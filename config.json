@@ -25,8 +25,8 @@
         "items": [
           {
             "title": "CDO Public API",
-            "content": "cdo-public-api.yaml",
-            "type": "swagger3"
+            "content": "openapi.json",
+            "type": "oas3"
           }
         ]
       }
