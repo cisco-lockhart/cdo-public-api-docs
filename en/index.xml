@@ -1,0 +1,187 @@
+<items>
+
+    <item id="breadcrumb">
+        <sitenavigation>
+             <subType>
+                Security
+            </subType>
+		    <hyperlink>
+                <title>Learn</title>
+                <url>https://developer.cisco.com/learning/modules/cisco-umbrella</url>
+            </hyperlink>
+            <hyperlink>
+                <title>Docs</title>
+                <url>https://developer.cisco.com/docs/cloud-security/</url>
+            </hyperlink>
+            <hyperlink>
+                <title>Sandbox</title>
+                <url>https://devnetsandbox.cisco.com/RM/Diagram/Index/1ce48361-eefc-4812-93d5-4915496a1176?diagramType=Topology</url>
+            </hyperlink>
+            <hyperlink>
+                <title>Community</title>
+                <url>https://community.cisco.com/t5/cloud-edge/bd-p/disc-cloud-edge</url>
+            </hyperlink>
+        </sitenavigation>
+    </item>
+
+    <item id="banner_1">
+
+        <title>XYZ Admin API</title>
+        <description>
+		Provide the developer value proposition, which describes why a developer would want to develop on the technology.  We want to answer what problem the technology can solve.
+        </description>
+        <infoImage>
+            <src>
+                images/background.jpg
+            </src>
+        </infoImage>
+        <hyperlink>
+            <text>Read the docs</text>
+            <url>https://developer.cisco.com/docs/cloud-security/</url>
+            <target>_blank</target>
+            <type>button</type>
+            <typeClass>btn-lg-wide btn-outline-white</typeClass>
+        </hyperlink>
+
+    </item>
+    
+    <item id="benefits">
+        <header data-class="padding-bottom-md">
+            <title>What can I do with XYZ Admin API?</title>
+            <!-- <description>Build better web and mobile applications with deep performance visibility in test, pre-production, and production environments.</description> -->
+        </header>
+        <cards data-class="has-border font-weight-lighter" data-columns="3">
+            <card>
+                <icon>
+                    <img data-src="/images/2020-branch-offices-icon.svg" />
+                </icon>
+                <title data-class="font-weight-lighter">Management and Provisioning</title>
+                <description data-color="#39393b">Manage provisioning, policies and deployment using the Management and Enforcement API. Take action by allowing or blocking domains programmatically.</description>
+            </card>
+            <card>
+                <icon>
+                    <img data-src="/images/search.png" />
+                </icon>
+                <title data-class="font-weight-lighter">Reporting and Enrichment</title>
+                <description data-color="#39393b">Get security KPI’s and awareness of whats going on in your environment using the Reporting API. Then give your threat hunters the ability to dive in and learn more with the Investigate API.</description>
+            </card>
+	           <card>
+		          <icon>
+                    <img data-src="/images/2020-security-visibility-icon-2.svg" />
+                </icon>
+                <title data-class="font-weight-lighter">Cloud Access Security Broker</title>
+                <description data-color="#39393b">Gain insights into SaaS usage and related threats including Umbrella's Cloud Application usage. Cisco Cloudlock is a cloud-native cloud access security broker (CASB) that provides additional features and APIs.</description>
+            </card>
+        </cards>
+    </item>
+
+
+
+    <item id="learning_lab_1">
+        <title>
+            Learn how to automate with the XYZ Admin API 
+        </title>
+        <learningmodule>
+            <title>FEATURED LEARNING MODULE </title>
+            <permalink>networking-basics</permalink>
+        </learningmodule>
+        <learninglist>
+            <title>EXPLORE THE LEARNING LABS</title>
+            <permalink>cisco-umbrella</permalink>
+            <hyperlink>
+                <text>View all Learning Labs</text>
+                <url>https://developer.cisco.com/learning/modules/cisco-umbrella</url>
+                <target>_blank</target>
+                <type>button</type>
+                <typeClass>btn-primary btn-lg-wide</typeClass>
+            </hyperlink>
+        </learninglist>
+    </item>
+
+
+
+
+    <item id="codeexchange_1">
+        <apibaseurl>https://metadata.production.devnetcloud.com/v1/catalogs/search</apibaseurl>
+        <apiquerystring>fastMode=true&amp;type=Code&amp;keyPrefix=Umbrella&amp;programmingLanguages=Python</apiquerystring>
+        <limit>3</limit>
+        <title>Discover XYZ Admin sample code</title>
+        <description>Download community shared and DevNet curated GitHub sample code through DevNet Code Exchange.</description>
+        <repourlquerystring>utm_campaign=oc-codeexchange&amp;utm_medium=pubhubwidget&amp;utm_source=umbrella</repourlquerystring>
+        <actions>
+            <action data-href="https://developer.cisco.com/codeexchange/explore/#search=umbrella">See more in Code Exchange</action>
+        </actions>
+        <noentry>Sorry, we couldn’t find any code repos you were looking for.</noentry>
+    </item>
+	
+
+<item id="sandbox_1">
+    <title>
+        Try out the XYZ Admin API in the DevNet Sandbox
+    </title>
+    <description>
+        The DevNet Sandboxes provide developers with zero-cost, easy access to infrastructure and platforms to develop and run code against anytime. Use this testing environment to follow along with the Learning Labs.
+    </description>
+    <descriptionDetailLink>
+        <hyperlink>
+            <text>VIEW ALL SANDBOXES</text>
+            <url>https://developer.cisco.com/site/sandbox/</url>
+            <target>_blank</target>
+        </hyperlink>
+    </descriptionDetailLink>
+    <sandboxInfo>
+        <infoImage>
+            <src>
+                /images/umbrella-sandbox.png
+            </src>
+            <text>Umbrella Secure Internet Gateway</text>
+            <url>
+                https://devnetsandbox.cisco.com/RM/Diagram/Index/1ce48361-eefc-4812-93d5-4915496a1176?diagramType=Topology
+            </url>
+            <target>_blank</target>
+        </infoImage>
+        <title>Umbrella Secure Internet Gateway</title>
+        <description>The Umbrella sandbox will allow you to create API keys, log in to the dashboard (automatically via SSO), and it gives you access to a Devbox. Features include: 
+            <ul>
+                <li>Reporting v1 and v2 access</li>
+                <li>Traffic generator with security events</li>
+                <li>Enforcement API access</li>
+                <li>Management API acces with SIG features</li>
+            </ul>
+        </description>
+        <hyperlink>
+            <text>Try it out</text>
+            <url>
+                https://devnetsandbox.cisco.com/RM/Diagram/Index/1ce48361-eefc-4812-93d5-4915496a1176?diagramType=Topology
+            </url>
+            <target>_blank</target>
+            <type>button</type>
+            <typeClass>btn-primary btn-lg-wider</typeClass>
+        </hyperlink>
+    </sandboxInfo>
+</item>
+
+
+
+
+    <item id="banner_2">
+      <title>Questions? We are here to help.</title>
+      <description>
+          Bring your questions to the XYZ Admin community! Engage, collaborate and share with your fellow experts in the developer forum.
+	    </description>
+      <infoImage>
+          <src>
+               images/background.jpg
+          </src>
+      </infoImage>
+      <hyperlink>
+          <text>Go to the forum</text>
+          <url>https://community.cisco.com/t5/cloud-edge/bd-p/disc-cloud-edge</url>
+          <target>_blank</target>
+          <type>button</type>
+          <typeClass>btn-lg-wide btn-outline-white</typeClass>
+      </hyperlink>
+  </item>
+
+
+</items>
