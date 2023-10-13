@@ -26,7 +26,7 @@
           {
             "title": "CDO Public API",
             "content": "openapi.json",
-            "type": "oas3"
+            "type": "swagger3"
           }
         ]
       }
