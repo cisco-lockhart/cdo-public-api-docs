@@ -1,0 +1,34 @@
+{
+    "items": [
+      {
+        "title": "Cisco Defense Orchestrator Internal API Docs",
+        "items": [
+            {
+              "title": "Introduction",
+              "content": "overview/intro.md"
+            },
+            {
+              "title": "Authentication",
+              "content": "overview/authentication.md"
+            }, 
+            {
+              "title": "Getting Started",
+              "content": "overview/getting-started.md"
+            }
+          ]
+      },
+      {
+        "title": "API Reference",
+        "config": {
+          "expand": 0
+        },
+        "items": [
+          {
+            "title": "CDO Public API",
+            "content": "cdo-public-api.yaml",
+            "type": "oas3"
+          }
+        ]
+      }
+    ]
+}
