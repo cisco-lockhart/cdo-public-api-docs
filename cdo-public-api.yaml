@@ -7,8 +7,9 @@ info:
     name: CDO TAC
     email: cdo.tac@cisco.com
 servers:
-- url: http://localhost:4033
-  description: Generated server url
+- url: https://edge.staging.cdo.cisco.com/api/platform/public-api
+- url: https://edge.scale.cdo.cisco.com/api/platform/public-api
+- url: https://edge.ci.cdo.cisco.com/api/platform/public-api
 paths:
   /v1/inventory/managers:
     get:
