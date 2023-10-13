@@ -6,7 +6,7 @@ info:
   contact:
     name: CDO TAC
     email: cdo.tac@cisco.com
-  version: pre-release
+  version: '''0.1.0'''
 servers:
 - url: https://edge.staging.cdo.cisco.com/api/platform/public-api
   description: Staging
