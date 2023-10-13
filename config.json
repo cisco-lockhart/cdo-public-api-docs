@@ -25,7 +25,7 @@
         "items": [
           {
             "title": "CDO Public API",
-            "content": "openapi.json",
+            "content": "openapi.yaml",
             "type": "oas3"
           }
         ]
