@@ -9,9 +9,11 @@ curl -X GET --silent --url  "${transformation_url}" -H "Authorization: X-Auth-Ke
 echo "✅︎"
 
 if [[ -z ${args[--do-not-commit]} ]]; then
+    cd ${root_dir}
     git checkout main
     git pull origin main
     git add .
     git commit -am "Update OpenAPI.yaml from staging"
     git push origin main
+    cd -
 fi
