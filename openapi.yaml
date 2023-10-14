@@ -21,9 +21,9 @@ paths:
     get:
       tags:
       - device-manager-controller
-      summary: getDeviceList
+      summary: listDeviceManagers
       description: ''
-      operationId: getDeviceList
+      operationId: listDeviceManagers
       parameters:
       - name: limit
         in: query
@@ -57,13 +57,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        '401':
-          description: Request not authorized.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuthenticationError'
         '400':
           description: Invalid input provided. Check the response for details.
           headers: {}
@@ -71,6 +64,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PublicApiError'
+        '401':
+          description: Request not authorized.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
         '403':
           description: User does not have sufficient privileges to perform this operation.
           headers: {}
@@ -92,9 +92,9 @@ paths:
     get:
       tags:
       - device-controller
-      summary: getDeviceList_1
+      summary: listDevices
       description: ''
-      operationId: getDeviceList_1
+      operationId: listDevices
       parameters:
       - name: limit
         in: query
@@ -128,13 +128,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        '401':
-          description: Request not authorized.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuthenticationError'
         '400':
           description: Invalid input provided. Check the response for details.
           headers: {}
@@ -142,6 +135,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PublicApiError'
+        '401':
+          description: Request not authorized.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
         '403':
           description: User does not have sufficient privileges to perform this operation.
           headers: {}
@@ -215,6 +215,7 @@ components:
           allOf:
           - $ref: '#/components/schemas/DeviceType'
           - description: The type of the device.
+            example: CDFMC_MANAGED_FTD
         connectorType:
           allOf:
           - $ref: '#/components/schemas/ConnectorType'
@@ -310,6 +311,7 @@ components:
           allOf:
           - $ref: '#/components/schemas/MerakiDeploymentMode'
           - description: (Meraki devices only) The deployment mode of the Meraki device.
+            example: ROUTED
         merakiNetwork:
           allOf:
           - $ref: '#/components/schemas/Network'
@@ -350,11 +352,11 @@ components:
         name:
           type: string
           description: The name of the Meraki Dashboard Network.
-          example: L_583779101697901532
+          example: meraki-network
         timezone:
           type: string
           description: The timezone of the Meraki Dashboard Network.
-          example: L_583779101697901532
+          example: UTC +0
       description: (Meraki devices only) The [Dashboard Network](https://documentation.meraki.com/General_Administration/Organizations_and_Networks/Creating_and_Deleting_Dashboard_Networks) the device is deployed in.
     OnPremFmcInfo:
       title: OnPremFmcInfo
@@ -472,6 +474,7 @@ components:
       - CDFMC
       type: string
       description: The type of the device.
+      example: CDFMC_MANAGED_FTD
     ErrorCode:
       title: ErrorCode
       enum:
@@ -487,6 +490,7 @@ components:
       - PASSTHROUGH
       type: string
       description: (Meraki devices only) The deployment mode of the Meraki device.
+      example: ROUTED
   securitySchemes:
     bearerAuth:
       type: http
