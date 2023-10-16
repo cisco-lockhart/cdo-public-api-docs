@@ -17,6 +17,77 @@ servers:
   description: CI
   variables: {}
 paths:
+  /v1/inventory/services:
+    get:
+      tags:
+      - device-cloud-services-controller
+      summary: listDeviceCloudServices
+      description: ''
+      operationId: listDeviceCloudServices
+      parameters:
+      - name: limit
+        in: query
+        description: The number of results to retrieve.
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: '50'
+      - name: offset
+        in: query
+        description: The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: '0'
+      - name: q
+        in: query
+        description: The query to execute. Use the Lucene Query Syntax to construct your query.
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: name:London-Office-ASA
+      responses:
+        '200':
+          description: List of Cloud Services
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevicePage'
+        '400':
+          description: Invalid input provided. Check the response for details.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+        '401':
+          description: Request not authorized.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '403':
+          description: User does not have sufficient privileges to perform this operation.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+        '500':
+          description: Internal server error.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      deprecated: false
+      security:
+      - bearerAuth: []
   /v1/inventory/managers:
     get:
       tags:
@@ -472,6 +543,10 @@ components:
       - SFCN_STS
       - ONPREM_FMC
       - CDFMC
+      - AWS_VPC
+      - AZURE_VNET
+      - DUO_ADMIN_PANEL
+      - UMBRELLA_ORGANIZATION
       type: string
       description: The type of the device.
       example: CDFMC_MANAGED_FTD
@@ -498,6 +573,8 @@ components:
       bearerFormat: jwt
 security: []
 tags:
+- name: device-cloud-services-controller
+  description: ''
 - name: device-manager-controller
   description: ''
 - name: device-controller
