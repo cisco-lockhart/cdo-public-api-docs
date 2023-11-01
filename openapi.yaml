@@ -17,6 +17,30 @@ servers:
   description: CI
   variables: {}
 paths:
+  /v1/regions:
+    get:
+      tags:
+      - regions-controller
+      summary: listRegions
+      description: ''
+      operationId: listRegions
+      parameters: []
+      responses:
+        '200':
+          description: List of CDO regions
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoRegionList'
+        '500':
+          description: Internal server error.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      deprecated: false
   /v1/inventory/services:
     get:
       tags:
@@ -50,15 +74,8 @@ paths:
           type: string
           example: name:London-Office-ASA
       responses:
-        '200':
-          description: List of Cloud Services
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DevicePage'
-        '400':
-          description: Invalid input provided. Check the response for details.
+        '403':
+          description: User does not have sufficient privileges to perform this operation.
           headers: {}
           content:
             application/json:
@@ -71,8 +88,77 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthenticationError'
+        '400':
+          description: Invalid input provided. Check the response for details.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+        '200':
+          description: List of Cloud Services
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevicePage'
+        '500':
+          description: Internal server error.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      deprecated: false
+      security:
+      - bearerAuth: []
+  /v1/inventory/services/{cloudServiceUid}:
+    get:
+      tags:
+      - device-cloud-services-controller
+      summary: fetchCloudService
+      description: ''
+      operationId: fetchCloudService
+      parameters:
+      - name: cloudServiceUid
+        in: path
+        description: The unique identifier of the cloud service in CDO.
+        required: true
+        style: simple
+        schema:
+          type: string
+          format: uuid
+      responses:
         '403':
           description: User does not have sufficient privileges to perform this operation.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+        '404':
+          description: Entity not found
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+        '200':
+          description: Cloud Service
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '401':
+          description: Request not authorized.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '400':
+          description: Invalid input provided. Check the response for details.
           headers: {}
           content:
             application/json:
@@ -121,6 +207,13 @@ paths:
           type: string
           example: name:London-Office-ASA
       responses:
+        '403':
+          description: User does not have sufficient privileges to perform this operation.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
         '200':
           description: List of Device Manager objects
           headers: {}
@@ -128,13 +221,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        '400':
-          description: Invalid input provided. Check the response for details.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
         '401':
           description: Request not authorized.
           headers: {}
@@ -142,8 +228,70 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthenticationError'
+        '400':
+          description: Invalid input provided. Check the response for details.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+        '500':
+          description: Internal server error.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      deprecated: false
+      security:
+      - bearerAuth: []
+  /v1/inventory/managers/{deviceManagerUid}:
+    get:
+      tags:
+      - device-manager-controller
+      summary: fetchDeviceManager
+      description: ''
+      operationId: fetchDeviceManager
+      parameters:
+      - name: deviceManagerUid
+        in: path
+        description: The unique identifier of the device manager in CDO.
+        required: true
+        style: simple
+        schema:
+          type: string
+          format: uuid
+      responses:
         '403':
           description: User does not have sufficient privileges to perform this operation.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+        '404':
+          description: Entity not found
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+        '200':
+          description: Device Manager
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '401':
+          description: Request not authorized.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '400':
+          description: Invalid input provided. Check the response for details.
           headers: {}
           content:
             application/json:
@@ -192,6 +340,13 @@ paths:
           type: string
           example: name:London-Office-ASA
       responses:
+        '403':
+          description: User does not have sufficient privileges to perform this operation.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
         '200':
           description: List of Device objects
           headers: {}
@@ -199,13 +354,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        '400':
-          description: Invalid input provided. Check the response for details.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
         '401':
           description: Request not authorized.
           headers: {}
@@ -213,8 +361,70 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthenticationError'
+        '400':
+          description: Invalid input provided. Check the response for details.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+        '500':
+          description: Internal server error.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      deprecated: false
+      security:
+      - bearerAuth: []
+  /v1/inventory/devices/{deviceUid}:
+    get:
+      tags:
+      - device-controller
+      summary: fetchDevice
+      description: ''
+      operationId: fetchDevice
+      parameters:
+      - name: deviceUid
+        in: path
+        description: The unique identifier of the device in CDO.
+        required: true
+        style: simple
+        schema:
+          type: string
+          format: uuid
+      responses:
         '403':
           description: User does not have sufficient privileges to perform this operation.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+        '404':
+          description: Entity not found
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+        '200':
+          description: Device object
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '401':
+          description: Request not authorized.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '400':
+          description: Invalid input provided. Check the response for details.
           headers: {}
           content:
             application/json:
@@ -232,6 +442,29 @@ paths:
       - bearerAuth: []
 components:
   schemas:
+    CdoRegion:
+      title: CdoRegion
+      type: object
+      properties:
+        domain:
+          type: string
+          description: The domain for the region.
+        apiDomain:
+          type: string
+          description: The domain for API services in the region.
+        description:
+          type: string
+          description: Human readable description of the region.
+      description: The list of items.
+    CdoRegionList:
+      title: CdoRegionList
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CdoRegion'
+          description: The list of items.
     AsaFailoverMate:
       title: AsaFailoverMate
       type: object
@@ -387,7 +620,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/Network'
           - description: (Meraki devices only) The [Dashboard Network](https://documentation.meraki.com/General_Administration/Organizations_and_Networks/Creating_and_Deleting_Dashboard_Networks) the device is deployed in.
-      description: The list of items retrieved.
     DevicePage:
       title: DevicePage
       type: object
@@ -466,7 +698,7 @@ components:
         errorMsg:
           type: string
           description: A human-readable error description in English.
-          example: 'getDeviceList.limit: must be greater than or equal to 0'
+          example: sample error
         details:
           type: object
           additionalProperties:
@@ -554,6 +786,9 @@ components:
       title: ErrorCode
       enum:
       - INVALID_INPUT
+      - UNAUTHORIZED
+      - FORBIDDEN
+      - NOT_FOUND
       - SERVER_ERROR
       type: string
       description: A unique error code that describes the error.
@@ -573,6 +808,8 @@ components:
       bearerFormat: jwt
 security: []
 tags:
+- name: regions-controller
+  description: ''
 - name: device-cloud-services-controller
   description: ''
 - name: device-manager-controller
