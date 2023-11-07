@@ -81,6 +81,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PublicApiError'
+        '200':
+          description: List of Cloud Services
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevicePage'
         '401':
           description: Request not authorized.
           headers: {}
@@ -95,13 +102,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PublicApiError'
-        '200':
-          description: List of Cloud Services
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DevicePage'
         '500':
           description: Internal server error.
           headers: {}
@@ -347,13 +347,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PublicApiError'
-        '200':
-          description: List of Device objects
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DevicePage'
         '401':
           description: Request not authorized.
           headers: {}
@@ -361,6 +354,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthenticationError'
+        '200':
+          description: List of Device objects
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevicePage'
         '400':
           description: Invalid input provided. Check the response for details.
           headers: {}
@@ -409,13 +409,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PublicApiError'
-        '200':
-          description: Device object
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Device'
         '401':
           description: Request not authorized.
           headers: {}
@@ -423,6 +416,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthenticationError'
+        '200':
+          description: Device object
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
         '400':
           description: Invalid input provided. Check the response for details.
           headers: {}
