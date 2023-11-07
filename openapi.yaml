@@ -41,6 +41,139 @@ paths:
               schema:
                 $ref: '#/components/schemas/PublicApiError'
       deprecated: false
+  /v1/inventory/templates:
+    get:
+      tags:
+      - template-device-controller
+      summary: listTemplateDevices
+      description: ''
+      operationId: listTemplateDevices
+      parameters:
+      - name: limit
+        in: query
+        description: The number of results to retrieve.
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: '50'
+      - name: offset
+        in: query
+        description: The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: '0'
+      - name: q
+        in: query
+        description: The query to execute. Use the Lucene Query Syntax to construct your query.
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: name:London-Office-ASA
+      responses:
+        '403':
+          description: User does not have sufficient privileges to perform this operation.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+        '200':
+          description: List of Template Devices
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevicePage'
+        '401':
+          description: Request not authorized.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '400':
+          description: Invalid input provided. Check the response for details.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+        '500':
+          description: Internal server error.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      deprecated: false
+      security:
+      - bearerAuth: []
+  /v1/inventory/templates/{templateDeviceUid}:
+    get:
+      tags:
+      - template-device-controller
+      summary: fetchTemplateDevice
+      description: ''
+      operationId: fetchTemplateDevice
+      parameters:
+      - name: templateDeviceUid
+        in: path
+        description: The unique identifier of the template device in CDO.
+        required: true
+        style: simple
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '403':
+          description: User does not have sufficient privileges to perform this operation.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+        '200':
+          description: Template Device object
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '404':
+          description: Entity not found
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+        '401':
+          description: Request not authorized.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
+        '400':
+          description: Invalid input provided. Check the response for details.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+        '500':
+          description: Internal server error.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicApiError'
+      deprecated: false
+      security:
+      - bearerAuth: []
   /v1/inventory/services:
     get:
       tags:
@@ -81,13 +214,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PublicApiError'
-        '200':
-          description: List of Cloud Services
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DevicePage'
         '401':
           description: Request not authorized.
           headers: {}
@@ -102,6 +228,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PublicApiError'
+        '200':
+          description: List of Cloud Services
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevicePage'
         '500':
           description: Internal server error.
           headers: {}
@@ -214,13 +347,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PublicApiError'
-        '200':
-          description: List of Device Manager objects
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DevicePage'
         '401':
           description: Request not authorized.
           headers: {}
@@ -228,6 +354,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthenticationError'
+        '200':
+          description: List of Device Manager objects
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevicePage'
         '400':
           description: Invalid input provided. Check the response for details.
           headers: {}
@@ -276,13 +409,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PublicApiError'
-        '200':
-          description: Device Manager
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Device'
         '401':
           description: Request not authorized.
           headers: {}
@@ -297,6 +423,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PublicApiError'
+        '200':
+          description: Device Manager
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
         '500':
           description: Internal server error.
           headers: {}
@@ -347,13 +480,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PublicApiError'
-        '401':
-          description: Request not authorized.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuthenticationError'
         '200':
           description: List of Device objects
           headers: {}
@@ -361,6 +487,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
+        '401':
+          description: Request not authorized.
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationError'
         '400':
           description: Invalid input provided. Check the response for details.
           headers: {}
@@ -416,13 +549,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthenticationError'
-        '200':
-          description: Device object
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Device'
         '400':
           description: Invalid input provided. Check the response for details.
           headers: {}
@@ -430,6 +556,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PublicApiError'
+        '200':
+          description: Device object
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
         '500':
           description: Internal server error.
           headers: {}
@@ -809,6 +942,8 @@ components:
 security: []
 tags:
 - name: regions-controller
+  description: ''
+- name: template-device-controller
   description: ''
 - name: device-cloud-services-controller
   description: ''
