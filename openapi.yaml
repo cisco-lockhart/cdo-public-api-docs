@@ -1,582 +1,439 @@
-openapi: 3.0.0
+openapi: 3.0.1
 info:
   title: API Docs
-  description: Use the interactive documentation to explore the endpoints CDO has to offer
+  description: Use the interactive documentation to explore the endpoints CDO has
+    to offer
   contact:
     name: CDO TAC
     email: cdo.tac@cisco.com
-  version: 'pre-release'
+  version: pre-release
 servers:
 - url: https://edge.staging.cdo.cisco.com/api/platform/public-api
   description: Staging
-  variables: {}
 - url: https://edge.scale.cdo.cisco.com/api/platform/public-api
   description: Scale
-  variables: {}
 - url: https://edge.ci.cdo.cisco.com/api/platform/public-api
   description: CI
-  variables: {}
 paths:
   /v1/regions:
     get:
       tags:
       - regions-controller
-      summary: listRegions
-      description: ''
+      summary: Fetch a list of CDO regions.
       operationId: listRegions
-      parameters: []
       responses:
-        '200':
+        "200":
           description: List of CDO regions
-          headers: {}
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoRegionList'
-        '500':
+        "500":
           description: Internal server error.
-          headers: {}
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiError'
-      deprecated: false
+                $ref: '#/components/schemas/CommonApiError'
   /v1/inventory/templates:
     get:
       tags:
       - template-device-controller
-      summary: listTemplateDevices
-      description: ''
+      summary: Fetch a list of template devices in the CDO tenant.
       operationId: listTemplateDevices
       parameters:
       - name: limit
         in: query
         description: The number of results to retrieve.
-        style: form
-        explode: true
+        required: false
         schema:
+          maximum: 200
+          minimum: 0
           type: string
-          default: '50'
+          default: "50"
       - name: offset
         in: query
-        description: The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-        style: form
-        explode: true
+        description: "The offset of the results retrieved. The CDO Public API uses\
+          \ the offset field to determine the index of the first result retrieved,\
+          \ and will retrieve `limit` results from the offset specified."
+        required: false
         schema:
+          minimum: 0
           type: string
-          default: '0'
+          default: "0"
       - name: q
         in: query
-        description: The query to execute. Use the Lucene Query Syntax to construct your query.
-        style: form
-        explode: true
+        description: The query to execute. Use the Lucene Query Syntax to construct
+          your query.
+        required: false
         schema:
           type: string
-          example: name:London-Office-ASA
+        example: name:London-Office-ASA
+      - name: sort
+        in: query
+        description: The fields to sort results by.
+        required: true
+        schema:
+          $ref: '#/components/schemas/SortCriteriaParam'
+        example: name:DESC
       responses:
-        '403':
-          description: User does not have sufficient privileges to perform this operation.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '200':
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "200":
           description: List of Template Devices
-          headers: {}
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        '401':
-          description: Request not authorized.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuthenticationError'
-        '400':
-          description: Invalid input provided. Check the response for details.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '500':
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
           description: Internal server error.
-          headers: {}
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiError'
-      deprecated: false
+                $ref: '#/components/schemas/CommonApiError'
       security:
       - bearerAuth: []
   /v1/inventory/templates/{templateDeviceUid}:
     get:
       tags:
       - template-device-controller
-      summary: fetchTemplateDevice
-      description: ''
+      summary: Fetch a template device by UID in the CDO tenant.
       operationId: fetchTemplateDevice
       parameters:
       - name: templateDeviceUid
         in: path
         description: The unique identifier of the template device in CDO.
         required: true
-        style: simple
         schema:
           type: string
           format: uuid
       responses:
-        '403':
-          description: User does not have sufficient privileges to perform this operation.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '200':
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "200":
           description: Template Device object
-          headers: {}
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        '404':
-          description: Entity not found
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '401':
-          description: Request not authorized.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuthenticationError'
-        '400':
-          description: Invalid input provided. Check the response for details.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '500':
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
           description: Internal server error.
-          headers: {}
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiError'
-      deprecated: false
+                $ref: '#/components/schemas/CommonApiError'
       security:
       - bearerAuth: []
   /v1/inventory/services:
     get:
       tags:
       - device-cloud-services-controller
-      summary: listDeviceCloudServices
-      description: ''
+      summary: Fetch a list of Cloud Services in the CDO tenant.
       operationId: listDeviceCloudServices
       parameters:
       - name: limit
         in: query
         description: The number of results to retrieve.
-        style: form
-        explode: true
+        required: false
         schema:
+          maximum: 200
+          minimum: 0
           type: string
-          default: '50'
+          default: "50"
       - name: offset
         in: query
-        description: The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-        style: form
-        explode: true
+        description: "The offset of the results retrieved. The CDO Public API uses\
+          \ the offset field to determine the index of the first result retrieved,\
+          \ and will retrieve `limit` results from the offset specified."
+        required: false
         schema:
+          minimum: 0
           type: string
-          default: '0'
+          default: "0"
       - name: q
         in: query
-        description: The query to execute. Use the Lucene Query Syntax to construct your query.
-        style: form
-        explode: true
+        description: The query to execute. Use the Lucene Query Syntax to construct
+          your query.
+        required: false
         schema:
           type: string
-          example: name:London-Office-ASA
+        example: name:London-Office-ASA
+      - name: sort
+        in: query
+        description: The fields to sort results by.
+        required: true
+        schema:
+          $ref: '#/components/schemas/SortCriteriaParam'
+        example: name:DESC
       responses:
-        '403':
-          description: User does not have sufficient privileges to perform this operation.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '401':
-          description: Request not authorized.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuthenticationError'
-        '400':
-          description: Invalid input provided. Check the response for details.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '200':
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "200":
           description: List of Cloud Services
-          headers: {}
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        '500':
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
           description: Internal server error.
-          headers: {}
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiError'
-      deprecated: false
+                $ref: '#/components/schemas/CommonApiError'
       security:
       - bearerAuth: []
   /v1/inventory/services/{cloudServiceUid}:
     get:
       tags:
       - device-cloud-services-controller
-      summary: fetchCloudService
-      description: ''
+      summary: Fetch a Cloud Service by UID in the CDO tenant.
       operationId: fetchCloudService
       parameters:
       - name: cloudServiceUid
         in: path
         description: The unique identifier of the cloud service in CDO.
         required: true
-        style: simple
         schema:
           type: string
           format: uuid
       responses:
-        '403':
-          description: User does not have sufficient privileges to perform this operation.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '404':
-          description: Entity not found
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '200':
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "200":
           description: Cloud Service
-          headers: {}
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        '401':
-          description: Request not authorized.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuthenticationError'
-        '400':
-          description: Invalid input provided. Check the response for details.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '500':
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
           description: Internal server error.
-          headers: {}
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiError'
-      deprecated: false
+                $ref: '#/components/schemas/CommonApiError'
       security:
       - bearerAuth: []
   /v1/inventory/managers:
     get:
       tags:
       - device-manager-controller
-      summary: listDeviceManagers
-      description: ''
+      summary: Fetch a list of Device Managers (on-prem FMCs and cloud-delivered FMCs)
+        in the CDO tenant.
       operationId: listDeviceManagers
       parameters:
       - name: limit
         in: query
         description: The number of results to retrieve.
-        style: form
-        explode: true
+        required: false
         schema:
+          maximum: 200
+          minimum: 0
           type: string
-          default: '50'
+          default: "50"
       - name: offset
         in: query
-        description: The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-        style: form
-        explode: true
+        description: "The offset of the results retrieved. The CDO Public API uses\
+          \ the offset field to determine the index of the first result retrieved,\
+          \ and will retrieve `limit` results from the offset specified."
+        required: false
         schema:
+          minimum: 0
           type: string
-          default: '0'
+          default: "0"
       - name: q
         in: query
-        description: The query to execute. Use the Lucene Query Syntax to construct your query.
-        style: form
-        explode: true
+        description: The query to execute. Use the Lucene Query Syntax to construct
+          your query.
+        required: false
         schema:
           type: string
-          example: name:London-Office-ASA
+        example: name:London-Office-ASA
+      - name: sort
+        in: query
+        description: The fields to sort results by.
+        required: true
+        schema:
+          $ref: '#/components/schemas/SortCriteriaParam'
+        example: name:DESC
       responses:
-        '403':
-          description: User does not have sufficient privileges to perform this operation.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '401':
-          description: Request not authorized.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuthenticationError'
-        '200':
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "200":
           description: List of Device Manager objects
-          headers: {}
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        '400':
-          description: Invalid input provided. Check the response for details.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '500':
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
           description: Internal server error.
-          headers: {}
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiError'
-      deprecated: false
+                $ref: '#/components/schemas/CommonApiError'
       security:
       - bearerAuth: []
   /v1/inventory/managers/{deviceManagerUid}:
     get:
       tags:
       - device-manager-controller
-      summary: fetchDeviceManager
-      description: ''
+      summary: Fetch a Device Manager by UID in the CDO tenant.
       operationId: fetchDeviceManager
       parameters:
       - name: deviceManagerUid
         in: path
         description: The unique identifier of the device manager in CDO.
         required: true
-        style: simple
         schema:
           type: string
           format: uuid
       responses:
-        '403':
-          description: User does not have sufficient privileges to perform this operation.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '404':
-          description: Entity not found
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '401':
-          description: Request not authorized.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuthenticationError'
-        '400':
-          description: Invalid input provided. Check the response for details.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '200':
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "200":
           description: Device Manager
-          headers: {}
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        '500':
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
           description: Internal server error.
-          headers: {}
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiError'
-      deprecated: false
+                $ref: '#/components/schemas/CommonApiError'
       security:
       - bearerAuth: []
   /v1/inventory/devices:
     get:
       tags:
       - device-controller
-      summary: listDevices
-      description: ''
+      summary: Fetch a list of devices in the CDO tenant.
       operationId: listDevices
       parameters:
       - name: limit
         in: query
         description: The number of results to retrieve.
-        style: form
-        explode: true
+        required: false
         schema:
+          maximum: 200
+          minimum: 0
           type: string
-          default: '50'
+          default: "50"
       - name: offset
         in: query
-        description: The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-        style: form
-        explode: true
+        description: "The offset of the results retrieved. The CDO Public API uses\
+          \ the offset field to determine the index of the first result retrieved,\
+          \ and will retrieve `limit` results from the offset specified."
+        required: false
         schema:
+          minimum: 0
           type: string
-          default: '0'
+          default: "0"
       - name: q
         in: query
-        description: The query to execute. Use the Lucene Query Syntax to construct your query.
-        style: form
-        explode: true
+        description: The query to execute. Use the Lucene Query Syntax to construct
+          your query.
+        required: false
         schema:
           type: string
-          example: name:London-Office-ASA
+        example: name:London-Office-ASA
+      - name: sort
+        in: query
+        description: The fields to sort results by.
+        required: true
+        schema:
+          $ref: '#/components/schemas/SortCriteriaParam'
+        example: name:DESC
       responses:
-        '403':
-          description: User does not have sufficient privileges to perform this operation.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '200':
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "200":
           description: List of Device objects
-          headers: {}
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        '401':
-          description: Request not authorized.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuthenticationError'
-        '400':
-          description: Invalid input provided. Check the response for details.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '500':
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
           description: Internal server error.
-          headers: {}
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiError'
-      deprecated: false
+                $ref: '#/components/schemas/CommonApiError'
       security:
       - bearerAuth: []
   /v1/inventory/devices/{deviceUid}:
     get:
       tags:
       - device-controller
-      summary: fetchDevice
-      description: ''
+      summary: Fetch a device by UID in the CDO tenant.
       operationId: fetchDevice
       parameters:
       - name: deviceUid
         in: path
         description: The unique identifier of the device in CDO.
         required: true
-        style: simple
         schema:
           type: string
           format: uuid
       responses:
-        '403':
-          description: User does not have sufficient privileges to perform this operation.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '404':
-          description: Entity not found
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '401':
-          description: Request not authorized.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuthenticationError'
-        '400':
-          description: Invalid input provided. Check the response for details.
-          headers: {}
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicApiError'
-        '200':
+        "200":
           description: Device object
-          headers: {}
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        '500':
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
           description: Internal server error.
-          headers: {}
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicApiError'
-      deprecated: false
+                $ref: '#/components/schemas/CommonApiError'
       security:
       - bearerAuth: []
 components:
   schemas:
     CdoRegion:
-      title: CdoRegion
       type: object
       properties:
         domain:
@@ -590,16 +447,26 @@ components:
           description: Human readable description of the region.
       description: The list of items.
     CdoRegionList:
-      title: CdoRegionList
       type: object
       properties:
         items:
           type: array
+          description: The list of items.
           items:
             $ref: '#/components/schemas/CdoRegion'
-          description: The list of items.
+    SortCriteriaParam:
+      type: object
+      properties:
+        sort:
+          type: array
+          writeOnly: true
+          items:
+            type: string
+        sortFields:
+          type: array
+          items:
+            type: string
     AsaFailoverMate:
-      title: AsaFailoverMate
       type: object
       properties:
         failoverState:
@@ -608,35 +475,46 @@ components:
           example: Primary - Active
         serial:
           type: string
-          description: (High Availability ASAs only) The serial number of the device. This is typically used for licensing, and is not the same as the chassis' serial number.
+          description: "(High Availability ASAs only) The serial number of the device.\
+            \ This is typically used for licensing, and is not the same as the chassis'\
+            \ serial number."
           example: JAD24500xxx
         softwareVersion:
           type: string
-          description: (High Availability ASAs only) The version of the software running on the device.
+          description: (High Availability ASAs only) The version of the software running
+            on the device.
           example: 9.18.8
-      description: (High Availability ASAs only) Information on the failover mate of this device.
+      description: (High Availability ASAs only) Information on the failover mate
+        of this device.
     CdFmcInfo:
-      title: CdFmcInfo
       type: object
       properties:
         cliKey:
           type: string
-          description: The CLI key to paste into the FTD CLI to register the FTD with a cdFMC. You need to paste this value in only once, when the FTD is being onboarded. Refer to the [CDO Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html) for details.
-          example: configure manager add acme.app.us.cdo.cisco.com E2jsyiZggyeCfFfCUaMK2kD1a1bxxx 5Do6FwUaXY4EFlyraC2yVnxodLxhuxxx acme.app.us.cdo.cisco.com
+          description: "The CLI key to paste into the FTD CLI to register the FTD\
+            \ with a cdFMC. You need to paste this value in only once, when the FTD\
+            \ is being onboarded. Refer to the [CDO Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html)\
+            \ for details."
+          example: configure manager add acme.app.us.cdo.cisco.com E2jsyiZggyeCfFfCUaMK2kD1a1bxxx
+            5Do6FwUaXY4EFlyraC2yVnxodLxhuxxx acme.app.us.cdo.cisco.com
         regKey:
           type: string
-          description: The Network Address Translation (NAT) ID of this FTD. Refer to the [CDO Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html) for details.
+          description: "The Network Address Translation (NAT) ID of this FTD. Refer\
+            \ to the [CDO Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html)\
+            \ for details."
           example: E2jsyiZggyeCfFfCUaMK2kD1a1bxxx
         natId:
           type: string
-          description: The Registration Key of this FTD. Refer to the [CDO Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html) for details.
+          description: "The Registration Key of this FTD. Refer to the [CDO Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html)\
+            \ for details."
           example: 5Do6FwUaXY4EFlyraC2yVnxodLxhuxxx
-      description: (FTDs managed by cdFMC only) Information on the cloud-delivered FMC managing this FTD. This information is not available for FTDs managed using FDM or on-prem FMCs.
+      description: (FTDs managed by cdFMC only) Information on the cloud-delivered
+        FMC managing this FTD. This information is not available for FTDs managed
+        using FDM or on-prem FMCs.
     Device:
-      title: Device
       required:
-      - name
       - deviceType
+      - name
       type: object
       properties:
         uid:
@@ -649,112 +527,165 @@ components:
           description: The name of the device in CDO. Device names are unique in CDO.
           example: my-example-device
         deviceType:
-          allOf:
-          - $ref: '#/components/schemas/DeviceType'
-          - description: The type of the device.
-            example: CDFMC_MANAGED_FTD
+          type: string
+          description: The type of the device.
+          example: CDFMC_MANAGED_FTD
+          enum:
+          - ASA
+          - CDFMC_MANAGED_FTD
+          - ONPREM_FMC_MANAGED_FTD
+          - ONPREM_FMC_MANAGED_FIREPOWER
+          - ONPREM_FMC_NGIPS
+          - FDM_MANAGED_FTD
+          - IOS
+          - SSH_DEVICE
+          - GENERIC_DEVICE
+          - MERAKI_MX
+          - CLOUD_DNG
+          - SFCN
+          - SFCN_DNG
+          - SFCN_STS
+          - ONPREM_FMC
+          - CDFMC
+          - AWS_VPC
+          - AZURE_VNET
+          - DUO_ADMIN_PANEL
+          - UMBRELLA_ORGANIZATION
         connectorType:
-          allOf:
-          - $ref: '#/components/schemas/ConnectorType'
-          - description: The type of the connector that will be used to communicate with the device. CDO can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
-            example: CDG
+          type: string
+          description: The type of the connector that will be used to communicate
+            with the device. CDO can communicate with your device using either a Cloud
+            Connector (CDG) or a Secure Device Connector (SDC).
+          example: CDG
+          enum:
+          - SDC
+          - CDG
         connectorUid:
           type: string
-          description: The unique identifier of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG)The name of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG).
+          description: The unique identifier of the Secure Device Connector (SDC)
+            that will be used to communicate with the device. This value is not required
+            if the connector type selected is Cloud Connector (CDG)The name of the
+            Secure Device Connector (SDC) that will be used to communicate with the
+            device. This value is not required if the connector type selected is Cloud
+            Connector (CDG).
           format: uuid
           example: 3af473a8-d70f-4090-bcdb-853981696478
         address:
           type: string
-          description: The address of the device, in `host:port` format. CDO connects to the device at this address.
+          description: "The address of the device, in `host:port` format. CDO connects\
+            \ to the device at this address."
           example: my-example-device.example.com:443
         deviceRole:
-          allOf:
-          - $ref: '#/components/schemas/DeviceRole'
-          - description: The role this device performs on the network.
-            example: RA_VPN_HEADEND
+          type: string
+          description: The role this device performs on the network.
+          example: RA_VPN_HEADEND
+          enum:
+          - RA_VPN_HEADEND
+          - MFA_PROVIDER
+          - ZTNA_PROVIDER
         serial:
           type: string
-          description: The serial number of the device. This is typically used for licensing, and is not the same as the chassis' serial number.
+          description: "The serial number of the device. This is typically used for\
+            \ licensing, and is not the same as the chassis' serial number."
           example: JAD24500xxx
         chassisSerial:
           type: string
-          description: The serial number on the chassis of the device (ASA-only). This is typically used to type up to Cisco SmartNet, and is not the same as the serial number.
+          description: "The serial number on the chassis of the device (ASA-only).\
+            \ This is typically used to type up to Cisco SmartNet, and is not the\
+            \ same as the serial number."
           example: JMX2450Xxxx
         softwareVersion:
           type: string
           description: The version of the software running on the device.
           example: 7.4.1
         connectivityState:
-          allOf:
-          - $ref: '#/components/schemas/ConnectivityState'
-          - description: The connectivity state of the device to CDO. A connectivity state that is not ONLINE can indicate either a problem with the device, or the communication pathways between the device and CDO.
-            example: ONLINE
+          type: string
+          description: "The connectivity state of the device to CDO. A connectivity\
+            \ state that is not ONLINE can indicate either a problem with the device,\
+            \ or the communication pathways between the device and CDO."
+          example: ONLINE
+          enum:
+          - ONLINE
+          - UNREACHABLE
         configState:
-          allOf:
-          - $ref: '#/components/schemas/ConfigState'
-          - description: The state of the device configuration in CDO. CDO stages configuration changes which have to be manually applied to the device; this field indicates whether the configuration on CDO does not match the configuration on the device, which indicates whether there are changes to be deployed from CDO to the device.
-            example: SYNCED
+          type: string
+          description: "The state of the device configuration in CDO. CDO stages configuration\
+            \ changes which have to be manually applied to the device; this field\
+            \ indicates whether the configuration on CDO does not match the configuration\
+            \ on the device, which indicates whether there are changes to be deployed\
+            \ from CDO to the device."
+          example: SYNCED
+          enum:
+          - NO_CONFIG
+          - SYNCED
+          - NOT_SYNCED
+          - UNKNOWN
         conflictDetectionState:
-          allOf:
-          - $ref: '#/components/schemas/ConflictDetectionState'
-          - description: Indicates whether there have been changes made to the device's configuration outside of CDO.
-            example: NO_CONFLICTS
+          type: string
+          description: Indicates whether there have been changes made to the device's
+            configuration outside of CDO.
+          example: NO_CONFLICTS
+          enum:
+          - CONFLICT_DETECTED
+          - NO_CONFLICTS
         notes:
           type: string
           description: Free-form notes on the device.
           example: This is an example note on the device.
         asdmVersion:
           type: string
-          description: (ASAs only) Version of the ASDM device manager running on the device.
+          description: (ASAs only) Version of the ASDM device manager running on the
+            device.
           example: 7.6(2)
         asaFailoverMode:
-          allOf:
-          - $ref: '#/components/schemas/AsaFailoverMode'
-          - description: (ASAs only) Failover mode of the device.
-            example: ACTIVE_STANDBY
+          type: string
+          description: (ASAs only) Failover mode of the device.
+          example: ACTIVE_STANDBY
+          enum:
+          - "OFF"
+          - ACTIVE_STANDBY
+          - ACTIVE_ACTIVE
         asaFailoverState:
           type: string
           description: (High Availability ASAs only) Failover state of this device.
           example: Primary - Active
         asaFailoverMate:
-          allOf:
-          - $ref: '#/components/schemas/AsaFailoverMate'
-          - description: (High Availability ASAs only) Information on the failover mate of this device.
+          $ref: '#/components/schemas/AsaFailoverMate'
         asaLicenseEntitlements:
           type: object
           additionalProperties:
             type: string
+            description: (ASAs only) Map of ASA License entitlements.
           description: (ASAs only) Map of ASA License entitlements.
         ftdLicenses:
           type: array
+          description: (FTDs only) List of FTD License entitlements.
           items:
             type: string
-          description: (FTDs only) List of FTD License entitlements.
+            description: (FTDs only) List of FTD License entitlements.
         snortVersion:
           type: string
           description: (FTDs only) List of FTD License entitlements.
         ftdPerformanceTier:
           type: string
-          description: (FTDvs only) The FTDv supports performance-tiered licensing that provides different throughput levels and VPN connection limits based on deployment requirements. This field specifies the performance tier of the FTD.
+          description: (FTDvs only) The FTDv supports performance-tiered licensing
+            that provides different throughput levels and VPN connection limits based
+            on deployment requirements. This field specifies the performance tier
+            of the FTD.
         cdFmcInfo:
-          allOf:
-          - $ref: '#/components/schemas/CdFmcInfo'
-          - description: (FTDs managed by cdFMC only) Information on the cloud-delivered FMC managing this FTD. This information is not available for FTDs managed using FDM or on-prem FMCs.
+          $ref: '#/components/schemas/CdFmcInfo'
         onPremFmcInfo:
-          allOf:
-          - $ref: '#/components/schemas/OnPremFmcInfo'
-          - description: (Devices managed by on-prem FMC only) Information on the on-prem FMC managing this device.
+          $ref: '#/components/schemas/OnPremFmcInfo'
         merakiDeploymentMode:
-          allOf:
-          - $ref: '#/components/schemas/MerakiDeploymentMode'
-          - description: (Meraki devices only) The deployment mode of the Meraki device.
-            example: ROUTED
+          type: string
+          description: (Meraki devices only) The deployment mode of the Meraki device.
+          example: ROUTED
+          enum:
+          - ROUTED
+          - PASSTHROUGH
         merakiNetwork:
-          allOf:
-          - $ref: '#/components/schemas/Network'
-          - description: (Meraki devices only) The [Dashboard Network](https://documentation.meraki.com/General_Administration/Organizations_and_Networks/Creating_and_Deleting_Dashboard_Networks) the device is deployed in.
+          $ref: '#/components/schemas/Network'
     DevicePage:
-      title: DevicePage
       type: object
       properties:
         count:
@@ -769,16 +700,17 @@ components:
           example: 50
         offset:
           type: integer
-          description: The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+          description: "The offset of the results retrieved. The CDO Public API uses\
+            \ the offset field to determine the index of the first result retrieved,\
+            \ and will retrieve `limit` results from the offset specified."
           format: int32
           example: 0
         items:
           type: array
+          description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/Device'
-          description: The list of items retrieved.
     Network:
-      title: Network
       type: object
       properties:
         id:
@@ -793,9 +725,9 @@ components:
           type: string
           description: The timezone of the Meraki Dashboard Network.
           example: UTC +0
-      description: (Meraki devices only) The [Dashboard Network](https://documentation.meraki.com/General_Administration/Organizations_and_Networks/Creating_and_Deleting_Dashboard_Networks) the device is deployed in.
+      description: "(Meraki devices only) The [Dashboard Network](https://documentation.meraki.com/General_Administration/Organizations_and_Networks/Creating_and_Deleting_Dashboard_Networks)\
+        \ the device is deployed in."
     OnPremFmcInfo:
-      title: OnPremFmcInfo
       type: object
       properties:
         name:
@@ -804,11 +736,12 @@ components:
           example: my-example-fmc
         address:
           type: string
-          description: The address of the on-prem FMC managing this device, in `host:port` format.
+          description: "The address of the on-prem FMC managing this device, in `host:port`\
+            \ format."
           example: my-example-fmc.example.com:443
-      description: (Devices managed by on-prem FMC only) Information on the on-prem FMC managing this device.
+      description: (Devices managed by on-prem FMC only) Information on the on-prem
+        FMC managing this device.
     AuthenticationError:
-      title: AuthenticationError
       type: object
       properties:
         error:
@@ -819,15 +752,20 @@ components:
           type: string
           description: A human-readable error description in English.
           example: Your token is invalid
-    PublicApiError:
-      title: PublicApiError
+    CommonApiError:
       type: object
       properties:
         errorCode:
-          allOf:
-          - $ref: '#/components/schemas/ErrorCode'
-          - description: A unique error code that describes the error.
-            example: INVALID_INPUT
+          type: string
+          description: A unique error code that describes the error.
+          example: INVALID_INPUT
+          enum:
+          - INVALID_INPUT
+          - UNAUTHORIZED
+          - FORBIDDEN
+          - NOT_FOUND
+          - SERVER_ERROR
+          - PROXY_ERROR
         errorMsg:
           type: string
           description: A human-readable error description in English.
@@ -836,118 +774,36 @@ components:
           type: object
           additionalProperties:
             type: object
-          description: Additional details, if any, on the error
-    AsaFailoverMode:
-      title: AsaFailoverMode
-      enum:
-      - OFF
-      - ACTIVE_STANDBY
-      - ACTIVE_ACTIVE
-      type: string
-      description: (ASAs only) Failover mode of the device.
-      example: ACTIVE_STANDBY
-    ConfigState:
-      title: ConfigState
-      enum:
-      - NO_CONFIG
-      - SYNCED
-      - NOT_SYNCED
-      - UNKNOWN
-      type: string
-      description: The state of the device configuration in CDO. CDO stages configuration changes which have to be manually applied to the device; this field indicates whether the configuration on CDO does not match the configuration on the device, which indicates whether there are changes to be deployed from CDO to the device.
-      example: SYNCED
-    ConflictDetectionState:
-      title: ConflictDetectionState
-      enum:
-      - CONFLICT_DETECTED
-      - NO_CONFLICTS
-      type: string
-      description: Indicates whether there have been changes made to the device's configuration outside of CDO.
-      example: NO_CONFLICTS
-    ConnectivityState:
-      title: ConnectivityState
-      enum:
-      - ONLINE
-      - UNREACHABLE
-      type: string
-      description: The connectivity state of the device to CDO. A connectivity state that is not ONLINE can indicate either a problem with the device, or the communication pathways between the device and CDO.
-      example: ONLINE
-    ConnectorType:
-      title: ConnectorType
-      enum:
-      - SDC
-      - CDG
-      type: string
-      description: The type of the connector that will be used to communicate with the device. CDO can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
-      example: CDG
-    DeviceRole:
-      title: DeviceRole
-      enum:
-      - RA_VPN_HEADEND
-      - MFA_PROVIDER
-      - ZTNA_PROVIDER
-      type: string
-      description: The role this device performs on the network.
-      example: RA_VPN_HEADEND
-    DeviceType:
-      title: DeviceType
-      enum:
-      - ASA
-      - CDFMC_MANAGED_FTD
-      - ONPREM_FMC_MANAGED_FTD
-      - ONPREM_FMC_MANAGED_FIREPOWER
-      - ONPREM_FMC_NGIPS
-      - FDM_MANAGED_FTD
-      - IOS
-      - SSH_DEVICE
-      - GENERIC_DEVICE
-      - MERAKI_MX
-      - CLOUD_DNG
-      - SFCN
-      - SFCN_DNG
-      - SFCN_STS
-      - ONPREM_FMC
-      - CDFMC
-      - AWS_VPC
-      - AZURE_VNET
-      - DUO_ADMIN_PANEL
-      - UMBRELLA_ORGANIZATION
-      type: string
-      description: The type of the device.
-      example: CDFMC_MANAGED_FTD
-    ErrorCode:
-      title: ErrorCode
-      enum:
-      - INVALID_INPUT
-      - UNAUTHORIZED
-      - FORBIDDEN
-      - NOT_FOUND
-      - SERVER_ERROR
-      type: string
-      description: A unique error code that describes the error.
-      example: INVALID_INPUT
-    MerakiDeploymentMode:
-      title: MerakiDeploymentMode
-      enum:
-      - ROUTED
-      - PASSTHROUGH
-      type: string
-      description: (Meraki devices only) The deployment mode of the Meraki device.
-      example: ROUTED
+            description: "Additional details, if any, on the error"
+          description: "Additional details, if any, on the error"
+  responses:
+    http401Unauthorised:
+      description: Request not authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthenticationError'
+    http403Forbidden:
+      description: User does not have sufficient privileges to perform this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+    http400BadRequest:
+      description: Invalid input provided. Check the response for details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+    http404NotFound:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
   securitySchemes:
     bearerAuth:
       type: http
+      in: header
       scheme: bearer
-      bearerFormat: jwt
-security: []
-tags:
-- name: regions-controller
-  description: ''
-- name: template-device-controller
-  description: ''
-- name: device-cloud-services-controller
-  description: ''
-- name: device-manager-controller
-  description: ''
-- name: device-controller
-  description: ''
+      bearerFormat: JWT
