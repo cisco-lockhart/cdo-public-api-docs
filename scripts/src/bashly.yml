@@ -8,11 +8,8 @@ commands:
   help: Download and add public API YAML to the pubhub docs
 
   flags:
-  - long: --apimatic-api-key
-    arg: apimatic-api-key
-    help: Because Pubhub has issues with Spring-generated API docs, we use APImatic to transform the API docs.
   - long: --do-not-commit
     help: Download the latest public API OpenAPI YAML, but do not commit and push it.
 
   examples:
-  - cli download --apimatic-api-key <apimatic-api-key>
+  - cli download
