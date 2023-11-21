@@ -15,6 +15,69 @@ servers:
 - url: https://edge.ci.cdo.cisco.com/api/platform/public-api
   description: CI
 paths:
+  /v1/inventory/devices/asas:
+    post:
+      tags:
+      - asa-device-controller
+      summary: Onboard a ASA device in the CDO tenant.
+      operationId: createAsaDevice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AsaCreateOrUpdateInput'
+        required: true
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "202":
+          description: CDO Transaction object that can be used to track the progress
+            of the onboarding operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+      - bearerAuth: []
+  /v1/transactions/{transactionUid}:
+    get:
+      tags:
+      - transactions-controller
+      operationId: getTransaction
+      parameters:
+      - name: transactionUid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+      - bearerAuth: []
   /v1/regions:
     get:
       tags:
@@ -101,7 +164,7 @@ paths:
       tags:
       - template-device-controller
       summary: Fetch a template device by UID in the CDO tenant.
-      operationId: fetchTemplateDevice
+      operationId: getTemplateDevice
       parameters:
       - name: templateDeviceUid
         in: path
@@ -113,16 +176,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: Template Device object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -177,14 +240,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: List of Cloud Services
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -200,7 +263,7 @@ paths:
       tags:
       - device-cloud-services-controller
       summary: Fetch a Cloud Service by UID in the CDO tenant.
-      operationId: fetchCloudService
+      operationId: getCloudService
       parameters:
       - name: cloudServiceUid
         in: path
@@ -300,7 +363,7 @@ paths:
       tags:
       - device-manager-controller
       summary: Fetch a Device Manager by UID in the CDO tenant.
-      operationId: fetchDeviceManager
+      operationId: getDeviceManager
       parameters:
       - name: deviceManagerUid
         in: path
@@ -376,16 +439,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: List of Device objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -399,7 +462,7 @@ paths:
       tags:
       - device-controller
       summary: Fetch a device by UID in the CDO tenant.
-      operationId: fetchDevice
+      operationId: getDevice
       parameters:
       - name: deviceUid
         in: path
@@ -409,12 +472,111 @@ paths:
           type: string
           format: uuid
       responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "200":
           description: Device object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+      - bearerAuth: []
+  /v1/connectors/sdcs:
+    get:
+      tags:
+      - sdc-controller
+      summary: Fetch a list of SDCs in the CDO tenant.
+      operationId: listSdcs
+      parameters:
+      - name: limit
+        in: query
+        description: The number of results to retrieve.
+        required: false
+        schema:
+          maximum: 200
+          minimum: 0
+          type: string
+          default: "50"
+      - name: offset
+        in: query
+        description: "The offset of the results retrieved. The CDO Public API uses\
+          \ the offset field to determine the index of the first result retrieved,\
+          \ and will retrieve `limit` results from the offset specified."
+        required: false
+        schema:
+          minimum: 0
+          type: string
+          default: "0"
+      - name: q
+        in: query
+        description: The query to execute. Use the Lucene Query Syntax to construct
+          your query.
+        required: false
+        schema:
+          type: string
+        example: name:London-Office-ASA
+      - name: sort
+        in: query
+        description: The fields to sort results by.
+        required: true
+        schema:
+          $ref: '#/components/schemas/SortCriteriaParam'
+        example: name:DESC
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "200":
+          description: List of SDC objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SdcPage'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+      - bearerAuth: []
+  /v1/connectors/sdcs/{sdcUid}:
+    get:
+      tags:
+      - sdc-controller
+      summary: Fetch a SDC by UID in the CDO tenant.
+      operationId: fetchSdc
+      parameters:
+      - name: sdcUid
+        in: path
+        description: The unique identifier of the SDC in CDO.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: SDC object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sdc'
         "403":
           $ref: '#/components/responses/http403Forbidden'
         "404":
@@ -433,6 +595,126 @@ paths:
       - bearerAuth: []
 components:
   schemas:
+    AsaCreateOrUpdateInput:
+      required:
+      - connectorType
+      - name
+      - password
+      - username
+      type: object
+      properties:
+        name:
+          type: string
+          description: A human-readable name for the device.
+          example: My ASA
+        deviceAddress:
+          type: string
+          description: "The address of the device to onboard, specified in the format\
+            \ `host:port`."
+          example: 10.2.2.5:443
+        username:
+          type: string
+          description: The username used to authenticate with the device.
+          example: admin
+        password:
+          type: string
+          description: The password used to authenticate with the device.
+          example: Cisco@23
+        connectorType:
+          type: string
+          description: The type of the connector that will be used to communicate
+            with the device. CDO can communicate with your device using either a Cloud
+            Connector (CDG) or a Secure Device Connector (SDC); see the CDO documentation
+            to learn more.
+          example: SDC
+          enum:
+          - SDC
+          - CDG
+        ignoreCertificate:
+          type: boolean
+          description: Set this attribute to true if you do not want CDO to validate
+            the certificate of this device before onboarding.
+          example: false
+          default: false
+        connectorName:
+          type: string
+          description: The name of the Secure Device Connector (SDC) that will be
+            used to communicate with the device. This value is not required if the
+            connector type selected is Cloud Connector (CDG).
+          example: SDC-1
+        labels:
+          uniqueItems: true
+          type: array
+          description: Specify a set of labels to identify the device as part of a
+            group. Refer to the CDO documentation for details on how labels are used
+            in CDO.
+          example:
+          - asa
+          - ra-vpn-headend
+          items:
+            type: string
+            description: Specify a set of labels to identify the device as part of
+              a group. Refer to the CDO documentation for details on how labels are
+              used in CDO.
+            example: "[\"asa\",\"ra-vpn-headend\"]"
+    CdoTransaction:
+      type: object
+      properties:
+        transactionUid:
+          type: string
+          description: The unique identifier of the asynchronous transaction triggered.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        tenantUid:
+          type: string
+          description: The unique identifier of the tenant that asynchronous transaction
+            triggered on.
+          format: uuid
+          example: 5131daad-e813-4b8f-8f42-be1e241e2cdb
+        entityUid:
+          type: string
+          description: The unique identifier of the entity that the asynchronous transaction
+            is triggered on.
+          format: uuid
+          example: f5f660d4-4b81-4374-877d-fbc4bee894e2
+        entityUrl:
+          type: string
+          description: A URL to access the entity that the asynchronous transaction
+            is triggered on.
+          example: https://edge.us.cdo.cisco.com/platform/public-api/v1/inventory/devices/f5f660d4-4b81-4374-877d-fbc4bee894e2
+        transactionPollingUrl:
+          type: string
+          description: The URL to poll to track the progress of the transaction.
+          example: https://edge.us.cdo.cisco.com/platform/public-api/v1/transactions/7131daad-e813-4b8f-8f42-be1e241e8cdb
+        submissionTime:
+          type: integer
+          description: The UNIX time (the number of seconds that have elapsed since
+            00:00:00 UTC on 1 January 1970) at which the transaction was triggered
+          format: int64
+          example: 1700154566
+        lastUpdatedTime:
+          type: integer
+          description: The UNIX time (the number of seconds that have elapsed since
+            00:00:00 UTC on 1 January 1970) at which the transaction status was last
+            updated
+          format: int64
+          example: 1700154566
+        transactionType:
+          type: string
+          description: The UNIX time (the number of seconds that have elapsed since
+            00:00:00 UTC on 1 January 1970) at which the transaction was triggered
+          example: "1700154566"
+          enum:
+          - ONBOARD_ASA
+        cdoTransactionStatus:
+          type: string
+          description: The status of the CDO transaction
+          example: IN_PROGRESS
+          enum:
+          - PENDING
+          - IN_PROGRESS
+          - DONE
+          - ERROR
     CdoRegion:
       type: object
       properties:
@@ -741,6 +1023,71 @@ components:
           example: my-example-fmc.example.com:443
       description: (Devices managed by on-prem FMC only) Information on the on-prem
         FMC managing this device.
+    Sdc:
+      required:
+      - name
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the SDC in CDO.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        name:
+          type: string
+          description: The name of the SDC in CDO. SDC names are unique in CDO.
+          example: my-example-sdc
+        softwareVersion:
+          type: string
+          description: The software version running on the SDC.
+          example: "202311071057"
+        ipAddress:
+          type: string
+          description: The IP address of the SDC.
+          example: "202311071057"
+        sdcStatus:
+          type: string
+          description: The status of the SDC.
+          example: ACTIVE
+          enum:
+          - NEW
+          - ONBOARDING
+          - ACTIVE
+          - INACTIVE
+          - DISABLED
+          - UNKNOWN
+        lastHeartbeat:
+          type: integer
+          description: "The UNIX time (the number of non-leap seconds which have passed\
+            \ since 00:00:00 UTC on Thursday, 1 January 1970) a heartbeat was received\
+            \ from the SDC. This serves as an indicator of the health of the SDC."
+          format: int64
+          example: 1700472623
+    SdcPage:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The total number of results available.
+          format: int32
+          example: 100
+        limit:
+          type: integer
+          description: The number of results retrieved.
+          format: int32
+          example: 50
+        offset:
+          type: integer
+          description: "The offset of the results retrieved. The CDO Public API uses\
+            \ the offset field to determine the index of the first result retrieved,\
+            \ and will retrieve `limit` results from the offset specified."
+          format: int32
+          example: 0
+        items:
+          type: array
+          description: The list of items retrieved.
+          items:
+            $ref: '#/components/schemas/Sdc'
     AuthenticationError:
       type: object
       properties:
