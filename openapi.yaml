@@ -32,8 +32,6 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the onboarding operation.
@@ -41,6 +39,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -55,6 +55,7 @@ paths:
     get:
       tags:
       - transactions-controller
+      summary: Get information of an in-progress CDO transaction.
       operationId: getTransaction
       parameters:
       - name: transactionUid
@@ -64,8 +65,23 @@ paths:
           type: string
           format: uuid
       responses:
+        "202":
+          description: CDO Transaction that is in progress
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "200":
+          description: "CDO Transaction that has completed, either successfully or\
+            \ unsuccessfully. Note: failed CDO Transactions do not roll back."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -178,14 +194,14 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: Template Device object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -240,16 +256,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: List of Cloud Services
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -338,14 +354,14 @@ paths:
           $ref: '#/components/schemas/SortCriteriaParam'
         example: name:DESC
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "200":
           description: List of Device Manager objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -439,16 +455,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: List of Device objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -474,14 +490,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "200":
           description: Device object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -536,14 +552,14 @@ paths:
           $ref: '#/components/schemas/SortCriteriaParam'
         example: name:DESC
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "200":
           description: List of SDC objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/SdcPage'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -571,14 +587,14 @@ paths:
           type: string
           format: uuid
       responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "200":
           description: SDC object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Sdc'
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
         "401":
@@ -715,6 +731,15 @@ components:
           - IN_PROGRESS
           - DONE
           - ERROR
+        errorMessage:
+          type: string
+          description: "Transaction error message, if any"
+        errorDetails:
+          type: object
+          additionalProperties:
+            type: string
+            description: "Transaction error details, if any"
+          description: "Transaction error details, if any"
     CdoRegion:
       type: object
       properties:
@@ -1028,6 +1053,8 @@ components:
       - name
       type: object
       properties:
+        sdcPublicKey:
+          $ref: '#/components/schemas/SdcPublicKey'
         uid:
           type: string
           description: The unique identifier of the SDC in CDO.
@@ -1088,6 +1115,21 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/Sdc'
+    SdcPublicKey:
+      type: object
+      properties:
+        base64EncodedKey:
+          type: string
+          description: Base64 RSA public key to use to encrypt device credentials
+            sent to the SDC.
+          example: c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCZ1FEZGpxeDNNMjh3ZHE2Rk11R2NFZHJqaGl3SFp5NDE0WXZFUmRDcVdnRXgrSXloNjVteHlkaVh1OVpoMXUyVTRtNDlnL0VUL2JxTklFNGgraUViQURjcjlScVFGRGZ4RC9pK1ZPSkhiQzQ0UERhZHFJd21vUGNoazYvQ0RoZVlJSmZTM0xTNmlkaC9SRGVFVHpnZ3lTaUI2Mm5yMnRmTkJ3V0ZScjV1Sko5dkNvdUxKRVBZbDBVMkpZNnBjd0paNk1lRDg5dU4rTjlHWFN2Vlh4bEZKNXg0VThReGFCMzJuNHZoekNiUzlYSVg1bGJJQnVIUEZ1bmMrNThPaUFzS0dwTTZ1NzhVR2V2TndOVzU0eVZmU2c4Q01XQ09vM1hiNTIrMnU2VHZlcE1BT2ZFU290YUd5NHV1RTBnUHYwSnowano3ZnFGTCt4d1AzNnNVY2pPRlIzQ1VhbEVpUDEyT2tTeEhreVNMUXJ3a2lFTVUvQ3VPUjdOWkdjUFd0dkVBaUZOTEN0VHhzY25Ma0xNNENkUEt3WnZQV3l3cHAyVGdValU4MEFaWkJZaGZBWTd3SFFQdDhrTkROMURhMWpWaHlwMWlycE5VbTEvaDNrS2srOFdFOVV2RjNDeVgyL1NqWUpPR2lMUWdVaXFUL3E5UkNMZUdVWStzaUFwS3ZyNS91UkU9IHNpd2FycmllQFNJV0FSUklFLU0tS1JBRgo=
+        keyId:
+          type: string
+          description: The identifier of the RSA public key. This identifier is used
+            by the SDC to know which private key to use to decrypt a string.
+          example: example-key-id
+      description: Information on the public key used to encrypt credentials sent
+        to the SDC.
     AuthenticationError:
       type: object
       properties:
