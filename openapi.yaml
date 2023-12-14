@@ -69,6 +69,13 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
+        "200":
+          description: "CDO Transaction that has completed, either successfully or\
+            \ unsuccessfully. Note: failed CDO Transactions do not roll back."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
         "202":
           description: CDO Transaction that is in progress
           content:
@@ -77,13 +84,6 @@ paths:
                 $ref: '#/components/schemas/CdoTransaction'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
-        "200":
-          description: "CDO Transaction that has completed, either successfully or\
-            \ unsuccessfully. Note: failed CDO Transactions do not roll back."
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CdoTransaction'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -107,26 +107,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoRegionList'
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-  /v1/meta:
-    get:
-      tags:
-      - meta-controller
-      summary: "Get Meta information about CDO, including the IP addresses of CDO\
-        \ services."
-      operationId: getMeta
-      responses:
-        "200":
-          description: Meta information about CDO.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Meta'
         "500":
           description: Internal server error.
           content:
@@ -212,14 +192,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "200":
           description: Template Device object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -376,14 +356,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: List of Device Manager objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -475,14 +455,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: List of Device objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -510,16 +490,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: Device object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -637,16 +617,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: SDC object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Sdc'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -751,23 +731,21 @@ components:
           description: The URL to poll to track the progress of the transaction.
           example: https://edge.us.cdo.cisco.com/platform/public-api/v1/transactions/7131daad-e813-4b8f-8f42-be1e241e8cdb
         submissionTime:
-          type: integer
-          description: The UNIX time (the number of seconds that have elapsed since
-            00:00:00 UTC on 1 January 1970) at which the transaction was triggered
-          format: int64
-          example: 1700154566
+          type: string
+          description: The time (UTC; represented using the RFC-3339 standard) at
+            which the transaction was triggered
+          format: date-time
+          example: 2023-12-13T05:15:44Z
         lastUpdatedTime:
-          type: integer
-          description: The UNIX time (the number of seconds that have elapsed since
-            00:00:00 UTC on 1 January 1970) at which the transaction status was last
-            updated
-          format: int64
-          example: 1700154566
+          type: string
+          description: The time (UTC; represented using the RFC-3339 standard) at
+            which the transaction status was last updated
+          format: date-time
+          example: 2023-12-13T08:15:44Z
         transactionType:
           type: string
-          description: The UNIX time (the number of seconds that have elapsed since
-            00:00:00 UTC on 1 January 1970) at which the transaction was triggered
-          example: "1700154566"
+          description: the type of the transaction
+          example: ONBOARD_ASA
           enum:
           - ONBOARD_ASA
         cdoTransactionStatus:
@@ -809,17 +787,6 @@ components:
           description: The list of items.
           items:
             $ref: '#/components/schemas/CdoRegion'
-    Meta:
-      type: object
-      properties:
-        cloudConnectorIps:
-          type: array
-          description: The IP addresses from which to allow inbound access to your
-            network if you wish to connect to your devices through CDO's Cloud Connector.
-          items:
-            type: string
-            description: The IP addresses from which to allow inbound access to your
-              network if you wish to connect to your devices through CDO's Cloud Connector.
     SortCriteriaParam:
       type: object
       properties:
@@ -1143,12 +1110,12 @@ components:
           - DISABLED
           - UNKNOWN
         lastHeartbeat:
-          type: integer
-          description: "The UNIX time (the number of non-leap seconds which have passed\
-            \ since 00:00:00 UTC on Thursday, 1 January 1970) a heartbeat was received\
-            \ from the SDC. This serves as an indicator of the health of the SDC."
-          format: int64
-          example: 1700472623
+          type: string
+          description: The time (UTC; represented using the RFC-3339 standard) that
+            a heartbeat was last received from the SDC. This serves as an indicator
+            of the health of the SDC.
+          format: date-time
+          example: 2023-12-13T05:15:44Z
     SdcPage:
       type: object
       properties:
