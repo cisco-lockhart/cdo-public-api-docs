@@ -28,6 +28,10 @@ paths:
               $ref: '#/components/schemas/AsaCreateOrUpdateInput'
         required: true
       responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the onboarding operation.
@@ -35,10 +39,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -67,14 +67,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "202":
           description: CDO Transaction that is in progress
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "200":
@@ -107,6 +107,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoRegionList'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+  /v1/meta:
+    get:
+      tags:
+      - meta-controller
+      summary: "Get Meta information about CDO, including the IP addresses of CDO\
+        \ services."
+      operationId: getMeta
+      responses:
+        "200":
+          description: Meta information about CDO.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Meta'
         "500":
           description: Internal server error.
           content:
@@ -391,14 +411,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "200":
           description: Device Manager
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -455,14 +475,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: List of Device objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -582,14 +602,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: List of SDC objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/SdcPage'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -789,6 +809,17 @@ components:
           description: The list of items.
           items:
             $ref: '#/components/schemas/CdoRegion'
+    Meta:
+      type: object
+      properties:
+        cloudConnectorIps:
+          type: array
+          description: The IP addresses from which to allow inbound access to your
+            network if you wish to connect to your devices through CDO's Cloud Connector.
+          items:
+            type: string
+            description: The IP addresses from which to allow inbound access to your
+              network if you wish to connect to your devices through CDO's Cloud Connector.
     SortCriteriaParam:
       type: object
       properties:
