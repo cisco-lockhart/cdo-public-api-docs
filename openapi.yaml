@@ -49,8 +49,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the onboarding operation.
@@ -58,6 +56,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+      - bearerAuth: []
+  /v1/inventory/devices/ftds:
+    post:
+      tags:
+      - ftd-device-controller
+      summary: Create an FTD device in the CDO tenant
+      operationId: createFtdDevice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FtdCreateOrUpdateInput'
+        required: true
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "202":
+          description: CDO Transaction object that can be used to track the progress
+            of the creation operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -77,14 +111,12 @@ paths:
       parameters:
       - name: deviceUid
         in: path
-        description: The unique identifier of the FTDC device in CDO.
+        description: The unique identifier of the cdFMC managed FTD device in CDO.
         required: true
         schema:
           type: string
           format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the deletion operation.
@@ -92,6 +124,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -121,8 +155,6 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the onboarding operation.
@@ -130,6 +162,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -215,14 +249,51 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "200":
-          description: List of users
+          description: List of User objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserPage'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+      - bearerAuth: []
+  /v1/users/{userUid}:
+    get:
+      tags:
+      - user-controller
+      summary: Fetch a user by UID in the CDO tenant.
+      operationId: getUser
+      parameters:
+      - name: userUid
+        in: path
+        description: The unique identifier of the user in CDO.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "200":
+          description: User object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -245,20 +316,10 @@ paths:
           type: string
           format: uuid
       responses:
-        "202":
-          description: CDO Transaction that is in progress
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CdoTransaction'
         "403":
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: "CDO Transaction that has completed, either successfully or\
             \ unsuccessfully. Note: failed CDO Transactions do not roll back."
@@ -266,6 +327,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "202":
+          description: CDO Transaction that is in progress
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -413,18 +484,18 @@ paths:
           type: string
           format: uuid
       responses:
-        "200":
-          description: Template Device object
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Device'
         "403":
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
+        "200":
+          description: Template Device object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -546,16 +617,16 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: Cloud Service
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -639,14 +710,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: List of Device Manager objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -672,16 +743,16 @@ paths:
           type: string
           format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "200":
           description: Device Manager
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -710,12 +781,12 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
         "204":
           description: No Content
         "401":
           $ref: '#/components/responses/http401Unauthorised'
+        "405":
+          $ref: '#/components/responses/http405MethodNotAllowed'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -807,12 +878,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "200":
-          description: Device object
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Device'
         "404":
           $ref: '#/components/responses/http404NotFound'
         "405":
@@ -821,6 +886,12 @@ paths:
           $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
+        "200":
+          description: Device object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
         "500":
           description: Internal server error.
           content:
@@ -845,10 +916,10 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
         "204":
           description: No Content
+        "405":
+          $ref: '#/components/responses/http405MethodNotAllowed'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -968,14 +1039,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "200":
           description: SDC object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Sdc'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -1089,6 +1160,7 @@ components:
           enum:
           - ONBOARD_ASA
           - ONBOARD_IOS
+          - ONBOARD_FTD
           - DELETE_FTDC
           - RECONNECT_ASA
         cdoTransactionStatus:
@@ -1109,6 +1181,92 @@ components:
             type: string
             description: "Transaction error details, if any"
           description: "Transaction error details, if any"
+    FtdCreateOrUpdateInput:
+      required:
+      - fmcAccessPolicyUid
+      - licenses
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+          description: Specify a human-readable name for the device.
+          example: My FTD
+        licenses:
+          uniqueItems: true
+          type: array
+          description: Specify a set of licenses to apply to the device.
+          example: BASE
+          items:
+            type: string
+            description: Specify a set of licenses to apply to the device.
+            example: BASE
+            enum:
+            - BASE
+            - CARRIER
+            - THREAT
+            - MALWARE
+            - URLFilter
+        virtual:
+          type: boolean
+          description: Indicate whether the FTD is a virtual or a physical device.
+        fmcAccessPolicyUid:
+          type: string
+          description: Specify the unique identifier of the FMC access policy to apply
+            to this device.
+          format: uuid
+        performanceTier:
+          type: string
+          description: Specify the performance tier of the FTDv (required only if
+            isVirtual is set to true)
+          enum:
+          - FTDv5
+          - FTDv10
+          - FTDv20
+          - FTDv30
+          - FTDv50
+          - FTDv100
+          - FTDv
+        labels:
+          uniqueItems: true
+          type: array
+          description: Specify a set of labels to identify the device as part of a
+            group. Refer to the CDO documentation for details on how labels are used
+            in CDO.
+          example:
+          - ios
+          - ra-vpn-headend
+          items:
+            type: string
+            description: Specify a set of labels to identify the device as part of
+              a group. Refer to the CDO documentation for details on how labels are
+              used in CDO.
+            example: "[\"ios\",\"ra-vpn-headend\"]"
+        deviceType:
+          type: string
+          description: Specify the type of the FTD. The only supported type of FTD
+            is CDFMC_MANAGED_FTD
+          enum:
+          - ASA
+          - CDFMC_MANAGED_FTD
+          - ONPREM_FMC_MANAGED_FTD
+          - ONPREM_FMC_MANAGED_FIREPOWER
+          - ONPREM_FMC_NGIPS
+          - FDM_MANAGED_FTD
+          - IOS
+          - SSH_DEVICE
+          - GENERIC_DEVICE
+          - MERAKI_MX
+          - CLOUD_DNG
+          - SFCN
+          - SFCN_DNG
+          - SFCN_STS
+          - ONPREM_FMC
+          - CDFMC
+          - AWS_VPC
+          - AZURE_VNET
+          - DUO_ADMIN_PANEL
+          - UMBRELLA_ORGANIZATION
     AsaCreateOrUpdateInput:
       required:
       - connectorType
@@ -1205,7 +1363,6 @@ components:
           example: 2023-12-13T05:15:44Z
         apiOnlyUser:
           type: boolean
-      description: The list of items retrieved.
     UserPage:
       type: object
       properties:
@@ -1720,6 +1877,7 @@ components:
           - FORBIDDEN
           - NOT_FOUND
           - METHOD_NOT_ALLOWED
+          - TOO_MANY_REQUESTS
           - CANNOT_DELETE_CDFMC_MANAGED_FTD
           - CANNOT_DELETE_ONPREM_FMC_MANAGED_FTD
           - CANNOT_DELETE_ONPREM_FMC_MANAGED_FIREPOWER
