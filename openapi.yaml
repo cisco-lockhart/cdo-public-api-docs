@@ -84,14 +84,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "201":
           description: User object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -102,12 +102,12 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
       - bearerAuth: []
-  /v1/users/{apiUserId}/apiToken/generate:
+  /v1/users/{apiUserId}/apiToken/revoke:
     post:
       tags:
       - user-controller
-      summary: Generate API token for API-only user.
-      operationId: generateApiToken
+      summary: Revoke API Token of API-only user.
+      operationId: revokeApiToken
       parameters:
       - name: apiUserId
         in: path
@@ -122,11 +122,46 @@ paths:
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "201":
-          description: API token
+          description: Status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusInfo'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+      - bearerAuth: []
+  /v1/users/{apiUserId}/apiToken/generate:
+    post:
+      tags:
+      - user-controller
+      summary: Generate API Token for API-only user.
+      operationId: generateApiToken
+      parameters:
+      - name: apiUserId
+        in: path
+        description: The unique identifier of the API user in CDO.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "201":
+          description: API Token
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiTokenInfo'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -205,10 +240,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the creation operation.
@@ -216,6 +247,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -241,10 +276,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the creation operation.
@@ -252,6 +283,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -275,6 +310,8 @@ paths:
           type: string
           format: uuid
       responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the deletion operation.
@@ -282,8 +319,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -385,16 +420,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: User object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -451,8 +486,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "200":
           description: "CDO Transaction that has completed, either successfully or\
             \ unsuccessfully. Note: failed CDO Transactions do not roll back."
@@ -460,6 +493,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "202":
           description: CDO Transaction that is in progress
           content:
@@ -584,14 +619,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: List of Template Devices
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -713,14 +748,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: List of Cloud Services
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -750,14 +785,14 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: Cloud Service
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -843,16 +878,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: List of Device Manager objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -914,12 +949,12 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
         "204":
           description: No Content
         "401":
           $ref: '#/components/responses/http401Unauthorised'
+        "405":
+          $ref: '#/components/responses/http405MethodNotAllowed'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -1009,16 +1044,16 @@ paths:
           type: string
           format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "200":
           description: Device object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "405":
           $ref: '#/components/responses/http405MethodNotAllowed'
         "401":
@@ -1049,10 +1084,10 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
         "204":
           description: No Content
+        "405":
+          $ref: '#/components/responses/http405MethodNotAllowed'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -1072,6 +1107,8 @@ paths:
       summary: Fetch the feature flags enabled for this tenant.
       operationId: listFeatureFlags
       responses:
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: Set of feature flags that are enabled for the user's tenant.
           content:
@@ -1083,8 +1120,6 @@ paths:
               example:
               - feature-1
               - feature-2
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "500":
           description: Internal server error.
           content:
@@ -1135,14 +1170,14 @@ paths:
           $ref: '#/components/schemas/SortCriteriaParam'
         example: name:DESC
       responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "200":
           description: List of SDC objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/SdcPage'
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -1251,6 +1286,13 @@ components:
             indicate the last time the user successfully login CDO.
           format: date-time
           example: 2023-12-13T05:15:44Z
+    StatusInfo:
+      type: object
+      properties:
+        status:
+          type: string
+          description: The Status of the request.
+          example: OK
     ApiTokenInfo:
       type: object
       properties:
