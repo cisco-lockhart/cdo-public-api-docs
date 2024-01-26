@@ -117,14 +117,14 @@ paths:
           type: string
           format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "201":
           description: Status
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/StatusInfo'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -152,14 +152,14 @@ paths:
           type: string
           format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "201":
           description: API Token
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiTokenInfo'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -208,6 +208,8 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the onboarding operation.
@@ -215,8 +217,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -240,8 +240,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the creation operation.
@@ -249,6 +247,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -276,8 +276,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the creation operation.
@@ -285,6 +283,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -312,10 +312,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the deletion operation.
@@ -323,6 +319,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -350,6 +350,8 @@ paths:
           $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the onboarding operation.
@@ -357,8 +359,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -384,6 +384,8 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the reconnecting operation.
@@ -391,8 +393,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -420,10 +420,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the read operation
@@ -431,6 +427,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -456,14 +456,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "200":
           description: User object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -524,6 +524,16 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "202":
+          description: CDO Transaction that is in progress
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
         "200":
           description: "CDO Transaction that has completed, either successfully or\
             \ unsuccessfully. Note: failed CDO Transactions do not roll back."
@@ -531,16 +541,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "202":
-          description: CDO Transaction that is in progress
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CdoTransaction'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -657,14 +657,14 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: List of Template Devices
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -784,14 +784,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: List of Cloud Services
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -914,16 +914,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: List of Device Manager objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -985,10 +985,10 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
         "204":
           description: No Content
+        "405":
+          $ref: '#/components/responses/http405MethodNotAllowed'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -1082,14 +1082,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "200":
           description: Device object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "405":
           $ref: '#/components/responses/http405MethodNotAllowed'
         "401":
@@ -1120,10 +1120,10 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
         "204":
           description: No Content
+        "405":
+          $ref: '#/components/responses/http405MethodNotAllowed'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -1143,8 +1143,6 @@ paths:
       summary: Fetch the feature flags enabled for this tenant.
       operationId: listFeatureFlags
       responses:
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: Set of feature flags that are enabled for the user's tenant.
           content:
@@ -1156,6 +1154,8 @@ paths:
               example:
               - feature-1
               - feature-2
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "500":
           description: Internal server error.
           content:
@@ -1301,16 +1301,7 @@ components:
           description: Roles associated with this user in CDO.
           example: "[ROLE_ADMIN]"
           items:
-            type: string
-            description: Roles associated with this user in CDO.
-            example: "[ROLE_ADMIN]"
-            enum:
-            - ROLE_ADMIN
-            - ROLE_SUPER_ADMIN
-            - ROLE_READ_ONLY
-            - ROLE_DEPLOY_ONLY
-            - ROLE_EDIT_ONLY
-            - ROLE_VPN_SESSIONS_MANAGER
+            $ref: '#/components/schemas/UserRole'
         apiOnlyUser:
           type: boolean
           description: "Whether the user is API-only, an API-only user cannot access\
@@ -1322,6 +1313,17 @@ components:
             indicate the last time the user successfully login CDO.
           format: date-time
           example: 2023-12-13T05:15:44Z
+    UserRole:
+      type: string
+      description: The role of the user this token belongs to. The user can be API-only
+        or a human.
+      enum:
+      - ROLE_ADMIN
+      - ROLE_SUPER_ADMIN
+      - ROLE_READ_ONLY
+      - ROLE_DEPLOY_ONLY
+      - ROLE_EDIT_ONLY
+      - ROLE_VPN_SESSIONS_MANAGER
     StatusInfo:
       type: object
       properties:
@@ -1429,26 +1431,9 @@ components:
           format: date-time
           example: 2023-12-13T08:15:44Z
         transactionType:
-          type: string
-          description: the type of the transaction
-          example: ONBOARD_ASA
-          enum:
-          - ONBOARD_ASA
-          - ONBOARD_IOS
-          - CREATE_FTD
-          - REGISTER_FTD
-          - DELETE_CDFMC_MANAGED_FTD
-          - RECONNECT_ASA
-          - READ_ASA
+          $ref: '#/components/schemas/CdoTransactionType'
         cdoTransactionStatus:
-          type: string
-          description: The status of the CDO transaction
-          example: IN_PROGRESS
-          enum:
-          - PENDING
-          - IN_PROGRESS
-          - DONE
-          - ERROR
+          $ref: '#/components/schemas/CdoTransactionStatus'
         errorMessage:
           type: string
           description: "Transaction error message, if any"
@@ -1458,6 +1443,52 @@ components:
             type: string
             description: "Transaction error details, if any"
           description: "Transaction error details, if any"
+    CdoTransactionStatus:
+      type: string
+      description: The status of the CDO transaction
+      example: IN_PROGRESS
+      enum:
+      - PENDING
+      - IN_PROGRESS
+      - DONE
+      - ERROR
+    CdoTransactionType:
+      type: string
+      description: the type of the transaction
+      example: ONBOARD_ASA
+      enum:
+      - ONBOARD_ASA
+      - ONBOARD_IOS
+      - CREATE_FTD
+      - REGISTER_FTD
+      - DELETE_CDFMC_MANAGED_FTD
+      - RECONNECT_ASA
+      - READ_ASA
+    EntityType:
+      type: string
+      description: The type of the device.
+      example: CDFMC_MANAGED_FTD
+      enum:
+      - ASA
+      - CDFMC_MANAGED_FTD
+      - ONPREM_FMC_MANAGED_FTD
+      - ONPREM_FMC_MANAGED_FIREPOWER
+      - ONPREM_FMC_NGIPS
+      - FDM_MANAGED_FTD
+      - IOS
+      - SSH_DEVICE
+      - GENERIC_DEVICE
+      - MERAKI_MX
+      - CLOUD_DNG
+      - SFCN
+      - SFCN_DNG
+      - SFCN_STS
+      - ONPREM_FMC
+      - CDFMC
+      - AWS_VPC
+      - AZURE_VNET
+      - DUO_ADMIN_PANEL
+      - UMBRELLA_ORGANIZATION
     FtdCreateOrUpdateInput:
       required:
       - fmcAccessPolicyUid
@@ -1520,30 +1551,7 @@ components:
               used in CDO.
             example: "[\"ios\",\"ra-vpn-headend\"]"
         deviceType:
-          type: string
-          description: Specify the type of the FTD. The only supported type of FTD
-            is CDFMC_MANAGED_FTD
-          enum:
-          - ASA
-          - CDFMC_MANAGED_FTD
-          - ONPREM_FMC_MANAGED_FTD
-          - ONPREM_FMC_MANAGED_FIREPOWER
-          - ONPREM_FMC_NGIPS
-          - FDM_MANAGED_FTD
-          - IOS
-          - SSH_DEVICE
-          - GENERIC_DEVICE
-          - MERAKI_MX
-          - CLOUD_DNG
-          - SFCN
-          - SFCN_DNG
-          - SFCN_STS
-          - ONPREM_FMC
-          - CDFMC
-          - AWS_VPC
-          - AZURE_VNET
-          - DUO_ADMIN_PANEL
-          - UMBRELLA_ORGANIZATION
+          $ref: '#/components/schemas/EntityType'
     FtdRegistrationInput:
       required:
       - ftdUid
@@ -1581,15 +1589,7 @@ components:
           description: The password used to authenticate with the device.
           example: Cisco@23
         connectorType:
-          type: string
-          description: The type of the connector that will be used to communicate
-            with the device. CDO can communicate with your device using either a Cloud
-            Connector (CDG) or a Secure Device Connector (SDC); see the CDO documentation
-            to learn more.
-          example: SDC
-          enum:
-          - SDC
-          - CDG
+          $ref: '#/components/schemas/ConnectorType'
         ignoreCertificate:
           type: boolean
           description: Set this attribute to true if you do not want CDO to validate
@@ -1617,6 +1617,15 @@ components:
               a group. Refer to the CDO documentation for details on how labels are
               used in CDO.
             example: "[\"asa\",\"ra-vpn-headend\"]"
+    ConnectorType:
+      type: string
+      description: The type of the connector that will be used to communicate with
+        the device. CDO can communicate with your device using either a Cloud Connector
+        (CDG) or a Secure Device Connector (SDC).
+      example: CDG
+      enum:
+      - SDC
+      - CDG
     UserPage:
       type: object
       properties:
@@ -1662,16 +1671,7 @@ components:
           description: The role of the user this token belongs to. The user can be
             API-only or a human.
           items:
-            type: string
-            description: The role of the user this token belongs to. The user can
-              be API-only or a human.
-            enum:
-            - ROLE_ADMIN
-            - ROLE_SUPER_ADMIN
-            - ROLE_READ_ONLY
-            - ROLE_DEPLOY_ONLY
-            - ROLE_EDIT_ONLY
-            - ROLE_VPN_SESSIONS_MANAGER
+            $ref: '#/components/schemas/UserRole'
         expiresAt:
           type: string
           description: "The time (UTC; represented using the RFC-3339 standard) the\
@@ -1747,6 +1747,14 @@ components:
           example: 9.18.8
       description: (High Availability ASAs only) Information on the failover mate
         of this device.
+    AsaFailoverMode:
+      type: string
+      description: (ASAs only) Failover mode of the device.
+      example: ACTIVE_STANDBY
+      enum:
+      - "OFF"
+      - ACTIVE_STANDBY
+      - ACTIVE_ACTIVE
     CdFmcInfo:
       type: object
       properties:
@@ -1772,6 +1780,39 @@ components:
       description: (FTDs managed by cdFMC only) Information on the cloud-delivered
         FMC managing this FTD. This information is not available for FTDs managed
         using FDM or on-prem FMCs.
+    ConfigState:
+      type: string
+      description: "The state of the device configuration in CDO. CDO stages configuration\
+        \ changes which have to be manually applied to the device; this field indicates\
+        \ whether the configuration on CDO does not match the configuration on the\
+        \ device, which indicates whether there are changes to be deployed from CDO\
+        \ to the device."
+      example: SYNCED
+      enum:
+      - NO_CONFIG
+      - SYNCED
+      - NOT_SYNCED
+      - UNKNOWN
+    ConflictDetectionState:
+      type: string
+      description: Indicates whether there have been changes made to the device's
+        configuration outside of CDO.
+      example: NO_CONFLICTS
+      enum:
+      - CONFLICT_DETECTED
+      - NO_CONFLICTS
+    ConnectivityState:
+      type: string
+      description: "The connectivity state of the device to CDO. A connectivity state\
+        \ that is not ONLINE can indicate either a problem with the device, or the\
+        \ communication pathways between the device and CDO."
+      example: ONLINE
+      enum:
+      - ONLINE
+      - UNREACHABLE
+      - BAD_CREDENTIALS
+      - UNKNOWN
+      - PENDING_SETUP
     Device:
       required:
       - deviceType
@@ -1788,39 +1829,9 @@ components:
           description: The name of the device in CDO. Device names are unique in CDO.
           example: my-example-device
         deviceType:
-          type: string
-          description: The type of the device.
-          example: CDFMC_MANAGED_FTD
-          enum:
-          - ASA
-          - CDFMC_MANAGED_FTD
-          - ONPREM_FMC_MANAGED_FTD
-          - ONPREM_FMC_MANAGED_FIREPOWER
-          - ONPREM_FMC_NGIPS
-          - FDM_MANAGED_FTD
-          - IOS
-          - SSH_DEVICE
-          - GENERIC_DEVICE
-          - MERAKI_MX
-          - CLOUD_DNG
-          - SFCN
-          - SFCN_DNG
-          - SFCN_STS
-          - ONPREM_FMC
-          - CDFMC
-          - AWS_VPC
-          - AZURE_VNET
-          - DUO_ADMIN_PANEL
-          - UMBRELLA_ORGANIZATION
+          $ref: '#/components/schemas/EntityType'
         connectorType:
-          type: string
-          description: The type of the connector that will be used to communicate
-            with the device. CDO can communicate with your device using either a Cloud
-            Connector (CDG) or a Secure Device Connector (SDC).
-          example: CDG
-          enum:
-          - SDC
-          - CDG
+          $ref: '#/components/schemas/ConnectorType'
         connectorUid:
           type: string
           description: The unique identifier of the Secure Device Connector (SDC)
@@ -1837,13 +1848,7 @@ components:
             \ to the device at this address."
           example: my-example-device.example.com:443
         deviceRole:
-          type: string
-          description: The role this device performs on the network.
-          example: RA_VPN_HEADEND
-          enum:
-          - RA_VPN_HEADEND
-          - MFA_PROVIDER
-          - ZTNA_PROVIDER
+          $ref: '#/components/schemas/DeviceRole'
         serial:
           type: string
           description: "The serial number of the device. This is typically used for\
@@ -1860,38 +1865,11 @@ components:
           description: The version of the software running on the device.
           example: 7.4.1
         connectivityState:
-          type: string
-          description: "The connectivity state of the device to CDO. A connectivity\
-            \ state that is not ONLINE can indicate either a problem with the device,\
-            \ or the communication pathways between the device and CDO."
-          example: ONLINE
-          enum:
-          - ONLINE
-          - UNREACHABLE
-          - BAD_CREDENTIALS
-          - UNKNOWN
-          - PENDING_SETUP
+          $ref: '#/components/schemas/ConnectivityState'
         configState:
-          type: string
-          description: "The state of the device configuration in CDO. CDO stages configuration\
-            \ changes which have to be manually applied to the device; this field\
-            \ indicates whether the configuration on CDO does not match the configuration\
-            \ on the device, which indicates whether there are changes to be deployed\
-            \ from CDO to the device."
-          example: SYNCED
-          enum:
-          - NO_CONFIG
-          - SYNCED
-          - NOT_SYNCED
-          - UNKNOWN
+          $ref: '#/components/schemas/ConfigState'
         conflictDetectionState:
-          type: string
-          description: Indicates whether there have been changes made to the device's
-            configuration outside of CDO.
-          example: NO_CONFLICTS
-          enum:
-          - CONFLICT_DETECTED
-          - NO_CONFLICTS
+          $ref: '#/components/schemas/ConflictDetectionState'
         notes:
           type: string
           description: Free-form notes on the device.
@@ -1902,13 +1880,7 @@ components:
             device.
           example: 7.6(2)
         asaFailoverMode:
-          type: string
-          description: (ASAs only) Failover mode of the device.
-          example: ACTIVE_STANDBY
-          enum:
-          - "OFF"
-          - ACTIVE_STANDBY
-          - ACTIVE_ACTIVE
+          $ref: '#/components/schemas/AsaFailoverMode'
         asaFailoverState:
           type: string
           description: (High Availability ASAs only) Failover state of this device.
@@ -1941,12 +1913,7 @@ components:
         onPremFmcInfo:
           $ref: '#/components/schemas/OnPremFmcInfo'
         merakiDeploymentMode:
-          type: string
-          description: (Meraki devices only) The deployment mode of the Meraki device.
-          example: ROUTED
-          enum:
-          - ROUTED
-          - PASSTHROUGH
+          $ref: '#/components/schemas/MerakiDeploymentMode'
         merakiNetwork:
           $ref: '#/components/schemas/Network'
         state:
@@ -1979,6 +1946,21 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/Device'
+    DeviceRole:
+      type: string
+      description: The role this device performs on the network.
+      example: RA_VPN_HEADEND
+      enum:
+      - RA_VPN_HEADEND
+      - MFA_PROVIDER
+      - ZTNA_PROVIDER
+    MerakiDeploymentMode:
+      type: string
+      description: (Meraki devices only) The deployment mode of the Meraki device.
+      example: ROUTED
+      enum:
+      - ROUTED
+      - PASSTHROUGH
     Network:
       type: object
       properties:
@@ -2052,16 +2034,7 @@ components:
           description: The IP address of the SDC.
           example: "202311071057"
         sdcStatus:
-          type: string
-          description: The status of the SDC.
-          example: ACTIVE
-          enum:
-          - NEW
-          - ONBOARDING
-          - ACTIVE
-          - INACTIVE
-          - DISABLED
-          - UNKNOWN
+          $ref: '#/components/schemas/SdcStatus'
         lastHeartbeat:
           type: string
           description: The time (UTC; represented using the RFC-3339 standard) that
@@ -2109,6 +2082,17 @@ components:
           example: example-key-id
       description: Information on the public key used to encrypt credentials sent
         to the SDC.
+    SdcStatus:
+      type: string
+      description: The status of the SDC.
+      example: ACTIVE
+      enum:
+      - NEW
+      - ONBOARDING
+      - ACTIVE
+      - INACTIVE
+      - DISABLED
+      - UNKNOWN
     AuthenticationError:
       type: object
       properties:
