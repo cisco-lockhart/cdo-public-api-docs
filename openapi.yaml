@@ -58,16 +58,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: List of User objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserPage'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -79,7 +79,7 @@ paths:
     post:
       tags:
       - user-controller
-      summary: Create a user in the CDO tenant.
+      summary: Create a user in the CDO tenant
       operationId: createUser
       requestBody:
         content:
@@ -90,14 +90,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "201":
           description: User object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -112,7 +112,7 @@ paths:
     post:
       tags:
       - user-controller
-      summary: Revoke API Token of API-only user.
+      summary: Revoke API Token of API-only user
       operationId: revokeApiToken
       parameters:
       - name: apiUserId
@@ -147,7 +147,7 @@ paths:
     post:
       tags:
       - user-controller
-      summary: Generate API Token for API-only user.
+      summary: Generate API Token for API-only user
       operationId: generateApiToken
       parameters:
       - name: apiUserId
@@ -158,16 +158,16 @@ paths:
           type: string
           format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "201":
           description: API Token
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiTokenInfo'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -197,11 +197,44 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
       - bearerAuth: []
+  /v1/msp/tenants:
+    post:
+      tags:
+      - msp-controller
+      summary: Add a tenant to the MSP Portal
+      operationId: addMspTenant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MspAddTenantInput'
+        required: true
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "201":
+          description: Status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusInfo'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+      - bearerAuth: []
   /v1/inventory/devices/ios:
     post:
       tags:
       - ios-device-controller
-      summary: Onboard a IOS device in the CDO tenant.
+      summary: Onboard a IOS device in the CDO tenant
       operationId: createIosDevice
       requestBody:
         content:
@@ -246,10 +279,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the creation operation.
@@ -257,6 +286,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -271,7 +304,7 @@ paths:
       - ftd-device-controller
       summary: "Register an FTD device managed by an FMC to the CDO tenant. Call this\
         \ API endpoint after you have created an FTD, and pasted the generated CLI\
-        \ output in the FTD."
+        \ output in the FTD"
       operationId: finishOnboardingFtdDevice
       requestBody:
         content:
@@ -282,10 +315,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the creation operation.
@@ -293,6 +322,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -305,7 +338,7 @@ paths:
     post:
       tags:
       - ftd-device-controller
-      summary: Delete cdFMC managed FTD device in the CDO tenant.
+      summary: Delete cdFMC managed FTD device in the CDO tenant
       operationId: deleteCdFmcManagedFtdDevice
       parameters:
       - name: deviceUid
@@ -318,8 +351,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the deletion operation.
@@ -327,6 +358,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -341,7 +374,7 @@ paths:
     post:
       tags:
       - asa-device-controller
-      summary: Onboard a ASA device in the CDO tenant.
+      summary: Onboard a ASA device in the CDO tenant
       operationId: createAsaDevice
       requestBody:
         content:
@@ -352,6 +385,8 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the onboarding operation.
@@ -359,8 +394,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -377,7 +410,7 @@ paths:
     post:
       tags:
       - asa-device-controller
-      summary: Reconnect an ASA device in the CDO tenant.
+      summary: Reconnect an ASA device in the CDO tenant
       operationId: reconnectAsaDevice
       parameters:
       - name: deviceUid
@@ -426,8 +459,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the read operation
@@ -435,6 +466,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -462,16 +495,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: User object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -485,7 +518,7 @@ paths:
     delete:
       tags:
       - user-controller
-      summary: Delete a User by UID in the CDO tenant.
+      summary: Delete a User by UID in the CDO tenant
       operationId: deleteDeviceManager
       parameters:
       - name: userUid
@@ -516,7 +549,7 @@ paths:
     get:
       tags:
       - transactions-controller
-      summary: Get information of an in-progress CDO transaction.
+      summary: Get information of an in-progress CDO transaction
       operationId: getTransaction
       parameters:
       - name: transactionUid
@@ -528,14 +561,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "202":
-          description: CDO Transaction that is in progress
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CdoTransaction'
         "200":
           description: "CDO Transaction that has completed, either successfully or\
             \ unsuccessfully. Note: failed CDO Transactions do not roll back."
@@ -543,8 +568,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
+        "202":
+          description: CDO Transaction that is in progress
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -602,7 +635,7 @@ paths:
       tags:
       - meta-controller
       summary: "Get Meta information about CDO, including the IP addresses of CDO\
-        \ services."
+        \ services"
       operationId: getMeta
       responses:
         "200":
@@ -621,7 +654,7 @@ paths:
     get:
       tags:
       - template-device-controller
-      summary: Fetch a list of template devices in the CDO tenant.
+      summary: Fetch a list of template devices in the CDO tenant
       operationId: listTemplateDevices
       parameters:
       - name: limit
@@ -661,16 +694,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: List of Template Devices
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -683,7 +716,7 @@ paths:
     get:
       tags:
       - template-device-controller
-      summary: Fetch a template device by UID in the CDO tenant.
+      summary: Fetch a template device by UID in the CDO tenant
       operationId: getTemplateDevice
       parameters:
       - name: templateDeviceUid
@@ -696,16 +729,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: Template Device object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -719,7 +752,7 @@ paths:
     delete:
       tags:
       - template-device-controller
-      summary: Delete a template device by UID in the CDO tenant.
+      summary: Delete a template device by UID in the CDO tenant
       operationId: deleteTemplateDevice
       parameters:
       - name: templateDeviceUid
@@ -750,7 +783,7 @@ paths:
     get:
       tags:
       - device-cloud-services-controller
-      summary: Fetch a list of Cloud Services in the CDO tenant.
+      summary: Fetch a list of Cloud Services in the CDO tenant
       operationId: listDeviceCloudServices
       parameters:
       - name: limit
@@ -812,7 +845,7 @@ paths:
     get:
       tags:
       - device-cloud-services-controller
-      summary: Fetch a Cloud Service by UID in the CDO tenant.
+      summary: Fetch a Cloud Service by UID in the CDO tenant
       operationId: getCloudService
       parameters:
       - name: cloudServiceUid
@@ -825,14 +858,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "200":
           description: Cloud Service
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -848,7 +881,7 @@ paths:
     delete:
       tags:
       - device-cloud-services-controller
-      summary: Delete a Cloud Service by UID in the CDO tenant.
+      summary: Delete a Cloud Service by UID in the CDO tenant
       operationId: deleteCloudService
       parameters:
       - name: cloudServiceUid
@@ -880,7 +913,7 @@ paths:
       tags:
       - device-manager-controller
       summary: Fetch a list of Device Managers (on-prem FMCs and cloud-delivered FMCs)
-        in the CDO tenant.
+        in the CDO tenant
       operationId: listDeviceManagers
       parameters:
       - name: limit
@@ -942,7 +975,7 @@ paths:
     get:
       tags:
       - device-manager-controller
-      summary: Fetch a Device Manager by UID in the CDO tenant.
+      summary: Fetch a Device Manager by UID in the CDO tenant
       operationId: getDeviceManager
       parameters:
       - name: deviceManagerUid
@@ -953,16 +986,16 @@ paths:
           type: string
           format: uuid
       responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "200":
           description: Device Manager
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -978,7 +1011,7 @@ paths:
     delete:
       tags:
       - device-manager-controller
-      summary: Delete a Device Manager by UID in the CDO tenant.
+      summary: Delete a Device Manager by UID in the CDO tenant
       operationId: deleteDeviceManager_1
       parameters:
       - name: deviceManagerUid
@@ -1011,7 +1044,7 @@ paths:
     get:
       tags:
       - device-controller
-      summary: Fetch a list of devices in the CDO tenant.
+      summary: Fetch a list of devices in the CDO tenant
       operationId: listDevices
       parameters:
       - name: limit
@@ -1075,7 +1108,7 @@ paths:
     get:
       tags:
       - device-controller
-      summary: Fetch a device by UID in the CDO tenant.
+      summary: Fetch a device by UID in the CDO tenant
       operationId: getDevice
       parameters:
       - name: deviceUid
@@ -1086,16 +1119,16 @@ paths:
           type: string
           format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "200":
           description: Device object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "405":
           $ref: '#/components/responses/http405MethodNotAllowed'
         "401":
@@ -1113,7 +1146,7 @@ paths:
     delete:
       tags:
       - device-controller
-      summary: Delete a device by UID in the CDO tenant.
+      summary: Delete a device by UID in the CDO tenant
       operationId: deleteDevice
       parameters:
       - name: deviceUid
@@ -1146,7 +1179,7 @@ paths:
     get:
       tags:
       - features-controller
-      summary: Fetch the feature flags enabled for this tenant.
+      summary: Fetch the feature flags enabled for this tenant
       operationId: listFeatureFlags
       responses:
         "200":
@@ -1174,7 +1207,7 @@ paths:
     get:
       tags:
       - sdc-controller
-      summary: Fetch a list of SDCs in the CDO tenant.
+      summary: Fetch a list of SDCs in the CDO tenant
       operationId: listSdcs
       parameters:
       - name: limit
@@ -1214,16 +1247,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: List of SDC objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/SdcPage'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -1236,7 +1269,7 @@ paths:
     get:
       tags:
       - sdc-controller
-      summary: Fetch a SDC by UID in the CDO tenant.
+      summary: Fetch a SDC by UID in the CDO tenant
       operationId: fetchSdc
       parameters:
       - name: sdcUid
@@ -1249,14 +1282,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "200":
           description: SDC object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Sdc'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -1342,7 +1375,16 @@ components:
       properties:
         apiToken:
           type: string
-          description: The API access token.
+          description: The API Access Token.
+          example: FaKE-toKeN
+    MspAddTenantInput:
+      required:
+      - apiToken
+      type: object
+      properties:
+        apiToken:
+          type: string
+          description: The Tenant API Access Token.
           example: FaKE-toKeN
     IosCreateOrUpdateInput:
       required:
