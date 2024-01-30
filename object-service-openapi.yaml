@@ -1,0 +1,1152 @@
+openapi: 3.0.1
+info:
+  title: API Docs
+  description: Use the interactive documentation to explore the endpoints CDO has
+    to offer
+  contact:
+    name: CDO TAC
+    email: cdo.tac@cisco.com
+  version: 0.0.1
+servers:
+- url: https://edge.us.cdo.cisco.com/api/rest
+  description: US
+- url: https://edge.eu.cdo.cisco.com/api/rest
+  description: EU
+- url: https://edge.apj.cdo.cisco.com/api/rest
+  description: APJ
+- url: https://edge.staging.cdo.cisco.com/api/rest
+  description: Staging
+- url: https://edge.scale.cdo.cisco.com/api/rest
+  description: Scale
+- url: https://edge.ci.cdo.cisco.com/api/rest
+  description: CI
+paths:
+  /v0/objects:
+    get:
+      tags:
+      - common-objects-controller
+      operationId: listObjects
+      parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          maximum: 200
+          minimum: 1
+          type: integer
+          format: int32
+          default: 50
+      - name: sortBy
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+    post:
+      tags:
+      - common-objects-controller
+      summary: Creates an object in the CDO tenant
+      operationId: createObject
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRequest'
+        required: true
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "201":
+          description: A descriptive representation of the created CDO object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectResponse'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+  /v0/objects/{uid}/targets:
+    post:
+      tags:
+      - common-objects-controller
+      operationId: addTargets
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TargetsRequest'
+        required: true
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+    delete:
+      tags:
+      - common-objects-controller
+      operationId: removeTargets
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TargetsRequest'
+        required: true
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+  /v0/objects/{uid}:
+    get:
+      tags:
+      - common-objects-controller
+      operationId: readObject
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+    delete:
+      tags:
+      - common-objects-controller
+      operationId: deleteObject
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+    patch:
+      tags:
+      - common-objects-controller
+      summary: Updates an object in the CDO tenant
+      operationId: updateObject
+      parameters:
+      - name: uid
+        in: path
+        description: The request UID of the object being updated.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRequest'
+        required: true
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "200":
+          description: A descriptive representation of the updated CDO object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectResponse'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+  /v0/objects/{uid}/usage:
+    get:
+      tags:
+      - common-objects-controller
+      operationId: getObjectUsages
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+  /v0/objects/{uid}/details:
+    get:
+      tags:
+      - common-objects-controller
+      operationId: readObjectWithDetails
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+components:
+  schemas:
+    CreateRequest:
+      required:
+      - name
+      - value
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the object
+          example: my-object
+        value:
+          $ref: '#/components/schemas/SharedObjectValue'
+        description:
+          type: string
+          description: The human-readable description of the object
+          example: My object description
+        targetIds:
+          uniqueItems: true
+          type: array
+          description: "Set of IDs for targets that contain the object. A target can\
+            \ be, for example, a device, service, or a shared policy (Ruleset)."
+          example:
+          - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          items:
+            type: string
+            description: "Set of IDs for targets that contain the object. A target\
+              \ can be, for example, a device, service, or a shared policy (Ruleset)."
+            example: "[\"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\"]"
+        tags:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            description: The tags for the object
+            example:
+              location:
+              - London
+              - Head-office
+            items:
+              type: string
+              description: The tags for the object
+              example: "{\"location\":[\"London\",\"Head-office\"]}"
+          description: The tags for the object
+          example:
+            location:
+            - London
+            - Head-office
+        labels:
+          uniqueItems: true
+          type: array
+          description: The labels for the object
+          example:
+          - migration
+          items:
+            type: string
+            description: The labels for the object
+            example: "[\"migration\"]"
+    GroupContent:
+      type: object
+      properties:
+        literals:
+          type: array
+          description: List of content literals
+          items:
+            $ref: '#/components/schemas/SingleContent'
+        referencedObjectUids:
+          uniqueItems: true
+          type: array
+          description: Set of UIDs of the group's referenced objects
+          example:
+          - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          items:
+            type: string
+            description: Set of UIDs of the group's referenced objects
+            format: uuid
+      description: The contents of an object group
+    Icmp4Value:
+      type: object
+      properties:
+        icmp4Type:
+          type: string
+          example: DESTINATION_UNREACHABLE
+          enum:
+          - ANY
+          - ECHO_REPLY
+          - DESTINATION_UNREACHABLE
+          - SOURCE_QUENCH
+          - REDIRECT_MESSAGE
+          - ALTERNATE_HOST_ADDRESS
+          - ECHO_REQUEST
+          - ROUTER_ADVERTISEMENT
+          - ROUTER_SOLICITATION
+          - TIME_EXCEEDED
+          - PARAMETER_PROBLEM
+          - TIMESTAMP
+          - TIMESTAMP_REPLY
+          - INFO_REQUEST
+          - INFO_REPLY
+          - ADDR_MASK_REQUEST
+          - ADDR_MASK_REPLY
+          - TRACEROUTE
+          - DATAGRAM_CONVERSION_ERROR
+          - MOBILE_HOST_REDIRECT
+          - WHERE_ARE_YOU
+          - HERE_I_AM
+          - MOBILE_REG_REQUEST
+          - MOBILE_REG_REPLY
+          - DOMAIN_NAME_REQUEST
+          - DOMAIN_NAME_REPLY
+          - SKIP_ALGORITHM_DISCOVERY_PROTOCOL
+          - PHOTURIS
+          - EXPERIMENTAL_MOB_PROTOCOLS
+        icmp4Code:
+          type: string
+          example: NET_UNREACHABLE
+          enum:
+          - NET_UNREACHABLE
+          - HOST_UNREACHABLE
+          - PROTOCOL_UNREACHABLE
+          - PORT_UNREACHABLE
+          - FRAGMENTATION_NEEDED
+          - SOURCE_ROUTE_FAILED
+          - DEST_NETWORK_UNKNOWN
+          - DEST_HOST_UNKNOWN
+          - SRC_HOST_ISOLATED
+          - COMMUNICATION_DEST_NET_PROHIBITED
+          - COMMUNICATION_DEST_HOST_PROHIBITED
+          - DEST_NET_UNREACHABLE_FOR_TOS
+          - DEST_HOST_UNREACHABLE_FOR_TOS
+          - COMM_ADMINISTRATIVELY_PROHIBITED
+          - HOST_PRECEDENCE_VIOLATION
+          - PRECEDENCE_CUTOFF
+          - REDIRECT_DATAGRAM_NETWORK
+          - REDIRECT_DATAGRAM_HOST
+          - REDIRECT_DATAGRAM_SERVICE_NETWORK
+          - REDIRECT_DATAGRAM_SERVICE_HOST
+          - ALTERNATE_HOST_ADDR
+          - DO_NOT_ROUTE_COMMON_TRAFFIC
+          - NORMAL_ROUTER_ADV
+          - TTL_EXPIRED_TRANSIT
+          - FRAG_ASSEMBLY
+          - PTR_ERROR
+          - MISSING_REQD_OPTION
+          - BAD_LENGTH
+          - BAD_SPI
+          - AUTH_FAILED
+          - DECOMPRESSION_FAILED
+          - DECRYPTION_FAILED
+          - NEED_AUTHENTICATION
+          - NEED_AUTHORIZATION
+    Icmp6Value:
+      type: object
+      properties:
+        icmp6Type:
+          type: string
+          example: DESTINATION_UNREACHABLE
+          enum:
+          - ANY
+          - DESTINATION_UNREACHABLE
+          - PACKET_TOO_BIG
+          - TIME_EXCEEDED
+          - PARAMETER_PROBLEM
+          - ECHO_REQUEST
+          - ECHO_REPLY
+          - MULTICAST_LISTENER_QUERY
+          - MULTICAST_LISTENER_REPORT
+          - MULTICAST_LISTENER_DONE
+          - ROUTER_SOLICITATION
+          - ROUTER_ADVERTISEMENT
+          - NEIGHBOUR_SOLICITATION
+          - NEIGHBOUR_ADVERTISEMENT
+          - REDIRECT_MESSAGE
+          - ROUTER_RENUMBERING
+          - ICMP_NODE_INFO_QUERY
+          - ICMP_NODE_INFO_RESPONSE
+          - INVERSE_NEIGHBOR_DISCOVERY_SOLICITATION
+          - INVERSE_NEIGHBOR_DISCOVERY_ADVERTISEMENT
+          - VER2_MULTICAST_LISTENER_REPORT
+          - HOME_AGENT_ADDR_DISCOVERY_REQUEST
+          - HOME_AGENT_ADDR_DISCOVERY_REPLY
+          - MOBILE_PREFIX_SOLICITATION
+          - MOBILE_PREFIX_ADVERTISEMENT
+          - CERT_PATH_SOLICITATION
+          - CERT_PATH_ADVERTISEMENT
+          - ICMP_EXP_MOBILITY_PROTOCOLS
+          - MULTICAST_ROUTER_ADVERTISEMENT
+          - MULTICAST_ROUTER_SOLICITATION
+          - MULTICAST_ROUTER_TERMINATION
+          - FMIPV6_MESSAGE
+          - RPL_CONTROL_MESSAGE
+          - PRIVATE_EXPERIMENTATION
+          - PRIVATE_EXPERIMENTATION_EXTENDED
+        icmp6Code:
+          type: string
+          example: ADDRESS_UNREACHABLE
+          enum:
+          - NO_ROUTE_DEST
+          - COMMUNICATION_PROHIBITED
+          - BEYOND_SCOPE_SRC_ADDR
+          - ADDRESS_UNREACHABLE
+          - PORT_UNREACHABLE
+          - SOURCE_ADDRESS_FAILED
+          - REJECT_ROUTE
+          - ERROR_SRC_ROUTING_HEADER
+          - HOP_LIMIT_EXCEEDED
+          - FRAGMENT_REASSEMBLY_TIME_EXCEEDED
+          - ERRONEOUS_HEADER_ENCOUNTERED
+          - UNRECOGNIZED_NEXT_HEADER_TYPE_ENCOUNTERED
+          - UNRECOGNIZED_IPV6_OPTION_ENCOUNTERED
+          - IPV6_FIRST_FRAG_HAS_INCOMPLETE_HEADER_CHAIN
+          - SR_UPPER_LAYER_HEADER_ERROR
+          - ROUTER_RENUMBERING_COMMAND
+          - ROUTER_RENUMBERING_RESULT
+          - DATA_CONTAINS_IPV6
+          - DATA_CONTAINS_NAME
+          - DATA_CONTAINS_IPV4
+          - SUCCESSFUL_REPLY
+          - RESPONDER_REFUSES_ANSWER
+          - QTYPE_UNKNOWN
+    NetworkObjectContent:
+      required:
+      - literal
+      type: object
+      properties:
+        literal:
+          type: string
+          description: The literal content of the network object
+          example: a:b:c::1
+      description: The content of a network object
+    ObjectContent:
+      type: object
+      description: The content value of the override. This overrides the object's
+        default content.
+      example:
+        literal: a:b:c::1
+      oneOf:
+      - $ref: '#/components/schemas/ServiceObjectContent'
+      - $ref: '#/components/schemas/UrlObjectContent'
+      - $ref: '#/components/schemas/GroupContent'
+      - $ref: '#/components/schemas/NetworkObjectContent'
+    Override:
+      required:
+      - content
+      type: object
+      properties:
+        targetId:
+          type: string
+          description: "The ID of the target. A target can be, for example, a device,\
+            \ service, or a shared policy (Ruleset)."
+          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        content:
+          $ref: '#/components/schemas/ObjectContent'
+      description: The list of target overrides for the object. Each override the
+        default content for its target.
+      example:
+        targetId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        content: a:b:c::2
+    PortsValue:
+      type: object
+      properties:
+        op:
+          type: string
+          description: The operator applied to the list of ports
+          example: RANGE
+          enum:
+          - EQ
+          - RANGE
+          - GT
+          - LT
+          - NEQ
+          - SOURCE_DESTINATION
+        ports:
+          type: array
+          description: The list of ports
+          example:
+          - "80"
+          - "81"
+          items:
+            type: string
+            description: The list of ports
+            example: "[\"80\",\"81\"]"
+    ServiceObjectContent:
+      type: object
+      properties:
+        protocol:
+          type: string
+          description: The service object protocol
+          example: TCP
+          enum:
+          - TCP
+          - UDP
+          - ICMP4
+          - ICMP6
+          - TCP_UDP
+          - IGMP
+          - GGP
+          - ST2
+          - CBT
+          - EGP
+          - IGP
+          - BBNRCCMON
+          - NVP2
+          - PUP
+          - ARGUS
+          - EMCON
+          - XNET
+          - CHAOS
+          - MUX
+          - DCNMEAS
+          - HMP
+          - PRM
+          - XNSIDP
+          - TRUNK1
+          - TRUNK2
+          - LEAF1
+          - LEAF2
+          - RDP
+          - IRTP
+          - ISOTP4
+          - NETBLT
+          - MFENSP
+          - MERITINP
+          - SEP
+          - THREEPC
+          - IDPR
+          - XTP
+          - DDP
+          - IDPRCMTP
+          - TPPLUSPLUS
+          - IL
+          - SDRP
+          - IDRP
+          - RSVP
+          - GRE
+          - MHRP
+          - BNA
+          - ESP
+          - AH
+          - INLSP
+          - SWIPE
+          - NARP
+          - MOBILE
+          - TLSP
+          - SKIP
+          - IPv6NONXT
+          - CFTP
+          - SATEXPAK
+          - KRYPTOLAN
+          - RVD
+          - IPPC
+          - SATMON
+          - VISA
+          - IPCV
+          - CPNX
+          - CPHB
+          - WSN
+          - PVP
+          - BRSATMON
+          - SUNND
+          - WBMON
+          - WBEXPAK
+          - ISOIP
+          - VMTP
+          - SECUREVMTP
+          - VINES
+          - TTP
+          - NSFNETIGP
+          - DGP
+          - TCF
+          - EIGRP
+          - OSPFIGP
+          - SPRITERPC
+          - LARP
+          - MTP
+          - AX25
+          - IPIP
+          - MICP
+          - SCCSP
+          - ETHERIP
+          - ENCAP
+          - GMTP
+          - IFMP
+          - PNNI
+          - PIM
+          - ARIS
+          - SCPS
+          - QNX
+          - AN
+          - IPCOMP
+          - SNP
+          - COMPAQPEER
+          - IPXINIP
+          - VRRP
+          - PGM
+          - L2TP
+          - DDX
+          - IATP
+          - ST
+          - SRP
+          - UTI
+          - SMP
+          - SM
+          - PTP
+          - ISIS
+          - FIRE
+          - CRTP
+          - CRUDP
+          - SSCOPMCE
+          - IPLT
+          - SPS
+          - PIPE
+          - SCTP
+          - FC
+          - DIVERT
+        serviceValue:
+          $ref: '#/components/schemas/ServiceObjectValueContent'
+    ServiceObjectValueContent:
+      type: object
+      description: The value of the service object
+      example:
+        op: EQ
+        ports:
+        - "80"
+      oneOf:
+      - $ref: '#/components/schemas/Icmp4Value'
+      - $ref: '#/components/schemas/Icmp6Value'
+      - $ref: '#/components/schemas/PortsValue'
+    SharedObjectValue:
+      required:
+      - defaultContent
+      - objectType
+      type: object
+      properties:
+        objectType:
+          type: string
+          description: The type of object
+          example: NETWORK_OBJECT
+          enum:
+          - NETWORK_OBJECT
+          - IPV4_ADDRESS_POOL
+          - IPV6_ADDRESS_POOL
+          - NETWORK_GROUP
+          - SERVICE_OBJECT
+          - SERVICE_GROUP
+          - PROTOCOL_GROUP
+          - ICMP_GROUP
+          - URL_OBJECT
+          - URL_GROUP
+          - APPLICATION_FILTER_OBJECT
+          - DNS_GROUP_OBJECT
+          - SECURITY_ZONE_OBJECT
+          - ACTIVE_DIRECTORY_REALM_OBJECT
+          - REALM_SEQUENCE
+          - SPECIAL_IDENTITY_OBJECT
+          - LOCAL_IDENTITY_OBJECT
+          - SYSLOG_SERVER_OBJECT
+          - INTRUSION_POLICY_GROUP
+          - INTRUSION_POLICY
+          - FTD_POLICY_DEFAULT_ACTION
+          - FTD_IDENTITY_POLICY_DEFAULT_ACTION
+          - FTD_SSL_POLICY_DEFAULT_ACTION
+          - SETTINGS_DNS_DATA_INTERFACE_GROUP
+          - SETTINGS_DNS_MGMT_INTERFACE_GROUP
+          - SETTINGS_NTP_OBJECT
+          - SETTINGS_DHCP_OBJECT
+          - SETTINGS_DEVLOG_OBJECT
+          - SETTINGS_MGMTACCESS_HTTP_GROUP
+          - SETTINGS_MGMTACCESS_SSH_GROUP
+          - SETTINGS_MGMTACCESS_DATA_OBJECT
+          - SETTINGS_MGMTACCESS_HTTPS_DATA_PORT
+          - SETTINGS_URL_FILTERING_PREFERENCES_OBJECT
+          - SETTINGS_HOSTNAME_OBJECT
+          - SETTINGS_INTRUSION_OBJECT
+          - SETTINGS_WEB_ANALYTICS
+          - SETTINGS_SUCCESS_NETWORK
+          - SETTINGS_CLOUD_EVENTS
+          - SETTINGS_CLOUD_SERVICES_INFO
+          - GEOLOCATION_OBJECT
+          - NETWORK_FEED
+          - URL_FEED
+          - SECURITY_INTELLIGENCE
+          - ANY_CONNECT_CLIENT_PROFILE
+          - ANY_CONNECT_PACKAGE_FILE
+          - INTERNAL_CERTIFICATE
+          - INTERNAL_CA_CERTIFICATE
+          - EXTERNAL_CA_CERTIFICATE
+          - IKEV1_PROPOSAL
+          - IKEV2_PROPOSAL
+          - IKEV2_POLICY
+          - IKEV1_POLICY
+          - IDENTITY_SERVICES_ENGINE
+          - SETTINGS_VPN_OBJECT
+          - ANY_CONNECT_PROFILE
+          - STATIC_ROUTING
+          - RADIUS_IDENTITY_SOURCE
+          - RADIUS_IDENTITY_SOURCE_GROUP
+          - RA_VPN_GROUP_POLICY
+          - RA_VPN_CONNECTION_PROFILE
+          - RA_VPN
+          - RA_VPN_EXT
+          - RA_VPN_CONFIGURATION
+          - TIME_RANGE
+          - CLOUD_SECURITY_GROUP
+          - AWS_PREFIX_LIST
+          - SAML_SERVER
+          - DUO_LDAP_IDENTITY_SOURCE
+          - SECURITY_GROUP_TAG
+          - SGT_GROUP
+          - UNKNOWN
+          - SFCN_CERTIFICATE_KEYPAIR
+          - SFCN_CERTIFICATE
+          - AUTH_PROFILE_OBJECT
+        defaultContent:
+          $ref: '#/components/schemas/ObjectContent'
+        overrides:
+          type: array
+          description: The list of target overrides for the object. Each override
+            the default content for its target.
+          items:
+            $ref: '#/components/schemas/Override'
+      description: The value of the object
+    SingleContent:
+      type: object
+      description: List of content literals
+      oneOf:
+      - $ref: '#/components/schemas/ServiceObjectContent'
+      - $ref: '#/components/schemas/UrlObjectContent'
+      - $ref: '#/components/schemas/NetworkObjectContent'
+    UrlObjectContent:
+      required:
+      - url
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL literal
+          example: https://www.cisco.com/
+    ObjectResponse:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the object
+          format: uuid
+        name:
+          type: string
+          description: The name of the object
+          example: my-object
+        value:
+          $ref: '#/components/schemas/SharedObjectValue'
+        description:
+          type: string
+          description: The human-readable description of the object
+          example: My object description
+        targets:
+          type: array
+          description: "Set of targets that contain the object. A target can be, for\
+            \ example, a device, service, or a shared policy (Ruleset)."
+          items:
+            $ref: '#/components/schemas/Target'
+        elements:
+          type: array
+          description: A flattened list of the content value of the object
+          example: "[a:b:c::1]"
+          items:
+            type: string
+            description: A flattened list of the content value of the object
+            example: "[a:b:c::1]"
+        referencesInfoFromDefaultAndOverrides:
+          type: array
+          description: List of objects referenced in the default content or in any
+            of the overrides.
+          items:
+            $ref: '#/components/schemas/ReferenceInfo'
+        tags:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            description: The tags for the object
+            example:
+              location:
+              - London
+              - Head-office
+            items:
+              type: string
+              description: The tags for the object
+              example: "{\"location\":[\"London\",\"Head-office\"]}"
+          description: The tags for the object
+          example:
+            location:
+            - London
+            - Head-office
+        labels:
+          uniqueItems: true
+          type: array
+          description: The labels for the object
+          example:
+          - migration
+          items:
+            type: string
+            description: The labels for the object
+            example: "[\"migration\"]"
+    ReferenceInfo:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the referenced object
+          format: uuid
+        name:
+          type: string
+          description: The name of the referenced object
+          example: another-object
+        objectType:
+          type: string
+          description: The object type
+          example: NETWORK_OBJECT
+          enum:
+          - NETWORK_OBJECT
+          - IPV4_ADDRESS_POOL
+          - IPV6_ADDRESS_POOL
+          - NETWORK_GROUP
+          - SERVICE_OBJECT
+          - SERVICE_GROUP
+          - PROTOCOL_GROUP
+          - ICMP_GROUP
+          - URL_OBJECT
+          - URL_GROUP
+          - APPLICATION_FILTER_OBJECT
+          - DNS_GROUP_OBJECT
+          - SECURITY_ZONE_OBJECT
+          - ACTIVE_DIRECTORY_REALM_OBJECT
+          - REALM_SEQUENCE
+          - SPECIAL_IDENTITY_OBJECT
+          - LOCAL_IDENTITY_OBJECT
+          - SYSLOG_SERVER_OBJECT
+          - INTRUSION_POLICY_GROUP
+          - INTRUSION_POLICY
+          - FTD_POLICY_DEFAULT_ACTION
+          - FTD_IDENTITY_POLICY_DEFAULT_ACTION
+          - FTD_SSL_POLICY_DEFAULT_ACTION
+          - SETTINGS_DNS_DATA_INTERFACE_GROUP
+          - SETTINGS_DNS_MGMT_INTERFACE_GROUP
+          - SETTINGS_NTP_OBJECT
+          - SETTINGS_DHCP_OBJECT
+          - SETTINGS_DEVLOG_OBJECT
+          - SETTINGS_MGMTACCESS_HTTP_GROUP
+          - SETTINGS_MGMTACCESS_SSH_GROUP
+          - SETTINGS_MGMTACCESS_DATA_OBJECT
+          - SETTINGS_MGMTACCESS_HTTPS_DATA_PORT
+          - SETTINGS_URL_FILTERING_PREFERENCES_OBJECT
+          - SETTINGS_HOSTNAME_OBJECT
+          - SETTINGS_INTRUSION_OBJECT
+          - SETTINGS_WEB_ANALYTICS
+          - SETTINGS_SUCCESS_NETWORK
+          - SETTINGS_CLOUD_EVENTS
+          - SETTINGS_CLOUD_SERVICES_INFO
+          - GEOLOCATION_OBJECT
+          - NETWORK_FEED
+          - URL_FEED
+          - SECURITY_INTELLIGENCE
+          - ANY_CONNECT_CLIENT_PROFILE
+          - ANY_CONNECT_PACKAGE_FILE
+          - INTERNAL_CERTIFICATE
+          - INTERNAL_CA_CERTIFICATE
+          - EXTERNAL_CA_CERTIFICATE
+          - IKEV1_PROPOSAL
+          - IKEV2_PROPOSAL
+          - IKEV2_POLICY
+          - IKEV1_POLICY
+          - IDENTITY_SERVICES_ENGINE
+          - SETTINGS_VPN_OBJECT
+          - ANY_CONNECT_PROFILE
+          - STATIC_ROUTING
+          - RADIUS_IDENTITY_SOURCE
+          - RADIUS_IDENTITY_SOURCE_GROUP
+          - RA_VPN_GROUP_POLICY
+          - RA_VPN_CONNECTION_PROFILE
+          - RA_VPN
+          - RA_VPN_EXT
+          - RA_VPN_CONFIGURATION
+          - TIME_RANGE
+          - CLOUD_SECURITY_GROUP
+          - AWS_PREFIX_LIST
+          - SAML_SERVER
+          - DUO_LDAP_IDENTITY_SOURCE
+          - SECURITY_GROUP_TAG
+          - SGT_GROUP
+          - UNKNOWN
+          - SFCN_CERTIFICATE_KEYPAIR
+          - SFCN_CERTIFICATE
+          - AUTH_PROFILE_OBJECT
+      description: List of objects referenced in the default content or in any of
+        the overrides.
+    Target:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "The ID of the target with which the object is associated.\
+            \ A target can be, for example, a device, service, or a shared policy\
+            \ (Ruleset)."
+          example: "[xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx]"
+        displayName:
+          type: string
+          description: The display name of the target
+          example: My ASA
+        type:
+          type: string
+          description: The target type
+          example: ASA
+          enum:
+          - ASA
+          - FDM_MANAGED_FTD
+          - CDFMC
+          - CDFMC_MANAGED_FTD
+          - SFCN
+          - AWS_VPC
+          - ONPREM_FMC
+          - MERAKI_MX
+          - FDM_RULESET
+          - ONPREM_FMC_MANAGED_FTD
+          - MCD
+      description: "Set of targets that contain the object. A target can be, for example,\
+        \ a device, service, or a shared policy (Ruleset)."
+    TargetsRequest:
+      type: object
+      properties:
+        targetsUuids:
+          type: array
+          items:
+            type: string
+    UpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the object to update
+          example: my-object
+        description:
+          type: string
+          description: The description of the object
+          example: My object description
+        value:
+          $ref: '#/components/schemas/SharedObjectValue'
+        tags:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            description: The tags for the object
+            example:
+              location:
+              - London
+              - Head-office
+            items:
+              type: string
+              description: The tags for the object
+              example: "{\"location\":[\"London\",\"Head-office\"]}"
+          description: The tags for the object
+          example:
+            location:
+            - London
+            - Head-office
+        labels:
+          uniqueItems: true
+          type: array
+          description: The labels for the object
+          example:
+          - migration
+          items:
+            type: string
+            description: The labels for the object
+            example: "[\"migration\"]"
+    AuthenticationError:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error description in English.
+          example: invalid_token
+        errorDescription:
+          type: string
+          description: A human-readable error description in English.
+          example: Your token is invalid
+    CommonApiError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: A unique error code that describes the error.
+          example: INVALID_INPUT
+          enum:
+          - INVALID_INPUT
+          - UNAUTHORIZED
+          - FORBIDDEN
+          - NOT_FOUND
+          - METHOD_NOT_ALLOWED
+          - CONFLICT
+          - TOO_MANY_REQUESTS
+          - CANNOT_DELETE_CDFMC_MANAGED_FTD
+          - CANNOT_DELETE_ONPREM_FMC_MANAGED_FTD
+          - CANNOT_DELETE_ONPREM_FMC_MANAGED_FIREPOWER
+          - CANNOT_DELETE_CDFMC
+          - SERVER_ERROR
+          - PROXY_ERROR
+        errorMsg:
+          type: string
+          description: A human-readable error description in English.
+          example: sample error
+        details:
+          type: object
+          additionalProperties:
+            type: object
+            description: "Additional details, if any, on the error"
+          description: "Additional details, if any, on the error"
+  responses:
+    http400BadRequest:
+      description: Invalid input provided. Check the response for details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+    http401Unauthorised:
+      description: Request not authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthenticationError'
+    http403Forbidden:
+      description: User does not have sufficient privileges to perform this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+    http404NotFound:
+      description: Entity not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+    http405MethodNotAllowed:
+      description: Method not allowed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
