@@ -1,84 +1,100 @@
 openapi: 3.0.1
 info:
   title: API Docs
-  description: Use the interactive documentation to explore the endpoints CDO has
-    to offer
+  description: Use the interactive documentation to explore the endpoints CDO has to offer
   contact:
     name: CDO TAC
     email: cdo.tac@cisco.com
   version: 0.0.1
 servers:
-- url: https://edge.us.cdo.cisco.com/api/rest
-  description: US
-- url: https://edge.eu.cdo.cisco.com/api/rest
-  description: EU
-- url: https://edge.apj.cdo.cisco.com/api/rest
-  description: APJ
-- url: https://edge.staging.cdo.cisco.com/api/rest
-  description: Staging
-- url: https://edge.scale.cdo.cisco.com/api/rest
-  description: Scale
-- url: https://edge.ci.cdo.cisco.com/api/rest
-  description: CI
+  - url: https://edge.us.cdo.cisco.com/api/rest
+    description: US
+  - url: https://edge.eu.cdo.cisco.com/api/rest
+    description: EU
+  - url: https://edge.apj.cdo.cisco.com/api/rest
+    description: APJ
+  - url: https://edge.staging.cdo.cisco.com/api/rest
+    description: Staging
+  - url: https://edge.scale.cdo.cisco.com/api/rest
+    description: Scale
+  - url: https://edge.ci.cdo.cisco.com/api/rest
+    description: CI
+tags:
+  - name: Users
+    x-displayName: Users
+  - name: Tenant Management
+    x-displayName: Tenant Management
+  - name: Inventory
+    x-displayName: Inventory
+  - name: Transactions
+    x-displayName: Transactions
+  - name: Meta
+    x-displayName: Meta
+  - name: Connectors
+    x-displayName: Connectors
+  - name: Object Management
+    x-displayName: Object Management
 paths:
   /v1/users:
     get:
       tags:
-      - Users
+        - Users
       summary: Fetch a list of users associated with the CDO tenant.
       operationId: listUsers
       parameters:
-      - name: limit
-        in: query
-        description: The number of results to retrieve.
-        required: false
-        schema:
-          maximum: 200
-          minimum: 0
-          type: string
-          default: "50"
-      - name: offset
-        in: query
-        description: "The offset of the results retrieved. The CDO Public API uses\
-          \ the offset field to determine the index of the first result retrieved,\
-          \ and will retrieve `limit` results from the offset specified."
-        required: false
-        schema:
-          minimum: 0
-          type: string
-          default: "0"
-      - name: q
-        in: query
-        description: The query to execute. Use the Lucene Query Syntax to construct
-          your query.
-        required: false
-        schema:
-          type: string
-        example: name:London-Office-ASA
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO Public API uses the
+            offset field to determine the index of the first result retrieved,
+            and will retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: name:London-Office-ASA
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "200":
+        '200':
           description: List of User objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserPage'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
     post:
       tags:
-      - Users
+        - Users
       summary: Create a user in the CDO tenant
       operationId: createUser
       requestBody:
@@ -88,119 +104,119 @@ paths:
               $ref: '#/components/schemas/UserCreateOrUpdateInput'
         required: true
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "201":
+        '201':
           description: User object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/users/{apiUserId}/apiToken/revoke:
     post:
       tags:
-      - Users
+        - Users
       summary: Revoke API Token of API-only user
       operationId: revokeApiToken
       parameters:
-      - name: apiUserId
-        in: path
-        description: The unique identifier of the API user in CDO.
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: apiUserId
+          in: path
+          description: The unique identifier of the API user in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "201":
+        '201':
           description: Status
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/StatusInfo'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/users/{apiUserId}/apiToken/generate:
     post:
       tags:
-      - Users
+        - Users
       summary: Generate API Token for API-only user
       operationId: generateApiToken
       parameters:
-      - name: apiUserId
-        in: path
-        description: The unique identifier of the API user in CDO.
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: apiUserId
+          in: path
+          description: The unique identifier of the API user in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "201":
+        '201':
           description: API Token
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiTokenInfo'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/token/revoke:
     post:
       tags:
-      - Users
+        - Users
       summary: Revoke the current token
       operationId: revokeToken
       responses:
-        "200":
+        '200':
           description: Revoke success
-        "401":
+        '401':
           $ref: '#/components/responses/http401Unauthorised'
-        "500":
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/msp/tenants:
     post:
       tags:
-      - Tenant Management
+        - Tenant Management
       summary: Add a tenant to the MSP Portal
       operationId: addMspTenant
       requestBody:
@@ -210,30 +226,30 @@ paths:
               $ref: '#/components/schemas/MspAddTenantInput'
         required: true
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "201":
+        '201':
           description: Status
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/StatusInfo'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/inventory/devices/ios:
     post:
       tags:
-      - Inventory
+        - Inventory
       summary: Onboard a IOS device in the CDO tenant
       operationId: createIosDevice
       requestBody:
@@ -243,31 +259,32 @@ paths:
               $ref: '#/components/schemas/IosCreateOrUpdateInput'
         required: true
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "202":
-          description: CDO Transaction object that can be used to track the progress
-            of the onboarding operation.
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the progress of the
+            onboarding operation.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/inventory/devices/ftds:
     post:
       tags:
-      - Inventory
+        - Inventory
       summary: Create an FTD device in the CDO tenant
       operationId: createFtdDevice
       requestBody:
@@ -277,34 +294,36 @@ paths:
               $ref: '#/components/schemas/FtdCreateOrUpdateInput'
         required: true
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "202":
-          description: CDO Transaction object that can be used to track the progress
-            of the creation operation.
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the progress of the
+            creation operation.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/inventory/devices/ftds/register:
     post:
       tags:
-      - Inventory
-      summary: "Register an FTD device managed by an FMC to the CDO tenant. Call this\
-        \ API endpoint after you have created an FTD, and pasted the generated CLI\
-        \ output in the FTD"
+        - Inventory
+      summary: >-
+        Register an FTD device managed by an FMC to the CDO tenant. Call this
+        API endpoint after you have created an FTD, and pasted the generated CLI
+        output in the FTD
       operationId: finishOnboardingFtdDevice
       requestBody:
         content:
@@ -313,67 +332,69 @@ paths:
               $ref: '#/components/schemas/FtdRegistrationInput'
         required: true
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "202":
-          description: CDO Transaction object that can be used to track the progress
-            of the creation operation.
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the progress of the
+            creation operation.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/inventory/devices/ftds/cdfmcManaged/{deviceUid}/delete:
     post:
       tags:
-      - Inventory
+        - Inventory
       summary: Delete cdFMC managed FTD device in the CDO tenant
       operationId: deleteCdFmcManagedFtdDevice
       parameters:
-      - name: deviceUid
-        in: path
-        description: The unique identifier of the cdFMC managed FTD device in CDO.
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: deviceUid
+          in: path
+          description: The unique identifier of the cdFMC managed FTD device in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "202":
-          description: CDO Transaction object that can be used to track the progress
-            of the deletion operation.
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the progress of the
+            deletion operation.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/inventory/devices/asas:
     post:
       tags:
-      - Inventory
+        - Inventory
       summary: Onboard a ASA device in the CDO tenant
       operationId: createAsaDevice
       requestBody:
@@ -383,285 +404,289 @@ paths:
               $ref: '#/components/schemas/AsaCreateOrUpdateInput'
         required: true
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "202":
-          description: CDO Transaction object that can be used to track the progress
-            of the onboarding operation.
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the progress of the
+            onboarding operation.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/inventory/devices/asas/{deviceUid}/reconnect:
     post:
       tags:
-      - Inventory
+        - Inventory
       summary: Reconnect an ASA device in the CDO tenant
       operationId: reconnectAsaDevice
       parameters:
-      - name: deviceUid
-        in: path
-        description: The unique identifier of the ASA device in CDO.
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: deviceUid
+          in: path
+          description: The unique identifier of the ASA device in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "202":
-          description: CDO Transaction object that can be used to track the progress
-            of the reconnecting operation.
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the progress of the
+            reconnecting operation.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/inventory/devices/asas/{deviceUid}/read:
     post:
       tags:
-      - Inventory
+        - Inventory
       summary: Read configuration on ASA device into CDO
       operationId: readFromAsaDevice
       parameters:
-      - name: deviceUid
-        in: path
-        description: The unique identifier of the ASA device in CDO.
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: deviceUid
+          in: path
+          description: The unique identifier of the ASA device in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "202":
-          description: CDO Transaction object that can be used to track the progress
-            of the read operation
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the progress of the
+            read operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/users/{userUid}:
     get:
       tags:
-      - Users
+        - Users
       summary: Fetch a user by UID in the CDO tenant.
       operationId: getUser
       parameters:
-      - name: userUid
-        in: path
-        description: The unique identifier of the user in CDO.
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: userUid
+          in: path
+          description: The unique identifier of the user in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "200":
+        '200':
           description: User object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
     delete:
       tags:
-      - Users
+        - Users
       summary: Delete a User by UID in the CDO tenant
       operationId: deleteDeviceManager
       parameters:
-      - name: userUid
-        in: path
-        description: The unique identifier of the user in CDO.
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: userUid
+          in: path
+          description: The unique identifier of the user in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "204":
+        '204':
           description: No Content
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/transactions/{transactionUid}:
     get:
       tags:
-      - Transactions
+        - Transactions
       summary: Get information of an in-progress CDO transaction
       operationId: getTransaction
       parameters:
-      - name: transactionUid
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: transactionUid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "200":
-          description: "CDO Transaction that has completed, either successfully or\
-            \ unsuccessfully. Note: failed CDO Transactions do not roll back."
+        '200':
+          description: >-
+            CDO Transaction that has completed, either successfully or
+            unsuccessfully. Note: failed CDO Transactions do not roll back.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "202":
+        '202':
           description: CDO Transaction that is in progress
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/token:
     get:
       tags:
-      - Users
+        - Users
       summary: Fetch information on the current token
       operationId: getToken
       responses:
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "200":
+        '200':
           description: Token information
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTokenInfo'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/tenants/{tenantUid}:
     get:
       tags:
-      - Tenant Management
+        - Tenant Management
       summary: Fetch a tenant by UID in CDO
       operationId: getTenant
       parameters:
-      - name: tenantUid
-        in: path
-        description: The unique identifier of the tenant in CDO.
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: tenantUid
+          in: path
+          description: The unique identifier of the tenant in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "200":
+        '200':
           description: Tenant Object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Tenant'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/regions:
     get:
       tags:
-      - Meta
+        - Meta
       summary: Fetch a list of CDO regions.
       operationId: listRegions
       responses:
-        "200":
+        '200':
           description: List of CDO regions
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoRegionList'
-        "500":
+        '500':
           description: Internal server error.
           content:
             application/json:
@@ -670,18 +695,19 @@ paths:
   /v1/meta:
     get:
       tags:
-      - Meta
-      summary: "Get Meta information about CDO, including the IP addresses of CDO\
-        \ services"
+        - Meta
+      summary: >-
+        Get Meta information about CDO, including the IP addresses of CDO
+        services
       operationId: getMeta
       responses:
-        "200":
+        '200':
           description: Meta information about CDO.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Meta'
-        "500":
+        '500':
           description: Internal server error.
           content:
             application/json:
@@ -690,538 +716,545 @@ paths:
   /v1/inventory/templates:
     get:
       tags:
-      - Inventory
+        - Inventory
       summary: Fetch a list of template devices in the CDO tenant
       operationId: listTemplateDevices
       parameters:
-      - name: limit
-        in: query
-        description: The number of results to retrieve.
-        required: false
-        schema:
-          maximum: 200
-          minimum: 0
-          type: string
-          default: "50"
-      - name: offset
-        in: query
-        description: "The offset of the results retrieved. The CDO Public API uses\
-          \ the offset field to determine the index of the first result retrieved,\
-          \ and will retrieve `limit` results from the offset specified."
-        required: false
-        schema:
-          minimum: 0
-          type: string
-          default: "0"
-      - name: q
-        in: query
-        description: The query to execute. Use the Lucene Query Syntax to construct
-          your query.
-        required: false
-        schema:
-          type: string
-        example: name:London-Office-ASA
-      - name: sort
-        in: query
-        description: The fields to sort results by.
-        required: true
-        schema:
-          $ref: '#/components/schemas/SortCriteriaParam'
-        example: name:DESC
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO Public API uses the
+            offset field to determine the index of the first result retrieved,
+            and will retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: name:London-Office-ASA
+        - name: sort
+          in: query
+          description: The fields to sort results by.
+          required: true
+          schema:
+            $ref: '#/components/schemas/SortCriteriaParam'
+          example: name:DESC
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "200":
+        '200':
           description: List of Template Devices
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/inventory/templates/{templateDeviceUid}:
     get:
       tags:
-      - Inventory
+        - Inventory
       summary: Fetch a template device by UID in the CDO tenant
       operationId: getTemplateDevice
       parameters:
-      - name: templateDeviceUid
-        in: path
-        description: The unique identifier of the template device in CDO.
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: templateDeviceUid
+          in: path
+          description: The unique identifier of the template device in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "200":
+        '200':
           description: Template Device object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
     delete:
       tags:
-      - Inventory
+        - Inventory
       summary: Delete a template device by UID in the CDO tenant
       operationId: deleteTemplateDevice
       parameters:
-      - name: templateDeviceUid
-        in: path
-        description: The unique identifier of the template device in CDO.
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: templateDeviceUid
+          in: path
+          description: The unique identifier of the template device in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "204":
+        '204':
           description: No Content
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/inventory/services:
     get:
       tags:
-      - Inventory
+        - Inventory
       summary: Fetch a list of Cloud Services in the CDO tenant
       operationId: listDeviceCloudServices
       parameters:
-      - name: limit
-        in: query
-        description: The number of results to retrieve.
-        required: false
-        schema:
-          maximum: 200
-          minimum: 0
-          type: string
-          default: "50"
-      - name: offset
-        in: query
-        description: "The offset of the results retrieved. The CDO Public API uses\
-          \ the offset field to determine the index of the first result retrieved,\
-          \ and will retrieve `limit` results from the offset specified."
-        required: false
-        schema:
-          minimum: 0
-          type: string
-          default: "0"
-      - name: q
-        in: query
-        description: The query to execute. Use the Lucene Query Syntax to construct
-          your query.
-        required: false
-        schema:
-          type: string
-        example: name:London-Office-ASA
-      - name: sort
-        in: query
-        description: The fields to sort results by.
-        required: true
-        schema:
-          $ref: '#/components/schemas/SortCriteriaParam'
-        example: name:DESC
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO Public API uses the
+            offset field to determine the index of the first result retrieved,
+            and will retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: name:London-Office-ASA
+        - name: sort
+          in: query
+          description: The fields to sort results by.
+          required: true
+          schema:
+            $ref: '#/components/schemas/SortCriteriaParam'
+          example: name:DESC
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "200":
+        '200':
           description: List of Cloud Services
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/inventory/services/{cloudServiceUid}:
     get:
       tags:
-      - Inventory
+        - Inventory
       summary: Fetch a Cloud Service by UID in the CDO tenant
       operationId: getCloudService
       parameters:
-      - name: cloudServiceUid
-        in: path
-        description: The unique identifier of the cloud service in CDO.
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: cloudServiceUid
+          in: path
+          description: The unique identifier of the cloud service in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
-        "200":
+        '200':
           description: Cloud Service
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        "500":
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
     delete:
       tags:
-      - Inventory
+        - Inventory
       summary: Delete a Cloud Service by UID in the CDO tenant
       operationId: deleteCloudService
       parameters:
-      - name: cloudServiceUid
-        in: path
-        description: The unique identifier of the cloud service in CDO.
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: cloudServiceUid
+          in: path
+          description: The unique identifier of the cloud service in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "204":
+        '204':
           description: No Content
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/inventory/managers:
     get:
       tags:
-      - Inventory
-      summary: Fetch a list of Device Managers (on-prem FMCs and cloud-delivered FMCs)
+        - Inventory
+      summary: >-
+        Fetch a list of Device Managers (on-prem FMCs and cloud-delivered FMCs)
         in the CDO tenant
       operationId: listDeviceManagers
       parameters:
-      - name: limit
-        in: query
-        description: The number of results to retrieve.
-        required: false
-        schema:
-          maximum: 200
-          minimum: 0
-          type: string
-          default: "50"
-      - name: offset
-        in: query
-        description: "The offset of the results retrieved. The CDO Public API uses\
-          \ the offset field to determine the index of the first result retrieved,\
-          \ and will retrieve `limit` results from the offset specified."
-        required: false
-        schema:
-          minimum: 0
-          type: string
-          default: "0"
-      - name: q
-        in: query
-        description: The query to execute. Use the Lucene Query Syntax to construct
-          your query.
-        required: false
-        schema:
-          type: string
-        example: name:London-Office-ASA
-      - name: sort
-        in: query
-        description: The fields to sort results by.
-        required: true
-        schema:
-          $ref: '#/components/schemas/SortCriteriaParam'
-        example: name:DESC
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO Public API uses the
+            offset field to determine the index of the first result retrieved,
+            and will retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: name:London-Office-ASA
+        - name: sort
+          in: query
+          description: The fields to sort results by.
+          required: true
+          schema:
+            $ref: '#/components/schemas/SortCriteriaParam'
+          example: name:DESC
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "200":
+        '200':
           description: List of Device Manager objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/inventory/managers/{deviceManagerUid}:
     get:
       tags:
-      - Inventory
+        - Inventory
       summary: Fetch a Device Manager by UID in the CDO tenant
       operationId: getDeviceManager
       parameters:
-      - name: deviceManagerUid
-        in: path
-        description: The unique identifier of the device manager in CDO.
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: deviceManagerUid
+          in: path
+          description: The unique identifier of the device manager in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "200":
+        '200':
           description: Device Manager
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
     delete:
       tags:
-      - Inventory
+        - Inventory
       summary: Delete a Device Manager by UID in the CDO tenant
       operationId: deleteDeviceManager_1
       parameters:
-      - name: deviceManagerUid
-        in: path
-        description: The unique identifier of the device manager in CDO.
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: deviceManagerUid
+          in: path
+          description: The unique identifier of the device manager in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
-        "204":
+        '204':
           description: No Content
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/inventory/devices:
     get:
       tags:
-      - Inventory
+        - Inventory
       summary: Fetch a list of devices in the CDO tenant
       operationId: listDevices
       parameters:
-      - name: limit
-        in: query
-        description: The number of results to retrieve.
-        required: false
-        schema:
-          maximum: 200
-          minimum: 0
-          type: string
-          default: "50"
-      - name: offset
-        in: query
-        description: "The offset of the results retrieved. The CDO Public API uses\
-          \ the offset field to determine the index of the first result retrieved,\
-          \ and will retrieve `limit` results from the offset specified."
-        required: false
-        schema:
-          minimum: 0
-          type: string
-          default: "0"
-      - name: q
-        in: query
-        description: The query to execute. Use the Lucene Query Syntax to construct
-          your query.
-        required: false
-        schema:
-          type: string
-        example: name:London-Office-ASA
-      - name: sort
-        in: query
-        description: The fields to sort results by.
-        required: true
-        schema:
-          $ref: '#/components/schemas/SortCriteriaParam'
-        example: name:DESC
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO Public API uses the
+            offset field to determine the index of the first result retrieved,
+            and will retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: name:London-Office-ASA
+        - name: sort
+          in: query
+          description: The fields to sort results by.
+          required: true
+          schema:
+            $ref: '#/components/schemas/SortCriteriaParam'
+          example: name:DESC
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "200":
+        '200':
           description: List of Device objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/inventory/devices/{deviceUid}:
     get:
       tags:
-      - Inventory
+        - Inventory
       summary: Fetch a device by UID in the CDO tenant
       operationId: getDevice
       parameters:
-      - name: deviceUid
-        in: path
-        description: The unique identifier of the device in CDO.
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: deviceUid
+          in: path
+          description: The unique identifier of the device in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "200":
+        '200':
           description: Device object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
     delete:
       tags:
-      - Inventory
+        - Inventory
       summary: Delete a device by UID in the CDO tenant
       operationId: deleteDevice
       parameters:
-      - name: deviceUid
-        in: path
-        description: The unique identifier of the device in CDO.
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: deviceUid
+          in: path
+          description: The unique identifier of the device in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
-        "204":
+        '204':
           description: No Content
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/features:
     get:
       tags:
-      - Tenant Management
+        - Tenant Management
       summary: Fetch the feature flags enabled for this tenant
       operationId: listFeatureFlags
       responses:
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "200":
+        '200':
           description: Set of feature flags that are enabled for the user's tenant.
           content:
             application/json:
@@ -1230,120 +1263,398 @@ paths:
                 items:
                   type: string
               example:
-              - feature-1
-              - feature-2
-        "500":
+                - feature-1
+                - feature-2
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/connectors/sdcs:
     get:
       tags:
-      - Connectors
+        - Connectors
       summary: Fetch a list of SDCs in the CDO tenant
       operationId: listSdcs
       parameters:
-      - name: limit
-        in: query
-        description: The number of results to retrieve.
-        required: false
-        schema:
-          maximum: 200
-          minimum: 0
-          type: string
-          default: "50"
-      - name: offset
-        in: query
-        description: "The offset of the results retrieved. The CDO Public API uses\
-          \ the offset field to determine the index of the first result retrieved,\
-          \ and will retrieve `limit` results from the offset specified."
-        required: false
-        schema:
-          minimum: 0
-          type: string
-          default: "0"
-      - name: q
-        in: query
-        description: The query to execute. Use the Lucene Query Syntax to construct
-          your query.
-        required: false
-        schema:
-          type: string
-        example: name:London-Office-ASA
-      - name: sort
-        in: query
-        description: The fields to sort results by.
-        required: true
-        schema:
-          $ref: '#/components/schemas/SortCriteriaParam'
-        example: name:DESC
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO Public API uses the
+            offset field to determine the index of the first result retrieved,
+            and will retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: name:London-Office-ASA
+        - name: sort
+          in: query
+          description: The fields to sort results by.
+          required: true
+          schema:
+            $ref: '#/components/schemas/SortCriteriaParam'
+          example: name:DESC
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "200":
+        '200':
           description: List of SDC objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/SdcPage'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
+        '400':
           $ref: '#/components/responses/http400BadRequest'
-        "500":
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
   /v1/connectors/sdcs/{sdcUid}:
     get:
       tags:
-      - Connectors
+        - Connectors
       summary: Fetch a SDC by UID in the CDO tenant
       operationId: fetchSdc
       parameters:
-      - name: sdcUid
-        in: path
-        description: The unique identifier of the SDC in CDO.
-        required: true
-        schema:
-          type: string
-          format: uuid
+        - name: sdcUid
+          in: path
+          description: The unique identifier of the SDC in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
-        "200":
+        '200':
           description: SDC object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Sdc'
-        "500":
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
           description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
       security:
-      - bearerAuth: []
+        - bearerAuth: []
+  /v0/objects:
+    get:
+      tags:
+        - Object Management
+      operationId: listObjects
+      parameters:
+        - name: q
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: limit
+          in: query
+          required: false
+          schema:
+            maximum: 200
+            minimum: 1
+            type: integer
+            format: int32
+            default: 50
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+    post:
+      tags:
+        - Object Management
+      summary: Creates an object in the CDO tenant
+      operationId: createObject
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRequest'
+        required: true
+      responses:
+        '201':
+          description: A descriptive representation of the created CDO object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectResponse'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+  /v0/objects/{uid}/targets:
+    post:
+      tags:
+        - Object Management
+      operationId: addTargets
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TargetsRequest'
+        required: true
+      responses:
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+    delete:
+      tags:
+        - Object Management
+      operationId: removeTargets
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TargetsRequest'
+        required: true
+      responses:
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+  /v0/objects/{uid}:
+    get:
+      tags:
+        - Object Management
+      operationId: readObject
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+    delete:
+      tags:
+        - Object Management
+      operationId: deleteObject
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+    patch:
+      tags:
+        - Object Management
+      summary: Updates an object in the CDO tenant
+      operationId: updateObject
+      parameters:
+        - name: uid
+          in: path
+          description: The request UID of the object being updated.
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRequest'
+        required: true
+      responses:
+        '200':
+          description: A descriptive representation of the updated CDO object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectResponse'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+  /v0/objects/{uid}/usage:
+    get:
+      tags:
+        - Object Management
+      operationId: getObjectUsages
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+  /v0/objects/{uid}/details:
+    get:
+      tags:
+        - Object Management
+      operationId: readObjectWithDetails
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
 components:
   schemas:
     UserCreateOrUpdateInput:
       required:
-      - name
+        - name
       type: object
       properties:
         name:
@@ -1356,8 +1667,9 @@ components:
           example: ROLE_ADMIN
         apiOnlyUser:
           type: boolean
-          description: "Whether the user is API-only, an API-only user cannot access\
-            \ CDO in the UI."
+          description: >-
+            Whether the user is API-only, an API-only user cannot access CDO in
+            the UI.
           example: false
           default: false
     User:
@@ -1375,31 +1687,34 @@ components:
         roles:
           type: array
           description: Roles associated with this user in CDO.
-          example: "[ROLE_ADMIN]"
+          example: '[ROLE_ADMIN]'
           items:
             $ref: '#/components/schemas/UserRole'
         apiOnlyUser:
           type: boolean
-          description: "Whether the user is API-only, an API-only user cannot access\
-            \ CDO in the UI."
+          description: >-
+            Whether the user is API-only, an API-only user cannot access CDO in
+            the UI.
           example: false
         lastSuccessfulLogin:
           type: string
-          description: The time (UTC; represented using the RFC-3339 standard) that
+          description: >-
+            The time (UTC; represented using the RFC-3339 standard) that
             indicate the last time the user successfully login CDO.
           format: date-time
-          example: 2023-12-13T05:15:44Z
+          example: '2023-12-13T05:15:44Z'
     UserRole:
       type: string
-      description: The role of the user this token belongs to. The user can be API-only
-        or a human.
+      description: >-
+        The role of the user this token belongs to. The user can be API-only or
+        a human.
       enum:
-      - ROLE_ADMIN
-      - ROLE_SUPER_ADMIN
-      - ROLE_READ_ONLY
-      - ROLE_DEPLOY_ONLY
-      - ROLE_EDIT_ONLY
-      - ROLE_VPN_SESSIONS_MANAGER
+        - ROLE_ADMIN
+        - ROLE_SUPER_ADMIN
+        - ROLE_READ_ONLY
+        - ROLE_DEPLOY_ONLY
+        - ROLE_EDIT_ONLY
+        - ROLE_VPN_SESSIONS_MANAGER
     StatusInfo:
       type: object
       properties:
@@ -1416,7 +1731,7 @@ components:
           example: FaKE-toKeN
     MspAddTenantInput:
       required:
-      - apiToken
+        - apiToken
       type: object
       properties:
         apiToken:
@@ -1425,10 +1740,10 @@ components:
           example: FaKE-toKeN
     IosCreateOrUpdateInput:
       required:
-      - connectorName
-      - name
-      - password
-      - username
+        - connectorName
+        - name
+        - password
+        - username
       type: object
       properties:
         name:
@@ -1437,8 +1752,9 @@ components:
           example: My IOS
         deviceAddress:
           type: string
-          description: "The address of the device to onboard, specified in the format\
-            \ `host:port`."
+          description: >-
+            The address of the device to onboard, specified in the format
+            `host:port`.
           example: 10.2.2.5:443
         username:
           type: string
@@ -1450,30 +1766,34 @@ components:
           example: Cisco@23
         ignoreCertificate:
           type: boolean
-          description: Set this attribute to true if you do not want CDO to validate
-            the certificate of this device before onboarding.
+          description: >-
+            Set this attribute to true if you do not want CDO to validate the
+            certificate of this device before onboarding.
           example: false
           default: false
         connectorName:
           type: string
-          description: The name of the Secure Device Connector (SDC) that will be
-            used to communicate with the device.
+          description: >-
+            The name of the Secure Device Connector (SDC) that will be used to
+            communicate with the device.
           example: SDC-1
         labels:
           uniqueItems: true
           type: array
-          description: Specify a set of labels to identify the device as part of a
-            group. Refer to the CDO documentation for details on how labels are used
-            in CDO.
+          description: >-
+            Specify a set of labels to identify the device as part of a group.
+            Refer to the CDO documentation for details on how labels are used in
+            CDO.
           example:
-          - ios
-          - ra-vpn-headend
+            - ios
+            - ra-vpn-headend
           items:
             type: string
-            description: Specify a set of labels to identify the device as part of
-              a group. Refer to the CDO documentation for details on how labels are
-              used in CDO.
-            example: "[\"ios\",\"ra-vpn-headend\"]"
+            description: >-
+              Specify a set of labels to identify the device as part of a group.
+              Refer to the CDO documentation for details on how labels are used
+              in CDO.
+            example: '["ios","ra-vpn-headend"]'
     CdoTransaction:
       type: object
       properties:
@@ -1484,101 +1804,108 @@ components:
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         tenantUid:
           type: string
-          description: The unique identifier of the tenant that asynchronous transaction
+          description: >-
+            The unique identifier of the tenant that asynchronous transaction
             triggered on.
           format: uuid
           example: 5131daad-e813-4b8f-8f42-be1e241e2cdb
         entityUid:
           type: string
-          description: The unique identifier of the entity that the asynchronous transaction
-            is triggered on.
+          description: >-
+            The unique identifier of the entity that the asynchronous
+            transaction is triggered on.
           format: uuid
           example: f5f660d4-4b81-4374-877d-fbc4bee894e2
         entityUrl:
           type: string
-          description: A URL to access the entity that the asynchronous transaction
-            is triggered on.
-          example: https://edge.us.cdo.cisco.com/platform/public-api/v1/inventory/devices/f5f660d4-4b81-4374-877d-fbc4bee894e2
+          description: >-
+            A URL to access the entity that the asynchronous transaction is
+            triggered on.
+          example: >-
+            https://edge.us.cdo.cisco.com/platform/public-api/v1/inventory/devices/f5f660d4-4b81-4374-877d-fbc4bee894e2
         transactionPollingUrl:
           type: string
           description: The URL to poll to track the progress of the transaction.
-          example: https://edge.us.cdo.cisco.com/platform/public-api/v1/transactions/7131daad-e813-4b8f-8f42-be1e241e8cdb
+          example: >-
+            https://edge.us.cdo.cisco.com/platform/public-api/v1/transactions/7131daad-e813-4b8f-8f42-be1e241e8cdb
         submissionTime:
           type: string
-          description: The time (UTC; represented using the RFC-3339 standard) at
-            which the transaction was triggered
+          description: >-
+            The time (UTC; represented using the RFC-3339 standard) at which the
+            transaction was triggered
           format: date-time
-          example: 2023-12-13T05:15:44Z
+          example: '2023-12-13T05:15:44Z'
         lastUpdatedTime:
           type: string
-          description: The time (UTC; represented using the RFC-3339 standard) at
-            which the transaction status was last updated
+          description: >-
+            The time (UTC; represented using the RFC-3339 standard) at which the
+            transaction status was last updated
           format: date-time
-          example: 2023-12-13T08:15:44Z
+          example: '2023-12-13T08:15:44Z'
         transactionType:
           $ref: '#/components/schemas/CdoTransactionType'
         cdoTransactionStatus:
           $ref: '#/components/schemas/CdoTransactionStatus'
         errorMessage:
           type: string
-          description: "Transaction error message, if any"
+          description: Transaction error message, if any
         errorDetails:
           type: object
           additionalProperties:
             type: string
-            description: "Transaction error details, if any"
-          description: "Transaction error details, if any"
+            description: Transaction error details, if any
+          description: Transaction error details, if any
     CdoTransactionStatus:
       type: string
       description: The status of the CDO transaction
       example: IN_PROGRESS
       enum:
-      - PENDING
-      - IN_PROGRESS
-      - DONE
-      - ERROR
+        - PENDING
+        - IN_PROGRESS
+        - DONE
+        - ERROR
     CdoTransactionType:
       type: string
       description: the type of the transaction
       example: ONBOARD_ASA
       enum:
-      - ONBOARD_ASA
-      - ONBOARD_IOS
-      - CREATE_FTD
-      - REGISTER_FTD
-      - DELETE_CDFMC_MANAGED_FTD
-      - RECONNECT_ASA
-      - READ_ASA
+        - ONBOARD_ASA
+        - ONBOARD_IOS
+        - CREATE_FTD
+        - REGISTER_FTD
+        - DELETE_CDFMC_MANAGED_FTD
+        - RECONNECT_ASA
+        - READ_ASA
     EntityType:
       type: string
       description: The type of the device.
       example: CDFMC_MANAGED_FTD
       enum:
-      - ASA
-      - CDFMC_MANAGED_FTD
-      - ONPREM_FMC_MANAGED_FTD
-      - ONPREM_FMC_MANAGED_FIREPOWER
-      - ONPREM_FMC_NGIPS
-      - FDM_MANAGED_FTD
-      - IOS
-      - SSH_DEVICE
-      - GENERIC_DEVICE
-      - MERAKI_MX
-      - CLOUD_DNG
-      - SFCN
-      - SFCN_DNG
-      - SFCN_STS
-      - ONPREM_FMC
-      - CDFMC
-      - AWS_VPC
-      - AZURE_VNET
-      - DUO_ADMIN_PANEL
-      - UMBRELLA_ORGANIZATION
+        - ASA
+        - CDFMC_MANAGED_FTD
+        - ONPREM_FMC_MANAGED_FTD
+        - ONPREM_FMC_MANAGED_FIREPOWER
+        - ONPREM_FMC_NGIPS
+        - FDM_MANAGED_FTD
+        - IOS
+        - SSH_DEVICE
+        - GENERIC_DEVICE
+        - MERAKI_MX
+        - CLOUD_DNG
+        - SFCN
+        - SFCN_DNG
+        - SFCN_STS
+        - ONPREM_FMC
+        - CDFMC
+        - AWS_VPC
+        - AZURE_VNET
+        - DUO_ADMIN_PANEL
+        - UMBRELLA_ORGANIZATION
     FtdCreateOrUpdateInput:
       required:
-      - fmcAccessPolicyUid
-      - licenses
-      - name
+        - fmcAccessPolicyUid
+        - licenses
+        - name
       type: object
       properties:
         name:
@@ -1595,65 +1922,70 @@ components:
             description: Specify a set of licenses to apply to the device.
             example: BASE
             enum:
-            - BASE
-            - CARRIER
-            - THREAT
-            - MALWARE
-            - URLFilter
+              - BASE
+              - CARRIER
+              - THREAT
+              - MALWARE
+              - URLFilter
         virtual:
           type: boolean
           description: Indicate whether the FTD is a virtual or a physical device.
         fmcAccessPolicyUid:
           type: string
-          description: Specify the unique identifier of the FMC access policy to apply
-            to this device.
+          description: >-
+            Specify the unique identifier of the FMC access policy to apply to
+            this device.
           format: uuid
         performanceTier:
           type: string
-          description: Specify the performance tier of the FTDv (required only if
-            isVirtual is set to true)
+          description: >-
+            Specify the performance tier of the FTDv (required only if isVirtual
+            is set to true)
           enum:
-          - FTDv5
-          - FTDv10
-          - FTDv20
-          - FTDv30
-          - FTDv50
-          - FTDv100
-          - FTDv
+            - FTDv5
+            - FTDv10
+            - FTDv20
+            - FTDv30
+            - FTDv50
+            - FTDv100
+            - FTDv
         labels:
           uniqueItems: true
           type: array
-          description: Specify a set of labels to identify the device as part of a
-            group. Refer to the CDO documentation for details on how labels are used
-            in CDO.
+          description: >-
+            Specify a set of labels to identify the device as part of a group.
+            Refer to the CDO documentation for details on how labels are used in
+            CDO.
           example:
-          - ios
-          - ra-vpn-headend
+            - ios
+            - ra-vpn-headend
           items:
             type: string
-            description: Specify a set of labels to identify the device as part of
-              a group. Refer to the CDO documentation for details on how labels are
-              used in CDO.
-            example: "[\"ios\",\"ra-vpn-headend\"]"
+            description: >-
+              Specify a set of labels to identify the device as part of a group.
+              Refer to the CDO documentation for details on how labels are used
+              in CDO.
+            example: '["ios","ra-vpn-headend"]'
         deviceType:
           $ref: '#/components/schemas/EntityType'
     FtdRegistrationInput:
       required:
-      - ftdUid
+        - ftdUid
       type: object
       properties:
         ftdUid:
           type: string
-          description: The unique identifier of the FTD device in CDO for which registration
-            should be triggered.
+          description: >-
+            The unique identifier of the FTD device in CDO for which
+            registration should be triggered.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
     AsaCreateOrUpdateInput:
       required:
-      - connectorType
-      - name
-      - password
-      - username
+        - connectorType
+        - name
+        - password
+        - username
       type: object
       properties:
         name:
@@ -1662,8 +1994,9 @@ components:
           example: My ASA
         deviceAddress:
           type: string
-          description: "The address of the device to onboard, specified in the format\
-            \ `host:port`."
+          description: >-
+            The address of the device to onboard, specified in the format
+            `host:port`.
           example: 10.2.2.5:443
         username:
           type: string
@@ -1677,40 +2010,45 @@ components:
           $ref: '#/components/schemas/ConnectorType'
         ignoreCertificate:
           type: boolean
-          description: Set this attribute to true if you do not want CDO to validate
-            the certificate of this device before onboarding.
+          description: >-
+            Set this attribute to true if you do not want CDO to validate the
+            certificate of this device before onboarding.
           example: false
           default: false
         connectorName:
           type: string
-          description: The name of the Secure Device Connector (SDC) that will be
-            used to communicate with the device. This value is not required if the
+          description: >-
+            The name of the Secure Device Connector (SDC) that will be used to
+            communicate with the device. This value is not required if the
             connector type selected is Cloud Connector (CDG).
           example: SDC-1
         labels:
           uniqueItems: true
           type: array
-          description: Specify a set of labels to identify the device as part of a
-            group. Refer to the CDO documentation for details on how labels are used
-            in CDO.
+          description: >-
+            Specify a set of labels to identify the device as part of a group.
+            Refer to the CDO documentation for details on how labels are used in
+            CDO.
           example:
-          - asa
-          - ra-vpn-headend
+            - asa
+            - ra-vpn-headend
           items:
             type: string
-            description: Specify a set of labels to identify the device as part of
-              a group. Refer to the CDO documentation for details on how labels are
-              used in CDO.
-            example: "[\"asa\",\"ra-vpn-headend\"]"
+            description: >-
+              Specify a set of labels to identify the device as part of a group.
+              Refer to the CDO documentation for details on how labels are used
+              in CDO.
+            example: '["asa","ra-vpn-headend"]'
     ConnectorType:
       type: string
-      description: The type of the connector that will be used to communicate with
-        the device. CDO can communicate with your device using either a Cloud Connector
-        (CDG) or a Secure Device Connector (SDC).
+      description: >-
+        The type of the connector that will be used to communicate with the
+        device. CDO can communicate with your device using either a Cloud
+        Connector (CDG) or a Secure Device Connector (SDC).
       example: CDG
       enum:
-      - SDC
-      - CDG
+        - SDC
+        - CDG
     UserPage:
       type: object
       properties:
@@ -1726,9 +2064,10 @@ components:
           example: 50
         offset:
           type: integer
-          description: "The offset of the results retrieved. The CDO Public API uses\
-            \ the offset field to determine the index of the first result retrieved,\
-            \ and will retrieve `limit` results from the offset specified."
+          description: >-
+            The offset of the results retrieved. The CDO Public API uses the
+            offset field to determine the index of the first result retrieved,
+            and will retrieve `limit` results from the offset specified.
           format: int32
           example: 0
         items:
@@ -1741,32 +2080,37 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the user this token belongs to. The
-            user can be API-only or a human.
+          description: >-
+            The unique identifier of the user this token belongs to. The user
+            can be API-only or a human.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
           type: string
-          description: The name of the user this token belongs to. The user can be
-            API-only or a human.
+          description: >-
+            The name of the user this token belongs to. The user can be API-only
+            or a human.
           example: my-example-device
         roles:
           uniqueItems: true
           type: array
-          description: The role of the user this token belongs to. The user can be
-            API-only or a human.
+          description: >-
+            The role of the user this token belongs to. The user can be API-only
+            or a human.
           items:
             $ref: '#/components/schemas/UserRole'
         expiresAt:
           type: string
-          description: "The time (UTC; represented using the RFC-3339 standard) the\
-            \ token expires. If this field is missing, the token will never expire."
+          description: >-
+            The time (UTC; represented using the RFC-3339 standard) the token
+            expires. If this field is missing, the token will never expire.
           format: date-time
         tenantUid:
           type: string
-          description: "The unique identifier of the tenant this token is associated\
-            \ with. While a user can be associated with multiple tenants, a token\
-            \ is associated with a single tenant."
+          description: >-
+            The unique identifier of the tenant this token is associated with.
+            While a user can be associated with multiple tenants, a token is
+            associated with a single tenant.
           format: uuid
     Tenant:
       type: object
@@ -1782,13 +2126,15 @@ components:
           example: mytenantname@cisco.com
         securityCloudControlEnterpriseId:
           type: string
-          description: The unique identifier of the Security Cloud Control Enterprise
-            this tenant is associated with.
+          description: >-
+            The unique identifier of the Security Cloud Control Enterprise this
+            tenant is associated with.
           format: uuid
           example: dda3ce52-312c-477a-aa86-1fd1866ddab7
         displayName:
           type: string
-          description: A human-readable display name for the tenant. This is the tenant
+          description: >-
+            A human-readable display name for the tenant. This is the tenant
             name displayed in the CDO Web UI.
           example: mytenantname
         payType:
@@ -1798,12 +2144,12 @@ components:
       description: An enum that describes the payment status of the tenant in CDO.
       example: TRIAL
       enum:
-      - PAYING
-      - NOT_PAYING
-      - TRIAL
-      - INTERNAL
-      - PARTNER
-      - DEMO
+        - PAYING
+        - NOT_PAYING
+        - TRIAL
+        - INTERNAL
+        - PARTNER
+        - DEMO
     CdoRegion:
       type: object
       properties:
@@ -1830,12 +2176,16 @@ components:
       properties:
         cloudConnectorIps:
           type: array
-          description: The IP addresses from which to allow inbound access to your
-            network if you wish to connect to your devices through CDO's Cloud Connector.
+          description: >-
+            The IP addresses from which to allow inbound access to your network
+            if you wish to connect to your devices through CDO's Cloud
+            Connector.
           items:
             type: string
-            description: The IP addresses from which to allow inbound access to your
-              network if you wish to connect to your devices through CDO's Cloud Connector.
+            description: >-
+              The IP addresses from which to allow inbound access to your
+              network if you wish to connect to your devices through CDO's Cloud
+              Connector.
     SortCriteriaParam:
       type: object
       properties:
@@ -1857,87 +2207,102 @@ components:
           example: Primary - Active
         serial:
           type: string
-          description: "(High Availability ASAs only) The serial number of the device.\
-            \ This is typically used for licensing, and is not the same as the chassis'\
-            \ serial number."
+          description: >-
+            (High Availability ASAs only) The serial number of the device. This
+            is typically used for licensing, and is not the same as the chassis'
+            serial number.
           example: JAD24500xxx
         softwareVersion:
           type: string
-          description: (High Availability ASAs only) The version of the software running
-            on the device.
+          description: >-
+            (High Availability ASAs only) The version of the software running on
+            the device.
           example: 9.18.8
-      description: (High Availability ASAs only) Information on the failover mate
-        of this device.
+      description: >-
+        (High Availability ASAs only) Information on the failover mate of this
+        device.
     AsaFailoverMode:
       type: string
       description: (ASAs only) Failover mode of the device.
       example: ACTIVE_STANDBY
       enum:
-      - "OFF"
-      - ACTIVE_STANDBY
-      - ACTIVE_ACTIVE
+        - 'OFF'
+        - ACTIVE_STANDBY
+        - ACTIVE_ACTIVE
     CdFmcInfo:
       type: object
       properties:
         cliKey:
           type: string
-          description: "The CLI key to paste into the FTD CLI to register the FTD\
-            \ with a cdFMC. You need to paste this value in only once, when the FTD\
-            \ is being onboarded. Refer to the [CDO Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html)\
-            \ for details."
-          example: configure manager add acme.app.us.cdo.cisco.com E2jsyiZggyeCfFfCUaMK2kD1a1bxxx
-            5Do6FwUaXY4EFlyraC2yVnxodLxhuxxx acme.app.us.cdo.cisco.com
+          description: >-
+            The CLI key to paste into the FTD CLI to register the FTD with a
+            cdFMC. You need to paste this value in only once, when the FTD is
+            being onboarded. Refer to the [CDO
+            Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html)
+            for details.
+          example: >-
+            configure manager add acme.app.us.cdo.cisco.com
+            E2jsyiZggyeCfFfCUaMK2kD1a1bxxx 5Do6FwUaXY4EFlyraC2yVnxodLxhuxxx
+            acme.app.us.cdo.cisco.com
         regKey:
           type: string
-          description: "The Network Address Translation (NAT) ID of this FTD. Refer\
-            \ to the [CDO Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html)\
-            \ for details."
+          description: >-
+            The Network Address Translation (NAT) ID of this FTD. Refer to the
+            [CDO
+            Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html)
+            for details.
           example: E2jsyiZggyeCfFfCUaMK2kD1a1bxxx
         natId:
           type: string
-          description: "The Registration Key of this FTD. Refer to the [CDO Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html)\
-            \ for details."
+          description: >-
+            The Registration Key of this FTD. Refer to the [CDO
+            Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html)
+            for details.
           example: 5Do6FwUaXY4EFlyraC2yVnxodLxhuxxx
-      description: (FTDs managed by cdFMC only) Information on the cloud-delivered
-        FMC managing this FTD. This information is not available for FTDs managed
+      description: >-
+        (FTDs managed by cdFMC only) Information on the cloud-delivered FMC
+        managing this FTD. This information is not available for FTDs managed
         using FDM or on-prem FMCs.
     ConfigState:
       type: string
-      description: "The state of the device configuration in CDO. CDO stages configuration\
-        \ changes which have to be manually applied to the device; this field indicates\
-        \ whether the configuration on CDO does not match the configuration on the\
-        \ device, which indicates whether there are changes to be deployed from CDO\
-        \ to the device."
+      description: >-
+        The state of the device configuration in CDO. CDO stages configuration
+        changes which have to be manually applied to the device; this field
+        indicates whether the configuration on CDO does not match the
+        configuration on the device, which indicates whether there are changes
+        to be deployed from CDO to the device.
       example: SYNCED
       enum:
-      - NO_CONFIG
-      - SYNCED
-      - NOT_SYNCED
-      - UNKNOWN
+        - NO_CONFIG
+        - SYNCED
+        - NOT_SYNCED
+        - UNKNOWN
     ConflictDetectionState:
       type: string
-      description: Indicates whether there have been changes made to the device's
+      description: >-
+        Indicates whether there have been changes made to the device's
         configuration outside of CDO.
       example: NO_CONFLICTS
       enum:
-      - CONFLICT_DETECTED
-      - NO_CONFLICTS
+        - CONFLICT_DETECTED
+        - NO_CONFLICTS
     ConnectivityState:
       type: string
-      description: "The connectivity state of the device to CDO. A connectivity state\
-        \ that is not ONLINE can indicate either a problem with the device, or the\
-        \ communication pathways between the device and CDO."
+      description: >-
+        The connectivity state of the device to CDO. A connectivity state that
+        is not ONLINE can indicate either a problem with the device, or the
+        communication pathways between the device and CDO.
       example: ONLINE
       enum:
-      - ONLINE
-      - UNREACHABLE
-      - BAD_CREDENTIALS
-      - UNKNOWN
-      - PENDING_SETUP
+        - ONLINE
+        - UNREACHABLE
+        - BAD_CREDENTIALS
+        - UNKNOWN
+        - PENDING_SETUP
     Device:
       required:
-      - deviceType
-      - name
+        - deviceType
+        - name
       type: object
       properties:
         uid:
@@ -1955,31 +2320,35 @@ components:
           $ref: '#/components/schemas/ConnectorType'
         connectorUid:
           type: string
-          description: The unique identifier of the Secure Device Connector (SDC)
-            that will be used to communicate with the device. This value is not required
-            if the connector type selected is Cloud Connector (CDG)The name of the
-            Secure Device Connector (SDC) that will be used to communicate with the
-            device. This value is not required if the connector type selected is Cloud
-            Connector (CDG).
+          description: >-
+            The unique identifier of the Secure Device Connector (SDC) that will
+            be used to communicate with the device. This value is not required
+            if the connector type selected is Cloud Connector (CDG)The name of
+            the Secure Device Connector (SDC) that will be used to communicate
+            with the device. This value is not required if the connector type
+            selected is Cloud Connector (CDG).
           format: uuid
           example: 3af473a8-d70f-4090-bcdb-853981696478
         address:
           type: string
-          description: "The address of the device, in `host:port` format. CDO connects\
-            \ to the device at this address."
+          description: >-
+            The address of the device, in `host:port` format. CDO connects to
+            the device at this address.
           example: my-example-device.example.com:443
         deviceRole:
           $ref: '#/components/schemas/DeviceRole'
         serial:
           type: string
-          description: "The serial number of the device. This is typically used for\
-            \ licensing, and is not the same as the chassis' serial number."
+          description: >-
+            The serial number of the device. This is typically used for
+            licensing, and is not the same as the chassis' serial number.
           example: JAD24500xxx
         chassisSerial:
           type: string
-          description: "The serial number on the chassis of the device (ASA-only).\
-            \ This is typically used to type up to Cisco SmartNet, and is not the\
-            \ same as the serial number."
+          description: >-
+            The serial number on the chassis of the device (ASA-only). This is
+            typically used to type up to Cisco SmartNet, and is not the same as
+            the serial number.
           example: JMX2450Xxxx
         softwareVersion:
           type: string
@@ -1997,7 +2366,8 @@ components:
           example: This is an example note on the device.
         asdmVersion:
           type: string
-          description: (ASAs only) Version of the ASDM device manager running on the
+          description: >-
+            (ASAs only) Version of the ASDM device manager running on the
             device.
           example: 7.6(2)
         asaFailoverMode:
@@ -2025,10 +2395,11 @@ components:
           description: (FTDs only) List of FTD License entitlements.
         ftdPerformanceTier:
           type: string
-          description: (FTDvs only) The FTDv supports performance-tiered licensing
-            that provides different throughput levels and VPN connection limits based
-            on deployment requirements. This field specifies the performance tier
-            of the FTD.
+          description: >-
+            (FTDvs only) The FTDv supports performance-tiered licensing that
+            provides different throughput levels and VPN connection limits based
+            on deployment requirements. This field specifies the performance
+            tier of the FTD.
         cdFmcInfo:
           $ref: '#/components/schemas/CdFmcInfo'
         onPremFmcInfo:
@@ -2057,9 +2428,10 @@ components:
           example: 50
         offset:
           type: integer
-          description: "The offset of the results retrieved. The CDO Public API uses\
-            \ the offset field to determine the index of the first result retrieved,\
-            \ and will retrieve `limit` results from the offset specified."
+          description: >-
+            The offset of the results retrieved. The CDO Public API uses the
+            offset field to determine the index of the first result retrieved,
+            and will retrieve `limit` results from the offset specified.
           format: int32
           example: 0
         items:
@@ -2072,16 +2444,16 @@ components:
       description: The role this device performs on the network.
       example: RA_VPN_HEADEND
       enum:
-      - RA_VPN_HEADEND
-      - MFA_PROVIDER
-      - ZTNA_PROVIDER
+        - RA_VPN_HEADEND
+        - MFA_PROVIDER
+        - ZTNA_PROVIDER
     MerakiDeploymentMode:
       type: string
       description: (Meraki devices only) The deployment mode of the Meraki device.
       example: ROUTED
       enum:
-      - ROUTED
-      - PASSTHROUGH
+        - ROUTED
+        - PASSTHROUGH
     Network:
       type: object
       properties:
@@ -2097,8 +2469,10 @@ components:
           type: string
           description: The timezone of the Meraki Dashboard Network.
           example: UTC +0
-      description: "(Meraki devices only) The [Dashboard Network](https://documentation.meraki.com/General_Administration/Organizations_and_Networks/Creating_and_Deleting_Dashboard_Networks)\
-        \ the device is deployed in."
+      description: >-
+        (Meraki devices only) The [Dashboard
+        Network](https://documentation.meraki.com/General_Administration/Organizations_and_Networks/Creating_and_Deleting_Dashboard_Networks)
+        the device is deployed in.
     OnPremFmcInfo:
       type: object
       properties:
@@ -2108,11 +2482,13 @@ components:
           example: my-example-fmc
         address:
           type: string
-          description: "The address of the on-prem FMC managing this device, in `host:port`\
-            \ format."
+          description: >-
+            The address of the on-prem FMC managing this device, in `host:port`
+            format.
           example: my-example-fmc.example.com:443
-      description: (Devices managed by on-prem FMC only) Information on the on-prem
-        FMC managing this device.
+      description: >-
+        (Devices managed by on-prem FMC only) Information on the on-prem FMC
+        managing this device.
     StateMachineDetails:
       type: object
       properties:
@@ -2132,7 +2508,7 @@ components:
           type: string
     Sdc:
       required:
-      - name
+        - name
       type: object
       properties:
         sdcPublicKey:
@@ -2149,20 +2525,21 @@ components:
         softwareVersion:
           type: string
           description: The software version running on the SDC.
-          example: "202311071057"
+          example: '202311071057'
         ipAddress:
           type: string
           description: The IP address of the SDC.
-          example: "202311071057"
+          example: '202311071057'
         sdcStatus:
           $ref: '#/components/schemas/SdcStatus'
         lastHeartbeat:
           type: string
-          description: The time (UTC; represented using the RFC-3339 standard) that
-            a heartbeat was last received from the SDC. This serves as an indicator
-            of the health of the SDC.
+          description: >-
+            The time (UTC; represented using the RFC-3339 standard) that a
+            heartbeat was last received from the SDC. This serves as an
+            indicator of the health of the SDC.
           format: date-time
-          example: 2023-12-13T05:15:44Z
+          example: '2023-12-13T05:15:44Z'
     SdcPage:
       type: object
       properties:
@@ -2178,9 +2555,10 @@ components:
           example: 50
         offset:
           type: integer
-          description: "The offset of the results retrieved. The CDO Public API uses\
-            \ the offset field to determine the index of the first result retrieved,\
-            \ and will retrieve `limit` results from the offset specified."
+          description: >-
+            The offset of the results retrieved. The CDO Public API uses the
+            offset field to determine the index of the first result retrieved,
+            and will retrieve `limit` results from the offset specified.
           format: int32
           example: 0
         items:
@@ -2193,27 +2571,31 @@ components:
       properties:
         base64EncodedKey:
           type: string
-          description: Base64 RSA public key to use to encrypt device credentials
-            sent to the SDC.
-          example: c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCZ1FEZGpxeDNNMjh3ZHE2Rk11R2NFZHJqaGl3SFp5NDE0WXZFUmRDcVdnRXgrSXloNjVteHlkaVh1OVpoMXUyVTRtNDlnL0VUL2JxTklFNGgraUViQURjcjlScVFGRGZ4RC9pK1ZPSkhiQzQ0UERhZHFJd21vUGNoazYvQ0RoZVlJSmZTM0xTNmlkaC9SRGVFVHpnZ3lTaUI2Mm5yMnRmTkJ3V0ZScjV1Sko5dkNvdUxKRVBZbDBVMkpZNnBjd0paNk1lRDg5dU4rTjlHWFN2Vlh4bEZKNXg0VThReGFCMzJuNHZoekNiUzlYSVg1bGJJQnVIUEZ1bmMrNThPaUFzS0dwTTZ1NzhVR2V2TndOVzU0eVZmU2c4Q01XQ09vM1hiNTIrMnU2VHZlcE1BT2ZFU290YUd5NHV1RTBnUHYwSnowano3ZnFGTCt4d1AzNnNVY2pPRlIzQ1VhbEVpUDEyT2tTeEhreVNMUXJ3a2lFTVUvQ3VPUjdOWkdjUFd0dkVBaUZOTEN0VHhzY25Ma0xNNENkUEt3WnZQV3l3cHAyVGdValU4MEFaWkJZaGZBWTd3SFFQdDhrTkROMURhMWpWaHlwMWlycE5VbTEvaDNrS2srOFdFOVV2RjNDeVgyL1NqWUpPR2lMUWdVaXFUL3E5UkNMZUdVWStzaUFwS3ZyNS91UkU9IHNpd2FycmllQFNJV0FSUklFLU0tS1JBRgo=
+          description: >-
+            Base64 RSA public key to use to encrypt device credentials sent to
+            the SDC.
+          example: >-
+            c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCZ1FEZGpxeDNNMjh3ZHE2Rk11R2NFZHJqaGl3SFp5NDE0WXZFUmRDcVdnRXgrSXloNjVteHlkaVh1OVpoMXUyVTRtNDlnL0VUL2JxTklFNGgraUViQURjcjlScVFGRGZ4RC9pK1ZPSkhiQzQ0UERhZHFJd21vUGNoazYvQ0RoZVlJSmZTM0xTNmlkaC9SRGVFVHpnZ3lTaUI2Mm5yMnRmTkJ3V0ZScjV1Sko5dkNvdUxKRVBZbDBVMkpZNnBjd0paNk1lRDg5dU4rTjlHWFN2Vlh4bEZKNXg0VThReGFCMzJuNHZoekNiUzlYSVg1bGJJQnVIUEZ1bmMrNThPaUFzS0dwTTZ1NzhVR2V2TndOVzU0eVZmU2c4Q01XQ09vM1hiNTIrMnU2VHZlcE1BT2ZFU290YUd5NHV1RTBnUHYwSnowano3ZnFGTCt4d1AzNnNVY2pPRlIzQ1VhbEVpUDEyT2tTeEhreVNMUXJ3a2lFTVUvQ3VPUjdOWkdjUFd0dkVBaUZOTEN0VHhzY25Ma0xNNENkUEt3WnZQV3l3cHAyVGdValU4MEFaWkJZaGZBWTd3SFFQdDhrTkROMURhMWpWaHlwMWlycE5VbTEvaDNrS2srOFdFOVV2RjNDeVgyL1NqWUpPR2lMUWdVaXFUL3E5UkNMZUdVWStzaUFwS3ZyNS91UkU9IHNpd2FycmllQFNJV0FSUklFLU0tS1JBRgo=
         keyId:
           type: string
-          description: The identifier of the RSA public key. This identifier is used
-            by the SDC to know which private key to use to decrypt a string.
+          description: >-
+            The identifier of the RSA public key. This identifier is used by the
+            SDC to know which private key to use to decrypt a string.
           example: example-key-id
-      description: Information on the public key used to encrypt credentials sent
-        to the SDC.
+      description: >-
+        Information on the public key used to encrypt credentials sent to the
+        SDC.
     SdcStatus:
       type: string
       description: The status of the SDC.
       example: ACTIVE
       enum:
-      - NEW
-      - ONBOARDING
-      - ACTIVE
-      - INACTIVE
-      - DISABLED
-      - UNKNOWN
+        - NEW
+        - ONBOARDING
+        - ACTIVE
+        - INACTIVE
+        - DISABLED
+        - UNKNOWN
     AuthenticationError:
       type: object
       properties:
@@ -2233,19 +2615,19 @@ components:
           description: A unique error code that describes the error.
           example: INVALID_INPUT
           enum:
-          - INVALID_INPUT
-          - UNAUTHORIZED
-          - FORBIDDEN
-          - NOT_FOUND
-          - METHOD_NOT_ALLOWED
-          - CONFLICT
-          - TOO_MANY_REQUESTS
-          - CANNOT_DELETE_CDFMC_MANAGED_FTD
-          - CANNOT_DELETE_ONPREM_FMC_MANAGED_FTD
-          - CANNOT_DELETE_ONPREM_FMC_MANAGED_FIREPOWER
-          - CANNOT_DELETE_CDFMC
-          - SERVER_ERROR
-          - PROXY_ERROR
+            - INVALID_INPUT
+            - UNAUTHORIZED
+            - FORBIDDEN
+            - NOT_FOUND
+            - METHOD_NOT_ALLOWED
+            - CONFLICT
+            - TOO_MANY_REQUESTS
+            - CANNOT_DELETE_CDFMC_MANAGED_FTD
+            - CANNOT_DELETE_ONPREM_FMC_MANAGED_FTD
+            - CANNOT_DELETE_ONPREM_FMC_MANAGED_FIREPOWER
+            - CANNOT_DELETE_CDFMC
+            - SERVER_ERROR
+            - PROXY_ERROR
         errorMsg:
           type: string
           description: A human-readable error description in English.
@@ -2254,8 +2636,794 @@ components:
           type: object
           additionalProperties:
             type: object
-            description: "Additional details, if any, on the error"
-          description: "Additional details, if any, on the error"
+            description: Additional details, if any, on the error
+          description: Additional details, if any, on the error
+    CreateRequest:
+      required:
+        - name
+        - value
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the object
+          example: my-object
+        value:
+          $ref: '#/components/schemas/SharedObjectValue'
+        description:
+          type: string
+          description: The human-readable description of the object
+          example: My object description
+        targetIds:
+          uniqueItems: true
+          type: array
+          description: >-
+            Set of IDs for targets that contain the object. A target can be, for
+            example, a device, service, or a shared policy (Ruleset).
+          example:
+            - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          items:
+            type: string
+            description: >-
+              Set of IDs for targets that contain the object. A target can be,
+              for example, a device, service, or a shared policy (Ruleset).
+            example: '["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"]'
+        tags:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            description: The tags for the object
+            example:
+              location:
+                - London
+                - Head-office
+            items:
+              type: string
+              description: The tags for the object
+              example: '{"location":["London","Head-office"]}'
+          description: The tags for the object
+          example:
+            location:
+              - London
+              - Head-office
+        labels:
+          uniqueItems: true
+          type: array
+          description: The labels for the object
+          example:
+            - migration
+          items:
+            type: string
+            description: The labels for the object
+            example: '["migration"]'
+    GroupContent:
+      type: object
+      properties:
+        literals:
+          type: array
+          description: List of content literals
+          items:
+            $ref: '#/components/schemas/SingleContent'
+        referencedObjectUids:
+          uniqueItems: true
+          type: array
+          description: Set of UIDs of the group's referenced objects
+          example:
+            - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          items:
+            type: string
+            description: Set of UIDs of the group's referenced objects
+            format: uuid
+      description: The contents of an object group
+    Icmp4Value:
+      type: object
+      properties:
+        icmp4Type:
+          type: string
+          example: DESTINATION_UNREACHABLE
+          enum:
+            - ANY
+            - ECHO_REPLY
+            - DESTINATION_UNREACHABLE
+            - SOURCE_QUENCH
+            - REDIRECT_MESSAGE
+            - ALTERNATE_HOST_ADDRESS
+            - ECHO_REQUEST
+            - ROUTER_ADVERTISEMENT
+            - ROUTER_SOLICITATION
+            - TIME_EXCEEDED
+            - PARAMETER_PROBLEM
+            - TIMESTAMP
+            - TIMESTAMP_REPLY
+            - INFO_REQUEST
+            - INFO_REPLY
+            - ADDR_MASK_REQUEST
+            - ADDR_MASK_REPLY
+            - TRACEROUTE
+            - DATAGRAM_CONVERSION_ERROR
+            - MOBILE_HOST_REDIRECT
+            - WHERE_ARE_YOU
+            - HERE_I_AM
+            - MOBILE_REG_REQUEST
+            - MOBILE_REG_REPLY
+            - DOMAIN_NAME_REQUEST
+            - DOMAIN_NAME_REPLY
+            - SKIP_ALGORITHM_DISCOVERY_PROTOCOL
+            - PHOTURIS
+            - EXPERIMENTAL_MOB_PROTOCOLS
+        icmp4Code:
+          type: string
+          example: NET_UNREACHABLE
+          enum:
+            - NET_UNREACHABLE
+            - HOST_UNREACHABLE
+            - PROTOCOL_UNREACHABLE
+            - PORT_UNREACHABLE
+            - FRAGMENTATION_NEEDED
+            - SOURCE_ROUTE_FAILED
+            - DEST_NETWORK_UNKNOWN
+            - DEST_HOST_UNKNOWN
+            - SRC_HOST_ISOLATED
+            - COMMUNICATION_DEST_NET_PROHIBITED
+            - COMMUNICATION_DEST_HOST_PROHIBITED
+            - DEST_NET_UNREACHABLE_FOR_TOS
+            - DEST_HOST_UNREACHABLE_FOR_TOS
+            - COMM_ADMINISTRATIVELY_PROHIBITED
+            - HOST_PRECEDENCE_VIOLATION
+            - PRECEDENCE_CUTOFF
+            - REDIRECT_DATAGRAM_NETWORK
+            - REDIRECT_DATAGRAM_HOST
+            - REDIRECT_DATAGRAM_SERVICE_NETWORK
+            - REDIRECT_DATAGRAM_SERVICE_HOST
+            - ALTERNATE_HOST_ADDR
+            - DO_NOT_ROUTE_COMMON_TRAFFIC
+            - NORMAL_ROUTER_ADV
+            - TTL_EXPIRED_TRANSIT
+            - FRAG_ASSEMBLY
+            - PTR_ERROR
+            - MISSING_REQD_OPTION
+            - BAD_LENGTH
+            - BAD_SPI
+            - AUTH_FAILED
+            - DECOMPRESSION_FAILED
+            - DECRYPTION_FAILED
+            - NEED_AUTHENTICATION
+            - NEED_AUTHORIZATION
+    Icmp6Value:
+      type: object
+      properties:
+        icmp6Type:
+          type: string
+          example: DESTINATION_UNREACHABLE
+          enum:
+            - ANY
+            - DESTINATION_UNREACHABLE
+            - PACKET_TOO_BIG
+            - TIME_EXCEEDED
+            - PARAMETER_PROBLEM
+            - ECHO_REQUEST
+            - ECHO_REPLY
+            - MULTICAST_LISTENER_QUERY
+            - MULTICAST_LISTENER_REPORT
+            - MULTICAST_LISTENER_DONE
+            - ROUTER_SOLICITATION
+            - ROUTER_ADVERTISEMENT
+            - NEIGHBOUR_SOLICITATION
+            - NEIGHBOUR_ADVERTISEMENT
+            - REDIRECT_MESSAGE
+            - ROUTER_RENUMBERING
+            - ICMP_NODE_INFO_QUERY
+            - ICMP_NODE_INFO_RESPONSE
+            - INVERSE_NEIGHBOR_DISCOVERY_SOLICITATION
+            - INVERSE_NEIGHBOR_DISCOVERY_ADVERTISEMENT
+            - VER2_MULTICAST_LISTENER_REPORT
+            - HOME_AGENT_ADDR_DISCOVERY_REQUEST
+            - HOME_AGENT_ADDR_DISCOVERY_REPLY
+            - MOBILE_PREFIX_SOLICITATION
+            - MOBILE_PREFIX_ADVERTISEMENT
+            - CERT_PATH_SOLICITATION
+            - CERT_PATH_ADVERTISEMENT
+            - ICMP_EXP_MOBILITY_PROTOCOLS
+            - MULTICAST_ROUTER_ADVERTISEMENT
+            - MULTICAST_ROUTER_SOLICITATION
+            - MULTICAST_ROUTER_TERMINATION
+            - FMIPV6_MESSAGE
+            - RPL_CONTROL_MESSAGE
+            - PRIVATE_EXPERIMENTATION
+            - PRIVATE_EXPERIMENTATION_EXTENDED
+        icmp6Code:
+          type: string
+          example: ADDRESS_UNREACHABLE
+          enum:
+            - NO_ROUTE_DEST
+            - COMMUNICATION_PROHIBITED
+            - BEYOND_SCOPE_SRC_ADDR
+            - ADDRESS_UNREACHABLE
+            - PORT_UNREACHABLE
+            - SOURCE_ADDRESS_FAILED
+            - REJECT_ROUTE
+            - ERROR_SRC_ROUTING_HEADER
+            - HOP_LIMIT_EXCEEDED
+            - FRAGMENT_REASSEMBLY_TIME_EXCEEDED
+            - ERRONEOUS_HEADER_ENCOUNTERED
+            - UNRECOGNIZED_NEXT_HEADER_TYPE_ENCOUNTERED
+            - UNRECOGNIZED_IPV6_OPTION_ENCOUNTERED
+            - IPV6_FIRST_FRAG_HAS_INCOMPLETE_HEADER_CHAIN
+            - SR_UPPER_LAYER_HEADER_ERROR
+            - ROUTER_RENUMBERING_COMMAND
+            - ROUTER_RENUMBERING_RESULT
+            - DATA_CONTAINS_IPV6
+            - DATA_CONTAINS_NAME
+            - DATA_CONTAINS_IPV4
+            - SUCCESSFUL_REPLY
+            - RESPONDER_REFUSES_ANSWER
+            - QTYPE_UNKNOWN
+    NetworkObjectContent:
+      required:
+        - literal
+      type: object
+      properties:
+        literal:
+          type: string
+          description: The literal content of the network object
+          example: a:b:c::1
+      description: The content of a network object
+    ObjectContent:
+      type: object
+      description: >-
+        The content value of the override. This overrides the object's default
+        content.
+      example:
+        literal: a:b:c::1
+      oneOf:
+        - $ref: '#/components/schemas/ServiceObjectContent'
+        - $ref: '#/components/schemas/UrlObjectContent'
+        - $ref: '#/components/schemas/GroupContent'
+        - $ref: '#/components/schemas/NetworkObjectContent'
+    Override:
+      required:
+        - content
+      type: object
+      properties:
+        targetId:
+          type: string
+          description: >-
+            The ID of the target. A target can be, for example, a device,
+            service, or a shared policy (Ruleset).
+          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        content:
+          $ref: '#/components/schemas/ObjectContent'
+      description: >-
+        The list of target overrides for the object. Each override the default
+        content for its target.
+      example:
+        targetId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        content: a:b:c::2
+    PortsValue:
+      type: object
+      properties:
+        op:
+          type: string
+          description: The operator applied to the list of ports
+          example: RANGE
+          enum:
+            - EQ
+            - RANGE
+            - GT
+            - LT
+            - NEQ
+            - SOURCE_DESTINATION
+        ports:
+          type: array
+          description: The list of ports
+          example:
+            - '80'
+            - '81'
+          items:
+            type: string
+            description: The list of ports
+            example: '["80","81"]'
+    ServiceObjectContent:
+      type: object
+      properties:
+        protocol:
+          type: string
+          description: The service object protocol
+          example: TCP
+          enum:
+            - TCP
+            - UDP
+            - ICMP4
+            - ICMP6
+            - TCP_UDP
+            - IGMP
+            - GGP
+            - ST2
+            - CBT
+            - EGP
+            - IGP
+            - BBNRCCMON
+            - NVP2
+            - PUP
+            - ARGUS
+            - EMCON
+            - XNET
+            - CHAOS
+            - MUX
+            - DCNMEAS
+            - HMP
+            - PRM
+            - XNSIDP
+            - TRUNK1
+            - TRUNK2
+            - LEAF1
+            - LEAF2
+            - RDP
+            - IRTP
+            - ISOTP4
+            - NETBLT
+            - MFENSP
+            - MERITINP
+            - SEP
+            - THREEPC
+            - IDPR
+            - XTP
+            - DDP
+            - IDPRCMTP
+            - TPPLUSPLUS
+            - IL
+            - SDRP
+            - IDRP
+            - RSVP
+            - GRE
+            - MHRP
+            - BNA
+            - ESP
+            - AH
+            - INLSP
+            - SWIPE
+            - NARP
+            - MOBILE
+            - TLSP
+            - SKIP
+            - IPv6NONXT
+            - CFTP
+            - SATEXPAK
+            - KRYPTOLAN
+            - RVD
+            - IPPC
+            - SATMON
+            - VISA
+            - IPCV
+            - CPNX
+            - CPHB
+            - WSN
+            - PVP
+            - BRSATMON
+            - SUNND
+            - WBMON
+            - WBEXPAK
+            - ISOIP
+            - VMTP
+            - SECUREVMTP
+            - VINES
+            - TTP
+            - NSFNETIGP
+            - DGP
+            - TCF
+            - EIGRP
+            - OSPFIGP
+            - SPRITERPC
+            - LARP
+            - MTP
+            - AX25
+            - IPIP
+            - MICP
+            - SCCSP
+            - ETHERIP
+            - ENCAP
+            - GMTP
+            - IFMP
+            - PNNI
+            - PIM
+            - ARIS
+            - SCPS
+            - QNX
+            - AN
+            - IPCOMP
+            - SNP
+            - COMPAQPEER
+            - IPXINIP
+            - VRRP
+            - PGM
+            - L2TP
+            - DDX
+            - IATP
+            - ST
+            - SRP
+            - UTI
+            - SMP
+            - SM
+            - PTP
+            - ISIS
+            - FIRE
+            - CRTP
+            - CRUDP
+            - SSCOPMCE
+            - IPLT
+            - SPS
+            - PIPE
+            - SCTP
+            - FC
+            - DIVERT
+        serviceValue:
+          $ref: '#/components/schemas/ServiceObjectValueContent'
+    ServiceObjectValueContent:
+      type: object
+      description: The value of the service object
+      example:
+        op: EQ
+        ports:
+          - '80'
+      oneOf:
+        - $ref: '#/components/schemas/Icmp4Value'
+        - $ref: '#/components/schemas/Icmp6Value'
+        - $ref: '#/components/schemas/PortsValue'
+    SharedObjectValue:
+      required:
+        - defaultContent
+        - objectType
+      type: object
+      properties:
+        objectType:
+          type: string
+          description: The type of object
+          example: NETWORK_OBJECT
+          enum:
+            - NETWORK_OBJECT
+            - IPV4_ADDRESS_POOL
+            - IPV6_ADDRESS_POOL
+            - NETWORK_GROUP
+            - SERVICE_OBJECT
+            - SERVICE_GROUP
+            - PROTOCOL_GROUP
+            - ICMP_GROUP
+            - URL_OBJECT
+            - URL_GROUP
+            - APPLICATION_FILTER_OBJECT
+            - DNS_GROUP_OBJECT
+            - SECURITY_ZONE_OBJECT
+            - ACTIVE_DIRECTORY_REALM_OBJECT
+            - REALM_SEQUENCE
+            - SPECIAL_IDENTITY_OBJECT
+            - LOCAL_IDENTITY_OBJECT
+            - SYSLOG_SERVER_OBJECT
+            - INTRUSION_POLICY_GROUP
+            - INTRUSION_POLICY
+            - FTD_POLICY_DEFAULT_ACTION
+            - FTD_IDENTITY_POLICY_DEFAULT_ACTION
+            - FTD_SSL_POLICY_DEFAULT_ACTION
+            - SETTINGS_DNS_DATA_INTERFACE_GROUP
+            - SETTINGS_DNS_MGMT_INTERFACE_GROUP
+            - SETTINGS_NTP_OBJECT
+            - SETTINGS_DHCP_OBJECT
+            - SETTINGS_DEVLOG_OBJECT
+            - SETTINGS_MGMTACCESS_HTTP_GROUP
+            - SETTINGS_MGMTACCESS_SSH_GROUP
+            - SETTINGS_MGMTACCESS_DATA_OBJECT
+            - SETTINGS_MGMTACCESS_HTTPS_DATA_PORT
+            - SETTINGS_URL_FILTERING_PREFERENCES_OBJECT
+            - SETTINGS_HOSTNAME_OBJECT
+            - SETTINGS_INTRUSION_OBJECT
+            - SETTINGS_WEB_ANALYTICS
+            - SETTINGS_SUCCESS_NETWORK
+            - SETTINGS_CLOUD_EVENTS
+            - SETTINGS_CLOUD_SERVICES_INFO
+            - GEOLOCATION_OBJECT
+            - NETWORK_FEED
+            - URL_FEED
+            - SECURITY_INTELLIGENCE
+            - ANY_CONNECT_CLIENT_PROFILE
+            - ANY_CONNECT_PACKAGE_FILE
+            - INTERNAL_CERTIFICATE
+            - INTERNAL_CA_CERTIFICATE
+            - EXTERNAL_CA_CERTIFICATE
+            - IKEV1_PROPOSAL
+            - IKEV2_PROPOSAL
+            - IKEV2_POLICY
+            - IKEV1_POLICY
+            - IDENTITY_SERVICES_ENGINE
+            - SETTINGS_VPN_OBJECT
+            - ANY_CONNECT_PROFILE
+            - STATIC_ROUTING
+            - RADIUS_IDENTITY_SOURCE
+            - RADIUS_IDENTITY_SOURCE_GROUP
+            - RA_VPN_GROUP_POLICY
+            - RA_VPN_CONNECTION_PROFILE
+            - RA_VPN
+            - RA_VPN_EXT
+            - RA_VPN_CONFIGURATION
+            - TIME_RANGE
+            - CLOUD_SECURITY_GROUP
+            - AWS_PREFIX_LIST
+            - SAML_SERVER
+            - DUO_LDAP_IDENTITY_SOURCE
+            - SECURITY_GROUP_TAG
+            - SGT_GROUP
+            - UNKNOWN
+            - SFCN_CERTIFICATE_KEYPAIR
+            - SFCN_CERTIFICATE
+            - AUTH_PROFILE_OBJECT
+        defaultContent:
+          $ref: '#/components/schemas/ObjectContent'
+        overrides:
+          type: array
+          description: >-
+            The list of target overrides for the object. Each override the
+            default content for its target.
+          items:
+            $ref: '#/components/schemas/Override'
+      description: The value of the object
+    SingleContent:
+      type: object
+      description: List of content literals
+      oneOf:
+        - $ref: '#/components/schemas/ServiceObjectContent'
+        - $ref: '#/components/schemas/UrlObjectContent'
+        - $ref: '#/components/schemas/NetworkObjectContent'
+    UrlObjectContent:
+      required:
+        - url
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL literal
+          example: https://www.cisco.com/
+    ObjectResponse:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the object
+          format: uuid
+        name:
+          type: string
+          description: The name of the object
+          example: my-object
+        value:
+          $ref: '#/components/schemas/SharedObjectValue'
+        description:
+          type: string
+          description: The human-readable description of the object
+          example: My object description
+        targets:
+          type: array
+          description: >-
+            Set of targets that contain the object. A target can be, for
+            example, a device, service, or a shared policy (Ruleset).
+          items:
+            $ref: '#/components/schemas/Target'
+        elements:
+          type: array
+          description: A flattened list of the content value of the object
+          example: '[a:b:c::1]'
+          items:
+            type: string
+            description: A flattened list of the content value of the object
+            example: '[a:b:c::1]'
+        referencesInfoFromDefaultAndOverrides:
+          type: array
+          description: >-
+            List of objects referenced in the default content or in any of the
+            overrides.
+          items:
+            $ref: '#/components/schemas/ReferenceInfo'
+        tags:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            description: The tags for the object
+            example:
+              location:
+                - London
+                - Head-office
+            items:
+              type: string
+              description: The tags for the object
+              example: '{"location":["London","Head-office"]}'
+          description: The tags for the object
+          example:
+            location:
+              - London
+              - Head-office
+        labels:
+          uniqueItems: true
+          type: array
+          description: The labels for the object
+          example:
+            - migration
+          items:
+            type: string
+            description: The labels for the object
+            example: '["migration"]'
+    ReferenceInfo:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the referenced object
+          format: uuid
+        name:
+          type: string
+          description: The name of the referenced object
+          example: another-object
+        objectType:
+          type: string
+          description: The object type
+          example: NETWORK_OBJECT
+          enum:
+            - NETWORK_OBJECT
+            - IPV4_ADDRESS_POOL
+            - IPV6_ADDRESS_POOL
+            - NETWORK_GROUP
+            - SERVICE_OBJECT
+            - SERVICE_GROUP
+            - PROTOCOL_GROUP
+            - ICMP_GROUP
+            - URL_OBJECT
+            - URL_GROUP
+            - APPLICATION_FILTER_OBJECT
+            - DNS_GROUP_OBJECT
+            - SECURITY_ZONE_OBJECT
+            - ACTIVE_DIRECTORY_REALM_OBJECT
+            - REALM_SEQUENCE
+            - SPECIAL_IDENTITY_OBJECT
+            - LOCAL_IDENTITY_OBJECT
+            - SYSLOG_SERVER_OBJECT
+            - INTRUSION_POLICY_GROUP
+            - INTRUSION_POLICY
+            - FTD_POLICY_DEFAULT_ACTION
+            - FTD_IDENTITY_POLICY_DEFAULT_ACTION
+            - FTD_SSL_POLICY_DEFAULT_ACTION
+            - SETTINGS_DNS_DATA_INTERFACE_GROUP
+            - SETTINGS_DNS_MGMT_INTERFACE_GROUP
+            - SETTINGS_NTP_OBJECT
+            - SETTINGS_DHCP_OBJECT
+            - SETTINGS_DEVLOG_OBJECT
+            - SETTINGS_MGMTACCESS_HTTP_GROUP
+            - SETTINGS_MGMTACCESS_SSH_GROUP
+            - SETTINGS_MGMTACCESS_DATA_OBJECT
+            - SETTINGS_MGMTACCESS_HTTPS_DATA_PORT
+            - SETTINGS_URL_FILTERING_PREFERENCES_OBJECT
+            - SETTINGS_HOSTNAME_OBJECT
+            - SETTINGS_INTRUSION_OBJECT
+            - SETTINGS_WEB_ANALYTICS
+            - SETTINGS_SUCCESS_NETWORK
+            - SETTINGS_CLOUD_EVENTS
+            - SETTINGS_CLOUD_SERVICES_INFO
+            - GEOLOCATION_OBJECT
+            - NETWORK_FEED
+            - URL_FEED
+            - SECURITY_INTELLIGENCE
+            - ANY_CONNECT_CLIENT_PROFILE
+            - ANY_CONNECT_PACKAGE_FILE
+            - INTERNAL_CERTIFICATE
+            - INTERNAL_CA_CERTIFICATE
+            - EXTERNAL_CA_CERTIFICATE
+            - IKEV1_PROPOSAL
+            - IKEV2_PROPOSAL
+            - IKEV2_POLICY
+            - IKEV1_POLICY
+            - IDENTITY_SERVICES_ENGINE
+            - SETTINGS_VPN_OBJECT
+            - ANY_CONNECT_PROFILE
+            - STATIC_ROUTING
+            - RADIUS_IDENTITY_SOURCE
+            - RADIUS_IDENTITY_SOURCE_GROUP
+            - RA_VPN_GROUP_POLICY
+            - RA_VPN_CONNECTION_PROFILE
+            - RA_VPN
+            - RA_VPN_EXT
+            - RA_VPN_CONFIGURATION
+            - TIME_RANGE
+            - CLOUD_SECURITY_GROUP
+            - AWS_PREFIX_LIST
+            - SAML_SERVER
+            - DUO_LDAP_IDENTITY_SOURCE
+            - SECURITY_GROUP_TAG
+            - SGT_GROUP
+            - UNKNOWN
+            - SFCN_CERTIFICATE_KEYPAIR
+            - SFCN_CERTIFICATE
+            - AUTH_PROFILE_OBJECT
+      description: >-
+        List of objects referenced in the default content or in any of the
+        overrides.
+    Target:
+      type: object
+      properties:
+        id:
+          type: string
+          description: >-
+            The ID of the target with which the object is associated. A target
+            can be, for example, a device, service, or a shared policy
+            (Ruleset).
+          example: '[xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx]'
+        displayName:
+          type: string
+          description: The display name of the target
+          example: My ASA
+        type:
+          type: string
+          description: The target type
+          example: ASA
+          enum:
+            - ASA
+            - FDM_MANAGED_FTD
+            - CDFMC
+            - CDFMC_MANAGED_FTD
+            - SFCN
+            - AWS_VPC
+            - ONPREM_FMC
+            - MERAKI_MX
+            - FDM_RULESET
+            - ONPREM_FMC_MANAGED_FTD
+            - MCD
+      description: >-
+        Set of targets that contain the object. A target can be, for example, a
+        device, service, or a shared policy (Ruleset).
+    TargetsRequest:
+      type: object
+      properties:
+        targetsUuids:
+          type: array
+          items:
+            type: string
+    UpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the object to update
+          example: my-object
+        description:
+          type: string
+          description: The description of the object
+          example: My object description
+        value:
+          $ref: '#/components/schemas/SharedObjectValue'
+        tags:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            description: The tags for the object
+            example:
+              location:
+                - London
+                - Head-office
+            items:
+              type: string
+              description: The tags for the object
+              example: '{"location":["London","Head-office"]}'
+          description: The tags for the object
+          example:
+            location:
+              - London
+              - Head-office
+        labels:
+          uniqueItems: true
+          type: array
+          description: The labels for the object
+          example:
+            - migration
+          items:
+            type: string
+            description: The labels for the object
+            example: '["migration"]'
   responses:
     http400BadRequest:
       description: Invalid input provided. Check the response for details.
@@ -2292,3 +3460,15 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+x-tagGroups:
+  - name: public-api-openapi
+    tags:
+      - Users
+      - Tenant Management
+      - Inventory
+      - Transactions
+      - Meta
+      - Connectors
+  - name: object-service-openapi
+    tags:
+      - Object Management

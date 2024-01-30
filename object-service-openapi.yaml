@@ -24,7 +24,7 @@ paths:
   /v0/objects:
     get:
       tags:
-      - common-objects-controller
+      - Object Management
       operationId: listObjects
       parameters:
       - name: q
@@ -68,7 +68,7 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
     post:
       tags:
-      - common-objects-controller
+      - Object Management
       summary: Creates an object in the CDO tenant
       operationId: createObject
       requestBody:
@@ -80,14 +80,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "201":
           description: A descriptive representation of the created CDO object.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -99,7 +99,7 @@ paths:
   /v0/objects/{uid}/targets:
     post:
       tags:
-      - common-objects-controller
+      - Object Management
       operationId: addTargets
       parameters:
       - name: uid
@@ -129,7 +129,7 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
     delete:
       tags:
-      - common-objects-controller
+      - Object Management
       operationId: removeTargets
       parameters:
       - name: uid
@@ -160,7 +160,7 @@ paths:
   /v0/objects/{uid}:
     get:
       tags:
-      - common-objects-controller
+      - Object Management
       operationId: readObject
       parameters:
       - name: uid
@@ -184,7 +184,7 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
     delete:
       tags:
-      - common-objects-controller
+      - Object Management
       operationId: deleteObject
       parameters:
       - name: uid
@@ -208,7 +208,7 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
     patch:
       tags:
-      - common-objects-controller
+      - Object Management
       summary: Updates an object in the CDO tenant
       operationId: updateObject
       parameters:
@@ -248,7 +248,7 @@ paths:
   /v0/objects/{uid}/usage:
     get:
       tags:
-      - common-objects-controller
+      - Object Management
       operationId: getObjectUsages
       parameters:
       - name: uid
@@ -273,7 +273,7 @@ paths:
   /v0/objects/{uid}/details:
     get:
       tags:
-      - common-objects-controller
+      - Object Management
       operationId: readObjectWithDetails
       parameters:
       - name: uid
