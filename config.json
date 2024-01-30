@@ -8,12 +8,12 @@
               "content": "overview/intro.md"
             },
             {
-              "title": "Authentication",
-              "content": "overview/authentication.md"
-            }, 
-            {
               "title": "Getting Started",
               "content": "overview/getting-started.md"
+            },
+            {
+              "title": "Authentication",
+              "content": "overview/authentication.md"
             }
           ]
       },
