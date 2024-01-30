@@ -13,11 +13,11 @@ for service in "${!urls[@]}"; do
 done
 
 echo "$(yellow Installing redocly from npm)... "
-npm i -g @redocly/cli@latest
+npm i
 echo "Installed ✅︎"
 
 echo -n "$(yellow Combining all OpenAPI YAMLs into one)... "
- redocly join ${filenames[*]} -o openapi.yaml
+ ./node_modules/.bin/redocly join ${filenames[*]} -o openapi.yaml
 echo "Combined ✅︎"
 
 if [[ -z ${args[--do-not-commit]} ]]; then

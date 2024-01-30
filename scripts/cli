@@ -198,13 +198,13 @@ cli_download_command() {
       echo "✅︎"
   done
 
-  echo -n "$(yellow Installing redocly from npm)... "
-  npm i -g @redocly/cli@latest
-  echo "✅︎"
+  echo "$(yellow Installing redocly from npm)... "
+  npm i
+  echo "Installed ✅︎"
 
   echo -n "$(yellow Combining all OpenAPI YAMLs into one)... "
-   redocly join ${filenames[*]} -o openapi.yaml
-  echo "✅︎"
+   ./node_modules/.bin/redocly join ${filenames[*]} -o openapi.yaml
+  echo "Combined ✅︎"
 
   if [[ -z ${args[--do-not-commit]} ]]; then
       cd ${root_dir}
