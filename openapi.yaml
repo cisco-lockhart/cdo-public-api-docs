@@ -1376,6 +1376,31 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /.well-known/jwks.json:
+    get:
+      tags:
+        - Meta
+      summary: Fetch The JSON Web Key Set
+      description: >-
+        Retrieves the JSON Web Key Set (JWKS), which is a set of keys containing
+        the public keys used to verify any JSON Web Token (JWT) issued by the
+        Authorization Server and signed using the RS256 signing algorithm. Note:
+        Verification of the token using a JSON Web Key does not guarantee
+        validity due to the possibility of revocation.
+      operationId: getJwks
+      responses:
+        '200':
+          description: The JSON Web Key Set.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JwkSet'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
   /v0/objects:
     get:
       tags:
@@ -2596,6 +2621,36 @@ components:
         - INACTIVE
         - DISABLED
         - UNKNOWN
+    JsonWebKey:
+      type: object
+      properties:
+        kty:
+          type: string
+          description: The family of cryptographic algorithms used with the key.
+        e:
+          type: string
+          description: The exponent for the RSA public key.
+        use:
+          type: string
+          description: How the key was meant to be used.
+        kid:
+          type: string
+          description: The unique identifier for the key.
+        alg:
+          type: string
+          description: The specific cryptographic algorithm used with the key.
+        'n':
+          type: string
+          description: The modulus for the RSA public key.
+      description: The JSON Web Key Set.
+    JwkSet:
+      type: object
+      properties:
+        keys:
+          type: array
+          description: The JSON Web Key Set.
+          items:
+            $ref: '#/components/schemas/JsonWebKey'
     AuthenticationError:
       type: object
       properties:
