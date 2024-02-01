@@ -25,39 +25,54 @@ paths:
     get:
       tags:
       - Object Management
+      summary: Retrieves objects in the CDO tenant
       operationId: listObjects
       parameters:
       - name: q
         in: query
+        description: The query to execute. Use the Lucene Query Syntax to construct
+          your query.
         required: false
         schema:
           type: string
+        example: name:London-Office-ASA
       - name: offset
         in: query
+        description: "The offset of the results retrieved. The CDO Public API uses\
+          \ the offset field to determine the index of the first result retrieved,\
+          \ and will retrieve `limit` results from the offset specified."
         required: false
         schema:
-          type: integer
-          format: int32
-          default: 0
+          minimum: 0
+          type: string
+          default: "0"
       - name: limit
         in: query
+        description: The number of results to retrieve.
         required: false
         schema:
           maximum: 200
           minimum: 1
-          type: integer
-          format: int32
-          default: 50
+          type: string
+          default: "50"
       - name: sortBy
         in: query
+        description: The fields to sort results by.
         required: false
         schema:
           type: string
+        example: name:DESC
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
+        "200":
+          description: A paginated view of the CDO objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListObjectResponse'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -80,16 +95,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "201":
           description: A descriptive representation of the created CDO object.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -100,14 +115,18 @@ paths:
     post:
       tags:
       - Object Management
-      operationId: addTargets
+      summary: Create targets for an object in the CDO tenant
+      operationId: createTargets
       parameters:
       - name: uid
         in: path
+        description: The request UID of the object for which the targets are being
+          added to.
         required: true
         schema:
           type: string
           format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       requestBody:
         content:
           application/json:
@@ -117,6 +136,18 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "200":
+          description: No content
+          content:
+            '*/*':
+              schema:
+                type: object
+        "404":
+          description: Not found
+          content:
+            '*/*':
+              schema:
+                type: object
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -130,14 +161,18 @@ paths:
     delete:
       tags:
       - Object Management
-      operationId: removeTargets
+      summary: Deletes targets for an object in the CDO tenant
+      operationId: deleteTargets
       parameters:
       - name: uid
         in: path
+        description: The request UID of the object for which the targets are being
+          deleted from.
         required: true
         schema:
           type: string
           format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       requestBody:
         content:
           application/json:
@@ -147,6 +182,18 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "204":
+          description: No content
+          content:
+            '*/*':
+              schema:
+                type: object
+        "404":
+          description: Not found
+          content:
+            '*/*':
+              schema:
+                type: object
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -161,17 +208,26 @@ paths:
     get:
       tags:
       - Object Management
-      operationId: readObject
+      summary: Retrieves an object in the CDO tenant
+      operationId: getObject
       parameters:
       - name: uid
         in: path
+        description: The request UID of the object being retrieved.
         required: true
         schema:
           type: string
           format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "200":
+          description: Fetch an object by UID in the CDO tenant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectResponse'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -185,17 +241,26 @@ paths:
     delete:
       tags:
       - Object Management
+      summary: Deletes an object in the CDO tenant
       operationId: deleteObject
       parameters:
       - name: uid
         in: path
+        description: The request UID of the object being deleted.
         required: true
         schema:
           type: string
           format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "204":
+          description: No content
+          content:
+            '*/*':
+              schema:
+                type: object
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -229,14 +294,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: A descriptive representation of the updated CDO object.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -249,17 +314,28 @@ paths:
     get:
       tags:
       - Object Management
-      operationId: getObjectUsages
+      summary: Retrieves usages of an object in the CDO tenant
+      operationId: getObjectDetails
       parameters:
       - name: uid
         in: path
+        description: The request UID of the object being updated.
         required: true
         schema:
           type: string
           format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "200":
+          description: A descriptive representation of the created CDO object.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReferenceInfo'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -274,14 +350,17 @@ paths:
     get:
       tags:
       - Object Management
-      operationId: readObjectWithDetails
+      summary: Retrieves a detailed representation of an object in the CDO tenant
+      operationId: getObjectDetails_1
       parameters:
       - name: uid
         in: path
+        description: The request UID of the detailed object being retrieved.
         required: true
         schema:
           type: string
           format: uuid
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
@@ -289,6 +368,12 @@ paths:
           $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
+        "200":
+          description: A descriptive representation of the created CDO object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectResponse'
         "500":
           description: Internal server error.
           content:
@@ -1028,8 +1113,13 @@ components:
       properties:
         targetsUuids:
           type: array
+          description: The list of UIDs of the targets to be deleted.
+          example:
+          - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           items:
             type: string
+            description: The list of UIDs of the targets to be deleted.
+            example: "[\"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\"]"
     UpdateRequest:
       type: object
       properties:
@@ -1072,6 +1162,67 @@ components:
             type: string
             description: The labels for the object
             example: "[\"migration\"]"
+    ListObjectResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The total number of results available.
+          format: int64
+          example: 100
+        limit:
+          maximum: 200
+          type: integer
+          description: The number of results retrieved.
+          format: int64
+          example: 50
+        offset:
+          type: integer
+          description: "The offset of the results retrieved. The CDO Public API uses\
+            \ the offset field to determine the index of the first result retrieved,\
+            \ and will retrieve `limit` results from the offset specified."
+          format: int64
+          example: 0
+        items:
+          type: array
+          description: The list of objects retrieved.
+          items:
+            $ref: '#/components/schemas/UnifiedObjectListView'
+    UnifiedObjectListView:
+      type: object
+      properties:
+        uid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        value:
+          $ref: '#/components/schemas/SharedObjectValue'
+        targetIds:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        overrideIds:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        tags:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        labels:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+      description: The list of objects retrieved.
     AuthenticationError:
       type: object
       properties:
