@@ -541,6 +541,44 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /v1/inventory/devices/asas/{deviceUid}/deploy:
+    post:
+      tags:
+        - Inventory
+      summary: Deploy changes to an ASA device in the CDO tenant
+      operationId: deployAsaDeviceChanges
+      parameters:
+        - name: deviceUid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the progress of the
+            ASA deploy operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/users/{userUid}:
     get:
       tags:
@@ -2078,6 +2116,7 @@ components:
         - DELETE_CDFMC_MANAGED_FTD
         - RECONNECT_ASA
         - READ_ASA
+        - DEPLOY_ASA_DEVICE_CHANGES
     EntityType:
       type: string
       description: The type of the device.
