@@ -28,6 +28,8 @@ tags:
     x-displayName: Inventory
   - name: Transactions
     x-displayName: Transactions
+  - name: Search
+    x-displayName: Search
   - name: Meta
     x-displayName: Meta
   - name: Connectors
@@ -790,6 +792,41 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         '404':
           $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+  /v1/search:
+    get:
+      tags:
+        - Search
+      summary: Search for devices, services, and device managers in the CDO tenant
+      operationId: search
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Search Result object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalSearchResult'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
         '500':
           description: Internal server error.
           content:
@@ -2461,6 +2498,59 @@ components:
         - INTERNAL
         - PARTNER
         - DEMO
+    Entity:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the entity in CDO.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        name:
+          type: string
+          description: The name of the entity in CDO. Device names are unique in CDO.
+          example: my-example-entity
+        type:
+          $ref: '#/components/schemas/EntityType'
+        address:
+          type: string
+          description: The address of the entity.
+          example: my-example-device.example.com:443
+        matchingConfigurations:
+          type: array
+          description: >-
+            (ASAs only) Parts of the ASA device configuration that match the
+            search term.
+          items:
+            type: string
+            description: >-
+              (ASAs only) Parts of the ASA device configuration that match the
+              search term.
+      description: Cloud Services that match the search term.
+    GlobalSearchResult:
+      type: object
+      properties:
+        inventory:
+          $ref: '#/components/schemas/Inventory'
+    Inventory:
+      type: object
+      properties:
+        devices:
+          type: array
+          description: Devices that match the search term.
+          items:
+            $ref: '#/components/schemas/Entity'
+        managers:
+          type: array
+          description: Device Managers that match the search term.
+          items:
+            $ref: '#/components/schemas/Entity'
+        services:
+          type: array
+          description: Cloud Services that match the search term.
+          items:
+            $ref: '#/components/schemas/Entity'
+      description: Results from the CDO inventory that match the search term.
     CdoRegion:
       type: object
       properties:
@@ -3875,6 +3965,7 @@ x-tagGroups:
       - Tenant Management
       - Inventory
       - Transactions
+      - Search
       - Meta
       - Connectors
   - name: object-service-openapi
