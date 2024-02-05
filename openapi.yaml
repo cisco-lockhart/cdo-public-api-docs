@@ -800,6 +800,33 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /v1/settings/tenant:
+    get:
+      tags:
+        - Tenant Management
+      summary: Fetch the tenant settings in CDO
+      operationId: getTenantSettings
+      responses:
+        '200':
+          description: Tenant Object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantSettings'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/search:
     get:
       tags:
@@ -2498,6 +2525,57 @@ components:
         - INTERNAL
         - PARTNER
         - DEMO
+    ConflictDetectionInterval:
+      type: string
+      description: Specifies the interval for conflict detection.
+      example: OOB_6_HOURS
+      enum:
+        - OOB_10_MINUTES
+        - OOB_1_HOUR
+        - OOB_6_HOURS
+        - OOB_24_HOURS
+    TenantSettings:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the tenant in CDO.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        changeRequestSupport:
+          type: boolean
+          description: Indicates if the tenant supports change requests.
+          example: true
+        autoAcceptDeviceChanges:
+          type: boolean
+          description: >-
+            Indicates if device changes are automatically accepted without
+            manual approval.
+          example: true
+        webAnalytics:
+          type: boolean
+          description: Indicates if web analytics are enabled for the tenant.
+          example: true
+        scheduledDeployments:
+          type: boolean
+          description: Indicates if the tenant has scheduled deployments enabled.
+          example: false
+        denyCiscoSupportAccessToTenant:
+          type: boolean
+          description: Indicates if Cisco support is denied access to the tenant's data.
+          example: true
+        multicloudDefense:
+          type: boolean
+          description: Indicates if the tenant has enabled multicloud defense capabilities.
+          example: false
+        autoDiscoverOnPremFmcs:
+          type: boolean
+          description: >-
+            Indicates if the system automatically discovers on-premises FMCS
+            (Firepower Management Centers).
+          example: true
+        conflictDetectionInterval:
+          $ref: '#/components/schemas/ConflictDetectionInterval'
     Entity:
       type: object
       properties:
