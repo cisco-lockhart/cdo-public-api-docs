@@ -3125,6 +3125,11 @@ components:
       properties:
         inventory:
           $ref: '#/components/schemas/Inventory'
+        objects:
+          type: array
+          description: Results from the CDO objects that match the search term.
+          items:
+            type: object
     Inventory:
       type: object
       properties:
