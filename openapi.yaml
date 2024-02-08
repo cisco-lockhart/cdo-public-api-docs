@@ -2602,13 +2602,15 @@ components:
         - CDG
     ConflictDetectionInterval:
       type: string
-      description: Specifies the interval for conflict detection.
-      example: OOB_6_HOURS
+      description: >-
+        Specifies the default interval at which CDO checks for changes made
+        out-of-band on the devices on the tenant.
+      example: EVERY_6_HOURS
       enum:
-        - OOB_10_MINUTES
-        - OOB_1_HOUR
-        - OOB_6_HOURS
-        - OOB_24_HOURS
+        - EVERY_10_MINUTES
+        - EVERY_HOUR
+        - EVERY_6_HOURS
+        - EVERY_24_HOURS
     TenantSettings:
       type: object
       properties:
@@ -2624,8 +2626,8 @@ components:
         autoAcceptDeviceChanges:
           type: boolean
           description: >-
-            Indicates if device changes are automatically accepted without
-            manual approval.
+            Indicates if changes made out-of-band on devices on the tenant are
+            automatically accepted without manual approval.
           example: true
         webAnalytics:
           type: boolean
@@ -2637,7 +2639,7 @@ components:
           example: false
         denyCiscoSupportAccessToTenant:
           type: boolean
-          description: Indicates if Cisco support is denied access to the tenant's data.
+          description: Indicates if Cisco support is denied access to the tenant.
           example: true
         multicloudDefense:
           type: boolean
@@ -2645,9 +2647,7 @@ components:
           example: false
         autoDiscoverOnPremFmcs:
           type: boolean
-          description: >-
-            Indicates if the system automatically discovers on-premises FMCS
-            (Firepower Management Centers).
+          description: Indicates if the system automatically discovers on-premise FMCs.
           example: true
         conflictDetectionInterval:
           $ref: '#/components/schemas/ConflictDetectionInterval'
