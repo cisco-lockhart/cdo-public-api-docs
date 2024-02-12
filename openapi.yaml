@@ -2064,25 +2064,30 @@ paths:
     delete:
       tags:
         - Object Management
-      summary: Deletes targets for an object in the CDO tenant
-      operationId: deleteTargets
+      summary: Removes targets from an object in the CDO tenant
+      operationId: removeTargets
       parameters:
         - name: uid
           in: path
           description: >-
             The request UID of the object for which the targets are being
-            deleted from.
+            removed from.
           required: true
           schema:
             type: string
             format: uuid
           example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TargetsRequest'
-        required: true
+        - name: targetUuids
+          in: query
+          description: The list of UIDs of the targets being removed.
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+          example:
+            - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+            - yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy
       responses:
         '204':
           description: No content
@@ -2123,6 +2128,15 @@ paths:
             type: string
             format: uuid
           example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        - name: fields
+          in: query
+          description: >-
+            The scope of the fields to be retrieved. One of ["@basic",
+            "@detailed"]. Defaults to "@basic".
+          required: false
+          schema:
+            type: string
+          example: '@detailed'
       responses:
         '200':
           description: Fetch an object by UID in the CDO tenant
@@ -2219,11 +2233,11 @@ paths:
       tags:
         - Object Management
       summary: Retrieves usages of an object in the CDO tenant
-      operationId: getObjectDetails
+      operationId: getObjectUsage
       parameters:
         - name: uid
           in: path
-          description: The request UID of the object being updated.
+          description: The request UID of the object to retrieve usages for.
           required: true
           schema:
             type: string
@@ -2238,40 +2252,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ReferenceInfo'
-        '400':
-          $ref: '#/components/responses/http400BadRequest'
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '403':
-          $ref: '#/components/responses/http403Forbidden'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-  /v0/objects/{uid}/details:
-    get:
-      tags:
-        - Object Management
-      summary: Retrieves a detailed representation of an object in the CDO tenant
-      operationId: getObjectDetails_1
-      parameters:
-        - name: uid
-          in: path
-          description: The request UID of the detailed object being retrieved.
-          required: true
-          schema:
-            type: string
-            format: uuid
-          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-      responses:
-        '200':
-          description: A descriptive representation of the created CDO object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectResponse'
         '400':
           $ref: '#/components/responses/http400BadRequest'
         '401':
@@ -3958,79 +3938,11 @@ components:
           example: NETWORK_OBJECT
           enum:
             - NETWORK_OBJECT
-            - IPV4_ADDRESS_POOL
-            - IPV6_ADDRESS_POOL
-            - NETWORK_GROUP
-            - SERVICE_OBJECT
-            - SERVICE_GROUP
-            - PROTOCOL_GROUP
-            - ICMP_GROUP
             - URL_OBJECT
+            - SERVICE_OBJECT
+            - NETWORK_GROUP
             - URL_GROUP
-            - APPLICATION_FILTER_OBJECT
-            - DNS_GROUP_OBJECT
-            - SECURITY_ZONE_OBJECT
-            - ACTIVE_DIRECTORY_REALM_OBJECT
-            - REALM_SEQUENCE
-            - SPECIAL_IDENTITY_OBJECT
-            - LOCAL_IDENTITY_OBJECT
-            - SYSLOG_SERVER_OBJECT
-            - INTRUSION_POLICY_GROUP
-            - INTRUSION_POLICY
-            - FTD_POLICY_DEFAULT_ACTION
-            - FTD_IDENTITY_POLICY_DEFAULT_ACTION
-            - FTD_SSL_POLICY_DEFAULT_ACTION
-            - SETTINGS_DNS_DATA_INTERFACE_GROUP
-            - SETTINGS_DNS_MGMT_INTERFACE_GROUP
-            - SETTINGS_NTP_OBJECT
-            - SETTINGS_DHCP_OBJECT
-            - SETTINGS_DEVLOG_OBJECT
-            - SETTINGS_MGMTACCESS_HTTP_GROUP
-            - SETTINGS_MGMTACCESS_SSH_GROUP
-            - SETTINGS_MGMTACCESS_DATA_OBJECT
-            - SETTINGS_MGMTACCESS_HTTPS_DATA_PORT
-            - SETTINGS_URL_FILTERING_PREFERENCES_OBJECT
-            - SETTINGS_HOSTNAME_OBJECT
-            - SETTINGS_INTRUSION_OBJECT
-            - SETTINGS_WEB_ANALYTICS
-            - SETTINGS_SUCCESS_NETWORK
-            - SETTINGS_CLOUD_EVENTS
-            - SETTINGS_CLOUD_SERVICES_INFO
-            - GEOLOCATION_OBJECT
-            - NETWORK_FEED
-            - URL_FEED
-            - SECURITY_INTELLIGENCE
-            - ANY_CONNECT_CLIENT_PROFILE
-            - ANY_CONNECT_PACKAGE_FILE
-            - INTERNAL_CERTIFICATE
-            - INTERNAL_CA_CERTIFICATE
-            - EXTERNAL_CA_CERTIFICATE
-            - IKEV1_PROPOSAL
-            - IKEV2_PROPOSAL
-            - IKEV2_POLICY
-            - IKEV1_POLICY
-            - IDENTITY_SERVICES_ENGINE
-            - SETTINGS_VPN_OBJECT
-            - ANY_CONNECT_PROFILE
-            - STATIC_ROUTING
-            - RADIUS_IDENTITY_SOURCE
-            - RADIUS_IDENTITY_SOURCE_GROUP
-            - RA_VPN_GROUP_POLICY
-            - RA_VPN_CONNECTION_PROFILE
-            - RA_VPN
-            - RA_VPN_EXT
-            - RA_VPN_CONFIGURATION
-            - TIME_RANGE
-            - CLOUD_SECURITY_GROUP
-            - AWS_PREFIX_LIST
-            - SAML_SERVER
-            - DUO_LDAP_IDENTITY_SOURCE
-            - SECURITY_GROUP_TAG
-            - SGT_GROUP
-            - UNKNOWN
-            - SFCN_CERTIFICATE_KEYPAIR
-            - SFCN_CERTIFICATE
-            - AUTH_PROFILE_OBJECT
+            - SERVICE_GROUP
         defaultContent:
           $ref: '#/components/schemas/ObjectContent'
         overrides:
@@ -4142,82 +4054,11 @@ components:
           example: NETWORK_OBJECT
           enum:
             - NETWORK_OBJECT
-            - IPV4_ADDRESS_POOL
-            - IPV6_ADDRESS_POOL
-            - NETWORK_GROUP
-            - SERVICE_OBJECT
-            - SERVICE_GROUP
-            - PROTOCOL_GROUP
-            - ICMP_GROUP
             - URL_OBJECT
+            - SERVICE_OBJECT
+            - NETWORK_GROUP
             - URL_GROUP
-            - APPLICATION_FILTER_OBJECT
-            - DNS_GROUP_OBJECT
-            - SECURITY_ZONE_OBJECT
-            - ACTIVE_DIRECTORY_REALM_OBJECT
-            - REALM_SEQUENCE
-            - SPECIAL_IDENTITY_OBJECT
-            - LOCAL_IDENTITY_OBJECT
-            - SYSLOG_SERVER_OBJECT
-            - INTRUSION_POLICY_GROUP
-            - INTRUSION_POLICY
-            - FTD_POLICY_DEFAULT_ACTION
-            - FTD_IDENTITY_POLICY_DEFAULT_ACTION
-            - FTD_SSL_POLICY_DEFAULT_ACTION
-            - SETTINGS_DNS_DATA_INTERFACE_GROUP
-            - SETTINGS_DNS_MGMT_INTERFACE_GROUP
-            - SETTINGS_NTP_OBJECT
-            - SETTINGS_DHCP_OBJECT
-            - SETTINGS_DEVLOG_OBJECT
-            - SETTINGS_MGMTACCESS_HTTP_GROUP
-            - SETTINGS_MGMTACCESS_SSH_GROUP
-            - SETTINGS_MGMTACCESS_DATA_OBJECT
-            - SETTINGS_MGMTACCESS_HTTPS_DATA_PORT
-            - SETTINGS_URL_FILTERING_PREFERENCES_OBJECT
-            - SETTINGS_HOSTNAME_OBJECT
-            - SETTINGS_INTRUSION_OBJECT
-            - SETTINGS_WEB_ANALYTICS
-            - SETTINGS_SUCCESS_NETWORK
-            - SETTINGS_CLOUD_EVENTS
-            - SETTINGS_CLOUD_SERVICES_INFO
-            - GEOLOCATION_OBJECT
-            - NETWORK_FEED
-            - URL_FEED
-            - SECURITY_INTELLIGENCE
-            - ANY_CONNECT_CLIENT_PROFILE
-            - ANY_CONNECT_PACKAGE_FILE
-            - INTERNAL_CERTIFICATE
-            - INTERNAL_CA_CERTIFICATE
-            - EXTERNAL_CA_CERTIFICATE
-            - IKEV1_PROPOSAL
-            - IKEV2_PROPOSAL
-            - IKEV2_POLICY
-            - IKEV1_POLICY
-            - IDENTITY_SERVICES_ENGINE
-            - SETTINGS_VPN_OBJECT
-            - ANY_CONNECT_PROFILE
-            - STATIC_ROUTING
-            - RADIUS_IDENTITY_SOURCE
-            - RADIUS_IDENTITY_SOURCE_GROUP
-            - RA_VPN_GROUP_POLICY
-            - RA_VPN_CONNECTION_PROFILE
-            - RA_VPN
-            - RA_VPN_EXT
-            - RA_VPN_CONFIGURATION
-            - TIME_RANGE
-            - CLOUD_SECURITY_GROUP
-            - AWS_PREFIX_LIST
-            - SAML_SERVER
-            - DUO_LDAP_IDENTITY_SOURCE
-            - SECURITY_GROUP_TAG
-            - SGT_GROUP
-            - UNKNOWN
-            - SFCN_CERTIFICATE_KEYPAIR
-            - SFCN_CERTIFICATE
-            - AUTH_PROFILE_OBJECT
-      description: >-
-        List of objects referenced in the default content or in any of the
-        overrides.
+            - SERVICE_GROUP
     Target:
       type: object
       properties:
