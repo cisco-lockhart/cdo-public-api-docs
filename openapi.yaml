@@ -1340,7 +1340,9 @@ paths:
     get:
       tags:
         - Search
-      summary: Search for devices, services, and device managers in the CDO tenant
+      summary: >-
+        Search for devices, services, managers, objects and policies across the
+        CDO tenant
       operationId: search
       parameters:
         - name: q
@@ -1350,7 +1352,7 @@ paths:
             type: string
       responses:
         '200':
-          description: Search Result object
+          description: Search Result
           content:
             application/json:
               schema:
@@ -3271,6 +3273,11 @@ components:
           description: Results from the CDO objects that match the search term.
           items:
             type: object
+        policies:
+          type: array
+          description: Results from the CDO policies that match the search term.
+          items:
+            $ref: '#/components/schemas/Policy'
     Inventory:
       type: object
       properties:
@@ -3290,6 +3297,19 @@ components:
           items:
             $ref: '#/components/schemas/Entity'
       description: Results from the CDO inventory that match the search term.
+    Policy:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the policy in CDO.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        name:
+          type: string
+          description: The name of the policy in CDO.
+          example: my-example-policy
+      description: Results from the CDO policies that match the search term.
     CdoRegion:
       type: object
       properties:
