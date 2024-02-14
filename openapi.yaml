@@ -22,14 +22,14 @@ servers:
 tags:
   - name: Users
     x-displayName: Users
+  - name: Search
+    x-displayName: Search
   - name: Tenant Management
     x-displayName: Tenant Management
   - name: Inventory
     x-displayName: Inventory
   - name: Transactions
     x-displayName: Transactions
-  - name: Search
-    x-displayName: Search
   - name: Meta
     x-displayName: Meta
   - name: Connectors
@@ -209,6 +209,37 @@ paths:
           description: Revoke success
         '401':
           $ref: '#/components/responses/http401Unauthorised'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+  /v1/search/index:
+    post:
+      tags:
+        - Search
+      summary: Initiate Full Indexing
+      operationId: initiateFullIndexing
+      responses:
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the progress of the
+            indexing operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
         '500':
           description: Internal server error.
           content:
@@ -2343,71 +2374,6 @@ components:
           type: string
           description: The API Access Token.
           example: FaKE-toKeN
-    MspAddTenantInput:
-      required:
-        - apiToken
-      type: object
-      properties:
-        apiToken:
-          type: string
-          description: The Tenant API Access Token.
-          example: FaKE-toKeN
-    IosCreateOrUpdateInput:
-      required:
-        - connectorName
-        - name
-        - password
-        - username
-      type: object
-      properties:
-        name:
-          type: string
-          description: A human-readable name for the device.
-          example: My IOS
-        deviceAddress:
-          type: string
-          description: >-
-            The address of the device to onboard, specified in the format
-            `host:port`.
-          example: 10.2.2.5:443
-        username:
-          type: string
-          description: The username used to authenticate with the device.
-          example: admin
-        password:
-          type: string
-          description: The password used to authenticate with the device.
-          example: Cisco@23
-        ignoreCertificate:
-          type: boolean
-          description: >-
-            Set this attribute to true if you do not want CDO to validate the
-            certificate of this device before onboarding.
-          example: false
-          default: false
-        connectorName:
-          type: string
-          description: >-
-            The name of the Secure Device Connector (SDC) that will be used to
-            communicate with the device.
-          example: SDC-1
-        labels:
-          uniqueItems: true
-          type: array
-          description: >-
-            Specify a set of labels to identify the device as part of a group.
-            Refer to the CDO documentation for details on how labels are used in
-            CDO.
-          example:
-            - ios
-            - ra-vpn-headend
-          items:
-            type: string
-            description: >-
-              Specify a set of labels to identify the device as part of a group.
-              Refer to the CDO documentation for details on how labels are used
-              in CDO.
-            example: '["ios","ra-vpn-headend"]'
     CdoTransaction:
       type: object
       properties:
@@ -2492,6 +2458,72 @@ components:
         - RECONNECT_ASA
         - READ_ASA
         - DEPLOY_ASA_DEVICE_CHANGES
+        - INDEX_TENANT
+    MspAddTenantInput:
+      required:
+        - apiToken
+      type: object
+      properties:
+        apiToken:
+          type: string
+          description: The Tenant API Access Token.
+          example: FaKE-toKeN
+    IosCreateOrUpdateInput:
+      required:
+        - connectorName
+        - name
+        - password
+        - username
+      type: object
+      properties:
+        name:
+          type: string
+          description: A human-readable name for the device.
+          example: My IOS
+        deviceAddress:
+          type: string
+          description: >-
+            The address of the device to onboard, specified in the format
+            `host:port`.
+          example: 10.2.2.5:443
+        username:
+          type: string
+          description: The username used to authenticate with the device.
+          example: admin
+        password:
+          type: string
+          description: The password used to authenticate with the device.
+          example: Cisco@23
+        ignoreCertificate:
+          type: boolean
+          description: >-
+            Set this attribute to true if you do not want CDO to validate the
+            certificate of this device before onboarding.
+          example: false
+          default: false
+        connectorName:
+          type: string
+          description: >-
+            The name of the Secure Device Connector (SDC) that will be used to
+            communicate with the device.
+          example: SDC-1
+        labels:
+          uniqueItems: true
+          type: array
+          description: >-
+            Specify a set of labels to identify the device as part of a group.
+            Refer to the CDO documentation for details on how labels are used in
+            CDO.
+          example:
+            - ios
+            - ra-vpn-headend
+          items:
+            type: string
+            description: >-
+              Specify a set of labels to identify the device as part of a group.
+              Refer to the CDO documentation for details on how labels are used
+              in CDO.
+            example: '["ios","ra-vpn-headend"]'
     EntityType:
       type: string
       description: The type of the device.
@@ -4248,10 +4280,10 @@ x-tagGroups:
   - name: public-api-openapi
     tags:
       - Users
+      - Search
       - Tenant Management
       - Inventory
       - Transactions
-      - Search
       - Meta
       - Connectors
       - CdFMC
