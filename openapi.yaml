@@ -3234,6 +3234,45 @@ components:
         - INTERNAL
         - PARTNER
         - DEMO
+    CdFmcObject:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the entity in Cloud-delivered FMC.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        name:
+          type: string
+          description: The name of the entity in Cloud-delivered FMC.
+          example: my-example-entity
+        link:
+          type: string
+          description: A URL to access the entity in Cloud-delivered FMC.
+          example: >-
+            https://edge.us.cdo.cisco.com/api/platform/public-api/v1/cdfmc/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/7131daad-e813-4b8f-8f42-be1e241e8cdb
+      description: Policies that match the search term.
+    CdFmcResult:
+      type: object
+      properties:
+        devices:
+          type: array
+          description: Devices that match the search term.
+          items:
+            $ref: '#/components/schemas/CdFmcObject'
+        objects:
+          type: array
+          description: Objects that match the search term.
+          items:
+            $ref: '#/components/schemas/CdFmcObject'
+        policies:
+          type: array
+          description: Policies that match the search term.
+          items:
+            $ref: '#/components/schemas/CdFmcObject'
+      description: >-
+        Results from the Cloud-delivered FMC devices, objects or policies that
+        match the search term.
     Entity:
       type: object
       properties:
@@ -3278,6 +3317,8 @@ components:
           description: Results from the CDO policies that match the search term.
           items:
             $ref: '#/components/schemas/Policy'
+        cdFmcResult:
+          $ref: '#/components/schemas/CdFmcResult'
     Inventory:
       type: object
       properties:
