@@ -2566,11 +2566,11 @@ components:
           uniqueItems: true
           type: array
           description: Specify a set of licenses to apply to the device.
-          example: BASE
+          example: '[BASE]'
           items:
             type: string
             description: Specify a set of licenses to apply to the device.
-            example: BASE
+            example: '[BASE]'
             enum:
               - BASE
               - CARRIER
