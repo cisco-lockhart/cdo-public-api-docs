@@ -34,6 +34,8 @@ tags:
     x-displayName: Meta
   - name: Connectors
     x-displayName: Connectors
+  - name: Changelogs
+    x-displayName: Changelogs
   - name: CdFMC
     x-displayName: CdFMC
   - name: Object Management
@@ -1802,6 +1804,65 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /v1/changelogs:
+    get:
+      tags:
+        - Changelogs
+      summary: Fetch a list of Change Logs.
+      operationId: listChangelogs
+      parameters:
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO Public API uses the
+            offset field to determine the index of the first result retrieved,
+            and will retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: name:London-Office-ASA
+      responses:
+        '200':
+          description: List of Change Log objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangelogPage'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /.well-known/jwks.json:
     get:
       tags:
@@ -3515,6 +3576,103 @@ components:
         - INACTIVE
         - DISABLED
         - UNKNOWN
+    Changelog:
+      required:
+        - uid
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the Change Log.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        status:
+          type: string
+          description: The status of the Change Log.
+          example: ACTIVE
+          enum:
+            - ACTIVE
+            - COMPLETED
+            - UNKNOWN
+        entityUid:
+          type: string
+          description: The uid of the device/manager/service the Change Log refers to.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        events:
+          type: array
+          description: The events recorded in this Change Log.
+          items:
+            $ref: '#/components/schemas/Event'
+      description: The list of items retrieved.
+    ChangelogPage:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The total number of results available.
+          format: int32
+          example: 100
+        limit:
+          type: integer
+          description: The number of results retrieved.
+          format: int32
+          example: 50
+        offset:
+          type: integer
+          description: >-
+            The offset of the results retrieved. The CDO Public API uses the
+            offset field to determine the index of the first result retrieved,
+            and will retrieve `limit` results from the offset specified.
+          format: int32
+          example: 0
+        items:
+          type: array
+          description: The list of items retrieved.
+          items:
+            $ref: '#/components/schemas/Changelog'
+    Event:
+      type: object
+      properties:
+        description:
+          type: string
+          description: A human-readable description of the Change Log event.
+        diff:
+          type: string
+          description: >-
+            A textual Diff representation of the changes made to the
+            configuration.
+        username:
+          type: string
+          description: The username of the user that triggered the Change Log event.
+          example: myuser@cisco.com
+        date:
+          type: string
+          description: >-
+            The time (UTC; represented using the RFC-3339 standard) at which the
+            Change Log Event occurred.
+          format: date-time
+        action:
+          type: string
+          description: The action performed.
+          enum:
+            - CREATE
+            - UPDATE
+            - DELETE
+            - ERROR
+            - UNKNOWN
+        changeRequestUid:
+          type: string
+          description: >-
+            The unique Identifier of the Change Request associated with the
+            Change Log event.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        changeRequestName:
+          type: string
+          description: The name of the Change Request associated with the Change Log event.
+          example: LH-12345
+      description: The events recorded in this Change Log.
     JsonWebKey:
       type: object
       properties:
@@ -4347,6 +4505,7 @@ x-tagGroups:
       - Transactions
       - Meta
       - Connectors
+      - Changelogs
       - CdFMC
   - name: object-service-openapi
     tags:
