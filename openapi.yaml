@@ -2587,33 +2587,9 @@ components:
               Refer to the CDO documentation for details on how labels are used
               in CDO.
             example: '["ios","ra-vpn-headend"]'
-    EntityType:
-      type: string
-      description: The type of the device.
-      example: CDFMC_MANAGED_FTD
-      enum:
-        - ASA
-        - CDFMC_MANAGED_FTD
-        - ONPREM_FMC_MANAGED_FTD
-        - ONPREM_FMC_MANAGED_FIREPOWER
-        - ONPREM_FMC_NGIPS
-        - FDM_MANAGED_FTD
-        - IOS
-        - SSH_DEVICE
-        - GENERIC_DEVICE
-        - MERAKI_MX
-        - CLOUD_DNG
-        - SFCN
-        - SFCN_DNG
-        - SFCN_STS
-        - ONPREM_FMC
-        - CDFMC
-        - AWS_VPC
-        - AZURE_VNET
-        - DUO_ADMIN_PANEL
-        - UMBRELLA_ORGANIZATION
     FtdCreateOrUpdateInput:
       required:
+        - deviceType
         - fmcAccessPolicyUid
         - licenses
         - name
@@ -2678,7 +2654,12 @@ components:
               in CDO.
             example: '["ios","ra-vpn-headend"]'
         deviceType:
-          $ref: '#/components/schemas/EntityType'
+          type: string
+          description: >-
+            Specify the type of the FTD. The only supported type of FTD is
+            CDFMC_MANAGED_FTD
+          enum:
+            - CDFMC_MANAGED_FTD
     FtdRegistrationInput:
       required:
         - ftdUid
@@ -3109,6 +3090,31 @@ components:
         - RA_VPN_HEADEND
         - MFA_PROVIDER
         - ZTNA_PROVIDER
+    EntityType:
+      type: string
+      description: The type of the device.
+      example: CDFMC_MANAGED_FTD
+      enum:
+        - ASA
+        - CDFMC_MANAGED_FTD
+        - ONPREM_FMC_MANAGED_FTD
+        - ONPREM_FMC_MANAGED_FIREPOWER
+        - ONPREM_FMC_NGIPS
+        - FDM_MANAGED_FTD
+        - IOS
+        - SSH_DEVICE
+        - GENERIC_DEVICE
+        - MERAKI_MX
+        - CLOUD_DNG
+        - SFCN
+        - SFCN_DNG
+        - SFCN_STS
+        - ONPREM_FMC
+        - CDFMC
+        - AWS_VPC
+        - AZURE_VNET
+        - DUO_ADMIN_PANEL
+        - UMBRELLA_ORGANIZATION
     MerakiDeploymentMode:
       type: string
       description: (Meraki devices only) The deployment mode of the Meraki device.
