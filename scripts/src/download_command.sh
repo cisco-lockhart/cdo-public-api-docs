@@ -11,17 +11,16 @@ filenames=()
 for service in "${!urls[@]}"; do
     url=${urls[${service}]}
     filename="${service}-openapi.yaml"
+    echo -n "$(yellow Downloading file from) $(yellow_underlined ${url}) to $(blue_bold ${root_dir}/${filename})... "
     if [[ "$service" == "cdFmc-service" ]]; then
-        echo -n "Downloading and converting cdFmc-service JSON to YAML... "
         curl -s "$url" | \
         # Replace cdFMC URLs with the new Public API proxy URL
-        jq '.paths |= with_entries(.key |= gsub("api/fmc_platform/"; "v1/cdfmc/api/fmc_platform/"))' | \
+        jq '.paths |= with_entries(.key |= gsub("api/fmc_config/"; "v1/cdfmc/api/fmc_config/"))' | \
         yq e -P - > "${root_dir}/${filename}"
     else
-        echo -n "$(yellow Downloading file from) $(yellow_underlined ${url}) to $(blue_bold ${root_dir}/${filename})... "
         curl -X GET --silent --url  "${url}" -o $root_dir/$filename
+        filenames+=("${root_dir}/${filename}")
     fi
-    filenames+=("${root_dir}/${filename}")
     echo "✅︎"
 done
 
