@@ -2179,9 +2179,9 @@ paths:
             type: array
             items:
               type: string
-          example:
-            - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-            - yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy
+          example: >-
+            [xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx,
+            yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy]
       responses:
         '204':
           description: No content
