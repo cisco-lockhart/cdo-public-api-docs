@@ -1863,6 +1863,43 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /v1/changelogs/{changelogUid}:
+    get:
+      tags:
+        - Changelogs
+      summary: Fetch a Change Log by UID in the CDO tenant.
+      operationId: getChangelog
+      parameters:
+        - name: changelogUid
+          in: path
+          description: The unique identifier of the changelog in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Change Log objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Changelog'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /.well-known/jwks.json:
     get:
       tags:
@@ -3610,7 +3647,6 @@ components:
           description: The events recorded in this Change Log.
           items:
             $ref: '#/components/schemas/Event'
-      description: The list of items retrieved.
     ChangelogPage:
       type: object
       properties:
