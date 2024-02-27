@@ -2608,22 +2608,18 @@ components:
             communicate with the device.
           example: SDC-1
         labels:
+          $ref: '#/components/schemas/Labels'
+    Labels:
+      type: object
+      properties:
+        ungroupedLabels:
           uniqueItems: true
           type: array
-          description: >-
-            Specify a set of labels to identify the device as part of a group.
-            Refer to the CDO documentation for details on how labels are used in
-            CDO.
-          example:
-            - ios
-            - ra-vpn-headend
           items:
             type: string
-            description: >-
-              Specify a set of labels to identify the device as part of a group.
-              Refer to the CDO documentation for details on how labels are used
-              in CDO.
-            example: '["ios","ra-vpn-headend"]'
+      description: >-
+        Map of label groups to list of label values, ungrouped labels are listed
+        under the key 'ungroupedLabels'.
     FtdCreateOrUpdateInput:
       required:
         - deviceType
@@ -2674,22 +2670,7 @@ components:
             - FTDv100
             - FTDv
         labels:
-          uniqueItems: true
-          type: array
-          description: >-
-            Specify a set of labels to identify the device as part of a group.
-            Refer to the CDO documentation for details on how labels are used in
-            CDO.
-          example:
-            - ios
-            - ra-vpn-headend
-          items:
-            type: string
-            description: >-
-              Specify a set of labels to identify the device as part of a group.
-              Refer to the CDO documentation for details on how labels are used
-              in CDO.
-            example: '["ios","ra-vpn-headend"]'
+          $ref: '#/components/schemas/Labels'
         deviceType:
           type: string
           description: >-
@@ -2737,22 +2718,7 @@ components:
             with Duo Admin Panel.
           example: b2Ln2DrBioS2sTI7dqRYh7DPoLsvYDm0wn5UbIKi
         labels:
-          uniqueItems: true
-          type: array
-          description: >-
-            Specify a set of labels to identify the device as part of a group.
-            Refer to the CDO documentation for details on how labels are used in
-            CDO.
-          example:
-            - duo-admin-panel
-            - ra-vpn-headend
-          items:
-            type: string
-            description: >-
-              Specify a set of labels to identify the device as part of a group.
-              Refer to the CDO documentation for details on how labels are used
-              in CDO.
-            example: '["duo-admin-panel","ra-vpn-headend"]'
+          $ref: '#/components/schemas/Labels'
     AsaCreateOrUpdateInput:
       required:
         - connectorType
@@ -2796,22 +2762,7 @@ components:
             connector type selected is Cloud Connector (CDG).
           example: SDC-1
         labels:
-          uniqueItems: true
-          type: array
-          description: >-
-            Specify a set of labels to identify the device as part of a group.
-            Refer to the CDO documentation for details on how labels are used in
-            CDO.
-          example:
-            - asa
-            - ra-vpn-headend
-          items:
-            type: string
-            description: >-
-              Specify a set of labels to identify the device as part of a group.
-              Refer to the CDO documentation for details on how labels are used
-              in CDO.
-            example: '["asa","ra-vpn-headend"]'
+          $ref: '#/components/schemas/Labels'
     ConnectorType:
       type: string
       description: >-
@@ -2881,22 +2832,7 @@ components:
           description: A human-readable name for the device.
           example: My ASA
         labels:
-          uniqueItems: true
-          type: array
-          description: >-
-            Specify a set of labels to identify the device as part of a group.
-            Refer to the CDO documentation for details on how labels are used in
-            CDO.
-          example:
-            - asa
-            - ra-vpn-headend
-          items:
-            type: string
-            description: >-
-              Specify a set of labels to identify the device as part of a group.
-              Refer to the CDO documentation for details on how labels are used
-              in CDO.
-            example: '["asa","ra-vpn-headend"]'
+          $ref: '#/components/schemas/Labels'
     AsaFailoverMate:
       type: object
       properties:
@@ -3113,12 +3049,7 @@ components:
         stateMachineDetails:
           $ref: '#/components/schemas/StateMachineDetails'
         labels:
-          uniqueItems: true
-          type: array
-          description: The tags associated with the device
-          items:
-            type: string
-            description: The tags associated with the device
+          $ref: '#/components/schemas/Labels'
     DeviceRole:
       type: string
       description: The role this device performs on the network.
