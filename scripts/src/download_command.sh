@@ -5,6 +5,8 @@ declare -A urls=(
     ["object-service"]="https://edge.staging.cdo.cisco.com/api/platform/object-service/v3/api-docs.yaml"
 )
 
+scripts/cli transform-fmc-oas
+
 filenames=()
 for service in "${!urls[@]}"; do
     url=${urls[${service}]}
@@ -14,8 +16,6 @@ for service in "${!urls[@]}"; do
     filenames+=("${root_dir}/${filename}")
     echo "✅︎"
 done
-
-filenames+=("${root_dir}/cdFmc-service-openapi.yaml")
 
 echo "$(yellow Installing redocly from npm)... "
 npm i
