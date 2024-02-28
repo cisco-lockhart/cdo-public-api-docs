@@ -30,8 +30,8 @@
             "type": "oas3"
           },
           {
-            "title": "cdFMC Public API",
-            "content": "cdfmc-service-openapi.yaml",
+            "title": "Cloud-delivered FMC Public API",
+            "content": "cdFmc-service-openapi.yaml",
             "type": "oas3"
           }
         ]
