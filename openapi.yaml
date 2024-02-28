@@ -2612,6 +2612,14 @@ components:
     Labels:
       type: object
       properties:
+        groupedLabels:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+          writeOnly: true
         ungroupedLabels:
           uniqueItems: true
           type: array
