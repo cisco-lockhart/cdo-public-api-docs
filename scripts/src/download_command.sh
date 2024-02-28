@@ -3,8 +3,6 @@ filename=openapi.yaml
 declare -A urls=(
     ["public-api"]="https://edge.staging.cdo.cisco.com/api/platform/public-api/v3/api-docs.yaml"
     ["object-service"]="https://edge.staging.cdo.cisco.com/api/platform/object-service/v3/api-docs.yaml"
-    # Currently dependent on the acme tenant cdFMC - need to update
-    ["cdFmc-service"]="https://cdo-acme.app.staging.cdo.cisco.com/api/api-explorer/fmc_oas3.json"
 )
 
 filenames=()
@@ -12,17 +10,12 @@ for service in "${!urls[@]}"; do
     url=${urls[${service}]}
     filename="${service}-openapi.yaml"
     echo -n "$(yellow Downloading file from) $(yellow_underlined ${url}) to $(blue_bold ${root_dir}/${filename})... "
-    if [[ "$service" == "cdFmc-service" ]]; then
-        curl -s "$url" | \
-        # Replace cdFMC URLs with the new Public API proxy URL
-        jq '.paths |= with_entries(.key |= gsub("api/fmc_config/"; "v1/cdfmc/api/fmc_config/"))' | \
-        yq e -P - > "${root_dir}/${filename}"
-    else
-        curl -X GET --silent --url  "${url}" -o $root_dir/$filename
-        filenames+=("${root_dir}/${filename}")
-    fi
+    curl -X GET --silent --url  "${url}" -o $root_dir/$filename
+    filenames+=("${root_dir}/${filename}")
     echo "✅︎"
 done
+
+filenames+=("${root_dir}/cdFmc-service-openapi.yaml")
 
 echo "$(yellow Installing redocly from npm)... "
 npm i
