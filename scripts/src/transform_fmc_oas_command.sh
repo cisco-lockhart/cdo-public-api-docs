@@ -2,7 +2,7 @@ root_dir=$(dirname $(dirname $(readlink -f "$0")))
 filename=openapi.yaml
 declare -A urls=(
     # Currently dependent on the CDO_cisco-ai-team-cdo tenant cdFMC - need to update
-    ["cdFmc-service"]="https://cisco-ai-team-cdo.app.us.cdo.cisco.com/api/api-explorer/fmc_oas3.json"
+    ["cdFmc-service"]="https://demo-red.app.us.cdo.cisco.com/api/api-explorer/fmc_oas3.json"
 )
 
 filenames=()
