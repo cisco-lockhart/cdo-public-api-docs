@@ -28,6 +28,11 @@
             "title": "CDO Public API",
             "content": "openapi.yaml",
             "type": "oas3"
+          },
+          {
+            "title": "Cloud-delivered FMC Public API",
+            "content": "cdFmc-service-openapi.yaml",
+            "type": "oas3"
           }
         ]
       }

@@ -1,14 +1,19 @@
 root_dir=$(dirname $(dirname $(readlink -f "$0")))
 filename=openapi.yaml
-declare -A urls=( ["public-api"]="https://edge.staging.cdo.cisco.com/api/platform/public-api/v3/api-docs.yaml" ["object-service"]="https://edge.staging.cdo.cisco.com/api/platform/object-service/v3/api-docs.yaml" )
+declare -A urls=(
+    ["public-api"]="https://edge.staging.cdo.cisco.com/api/platform/public-api/v3/api-docs.yaml"
+    ["object-service"]="https://edge.staging.cdo.cisco.com/api/platform/object-service/v3/api-docs.yaml"
+)
+
+scripts/cli transform-fmc-oas
 
 filenames=()
 for service in "${!urls[@]}"; do
-    filename="${service}-openapi.yaml"
-    filenames+=("${root_dir}/${filename}")
     url=${urls[${service}]}
+    filename="${service}-openapi.yaml"
     echo -n "$(yellow Downloading file from) $(yellow_underlined ${url}) to $(blue_bold ${root_dir}/${filename})... "
     curl -X GET --silent --url  "${url}" -o $root_dir/$filename
+    filenames+=("${root_dir}/${filename}")
     echo "✅︎"
 done
 

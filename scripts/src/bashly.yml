@@ -6,10 +6,13 @@ commands:
 - name: download
   alias: d
   help: Download and add public API YAML to the pubhub docs
-
   flags:
   - long: --do-not-commit
     help: Download the latest public API OpenAPI YAML, but do not commit and push it.
-
   examples:
   - cli download
+
+- name: transform-fmc-oas
+  help: Perform transformations on FMC OAS and generate cdfmc-service-openapi.yaml
+  examples:
+  - cli transform-fmc-oas
