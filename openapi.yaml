@@ -36,8 +36,6 @@ tags:
     x-displayName: Connectors
   - name: Changelogs
     x-displayName: Changelogs
-  - name: CdFMC
-    x-displayName: CdFMC
   - name: Object Management
     x-displayName: Object Management
 paths:
@@ -1925,133 +1923,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
-  /v1/cdfmc/**:
-    get:
-      tags:
-        - CdFMC
-      summary: Proxies request to cdFMC
-      operationId: proxyFmcRequest
-      responses:
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
-    put:
-      tags:
-        - CdFMC
-      summary: Proxies request to cdFMC
-      operationId: proxyFmcRequest_3
-      responses:
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
-    post:
-      tags:
-        - CdFMC
-      summary: Proxies request to cdFMC
-      operationId: proxyFmcRequest_2
-      responses:
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
-    delete:
-      tags:
-        - CdFMC
-      summary: Proxies request to cdFMC
-      operationId: proxyFmcRequest_5
-      responses:
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
-    options:
-      tags:
-        - CdFMC
-      summary: Proxies request to cdFMC
-      operationId: proxyFmcRequest_6
-      responses:
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
-    head:
-      tags:
-        - CdFMC
-      summary: Proxies request to cdFMC
-      operationId: proxyFmcRequest_1
-      responses:
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
-    patch:
-      tags:
-        - CdFMC
-      summary: Proxies request to cdFMC
-      operationId: proxyFmcRequest_4
-      responses:
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
   /v0/objects:
     get:
       tags:
@@ -2617,17 +2488,19 @@ components:
           additionalProperties:
             uniqueItems: true
             type: array
+            description: Groups of labels used to identify/tag CDO entities.
             items:
               type: string
-          writeOnly: true
+              description: Groups of labels used to identify/tag CDO entities.
+          description: Groups of labels used to identify/tag CDO entities.
         ungroupedLabels:
           uniqueItems: true
           type: array
+          description: Set of free-labels used to identify/tag CDO entities.
           items:
             type: string
-      description: >-
-        Map of label groups to list of label values, ungrouped labels are listed
-        under the key 'ungroupedLabels'.
+            description: Set of free-labels used to identify/tag CDO entities.
+      description: Labels used to identify/tag CDO entities.
     FtdCreateOrUpdateInput:
       required:
         - deviceType
@@ -4487,7 +4360,6 @@ x-tagGroups:
       - Meta
       - Connectors
       - Changelogs
-      - CdFMC
   - name: object-service-openapi
     tags:
       - Object Management
