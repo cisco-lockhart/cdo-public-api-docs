@@ -5,7 +5,7 @@ declare -A urls=(
     ["object-service"]="https://edge.staging.cdo.cisco.com/api/platform/object-service/v3/api-docs.yaml"
 )
 
-# scripts/cli transform-fmc-oas
+scripts/cli transform-fmc-oas
 
 filenames=()
 for service in "${!urls[@]}"; do
