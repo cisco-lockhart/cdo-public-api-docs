@@ -2550,17 +2550,37 @@ components:
             uniqueItems: true
             type: array
             description: Groups of labels used to identify/tag CDO entities.
+            example:
+              group1:
+                - label-1
+                - label-2
+              group2:
+                - label-1
+                - label-2
             items:
               type: string
               description: Groups of labels used to identify/tag CDO entities.
+              example: '{"group1":["label-1","label-2"],"group2":["label-1","label-2"]}'
           description: Groups of labels used to identify/tag CDO entities.
+          example:
+            group1:
+              - label-1
+              - label-2
+            group2:
+              - label-1
+              - label-2
         ungroupedLabels:
           uniqueItems: true
           type: array
           description: Set of free-labels used to identify/tag CDO entities.
+          example:
+            - label-a
+            - label-b
+            - label-c
           items:
             type: string
             description: Set of free-labels used to identify/tag CDO entities.
+            example: '["label-a","label-b","label-c"]'
       description: Labels used to identify/tag CDO entities.
     FtdCreateOrUpdateInput:
       required:
