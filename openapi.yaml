@@ -28,6 +28,8 @@ tags:
     x-displayName: Tenant Management
   - name: Inventory
     x-displayName: Inventory
+  - name: Change Requests
+    x-displayName: Change Requests
   - name: Transactions
     x-displayName: Transactions
   - name: Meta
@@ -36,8 +38,6 @@ tags:
     x-displayName: Connectors
   - name: Changelogs
     x-displayName: Changelogs
-  - name: Change Requests
-    x-displayName: Change Requests
   - name: Object Management
     x-displayName: Object Management
 paths:
@@ -608,6 +608,99 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         '404':
           $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+  /v1/changeRequests:
+    get:
+      tags:
+        - Change Requests
+      summary: Fetch a list of Change Requests.
+      operationId: listChangeRequests
+      parameters:
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO Public API uses the
+            offset field to determine the index of the first result retrieved,
+            and will retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: name:London-Office-ASA
+      responses:
+        '200':
+          description: List of Change Request objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeRequestPage'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+    post:
+      tags:
+        - Change Requests
+      summary: Create Change Requests.
+      operationId: createChangeRequest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeRequestCreateInput'
+        required: true
+      responses:
+        '201':
+          description: Created change Request object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeRequest'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
         '500':
           description: Internal server error.
           content:
@@ -1900,65 +1993,6 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
-  /v1/changeRequests:
-    get:
-      tags:
-        - Change Requests
-      summary: Fetch a list of Change Requests.
-      operationId: listChangeRequests
-      parameters:
-        - name: limit
-          in: query
-          description: The number of results to retrieve.
-          required: false
-          schema:
-            maximum: 200
-            minimum: 0
-            type: string
-            default: '50'
-        - name: offset
-          in: query
-          description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
-          required: false
-          schema:
-            minimum: 0
-            type: string
-            default: '0'
-        - name: q
-          in: query
-          description: >-
-            The query to execute. Use the Lucene Query Syntax to construct your
-            query.
-          required: false
-          schema:
-            type: string
-          example: name:London-Office-ASA
-      responses:
-        '200':
-          description: List of Change Request objects
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ChangeRequestPage'
-        '400':
-          $ref: '#/components/responses/http400BadRequest'
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '403':
-          $ref: '#/components/responses/http403Forbidden'
-        '405':
-          $ref: '#/components/responses/http405MethodNotAllowed'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
   /.well-known/jwks.json:
     get:
       tags:
@@ -2768,6 +2802,39 @@ components:
       enum:
         - SDC
         - CDG
+    ChangeRequestCreateInput:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the change request in CDO.
+          example: SecureNewBranchChange
+        description:
+          type: string
+          description: The description of the change request in CDO.
+          example: Changes related to securing the new branch.
+    ChangeRequest:
+      required:
+        - name
+        - uid
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the Change Request.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        name:
+          type: string
+          description: The name of the Change Request.
+          example: my change request
+        description:
+          type: string
+          description: The description of the Change Request.
+          example: my change request description
+      description: The list of items retrieved.
     ConflictDetectionInterval:
       type: string
       description: >-
@@ -3641,26 +3708,6 @@ components:
           description: The name of the Change Request associated with the Change Log event.
           example: LH-12345
       description: The events recorded in this Change Log.
-    ChangeRequest:
-      required:
-        - name
-        - uid
-      type: object
-      properties:
-        uid:
-          type: string
-          description: The unique identifier of the Change Request.
-          format: uuid
-          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-        name:
-          type: string
-          description: The name of the Change Request.
-          example: my change request
-        description:
-          type: string
-          description: The description of the Change Request.
-          example: my change request description
-      description: The list of items retrieved.
     ChangeRequestPage:
       type: object
       properties:
@@ -4516,11 +4563,11 @@ x-tagGroups:
       - Search
       - Tenant Management
       - Inventory
+      - Change Requests
       - Transactions
       - Meta
       - Connectors
       - Changelogs
-      - Change Requests
   - name: object-service-openapi
     tags:
       - Object Management
