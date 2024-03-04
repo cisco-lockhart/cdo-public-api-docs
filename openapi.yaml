@@ -934,7 +934,7 @@ paths:
       tags:
         - Inventory
       summary: Delete a Device Manager by UID in the CDO tenant
-      operationId: deleteDeviceManager_1
+      operationId: deleteDeviceManager
       parameters:
         - name: deviceManagerUid
           in: path
@@ -1160,7 +1160,7 @@ paths:
       tags:
         - Users
       summary: Delete a User by UID in the CDO tenant
-      operationId: deleteDeviceManager
+      operationId: deleteUser
       parameters:
         - name: userUid
           in: path
@@ -1984,6 +1984,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
+  /v1/changeRequests/{changeRequestUid}:
+    delete:
+      tags:
+        - Change Requests
+      summary: Delete a Change Request by UID in the CDO tenant
+      operationId: deleteChangeRequest
+      parameters:
+        - name: changeRequestUid
+          in: path
+          description: The unique identifier of the Change Request in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v0/objects:
     get:
       tags:
