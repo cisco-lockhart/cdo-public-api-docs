@@ -25,6 +25,10 @@ echo -n "$(yellow Combining all OpenAPI YAMLs into one)... "
  ./node_modules/.bin/redocly join ${filenames[*]} -o openapi.yaml
 echo "Combined ✅︎"
 
+echo -n "$(yellow Generating Postman collection from combined OpenAPI YAMLs)... "
+./node_modules/.bin/openapi2postmanv2 -s openapi.yaml -o postman-collection.json -O folderStrategy=Tags
+echo "Generated ✅︎"
+
 if [[ -z ${args[--do-not-commit]} ]]; then
     cd ${root_dir}
     git checkout main

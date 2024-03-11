@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "These docs are published to DevNet using PubHub.  See [https://pubhub.cisco.com/detail/5082] or contact siwarrie@cisco.com for details",
   "dependencies": {
-    "@redocly/cli": "^1.8.1"
+    "@redocly/cli": "^1.8.1",
+    "openapi-to-postmanv2": "^4.20.0"
   }
 }
