@@ -247,7 +247,7 @@ cli_download_command() {
   echo "Combined ✅︎"
 
   echo -n "$(yellow Generating Postman collection from combined OpenAPI YAMLs)... "
-  openapi2postmanv2 -s openapi.yaml -p -o postman-collection.json -O folderStrategy=Tags
+  ./node_modules/.bin/openapi2postmanv2 -s openapi.yaml -o postman-collection.json -O folderStrategy=Tags
   echo "Generated ✅︎"
 
   if [[ -z ${args[--do-not-commit]} ]]; then
