@@ -30,6 +30,8 @@ tags:
     x-displayName: Inventory
   - name: Change Requests
     x-displayName: Change Requests
+  - name: Remote Access Monitoring
+    x-displayName: Remote Access Monitoring
   - name: Transactions
     x-displayName: Transactions
   - name: Meta
@@ -1194,6 +1196,111 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+  /v1/vpnsessions:
+    get:
+      tags:
+        - Remote Access Monitoring
+      summary: Fetch a list of RA VPN sessions.
+      operationId: listRaVpnSessions
+      parameters:
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO Public API uses the
+            offset field to determine the index of the first result retrieved,
+            and will retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: name:London-Office-ASA
+        - name: sort
+          in: query
+          description: The fields to sort results by.
+          required: true
+          schema:
+            $ref: '#/components/schemas/SortCriteriaParam'
+          example: name:DESC
+      responses:
+        '200':
+          description: List of RA VPN Sessions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RaVpnSessionPage'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+  /v1/vpnsessions/{raVpnSessionUid}:
+    get:
+      tags:
+        - Remote Access Monitoring
+      summary: Fetch a RA VPN session by UID in the CDO tenant.
+      operationId: getRaVpnSession
+      parameters:
+        - name: raVpnSessionUid
+          in: path
+          description: The unique identifier of the RA VPN session in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: RA VPN Session object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RaVpnSession'
         '400':
           $ref: '#/components/responses/http400BadRequest'
         '401':
@@ -3241,6 +3348,160 @@ components:
           type: string
         actionIdentifier:
           type: string
+    SortCriteriaParam:
+      type: object
+      properties:
+        sort:
+          type: array
+          writeOnly: true
+          items:
+            type: string
+        sortFields:
+          type: array
+          items:
+            type: string
+    Location:
+      type: object
+      properties:
+        city:
+          type: string
+          description: >-
+            The city where the device associated with the RA VPN session is
+            located.
+          example: Ashburn
+        subdivision:
+          type: string
+          description: >-
+            The subdivision (e.g., state or province) where the device is
+            located.
+          example: VA
+        country:
+          type: string
+          description: >-
+            The country where the device associated with the RA VPN session is
+            located.
+          example: US
+      description: >-
+        The location information of the device associated with the RA VPN
+        session.
+    OS:
+      type: object
+      properties:
+        type:
+          type: string
+          description: >-
+            The type of operating system running on the device associated with
+            the RA VPN session.
+          example: mac-intel
+        version:
+          type: string
+          description: The version of the operating system running on the device.
+          example: 14.2.1
+      description: >-
+        The operating system information of the device associated with the RA
+        VPN session.
+    RaVpnSession:
+      required:
+        - deviceUid
+        - uid
+        - username
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the VPN session.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        username:
+          type: string
+          description: The name of the user associated with the RA VPN session.
+          example: user@example.com
+        status:
+          type: string
+          description: The status of the RA VPN session.
+          example: ACTIVE
+          enum:
+            - ACTIVE
+            - TERMINATED
+        deviceUid:
+          type: string
+          description: >-
+            The unique identifier of the device associated with the RA VPN
+            session.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        assignedIpV4:
+          type: string
+          description: The IPv4 address assigned to the RA VPN session.
+          example: 172.16.0.2
+        assignedIpV6:
+          type: string
+          description: The IPv6 address assigned to the RA VPN session.
+          example: 172.16.0.2
+        publicIp:
+          type: string
+          description: >-
+            The public IP address of the client that has established this RA VPN
+            session.
+          example: 106.51.163.157
+        auditSessionId:
+          type: string
+          description: The audit session ID associated with this RA VPN session.
+          example: 0a6405150000900065c0c86d
+        location:
+          $ref: '#/components/schemas/Location'
+        os:
+          $ref: '#/components/schemas/OS'
+        bytesTx:
+          type: integer
+          description: The number of bytes transmitted during the RA VPN session.
+          format: int32
+          example: 9157513
+        bytesRx:
+          type: integer
+          description: The number of bytes received during the RA VPN session.
+          format: int32
+          example: 6102087
+        loginTime:
+          type: string
+          description: >-
+            The time (in UTC) at which the user logged in to the RA VPN session,
+            represented using the RFC-3339 standard.
+          format: date-time
+          example: '2023-12-13T05:15:44Z'
+        lastActiveTime:
+          type: string
+          description: >-
+            The time (in UTC) at which the user was last active in the RA VPN
+            session, represented using the RFC-3339 standard.
+          format: date-time
+          example: '2023-12-13T05:15:44Z'
+    RaVpnSessionPage:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The total number of results available.
+          format: int32
+          example: 100
+        limit:
+          type: integer
+          description: The number of results retrieved.
+          format: int32
+          example: 50
+        offset:
+          type: integer
+          description: >-
+            The offset of the results retrieved. The CDO Public API uses the
+            offset field to determine the index of the first result retrieved,
+            and will retrieve `limit` results from the offset specified.
+          format: int32
+          example: 0
+        items:
+          type: array
+          description: The list of items retrieved.
+          items:
+            $ref: '#/components/schemas/RaVpnSession'
     UserPage:
       type: object
       properties:
@@ -3521,18 +3782,6 @@ components:
               The IP addresses from which to allow inbound access to your
               network if you wish to connect to your devices through CDO's Cloud
               Connector.
-    SortCriteriaParam:
-      type: object
-      properties:
-        sort:
-          type: array
-          writeOnly: true
-          items:
-            type: string
-        sortFields:
-          type: array
-          items:
-            type: string
     DevicePage:
       type: object
       properties:
@@ -4601,6 +4850,7 @@ x-tagGroups:
       - Tenant Management
       - Inventory
       - Change Requests
+      - Remote Access Monitoring
       - Transactions
       - Meta
       - Connectors
