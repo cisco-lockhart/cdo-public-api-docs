@@ -35,6 +35,42 @@
             "type": "oas3"
           }
         ]
+      },
+      {
+        "title": "Developer Resources",
+        "config": {
+          "expand": 0
+        },
+        "items": [
+          {
+            "title": "Learning Labs",
+            "content": "https://developer.cisco.com/learning/modules/automating-cisco-defense-orchestrator/",
+            "type": "url"
+          },
+          {
+            "title": "Postman Collection",
+            "content": "https://github.com/cisco-lockhart/cdo-public-api-docs/blob/main/postman-collection.json",
+            "type": "url"
+          },
+          {
+            "title": "Code Exchange",
+            "content": "https://developer.cisco.com/codeexchange/search/?products=Cisco+Defense+Orchestrator",
+            "type": "url"
+          }
+        ]
+      },
+      {
+        "title": "Community & Support",
+        "config": {
+          "expand": 0
+        },
+        "items": [
+          {
+            "title": "Community",
+            "content": "https://community.cisco.com/t5/network-security/bd-p/disc-network-security",
+            "type": "url"
+          }
+        ]
       }
     ]
 }
