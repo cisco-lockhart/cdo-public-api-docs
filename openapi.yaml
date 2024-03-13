@@ -4581,6 +4581,18 @@ components:
           type: string
           description: The URL literal
           example: https://www.cisco.com/
+    IssuesDto:
+      type: object
+      properties:
+        unusedTargetIds:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+      description: The issues for the object
+      example:
+        unusedTargetIds:
+          - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
     ObjectResponse:
       type: object
       properties:
@@ -4649,6 +4661,8 @@ components:
             type: string
             description: The labels for the object
             example: '["migration"]'
+        issues:
+          $ref: '#/components/schemas/IssuesDto'
     ReferenceInfo:
       type: object
       properties:
@@ -4819,6 +4833,8 @@ components:
           type: array
           items:
             type: string
+        issues:
+          $ref: '#/components/schemas/IssuesDto'
       description: The list of objects retrieved.
   responses:
     http400BadRequest:

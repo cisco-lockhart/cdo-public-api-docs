@@ -233,14 +233,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: Fetch an object by UID in the CDO tenant
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -305,14 +305,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: A descriptive representation of the updated CDO object.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -339,6 +339,10 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: A descriptive representation of the created CDO object.
           content:
@@ -347,10 +351,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ReferenceInfo'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -828,6 +828,18 @@ components:
           type: string
           description: The URL literal
           example: https://www.cisco.com/
+    IssuesDto:
+      type: object
+      properties:
+        unusedTargetIds:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+      description: The issues for the object
+      example:
+        unusedTargetIds:
+        - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
     ObjectResponse:
       type: object
       properties:
@@ -894,6 +906,8 @@ components:
             type: string
             description: The labels for the object
             example: "[\"migration\"]"
+        issues:
+          $ref: '#/components/schemas/IssuesDto'
     ReferenceInfo:
       type: object
       properties:
@@ -1061,6 +1075,8 @@ components:
           type: array
           items:
             type: string
+        issues:
+          $ref: '#/components/schemas/IssuesDto'
       description: The list of objects retrieved.
     AuthenticationError:
       type: object
