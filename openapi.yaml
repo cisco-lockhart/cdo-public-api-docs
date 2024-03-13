@@ -2031,6 +2031,20 @@ paths:
             minimum: 0
             type: string
             default: '0'
+        - name: searchText
+          in: query
+          description: >-
+            The searchText parameter serves as a flexible search option that
+            allows for text-based filtering across all fields of the Change Log
+            object. This parameter can be used independently to search for
+            entries containing the specified text, or in combination with the q
+            query parameter for more targeted results. When used with q, the
+            search conditions of searchText are logically ANDed with the q
+            parameter's criteria, ensuring that the returned entries satisfy
+            both sets of conditions.
+          required: false
+          schema:
+            type: string
         - name: q
           in: query
           description: >-
