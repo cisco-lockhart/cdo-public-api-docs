@@ -53,7 +53,7 @@
             "type": "url"
           },
           {
-            "title": "Postman Environment",
+            "title": "Example Postman Environment",
             "content": "https://github.com/cisco-lockhart/cdo-public-api-docs/blob/main/postman-environment.json",
             "type": "url"
           },

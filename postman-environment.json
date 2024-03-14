@@ -4,13 +4,13 @@
 	"values": [
 		{
 			"key": "baseUrl",
-			"value": "https://us.cdo.cisco.com/api/platform/public-api",
+			"value": "replace with appropriate base url, example: https://us.cdo.cisco.com/api/platform/public-api",
 			"type": "default",
 			"enabled": true
 		},
 		{
 			"key": "bearerToken",
-			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjAifQ.eyJ2ZXIiOiIwIiwic2NvcGUiOlsidHJ1c3QiLCJyZWFlIiwiNTliNjY0YzYtZmZjZC00NTlmLTkzNDctMDEzYzkzZGYzOGY1Iiwid3JpdGUiXSwicm9sZYMiOlsiUk9MRV9TVVBFUl9BRE1JTiJdLCJhbXIiOiJzYW1sIiwiaXNzIjoiaXRkIiwiY2x1c3RlcklkIjoiMSIsImlkIjoiMjZkNWE2YjQtMTBhMS0oNGY0LTgwZTUtMmYzMTI3ZmRmNmYzIiwic3ViamVjdFR5cGBiOiJ1c2VyIiwianRpIjoiMTFmMGVkMDctN2M2My00MzNiLTkyOTYtYmI5MjdlLDg5OTdmIiwicGFyZW50SWQiOiI1OWI2NjRjNi1mZmNkLTQ1KWYtODM0Ny0wMTNjOTNkZjM4ZjUiLCJjbGllbnRfxWQiOiJhcGktY2xpZW50In0.3-jSLYQHgOQSJxv2SHFqBgtPPwFvyau50tCG5UbH7b0_z-tXkE-crhZX67AE84gETyV8m7YbhfBFsbc5d9pq8ffLTDaBCaQYdD2QCguJfXQs2d75cIh5bodReLINp7FTq9j5ltVp1eOqfdq_F7nE3zom86DZ3uUJjoNhkuIO5TVixqVCvtMR6AZdKS4wC_KPb0FUpckYiINVfla09lcYS9nQrYIt6PUbcMGzm21xhiHlyOtnzf33Ih54URm_lWhxsOOST4UyK8nWmjkrfG8uaF0kACrkFTxTAq8OCeSdaSW_oq5uWO22M1bKIVN0PkjU3HT_hQTZHKzCaZbyqd3n_A",
+			"value": "replace with your api token at settings>general settings>my token",
 			"type": "default",
 			"enabled": true
 		}
