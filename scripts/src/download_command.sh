@@ -27,7 +27,11 @@ echo "Combined ✅︎"
 
 echo -n "$(yellow Generating Postman collection from combined OpenAPI YAMLs)... "
 ./node_modules/.bin/openapi2postmanv2 -s openapi.yaml -o postman-collection.json -O folderStrategy=Tags
-echo "Generated ✅︎"
+echo "Postman collection Generated ✅︎"
+
+echo -n "$(yellow Generating Python SDK from combined OpenAPI YAMLs)... "
+openapi-generator generate -i openapi.yaml -g python -o ./cdo-sdk/python
+echo "Python SDK Generated ✅︎"
 
 if [[ -z ${args[--do-not-commit]} ]]; then
     cd ${root_dir}
