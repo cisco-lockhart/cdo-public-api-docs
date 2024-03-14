@@ -1,0 +1,21 @@
+{
+	"id": "6c27f329-928c-402d-ac02-f428d2e8bd33",
+	"name": "Cisco CDO API",
+	"values": [
+		{
+			"key": "baseUrl",
+			"value": "replace with appropriate base url, example: https://us.cdo.cisco.com/api/platform/public-api",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "bearerToken",
+			"value": "replace with your api token at settings>general settings>my token",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2024-03-14T11:26:00.151Z",
+	"_postman_exported_using": "Postman/10.22.13"
+}
