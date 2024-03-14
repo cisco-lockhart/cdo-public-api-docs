@@ -1,0 +1,21 @@
+{
+	"id": "6c27f329-928c-402d-ac02-f428d2e8bd33",
+	"name": "Cisco CDO API",
+	"values": [
+		{
+			"key": "baseUrl",
+			"value": "https://us.cdo.cisco.com/api/platform/public-api",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "bearerToken",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjAifQ.eyJ2ZXIiOiIwIiwic2NvcGUiOlsidHJ1c3QiLCJyZWFlIiwiNTliNjY0YzYtZmZjZC00NTlmLTkzNDctMDEzYzkzZGYzOGY1Iiwid3JpdGUiXSwicm9sZYMiOlsiUk9MRV9TVVBFUl9BRE1JTiJdLCJhbXIiOiJzYW1sIiwiaXNzIjoiaXRkIiwiY2x1c3RlcklkIjoiMSIsImlkIjoiMjZkNWE2YjQtMTBhMS0oNGY0LTgwZTUtMmYzMTI3ZmRmNmYzIiwic3ViamVjdFR5cGBiOiJ1c2VyIiwianRpIjoiMTFmMGVkMDctN2M2My00MzNiLTkyOTYtYmI5MjdlLDg5OTdmIiwicGFyZW50SWQiOiI1OWI2NjRjNi1mZmNkLTQ1KWYtODM0Ny0wMTNjOTNkZjM4ZjUiLCJjbGllbnRfxWQiOiJhcGktY2xpZW50In0.3-jSLYQHgOQSJxv2SHFqBgtPPwFvyau50tCG5UbH7b0_z-tXkE-crhZX67AE84gETyV8m7YbhfBFsbc5d9pq8ffLTDaBCaQYdD2QCguJfXQs2d75cIh5bodReLINp7FTq9j5ltVp1eOqfdq_F7nE3zom86DZ3uUJjoNhkuIO5TVixqVCvtMR6AZdKS4wC_KPb0FUpckYiINVfla09lcYS9nQrYIt6PUbcMGzm21xhiHlyOtnzf33Ih54URm_lWhxsOOST4UyK8nWmjkrfG8uaF0kACrkFTxTAq8OCeSdaSW_oq5uWO22M1bKIVN0PkjU3HT_hQTZHKzCaZbyqd3n_A",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2024-03-14T11:26:00.151Z",
+	"_postman_exported_using": "Postman/10.22.13"
+}
