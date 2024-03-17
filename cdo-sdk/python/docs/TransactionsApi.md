@@ -1,4 +1,4 @@
-# cdo_python_sdk.TransactionsApi
+# cdo_sdk_python.TransactionsApi
 
 All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 
@@ -17,14 +17,14 @@ Get information of an in-progress CDO transaction
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.cdo_transaction import CdoTransaction
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.cdo_transaction import CdoTransaction
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -34,14 +34,14 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.TransactionsApi(api_client)
+    api_instance = cdo_sdk_python.TransactionsApi(api_client)
     transaction_uid = 'transaction_uid_example' # str | 
 
     try:

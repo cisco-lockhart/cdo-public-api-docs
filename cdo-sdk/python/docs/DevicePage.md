@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.device_page import DevicePage
+from cdo_sdk_python.models.device_page import DevicePage
 
 # TODO update the JSON string below
 json = "{}"

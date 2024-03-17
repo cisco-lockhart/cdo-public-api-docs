@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.api.tenant_management_api import TenantManagementApi
+from cdo_sdk_python.api.tenant_management_api import TenantManagementApi
 
 
 class TestTenantManagementApi(unittest.TestCase):

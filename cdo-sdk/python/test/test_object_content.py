@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.object_content import ObjectContent
+from cdo_sdk_python.models.object_content import ObjectContent
 
 class TestObjectContent(unittest.TestCase):
     """ObjectContent unit test stubs"""
@@ -40,7 +40,7 @@ class TestObjectContent(unittest.TestCase):
                 service_value = {"op":"EQ","ports":["80"]},
                 url = 'https://www.cisco.com/',
                 literals = [
-                    cdo_python_sdk.models.single_content.SingleContent()
+                    cdo_sdk_python.models.single_content.SingleContent()
                     ],
                 referenced_object_uids = [xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx],
                 literal = 'a:b:c::1'

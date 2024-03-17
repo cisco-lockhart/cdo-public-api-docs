@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.api.remote_access_monitoring_api import RemoteAccessMonitoringApi
+from cdo_sdk_python.api.remote_access_monitoring_api import RemoteAccessMonitoringApi
 
 
 class TestRemoteAccessMonitoringApi(unittest.TestCase):

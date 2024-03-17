@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.icmp6_value import Icmp6Value
+from cdo_sdk_python.models.icmp6_value import Icmp6Value
 
 class TestIcmp6Value(unittest.TestCase):
     """Icmp6Value unit test stubs"""

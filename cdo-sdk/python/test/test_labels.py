@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.labels import Labels
+from cdo_sdk_python.models.labels import Labels
 
 class TestLabels(unittest.TestCase):
     """Labels unit test stubs"""

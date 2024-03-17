@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.single_content import SingleContent
+from cdo_sdk_python.models.single_content import SingleContent
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,4 +1,4 @@
-# cdo_python_sdk.ObjectManagementApi
+# cdo_sdk_python.ObjectManagementApi
 
 All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 
@@ -23,24 +23,24 @@ Creates an object in the CDO tenant
 
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.create_request import CreateRequest
-from cdo_python_sdk.models.object_response import ObjectResponse
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.create_request import CreateRequest
+from cdo_sdk_python.models.object_response import ObjectResponse
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.ObjectManagementApi(api_client)
-    create_request = cdo_python_sdk.CreateRequest() # CreateRequest | 
+    api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
+    create_request = cdo_sdk_python.CreateRequest() # CreateRequest | 
 
     try:
         # Creates an object in the CDO tenant
@@ -94,24 +94,24 @@ Create targets for an object in the CDO tenant
 
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.targets_request import TargetsRequest
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.targets_request import TargetsRequest
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.ObjectManagementApi(api_client)
+    api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
     uid = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' # str | The request UID of the object for which the targets are being added to.
-    targets_request = cdo_python_sdk.TargetsRequest() # TargetsRequest | 
+    targets_request = cdo_sdk_python.TargetsRequest() # TargetsRequest | 
 
     try:
         # Create targets for an object in the CDO tenant
@@ -167,21 +167,21 @@ Deletes an object in the CDO tenant
 
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.ObjectManagementApi(api_client)
+    api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
     uid = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' # str | The request UID of the object being deleted.
 
     try:
@@ -236,22 +236,22 @@ Retrieves an object in the CDO tenant
 
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.object_response import ObjectResponse
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.object_response import ObjectResponse
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.ObjectManagementApi(api_client)
+    api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
     uid = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' # str | The request UID of the object being retrieved.
     fields = '@detailed' # str | The scope of the fields to be retrieved. One of [\"@basic\", \"@detailed\"]. Defaults to \"@basic\". (optional)
 
@@ -308,22 +308,22 @@ Retrieves usages of an object in the CDO tenant
 
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.reference_info import ReferenceInfo
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.reference_info import ReferenceInfo
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.ObjectManagementApi(api_client)
+    api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
     uid = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' # str | The request UID of the object to retrieve usages for.
 
     try:
@@ -378,22 +378,22 @@ Retrieves objects in the CDO tenant
 
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.list_object_response import ListObjectResponse
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.list_object_response import ListObjectResponse
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.ObjectManagementApi(api_client)
+    api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
     q = 'name:London-Office-ASA' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
     offset = '0' # str | The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
@@ -454,21 +454,21 @@ Removes targets from an object in the CDO tenant
 
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.ObjectManagementApi(api_client)
+    api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
     uid = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' # str | The request UID of the object for which the targets are being removed from.
     target_uuids = ['[xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx, yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy]'] # List[str] | The list of UIDs of the targets being removed.
 
@@ -526,25 +526,25 @@ Updates an object in the CDO tenant
 
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.object_response import ObjectResponse
-from cdo_python_sdk.models.update_request import UpdateRequest
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.object_response import ObjectResponse
+from cdo_sdk_python.models.update_request import UpdateRequest
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.ObjectManagementApi(api_client)
+    api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
     uid = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' # str | The request UID of the object being updated.
-    update_request = cdo_python_sdk.UpdateRequest() # UpdateRequest | 
+    update_request = cdo_sdk_python.UpdateRequest() # UpdateRequest | 
 
     try:
         # Updates an object in the CDO tenant

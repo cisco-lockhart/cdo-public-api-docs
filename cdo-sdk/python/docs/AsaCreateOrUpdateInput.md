@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.asa_create_or_update_input import AsaCreateOrUpdateInput
+from cdo_sdk_python.models.asa_create_or_update_input import AsaCreateOrUpdateInput
 
 # TODO update the JSON string below
 json = "{}"

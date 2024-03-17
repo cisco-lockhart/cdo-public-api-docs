@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.json_web_key import JsonWebKey
+from cdo_sdk_python.models.json_web_key import JsonWebKey
 
 class TestJsonWebKey(unittest.TestCase):
     """JsonWebKey unit test stubs"""

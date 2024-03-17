@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.single_content import SingleContent
+from cdo_sdk_python.models.single_content import SingleContent
 
 class TestSingleContent(unittest.TestCase):
     """SingleContent unit test stubs"""

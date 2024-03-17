@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.url_object_content import UrlObjectContent
+from cdo_sdk_python.models.url_object_content import UrlObjectContent
 
 # TODO update the JSON string below
 json = "{}"

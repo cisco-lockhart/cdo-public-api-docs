@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.state_machine_details import StateMachineDetails
+from cdo_sdk_python.models.state_machine_details import StateMachineDetails
 
 # TODO update the JSON string below
 json = "{}"

@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.authentication_error import AuthenticationError
+from cdo_sdk_python.models.authentication_error import AuthenticationError
 
 class TestAuthenticationError(unittest.TestCase):
     """AuthenticationError unit test stubs"""

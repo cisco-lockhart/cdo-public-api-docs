@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.status_info import StatusInfo
+from cdo_sdk_python.models.status_info import StatusInfo
 
 # TODO update the JSON string below
 json = "{}"

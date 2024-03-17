@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.common_api_error import CommonApiError
+from cdo_sdk_python.models.common_api_error import CommonApiError
 
 # TODO update the JSON string below
 json = "{}"

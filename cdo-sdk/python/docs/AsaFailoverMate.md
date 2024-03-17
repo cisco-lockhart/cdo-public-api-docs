@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.asa_failover_mate import AsaFailoverMate
+from cdo_sdk_python.models.asa_failover_mate import AsaFailoverMate
 
 # TODO update the JSON string below
 json = "{}"

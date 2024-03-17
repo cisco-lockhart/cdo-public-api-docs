@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.api.meta_api import MetaApi
+from cdo_sdk_python.api.meta_api import MetaApi
 
 
 class TestMetaApi(unittest.TestCase):

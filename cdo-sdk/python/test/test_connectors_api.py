@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.api.connectors_api import ConnectorsApi
+from cdo_sdk_python.api.connectors_api import ConnectorsApi
 
 
 class TestConnectorsApi(unittest.TestCase):

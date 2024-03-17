@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.global_search_result import GlobalSearchResult
+from cdo_sdk_python.models.global_search_result import GlobalSearchResult
 
 class TestGlobalSearchResult(unittest.TestCase):
     """GlobalSearchResult unit test stubs"""
@@ -36,9 +36,9 @@ class TestGlobalSearchResult(unittest.TestCase):
         model = GlobalSearchResult()
         if include_optional:
             return GlobalSearchResult(
-                inventory = cdo_python_sdk.models.inventory.Inventory(
+                inventory = cdo_sdk_python.models.inventory.Inventory(
                     devices = [
-                        cdo_python_sdk.models.entity.Entity(
+                        cdo_sdk_python.models.entity.Entity(
                             uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                             name = 'my-example-entity', 
                             type = 'CDFMC_MANAGED_FTD', 
@@ -48,7 +48,7 @@ class TestGlobalSearchResult(unittest.TestCase):
                                 ], )
                         ], 
                     managers = [
-                        cdo_python_sdk.models.entity.Entity(
+                        cdo_sdk_python.models.entity.Entity(
                             uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                             name = 'my-example-entity', 
                             address = 'my-example-device.example.com:443', )
@@ -60,19 +60,19 @@ class TestGlobalSearchResult(unittest.TestCase):
                     None
                     ],
                 policies = [
-                    cdo_python_sdk.models.policy.Policy(
+                    cdo_sdk_python.models.policy.Policy(
                         uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                         name = 'my-example-policy', )
                     ],
-                cd_fmc_result = cdo_python_sdk.models.cd_fmc_result.CdFmcResult(
+                cd_fmc_result = cdo_sdk_python.models.cd_fmc_result.CdFmcResult(
                     devices = [
-                        cdo_python_sdk.models.cd_fmc_object.CdFmcObject(
+                        cdo_sdk_python.models.cd_fmc_object.CdFmcObject(
                             uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                             name = 'my-example-entity', 
                             link = 'https://edge.us.cdo.cisco.com/api/platform/public-api/v1/cdfmc/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/7131daad-e813-4b8f-8f42-be1e241e8cdb', )
                         ], 
                     objects = [
-                        cdo_python_sdk.models.cd_fmc_object.CdFmcObject(
+                        cdo_sdk_python.models.cd_fmc_object.CdFmcObject(
                             uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                             name = 'my-example-entity', 
                             link = 'https://edge.us.cdo.cisco.com/api/platform/public-api/v1/cdfmc/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/7131daad-e813-4b8f-8f42-be1e241e8cdb', )

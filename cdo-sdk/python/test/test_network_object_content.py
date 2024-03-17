@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.network_object_content import NetworkObjectContent
+from cdo_sdk_python.models.network_object_content import NetworkObjectContent
 
 class TestNetworkObjectContent(unittest.TestCase):
     """NetworkObjectContent unit test stubs"""

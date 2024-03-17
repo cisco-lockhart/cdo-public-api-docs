@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.on_prem_fmc_info import OnPremFmcInfo
+from cdo_sdk_python.models.on_prem_fmc_info import OnPremFmcInfo
 
 # TODO update the JSON string below
 json = "{}"

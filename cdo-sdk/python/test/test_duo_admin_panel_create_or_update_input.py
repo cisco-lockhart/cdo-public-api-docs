@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.duo_admin_panel_create_or_update_input import DuoAdminPanelCreateOrUpdateInput
+from cdo_sdk_python.models.duo_admin_panel_create_or_update_input import DuoAdminPanelCreateOrUpdateInput
 
 class TestDuoAdminPanelCreateOrUpdateInput(unittest.TestCase):
     """DuoAdminPanelCreateOrUpdateInput unit test stubs"""
@@ -40,7 +40,7 @@ class TestDuoAdminPanelCreateOrUpdateInput(unittest.TestCase):
                 host = 'api-1aa2bbb3.duosecurity.com',
                 integration_key = 'EIVJAJFK1Y25B1BWVSO',
                 secret_key = 'b2Ln2DrBioS2sTI7dqRYh7DPoLsvYDm0wn5UbIKi',
-                labels = cdo_python_sdk.models.labels.Labels(
+                labels = cdo_sdk_python.models.labels.Labels(
                     grouped_labels = {"group1":["label-1","label-2"],"group2":["label-1","label-2"]}, 
                     ungrouped_labels = ["label-a","label-b","label-c"], )
             )

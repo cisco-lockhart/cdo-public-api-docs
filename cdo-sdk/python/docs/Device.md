@@ -38,7 +38,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.device import Device
+from cdo_sdk_python.models.device import Device
 
 # TODO update the JSON string below
 json = "{}"

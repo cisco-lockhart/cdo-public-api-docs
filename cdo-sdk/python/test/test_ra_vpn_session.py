@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.ra_vpn_session import RaVpnSession
+from cdo_sdk_python.models.ra_vpn_session import RaVpnSession
 
 class TestRaVpnSession(unittest.TestCase):
     """RaVpnSession unit test stubs"""
@@ -44,11 +44,11 @@ class TestRaVpnSession(unittest.TestCase):
                 assigned_ip_v6 = '172.16.0.2',
                 public_ip = '106.51.163.157',
                 audit_session_id = '0a6405150000900065c0c86d',
-                location = cdo_python_sdk.models.location.Location(
+                location = cdo_sdk_python.models.location.Location(
                     city = 'Ashburn', 
                     subdivision = 'VA', 
                     country = 'US', ),
-                os = cdo_python_sdk.models.os.OS(
+                os = cdo_sdk_python.models.os.OS(
                     type = 'mac-intel', 
                     version = '14.2.1', ),
                 bytes_tx = 9157513,

@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.sdc_public_key import SdcPublicKey
+from cdo_sdk_python.models.sdc_public_key import SdcPublicKey
 
 class TestSdcPublicKey(unittest.TestCase):
     """SdcPublicKey unit test stubs"""

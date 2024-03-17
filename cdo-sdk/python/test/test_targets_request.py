@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.targets_request import TargetsRequest
+from cdo_sdk_python.models.targets_request import TargetsRequest
 
 class TestTargetsRequest(unittest.TestCase):
     """TargetsRequest unit test stubs"""

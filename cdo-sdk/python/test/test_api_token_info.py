@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.api_token_info import ApiTokenInfo
+from cdo_sdk_python.models.api_token_info import ApiTokenInfo
 
 class TestApiTokenInfo(unittest.TestCase):
     """ApiTokenInfo unit test stubs"""

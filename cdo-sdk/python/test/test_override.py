@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.override import Override
+from cdo_sdk_python.models.override import Override
 
 class TestOverride(unittest.TestCase):
     """Override unit test stubs"""

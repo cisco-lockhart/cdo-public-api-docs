@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.cdo_transaction_type import CdoTransactionType
+from cdo_sdk_python.models.cdo_transaction_type import CdoTransactionType
 
 class TestCdoTransactionType(unittest.TestCase):
     """CdoTransactionType unit test stubs"""

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "cdo_python_sdk"
+name = "cdo_sdk_python"
 version = "1.0.0"
 description = "API Docs"
 authors = ["CDO TAC <cdo.tac@cisco.com>"]
@@ -7,7 +7,7 @@ license = "NoLicense"
 readme = "README.md"
 repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
 keywords = ["OpenAPI", "OpenAPI-Generator", "API Docs"]
-include = ["cdo_python_sdk/py.typed"]
+include = ["cdo_sdk_python/py.typed"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -34,7 +34,7 @@ extension-pkg-whitelist = "pydantic"
 
 [tool.mypy]
 files = [
-  "cdo_python_sdk",
+  "cdo_sdk_python",
   #"test",  # auto-generated tests
   "tests", # hand-written tests
 ]

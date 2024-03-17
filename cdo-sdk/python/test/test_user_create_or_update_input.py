@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.user_create_or_update_input import UserCreateOrUpdateInput
+from cdo_sdk_python.models.user_create_or_update_input import UserCreateOrUpdateInput
 
 class TestUserCreateOrUpdateInput(unittest.TestCase):
     """UserCreateOrUpdateInput unit test stubs"""

@@ -21,7 +21,7 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "cdo-python-sdk"
+NAME = "cdo-sdk-python"
 VERSION = "1.0.0"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
@@ -46,5 +46,5 @@ setup(
     long_description="""\
     Use the interactive documentation to explore the endpoints CDO has to offer
     """,  # noqa: E501
-    package_data={"cdo_python_sdk": ["py.typed"]},
+    package_data={"cdo_sdk_python": ["py.typed"]},
 )

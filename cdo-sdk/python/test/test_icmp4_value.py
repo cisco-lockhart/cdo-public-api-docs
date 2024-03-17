@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.icmp4_value import Icmp4Value
+from cdo_sdk_python.models.icmp4_value import Icmp4Value
 
 class TestIcmp4Value(unittest.TestCase):
     """Icmp4Value unit test stubs"""

@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.ios_create_or_update_input import IosCreateOrUpdateInput
+from cdo_sdk_python.models.ios_create_or_update_input import IosCreateOrUpdateInput
 
 # TODO update the JSON string below
 json = "{}"

@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.tenant_page import TenantPage
+from cdo_sdk_python.models.tenant_page import TenantPage
 
 class TestTenantPage(unittest.TestCase):
     """TenantPage unit test stubs"""
@@ -40,7 +40,7 @@ class TestTenantPage(unittest.TestCase):
                 limit = 50,
                 offset = 0,
                 items = [
-                    cdo_python_sdk.models.tenant.Tenant(
+                    cdo_sdk_python.models.tenant.Tenant(
                         uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                         name = 'mytenantname@cisco.com', 
                         security_cloud_control_enterprise_id = 'dda3ce52-312c-477a-aa86-1fd1866ddab7', 

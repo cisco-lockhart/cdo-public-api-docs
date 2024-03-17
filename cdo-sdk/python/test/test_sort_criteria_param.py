@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.sort_criteria_param import SortCriteriaParam
+from cdo_sdk_python.models.sort_criteria_param import SortCriteriaParam
 
 class TestSortCriteriaParam(unittest.TestCase):
     """SortCriteriaParam unit test stubs"""

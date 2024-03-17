@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.state_machine_details import StateMachineDetails
+from cdo_sdk_python.models.state_machine_details import StateMachineDetails
 
 class TestStateMachineDetails(unittest.TestCase):
     """StateMachineDetails unit test stubs"""
@@ -37,7 +37,7 @@ class TestStateMachineDetails(unittest.TestCase):
         if include_optional:
             return StateMachineDetails(
                 identifier = '',
-                last_error = cdo_python_sdk.models.state_machine_error.StateMachineError(
+                last_error = cdo_sdk_python.models.state_machine_error.StateMachineError(
                     error_message = '', 
                     error_code = '', 
                     action_identifier = '', )

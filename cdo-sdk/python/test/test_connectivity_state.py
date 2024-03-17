@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.connectivity_state import ConnectivityState
+from cdo_sdk_python.models.connectivity_state import ConnectivityState
 
 class TestConnectivityState(unittest.TestCase):
     """ConnectivityState unit test stubs"""

@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.cd_fmc_object import CdFmcObject
+from cdo_sdk_python.models.cd_fmc_object import CdFmcObject
 
 class TestCdFmcObject(unittest.TestCase):
     """CdFmcObject unit test stubs"""

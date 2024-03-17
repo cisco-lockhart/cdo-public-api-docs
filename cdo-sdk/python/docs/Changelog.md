@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.changelog import Changelog
+from cdo_sdk_python.models.changelog import Changelog
 
 # TODO update the JSON string below
 json = "{}"

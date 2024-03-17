@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.entity_type import EntityType
+from cdo_sdk_python.models.entity_type import EntityType
 
 class TestEntityType(unittest.TestCase):
     """EntityType unit test stubs"""

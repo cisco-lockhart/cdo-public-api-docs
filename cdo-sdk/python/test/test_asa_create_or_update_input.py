@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.asa_create_or_update_input import AsaCreateOrUpdateInput
+from cdo_sdk_python.models.asa_create_or_update_input import AsaCreateOrUpdateInput
 
 class TestAsaCreateOrUpdateInput(unittest.TestCase):
     """AsaCreateOrUpdateInput unit test stubs"""
@@ -43,7 +43,7 @@ class TestAsaCreateOrUpdateInput(unittest.TestCase):
                 connector_type = 'CDG',
                 ignore_certificate = False,
                 connector_name = 'SDC-1',
-                labels = cdo_python_sdk.models.labels.Labels(
+                labels = cdo_sdk_python.models.labels.Labels(
                     grouped_labels = {"group1":["label-1","label-2"],"group2":["label-1","label-2"]}, 
                     ungrouped_labels = ["label-a","label-b","label-c"], )
             )

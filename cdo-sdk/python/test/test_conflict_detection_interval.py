@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.conflict_detection_interval import ConflictDetectionInterval
+from cdo_sdk_python.models.conflict_detection_interval import ConflictDetectionInterval
 
 class TestConflictDetectionInterval(unittest.TestCase):
     """ConflictDetectionInterval unit test stubs"""

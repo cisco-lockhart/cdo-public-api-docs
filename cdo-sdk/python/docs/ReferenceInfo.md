@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.reference_info import ReferenceInfo
+from cdo_sdk_python.models.reference_info import ReferenceInfo
 
 # TODO update the JSON string below
 json = "{}"

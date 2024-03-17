@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.tenant_settings import TenantSettings
+from cdo_sdk_python.models.tenant_settings import TenantSettings
 
 class TestTenantSettings(unittest.TestCase):
     """TenantSettings unit test stubs"""

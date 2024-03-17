@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.meta import Meta
+from cdo_sdk_python.models.meta import Meta
 
 # TODO update the JSON string below
 json = "{}"

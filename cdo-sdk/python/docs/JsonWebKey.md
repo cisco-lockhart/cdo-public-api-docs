@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.json_web_key import JsonWebKey
+from cdo_sdk_python.models.json_web_key import JsonWebKey
 
 # TODO update the JSON string below
 json = "{}"

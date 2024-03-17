@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.reference_info import ReferenceInfo
+from cdo_sdk_python.models.reference_info import ReferenceInfo
 
 class TestReferenceInfo(unittest.TestCase):
     """ReferenceInfo unit test stubs"""

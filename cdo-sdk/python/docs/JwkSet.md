@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.jwk_set import JwkSet
+from cdo_sdk_python.models.jwk_set import JwkSet
 
 # TODO update the JSON string below
 json = "{}"

@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.user_page import UserPage
+from cdo_sdk_python.models.user_page import UserPage
 
 class TestUserPage(unittest.TestCase):
     """UserPage unit test stubs"""
@@ -40,7 +40,7 @@ class TestUserPage(unittest.TestCase):
                 limit = 50,
                 offset = 0,
                 items = [
-                    cdo_python_sdk.models.user.User(
+                    cdo_sdk_python.models.user.User(
                         uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                         name = 'myusername@cisco.com', 
                         roles = [ROLE_ADMIN], 

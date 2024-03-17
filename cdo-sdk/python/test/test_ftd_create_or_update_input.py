@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.ftd_create_or_update_input import FtdCreateOrUpdateInput
+from cdo_sdk_python.models.ftd_create_or_update_input import FtdCreateOrUpdateInput
 
 class TestFtdCreateOrUpdateInput(unittest.TestCase):
     """FtdCreateOrUpdateInput unit test stubs"""
@@ -41,7 +41,7 @@ class TestFtdCreateOrUpdateInput(unittest.TestCase):
                 virtual = True,
                 fmc_access_policy_uid = '',
                 performance_tier = 'FTDv5',
-                labels = cdo_python_sdk.models.labels.Labels(
+                labels = cdo_sdk_python.models.labels.Labels(
                     grouped_labels = {"group1":["label-1","label-2"],"group2":["label-1","label-2"]}, 
                     ungrouped_labels = ["label-a","label-b","label-c"], ),
                 device_type = 'CDFMC_MANAGED_FTD'

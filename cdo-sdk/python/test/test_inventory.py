@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.inventory import Inventory
+from cdo_sdk_python.models.inventory import Inventory
 
 class TestInventory(unittest.TestCase):
     """Inventory unit test stubs"""
@@ -37,7 +37,7 @@ class TestInventory(unittest.TestCase):
         if include_optional:
             return Inventory(
                 devices = [
-                    cdo_python_sdk.models.entity.Entity(
+                    cdo_sdk_python.models.entity.Entity(
                         uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                         name = 'my-example-entity', 
                         type = 'CDFMC_MANAGED_FTD', 
@@ -47,7 +47,7 @@ class TestInventory(unittest.TestCase):
                             ], )
                     ],
                 managers = [
-                    cdo_python_sdk.models.entity.Entity(
+                    cdo_sdk_python.models.entity.Entity(
                         uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                         name = 'my-example-entity', 
                         type = 'CDFMC_MANAGED_FTD', 
@@ -57,7 +57,7 @@ class TestInventory(unittest.TestCase):
                             ], )
                     ],
                 services = [
-                    cdo_python_sdk.models.entity.Entity(
+                    cdo_sdk_python.models.entity.Entity(
                         uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                         name = 'my-example-entity', 
                         type = 'CDFMC_MANAGED_FTD', 

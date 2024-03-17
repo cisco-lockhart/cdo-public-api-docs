@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.cdo_token_info import CdoTokenInfo
+from cdo_sdk_python.models.cdo_token_info import CdoTokenInfo
 
 # TODO update the JSON string below
 json = "{}"

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.shared_object_value import SharedObjectValue
+from cdo_sdk_python.models.shared_object_value import SharedObjectValue
 
 # TODO update the JSON string below
 json = "{}"

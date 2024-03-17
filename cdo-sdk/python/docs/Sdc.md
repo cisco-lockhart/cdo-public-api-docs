@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.sdc import Sdc
+from cdo_sdk_python.models.sdc import Sdc
 
 # TODO update the JSON string below
 json = "{}"

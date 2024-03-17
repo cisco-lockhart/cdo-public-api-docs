@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo_python_sdk.models.connector_type import ConnectorType
+from cdo_sdk_python.models.connector_type import ConnectorType
 
 class TestConnectorType(unittest.TestCase):
     """ConnectorType unit test stubs"""

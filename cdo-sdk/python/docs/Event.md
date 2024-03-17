@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_python_sdk.models.event import Event
+from cdo_sdk_python.models.event import Event
 
 # TODO update the JSON string below
 json = "{}"

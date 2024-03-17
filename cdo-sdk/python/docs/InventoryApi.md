@@ -1,4 +1,4 @@
-# cdo_python_sdk.InventoryApi
+# cdo_sdk_python.InventoryApi
 
 All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 
@@ -43,15 +43,15 @@ Onboard a Duo Admin Panel to the CDO tenant. The credentials to onboard the Duo 
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.cdo_transaction import CdoTransaction
-from cdo_python_sdk.models.duo_admin_panel_create_or_update_input import DuoAdminPanelCreateOrUpdateInput
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.cdo_transaction import CdoTransaction
+from cdo_sdk_python.models.duo_admin_panel_create_or_update_input import DuoAdminPanelCreateOrUpdateInput
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -61,15 +61,15 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
-    duo_admin_panel_create_or_update_input = cdo_python_sdk.DuoAdminPanelCreateOrUpdateInput() # DuoAdminPanelCreateOrUpdateInput | 
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
+    duo_admin_panel_create_or_update_input = cdo_sdk_python.DuoAdminPanelCreateOrUpdateInput() # DuoAdminPanelCreateOrUpdateInput | 
 
     try:
         # Onboard a Duo Admin Panel in the CDO tenant
@@ -124,15 +124,15 @@ Create an FTD device in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.cdo_transaction import CdoTransaction
-from cdo_python_sdk.models.ftd_create_or_update_input import FtdCreateOrUpdateInput
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.cdo_transaction import CdoTransaction
+from cdo_sdk_python.models.ftd_create_or_update_input import FtdCreateOrUpdateInput
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -142,15 +142,15 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
-    ftd_create_or_update_input = cdo_python_sdk.FtdCreateOrUpdateInput() # FtdCreateOrUpdateInput | 
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
+    ftd_create_or_update_input = cdo_sdk_python.FtdCreateOrUpdateInput() # FtdCreateOrUpdateInput | 
 
     try:
         # Create an FTD device in the CDO tenant
@@ -205,14 +205,14 @@ Delete cdFMC managed FTD device in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.cdo_transaction import CdoTransaction
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.cdo_transaction import CdoTransaction
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -222,14 +222,14 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
     device_uid = 'device_uid_example' # str | The unique identifier of the cdFMC managed FTD device in CDO.
 
     try:
@@ -285,13 +285,13 @@ Delete a Cloud Service by UID in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -301,14 +301,14 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
     cloud_service_uid = 'cloud_service_uid_example' # str | The unique identifier of the cloud service in CDO.
 
     try:
@@ -362,13 +362,13 @@ Delete a device by UID in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -378,14 +378,14 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
     device_uid = 'device_uid_example' # str | The unique identifier of the device in CDO.
 
     try:
@@ -440,13 +440,13 @@ Delete a Device Manager by UID in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -456,14 +456,14 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
     device_manager_uid = 'device_manager_uid_example' # str | The unique identifier of the device manager in CDO.
 
     try:
@@ -518,13 +518,13 @@ Delete a template device by UID in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -534,14 +534,14 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
     template_device_uid = 'template_device_uid_example' # str | The unique identifier of the template device in CDO.
 
     try:
@@ -595,14 +595,14 @@ Deploy changes to an ASA device in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.cdo_transaction import CdoTransaction
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.cdo_transaction import CdoTransaction
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -612,14 +612,14 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
     device_uid = 'device_uid_example' # str | 
 
     try:
@@ -676,15 +676,15 @@ Register an FTD device managed by an FMC to the CDO tenant. Call this API endpoi
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.cdo_transaction import CdoTransaction
-from cdo_python_sdk.models.ftd_registration_input import FtdRegistrationInput
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.cdo_transaction import CdoTransaction
+from cdo_sdk_python.models.ftd_registration_input import FtdRegistrationInput
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -694,15 +694,15 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
-    ftd_registration_input = cdo_python_sdk.FtdRegistrationInput() # FtdRegistrationInput | 
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
+    ftd_registration_input = cdo_sdk_python.FtdRegistrationInput() # FtdRegistrationInput | 
 
     try:
         # Register an FTD device managed by an FMC to the CDO tenant. Call this API endpoint after you have created an FTD, and pasted the generated CLI output in the FTD
@@ -757,14 +757,14 @@ Fetch a Cloud Service by UID in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.device import Device
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.device import Device
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -774,14 +774,14 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
     cloud_service_uid = 'cloud_service_uid_example' # str | The unique identifier of the cloud service in CDO.
 
     try:
@@ -838,14 +838,14 @@ Fetch a device by UID in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.device import Device
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.device import Device
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -855,14 +855,14 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
     device_uid = 'device_uid_example' # str | The unique identifier of the device in CDO.
 
     try:
@@ -920,14 +920,14 @@ Fetch a Device Manager by UID in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.device import Device
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.device import Device
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -937,14 +937,14 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
     device_manager_uid = 'device_manager_uid_example' # str | The unique identifier of the device manager in CDO.
 
     try:
@@ -1001,14 +1001,14 @@ Fetch a template device by UID in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.device import Device
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.device import Device
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -1018,14 +1018,14 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
     template_device_uid = 'template_device_uid_example' # str | The unique identifier of the template device in CDO.
 
     try:
@@ -1082,15 +1082,15 @@ Fetch a list of Cloud Services in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.device_page import DevicePage
-from cdo_python_sdk.models.sort_criteria_param import SortCriteriaParam
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.device_page import DevicePage
+from cdo_sdk_python.models.sort_criteria_param import SortCriteriaParam
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -1100,15 +1100,15 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
-    sort = cdo_python_sdk.SortCriteriaParam() # SortCriteriaParam | The fields to sort results by.
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
+    sort = cdo_sdk_python.SortCriteriaParam() # SortCriteriaParam | The fields to sort results by.
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'name:London-Office-ASA' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
@@ -1169,15 +1169,15 @@ Fetch a list of Device Managers (on-prem FMCs and cloud-delivered FMCs) in the C
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.device_page import DevicePage
-from cdo_python_sdk.models.sort_criteria_param import SortCriteriaParam
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.device_page import DevicePage
+from cdo_sdk_python.models.sort_criteria_param import SortCriteriaParam
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -1187,15 +1187,15 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
-    sort = cdo_python_sdk.SortCriteriaParam() # SortCriteriaParam | The fields to sort results by.
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
+    sort = cdo_sdk_python.SortCriteriaParam() # SortCriteriaParam | The fields to sort results by.
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'name:London-Office-ASA' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
@@ -1256,15 +1256,15 @@ Fetch a list of devices in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.device_page import DevicePage
-from cdo_python_sdk.models.sort_criteria_param import SortCriteriaParam
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.device_page import DevicePage
+from cdo_sdk_python.models.sort_criteria_param import SortCriteriaParam
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -1274,15 +1274,15 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
-    sort = cdo_python_sdk.SortCriteriaParam() # SortCriteriaParam | The fields to sort results by.
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
+    sort = cdo_sdk_python.SortCriteriaParam() # SortCriteriaParam | The fields to sort results by.
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'name:London-Office-ASA' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
@@ -1344,15 +1344,15 @@ Fetch a list of template devices in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.device_page import DevicePage
-from cdo_python_sdk.models.sort_criteria_param import SortCriteriaParam
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.device_page import DevicePage
+from cdo_sdk_python.models.sort_criteria_param import SortCriteriaParam
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -1362,15 +1362,15 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
-    sort = cdo_python_sdk.SortCriteriaParam() # SortCriteriaParam | The fields to sort results by.
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
+    sort = cdo_sdk_python.SortCriteriaParam() # SortCriteriaParam | The fields to sort results by.
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'name:London-Office-ASA' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
@@ -1431,15 +1431,15 @@ Onboard a ASA device in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.asa_create_or_update_input import AsaCreateOrUpdateInput
-from cdo_python_sdk.models.cdo_transaction import CdoTransaction
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.asa_create_or_update_input import AsaCreateOrUpdateInput
+from cdo_sdk_python.models.cdo_transaction import CdoTransaction
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -1449,15 +1449,15 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
-    asa_create_or_update_input = cdo_python_sdk.AsaCreateOrUpdateInput() # AsaCreateOrUpdateInput | 
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
+    asa_create_or_update_input = cdo_sdk_python.AsaCreateOrUpdateInput() # AsaCreateOrUpdateInput | 
 
     try:
         # Onboard a ASA device in the CDO tenant
@@ -1513,15 +1513,15 @@ Onboard a IOS device in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.cdo_transaction import CdoTransaction
-from cdo_python_sdk.models.ios_create_or_update_input import IosCreateOrUpdateInput
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.cdo_transaction import CdoTransaction
+from cdo_sdk_python.models.ios_create_or_update_input import IosCreateOrUpdateInput
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -1531,15 +1531,15 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
-    ios_create_or_update_input = cdo_python_sdk.IosCreateOrUpdateInput() # IosCreateOrUpdateInput | 
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
+    ios_create_or_update_input = cdo_sdk_python.IosCreateOrUpdateInput() # IosCreateOrUpdateInput | 
 
     try:
         # Onboard a IOS device in the CDO tenant
@@ -1594,15 +1594,15 @@ Modify a Cloud Service by UID in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.device import Device
-from cdo_python_sdk.models.device_patch_input import DevicePatchInput
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.device import Device
+from cdo_sdk_python.models.device_patch_input import DevicePatchInput
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -1612,16 +1612,16 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
     cloud_service_uid = 'cloud_service_uid_example' # str | The unique identifier of the cloud service in CDO.
-    device_patch_input = cdo_python_sdk.DevicePatchInput() # DevicePatchInput | 
+    device_patch_input = cdo_sdk_python.DevicePatchInput() # DevicePatchInput | 
 
     try:
         # Modify a Cloud Service by UID in the CDO tenant
@@ -1678,15 +1678,15 @@ Modify a device in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.device import Device
-from cdo_python_sdk.models.device_patch_input import DevicePatchInput
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.device import Device
+from cdo_sdk_python.models.device_patch_input import DevicePatchInput
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -1696,16 +1696,16 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
     device_uid = 'device_uid_example' # str | The unique identifier of the device in CDO.
-    device_patch_input = cdo_python_sdk.DevicePatchInput() # DevicePatchInput | 
+    device_patch_input = cdo_sdk_python.DevicePatchInput() # DevicePatchInput | 
 
     try:
         # Modify a device in the CDO tenant
@@ -1763,15 +1763,15 @@ Modify a device manager by UID in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.device import Device
-from cdo_python_sdk.models.device_patch_input import DevicePatchInput
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.device import Device
+from cdo_sdk_python.models.device_patch_input import DevicePatchInput
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -1781,16 +1781,16 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
     device_manager_uid = 'device_manager_uid_example' # str | The unique identifier of the device manager in CDO.
-    device_patch_input = cdo_python_sdk.DevicePatchInput() # DevicePatchInput | 
+    device_patch_input = cdo_sdk_python.DevicePatchInput() # DevicePatchInput | 
 
     try:
         # Modify a device manager by UID in the CDO tenant
@@ -1847,15 +1847,15 @@ Modify a template device in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.device import Device
-from cdo_python_sdk.models.device_patch_input import DevicePatchInput
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.device import Device
+from cdo_sdk_python.models.device_patch_input import DevicePatchInput
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -1865,16 +1865,16 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
     template_device_uid = 'template_device_uid_example' # str | The unique identifier of the template device in CDO.
-    device_patch_input = cdo_python_sdk.DevicePatchInput() # DevicePatchInput | 
+    device_patch_input = cdo_sdk_python.DevicePatchInput() # DevicePatchInput | 
 
     try:
         # Modify a template device in the CDO tenant
@@ -1931,14 +1931,14 @@ Read configuration on ASA device into CDO
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.cdo_transaction import CdoTransaction
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.cdo_transaction import CdoTransaction
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -1948,14 +1948,14 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
     device_uid = 'device_uid_example' # str | The unique identifier of the ASA device in CDO.
 
     try:
@@ -2011,14 +2011,14 @@ Reconnect an ASA device in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo_python_sdk
-from cdo_python_sdk.models.cdo_transaction import CdoTransaction
-from cdo_python_sdk.rest import ApiException
+import cdo_sdk_python
+from cdo_sdk_python.models.cdo_transaction import CdoTransaction
+from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -2028,14 +2028,14 @@ configuration = cdo_python_sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo_python_sdk.Configuration(
+configuration = cdo_sdk_python.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo_python_sdk.ApiClient(configuration) as api_client:
+with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo_python_sdk.InventoryApi(api_client)
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
     device_uid = 'device_uid_example' # str | The unique identifier of the ASA device in CDO.
 
     try:
