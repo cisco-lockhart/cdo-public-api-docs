@@ -30,7 +30,7 @@ echo -n "$(yellow Generating Postman collection from combined OpenAPI YAMLs)... 
 echo "Postman collection Generated ✅︎"
 
 echo -n "$(yellow Generating Python SDK from combined OpenAPI YAMLs)... "
-openapi-generator generate -i openapi.yaml -g python -o ./cdo-sdk/python --additional-properties packageName=cdo-python-sdk --openapi-generator-ignore-list ".github/workflows/python.yml"
+openapi-generator generate -i openapi.yaml -g python -o ./cdo-sdk/python --additional-properties packageName=cdo_sdk_python --openapi-generator-ignore-list ".github/workflows/python.yml"
 echo "Python SDK Generated ✅︎"
 
 if [[ -z ${args[--do-not-commit]} ]]; then
