@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.change_request_page import ChangeRequestPage
+from cdo_python_sdk.models.change_request_page import ChangeRequestPage
 
 # TODO update the JSON string below
 json = "{}"

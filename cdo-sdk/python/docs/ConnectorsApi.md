@@ -1,4 +1,4 @@
-# cdo-python-sdk.ConnectorsApi
+# cdo_python_sdk.ConnectorsApi
 
 All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 
@@ -18,14 +18,14 @@ Fetch a SDC by UID in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo-python-sdk
-from cdo-python-sdk.models.sdc import Sdc
-from cdo-python-sdk.rest import ApiException
+import cdo_python_sdk
+from cdo_python_sdk.models.sdc import Sdc
+from cdo_python_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo-python-sdk.Configuration(
+configuration = cdo_python_sdk.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -35,14 +35,14 @@ configuration = cdo-python-sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo-python-sdk.Configuration(
+configuration = cdo_python_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo-python-sdk.ApiClient(configuration) as api_client:
+with cdo_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo-python-sdk.ConnectorsApi(api_client)
+    api_instance = cdo_python_sdk.ConnectorsApi(api_client)
     sdc_uid = 'sdc_uid_example' # str | The unique identifier of the SDC in CDO.
 
     try:
@@ -99,15 +99,15 @@ Fetch a list of SDCs in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo-python-sdk
-from cdo-python-sdk.models.sdc_page import SdcPage
-from cdo-python-sdk.models.sort_criteria_param import SortCriteriaParam
-from cdo-python-sdk.rest import ApiException
+import cdo_python_sdk
+from cdo_python_sdk.models.sdc_page import SdcPage
+from cdo_python_sdk.models.sort_criteria_param import SortCriteriaParam
+from cdo_python_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo-python-sdk.Configuration(
+configuration = cdo_python_sdk.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -117,15 +117,15 @@ configuration = cdo-python-sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo-python-sdk.Configuration(
+configuration = cdo_python_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo-python-sdk.ApiClient(configuration) as api_client:
+with cdo_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo-python-sdk.ConnectorsApi(api_client)
-    sort = cdo-python-sdk.SortCriteriaParam() # SortCriteriaParam | The fields to sort results by.
+    api_instance = cdo_python_sdk.ConnectorsApi(api_client)
+    sort = cdo_python_sdk.SortCriteriaParam() # SortCriteriaParam | The fields to sort results by.
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'name:London-Office-ASA' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)

@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.changelog import Changelog
+from cdo_python_sdk.models.changelog import Changelog
 
 class TestChangelog(unittest.TestCase):
     """Changelog unit test stubs"""
@@ -40,7 +40,7 @@ class TestChangelog(unittest.TestCase):
                 status = 'ACTIVE',
                 entity_uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb',
                 events = [
-                    cdo-python-sdk.models.event.Event(
+                    cdo_python_sdk.models.event.Event(
                         description = '', 
                         diff = '', 
                         username = 'myuser@cisco.com', 

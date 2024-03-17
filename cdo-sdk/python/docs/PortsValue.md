@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.ports_value import PortsValue
+from cdo_python_sdk.models.ports_value import PortsValue
 
 # TODO update the JSON string below
 json = "{}"

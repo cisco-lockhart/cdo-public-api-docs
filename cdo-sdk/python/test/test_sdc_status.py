@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.sdc_status import SdcStatus
+from cdo_python_sdk.models.sdc_status import SdcStatus
 
 class TestSdcStatus(unittest.TestCase):
     """SdcStatus unit test stubs"""

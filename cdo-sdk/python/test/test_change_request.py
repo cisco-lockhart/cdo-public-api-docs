@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.change_request import ChangeRequest
+from cdo_python_sdk.models.change_request import ChangeRequest
 
 class TestChangeRequest(unittest.TestCase):
     """ChangeRequest unit test stubs"""

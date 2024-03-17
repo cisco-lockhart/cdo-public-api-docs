@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.cdo_transaction import CdoTransaction
+from cdo_python_sdk.models.cdo_transaction import CdoTransaction
 
 # TODO update the JSON string below
 json = "{}"

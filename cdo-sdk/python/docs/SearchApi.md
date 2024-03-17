@@ -1,4 +1,4 @@
-# cdo-python-sdk.SearchApi
+# cdo_python_sdk.SearchApi
 
 All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 
@@ -18,14 +18,14 @@ Initiate Full Indexing
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo-python-sdk
-from cdo-python-sdk.models.cdo_transaction import CdoTransaction
-from cdo-python-sdk.rest import ApiException
+import cdo_python_sdk
+from cdo_python_sdk.models.cdo_transaction import CdoTransaction
+from cdo_python_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo-python-sdk.Configuration(
+configuration = cdo_python_sdk.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -35,14 +35,14 @@ configuration = cdo-python-sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo-python-sdk.Configuration(
+configuration = cdo_python_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo-python-sdk.ApiClient(configuration) as api_client:
+with cdo_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo-python-sdk.SearchApi(api_client)
+    api_instance = cdo_python_sdk.SearchApi(api_client)
 
     try:
         # Initiate Full Indexing
@@ -95,14 +95,14 @@ Search for devices, services, managers, objects and policies across the CDO tena
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import cdo-python-sdk
-from cdo-python-sdk.models.global_search_result import GlobalSearchResult
-from cdo-python-sdk.rest import ApiException
+import cdo_python_sdk
+from cdo_python_sdk.models.global_search_result import GlobalSearchResult
+from cdo_python_sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = cdo-python-sdk.Configuration(
+configuration = cdo_python_sdk.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -112,14 +112,14 @@ configuration = cdo-python-sdk.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = cdo-python-sdk.Configuration(
+configuration = cdo_python_sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with cdo-python-sdk.ApiClient(configuration) as api_client:
+with cdo_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = cdo-python-sdk.SearchApi(api_client)
+    api_instance = cdo_python_sdk.SearchApi(api_client)
     q = 'q_example' # str | 
 
     try:

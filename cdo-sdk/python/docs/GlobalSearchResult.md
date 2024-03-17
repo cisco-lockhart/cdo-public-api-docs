@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.global_search_result import GlobalSearchResult
+from cdo_python_sdk.models.global_search_result import GlobalSearchResult
 
 # TODO update the JSON string below
 json = "{}"

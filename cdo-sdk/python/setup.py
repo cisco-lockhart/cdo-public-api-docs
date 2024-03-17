@@ -46,5 +46,5 @@ setup(
     long_description="""\
     Use the interactive documentation to explore the endpoints CDO has to offer
     """,  # noqa: E501
-    package_data={"cdo-python-sdk": ["py.typed"]},
+    package_data={"cdo_python_sdk": ["py.typed"]},
 )

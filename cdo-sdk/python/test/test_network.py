@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.network import Network
+from cdo_python_sdk.models.network import Network
 
 class TestNetwork(unittest.TestCase):
     """Network unit test stubs"""

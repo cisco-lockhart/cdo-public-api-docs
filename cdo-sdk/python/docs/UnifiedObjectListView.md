@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.unified_object_list_view import UnifiedObjectListView
+from cdo_python_sdk.models.unified_object_list_view import UnifiedObjectListView
 
 # TODO update the JSON string below
 json = "{}"

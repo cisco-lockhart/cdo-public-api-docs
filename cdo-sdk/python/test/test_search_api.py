@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.api.search_api import SearchApi
+from cdo_python_sdk.api.search_api import SearchApi
 
 
 class TestSearchApi(unittest.TestCase):

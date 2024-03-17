@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.cdo_region import CdoRegion
+from cdo_python_sdk.models.cdo_region import CdoRegion
 
 class TestCdoRegion(unittest.TestCase):
     """CdoRegion unit test stubs"""

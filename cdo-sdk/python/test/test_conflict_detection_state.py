@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.conflict_detection_state import ConflictDetectionState
+from cdo_python_sdk.models.conflict_detection_state import ConflictDetectionState
 
 class TestConflictDetectionState(unittest.TestCase):
     """ConflictDetectionState unit test stubs"""

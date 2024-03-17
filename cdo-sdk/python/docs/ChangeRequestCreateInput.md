@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.change_request_create_input import ChangeRequestCreateInput
+from cdo_python_sdk.models.change_request_create_input import ChangeRequestCreateInput
 
 # TODO update the JSON string below
 json = "{}"

@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.tenant import Tenant
+from cdo_python_sdk.models.tenant import Tenant
 
 class TestTenant(unittest.TestCase):
     """Tenant unit test stubs"""

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.device_patch_input import DevicePatchInput
+from cdo_python_sdk.models.device_patch_input import DevicePatchInput
 
 # TODO update the JSON string below
 json = "{}"

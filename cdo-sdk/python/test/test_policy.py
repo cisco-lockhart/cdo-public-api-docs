@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.policy import Policy
+from cdo_python_sdk.models.policy import Policy
 
 class TestPolicy(unittest.TestCase):
     """Policy unit test stubs"""

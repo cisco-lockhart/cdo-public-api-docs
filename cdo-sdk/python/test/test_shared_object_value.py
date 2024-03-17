@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.shared_object_value import SharedObjectValue
+from cdo_python_sdk.models.shared_object_value import SharedObjectValue
 
 class TestSharedObjectValue(unittest.TestCase):
     """SharedObjectValue unit test stubs"""

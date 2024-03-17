@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.group_content import GroupContent
+from cdo_python_sdk.models.group_content import GroupContent
 
 # TODO update the JSON string below
 json = "{}"

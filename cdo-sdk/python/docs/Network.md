@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.network import Network
+from cdo_python_sdk.models.network import Network
 
 # TODO update the JSON string below
 json = "{}"

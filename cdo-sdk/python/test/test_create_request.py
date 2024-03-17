@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.create_request import CreateRequest
+from cdo_python_sdk.models.create_request import CreateRequest
 
 class TestCreateRequest(unittest.TestCase):
     """CreateRequest unit test stubs"""
@@ -37,7 +37,7 @@ class TestCreateRequest(unittest.TestCase):
         if include_optional:
             return CreateRequest(
                 name = 'my-object',
-                value = cdo-python-sdk.models.shared_object_value.SharedObjectValue(
+                value = cdo_python_sdk.models.shared_object_value.SharedObjectValue(
                     object_type = 'NETWORK_OBJECT', 
                     default_content = {"literal":"a:b:c::1"}, 
                     overrides = [
@@ -51,7 +51,7 @@ class TestCreateRequest(unittest.TestCase):
         else:
             return CreateRequest(
                 name = 'my-object',
-                value = cdo-python-sdk.models.shared_object_value.SharedObjectValue(
+                value = cdo_python_sdk.models.shared_object_value.SharedObjectValue(
                     object_type = 'NETWORK_OBJECT', 
                     default_content = {"literal":"a:b:c::1"}, 
                     overrides = [

@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.object_response import ObjectResponse
+from cdo_python_sdk.models.object_response import ObjectResponse
 
 # TODO update the JSON string below
 json = "{}"

@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.list_object_response import ListObjectResponse
+from cdo_python_sdk.models.list_object_response import ListObjectResponse
 
 class TestListObjectResponse(unittest.TestCase):
     """ListObjectResponse unit test stubs"""
@@ -40,11 +40,11 @@ class TestListObjectResponse(unittest.TestCase):
                 limit = 50,
                 offset = 0,
                 items = [
-                    cdo-python-sdk.models.unified_object_list_view.UnifiedObjectListView(
+                    cdo_python_sdk.models.unified_object_list_view.UnifiedObjectListView(
                         uid = '', 
                         name = '', 
                         description = '', 
-                        value = cdo-python-sdk.models.shared_object_value.SharedObjectValue(
+                        value = cdo_python_sdk.models.shared_object_value.SharedObjectValue(
                             object_type = 'NETWORK_OBJECT', 
                             default_content = {"literal":"a:b:c::1"}, 
                             overrides = [

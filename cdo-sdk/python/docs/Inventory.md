@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.inventory import Inventory
+from cdo_python_sdk.models.inventory import Inventory
 
 # TODO update the JSON string below
 json = "{}"

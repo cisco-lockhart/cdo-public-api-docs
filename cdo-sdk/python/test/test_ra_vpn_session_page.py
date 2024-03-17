@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.ra_vpn_session_page import RaVpnSessionPage
+from cdo_python_sdk.models.ra_vpn_session_page import RaVpnSessionPage
 
 class TestRaVpnSessionPage(unittest.TestCase):
     """RaVpnSessionPage unit test stubs"""
@@ -40,7 +40,7 @@ class TestRaVpnSessionPage(unittest.TestCase):
                 limit = 50,
                 offset = 0,
                 items = [
-                    cdo-python-sdk.models.ra_vpn_session.RaVpnSession(
+                    cdo_python_sdk.models.ra_vpn_session.RaVpnSession(
                         uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                         username = 'user@example.com', 
                         status = 'ACTIVE', 
@@ -49,11 +49,11 @@ class TestRaVpnSessionPage(unittest.TestCase):
                         assigned_ip_v6 = '172.16.0.2', 
                         public_ip = '106.51.163.157', 
                         audit_session_id = '0a6405150000900065c0c86d', 
-                        location = cdo-python-sdk.models.location.Location(
+                        location = cdo_python_sdk.models.location.Location(
                             city = 'Ashburn', 
                             subdivision = 'VA', 
                             country = 'US', ), 
-                        os = cdo-python-sdk.models.os.OS(
+                        os = cdo_python_sdk.models.os.OS(
                             type = 'mac-intel', 
                             version = '14.2.1', ), 
                         bytes_tx = 9157513, 

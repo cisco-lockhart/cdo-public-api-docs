@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.sdc_public_key import SdcPublicKey
+from cdo_python_sdk.models.sdc_public_key import SdcPublicKey
 
 # TODO update the JSON string below
 json = "{}"

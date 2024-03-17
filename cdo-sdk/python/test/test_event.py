@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.event import Event
+from cdo_python_sdk.models.event import Event
 
 class TestEvent(unittest.TestCase):
     """Event unit test stubs"""

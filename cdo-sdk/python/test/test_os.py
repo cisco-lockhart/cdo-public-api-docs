@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.os import OS
+from cdo_python_sdk.models.os import OS
 
 class TestOS(unittest.TestCase):
     """OS unit test stubs"""

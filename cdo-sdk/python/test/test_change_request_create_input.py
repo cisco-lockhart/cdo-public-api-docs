@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.change_request_create_input import ChangeRequestCreateInput
+from cdo_python_sdk.models.change_request_create_input import ChangeRequestCreateInput
 
 class TestChangeRequestCreateInput(unittest.TestCase):
     """ChangeRequestCreateInput unit test stubs"""

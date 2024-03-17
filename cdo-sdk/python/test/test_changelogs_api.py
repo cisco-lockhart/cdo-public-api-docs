@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.api.changelogs_api import ChangelogsApi
+from cdo_python_sdk.api.changelogs_api import ChangelogsApi
 
 
 class TestChangelogsApi(unittest.TestCase):

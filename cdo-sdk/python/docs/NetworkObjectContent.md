@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.network_object_content import NetworkObjectContent
+from cdo_python_sdk.models.network_object_content import NetworkObjectContent
 
 # TODO update the JSON string below
 json = "{}"

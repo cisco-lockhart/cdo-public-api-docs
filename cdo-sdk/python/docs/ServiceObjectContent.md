@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.service_object_content import ServiceObjectContent
+from cdo_python_sdk.models.service_object_content import ServiceObjectContent
 
 # TODO update the JSON string below
 json = "{}"

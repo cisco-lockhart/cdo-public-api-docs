@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.device_patch_input import DevicePatchInput
+from cdo_python_sdk.models.device_patch_input import DevicePatchInput
 
 class TestDevicePatchInput(unittest.TestCase):
     """DevicePatchInput unit test stubs"""
@@ -37,7 +37,7 @@ class TestDevicePatchInput(unittest.TestCase):
         if include_optional:
             return DevicePatchInput(
                 name = 'My ASA',
-                labels = cdo-python-sdk.models.labels.Labels(
+                labels = cdo_python_sdk.models.labels.Labels(
                     grouped_labels = {"group1":["label-1","label-2"],"group2":["label-1","label-2"]}, 
                     ungrouped_labels = ["label-a","label-b","label-c"], )
             )

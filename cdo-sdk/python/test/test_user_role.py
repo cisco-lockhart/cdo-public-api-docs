@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.user_role import UserRole
+from cdo_python_sdk.models.user_role import UserRole
 
 class TestUserRole(unittest.TestCase):
     """UserRole unit test stubs"""

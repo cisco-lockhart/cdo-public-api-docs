@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.icmp4_value import Icmp4Value
+from cdo_python_sdk.models.icmp4_value import Icmp4Value
 
 # TODO update the JSON string below
 json = "{}"

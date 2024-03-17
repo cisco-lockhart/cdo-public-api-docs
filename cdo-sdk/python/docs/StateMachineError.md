@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.state_machine_error import StateMachineError
+from cdo_python_sdk.models.state_machine_error import StateMachineError
 
 # TODO update the JSON string below
 json = "{}"

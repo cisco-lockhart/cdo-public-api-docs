@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.create_request import CreateRequest
+from cdo_python_sdk.models.create_request import CreateRequest
 
 # TODO update the JSON string below
 json = "{}"

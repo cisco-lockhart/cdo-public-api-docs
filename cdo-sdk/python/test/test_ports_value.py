@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.ports_value import PortsValue
+from cdo_python_sdk.models.ports_value import PortsValue
 
 class TestPortsValue(unittest.TestCase):
     """PortsValue unit test stubs"""

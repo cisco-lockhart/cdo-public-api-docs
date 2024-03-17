@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.device_role import DeviceRole
+from cdo_python_sdk.models.device_role import DeviceRole
 
 class TestDeviceRole(unittest.TestCase):
     """DeviceRole unit test stubs"""

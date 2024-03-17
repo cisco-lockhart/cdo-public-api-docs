@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.user import User
+from cdo_python_sdk.models.user import User
 
 class TestUser(unittest.TestCase):
     """User unit test stubs"""

@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.location import Location
+from cdo_python_sdk.models.location import Location
 
 class TestLocation(unittest.TestCase):
     """Location unit test stubs"""

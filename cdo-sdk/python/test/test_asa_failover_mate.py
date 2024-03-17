@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.asa_failover_mate import AsaFailoverMate
+from cdo_python_sdk.models.asa_failover_mate import AsaFailoverMate
 
 class TestAsaFailoverMate(unittest.TestCase):
     """AsaFailoverMate unit test stubs"""

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.ftd_registration_input import FtdRegistrationInput
+from cdo_python_sdk.models.ftd_registration_input import FtdRegistrationInput
 
 # TODO update the JSON string below
 json = "{}"

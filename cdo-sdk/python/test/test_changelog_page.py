@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.changelog_page import ChangelogPage
+from cdo_python_sdk.models.changelog_page import ChangelogPage
 
 class TestChangelogPage(unittest.TestCase):
     """ChangelogPage unit test stubs"""
@@ -40,12 +40,12 @@ class TestChangelogPage(unittest.TestCase):
                 limit = 50,
                 offset = 0,
                 items = [
-                    cdo-python-sdk.models.changelog.Changelog(
+                    cdo_python_sdk.models.changelog.Changelog(
                         uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                         status = 'ACTIVE', 
                         entity_uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                         events = [
-                            cdo-python-sdk.models.event.Event(
+                            cdo_python_sdk.models.event.Event(
                                 description = '', 
                                 diff = '', 
                                 username = 'myuser@cisco.com', 

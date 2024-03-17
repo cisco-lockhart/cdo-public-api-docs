@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.authentication_error import AuthenticationError
+from cdo_python_sdk.models.authentication_error import AuthenticationError
 
 # TODO update the JSON string below
 json = "{}"

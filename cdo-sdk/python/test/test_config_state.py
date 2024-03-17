@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.config_state import ConfigState
+from cdo_python_sdk.models.config_state import ConfigState
 
 class TestConfigState(unittest.TestCase):
     """ConfigState unit test stubs"""

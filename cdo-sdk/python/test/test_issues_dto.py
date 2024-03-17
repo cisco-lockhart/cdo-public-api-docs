@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.issues_dto import IssuesDto
+from cdo_python_sdk.models.issues_dto import IssuesDto
 
 class TestIssuesDto(unittest.TestCase):
     """IssuesDto unit test stubs"""

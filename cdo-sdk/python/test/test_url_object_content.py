@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.url_object_content import UrlObjectContent
+from cdo_python_sdk.models.url_object_content import UrlObjectContent
 
 class TestUrlObjectContent(unittest.TestCase):
     """UrlObjectContent unit test stubs"""

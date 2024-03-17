@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.api.object_management_api import ObjectManagementApi
+from cdo_python_sdk.api.object_management_api import ObjectManagementApi
 
 
 class TestObjectManagementApi(unittest.TestCase):

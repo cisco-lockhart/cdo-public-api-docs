@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo-python-sdk.models.user_create_or_update_input import UserCreateOrUpdateInput
+from cdo_python_sdk.models.user_create_or_update_input import UserCreateOrUpdateInput
 
 # TODO update the JSON string below
 json = "{}"

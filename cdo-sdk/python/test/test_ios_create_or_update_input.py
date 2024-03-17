@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.ios_create_or_update_input import IosCreateOrUpdateInput
+from cdo_python_sdk.models.ios_create_or_update_input import IosCreateOrUpdateInput
 
 class TestIosCreateOrUpdateInput(unittest.TestCase):
     """IosCreateOrUpdateInput unit test stubs"""
@@ -42,7 +42,7 @@ class TestIosCreateOrUpdateInput(unittest.TestCase):
                 password = 'Cisco@23',
                 ignore_certificate = False,
                 connector_name = 'SDC-1',
-                labels = cdo-python-sdk.models.labels.Labels(
+                labels = cdo_python_sdk.models.labels.Labels(
                     grouped_labels = {"group1":["label-1","label-2"],"group2":["label-1","label-2"]}, 
                     ungrouped_labels = ["label-a","label-b","label-c"], )
             )

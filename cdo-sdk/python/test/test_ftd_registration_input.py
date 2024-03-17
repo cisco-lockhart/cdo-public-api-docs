@@ -15,7 +15,7 @@
 
 import unittest
 
-from cdo-python-sdk.models.ftd_registration_input import FtdRegistrationInput
+from cdo_python_sdk.models.ftd_registration_input import FtdRegistrationInput
 
 class TestFtdRegistrationInput(unittest.TestCase):
     """FtdRegistrationInput unit test stubs"""
