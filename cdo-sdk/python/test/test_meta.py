@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.meta import Meta
+from cdo-python-sdk.models.meta import Meta
 
 class TestMeta(unittest.TestCase):
     """Meta unit test stubs"""

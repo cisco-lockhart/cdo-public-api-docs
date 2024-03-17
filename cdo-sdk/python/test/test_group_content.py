@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.group_content import GroupContent
+from cdo-python-sdk.models.group_content import GroupContent
 
 class TestGroupContent(unittest.TestCase):
     """GroupContent unit test stubs"""
@@ -37,7 +37,7 @@ class TestGroupContent(unittest.TestCase):
         if include_optional:
             return GroupContent(
                 literals = [
-                    openapi_client.models.single_content.SingleContent()
+                    cdo-python-sdk.models.single_content.SingleContent()
                     ],
                 referenced_object_uids = ["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"]
             )

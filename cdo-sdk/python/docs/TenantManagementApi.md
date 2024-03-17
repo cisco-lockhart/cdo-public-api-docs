@@ -1,4 +1,4 @@
-# openapi_client.TenantManagementApi
+# cdo-python-sdk.TenantManagementApi
 
 All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 
@@ -22,15 +22,15 @@ Add a tenant to the MSP Portal
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import openapi_client
-from openapi_client.models.msp_add_tenant_input import MspAddTenantInput
-from openapi_client.models.status_info import StatusInfo
-from openapi_client.rest import ApiException
+import cdo-python-sdk
+from cdo-python-sdk.models.msp_add_tenant_input import MspAddTenantInput
+from cdo-python-sdk.models.status_info import StatusInfo
+from cdo-python-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -40,15 +40,15 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with cdo-python-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TenantManagementApi(api_client)
-    msp_add_tenant_input = openapi_client.MspAddTenantInput() # MspAddTenantInput | 
+    api_instance = cdo-python-sdk.TenantManagementApi(api_client)
+    msp_add_tenant_input = cdo-python-sdk.MspAddTenantInput() # MspAddTenantInput | 
 
     try:
         # Add a tenant to the MSP Portal
@@ -103,14 +103,14 @@ Fetch a tenant by UID in CDO
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import openapi_client
-from openapi_client.models.tenant import Tenant
-from openapi_client.rest import ApiException
+import cdo-python-sdk
+from cdo-python-sdk.models.tenant import Tenant
+from cdo-python-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -120,14 +120,14 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with cdo-python-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TenantManagementApi(api_client)
+    api_instance = cdo-python-sdk.TenantManagementApi(api_client)
     tenant_uid = 'tenant_uid_example' # str | The unique identifier of the tenant in CDO.
 
     try:
@@ -184,14 +184,14 @@ Fetch the tenant settings in CDO
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import openapi_client
-from openapi_client.models.tenant_settings import TenantSettings
-from openapi_client.rest import ApiException
+import cdo-python-sdk
+from cdo-python-sdk.models.tenant_settings import TenantSettings
+from cdo-python-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -201,14 +201,14 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with cdo-python-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TenantManagementApi(api_client)
+    api_instance = cdo-python-sdk.TenantManagementApi(api_client)
 
     try:
         # Fetch the tenant settings in CDO
@@ -260,13 +260,13 @@ Fetch the feature flags enabled for this tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import cdo-python-sdk
+from cdo-python-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -276,14 +276,14 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with cdo-python-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TenantManagementApi(api_client)
+    api_instance = cdo-python-sdk.TenantManagementApi(api_client)
 
     try:
         # Fetch the feature flags enabled for this tenant
@@ -333,14 +333,14 @@ Fetch a list of tenants associated with the CDO user.
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import openapi_client
-from openapi_client.models.tenant_page import TenantPage
-from openapi_client.rest import ApiException
+import cdo-python-sdk
+from cdo-python-sdk.models.tenant_page import TenantPage
+from cdo-python-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -350,14 +350,14 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with cdo-python-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TenantManagementApi(api_client)
+    api_instance = cdo-python-sdk.TenantManagementApi(api_client)
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
 
@@ -415,14 +415,14 @@ Update the tenant settings in CDO
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import openapi_client
-from openapi_client.models.tenant_settings import TenantSettings
-from openapi_client.rest import ApiException
+import cdo-python-sdk
+from cdo-python-sdk.models.tenant_settings import TenantSettings
+from cdo-python-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -432,15 +432,15 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with cdo-python-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TenantManagementApi(api_client)
-    tenant_settings = openapi_client.TenantSettings() # TenantSettings | 
+    api_instance = cdo-python-sdk.TenantManagementApi(api_client)
+    tenant_settings = cdo-python-sdk.TenantSettings() # TenantSettings | 
 
     try:
         # Update the tenant settings in CDO

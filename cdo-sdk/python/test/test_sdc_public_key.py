@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.sdc_public_key import SdcPublicKey
+from cdo-python-sdk.models.sdc_public_key import SdcPublicKey
 
 class TestSdcPublicKey(unittest.TestCase):
     """SdcPublicKey unit test stubs"""

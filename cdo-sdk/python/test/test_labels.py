@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.labels import Labels
+from cdo-python-sdk.models.labels import Labels
 
 class TestLabels(unittest.TestCase):
     """Labels unit test stubs"""

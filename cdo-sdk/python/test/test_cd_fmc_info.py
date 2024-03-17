@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.cd_fmc_info import CdFmcInfo
+from cdo-python-sdk.models.cd_fmc_info import CdFmcInfo
 
 class TestCdFmcInfo(unittest.TestCase):
     """CdFmcInfo unit test stubs"""

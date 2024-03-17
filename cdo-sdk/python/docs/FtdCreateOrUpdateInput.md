@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.ftd_create_or_update_input import FtdCreateOrUpdateInput
+from cdo-python-sdk.models.ftd_create_or_update_input import FtdCreateOrUpdateInput
 
 # TODO update the JSON string below
 json = "{}"

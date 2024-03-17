@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.asa_failover_mate import AsaFailoverMate
+from cdo-python-sdk.models.asa_failover_mate import AsaFailoverMate
 
 class TestAsaFailoverMate(unittest.TestCase):
     """AsaFailoverMate unit test stubs"""

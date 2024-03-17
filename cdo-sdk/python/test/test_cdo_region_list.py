@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.cdo_region_list import CdoRegionList
+from cdo-python-sdk.models.cdo_region_list import CdoRegionList
 
 class TestCdoRegionList(unittest.TestCase):
     """CdoRegionList unit test stubs"""
@@ -37,7 +37,7 @@ class TestCdoRegionList(unittest.TestCase):
         if include_optional:
             return CdoRegionList(
                 items = [
-                    openapi_client.models.cdo_region.CdoRegion(
+                    cdo-python-sdk.models.cdo_region.CdoRegion(
                         domain = '', 
                         api_domain = '', 
                         description = '', )

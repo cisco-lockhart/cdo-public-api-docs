@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.on_prem_fmc_info import OnPremFmcInfo
+from cdo-python-sdk.models.on_prem_fmc_info import OnPremFmcInfo
 
 class TestOnPremFmcInfo(unittest.TestCase):
     """OnPremFmcInfo unit test stubs"""

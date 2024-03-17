@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.reference_info import ReferenceInfo
+from cdo-python-sdk.models.reference_info import ReferenceInfo
 
 class TestReferenceInfo(unittest.TestCase):
     """ReferenceInfo unit test stubs"""

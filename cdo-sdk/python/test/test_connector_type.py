@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.connector_type import ConnectorType
+from cdo-python-sdk.models.connector_type import ConnectorType
 
 class TestConnectorType(unittest.TestCase):
     """ConnectorType unit test stubs"""

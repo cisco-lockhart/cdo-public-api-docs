@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.policy import Policy
+from cdo-python-sdk.models.policy import Policy
 
 # TODO update the JSON string below
 json = "{}"

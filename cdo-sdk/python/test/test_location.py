@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.location import Location
+from cdo-python-sdk.models.location import Location
 
 class TestLocation(unittest.TestCase):
     """Location unit test stubs"""

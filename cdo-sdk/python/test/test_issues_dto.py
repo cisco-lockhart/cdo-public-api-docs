@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.issues_dto import IssuesDto
+from cdo-python-sdk.models.issues_dto import IssuesDto
 
 class TestIssuesDto(unittest.TestCase):
     """IssuesDto unit test stubs"""

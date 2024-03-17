@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.targets_request import TargetsRequest
+from cdo-python-sdk.models.targets_request import TargetsRequest
 
 # TODO update the JSON string below
 json = "{}"

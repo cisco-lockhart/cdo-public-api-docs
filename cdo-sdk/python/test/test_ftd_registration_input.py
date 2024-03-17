@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.ftd_registration_input import FtdRegistrationInput
+from cdo-python-sdk.models.ftd_registration_input import FtdRegistrationInput
 
 class TestFtdRegistrationInput(unittest.TestCase):
     """FtdRegistrationInput unit test stubs"""

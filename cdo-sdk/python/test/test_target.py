@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.target import Target
+from cdo-python-sdk.models.target import Target
 
 class TestTarget(unittest.TestCase):
     """Target unit test stubs"""

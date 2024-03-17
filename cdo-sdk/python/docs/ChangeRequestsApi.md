@@ -1,4 +1,4 @@
-# openapi_client.ChangeRequestsApi
+# cdo-python-sdk.ChangeRequestsApi
 
 All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 
@@ -20,15 +20,15 @@ Create Change Requests.
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import openapi_client
-from openapi_client.models.change_request import ChangeRequest
-from openapi_client.models.change_request_create_input import ChangeRequestCreateInput
-from openapi_client.rest import ApiException
+import cdo-python-sdk
+from cdo-python-sdk.models.change_request import ChangeRequest
+from cdo-python-sdk.models.change_request_create_input import ChangeRequestCreateInput
+from cdo-python-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -38,15 +38,15 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with cdo-python-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ChangeRequestsApi(api_client)
-    change_request_create_input = openapi_client.ChangeRequestCreateInput() # ChangeRequestCreateInput | 
+    api_instance = cdo-python-sdk.ChangeRequestsApi(api_client)
+    change_request_create_input = cdo-python-sdk.ChangeRequestCreateInput() # ChangeRequestCreateInput | 
 
     try:
         # Create Change Requests.
@@ -102,13 +102,13 @@ Delete a Change Request by UID in the CDO tenant
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import cdo-python-sdk
+from cdo-python-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -118,14 +118,14 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with cdo-python-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ChangeRequestsApi(api_client)
+    api_instance = cdo-python-sdk.ChangeRequestsApi(api_client)
     change_request_uid = 'change_request_uid_example' # str | The unique identifier of the Change Request in CDO.
 
     try:
@@ -180,14 +180,14 @@ Fetch a Change Request by UID in the CDO tenant.
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import openapi_client
-from openapi_client.models.change_request import ChangeRequest
-from openapi_client.rest import ApiException
+import cdo-python-sdk
+from cdo-python-sdk.models.change_request import ChangeRequest
+from cdo-python-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -197,14 +197,14 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with cdo-python-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ChangeRequestsApi(api_client)
+    api_instance = cdo-python-sdk.ChangeRequestsApi(api_client)
     change_request_uid = 'change_request_uid_example' # str | The unique identifier of the Change Request in CDO.
 
     try:
@@ -262,14 +262,14 @@ Fetch a list of Change Requests.
 * Bearer (JWT) Authentication (bearerAuth):
 
 ```python
-import openapi_client
-from openapi_client.models.change_request_page import ChangeRequestPage
-from openapi_client.rest import ApiException
+import cdo-python-sdk
+from cdo-python-sdk.models.change_request_page import ChangeRequestPage
+from cdo-python-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
@@ -279,14 +279,14 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (JWT): bearerAuth
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with cdo-python-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ChangeRequestsApi(api_client)
+    api_instance = cdo-python-sdk.ChangeRequestsApi(api_client)
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'name:London-Office-ASA' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)

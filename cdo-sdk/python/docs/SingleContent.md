@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.single_content import SingleContent
+from cdo-python-sdk.models.single_content import SingleContent
 
 # TODO update the JSON string below
 json = "{}"

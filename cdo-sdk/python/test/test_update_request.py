@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.update_request import UpdateRequest
+from cdo-python-sdk.models.update_request import UpdateRequest
 
 class TestUpdateRequest(unittest.TestCase):
     """UpdateRequest unit test stubs"""
@@ -38,7 +38,7 @@ class TestUpdateRequest(unittest.TestCase):
             return UpdateRequest(
                 name = 'my-object',
                 description = 'My object description',
-                value = openapi_client.models.shared_object_value.SharedObjectValue(
+                value = cdo-python-sdk.models.shared_object_value.SharedObjectValue(
                     object_type = 'NETWORK_OBJECT', 
                     default_content = {"literal":"a:b:c::1"}, 
                     overrides = [

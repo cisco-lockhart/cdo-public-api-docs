@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.cdo_transaction import CdoTransaction
+from cdo-python-sdk.models.cdo_transaction import CdoTransaction
 
 class TestCdoTransaction(unittest.TestCase):
     """CdoTransaction unit test stubs"""

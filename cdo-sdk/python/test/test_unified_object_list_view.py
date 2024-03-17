@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.unified_object_list_view import UnifiedObjectListView
+from cdo-python-sdk.models.unified_object_list_view import UnifiedObjectListView
 
 class TestUnifiedObjectListView(unittest.TestCase):
     """UnifiedObjectListView unit test stubs"""
@@ -39,7 +39,7 @@ class TestUnifiedObjectListView(unittest.TestCase):
                 uid = '',
                 name = '',
                 description = '',
-                value = openapi_client.models.shared_object_value.SharedObjectValue(
+                value = cdo-python-sdk.models.shared_object_value.SharedObjectValue(
                     object_type = 'NETWORK_OBJECT', 
                     default_content = {"literal":"a:b:c::1"}, 
                     overrides = [

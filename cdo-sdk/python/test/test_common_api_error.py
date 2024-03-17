@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.common_api_error import CommonApiError
+from cdo-python-sdk.models.common_api_error import CommonApiError
 
 class TestCommonApiError(unittest.TestCase):
     """CommonApiError unit test stubs"""

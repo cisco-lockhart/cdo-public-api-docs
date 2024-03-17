@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.network_object_content import NetworkObjectContent
+from cdo-python-sdk.models.network_object_content import NetworkObjectContent
 
 class TestNetworkObjectContent(unittest.TestCase):
     """NetworkObjectContent unit test stubs"""

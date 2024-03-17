@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.device import Device
+from cdo-python-sdk.models.device import Device
 
 class TestDevice(unittest.TestCase):
     """Device unit test stubs"""
@@ -53,7 +53,7 @@ class TestDevice(unittest.TestCase):
                 asdm_version = '7.6(2)',
                 asa_failover_mode = 'ACTIVE_STANDBY',
                 asa_failover_state = 'Primary - Active',
-                asa_failover_mate = openapi_client.models.asa_failover_mate.AsaFailoverMate(
+                asa_failover_mate = cdo-python-sdk.models.asa_failover_mate.AsaFailoverMate(
                     failover_state = 'Primary - Active', 
                     serial = 'JAD24500xxx', 
                     software_version = '9.18.8', ),
@@ -65,26 +65,26 @@ class TestDevice(unittest.TestCase):
                     ],
                 snort_version = '',
                 ftd_performance_tier = '',
-                cd_fmc_info = openapi_client.models.cd_fmc_info.CdFmcInfo(
+                cd_fmc_info = cdo-python-sdk.models.cd_fmc_info.CdFmcInfo(
                     cli_key = 'configure manager add acme.app.us.cdo.cisco.com E2jsyiZggyeCfFfCUaMK2kD1a1bxxx 5Do6FwUaXY4EFlyraC2yVnxodLxhuxxx acme.app.us.cdo.cisco.com', 
                     reg_key = 'E2jsyiZggyeCfFfCUaMK2kD1a1bxxx', 
                     nat_id = '5Do6FwUaXY4EFlyraC2yVnxodLxhuxxx', ),
-                on_prem_fmc_info = openapi_client.models.on_prem_fmc_info.OnPremFmcInfo(
+                on_prem_fmc_info = cdo-python-sdk.models.on_prem_fmc_info.OnPremFmcInfo(
                     name = 'my-example-fmc', 
                     address = 'my-example-fmc.example.com:443', ),
                 meraki_deployment_mode = 'ROUTED',
-                meraki_network = openapi_client.models.network.Network(
+                meraki_network = cdo-python-sdk.models.network.Network(
                     id = 'L_583779101697901532', 
                     name = 'meraki-network', 
                     timezone = 'UTC +0', ),
                 state = '',
-                state_machine_details = openapi_client.models.state_machine_details.StateMachineDetails(
+                state_machine_details = cdo-python-sdk.models.state_machine_details.StateMachineDetails(
                     identifier = '', 
-                    last_error = openapi_client.models.state_machine_error.StateMachineError(
+                    last_error = cdo-python-sdk.models.state_machine_error.StateMachineError(
                         error_message = '', 
                         error_code = '', 
                         action_identifier = '', ), ),
-                labels = openapi_client.models.labels.Labels(
+                labels = cdo-python-sdk.models.labels.Labels(
                     grouped_labels = {"group1":["label-1","label-2"],"group2":["label-1","label-2"]}, 
                     ungrouped_labels = ["label-a","label-b","label-c"], )
             )

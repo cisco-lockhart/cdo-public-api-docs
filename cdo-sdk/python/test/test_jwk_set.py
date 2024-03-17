@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.jwk_set import JwkSet
+from cdo-python-sdk.models.jwk_set import JwkSet
 
 class TestJwkSet(unittest.TestCase):
     """JwkSet unit test stubs"""
@@ -37,7 +37,7 @@ class TestJwkSet(unittest.TestCase):
         if include_optional:
             return JwkSet(
                 keys = [
-                    openapi_client.models.json_web_key.JsonWebKey(
+                    cdo-python-sdk.models.json_web_key.JsonWebKey(
                         kty = '', 
                         e = '', 
                         use = '', 

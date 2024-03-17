@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.os import OS
+from cdo-python-sdk.models.os import OS
 
 class TestOS(unittest.TestCase):
     """OS unit test stubs"""

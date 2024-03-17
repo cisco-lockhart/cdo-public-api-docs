@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.network import Network
+from cdo-python-sdk.models.network import Network
 
 class TestNetwork(unittest.TestCase):
     """Network unit test stubs"""

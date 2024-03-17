@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.status_info import StatusInfo
+from cdo-python-sdk.models.status_info import StatusInfo
 
 class TestStatusInfo(unittest.TestCase):
     """StatusInfo unit test stubs"""

@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.change_request import ChangeRequest
+from cdo-python-sdk.models.change_request import ChangeRequest
 
 class TestChangeRequest(unittest.TestCase):
     """ChangeRequest unit test stubs"""

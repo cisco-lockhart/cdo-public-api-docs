@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.api.users_api import UsersApi
+from cdo-python-sdk.api.users_api import UsersApi
 
 
 class TestUsersApi(unittest.TestCase):

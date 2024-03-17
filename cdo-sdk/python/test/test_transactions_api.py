@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.api.transactions_api import TransactionsApi
+from cdo-python-sdk.api.transactions_api import TransactionsApi
 
 
 class TestTransactionsApi(unittest.TestCase):

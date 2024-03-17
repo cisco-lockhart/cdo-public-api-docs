@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.cdo_token_info import CdoTokenInfo
+from cdo-python-sdk.models.cdo_token_info import CdoTokenInfo
 
 class TestCdoTokenInfo(unittest.TestCase):
     """CdoTokenInfo unit test stubs"""

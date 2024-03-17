@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.single_content import SingleContent
+from cdo-python-sdk.models.single_content import SingleContent
 
 class TestSingleContent(unittest.TestCase):
     """SingleContent unit test stubs"""

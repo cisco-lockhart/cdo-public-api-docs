@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.override import Override
+from cdo-python-sdk.models.override import Override
 
 # TODO update the JSON string below
 json = "{}"

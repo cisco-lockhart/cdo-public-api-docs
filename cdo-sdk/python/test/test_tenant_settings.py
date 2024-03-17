@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.tenant_settings import TenantSettings
+from cdo-python-sdk.models.tenant_settings import TenantSettings
 
 class TestTenantSettings(unittest.TestCase):
     """TenantSettings unit test stubs"""

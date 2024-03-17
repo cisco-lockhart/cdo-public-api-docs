@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.os import OS
+from cdo-python-sdk.models.os import OS
 
 # TODO update the JSON string below
 json = "{}"

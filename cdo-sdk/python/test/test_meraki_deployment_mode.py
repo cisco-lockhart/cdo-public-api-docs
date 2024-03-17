@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.meraki_deployment_mode import MerakiDeploymentMode
+from cdo-python-sdk.models.meraki_deployment_mode import MerakiDeploymentMode
 
 class TestMerakiDeploymentMode(unittest.TestCase):
     """MerakiDeploymentMode unit test stubs"""

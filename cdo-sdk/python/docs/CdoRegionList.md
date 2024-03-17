@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.cdo_region_list import CdoRegionList
+from cdo-python-sdk.models.cdo_region_list import CdoRegionList
 
 # TODO update the JSON string below
 json = "{}"

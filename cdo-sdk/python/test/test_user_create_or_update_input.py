@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.user_create_or_update_input import UserCreateOrUpdateInput
+from cdo-python-sdk.models.user_create_or_update_input import UserCreateOrUpdateInput
 
 class TestUserCreateOrUpdateInput(unittest.TestCase):
     """UserCreateOrUpdateInput unit test stubs"""

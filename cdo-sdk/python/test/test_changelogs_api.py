@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.api.changelogs_api import ChangelogsApi
+from cdo-python-sdk.api.changelogs_api import ChangelogsApi
 
 
 class TestChangelogsApi(unittest.TestCase):

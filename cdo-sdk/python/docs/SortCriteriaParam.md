@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.sort_criteria_param import SortCriteriaParam
+from cdo-python-sdk.models.sort_criteria_param import SortCriteriaParam
 
 # TODO update the JSON string below
 json = "{}"

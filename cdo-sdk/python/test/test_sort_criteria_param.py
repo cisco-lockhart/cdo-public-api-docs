@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.sort_criteria_param import SortCriteriaParam
+from cdo-python-sdk.models.sort_criteria_param import SortCriteriaParam
 
 class TestSortCriteriaParam(unittest.TestCase):
     """SortCriteriaParam unit test stubs"""

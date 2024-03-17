@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.msp_add_tenant_input import MspAddTenantInput
+from cdo-python-sdk.models.msp_add_tenant_input import MspAddTenantInput
 
 class TestMspAddTenantInput(unittest.TestCase):
     """MspAddTenantInput unit test stubs"""

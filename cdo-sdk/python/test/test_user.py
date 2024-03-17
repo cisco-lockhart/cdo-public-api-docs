@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.user import User
+from cdo-python-sdk.models.user import User
 
 class TestUser(unittest.TestCase):
     """User unit test stubs"""

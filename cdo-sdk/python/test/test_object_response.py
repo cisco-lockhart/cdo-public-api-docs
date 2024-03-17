@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.object_response import ObjectResponse
+from cdo-python-sdk.models.object_response import ObjectResponse
 
 class TestObjectResponse(unittest.TestCase):
     """ObjectResponse unit test stubs"""
@@ -38,7 +38,7 @@ class TestObjectResponse(unittest.TestCase):
             return ObjectResponse(
                 uid = '',
                 name = 'my-object',
-                value = openapi_client.models.shared_object_value.SharedObjectValue(
+                value = cdo-python-sdk.models.shared_object_value.SharedObjectValue(
                     object_type = 'NETWORK_OBJECT', 
                     default_content = {"literal":"a:b:c::1"}, 
                     overrides = [
@@ -46,14 +46,14 @@ class TestObjectResponse(unittest.TestCase):
                         ], ),
                 description = 'My object description',
                 targets = [
-                    openapi_client.models.target.Target(
+                    cdo-python-sdk.models.target.Target(
                         id = '[xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx]', 
                         display_name = 'My ASA', 
                         type = 'ASA', )
                     ],
                 elements = [a:b:c::1],
                 references_info_from_default_and_overrides = [
-                    openapi_client.models.reference_info.ReferenceInfo(
+                    cdo-python-sdk.models.reference_info.ReferenceInfo(
                         uid = '', 
                         name = 'another-object', 
                         object_type = 'NETWORK_OBJECT', )

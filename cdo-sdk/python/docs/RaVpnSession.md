@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.ra_vpn_session import RaVpnSession
+from cdo-python-sdk.models.ra_vpn_session import RaVpnSession
 
 # TODO update the JSON string below
 json = "{}"

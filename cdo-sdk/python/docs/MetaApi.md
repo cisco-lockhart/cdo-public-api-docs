@@ -1,4 +1,4 @@
-# openapi_client.MetaApi
+# cdo-python-sdk.MetaApi
 
 All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 
@@ -20,22 +20,22 @@ Retrieves the JSON Web Key Set (JWKS), which is a set of keys containing the pub
 
 
 ```python
-import openapi_client
-from openapi_client.models.jwk_set import JwkSet
-from openapi_client.rest import ApiException
+import cdo-python-sdk
+from cdo-python-sdk.models.jwk_set import JwkSet
+from cdo-python-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with cdo-python-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.MetaApi(api_client)
+    api_instance = cdo-python-sdk.MetaApi(api_client)
 
     try:
         # Fetch The JSON Web Key Set
@@ -83,22 +83,22 @@ Get Meta information about CDO, including the IP addresses of CDO services
 
 
 ```python
-import openapi_client
-from openapi_client.models.meta import Meta
-from openapi_client.rest import ApiException
+import cdo-python-sdk
+from cdo-python-sdk.models.meta import Meta
+from cdo-python-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with cdo-python-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.MetaApi(api_client)
+    api_instance = cdo-python-sdk.MetaApi(api_client)
 
     try:
         # Get Meta information about CDO, including the IP addresses of CDO services
@@ -146,22 +146,22 @@ Fetch a list of CDO regions.
 
 
 ```python
-import openapi_client
-from openapi_client.models.cdo_region_list import CdoRegionList
-from openapi_client.rest import ApiException
+import cdo-python-sdk
+from cdo-python-sdk.models.cdo_region_list import CdoRegionList
+from cdo-python-sdk.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = cdo-python-sdk.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with cdo-python-sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.MetaApi(api_client)
+    api_instance = cdo-python-sdk.MetaApi(api_client)
 
     try:
         # Fetch a list of CDO regions.

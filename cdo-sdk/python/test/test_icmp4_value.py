@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.icmp4_value import Icmp4Value
+from cdo-python-sdk.models.icmp4_value import Icmp4Value
 
 class TestIcmp4Value(unittest.TestCase):
     """Icmp4Value unit test stubs"""

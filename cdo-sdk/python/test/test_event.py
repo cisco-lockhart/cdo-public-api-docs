@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.event import Event
+from cdo-python-sdk.models.event import Event
 
 class TestEvent(unittest.TestCase):
     """Event unit test stubs"""

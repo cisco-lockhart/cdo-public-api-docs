@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.icmp6_value import Icmp6Value
+from cdo-python-sdk.models.icmp6_value import Icmp6Value
 
 # TODO update the JSON string below
 json = "{}"

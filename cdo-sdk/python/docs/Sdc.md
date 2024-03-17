@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.sdc import Sdc
+from cdo-python-sdk.models.sdc import Sdc
 
 # TODO update the JSON string below
 json = "{}"

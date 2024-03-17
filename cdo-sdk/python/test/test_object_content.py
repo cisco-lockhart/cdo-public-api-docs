@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.object_content import ObjectContent
+from cdo-python-sdk.models.object_content import ObjectContent
 
 class TestObjectContent(unittest.TestCase):
     """ObjectContent unit test stubs"""
@@ -40,7 +40,7 @@ class TestObjectContent(unittest.TestCase):
                 service_value = {"op":"EQ","ports":["80"]},
                 url = 'https://www.cisco.com/',
                 literals = [
-                    openapi_client.models.single_content.SingleContent()
+                    cdo-python-sdk.models.single_content.SingleContent()
                     ],
                 referenced_object_uids = [xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx],
                 literal = 'a:b:c::1'

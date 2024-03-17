@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.inventory import Inventory
+from cdo-python-sdk.models.inventory import Inventory
 
 class TestInventory(unittest.TestCase):
     """Inventory unit test stubs"""
@@ -37,7 +37,7 @@ class TestInventory(unittest.TestCase):
         if include_optional:
             return Inventory(
                 devices = [
-                    openapi_client.models.entity.Entity(
+                    cdo-python-sdk.models.entity.Entity(
                         uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                         name = 'my-example-entity', 
                         type = 'CDFMC_MANAGED_FTD', 
@@ -47,7 +47,7 @@ class TestInventory(unittest.TestCase):
                             ], )
                     ],
                 managers = [
-                    openapi_client.models.entity.Entity(
+                    cdo-python-sdk.models.entity.Entity(
                         uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                         name = 'my-example-entity', 
                         type = 'CDFMC_MANAGED_FTD', 
@@ -57,7 +57,7 @@ class TestInventory(unittest.TestCase):
                             ], )
                     ],
                 services = [
-                    openapi_client.models.entity.Entity(
+                    cdo-python-sdk.models.entity.Entity(
                         uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                         name = 'my-example-entity', 
                         type = 'CDFMC_MANAGED_FTD', 

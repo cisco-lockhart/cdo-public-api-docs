@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.msp_add_tenant_input import MspAddTenantInput
+from cdo-python-sdk.models.msp_add_tenant_input import MspAddTenantInput
 
 # TODO update the JSON string below
 json = "{}"

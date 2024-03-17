@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.tenant_pay_type import TenantPayType
+from cdo-python-sdk.models.tenant_pay_type import TenantPayType
 
 class TestTenantPayType(unittest.TestCase):
     """TenantPayType unit test stubs"""

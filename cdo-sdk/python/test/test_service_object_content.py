@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.service_object_content import ServiceObjectContent
+from cdo-python-sdk.models.service_object_content import ServiceObjectContent
 
 class TestServiceObjectContent(unittest.TestCase):
     """ServiceObjectContent unit test stubs"""

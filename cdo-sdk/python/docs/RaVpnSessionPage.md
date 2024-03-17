@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.ra_vpn_session_page import RaVpnSessionPage
+from cdo-python-sdk.models.ra_vpn_session_page import RaVpnSessionPage
 
 # TODO update the JSON string below
 json = "{}"

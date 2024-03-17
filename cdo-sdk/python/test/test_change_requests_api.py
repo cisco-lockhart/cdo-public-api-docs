@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.api.change_requests_api import ChangeRequestsApi
+from cdo-python-sdk.api.change_requests_api import ChangeRequestsApi
 
 
 class TestChangeRequestsApi(unittest.TestCase):

@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.cd_fmc_result import CdFmcResult
+from cdo-python-sdk.models.cd_fmc_result import CdFmcResult
 
 class TestCdFmcResult(unittest.TestCase):
     """CdFmcResult unit test stubs"""
@@ -37,19 +37,19 @@ class TestCdFmcResult(unittest.TestCase):
         if include_optional:
             return CdFmcResult(
                 devices = [
-                    openapi_client.models.cd_fmc_object.CdFmcObject(
+                    cdo-python-sdk.models.cd_fmc_object.CdFmcObject(
                         uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                         name = 'my-example-entity', 
                         link = 'https://edge.us.cdo.cisco.com/api/platform/public-api/v1/cdfmc/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/7131daad-e813-4b8f-8f42-be1e241e8cdb', )
                     ],
                 objects = [
-                    openapi_client.models.cd_fmc_object.CdFmcObject(
+                    cdo-python-sdk.models.cd_fmc_object.CdFmcObject(
                         uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                         name = 'my-example-entity', 
                         link = 'https://edge.us.cdo.cisco.com/api/platform/public-api/v1/cdfmc/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/7131daad-e813-4b8f-8f42-be1e241e8cdb', )
                     ],
                 policies = [
-                    openapi_client.models.cd_fmc_object.CdFmcObject(
+                    cdo-python-sdk.models.cd_fmc_object.CdFmcObject(
                         uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                         name = 'my-example-entity', 
                         link = 'https://edge.us.cdo.cisco.com/api/platform/public-api/v1/cdfmc/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/7131daad-e813-4b8f-8f42-be1e241e8cdb', )

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.api_token_info import ApiTokenInfo
+from cdo-python-sdk.models.api_token_info import ApiTokenInfo
 
 # TODO update the JSON string below
 json = "{}"

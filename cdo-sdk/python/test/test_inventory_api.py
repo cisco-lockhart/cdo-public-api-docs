@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.api.inventory_api import InventoryApi
+from cdo-python-sdk.api.inventory_api import InventoryApi
 
 
 class TestInventoryApi(unittest.TestCase):

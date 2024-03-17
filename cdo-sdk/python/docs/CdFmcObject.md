@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.cd_fmc_object import CdFmcObject
+from cdo-python-sdk.models.cd_fmc_object import CdFmcObject
 
 # TODO update the JSON string below
 json = "{}"

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.meta import Meta
+from cdo-python-sdk.models.meta import Meta
 
 # TODO update the JSON string below
 json = "{}"

@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.json_web_key import JsonWebKey
+from cdo-python-sdk.models.json_web_key import JsonWebKey
 
 class TestJsonWebKey(unittest.TestCase):
     """JsonWebKey unit test stubs"""

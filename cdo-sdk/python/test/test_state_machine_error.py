@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.state_machine_error import StateMachineError
+from cdo-python-sdk.models.state_machine_error import StateMachineError
 
 class TestStateMachineError(unittest.TestCase):
     """StateMachineError unit test stubs"""

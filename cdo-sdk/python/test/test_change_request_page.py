@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.change_request_page import ChangeRequestPage
+from cdo-python-sdk.models.change_request_page import ChangeRequestPage
 
 class TestChangeRequestPage(unittest.TestCase):
     """ChangeRequestPage unit test stubs"""
@@ -40,7 +40,7 @@ class TestChangeRequestPage(unittest.TestCase):
                 limit = 50,
                 offset = 0,
                 items = [
-                    openapi_client.models.change_request.ChangeRequest(
+                    cdo-python-sdk.models.change_request.ChangeRequest(
                         uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb', 
                         name = 'my change request', 
                         description = 'my change request description', )

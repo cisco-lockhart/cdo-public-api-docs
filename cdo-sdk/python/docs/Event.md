@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.event import Event
+from cdo-python-sdk.models.event import Event
 
 # TODO update the JSON string below
 json = "{}"

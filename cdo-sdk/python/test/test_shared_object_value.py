@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.shared_object_value import SharedObjectValue
+from cdo-python-sdk.models.shared_object_value import SharedObjectValue
 
 class TestSharedObjectValue(unittest.TestCase):
     """SharedObjectValue unit test stubs"""

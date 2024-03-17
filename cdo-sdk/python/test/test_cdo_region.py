@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.cdo_region import CdoRegion
+from cdo-python-sdk.models.cdo_region import CdoRegion
 
 class TestCdoRegion(unittest.TestCase):
     """CdoRegion unit test stubs"""

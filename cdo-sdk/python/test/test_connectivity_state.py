@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.models.connectivity_state import ConnectivityState
+from cdo-python-sdk.models.connectivity_state import ConnectivityState
 
 class TestConnectivityState(unittest.TestCase):
     """ConnectivityState unit test stubs"""

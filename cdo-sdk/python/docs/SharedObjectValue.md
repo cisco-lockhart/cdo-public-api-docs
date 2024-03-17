@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.shared_object_value import SharedObjectValue
+from cdo-python-sdk.models.shared_object_value import SharedObjectValue
 
 # TODO update the JSON string below
 json = "{}"

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.user_page import UserPage
+from cdo-python-sdk.models.user_page import UserPage
 
 # TODO update the JSON string below
 json = "{}"

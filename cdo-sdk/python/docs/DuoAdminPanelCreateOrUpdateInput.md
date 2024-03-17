@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.duo_admin_panel_create_or_update_input import DuoAdminPanelCreateOrUpdateInput
+from cdo-python-sdk.models.duo_admin_panel_create_or_update_input import DuoAdminPanelCreateOrUpdateInput
 
 # TODO update the JSON string below
 json = "{}"
