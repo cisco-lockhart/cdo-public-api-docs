@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    API Docs
+    Cisco Defense Orchestrator API
 
     Use the interactive documentation to explore the endpoints CDO has to offer
 
@@ -22,7 +22,7 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "cdo-sdk-python"
-VERSION = "1.0.0"
+VERSION = "1.0.3"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
     "urllib3 >= 1.25.3, < 2.1.0",
@@ -34,11 +34,11 @@ REQUIRES = [
 setup(
     name=NAME,
     version=VERSION,
-    description="API Docs",
+    description="Cisco Defense Orchestrator API",
     author="CDO TAC",
     author_email="cdo.tac@cisco.com",
     url="",
-    keywords=["OpenAPI", "OpenAPI-Generator", "API Docs"],
+    keywords=["OpenAPI", "OpenAPI-Generator", "Cisco Defense Orchestrator API"],
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,

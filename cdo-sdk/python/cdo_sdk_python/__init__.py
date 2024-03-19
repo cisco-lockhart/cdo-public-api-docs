@@ -3,7 +3,7 @@
 # flake8: noqa
 
 """
-    API Docs
+    Cisco Defense Orchestrator API
 
     Use the interactive documentation to explore the endpoints CDO has to offer
 
@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.0"
+__version__ = "1.0.3"
 
 # import apis into sdk package
 from cdo_sdk_python.api.change_requests_api import ChangeRequestsApi
@@ -113,7 +113,6 @@ from cdo_sdk_python.models.service_object_content import ServiceObjectContent
 from cdo_sdk_python.models.service_object_value_content import ServiceObjectValueContent
 from cdo_sdk_python.models.shared_object_value import SharedObjectValue
 from cdo_sdk_python.models.single_content import SingleContent
-from cdo_sdk_python.models.sort_criteria_param import SortCriteriaParam
 from cdo_sdk_python.models.state_machine_details import StateMachineDetails
 from cdo_sdk_python.models.state_machine_error import StateMachineError
 from cdo_sdk_python.models.status_info import StatusInfo

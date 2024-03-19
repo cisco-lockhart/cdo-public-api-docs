@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: API Docs
+  title: Cisco Defense Orchestrator API
   description: Use the interactive documentation to explore the endpoints CDO has to offer
   contact:
     name: CDO TAC
@@ -1253,9 +1253,11 @@ paths:
         - name: sort
           in: query
           description: The fields to sort results by.
-          required: true
+          required: false
           schema:
-            $ref: '#/components/schemas/SortCriteriaParam'
+            type: array
+            items:
+              type: string
           example: name:DESC
       responses:
         '200':
@@ -1654,9 +1656,11 @@ paths:
         - name: sort
           in: query
           description: The fields to sort results by.
-          required: true
+          required: false
           schema:
-            $ref: '#/components/schemas/SortCriteriaParam'
+            type: array
+            items:
+              type: string
           example: name:DESC
       responses:
         '200':
@@ -1718,9 +1722,11 @@ paths:
         - name: sort
           in: query
           description: The fields to sort results by.
-          required: true
+          required: false
           schema:
-            $ref: '#/components/schemas/SortCriteriaParam'
+            type: array
+            items:
+              type: string
           example: name:DESC
       responses:
         '200':
@@ -1784,9 +1790,11 @@ paths:
         - name: sort
           in: query
           description: The fields to sort results by.
-          required: true
+          required: false
           schema:
-            $ref: '#/components/schemas/SortCriteriaParam'
+            type: array
+            items:
+              type: string
           example: name:DESC
       responses:
         '200':
@@ -1848,9 +1856,11 @@ paths:
         - name: sort
           in: query
           description: The fields to sort results by.
-          required: true
+          required: false
           schema:
-            $ref: '#/components/schemas/SortCriteriaParam'
+            type: array
+            items:
+              type: string
           example: name:DESC
       responses:
         '200':
@@ -1942,9 +1952,11 @@ paths:
         - name: sort
           in: query
           description: The fields to sort results by.
-          required: true
+          required: false
           schema:
-            $ref: '#/components/schemas/SortCriteriaParam'
+            type: array
+            items:
+              type: string
           example: name:DESC
       responses:
         '200':
@@ -3362,18 +3374,6 @@ components:
           type: string
         actionIdentifier:
           type: string
-    SortCriteriaParam:
-      type: object
-      properties:
-        sort:
-          type: array
-          writeOnly: true
-          items:
-            type: string
-        sortFields:
-          type: array
-          items:
-            type: string
     Location:
       type: object
       properties:
@@ -4105,7 +4105,9 @@ components:
           additionalProperties:
             type: object
             description: Additional details, if any, on the error
+            example: {}
           description: Additional details, if any, on the error
+          example: {}
     CreateRequest:
       required:
         - name

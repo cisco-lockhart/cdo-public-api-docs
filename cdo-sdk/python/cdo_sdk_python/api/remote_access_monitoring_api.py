@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    API Docs
+    Cisco Defense Orchestrator API
 
     Use the interactive documentation to explore the endpoints CDO has to offer
 
@@ -18,11 +18,10 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from cdo_sdk_python.models.ra_vpn_session import RaVpnSession
 from cdo_sdk_python.models.ra_vpn_session_page import RaVpnSessionPage
-from cdo_sdk_python.models.sort_criteria_param import SortCriteriaParam
 
 from cdo_sdk_python.api_client import ApiClient, RequestSerialized
 from cdo_sdk_python.api_response import ApiResponse
@@ -318,10 +317,10 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def list_ra_vpn_sessions(
         self,
-        sort: Annotated[SortCriteriaParam, Field(description="The fields to sort results by.")],
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
+        sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -338,14 +337,14 @@ class RemoteAccessMonitoringApi:
         """Fetch a list of RA VPN sessions.
 
 
-        :param sort: The fields to sort results by. (required)
-        :type sort: SortCriteriaParam
         :param limit: The number of results to retrieve.
         :type limit: str
         :param offset: The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
+        :param sort: The fields to sort results by.
+        :type sort: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -369,10 +368,10 @@ class RemoteAccessMonitoringApi:
         """ # noqa: E501
 
         _param = self._list_ra_vpn_sessions_serialize(
-            sort=sort,
             limit=limit,
             offset=offset,
             q=q,
+            sort=sort,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -401,10 +400,10 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def list_ra_vpn_sessions_with_http_info(
         self,
-        sort: Annotated[SortCriteriaParam, Field(description="The fields to sort results by.")],
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
+        sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -421,14 +420,14 @@ class RemoteAccessMonitoringApi:
         """Fetch a list of RA VPN sessions.
 
 
-        :param sort: The fields to sort results by. (required)
-        :type sort: SortCriteriaParam
         :param limit: The number of results to retrieve.
         :type limit: str
         :param offset: The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
+        :param sort: The fields to sort results by.
+        :type sort: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -452,10 +451,10 @@ class RemoteAccessMonitoringApi:
         """ # noqa: E501
 
         _param = self._list_ra_vpn_sessions_serialize(
-            sort=sort,
             limit=limit,
             offset=offset,
             q=q,
+            sort=sort,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -484,10 +483,10 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def list_ra_vpn_sessions_without_preload_content(
         self,
-        sort: Annotated[SortCriteriaParam, Field(description="The fields to sort results by.")],
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
+        sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -504,14 +503,14 @@ class RemoteAccessMonitoringApi:
         """Fetch a list of RA VPN sessions.
 
 
-        :param sort: The fields to sort results by. (required)
-        :type sort: SortCriteriaParam
         :param limit: The number of results to retrieve.
         :type limit: str
         :param offset: The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
+        :param sort: The fields to sort results by.
+        :type sort: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -535,10 +534,10 @@ class RemoteAccessMonitoringApi:
         """ # noqa: E501
 
         _param = self._list_ra_vpn_sessions_serialize(
-            sort=sort,
             limit=limit,
             offset=offset,
             q=q,
+            sort=sort,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -562,10 +561,10 @@ class RemoteAccessMonitoringApi:
 
     def _list_ra_vpn_sessions_serialize(
         self,
-        sort,
         limit,
         offset,
         q,
+        sort,
         _request_auth,
         _content_type,
         _headers,
@@ -575,6 +574,7 @@ class RemoteAccessMonitoringApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'sort': 'multi',
         }
 
         _path_params: Dict[str, str] = {}

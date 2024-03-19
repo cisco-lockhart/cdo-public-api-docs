@@ -34,8 +34,9 @@ cli_usage() {
   echo
   # :command.usage_commands
   printf "%s\n" "Commands:"
-  printf "  %s   Download and add public API YAML to the pubhub docs\n" "download         "
-  printf "  %s   Perform transformations on FMC OAS and generate cdfmc-service-openapi.yaml\n" "transform-fmc-oas"
+  printf "  %s   Download and add public API YAML to the pubhub docs\n" "download          "
+  printf "  %s   Perform transformations on FMC OAS and generate cdfmc-service-openapi.yaml\n" "transform-fmc-oas "
+  printf "  %s   Publishes a new version of the CDO SDK to PyPI\n" "publish-python-sdk"
   echo
 
   # :command.long_usage
@@ -130,6 +131,40 @@ cli_transform_fmc_oas_usage() {
   fi
 }
 
+# :command.usage
+cli_publish_python_sdk_usage() {
+  if [[ -n $long_usage ]]; then
+    printf "cli publish-python-sdk - Publishes a new version of the CDO SDK to PyPI\n"
+    echo
+
+  else
+    printf "cli publish-python-sdk - Publishes a new version of the CDO SDK to PyPI\n"
+    echo
+
+  fi
+
+  printf "%s\n" "Usage:"
+  printf "  cli publish-python-sdk\n"
+  printf "  cli publish-python-sdk --help | -h\n"
+  echo
+
+  # :command.long_usage
+  if [[ -n $long_usage ]]; then
+    printf "%s\n" "Options:"
+
+    # :command.usage_fixed_flags
+    printf "  %s\n" "--help, -h"
+    printf "    Show this help\n"
+    echo
+
+    # :command.usage_examples
+    printf "%s\n" "Examples:"
+    printf "  cli publish-python-sdk\n"
+    echo
+
+  fi
+}
+
 # :command.normalize_input
 normalize_input() {
   local arg flags
@@ -219,6 +254,15 @@ cyan_underlined() { print_in_color "\e[4;36m" "$*"; }
 # :command.function
 cli_download_command() {
   # src/download_command.sh
+  # Function to increment version number
+  increment_version() {
+      local version=$1
+      local parts=( ${version//./ } )
+      ((parts[2]++))
+      new_version="${parts[0]}.${parts[1]}.${parts[2]}"
+      echo "$new_version"
+  }
+
   root_dir=$(dirname $(dirname $(readlink -f "$0")))
   filename=openapi.yaml
   declare -A urls=(
@@ -251,8 +295,15 @@ cli_download_command() {
   echo "Postman collection Generated ✅︎"
 
   echo -n "$(yellow Generating Python SDK from combined OpenAPI YAMLs)... "
-  openapi-generator generate -i openapi.yaml -g python -o ./cdo-sdk/python --additional-properties packageName=cdo_sdk_python --openapi-generator-ignore-list ".github/workflows/python.yml"
+  current_version=$(grep -Eo "VERSION = \"[0-9]+\.[0-9]+\.[0-9]+\"" cdo-sdk/python/setup.py | cut -d'"' -f2)
+  new_version=$(increment_version "$current_version")
+  openapi-generator generate -i openapi.yaml -g python -o ./cdo-sdk/python \
+  --additional-properties packageName=cdo_sdk_python,packageVersion="$new_version" \
+  --openapi-generator-ignore-list ".github/workflows/python.yml"
   echo "Python SDK Generated ✅︎"
+
+  scripts/cli publish-python-sdk
+  echo "New version of the CDO SDK published to PyPI: $new_version ✅︎"
 
   if [[ -z ${args[--do-not-commit]} ]]; then
       cd ${root_dir}
@@ -297,6 +348,14 @@ cli_transform_fmc_oas_command() {
   done
 }
 
+# :command.function
+cli_publish_python_sdk_command() {
+  # src/publish_python_sdk_command.sh
+  cd cdo-sdk/python
+  python3 setup.py sdist bdist_wheel
+  twine upload dist/*
+}
+
 # :command.parse_requirements
 parse_requirements() {
   # :command.fixed_flags_filter
@@ -337,6 +396,13 @@ parse_requirements() {
       action="transform-fmc-oas"
       shift
       cli_transform_fmc_oas_parse_requirements "$@"
+      shift $#
+      ;;
+
+    publish-python-sdk)
+      action="publish-python-sdk"
+      shift
+      cli_publish_python_sdk_parse_requirements "$@"
       shift $#
       ;;
 
@@ -471,6 +537,50 @@ cli_transform_fmc_oas_parse_requirements() {
 
 }
 
+# :command.parse_requirements
+cli_publish_python_sdk_parse_requirements() {
+  # :command.fixed_flags_filter
+  while [[ $# -gt 0 ]]; do
+    case "${1:-}" in
+      --help | -h)
+        long_usage=yes
+        cli_publish_python_sdk_usage
+        exit
+        ;;
+
+      *)
+        break
+        ;;
+
+    esac
+  done
+
+  # :command.command_filter
+  action="publish-python-sdk"
+
+  # :command.parse_requirements_while
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case "$key" in
+
+      -?*)
+        printf "invalid option: %s\n" "$key" >&2
+        exit 1
+        ;;
+
+      *)
+        # :command.parse_requirements_case
+        # :command.parse_requirements_case_simple
+        printf "invalid argument: %s\n" "$key" >&2
+        exit 1
+
+        ;;
+
+    esac
+  done
+
+}
+
 # :command.initialize
 initialize() {
   version="0.1.0"
@@ -491,6 +601,7 @@ run() {
   case "$action" in
     "download") cli_download_command ;;
     "transform-fmc-oas") cli_transform_fmc_oas_command ;;
+    "publish-python-sdk") cli_publish_python_sdk_command ;;
   esac
 }
 

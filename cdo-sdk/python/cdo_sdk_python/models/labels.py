@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-    API Docs
+    Cisco Defense Orchestrator API
 
     Use the interactive documentation to explore the endpoints CDO has to offer
 

@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "cdo_sdk_python"
-version = "1.0.0"
-description = "API Docs"
+version = "1.0.3"
+description = "Cisco Defense Orchestrator API"
 authors = ["CDO TAC <cdo.tac@cisco.com>"]
 license = "NoLicense"
 readme = "README.md"
 repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
-keywords = ["OpenAPI", "OpenAPI-Generator", "API Docs"]
+keywords = ["OpenAPI", "OpenAPI-Generator", "Cisco Defense Orchestrator API"]
 include = ["cdo_sdk_python/py.typed"]
 
 [tool.poetry.dependencies]

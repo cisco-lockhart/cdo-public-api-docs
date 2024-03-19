@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_ra_vpn_sessions**
-> RaVpnSessionPage list_ra_vpn_sessions(sort, limit=limit, offset=offset, q=q)
+> RaVpnSessionPage list_ra_vpn_sessions(limit=limit, offset=offset, q=q, sort=sort)
 
 Fetch a list of RA VPN sessions.
 
@@ -102,7 +102,6 @@ Fetch a list of RA VPN sessions.
 ```python
 import cdo_sdk_python
 from cdo_sdk_python.models.ra_vpn_session_page import RaVpnSessionPage
-from cdo_sdk_python.models.sort_criteria_param import SortCriteriaParam
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
@@ -126,14 +125,14 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.RemoteAccessMonitoringApi(api_client)
-    sort = cdo_sdk_python.SortCriteriaParam() # SortCriteriaParam | The fields to sort results by.
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'name:London-Office-ASA' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
+    sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
         # Fetch a list of RA VPN sessions.
-        api_response = api_instance.list_ra_vpn_sessions(sort, limit=limit, offset=offset, q=q)
+        api_response = api_instance.list_ra_vpn_sessions(limit=limit, offset=offset, q=q, sort=sort)
         print("The response of RemoteAccessMonitoringApi->list_ra_vpn_sessions:\n")
         pprint(api_response)
     except Exception as e:
@@ -147,10 +146,10 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sort** | [**SortCriteriaParam**](.md)| The fields to sort results by. | 
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
  **offset** | **str**| The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
+ **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
 ### Return type
 

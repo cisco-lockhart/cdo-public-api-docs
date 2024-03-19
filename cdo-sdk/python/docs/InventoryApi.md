@@ -1073,7 +1073,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_device_cloud_services**
-> DevicePage list_device_cloud_services(sort, limit=limit, offset=offset, q=q)
+> DevicePage list_device_cloud_services(limit=limit, offset=offset, q=q, sort=sort)
 
 Fetch a list of Cloud Services in the CDO tenant
 
@@ -1084,7 +1084,6 @@ Fetch a list of Cloud Services in the CDO tenant
 ```python
 import cdo_sdk_python
 from cdo_sdk_python.models.device_page import DevicePage
-from cdo_sdk_python.models.sort_criteria_param import SortCriteriaParam
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
@@ -1108,14 +1107,14 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    sort = cdo_sdk_python.SortCriteriaParam() # SortCriteriaParam | The fields to sort results by.
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'name:London-Office-ASA' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
+    sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
         # Fetch a list of Cloud Services in the CDO tenant
-        api_response = api_instance.list_device_cloud_services(sort, limit=limit, offset=offset, q=q)
+        api_response = api_instance.list_device_cloud_services(limit=limit, offset=offset, q=q, sort=sort)
         print("The response of InventoryApi->list_device_cloud_services:\n")
         pprint(api_response)
     except Exception as e:
@@ -1129,10 +1128,10 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sort** | [**SortCriteriaParam**](.md)| The fields to sort results by. | 
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
  **offset** | **str**| The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
+ **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
 ### Return type
 
@@ -1160,7 +1159,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_device_managers**
-> DevicePage list_device_managers(sort, limit=limit, offset=offset, q=q)
+> DevicePage list_device_managers(limit=limit, offset=offset, q=q, sort=sort)
 
 Fetch a list of Device Managers (on-prem FMCs and cloud-delivered FMCs) in the CDO tenant
 
@@ -1171,7 +1170,6 @@ Fetch a list of Device Managers (on-prem FMCs and cloud-delivered FMCs) in the C
 ```python
 import cdo_sdk_python
 from cdo_sdk_python.models.device_page import DevicePage
-from cdo_sdk_python.models.sort_criteria_param import SortCriteriaParam
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
@@ -1195,14 +1193,14 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    sort = cdo_sdk_python.SortCriteriaParam() # SortCriteriaParam | The fields to sort results by.
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'name:London-Office-ASA' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
+    sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
         # Fetch a list of Device Managers (on-prem FMCs and cloud-delivered FMCs) in the CDO tenant
-        api_response = api_instance.list_device_managers(sort, limit=limit, offset=offset, q=q)
+        api_response = api_instance.list_device_managers(limit=limit, offset=offset, q=q, sort=sort)
         print("The response of InventoryApi->list_device_managers:\n")
         pprint(api_response)
     except Exception as e:
@@ -1216,10 +1214,10 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sort** | [**SortCriteriaParam**](.md)| The fields to sort results by. | 
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
  **offset** | **str**| The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
+ **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
 ### Return type
 
@@ -1247,7 +1245,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_devices**
-> DevicePage list_devices(sort, limit=limit, offset=offset, q=q)
+> DevicePage list_devices(limit=limit, offset=offset, q=q, sort=sort)
 
 Fetch a list of devices in the CDO tenant
 
@@ -1258,7 +1256,6 @@ Fetch a list of devices in the CDO tenant
 ```python
 import cdo_sdk_python
 from cdo_sdk_python.models.device_page import DevicePage
-from cdo_sdk_python.models.sort_criteria_param import SortCriteriaParam
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
@@ -1282,14 +1279,14 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    sort = cdo_sdk_python.SortCriteriaParam() # SortCriteriaParam | The fields to sort results by.
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'name:London-Office-ASA' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
+    sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
         # Fetch a list of devices in the CDO tenant
-        api_response = api_instance.list_devices(sort, limit=limit, offset=offset, q=q)
+        api_response = api_instance.list_devices(limit=limit, offset=offset, q=q, sort=sort)
         print("The response of InventoryApi->list_devices:\n")
         pprint(api_response)
     except Exception as e:
@@ -1303,10 +1300,10 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sort** | [**SortCriteriaParam**](.md)| The fields to sort results by. | 
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
  **offset** | **str**| The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
+ **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
 ### Return type
 
@@ -1335,7 +1332,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_template_devices**
-> DevicePage list_template_devices(sort, limit=limit, offset=offset, q=q)
+> DevicePage list_template_devices(limit=limit, offset=offset, q=q, sort=sort)
 
 Fetch a list of template devices in the CDO tenant
 
@@ -1346,7 +1343,6 @@ Fetch a list of template devices in the CDO tenant
 ```python
 import cdo_sdk_python
 from cdo_sdk_python.models.device_page import DevicePage
-from cdo_sdk_python.models.sort_criteria_param import SortCriteriaParam
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
@@ -1370,14 +1366,14 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    sort = cdo_sdk_python.SortCriteriaParam() # SortCriteriaParam | The fields to sort results by.
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'name:London-Office-ASA' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
+    sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
         # Fetch a list of template devices in the CDO tenant
-        api_response = api_instance.list_template_devices(sort, limit=limit, offset=offset, q=q)
+        api_response = api_instance.list_template_devices(limit=limit, offset=offset, q=q, sort=sort)
         print("The response of InventoryApi->list_template_devices:\n")
         pprint(api_response)
     except Exception as e:
@@ -1391,10 +1387,10 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sort** | [**SortCriteriaParam**](.md)| The fields to sort results by. | 
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
  **offset** | **str**| The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
+ **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
 ### Return type
 
