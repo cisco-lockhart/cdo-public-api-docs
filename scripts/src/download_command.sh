@@ -46,9 +46,6 @@ openapi-generator generate -i openapi.yaml -g python -o ./cdo-sdk/python \
 --openapi-generator-ignore-list ".github/workflows/python.yml"
 echo "Python SDK Generated ✅︎"
 
-scripts/cli publish-python-sdk
-echo "New version of the CDO SDK published to PyPI: $new_version ✅︎"
-
 if [[ -z ${args[--do-not-commit]} ]]; then
     cd ${root_dir}
     git checkout main

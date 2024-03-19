@@ -302,9 +302,6 @@ cli_download_command() {
   --openapi-generator-ignore-list ".github/workflows/python.yml"
   echo "Python SDK Generated ✅︎"
 
-  scripts/cli publish-python-sdk
-  echo "New version of the CDO SDK published to PyPI: $new_version ✅︎"
-
   if [[ -z ${args[--do-not-commit]} ]]; then
       cd ${root_dir}
       git checkout main
@@ -352,7 +349,12 @@ cli_transform_fmc_oas_command() {
 cli_publish_python_sdk_command() {
   # src/publish_python_sdk_command.sh
   cd cdo-sdk/python
+  pip install -r requirements.txt
+  pip install wheel
+  pip install twine
   python3 setup.py sdist bdist_wheel
+
+  # need to set pypi creds
   twine upload dist/*
 }
 
