@@ -93,14 +93,14 @@ paths:
               $ref: '#/components/schemas/CreateRequest'
         required: true
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "201":
           description: A descriptive representation of the created CDO object.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":

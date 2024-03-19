@@ -53,6 +53,11 @@
             "type": "url"
           },
           {
+            "title": "Example Postman Environment",
+            "content": "https://github.com/cisco-lockhart/cdo-public-api-docs/blob/main/postman-environment.json",
+            "type": "url"
+          },
+          {
             "title": "Code Exchange",
             "content": "https://developer.cisco.com/codeexchange/search/?products=Cisco+Defense+Orchestrator",
             "type": "url"
