@@ -12,8 +12,8 @@
               "content": "overview/getting-started.md"
             },
             {
-              "title": "Authentication",
-              "content": "overview/authentication.md"
+              "title": "API Changelog",
+              "content": "api-changelog.md"
             }
           ]
       },
@@ -70,6 +70,10 @@
           "expand": 0
         },
         "items": [
+          {
+            "title": "Developer Support",
+            "content": "community-and-support/developer-support.md"
+          },
           {
             "title": "Community",
             "content": "https://community.cisco.com/t5/network-security/bd-p/disc-network-security",
