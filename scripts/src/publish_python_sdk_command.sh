@@ -1,12 +1,17 @@
-# Retrieve the secret value from AWS Secrets Manager and update .pypirc
-secret_value=$(aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:us-west-2:107042026245:secret:jenkins-pypi-credentials-mD4NdK --query SecretString --output text)
-sed -i "s/\"CHANGE_ME\"/$secret_value/" .pypirc
+secret_arn=arn:aws:secretsmanager:us-west-2:107042026245:secret:jenkins-pypi-credentials-mD4NdK
+echo -n "$(yellow Retrieving the secret value from AWS Secrets Manager)... "
+secret_value=$(aws secretsmanager get-secret-value --secret-id $secret_arn --query SecretString --output text)
+
+package_name=$(grep -Eo 'NAME = "[^"]+"' cdo-sdk/python/setup.py | cut -d'"' -f2)
+current_version=$(grep -Eo "VERSION = \"[0-9]+\.[0-9]+\.[0-9]+\"" cdo-sdk/python/setup.py | cut -d'"' -f2)
 
 cd cdo-sdk/python
-pip install -r requirements.txt
-pip install wheel
-pip install twine
+pip install wheel twine
 
-# Prepare to publish & Publish to PyPI
+echo -n "$(yellow Creating the Wheel and Source)... "
 python3 setup.py sdist bdist_wheel
-twine upload dist/*
+
+echo -n "$(yellow Publishing to PyPI)... "
+twine upload --username __token__ --password $secret_value dist/${package_name}-${current_version}.tar.gz dist/${package_name//-/_}-${current_version}-py3-none-any.whl
+
+unset secret_value
