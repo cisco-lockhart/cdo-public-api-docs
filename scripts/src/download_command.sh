@@ -41,7 +41,7 @@ echo "Postman collection Generated ✅︎"
 echo -n "$(yellow Generating Python SDK from combined OpenAPI YAMLs)... "
 current_version=$(grep -Eo "VERSION = \"[0-9]+\.[0-9]+\.[0-9]+\"" cdo-sdk/python/setup.py | cut -d'"' -f2)
 new_version=$(increment_version "$current_version")
-openapi-generator generate -i openapi.yaml -g python -o ./cdo-sdk/python \
+openapi-generator-cli generate -i openapi.yaml -g python -o ./cdo-sdk/python \
 --additional-properties packageName=cdo_sdk_python,packageVersion="$new_version" \
 --openapi-generator-ignore-list ".github/workflows/python.yml"
 echo "Python SDK Generated ✅︎"
