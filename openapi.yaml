@@ -20,6 +20,8 @@ servers:
   - url: https://edge.ci.cdo.cisco.com/api/rest
     description: CI
 tags:
+  - name: Remote Access Monitoring
+    x-displayName: Remote Access Monitoring
   - name: Users
     x-displayName: Users
   - name: Search
@@ -30,8 +32,6 @@ tags:
     x-displayName: Inventory
   - name: Change Requests
     x-displayName: Change Requests
-  - name: Remote Access Monitoring
-    x-displayName: Remote Access Monitoring
   - name: Transactions
     x-displayName: Transactions
   - name: Meta
@@ -43,6 +43,87 @@ tags:
   - name: Object Management
     x-displayName: Object Management
 paths:
+  /v1/vpnsessions/{deviceUid}/terminate:
+    post:
+      tags:
+        - Remote Access Monitoring
+      summary: Terminate all RA VPN sessions on a device in the CDO tenant.
+      operationId: terminateRaVpnSessionsByDevice
+      parameters:
+        - name: deviceUid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the progress of the
+            termination operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+  /v1/vpnsessions/{deviceUid}/terminate/{userName}:
+    post:
+      tags:
+        - Remote Access Monitoring
+      summary: Terminate all of a user's RA VPN sessions on a device in the CDO tenant
+      operationId: terminateRaVpnSessionsByDeviceAndUserName
+      parameters:
+        - name: deviceUid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: userName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the progress of the
+            termination operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/users:
     get:
       tags:
@@ -2567,83 +2648,6 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
 components:
   schemas:
-    UserCreateOrUpdateInput:
-      required:
-        - name
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the user in CDO.
-          example: myusername@cisco.com
-        role:
-          type: string
-          description: The user role in CDO.
-          example: ROLE_ADMIN
-        apiOnlyUser:
-          type: boolean
-          description: >-
-            Whether the user is API-only, an API-only user cannot access CDO in
-            the UI.
-          example: false
-          default: false
-    User:
-      type: object
-      properties:
-        uid:
-          type: string
-          description: The unique identifier of the SDC in CDO.
-          format: uuid
-          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-        name:
-          type: string
-          description: The name of the user in CDO.
-          example: myusername@cisco.com
-        roles:
-          type: array
-          description: Roles associated with this user in CDO.
-          example: '[ROLE_ADMIN]'
-          items:
-            $ref: '#/components/schemas/UserRole'
-        apiOnlyUser:
-          type: boolean
-          description: >-
-            Whether the user is API-only, an API-only user cannot access CDO in
-            the UI.
-          example: false
-        lastSuccessfulLogin:
-          type: string
-          description: >-
-            The time (UTC; represented using the RFC-3339 standard) that
-            indicate the last time the user successfully login CDO.
-          format: date-time
-          example: '2023-12-13T05:15:44Z'
-    UserRole:
-      type: string
-      description: >-
-        The role of the user this token belongs to. The user can be API-only or
-        a human.
-      enum:
-        - ROLE_ADMIN
-        - ROLE_SUPER_ADMIN
-        - ROLE_READ_ONLY
-        - ROLE_DEPLOY_ONLY
-        - ROLE_EDIT_ONLY
-        - ROLE_VPN_SESSIONS_MANAGER
-    StatusInfo:
-      type: object
-      properties:
-        status:
-          type: string
-          description: The Status of the request.
-          example: OK
-    ApiTokenInfo:
-      type: object
-      properties:
-        apiToken:
-          type: string
-          description: The API Access Token.
-          example: FaKE-toKeN
     CdoTransaction:
       type: object
       properties:
@@ -2729,6 +2733,85 @@ components:
         - READ_ASA
         - DEPLOY_ASA_DEVICE_CHANGES
         - INDEX_TENANT
+        - TERMINATE_DEVICE_RA_VPN_SESSIONS
+        - TERMINATE_USER_RA_VPN_SESSIONS
+    UserCreateOrUpdateInput:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the user in CDO.
+          example: myusername@cisco.com
+        role:
+          type: string
+          description: The user role in CDO.
+          example: ROLE_ADMIN
+        apiOnlyUser:
+          type: boolean
+          description: >-
+            Whether the user is API-only, an API-only user cannot access CDO in
+            the UI.
+          example: false
+          default: false
+    User:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the SDC in CDO.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        name:
+          type: string
+          description: The name of the user in CDO.
+          example: myusername@cisco.com
+        roles:
+          type: array
+          description: Roles associated with this user in CDO.
+          example: '[ROLE_ADMIN]'
+          items:
+            $ref: '#/components/schemas/UserRole'
+        apiOnlyUser:
+          type: boolean
+          description: >-
+            Whether the user is API-only, an API-only user cannot access CDO in
+            the UI.
+          example: false
+        lastSuccessfulLogin:
+          type: string
+          description: >-
+            The time (UTC; represented using the RFC-3339 standard) that
+            indicate the last time the user successfully login CDO.
+          format: date-time
+          example: '2023-12-13T05:15:44Z'
+    UserRole:
+      type: string
+      description: >-
+        The role of the user this token belongs to. The user can be API-only or
+        a human.
+      enum:
+        - ROLE_ADMIN
+        - ROLE_SUPER_ADMIN
+        - ROLE_READ_ONLY
+        - ROLE_DEPLOY_ONLY
+        - ROLE_EDIT_ONLY
+        - ROLE_VPN_SESSIONS_MANAGER
+    StatusInfo:
+      type: object
+      properties:
+        status:
+          type: string
+          description: The Status of the request.
+          example: OK
+    ApiTokenInfo:
+      type: object
+      properties:
+        apiToken:
+          type: string
+          description: The API Access Token.
+          example: FaKE-toKeN
     MspAddTenantInput:
       required:
         - apiToken
@@ -4877,12 +4960,12 @@ components:
 x-tagGroups:
   - name: public-api-openapi
     tags:
+      - Remote Access Monitoring
       - Users
       - Search
       - Tenant Management
       - Inventory
       - Change Requests
-      - Remote Access Monitoring
       - Transactions
       - Meta
       - Connectors

@@ -6,6 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_ra_vpn_session**](RemoteAccessMonitoringApi.md#get_ra_vpn_session) | **GET** /v1/vpnsessions/{raVpnSessionUid} | Fetch a RA VPN session by UID in the CDO tenant.
 [**list_ra_vpn_sessions**](RemoteAccessMonitoringApi.md#list_ra_vpn_sessions) | **GET** /v1/vpnsessions | Fetch a list of RA VPN sessions.
+[**terminate_ra_vpn_sessions_by_device**](RemoteAccessMonitoringApi.md#terminate_ra_vpn_sessions_by_device) | **POST** /v1/vpnsessions/{deviceUid}/terminate | Terminate all RA VPN sessions on a device in the CDO tenant.
+[**terminate_ra_vpn_sessions_by_device_and_user_name**](RemoteAccessMonitoringApi.md#terminate_ra_vpn_sessions_by_device_and_user_name) | **POST** /v1/vpnsessions/{deviceUid}/terminate/{userName} | Terminate all of a user&#39;s RA VPN sessions on a device in the CDO tenant
 
 
 # **get_ra_vpn_session**
@@ -169,6 +171,170 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of RA VPN Sessions |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**405** | Method not allowed. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **terminate_ra_vpn_sessions_by_device**
+> CdoTransaction terminate_ra_vpn_sessions_by_device(device_uid)
+
+Terminate all RA VPN sessions on a device in the CDO tenant.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import cdo_sdk_python
+from cdo_sdk_python.models.cdo_transaction import CdoTransaction
+from cdo_sdk_python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cdo_sdk_python.Configuration(
+    host = "https://edge.us.cdo.cisco.com/api/rest"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = cdo_sdk_python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with cdo_sdk_python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cdo_sdk_python.RemoteAccessMonitoringApi(api_client)
+    device_uid = 'device_uid_example' # str | 
+
+    try:
+        # Terminate all RA VPN sessions on a device in the CDO tenant.
+        api_response = api_instance.terminate_ra_vpn_sessions_by_device(device_uid)
+        print("The response of RemoteAccessMonitoringApi->terminate_ra_vpn_sessions_by_device:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling RemoteAccessMonitoringApi->terminate_ra_vpn_sessions_by_device: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **device_uid** | **str**|  | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | CDO Transaction object that can be used to track the progress of the termination operation |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**405** | Method not allowed. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **terminate_ra_vpn_sessions_by_device_and_user_name**
+> CdoTransaction terminate_ra_vpn_sessions_by_device_and_user_name(device_uid, user_name)
+
+Terminate all of a user's RA VPN sessions on a device in the CDO tenant
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import cdo_sdk_python
+from cdo_sdk_python.models.cdo_transaction import CdoTransaction
+from cdo_sdk_python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cdo_sdk_python.Configuration(
+    host = "https://edge.us.cdo.cisco.com/api/rest"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = cdo_sdk_python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with cdo_sdk_python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cdo_sdk_python.RemoteAccessMonitoringApi(api_client)
+    device_uid = 'device_uid_example' # str | 
+    user_name = 'user_name_example' # str | 
+
+    try:
+        # Terminate all of a user's RA VPN sessions on a device in the CDO tenant
+        api_response = api_instance.terminate_ra_vpn_sessions_by_device_and_user_name(device_uid, user_name)
+        print("The response of RemoteAccessMonitoringApi->terminate_ra_vpn_sessions_by_device_and_user_name:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling RemoteAccessMonitoringApi->terminate_ra_vpn_sessions_by_device_and_user_name: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **device_uid** | **str**|  | 
+ **user_name** | **str**|  | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | CDO Transaction object that can be used to track the progress of the termination operation |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
