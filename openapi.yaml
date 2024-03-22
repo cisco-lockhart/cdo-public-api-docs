@@ -2307,8 +2307,9 @@ paths:
     get:
       tags:
         - Object Management
-      summary: Retrieves objects in the CDO tenant
-      operationId: listObjects
+      summary: Get Objects
+      description: Get objects in the CDO tenant.
+      operationId: getObjects
       parameters:
         - name: q
           in: query
@@ -2368,7 +2369,8 @@ paths:
     post:
       tags:
         - Object Management
-      summary: Creates an object in the CDO tenant
+      summary: Create Object
+      description: Create an object in the CDO tenant.
       operationId: createObject
       requestBody:
         content:
@@ -2399,7 +2401,8 @@ paths:
     post:
       tags:
         - Object Management
-      summary: Create targets for an object in the CDO tenant
+      summary: Create Targets
+      description: Create targets for an object in the CDO tenant.
       operationId: createTargets
       parameters:
         - name: uid
@@ -2446,8 +2449,9 @@ paths:
     delete:
       tags:
         - Object Management
-      summary: Removes targets from an object in the CDO tenant
-      operationId: removeTargets
+      summary: Delete Targets
+      description: Delete targets from an object in the CDO tenant.
+      operationId: deleteTargets
       parameters:
         - name: uid
           in: path
@@ -2499,7 +2503,8 @@ paths:
     get:
       tags:
         - Object Management
-      summary: Retrieves an object in the CDO tenant
+      summary: Get Object
+      description: Gets an object in the CDO tenant
       operationId: getObject
       parameters:
         - name: uid
@@ -2521,7 +2526,7 @@ paths:
           example: '@detailed'
       responses:
         '200':
-          description: Fetch an object by UID in the CDO tenant
+          description: OK
           content:
             application/json:
               schema:
@@ -2541,7 +2546,8 @@ paths:
     delete:
       tags:
         - Object Management
-      summary: Deletes an object in the CDO tenant
+      summary: Delete Object
+      description: Delete an object in the CDO tenant
       operationId: deleteObject
       parameters:
         - name: uid
@@ -2574,8 +2580,9 @@ paths:
     patch:
       tags:
         - Object Management
-      summary: Updates an object in the CDO tenant
-      operationId: updateObject
+      summary: Modify Object
+      description: Modify an object in the CDO tenant
+      operationId: modifyObject
       parameters:
         - name: uid
           in: path
@@ -2614,8 +2621,9 @@ paths:
     get:
       tags:
         - Object Management
-      summary: Retrieves usages of an object in the CDO tenant
-      operationId: getObjectUsage
+      summary: Get Object Usages
+      description: Get usages of an object in the CDO tenant.
+      operationId: getObjectUsages
       parameters:
         - name: uid
           in: path
