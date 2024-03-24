@@ -47,7 +47,11 @@ paths:
     post:
       tags:
         - Remote Access Monitoring
-      summary: Terminate all RA VPN sessions on a device in the CDO tenant.
+      summary: Terminate RA VPN Sessions.
+      description: >-
+        This is an asynchronous operation to terminate all RA VPN sessions on a
+        device in the CDO tenant. This operation returns a link to a transaction
+        object that can be used to monitor the progress of the operation.
       operationId: terminateRaVpnSessionsByDevice
       parameters:
         - name: deviceUid
@@ -85,7 +89,12 @@ paths:
     post:
       tags:
         - Remote Access Monitoring
-      summary: Terminate all of a user's RA VPN sessions on a device in the CDO tenant
+      summary: Terminate User's RA VPN Sessions
+      description: >-
+        This is an asynchronous operation to terminate all of a user's RA VPN
+        sessions on a device in the CDO tenant. This operation returns a link to
+        a transaction object that can be used to monitor the progress of the
+        operation.
       operationId: terminateRaVpnSessionsByDeviceAndUserName
       parameters:
         - name: deviceUid
@@ -128,8 +137,9 @@ paths:
     get:
       tags:
         - Users
-      summary: Fetch a list of users associated with the CDO tenant.
-      operationId: listUsers
+      summary: Get Tenant Users
+      description: Get a list of users associated with the CDO tenant.
+      operationId: getUsers
       parameters:
         - name: limit
           in: query
@@ -184,7 +194,11 @@ paths:
     post:
       tags:
         - Users
-      summary: Create a user in the CDO tenant
+      summary: Create User in CDO Tenant
+      description: >-
+        Create a user in the CDO tenant. The user may already exist and have
+        access to other tenants, in which case this endpoint adds the user to
+        this tenant.
       operationId: createUser
       requestBody:
         content:
@@ -217,7 +231,10 @@ paths:
     post:
       tags:
         - Users
-      summary: Revoke API Token of API-only user
+      summary: Revoke API-only User's Token
+      description: >-
+        Revoke API Token of API-only user. If the user ID provided is not that
+        of an API-only user, this operation will fail.
       operationId: revokeApiToken
       parameters:
         - name: apiUserId
@@ -252,12 +269,16 @@ paths:
     post:
       tags:
         - Users
-      summary: Generate API Token for API-only user
+      summary: Generate Token for API-only user
+      description: >-
+        Generate API Token for API-only user. API-only users are used for
+        building automations with CDO. If the user ID provided is not that of an
+        API-only user, this operation will fail.
       operationId: generateApiToken
       parameters:
         - name: apiUserId
           in: path
-          description: The unique identifier of the API user in CDO.
+          description: The unique identifier of the API-only user in CDO
           required: true
           schema:
             type: string
@@ -287,7 +308,10 @@ paths:
     post:
       tags:
         - Users
-      summary: Revoke the current token
+      summary: Revoke Token
+      description: >-
+        Revoke the current token. All subsequent requests with a revoked token
+        will fail with 401 Unauthorized errors.
       operationId: revokeToken
       responses:
         '200':
@@ -306,7 +330,12 @@ paths:
     post:
       tags:
         - Search
-      summary: Initiate Full Indexing
+      summary: Rebuild search index
+      description: >-
+        Initiate Full Indexing on the CDO tenant, to improve accuracy of search
+        results. This operation is performed automatically on a schedule by CDO,
+        but can be triggered on demand too. This operation is asynchronous, but
+        its progress cannot be tracked using CDO's API.
       operationId: initiateFullIndexing
       responses:
         '202':
@@ -337,7 +366,10 @@ paths:
     post:
       tags:
         - Tenant Management
-      summary: Add a tenant to the MSP Portal
+      summary: Add Tenant to MSP Portal
+      description: >-
+        Add a tenant to the MSP Portal. This endpoint requires that the token
+        provided is that of an MSP tenant.
       operationId: addMspTenant
       requestBody:
         content:
@@ -370,7 +402,11 @@ paths:
     post:
       tags:
         - Inventory
-      summary: Onboard a IOS device in the CDO tenant
+      summary: Onboard IOS Device
+      description: >-
+        Onboard a IOS device in the CDO tenant. This operation returns a link to
+        a transaction object that can be used to monitor the progress of the
+        operation.
       operationId: onboardIosDevice
       requestBody:
         content:
@@ -405,7 +441,15 @@ paths:
     post:
       tags:
         - Inventory
-      summary: Create an FTD device in the CDO tenant
+      summary: Create FTD device.
+      description: >-
+        This is an asynchronous operation to create a cdFMC managed FTD device
+        in the CDO tenant. This operation returns a link to a transaction object
+        that can be used to monitor the progress of the operation. Onboarding a
+        cdFMC managed FTD device is a two-step process: the first step, handled
+        by this operation, creates an FTD device with a configure manager string
+        that must be pasted into the FTD device's Command-Line Interface. The
+        FTD then uses this information to register itself with the CDO tenant.
       operationId: createFtdDevice
       requestBody:
         content:
@@ -440,10 +484,13 @@ paths:
     post:
       tags:
         - Inventory
-      summary: >-
-        Register an FTD device managed by an FMC to the CDO tenant. Call this
-        API endpoint after you have created an FTD, and pasted the generated CLI
-        output in the FTD
+      summary: Register FTD device.
+      description: >-
+        Complete registration of an FTD device managed by an FMC to the CDO
+        tenant. Call this API endpoint after you have created an FTD and pasted
+        the generated CLI output in the FTD. This operation returns a link to a
+        transaction object that can be used to monitor the progress of the
+        operation.
       operationId: finishOnboardingFtdDevice
       requestBody:
         content:
@@ -478,7 +525,13 @@ paths:
     post:
       tags:
         - Inventory
-      summary: Delete cdFMC managed FTD device in the CDO tenant
+      summary: Delete cdFMC managed FTD device
+      description: >-
+        This is an asynchronous operation to delete cdFMC managed FTD device in
+        the CDO tenant. This operation returns a link to a transaction object
+        that can be used to monitor the progress of the operation. The reason
+        this operation is asynchronous is because the device is first removed
+        from the cdFMC, following which it is deleted from the CDO tenant.
       operationId: deleteCdFmcManagedFtdDevice
       parameters:
         - name: deviceUid
@@ -515,11 +568,13 @@ paths:
     post:
       tags:
         - Inventory
-      summary: Onboard a Duo Admin Panel in the CDO tenant
+      summary: Onboard Duo Admin Panel
       description: >-
         Onboard a Duo Admin Panel to the CDO tenant. The credentials to onboard
         the Duo Admin Panel to CDO must be generated by creating an Admin API
-        application on https://www.duo.com
+        application on https://www.duo.com. This operation returns a link to a
+        transaction object that can be used to monitor the progress of the
+        operation.
       operationId: createDuoAdminPanel
       requestBody:
         content:
@@ -554,7 +609,11 @@ paths:
     post:
       tags:
         - Inventory
-      summary: Onboard a ASA device in the CDO tenant
+      summary: Onboard ASA device
+      description: >-
+        This is an asynchronous operation to onboard an ASA to a CDO tenant.
+        This operation returns a link to a transaction object that can be used
+        to monitor the progress of the operation.
       operationId: onboardAsaDevice
       requestBody:
         content:
@@ -591,7 +650,11 @@ paths:
     post:
       tags:
         - Inventory
-      summary: Reconnect an ASA device in the CDO tenant
+      summary: Reconnect ASA device
+      description: >-
+        This is an asynchronous operation to re-establish the connection between
+        an ASA and the CDO cloud. This operation returns a link to a transaction
+        object that can be used to monitor the progress of the operation.
       operationId: reconnectAsaDevice
       parameters:
         - name: deviceUid
@@ -628,8 +691,13 @@ paths:
     post:
       tags:
         - Inventory
-      summary: Read configuration on ASA device into CDO
-      operationId: readFromAsaDevice
+      summary: Read ASA device configuration
+      description: >-
+        This is an asynchronous operation to read the latest configuration on an
+        ASA device in to the CDO tenant. This operation returns a link to a
+        transaction object that can be used to monitor the progress of the
+        operation.
+      operationId: readAsaDeviceConfiguration
       parameters:
         - name: deviceUid
           in: path
@@ -665,7 +733,12 @@ paths:
     post:
       tags:
         - Inventory
-      summary: Deploy changes to an ASA device in the CDO tenant
+      summary: Deploy ASA device changes
+      description: >-
+        This is an asynchronous operation to deploy changes made to an ASA
+        device's configuration on CDO to the device. This operation returns a
+        link to a transaction object that can be used to monitor the progress of
+        the operation.
       operationId: deployAsaDeviceChanges
       parameters:
         - name: deviceUid
@@ -703,8 +776,9 @@ paths:
     get:
       tags:
         - Change Requests
-      summary: Fetch a list of Change Requests.
-      operationId: listChangeRequests
+      summary: Get Change Requests
+      description: Get a list of Change Requests.
+      operationId: getChangeRequests
       parameters:
         - name: limit
           in: query
@@ -761,7 +835,8 @@ paths:
     post:
       tags:
         - Change Requests
-      summary: Create Change Requests.
+      summary: Create Change Request
+      description: Create a Change Request in the CDO tenant.
       operationId: createChangeRequest
       requestBody:
         content:
@@ -796,7 +871,8 @@ paths:
     get:
       tags:
         - Tenant Management
-      summary: Fetch the tenant settings in CDO
+      summary: Get Tenant Settings
+      description: Get the settings for the CDO tenant.
       operationId: getTenantSettings
       responses:
         '200':
@@ -822,8 +898,9 @@ paths:
     patch:
       tags:
         - Tenant Management
-      summary: Update the tenant settings in CDO
-      operationId: updateTenantSettings
+      summary: Modify Tenant Settings
+      description: Modify the settings for the CDO tenant.
+      operationId: modifyTenantSettings
       requestBody:
         content:
           application/json:
@@ -855,7 +932,8 @@ paths:
     get:
       tags:
         - Inventory
-      summary: Fetch a template device by UID in the CDO tenant
+      summary: Get Template Device
+      description: Get a template device by UID in the CDO tenant.
       operationId: getTemplateDevice
       parameters:
         - name: templateDeviceUid
@@ -891,7 +969,8 @@ paths:
     delete:
       tags:
         - Inventory
-      summary: Delete a template device by UID in the CDO tenant
+      summary: Delete Template Device
+      description: Delete a template device by UID in the CDO tenant.
       operationId: deleteTemplateDevice
       parameters:
         - name: templateDeviceUid
@@ -921,8 +1000,9 @@ paths:
     patch:
       tags:
         - Inventory
-      summary: Modify a template device in the CDO tenant
-      operationId: patchTemplateDevice
+      summary: Modify Template Device.
+      description: Modify a template device in the CDO tenant.
+      operationId: modifyTemplateDevice
       parameters:
         - name: templateDeviceUid
           in: path
@@ -964,7 +1044,8 @@ paths:
     get:
       tags:
         - Inventory
-      summary: Fetch a Cloud Service by UID in the CDO tenant
+      summary: Get Cloud Service
+      description: Get a Cloud Service by UID in the CDO tenant.
       operationId: getCloudService
       parameters:
         - name: cloudServiceUid
@@ -1000,7 +1081,8 @@ paths:
     delete:
       tags:
         - Inventory
-      summary: Delete a Cloud Service by UID in the CDO tenant
+      summary: Delete Cloud Service
+      description: Delete a Cloud Service by UID in the CDO tenant.
       operationId: deleteCloudService
       parameters:
         - name: cloudServiceUid
@@ -1030,8 +1112,9 @@ paths:
     patch:
       tags:
         - Inventory
-      summary: Modify a Cloud Service by UID in the CDO tenant
-      operationId: patchCloudService
+      summary: Modify Cloud Service
+      description: Modify a Cloud Service by UID in the CDO tenant.
+      operationId: modifyCloudService
       parameters:
         - name: cloudServiceUid
           in: path
@@ -1073,7 +1156,8 @@ paths:
     get:
       tags:
         - Inventory
-      summary: Fetch a Device Manager by UID in the CDO tenant
+      summary: Get Device Manager
+      description: Get a Device Manager by UID in the CDO tenant.
       operationId: getDeviceManager
       parameters:
         - name: deviceManagerUid
@@ -1109,7 +1193,8 @@ paths:
     delete:
       tags:
         - Inventory
-      summary: Delete a Device Manager by UID in the CDO tenant
+      summary: Delete Device Manager
+      description: Delete a Device Manager by UID in the CDO tenant.
       operationId: deleteDeviceManager
       parameters:
         - name: deviceManagerUid
@@ -1141,8 +1226,9 @@ paths:
     patch:
       tags:
         - Inventory
-      summary: Modify a device manager by UID in the CDO tenant
-      operationId: patchDeviceManager
+      summary: Modify Device Manager
+      description: Modify a device manager by UID in the CDO tenant.
+      operationId: modifyDeviceManager
       parameters:
         - name: deviceManagerUid
           in: path
@@ -1184,7 +1270,8 @@ paths:
     get:
       tags:
         - Inventory
-      summary: Fetch a device by UID in the CDO tenant
+      summary: Get Device
+      description: Get a device by UID in the CDO tenant
       operationId: getDevice
       parameters:
         - name: deviceUid
@@ -1222,7 +1309,8 @@ paths:
     delete:
       tags:
         - Inventory
-      summary: Delete a device by UID in the CDO tenant
+      summary: Delete Device
+      description: Delete a device by UID in the CDO tenant
       operationId: deleteDevice
       parameters:
         - name: deviceUid
@@ -1254,8 +1342,9 @@ paths:
     patch:
       tags:
         - Inventory
-      summary: Modify a device in the CDO tenant
-      operationId: patchDevice
+      summary: Modify Device
+      description: Modify a device in the CDO tenant
+      operationId: modifyDevice
       parameters:
         - name: deviceUid
           in: path
@@ -1299,8 +1388,9 @@ paths:
     get:
       tags:
         - Remote Access Monitoring
-      summary: Fetch a list of RA VPN sessions.
-      operationId: listRaVpnSessions
+      summary: Get RA VPN Sessions
+      description: Get a list of RA VPN sessions.
+      operationId: getRaVpnSessions
       parameters:
         - name: limit
           in: query
@@ -1367,7 +1457,8 @@ paths:
     get:
       tags:
         - Remote Access Monitoring
-      summary: Fetch a RA VPN session by UID in the CDO tenant.
+      summary: Get RA VPN Session
+      description: Get a RA VPN session by UID in the CDO tenant.
       operationId: getRaVpnSession
       parameters:
         - name: raVpnSessionUid
@@ -1406,7 +1497,10 @@ paths:
     get:
       tags:
         - Users
-      summary: Fetch a user by UID in the CDO tenant.
+      summary: Get Tenant User
+      description: >-
+        Fetch a user by UID in the CDO tenant. This will only return 200
+        responses for users associated with the CDO tenant.
       operationId: getUser
       parameters:
         - name: userUid
@@ -1442,7 +1536,11 @@ paths:
     delete:
       tags:
         - Users
-      summary: Delete a User by UID in the CDO tenant
+      summary: Remove User from CDO Tenant
+      description: >-
+        Delete a User by UID in the CDO tenant. If the user is associated with
+        multiple tenants, they will continue to have access to every other
+        tenant.
       operationId: deleteUser
       parameters:
         - name: userUid
@@ -1473,7 +1571,12 @@ paths:
     get:
       tags:
         - Transactions
-      summary: Get information of an in-progress CDO transaction
+      summary: Get Transaction
+      description: >-
+        Get information of an in-progress CDO transaction. A CDO transaction is
+        an entity used to monitor progress of, and provide feedback on,
+        long-running operations. All asynchronous operations in CDO's API create
+        CDO transactions.
       operationId: getTransaction
       parameters:
         - name: transactionUid
@@ -1517,7 +1620,11 @@ paths:
     get:
       tags:
         - Users
-      summary: Fetch information on the current token
+      summary: Get Token Info
+      description: >-
+        Fetch information on the current token. Each CDO token is associated
+        with a specific user and a specific tenant. A token can only be used to
+        perform operations on the tenant it is associated with.
       operationId: getToken
       responses:
         '200':
@@ -1540,8 +1647,9 @@ paths:
     get:
       tags:
         - Tenant Management
-      summary: Fetch a list of tenants associated with the CDO user.
-      operationId: listTenants
+      summary: Get Tenants
+      description: Get a list of tenants with which the CDO user is associated.
+      operationId: getTenants
       parameters:
         - name: limit
           in: query
@@ -1588,7 +1696,10 @@ paths:
     get:
       tags:
         - Tenant Management
-      summary: Fetch a tenant by UID in CDO
+      summary: Get Tenant
+      description: >-
+        Fetch a tenant by UID in CDO. This will return a 200 response only if
+        the user is associated with the tenant.
       operationId: getTenant
       parameters:
         - name: tenantUid
@@ -1625,9 +1736,10 @@ paths:
     get:
       tags:
         - Search
-      summary: >-
+      summary: Search
+      description: >-
         Search for devices, services, managers, objects and policies across the
-        CDO tenant
+        CDO tenant.
       operationId: search
       parameters:
         - name: q
@@ -1663,7 +1775,7 @@ paths:
       tags:
         - Meta
       summary: Fetch a list of CDO regions.
-      operationId: listRegions
+      operationId: getRegions
       responses:
         '200':
           description: List of CDO regions
@@ -1681,9 +1793,10 @@ paths:
     get:
       tags:
         - Meta
-      summary: >-
+      summary: Get Meta information
+      description: >-
         Get Meta information about CDO, including the IP addresses of CDO
-        services
+        services.
       operationId: getMeta
       responses:
         '200':
@@ -1702,8 +1815,9 @@ paths:
     get:
       tags:
         - Inventory
-      summary: Fetch a list of template devices in the CDO tenant
-      operationId: listTemplateDevices
+      summary: Get Template Devices
+      description: Get a list of template devices in the CDO tenant.
+      operationId: getTemplateDevices
       parameters:
         - name: limit
           in: query
@@ -1768,8 +1882,9 @@ paths:
     get:
       tags:
         - Inventory
-      summary: Fetch a list of Cloud Services in the CDO tenant
-      operationId: listDeviceCloudServices
+      summary: Get Cloud Services
+      description: Get a list of Cloud Services in the CDO tenant.
+      operationId: getCloudServices
       parameters:
         - name: limit
           in: query
@@ -1834,10 +1949,11 @@ paths:
     get:
       tags:
         - Inventory
-      summary: >-
+      summary: Get Device Managers
+      description: >-
         Fetch a list of Device Managers (on-prem FMCs and cloud-delivered FMCs)
-        in the CDO tenant
-      operationId: listDeviceManagers
+        in the CDO tenant.
+      operationId: getDeviceManagers
       parameters:
         - name: limit
           in: query
@@ -1902,8 +2018,9 @@ paths:
     get:
       tags:
         - Inventory
-      summary: Fetch a list of devices in the CDO tenant
-      operationId: listDevices
+      summary: Get Devices
+      description: Get a list of devices in the CDO tenant.
+      operationId: getDevices
       parameters:
         - name: limit
           in: query
@@ -1970,8 +2087,9 @@ paths:
     get:
       tags:
         - Tenant Management
-      summary: Fetch the feature flags enabled for this tenant
-      operationId: listFeatureFlags
+      summary: Get Feature Flags
+      description: Get the feature flags enabled in the CDO tenant.
+      operationId: getFeatureFlags
       responses:
         '200':
           description: Set of feature flags that are enabled for the user's tenant.
@@ -1998,8 +2116,9 @@ paths:
     get:
       tags:
         - Connectors
-      summary: Fetch a list of SDCs in the CDO tenant
-      operationId: listSdcs
+      summary: Get SDCs
+      description: Get a list of on-prem SDCs in the CDO tenant.
+      operationId: getSdcs
       parameters:
         - name: limit
           in: query
@@ -2064,8 +2183,9 @@ paths:
     get:
       tags:
         - Connectors
-      summary: Fetch a SDC by UID in the CDO tenant
-      operationId: fetchSdc
+      summary: Get SDC
+      description: Get a SDC by UID in the CDO tenant.
+      operationId: getSdc
       parameters:
         - name: sdcUid
           in: path
@@ -2101,8 +2221,9 @@ paths:
     get:
       tags:
         - Changelogs
-      summary: Fetch a list of Change Logs.
-      operationId: listChangelogs
+      summary: List Change Logs
+      description: Get a list of Change Logs in the CDO tenant.
+      operationId: getChangelogs
       parameters:
         - name: limit
           in: query
@@ -2174,7 +2295,8 @@ paths:
     get:
       tags:
         - Changelogs
-      summary: Fetch a Change Log by UID in the CDO tenant.
+      summary: Get Change Log
+      description: Get a specific Change Log object by UID in the CDO tenant.
       operationId: getChangelog
       parameters:
         - name: changelogUid
@@ -2211,7 +2333,8 @@ paths:
     get:
       tags:
         - Change Requests
-      summary: Fetch a Change Request by UID in the CDO tenant.
+      summary: Get Change Request
+      description: Get a Change Request by UID in the CDO tenant.
       operationId: getChangeRequest
       parameters:
         - name: changeRequestUid
@@ -2249,7 +2372,8 @@ paths:
     delete:
       tags:
         - Change Requests
-      summary: Delete a Change Request by UID in the CDO tenant
+      summary: Delete Change Request
+      description: Delete a Change Request by UID in the CDO tenant.
       operationId: deleteChangeRequest
       parameters:
         - name: changeRequestUid
@@ -2282,7 +2406,7 @@ paths:
     get:
       tags:
         - Meta
-      summary: Fetch The JSON Web Key Set
+      summary: Fetch JSON Web Key Set
       description: >-
         Retrieves the JSON Web Key Set (JWKS), which is a set of keys containing
         the public keys used to verify any JSON Web Token (JWT) issued by the
