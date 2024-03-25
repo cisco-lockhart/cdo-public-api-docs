@@ -6,7 +6,7 @@ package_name=$(grep -Eo 'NAME = "[^"]+"' cdo-sdk/python/setup.py | cut -d'"' -f2
 current_version=$(grep -Eo "VERSION = \"[0-9]+\.[0-9]+\.[0-9]+\"" cdo-sdk/python/setup.py | cut -d'"' -f2)
 
 cd cdo-sdk/python
-pip install wheel twine
+pip3 install wheel twine
 
 echo -n "$(yellow Creating the Wheel and Source)... "
 python3 setup.py sdist bdist_wheel
