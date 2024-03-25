@@ -6,6 +6,7 @@ cdo_sdk_python/__init__.py
 cdo_sdk_python/api/__init__.py
 cdo_sdk_python/api/change_requests_api.py
 cdo_sdk_python/api/changelogs_api.py
+cdo_sdk_python/api/cloud_delivered_fmc_api.py
 cdo_sdk_python/api/connectors_api.py
 cdo_sdk_python/api/inventory_api.py
 cdo_sdk_python/api/meta_api.py
@@ -130,6 +131,7 @@ docs/ChangeRequestsApi.md
 docs/Changelog.md
 docs/ChangelogPage.md
 docs/ChangelogsApi.md
+docs/CloudDeliveredFMCApi.md
 docs/CommonApiError.md
 docs/ConfigState.md
 docs/ConflictDetectionInterval.md
@@ -214,4 +216,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_cloud_delivered_fmc_api.py
 tox.ini
