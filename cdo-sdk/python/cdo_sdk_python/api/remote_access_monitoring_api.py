@@ -662,7 +662,7 @@ class RemoteAccessMonitoringApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CdoTransaction:
-        """Terminate RA VPN Sessions.
+        """Terminate RA VPN Sessions
 
         This is an asynchronous operation to terminate all RA VPN sessions on a device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
@@ -734,7 +734,7 @@ class RemoteAccessMonitoringApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CdoTransaction]:
-        """Terminate RA VPN Sessions.
+        """Terminate RA VPN Sessions
 
         This is an asynchronous operation to terminate all RA VPN sessions on a device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
@@ -806,7 +806,7 @@ class RemoteAccessMonitoringApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Terminate RA VPN Sessions.
+        """Terminate RA VPN Sessions
 
         This is an asynchronous operation to terminate all RA VPN sessions on a device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 

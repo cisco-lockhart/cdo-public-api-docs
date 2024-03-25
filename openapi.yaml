@@ -47,7 +47,7 @@ paths:
     post:
       tags:
         - Remote Access Monitoring
-      summary: Terminate RA VPN Sessions.
+      summary: Terminate RA VPN Sessions
       description: >-
         This is an asynchronous operation to terminate all RA VPN sessions on a
         device in the CDO tenant. This operation returns a link to a transaction

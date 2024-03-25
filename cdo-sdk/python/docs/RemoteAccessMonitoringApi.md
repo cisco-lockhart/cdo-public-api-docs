@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_ra_vpn_session**](RemoteAccessMonitoringApi.md#get_ra_vpn_session) | **GET** /v1/vpnsessions/{raVpnSessionUid} | Get RA VPN Session
 [**get_ra_vpn_sessions**](RemoteAccessMonitoringApi.md#get_ra_vpn_sessions) | **GET** /v1/vpnsessions | Get RA VPN Sessions
-[**terminate_ra_vpn_sessions_by_device**](RemoteAccessMonitoringApi.md#terminate_ra_vpn_sessions_by_device) | **POST** /v1/vpnsessions/{deviceUid}/terminate | Terminate RA VPN Sessions.
+[**terminate_ra_vpn_sessions_by_device**](RemoteAccessMonitoringApi.md#terminate_ra_vpn_sessions_by_device) | **POST** /v1/vpnsessions/{deviceUid}/terminate | Terminate RA VPN Sessions
 [**terminate_ra_vpn_sessions_by_device_and_user_name**](RemoteAccessMonitoringApi.md#terminate_ra_vpn_sessions_by_device_and_user_name) | **POST** /v1/vpnsessions/{deviceUid}/terminate/{userName} | Terminate User&#39;s RA VPN Sessions
 
 
@@ -186,7 +186,7 @@ Name | Type | Description  | Notes
 # **terminate_ra_vpn_sessions_by_device**
 > CdoTransaction terminate_ra_vpn_sessions_by_device(device_uid)
 
-Terminate RA VPN Sessions.
+Terminate RA VPN Sessions
 
 This is an asynchronous operation to terminate all RA VPN sessions on a device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
@@ -223,7 +223,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     device_uid = 'device_uid_example' # str | 
 
     try:
-        # Terminate RA VPN Sessions.
+        # Terminate RA VPN Sessions
         api_response = api_instance.terminate_ra_vpn_sessions_by_device(device_uid)
         print("The response of RemoteAccessMonitoringApi->terminate_ra_vpn_sessions_by_device:\n")
         pprint(api_response)
