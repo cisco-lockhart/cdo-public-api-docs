@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cdo_sdk_python"
-version = "1.0.18"
+version = "1.0.19"
 description = "Cisco Defense Orchestrator API"
 authors = ["CDO TAC <cdo.tac@cisco.com>"]
 license = "NoLicense"
