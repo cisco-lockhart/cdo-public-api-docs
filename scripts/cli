@@ -357,6 +357,9 @@ cli_publish_python_sdk_command() {
 
   cd cdo-sdk/python
   pip3 install wheel twine
+  echo "PATH: $PATH"
+  echo "Wheel installation directory: $(which wheel)"
+  echo "Twine installation directory: $(which twine)"
 
   echo -n "$(yellow Creating the Wheel and Source)... "
   python3 setup.py sdist bdist_wheel

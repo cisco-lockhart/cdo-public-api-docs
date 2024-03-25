@@ -7,6 +7,9 @@ current_version=$(grep -Eo "VERSION = \"[0-9]+\.[0-9]+\.[0-9]+\"" cdo-sdk/python
 
 cd cdo-sdk/python
 pip3 install wheel twine
+echo "PATH: $PATH"
+echo "Wheel installation directory: $(which wheel)"
+echo "Twine installation directory: $(which twine)"
 
 echo -n "$(yellow Creating the Wheel and Source)... "
 python3 setup.py sdist bdist_wheel
