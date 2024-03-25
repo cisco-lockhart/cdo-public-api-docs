@@ -7,6 +7,7 @@ The issues for the object
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **unused_target_ids** | **List[str]** |  | [optional] 
+**duplicate_target_ids** | **List[str]** |  | [optional] 
 
 ## Example
 

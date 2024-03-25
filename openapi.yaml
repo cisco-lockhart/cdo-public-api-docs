@@ -2778,6 +2778,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
+  /v0/objects/{uid}/duplicates:
+    get:
+      tags:
+        - Object Management
+      operationId: getObjectDuplicates
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: targetId
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
 components:
   schemas:
     CdoTransaction:
@@ -4802,6 +4833,11 @@ components:
       type: object
       properties:
         unusedTargetIds:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        duplicateTargetIds:
           uniqueItems: true
           type: array
           items:

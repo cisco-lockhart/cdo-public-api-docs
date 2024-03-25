@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**delete_object**](ObjectManagementApi.md#delete_object) | **DELETE** /v0/objects/{uid} | Delete Object
 [**delete_targets**](ObjectManagementApi.md#delete_targets) | **DELETE** /v0/objects/{uid}/targets | Delete Targets
 [**get_object**](ObjectManagementApi.md#get_object) | **GET** /v0/objects/{uid} | Get Object
+[**get_object_duplicates**](ObjectManagementApi.md#get_object_duplicates) | **GET** /v0/objects/{uid}/duplicates | 
 [**get_object_usages**](ObjectManagementApi.md#get_object_usages) | **GET** /v0/objects/{uid}/usage | Get Object Usages
 [**get_objects**](ObjectManagementApi.md#get_objects) | **GET** /v0/objects | Get Objects
 [**modify_object**](ObjectManagementApi.md#modify_object) | **PATCH** /v0/objects/{uid} | Modify Object
@@ -374,6 +375,73 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_object_duplicates**
+> get_object_duplicates(uid, target_id)
+
+
+
+### Example
+
+
+```python
+import cdo_sdk_python
+from cdo_sdk_python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cdo_sdk_python.Configuration(
+    host = "https://edge.us.cdo.cisco.com/api/rest"
+)
+
+
+# Enter a context with an instance of the API client
+with cdo_sdk_python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
+    uid = 'uid_example' # str | 
+    target_id = 'target_id_example' # str | 
+
+    try:
+        api_instance.get_object_duplicates(uid, target_id)
+    except Exception as e:
+        print("Exception when calling ObjectManagementApi->get_object_duplicates: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **uid** | **str**|  | 
+ **target_id** | **str**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |

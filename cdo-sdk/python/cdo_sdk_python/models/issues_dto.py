@@ -28,7 +28,8 @@ class IssuesDto(BaseModel):
     The issues for the object
     """ # noqa: E501
     unused_target_ids: Optional[List[StrictStr]] = Field(default=None, alias="unusedTargetIds")
-    __properties: ClassVar[List[str]] = ["unusedTargetIds"]
+    duplicate_target_ids: Optional[List[StrictStr]] = Field(default=None, alias="duplicateTargetIds")
+    __properties: ClassVar[List[str]] = ["unusedTargetIds", "duplicateTargetIds"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,7 +82,8 @@ class IssuesDto(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "unusedTargetIds": obj.get("unusedTargetIds")
+            "unusedTargetIds": obj.get("unusedTargetIds"),
+            "duplicateTargetIds": obj.get("duplicateTargetIds")
         })
         return _obj
 
