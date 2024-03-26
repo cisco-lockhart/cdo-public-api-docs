@@ -26,6 +26,7 @@ cdo_sdk_python/models/asa_create_or_update_input.py
 cdo_sdk_python/models/asa_failover_mate.py
 cdo_sdk_python/models/asa_failover_mode.py
 cdo_sdk_python/models/authentication_error.py
+cdo_sdk_python/models/browser.py
 cdo_sdk_python/models/cd_fmc_info.py
 cdo_sdk_python/models/cd_fmc_object.py
 cdo_sdk_python/models/cd_fmc_result.py
@@ -40,6 +41,7 @@ cdo_sdk_python/models/change_request_create_input.py
 cdo_sdk_python/models/change_request_page.py
 cdo_sdk_python/models/changelog.py
 cdo_sdk_python/models/changelog_page.py
+cdo_sdk_python/models/client_device.py
 cdo_sdk_python/models/common_api_error.py
 cdo_sdk_python/models/config_state.py
 cdo_sdk_python/models/conflict_detection_interval.py
@@ -71,6 +73,8 @@ cdo_sdk_python/models/list_object_response.py
 cdo_sdk_python/models/location.py
 cdo_sdk_python/models/meraki_deployment_mode.py
 cdo_sdk_python/models/meta.py
+cdo_sdk_python/models/mfa_event.py
+cdo_sdk_python/models/mfa_event_page.py
 cdo_sdk_python/models/msp_add_tenant_input.py
 cdo_sdk_python/models/network.py
 cdo_sdk_python/models/network_object_content.py
@@ -115,6 +119,7 @@ docs/AsaCreateOrUpdateInput.md
 docs/AsaFailoverMate.md
 docs/AsaFailoverMode.md
 docs/AuthenticationError.md
+docs/Browser.md
 docs/CdFmcInfo.md
 docs/CdFmcObject.md
 docs/CdFmcResult.md
@@ -131,6 +136,7 @@ docs/ChangeRequestsApi.md
 docs/Changelog.md
 docs/ChangelogPage.md
 docs/ChangelogsApi.md
+docs/ClientDevice.md
 docs/CloudDeliveredFMCApi.md
 docs/CommonApiError.md
 docs/ConfigState.md
@@ -166,6 +172,8 @@ docs/Location.md
 docs/MerakiDeploymentMode.md
 docs/Meta.md
 docs/MetaApi.md
+docs/MfaEvent.md
+docs/MfaEventPage.md
 docs/MspAddTenantInput.md
 docs/Network.md
 docs/NetworkObjectContent.md
@@ -216,4 +224,8 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_browser.py
+test/test_client_device.py
+test/test_mfa_event.py
+test/test_mfa_event_page.py
 tox.ini

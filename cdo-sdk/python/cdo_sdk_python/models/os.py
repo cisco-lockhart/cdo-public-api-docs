@@ -25,10 +25,10 @@ from typing_extensions import Self
 
 class OS(BaseModel):
     """
-    The operating system information of the device associated with the RA VPN session.
+    The operating system of the client device.
     """ # noqa: E501
-    type: Optional[StrictStr] = Field(default=None, description="The type of operating system running on the device associated with the RA VPN session.")
-    version: Optional[StrictStr] = Field(default=None, description="The version of the operating system running on the device.")
+    type: Optional[StrictStr] = Field(default=None, description="The type of operating system running on the client device.")
+    version: Optional[StrictStr] = Field(default=None, description="The version of the operating system running on the client device.")
     __properties: ClassVar[List[str]] = ["type", "version"]
 
     model_config = ConfigDict(

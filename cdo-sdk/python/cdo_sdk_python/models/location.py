@@ -25,11 +25,11 @@ from typing_extensions import Self
 
 class Location(BaseModel):
     """
-    The location information of the device associated with the RA VPN session.
+    The location of the client device.
     """ # noqa: E501
-    city: Optional[StrictStr] = Field(default=None, description="The city where the device associated with the RA VPN session is located.")
-    subdivision: Optional[StrictStr] = Field(default=None, description="The subdivision (e.g., state or province) where the device is located.")
-    country: Optional[StrictStr] = Field(default=None, description="The country where the device associated with the RA VPN session is located.")
+    city: Optional[StrictStr] = Field(default=None, description="The city where the client device is located.")
+    subdivision: Optional[StrictStr] = Field(default=None, description="The subdivision (e.g., state or province) where the client device is located.")
+    country: Optional[StrictStr] = Field(default=None, description="The country where the client device is located.")
     __properties: ClassVar[List[str]] = ["city", "subdivision", "country"]
 
     model_config = ConfigDict(

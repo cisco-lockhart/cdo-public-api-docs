@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.27"
+__version__ = "1.0.28"
 
 # import apis into sdk package
 from cdo_sdk_python.api.change_requests_api import ChangeRequestsApi
@@ -48,6 +48,7 @@ from cdo_sdk_python.models.asa_create_or_update_input import AsaCreateOrUpdateIn
 from cdo_sdk_python.models.asa_failover_mate import AsaFailoverMate
 from cdo_sdk_python.models.asa_failover_mode import AsaFailoverMode
 from cdo_sdk_python.models.authentication_error import AuthenticationError
+from cdo_sdk_python.models.browser import Browser
 from cdo_sdk_python.models.cd_fmc_info import CdFmcInfo
 from cdo_sdk_python.models.cd_fmc_object import CdFmcObject
 from cdo_sdk_python.models.cd_fmc_result import CdFmcResult
@@ -62,6 +63,7 @@ from cdo_sdk_python.models.change_request_create_input import ChangeRequestCreat
 from cdo_sdk_python.models.change_request_page import ChangeRequestPage
 from cdo_sdk_python.models.changelog import Changelog
 from cdo_sdk_python.models.changelog_page import ChangelogPage
+from cdo_sdk_python.models.client_device import ClientDevice
 from cdo_sdk_python.models.common_api_error import CommonApiError
 from cdo_sdk_python.models.config_state import ConfigState
 from cdo_sdk_python.models.conflict_detection_interval import ConflictDetectionInterval
@@ -93,6 +95,8 @@ from cdo_sdk_python.models.list_object_response import ListObjectResponse
 from cdo_sdk_python.models.location import Location
 from cdo_sdk_python.models.meraki_deployment_mode import MerakiDeploymentMode
 from cdo_sdk_python.models.meta import Meta
+from cdo_sdk_python.models.mfa_event import MfaEvent
+from cdo_sdk_python.models.mfa_event_page import MfaEventPage
 from cdo_sdk_python.models.msp_add_tenant_input import MspAddTenantInput
 from cdo_sdk_python.models.network import Network
 from cdo_sdk_python.models.network_object_content import NetworkObjectContent

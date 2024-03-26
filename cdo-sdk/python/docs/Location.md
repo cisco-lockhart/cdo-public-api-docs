@@ -1,14 +1,14 @@
 # Location
 
-The location information of the device associated with the RA VPN session.
+The location of the client device.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**city** | **str** | The city where the device associated with the RA VPN session is located. | [optional] 
-**subdivision** | **str** | The subdivision (e.g., state or province) where the device is located. | [optional] 
-**country** | **str** | The country where the device associated with the RA VPN session is located. | [optional] 
+**city** | **str** | The city where the client device is located. | [optional] 
+**subdivision** | **str** | The subdivision (e.g., state or province) where the client device is located. | [optional] 
+**country** | **str** | The country where the client device is located. | [optional] 
 
 ## Example
 

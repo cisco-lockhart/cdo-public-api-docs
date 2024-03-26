@@ -1,13 +1,13 @@
 # OS
 
-The operating system information of the device associated with the RA VPN session.
+The operating system of the client device.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** | The type of operating system running on the device associated with the RA VPN session. | [optional] 
-**version** | **str** | The version of the operating system running on the device. | [optional] 
+**type** | **str** | The type of operating system running on the client device. | [optional] 
+**version** | **str** | The version of the operating system running on the client device. | [optional] 
 
 ## Example
 
