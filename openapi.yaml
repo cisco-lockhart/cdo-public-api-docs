@@ -135,6 +135,39 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /v1/vpnsessions/refresh:
+    post:
+      tags:
+        - Remote Access Monitoring
+      summary: >-
+        This is an asynchronous operation to refresh RA VPN sessions for all
+        devices in the CDO tenant.
+      operationId: refreshRaVpnSessionsByDevice
+      responses:
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the progress of the
+            refresh operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/users:
     get:
       tags:
@@ -3198,6 +3231,7 @@ components:
         - DEPLOY_ASA_DEVICE_CHANGES
         - INDEX_TENANT
         - TERMINATE_DEVICE_RA_VPN_SESSIONS
+        - REFRESH_RA_VPN_SESSIONS
         - TERMINATE_USER_RA_VPN_SESSIONS
     UserCreateOrUpdateInput:
       required:
@@ -3837,6 +3871,7 @@ components:
         - RA_VPN_HEADEND
         - MFA_PROVIDER
         - ZTNA_PROVIDER
+        - ANYCONNECT_VPN_HEAD_END
     EntityType:
       type: string
       description: The type of the device.

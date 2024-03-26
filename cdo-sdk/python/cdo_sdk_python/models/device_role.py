@@ -30,6 +30,7 @@ class DeviceRole(str, Enum):
     RA_VPN_HEADEND = 'RA_VPN_HEADEND'
     MFA_PROVIDER = 'MFA_PROVIDER'
     ZTNA_PROVIDER = 'ZTNA_PROVIDER'
+    ANYCONNECT_VPN_HEAD_END = 'ANYCONNECT_VPN_HEAD_END'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
