@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**sdc_public_key** | [**SdcPublicKey**](SdcPublicKey.md) |  | [optional] 
+**public_key** | [**PublicKey**](PublicKey.md) |  | [optional] 
 **uid** | **str** | The unique identifier of the SDC in CDO. | [optional] 
 **name** | **str** | The name of the SDC in CDO. SDC names are unique in CDO. | 
 **software_version** | **str** | The software version running on the SDC. | [optional] 
 **ip_address** | **str** | The IP address of the SDC. | [optional] 
-**sdc_status** | [**SdcStatus**](SdcStatus.md) |  | [optional] 
+**status** | [**Status**](Status.md) |  | [optional] 
 **last_heartbeat** | **datetime** | The time (UTC; represented using the RFC-3339 standard) that a heartbeat was last received from the SDC. This serves as an indicator of the health of the SDC. | [optional] 
 
 ## Example

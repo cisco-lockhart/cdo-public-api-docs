@@ -4513,13 +4513,32 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/Device'
+    PublicKey:
+      type: object
+      properties:
+        base64EncodedKey:
+          type: string
+          description: >-
+            Base64 RSA public key to use to encrypt device credentials sent to
+            the SDC.
+          example: >-
+            c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCZ1FEZGpxeDNNMjh3ZHE2Rk11R2NFZHJqaGl3SFp5NDE0WXZFUmRDcVdnRXgrSXloNjVteHlkaVh1OVpoMXUyVTRtNDlnL0VUL2JxTklFNGgraUViQURjcjlScVFGRGZ4RC9pK1ZPSkhiQzQ0UERhZHFJd21vUGNoazYvQ0RoZVlJSmZTM0xTNmlkaC9SRGVFVHpnZ3lTaUI2Mm5yMnRmTkJ3V0ZScjV1Sko5dkNvdUxKRVBZbDBVMkpZNnBjd0paNk1lRDg5dU4rTjlHWFN2Vlh4bEZKNXg0VThReGFCMzJuNHZoekNiUzlYSVg1bGJJQnVIUEZ1bmMrNThPaUFzS0dwTTZ1NzhVR2V2TndOVzU0eVZmU2c4Q01XQ09vM1hiNTIrMnU2VHZlcE1BT2ZFU290YUd5NHV1RTBnUHYwSnowano3ZnFGTCt4d1AzNnNVY2pPRlIzQ1VhbEVpUDEyT2tTeEhreVNMUXJ3a2lFTVUvQ3VPUjdOWkdjUFd0dkVBaUZOTEN0VHhzY25Ma0xNNENkUEt3WnZQV3l3cHAyVGdValU4MEFaWkJZaGZBWTd3SFFQdDhrTkROMURhMWpWaHlwMWlycE5VbTEvaDNrS2srOFdFOVV2RjNDeVgyL1NqWUpPR2lMUWdVaXFUL3E5UkNMZUdVWStzaUFwS3ZyNS91UkU9IHNpd2FycmllQFNJV0FSUklFLU0tS1JBRgo=
+        keyId:
+          type: string
+          description: >-
+            The identifier of the RSA public key. This identifier is used by the
+            SDC to know which private key to use to decrypt a string.
+          example: example-key-id
+      description: >-
+        Information on the public key used to encrypt credentials sent to the
+        SDC.
     Sdc:
       required:
         - name
       type: object
       properties:
-        sdcPublicKey:
-          $ref: '#/components/schemas/SdcPublicKey'
+        publicKey:
+          $ref: '#/components/schemas/PublicKey'
         uid:
           type: string
           description: The unique identifier of the SDC in CDO.
@@ -4537,8 +4556,8 @@ components:
           type: string
           description: The IP address of the SDC.
           example: '202311071057'
-        sdcStatus:
-          $ref: '#/components/schemas/SdcStatus'
+        status:
+          $ref: '#/components/schemas/Status'
         lastHeartbeat:
           type: string
           description: >-
@@ -4573,26 +4592,7 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/Sdc'
-    SdcPublicKey:
-      type: object
-      properties:
-        base64EncodedKey:
-          type: string
-          description: >-
-            Base64 RSA public key to use to encrypt device credentials sent to
-            the SDC.
-          example: >-
-            c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCZ1FEZGpxeDNNMjh3ZHE2Rk11R2NFZHJqaGl3SFp5NDE0WXZFUmRDcVdnRXgrSXloNjVteHlkaVh1OVpoMXUyVTRtNDlnL0VUL2JxTklFNGgraUViQURjcjlScVFGRGZ4RC9pK1ZPSkhiQzQ0UERhZHFJd21vUGNoazYvQ0RoZVlJSmZTM0xTNmlkaC9SRGVFVHpnZ3lTaUI2Mm5yMnRmTkJ3V0ZScjV1Sko5dkNvdUxKRVBZbDBVMkpZNnBjd0paNk1lRDg5dU4rTjlHWFN2Vlh4bEZKNXg0VThReGFCMzJuNHZoekNiUzlYSVg1bGJJQnVIUEZ1bmMrNThPaUFzS0dwTTZ1NzhVR2V2TndOVzU0eVZmU2c4Q01XQ09vM1hiNTIrMnU2VHZlcE1BT2ZFU290YUd5NHV1RTBnUHYwSnowano3ZnFGTCt4d1AzNnNVY2pPRlIzQ1VhbEVpUDEyT2tTeEhreVNMUXJ3a2lFTVUvQ3VPUjdOWkdjUFd0dkVBaUZOTEN0VHhzY25Ma0xNNENkUEt3WnZQV3l3cHAyVGdValU4MEFaWkJZaGZBWTd3SFFQdDhrTkROMURhMWpWaHlwMWlycE5VbTEvaDNrS2srOFdFOVV2RjNDeVgyL1NqWUpPR2lMUWdVaXFUL3E5UkNMZUdVWStzaUFwS3ZyNS91UkU9IHNpd2FycmllQFNJV0FSUklFLU0tS1JBRgo=
-        keyId:
-          type: string
-          description: >-
-            The identifier of the RSA public key. This identifier is used by the
-            SDC to know which private key to use to decrypt a string.
-          example: example-key-id
-      description: >-
-        Information on the public key used to encrypt credentials sent to the
-        SDC.
-    SdcStatus:
+    Status:
       type: string
       description: The status of the SDC.
       example: ACTIVE

@@ -21,8 +21,8 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cdo_sdk_python.models.sdc_public_key import SdcPublicKey
-from cdo_sdk_python.models.sdc_status import SdcStatus
+from cdo_sdk_python.models.public_key import PublicKey
+from cdo_sdk_python.models.status import Status
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,14 +30,14 @@ class Sdc(BaseModel):
     """
     Sdc
     """ # noqa: E501
-    sdc_public_key: Optional[SdcPublicKey] = Field(default=None, alias="sdcPublicKey")
+    public_key: Optional[PublicKey] = Field(default=None, alias="publicKey")
     uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the SDC in CDO.")
     name: StrictStr = Field(description="The name of the SDC in CDO. SDC names are unique in CDO.")
     software_version: Optional[StrictStr] = Field(default=None, description="The software version running on the SDC.", alias="softwareVersion")
     ip_address: Optional[StrictStr] = Field(default=None, description="The IP address of the SDC.", alias="ipAddress")
-    sdc_status: Optional[SdcStatus] = Field(default=None, alias="sdcStatus")
+    status: Optional[Status] = None
     last_heartbeat: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) that a heartbeat was last received from the SDC. This serves as an indicator of the health of the SDC.", alias="lastHeartbeat")
-    __properties: ClassVar[List[str]] = ["sdcPublicKey", "uid", "name", "softwareVersion", "ipAddress", "sdcStatus", "lastHeartbeat"]
+    __properties: ClassVar[List[str]] = ["publicKey", "uid", "name", "softwareVersion", "ipAddress", "status", "lastHeartbeat"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,9 +78,9 @@ class Sdc(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of sdc_public_key
-        if self.sdc_public_key:
-            _dict['sdcPublicKey'] = self.sdc_public_key.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of public_key
+        if self.public_key:
+            _dict['publicKey'] = self.public_key.to_dict()
         return _dict
 
     @classmethod
@@ -93,12 +93,12 @@ class Sdc(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "sdcPublicKey": SdcPublicKey.from_dict(obj["sdcPublicKey"]) if obj.get("sdcPublicKey") is not None else None,
+            "publicKey": PublicKey.from_dict(obj["publicKey"]) if obj.get("publicKey") is not None else None,
             "uid": obj.get("uid"),
             "name": obj.get("name"),
             "softwareVersion": obj.get("softwareVersion"),
             "ipAddress": obj.get("ipAddress"),
-            "sdcStatus": obj.get("sdcStatus"),
+            "status": obj.get("status"),
             "lastHeartbeat": obj.get("lastHeartbeat")
         })
         return _obj
