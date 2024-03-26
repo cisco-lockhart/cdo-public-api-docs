@@ -5,20 +5,13 @@ secret_value=$(aws secretsmanager get-secret-value --secret-id $secret_arn --que
 package_name=$(grep -Eo 'NAME = "[^"]+"' cdo-sdk/python/setup.py | cut -d'"' -f2)
 current_version=$(grep -Eo "VERSION = \"[0-9]+\.[0-9]+\.[0-9]+\"" cdo-sdk/python/setup.py | cut -d'"' -f2)
 
-ls
 cd cdo-sdk/python
-ls
 pip3 install wheel twine
-echo "PATH: $PATH"
-echo "Wheel installation directory: $(which wheel)"
-echo "Twine installation directory: $(which twine)"
-pip3 show wheel
-pip3 show twine
 
 echo -n "$(yellow Creating the Wheel and Source)... "
 python3 setup.py sdist bdist_wheel
 
 echo -n "$(yellow Publishing to PyPI)... "
-twine upload --username __token__ --password $secret_value dist/${package_name}-${current_version}.tar.gz dist/${package_name//-/_}-${current_version}-py3-none-any.whl
+/home/jenkins/.local/bin/twine upload --username __token__ --password $secret_value dist/${package_name}-${current_version}.tar.gz dist/${package_name//-/_}-${current_version}-py3-none-any.whl
 
 unset secret_value
