@@ -34,9 +34,10 @@ cli_usage() {
   echo
   # :command.usage_commands
   printf "%s\n" "Commands:"
-  printf "  %s   Download and add public API YAML to the pubhub docs\n" "download          "
-  printf "  %s   Perform transformations on FMC OAS and generate cdfmc-service-openapi.yaml\n" "transform-fmc-oas "
-  printf "  %s   Publishes a new version of the CDO SDK to PyPI\n" "publish-python-sdk"
+  printf "  %s   Download and add public API YAML to the pubhub docs\n" "download              "
+  printf "  %s   Perform transformations on FMC OAS and generate cdfmc-service-openapi.yaml\n" "transform-fmc-oas     "
+  printf "  %s   Publishes a new version of the CDO SDK to PyPI\n" "publish-python-sdk    "
+  printf "  %s   Updating the SDK description with SDK-DESC.md\n" "update-sdk-description"
   echo
 
   # :command.long_usage
@@ -160,6 +161,40 @@ cli_publish_python_sdk_usage() {
     # :command.usage_examples
     printf "%s\n" "Examples:"
     printf "  cli publish-python-sdk\n"
+    echo
+
+  fi
+}
+
+# :command.usage
+cli_update_sdk_description_usage() {
+  if [[ -n $long_usage ]]; then
+    printf "cli update-sdk-description - Updating the SDK description with SDK-DESC.md\n"
+    echo
+
+  else
+    printf "cli update-sdk-description - Updating the SDK description with SDK-DESC.md\n"
+    echo
+
+  fi
+
+  printf "%s\n" "Usage:"
+  printf "  cli update-sdk-description\n"
+  printf "  cli update-sdk-description --help | -h\n"
+  echo
+
+  # :command.long_usage
+  if [[ -n $long_usage ]]; then
+    printf "%s\n" "Options:"
+
+    # :command.usage_fixed_flags
+    printf "  %s\n" "--help, -h"
+    printf "    Show this help\n"
+    echo
+
+    # :command.usage_examples
+    printf "%s\n" "Examples:"
+    printf "  cli update-sdk-description\n"
     echo
 
   fi
@@ -348,6 +383,9 @@ cli_transform_fmc_oas_command() {
 # :command.function
 cli_publish_python_sdk_command() {
   # src/publish_python_sdk_command.sh
+  pip install setuptools
+  scripts/cli update-sdk-description
+
   secret_arn=arn:aws:secretsmanager:us-west-2:107042026245:secret:jenkins-pypi-credentials-mD4NdK
   echo -n "$(yellow Retrieving the secret value from AWS Secrets Manager)... "
   secret_value=$(aws secretsmanager get-secret-value --secret-id $secret_arn --query SecretString --output text)
@@ -365,6 +403,21 @@ cli_publish_python_sdk_command() {
   /home/jenkins/.local/bin/twine upload --username __token__ --password $secret_value dist/${package_name}-${current_version}.tar.gz dist/${package_name//-/_}-${current_version}-py3-none-any.whl
 
   unset secret_value
+}
+
+# :command.function
+cli_update_sdk_description_command() {
+  # src/update_sdk_description_command.sh
+  SETUP_PY_PATH="cdo-sdk/python/setup.py"
+  TEMP_FILE_PATH="cdo-sdk/python/setup.tmp.py"
+
+  # Replace the long_description block in setup.py
+  awk '
+    /long_description=/{print "    long_description=open('\''../../SDK-DESC.md'\'', '\''r'\'', encoding='\''utf-8'\'').read(),"; inDescBlock=1; next}
+    /^    [a-z_]+=/ {inDescBlock=0}
+    inDescBlock {next}
+    {print}
+  ' "$SETUP_PY_PATH" > "$TEMP_FILE_PATH" && mv "$TEMP_FILE_PATH" "$SETUP_PY_PATH"
 }
 
 # :command.parse_requirements
@@ -414,6 +467,13 @@ parse_requirements() {
       action="publish-python-sdk"
       shift
       cli_publish_python_sdk_parse_requirements "$@"
+      shift $#
+      ;;
+
+    update-sdk-description)
+      action="update-sdk-description"
+      shift
+      cli_update_sdk_description_parse_requirements "$@"
       shift $#
       ;;
 
@@ -592,6 +652,50 @@ cli_publish_python_sdk_parse_requirements() {
 
 }
 
+# :command.parse_requirements
+cli_update_sdk_description_parse_requirements() {
+  # :command.fixed_flags_filter
+  while [[ $# -gt 0 ]]; do
+    case "${1:-}" in
+      --help | -h)
+        long_usage=yes
+        cli_update_sdk_description_usage
+        exit
+        ;;
+
+      *)
+        break
+        ;;
+
+    esac
+  done
+
+  # :command.command_filter
+  action="update-sdk-description"
+
+  # :command.parse_requirements_while
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case "$key" in
+
+      -?*)
+        printf "invalid option: %s\n" "$key" >&2
+        exit 1
+        ;;
+
+      *)
+        # :command.parse_requirements_case
+        # :command.parse_requirements_case_simple
+        printf "invalid argument: %s\n" "$key" >&2
+        exit 1
+
+        ;;
+
+    esac
+  done
+
+}
+
 # :command.initialize
 initialize() {
   version="0.1.0"
@@ -613,6 +717,7 @@ run() {
     "download") cli_download_command ;;
     "transform-fmc-oas") cli_transform_fmc_oas_command ;;
     "publish-python-sdk") cli_publish_python_sdk_command ;;
+    "update-sdk-description") cli_update_sdk_description_command ;;
   esac
 }
 

@@ -22,3 +22,8 @@ commands:
   examples:
   - cli publish-python-sdk
   
+- name: update-sdk-description
+  help: Updating the SDK description with SDK-DESC.md
+  examples:
+  - cli update-sdk-description
+  

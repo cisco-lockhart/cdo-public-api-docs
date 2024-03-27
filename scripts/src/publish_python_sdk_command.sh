@@ -1,3 +1,6 @@
+pip install setuptools
+scripts/cli update-sdk-description
+
 secret_arn=arn:aws:secretsmanager:us-west-2:107042026245:secret:jenkins-pypi-credentials-mD4NdK
 echo -n "$(yellow Retrieving the secret value from AWS Secrets Manager)... "
 secret_value=$(aws secretsmanager get-secret-value --secret-id $secret_arn --query SecretString --output text)
