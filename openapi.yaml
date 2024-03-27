@@ -1809,7 +1809,8 @@ paths:
     get:
       tags:
         - Meta
-      summary: Fetch a list of CDO regions.
+      summary: Get CDO Regions
+      description: Get the list of regions that CDO is deployed in.
       operationId: getRegions
       responses:
         '200':

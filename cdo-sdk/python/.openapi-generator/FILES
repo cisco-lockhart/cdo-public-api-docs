@@ -224,10 +224,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_browser.py
-test/test_client_device.py
-test/test_mfa_event.py
-test/test_mfa_event_page.py
-test/test_public_key.py
-test/test_status.py
 tox.ini

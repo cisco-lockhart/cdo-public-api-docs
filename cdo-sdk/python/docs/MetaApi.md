@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_jwks**](MetaApi.md#get_jwks) | **GET** /.well-known/jwks.json | Fetch JSON Web Key Set
 [**get_meta**](MetaApi.md#get_meta) | **GET** /v1/meta | Get Meta information
-[**get_regions**](MetaApi.md#get_regions) | **GET** /v1/regions | Fetch a list of CDO regions.
+[**get_regions**](MetaApi.md#get_regions) | **GET** /v1/regions | Get CDO Regions
 
 
 # **get_jwks**
@@ -142,7 +142,9 @@ No authorization required
 # **get_regions**
 > CdoRegionList get_regions()
 
-Fetch a list of CDO regions.
+Get CDO Regions
+
+Get the list of regions that CDO is deployed in.
 
 ### Example
 
@@ -166,7 +168,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     api_instance = cdo_sdk_python.MetaApi(api_client)
 
     try:
-        # Fetch a list of CDO regions.
+        # Get CDO Regions
         api_response = api_instance.get_regions()
         print("The response of MetaApi->get_regions:\n")
         pprint(api_response)
