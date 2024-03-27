@@ -632,7 +632,7 @@ class ObjectManagementApi:
     @validate_call
     def delete_object(
         self,
-        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being deleted.")],
+        uid: Annotated[StrictStr, Field(description="The unique identifier of the object being deleted.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -650,7 +650,7 @@ class ObjectManagementApi:
 
         Delete an object in the CDO tenant
 
-        :param uid: the unique identifier of the object being deleted. (required)
+        :param uid: The unique identifier of the object being deleted. (required)
         :type uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -703,7 +703,7 @@ class ObjectManagementApi:
     @validate_call
     def delete_object_with_http_info(
         self,
-        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being deleted.")],
+        uid: Annotated[StrictStr, Field(description="The unique identifier of the object being deleted.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -721,7 +721,7 @@ class ObjectManagementApi:
 
         Delete an object in the CDO tenant
 
-        :param uid: the unique identifier of the object being deleted. (required)
+        :param uid: The unique identifier of the object being deleted. (required)
         :type uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -774,7 +774,7 @@ class ObjectManagementApi:
     @validate_call
     def delete_object_without_preload_content(
         self,
-        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being deleted.")],
+        uid: Annotated[StrictStr, Field(description="The unique identifier of the object being deleted.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -792,7 +792,7 @@ class ObjectManagementApi:
 
         Delete an object in the CDO tenant
 
-        :param uid: the unique identifier of the object being deleted. (required)
+        :param uid: The unique identifier of the object being deleted. (required)
         :type uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1193,7 +1193,7 @@ class ObjectManagementApi:
     @validate_call
     def get_duplicate_objects(
         self,
-        uid: Annotated[StrictStr, Field(description="the unique identifier of the object to retrieve duplicates for.")],
+        uid: Annotated[StrictStr, Field(description="The unique identifier of the object to retrieve duplicates for.")],
         target_uid: Annotated[StrictStr, Field(description="the unique identifier of the target to restrict the duplicate search to.")],
         _request_timeout: Union[
             None,
@@ -1212,7 +1212,7 @@ class ObjectManagementApi:
 
         Get objects in the CDO tenant that are duplicates of the given object.
 
-        :param uid: the unique identifier of the object to retrieve duplicates for. (required)
+        :param uid: The unique identifier of the object to retrieve duplicates for. (required)
         :type uid: str
         :param target_uid: the unique identifier of the target to restrict the duplicate search to. (required)
         :type target_uid: str
@@ -1268,7 +1268,7 @@ class ObjectManagementApi:
     @validate_call
     def get_duplicate_objects_with_http_info(
         self,
-        uid: Annotated[StrictStr, Field(description="the unique identifier of the object to retrieve duplicates for.")],
+        uid: Annotated[StrictStr, Field(description="The unique identifier of the object to retrieve duplicates for.")],
         target_uid: Annotated[StrictStr, Field(description="the unique identifier of the target to restrict the duplicate search to.")],
         _request_timeout: Union[
             None,
@@ -1287,7 +1287,7 @@ class ObjectManagementApi:
 
         Get objects in the CDO tenant that are duplicates of the given object.
 
-        :param uid: the unique identifier of the object to retrieve duplicates for. (required)
+        :param uid: The unique identifier of the object to retrieve duplicates for. (required)
         :type uid: str
         :param target_uid: the unique identifier of the target to restrict the duplicate search to. (required)
         :type target_uid: str
@@ -1343,7 +1343,7 @@ class ObjectManagementApi:
     @validate_call
     def get_duplicate_objects_without_preload_content(
         self,
-        uid: Annotated[StrictStr, Field(description="the unique identifier of the object to retrieve duplicates for.")],
+        uid: Annotated[StrictStr, Field(description="The unique identifier of the object to retrieve duplicates for.")],
         target_uid: Annotated[StrictStr, Field(description="the unique identifier of the target to restrict the duplicate search to.")],
         _request_timeout: Union[
             None,
@@ -1362,7 +1362,7 @@ class ObjectManagementApi:
 
         Get objects in the CDO tenant that are duplicates of the given object.
 
-        :param uid: the unique identifier of the object to retrieve duplicates for. (required)
+        :param uid: The unique identifier of the object to retrieve duplicates for. (required)
         :type uid: str
         :param target_uid: the unique identifier of the target to restrict the duplicate search to. (required)
         :type target_uid: str
@@ -1479,7 +1479,7 @@ class ObjectManagementApi:
     @validate_call
     def get_object(
         self,
-        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being retrieved.")],
+        uid: Annotated[StrictStr, Field(description="The unique identifier of the object being retrieved.")],
         fields: Annotated[Optional[StrictStr], Field(description="The scope of the fields to be retrieved. One of [\"@basic\", \"@detailed\"]. Defaults to \"@basic\".")] = None,
         _request_timeout: Union[
             None,
@@ -1498,7 +1498,7 @@ class ObjectManagementApi:
 
         Gets an object in the CDO tenant
 
-        :param uid: the unique identifier of the object being retrieved. (required)
+        :param uid: The unique identifier of the object being retrieved. (required)
         :type uid: str
         :param fields: The scope of the fields to be retrieved. One of [\"@basic\", \"@detailed\"]. Defaults to \"@basic\".
         :type fields: str
@@ -1554,7 +1554,7 @@ class ObjectManagementApi:
     @validate_call
     def get_object_with_http_info(
         self,
-        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being retrieved.")],
+        uid: Annotated[StrictStr, Field(description="The unique identifier of the object being retrieved.")],
         fields: Annotated[Optional[StrictStr], Field(description="The scope of the fields to be retrieved. One of [\"@basic\", \"@detailed\"]. Defaults to \"@basic\".")] = None,
         _request_timeout: Union[
             None,
@@ -1573,7 +1573,7 @@ class ObjectManagementApi:
 
         Gets an object in the CDO tenant
 
-        :param uid: the unique identifier of the object being retrieved. (required)
+        :param uid: The unique identifier of the object being retrieved. (required)
         :type uid: str
         :param fields: The scope of the fields to be retrieved. One of [\"@basic\", \"@detailed\"]. Defaults to \"@basic\".
         :type fields: str
@@ -1629,7 +1629,7 @@ class ObjectManagementApi:
     @validate_call
     def get_object_without_preload_content(
         self,
-        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being retrieved.")],
+        uid: Annotated[StrictStr, Field(description="The unique identifier of the object being retrieved.")],
         fields: Annotated[Optional[StrictStr], Field(description="The scope of the fields to be retrieved. One of [\"@basic\", \"@detailed\"]. Defaults to \"@basic\".")] = None,
         _request_timeout: Union[
             None,
@@ -1648,7 +1648,7 @@ class ObjectManagementApi:
 
         Gets an object in the CDO tenant
 
-        :param uid: the unique identifier of the object being retrieved. (required)
+        :param uid: The unique identifier of the object being retrieved. (required)
         :type uid: str
         :param fields: The scope of the fields to be retrieved. One of [\"@basic\", \"@detailed\"]. Defaults to \"@basic\".
         :type fields: str
@@ -1765,7 +1765,7 @@ class ObjectManagementApi:
     @validate_call
     def get_object_usages(
         self,
-        uid: Annotated[StrictStr, Field(description="the unique identifier of the object to retrieve usages for.")],
+        uid: Annotated[StrictStr, Field(description="The unique identifier of the object to retrieve usages for.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1783,7 +1783,7 @@ class ObjectManagementApi:
 
         Get usages of an object in the CDO tenant.
 
-        :param uid: the unique identifier of the object to retrieve usages for. (required)
+        :param uid: The unique identifier of the object to retrieve usages for. (required)
         :type uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1836,7 +1836,7 @@ class ObjectManagementApi:
     @validate_call
     def get_object_usages_with_http_info(
         self,
-        uid: Annotated[StrictStr, Field(description="the unique identifier of the object to retrieve usages for.")],
+        uid: Annotated[StrictStr, Field(description="The unique identifier of the object to retrieve usages for.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1854,7 +1854,7 @@ class ObjectManagementApi:
 
         Get usages of an object in the CDO tenant.
 
-        :param uid: the unique identifier of the object to retrieve usages for. (required)
+        :param uid: The unique identifier of the object to retrieve usages for. (required)
         :type uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1907,7 +1907,7 @@ class ObjectManagementApi:
     @validate_call
     def get_object_usages_without_preload_content(
         self,
-        uid: Annotated[StrictStr, Field(description="the unique identifier of the object to retrieve usages for.")],
+        uid: Annotated[StrictStr, Field(description="The unique identifier of the object to retrieve usages for.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1925,7 +1925,7 @@ class ObjectManagementApi:
 
         Get usages of an object in the CDO tenant.
 
-        :param uid: the unique identifier of the object to retrieve usages for. (required)
+        :param uid: The unique identifier of the object to retrieve usages for. (required)
         :type uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2356,7 +2356,7 @@ class ObjectManagementApi:
     @validate_call
     def modify_object(
         self,
-        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being updated.")],
+        uid: Annotated[StrictStr, Field(description="The unique identifier of the object being updated.")],
         update_request: UpdateRequest,
         _request_timeout: Union[
             None,
@@ -2375,7 +2375,7 @@ class ObjectManagementApi:
 
         Modify an object in the CDO tenant
 
-        :param uid: the unique identifier of the object being updated. (required)
+        :param uid: The unique identifier of the object being updated. (required)
         :type uid: str
         :param update_request: (required)
         :type update_request: UpdateRequest
@@ -2431,7 +2431,7 @@ class ObjectManagementApi:
     @validate_call
     def modify_object_with_http_info(
         self,
-        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being updated.")],
+        uid: Annotated[StrictStr, Field(description="The unique identifier of the object being updated.")],
         update_request: UpdateRequest,
         _request_timeout: Union[
             None,
@@ -2450,7 +2450,7 @@ class ObjectManagementApi:
 
         Modify an object in the CDO tenant
 
-        :param uid: the unique identifier of the object being updated. (required)
+        :param uid: The unique identifier of the object being updated. (required)
         :type uid: str
         :param update_request: (required)
         :type update_request: UpdateRequest
@@ -2506,7 +2506,7 @@ class ObjectManagementApi:
     @validate_call
     def modify_object_without_preload_content(
         self,
-        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being updated.")],
+        uid: Annotated[StrictStr, Field(description="The unique identifier of the object being updated.")],
         update_request: UpdateRequest,
         _request_timeout: Union[
             None,
@@ -2525,7 +2525,7 @@ class ObjectManagementApi:
 
         Modify an object in the CDO tenant
 
-        :param uid: the unique identifier of the object being updated. (required)
+        :param uid: The unique identifier of the object being updated. (required)
         :type uid: str
         :param update_request: (required)
         :type update_request: UpdateRequest

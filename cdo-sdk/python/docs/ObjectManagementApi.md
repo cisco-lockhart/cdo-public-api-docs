@@ -189,7 +189,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
-    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | the unique identifier of the object being deleted.
+    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | The unique identifier of the object being deleted.
 
     try:
         # Delete Object
@@ -207,7 +207,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uid** | **str**| the unique identifier of the object being deleted. | 
+ **uid** | **str**| The unique identifier of the object being deleted. | 
 
 ### Return type
 
@@ -335,7 +335,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
-    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | the unique identifier of the object to retrieve duplicates for.
+    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | The unique identifier of the object to retrieve duplicates for.
     target_uid = '6131daad-e813-4b8f-8f42-be1e241e8cdb' # str | the unique identifier of the target to restrict the duplicate search to.
 
     try:
@@ -354,7 +354,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uid** | **str**| the unique identifier of the object to retrieve duplicates for. | 
+ **uid** | **str**| The unique identifier of the object to retrieve duplicates for. | 
  **target_uid** | **str**| the unique identifier of the target to restrict the duplicate search to. | 
 
 ### Return type
@@ -409,7 +409,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
-    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | the unique identifier of the object being retrieved.
+    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | The unique identifier of the object being retrieved.
     fields = '@detailed' # str | The scope of the fields to be retrieved. One of [\"@basic\", \"@detailed\"]. Defaults to \"@basic\". (optional)
 
     try:
@@ -428,7 +428,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uid** | **str**| the unique identifier of the object being retrieved. | 
+ **uid** | **str**| The unique identifier of the object being retrieved. | 
  **fields** | **str**| The scope of the fields to be retrieved. One of [\&quot;@basic\&quot;, \&quot;@detailed\&quot;]. Defaults to \&quot;@basic\&quot;. | [optional] 
 
 ### Return type
@@ -483,7 +483,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
-    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | the unique identifier of the object to retrieve usages for.
+    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | The unique identifier of the object to retrieve usages for.
 
     try:
         # Get Object Usages
@@ -501,7 +501,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uid** | **str**| the unique identifier of the object to retrieve usages for. | 
+ **uid** | **str**| The unique identifier of the object to retrieve usages for. | 
 
 ### Return type
 
@@ -634,7 +634,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
-    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | the unique identifier of the object being updated.
+    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | The unique identifier of the object being updated.
     update_request = cdo_sdk_python.UpdateRequest() # UpdateRequest | 
 
     try:
@@ -653,7 +653,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uid** | **str**| the unique identifier of the object being updated. | 
+ **uid** | **str**| The unique identifier of the object being updated. | 
  **update_request** | [**UpdateRequest**](UpdateRequest.md)|  | 
 
 ### Return type

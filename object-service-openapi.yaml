@@ -66,16 +66,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: A paginated view of the CDO objects.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListObjectResponse'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -97,14 +97,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "201":
           description: A descriptive representation of the created CDO object.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -221,7 +221,7 @@ paths:
       parameters:
       - name: uid
         in: path
-        description: the unique identifier of the object being retrieved.
+        description: The unique identifier of the object being retrieved.
         required: true
         schema:
           type: string
@@ -263,7 +263,7 @@ paths:
       parameters:
       - name: uid
         in: path
-        description: the unique identifier of the object being deleted.
+        description: The unique identifier of the object being deleted.
         required: true
         schema:
           type: string
@@ -297,7 +297,7 @@ paths:
       parameters:
       - name: uid
         in: path
-        description: the unique identifier of the object being updated.
+        description: The unique identifier of the object being updated.
         required: true
         schema:
           type: string
@@ -312,14 +312,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: A descriptive representation of the updated CDO object.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -338,7 +338,7 @@ paths:
       parameters:
       - name: uid
         in: path
-        description: the unique identifier of the object to retrieve usages for.
+        description: The unique identifier of the object to retrieve usages for.
         required: true
         schema:
           type: string
@@ -347,6 +347,8 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: A descriptive representation of the created CDO object.
           content:
@@ -355,8 +357,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ReferenceInfo'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -376,7 +376,7 @@ paths:
       parameters:
       - name: uid
         in: path
-        description: the unique identifier of the object to retrieve duplicates for.
+        description: The unique identifier of the object to retrieve duplicates for.
         required: true
         schema:
           type: string
@@ -394,8 +394,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: Duplicates of the object.
           content:
@@ -404,6 +402,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DuplicateGroupDto'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":

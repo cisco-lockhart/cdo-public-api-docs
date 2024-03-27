@@ -2968,7 +2968,7 @@ paths:
       parameters:
         - name: uid
           in: path
-          description: the unique identifier of the object being retrieved.
+          description: The unique identifier of the object being retrieved.
           required: true
           schema:
             type: string
@@ -3011,7 +3011,7 @@ paths:
       parameters:
         - name: uid
           in: path
-          description: the unique identifier of the object being deleted.
+          description: The unique identifier of the object being deleted.
           required: true
           schema:
             type: string
@@ -3045,7 +3045,7 @@ paths:
       parameters:
         - name: uid
           in: path
-          description: the unique identifier of the object being updated.
+          description: The unique identifier of the object being updated.
           required: true
           schema:
             type: string
@@ -3086,7 +3086,7 @@ paths:
       parameters:
         - name: uid
           in: path
-          description: the unique identifier of the object to retrieve usages for.
+          description: The unique identifier of the object to retrieve usages for.
           required: true
           schema:
             type: string
@@ -3123,7 +3123,7 @@ paths:
       parameters:
         - name: uid
           in: path
-          description: the unique identifier of the object to retrieve duplicates for.
+          description: The unique identifier of the object to retrieve duplicates for.
           required: true
           schema:
             type: string
