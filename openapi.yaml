@@ -139,7 +139,8 @@ paths:
     post:
       tags:
         - Remote Access Monitoring
-      summary: >-
+      summary: Refresh RA VPN Sessions
+      description: >-
         This is an asynchronous operation to refresh RA VPN sessions for all
         devices in the CDO tenant.
       operationId: refreshRaVpnSessionsByDevice

@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**get_mfa_events**](RemoteAccessMonitoringApi.md#get_mfa_events) | **GET** /v1/mfaevents | Get MFA Events
 [**get_ra_vpn_session**](RemoteAccessMonitoringApi.md#get_ra_vpn_session) | **GET** /v1/vpnsessions/{raVpnSessionUid} | Get RA VPN Session
 [**get_ra_vpn_sessions**](RemoteAccessMonitoringApi.md#get_ra_vpn_sessions) | **GET** /v1/vpnsessions | Get RA VPN Sessions
-[**refresh_ra_vpn_sessions_by_device**](RemoteAccessMonitoringApi.md#refresh_ra_vpn_sessions_by_device) | **POST** /v1/vpnsessions/refresh | This is an asynchronous operation to refresh RA VPN sessions for all devices in the CDO tenant.
+[**refresh_ra_vpn_sessions_by_device**](RemoteAccessMonitoringApi.md#refresh_ra_vpn_sessions_by_device) | **POST** /v1/vpnsessions/refresh | Refresh RA VPN Sessions
 [**terminate_ra_vpn_sessions_by_device**](RemoteAccessMonitoringApi.md#terminate_ra_vpn_sessions_by_device) | **POST** /v1/vpnsessions/{deviceUid}/terminate | Terminate RA VPN Sessions
 [**terminate_ra_vpn_sessions_by_device_and_user_name**](RemoteAccessMonitoringApi.md#terminate_ra_vpn_sessions_by_device_and_user_name) | **POST** /v1/vpnsessions/{deviceUid}/terminate/{userName} | Terminate User&#39;s RA VPN Sessions
 
@@ -362,6 +362,8 @@ Name | Type | Description  | Notes
 # **refresh_ra_vpn_sessions_by_device**
 > CdoTransaction refresh_ra_vpn_sessions_by_device()
 
+Refresh RA VPN Sessions
+
 This is an asynchronous operation to refresh RA VPN sessions for all devices in the CDO tenant.
 
 ### Example
@@ -396,7 +398,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     api_instance = cdo_sdk_python.RemoteAccessMonitoringApi(api_client)
 
     try:
-        # This is an asynchronous operation to refresh RA VPN sessions for all devices in the CDO tenant.
+        # Refresh RA VPN Sessions
         api_response = api_instance.refresh_ra_vpn_sessions_by_device()
         print("The response of RemoteAccessMonitoringApi->refresh_ra_vpn_sessions_by_device:\n")
         pprint(api_response)

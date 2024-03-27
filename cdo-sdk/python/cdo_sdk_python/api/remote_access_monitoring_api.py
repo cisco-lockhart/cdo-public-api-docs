@@ -1266,8 +1266,9 @@ class RemoteAccessMonitoringApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CdoTransaction:
-        """This is an asynchronous operation to refresh RA VPN sessions for all devices in the CDO tenant.
+        """Refresh RA VPN Sessions
 
+        This is an asynchronous operation to refresh RA VPN sessions for all devices in the CDO tenant.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1333,8 +1334,9 @@ class RemoteAccessMonitoringApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CdoTransaction]:
-        """This is an asynchronous operation to refresh RA VPN sessions for all devices in the CDO tenant.
+        """Refresh RA VPN Sessions
 
+        This is an asynchronous operation to refresh RA VPN sessions for all devices in the CDO tenant.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1400,8 +1402,9 @@ class RemoteAccessMonitoringApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """This is an asynchronous operation to refresh RA VPN sessions for all devices in the CDO tenant.
+        """Refresh RA VPN Sessions
 
+        This is an asynchronous operation to refresh RA VPN sessions for all devices in the CDO tenant.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
