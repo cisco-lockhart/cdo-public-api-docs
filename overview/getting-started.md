@@ -16,6 +16,7 @@ At a high level, the CDO API supports operations on the following resources:
 - **Object Management** - Manage firewall policy objects in your CDO tenant.
 - **User Management** - Manage users in your CDO tenant.
 - **Tenant Management** - Manage your CDO tenant, or Managed Service Portal.
+- **Remote Access Monitoring** - View and manage the Remote Access Virtual Private Network (RA VPN) sessions, and Multi-factor Authentication (MFA) events in your CDO tenant.
 - **Search** - Perform searches across all of the resources in your CDO tenant.
 - **Changelogs** - View a detailed history of all changes made to your CDO tenant.
 - **Change Requests** - Manage change requests, which can be used to associate changes made to your security policy on CDO with external change-management systems.
