@@ -21,6 +21,7 @@ from pydantic import Field, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
 from cdo_sdk_python.models.create_request import CreateRequest
+from cdo_sdk_python.models.duplicate_group_dto import DuplicateGroupDto
 from cdo_sdk_python.models.list_object_response import ListObjectResponse
 from cdo_sdk_python.models.object_response import ObjectResponse
 from cdo_sdk_python.models.reference_info import ReferenceInfo
@@ -330,7 +331,7 @@ class ObjectManagementApi:
     @validate_call
     def create_targets(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object for which the targets are being added to.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object for which the targets are being added to.")],
         targets_request: TargetsRequest,
         _request_timeout: Union[
             None,
@@ -349,7 +350,7 @@ class ObjectManagementApi:
 
         Create targets for an object in the CDO tenant.
 
-        :param uid: The request UID of the object for which the targets are being added to. (required)
+        :param uid: the unique identifier of the object for which the targets are being added to. (required)
         :type uid: str
         :param targets_request: (required)
         :type targets_request: TargetsRequest
@@ -406,7 +407,7 @@ class ObjectManagementApi:
     @validate_call
     def create_targets_with_http_info(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object for which the targets are being added to.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object for which the targets are being added to.")],
         targets_request: TargetsRequest,
         _request_timeout: Union[
             None,
@@ -425,7 +426,7 @@ class ObjectManagementApi:
 
         Create targets for an object in the CDO tenant.
 
-        :param uid: The request UID of the object for which the targets are being added to. (required)
+        :param uid: the unique identifier of the object for which the targets are being added to. (required)
         :type uid: str
         :param targets_request: (required)
         :type targets_request: TargetsRequest
@@ -482,7 +483,7 @@ class ObjectManagementApi:
     @validate_call
     def create_targets_without_preload_content(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object for which the targets are being added to.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object for which the targets are being added to.")],
         targets_request: TargetsRequest,
         _request_timeout: Union[
             None,
@@ -501,7 +502,7 @@ class ObjectManagementApi:
 
         Create targets for an object in the CDO tenant.
 
-        :param uid: The request UID of the object for which the targets are being added to. (required)
+        :param uid: the unique identifier of the object for which the targets are being added to. (required)
         :type uid: str
         :param targets_request: (required)
         :type targets_request: TargetsRequest
@@ -631,7 +632,7 @@ class ObjectManagementApi:
     @validate_call
     def delete_object(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object being deleted.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being deleted.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -649,7 +650,7 @@ class ObjectManagementApi:
 
         Delete an object in the CDO tenant
 
-        :param uid: The request UID of the object being deleted. (required)
+        :param uid: the unique identifier of the object being deleted. (required)
         :type uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -702,7 +703,7 @@ class ObjectManagementApi:
     @validate_call
     def delete_object_with_http_info(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object being deleted.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being deleted.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -720,7 +721,7 @@ class ObjectManagementApi:
 
         Delete an object in the CDO tenant
 
-        :param uid: The request UID of the object being deleted. (required)
+        :param uid: the unique identifier of the object being deleted. (required)
         :type uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -773,7 +774,7 @@ class ObjectManagementApi:
     @validate_call
     def delete_object_without_preload_content(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object being deleted.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being deleted.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -791,7 +792,7 @@ class ObjectManagementApi:
 
         Delete an object in the CDO tenant
 
-        :param uid: The request UID of the object being deleted. (required)
+        :param uid: the unique identifier of the object being deleted. (required)
         :type uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -901,7 +902,7 @@ class ObjectManagementApi:
     @validate_call
     def delete_targets(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object for which the targets are being removed from.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object for which the targets are being removed from.")],
         target_uuids: Annotated[List[StrictStr], Field(description="The list of UIDs of the targets being removed.")],
         _request_timeout: Union[
             None,
@@ -920,7 +921,7 @@ class ObjectManagementApi:
 
         Delete targets from an object in the CDO tenant.
 
-        :param uid: The request UID of the object for which the targets are being removed from. (required)
+        :param uid: the unique identifier of the object for which the targets are being removed from. (required)
         :type uid: str
         :param target_uuids: The list of UIDs of the targets being removed. (required)
         :type target_uuids: List[str]
@@ -977,7 +978,7 @@ class ObjectManagementApi:
     @validate_call
     def delete_targets_with_http_info(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object for which the targets are being removed from.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object for which the targets are being removed from.")],
         target_uuids: Annotated[List[StrictStr], Field(description="The list of UIDs of the targets being removed.")],
         _request_timeout: Union[
             None,
@@ -996,7 +997,7 @@ class ObjectManagementApi:
 
         Delete targets from an object in the CDO tenant.
 
-        :param uid: The request UID of the object for which the targets are being removed from. (required)
+        :param uid: the unique identifier of the object for which the targets are being removed from. (required)
         :type uid: str
         :param target_uuids: The list of UIDs of the targets being removed. (required)
         :type target_uuids: List[str]
@@ -1053,7 +1054,7 @@ class ObjectManagementApi:
     @validate_call
     def delete_targets_without_preload_content(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object for which the targets are being removed from.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object for which the targets are being removed from.")],
         target_uuids: Annotated[List[StrictStr], Field(description="The list of UIDs of the targets being removed.")],
         _request_timeout: Union[
             None,
@@ -1072,7 +1073,7 @@ class ObjectManagementApi:
 
         Delete targets from an object in the CDO tenant.
 
-        :param uid: The request UID of the object for which the targets are being removed from. (required)
+        :param uid: the unique identifier of the object for which the targets are being removed from. (required)
         :type uid: str
         :param target_uuids: The list of UIDs of the targets being removed. (required)
         :type target_uuids: List[str]
@@ -1190,9 +1191,295 @@ class ObjectManagementApi:
 
 
     @validate_call
+    def get_duplicate_objects(
+        self,
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object to retrieve duplicates for.")],
+        target_uid: Annotated[StrictStr, Field(description="the unique identifier of the target to restrict the duplicate search to.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> List[DuplicateGroupDto]:
+        """Get Duplicate Objects
+
+        Get objects in the CDO tenant that are duplicates of the given object.
+
+        :param uid: the unique identifier of the object to retrieve duplicates for. (required)
+        :type uid: str
+        :param target_uid: the unique identifier of the target to restrict the duplicate search to. (required)
+        :type target_uid: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_duplicate_objects_serialize(
+            uid=uid,
+            target_uid=target_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[DuplicateGroupDto]",
+            '400': "CommonApiError",
+            '401': "AuthenticationError",
+            '403': "CommonApiError",
+            '500': "CommonApiError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_duplicate_objects_with_http_info(
+        self,
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object to retrieve duplicates for.")],
+        target_uid: Annotated[StrictStr, Field(description="the unique identifier of the target to restrict the duplicate search to.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[List[DuplicateGroupDto]]:
+        """Get Duplicate Objects
+
+        Get objects in the CDO tenant that are duplicates of the given object.
+
+        :param uid: the unique identifier of the object to retrieve duplicates for. (required)
+        :type uid: str
+        :param target_uid: the unique identifier of the target to restrict the duplicate search to. (required)
+        :type target_uid: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_duplicate_objects_serialize(
+            uid=uid,
+            target_uid=target_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[DuplicateGroupDto]",
+            '400': "CommonApiError",
+            '401': "AuthenticationError",
+            '403': "CommonApiError",
+            '500': "CommonApiError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_duplicate_objects_without_preload_content(
+        self,
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object to retrieve duplicates for.")],
+        target_uid: Annotated[StrictStr, Field(description="the unique identifier of the target to restrict the duplicate search to.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Duplicate Objects
+
+        Get objects in the CDO tenant that are duplicates of the given object.
+
+        :param uid: the unique identifier of the object to retrieve duplicates for. (required)
+        :type uid: str
+        :param target_uid: the unique identifier of the target to restrict the duplicate search to. (required)
+        :type target_uid: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_duplicate_objects_serialize(
+            uid=uid,
+            target_uid=target_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[DuplicateGroupDto]",
+            '400': "CommonApiError",
+            '401': "AuthenticationError",
+            '403': "CommonApiError",
+            '500': "CommonApiError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_duplicate_objects_serialize(
+        self,
+        uid,
+        target_uid,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, str] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if uid is not None:
+            _path_params['uid'] = uid
+        # process the query parameters
+        if target_uid is not None:
+            
+            _query_params.append(('targetUid', target_uid))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/v0/objects/{uid}/duplicates',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_object(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object being retrieved.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being retrieved.")],
         fields: Annotated[Optional[StrictStr], Field(description="The scope of the fields to be retrieved. One of [\"@basic\", \"@detailed\"]. Defaults to \"@basic\".")] = None,
         _request_timeout: Union[
             None,
@@ -1211,7 +1498,7 @@ class ObjectManagementApi:
 
         Gets an object in the CDO tenant
 
-        :param uid: The request UID of the object being retrieved. (required)
+        :param uid: the unique identifier of the object being retrieved. (required)
         :type uid: str
         :param fields: The scope of the fields to be retrieved. One of [\"@basic\", \"@detailed\"]. Defaults to \"@basic\".
         :type fields: str
@@ -1267,7 +1554,7 @@ class ObjectManagementApi:
     @validate_call
     def get_object_with_http_info(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object being retrieved.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being retrieved.")],
         fields: Annotated[Optional[StrictStr], Field(description="The scope of the fields to be retrieved. One of [\"@basic\", \"@detailed\"]. Defaults to \"@basic\".")] = None,
         _request_timeout: Union[
             None,
@@ -1286,7 +1573,7 @@ class ObjectManagementApi:
 
         Gets an object in the CDO tenant
 
-        :param uid: The request UID of the object being retrieved. (required)
+        :param uid: the unique identifier of the object being retrieved. (required)
         :type uid: str
         :param fields: The scope of the fields to be retrieved. One of [\"@basic\", \"@detailed\"]. Defaults to \"@basic\".
         :type fields: str
@@ -1342,7 +1629,7 @@ class ObjectManagementApi:
     @validate_call
     def get_object_without_preload_content(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object being retrieved.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being retrieved.")],
         fields: Annotated[Optional[StrictStr], Field(description="The scope of the fields to be retrieved. One of [\"@basic\", \"@detailed\"]. Defaults to \"@basic\".")] = None,
         _request_timeout: Union[
             None,
@@ -1361,7 +1648,7 @@ class ObjectManagementApi:
 
         Gets an object in the CDO tenant
 
-        :param uid: The request UID of the object being retrieved. (required)
+        :param uid: the unique identifier of the object being retrieved. (required)
         :type uid: str
         :param fields: The scope of the fields to be retrieved. One of [\"@basic\", \"@detailed\"]. Defaults to \"@basic\".
         :type fields: str
@@ -1476,289 +1763,9 @@ class ObjectManagementApi:
 
 
     @validate_call
-    def get_object_duplicates(
-        self,
-        uid: StrictStr,
-        target_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """get_object_duplicates
-
-
-        :param uid: (required)
-        :type uid: str
-        :param target_id: (required)
-        :type target_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_object_duplicates_serialize(
-            uid=uid,
-            target_id=target_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '400': "CommonApiError",
-            '401': "AuthenticationError",
-            '403': "CommonApiError",
-            '500': "CommonApiError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def get_object_duplicates_with_http_info(
-        self,
-        uid: StrictStr,
-        target_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """get_object_duplicates
-
-
-        :param uid: (required)
-        :type uid: str
-        :param target_id: (required)
-        :type target_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_object_duplicates_serialize(
-            uid=uid,
-            target_id=target_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '400': "CommonApiError",
-            '401': "AuthenticationError",
-            '403': "CommonApiError",
-            '500': "CommonApiError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def get_object_duplicates_without_preload_content(
-        self,
-        uid: StrictStr,
-        target_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """get_object_duplicates
-
-
-        :param uid: (required)
-        :type uid: str
-        :param target_id: (required)
-        :type target_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_object_duplicates_serialize(
-            uid=uid,
-            target_id=target_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '400': "CommonApiError",
-            '401': "AuthenticationError",
-            '403': "CommonApiError",
-            '500': "CommonApiError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _get_object_duplicates_serialize(
-        self,
-        uid,
-        target_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if uid is not None:
-            _path_params['uid'] = uid
-        # process the query parameters
-        if target_id is not None:
-            
-            _query_params.append(('targetId', target_id))
-            
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v0/objects/{uid}/duplicates',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
     def get_object_usages(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object to retrieve usages for.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object to retrieve usages for.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1776,7 +1783,7 @@ class ObjectManagementApi:
 
         Get usages of an object in the CDO tenant.
 
-        :param uid: The request UID of the object to retrieve usages for. (required)
+        :param uid: the unique identifier of the object to retrieve usages for. (required)
         :type uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1829,7 +1836,7 @@ class ObjectManagementApi:
     @validate_call
     def get_object_usages_with_http_info(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object to retrieve usages for.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object to retrieve usages for.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1847,7 +1854,7 @@ class ObjectManagementApi:
 
         Get usages of an object in the CDO tenant.
 
-        :param uid: The request UID of the object to retrieve usages for. (required)
+        :param uid: the unique identifier of the object to retrieve usages for. (required)
         :type uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1900,7 +1907,7 @@ class ObjectManagementApi:
     @validate_call
     def get_object_usages_without_preload_content(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object to retrieve usages for.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object to retrieve usages for.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1918,7 +1925,7 @@ class ObjectManagementApi:
 
         Get usages of an object in the CDO tenant.
 
-        :param uid: The request UID of the object to retrieve usages for. (required)
+        :param uid: the unique identifier of the object to retrieve usages for. (required)
         :type uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2349,7 +2356,7 @@ class ObjectManagementApi:
     @validate_call
     def modify_object(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object being updated.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being updated.")],
         update_request: UpdateRequest,
         _request_timeout: Union[
             None,
@@ -2368,7 +2375,7 @@ class ObjectManagementApi:
 
         Modify an object in the CDO tenant
 
-        :param uid: The request UID of the object being updated. (required)
+        :param uid: the unique identifier of the object being updated. (required)
         :type uid: str
         :param update_request: (required)
         :type update_request: UpdateRequest
@@ -2424,7 +2431,7 @@ class ObjectManagementApi:
     @validate_call
     def modify_object_with_http_info(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object being updated.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being updated.")],
         update_request: UpdateRequest,
         _request_timeout: Union[
             None,
@@ -2443,7 +2450,7 @@ class ObjectManagementApi:
 
         Modify an object in the CDO tenant
 
-        :param uid: The request UID of the object being updated. (required)
+        :param uid: the unique identifier of the object being updated. (required)
         :type uid: str
         :param update_request: (required)
         :type update_request: UpdateRequest
@@ -2499,7 +2506,7 @@ class ObjectManagementApi:
     @validate_call
     def modify_object_without_preload_content(
         self,
-        uid: Annotated[StrictStr, Field(description="The request UID of the object being updated.")],
+        uid: Annotated[StrictStr, Field(description="the unique identifier of the object being updated.")],
         update_request: UpdateRequest,
         _request_timeout: Union[
             None,
@@ -2518,7 +2525,7 @@ class ObjectManagementApi:
 
         Modify an object in the CDO tenant
 
-        :param uid: The request UID of the object being updated. (required)
+        :param uid: the unique identifier of the object being updated. (required)
         :type uid: str
         :param update_request: (required)
         :type update_request: UpdateRequest

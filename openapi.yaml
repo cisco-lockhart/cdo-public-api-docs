@@ -2867,13 +2867,13 @@ paths:
         - name: uid
           in: path
           description: >-
-            The request UID of the object for which the targets are being added
-            to.
+            the unique identifier of the object for which the targets are being
+            added to.
           required: true
           schema:
             type: string
             format: uuid
-          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
       requestBody:
         content:
           application/json:
@@ -2915,13 +2915,13 @@ paths:
         - name: uid
           in: path
           description: >-
-            The request UID of the object for which the targets are being
+            the unique identifier of the object for which the targets are being
             removed from.
           required: true
           schema:
             type: string
             format: uuid
-          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         - name: targetUuids
           in: query
           description: The list of UIDs of the targets being removed.
@@ -2931,7 +2931,7 @@ paths:
             items:
               type: string
           example: >-
-            [xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx,
+            [7131daad-e813-4b8f-8f42-be1e241e8cdb,
             yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy]
       responses:
         '204':
@@ -2968,12 +2968,12 @@ paths:
       parameters:
         - name: uid
           in: path
-          description: The request UID of the object being retrieved.
+          description: the unique identifier of the object being retrieved.
           required: true
           schema:
             type: string
             format: uuid
-          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         - name: fields
           in: query
           description: >-
@@ -3011,12 +3011,12 @@ paths:
       parameters:
         - name: uid
           in: path
-          description: The request UID of the object being deleted.
+          description: the unique identifier of the object being deleted.
           required: true
           schema:
             type: string
             format: uuid
-          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
       responses:
         '204':
           description: No content
@@ -3045,12 +3045,12 @@ paths:
       parameters:
         - name: uid
           in: path
-          description: The request UID of the object being updated.
+          description: the unique identifier of the object being updated.
           required: true
           schema:
             type: string
             format: uuid
-          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
       requestBody:
         content:
           application/json:
@@ -3086,12 +3086,12 @@ paths:
       parameters:
         - name: uid
           in: path
-          description: The request UID of the object to retrieve usages for.
+          description: the unique identifier of the object to retrieve usages for.
           required: true
           schema:
             type: string
             format: uuid
-          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
       responses:
         '200':
           description: A descriptive representation of the created CDO object.
@@ -3117,21 +3117,37 @@ paths:
     get:
       tags:
         - Object Management
-      operationId: getObjectDuplicates
+      summary: Get Duplicate Objects
+      description: Get objects in the CDO tenant that are duplicates of the given object.
+      operationId: getDuplicateObjects
       parameters:
         - name: uid
           in: path
+          description: the unique identifier of the object to retrieve duplicates for.
           required: true
           schema:
             type: string
             format: uuid
-        - name: targetId
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        - name: targetUid
           in: query
+          description: >-
+            the unique identifier of the target to restrict the duplicate search
+            to.
           required: true
           schema:
             type: string
             format: uuid
+          example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
       responses:
+        '200':
+          description: Duplicates of the object.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DuplicateGroupDto'
         '400':
           $ref: '#/components/responses/http400BadRequest'
         '401':
@@ -4823,13 +4839,13 @@ components:
             Set of IDs for targets that contain the object. A target can be, for
             example, a device, service, or a shared policy (Ruleset).
           example:
-            - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+            - 7131daad-e813-4b8f-8f42-be1e241e8cdb
           items:
             type: string
             description: >-
               Set of IDs for targets that contain the object. A target can be,
               for example, a device, service, or a shared policy (Ruleset).
-            example: '["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"]'
+            example: '["7131daad-e813-4b8f-8f42-be1e241e8cdb"]'
         tags:
           type: object
           additionalProperties:
@@ -4872,7 +4888,7 @@ components:
           type: array
           description: Set of UIDs of the group's referenced objects
           example:
-            - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+            - 7131daad-e813-4b8f-8f42-be1e241e8cdb
           items:
             type: string
             description: Set of UIDs of the group's referenced objects
@@ -5053,14 +5069,14 @@ components:
           description: >-
             The ID of the target. A target can be, for example, a device,
             service, or a shared policy (Ruleset).
-          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         content:
           $ref: '#/components/schemas/ObjectContent'
       description: >-
         The list of target overrides for the object. Each override the default
         content for its target.
       example:
-        targetId: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        targetId: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         content: a:b:c::2
     PortsValue:
       type: object
@@ -5291,7 +5307,7 @@ components:
       description: The issues for the object
       example:
         unusedTargetIds:
-          - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          - 7131daad-e813-4b8f-8f42-be1e241e8cdb
     ObjectResponse:
       type: object
       properties:
@@ -5299,6 +5315,7 @@ components:
           type: string
           description: The unique identifier of the object
           format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
           type: string
           description: The name of the object
@@ -5369,6 +5386,7 @@ components:
           type: string
           description: The unique identifier of the referenced object
           format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
           type: string
           description: The name of the referenced object
@@ -5393,7 +5411,7 @@ components:
             The ID of the target with which the object is associated. A target
             can be, for example, a device, service, or a shared policy
             (Ruleset).
-          example: '[xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx]'
+          example: '[7131daad-e813-4b8f-8f42-be1e241e8cdb]'
         displayName:
           type: string
           description: The display name of the target
@@ -5424,11 +5442,11 @@ components:
           type: array
           description: The list of UIDs of the targets to be deleted.
           example:
-            - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+            - 7131daad-e813-4b8f-8f42-be1e241e8cdb
           items:
             type: string
             description: The list of UIDs of the targets to be deleted.
-            example: '["xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"]'
+            example: '["7131daad-e813-4b8f-8f42-be1e241e8cdb"]'
     UpdateRequest:
       type: object
       properties:
@@ -5535,6 +5553,22 @@ components:
         issues:
           $ref: '#/components/schemas/IssuesDto'
       description: The list of objects retrieved.
+    DuplicateGroupDto:
+      type: object
+      properties:
+        targetUid:
+          type: string
+          description: The unique identifier of the target to search in.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        unifiedObjectUids:
+          uniqueItems: true
+          type: array
+          description: The set of unique identifiers of the duplicate objects.
+          items:
+            type: string
+            description: The set of unique identifiers of the duplicate objects.
+            format: uuid
   responses:
     http400BadRequest:
       description: Invalid input provided. Check the response for details.

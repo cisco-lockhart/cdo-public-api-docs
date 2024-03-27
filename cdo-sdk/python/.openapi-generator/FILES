@@ -54,6 +54,7 @@ cdo_sdk_python/models/device_page.py
 cdo_sdk_python/models/device_patch_input.py
 cdo_sdk_python/models/device_role.py
 cdo_sdk_python/models/duo_admin_panel_create_or_update_input.py
+cdo_sdk_python/models/duplicate_group_dto.py
 cdo_sdk_python/models/entity.py
 cdo_sdk_python/models/entity_type.py
 cdo_sdk_python/models/event.py
@@ -151,6 +152,7 @@ docs/DevicePage.md
 docs/DevicePatchInput.md
 docs/DeviceRole.md
 docs/DuoAdminPanelCreateOrUpdateInput.md
+docs/DuplicateGroupDto.md
 docs/Entity.md
 docs/EntityType.md
 docs/Event.md
@@ -224,4 +226,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_duplicate_group_dto.py
 tox.ini

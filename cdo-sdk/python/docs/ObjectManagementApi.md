@@ -8,8 +8,8 @@ Method | HTTP request | Description
 [**create_targets**](ObjectManagementApi.md#create_targets) | **POST** /v0/objects/{uid}/targets | Create Targets
 [**delete_object**](ObjectManagementApi.md#delete_object) | **DELETE** /v0/objects/{uid} | Delete Object
 [**delete_targets**](ObjectManagementApi.md#delete_targets) | **DELETE** /v0/objects/{uid}/targets | Delete Targets
+[**get_duplicate_objects**](ObjectManagementApi.md#get_duplicate_objects) | **GET** /v0/objects/{uid}/duplicates | Get Duplicate Objects
 [**get_object**](ObjectManagementApi.md#get_object) | **GET** /v0/objects/{uid} | Get Object
-[**get_object_duplicates**](ObjectManagementApi.md#get_object_duplicates) | **GET** /v0/objects/{uid}/duplicates | 
 [**get_object_usages**](ObjectManagementApi.md#get_object_usages) | **GET** /v0/objects/{uid}/usage | Get Object Usages
 [**get_objects**](ObjectManagementApi.md#get_objects) | **GET** /v0/objects | Get Objects
 [**modify_object**](ObjectManagementApi.md#modify_object) | **PATCH** /v0/objects/{uid} | Modify Object
@@ -115,7 +115,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
-    uid = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' # str | The request UID of the object for which the targets are being added to.
+    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | the unique identifier of the object for which the targets are being added to.
     targets_request = cdo_sdk_python.TargetsRequest() # TargetsRequest | 
 
     try:
@@ -134,7 +134,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uid** | **str**| The request UID of the object for which the targets are being added to. | 
+ **uid** | **str**| the unique identifier of the object for which the targets are being added to. | 
  **targets_request** | [**TargetsRequest**](TargetsRequest.md)|  | 
 
 ### Return type
@@ -189,7 +189,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
-    uid = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' # str | The request UID of the object being deleted.
+    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | the unique identifier of the object being deleted.
 
     try:
         # Delete Object
@@ -207,7 +207,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uid** | **str**| The request UID of the object being deleted. | 
+ **uid** | **str**| the unique identifier of the object being deleted. | 
 
 ### Return type
 
@@ -260,8 +260,8 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
-    uid = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' # str | The request UID of the object for which the targets are being removed from.
-    target_uuids = ['[xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx, yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy]'] # List[str] | The list of UIDs of the targets being removed.
+    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | the unique identifier of the object for which the targets are being removed from.
+    target_uuids = ['[7131daad-e813-4b8f-8f42-be1e241e8cdb, yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy]'] # List[str] | The list of UIDs of the targets being removed.
 
     try:
         # Delete Targets
@@ -279,7 +279,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uid** | **str**| The request UID of the object for which the targets are being removed from. | 
+ **uid** | **str**| the unique identifier of the object for which the targets are being removed from. | 
  **target_uuids** | [**List[str]**](str.md)| The list of UIDs of the targets being removed. | 
 
 ### Return type
@@ -304,6 +304,80 @@ No authorization required
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
 **404** | Not found |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_duplicate_objects**
+> List[DuplicateGroupDto] get_duplicate_objects(uid, target_uid)
+
+Get Duplicate Objects
+
+Get objects in the CDO tenant that are duplicates of the given object.
+
+### Example
+
+
+```python
+import cdo_sdk_python
+from cdo_sdk_python.models.duplicate_group_dto import DuplicateGroupDto
+from cdo_sdk_python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cdo_sdk_python.Configuration(
+    host = "https://edge.us.cdo.cisco.com/api/rest"
+)
+
+
+# Enter a context with an instance of the API client
+with cdo_sdk_python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
+    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | the unique identifier of the object to retrieve duplicates for.
+    target_uid = '6131daad-e813-4b8f-8f42-be1e241e8cdb' # str | the unique identifier of the target to restrict the duplicate search to.
+
+    try:
+        # Get Duplicate Objects
+        api_response = api_instance.get_duplicate_objects(uid, target_uid)
+        print("The response of ObjectManagementApi->get_duplicate_objects:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ObjectManagementApi->get_duplicate_objects: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **uid** | **str**| the unique identifier of the object to retrieve duplicates for. | 
+ **target_uid** | **str**| the unique identifier of the target to restrict the duplicate search to. | 
+
+### Return type
+
+[**List[DuplicateGroupDto]**](DuplicateGroupDto.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Duplicates of the object. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -335,7 +409,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
-    uid = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' # str | The request UID of the object being retrieved.
+    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | the unique identifier of the object being retrieved.
     fields = '@detailed' # str | The scope of the fields to be retrieved. One of [\"@basic\", \"@detailed\"]. Defaults to \"@basic\". (optional)
 
     try:
@@ -354,7 +428,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uid** | **str**| The request UID of the object being retrieved. | 
+ **uid** | **str**| the unique identifier of the object being retrieved. | 
  **fields** | **str**| The scope of the fields to be retrieved. One of [\&quot;@basic\&quot;, \&quot;@detailed\&quot;]. Defaults to \&quot;@basic\&quot;. | [optional] 
 
 ### Return type
@@ -375,73 +449,6 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | OK |  -  |
-**400** | Invalid input provided. Check the response for details. |  -  |
-**401** | Request not authorized. |  -  |
-**403** | User does not have sufficient privileges to perform this operation. |  -  |
-**500** | Internal server error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_object_duplicates**
-> get_object_duplicates(uid, target_id)
-
-
-
-### Example
-
-
-```python
-import cdo_sdk_python
-from cdo_sdk_python.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
-# See configuration.py for a list of all supported configuration parameters.
-configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
-)
-
-
-# Enter a context with an instance of the API client
-with cdo_sdk_python.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
-    uid = 'uid_example' # str | 
-    target_id = 'target_id_example' # str | 
-
-    try:
-        api_instance.get_object_duplicates(uid, target_id)
-    except Exception as e:
-        print("Exception when calling ObjectManagementApi->get_object_duplicates: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **uid** | **str**|  | 
- **target_id** | **str**|  | 
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -476,7 +483,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
-    uid = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' # str | The request UID of the object to retrieve usages for.
+    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | the unique identifier of the object to retrieve usages for.
 
     try:
         # Get Object Usages
@@ -494,7 +501,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uid** | **str**| The request UID of the object to retrieve usages for. | 
+ **uid** | **str**| the unique identifier of the object to retrieve usages for. | 
 
 ### Return type
 
@@ -627,7 +634,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
-    uid = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' # str | The request UID of the object being updated.
+    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | the unique identifier of the object being updated.
     update_request = cdo_sdk_python.UpdateRequest() # UpdateRequest | 
 
     try:
@@ -646,7 +653,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uid** | **str**| The request UID of the object being updated. | 
+ **uid** | **str**| the unique identifier of the object being updated. | 
  **update_request** | [**UpdateRequest**](UpdateRequest.md)|  | 
 
 ### Return type

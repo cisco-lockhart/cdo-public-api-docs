@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.39"
+__version__ = "1.0.40"
 
 # import apis into sdk package
 from cdo_sdk_python.api.change_requests_api import ChangeRequestsApi
@@ -76,6 +76,7 @@ from cdo_sdk_python.models.device_page import DevicePage
 from cdo_sdk_python.models.device_patch_input import DevicePatchInput
 from cdo_sdk_python.models.device_role import DeviceRole
 from cdo_sdk_python.models.duo_admin_panel_create_or_update_input import DuoAdminPanelCreateOrUpdateInput
+from cdo_sdk_python.models.duplicate_group_dto import DuplicateGroupDto
 from cdo_sdk_python.models.entity import Entity
 from cdo_sdk_python.models.entity_type import EntityType
 from cdo_sdk_python.models.event import Event
