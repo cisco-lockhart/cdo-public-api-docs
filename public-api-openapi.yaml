@@ -21,6 +21,127 @@ servers:
 - url: https://edge.ci.cdo.cisco.com/api/rest
   description: CI
 paths:
+  /v1/cdfmc/**:
+    get:
+      tags:
+      - Cloud-delivered FMC
+      summary: Proxy Request To Cloud-Delivered FMC
+      description: This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
+        Refer to the <a href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
+        API Explorer in CDO</a> for the list of available endpoints. You can append
+        the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc`
+        URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints
+        will return 404 if the CDO tenant does not have a cdFMC provisioned.
+      operationId: proxyFmcRequest
+      responses:
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+      - bearerAuth: []
+    put:
+      tags:
+      - Cloud-delivered FMC
+      summary: Proxy Request To Cloud-Delivered FMC
+      description: This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
+        Refer to the <a href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
+        API Explorer in CDO</a> for the list of available endpoints. You can append
+        the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc`
+        URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints
+        will return 404 if the CDO tenant does not have a cdFMC provisioned.
+      operationId: proxyFmcRequest_2
+      responses:
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Cloud-delivered FMC
+      summary: Proxy Request To Cloud-Delivered FMC
+      description: This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
+        Refer to the <a href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
+        API Explorer in CDO</a> for the list of available endpoints. You can append
+        the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc`
+        URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints
+        will return 404 if the CDO tenant does not have a cdFMC provisioned.
+      operationId: proxyFmcRequest_1
+      responses:
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Cloud-delivered FMC
+      summary: Proxy Request To Cloud-Delivered FMC
+      description: This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
+        Refer to the <a href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
+        API Explorer in CDO</a> for the list of available endpoints. You can append
+        the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc`
+        URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints
+        will return 404 if the CDO tenant does not have a cdFMC provisioned.
+      operationId: proxyFmcRequest_4
+      responses:
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+      - bearerAuth: []
+    patch:
+      tags:
+      - Cloud-delivered FMC
+      summary: Proxy Request To Cloud-Delivered FMC
+      description: This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
+        Refer to the <a href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
+        API Explorer in CDO</a> for the list of available endpoints. You can append
+        the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc`
+        URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints
+        will return 404 if the CDO tenant does not have a cdFMC provisioned.
+      operationId: proxyFmcRequest_3
+      responses:
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+      - bearerAuth: []
   /v1/vpnsessions/{deviceUid}/terminate:
     post:
       tags:
@@ -121,8 +242,6 @@ paths:
           $ref: '#/components/responses/http405MethodNotAllowed'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the refresh operation
@@ -130,6 +249,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -174,14 +295,14 @@ paths:
           type: string
         example: name:London-Office-ASA
       responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "200":
           description: List of User objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserPage'
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -211,14 +332,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "201":
           description: User object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -248,14 +369,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "201":
           description: Status
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/StatusInfo'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -338,6 +459,8 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "405":
+          $ref: '#/components/responses/http405MethodNotAllowed'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the indexing operation.
@@ -345,8 +468,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -376,14 +497,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "201":
           description: Status
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/StatusInfo'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -451,6 +572,8 @@ paths:
               $ref: '#/components/schemas/FtdCreateOrUpdateInput'
         required: true
       responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the creation operation.
@@ -458,8 +581,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -489,6 +610,8 @@ paths:
               $ref: '#/components/schemas/FtdRegistrationInput'
         required: true
       responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the creation operation.
@@ -496,8 +619,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -568,8 +689,6 @@ paths:
               $ref: '#/components/schemas/DuoAdminPanelCreateOrUpdateInput'
         required: true
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the onboarding operation
@@ -577,6 +696,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -607,6 +728,8 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "202":
           description: CDO Transaction object that can be used to track the progress
             of the onboarding operation.
@@ -614,8 +737,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -820,16 +941,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "405":
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "201":
           description: Created change Request object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ChangeRequest'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -921,16 +1042,16 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: Template Device object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -995,16 +1116,16 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: Template Device object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -1029,16 +1150,16 @@ paths:
           type: string
           format: uuid
       responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "200":
           description: Cloud Service
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -1103,16 +1224,16 @@ paths:
               $ref: '#/components/schemas/DevicePatchInput'
         required: true
       responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "200":
           description: Cloud Service
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -1257,14 +1378,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "200":
           description: Device object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "405":
           $ref: '#/components/responses/http405MethodNotAllowed'
         "401":
@@ -1335,14 +1456,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "200":
           description: Device object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "405":
           $ref: '#/components/responses/http405MethodNotAllowed'
         "401":
@@ -1404,14 +1525,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "405":
+          $ref: '#/components/responses/http405MethodNotAllowed'
         "200":
           description: List of RA VPN Sessions
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RaVpnSessionPage'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -1442,12 +1563,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "200":
-          description: RA VPN Session object
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RaVpnSession'
         "404":
           $ref: '#/components/responses/http404NotFound'
         "405":
@@ -1456,6 +1571,12 @@ paths:
           $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
+        "200":
+          description: RA VPN Session object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RaVpnSession'
         "500":
           description: Internal server error.
           content:
@@ -1483,16 +1604,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: User object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -1557,17 +1678,17 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
-        "200":
-          description: "CDO Transaction that has completed, either successfully or\
-            \ unsuccessfully. Note: failed CDO Transactions do not roll back."
+        "202":
+          description: CDO Transaction that is in progress
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
-        "202":
-          description: CDO Transaction that is in progress
+        "200":
+          description: "CDO Transaction that has completed, either successfully or\
+            \ unsuccessfully. Note: failed CDO Transactions do not roll back."
           content:
             application/json:
               schema:
@@ -1673,16 +1794,16 @@ paths:
           type: string
           format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "200":
           description: Tenant Object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Tenant'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -1712,14 +1833,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
         "200":
           description: Search Result
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/GlobalSearchResult'
+        "405":
+          $ref: '#/components/responses/http405MethodNotAllowed'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -1799,16 +1920,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "405":
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: List of MFA events
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/MfaEventPage'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -1835,6 +1956,12 @@ paths:
           type: string
           format: uuid
       responses:
+        "200":
+          description: MFA Event object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MfaEvent'
         "403":
           $ref: '#/components/responses/http403Forbidden'
         "404":
@@ -1845,12 +1972,6 @@ paths:
           $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
-        "200":
-          description: MFA Event object
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MfaEvent'
         "500":
           description: Internal server error.
           content:
@@ -1927,16 +2048,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: List of Template Devices
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -1990,14 +2111,14 @@ paths:
             type: string
         example: name:DESC
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "200":
           description: List of Cloud Services
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -2058,14 +2179,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: List of Device Manager objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -2121,14 +2242,14 @@ paths:
             type: string
         example: name:DESC
       responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "200":
           description: List of Device objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DevicePage'
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "405":
           $ref: '#/components/responses/http405MethodNotAllowed'
         "401":
@@ -2151,8 +2272,6 @@ paths:
       description: Get the feature flags enabled in the CDO tenant.
       operationId: getFeatureFlags
       responses:
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: Set of feature flags that are enabled for the user's tenant.
           content:
@@ -2164,6 +2283,8 @@ paths:
               example:
               - feature-1
               - feature-2
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "500":
           description: Internal server error.
           content:
@@ -2257,14 +2378,14 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: SDC object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Sdc'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -2325,16 +2446,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: List of Change Log objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ChangelogPage'
+        "405":
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -2363,16 +2484,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: Change Log objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Changelog'
+        "405":
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -2403,16 +2524,16 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
+        "405":
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: Change Request object
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ChangeRequest'
-        "405":
-          $ref: '#/components/responses/http405MethodNotAllowed'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -2480,175 +2601,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
-  /v1/cdfmc/**:
-    get:
-      tags:
-      - Cloud-delivered FMC
-      summary: Proxy Request To Cloud-Delivered FMC
-      description: This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
-        Refer to the <a href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
-        API Explorer in CDO</a> for the list of available endpoints. You can append
-        the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc`
-        URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints
-        will return 404 if the CDO tenant does not have a cdFMC provisioned.
-      operationId: proxyFmcRequest
-      responses:
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-      - bearerAuth: []
-    put:
-      tags:
-      - Cloud-delivered FMC
-      summary: Proxy Request To Cloud-Delivered FMC
-      description: This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
-        Refer to the <a href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
-        API Explorer in CDO</a> for the list of available endpoints. You can append
-        the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc`
-        URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints
-        will return 404 if the CDO tenant does not have a cdFMC provisioned.
-      operationId: proxyFmcRequest_3
-      responses:
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-      - bearerAuth: []
-    post:
-      tags:
-      - Cloud-delivered FMC
-      summary: Proxy Request To Cloud-Delivered FMC
-      description: This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
-        Refer to the <a href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
-        API Explorer in CDO</a> for the list of available endpoints. You can append
-        the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc`
-        URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints
-        will return 404 if the CDO tenant does not have a cdFMC provisioned.
-      operationId: proxyFmcRequest_2
-      responses:
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-      - bearerAuth: []
-    delete:
-      tags:
-      - Cloud-delivered FMC
-      summary: Proxy Request To Cloud-Delivered FMC
-      description: This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
-        Refer to the <a href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
-        API Explorer in CDO</a> for the list of available endpoints. You can append
-        the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc`
-        URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints
-        will return 404 if the CDO tenant does not have a cdFMC provisioned.
-      operationId: proxyFmcRequest_5
-      responses:
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-      - bearerAuth: []
-    options:
-      tags:
-      - Cloud-delivered FMC
-      summary: Proxy Request To Cloud-Delivered FMC
-      description: This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
-        Refer to the <a href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
-        API Explorer in CDO</a> for the list of available endpoints. You can append
-        the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc`
-        URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints
-        will return 404 if the CDO tenant does not have a cdFMC provisioned.
-      operationId: proxyFmcRequest_6
-      responses:
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-      - bearerAuth: []
-    head:
-      tags:
-      - Cloud-delivered FMC
-      summary: Proxy Request To Cloud-Delivered FMC
-      description: This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
-        Refer to the <a href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
-        API Explorer in CDO</a> for the list of available endpoints. You can append
-        the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc`
-        URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints
-        will return 404 if the CDO tenant does not have a cdFMC provisioned.
-      operationId: proxyFmcRequest_1
-      responses:
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-      - bearerAuth: []
-    patch:
-      tags:
-      - Cloud-delivered FMC
-      summary: Proxy Request To Cloud-Delivered FMC
-      description: This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
-        Refer to the <a href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
-        API Explorer in CDO</a> for the list of available endpoints. You can append
-        the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc`
-        URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints
-        will return 404 if the CDO tenant does not have a cdFMC provisioned.
-      operationId: proxyFmcRequest_4
-      responses:
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-      - bearerAuth: []
 components:
   schemas:
     CdoTransaction:

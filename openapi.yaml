@@ -20,6 +20,8 @@ servers:
   - url: https://edge.ci.cdo.cisco.com/api/rest
     description: CI
 tags:
+  - name: Cloud-delivered FMC
+    x-displayName: Cloud-delivered FMC
   - name: Remote Access Monitoring
     x-displayName: Remote Access Monitoring
   - name: Users
@@ -40,11 +42,145 @@ tags:
     x-displayName: Connectors
   - name: Changelogs
     x-displayName: Changelogs
-  - name: Cloud-delivered FMC
-    x-displayName: Cloud-delivered FMC
   - name: Object Management
     x-displayName: Object Management
 paths:
+  /v1/cdfmc/**:
+    get:
+      tags:
+        - Cloud-delivered FMC
+      summary: Proxy Request To Cloud-Delivered FMC
+      description: >-
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
+        Refer to the <a
+        href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
+        API Explorer in CDO</a> for the list of available endpoints. You can
+        append the relative API paths provided in the cdFMC API documentation to
+        the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant.
+        <b>Note:</b> These endpoints will return 404 if the CDO tenant does not
+        have a cdFMC provisioned.
+      operationId: proxyFmcRequest
+      responses:
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+    put:
+      tags:
+        - Cloud-delivered FMC
+      summary: Proxy Request To Cloud-Delivered FMC
+      description: >-
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
+        Refer to the <a
+        href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
+        API Explorer in CDO</a> for the list of available endpoints. You can
+        append the relative API paths provided in the cdFMC API documentation to
+        the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant.
+        <b>Note:</b> These endpoints will return 404 if the CDO tenant does not
+        have a cdFMC provisioned.
+      operationId: proxyFmcRequest_2
+      responses:
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+    post:
+      tags:
+        - Cloud-delivered FMC
+      summary: Proxy Request To Cloud-Delivered FMC
+      description: >-
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
+        Refer to the <a
+        href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
+        API Explorer in CDO</a> for the list of available endpoints. You can
+        append the relative API paths provided in the cdFMC API documentation to
+        the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant.
+        <b>Note:</b> These endpoints will return 404 if the CDO tenant does not
+        have a cdFMC provisioned.
+      operationId: proxyFmcRequest_1
+      responses:
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - Cloud-delivered FMC
+      summary: Proxy Request To Cloud-Delivered FMC
+      description: >-
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
+        Refer to the <a
+        href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
+        API Explorer in CDO</a> for the list of available endpoints. You can
+        append the relative API paths provided in the cdFMC API documentation to
+        the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant.
+        <b>Note:</b> These endpoints will return 404 if the CDO tenant does not
+        have a cdFMC provisioned.
+      operationId: proxyFmcRequest_4
+      responses:
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+    patch:
+      tags:
+        - Cloud-delivered FMC
+      summary: Proxy Request To Cloud-Delivered FMC
+      description: >-
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
+        Refer to the <a
+        href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
+        API Explorer in CDO</a> for the list of available endpoints. You can
+        append the relative API paths provided in the cdFMC API documentation to
+        the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant.
+        <b>Note:</b> These endpoints will return 404 if the CDO tenant does not
+        have a cdFMC provisioned.
+      operationId: proxyFmcRequest_3
+      responses:
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/vpnsessions/{deviceUid}/terminate:
     post:
       tags:
@@ -2573,196 +2709,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
-  /v1/cdfmc/**:
-    get:
-      tags:
-        - Cloud-delivered FMC
-      summary: Proxy Request To Cloud-Delivered FMC
-      description: >-
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
-        Refer to the <a
-        href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
-        API Explorer in CDO</a> for the list of available endpoints. You can
-        append the relative API paths provided in the cdFMC API documentation to
-        the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant.
-        <b>Note:</b> These endpoints will return 404 if the CDO tenant does not
-        have a cdFMC provisioned.
-      operationId: proxyFmcRequest
-      responses:
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
-    put:
-      tags:
-        - Cloud-delivered FMC
-      summary: Proxy Request To Cloud-Delivered FMC
-      description: >-
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
-        Refer to the <a
-        href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
-        API Explorer in CDO</a> for the list of available endpoints. You can
-        append the relative API paths provided in the cdFMC API documentation to
-        the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant.
-        <b>Note:</b> These endpoints will return 404 if the CDO tenant does not
-        have a cdFMC provisioned.
-      operationId: proxyFmcRequest_3
-      responses:
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
-    post:
-      tags:
-        - Cloud-delivered FMC
-      summary: Proxy Request To Cloud-Delivered FMC
-      description: >-
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
-        Refer to the <a
-        href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
-        API Explorer in CDO</a> for the list of available endpoints. You can
-        append the relative API paths provided in the cdFMC API documentation to
-        the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant.
-        <b>Note:</b> These endpoints will return 404 if the CDO tenant does not
-        have a cdFMC provisioned.
-      operationId: proxyFmcRequest_2
-      responses:
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
-    delete:
-      tags:
-        - Cloud-delivered FMC
-      summary: Proxy Request To Cloud-Delivered FMC
-      description: >-
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
-        Refer to the <a
-        href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
-        API Explorer in CDO</a> for the list of available endpoints. You can
-        append the relative API paths provided in the cdFMC API documentation to
-        the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant.
-        <b>Note:</b> These endpoints will return 404 if the CDO tenant does not
-        have a cdFMC provisioned.
-      operationId: proxyFmcRequest_5
-      responses:
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
-    options:
-      tags:
-        - Cloud-delivered FMC
-      summary: Proxy Request To Cloud-Delivered FMC
-      description: >-
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
-        Refer to the <a
-        href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
-        API Explorer in CDO</a> for the list of available endpoints. You can
-        append the relative API paths provided in the cdFMC API documentation to
-        the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant.
-        <b>Note:</b> These endpoints will return 404 if the CDO tenant does not
-        have a cdFMC provisioned.
-      operationId: proxyFmcRequest_6
-      responses:
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
-    head:
-      tags:
-        - Cloud-delivered FMC
-      summary: Proxy Request To Cloud-Delivered FMC
-      description: >-
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
-        Refer to the <a
-        href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
-        API Explorer in CDO</a> for the list of available endpoints. You can
-        append the relative API paths provided in the cdFMC API documentation to
-        the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant.
-        <b>Note:</b> These endpoints will return 404 if the CDO tenant does not
-        have a cdFMC provisioned.
-      operationId: proxyFmcRequest_1
-      responses:
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
-    patch:
-      tags:
-        - Cloud-delivered FMC
-      summary: Proxy Request To Cloud-Delivered FMC
-      description: >-
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC).
-        Refer to the <a
-        href="https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html">cdFMC
-        API Explorer in CDO</a> for the list of available endpoints. You can
-        append the relative API paths provided in the cdFMC API documentation to
-        the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant.
-        <b>Note:</b> These endpoints will return 404 if the CDO tenant does not
-        have a cdFMC provisioned.
-      operationId: proxyFmcRequest_4
-      responses:
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
   /v0/objects:
     get:
       tags:
@@ -5609,6 +5555,7 @@ components:
 x-tagGroups:
   - name: public-api-openapi
     tags:
+      - Cloud-delivered FMC
       - Remote Access Monitoring
       - Users
       - Search
@@ -5619,7 +5566,6 @@ x-tagGroups:
       - Meta
       - Connectors
       - Changelogs
-      - Cloud-delivered FMC
   - name: object-service-openapi
     tags:
       - Object Management
