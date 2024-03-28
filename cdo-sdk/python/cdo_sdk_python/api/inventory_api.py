@@ -5844,7 +5844,7 @@ class InventoryApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Device:
-        """Modify Template Device.
+        """Modify Template Device
 
         Modify a template device in the CDO tenant.
 
@@ -5920,7 +5920,7 @@ class InventoryApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Device]:
-        """Modify Template Device.
+        """Modify Template Device
 
         Modify a template device in the CDO tenant.
 
@@ -5996,7 +5996,7 @@ class InventoryApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Modify Template Device.
+        """Modify Template Device
 
         Modify a template device in the CDO tenant.
 

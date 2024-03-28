@@ -24,7 +24,7 @@ Method | HTTP request | Description
 [**modify_cloud_service**](InventoryApi.md#modify_cloud_service) | **PATCH** /v1/inventory/services/{cloudServiceUid} | Modify Cloud Service
 [**modify_device**](InventoryApi.md#modify_device) | **PATCH** /v1/inventory/devices/{deviceUid} | Modify Device
 [**modify_device_manager**](InventoryApi.md#modify_device_manager) | **PATCH** /v1/inventory/managers/{deviceManagerUid} | Modify Device Manager
-[**modify_template_device**](InventoryApi.md#modify_template_device) | **PATCH** /v1/inventory/templates/{templateDeviceUid} | Modify Template Device.
+[**modify_template_device**](InventoryApi.md#modify_template_device) | **PATCH** /v1/inventory/templates/{templateDeviceUid} | Modify Template Device
 [**onboard_asa_device**](InventoryApi.md#onboard_asa_device) | **POST** /v1/inventory/devices/asas | Onboard ASA device
 [**onboard_ios_device**](InventoryApi.md#onboard_ios_device) | **POST** /v1/inventory/devices/ios | Onboard IOS Device
 [**read_asa_device_configuration**](InventoryApi.md#read_asa_device_configuration) | **POST** /v1/inventory/devices/asas/{deviceUid}/read | Read ASA device configuration
@@ -1711,7 +1711,7 @@ Name | Type | Description  | Notes
 # **modify_template_device**
 > Device modify_template_device(template_device_uid, device_patch_input)
 
-Modify Template Device.
+Modify Template Device
 
 Modify a template device in the CDO tenant.
 
@@ -1750,7 +1750,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     device_patch_input = cdo_sdk_python.DevicePatchInput() # DevicePatchInput | 
 
     try:
-        # Modify Template Device.
+        # Modify Template Device
         api_response = api_instance.modify_template_device(template_device_uid, device_patch_input)
         print("The response of InventoryApi->modify_template_device:\n")
         pprint(api_response)
