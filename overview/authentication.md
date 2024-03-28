@@ -20,8 +20,8 @@ The CDO token follows the JSON Web Token (JWT) standard. The claims in the CDO t
 
 - `parentId`: The `parentId` claim provides the unique identifier of the CDO tenant this token was issued for.
 - `exp`: Time after which the JWT expires. This claim is absent in API tokens that do not expire. 
+- `clusterId`: The unique identifier of the underlying CDO cluster that this tenant uses.
 
 >**Note**:
 This claim does not validate the JWT token, as a token that has not yet expired could have been revoked.
-- `clusterId`: The unique identifier of the underlying CDO cluster that this tenant uses.
 
