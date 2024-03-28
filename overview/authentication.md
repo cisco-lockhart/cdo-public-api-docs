@@ -19,5 +19,9 @@ The CDO token follows the JSON Web Token (JWT) standard. The claims in the CDO t
 | [ROLE_VPN_SESSION_MANAGER](https://edge.us.cdo.cisco.com/content/docs/index.html#!c-vpn-sessions-manager-role.html) | The VPN Sessions Manager role is designed for administrators monitoring remote access VPN connections, not site to site VPN connections. | 
 
 - `parentId`: The `parentId` claim provides the unique identifier of the CDO tenant this token was issued for.
-- `exp`: Time after which the JWT expires. This claim is absent in API tokens that do not expire. **Note:** This claim does not validate the JWT token, as a token that has not yet expired could have been revoked.
+- `exp`: Time after which the JWT expires. This claim is absent in API tokens that do not expire. 
+
+>**Note**:
+This claim does not validate the JWT token, as a token that has not yet expired could have been revoked.
 - `clusterId`: The unique identifier of the underlying CDO cluster that this tenant uses.
+
