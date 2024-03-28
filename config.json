@@ -42,18 +42,12 @@
         },
         "items": [
           {
+            "title": "Postman Collection",
+            "content": "developer-resources/postman-collection.md"
+          },
+          {
             "title": "Learning Labs",
             "content": "https://developer.cisco.com/learning/modules/automating-cisco-defense-orchestrator/",
-            "type": "url"
-          },
-          {
-            "title": "Postman Collection",
-            "content": "https://github.com/cisco-lockhart/cdo-public-api-docs/blob/main/postman-collection.json",
-            "type": "url"
-          },
-          {
-            "title": "Example Postman Environment",
-            "content": "https://github.com/cisco-lockhart/cdo-public-api-docs/blob/main/postman-environment.json",
             "type": "url"
           },
           {
