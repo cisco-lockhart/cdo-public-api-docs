@@ -33,11 +33,11 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     api_instance = cdo_sdk_python.TenantManagementApi(api_client)
 
     try:
-        api_response = api_instance.list_tenants()
-        print("The response of TenantManagementApi->list_tenants:\n")
+        api_response = api_instance.get_tenants()
+        print("The response of TenantManagementApi->get_tenants:\n")
         pprint(api_response)
     except ApiException as e:
-        print("Exception when calling TenantManagementApi->list_tenants: %s\n" % e)
+        print("Exception when calling TenantManagementApi->get_tenants: %s\n" % e)
 ```
 
 ## Developer Support
