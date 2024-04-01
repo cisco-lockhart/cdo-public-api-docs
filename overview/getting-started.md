@@ -3,7 +3,7 @@
 The following sections introduce you to the resources in the CDO Public API, and provide instructions to make your first API request. Examples will be shown using the command line with cURL.
 
 ## Supported RESTful Operations
-The resources in the CDO API support one or more of the `GET`, `POST`, `PATCH`, and `DELETE` operations. 
+The resources in the CDO API support one or more of the `GET`, `POST`, `PATCH`, `PUT`, and `DELETE` operations. 
 
 >**Note**:
 Not all of the resources support all of these operations. 
@@ -11,9 +11,9 @@ Not all of the resources support all of these operations.
 
 - **GET**: There are two kinds of `GET` operations in CDO: list `GET` operations, which return a paged list of resources, and individual `GET` operations which return a single resource by UID. In the list endpoints, it is possible to search and sort by a subset of the fields in the resource.
 - **POST**: `POST` operations are used in CDO to either create a resource or trigger an asynchronous operation. All POST operations with an action verb trigger asynchronous operations. Asynchronous operations can be tracked using the CDO transaction API.
-- **DELETE**: `DELETE` operations are used in CDO to delete resources. All `DELETE` operations in the CDO API are idempotent.
 - **PATCH**: `PATCH` operations are used in CDO to modify resources.
 - **PUT**: `PUT` operations are used by the Cloud-delivered FMC API endpoints to modify resources.
+- **DELETE**: `DELETE` operations are used in CDO to delete resources. All `DELETE` operations in the CDO API are idempotent.
 
 All responses from the CDO API are in the JSON format. Additionally, all payloads must be sent to the CDO API as JSON.
 
@@ -32,7 +32,7 @@ At a high level, the CDO API supports operations on the following resources:
 - **Transaction Management** - CDO transactions are used to track the progress of asynchronous operations triggered using the API on your CDO tenant. For example, use CDO transactions to monitor the progress of deploying configuration to an ASA.
 - **Meta endpoints** - Meta information about CDO itself.
 
-## API User Pre-requisites
+## API User Prerequisites
 
 To use the CDO Public API, you must have an API token. We recommend creating an [API-only user](https://docs.defenseorchestrator.com/c-secure-device-connector-sdc.html#!t-create-api-only-users.html) in your CDO tenant, and generating a token for it.
 
