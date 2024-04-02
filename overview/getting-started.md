@@ -197,4 +197,4 @@ The `limit` and `offset` values can be set as query parameters to the request, a
 
 
 ## Try it out with Postman
-Prefer to use Postman rather than code or the command line? Check out our [Postman Collection](developer-resources/postman-collections.md).
+Prefer to use Postman rather than code or the command line? Check out our [Postman Collection](#!postman-collection/postman-collection).
