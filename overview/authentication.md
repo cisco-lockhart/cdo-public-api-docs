@@ -36,13 +36,13 @@ The CDO token follows the JSON Web Token (JWT) standard. The claims in the CDO t
 - `exp`: Time after which the JWT expires. This claim is absent in API tokens that do not expire. 
 - `clusterId`: The unique identifier of the underlying CDO cluster that this tenant uses.
 
+>**Note**:
+This claim does not validate the JWT token, as a token that has not yet expired could have been revoked.
+
+
 ### Token Expiry
 
 CDO supports two kinds of user-facing JWT tokens:
 - *Time limited access tokens*: These tokens are used by CDO itself to make API calls in the CDO UI, and have an expiry of 1 hour. These access tokens can be refreshed using the associated refresh token. You cannot generate time-limited CDO access tokens using the CDO UI or API.
 - *API tokens*: These tokens are used by CDO API users to build automations. These tokens do not expire. You can refresh or revoke the API token for a user (super-admins only) by going to the **User Management** page (click on **Settings** -> **User Management** in the CDO UI).
 ![img](../images/revoke-refresh-api-token.png)
-
->**Note**:
-This claim does not validate the JWT token, as a token that has not yet expired could have been revoked.
-

@@ -1172,7 +1172,7 @@ paths:
     patch:
       tags:
         - Inventory
-      summary: Modify Template Device.
+      summary: Modify Template Device
       description: Modify a template device in the CDO tenant.
       operationId: modifyTemplateDevice
       parameters:
