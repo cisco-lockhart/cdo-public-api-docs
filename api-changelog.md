@@ -1,6 +1,6 @@
-# 04-2024
+# Version 0.1.0 (2023-04-02)
 
-## Highlights
+## Added
 
 This is the first major release of the CDO Public API, and exposes a large number of CDO features. Some of the highlights include:
 - Simplified Inventory management: API endpoints to add, delete, view, and perform operations on devices, device managers, and cloud services available on the CDO inventory page.
