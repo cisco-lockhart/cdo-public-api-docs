@@ -5,15 +5,24 @@ All requests to CDO APIs must be authenticated using the Bearer token method for
 You can do this as follows:
 
 - Log in to your CDO tenant and click on **Settings** -> **User Management**.
+
 ![img](../images/user-management-menu-item.png)
+
 - Click on the **+** button to add a new user.
+
 ![img](../images/add-user.png)
+
 - In the dialog that opens up, give the API-only user a name, select the checkbox labelled `API Only User`, and select the role you want the API-only user to have (see below for a description of the roles in CDO).
+
 ![img](../images/add-user-dialog.png)
+
 - Click on the **OK** button.
 - Click on the **Generate API Token** button.
+
 ![img](../images/generate-api-token.png)
+
 - Click on the **Copy API Token** button in the dialog that opens up. Save this token somewhere safe, as you will not be able to access it. 
+
 ![img](../images/copy-api-token.png)
 
 You can use this API token to make CDO API requests.
