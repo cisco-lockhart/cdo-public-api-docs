@@ -1,3 +1,7 @@
+>**Note**:
+The Cisco Defense Orchestrator Public API is currently in beta and is subject to change. If you adopt a beta API, it may not be fully compatible with future versions.
+
+
 # Version 0.1.0 (2023-04-02)
 
 ## Added
