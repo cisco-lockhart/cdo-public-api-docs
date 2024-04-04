@@ -1,11 +1,11 @@
 openapi: 3.0.1
 info:
-  title: Cisco Defense Orchestrator API
-  description: Use the interactive documentation to explore the endpoints CDO has to offer
+  title: CDO API
+  description: Use the documentation to explore the endpoints CDO has to offer
   contact:
     name: CDO TAC
     email: cdo.tac@cisco.com
-  version: 0.0.1
+  version: 0.1.0
 servers:
   - url: https://edge.us.cdo.cisco.com/api/rest
     description: US
@@ -325,9 +325,9 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           required: false
           schema:
             minimum: 0
@@ -964,9 +964,9 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           required: false
           schema:
             minimum: 0
@@ -1576,9 +1576,9 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           required: false
           schema:
             minimum: 0
@@ -1835,9 +1835,9 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           required: false
           schema:
             minimum: 0
@@ -1982,9 +1982,9 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           required: false
           schema:
             minimum: 0
@@ -2113,9 +2113,9 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           required: false
           schema:
             minimum: 0
@@ -2180,9 +2180,9 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           required: false
           schema:
             minimum: 0
@@ -2249,9 +2249,9 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           required: false
           schema:
             minimum: 0
@@ -2316,9 +2316,9 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           required: false
           schema:
             minimum: 0
@@ -2414,9 +2414,9 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           required: false
           schema:
             minimum: 0
@@ -2519,9 +2519,9 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           required: false
           schema:
             minimum: 0
@@ -4042,9 +4042,9 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           format: int32
           example: 0
         items:
@@ -4068,9 +4068,9 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           format: int32
           example: 0
         items:
@@ -4158,9 +4158,9 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           format: int32
           example: 0
         items:
@@ -4426,9 +4426,9 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           format: int32
           example: 0
         items:
@@ -4467,9 +4467,9 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           format: int32
           example: 0
         items:
@@ -4546,9 +4546,9 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           format: int32
           example: 0
         items:
@@ -4611,9 +4611,9 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           format: int32
           example: 0
         items:
@@ -4679,9 +4679,9 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The CDO Public API uses the
-            offset field to determine the index of the first result retrieved,
-            and will retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           format: int32
           example: 0
         items:
