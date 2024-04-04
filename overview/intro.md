@@ -6,7 +6,7 @@
 The CDO API is currently in beta and is subject to change. If you adopt a beta API, it may not be fully compatible with future versions.
 
 
-Cisco Defense Orchestrator (CDO) exposes a rich REST API. Internal and external users can leverage the API to programmatically integrate with the product. This document describes the semantics of the REST API. Backwards compatibility of the API is guaranteed using a versioning system.
+Cisco Defense Orchestrator (CDO) exposes a rich REST API. This document describes the semantics of the REST API. Backwards compatibility of the API is guaranteed using a versioning system.
 
 ## What can you do with it?
 - Manage your devices, services, and device managers
