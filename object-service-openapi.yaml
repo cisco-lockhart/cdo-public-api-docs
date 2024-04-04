@@ -1,12 +1,11 @@
 openapi: 3.0.1
 info:
-  title: Cisco Defense Orchestrator API
-  description: Use the interactive documentation to explore the endpoints CDO has
-    to offer
+  title: CDO API
+  description: Use the documentation to explore the endpoints CDO has to offer
   contact:
     name: CDO TAC
     email: cdo.tac@cisco.com
-  version: 0.0.1
+  version: 0.1.0
 servers:
 - url: https://edge.us.cdo.cisco.com/api/rest
   description: US
@@ -39,9 +38,9 @@ paths:
         example: name:London-Office-ASA
       - name: offset
         in: query
-        description: "The offset of the results retrieved. The CDO Public API uses\
-          \ the offset field to determine the index of the first result retrieved,\
-          \ and will retrieve `limit` results from the offset specified."
+        description: "The offset of the results retrieved. The CDO API uses the offset\
+          \ field to determine the index of the first result retrieved, and will retrieve\
+          \ `limit` results from the offset specified."
         required: false
         schema:
           minimum: 0
@@ -66,14 +65,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: A paginated view of the CDO objects.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListObjectResponse'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -97,14 +96,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "201":
           description: A descriptive representation of the created CDO object.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -347,8 +346,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: A descriptive representation of the created CDO object.
           content:
@@ -357,6 +354,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ReferenceInfo'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -394,8 +393,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: Duplicates of the object.
           content:
@@ -404,6 +401,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DuplicateGroupDto'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -1093,9 +1092,9 @@ components:
           example: 50
         offset:
           type: integer
-          description: "The offset of the results retrieved. The CDO Public API uses\
-            \ the offset field to determine the index of the first result retrieved,\
-            \ and will retrieve `limit` results from the offset specified."
+          description: "The offset of the results retrieved. The CDO API uses the\
+            \ offset field to determine the index of the first result retrieved, and\
+            \ will retrieve `limit` results from the offset specified."
           format: int64
           example: 0
         items:

@@ -2035,7 +2035,7 @@ class ObjectManagementApi:
     def get_objects(
         self,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -2057,7 +2057,7 @@ class ObjectManagementApi:
 
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
-        :param offset: The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param limit: The number of results to retrieve.
         :type limit: str
@@ -2118,7 +2118,7 @@ class ObjectManagementApi:
     def get_objects_with_http_info(
         self,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -2140,7 +2140,7 @@ class ObjectManagementApi:
 
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
-        :param offset: The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param limit: The number of results to retrieve.
         :type limit: str
@@ -2201,7 +2201,7 @@ class ObjectManagementApi:
     def get_objects_without_preload_content(
         self,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -2223,7 +2223,7 @@ class ObjectManagementApi:
 
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
-        :param offset: The offset of the results retrieved. The CDO Public API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param limit: The number of results to retrieve.
         :type limit: str
