@@ -1,6 +1,6 @@
 # Getting Started
 
-The following sections introduce you to the resources in the CDO Public API, and provide instructions to make your first API request. Examples will be shown using the command line with cURL.
+The following sections introduce you to the resources in the CDO API, and provide instructions to make your first API request. Examples will be shown using the command line with cURL.
 
 ## Supported RESTful Operations
 The resources in the CDO API support one or more of the `GET`, `POST`, `PATCH`, `PUT`, and `DELETE` operations. 
@@ -34,9 +34,9 @@ At a high level, the CDO API supports operations on the following resources:
 
 ## API User Prerequisites
 
-To use the CDO Public API, you must have an API token. We recommend creating an [API-only user](https://docs.defenseorchestrator.com/c-secure-device-connector-sdc.html#!t-create-api-only-users.html) in your CDO tenant, and generating a token for it.
+To use the CDO API, you must have an API token. We recommend creating an [API-only user](https://docs.defenseorchestrator.com/c-secure-device-connector-sdc.html#!t-create-api-only-users.html) in your CDO tenant, and generating a token for it.
 
-In order to perform the operation described in this page, the API-only user should at least have the **Read Only** role. However, different endpoints in the CDO Public API can require admin or super-admin privileges.
+In order to perform the operation described in this page, the API-only user should at least have the **Read Only** role. However, different endpoints in the CDO API can require admin or super-admin privileges.
 
 ## Base URI
 

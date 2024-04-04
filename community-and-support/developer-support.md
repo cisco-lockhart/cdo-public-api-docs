@@ -8,7 +8,7 @@ Use the DevNet Community for general best practices, help, tips, or examples usi
 
 ## Issues
 
-If you identify issues with the CDO Public API, you can contact the [Cisco Technical Assistance Center (TAC)](https://www.cisco.com/c/en/us/support/web/tsd-cisco-worldwide-contacts.html) for support. First time? [Start here](https://www.cisco.com/c/dam/en/us/services/collateral/acquisitions/cjp-tac-support-guide.pdf).
+If you identify issues with the CDO API, you can contact the [Cisco Technical Assistance Center (TAC)](https://www.cisco.com/c/en/us/support/web/tsd-cisco-worldwide-contacts.html) for support. First time? [Start here](https://www.cisco.com/c/dam/en/us/services/collateral/acquisitions/cjp-tac-support-guide.pdf).
 
 - Internet: https://mycase.cloudapps.cisco.com/
 - Worldwide Support Contacts: https://www.cisco.com/c/en/us/support/web/tsd-cisco-worldwide-contacts.html

@@ -1,7 +1,7 @@
 {
     "items": [
       {
-        "title": "Cisco Defense Orchestrator Public API Documentation",
+        "title": "CDO API Documentation",
         "items": [
             {
               "title": "Introduction",
@@ -29,7 +29,7 @@
         },
         "items": [
           {
-            "title": "CDO Public API",
+            "title": "CDO API",
             "content": "openapi.yaml",
             "type": "oas3"
           }
