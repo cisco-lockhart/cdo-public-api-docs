@@ -1,12 +1,12 @@
-<seotitle>Cloud Firewall Manager, Security Policy, Network Management, Deploy, Upgrade, CDO, Cisco Defense Orchestrator, Cisco Defense Orchestrator Public API</seotitle>
+<seotitle>Cloud Firewall Manager, Security Policy, Network Management, Deploy, Upgrade, CDO, Cisco Defense Orchestrator, Cisco Defense Orchestrator API</seotitle>
 
-# Cisco Defense Orchestrator Public API Documentation
+# Cisco Defense Orchestrator API Documentation
 
 >**Note**:
-The Cisco Defense Orchestrator Public API is currently in beta and is subject to change. If you adopt a beta API, it may not be fully compatible with future versions.
+The CDO API is currently in beta and is subject to change. If you adopt a beta API, it may not be fully compatible with future versions.
 
 
-Cisco Defense Orchestrator (CDO) exposes a rich REST API. Internal and external users can leverage the API to programmatically integrate with the product. This document describes the semantics of the REST API. The public API exposes a curated subset of features available across multiple CDO internal REST APIs. Backwards compatibility of the public API is guaranteed using a versioning system.
+Cisco Defense Orchestrator (CDO) exposes a rich REST API. This document describes the semantics of the REST API. Backwards compatibility of the API is guaranteed using a versioning system.
 
 ## What can you do with it?
 - Manage your devices, services, and device managers
