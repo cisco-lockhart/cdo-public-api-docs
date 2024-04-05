@@ -2503,7 +2503,7 @@ paths:
     get:
       tags:
         - Changelogs
-      summary: List Change Logs
+      summary: Get Change Logs
       description: Get a list of Change Logs in the CDO tenant.
       operationId: getChangelogs
       parameters:

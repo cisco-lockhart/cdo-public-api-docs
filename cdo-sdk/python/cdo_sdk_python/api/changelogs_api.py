@@ -334,7 +334,7 @@ class ChangelogsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ChangelogPage:
-        """List Change Logs
+        """Get Change Logs
 
         Get a list of Change Logs in the CDO tenant.
 
@@ -418,7 +418,7 @@ class ChangelogsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ChangelogPage]:
-        """List Change Logs
+        """Get Change Logs
 
         Get a list of Change Logs in the CDO tenant.
 
@@ -502,7 +502,7 @@ class ChangelogsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """List Change Logs
+        """Get Change Logs
 
         Get a list of Change Logs in the CDO tenant.
 

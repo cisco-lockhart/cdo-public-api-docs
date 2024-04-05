@@ -5,7 +5,7 @@ All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_changelog**](ChangelogsApi.md#get_changelog) | **GET** /v1/changelogs/{changelogUid} | Get Change Log
-[**get_changelogs**](ChangelogsApi.md#get_changelogs) | **GET** /v1/changelogs | List Change Logs
+[**get_changelogs**](ChangelogsApi.md#get_changelogs) | **GET** /v1/changelogs | Get Change Logs
 
 
 # **get_changelog**
@@ -94,7 +94,7 @@ Name | Type | Description  | Notes
 # **get_changelogs**
 > ChangelogPage get_changelogs(limit=limit, offset=offset, search_text=search_text, q=q)
 
-List Change Logs
+Get Change Logs
 
 Get a list of Change Logs in the CDO tenant.
 
@@ -134,7 +134,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     q = 'name:London-Office-ASA' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
 
     try:
-        # List Change Logs
+        # Get Change Logs
         api_response = api_instance.get_changelogs(limit=limit, offset=offset, search_text=search_text, q=q)
         print("The response of ChangelogsApi->get_changelogs:\n")
         pprint(api_response)
