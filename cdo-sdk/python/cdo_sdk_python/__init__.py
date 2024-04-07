@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.68"
+__version__ = "1.0.69"
 
 # import apis into sdk package
 from cdo_sdk_python.api.change_requests_api import ChangeRequestsApi
@@ -88,6 +88,7 @@ from cdo_sdk_python.models.icmp4_value import Icmp4Value
 from cdo_sdk_python.models.icmp6_value import Icmp6Value
 from cdo_sdk_python.models.inventory import Inventory
 from cdo_sdk_python.models.ios_create_or_update_input import IosCreateOrUpdateInput
+from cdo_sdk_python.models.issues_count import IssuesCount
 from cdo_sdk_python.models.issues_dto import IssuesDto
 from cdo_sdk_python.models.json_web_key import JsonWebKey
 from cdo_sdk_python.models.jwk_set import JwkSet

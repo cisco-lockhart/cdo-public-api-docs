@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**delete_object**](ObjectManagementApi.md#delete_object) | **DELETE** /v0/objects/{uid} | Delete Object
 [**delete_targets**](ObjectManagementApi.md#delete_targets) | **DELETE** /v0/objects/{uid}/targets | Delete Targets
 [**get_duplicate_objects**](ObjectManagementApi.md#get_duplicate_objects) | **GET** /v0/objects/{uid}/duplicates | Get Duplicate Objects
+[**get_issues_count**](ObjectManagementApi.md#get_issues_count) | **GET** /v0/objects/issues-count | Get Issues Count
 [**get_object**](ObjectManagementApi.md#get_object) | **GET** /v0/objects/{uid} | Get Object
 [**get_object_usages**](ObjectManagementApi.md#get_object_usages) | **GET** /v0/objects/{uid}/usage | Get Object Usages
 [**get_objects**](ObjectManagementApi.md#get_objects) | **GET** /v0/objects | Get Objects
@@ -375,6 +376,74 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Duplicates of the object. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_issues_count**
+> IssuesCount get_issues_count()
+
+Get Issues Count
+
+Get issues count in the CDO tenant.
+
+### Example
+
+
+```python
+import cdo_sdk_python
+from cdo_sdk_python.models.issues_count import IssuesCount
+from cdo_sdk_python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cdo_sdk_python.Configuration(
+    host = "https://edge.us.cdo.cisco.com/api/rest"
+)
+
+
+# Enter a context with an instance of the API client
+with cdo_sdk_python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
+
+    try:
+        # Get Issues Count
+        api_response = api_instance.get_issues_count()
+        print("The response of ObjectManagementApi->get_issues_count:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ObjectManagementApi->get_issues_count: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**IssuesCount**](IssuesCount.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |

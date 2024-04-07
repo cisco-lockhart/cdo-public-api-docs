@@ -3107,6 +3107,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
+  /v0/objects/issues-count:
+    get:
+      tags:
+        - Object Management
+      summary: Get Issues Count
+      description: Get issues count in the CDO tenant.
+      operationId: getIssuesCount
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IssuesCount'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
 components:
   schemas:
     CdoTransaction:
@@ -5516,6 +5542,29 @@ components:
             type: string
             description: The set of unique identifiers of the duplicate objects.
             format: uuid
+    IssuesCount:
+      type: object
+      properties:
+        totalObjects:
+          type: integer
+          description: Total number of objects for the tenant
+          format: int64
+          example: 4
+        unAssociated:
+          type: integer
+          description: Number of UnAssociated Objects
+          format: int64
+          example: 1
+        unUseds:
+          type: integer
+          description: Number of unAssigned Objects
+          format: int64
+          example: 1
+        duplicates:
+          type: integer
+          description: Number of duplicate Objects
+          format: int64
+          example: 2
   responses:
     http400BadRequest:
       description: Invalid input provided. Check the response for details.
