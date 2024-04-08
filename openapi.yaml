@@ -32,14 +32,14 @@ tags:
     x-displayName: Tenant Management
   - name: Inventory
     x-displayName: Inventory
+  - name: Connectors
+    x-displayName: Connectors
   - name: Change Requests
     x-displayName: Change Requests
   - name: Transactions
     x-displayName: Transactions
   - name: Meta
     x-displayName: Meta
-  - name: Connectors
-    x-displayName: Connectors
   - name: Changelogs
     x-displayName: Changelogs
   - name: Object Management
@@ -936,6 +936,111 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         '404':
           $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+  /v1/connectors/sdcs:
+    get:
+      tags:
+        - Connectors
+      summary: Get SDCs
+      description: Get a list of on-prem SDCs in the CDO tenant.
+      operationId: getSdcs
+      parameters:
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: name:London-Office-ASA
+        - name: sort
+          in: query
+          description: The fields to sort results by.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          example: name:DESC
+      responses:
+        '200':
+          description: List of SDC objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SdcPage'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+    post:
+      tags:
+        - Connectors
+      summary: Creates an SDC
+      description: >-
+        This is an asynchronous operation to create an SDC to a CDO tenant. This
+        operation returns a link to a transaction object that can be used to
+        monitor the progress of the operation.
+      operationId: createSdc
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SdcCreateInput'
+        required: true
+      responses:
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the progress of the
+            creation operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
         '500':
           description: Internal server error.
           content:
@@ -2394,73 +2499,6 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
-  /v1/connectors/sdcs:
-    get:
-      tags:
-        - Connectors
-      summary: Get SDCs
-      description: Get a list of on-prem SDCs in the CDO tenant.
-      operationId: getSdcs
-      parameters:
-        - name: limit
-          in: query
-          description: The number of results to retrieve.
-          required: false
-          schema:
-            maximum: 200
-            minimum: 0
-            type: string
-            default: '50'
-        - name: offset
-          in: query
-          description: >-
-            The offset of the results retrieved. The CDO API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
-          required: false
-          schema:
-            minimum: 0
-            type: string
-            default: '0'
-        - name: q
-          in: query
-          description: >-
-            The query to execute. Use the Lucene Query Syntax to construct your
-            query.
-          required: false
-          schema:
-            type: string
-          example: name:London-Office-ASA
-        - name: sort
-          in: query
-          description: The fields to sort results by.
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          example: name:DESC
-      responses:
-        '200':
-          description: List of SDC objects
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SdcPage'
-        '400':
-          $ref: '#/components/responses/http400BadRequest'
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '403':
-          $ref: '#/components/responses/http403Forbidden'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
   /v1/connectors/sdcs/{sdcUid}:
     get:
       tags:
@@ -3223,6 +3261,7 @@ components:
         - TERMINATE_DEVICE_RA_VPN_SESSIONS
         - REFRESH_RA_VPN_SESSIONS
         - TERMINATE_USER_RA_VPN_SESSIONS
+        - CREATE_SDC
     UserCreateOrUpdateInput:
       required:
         - name
@@ -3544,6 +3583,11 @@ components:
       enum:
         - SDC
         - CDG
+    SdcCreateInput:
+      type: object
+      properties:
+        name:
+          type: string
     ChangeRequestCreateInput:
       required:
         - name
@@ -4556,6 +4600,17 @@ components:
             indicator of the health of the SDC.
           format: date-time
           example: '2023-12-13T05:15:44Z'
+        bootstrapData:
+          type: string
+          description: >-
+            The bootstrap data is information used to automatically configure
+            the SDC during its initial setup. This data is base64 encoded and
+            includes essential details like the unique registration token and
+            customer-specific settings that enable the SDC to communicate with
+            and send data to CDO. This field is populated only if the SDC is not
+            onboarded.
+          example: >-
+            Q0RPX1RPS0VOPSJleGFtcGxlLWNkby1hcGktdG9rZW4iCkNET19ET01BSU49ImNkby5jaXNjby5jb20iCkNET19URU5BTlQ9IkNET190ZXN0LXRlbmFudCIKQ0RPX0JPT1RTVFJBUF9VUkw9Imh0dHBzOi8vY2RvLmNpc2NvLmNvbS9zZGMvYm9vdHN0cmFwL0NET190ZXN0LXRlbmFudC9teS1zaGlueS1uZXctc2RjIgo=
     SdcPage:
       type: object
       properties:
@@ -5610,10 +5665,10 @@ x-tagGroups:
       - Search
       - Tenant Management
       - Inventory
+      - Connectors
       - Change Requests
       - Transactions
       - Meta
-      - Connectors
       - Changelogs
   - name: object-service-openapi
     tags:

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **ip_address** | **str** | The IP address of the SDC. | [optional] 
 **status** | [**Status**](Status.md) |  | [optional] 
 **last_heartbeat** | **datetime** | The time (UTC; represented using the RFC-3339 standard) that a heartbeat was last received from the SDC. This serves as an indicator of the health of the SDC. | [optional] 
+**bootstrap_data** | **str** | The bootstrap data is information used to automatically configure the SDC during its initial setup. This data is base64 encoded and includes essential details like the unique registration token and customer-specific settings that enable the SDC to communicate with and send data to CDO. This field is populated only if the SDC is not onboarded. | [optional] 
 
 ## Example
 

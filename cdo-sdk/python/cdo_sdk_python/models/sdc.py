@@ -37,7 +37,8 @@ class Sdc(BaseModel):
     ip_address: Optional[StrictStr] = Field(default=None, description="The IP address of the SDC.", alias="ipAddress")
     status: Optional[Status] = None
     last_heartbeat: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) that a heartbeat was last received from the SDC. This serves as an indicator of the health of the SDC.", alias="lastHeartbeat")
-    __properties: ClassVar[List[str]] = ["publicKey", "uid", "name", "softwareVersion", "ipAddress", "status", "lastHeartbeat"]
+    bootstrap_data: Optional[StrictStr] = Field(default=None, description="The bootstrap data is information used to automatically configure the SDC during its initial setup. This data is base64 encoded and includes essential details like the unique registration token and customer-specific settings that enable the SDC to communicate with and send data to CDO. This field is populated only if the SDC is not onboarded.", alias="bootstrapData")
+    __properties: ClassVar[List[str]] = ["publicKey", "uid", "name", "softwareVersion", "ipAddress", "status", "lastHeartbeat", "bootstrapData"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -99,7 +100,8 @@ class Sdc(BaseModel):
             "softwareVersion": obj.get("softwareVersion"),
             "ipAddress": obj.get("ipAddress"),
             "status": obj.get("status"),
-            "lastHeartbeat": obj.get("lastHeartbeat")
+            "lastHeartbeat": obj.get("lastHeartbeat"),
+            "bootstrapData": obj.get("bootstrapData")
         })
         return _obj
 

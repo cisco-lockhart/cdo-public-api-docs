@@ -92,6 +92,7 @@ cdo_sdk_python/models/ra_vpn_session.py
 cdo_sdk_python/models/ra_vpn_session_page.py
 cdo_sdk_python/models/reference_info.py
 cdo_sdk_python/models/sdc.py
+cdo_sdk_python/models/sdc_create_input.py
 cdo_sdk_python/models/sdc_page.py
 cdo_sdk_python/models/service_object_content.py
 cdo_sdk_python/models/service_object_value_content.py
@@ -195,6 +196,7 @@ docs/RaVpnSessionPage.md
 docs/ReferenceInfo.md
 docs/RemoteAccessMonitoringApi.md
 docs/Sdc.md
+docs/SdcCreateInput.md
 docs/SdcPage.md
 docs/SearchApi.md
 docs/ServiceObjectContent.md
@@ -230,4 +232,5 @@ test-requirements.txt
 test/__init__.py
 test/test_duplicate_group_dto.py
 test/test_issues_count.py
+test/test_sdc_create_input.py
 tox.ini
