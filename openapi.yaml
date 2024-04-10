@@ -5140,6 +5140,7 @@ components:
           enum:
             - TCP
             - UDP
+            - ICMP
             - ICMP4
             - ICMP6
             - TCP_UDP
