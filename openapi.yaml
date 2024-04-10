@@ -1661,6 +1661,87 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /v1/connectors/sdcs/{sdcUid}:
+    get:
+      tags:
+        - Connectors
+      summary: Get SDC
+      description: Get a SDC by UID in the CDO tenant.
+      operationId: getSdc
+      parameters:
+        - name: sdcUid
+          in: path
+          description: The unique identifier of the SDC in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: SDC object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sdc'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+    patch:
+      tags:
+        - Connectors
+      summary: Modify SDC
+      description: Modify a SDC in the CDO tenant
+      operationId: modifySdc
+      parameters:
+        - name: sdcUid
+          in: path
+          description: The unique identifier of the SDC in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SdcPatchInput'
+        required: true
+      responses:
+        '200':
+          description: SDC object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sdc'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/vpnsessions:
     get:
       tags:
@@ -2491,44 +2572,6 @@ paths:
                 - feature-2
         '401':
           $ref: '#/components/responses/http401Unauthorised'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
-  /v1/connectors/sdcs/{sdcUid}:
-    get:
-      tags:
-        - Connectors
-      summary: Get SDC
-      description: Get a SDC by UID in the CDO tenant.
-      operationId: getSdc
-      parameters:
-        - name: sdcUid
-          in: path
-          description: The unique identifier of the SDC in CDO.
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '200':
-          description: SDC object
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Sdc'
-        '400':
-          $ref: '#/components/responses/http400BadRequest'
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '403':
-          $ref: '#/components/responses/http403Forbidden'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
         '500':
           description: Internal server error.
           content:
@@ -3990,6 +4033,86 @@ components:
           type: string
         actionIdentifier:
           type: string
+    SdcPatchInput:
+      type: object
+      properties:
+        name:
+          type: string
+    PublicKey:
+      type: object
+      properties:
+        base64EncodedKey:
+          type: string
+          description: >-
+            Base64 RSA public key to use to encrypt device credentials sent to
+            the SDC.
+          example: >-
+            c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCZ1FEZGpxeDNNMjh3ZHE2Rk11R2NFZHJqaGl3SFp5NDE0WXZFUmRDcVdnRXgrSXloNjVteHlkaVh1OVpoMXUyVTRtNDlnL0VUL2JxTklFNGgraUViQURjcjlScVFGRGZ4RC9pK1ZPSkhiQzQ0UERhZHFJd21vUGNoazYvQ0RoZVlJSmZTM0xTNmlkaC9SRGVFVHpnZ3lTaUI2Mm5yMnRmTkJ3V0ZScjV1Sko5dkNvdUxKRVBZbDBVMkpZNnBjd0paNk1lRDg5dU4rTjlHWFN2Vlh4bEZKNXg0VThReGFCMzJuNHZoekNiUzlYSVg1bGJJQnVIUEZ1bmMrNThPaUFzS0dwTTZ1NzhVR2V2TndOVzU0eVZmU2c4Q01XQ09vM1hiNTIrMnU2VHZlcE1BT2ZFU290YUd5NHV1RTBnUHYwSnowano3ZnFGTCt4d1AzNnNVY2pPRlIzQ1VhbEVpUDEyT2tTeEhreVNMUXJ3a2lFTVUvQ3VPUjdOWkdjUFd0dkVBaUZOTEN0VHhzY25Ma0xNNENkUEt3WnZQV3l3cHAyVGdValU4MEFaWkJZaGZBWTd3SFFQdDhrTkROMURhMWpWaHlwMWlycE5VbTEvaDNrS2srOFdFOVV2RjNDeVgyL1NqWUpPR2lMUWdVaXFUL3E5UkNMZUdVWStzaUFwS3ZyNS91UkU9IHNpd2FycmllQFNJV0FSUklFLU0tS1JBRgo=
+        keyId:
+          type: string
+          description: >-
+            The identifier of the RSA public key. This identifier is used by the
+            SDC to know which private key to use to decrypt a string.
+          example: example-key-id
+      description: >-
+        Information on the public key used to encrypt credentials sent to the
+        SDC.
+    Sdc:
+      required:
+        - name
+      type: object
+      properties:
+        publicKey:
+          $ref: '#/components/schemas/PublicKey'
+        uid:
+          type: string
+          description: The unique identifier of the SDC in CDO.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        name:
+          type: string
+          description: The name of the SDC in CDO. SDC names are unique in CDO.
+          example: my-example-sdc
+        softwareVersion:
+          type: string
+          description: The software version running on the SDC.
+          example: '202311071057'
+        ipAddress:
+          type: string
+          description: The IP address of the SDC.
+          example: '202311071057'
+        status:
+          $ref: '#/components/schemas/Status'
+        lastHeartbeat:
+          type: string
+          description: >-
+            The time (UTC; represented using the RFC-3339 standard) that a
+            heartbeat was last received from the SDC. This serves as an
+            indicator of the health of the SDC.
+          format: date-time
+          example: '2023-12-13T05:15:44Z'
+        bootstrapData:
+          type: string
+          description: >-
+            The bootstrap data is information used to automatically configure
+            the SDC during its initial setup. This data is base64 encoded and
+            includes essential details like the unique registration token and
+            customer-specific settings that enable the SDC to communicate with
+            and send data to CDO. This field is populated only if the SDC is not
+            onboarded.
+          example: >-
+            Q0RPX1RPS0VOPSJleGFtcGxlLWNkby1hcGktdG9rZW4iCkNET19ET01BSU49ImNkby5jaXNjby5jb20iCkNET19URU5BTlQ9IkNET190ZXN0LXRlbmFudCIKQ0RPX0JPT1RTVFJBUF9VUkw9Imh0dHBzOi8vY2RvLmNpc2NvLmNvbS9zZGMvYm9vdHN0cmFwL0NET190ZXN0LXRlbmFudC9teS1zaGlueS1uZXctc2RjIgo=
+    Status:
+      type: string
+      description: The status of the SDC.
+      example: ACTIVE
+      enum:
+        - NEW
+        - ONBOARDING
+        - ACTIVE
+        - INACTIVE
+        - DISABLED
+        - UNKNOWN
     Location:
       type: object
       properties:
@@ -4547,70 +4670,6 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/Device'
-    PublicKey:
-      type: object
-      properties:
-        base64EncodedKey:
-          type: string
-          description: >-
-            Base64 RSA public key to use to encrypt device credentials sent to
-            the SDC.
-          example: >-
-            c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCZ1FEZGpxeDNNMjh3ZHE2Rk11R2NFZHJqaGl3SFp5NDE0WXZFUmRDcVdnRXgrSXloNjVteHlkaVh1OVpoMXUyVTRtNDlnL0VUL2JxTklFNGgraUViQURjcjlScVFGRGZ4RC9pK1ZPSkhiQzQ0UERhZHFJd21vUGNoazYvQ0RoZVlJSmZTM0xTNmlkaC9SRGVFVHpnZ3lTaUI2Mm5yMnRmTkJ3V0ZScjV1Sko5dkNvdUxKRVBZbDBVMkpZNnBjd0paNk1lRDg5dU4rTjlHWFN2Vlh4bEZKNXg0VThReGFCMzJuNHZoekNiUzlYSVg1bGJJQnVIUEZ1bmMrNThPaUFzS0dwTTZ1NzhVR2V2TndOVzU0eVZmU2c4Q01XQ09vM1hiNTIrMnU2VHZlcE1BT2ZFU290YUd5NHV1RTBnUHYwSnowano3ZnFGTCt4d1AzNnNVY2pPRlIzQ1VhbEVpUDEyT2tTeEhreVNMUXJ3a2lFTVUvQ3VPUjdOWkdjUFd0dkVBaUZOTEN0VHhzY25Ma0xNNENkUEt3WnZQV3l3cHAyVGdValU4MEFaWkJZaGZBWTd3SFFQdDhrTkROMURhMWpWaHlwMWlycE5VbTEvaDNrS2srOFdFOVV2RjNDeVgyL1NqWUpPR2lMUWdVaXFUL3E5UkNMZUdVWStzaUFwS3ZyNS91UkU9IHNpd2FycmllQFNJV0FSUklFLU0tS1JBRgo=
-        keyId:
-          type: string
-          description: >-
-            The identifier of the RSA public key. This identifier is used by the
-            SDC to know which private key to use to decrypt a string.
-          example: example-key-id
-      description: >-
-        Information on the public key used to encrypt credentials sent to the
-        SDC.
-    Sdc:
-      required:
-        - name
-      type: object
-      properties:
-        publicKey:
-          $ref: '#/components/schemas/PublicKey'
-        uid:
-          type: string
-          description: The unique identifier of the SDC in CDO.
-          format: uuid
-          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-        name:
-          type: string
-          description: The name of the SDC in CDO. SDC names are unique in CDO.
-          example: my-example-sdc
-        softwareVersion:
-          type: string
-          description: The software version running on the SDC.
-          example: '202311071057'
-        ipAddress:
-          type: string
-          description: The IP address of the SDC.
-          example: '202311071057'
-        status:
-          $ref: '#/components/schemas/Status'
-        lastHeartbeat:
-          type: string
-          description: >-
-            The time (UTC; represented using the RFC-3339 standard) that a
-            heartbeat was last received from the SDC. This serves as an
-            indicator of the health of the SDC.
-          format: date-time
-          example: '2023-12-13T05:15:44Z'
-        bootstrapData:
-          type: string
-          description: >-
-            The bootstrap data is information used to automatically configure
-            the SDC during its initial setup. This data is base64 encoded and
-            includes essential details like the unique registration token and
-            customer-specific settings that enable the SDC to communicate with
-            and send data to CDO. This field is populated only if the SDC is not
-            onboarded.
-          example: >-
-            Q0RPX1RPS0VOPSJleGFtcGxlLWNkby1hcGktdG9rZW4iCkNET19ET01BSU49ImNkby5jaXNjby5jb20iCkNET19URU5BTlQ9IkNET190ZXN0LXRlbmFudCIKQ0RPX0JPT1RTVFJBUF9VUkw9Imh0dHBzOi8vY2RvLmNpc2NvLmNvbS9zZGMvYm9vdHN0cmFwL0NET190ZXN0LXRlbmFudC9teS1zaGlueS1uZXctc2RjIgo=
     SdcPage:
       type: object
       properties:
@@ -4637,17 +4696,6 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/Sdc'
-    Status:
-      type: string
-      description: The status of the SDC.
-      example: ACTIVE
-      enum:
-        - NEW
-        - ONBOARDING
-        - ACTIVE
-        - INACTIVE
-        - DISABLED
-        - UNKNOWN
     Changelog:
       required:
         - uid

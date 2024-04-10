@@ -94,6 +94,7 @@ cdo_sdk_python/models/reference_info.py
 cdo_sdk_python/models/sdc.py
 cdo_sdk_python/models/sdc_create_input.py
 cdo_sdk_python/models/sdc_page.py
+cdo_sdk_python/models/sdc_patch_input.py
 cdo_sdk_python/models/service_object_content.py
 cdo_sdk_python/models/service_object_value_content.py
 cdo_sdk_python/models/shared_object_value.py
@@ -198,6 +199,7 @@ docs/RemoteAccessMonitoringApi.md
 docs/Sdc.md
 docs/SdcCreateInput.md
 docs/SdcPage.md
+docs/SdcPatchInput.md
 docs/SearchApi.md
 docs/ServiceObjectContent.md
 docs/ServiceObjectValueContent.md
@@ -233,4 +235,5 @@ test/__init__.py
 test/test_duplicate_group_dto.py
 test/test_issues_count.py
 test/test_sdc_create_input.py
+test/test_sdc_patch_input.py
 tox.ini

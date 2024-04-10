@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.76"
+__version__ = "1.0.77"
 
 # import apis into sdk package
 from cdo_sdk_python.api.change_requests_api import ChangeRequestsApi
@@ -116,6 +116,7 @@ from cdo_sdk_python.models.reference_info import ReferenceInfo
 from cdo_sdk_python.models.sdc import Sdc
 from cdo_sdk_python.models.sdc_create_input import SdcCreateInput
 from cdo_sdk_python.models.sdc_page import SdcPage
+from cdo_sdk_python.models.sdc_patch_input import SdcPatchInput
 from cdo_sdk_python.models.service_object_content import ServiceObjectContent
 from cdo_sdk_python.models.service_object_value_content import ServiceObjectValueContent
 from cdo_sdk_python.models.shared_object_value import SharedObjectValue
