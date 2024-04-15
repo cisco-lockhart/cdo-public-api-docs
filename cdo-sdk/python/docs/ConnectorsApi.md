@@ -4,7 +4,7 @@ All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_sdc**](ConnectorsApi.md#create_sdc) | **POST** /v1/connectors/sdcs | Creates an SDC
+[**create_sdc**](ConnectorsApi.md#create_sdc) | **POST** /v1/connectors/sdcs | Create SDC
 [**get_sdc**](ConnectorsApi.md#get_sdc) | **GET** /v1/connectors/sdcs/{sdcUid} | Get SDC
 [**get_sdcs**](ConnectorsApi.md#get_sdcs) | **GET** /v1/connectors/sdcs | Get SDCs
 [**modify_sdc**](ConnectorsApi.md#modify_sdc) | **PATCH** /v1/connectors/sdcs/{sdcUid} | Modify SDC
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 # **create_sdc**
 > CdoTransaction create_sdc(sdc_create_input)
 
-Creates an SDC
+Create SDC
 
 This is an asynchronous operation to create an SDC to a CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
@@ -51,7 +51,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     sdc_create_input = cdo_sdk_python.SdcCreateInput() # SdcCreateInput | 
 
     try:
-        # Creates an SDC
+        # Create SDC
         api_response = api_instance.create_sdc(sdc_create_input)
         print("The response of ConnectorsApi->create_sdc:\n")
         pprint(api_response)
