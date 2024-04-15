@@ -42,6 +42,8 @@ tags:
     x-displayName: Meta
   - name: Changelogs
     x-displayName: Changelogs
+  - name: Command Line Interface
+    x-displayName: Command Line Interface
   - name: Object Management
     x-displayName: Object Management
 paths:
@@ -2765,6 +2767,121 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /cli/results:
+    get:
+      tags:
+        - Command Line Interface
+      summary: Get CLI Results
+      description: >-
+        Get a list of results from command lines executed using the [CDO Command
+        Line Interface
+        (CLI)](https://docs.defenseorchestrator.com/c-using-the-cdo-command-line-interface.html).
+        These commands can be executed using either the CDO UI or the API.
+      operationId: getCliResults
+      parameters:
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: name:London-Office-ASA
+        - name: sort
+          in: query
+          description: The fields to sort results by.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          example: name:DESC
+      responses:
+        '200':
+          description: List of CDO CLI execution results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoCliResultPage'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+  /cli/results/{cliResultUid}:
+    get:
+      tags:
+        - Command Line Interface
+      summary: Get CLI Result
+      description: >-
+        Get the result of a command executed using the CDO Command Line
+        Interface (CLI) by UID.
+      operationId: getCliResult
+      parameters:
+        - name: cliResultUid
+          in: path
+          description: The unique identifier of the CDO CLI result in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: CDO CLI result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoCliResult'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /.well-known/jwks.json:
     get:
       tags:
@@ -4818,6 +4935,67 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/ChangeRequest'
+    CdoCliResult:
+      required:
+        - deviceUid
+        - uid
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the CLI execution result.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        result:
+          type: string
+          description: The result of the CLI execution.
+          example: '5 in use, 5 most used\nFlags: D - DNS, e - extended, I - identity'
+        errorMsg:
+          type: string
+          description: The error message, if any.
+          example: 'Error: Connection timed out'
+        deviceUid:
+          type: string
+          description: The unique identifier of the device.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        startTime:
+          type: string
+          description: >-
+            The time (in UTC) at which the user run the CLI execution,
+            represented using the RFC-3339 standard.
+          format: date-time
+          example: '2023-12-13T05:15:44Z'
+        script:
+          type: string
+          description: The script executed to generate the CLI result.
+          example: show xlate detail
+    CdoCliResultPage:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The total number of results available.
+          format: int32
+          example: 100
+        limit:
+          type: integer
+          description: The number of results retrieved.
+          format: int32
+          example: 50
+        offset:
+          type: integer
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          format: int32
+          example: 0
+        items:
+          type: array
+          description: The list of items retrieved.
+          items:
+            $ref: '#/components/schemas/CdoCliResult'
     JsonWebKey:
       type: object
       properties:
@@ -5719,6 +5897,7 @@ x-tagGroups:
       - Transactions
       - Meta
       - Changelogs
+      - Command Line Interface
   - name: object-service-openapi
     tags:
       - Object Management

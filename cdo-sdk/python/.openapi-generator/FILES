@@ -7,6 +7,7 @@ cdo_sdk_python/api/__init__.py
 cdo_sdk_python/api/change_requests_api.py
 cdo_sdk_python/api/changelogs_api.py
 cdo_sdk_python/api/cloud_delivered_fmc_api.py
+cdo_sdk_python/api/command_line_interface_api.py
 cdo_sdk_python/api/connectors_api.py
 cdo_sdk_python/api/inventory_api.py
 cdo_sdk_python/api/meta_api.py
@@ -30,6 +31,8 @@ cdo_sdk_python/models/browser.py
 cdo_sdk_python/models/cd_fmc_info.py
 cdo_sdk_python/models/cd_fmc_object.py
 cdo_sdk_python/models/cd_fmc_result.py
+cdo_sdk_python/models/cdo_cli_result.py
+cdo_sdk_python/models/cdo_cli_result_page.py
 cdo_sdk_python/models/cdo_region.py
 cdo_sdk_python/models/cdo_region_list.py
 cdo_sdk_python/models/cdo_token_info.py
@@ -127,6 +130,8 @@ docs/Browser.md
 docs/CdFmcInfo.md
 docs/CdFmcObject.md
 docs/CdFmcResult.md
+docs/CdoCliResult.md
+docs/CdoCliResultPage.md
 docs/CdoRegion.md
 docs/CdoRegionList.md
 docs/CdoTokenInfo.md
@@ -142,6 +147,7 @@ docs/ChangelogPage.md
 docs/ChangelogsApi.md
 docs/ClientDevice.md
 docs/CloudDeliveredFMCApi.md
+docs/CommandLineInterfaceApi.md
 docs/CommonApiError.md
 docs/ConfigState.md
 docs/ConflictDetectionInterval.md
@@ -232,6 +238,9 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_cdo_cli_result.py
+test/test_cdo_cli_result_page.py
+test/test_command_line_interface_api.py
 test/test_duplicate_group_dto.py
 test/test_issues_count.py
 test/test_sdc_create_input.py

@@ -15,12 +15,13 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.84"
+__version__ = "1.0.85"
 
 # import apis into sdk package
 from cdo_sdk_python.api.change_requests_api import ChangeRequestsApi
 from cdo_sdk_python.api.changelogs_api import ChangelogsApi
 from cdo_sdk_python.api.cloud_delivered_fmc_api import CloudDeliveredFMCApi
+from cdo_sdk_python.api.command_line_interface_api import CommandLineInterfaceApi
 from cdo_sdk_python.api.connectors_api import ConnectorsApi
 from cdo_sdk_python.api.inventory_api import InventoryApi
 from cdo_sdk_python.api.meta_api import MetaApi
@@ -52,6 +53,8 @@ from cdo_sdk_python.models.browser import Browser
 from cdo_sdk_python.models.cd_fmc_info import CdFmcInfo
 from cdo_sdk_python.models.cd_fmc_object import CdFmcObject
 from cdo_sdk_python.models.cd_fmc_result import CdFmcResult
+from cdo_sdk_python.models.cdo_cli_result import CdoCliResult
+from cdo_sdk_python.models.cdo_cli_result_page import CdoCliResultPage
 from cdo_sdk_python.models.cdo_region import CdoRegion
 from cdo_sdk_python.models.cdo_region_list import CdoRegionList
 from cdo_sdk_python.models.cdo_token_info import CdoTokenInfo

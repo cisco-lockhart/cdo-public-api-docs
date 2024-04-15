@@ -24,6 +24,8 @@ from cdo_sdk_python.models.browser import Browser
 from cdo_sdk_python.models.cd_fmc_info import CdFmcInfo
 from cdo_sdk_python.models.cd_fmc_object import CdFmcObject
 from cdo_sdk_python.models.cd_fmc_result import CdFmcResult
+from cdo_sdk_python.models.cdo_cli_result import CdoCliResult
+from cdo_sdk_python.models.cdo_cli_result_page import CdoCliResultPage
 from cdo_sdk_python.models.cdo_region import CdoRegion
 from cdo_sdk_python.models.cdo_region_list import CdoRegionList
 from cdo_sdk_python.models.cdo_token_info import CdoTokenInfo
