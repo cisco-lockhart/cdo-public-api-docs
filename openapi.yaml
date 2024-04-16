@@ -1701,6 +1701,37 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+    delete:
+      tags:
+        - Connectors
+      summary: Delete SDC
+      description: Delete an SDC in the CDO tenant
+      operationId: deleteSdc
+      parameters:
+        - name: sdcUid
+          in: path
+          description: The unique identifier of the SDC in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
     patch:
       tags:
         - Connectors
