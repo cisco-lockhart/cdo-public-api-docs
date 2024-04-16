@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.models.mfa_event import MfaEvent
 from cdo_sdk_python.models.mfa_event_page import MfaEventPage
+from cdo_sdk_python.models.ra_vpn_device_input import RaVpnDeviceInput
 from cdo_sdk_python.models.ra_vpn_session import RaVpnSession
 from cdo_sdk_python.models.ra_vpn_session_page import RaVpnSessionPage
 
@@ -1253,6 +1254,7 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def refresh_ra_vpn_sessions_by_device(
         self,
+        ra_vpn_device_input: Optional[RaVpnDeviceInput] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1270,6 +1272,8 @@ class RemoteAccessMonitoringApi:
 
         This is an asynchronous operation to refresh RA VPN sessions for all devices in the CDO tenant.
 
+        :param ra_vpn_device_input:
+        :type ra_vpn_device_input: RaVpnDeviceInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1293,6 +1297,7 @@ class RemoteAccessMonitoringApi:
         """ # noqa: E501
 
         _param = self._refresh_ra_vpn_sessions_by_device_serialize(
+            ra_vpn_device_input=ra_vpn_device_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1321,6 +1326,7 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def refresh_ra_vpn_sessions_by_device_with_http_info(
         self,
+        ra_vpn_device_input: Optional[RaVpnDeviceInput] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1338,6 +1344,8 @@ class RemoteAccessMonitoringApi:
 
         This is an asynchronous operation to refresh RA VPN sessions for all devices in the CDO tenant.
 
+        :param ra_vpn_device_input:
+        :type ra_vpn_device_input: RaVpnDeviceInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1361,6 +1369,7 @@ class RemoteAccessMonitoringApi:
         """ # noqa: E501
 
         _param = self._refresh_ra_vpn_sessions_by_device_serialize(
+            ra_vpn_device_input=ra_vpn_device_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1389,6 +1398,7 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def refresh_ra_vpn_sessions_by_device_without_preload_content(
         self,
+        ra_vpn_device_input: Optional[RaVpnDeviceInput] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1406,6 +1416,8 @@ class RemoteAccessMonitoringApi:
 
         This is an asynchronous operation to refresh RA VPN sessions for all devices in the CDO tenant.
 
+        :param ra_vpn_device_input:
+        :type ra_vpn_device_input: RaVpnDeviceInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1429,6 +1441,7 @@ class RemoteAccessMonitoringApi:
         """ # noqa: E501
 
         _param = self._refresh_ra_vpn_sessions_by_device_serialize(
+            ra_vpn_device_input=ra_vpn_device_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1452,6 +1465,7 @@ class RemoteAccessMonitoringApi:
 
     def _refresh_ra_vpn_sessions_by_device_serialize(
         self,
+        ra_vpn_device_input,
         _request_auth,
         _content_type,
         _headers,
@@ -1475,6 +1489,8 @@ class RemoteAccessMonitoringApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
+        if ra_vpn_device_input is not None:
+            _body_params = ra_vpn_device_input
 
 
         # set the HTTP header `Accept`
@@ -1484,6 +1500,19 @@ class RemoteAccessMonitoringApi:
             ]
         )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [

@@ -282,6 +282,11 @@ paths:
         This is an asynchronous operation to refresh RA VPN sessions for all
         devices in the CDO tenant.
       operationId: refreshRaVpnSessionsByDevice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RaVpnDeviceInput'
       responses:
         '202':
           description: >-
@@ -3453,6 +3458,25 @@ components:
         - REFRESH_RA_VPN_SESSIONS
         - TERMINATE_USER_RA_VPN_SESSIONS
         - CREATE_SDC
+    RaVpnDeviceInput:
+      required:
+        - deviceUids
+      type: object
+      properties:
+        deviceUids:
+          type: array
+          description: >-
+            List of UIDs of the devices to refresh RA VPN sessions for. Each of
+            these devices has to be an RA VPN headend (this is indicated by the
+            `deviceRole` field in the device object being set to
+            `RA_VPN_HEADEND`).
+          items:
+            type: string
+            description: >-
+              List of UIDs of the devices to refresh RA VPN sessions for. Each
+              of these devices has to be an RA VPN headend (this is indicated by
+              the `deviceRole` field in the device object being set to
+              `RA_VPN_HEADEND`).
     UserCreateOrUpdateInput:
       required:
         - name

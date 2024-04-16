@@ -84,6 +84,7 @@ from cdo_sdk_python.models.override import Override
 from cdo_sdk_python.models.policy import Policy
 from cdo_sdk_python.models.ports_value import PortsValue
 from cdo_sdk_python.models.public_key import PublicKey
+from cdo_sdk_python.models.ra_vpn_device_input import RaVpnDeviceInput
 from cdo_sdk_python.models.ra_vpn_session import RaVpnSession
 from cdo_sdk_python.models.ra_vpn_session_page import RaVpnSessionPage
 from cdo_sdk_python.models.reference_info import ReferenceInfo

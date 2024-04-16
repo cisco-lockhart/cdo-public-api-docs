@@ -360,7 +360,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **refresh_ra_vpn_sessions_by_device**
-> CdoTransaction refresh_ra_vpn_sessions_by_device()
+> CdoTransaction refresh_ra_vpn_sessions_by_device(ra_vpn_device_input=ra_vpn_device_input)
 
 Refresh RA VPN Sessions
 
@@ -373,6 +373,7 @@ This is an asynchronous operation to refresh RA VPN sessions for all devices in 
 ```python
 import cdo_sdk_python
 from cdo_sdk_python.models.cdo_transaction import CdoTransaction
+from cdo_sdk_python.models.ra_vpn_device_input import RaVpnDeviceInput
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
@@ -396,10 +397,11 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.RemoteAccessMonitoringApi(api_client)
+    ra_vpn_device_input = cdo_sdk_python.RaVpnDeviceInput() # RaVpnDeviceInput |  (optional)
 
     try:
         # Refresh RA VPN Sessions
-        api_response = api_instance.refresh_ra_vpn_sessions_by_device()
+        api_response = api_instance.refresh_ra_vpn_sessions_by_device(ra_vpn_device_input=ra_vpn_device_input)
         print("The response of RemoteAccessMonitoringApi->refresh_ra_vpn_sessions_by_device:\n")
         pprint(api_response)
     except Exception as e:
@@ -410,7 +412,10 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ra_vpn_device_input** | [**RaVpnDeviceInput**](RaVpnDeviceInput.md)|  | [optional] 
 
 ### Return type
 
@@ -422,7 +427,7 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
