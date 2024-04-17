@@ -2918,6 +2918,118 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /cli/macros:
+    get:
+      tags:
+        - Command Line Interface
+      summary: Get CLI Macros
+      description: >-
+        Get a list of CLI macros. A CLI macro is a fully-formed CLI command
+        ready to use, or a template of a CLI command you can modify before you
+        run it.
+      operationId: getCliMacros
+      parameters:
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: name:London-Office-ASA
+        - name: sort
+          in: query
+          description: The fields to sort results by.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          example: name:DESC
+      responses:
+        '200':
+          description: List of CDO CLI macros
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoCliMacroPage'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+  /cli/macros/{macroUid}:
+    get:
+      tags:
+        - Command Line Interface
+      summary: Get CLI Macro
+      description: Get a CDO CLI Macro by UID.
+      operationId: getCliMacro
+      parameters:
+        - name: macroUid
+          in: path
+          description: The unique identifier of the CDO CLI macro in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: CDO CLI macro
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoCliMacro'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /.well-known/jwks.json:
     get:
       tags:
@@ -4124,7 +4236,7 @@ components:
     EntityType:
       type: string
       description: The type of the device.
-      example: CDFMC_MANAGED_FTD
+      example: ASA
       enum:
         - ASA
         - CDFMC_MANAGED_FTD
@@ -5051,6 +5163,67 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/CdoCliResult'
+    CdoCliMacro:
+      required:
+        - deviceType
+        - uid
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the CLI macro.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        name:
+          type: string
+          description: The name of the CLI macro.
+          example: Disconnect VPN User
+        script:
+          type: string
+          description: The script executed to generate the CLI result.
+          example: vpn-sessiondb logoff name {{USER}} noconfirm
+        parameters:
+          uniqueItems: true
+          type: array
+          description: A set of parameters provided in the script
+          example:
+            - USER
+          items:
+            type: string
+            description: A set of parameters provided in the script
+            example: '["USER"]'
+        deviceType:
+          $ref: '#/components/schemas/EntityType'
+        systemDefined:
+          type: boolean
+          description: Indicating whether this CLI macro is system-defined.
+          example: true
+    CdoCliMacroPage:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The total number of results available.
+          format: int32
+          example: 100
+        limit:
+          type: integer
+          description: The number of results retrieved.
+          format: int32
+          example: 50
+        offset:
+          type: integer
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          format: int32
+          example: 0
+        items:
+          type: array
+          description: The list of items retrieved.
+          items:
+            $ref: '#/components/schemas/CdoCliMacro'
     JsonWebKey:
       type: object
       properties:

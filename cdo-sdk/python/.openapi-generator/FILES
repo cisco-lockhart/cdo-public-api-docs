@@ -31,6 +31,8 @@ cdo_sdk_python/models/browser.py
 cdo_sdk_python/models/cd_fmc_info.py
 cdo_sdk_python/models/cd_fmc_object.py
 cdo_sdk_python/models/cd_fmc_result.py
+cdo_sdk_python/models/cdo_cli_macro.py
+cdo_sdk_python/models/cdo_cli_macro_page.py
 cdo_sdk_python/models/cdo_cli_result.py
 cdo_sdk_python/models/cdo_cli_result_page.py
 cdo_sdk_python/models/cdo_region.py
@@ -131,6 +133,8 @@ docs/Browser.md
 docs/CdFmcInfo.md
 docs/CdFmcObject.md
 docs/CdFmcResult.md
+docs/CdoCliMacro.md
+docs/CdoCliMacroPage.md
 docs/CdoCliResult.md
 docs/CdoCliResultPage.md
 docs/CdoRegion.md
@@ -240,6 +244,8 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_cdo_cli_macro.py
+test/test_cdo_cli_macro_page.py
 test/test_cdo_cli_result.py
 test/test_cdo_cli_result_page.py
 test/test_command_line_interface_api.py
