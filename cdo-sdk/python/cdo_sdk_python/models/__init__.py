@@ -39,6 +39,7 @@ from cdo_sdk_python.models.change_request_create_input import ChangeRequestCreat
 from cdo_sdk_python.models.change_request_page import ChangeRequestPage
 from cdo_sdk_python.models.changelog import Changelog
 from cdo_sdk_python.models.changelog_page import ChangelogPage
+from cdo_sdk_python.models.cli_command_input import CliCommandInput
 from cdo_sdk_python.models.client_device import ClientDevice
 from cdo_sdk_python.models.common_api_error import CommonApiError
 from cdo_sdk_python.models.config_state import ConfigState

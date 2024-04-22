@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cdo_sdk_python.models.cdo_transaction_status import CdoTransactionStatus
 from cdo_sdk_python.models.cdo_transaction_type import CdoTransactionType
@@ -41,7 +41,8 @@ class CdoTransaction(BaseModel):
     cdo_transaction_status: Optional[CdoTransactionStatus] = Field(default=None, alias="cdoTransactionStatus")
     error_message: Optional[StrictStr] = Field(default=None, description="Transaction error message, if any", alias="errorMessage")
     error_details: Optional[Dict[str, StrictStr]] = Field(default=None, description="Transaction error details, if any", alias="errorDetails")
-    __properties: ClassVar[List[str]] = ["transactionUid", "tenantUid", "entityUid", "entityUrl", "transactionPollingUrl", "submissionTime", "lastUpdatedTime", "transactionType", "cdoTransactionStatus", "errorMessage", "errorDetails"]
+    expire_at: Optional[StrictInt] = Field(default=None, description="TTL attribute detailing the expiry time this item should be deleted", alias="expireAt")
+    __properties: ClassVar[List[str]] = ["transactionUid", "tenantUid", "entityUid", "entityUrl", "transactionPollingUrl", "submissionTime", "lastUpdatedTime", "transactionType", "cdoTransactionStatus", "errorMessage", "errorDetails", "expireAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -104,7 +105,8 @@ class CdoTransaction(BaseModel):
             "transactionType": obj.get("transactionType"),
             "cdoTransactionStatus": obj.get("cdoTransactionStatus"),
             "errorMessage": obj.get("errorMessage"),
-            "errorDetails": obj.get("errorDetails")
+            "errorDetails": obj.get("errorDetails"),
+            "expireAt": obj.get("expireAt")
         })
         return _obj
 

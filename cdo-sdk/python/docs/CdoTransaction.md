@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **cdo_transaction_status** | [**CdoTransactionStatus**](CdoTransactionStatus.md) |  | [optional] 
 **error_message** | **str** | Transaction error message, if any | [optional] 
 **error_details** | **Dict[str, str]** | Transaction error details, if any | [optional] 
+**expire_at** | **int** | TTL attribute detailing the expiry time this item should be deleted | [optional] 
 
 ## Example
 
