@@ -13,6 +13,10 @@ servers:
     description: EU
   - url: https://edge.apj.cdo.cisco.com/api/rest
     description: APJ
+  - url: https://edge.aus.cdo.cisco.com/api/rest
+    description: AUS
+  - url: https://edge.in.cdo.cisco.com/api/rest
+    description: IN
   - url: https://edge.staging.cdo.cisco.com/api/rest
     description: Staging
   - url: https://edge.scale.cdo.cisco.com/api/rest

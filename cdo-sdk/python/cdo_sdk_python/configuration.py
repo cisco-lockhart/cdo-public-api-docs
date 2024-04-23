@@ -380,7 +380,7 @@ class Configuration:
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 0.1.0\n"\
-               "SDK Package Version: 1.0.94".\
+               "SDK Package Version: 1.0.95".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):
@@ -400,6 +400,14 @@ class Configuration:
             {
                 'url': "https://edge.apj.cdo.cisco.com/api/rest",
                 'description': "APJ",
+            },
+            {
+                'url': "https://edge.aus.cdo.cisco.com/api/rest",
+                'description': "AUS",
+            },
+            {
+                'url': "https://edge.in.cdo.cisco.com/api/rest",
+                'description': "IN",
             },
             {
                 'url': "https://edge.staging.cdo.cisco.com/api/rest",
