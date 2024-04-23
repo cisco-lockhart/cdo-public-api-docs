@@ -40,14 +40,14 @@ tags:
     x-displayName: Connectors
   - name: Change Requests
     x-displayName: Change Requests
+  - name: Command Line Interface
+    x-displayName: Command Line Interface
   - name: Transactions
     x-displayName: Transactions
   - name: Meta
     x-displayName: Meta
   - name: Changelogs
     x-displayName: Changelogs
-  - name: Command Line Interface
-    x-displayName: Command Line Interface
   - name: Object Management
     x-displayName: Object Management
 paths:
@@ -1176,6 +1176,115 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ChangeRequest'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+  /cli/macros:
+    get:
+      tags:
+        - Command Line Interface
+      summary: Get CLI Macros
+      description: >-
+        Get a list of CLI macros. A CLI macro is a fully-formed CLI command
+        ready to use, or a template of a CLI command you can modify before you
+        run it.
+      operationId: getCliMacros
+      parameters:
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: name:London-Office-ASA
+        - name: sort
+          in: query
+          description: The fields to sort results by.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          example: name:DESC
+      responses:
+        '200':
+          description: List of CDO CLI macros
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoCliMacroPage'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+    post:
+      tags:
+        - Command Line Interface
+      summary: Create CLI Macro
+      description: >-
+        Create a CLI macro, which is a fully-formed CLI command ready to use or
+        a template of a CLI command you can modify before you run it.
+      operationId: createCliMacro
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CliMacroCreateInput'
+        required: true
+      responses:
+        '200':
+          description: CDO CLI macro
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoCliMacro'
         '400':
           $ref: '#/components/responses/http400BadRequest'
         '401':
@@ -2959,78 +3068,6 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
-  /cli/macros:
-    get:
-      tags:
-        - Command Line Interface
-      summary: Get CLI Macros
-      description: >-
-        Get a list of CLI macros. A CLI macro is a fully-formed CLI command
-        ready to use, or a template of a CLI command you can modify before you
-        run it.
-      operationId: getCliMacros
-      parameters:
-        - name: limit
-          in: query
-          description: The number of results to retrieve.
-          required: false
-          schema:
-            maximum: 200
-            minimum: 0
-            type: string
-            default: '50'
-        - name: offset
-          in: query
-          description: >-
-            The offset of the results retrieved. The CDO API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
-          required: false
-          schema:
-            minimum: 0
-            type: string
-            default: '0'
-        - name: q
-          in: query
-          description: >-
-            The query to execute. Use the Lucene Query Syntax to construct your
-            query.
-          required: false
-          schema:
-            type: string
-          example: name:London-Office-ASA
-        - name: sort
-          in: query
-          description: The fields to sort results by.
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          example: name:DESC
-      responses:
-        '200':
-          description: List of CDO CLI macros
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CdoCliMacroPage'
-        '400':
-          $ref: '#/components/responses/http400BadRequest'
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '403':
-          $ref: '#/components/responses/http403Forbidden'
-        '405':
-          $ref: '#/components/responses/http405MethodNotAllowed'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
   /cli/macros/{macroUid}:
     get:
       tags:
@@ -4012,6 +4049,80 @@ components:
           type: string
           description: The description of the Change Request.
           example: my change request description
+    CliMacroCreateInput:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        script:
+          type: string
+        deviceType:
+          type: string
+          enum:
+            - ASA
+            - IOS
+    CdoCliMacro:
+      required:
+        - deviceType
+        - uid
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the CLI macro.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        name:
+          type: string
+          description: The name of the CLI macro.
+          example: Disconnect VPN User
+        script:
+          type: string
+          description: The script executed to generate the CLI result.
+          example: vpn-sessiondb logoff name {{USER}} noconfirm
+        parameters:
+          uniqueItems: true
+          type: array
+          description: A set of parameters provided in the script
+          example:
+            - USER
+          items:
+            type: string
+            description: A set of parameters provided in the script
+            example: '["USER"]'
+        deviceType:
+          $ref: '#/components/schemas/EntityType'
+        systemDefined:
+          type: boolean
+          description: Indicating whether this CLI macro is system-defined.
+          example: true
+    EntityType:
+      type: string
+      description: The type of the device.
+      example: ASA
+      enum:
+        - ASA
+        - CDFMC_MANAGED_FTD
+        - ONPREM_FMC_MANAGED_FTD
+        - ONPREM_FMC_MANAGED_FIREPOWER
+        - ONPREM_FMC_NGIPS
+        - FDM_MANAGED_FTD
+        - IOS
+        - SSH_DEVICE
+        - GENERIC_DEVICE
+        - MERAKI_MX
+        - CLOUD_DNG
+        - SFCN
+        - SFCN_DNG
+        - SFCN_STS
+        - ONPREM_FMC
+        - CDFMC
+        - AWS_VPC
+        - AZURE_VNET
+        - DUO_ADMIN_PANEL
+        - UMBRELLA_ORGANIZATION
     ConflictDetectionInterval:
       type: string
       description: >-
@@ -4298,31 +4409,6 @@ components:
         - MFA_PROVIDER
         - ZTNA_PROVIDER
         - ANYCONNECT_VPN_HEAD_END
-    EntityType:
-      type: string
-      description: The type of the device.
-      example: ASA
-      enum:
-        - ASA
-        - CDFMC_MANAGED_FTD
-        - ONPREM_FMC_MANAGED_FTD
-        - ONPREM_FMC_MANAGED_FIREPOWER
-        - ONPREM_FMC_NGIPS
-        - FDM_MANAGED_FTD
-        - IOS
-        - SSH_DEVICE
-        - GENERIC_DEVICE
-        - MERAKI_MX
-        - CLOUD_DNG
-        - SFCN
-        - SFCN_DNG
-        - SFCN_STS
-        - ONPREM_FMC
-        - CDFMC
-        - AWS_VPC
-        - AZURE_VNET
-        - DUO_ADMIN_PANEL
-        - UMBRELLA_ORGANIZATION
     MerakiDeploymentMode:
       type: string
       description: (Meraki devices only) The deployment mode of the Meraki device.
@@ -5228,41 +5314,6 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/CdoCliResult'
-    CdoCliMacro:
-      required:
-        - deviceType
-        - uid
-      type: object
-      properties:
-        uid:
-          type: string
-          description: The unique identifier of the CLI macro.
-          format: uuid
-          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-        name:
-          type: string
-          description: The name of the CLI macro.
-          example: Disconnect VPN User
-        script:
-          type: string
-          description: The script executed to generate the CLI result.
-          example: vpn-sessiondb logoff name {{USER}} noconfirm
-        parameters:
-          uniqueItems: true
-          type: array
-          description: A set of parameters provided in the script
-          example:
-            - USER
-          items:
-            type: string
-            description: A set of parameters provided in the script
-            example: '["USER"]'
-        deviceType:
-          $ref: '#/components/schemas/EntityType'
-        systemDefined:
-          type: boolean
-          description: Indicating whether this CLI macro is system-defined.
-          example: true
     CdoCliMacroPage:
       type: object
       properties:
@@ -6187,10 +6238,10 @@ x-tagGroups:
       - Inventory
       - Connectors
       - Change Requests
+      - Command Line Interface
       - Transactions
       - Meta
       - Changelogs
-      - Command Line Interface
   - name: object-service-openapi
     tags:
       - Object Management
