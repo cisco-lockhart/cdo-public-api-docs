@@ -30,8 +30,9 @@ class CdoTransaction(BaseModel):
     """
     CdoTransaction
     """ # noqa: E501
-    transaction_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the asynchronous transaction triggered.", alias="transactionUid")
     tenant_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the tenant that asynchronous transaction triggered on.", alias="tenantUid")
+    sort_key: Optional[StrictStr] = Field(default=None, description="DynamoDB sort key to provide us with efficient query capabilities.", alias="sortKey")
+    transaction_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the asynchronous transaction triggered.", alias="transactionUid")
     entity_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the entity that the asynchronous transaction is triggered on.", alias="entityUid")
     entity_url: Optional[StrictStr] = Field(default=None, description="A URL to access the entity that the asynchronous transaction is triggered on.", alias="entityUrl")
     transaction_polling_url: Optional[StrictStr] = Field(default=None, description="The URL to poll to track the progress of the transaction.", alias="transactionPollingUrl")
@@ -42,7 +43,7 @@ class CdoTransaction(BaseModel):
     error_message: Optional[StrictStr] = Field(default=None, description="Transaction error message, if any", alias="errorMessage")
     error_details: Optional[Dict[str, StrictStr]] = Field(default=None, description="Transaction error details, if any", alias="errorDetails")
     expire_at: Optional[StrictInt] = Field(default=None, description="TTL attribute detailing the expiry time this item should be deleted", alias="expireAt")
-    __properties: ClassVar[List[str]] = ["transactionUid", "tenantUid", "entityUid", "entityUrl", "transactionPollingUrl", "submissionTime", "lastUpdatedTime", "transactionType", "cdoTransactionStatus", "errorMessage", "errorDetails", "expireAt"]
+    __properties: ClassVar[List[str]] = ["tenantUid", "sortKey", "transactionUid", "entityUid", "entityUrl", "transactionPollingUrl", "submissionTime", "lastUpdatedTime", "transactionType", "cdoTransactionStatus", "errorMessage", "errorDetails", "expireAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,8 +96,9 @@ class CdoTransaction(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "transactionUid": obj.get("transactionUid"),
             "tenantUid": obj.get("tenantUid"),
+            "sortKey": obj.get("sortKey"),
+            "transactionUid": obj.get("transactionUid"),
             "entityUid": obj.get("entityUid"),
             "entityUrl": obj.get("entityUrl"),
             "transactionPollingUrl": obj.get("transactionPollingUrl"),

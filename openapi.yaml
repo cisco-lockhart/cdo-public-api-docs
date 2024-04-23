@@ -3562,11 +3562,6 @@ components:
     CdoTransaction:
       type: object
       properties:
-        transactionUid:
-          type: string
-          description: The unique identifier of the asynchronous transaction triggered.
-          format: uuid
-          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         tenantUid:
           type: string
           description: >-
@@ -3574,6 +3569,18 @@ components:
             triggered on.
           format: uuid
           example: 5131daad-e813-4b8f-8f42-be1e241e2cdb
+        sortKey:
+          type: string
+          description: DynamoDB sort key to provide us with efficient query capabilities.
+          example: |2
+              `transactionUid`
+              `operation:<transactionType>#entityUid:<entityUid>`
+              `cdoTransactionStatus:<cdoTransactionStatus>`
+        transactionUid:
+          type: string
+          description: The unique identifier of the asynchronous transaction triggered.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         entityUid:
           type: string
           description: >-
