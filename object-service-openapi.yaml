@@ -13,6 +13,10 @@ servers:
   description: EU
 - url: https://edge.apj.cdo.cisco.com/api/rest
   description: APJ
+- url: https://edge.aus.cdo.cisco.com/api/rest
+  description: AUS
+- url: https://edge.in.cdo.cisco.com/api/rest
+  description: IN
 - url: https://edge.staging.cdo.cisco.com/api/rest
   description: Staging
 - url: https://edge.scale.cdo.cisco.com/api/rest
@@ -391,8 +395,6 @@ paths:
           format: uuid
         example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "200":
           description: Duplicates of the object.
           content:
@@ -401,6 +403,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DuplicateGroupDto'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -421,14 +425,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/IssuesCount'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
