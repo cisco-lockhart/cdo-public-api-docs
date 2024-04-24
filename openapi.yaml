@@ -3108,6 +3108,39 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+    delete:
+      tags:
+        - Command Line Interface
+      summary: Delete CLI Macro
+      description: Delete a CDO CLI Macro by UID.
+      operationId: deleteCliMacro
+      parameters:
+        - name: macroUid
+          in: path
+          description: The unique identifier of the CDO CLI macro in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: CDO CLI macro
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /.well-known/jwks.json:
     get:
       tags:
