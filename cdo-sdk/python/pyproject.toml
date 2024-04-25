@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cdo_sdk_python"
-version = "1.0.107"
+version = "1.0.108"
 description = "CDO API"
 authors = ["CDO TAC <cdo.tac@cisco.com>"]
 license = "NoLicense"
