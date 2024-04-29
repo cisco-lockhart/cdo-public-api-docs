@@ -48,6 +48,7 @@ cdo_sdk_python/models/changelog.py
 cdo_sdk_python/models/changelog_page.py
 cdo_sdk_python/models/cli_command_input.py
 cdo_sdk_python/models/cli_macro_create_input.py
+cdo_sdk_python/models/cli_macro_patch_input.py
 cdo_sdk_python/models/client_device.py
 cdo_sdk_python/models/common_api_error.py
 cdo_sdk_python/models/config_state.py
@@ -154,6 +155,7 @@ docs/ChangelogPage.md
 docs/ChangelogsApi.md
 docs/CliCommandInput.md
 docs/CliMacroCreateInput.md
+docs/CliMacroPatchInput.md
 docs/ClientDevice.md
 docs/CloudDeliveredFMCApi.md
 docs/CommandLineInterfaceApi.md
@@ -254,6 +256,7 @@ test/test_cdo_cli_result.py
 test/test_cdo_cli_result_page.py
 test/test_cli_command_input.py
 test/test_cli_macro_create_input.py
+test/test_cli_macro_patch_input.py
 test/test_command_line_interface_api.py
 test/test_duplicate_group_dto.py
 test/test_issues_count.py
