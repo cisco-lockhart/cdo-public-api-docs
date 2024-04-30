@@ -34,12 +34,12 @@ paths:
       parameters:
       - name: q
         in: query
-        description: The query to execute. Use the Lucene Query Syntax to construct
-          your query.
+        description: "The query to execute. Use the Lucene Query Syntax to construct\
+          \ your query. Possible fields to search by are name, content."
         required: false
         schema:
           type: string
-        example: name:London-Office-ASA
+        example: content:*2.2.* AND name:Lab1
       - name: offset
         in: query
         description: "The offset of the results retrieved. The CDO API uses the offset\
@@ -100,14 +100,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "201":
           description: A descriptive representation of the created CDO object.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -239,16 +239,16 @@ paths:
           type: string
         example: '@detailed'
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -315,14 +315,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: A descriptive representation of the updated CDO object.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -350,10 +350,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: A descriptive representation of the created CDO object.
           content:
@@ -362,6 +358,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ReferenceInfo'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -397,6 +397,8 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: Duplicates of the object.
           content:
@@ -405,8 +407,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DuplicateGroupDto'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -423,14 +423,14 @@ paths:
       description: Get issues count in the CDO tenant.
       operationId: getIssuesCount
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/IssuesCount'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":

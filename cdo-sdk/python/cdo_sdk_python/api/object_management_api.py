@@ -2289,7 +2289,7 @@ class ObjectManagementApi:
     @validate_call
     def get_objects(
         self,
-        q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
+        q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.")] = None,
         offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="The fields to sort results by.")] = None,
@@ -2310,7 +2310,7 @@ class ObjectManagementApi:
 
         Get objects in the CDO tenant.
 
-        :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
+        :param q: The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.
         :type q: str
         :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
@@ -2372,7 +2372,7 @@ class ObjectManagementApi:
     @validate_call
     def get_objects_with_http_info(
         self,
-        q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
+        q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.")] = None,
         offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="The fields to sort results by.")] = None,
@@ -2393,7 +2393,7 @@ class ObjectManagementApi:
 
         Get objects in the CDO tenant.
 
-        :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
+        :param q: The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.
         :type q: str
         :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
@@ -2455,7 +2455,7 @@ class ObjectManagementApi:
     @validate_call
     def get_objects_without_preload_content(
         self,
-        q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
+        q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.")] = None,
         offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="The fields to sort results by.")] = None,
@@ -2476,7 +2476,7 @@ class ObjectManagementApi:
 
         Get objects in the CDO tenant.
 
-        :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
+        :param q: The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.
         :type q: str
         :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str

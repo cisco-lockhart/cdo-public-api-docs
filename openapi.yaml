@@ -3223,11 +3223,11 @@ paths:
           in: query
           description: >-
             The query to execute. Use the Lucene Query Syntax to construct your
-            query.
+            query. Possible fields to search by are name, content.
           required: false
           schema:
             type: string
-          example: name:London-Office-ASA
+          example: content:*2.2.* AND name:Lab1
         - name: offset
           in: query
           description: >-
