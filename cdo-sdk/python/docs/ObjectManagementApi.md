@@ -598,7 +598,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_objects**
-> ListObjectResponse get_objects(q=q, offset=offset, limit=limit, sort_by=sort_by)
+> ListObjectResponse get_objects(q=q, include_overrides=include_overrides, offset=offset, limit=limit, sort_by=sort_by)
 
 Get Objects
 
@@ -625,13 +625,14 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
     q = 'content:*2.2.* AND name:Lab1' # str | The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content. (optional)
+    include_overrides = False # bool | If enabled, the search will also include results from override objects. (optional) (default to False)
     offset = '0' # str | The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     sort_by = 'name:DESC' # str | The fields to sort results by. (optional)
 
     try:
         # Get Objects
-        api_response = api_instance.get_objects(q=q, offset=offset, limit=limit, sort_by=sort_by)
+        api_response = api_instance.get_objects(q=q, include_overrides=include_overrides, offset=offset, limit=limit, sort_by=sort_by)
         print("The response of ObjectManagementApi->get_objects:\n")
         pprint(api_response)
     except Exception as e:
@@ -646,6 +647,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content. | [optional] 
+ **include_overrides** | **bool**| If enabled, the search will also include results from override objects. | [optional] [default to False]
  **offset** | **str**| The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
  **sort_by** | **str**| The fields to sort results by. | [optional] 

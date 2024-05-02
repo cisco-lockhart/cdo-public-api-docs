@@ -17,7 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
+from pydantic import Field, StrictBool, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
 from cdo_sdk_python.models.create_request import CreateRequest
@@ -2290,6 +2290,7 @@ class ObjectManagementApi:
     def get_objects(
         self,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.")] = None,
+        include_overrides: Annotated[Optional[StrictBool], Field(description="If enabled, the search will also include results from override objects.")] = None,
         offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="The fields to sort results by.")] = None,
@@ -2312,6 +2313,8 @@ class ObjectManagementApi:
 
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.
         :type q: str
+        :param include_overrides: If enabled, the search will also include results from override objects.
+        :type include_overrides: bool
         :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param limit: The number of results to retrieve.
@@ -2342,6 +2345,7 @@ class ObjectManagementApi:
 
         _param = self._get_objects_serialize(
             q=q,
+            include_overrides=include_overrides,
             offset=offset,
             limit=limit,
             sort_by=sort_by,
@@ -2373,6 +2377,7 @@ class ObjectManagementApi:
     def get_objects_with_http_info(
         self,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.")] = None,
+        include_overrides: Annotated[Optional[StrictBool], Field(description="If enabled, the search will also include results from override objects.")] = None,
         offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="The fields to sort results by.")] = None,
@@ -2395,6 +2400,8 @@ class ObjectManagementApi:
 
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.
         :type q: str
+        :param include_overrides: If enabled, the search will also include results from override objects.
+        :type include_overrides: bool
         :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param limit: The number of results to retrieve.
@@ -2425,6 +2432,7 @@ class ObjectManagementApi:
 
         _param = self._get_objects_serialize(
             q=q,
+            include_overrides=include_overrides,
             offset=offset,
             limit=limit,
             sort_by=sort_by,
@@ -2456,6 +2464,7 @@ class ObjectManagementApi:
     def get_objects_without_preload_content(
         self,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.")] = None,
+        include_overrides: Annotated[Optional[StrictBool], Field(description="If enabled, the search will also include results from override objects.")] = None,
         offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="The fields to sort results by.")] = None,
@@ -2478,6 +2487,8 @@ class ObjectManagementApi:
 
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.
         :type q: str
+        :param include_overrides: If enabled, the search will also include results from override objects.
+        :type include_overrides: bool
         :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param limit: The number of results to retrieve.
@@ -2508,6 +2519,7 @@ class ObjectManagementApi:
 
         _param = self._get_objects_serialize(
             q=q,
+            include_overrides=include_overrides,
             offset=offset,
             limit=limit,
             sort_by=sort_by,
@@ -2534,6 +2546,7 @@ class ObjectManagementApi:
     def _get_objects_serialize(
         self,
         q,
+        include_overrides,
         offset,
         limit,
         sort_by,
@@ -2560,6 +2573,10 @@ class ObjectManagementApi:
         if q is not None:
             
             _query_params.append(('q', q))
+            
+        if include_overrides is not None:
+            
+            _query_params.append(('includeOverrides', include_overrides))
             
         if offset is not None:
             
