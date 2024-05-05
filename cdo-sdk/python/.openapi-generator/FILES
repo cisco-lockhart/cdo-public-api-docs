@@ -250,17 +250,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_cdo_cli_macro.py
-test/test_cdo_cli_macro_page.py
-test/test_cdo_cli_result.py
-test/test_cdo_cli_result_page.py
-test/test_cli_command_input.py
-test/test_cli_macro_create_input.py
-test/test_cli_macro_patch_input.py
-test/test_command_line_interface_api.py
-test/test_duplicate_group_dto.py
-test/test_issues_count.py
-test/test_ra_vpn_device_input.py
-test/test_sdc_create_input.py
-test/test_sdc_patch_input.py
 tox.ini
