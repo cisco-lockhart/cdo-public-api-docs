@@ -6,6 +6,7 @@ List of content literals
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**type** | **str** |  | [optional] 
 **protocol** | **str** | The service object protocol | [optional] 
 **service_value** | [**ServiceObjectValueContent**](ServiceObjectValueContent.md) |  | [optional] 
 **url** | **str** | The URL literal | 

@@ -87,7 +87,7 @@ from cdo_sdk_python.models.object_response import ObjectResponse
 from cdo_sdk_python.models.on_prem_fmc_info import OnPremFmcInfo
 from cdo_sdk_python.models.override import Override
 from cdo_sdk_python.models.policy import Policy
-from cdo_sdk_python.models.ports_value import PortsValue
+from cdo_sdk_python.models.port_value import PortValue
 from cdo_sdk_python.models.public_key import PublicKey
 from cdo_sdk_python.models.ra_vpn_device_input import RaVpnDeviceInput
 from cdo_sdk_python.models.ra_vpn_session import RaVpnSession
@@ -101,6 +101,7 @@ from cdo_sdk_python.models.service_object_content import ServiceObjectContent
 from cdo_sdk_python.models.service_object_value_content import ServiceObjectValueContent
 from cdo_sdk_python.models.shared_object_value import SharedObjectValue
 from cdo_sdk_python.models.single_content import SingleContent
+from cdo_sdk_python.models.source_destination_ports_value import SourceDestinationPortsValue
 from cdo_sdk_python.models.state_machine_details import StateMachineDetails
 from cdo_sdk_python.models.state_machine_error import StateMachineError
 from cdo_sdk_python.models.status import Status

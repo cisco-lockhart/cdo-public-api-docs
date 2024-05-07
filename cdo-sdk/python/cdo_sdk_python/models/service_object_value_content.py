@@ -20,12 +20,13 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, f
 from typing import Any, List, Optional
 from cdo_sdk_python.models.icmp4_value import Icmp4Value
 from cdo_sdk_python.models.icmp6_value import Icmp6Value
-from cdo_sdk_python.models.ports_value import PortsValue
+from cdo_sdk_python.models.port_value import PortValue
+from cdo_sdk_python.models.source_destination_ports_value import SourceDestinationPortsValue
 from pydantic import StrictStr, Field
 from typing import Union, List, Optional, Dict
 from typing_extensions import Literal, Self
 
-SERVICEOBJECTVALUECONTENT_ONE_OF_SCHEMAS = ["Icmp4Value", "Icmp6Value", "PortsValue"]
+SERVICEOBJECTVALUECONTENT_ONE_OF_SCHEMAS = ["Icmp4Value", "Icmp6Value", "PortValue", "SourceDestinationPortsValue"]
 
 class ServiceObjectValueContent(BaseModel):
     """
@@ -35,10 +36,12 @@ class ServiceObjectValueContent(BaseModel):
     oneof_schema_1_validator: Optional[Icmp4Value] = None
     # data type: Icmp6Value
     oneof_schema_2_validator: Optional[Icmp6Value] = None
-    # data type: PortsValue
-    oneof_schema_3_validator: Optional[PortsValue] = None
-    actual_instance: Optional[Union[Icmp4Value, Icmp6Value, PortsValue]] = None
-    one_of_schemas: List[str] = Field(default=Literal["Icmp4Value", "Icmp6Value", "PortsValue"])
+    # data type: SourceDestinationPortsValue
+    oneof_schema_3_validator: Optional[SourceDestinationPortsValue] = None
+    # data type: PortValue
+    oneof_schema_4_validator: Optional[PortValue] = None
+    actual_instance: Optional[Union[Icmp4Value, Icmp6Value, PortValue, SourceDestinationPortsValue]] = None
+    one_of_schemas: List[str] = Field(default=Literal["Icmp4Value", "Icmp6Value", "PortValue", "SourceDestinationPortsValue"])
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -71,17 +74,22 @@ class ServiceObjectValueContent(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `Icmp6Value`")
         else:
             match += 1
-        # validate data type: PortsValue
-        if not isinstance(v, PortsValue):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `PortsValue`")
+        # validate data type: SourceDestinationPortsValue
+        if not isinstance(v, SourceDestinationPortsValue):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `SourceDestinationPortsValue`")
+        else:
+            match += 1
+        # validate data type: PortValue
+        if not isinstance(v, PortValue):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `PortValue`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ServiceObjectValueContent with oneOf schemas: Icmp4Value, Icmp6Value, PortsValue. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in ServiceObjectValueContent with oneOf schemas: Icmp4Value, Icmp6Value, PortValue, SourceDestinationPortsValue. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ServiceObjectValueContent with oneOf schemas: Icmp4Value, Icmp6Value, PortsValue. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in ServiceObjectValueContent with oneOf schemas: Icmp4Value, Icmp6Value, PortValue, SourceDestinationPortsValue. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -108,19 +116,25 @@ class ServiceObjectValueContent(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into PortsValue
+        # deserialize data into SourceDestinationPortsValue
         try:
-            instance.actual_instance = PortsValue.from_json(json_str)
+            instance.actual_instance = SourceDestinationPortsValue.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into PortValue
+        try:
+            instance.actual_instance = PortValue.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ServiceObjectValueContent with oneOf schemas: Icmp4Value, Icmp6Value, PortsValue. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into ServiceObjectValueContent with oneOf schemas: Icmp4Value, Icmp6Value, PortValue, SourceDestinationPortsValue. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ServiceObjectValueContent with oneOf schemas: Icmp4Value, Icmp6Value, PortsValue. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into ServiceObjectValueContent with oneOf schemas: Icmp4Value, Icmp6Value, PortValue, SourceDestinationPortsValue. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -134,7 +148,7 @@ class ServiceObjectValueContent(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], Icmp4Value, Icmp6Value, PortsValue]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], Icmp4Value, Icmp6Value, PortValue, SourceDestinationPortsValue]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

@@ -94,7 +94,7 @@ cdo_sdk_python/models/on_prem_fmc_info.py
 cdo_sdk_python/models/os.py
 cdo_sdk_python/models/override.py
 cdo_sdk_python/models/policy.py
-cdo_sdk_python/models/ports_value.py
+cdo_sdk_python/models/port_value.py
 cdo_sdk_python/models/public_key.py
 cdo_sdk_python/models/ra_vpn_device_input.py
 cdo_sdk_python/models/ra_vpn_session.py
@@ -108,6 +108,7 @@ cdo_sdk_python/models/service_object_content.py
 cdo_sdk_python/models/service_object_value_content.py
 cdo_sdk_python/models/shared_object_value.py
 cdo_sdk_python/models/single_content.py
+cdo_sdk_python/models/source_destination_ports_value.py
 cdo_sdk_python/models/state_machine_details.py
 cdo_sdk_python/models/state_machine_error.py
 cdo_sdk_python/models/status.py
@@ -207,7 +208,7 @@ docs/ObjectResponse.md
 docs/OnPremFmcInfo.md
 docs/Override.md
 docs/Policy.md
-docs/PortsValue.md
+docs/PortValue.md
 docs/PublicKey.md
 docs/RaVpnDeviceInput.md
 docs/RaVpnSession.md
@@ -223,6 +224,7 @@ docs/ServiceObjectContent.md
 docs/ServiceObjectValueContent.md
 docs/SharedObjectValue.md
 docs/SingleContent.md
+docs/SourceDestinationPortsValue.md
 docs/StateMachineDetails.md
 docs/StateMachineError.md
 docs/Status.md
@@ -250,4 +252,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_port_value.py
+test/test_source_destination_ports_value.py
 tox.ini

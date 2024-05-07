@@ -5797,30 +5797,13 @@ components:
       example:
         targetId: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         content: a:b:c::2
-    PortsValue:
+    PortValue:
       type: object
       properties:
-        op:
+        literal:
           type: string
-          description: The operator applied to the list of ports
-          example: RANGE
-          enum:
-            - EQ
-            - RANGE
-            - GT
-            - LT
-            - NEQ
-            - SOURCE_DESTINATION
-        ports:
-          type: array
-          description: The list of ports
-          example:
-            - '80'
-            - '81'
-          items:
-            type: string
-            description: The list of ports
-            example: '["80","81"]'
+          description: The literal port or range of port values
+          example: 8000-8080
     ServiceObjectContent:
       type: object
       properties:
@@ -5959,6 +5942,17 @@ components:
           $ref: '#/components/schemas/ServiceObjectValueContent'
     ServiceObjectValueContent:
       type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - NETWORK_OBJECT
+            - URL_OBJECT
+            - SERVICE_OBJECT
+            - ICMP_4
+            - ICMP_6
+            - SOURCE_DESTINATION_PORT
+            - PORT
       description: The value of the service object
       example:
         op: EQ
@@ -5967,7 +5961,8 @@ components:
       oneOf:
         - $ref: '#/components/schemas/Icmp4Value'
         - $ref: '#/components/schemas/Icmp6Value'
-        - $ref: '#/components/schemas/PortsValue'
+        - $ref: '#/components/schemas/SourceDestinationPortsValue'
+        - $ref: '#/components/schemas/PortValue'
     SharedObjectValue:
       required:
         - defaultContent
@@ -5997,11 +5992,29 @@ components:
       description: The value of the object
     SingleContent:
       type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - NETWORK_OBJECT
+            - URL_OBJECT
+            - SERVICE_OBJECT
+            - ICMP_4
+            - ICMP_6
+            - SOURCE_DESTINATION_PORT
+            - PORT
       description: List of content literals
       oneOf:
         - $ref: '#/components/schemas/ServiceObjectContent'
         - $ref: '#/components/schemas/UrlObjectContent'
         - $ref: '#/components/schemas/NetworkObjectContent'
+    SourceDestinationPortsValue:
+      type: object
+      properties:
+        source:
+          $ref: '#/components/schemas/PortValue'
+        destination:
+          $ref: '#/components/schemas/PortValue'
     UrlObjectContent:
       required:
         - url

@@ -6,12 +6,14 @@ The value of the service object
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**type** | **str** |  | [optional] 
 **icmp4_type** | **str** |  | [optional] 
 **icmp4_code** | **str** |  | [optional] 
 **icmp6_type** | **str** |  | [optional] 
 **icmp6_code** | **str** |  | [optional] 
-**op** | **str** | The operator applied to the list of ports | [optional] 
-**ports** | **List[str]** | The list of ports | [optional] 
+**source** | [**PortValue**](PortValue.md) |  | [optional] 
+**destination** | [**PortValue**](PortValue.md) |  | [optional] 
+**literal** | **str** | The literal port or range of port values | [optional] 
 
 ## Example
 
