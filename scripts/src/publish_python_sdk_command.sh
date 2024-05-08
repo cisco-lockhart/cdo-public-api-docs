@@ -12,6 +12,7 @@ cd cdo-sdk/python
 pip3 install wheel twine
 
 echo -n "$(yellow Creating the Wheel and Source)... "
+rm -rf dist/ build/ *.egg-info
 python3 setup.py sdist bdist_wheel
 
 echo -n "$(yellow Publishing to PyPI)... "
