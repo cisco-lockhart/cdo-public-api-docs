@@ -20,7 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
-from cdo_sdk_python.models.port_value import PortValue
+from cdo_sdk_python.models.ports_value import PortsValue
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,8 +28,8 @@ class SourceDestinationPortsValue(BaseModel):
     """
     SourceDestinationPortsValue
     """ # noqa: E501
-    source: Optional[PortValue] = None
-    destination: Optional[PortValue] = None
+    source: Optional[PortsValue] = None
+    destination: Optional[PortsValue] = None
     __properties: ClassVar[List[str]] = ["source", "destination"]
 
     model_config = ConfigDict(
@@ -89,8 +89,8 @@ class SourceDestinationPortsValue(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "source": PortValue.from_dict(obj["source"]) if obj.get("source") is not None else None,
-            "destination": PortValue.from_dict(obj["destination"]) if obj.get("destination") is not None else None
+            "source": PortsValue.from_dict(obj["source"]) if obj.get("source") is not None else None,
+            "destination": PortsValue.from_dict(obj["destination"]) if obj.get("destination") is not None else None
         })
         return _obj
 

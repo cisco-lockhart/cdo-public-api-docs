@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,19 +27,8 @@ class PortsValue(BaseModel):
     """
     PortsValue
     """ # noqa: E501
-    op: Optional[StrictStr] = Field(default=None, description="The operator applied to the list of ports")
-    ports: Optional[List[StrictStr]] = Field(default=None, description="The list of ports")
-    __properties: ClassVar[List[str]] = ["op", "ports"]
-
-    @field_validator('op')
-    def op_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['EQ', 'RANGE', 'GT', 'LT', 'NEQ', 'SOURCE_DESTINATION']):
-            raise ValueError("must be one of enum values ('EQ', 'RANGE', 'GT', 'LT', 'NEQ', 'SOURCE_DESTINATION')")
-        return value
+    literal: Optional[StrictStr] = Field(default=None, description="The literal port or range of port values")
+    __properties: ClassVar[List[str]] = ["literal"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,8 +81,7 @@ class PortsValue(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "op": obj.get("op"),
-            "ports": obj.get("ports")
+            "literal": obj.get("literal")
         })
         return _obj
 

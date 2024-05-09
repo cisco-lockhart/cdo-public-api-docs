@@ -5,8 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**op** | **str** | The operator applied to the list of ports | [optional] 
-**ports** | **List[str]** | The list of ports | [optional] 
+**literal** | **str** | The literal port or range of port values | [optional] 
 
 ## Example
 

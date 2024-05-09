@@ -95,7 +95,7 @@ cdo_sdk_python/models/on_prem_fmc_info.py
 cdo_sdk_python/models/os.py
 cdo_sdk_python/models/override.py
 cdo_sdk_python/models/policy.py
-cdo_sdk_python/models/port_value.py
+cdo_sdk_python/models/ports_value.py
 cdo_sdk_python/models/public_key.py
 cdo_sdk_python/models/ra_vpn_device_input.py
 cdo_sdk_python/models/ra_vpn_session.py
@@ -210,7 +210,7 @@ docs/ObjectResponse.md
 docs/OnPremFmcInfo.md
 docs/Override.md
 docs/Policy.md
-docs/PortValue.md
+docs/PortsValue.md
 docs/PublicKey.md
 docs/RaVpnDeviceInput.md
 docs/RaVpnSession.md

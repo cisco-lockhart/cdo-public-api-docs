@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**source** | [**PortValue**](PortValue.md) |  | [optional] 
-**destination** | [**PortValue**](PortValue.md) |  | [optional] 
+**source** | [**PortsValue**](PortsValue.md) |  | [optional] 
+**destination** | [**PortsValue**](PortsValue.md) |  | [optional] 
 
 ## Example
 

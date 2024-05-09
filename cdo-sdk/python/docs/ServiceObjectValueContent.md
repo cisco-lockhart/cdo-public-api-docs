@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **icmp4_code** | **str** |  | [optional] 
 **icmp6_type** | **str** |  | [optional] 
 **icmp6_code** | **str** |  | [optional] 
-**source** | [**PortValue**](PortValue.md) |  | [optional] 
-**destination** | [**PortValue**](PortValue.md) |  | [optional] 
+**source** | [**PortsValue**](PortsValue.md) |  | [optional] 
+**destination** | [**PortsValue**](PortsValue.md) |  | [optional] 
 **literal** | **str** | The literal port or range of port values | [optional] 
 
 ## Example

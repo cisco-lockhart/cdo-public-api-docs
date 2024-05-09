@@ -5864,7 +5864,7 @@ components:
       example:
         targetId: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         content: a:b:c::2
-    PortValue:
+    PortsValue:
       type: object
       properties:
         literal:
@@ -6029,7 +6029,7 @@ components:
         - $ref: '#/components/schemas/Icmp4Value'
         - $ref: '#/components/schemas/Icmp6Value'
         - $ref: '#/components/schemas/SourceDestinationPortsValue'
-        - $ref: '#/components/schemas/PortValue'
+        - $ref: '#/components/schemas/PortsValue'
     SharedObjectValue:
       required:
         - defaultContent
@@ -6079,9 +6079,9 @@ components:
       type: object
       properties:
         source:
-          $ref: '#/components/schemas/PortValue'
+          $ref: '#/components/schemas/PortsValue'
         destination:
-          $ref: '#/components/schemas/PortValue'
+          $ref: '#/components/schemas/PortsValue'
     UrlObjectContent:
       required:
         - url
