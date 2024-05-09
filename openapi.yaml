@@ -1000,7 +1000,7 @@ paths:
       description: >-
         This is an asynchronous operation to execute CLI macro command in the
         CDO tenant.
-      operationId: executeCliCommand_1
+      operationId: executeCliMacro
       requestBody:
         content:
           application/json:

@@ -2529,7 +2529,7 @@ class InventoryApi:
 
 
     @validate_call
-    def execute_cli_command1(
+    def execute_cli_macro(
         self,
         cli_macro_execute_input: Optional[CliMacroExecuteInput] = None,
         _request_timeout: Union[
@@ -2573,7 +2573,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._execute_cli_command1_serialize(
+        _param = self._execute_cli_macro_serialize(
             cli_macro_execute_input=cli_macro_execute_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2600,7 +2600,7 @@ class InventoryApi:
 
 
     @validate_call
-    def execute_cli_command1_with_http_info(
+    def execute_cli_macro_with_http_info(
         self,
         cli_macro_execute_input: Optional[CliMacroExecuteInput] = None,
         _request_timeout: Union[
@@ -2644,7 +2644,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._execute_cli_command1_serialize(
+        _param = self._execute_cli_macro_serialize(
             cli_macro_execute_input=cli_macro_execute_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2671,7 +2671,7 @@ class InventoryApi:
 
 
     @validate_call
-    def execute_cli_command1_without_preload_content(
+    def execute_cli_macro_without_preload_content(
         self,
         cli_macro_execute_input: Optional[CliMacroExecuteInput] = None,
         _request_timeout: Union[
@@ -2715,7 +2715,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._execute_cli_command1_serialize(
+        _param = self._execute_cli_macro_serialize(
             cli_macro_execute_input=cli_macro_execute_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2737,7 +2737,7 @@ class InventoryApi:
         return response_data.response
 
 
-    def _execute_cli_command1_serialize(
+    def _execute_cli_macro_serialize(
         self,
         cli_macro_execute_input,
         _request_auth,

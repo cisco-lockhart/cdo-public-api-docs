@@ -13,7 +13,7 @@ Method | HTTP request | Description
 [**delete_template_device**](InventoryApi.md#delete_template_device) | **DELETE** /v1/inventory/templates/{templateDeviceUid} | Delete Template Device
 [**deploy_asa_device_changes**](InventoryApi.md#deploy_asa_device_changes) | **POST** /v1/inventory/devices/asas/{deviceUid}/deploy | Deploy ASA device changes
 [**execute_cli_command**](InventoryApi.md#execute_cli_command) | **POST** /v1/inventory/devices/asas/cli/execute | Execute CLI Command
-[**execute_cli_command1**](InventoryApi.md#execute_cli_command1) | **POST** /v1/inventory/devices/asas/cli/executeMacro | Execute CLI Macro Command
+[**execute_cli_macro**](InventoryApi.md#execute_cli_macro) | **POST** /v1/inventory/devices/asas/cli/executeMacro | Execute CLI Macro Command
 [**finish_onboarding_ftd_device**](InventoryApi.md#finish_onboarding_ftd_device) | **POST** /v1/inventory/devices/ftds/register | Register FTD device.
 [**get_cloud_service**](InventoryApi.md#get_cloud_service) | **GET** /v1/inventory/services/{cloudServiceUid} | Get Cloud Service
 [**get_cloud_services**](InventoryApi.md#get_cloud_services) | **GET** /v1/inventory/services | Get Cloud Services
@@ -765,8 +765,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **execute_cli_command1**
-> CdoTransaction execute_cli_command1(cli_macro_execute_input=cli_macro_execute_input)
+# **execute_cli_macro**
+> CdoTransaction execute_cli_macro(cli_macro_execute_input=cli_macro_execute_input)
 
 Execute CLI Macro Command
 
@@ -807,11 +807,11 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
     try:
         # Execute CLI Macro Command
-        api_response = api_instance.execute_cli_command1(cli_macro_execute_input=cli_macro_execute_input)
-        print("The response of InventoryApi->execute_cli_command1:\n")
+        api_response = api_instance.execute_cli_macro(cli_macro_execute_input=cli_macro_execute_input)
+        print("The response of InventoryApi->execute_cli_macro:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling InventoryApi->execute_cli_command1: %s\n" % e)
+        print("Exception when calling InventoryApi->execute_cli_macro: %s\n" % e)
 ```
 
 

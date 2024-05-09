@@ -254,7 +254,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_cli_macro_execute_input.py
-test/test_port_value.py
-test/test_source_destination_ports_value.py
 tox.ini
