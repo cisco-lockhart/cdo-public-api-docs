@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**delete_template_device**](InventoryApi.md#delete_template_device) | **DELETE** /v1/inventory/templates/{templateDeviceUid} | Delete Template Device
 [**deploy_asa_device_changes**](InventoryApi.md#deploy_asa_device_changes) | **POST** /v1/inventory/devices/asas/{deviceUid}/deploy | Deploy ASA device changes
 [**execute_cli_command**](InventoryApi.md#execute_cli_command) | **POST** /v1/inventory/devices/asas/cli/execute | Execute CLI Command
+[**execute_cli_command1**](InventoryApi.md#execute_cli_command1) | **POST** /v1/inventory/devices/asas/cli/executeMacro | Execute CLI Macro Command
 [**finish_onboarding_ftd_device**](InventoryApi.md#finish_onboarding_ftd_device) | **POST** /v1/inventory/devices/ftds/register | Register FTD device.
 [**get_cloud_service**](InventoryApi.md#get_cloud_service) | **GET** /v1/inventory/services/{cloudServiceUid} | Get Cloud Service
 [**get_cloud_services**](InventoryApi.md#get_cloud_services) | **GET** /v1/inventory/services | Get Cloud Services
@@ -738,6 +739,89 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cli_command_input** | [**CliCommandInput**](CliCommandInput.md)|  | [optional] 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | CDO Transaction object that can be used to track the progress of the execute CLI operation |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **execute_cli_command1**
+> CdoTransaction execute_cli_command1(cli_macro_execute_input=cli_macro_execute_input)
+
+Execute CLI Macro Command
+
+This is an asynchronous operation to execute CLI macro command in the CDO tenant.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import cdo_sdk_python
+from cdo_sdk_python.models.cdo_transaction import CdoTransaction
+from cdo_sdk_python.models.cli_macro_execute_input import CliMacroExecuteInput
+from cdo_sdk_python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cdo_sdk_python.Configuration(
+    host = "https://edge.us.cdo.cisco.com/api/rest"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = cdo_sdk_python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with cdo_sdk_python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
+    cli_macro_execute_input = cdo_sdk_python.CliMacroExecuteInput() # CliMacroExecuteInput |  (optional)
+
+    try:
+        # Execute CLI Macro Command
+        api_response = api_instance.execute_cli_command1(cli_macro_execute_input=cli_macro_execute_input)
+        print("The response of InventoryApi->execute_cli_command1:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InventoryApi->execute_cli_command1: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cli_macro_execute_input** | [**CliMacroExecuteInput**](CliMacroExecuteInput.md)|  | [optional] 
 
 ### Return type
 

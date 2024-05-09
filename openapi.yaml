@@ -992,6 +992,43 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /v1/inventory/devices/asas/cli/executeMacro:
+    post:
+      tags:
+        - Inventory
+      summary: Execute CLI Macro Command
+      description: >-
+        This is an asynchronous operation to execute CLI macro command in the
+        CDO tenant.
+      operationId: executeCliCommand_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CliMacroExecuteInput'
+      responses:
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the progress of the
+            execute CLI operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/connectors/sdcs:
     get:
       tags:
@@ -4106,6 +4143,36 @@ components:
           type: string
           description: The script executed to generate the CLI result.
           example: show xlate detail
+    CliMacroExecuteInput:
+      required:
+        - deviceUids
+      type: object
+      properties:
+        deviceUids:
+          type: array
+          description: List of UIDs of the devices to execute the CLI macro for.
+          example:
+            - 7131daad-e813-4b8f-8f42-be1e241e8cdb
+          items:
+            type: string
+            description: List of UIDs of the devices to execute the CLI macro for.
+            example: '["7131daad-e813-4b8f-8f42-be1e241e8cdb"]'
+        macroUid:
+          type: string
+          description: The unique identifier of the CLI macro.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        parameters:
+          type: object
+          additionalProperties:
+            type: string
+            description: >-
+              Parameters provided for the CLI macro execution as key-value
+              pairs.
+            example: '{"USER":"admin"}'
+          description: Parameters provided for the CLI macro execution as key-value pairs.
+          example:
+            USER: admin
     SdcCreateInput:
       type: object
       properties:

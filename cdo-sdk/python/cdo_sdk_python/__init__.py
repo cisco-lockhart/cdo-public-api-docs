@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.144"
+__version__ = "1.0.145"
 
 # import apis into sdk package
 from cdo_sdk_python.api.change_requests_api import ChangeRequestsApi
@@ -70,6 +70,7 @@ from cdo_sdk_python.models.changelog import Changelog
 from cdo_sdk_python.models.changelog_page import ChangelogPage
 from cdo_sdk_python.models.cli_command_input import CliCommandInput
 from cdo_sdk_python.models.cli_macro_create_input import CliMacroCreateInput
+from cdo_sdk_python.models.cli_macro_execute_input import CliMacroExecuteInput
 from cdo_sdk_python.models.cli_macro_patch_input import CliMacroPatchInput
 from cdo_sdk_python.models.client_device import ClientDevice
 from cdo_sdk_python.models.common_api_error import CommonApiError

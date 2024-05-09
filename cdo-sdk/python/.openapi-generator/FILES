@@ -48,6 +48,7 @@ cdo_sdk_python/models/changelog.py
 cdo_sdk_python/models/changelog_page.py
 cdo_sdk_python/models/cli_command_input.py
 cdo_sdk_python/models/cli_macro_create_input.py
+cdo_sdk_python/models/cli_macro_execute_input.py
 cdo_sdk_python/models/cli_macro_patch_input.py
 cdo_sdk_python/models/client_device.py
 cdo_sdk_python/models/common_api_error.py
@@ -156,6 +157,7 @@ docs/ChangelogPage.md
 docs/ChangelogsApi.md
 docs/CliCommandInput.md
 docs/CliMacroCreateInput.md
+docs/CliMacroExecuteInput.md
 docs/CliMacroPatchInput.md
 docs/ClientDevice.md
 docs/CloudDeliveredFMCApi.md
@@ -252,6 +254,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_cli_macro_execute_input.py
 test/test_port_value.py
 test/test_source_destination_ports_value.py
 tox.ini
