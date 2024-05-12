@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cdo_sdk_python.models.issues_dto import IssuesDto
 from cdo_sdk_python.models.reference_info import ReferenceInfo
@@ -41,7 +41,8 @@ class ObjectResponse(BaseModel):
     tags: Optional[Dict[str, List[StrictStr]]] = Field(default=None, description="The tags for the object")
     labels: Optional[List[StrictStr]] = Field(default=None, description="The labels for the object")
     issues: Optional[IssuesDto] = None
-    __properties: ClassVar[List[str]] = ["uid", "name", "value", "description", "targets", "elements", "referencesInfoFromDefaultAndOverrides", "tags", "labels", "issues"]
+    addition_number: Optional[StrictInt] = Field(default=None, alias="additionNumber")
+    __properties: ClassVar[List[str]] = ["uid", "name", "value", "description", "targets", "elements", "referencesInfoFromDefaultAndOverrides", "tags", "labels", "issues", "additionNumber"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -123,7 +124,8 @@ class ObjectResponse(BaseModel):
             "referencesInfoFromDefaultAndOverrides": [ReferenceInfo.from_dict(_item) for _item in obj["referencesInfoFromDefaultAndOverrides"]] if obj.get("referencesInfoFromDefaultAndOverrides") is not None else None,
             "tags": obj.get("tags"),
             "labels": obj.get("labels"),
-            "issues": IssuesDto.from_dict(obj["issues"]) if obj.get("issues") is not None else None
+            "issues": IssuesDto.from_dict(obj["issues"]) if obj.get("issues") is not None else None,
+            "additionNumber": obj.get("additionNumber")
         })
         return _obj
 

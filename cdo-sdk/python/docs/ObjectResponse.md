@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **tags** | **Dict[str, List[str]]** | The tags for the object | [optional] 
 **labels** | **List[str]** | The labels for the object | [optional] 
 **issues** | [**IssuesDto**](IssuesDto.md) |  | [optional] 
+**addition_number** | **int** |  | [optional] 
 
 ## Example
 
