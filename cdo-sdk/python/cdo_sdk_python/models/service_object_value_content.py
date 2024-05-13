@@ -21,12 +21,13 @@ from typing import Any, List, Optional
 from cdo_sdk_python.models.icmp4_value import Icmp4Value
 from cdo_sdk_python.models.icmp6_value import Icmp6Value
 from cdo_sdk_python.models.ports_value import PortsValue
+from cdo_sdk_python.models.protocol_value_content import ProtocolValueContent
 from cdo_sdk_python.models.source_destination_ports_value import SourceDestinationPortsValue
 from pydantic import StrictStr, Field
 from typing import Union, List, Optional, Dict
 from typing_extensions import Literal, Self
 
-SERVICEOBJECTVALUECONTENT_ONE_OF_SCHEMAS = ["Icmp4Value", "Icmp6Value", "PortsValue", "SourceDestinationPortsValue"]
+SERVICEOBJECTVALUECONTENT_ONE_OF_SCHEMAS = ["Icmp4Value", "Icmp6Value", "PortsValue", "ProtocolValueContent", "SourceDestinationPortsValue"]
 
 class ServiceObjectValueContent(BaseModel):
     """
@@ -40,8 +41,10 @@ class ServiceObjectValueContent(BaseModel):
     oneof_schema_3_validator: Optional[SourceDestinationPortsValue] = None
     # data type: PortsValue
     oneof_schema_4_validator: Optional[PortsValue] = None
-    actual_instance: Optional[Union[Icmp4Value, Icmp6Value, PortsValue, SourceDestinationPortsValue]] = None
-    one_of_schemas: List[str] = Field(default=Literal["Icmp4Value", "Icmp6Value", "PortsValue", "SourceDestinationPortsValue"])
+    # data type: ProtocolValueContent
+    oneof_schema_5_validator: Optional[ProtocolValueContent] = None
+    actual_instance: Optional[Union[Icmp4Value, Icmp6Value, PortsValue, ProtocolValueContent, SourceDestinationPortsValue]] = None
+    one_of_schemas: List[str] = Field(default=Literal["Icmp4Value", "Icmp6Value", "PortsValue", "ProtocolValueContent", "SourceDestinationPortsValue"])
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -84,12 +87,17 @@ class ServiceObjectValueContent(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `PortsValue`")
         else:
             match += 1
+        # validate data type: ProtocolValueContent
+        if not isinstance(v, ProtocolValueContent):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ProtocolValueContent`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ServiceObjectValueContent with oneOf schemas: Icmp4Value, Icmp6Value, PortsValue, SourceDestinationPortsValue. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in ServiceObjectValueContent with oneOf schemas: Icmp4Value, Icmp6Value, PortsValue, ProtocolValueContent, SourceDestinationPortsValue. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ServiceObjectValueContent with oneOf schemas: Icmp4Value, Icmp6Value, PortsValue, SourceDestinationPortsValue. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in ServiceObjectValueContent with oneOf schemas: Icmp4Value, Icmp6Value, PortsValue, ProtocolValueContent, SourceDestinationPortsValue. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -128,13 +136,19 @@ class ServiceObjectValueContent(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into ProtocolValueContent
+        try:
+            instance.actual_instance = ProtocolValueContent.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ServiceObjectValueContent with oneOf schemas: Icmp4Value, Icmp6Value, PortsValue, SourceDestinationPortsValue. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into ServiceObjectValueContent with oneOf schemas: Icmp4Value, Icmp6Value, PortsValue, ProtocolValueContent, SourceDestinationPortsValue. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ServiceObjectValueContent with oneOf schemas: Icmp4Value, Icmp6Value, PortsValue, SourceDestinationPortsValue. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into ServiceObjectValueContent with oneOf schemas: Icmp4Value, Icmp6Value, PortsValue, ProtocolValueContent, SourceDestinationPortsValue. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -148,7 +162,7 @@ class ServiceObjectValueContent(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], Icmp4Value, Icmp6Value, PortsValue, SourceDestinationPortsValue]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], Icmp4Value, Icmp6Value, PortsValue, ProtocolValueContent, SourceDestinationPortsValue]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

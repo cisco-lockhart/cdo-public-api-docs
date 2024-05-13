@@ -5871,6 +5871,13 @@ components:
           type: string
           description: The literal port or range of port values
           example: 8000-8080
+    ProtocolValueContent:
+      type: object
+      properties:
+        protocolValue:
+          type: string
+          description: The literal for a custom protocol value
+          example: www
     ServiceObjectContent:
       type: object
       properties:
@@ -6005,6 +6012,7 @@ components:
             - SCTP
             - FC
             - DIVERT
+            - CUSTOM
         serviceValue:
           $ref: '#/components/schemas/ServiceObjectValueContent'
     ServiceObjectValueContent:
@@ -6020,16 +6028,15 @@ components:
             - ICMP_6
             - SOURCE_DESTINATION_PORT
             - PORT
+            - PROTOCOL_VALUE
       description: The value of the service object
-      example:
-        op: EQ
-        ports:
-          - '80'
+      example: '{ "8000-9000"] }'
       oneOf:
         - $ref: '#/components/schemas/Icmp4Value'
         - $ref: '#/components/schemas/Icmp6Value'
         - $ref: '#/components/schemas/SourceDestinationPortsValue'
         - $ref: '#/components/schemas/PortsValue'
+        - $ref: '#/components/schemas/ProtocolValueContent'
     SharedObjectValue:
       required:
         - defaultContent
@@ -6070,6 +6077,7 @@ components:
             - ICMP_6
             - SOURCE_DESTINATION_PORT
             - PORT
+            - PROTOCOL_VALUE
       description: List of content literals
       oneOf:
         - $ref: '#/components/schemas/ServiceObjectContent'

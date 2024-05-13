@@ -108,14 +108,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "201":
           description: A descriptive representation of the created CDO object.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -358,6 +358,8 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: A descriptive representation of the created CDO object.
           content:
@@ -366,8 +368,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ReferenceInfo'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -433,14 +433,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/IssuesCount'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -715,6 +715,13 @@ components:
           type: string
           description: The literal port or range of port values
           example: 8000-8080
+    ProtocolValueContent:
+      type: object
+      properties:
+        protocolValue:
+          type: string
+          description: The literal for a custom protocol value
+          example: www
     ServiceObjectContent:
       type: object
       properties:
@@ -849,6 +856,7 @@ components:
           - SCTP
           - FC
           - DIVERT
+          - CUSTOM
         serviceValue:
           $ref: '#/components/schemas/ServiceObjectValueContent'
     ServiceObjectValueContent:
@@ -864,16 +872,15 @@ components:
           - ICMP_6
           - SOURCE_DESTINATION_PORT
           - PORT
+          - PROTOCOL_VALUE
       description: The value of the service object
-      example:
-        op: EQ
-        ports:
-        - "80"
+      example: "{ \"8000-9000\"] }"
       oneOf:
       - $ref: '#/components/schemas/Icmp4Value'
       - $ref: '#/components/schemas/Icmp6Value'
       - $ref: '#/components/schemas/SourceDestinationPortsValue'
       - $ref: '#/components/schemas/PortsValue'
+      - $ref: '#/components/schemas/ProtocolValueContent'
     SharedObjectValue:
       required:
       - defaultContent
@@ -913,6 +920,7 @@ components:
           - ICMP_6
           - SOURCE_DESTINATION_PORT
           - PORT
+          - PROTOCOL_VALUE
       description: List of content literals
       oneOf:
       - $ref: '#/components/schemas/ServiceObjectContent'

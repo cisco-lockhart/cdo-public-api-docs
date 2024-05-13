@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **source** | [**PortsValue**](PortsValue.md) |  | [optional] 
 **destination** | [**PortsValue**](PortsValue.md) |  | [optional] 
 **literal** | **str** | The literal port or range of port values | [optional] 
+**protocol_value** | **str** | The literal for a custom protocol value | [optional] 
 
 ## Example
 
