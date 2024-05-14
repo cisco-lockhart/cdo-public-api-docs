@@ -17,7 +17,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
+from pydantic import Field, StrictStr
+from typing_extensions import Annotated
 from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.models.global_search_result import GlobalSearchResult
 
@@ -300,7 +301,7 @@ class SearchApi:
     @validate_call
     def search(
         self,
-        q: StrictStr,
+        q: Annotated[StrictStr, Field(description="This can be any non-empty string, and represents the search criteria. Spaces are allowed, but must be URL encoded.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -318,7 +319,7 @@ class SearchApi:
 
         Search for devices, services, managers, objects and policies across the CDO tenant.
 
-        :param q: (required)
+        :param q: This can be any non-empty string, and represents the search criteria. Spaces are allowed, but must be URL encoded. (required)
         :type q: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -372,7 +373,7 @@ class SearchApi:
     @validate_call
     def search_with_http_info(
         self,
-        q: StrictStr,
+        q: Annotated[StrictStr, Field(description="This can be any non-empty string, and represents the search criteria. Spaces are allowed, but must be URL encoded.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -390,7 +391,7 @@ class SearchApi:
 
         Search for devices, services, managers, objects and policies across the CDO tenant.
 
-        :param q: (required)
+        :param q: This can be any non-empty string, and represents the search criteria. Spaces are allowed, but must be URL encoded. (required)
         :type q: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -444,7 +445,7 @@ class SearchApi:
     @validate_call
     def search_without_preload_content(
         self,
-        q: StrictStr,
+        q: Annotated[StrictStr, Field(description="This can be any non-empty string, and represents the search criteria. Spaces are allowed, but must be URL encoded.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -462,7 +463,7 @@ class SearchApi:
 
         Search for devices, services, managers, objects and policies across the CDO tenant.
 
-        :param q: (required)
+        :param q: This can be any non-empty string, and represents the search criteria. Spaces are allowed, but must be URL encoded. (required)
         :type q: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

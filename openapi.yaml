@@ -2445,6 +2445,9 @@ paths:
       parameters:
         - name: q
           in: query
+          description: >-
+            This can be any non-empty string, and represents the search
+            criteria. Spaces are allowed, but must be URL encoded.
           required: true
           schema:
             type: string

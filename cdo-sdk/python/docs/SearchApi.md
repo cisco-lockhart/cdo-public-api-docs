@@ -124,7 +124,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.SearchApi(api_client)
-    q = 'q_example' # str | 
+    q = 'q_example' # str | This can be any non-empty string, and represents the search criteria. Spaces are allowed, but must be URL encoded.
 
     try:
         # Search
@@ -142,7 +142,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **q** | **str**|  | 
+ **q** | **str**| This can be any non-empty string, and represents the search criteria. Spaces are allowed, but must be URL encoded. | 
 
 ### Return type
 
