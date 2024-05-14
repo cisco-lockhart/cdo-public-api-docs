@@ -313,7 +313,7 @@ class ObjectManagementApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v0/objects',
+            resource_path='/v1/objects',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -614,7 +614,7 @@ class ObjectManagementApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v0/objects/{uid}/targets',
+            resource_path='/v1/objects/{uid}/targets',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -884,7 +884,7 @@ class ObjectManagementApi:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/v0/objects/{uid}',
+            resource_path='/v1/objects/{uid}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1175,7 +1175,7 @@ class ObjectManagementApi:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/v0/objects/{uid}/targets',
+            resource_path='/v1/objects/{uid}/targets',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1461,7 +1461,7 @@ class ObjectManagementApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/v0/objects/{uid}/duplicates',
+            resource_path='/v1/objects/{uid}/duplicates',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1715,7 +1715,7 @@ class ObjectManagementApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/v0/objects/issues-count',
+            resource_path='/v1/objects/issues-count',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2001,7 +2001,7 @@ class ObjectManagementApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/v0/objects/{uid}',
+            resource_path='/v1/objects/{uid}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2270,7 +2270,7 @@ class ObjectManagementApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/v0/objects/{uid}/usage',
+            resource_path='/v1/objects/{uid}/usage',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2609,7 +2609,7 @@ class ObjectManagementApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/v0/objects',
+            resource_path='/v1/objects',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2906,7 +2906,7 @@ class ObjectManagementApi:
 
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/v0/objects/{uid}',
+            resource_path='/v1/objects/{uid}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

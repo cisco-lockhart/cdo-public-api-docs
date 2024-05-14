@@ -4,16 +4,16 @@ All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_object**](ObjectManagementApi.md#create_object) | **POST** /v0/objects | Create Object
-[**create_targets**](ObjectManagementApi.md#create_targets) | **POST** /v0/objects/{uid}/targets | Create Targets
-[**delete_object**](ObjectManagementApi.md#delete_object) | **DELETE** /v0/objects/{uid} | Delete Object
-[**delete_targets**](ObjectManagementApi.md#delete_targets) | **DELETE** /v0/objects/{uid}/targets | Delete Targets
-[**get_duplicate_objects**](ObjectManagementApi.md#get_duplicate_objects) | **GET** /v0/objects/{uid}/duplicates | Get Duplicate Objects
-[**get_issues_count**](ObjectManagementApi.md#get_issues_count) | **GET** /v0/objects/issues-count | Get Issues Count
-[**get_object**](ObjectManagementApi.md#get_object) | **GET** /v0/objects/{uid} | Get Object
-[**get_object_usages**](ObjectManagementApi.md#get_object_usages) | **GET** /v0/objects/{uid}/usage | Get Object Usages
-[**get_objects**](ObjectManagementApi.md#get_objects) | **GET** /v0/objects | Get Objects
-[**modify_object**](ObjectManagementApi.md#modify_object) | **PATCH** /v0/objects/{uid} | Modify Object
+[**create_object**](ObjectManagementApi.md#create_object) | **POST** /v1/objects | Create Object
+[**create_targets**](ObjectManagementApi.md#create_targets) | **POST** /v1/objects/{uid}/targets | Create Targets
+[**delete_object**](ObjectManagementApi.md#delete_object) | **DELETE** /v1/objects/{uid} | Delete Object
+[**delete_targets**](ObjectManagementApi.md#delete_targets) | **DELETE** /v1/objects/{uid}/targets | Delete Targets
+[**get_duplicate_objects**](ObjectManagementApi.md#get_duplicate_objects) | **GET** /v1/objects/{uid}/duplicates | Get Duplicate Objects
+[**get_issues_count**](ObjectManagementApi.md#get_issues_count) | **GET** /v1/objects/issues-count | Get Issues Count
+[**get_object**](ObjectManagementApi.md#get_object) | **GET** /v1/objects/{uid} | Get Object
+[**get_object_usages**](ObjectManagementApi.md#get_object_usages) | **GET** /v1/objects/{uid}/usage | Get Object Usages
+[**get_objects**](ObjectManagementApi.md#get_objects) | **GET** /v1/objects | Get Objects
+[**modify_object**](ObjectManagementApi.md#modify_object) | **PATCH** /v1/objects/{uid} | Modify Object
 
 
 # **create_object**
