@@ -6190,9 +6190,6 @@ components:
             example: '["migration"]'
         issues:
           $ref: '#/components/schemas/IssuesDto'
-        additionNumber:
-          type: integer
-          format: int32
     ReferenceInfo:
       type: object
       properties:
