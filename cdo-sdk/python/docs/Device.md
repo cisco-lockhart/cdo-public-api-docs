@@ -34,6 +34,7 @@ Name | Type | Description | Notes
 **state** | **str** | The device state. | [optional] 
 **state_machine_details** | [**StateMachineDetails**](StateMachineDetails.md) |  | [optional] 
 **labels** | [**Labels**](Labels.md) |  | [optional] 
+**fmc_domain_uid** | **str** | (FMC device managers only) The unique identifier of the [FMC domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html). | [optional] 
 
 ## Example
 

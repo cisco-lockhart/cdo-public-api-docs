@@ -4574,6 +4574,12 @@ components:
           $ref: '#/components/schemas/StateMachineDetails'
         labels:
           $ref: '#/components/schemas/Labels'
+        fmcDomainUid:
+          type: string
+          description: >-
+            (FMC device managers only) The unique identifier of the [FMC
+            domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html).
+          format: uuid
     DeviceRole:
       type: string
       description: The role this device performs on the network.

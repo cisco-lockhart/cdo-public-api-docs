@@ -70,7 +70,8 @@ class Device(BaseModel):
     state: Optional[StrictStr] = Field(default=None, description="The device state.")
     state_machine_details: Optional[StateMachineDetails] = Field(default=None, alias="stateMachineDetails")
     labels: Optional[Labels] = None
-    __properties: ClassVar[List[str]] = ["uid", "name", "deviceType", "connectorType", "connectorUid", "address", "deviceRole", "serial", "chassisSerial", "softwareVersion", "connectivityState", "configState", "conflictDetectionState", "notes", "asdmVersion", "asaFailoverMode", "asaFailoverState", "asaFailoverMate", "asaLicenseEntitlements", "ftdLicenses", "snortVersion", "ftdPerformanceTier", "cdFmcInfo", "onPremFmcInfo", "merakiDeploymentMode", "merakiNetwork", "state", "stateMachineDetails", "labels"]
+    fmc_domain_uid: Optional[StrictStr] = Field(default=None, description="(FMC device managers only) The unique identifier of the [FMC domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html).", alias="fmcDomainUid")
+    __properties: ClassVar[List[str]] = ["uid", "name", "deviceType", "connectorType", "connectorUid", "address", "deviceRole", "serial", "chassisSerial", "softwareVersion", "connectivityState", "configState", "conflictDetectionState", "notes", "asdmVersion", "asaFailoverMode", "asaFailoverState", "asaFailoverMate", "asaLicenseEntitlements", "ftdLicenses", "snortVersion", "ftdPerformanceTier", "cdFmcInfo", "onPremFmcInfo", "merakiDeploymentMode", "merakiNetwork", "state", "stateMachineDetails", "labels", "fmcDomainUid"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -169,7 +170,8 @@ class Device(BaseModel):
             "merakiNetwork": Network.from_dict(obj["merakiNetwork"]) if obj.get("merakiNetwork") is not None else None,
             "state": obj.get("state"),
             "stateMachineDetails": StateMachineDetails.from_dict(obj["stateMachineDetails"]) if obj.get("stateMachineDetails") is not None else None,
-            "labels": Labels.from_dict(obj["labels"]) if obj.get("labels") is not None else None
+            "labels": Labels.from_dict(obj["labels"]) if obj.get("labels") is not None else None,
+            "fmcDomainUid": obj.get("fmcDomainUid")
         })
         return _obj
 
