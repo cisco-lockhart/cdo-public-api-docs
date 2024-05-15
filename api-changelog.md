@@ -1,8 +1,16 @@
 >**Note**:
 The CDO API is currently in beta and is subject to change. If you adopt a beta API, it may not be fully compatible with future versions.
 
+# Version 1.0.0 (2024-05-23)
 
-# Version 0.1.0 (2023-04-02)
+## Added
+- Secure Device Connector (SDC) management: API endpoints to create and delete Secure Device Connectors (SDCs).
+- ASA Command Line Interface (CLI): API endpoints to execute arbitrary CLIs and CLI macros across one or more devices (ASAs only).
+- RA VPN session management: API endpoints to view, refresh, and terminate RA VPN sessions on RA VPN headend devices.
+- MFA event monitoring: API endpoints to view MFA events on Duo Admin Panels.
+- Object Management: Object Management endpoints are now accessible from `v1` endpoints like the rest of CDO's endpoints.
+
+# Version 0.1.0 (2024-04-02)
 
 ## Added
 
