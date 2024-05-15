@@ -249,16 +249,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -403,10 +403,6 @@ paths:
           format: uuid
         example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: Duplicates of the object.
           content:
@@ -415,6 +411,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DuplicateGroupDto'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
