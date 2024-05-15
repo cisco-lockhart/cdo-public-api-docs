@@ -365,7 +365,7 @@ void (empty response body)
 
 Delete Device
 
-Delete a device by UID in the CDO tenant
+Delete a device by UID in the CDO tenant. On-prem FMCs and cloud-delivered FMCs cannot be deleted using this endpoint.
 
 ### Example
 

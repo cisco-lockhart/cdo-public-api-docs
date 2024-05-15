@@ -41,8 +41,8 @@ class FtdCreateOrUpdateInput(BaseModel):
     def licenses_validate_enum(cls, value):
         """Validates the enum"""
         for i in value:
-            if i not in set(['BASE', 'CARRIER', 'THREAT', 'MALWARE', 'URLFilter']):
-                raise ValueError("each list item must be one of ('BASE', 'CARRIER', 'THREAT', 'MALWARE', 'URLFilter')")
+            if i not in set(['BASE', 'CARRIER', 'THREAT', 'MALWARE', 'URLFilter', 'BASE', 'CARRIER', 'MALWARE', 'THREAT', 'URLFilter']):
+                raise ValueError("each list item must be one of ('BASE', 'CARRIER', 'THREAT', 'MALWARE', 'URLFilter', 'BASE', 'CARRIER', 'MALWARE', 'THREAT', 'URLFilter')")
         return value
 
     @field_validator('performance_tier')

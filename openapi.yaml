@@ -1781,7 +1781,9 @@ paths:
       tags:
         - Inventory
       summary: Delete Device
-      description: Delete a device by UID in the CDO tenant
+      description: >-
+        Delete a device by UID in the CDO tenant. On-prem FMCs and
+        cloud-delivered FMCs cannot be deleted using this endpoint.
       operationId: deleteDevice
       parameters:
         - name: deviceUid
@@ -4001,15 +4003,28 @@ components:
               - THREAT
               - MALWARE
               - URLFilter
+              - BASE
+              - CARRIER
+              - MALWARE
+              - THREAT
+              - URLFilter
+          enum:
+            - BASE
+            - CARRIER
+            - MALWARE
+            - THREAT
+            - URLFilter
         virtual:
           type: boolean
           description: Indicate whether the FTD is a virtual or a physical device.
+          example: true
         fmcAccessPolicyUid:
           type: string
           description: >-
             Specify the unique identifier of the FMC access policy to apply to
             this device.
           format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         performanceTier:
           type: string
           description: >-
