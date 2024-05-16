@@ -256,5 +256,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_protocol_value_content.py
 tox.ini
