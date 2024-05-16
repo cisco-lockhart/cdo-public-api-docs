@@ -352,7 +352,7 @@ paths:
           required: false
           schema:
             type: string
-          example: name:London-Office-ASA
+          example: fieldName:fieldValue
       responses:
         '200':
           description: List of User objects
@@ -1065,7 +1065,7 @@ paths:
           required: false
           schema:
             type: string
-          example: name:London-Office-ASA
+          example: fieldName:fieldValue
         - name: sort
           in: query
           description: The fields to sort results by.
@@ -1173,7 +1173,7 @@ paths:
           required: false
           schema:
             type: string
-          example: name:London-Office-ASA
+          example: fieldName:fieldValue
         - name: sort
           in: query
           description: The fields to sort results by.
@@ -1279,7 +1279,7 @@ paths:
           required: false
           schema:
             type: string
-          example: name:London-Office-ASA
+          example: fieldName:fieldValue
       responses:
         '200':
           description: List of Change Request objects
@@ -2123,7 +2123,7 @@ paths:
           required: false
           schema:
             type: string
-          example: name:London-Office-ASA
+          example: fieldName:fieldValue
         - name: sort
           in: query
           description: The fields to sort results by.
@@ -2532,7 +2532,7 @@ paths:
           required: false
           schema:
             type: string
-          example: name:London-Office-ASA
+          example: fieldName:fieldValue
         - name: sort
           in: query
           description: The fields to sort results by.
@@ -2663,7 +2663,7 @@ paths:
           required: false
           schema:
             type: string
-          example: name:London-Office-ASA
+          example: fieldName:fieldValue
         - name: sort
           in: query
           description: The fields to sort results by.
@@ -2730,7 +2730,7 @@ paths:
           required: false
           schema:
             type: string
-          example: name:London-Office-ASA
+          example: fieldName:fieldValue
         - name: sort
           in: query
           description: The fields to sort results by.
@@ -2799,7 +2799,7 @@ paths:
           required: false
           schema:
             type: string
-          example: name:London-Office-ASA
+          example: fieldName:fieldValue
         - name: sort
           in: query
           description: The fields to sort results by.
@@ -2866,7 +2866,7 @@ paths:
           required: false
           schema:
             type: string
-          example: name:London-Office-ASA
+          example: fieldName:fieldValue
         - name: sort
           in: query
           description: The fields to sort results by.
@@ -2968,7 +2968,7 @@ paths:
           required: false
           schema:
             type: string
-          example: name:London-Office-ASA
+          example: fieldName:fieldValue
         - name: sort
           in: query
           description: The fields to sort results by.
@@ -3093,7 +3093,7 @@ paths:
           required: false
           schema:
             type: string
-          example: name:London-Office-ASA
+          example: fieldName:fieldValue
       responses:
         '200':
           description: List of Change Log objects

@@ -1053,7 +1053,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     api_instance = cdo_sdk_python.InventoryApi(api_client)
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
-    q = 'name:London-Office-ASA' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
+    q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
     sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
@@ -1308,7 +1308,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     api_instance = cdo_sdk_python.InventoryApi(api_client)
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
-    q = 'name:London-Office-ASA' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
+    q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
     sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
@@ -1396,7 +1396,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     api_instance = cdo_sdk_python.InventoryApi(api_client)
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
-    q = 'name:London-Office-ASA' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
+    q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
     sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
@@ -1568,7 +1568,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     api_instance = cdo_sdk_python.InventoryApi(api_client)
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
-    q = 'name:London-Office-ASA' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
+    q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
     sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
