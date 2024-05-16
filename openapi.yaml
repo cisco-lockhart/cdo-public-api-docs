@@ -4355,8 +4355,12 @@ components:
           example: true
         multicloudDefense:
           type: boolean
-          description: Indicates if the tenant has enabled multicloud defense capabilities.
+          description: Indicates if the tenant has the multicloud defense enabled.
           example: false
+        aiAssistant:
+          type: boolean
+          description: Indicates if the tenant has the AI assistant enabled.
+          example: true
         autoDiscoverOnPremFmcs:
           type: boolean
           description: Indicates if the system automatically discovers on-premise FMCs.
