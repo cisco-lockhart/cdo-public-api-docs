@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.179"
+__version__ = "1.0.180"
 
 # import apis into sdk package
 from cdo_sdk_python.api.change_requests_api import ChangeRequestsApi
