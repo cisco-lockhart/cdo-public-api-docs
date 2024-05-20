@@ -699,7 +699,7 @@ cli_update_sdk_description_parse_requirements() {
 
 # :command.initialize
 initialize() {
-  version="0.1.0"
+  version="1.0.0"
   long_usage=''
   set -e
 

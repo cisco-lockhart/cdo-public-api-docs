@@ -1,6 +1,6 @@
 name: cli
 help: CDO Public API documentation
-version: 0.1.0
+version: 1.0.0
 
 commands:
 - name: download
