@@ -1,6 +1,3 @@
->**Note**:
-The CDO API is currently in beta and is subject to change. If you adopt a beta API, it may not be fully compatible with future versions.
-
 # Version 1.0.0 (2024-05-23)
 
 ## Added
