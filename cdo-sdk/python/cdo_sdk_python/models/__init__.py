@@ -15,6 +15,7 @@
 
 
 # import models into model package
+from cdo_sdk_python.models.ai_assistant_conversation import AiAssistantConversation
 from cdo_sdk_python.models.api_token_info import ApiTokenInfo
 from cdo_sdk_python.models.asa_create_or_update_input import AsaCreateOrUpdateInput
 from cdo_sdk_python.models.asa_failover_mate import AsaFailoverMate

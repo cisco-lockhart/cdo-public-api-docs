@@ -15,9 +15,10 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.192"
+__version__ = "1.0.193"
 
 # import apis into sdk package
+from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
 from cdo_sdk_python.api.change_requests_api import ChangeRequestsApi
 from cdo_sdk_python.api.changelogs_api import ChangelogsApi
 from cdo_sdk_python.api.cloud_delivered_fmc_api import CloudDeliveredFMCApi
@@ -44,6 +45,7 @@ from cdo_sdk_python.exceptions import ApiAttributeError
 from cdo_sdk_python.exceptions import ApiException
 
 # import models into sdk package
+from cdo_sdk_python.models.ai_assistant_conversation import AiAssistantConversation
 from cdo_sdk_python.models.api_token_info import ApiTokenInfo
 from cdo_sdk_python.models.asa_create_or_update_input import AsaCreateOrUpdateInput
 from cdo_sdk_python.models.asa_failover_mate import AsaFailoverMate

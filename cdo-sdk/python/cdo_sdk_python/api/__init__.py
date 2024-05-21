@@ -1,6 +1,7 @@
 # flake8: noqa
 
 # import apis into api package
+from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
 from cdo_sdk_python.api.change_requests_api import ChangeRequestsApi
 from cdo_sdk_python.api.changelogs_api import ChangelogsApi
 from cdo_sdk_python.api.cloud_delivered_fmc_api import CloudDeliveredFMCApi

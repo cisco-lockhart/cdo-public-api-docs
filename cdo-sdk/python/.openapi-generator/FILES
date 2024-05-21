@@ -4,6 +4,7 @@
 README.md
 cdo_sdk_python/__init__.py
 cdo_sdk_python/api/__init__.py
+cdo_sdk_python/api/ai_assistant_api.py
 cdo_sdk_python/api/change_requests_api.py
 cdo_sdk_python/api/changelogs_api.py
 cdo_sdk_python/api/cloud_delivered_fmc_api.py
@@ -22,6 +23,7 @@ cdo_sdk_python/api_response.py
 cdo_sdk_python/configuration.py
 cdo_sdk_python/exceptions.py
 cdo_sdk_python/models/__init__.py
+cdo_sdk_python/models/ai_assistant_conversation.py
 cdo_sdk_python/models/api_token_info.py
 cdo_sdk_python/models/asa_create_or_update_input.py
 cdo_sdk_python/models/asa_failover_mate.py
@@ -130,6 +132,8 @@ cdo_sdk_python/models/user_page.py
 cdo_sdk_python/models/user_role.py
 cdo_sdk_python/py.typed
 cdo_sdk_python/rest.py
+docs/AIAssistantApi.md
+docs/AiAssistantConversation.md
 docs/ApiTokenInfo.md
 docs/AsaCreateOrUpdateInput.md
 docs/AsaFailoverMate.md
@@ -256,4 +260,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_ai_assistant_api.py
+test/test_ai_assistant_conversation.py
 tox.ini

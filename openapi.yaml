@@ -48,6 +48,8 @@ tags:
     x-displayName: Meta
   - name: Changelogs
     x-displayName: Changelogs
+  - name: AI Assistant
+    x-displayName: AI Assistant
   - name: Object Management
     x-displayName: Object Management
 paths:
@@ -3228,6 +3230,104 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /v1/ai-assistant/conversations:
+    get:
+      tags:
+        - AI Assistant
+      summary: Get Conversations
+      description: >-
+        Get a list of AI Assistant Conversations. Note: the total number of
+        conversations is set to -1 as this information is currently unavailable.
+      operationId: getConversations
+      parameters:
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: sort
+          in: query
+          description: The fields to sort results by.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          example: name:DESC
+      responses:
+        '200':
+          description: List of Conversations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiAssistantConversation'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+  /v1/ai-assistant/conversations/{conversationUid}:
+    get:
+      tags:
+        - AI Assistant
+      summary: Get Conversation
+      description: Get an AI Assistant conversation by UID in the CDO tenant.
+      operationId: getConversation
+      parameters:
+        - name: conversationUid
+          in: path
+          description: The unique identifier of the conversation in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Conversation object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiAssistantConversation'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /.well-known/jwks.json:
     get:
       tags:
@@ -5556,6 +5656,43 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/ChangeRequest'
+    AiAssistantConversation:
+      required:
+        - uid
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the conversation.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        createdDate:
+          type: string
+          description: >-
+            The time (UTC; represented using the RFC-3339 standard) at which the
+            conversation was created.
+          format: date-time
+          example: '2023-12-13T08:15:44Z'
+        lastInteractionDate:
+          type: string
+          description: >-
+            The time (UTC; represented using the RFC-3339 standard) at which the
+            user interacted with this conversation.
+          format: date-time
+          example: '2023-12-13T08:15:44Z'
+        lastAnswerDate:
+          type: string
+          description: >-
+            The time (UTC; represented using the RFC-3339 standard) at which an
+            answer was received.
+          format: date-time
+          example: '2023-12-13T08:15:44Z'
+        title:
+          type: string
+          description: >-
+            The title of the conversation. This is set to the first question
+            asked as part of the conversation.
+          example: Is example.com blocked on my FTD?
     JsonWebKey:
       type: object
       properties:
@@ -6479,6 +6616,7 @@ x-tagGroups:
       - Transactions
       - Meta
       - Changelogs
+      - AI Assistant
   - name: object-service-openapi
     tags:
       - Object Management
