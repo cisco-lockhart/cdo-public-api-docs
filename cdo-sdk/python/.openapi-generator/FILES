@@ -260,6 +260,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_ai_assistant_api.py
-test/test_ai_assistant_conversation.py
 tox.ini
