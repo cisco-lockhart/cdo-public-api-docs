@@ -24,6 +24,7 @@ cdo_sdk_python/configuration.py
 cdo_sdk_python/exceptions.py
 cdo_sdk_python/models/__init__.py
 cdo_sdk_python/models/ai_assistant_conversation.py
+cdo_sdk_python/models/ai_assistant_conversation_page.py
 cdo_sdk_python/models/api_token_info.py
 cdo_sdk_python/models/asa_create_or_update_input.py
 cdo_sdk_python/models/asa_failover_mate.py
@@ -59,6 +60,8 @@ cdo_sdk_python/models/conflict_detection_interval.py
 cdo_sdk_python/models/conflict_detection_state.py
 cdo_sdk_python/models/connectivity_state.py
 cdo_sdk_python/models/connector_type.py
+cdo_sdk_python/models/conversation_message.py
+cdo_sdk_python/models/conversation_message_page.py
 cdo_sdk_python/models/create_request.py
 cdo_sdk_python/models/device.py
 cdo_sdk_python/models/device_page.py
@@ -134,6 +137,7 @@ cdo_sdk_python/py.typed
 cdo_sdk_python/rest.py
 docs/AIAssistantApi.md
 docs/AiAssistantConversation.md
+docs/AiAssistantConversationPage.md
 docs/ApiTokenInfo.md
 docs/AsaCreateOrUpdateInput.md
 docs/AsaFailoverMate.md
@@ -174,6 +178,8 @@ docs/ConflictDetectionState.md
 docs/ConnectivityState.md
 docs/ConnectorType.md
 docs/ConnectorsApi.md
+docs/ConversationMessage.md
+docs/ConversationMessagePage.md
 docs/CreateRequest.md
 docs/Device.md
 docs/DevicePage.md
@@ -260,4 +266,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_ai_assistant_conversation_page.py
+test/test_conversation_message.py
+test/test_conversation_message_page.py
 tox.ini

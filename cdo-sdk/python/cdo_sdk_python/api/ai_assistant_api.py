@@ -21,6 +21,8 @@ from pydantic import Field, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
 from cdo_sdk_python.models.ai_assistant_conversation import AiAssistantConversation
+from cdo_sdk_python.models.ai_assistant_conversation_page import AiAssistantConversationPage
+from cdo_sdk_python.models.conversation_message_page import ConversationMessagePage
 
 from cdo_sdk_python.api_client import ApiClient, RequestSerialized
 from cdo_sdk_python.api_response import ApiResponse
@@ -38,6 +40,328 @@ class AIAssistantApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+
+    @validate_call
+    def get_ai_assistant_conversation_messages(
+        self,
+        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier of the conversation in CDO.")],
+        limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ConversationMessagePage:
+        """Get Messages
+
+        Get a list of AI Assistant Messages in a single conversation. Note: the total number of messages is set to -1 as this information is currently unavailable.
+
+        :param conversation_uid: The unique identifier of the conversation in CDO. (required)
+        :type conversation_uid: str
+        :param limit: The number of results to retrieve.
+        :type limit: str
+        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :type offset: str
+        :param sort: The fields to sort results by.
+        :type sort: List[str]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_ai_assistant_conversation_messages_serialize(
+            conversation_uid=conversation_uid,
+            limit=limit,
+            offset=offset,
+            sort=sort,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ConversationMessagePage",
+            '400': "CommonApiError",
+            '401': "AuthenticationError",
+            '403': "CommonApiError",
+            '500': "CommonApiError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_ai_assistant_conversation_messages_with_http_info(
+        self,
+        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier of the conversation in CDO.")],
+        limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ConversationMessagePage]:
+        """Get Messages
+
+        Get a list of AI Assistant Messages in a single conversation. Note: the total number of messages is set to -1 as this information is currently unavailable.
+
+        :param conversation_uid: The unique identifier of the conversation in CDO. (required)
+        :type conversation_uid: str
+        :param limit: The number of results to retrieve.
+        :type limit: str
+        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :type offset: str
+        :param sort: The fields to sort results by.
+        :type sort: List[str]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_ai_assistant_conversation_messages_serialize(
+            conversation_uid=conversation_uid,
+            limit=limit,
+            offset=offset,
+            sort=sort,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ConversationMessagePage",
+            '400': "CommonApiError",
+            '401': "AuthenticationError",
+            '403': "CommonApiError",
+            '500': "CommonApiError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_ai_assistant_conversation_messages_without_preload_content(
+        self,
+        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier of the conversation in CDO.")],
+        limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Messages
+
+        Get a list of AI Assistant Messages in a single conversation. Note: the total number of messages is set to -1 as this information is currently unavailable.
+
+        :param conversation_uid: The unique identifier of the conversation in CDO. (required)
+        :type conversation_uid: str
+        :param limit: The number of results to retrieve.
+        :type limit: str
+        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :type offset: str
+        :param sort: The fields to sort results by.
+        :type sort: List[str]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_ai_assistant_conversation_messages_serialize(
+            conversation_uid=conversation_uid,
+            limit=limit,
+            offset=offset,
+            sort=sort,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ConversationMessagePage",
+            '400': "CommonApiError",
+            '401': "AuthenticationError",
+            '403': "CommonApiError",
+            '500': "CommonApiError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_ai_assistant_conversation_messages_serialize(
+        self,
+        conversation_uid,
+        limit,
+        offset,
+        sort,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+            'sort': 'multi',
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, str] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if conversation_uid is not None:
+            _path_params['conversationUid'] = conversation_uid
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if offset is not None:
+            
+            _query_params.append(('offset', offset))
+            
+        if sort is not None:
+            
+            _query_params.append(('sort', sort))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'bearerAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/v1/ai-assistant/conversations/{conversationUid}/messages',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
 
 
     @validate_call
@@ -331,7 +655,7 @@ class AIAssistantApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AiAssistantConversation:
+    ) -> AiAssistantConversationPage:
         """Get Conversations
 
         Get a list of AI Assistant Conversations. Note: the total number of conversations is set to -1 as this information is currently unavailable.
@@ -375,7 +699,7 @@ class AIAssistantApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiAssistantConversation",
+            '200': "AiAssistantConversationPage",
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
@@ -410,7 +734,7 @@ class AIAssistantApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AiAssistantConversation]:
+    ) -> ApiResponse[AiAssistantConversationPage]:
         """Get Conversations
 
         Get a list of AI Assistant Conversations. Note: the total number of conversations is set to -1 as this information is currently unavailable.
@@ -454,7 +778,7 @@ class AIAssistantApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiAssistantConversation",
+            '200': "AiAssistantConversationPage",
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
@@ -533,7 +857,7 @@ class AIAssistantApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AiAssistantConversation",
+            '200': "AiAssistantConversationPage",
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
