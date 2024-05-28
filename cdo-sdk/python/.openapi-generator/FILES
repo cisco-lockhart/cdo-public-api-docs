@@ -268,7 +268,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_ai_conversation.py
-test/test_ai_message.py
-test/test_ai_question.py
 tox.ini
