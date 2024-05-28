@@ -10,11 +10,11 @@ Method | HTTP request | Description
 
 
 # **get_ai_assistant_conversation_messages**
-> ConversationMessagePage get_ai_assistant_conversation_messages(conversation_uid, limit=limit, offset=offset, sort=sort)
+> ConversationMessagePage get_ai_assistant_conversation_messages(conversation_uid)
 
 Get Messages
 
-Get a list of AI Assistant Messages in a single conversation. Note: the total number of messages is set to -1 as this information is currently unavailable.
+Get a list of messages in a single AI Assistant conversation. Note: this endpoint is not paginated, and returns the full list of messages.
 
 ### Example
 
@@ -47,13 +47,10 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.AIAssistantApi(api_client)
     conversation_uid = 'conversation_uid_example' # str | The unique identifier of the conversation in CDO.
-    limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
-    sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
         # Get Messages
-        api_response = api_instance.get_ai_assistant_conversation_messages(conversation_uid, limit=limit, offset=offset, sort=sort)
+        api_response = api_instance.get_ai_assistant_conversation_messages(conversation_uid)
         print("The response of AIAssistantApi->get_ai_assistant_conversation_messages:\n")
         pprint(api_response)
     except Exception as e:
@@ -68,9 +65,6 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **conversation_uid** | **str**| The unique identifier of the conversation in CDO. | 
- **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
- **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
 ### Return type
 

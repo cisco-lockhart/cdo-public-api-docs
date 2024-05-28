@@ -3334,9 +3334,8 @@ paths:
         - AI Assistant
       summary: Get Messages
       description: >-
-        Get a list of AI Assistant Messages in a single conversation. Note: the
-        total number of messages is set to -1 as this information is currently
-        unavailable.
+        Get a list of messages in a single AI Assistant conversation. Note: this
+        endpoint is not paginated, and returns the full list of messages.
       operationId: getAiAssistantConversationMessages
       parameters:
         - name: conversationUid
@@ -3346,35 +3345,6 @@ paths:
           schema:
             type: string
             format: uuid
-        - name: limit
-          in: query
-          description: The number of results to retrieve.
-          required: false
-          schema:
-            maximum: 200
-            minimum: 0
-            type: string
-            default: '50'
-        - name: offset
-          in: query
-          description: >-
-            The offset of the results retrieved. The CDO API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
-          required: false
-          schema:
-            minimum: 0
-            type: string
-            default: '0'
-        - name: sort
-          in: query
-          description: The fields to sort results by.
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          example: name:DESC
       responses:
         '200':
           description: List of Conversation Messages

@@ -46,9 +46,6 @@ class AIAssistantApi:
     def get_ai_assistant_conversation_messages(
         self,
         conversation_uid: Annotated[StrictStr, Field(description="The unique identifier of the conversation in CDO.")],
-        limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
-        sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -64,16 +61,10 @@ class AIAssistantApi:
     ) -> ConversationMessagePage:
         """Get Messages
 
-        Get a list of AI Assistant Messages in a single conversation. Note: the total number of messages is set to -1 as this information is currently unavailable.
+        Get a list of messages in a single AI Assistant conversation. Note: this endpoint is not paginated, and returns the full list of messages.
 
         :param conversation_uid: The unique identifier of the conversation in CDO. (required)
         :type conversation_uid: str
-        :param limit: The number of results to retrieve.
-        :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-        :type offset: str
-        :param sort: The fields to sort results by.
-        :type sort: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -98,9 +89,6 @@ class AIAssistantApi:
 
         _param = self._get_ai_assistant_conversation_messages_serialize(
             conversation_uid=conversation_uid,
-            limit=limit,
-            offset=offset,
-            sort=sort,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -129,9 +117,6 @@ class AIAssistantApi:
     def get_ai_assistant_conversation_messages_with_http_info(
         self,
         conversation_uid: Annotated[StrictStr, Field(description="The unique identifier of the conversation in CDO.")],
-        limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
-        sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -147,16 +132,10 @@ class AIAssistantApi:
     ) -> ApiResponse[ConversationMessagePage]:
         """Get Messages
 
-        Get a list of AI Assistant Messages in a single conversation. Note: the total number of messages is set to -1 as this information is currently unavailable.
+        Get a list of messages in a single AI Assistant conversation. Note: this endpoint is not paginated, and returns the full list of messages.
 
         :param conversation_uid: The unique identifier of the conversation in CDO. (required)
         :type conversation_uid: str
-        :param limit: The number of results to retrieve.
-        :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-        :type offset: str
-        :param sort: The fields to sort results by.
-        :type sort: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -181,9 +160,6 @@ class AIAssistantApi:
 
         _param = self._get_ai_assistant_conversation_messages_serialize(
             conversation_uid=conversation_uid,
-            limit=limit,
-            offset=offset,
-            sort=sort,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -212,9 +188,6 @@ class AIAssistantApi:
     def get_ai_assistant_conversation_messages_without_preload_content(
         self,
         conversation_uid: Annotated[StrictStr, Field(description="The unique identifier of the conversation in CDO.")],
-        limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
-        sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -230,16 +203,10 @@ class AIAssistantApi:
     ) -> RESTResponseType:
         """Get Messages
 
-        Get a list of AI Assistant Messages in a single conversation. Note: the total number of messages is set to -1 as this information is currently unavailable.
+        Get a list of messages in a single AI Assistant conversation. Note: this endpoint is not paginated, and returns the full list of messages.
 
         :param conversation_uid: The unique identifier of the conversation in CDO. (required)
         :type conversation_uid: str
-        :param limit: The number of results to retrieve.
-        :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-        :type offset: str
-        :param sort: The fields to sort results by.
-        :type sort: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -264,9 +231,6 @@ class AIAssistantApi:
 
         _param = self._get_ai_assistant_conversation_messages_serialize(
             conversation_uid=conversation_uid,
-            limit=limit,
-            offset=offset,
-            sort=sort,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -290,9 +254,6 @@ class AIAssistantApi:
     def _get_ai_assistant_conversation_messages_serialize(
         self,
         conversation_uid,
-        limit,
-        offset,
-        sort,
         _request_auth,
         _content_type,
         _headers,
@@ -302,7 +263,6 @@ class AIAssistantApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'sort': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -316,18 +276,6 @@ class AIAssistantApi:
         if conversation_uid is not None:
             _path_params['conversationUid'] = conversation_uid
         # process the query parameters
-        if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
-        if offset is not None:
-            
-            _query_params.append(('offset', offset))
-            
-        if sort is not None:
-            
-            _query_params.append(('sort', sort))
-            
         # process the header parameters
         # process the form parameters
         # process the body parameter
