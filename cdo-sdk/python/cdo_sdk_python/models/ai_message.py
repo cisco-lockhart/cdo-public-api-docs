@@ -18,21 +18,32 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from cdo_sdk_python.models.ai_message import AiMessage
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ConversationMessagePage(BaseModel):
+class AiMessage(BaseModel):
     """
-    ConversationMessagePage
+    The list of items retrieved.
     """ # noqa: E501
-    count: Optional[StrictInt] = Field(default=None, description="The total number of results available.")
-    limit: Optional[StrictInt] = Field(default=None, description="The number of results retrieved.")
-    offset: Optional[StrictInt] = Field(default=None, description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")
-    items: Optional[List[AiMessage]] = Field(default=None, description="The list of items retrieved.")
-    __properties: ClassVar[List[str]] = ["count", "limit", "offset", "items"]
+    uid: StrictStr = Field(description="The unique identifier of the Message.")
+    type: Optional[StrictStr] = Field(default=None, description="The type of the message, indicating whether it is a request or a response.")
+    in_reply_to: Optional[StrictStr] = Field(default=None, description="The unique identifier of the message to which this message is replying. This field is populated only for messages of type RESPONSE.", alias="inReplyTo")
+    content: Optional[StrictStr] = Field(default=None, description="The content of the message.")
+    created_date: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) at which the message was sent.", alias="createdDate")
+    __properties: ClassVar[List[str]] = ["uid", "type", "inReplyTo", "content", "createdDate"]
+
+    @field_validator('type')
+    def type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['REQUEST', 'RESPONSE']):
+            raise ValueError("must be one of enum values ('REQUEST', 'RESPONSE')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +63,7 @@ class ConversationMessagePage(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ConversationMessagePage from a JSON string"""
+        """Create an instance of AiMessage from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,18 +84,11 @@ class ConversationMessagePage(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in items (list)
-        _items = []
-        if self.items:
-            for _item in self.items:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['items'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ConversationMessagePage from a dict"""
+        """Create an instance of AiMessage from a dict"""
         if obj is None:
             return None
 
@@ -92,10 +96,11 @@ class ConversationMessagePage(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "count": obj.get("count"),
-            "limit": obj.get("limit"),
-            "offset": obj.get("offset"),
-            "items": [AiMessage.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None
+            "uid": obj.get("uid"),
+            "type": obj.get("type"),
+            "inReplyTo": obj.get("inReplyTo"),
+            "content": obj.get("content"),
+            "createdDate": obj.get("createdDate")
         })
         return _obj
 

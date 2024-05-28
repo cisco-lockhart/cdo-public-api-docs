@@ -42,14 +42,14 @@ tags:
     x-displayName: Command Line Interface
   - name: Change Requests
     x-displayName: Change Requests
+  - name: AI Assistant
+    x-displayName: AI Assistant
   - name: Transactions
     x-displayName: Transactions
   - name: Meta
     x-displayName: Meta
   - name: Changelogs
     x-displayName: Changelogs
-  - name: AI Assistant
-    x-displayName: AI Assistant
   - name: Object Management
     x-displayName: Object Management
 paths:
@@ -1332,6 +1332,183 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         '405':
           $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+  /v1/ai-assistant/conversations:
+    get:
+      tags:
+        - AI Assistant
+      summary: Get Conversations
+      description: >-
+        Get a list of AI Assistant Conversations. Note: the total number of
+        conversations is set to -1 as this information is currently unavailable.
+      operationId: getConversations
+      parameters:
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: sort
+          in: query
+          description: The fields to sort results by.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          example: name:DESC
+      responses:
+        '200':
+          description: List of Conversations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiAssistantConversationPage'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+    post:
+      tags:
+        - AI Assistant
+      summary: Ask AI Assistant (New Conversation)
+      description: Start a new conversation with the AI Assistant by asking a question.
+      operationId: askAiAssistant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiQuestion'
+        required: true
+      responses:
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the status of the
+            question.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+  /v1/ai-assistant/conversations/{conversationUid}:
+    get:
+      tags:
+        - AI Assistant
+      summary: Get Conversation
+      description: Get an AI Assistant conversation by UID in the CDO tenant.
+      operationId: getConversation
+      parameters:
+        - name: conversationUid
+          in: path
+          description: The unique identifier of the conversation in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Conversation object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiConversation'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+    post:
+      tags:
+        - AI Assistant
+      summary: Ask AI Assistant (Existing Conversation)
+      description: >-
+        Ask the AI Assistant a question in the context of an existing
+        conversation with the AI Assistant.
+      operationId: askAiAssistant_1
+      parameters:
+        - name: conversationUid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiQuestion'
+        required: true
+      responses:
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the status of the
+            question.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
         '500':
           description: Internal server error.
           content:
@@ -3230,104 +3407,6 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
-  /v1/ai-assistant/conversations:
-    get:
-      tags:
-        - AI Assistant
-      summary: Get Conversations
-      description: >-
-        Get a list of AI Assistant Conversations. Note: the total number of
-        conversations is set to -1 as this information is currently unavailable.
-      operationId: getConversations
-      parameters:
-        - name: limit
-          in: query
-          description: The number of results to retrieve.
-          required: false
-          schema:
-            maximum: 200
-            minimum: 0
-            type: string
-            default: '50'
-        - name: offset
-          in: query
-          description: >-
-            The offset of the results retrieved. The CDO API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
-          required: false
-          schema:
-            minimum: 0
-            type: string
-            default: '0'
-        - name: sort
-          in: query
-          description: The fields to sort results by.
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          example: name:DESC
-      responses:
-        '200':
-          description: List of Conversations
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AiAssistantConversationPage'
-        '400':
-          $ref: '#/components/responses/http400BadRequest'
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '403':
-          $ref: '#/components/responses/http403Forbidden'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
-  /v1/ai-assistant/conversations/{conversationUid}:
-    get:
-      tags:
-        - AI Assistant
-      summary: Get Conversation
-      description: Get an AI Assistant conversation by UID in the CDO tenant.
-      operationId: getConversation
-      parameters:
-        - name: conversationUid
-          in: path
-          description: The unique identifier of the conversation in CDO.
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '200':
-          description: Conversation object
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AiAssistantConversation'
-        '400':
-          $ref: '#/components/responses/http400BadRequest'
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '403':
-          $ref: '#/components/responses/http403Forbidden'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
   /v1/ai-assistant/conversations/{conversationUid}/messages:
     get:
       tags:
@@ -3927,6 +4006,7 @@ components:
         - REFRESH_RA_VPN_SESSIONS
         - TERMINATE_USER_RA_VPN_SESSIONS
         - CREATE_SDC
+        - SEND_AI_ASSISTANT_MESSAGE
     RaVpnDeviceInput:
       required:
         - deviceUids
@@ -4450,6 +4530,13 @@ components:
           type: string
           description: The description of the Change Request.
           example: my change request description
+    AiQuestion:
+      type: object
+      properties:
+        content:
+          type: string
+          description: The content of the message.
+          example: What's the difference between an Admin and a Super Admin?
     ConflictDetectionInterval:
       type: string
       description: >-
@@ -5694,7 +5781,33 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/ChangeRequest'
-    AiAssistantConversation:
+    AiAssistantConversationPage:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The total number of results available.
+          format: int32
+          example: 100
+        limit:
+          type: integer
+          description: The number of results retrieved.
+          format: int32
+          example: 50
+        offset:
+          type: integer
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          format: int32
+          example: 0
+        items:
+          type: array
+          description: The list of items retrieved.
+          items:
+            $ref: '#/components/schemas/AiConversation'
+    AiConversation:
       required:
         - uid
       type: object
@@ -5731,33 +5844,7 @@ components:
             The title of the conversation. This is set to the first question
             asked as part of the conversation.
           example: Is example.com blocked on my FTD?
-    AiAssistantConversationPage:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: The total number of results available.
-          format: int32
-          example: 100
-        limit:
-          type: integer
-          description: The number of results retrieved.
-          format: int32
-          example: 50
-        offset:
-          type: integer
-          description: >-
-            The offset of the results retrieved. The CDO API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
-          format: int32
-          example: 0
-        items:
-          type: array
-          description: The list of items retrieved.
-          items:
-            $ref: '#/components/schemas/AiAssistantConversation'
-    ConversationMessage:
+    AiMessage:
       required:
         - uid
       type: object
@@ -5821,7 +5908,7 @@ components:
           type: array
           description: The list of items retrieved.
           items:
-            $ref: '#/components/schemas/ConversationMessage'
+            $ref: '#/components/schemas/AiMessage'
     JsonWebKey:
       type: object
       properties:
@@ -6742,10 +6829,10 @@ x-tagGroups:
       - Connectors
       - Command Line Interface
       - Change Requests
+      - AI Assistant
       - Transactions
       - Meta
       - Changelogs
-      - AI Assistant
   - name: object-service-openapi
     tags:
       - Object Management

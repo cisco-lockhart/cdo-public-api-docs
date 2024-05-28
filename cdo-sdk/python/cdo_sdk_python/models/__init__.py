@@ -15,8 +15,10 @@
 
 
 # import models into model package
-from cdo_sdk_python.models.ai_assistant_conversation import AiAssistantConversation
 from cdo_sdk_python.models.ai_assistant_conversation_page import AiAssistantConversationPage
+from cdo_sdk_python.models.ai_conversation import AiConversation
+from cdo_sdk_python.models.ai_message import AiMessage
+from cdo_sdk_python.models.ai_question import AiQuestion
 from cdo_sdk_python.models.api_token_info import ApiTokenInfo
 from cdo_sdk_python.models.asa_create_or_update_input import AsaCreateOrUpdateInput
 from cdo_sdk_python.models.asa_failover_mate import AsaFailoverMate
@@ -52,7 +54,6 @@ from cdo_sdk_python.models.conflict_detection_interval import ConflictDetectionI
 from cdo_sdk_python.models.conflict_detection_state import ConflictDetectionState
 from cdo_sdk_python.models.connectivity_state import ConnectivityState
 from cdo_sdk_python.models.connector_type import ConnectorType
-from cdo_sdk_python.models.conversation_message import ConversationMessage
 from cdo_sdk_python.models.conversation_message_page import ConversationMessagePage
 from cdo_sdk_python.models.create_request import CreateRequest
 from cdo_sdk_python.models.device import Device

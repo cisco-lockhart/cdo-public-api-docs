@@ -18,21 +18,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cdo_sdk_python.models.ai_message import AiMessage
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ConversationMessagePage(BaseModel):
+class AiConversation(BaseModel):
     """
-    ConversationMessagePage
+    AiConversation
     """ # noqa: E501
-    count: Optional[StrictInt] = Field(default=None, description="The total number of results available.")
-    limit: Optional[StrictInt] = Field(default=None, description="The number of results retrieved.")
-    offset: Optional[StrictInt] = Field(default=None, description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")
-    items: Optional[List[AiMessage]] = Field(default=None, description="The list of items retrieved.")
-    __properties: ClassVar[List[str]] = ["count", "limit", "offset", "items"]
+    uid: StrictStr = Field(description="The unique identifier of the conversation.")
+    created_date: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) at which the conversation was created.", alias="createdDate")
+    last_interaction_date: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) at which the user interacted with this conversation.", alias="lastInteractionDate")
+    last_answer_date: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) at which an answer was received.", alias="lastAnswerDate")
+    title: Optional[StrictStr] = Field(default=None, description="The title of the conversation. This is set to the first question asked as part of the conversation.")
+    __properties: ClassVar[List[str]] = ["uid", "createdDate", "lastInteractionDate", "lastAnswerDate", "title"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +53,7 @@ class ConversationMessagePage(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ConversationMessagePage from a JSON string"""
+        """Create an instance of AiConversation from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,18 +74,11 @@ class ConversationMessagePage(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in items (list)
-        _items = []
-        if self.items:
-            for _item in self.items:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['items'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ConversationMessagePage from a dict"""
+        """Create an instance of AiConversation from a dict"""
         if obj is None:
             return None
 
@@ -92,10 +86,11 @@ class ConversationMessagePage(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "count": obj.get("count"),
-            "limit": obj.get("limit"),
-            "offset": obj.get("offset"),
-            "items": [AiMessage.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None
+            "uid": obj.get("uid"),
+            "createdDate": obj.get("createdDate"),
+            "lastInteractionDate": obj.get("lastInteractionDate"),
+            "lastAnswerDate": obj.get("lastAnswerDate"),
+            "title": obj.get("title")
         })
         return _obj
 

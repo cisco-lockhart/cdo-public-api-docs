@@ -20,7 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from cdo_sdk_python.models.ai_assistant_conversation import AiAssistantConversation
+from cdo_sdk_python.models.ai_conversation import AiConversation
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,7 +31,7 @@ class AiAssistantConversationPage(BaseModel):
     count: Optional[StrictInt] = Field(default=None, description="The total number of results available.")
     limit: Optional[StrictInt] = Field(default=None, description="The number of results retrieved.")
     offset: Optional[StrictInt] = Field(default=None, description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")
-    items: Optional[List[AiAssistantConversation]] = Field(default=None, description="The list of items retrieved.")
+    items: Optional[List[AiConversation]] = Field(default=None, description="The list of items retrieved.")
     __properties: ClassVar[List[str]] = ["count", "limit", "offset", "items"]
 
     model_config = ConfigDict(
@@ -95,7 +95,7 @@ class AiAssistantConversationPage(BaseModel):
             "count": obj.get("count"),
             "limit": obj.get("limit"),
             "offset": obj.get("offset"),
-            "items": [AiAssistantConversation.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None
+            "items": [AiConversation.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None
         })
         return _obj
 
