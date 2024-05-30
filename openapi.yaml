@@ -5,7 +5,7 @@ info:
   contact:
     name: CDO TAC
     email: cdo.tac@cisco.com
-  version: 1.0.0
+  version: 1.1.0
 servers:
   - url: https://edge.us.cdo.cisco.com/api/rest
     description: US
