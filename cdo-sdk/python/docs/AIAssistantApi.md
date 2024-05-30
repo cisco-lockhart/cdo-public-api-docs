@@ -180,7 +180,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_ai_assistant_conversation_messages**
-> ConversationMessagePage get_ai_assistant_conversation_messages(conversation_uid)
+> List[AiMessage] get_ai_assistant_conversation_messages(conversation_uid)
 
 Get Messages
 
@@ -192,7 +192,7 @@ Get a list of messages in a single AI Assistant conversation. Note: this endpoin
 
 ```python
 import cdo_sdk_python
-from cdo_sdk_python.models.conversation_message_page import ConversationMessagePage
+from cdo_sdk_python.models.ai_message import AiMessage
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
@@ -238,7 +238,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConversationMessagePage**](ConversationMessagePage.md)
+[**List[AiMessage]**](AiMessage.md)
 
 ### Authorization
 

@@ -26,7 +26,7 @@ from typing_extensions import Self
 
 class AiMessage(BaseModel):
     """
-    The list of items retrieved.
+    AiMessage
     """ # noqa: E501
     uid: StrictStr = Field(description="The unique identifier of the Message.")
     type: Optional[StrictStr] = Field(default=None, description="The type of the message, indicating whether it is a request or a response.")

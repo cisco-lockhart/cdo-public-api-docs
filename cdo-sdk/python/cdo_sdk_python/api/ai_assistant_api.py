@@ -22,9 +22,9 @@ from typing import List, Optional
 from typing_extensions import Annotated
 from cdo_sdk_python.models.ai_assistant_conversation_page import AiAssistantConversationPage
 from cdo_sdk_python.models.ai_conversation import AiConversation
+from cdo_sdk_python.models.ai_message import AiMessage
 from cdo_sdk_python.models.ai_question import AiQuestion
 from cdo_sdk_python.models.cdo_transaction import CdoTransaction
-from cdo_sdk_python.models.conversation_message_page import ConversationMessagePage
 
 from cdo_sdk_python.api_client import ApiClient, RequestSerialized
 from cdo_sdk_python.api_response import ApiResponse
@@ -641,7 +641,7 @@ class AIAssistantApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ConversationMessagePage:
+    ) -> List[AiMessage]:
         """Get Messages
 
         Get a list of messages in a single AI Assistant conversation. Note: this endpoint is not paginated, and returns the full list of messages.
@@ -679,7 +679,7 @@ class AIAssistantApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ConversationMessagePage",
+            '200': "List[AiMessage]",
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
@@ -712,7 +712,7 @@ class AIAssistantApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ConversationMessagePage]:
+    ) -> ApiResponse[List[AiMessage]]:
         """Get Messages
 
         Get a list of messages in a single AI Assistant conversation. Note: this endpoint is not paginated, and returns the full list of messages.
@@ -750,7 +750,7 @@ class AIAssistantApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ConversationMessagePage",
+            '200': "List[AiMessage]",
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
@@ -821,7 +821,7 @@ class AIAssistantApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ConversationMessagePage",
+            '200': "List[AiMessage]",
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
