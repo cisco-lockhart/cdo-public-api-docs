@@ -1,7 +1,7 @@
 # Version 1.1.0 (2024-05-30)
 
 ## Added
-- AI Assistant: API endpoints to start a conversation with the AI assistant, ask a new question, and list the conversations and messages.
+- AI Assistant: API endpoints to start a conversation with the AI assistant, ask questions, and list conversations and messages.
 
 # Version 1.0.0 (2024-05-23)
 
