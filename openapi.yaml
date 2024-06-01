@@ -1405,7 +1405,7 @@ paths:
         - AI Assistant
       summary: Ask AI Assistant (New Conversation)
       description: Start a new conversation with the AI Assistant by asking a question.
-      operationId: askAiAssistant
+      operationId: askAiAssistantInNewConversation
       requestBody:
         content:
           application/json:
@@ -1480,7 +1480,7 @@ paths:
       description: >-
         Ask the AI Assistant a question in the context of an existing
         conversation with the AI Assistant.
-      operationId: askAiAssistant_1
+      operationId: askAiAssistantInExistingConversation
       parameters:
         - name: conversationUid
           in: path
