@@ -1,6 +1,6 @@
 # TenantPayType
 
-An enum that describes the payment status of the tenant in CDO.
+An enum that describes the payment type of the tenant in CDO.
 
 ## Properties
 

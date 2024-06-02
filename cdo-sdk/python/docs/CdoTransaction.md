@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **last_updated_time** | **datetime** | The time (UTC; represented using the RFC-3339 standard) at which the transaction status was last updated | [optional] 
 **transaction_type** | [**CdoTransactionType**](CdoTransactionType.md) |  | [optional] 
 **cdo_transaction_status** | [**CdoTransactionStatus**](CdoTransactionStatus.md) |  | [optional] 
+**transaction_details** | **Dict[str, str]** | Transaction details, if any | [optional] 
 **error_message** | **str** | Transaction error message, if any | [optional] 
 **error_details** | **Dict[str, str]** | Transaction error details, if any | [optional] 
 **expire_at** | **int** | TTL attribute detailing the expiry time this item should be deleted | [optional] 

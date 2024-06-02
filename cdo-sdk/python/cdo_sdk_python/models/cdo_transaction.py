@@ -40,10 +40,11 @@ class CdoTransaction(BaseModel):
     last_updated_time: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) at which the transaction status was last updated", alias="lastUpdatedTime")
     transaction_type: Optional[CdoTransactionType] = Field(default=None, alias="transactionType")
     cdo_transaction_status: Optional[CdoTransactionStatus] = Field(default=None, alias="cdoTransactionStatus")
+    transaction_details: Optional[Dict[str, StrictStr]] = Field(default=None, description="Transaction details, if any", alias="transactionDetails")
     error_message: Optional[StrictStr] = Field(default=None, description="Transaction error message, if any", alias="errorMessage")
     error_details: Optional[Dict[str, StrictStr]] = Field(default=None, description="Transaction error details, if any", alias="errorDetails")
     expire_at: Optional[StrictInt] = Field(default=None, description="TTL attribute detailing the expiry time this item should be deleted", alias="expireAt")
-    __properties: ClassVar[List[str]] = ["tenantUid", "sortKey", "transactionUid", "entityUid", "entityUrl", "transactionPollingUrl", "submissionTime", "lastUpdatedTime", "transactionType", "cdoTransactionStatus", "errorMessage", "errorDetails", "expireAt"]
+    __properties: ClassVar[List[str]] = ["tenantUid", "sortKey", "transactionUid", "entityUid", "entityUrl", "transactionPollingUrl", "submissionTime", "lastUpdatedTime", "transactionType", "cdoTransactionStatus", "transactionDetails", "errorMessage", "errorDetails", "expireAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -106,6 +107,7 @@ class CdoTransaction(BaseModel):
             "lastUpdatedTime": obj.get("lastUpdatedTime"),
             "transactionType": obj.get("transactionType"),
             "cdoTransactionStatus": obj.get("cdoTransactionStatus"),
+            "transactionDetails": obj.get("transactionDetails"),
             "errorMessage": obj.get("errorMessage"),
             "errorDetails": obj.get("errorDetails"),
             "expireAt": obj.get("expireAt")

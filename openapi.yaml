@@ -3966,6 +3966,12 @@ components:
           $ref: '#/components/schemas/CdoTransactionType'
         cdoTransactionStatus:
           $ref: '#/components/schemas/CdoTransactionStatus'
+        transactionDetails:
+          type: object
+          additionalProperties:
+            type: string
+            description: Transaction details, if any
+          description: Transaction details, if any
         errorMessage:
           type: string
           description: Transaction error message, if any
@@ -4009,6 +4015,7 @@ components:
         - TERMINATE_USER_RA_VPN_SESSIONS
         - CREATE_SDC
         - SEND_AI_ASSISTANT_MESSAGE
+        - CREATE_TENANT
     RaVpnDeviceInput:
       required:
         - deviceUids
@@ -5241,7 +5248,7 @@ components:
             $ref: '#/components/schemas/Tenant'
     TenantPayType:
       type: string
-      description: An enum that describes the payment status of the tenant in CDO.
+      description: An enum that describes the payment type of the tenant in CDO.
       example: TRIAL
       enum:
         - PAYING
