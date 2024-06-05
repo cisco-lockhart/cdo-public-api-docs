@@ -43,7 +43,7 @@ class CdoTransactionType(str, Enum):
     TERMINATE_USER_RA_VPN_SESSIONS = 'TERMINATE_USER_RA_VPN_SESSIONS'
     CREATE_SDC = 'CREATE_SDC'
     SEND_AI_ASSISTANT_MESSAGE = 'SEND_AI_ASSISTANT_MESSAGE'
-    CREATE_TENANT = 'CREATE_TENANT'
+    MSP_CREATE_TENANT = 'MSP_CREATE_TENANT'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

@@ -4015,7 +4015,7 @@ components:
         - TERMINATE_USER_RA_VPN_SESSIONS
         - CREATE_SDC
         - SEND_AI_ASSISTANT_MESSAGE
-        - CREATE_TENANT
+        - MSP_CREATE_TENANT
     RaVpnDeviceInput:
       required:
         - deviceUids
