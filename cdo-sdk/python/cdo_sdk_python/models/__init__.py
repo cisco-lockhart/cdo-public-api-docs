@@ -15,6 +15,8 @@
 
 
 # import models into model package
+from cdo_sdk_python.models.access_group import AccessGroup
+from cdo_sdk_python.models.access_group_page import AccessGroupPage
 from cdo_sdk_python.models.ai_assistant_conversation_page import AiAssistantConversationPage
 from cdo_sdk_python.models.ai_conversation import AiConversation
 from cdo_sdk_python.models.ai_message import AiMessage

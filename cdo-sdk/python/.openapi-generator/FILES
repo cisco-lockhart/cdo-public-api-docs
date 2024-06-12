@@ -5,6 +5,7 @@ README.md
 cdo_sdk_python/__init__.py
 cdo_sdk_python/api/__init__.py
 cdo_sdk_python/api/ai_assistant_api.py
+cdo_sdk_python/api/asa_access_groups_api.py
 cdo_sdk_python/api/change_requests_api.py
 cdo_sdk_python/api/changelogs_api.py
 cdo_sdk_python/api/cloud_delivered_fmc_api.py
@@ -23,6 +24,8 @@ cdo_sdk_python/api_response.py
 cdo_sdk_python/configuration.py
 cdo_sdk_python/exceptions.py
 cdo_sdk_python/models/__init__.py
+cdo_sdk_python/models/access_group.py
+cdo_sdk_python/models/access_group_page.py
 cdo_sdk_python/models/ai_assistant_conversation_page.py
 cdo_sdk_python/models/ai_conversation.py
 cdo_sdk_python/models/ai_message.py
@@ -136,6 +139,9 @@ cdo_sdk_python/models/user_role.py
 cdo_sdk_python/py.typed
 cdo_sdk_python/rest.py
 docs/AIAssistantApi.md
+docs/ASAAccessGroupsApi.md
+docs/AccessGroup.md
+docs/AccessGroupPage.md
 docs/AiAssistantConversationPage.md
 docs/AiConversation.md
 docs/AiMessage.md
@@ -266,4 +272,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_access_group.py
+test/test_access_group_page.py
+test/test_asa_access_groups_api.py
 tox.ini
