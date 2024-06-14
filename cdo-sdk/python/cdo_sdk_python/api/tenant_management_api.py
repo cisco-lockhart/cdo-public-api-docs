@@ -346,7 +346,7 @@ class TenantManagementApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CdoTransaction:
-        """Create Tenant
+        """Create CDO Tenant
 
         Create a new tenant in CDO. This endpoint can only be executed by a super-admin in an MSP Portal.
 
@@ -417,7 +417,7 @@ class TenantManagementApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CdoTransaction]:
-        """Create Tenant
+        """Create CDO Tenant
 
         Create a new tenant in CDO. This endpoint can only be executed by a super-admin in an MSP Portal.
 
@@ -488,7 +488,7 @@ class TenantManagementApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create Tenant
+        """Create CDO Tenant
 
         Create a new tenant in CDO. This endpoint can only be executed by a super-admin in an MSP Portal.
 

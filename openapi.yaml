@@ -591,7 +591,7 @@ paths:
     post:
       tags:
         - Tenant Management
-      summary: Create Tenant
+      summary: Create CDO Tenant
       description: >-
         Create a new tenant in CDO. This endpoint can only be executed by a
         super-admin in an MSP Portal.
@@ -4367,7 +4367,6 @@ components:
           example: FaKE-toKeN
     MspCreateTenantInput:
       required:
-        - payType
         - tenantName
       type: object
       properties:
@@ -4385,19 +4384,6 @@ components:
             if you want the display name to be different from the name of the
             tenant.
           example: Acme Inc., United States offices
-        payType:
-          $ref: '#/components/schemas/TenantPayType'
-    TenantPayType:
-      type: string
-      description: An enum that describes the payment type of the tenant in CDO.
-      example: TRIAL
-      enum:
-        - PAYING
-        - NOT_PAYING
-        - TRIAL
-        - INTERNAL
-        - PARTNER
-        - DEMO
     IosCreateOrUpdateInput:
       required:
         - connectorName
@@ -5523,6 +5509,17 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/Tenant'
+    TenantPayType:
+      type: string
+      description: An enum that describes the payment type of the tenant in CDO.
+      example: TRIAL
+      enum:
+        - PAYING
+        - NOT_PAYING
+        - TRIAL
+        - INTERNAL
+        - PARTNER
+        - DEMO
     CdFmcObject:
       type: object
       properties:

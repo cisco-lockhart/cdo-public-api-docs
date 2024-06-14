@@ -284,9 +284,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_access_rule.py
-test/test_access_rule_details_content.py
-test/test_access_rule_page.py
-test/test_asa_access_rules_api.py
-test/test_log_settings.py
 tox.ini

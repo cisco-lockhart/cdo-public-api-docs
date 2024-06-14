@@ -21,7 +21,6 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from cdo_sdk_python.models.tenant_pay_type import TenantPayType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,8 +30,7 @@ class MspCreateTenantInput(BaseModel):
     """ # noqa: E501
     tenant_name: Annotated[str, Field(strict=True)] = Field(description="The name of the tenant to create. The tenant name can only contain alphabets, numbers, -, and _, and is limited to 64 characters.", alias="tenantName")
     human_readable_tenant_name: Optional[StrictStr] = Field(default=None, description="A human-readable name of the tenant to create. Use this field only if you want the display name to be different from the name of the tenant.", alias="humanReadableTenantName")
-    pay_type: TenantPayType = Field(alias="payType")
-    __properties: ClassVar[List[str]] = ["tenantName", "humanReadableTenantName", "payType"]
+    __properties: ClassVar[List[str]] = ["tenantName", "humanReadableTenantName"]
 
     @field_validator('tenant_name')
     def tenant_name_validate_regular_expression(cls, value):
@@ -93,8 +91,7 @@ class MspCreateTenantInput(BaseModel):
 
         _obj = cls.model_validate({
             "tenantName": obj.get("tenantName"),
-            "humanReadableTenantName": obj.get("humanReadableTenantName"),
-            "payType": obj.get("payType")
+            "humanReadableTenantName": obj.get("humanReadableTenantName")
         })
         return _obj
 
