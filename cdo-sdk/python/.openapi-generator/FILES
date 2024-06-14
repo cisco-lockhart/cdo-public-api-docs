@@ -95,6 +95,7 @@ cdo_sdk_python/models/meta.py
 cdo_sdk_python/models/mfa_event.py
 cdo_sdk_python/models/mfa_event_page.py
 cdo_sdk_python/models/msp_add_tenant_input.py
+cdo_sdk_python/models/msp_create_tenant_input.py
 cdo_sdk_python/models/network.py
 cdo_sdk_python/models/network_object_content.py
 cdo_sdk_python/models/object_content.py
@@ -218,6 +219,7 @@ docs/MetaApi.md
 docs/MfaEvent.md
 docs/MfaEventPage.md
 docs/MspAddTenantInput.md
+docs/MspCreateTenantInput.md
 docs/Network.md
 docs/NetworkObjectContent.md
 docs/OS.md
@@ -272,4 +274,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_msp_create_tenant_input.py
 tox.ini

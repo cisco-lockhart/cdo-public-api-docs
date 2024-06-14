@@ -585,6 +585,44 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /v1/msp/tenant:
+    post:
+      tags:
+        - Tenant Management
+      summary: Create Tenant
+      description: >-
+        Create a new tenant in CDO. This endpoint can only be executed by a
+        super-admin in an MSP Portal.
+      operationId: createTenant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MspCreateTenantInput'
+        required: true
+      responses:
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the status of the
+            tenant creation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/inventory/devices/ios:
     post:
       tags:
@@ -4224,6 +4262,39 @@ components:
           type: string
           description: The Tenant API Access Token.
           example: FaKE-toKeN
+    MspCreateTenantInput:
+      required:
+        - payType
+        - tenantName
+      type: object
+      properties:
+        tenantName:
+          pattern: '[a-zA-Z0-9-_]{1,64}'
+          type: string
+          description: >-
+            The name of the tenant to create. The tenant name can only contain
+            alphabets, numbers, -, and _, and is limited to 64 characters.
+          example: acme-inc-usa
+        humanReadableTenantName:
+          type: string
+          description: >-
+            A human-readable name of the tenant to create. Use this field only
+            if you want the display name to be different from the name of the
+            tenant.
+          example: Acme Inc., United States offices
+        payType:
+          $ref: '#/components/schemas/TenantPayType'
+    TenantPayType:
+      type: string
+      description: An enum that describes the payment type of the tenant in CDO.
+      example: TRIAL
+      enum:
+        - PAYING
+        - NOT_PAYING
+        - TRIAL
+        - INTERNAL
+        - PARTNER
+        - DEMO
     IosCreateOrUpdateInput:
       required:
         - connectorName
@@ -5349,17 +5420,6 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/Tenant'
-    TenantPayType:
-      type: string
-      description: An enum that describes the payment type of the tenant in CDO.
-      example: TRIAL
-      enum:
-        - PAYING
-        - NOT_PAYING
-        - TRIAL
-        - INTERNAL
-        - PARTNER
-        - DEMO
     CdFmcObject:
       type: object
       properties:

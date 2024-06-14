@@ -86,6 +86,7 @@ from cdo_sdk_python.models.meta import Meta
 from cdo_sdk_python.models.mfa_event import MfaEvent
 from cdo_sdk_python.models.mfa_event_page import MfaEventPage
 from cdo_sdk_python.models.msp_add_tenant_input import MspAddTenantInput
+from cdo_sdk_python.models.msp_create_tenant_input import MspCreateTenantInput
 from cdo_sdk_python.models.network import Network
 from cdo_sdk_python.models.network_object_content import NetworkObjectContent
 from cdo_sdk_python.models.os import OS
