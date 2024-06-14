@@ -6,6 +6,7 @@ cdo_sdk_python/__init__.py
 cdo_sdk_python/api/__init__.py
 cdo_sdk_python/api/ai_assistant_api.py
 cdo_sdk_python/api/asa_access_groups_api.py
+cdo_sdk_python/api/asa_access_rules_api.py
 cdo_sdk_python/api/change_requests_api.py
 cdo_sdk_python/api/changelogs_api.py
 cdo_sdk_python/api/cloud_delivered_fmc_api.py
@@ -26,6 +27,9 @@ cdo_sdk_python/exceptions.py
 cdo_sdk_python/models/__init__.py
 cdo_sdk_python/models/access_group.py
 cdo_sdk_python/models/access_group_page.py
+cdo_sdk_python/models/access_rule.py
+cdo_sdk_python/models/access_rule_details_content.py
+cdo_sdk_python/models/access_rule_page.py
 cdo_sdk_python/models/ai_assistant_conversation_page.py
 cdo_sdk_python/models/ai_conversation.py
 cdo_sdk_python/models/ai_message.py
@@ -90,6 +94,7 @@ cdo_sdk_python/models/jwk_set.py
 cdo_sdk_python/models/labels.py
 cdo_sdk_python/models/list_object_response.py
 cdo_sdk_python/models/location.py
+cdo_sdk_python/models/log_settings.py
 cdo_sdk_python/models/meraki_deployment_mode.py
 cdo_sdk_python/models/meta.py
 cdo_sdk_python/models/mfa_event.py
@@ -141,8 +146,12 @@ cdo_sdk_python/py.typed
 cdo_sdk_python/rest.py
 docs/AIAssistantApi.md
 docs/ASAAccessGroupsApi.md
+docs/ASAAccessRulesApi.md
 docs/AccessGroup.md
 docs/AccessGroupPage.md
+docs/AccessRule.md
+docs/AccessRuleDetailsContent.md
+docs/AccessRulePage.md
 docs/AiAssistantConversationPage.md
 docs/AiConversation.md
 docs/AiMessage.md
@@ -213,6 +222,7 @@ docs/JwkSet.md
 docs/Labels.md
 docs/ListObjectResponse.md
 docs/Location.md
+docs/LogSettings.md
 docs/MerakiDeploymentMode.md
 docs/Meta.md
 docs/MetaApi.md
@@ -274,5 +284,9 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_msp_create_tenant_input.py
+test/test_access_rule.py
+test/test_access_rule_details_content.py
+test/test_access_rule_page.py
+test/test_asa_access_rules_api.py
+test/test_log_settings.py
 tox.ini

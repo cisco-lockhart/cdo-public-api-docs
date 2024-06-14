@@ -17,6 +17,9 @@
 # import models into model package
 from cdo_sdk_python.models.access_group import AccessGroup
 from cdo_sdk_python.models.access_group_page import AccessGroupPage
+from cdo_sdk_python.models.access_rule import AccessRule
+from cdo_sdk_python.models.access_rule_details_content import AccessRuleDetailsContent
+from cdo_sdk_python.models.access_rule_page import AccessRulePage
 from cdo_sdk_python.models.ai_assistant_conversation_page import AiAssistantConversationPage
 from cdo_sdk_python.models.ai_conversation import AiConversation
 from cdo_sdk_python.models.ai_message import AiMessage
@@ -81,6 +84,7 @@ from cdo_sdk_python.models.jwk_set import JwkSet
 from cdo_sdk_python.models.labels import Labels
 from cdo_sdk_python.models.list_object_response import ListObjectResponse
 from cdo_sdk_python.models.location import Location
+from cdo_sdk_python.models.log_settings import LogSettings
 from cdo_sdk_python.models.meraki_deployment_mode import MerakiDeploymentMode
 from cdo_sdk_python.models.meta import Meta
 from cdo_sdk_python.models.mfa_event import MfaEvent
