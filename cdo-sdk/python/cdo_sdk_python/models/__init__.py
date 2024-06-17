@@ -16,6 +16,7 @@
 
 # import models into model package
 from cdo_sdk_python.models.access_group import AccessGroup
+from cdo_sdk_python.models.access_group_create_or_update_input import AccessGroupCreateOrUpdateInput
 from cdo_sdk_python.models.access_group_page import AccessGroupPage
 from cdo_sdk_python.models.access_rule import AccessRule
 from cdo_sdk_python.models.access_rule_details_content import AccessRuleDetailsContent

@@ -32,6 +32,8 @@ tags:
     x-displayName: Users
   - name: Search
     x-displayName: Search
+  - name: ASA Access Groups
+    x-displayName: ASA Access Groups
   - name: Tenant Management
     x-displayName: Tenant Management
   - name: Inventory
@@ -50,8 +52,6 @@ tags:
     x-displayName: Meta
   - name: ASA Access Rules
     x-displayName: ASA Access Rules
-  - name: ASA Access Groups
-    x-displayName: ASA Access Groups
   - name: Changelogs
     x-displayName: Changelogs
   - name: Object Management
@@ -543,6 +543,102 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         '405':
           $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+  /v1/policies/asa/accessgroups:
+    get:
+      tags:
+        - ASA Access Groups
+      summary: Get Access Groups
+      description: Get a list of ASA Access Groups.
+      operationId: listAccessGroups
+      parameters:
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: fieldName:fieldValue
+        - name: sort
+          in: query
+          description: The fields to sort results by.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          example: name:DESC
+      responses:
+        '200':
+          description: List of Access Groups
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessGroupPage'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+    post:
+      tags:
+        - ASA Access Groups
+      summary: Create Access Group
+      description: Create an Access Group
+      operationId: createAccessGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessGroupCreateOrUpdateInput'
+        required: true
+      responses:
+        '200':
+          description: CDO Access Group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessGroup'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
         '500':
           description: Internal server error.
           content:
@@ -2818,71 +2914,6 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
-  /v1/policies/asa/accessgroups:
-    get:
-      tags:
-        - ASA Access Groups
-      summary: Get Access Groups
-      description: Get a list of ASA Access Groups.
-      operationId: listAccessGroups
-      parameters:
-        - name: limit
-          in: query
-          description: The number of results to retrieve.
-          required: false
-          schema:
-            maximum: 200
-            minimum: 0
-            type: string
-            default: '50'
-        - name: offset
-          in: query
-          description: >-
-            The offset of the results retrieved. The CDO API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
-          required: false
-          schema:
-            minimum: 0
-            type: string
-            default: '0'
-        - name: q
-          in: query
-          description: >-
-            The query to execute. Use the Lucene Query Syntax to construct your
-            query.
-          required: false
-          schema:
-            type: string
-          example: fieldName:fieldValue
-        - name: sort
-          in: query
-          description: The fields to sort results by.
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          example: name:DESC
-      responses:
-        '200':
-          description: List of Access Groups
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessGroupPage'
-        '400':
-          $ref: '#/components/responses/http400BadRequest'
-        '403':
-          $ref: '#/components/responses/http403Forbidden'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
   /v1/policies/asa/accessgroups/{accessGroupUid}:
     get:
       tags:
@@ -2911,6 +2942,35 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         '404':
           $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - ASA Access Groups
+      summary: Delete Access Group
+      description: Delete Access Group by UID in the CDO tenant.
+      operationId: deleteAccessGroup
+      parameters:
+        - name: accessGroupUid
+          in: path
+          description: The unique identifier of the Access Group in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
         '500':
           description: Internal server error.
           content:
@@ -4356,6 +4416,131 @@ components:
           type: string
           description: The API Access Token.
           example: FaKE-toKeN
+    AccessGroupCreateOrUpdateInput:
+      required:
+        - entityUid
+        - ruleSetType
+      type: object
+      properties:
+        name:
+          type: string
+          description: A human-readable name for the Access Group.
+          example: Access-Group1
+        entityUid:
+          type: string
+          description: >-
+            The unique identifier of the device/manager associated with the
+            Access Group.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        ruleSetType:
+          type: string
+          description: >-
+            The unique identifier of the device/manager associated with the
+            Access Group.
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        resources:
+          uniqueItems: true
+          type: array
+          description: The set of of interface and direction pairs or global resource.
+          example: >-
+            Interface resource: [{"interfaceName": "outside"},{"direction":
+            "OUTBOUND"}] or Global resource: [{"global": true}]
+          items:
+            type: object
+            additionalProperties:
+              type: object
+              description: The set of of interface and direction pairs or global resource.
+              example: >-
+                Interface resource: [{"interfaceName": "outside"},{"direction":
+                "OUTBOUND"}] or Global resource: [{"global": true}]
+            description: The set of of interface and direction pairs or global resource.
+            example: >-
+              Interface resource: [{"interfaceName": "outside"},{"direction":
+              "OUTBOUND"}] or Global resource: [{"global": true}]
+    AccessGroup:
+      required:
+        - entityUid
+        - name
+        - sharedAccessGroupUid
+        - uid
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of Access Group in CDO.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        name:
+          type: string
+          description: >-
+            The name of Access Group in CDO. Access Group names are unique in
+            CDO.
+          example: my-example-access-group
+        entityUid:
+          type: string
+          description: >-
+            The unique identifier of the device/manager associated with the
+            Access Group.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        sharedAccessGroupUid:
+          type: string
+          description: >-
+            The unique identifier of the shared access group manager associated
+            with the Access Group.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        isShared:
+          type: boolean
+          description: The flag that identifies if access group is shared.
+          example: false
+        appliedTo:
+          uniqueItems: true
+          type: array
+          description: >-
+            The set of device unique identifiers to which this Access Group was
+            applied. Only valid for shared access group.
+          example: '[deviceUid1, deviceUid2, ..., deviceUidN]'
+          items:
+            type: string
+            description: >-
+              The set of device unique identifiers to which this Access Group
+              was applied. Only valid for shared access group.
+            format: uuid
+        resources:
+          uniqueItems: true
+          type: array
+          description: The set of of interface and direction pairs or global resource.
+          example: >-
+            Interface resource: [{"interfaceName": "outside"},{"direction":
+            "OUTBOUND"}] or Global resource: [{"global": true}]
+          items:
+            type: object
+            additionalProperties:
+              type: object
+              description: The set of of interface and direction pairs or global resource.
+              example: >-
+                Interface resource: [{"interfaceName": "outside"},{"direction":
+                "OUTBOUND"}] or Global resource: [{"global": true}]
+            description: The set of of interface and direction pairs or global resource.
+            example: >-
+              Interface resource: [{"interfaceName": "outside"},{"direction":
+              "OUTBOUND"}] or Global resource: [{"global": true}]
+        createdDate:
+          type: string
+          description: >-
+            The time (in UTC) at which Access Group was created, represented
+            using the RFC-3339 standard.
+          format: date-time
+          example: '2023-12-13T05:15:44Z'
+        updatedDate:
+          type: string
+          description: >-
+            The time (in UTC) at which Access Group was updated, represented
+            using the RFC-3339 standard.
+          format: date-time
+          example: '2023-12-13T05:15:44Z'
     MspAddTenantInput:
       required:
         - apiToken
@@ -5836,89 +6021,6 @@ components:
           format: int32
           example: 1
       description: The set of of interface and direction pairs or global resource.
-    AccessGroup:
-      required:
-        - entityUid
-        - name
-        - sharedAccessGroupUid
-        - uid
-      type: object
-      properties:
-        uid:
-          type: string
-          description: The unique identifier of Access Group in CDO.
-          format: uuid
-          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-        name:
-          type: string
-          description: >-
-            The name of Access Group in CDO. Access Group names are unique in
-            CDO.
-          example: my-example-access-group
-        entityUid:
-          type: string
-          description: >-
-            The unique identifier of the device/manager associated with the
-            Access Group.
-          format: uuid
-          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-        sharedAccessGroupUid:
-          type: string
-          description: >-
-            The unique identifier of the shared access group manager associated
-            with the Access Group.
-          format: uuid
-          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-        isShared:
-          type: boolean
-          description: The flag that identifies if access group is shared.
-          example: false
-        appliedTo:
-          uniqueItems: true
-          type: array
-          description: >-
-            The set of device unique identifiers to which this Access Group was
-            applied. Only valid for shared access group.
-          example: '[deviceUid1, deviceUid2, ..., deviceUidN]'
-          items:
-            type: string
-            description: >-
-              The set of device unique identifiers to which this Access Group
-              was applied. Only valid for shared access group.
-            format: uuid
-        resources:
-          uniqueItems: true
-          type: array
-          description: The set of of interface and direction pairs or global resource.
-          example: >-
-            Interface resource: [{"interfaceName": "outside"},{"direction":
-            "OUTBOUND"}] or Global resource: [{"global": true}]
-          items:
-            type: object
-            additionalProperties:
-              type: object
-              description: The set of of interface and direction pairs or global resource.
-              example: >-
-                Interface resource: [{"interfaceName": "outside"},{"direction":
-                "OUTBOUND"}] or Global resource: [{"global": true}]
-            description: The set of of interface and direction pairs or global resource.
-            example: >-
-              Interface resource: [{"interfaceName": "outside"},{"direction":
-              "OUTBOUND"}] or Global resource: [{"global": true}]
-        createdDate:
-          type: string
-          description: >-
-            The time (in UTC) at which Access Group was created, represented
-            using the RFC-3339 standard.
-          format: date-time
-          example: '2023-12-13T05:15:44Z'
-        updatedDate:
-          type: string
-          description: >-
-            The time (in UTC) at which Access Group was updated, represented
-            using the RFC-3339 standard.
-          format: date-time
-          example: '2023-12-13T05:15:44Z'
     AccessGroupPage:
       type: object
       properties:
@@ -7356,6 +7458,7 @@ x-tagGroups:
       - Remote Access Monitoring
       - Users
       - Search
+      - ASA Access Groups
       - Tenant Management
       - Inventory
       - Connectors
@@ -7365,7 +7468,6 @@ x-tagGroups:
       - Transactions
       - Meta
       - ASA Access Rules
-      - ASA Access Groups
       - Changelogs
   - name: object-service-openapi
     tags:

@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.274"
+__version__ = "1.0.275"
 
 # import apis into sdk package
 from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
@@ -48,6 +48,7 @@ from cdo_sdk_python.exceptions import ApiException
 
 # import models into sdk package
 from cdo_sdk_python.models.access_group import AccessGroup
+from cdo_sdk_python.models.access_group_create_or_update_input import AccessGroupCreateOrUpdateInput
 from cdo_sdk_python.models.access_group_page import AccessGroupPage
 from cdo_sdk_python.models.access_rule import AccessRule
 from cdo_sdk_python.models.access_rule_details_content import AccessRuleDetailsContent
