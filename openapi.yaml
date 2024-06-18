@@ -7255,6 +7255,7 @@ components:
             - FDM_RULESET
             - ONPREM_FMC_MANAGED_FTD
             - MCD
+            - SDWAN
       description: >-
         Set of targets that contain the object. A target can be, for example, a
         device, service, or a shared policy (Ruleset).

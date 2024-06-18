@@ -38,8 +38,8 @@ class Target(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['ASA', 'FDM_MANAGED_FTD', 'CDFMC', 'CDFMC_MANAGED_FTD', 'SFCN', 'AWS_VPC', 'ONPREM_FMC', 'MERAKI_MX', 'FDM_RULESET', 'ONPREM_FMC_MANAGED_FTD', 'MCD']):
-            raise ValueError("must be one of enum values ('ASA', 'FDM_MANAGED_FTD', 'CDFMC', 'CDFMC_MANAGED_FTD', 'SFCN', 'AWS_VPC', 'ONPREM_FMC', 'MERAKI_MX', 'FDM_RULESET', 'ONPREM_FMC_MANAGED_FTD', 'MCD')")
+        if value not in set(['ASA', 'FDM_MANAGED_FTD', 'CDFMC', 'CDFMC_MANAGED_FTD', 'SFCN', 'AWS_VPC', 'ONPREM_FMC', 'MERAKI_MX', 'FDM_RULESET', 'ONPREM_FMC_MANAGED_FTD', 'MCD', 'SDWAN']):
+            raise ValueError("must be one of enum values ('ASA', 'FDM_MANAGED_FTD', 'CDFMC', 'CDFMC_MANAGED_FTD', 'SFCN', 'AWS_VPC', 'ONPREM_FMC', 'MERAKI_MX', 'FDM_RULESET', 'ONPREM_FMC_MANAGED_FTD', 'MCD', 'SDWAN')")
         return value
 
     model_config = ConfigDict(
