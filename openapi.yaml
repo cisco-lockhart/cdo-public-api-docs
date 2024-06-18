@@ -4444,20 +4444,20 @@ components:
           type: array
           description: The set of of interface and direction pairs or global resource.
           example: >-
-            Interface resource: [{"interfaceName": "outside"},{"direction":
-            "OUTBOUND"}] or Global resource: [{"global": true}]
+            Interface resource: [{"interfaceName": "outside","direction":
+            "OUTBOUND"] or Global resource: [{"global": true}]
           items:
             type: object
             additionalProperties:
               type: object
               description: The set of of interface and direction pairs or global resource.
               example: >-
-                Interface resource: [{"interfaceName": "outside"},{"direction":
-                "OUTBOUND"}] or Global resource: [{"global": true}]
+                Interface resource: [{"interfaceName": "outside","direction":
+                "OUTBOUND"] or Global resource: [{"global": true}]
             description: The set of of interface and direction pairs or global resource.
             example: >-
-              Interface resource: [{"interfaceName": "outside"},{"direction":
-              "OUTBOUND"}] or Global resource: [{"global": true}]
+              Interface resource: [{"interfaceName": "outside","direction":
+              "OUTBOUND"] or Global resource: [{"global": true}]
     AccessGroup:
       required:
         - entityUid
