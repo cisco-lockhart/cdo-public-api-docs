@@ -26,8 +26,9 @@ cdo_sdk_python/configuration.py
 cdo_sdk_python/exceptions.py
 cdo_sdk_python/models/__init__.py
 cdo_sdk_python/models/access_group.py
-cdo_sdk_python/models/access_group_create_or_update_input.py
+cdo_sdk_python/models/access_group_create_input.py
 cdo_sdk_python/models/access_group_page.py
+cdo_sdk_python/models/access_group_update_input.py
 cdo_sdk_python/models/access_rule.py
 cdo_sdk_python/models/access_rule_details_content.py
 cdo_sdk_python/models/access_rule_page.py
@@ -149,8 +150,9 @@ docs/AIAssistantApi.md
 docs/ASAAccessGroupsApi.md
 docs/ASAAccessRulesApi.md
 docs/AccessGroup.md
-docs/AccessGroupCreateOrUpdateInput.md
+docs/AccessGroupCreateInput.md
 docs/AccessGroupPage.md
+docs/AccessGroupUpdateInput.md
 docs/AccessRule.md
 docs/AccessRuleDetailsContent.md
 docs/AccessRulePage.md
@@ -286,4 +288,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_access_group_create_input.py
+test/test_access_group_update_input.py
 tox.ini

@@ -626,7 +626,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccessGroupCreateOrUpdateInput'
+              $ref: '#/components/schemas/AccessGroupCreateInput'
         required: true
       responses:
         '200':
@@ -1708,6 +1708,112 @@ paths:
           $ref: '#/components/responses/http401Unauthorised'
         '403':
           $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+  /v1/policies/asa/accessgroups/{accessGroupUid}:
+    get:
+      tags:
+        - ASA Access Groups
+      summary: Get Access Group
+      description: Get a single ASA Access Group by UUID.
+      operationId: fetchAccessGroup
+      parameters:
+        - name: accessGroupUid
+          in: path
+          description: The unique identifier of the Access Group in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Access Group object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessGroup'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - ASA Access Groups
+      summary: Delete Access Group
+      description: Delete Access Group by UID in the CDO tenant.
+      operationId: deleteAccessGroup
+      parameters:
+        - name: accessGroupUid
+          in: path
+          description: The unique identifier of the Access Group in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+    patch:
+      tags:
+        - ASA Access Groups
+      summary: Modify ASA Access Group
+      description: Modify CDO Access Group by UID.
+      operationId: patchAccessGroup
+      parameters:
+        - name: accessGroupUid
+          in: path
+          description: The unique identifier of the CDO Access Group.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessGroupUpdateInput'
+        required: true
+      responses:
+        '200':
+          description: CDO Access Group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessGroup'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
         '500':
           description: Internal server error.
           content:
@@ -2906,71 +3012,6 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         '404':
           $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
-  /v1/policies/asa/accessgroups/{accessGroupUid}:
-    get:
-      tags:
-        - ASA Access Groups
-      summary: Get Access Group
-      description: Get a single ASA Access Group by UUID.
-      operationId: fetchAccessGroup
-      parameters:
-        - name: accessGroupUid
-          in: path
-          description: The unique identifier of the Access Group in CDO.
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '200':
-          description: Access Group object
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessGroup'
-        '400':
-          $ref: '#/components/responses/http400BadRequest'
-        '403':
-          $ref: '#/components/responses/http403Forbidden'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
-    delete:
-      tags:
-        - ASA Access Groups
-      summary: Delete Access Group
-      description: Delete Access Group by UID in the CDO tenant.
-      operationId: deleteAccessGroup
-      parameters:
-        - name: accessGroupUid
-          in: path
-          description: The unique identifier of the Access Group in CDO.
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '204':
-          description: No Content
-        '400':
-          $ref: '#/components/responses/http400BadRequest'
-        '403':
-          $ref: '#/components/responses/http403Forbidden'
         '500':
           description: Internal server error.
           content:
@@ -4416,7 +4457,7 @@ components:
           type: string
           description: The API Access Token.
           example: FaKE-toKeN
-    AccessGroupCreateOrUpdateInput:
+    AccessGroupCreateInput:
       required:
         - entityUid
         - ruleSetType
@@ -5049,6 +5090,32 @@ components:
           example: true
         conflictDetectionInterval:
           $ref: '#/components/schemas/ConflictDetectionInterval'
+    AccessGroupUpdateInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: A human-readable name for the Access Group.
+          example: Access-Group1
+        resources:
+          uniqueItems: true
+          type: array
+          description: The set of of interface and direction pairs or global resource.
+          example: >-
+            Interface resource: [{"interfaceName": "outside","direction":
+            "OUTBOUND"] or Global resource: [{"global": true}]
+          items:
+            type: object
+            additionalProperties:
+              type: object
+              description: The set of of interface and direction pairs or global resource.
+              example: >-
+                Interface resource: [{"interfaceName": "outside","direction":
+                "OUTBOUND"] or Global resource: [{"global": true}]
+            description: The set of of interface and direction pairs or global resource.
+            example: >-
+              Interface resource: [{"interfaceName": "outside","direction":
+              "OUTBOUND"] or Global resource: [{"global": true}]
     DevicePatchInput:
       type: object
       properties:
