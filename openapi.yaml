@@ -4231,6 +4231,16 @@ paths:
       summary: Get Issues Count
       description: Get issues count in the CDO tenant.
       operationId: getIssuesCount
+      parameters:
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query. Possible fields to search by are name, content.
+          required: false
+          schema:
+            type: string
+          example: content:*2.2.* AND name:Lab1
       responses:
         '200':
           description: OK

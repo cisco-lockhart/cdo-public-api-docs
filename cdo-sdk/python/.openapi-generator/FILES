@@ -288,6 +288,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_access_group_create_input.py
-test/test_access_group_update_input.py
 tox.ini

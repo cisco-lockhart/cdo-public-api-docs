@@ -249,14 +249,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -358,8 +358,6 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: A descriptive representation of the created CDO object.
           content:
@@ -368,6 +366,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ReferenceInfo'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -430,19 +430,28 @@ paths:
       summary: Get Issues Count
       description: Get issues count in the CDO tenant.
       operationId: getIssuesCount
+      parameters:
+      - name: q
+        in: query
+        description: "The query to execute. Use the Lucene Query Syntax to construct\
+          \ your query. Possible fields to search by are name, content."
+        required: false
+        schema:
+          type: string
+        example: content:*2.2.* AND name:Lab1
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/IssuesCount'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:

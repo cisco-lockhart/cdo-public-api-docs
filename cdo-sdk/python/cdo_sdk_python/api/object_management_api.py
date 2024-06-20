@@ -1480,6 +1480,7 @@ class ObjectManagementApi:
     @validate_call
     def get_issues_count(
         self,
+        q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1497,6 +1498,8 @@ class ObjectManagementApi:
 
         Get issues count in the CDO tenant.
 
+        :param q: The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.
+        :type q: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1520,6 +1523,7 @@ class ObjectManagementApi:
         """ # noqa: E501
 
         _param = self._get_issues_count_serialize(
+            q=q,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1547,6 +1551,7 @@ class ObjectManagementApi:
     @validate_call
     def get_issues_count_with_http_info(
         self,
+        q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1564,6 +1569,8 @@ class ObjectManagementApi:
 
         Get issues count in the CDO tenant.
 
+        :param q: The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.
+        :type q: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1587,6 +1594,7 @@ class ObjectManagementApi:
         """ # noqa: E501
 
         _param = self._get_issues_count_serialize(
+            q=q,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1614,6 +1622,7 @@ class ObjectManagementApi:
     @validate_call
     def get_issues_count_without_preload_content(
         self,
+        q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1631,6 +1640,8 @@ class ObjectManagementApi:
 
         Get issues count in the CDO tenant.
 
+        :param q: The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.
+        :type q: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1654,6 +1665,7 @@ class ObjectManagementApi:
         """ # noqa: E501
 
         _param = self._get_issues_count_serialize(
+            q=q,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1676,6 +1688,7 @@ class ObjectManagementApi:
 
     def _get_issues_count_serialize(
         self,
+        q,
         _request_auth,
         _content_type,
         _headers,
@@ -1696,6 +1709,10 @@ class ObjectManagementApi:
 
         # process the path parameters
         # process the query parameters
+        if q is not None:
+            
+            _query_params.append(('q', q))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter

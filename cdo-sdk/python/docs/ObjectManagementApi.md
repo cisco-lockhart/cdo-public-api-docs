@@ -384,7 +384,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_issues_count**
-> IssuesCount get_issues_count()
+> IssuesCount get_issues_count(q=q)
 
 Get Issues Count
 
@@ -410,10 +410,11 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
+    q = 'content:*2.2.* AND name:Lab1' # str | The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content. (optional)
 
     try:
         # Get Issues Count
-        api_response = api_instance.get_issues_count()
+        api_response = api_instance.get_issues_count(q=q)
         print("The response of ObjectManagementApi->get_issues_count:\n")
         pprint(api_response)
     except Exception as e:
@@ -424,7 +425,10 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content. | [optional] 
 
 ### Return type
 
