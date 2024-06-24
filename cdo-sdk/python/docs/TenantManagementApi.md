@@ -5,7 +5,7 @@ All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_msp_tenant**](TenantManagementApi.md#add_msp_tenant) | **POST** /v1/msp/tenants | Add Tenant to MSP Portal
-[**create_tenant**](TenantManagementApi.md#create_tenant) | **POST** /v1/msp/tenant | Create CDO Tenant
+[**create_tenant**](TenantManagementApi.md#create_tenant) | **POST** /v1/msp/tenants/create | Create CDO Tenant
 [**get_feature_flags**](TenantManagementApi.md#get_feature_flags) | **GET** /v1/features | Get Feature Flags
 [**get_tenant**](TenantManagementApi.md#get_tenant) | **GET** /v1/tenants/{tenantUid} | Get Tenant
 [**get_tenant_settings**](TenantManagementApi.md#get_tenant_settings) | **GET** /v1/settings/tenant | Get Tenant Settings

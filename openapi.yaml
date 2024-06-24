@@ -683,7 +683,7 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
-  /v1/msp/tenant:
+  /v1/msp/tenants/create:
     post:
       tags:
         - Tenant Management
