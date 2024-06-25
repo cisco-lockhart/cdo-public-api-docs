@@ -2693,6 +2693,64 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /v1/users/groups:
+    get:
+      tags:
+        - Users
+      summary: Get Active Directory Groups
+      description: Get a list of active directory groups associated with the CDO tenant.
+      operationId: getDirectoryGroups
+      parameters:
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: fieldName:fieldValue
+      responses:
+        '200':
+          description: List of Directory Group objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryGroupPage'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/transactions/{transactionUid}:
     get:
       tags:
@@ -5681,6 +5739,55 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/User'
+    DirectoryGroup:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the directory group in CDO.
+          example: myusername
+        role:
+          $ref: '#/components/schemas/UserRole'
+        groupIdentifier:
+          type: string
+          description: The unique identifier of the directory group in your IdP.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        issueUrl:
+          type: string
+          description: The URL for reporting issues related to the directory group.
+          example: https://issue.com
+        notes:
+          type: string
+          description: Free-form notes on the directory group.
+          example: This is an example note on the directory group.
+      description: The list of items retrieved.
+    DirectoryGroupPage:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The total number of results available.
+          format: int32
+          example: 100
+        limit:
+          type: integer
+          description: The number of results retrieved.
+          format: int32
+          example: 50
+        offset:
+          type: integer
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          format: int32
+          example: 0
+        items:
+          type: array
+          description: The list of items retrieved.
+          items:
+            $ref: '#/components/schemas/DirectoryGroup'
     CdoTokenInfo:
       type: object
       properties:
