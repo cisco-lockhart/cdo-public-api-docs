@@ -292,6 +292,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_directory_group.py
-test/test_directory_group_page.py
 tox.ini

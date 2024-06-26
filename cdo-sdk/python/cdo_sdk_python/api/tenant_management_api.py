@@ -348,7 +348,7 @@ class TenantManagementApi:
     ) -> CdoTransaction:
         """Create CDO Tenant
 
-        Create a new tenant in CDO. This endpoint can only be executed by a super-admin in an MSP Portal.
+        Create a new tenant in CDO from an MSP portal. This endpoint creates a tenant, adds the tenant to the MSP portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal
 
         :param msp_create_tenant_input: (required)
         :type msp_create_tenant_input: MspCreateTenantInput
@@ -419,7 +419,7 @@ class TenantManagementApi:
     ) -> ApiResponse[CdoTransaction]:
         """Create CDO Tenant
 
-        Create a new tenant in CDO. This endpoint can only be executed by a super-admin in an MSP Portal.
+        Create a new tenant in CDO from an MSP portal. This endpoint creates a tenant, adds the tenant to the MSP portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal
 
         :param msp_create_tenant_input: (required)
         :type msp_create_tenant_input: MspCreateTenantInput
@@ -490,7 +490,7 @@ class TenantManagementApi:
     ) -> RESTResponseType:
         """Create CDO Tenant
 
-        Create a new tenant in CDO. This endpoint can only be executed by a super-admin in an MSP Portal.
+        Create a new tenant in CDO from an MSP portal. This endpoint creates a tenant, adds the tenant to the MSP portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal
 
         :param msp_create_tenant_input: (required)
         :type msp_create_tenant_input: MspCreateTenantInput
