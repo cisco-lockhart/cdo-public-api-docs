@@ -32,6 +32,9 @@ cdo_sdk_python/models/access_group_update_input.py
 cdo_sdk_python/models/access_rule.py
 cdo_sdk_python/models/access_rule_details_content.py
 cdo_sdk_python/models/access_rule_page.py
+cdo_sdk_python/models/active_directory_group.py
+cdo_sdk_python/models/active_directory_group_create_or_update_input.py
+cdo_sdk_python/models/active_directory_group_page.py
 cdo_sdk_python/models/ai_assistant_conversation_page.py
 cdo_sdk_python/models/ai_conversation.py
 cdo_sdk_python/models/ai_message.py
@@ -76,8 +79,6 @@ cdo_sdk_python/models/device.py
 cdo_sdk_python/models/device_page.py
 cdo_sdk_python/models/device_patch_input.py
 cdo_sdk_python/models/device_role.py
-cdo_sdk_python/models/directory_group.py
-cdo_sdk_python/models/directory_group_page.py
 cdo_sdk_python/models/duo_admin_panel_create_or_update_input.py
 cdo_sdk_python/models/duplicate_group_dto.py
 cdo_sdk_python/models/entity.py
@@ -158,6 +159,9 @@ docs/AccessGroupUpdateInput.md
 docs/AccessRule.md
 docs/AccessRuleDetailsContent.md
 docs/AccessRulePage.md
+docs/ActiveDirectoryGroup.md
+docs/ActiveDirectoryGroupCreateOrUpdateInput.md
+docs/ActiveDirectoryGroupPage.md
 docs/AiAssistantConversationPage.md
 docs/AiConversation.md
 docs/AiMessage.md
@@ -207,8 +211,6 @@ docs/Device.md
 docs/DevicePage.md
 docs/DevicePatchInput.md
 docs/DeviceRole.md
-docs/DirectoryGroup.md
-docs/DirectoryGroupPage.md
 docs/DuoAdminPanelCreateOrUpdateInput.md
 docs/DuplicateGroupDto.md
 docs/Entity.md
@@ -292,4 +294,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_active_directory_group.py
+test/test_active_directory_group_create_or_update_input.py
+test/test_active_directory_group_page.py
 tox.ini

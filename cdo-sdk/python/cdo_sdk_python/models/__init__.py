@@ -22,6 +22,9 @@ from cdo_sdk_python.models.access_group_update_input import AccessGroupUpdateInp
 from cdo_sdk_python.models.access_rule import AccessRule
 from cdo_sdk_python.models.access_rule_details_content import AccessRuleDetailsContent
 from cdo_sdk_python.models.access_rule_page import AccessRulePage
+from cdo_sdk_python.models.active_directory_group import ActiveDirectoryGroup
+from cdo_sdk_python.models.active_directory_group_create_or_update_input import ActiveDirectoryGroupCreateOrUpdateInput
+from cdo_sdk_python.models.active_directory_group_page import ActiveDirectoryGroupPage
 from cdo_sdk_python.models.ai_assistant_conversation_page import AiAssistantConversationPage
 from cdo_sdk_python.models.ai_conversation import AiConversation
 from cdo_sdk_python.models.ai_message import AiMessage
@@ -66,8 +69,6 @@ from cdo_sdk_python.models.device import Device
 from cdo_sdk_python.models.device_page import DevicePage
 from cdo_sdk_python.models.device_patch_input import DevicePatchInput
 from cdo_sdk_python.models.device_role import DeviceRole
-from cdo_sdk_python.models.directory_group import DirectoryGroup
-from cdo_sdk_python.models.directory_group_page import DirectoryGroupPage
 from cdo_sdk_python.models.duo_admin_panel_create_or_update_input import DuoAdminPanelCreateOrUpdateInput
 from cdo_sdk_python.models.duplicate_group_dto import DuplicateGroupDto
 from cdo_sdk_python.models.entity import Entity

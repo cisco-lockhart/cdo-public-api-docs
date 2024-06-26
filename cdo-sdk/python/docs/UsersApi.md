@@ -4,6 +4,7 @@ All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**create_active_directory_group**](UsersApi.md#create_active_directory_group) | **POST** /v1/users/groups | Create Active Directory Group in CDO Tenant
 [**create_user**](UsersApi.md#create_user) | **POST** /v1/users | Create User in CDO Tenant
 [**delete_user**](UsersApi.md#delete_user) | **DELETE** /v1/users/{userUid} | Remove User from CDO Tenant
 [**generate_api_token**](UsersApi.md#generate_api_token) | **POST** /v1/users/{apiUserId}/apiToken/generate | Generate Token for API-only user
@@ -14,6 +15,89 @@ Method | HTTP request | Description
 [**revoke_api_token**](UsersApi.md#revoke_api_token) | **POST** /v1/users/{apiUserId}/apiToken/revoke | Revoke API-only User&#39;s Token
 [**revoke_token**](UsersApi.md#revoke_token) | **POST** /v1/token/revoke | Revoke Token
 
+
+# **create_active_directory_group**
+> ActiveDirectoryGroup create_active_directory_group(active_directory_group_create_or_update_input)
+
+Create Active Directory Group in CDO Tenant
+
+Create an Active Directory Group in the CDO tenant.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import cdo_sdk_python
+from cdo_sdk_python.models.active_directory_group import ActiveDirectoryGroup
+from cdo_sdk_python.models.active_directory_group_create_or_update_input import ActiveDirectoryGroupCreateOrUpdateInput
+from cdo_sdk_python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cdo_sdk_python.Configuration(
+    host = "https://edge.us.cdo.cisco.com/api/rest"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = cdo_sdk_python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with cdo_sdk_python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cdo_sdk_python.UsersApi(api_client)
+    active_directory_group_create_or_update_input = cdo_sdk_python.ActiveDirectoryGroupCreateOrUpdateInput() # ActiveDirectoryGroupCreateOrUpdateInput | 
+
+    try:
+        # Create Active Directory Group in CDO Tenant
+        api_response = api_instance.create_active_directory_group(active_directory_group_create_or_update_input)
+        print("The response of UsersApi->create_active_directory_group:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UsersApi->create_active_directory_group: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **active_directory_group_create_or_update_input** | [**ActiveDirectoryGroupCreateOrUpdateInput**](ActiveDirectoryGroupCreateOrUpdateInput.md)|  | 
+
+### Return type
+
+[**ActiveDirectoryGroup**](ActiveDirectoryGroup.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Active Directory Group object |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_user**
 > User create_user(user_create_or_update_input)
@@ -260,7 +344,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_directory_groups**
-> DirectoryGroupPage get_directory_groups(limit=limit, offset=offset, q=q)
+> ActiveDirectoryGroupPage get_directory_groups(limit=limit, offset=offset, q=q)
 
 Get Active Directory Groups
 
@@ -272,7 +356,7 @@ Get a list of active directory groups associated with the CDO tenant.
 
 ```python
 import cdo_sdk_python
-from cdo_sdk_python.models.directory_group_page import DirectoryGroupPage
+from cdo_sdk_python.models.active_directory_group_page import ActiveDirectoryGroupPage
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
@@ -322,7 +406,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DirectoryGroupPage**](DirectoryGroupPage.md)
+[**ActiveDirectoryGroupPage**](ActiveDirectoryGroupPage.md)
 
 ### Authorization
 
@@ -337,7 +421,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of Directory Group objects |  -  |
+**200** | List of Active Directory Group objects |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
