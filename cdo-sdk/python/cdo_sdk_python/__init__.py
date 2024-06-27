@@ -15,12 +15,12 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.306"
+__version__ = "1.0.307"
 
 # import apis into sdk package
 from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
-from cdo_sdk_python.api.asa_access_groups_api import ASAAccessGroupsApi
 from cdo_sdk_python.api.asa_access_rules_api import ASAAccessRulesApi
+from cdo_sdk_python.api.access_groups_api import AccessGroupsApi
 from cdo_sdk_python.api.change_requests_api import ChangeRequestsApi
 from cdo_sdk_python.api.changelogs_api import ChangelogsApi
 from cdo_sdk_python.api.cloud_delivered_fmc_api import CloudDeliveredFMCApi

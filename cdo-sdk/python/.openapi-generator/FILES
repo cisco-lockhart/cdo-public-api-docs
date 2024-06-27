@@ -4,8 +4,8 @@
 README.md
 cdo_sdk_python/__init__.py
 cdo_sdk_python/api/__init__.py
+cdo_sdk_python/api/access_groups_api.py
 cdo_sdk_python/api/ai_assistant_api.py
-cdo_sdk_python/api/asa_access_groups_api.py
 cdo_sdk_python/api/asa_access_rules_api.py
 cdo_sdk_python/api/change_requests_api.py
 cdo_sdk_python/api/changelogs_api.py
@@ -150,12 +150,12 @@ cdo_sdk_python/models/user_role.py
 cdo_sdk_python/py.typed
 cdo_sdk_python/rest.py
 docs/AIAssistantApi.md
-docs/ASAAccessGroupsApi.md
 docs/ASAAccessRulesApi.md
 docs/AccessGroup.md
 docs/AccessGroupCreateInput.md
 docs/AccessGroupPage.md
 docs/AccessGroupUpdateInput.md
+docs/AccessGroupsApi.md
 docs/AccessRule.md
 docs/AccessRuleDetailsContent.md
 docs/AccessRulePage.md
@@ -294,4 +294,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_access_groups_api.py
 tox.ini

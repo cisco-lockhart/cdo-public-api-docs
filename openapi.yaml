@@ -32,8 +32,8 @@ tags:
     x-displayName: Users
   - name: Search
     x-displayName: Search
-  - name: ASA Access Groups
-    x-displayName: ASA Access Groups
+  - name: Access Groups
+    x-displayName: Access Groups
   - name: Tenant Management
     x-displayName: Tenant Management
   - name: Inventory
@@ -645,7 +645,7 @@ paths:
   /v1/policies/asa/accessgroups:
     get:
       tags:
-        - ASA Access Groups
+        - Access Groups
       summary: Get Access Groups
       description: Get a list of ASA Access Groups.
       operationId: listAccessGroups
@@ -709,7 +709,7 @@ paths:
         - bearerAuth: []
     post:
       tags:
-        - ASA Access Groups
+        - Access Groups
       summary: Create Access Group
       description: Create an Access Group
       operationId: createAccessGroup
@@ -1813,7 +1813,7 @@ paths:
   /v1/policies/asa/accessgroups/{accessGroupUid}:
     get:
       tags:
-        - ASA Access Groups
+        - Access Groups
       summary: Get Access Group
       description: Get a single ASA Access Group by UUID.
       operationId: fetchAccessGroup
@@ -1848,7 +1848,7 @@ paths:
         - bearerAuth: []
     delete:
       tags:
-        - ASA Access Groups
+        - Access Groups
       summary: Delete Access Group
       description: Delete Access Group by UID in the CDO tenant.
       operationId: deleteAccessGroup
@@ -1877,7 +1877,7 @@ paths:
         - bearerAuth: []
     patch:
       tags:
-        - ASA Access Groups
+        - Access Groups
       summary: Modify ASA Access Group
       description: Modify CDO Access Group by UID.
       operationId: patchAccessGroup
@@ -4627,7 +4627,6 @@ components:
     AccessGroupCreateInput:
       required:
         - entityUid
-        - ruleSetType
       type: object
       properties:
         name:
@@ -4640,12 +4639,6 @@ components:
             The unique identifier of the device/manager associated with the
             Access Group.
           format: uuid
-          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-        ruleSetType:
-          type: string
-          description: >-
-            The unique identifier of the device/manager associated with the
-            Access Group.
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         resources:
           uniqueItems: true
@@ -7719,7 +7712,7 @@ x-tagGroups:
       - Remote Access Monitoring
       - Users
       - Search
-      - ASA Access Groups
+      - Access Groups
       - Tenant Management
       - Inventory
       - Connectors

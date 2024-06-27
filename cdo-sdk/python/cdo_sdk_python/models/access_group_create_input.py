@@ -29,9 +29,8 @@ class AccessGroupCreateInput(BaseModel):
     """ # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="A human-readable name for the Access Group.")
     entity_uid: StrictStr = Field(description="The unique identifier of the device/manager associated with the Access Group.", alias="entityUid")
-    rule_set_type: StrictStr = Field(description="The unique identifier of the device/manager associated with the Access Group.", alias="ruleSetType")
     resources: Optional[List[Dict[str, Dict[str, Any]]]] = Field(default=None, description="The set of of interface and direction pairs or global resource.")
-    __properties: ClassVar[List[str]] = ["name", "entityUid", "ruleSetType", "resources"]
+    __properties: ClassVar[List[str]] = ["name", "entityUid", "resources"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,7 +85,6 @@ class AccessGroupCreateInput(BaseModel):
         _obj = cls.model_validate({
             "name": obj.get("name"),
             "entityUid": obj.get("entityUid"),
-            "ruleSetType": obj.get("ruleSetType"),
             "resources": obj.get("resources")
         })
         return _obj

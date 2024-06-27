@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | A human-readable name for the Access Group. | [optional] 
 **entity_uid** | **str** | The unique identifier of the device/manager associated with the Access Group. | 
-**rule_set_type** | **str** | The unique identifier of the device/manager associated with the Access Group. | 
 **resources** | **List[Dict[str, object]]** | The set of of interface and direction pairs or global resource. | [optional] 
 
 ## Example
