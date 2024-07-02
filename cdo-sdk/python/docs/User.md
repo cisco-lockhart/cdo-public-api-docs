@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the SDC in CDO. | [optional] 
+**uid** | **str** | The unique identifier of the user in CDO. | [optional] 
 **name** | **str** | The name of the user in CDO. | [optional] 
 **roles** | [**List[UserRole]**](UserRole.md) | Roles associated with this user in CDO. | [optional] 
 **api_only_user** | **bool** | Whether the user is API-only, an API-only user cannot access CDO in the UI. | [optional] 

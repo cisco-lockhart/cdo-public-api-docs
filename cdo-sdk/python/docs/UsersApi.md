@@ -8,7 +8,8 @@ Method | HTTP request | Description
 [**create_user**](UsersApi.md#create_user) | **POST** /v1/users | Create User in CDO Tenant
 [**delete_user**](UsersApi.md#delete_user) | **DELETE** /v1/users/{userUid} | Remove User from CDO Tenant
 [**generate_api_token**](UsersApi.md#generate_api_token) | **POST** /v1/users/{apiUserId}/apiToken/generate | Generate Token for API-only user
-[**get_directory_groups**](UsersApi.md#get_directory_groups) | **GET** /v1/users/groups | Get Active Directory Groups
+[**get_active_directory_group**](UsersApi.md#get_active_directory_group) | **GET** /v1/users/groups/{groupUid} | Get Active Directory Group
+[**get_active_directory_groups**](UsersApi.md#get_active_directory_groups) | **GET** /v1/users/groups | Get Active Directory Groups
 [**get_token**](UsersApi.md#get_token) | **GET** /v1/token | Get Token Info
 [**get_user**](UsersApi.md#get_user) | **GET** /v1/users/{userUid} | Get Tenant User
 [**get_users**](UsersApi.md#get_users) | **GET** /v1/users | Get Tenant Users
@@ -343,8 +344,91 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_directory_groups**
-> ActiveDirectoryGroupPage get_directory_groups(limit=limit, offset=offset, q=q)
+# **get_active_directory_group**
+> ActiveDirectoryGroup get_active_directory_group(group_uid)
+
+Get Active Directory Group
+
+Fetch a active directory group by UID in the CDO tenant.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import cdo_sdk_python
+from cdo_sdk_python.models.active_directory_group import ActiveDirectoryGroup
+from cdo_sdk_python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cdo_sdk_python.Configuration(
+    host = "https://edge.us.cdo.cisco.com/api/rest"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = cdo_sdk_python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with cdo_sdk_python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cdo_sdk_python.UsersApi(api_client)
+    group_uid = 'group_uid_example' # str | The unique identifier of the active directory group in CDO.
+
+    try:
+        # Get Active Directory Group
+        api_response = api_instance.get_active_directory_group(group_uid)
+        print("The response of UsersApi->get_active_directory_group:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UsersApi->get_active_directory_group: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group_uid** | **str**| The unique identifier of the active directory group in CDO. | 
+
+### Return type
+
+[**ActiveDirectoryGroup**](ActiveDirectoryGroup.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Active Directory Group object |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**404** | Entity not found. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_active_directory_groups**
+> ActiveDirectoryGroupPage get_active_directory_groups(limit=limit, offset=offset, q=q)
 
 Get Active Directory Groups
 
@@ -386,11 +470,11 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
     try:
         # Get Active Directory Groups
-        api_response = api_instance.get_directory_groups(limit=limit, offset=offset, q=q)
-        print("The response of UsersApi->get_directory_groups:\n")
+        api_response = api_instance.get_active_directory_groups(limit=limit, offset=offset, q=q)
+        print("The response of UsersApi->get_active_directory_groups:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling UsersApi->get_directory_groups: %s\n" % e)
+        print("Exception when calling UsersApi->get_active_directory_groups: %s\n" % e)
 ```
 
 

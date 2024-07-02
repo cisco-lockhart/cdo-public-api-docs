@@ -1,11 +1,11 @@
 # ActiveDirectoryGroup
 
-The list of items retrieved.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**uid** | **str** | The unique identifier of the Active Directory Group in CDO. | [optional] 
 **name** | **str** | The name of the Active Directory Group. CDO does not support special characters for this field. | [optional] 
 **role** | [**UserRole**](UserRole.md) |  | [optional] 
 **group_identifier** | **str** | The unique identifier of the Active Directory Group in your Identity Provider (IdP). | [optional] 

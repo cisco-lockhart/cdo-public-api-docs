@@ -26,14 +26,15 @@ from typing_extensions import Self
 
 class ActiveDirectoryGroup(BaseModel):
     """
-    The list of items retrieved.
+    ActiveDirectoryGroup
     """ # noqa: E501
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the Active Directory Group in CDO.")
     name: Optional[StrictStr] = Field(default=None, description="The name of the Active Directory Group. CDO does not support special characters for this field.")
     role: Optional[UserRole] = None
     group_identifier: Optional[StrictStr] = Field(default=None, description="The unique identifier of the Active Directory Group in your Identity Provider (IdP).", alias="groupIdentifier")
     issuer_url: Optional[StrictStr] = Field(default=None, description="The Identity Provider (IdP) URL, which Cisco Defense Orchestrator will use to validate SAML assertions during the sign-in process.", alias="issuerUrl")
     notes: Optional[StrictStr] = Field(default=None, description="Any notes that are applicable to this Active Directory Group.")
-    __properties: ClassVar[List[str]] = ["name", "role", "groupIdentifier", "issuerUrl", "notes"]
+    __properties: ClassVar[List[str]] = ["uid", "name", "role", "groupIdentifier", "issuerUrl", "notes"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,6 +87,7 @@ class ActiveDirectoryGroup(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "uid": obj.get("uid"),
             "name": obj.get("name"),
             "role": obj.get("role"),
             "groupIdentifier": obj.get("groupIdentifier"),

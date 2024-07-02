@@ -499,7 +499,7 @@ paths:
         - Users
       summary: Get Active Directory Groups
       description: Get a list of active directory groups associated with the CDO tenant.
-      operationId: getDirectoryGroups
+      operationId: getActiveDirectoryGroups
       parameters:
         - name: limit
           in: query
@@ -2787,6 +2787,44 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /v1/users/groups/{groupUid}:
+    get:
+      tags:
+        - Users
+      summary: Get Active Directory Group
+      description: Fetch a active directory group by UID in the CDO tenant.
+      operationId: getActiveDirectoryGroup
+      parameters:
+        - name: groupUid
+          in: path
+          description: The unique identifier of the active directory group in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Active Directory Group object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActiveDirectoryGroup'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/transactions/{transactionUid}:
     get:
       tags:
@@ -4509,7 +4547,7 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the SDC in CDO.
+          description: The unique identifier of the user in CDO.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
@@ -4599,6 +4637,11 @@ components:
     ActiveDirectoryGroup:
       type: object
       properties:
+        uid:
+          type: string
+          description: The unique identifier of the Active Directory Group in CDO.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
           type: string
           description: >-
@@ -4623,7 +4666,6 @@ components:
           type: string
           description: Any notes that are applicable to this Active Directory Group.
           example: This is an example note on the Active Directory Group.
-      description: The list of items retrieved.
     AccessGroupCreateInput:
       required:
         - entityUid
