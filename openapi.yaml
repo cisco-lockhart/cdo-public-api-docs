@@ -2825,6 +2825,37 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+    delete:
+      tags:
+        - Users
+      summary: Remove Active Directory Group from CDO Tenant
+      description: Delete a Active Directory Group by UID in the CDO tenant.
+      operationId: deleteActiveDirectoryGroup
+      parameters:
+        - name: groupUid
+          in: path
+          description: The unique identifier of the Active Directory Group in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/transactions/{transactionUid}:
     get:
       tags:

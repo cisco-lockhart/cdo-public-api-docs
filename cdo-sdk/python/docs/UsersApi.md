@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_active_directory_group**](UsersApi.md#create_active_directory_group) | **POST** /v1/users/groups | Create Active Directory Group in CDO Tenant
 [**create_user**](UsersApi.md#create_user) | **POST** /v1/users | Create User in CDO Tenant
+[**delete_active_directory_group**](UsersApi.md#delete_active_directory_group) | **DELETE** /v1/users/groups/{groupUid} | Remove Active Directory Group from CDO Tenant
 [**delete_user**](UsersApi.md#delete_user) | **DELETE** /v1/users/{userUid} | Remove User from CDO Tenant
 [**generate_api_token**](UsersApi.md#generate_api_token) | **POST** /v1/users/{apiUserId}/apiToken/generate | Generate Token for API-only user
 [**get_active_directory_group**](UsersApi.md#get_active_directory_group) | **GET** /v1/users/groups/{groupUid} | Get Active Directory Group
@@ -176,6 +177,85 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | User object |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_active_directory_group**
+> delete_active_directory_group(group_uid)
+
+Remove Active Directory Group from CDO Tenant
+
+Delete a Active Directory Group by UID in the CDO tenant.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import cdo_sdk_python
+from cdo_sdk_python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cdo_sdk_python.Configuration(
+    host = "https://edge.us.cdo.cisco.com/api/rest"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = cdo_sdk_python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with cdo_sdk_python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cdo_sdk_python.UsersApi(api_client)
+    group_uid = 'group_uid_example' # str | The unique identifier of the Active Directory Group in CDO.
+
+    try:
+        # Remove Active Directory Group from CDO Tenant
+        api_instance.delete_active_directory_group(group_uid)
+    except Exception as e:
+        print("Exception when calling UsersApi->delete_active_directory_group: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group_uid** | **str**| The unique identifier of the Active Directory Group in CDO. | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | No Content |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
