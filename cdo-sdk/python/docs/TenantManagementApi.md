@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 
 Create CDO Tenant
 
-Create a new tenant in CDO from an MSP portal. This endpoint creates a tenant, adds the tenant to the MSP portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal
+Create a new tenant in CDO from an MSP portal. This endpoint creates a tenant, adds the tenant to the MSP portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal. You can create no more than 1 tenant every 30 seconds. Additionally, you are limited to creating a total of 100 tenants: please speak to support to raise this limit.
 
 ### Example
 
@@ -175,6 +175,7 @@ Name | Type | Description  | Notes
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
+**422** | Unprocessable entity. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

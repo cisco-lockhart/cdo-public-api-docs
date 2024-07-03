@@ -784,7 +784,9 @@ paths:
         tenant, adds the tenant to the MSP portal. If the user creating the
         tenant is not an API-only user, the user is also added to the tenant.
         Note: This endpoint can only be executed by a super-admin in an MSP
-        Portal
+        Portal. You can create no more than 1 tenant every 30 seconds.
+        Additionally, you are limited to creating a total of 100 tenants: please
+        speak to support to raise this limit.
       operationId: createTenant
       requestBody:
         content:
@@ -807,6 +809,8 @@ paths:
           $ref: '#/components/responses/http401Unauthorised'
         '403':
           $ref: '#/components/responses/http403Forbidden'
+        '422':
+          $ref: '#/components/responses/http422UnprocessableEntity'
         '500':
           description: Internal server error.
           content:
@@ -4836,12 +4840,12 @@ components:
             The name of the tenant to create. The tenant name can only contain
             alphabets, numbers, -, and _, and is limited to 64 characters.
           example: acme-inc-usa
-        humanReadableTenantName:
+        displayName:
           type: string
           description: >-
-            A human-readable name of the tenant to create. Use this field only
-            if you want the display name to be different from the name of the
-            tenant.
+            A human-readable display name of the tenant to create. Use this
+            field only if you want the display name to be different from the
+            name of the tenant.
           example: Acme Inc., United States offices
     IosCreateOrUpdateInput:
       required:
@@ -7769,6 +7773,12 @@ components:
             $ref: '#/components/schemas/CommonApiError'
     http405MethodNotAllowed:
       description: Method not allowed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+    http422UnprocessableEntity:
+      description: Unprocessable entity.
       content:
         application/json:
           schema:

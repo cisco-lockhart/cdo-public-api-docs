@@ -348,7 +348,7 @@ class TenantManagementApi:
     ) -> CdoTransaction:
         """Create CDO Tenant
 
-        Create a new tenant in CDO from an MSP portal. This endpoint creates a tenant, adds the tenant to the MSP portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal
+        Create a new tenant in CDO from an MSP portal. This endpoint creates a tenant, adds the tenant to the MSP portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal. You can create no more than 1 tenant every 30 seconds. Additionally, you are limited to creating a total of 100 tenants: please speak to support to raise this limit.
 
         :param msp_create_tenant_input: (required)
         :type msp_create_tenant_input: MspCreateTenantInput
@@ -387,6 +387,7 @@ class TenantManagementApi:
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
+            '422': "CommonApiError",
             '500': "CommonApiError",
         }
         response_data = self.api_client.call_api(
@@ -419,7 +420,7 @@ class TenantManagementApi:
     ) -> ApiResponse[CdoTransaction]:
         """Create CDO Tenant
 
-        Create a new tenant in CDO from an MSP portal. This endpoint creates a tenant, adds the tenant to the MSP portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal
+        Create a new tenant in CDO from an MSP portal. This endpoint creates a tenant, adds the tenant to the MSP portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal. You can create no more than 1 tenant every 30 seconds. Additionally, you are limited to creating a total of 100 tenants: please speak to support to raise this limit.
 
         :param msp_create_tenant_input: (required)
         :type msp_create_tenant_input: MspCreateTenantInput
@@ -458,6 +459,7 @@ class TenantManagementApi:
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
+            '422': "CommonApiError",
             '500': "CommonApiError",
         }
         response_data = self.api_client.call_api(
@@ -490,7 +492,7 @@ class TenantManagementApi:
     ) -> RESTResponseType:
         """Create CDO Tenant
 
-        Create a new tenant in CDO from an MSP portal. This endpoint creates a tenant, adds the tenant to the MSP portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal
+        Create a new tenant in CDO from an MSP portal. This endpoint creates a tenant, adds the tenant to the MSP portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal. You can create no more than 1 tenant every 30 seconds. Additionally, you are limited to creating a total of 100 tenants: please speak to support to raise this limit.
 
         :param msp_create_tenant_input: (required)
         :type msp_create_tenant_input: MspCreateTenantInput
@@ -529,6 +531,7 @@ class TenantManagementApi:
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
+            '422': "CommonApiError",
             '500': "CommonApiError",
         }
         response_data = self.api_client.call_api(
