@@ -416,7 +416,7 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
-  /v1/users/{apiUserId}/apiToken/revoke:
+  /v1/users/{apiUserUid}/apiToken/revoke:
     post:
       tags:
         - Users
@@ -426,7 +426,7 @@ paths:
         of an API-only user, this operation will fail.
       operationId: revokeApiToken
       parameters:
-        - name: apiUserId
+        - name: apiUserUid
           in: path
           description: The unique identifier of the API user in CDO.
           required: true
@@ -454,7 +454,7 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
-  /v1/users/{apiUserId}/apiToken/generate:
+  /v1/users/{apiUserUid}/apiToken/generate:
     post:
       tags:
         - Users
@@ -465,7 +465,7 @@ paths:
         API-only user, this operation will fail.
       operationId: generateApiToken
       parameters:
-        - name: apiUserId
+        - name: apiUserUid
           in: path
           description: The unique identifier of the API-only user in CDO
           required: true

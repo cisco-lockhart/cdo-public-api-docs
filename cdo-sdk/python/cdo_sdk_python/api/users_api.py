@@ -1157,7 +1157,7 @@ class UsersApi:
     @validate_call
     def generate_api_token(
         self,
-        api_user_id: Annotated[StrictStr, Field(description="The unique identifier of the API-only user in CDO")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API-only user in CDO")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1175,8 +1175,8 @@ class UsersApi:
 
         Generate API Token for API-only user. API-only users are used for building automations with CDO. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_id: The unique identifier of the API-only user in CDO (required)
-        :type api_user_id: str
+        :param api_user_uid: The unique identifier of the API-only user in CDO (required)
+        :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1200,7 +1200,7 @@ class UsersApi:
         """ # noqa: E501
 
         _param = self._generate_api_token_serialize(
-            api_user_id=api_user_id,
+            api_user_uid=api_user_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1228,7 +1228,7 @@ class UsersApi:
     @validate_call
     def generate_api_token_with_http_info(
         self,
-        api_user_id: Annotated[StrictStr, Field(description="The unique identifier of the API-only user in CDO")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API-only user in CDO")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1246,8 +1246,8 @@ class UsersApi:
 
         Generate API Token for API-only user. API-only users are used for building automations with CDO. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_id: The unique identifier of the API-only user in CDO (required)
-        :type api_user_id: str
+        :param api_user_uid: The unique identifier of the API-only user in CDO (required)
+        :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1271,7 +1271,7 @@ class UsersApi:
         """ # noqa: E501
 
         _param = self._generate_api_token_serialize(
-            api_user_id=api_user_id,
+            api_user_uid=api_user_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1299,7 +1299,7 @@ class UsersApi:
     @validate_call
     def generate_api_token_without_preload_content(
         self,
-        api_user_id: Annotated[StrictStr, Field(description="The unique identifier of the API-only user in CDO")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API-only user in CDO")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1317,8 +1317,8 @@ class UsersApi:
 
         Generate API Token for API-only user. API-only users are used for building automations with CDO. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_id: The unique identifier of the API-only user in CDO (required)
-        :type api_user_id: str
+        :param api_user_uid: The unique identifier of the API-only user in CDO (required)
+        :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1342,7 +1342,7 @@ class UsersApi:
         """ # noqa: E501
 
         _param = self._generate_api_token_serialize(
-            api_user_id=api_user_id,
+            api_user_uid=api_user_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1365,7 +1365,7 @@ class UsersApi:
 
     def _generate_api_token_serialize(
         self,
-        api_user_id,
+        api_user_uid,
         _request_auth,
         _content_type,
         _headers,
@@ -1385,8 +1385,8 @@ class UsersApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if api_user_id is not None:
-            _path_params['apiUserId'] = api_user_id
+        if api_user_uid is not None:
+            _path_params['apiUserUid'] = api_user_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -1408,7 +1408,7 @@ class UsersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v1/users/{apiUserId}/apiToken/generate',
+            resource_path='/v1/users/{apiUserUid}/apiToken/generate',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2834,7 +2834,7 @@ class UsersApi:
     @validate_call
     def revoke_api_token(
         self,
-        api_user_id: Annotated[StrictStr, Field(description="The unique identifier of the API user in CDO.")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API user in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2852,8 +2852,8 @@ class UsersApi:
 
         Revoke API Token of API-only user. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_id: The unique identifier of the API user in CDO. (required)
-        :type api_user_id: str
+        :param api_user_uid: The unique identifier of the API user in CDO. (required)
+        :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2877,7 +2877,7 @@ class UsersApi:
         """ # noqa: E501
 
         _param = self._revoke_api_token_serialize(
-            api_user_id=api_user_id,
+            api_user_uid=api_user_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2905,7 +2905,7 @@ class UsersApi:
     @validate_call
     def revoke_api_token_with_http_info(
         self,
-        api_user_id: Annotated[StrictStr, Field(description="The unique identifier of the API user in CDO.")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API user in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2923,8 +2923,8 @@ class UsersApi:
 
         Revoke API Token of API-only user. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_id: The unique identifier of the API user in CDO. (required)
-        :type api_user_id: str
+        :param api_user_uid: The unique identifier of the API user in CDO. (required)
+        :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2948,7 +2948,7 @@ class UsersApi:
         """ # noqa: E501
 
         _param = self._revoke_api_token_serialize(
-            api_user_id=api_user_id,
+            api_user_uid=api_user_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2976,7 +2976,7 @@ class UsersApi:
     @validate_call
     def revoke_api_token_without_preload_content(
         self,
-        api_user_id: Annotated[StrictStr, Field(description="The unique identifier of the API user in CDO.")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API user in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2994,8 +2994,8 @@ class UsersApi:
 
         Revoke API Token of API-only user. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_id: The unique identifier of the API user in CDO. (required)
-        :type api_user_id: str
+        :param api_user_uid: The unique identifier of the API user in CDO. (required)
+        :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3019,7 +3019,7 @@ class UsersApi:
         """ # noqa: E501
 
         _param = self._revoke_api_token_serialize(
-            api_user_id=api_user_id,
+            api_user_uid=api_user_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3042,7 +3042,7 @@ class UsersApi:
 
     def _revoke_api_token_serialize(
         self,
-        api_user_id,
+        api_user_uid,
         _request_auth,
         _content_type,
         _headers,
@@ -3062,8 +3062,8 @@ class UsersApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if api_user_id is not None:
-            _path_params['apiUserId'] = api_user_id
+        if api_user_uid is not None:
+            _path_params['apiUserUid'] = api_user_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -3085,7 +3085,7 @@ class UsersApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v1/users/{apiUserId}/apiToken/revoke',
+            resource_path='/v1/users/{apiUserUid}/apiToken/revoke',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

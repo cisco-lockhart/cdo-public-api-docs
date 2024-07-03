@@ -8,13 +8,13 @@ Method | HTTP request | Description
 [**create_user**](UsersApi.md#create_user) | **POST** /v1/users | Create User in CDO Tenant
 [**delete_active_directory_group**](UsersApi.md#delete_active_directory_group) | **DELETE** /v1/users/groups/{groupUid} | Remove Active Directory Group from CDO Tenant
 [**delete_user**](UsersApi.md#delete_user) | **DELETE** /v1/users/{userUid} | Remove User from CDO Tenant
-[**generate_api_token**](UsersApi.md#generate_api_token) | **POST** /v1/users/{apiUserId}/apiToken/generate | Generate Token for API-only user
+[**generate_api_token**](UsersApi.md#generate_api_token) | **POST** /v1/users/{apiUserUid}/apiToken/generate | Generate Token for API-only user
 [**get_active_directory_group**](UsersApi.md#get_active_directory_group) | **GET** /v1/users/groups/{groupUid} | Get Active Directory Group
 [**get_active_directory_groups**](UsersApi.md#get_active_directory_groups) | **GET** /v1/users/groups | Get Active Directory Groups
 [**get_token**](UsersApi.md#get_token) | **GET** /v1/token | Get Token Info
 [**get_user**](UsersApi.md#get_user) | **GET** /v1/users/{userUid} | Get Tenant User
 [**get_users**](UsersApi.md#get_users) | **GET** /v1/users | Get Tenant Users
-[**revoke_api_token**](UsersApi.md#revoke_api_token) | **POST** /v1/users/{apiUserId}/apiToken/revoke | Revoke API-only User&#39;s Token
+[**revoke_api_token**](UsersApi.md#revoke_api_token) | **POST** /v1/users/{apiUserUid}/apiToken/revoke | Revoke API-only User&#39;s Token
 [**revoke_token**](UsersApi.md#revoke_token) | **POST** /v1/token/revoke | Revoke Token
 
 
@@ -343,7 +343,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **generate_api_token**
-> ApiTokenInfo generate_api_token(api_user_id)
+> ApiTokenInfo generate_api_token(api_user_uid)
 
 Generate Token for API-only user
 
@@ -379,11 +379,11 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
-    api_user_id = 'api_user_id_example' # str | The unique identifier of the API-only user in CDO
+    api_user_uid = 'api_user_uid_example' # str | The unique identifier of the API-only user in CDO
 
     try:
         # Generate Token for API-only user
-        api_response = api_instance.generate_api_token(api_user_id)
+        api_response = api_instance.generate_api_token(api_user_uid)
         print("The response of UsersApi->generate_api_token:\n")
         pprint(api_response)
     except Exception as e:
@@ -397,7 +397,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_user_id** | **str**| The unique identifier of the API-only user in CDO | 
+ **api_user_uid** | **str**| The unique identifier of the API-only user in CDO | 
 
 ### Return type
 
@@ -839,7 +839,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **revoke_api_token**
-> StatusInfo revoke_api_token(api_user_id)
+> StatusInfo revoke_api_token(api_user_uid)
 
 Revoke API-only User's Token
 
@@ -875,11 +875,11 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
-    api_user_id = 'api_user_id_example' # str | The unique identifier of the API user in CDO.
+    api_user_uid = 'api_user_uid_example' # str | The unique identifier of the API user in CDO.
 
     try:
         # Revoke API-only User's Token
-        api_response = api_instance.revoke_api_token(api_user_id)
+        api_response = api_instance.revoke_api_token(api_user_uid)
         print("The response of UsersApi->revoke_api_token:\n")
         pprint(api_response)
     except Exception as e:
@@ -893,7 +893,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_user_id** | **str**| The unique identifier of the API user in CDO. | 
+ **api_user_uid** | **str**| The unique identifier of the API user in CDO. | 
 
 ### Return type
 
