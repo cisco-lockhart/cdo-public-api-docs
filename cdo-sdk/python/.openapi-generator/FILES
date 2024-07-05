@@ -30,8 +30,10 @@ cdo_sdk_python/models/access_group_create_input.py
 cdo_sdk_python/models/access_group_page.py
 cdo_sdk_python/models/access_group_update_input.py
 cdo_sdk_python/models/access_rule.py
+cdo_sdk_python/models/access_rule_create_input.py
 cdo_sdk_python/models/access_rule_details_content.py
 cdo_sdk_python/models/access_rule_page.py
+cdo_sdk_python/models/access_rule_update_input.py
 cdo_sdk_python/models/active_directory_group.py
 cdo_sdk_python/models/active_directory_group_create_or_update_input.py
 cdo_sdk_python/models/active_directory_group_page.py
@@ -157,8 +159,10 @@ docs/AccessGroupPage.md
 docs/AccessGroupUpdateInput.md
 docs/AccessGroupsApi.md
 docs/AccessRule.md
+docs/AccessRuleCreateInput.md
 docs/AccessRuleDetailsContent.md
 docs/AccessRulePage.md
+docs/AccessRuleUpdateInput.md
 docs/ActiveDirectoryGroup.md
 docs/ActiveDirectoryGroupCreateOrUpdateInput.md
 docs/ActiveDirectoryGroupPage.md
@@ -294,4 +298,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_access_rule_create_input.py
+test/test_access_rule_update_input.py
 tox.ini
