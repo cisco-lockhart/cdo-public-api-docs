@@ -298,6 +298,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_access_rule_create_input.py
-test/test_access_rule_update_input.py
 tox.ini
