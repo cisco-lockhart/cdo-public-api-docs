@@ -4764,6 +4764,7 @@ components:
         - ROLE_DEPLOY_ONLY
         - ROLE_EDIT_ONLY
         - ROLE_VPN_SESSIONS_MANAGER
+        - ROLE_FWAAS
     StatusInfo:
       type: object
       properties:

@@ -33,6 +33,7 @@ class UserRole(str, Enum):
     ROLE_DEPLOY_ONLY = 'ROLE_DEPLOY_ONLY'
     ROLE_EDIT_ONLY = 'ROLE_EDIT_ONLY'
     ROLE_VPN_SESSIONS_MANAGER = 'ROLE_VPN_SESSIONS_MANAGER'
+    ROLE_FWAAS = 'ROLE_FWAAS'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
