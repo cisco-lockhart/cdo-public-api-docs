@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**get_token**](UsersApi.md#get_token) | **GET** /v1/token | Get Token Info
 [**get_user**](UsersApi.md#get_user) | **GET** /v1/users/{userUid} | Get Tenant User
 [**get_users**](UsersApi.md#get_users) | **GET** /v1/users | Get Tenant Users
+[**modify_active_directory_group**](UsersApi.md#modify_active_directory_group) | **PATCH** /v1/users/groups/{groupUid} | Modify Active Directory Group
 [**revoke_api_token**](UsersApi.md#revoke_api_token) | **POST** /v1/users/{apiUserUid}/apiToken/revoke | Revoke API-only User&#39;s Token
 [**revoke_token**](UsersApi.md#revoke_token) | **POST** /v1/token/revoke | Revoke Token
 
@@ -834,6 +835,92 @@ Name | Type | Description  | Notes
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **modify_active_directory_group**
+> ActiveDirectoryGroup modify_active_directory_group(group_uid, active_directory_group_create_or_update_input)
+
+Modify Active Directory Group
+
+Modify an Active Directory Group by UID.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import cdo_sdk_python
+from cdo_sdk_python.models.active_directory_group import ActiveDirectoryGroup
+from cdo_sdk_python.models.active_directory_group_create_or_update_input import ActiveDirectoryGroupCreateOrUpdateInput
+from cdo_sdk_python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cdo_sdk_python.Configuration(
+    host = "https://edge.us.cdo.cisco.com/api/rest"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = cdo_sdk_python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with cdo_sdk_python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cdo_sdk_python.UsersApi(api_client)
+    group_uid = 'group_uid_example' # str | The unique identifier of the active directory group in CDO.
+    active_directory_group_create_or_update_input = cdo_sdk_python.ActiveDirectoryGroupCreateOrUpdateInput() # ActiveDirectoryGroupCreateOrUpdateInput | 
+
+    try:
+        # Modify Active Directory Group
+        api_response = api_instance.modify_active_directory_group(group_uid, active_directory_group_create_or_update_input)
+        print("The response of UsersApi->modify_active_directory_group:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UsersApi->modify_active_directory_group: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group_uid** | **str**| The unique identifier of the active directory group in CDO. | 
+ **active_directory_group_create_or_update_input** | [**ActiveDirectoryGroupCreateOrUpdateInput**](ActiveDirectoryGroupCreateOrUpdateInput.md)|  | 
+
+### Return type
+
+[**ActiveDirectoryGroup**](ActiveDirectoryGroup.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Active Directory Group object |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**404** | Entity not found. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
