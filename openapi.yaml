@@ -7254,6 +7254,7 @@ components:
             - CANNOT_DELETE_CDFMC
             - SERVER_ERROR
             - PROXY_ERROR
+            - BAD_REQUEST
         errorMsg:
           type: string
           description: A human-readable error description in English.
