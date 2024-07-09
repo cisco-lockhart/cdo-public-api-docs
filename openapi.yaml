@@ -870,6 +870,53 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /v1/msp/tenants/{tenantUid}/users:
+    post:
+      tags:
+        - Tenant Management
+      summary: Add users to CDO tenant in MSP portal
+      description: >-
+        This is an asynchronous operation to add a list of users to a tenant
+        associated with the MSP portal. Note: this endpoint cannot be used to
+        add API-only users.
+      operationId: addUsersToTenantInMspPortal
+      parameters:
+        - name: tenantUid
+          in: path
+          description: Unique identifier of the tenant to which the users will be added.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MspAddUsersToTenantInput'
+        required: true
+      responses:
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the status of the
+            operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/msp/tenants/create:
     post:
       tags:
@@ -4682,6 +4729,7 @@ components:
         - CREATE_SDC
         - SEND_AI_ASSISTANT_MESSAGE
         - MSP_CREATE_TENANT
+        - MSP_ADD_USERS_TO_TENANT
     RaVpnDeviceInput:
       required:
         - deviceUids
@@ -5193,6 +5241,17 @@ components:
           type: string
           description: The Tenant API Access Token.
           example: FaKE-toKeN
+    MspAddUsersToTenantInput:
+      required:
+        - users
+      type: object
+      properties:
+        users:
+          type: array
+          description: The list of users to be added to the tenant.
+          example: '[username: burak@cisco.com, role: ROLE_ADMIN]'
+          items:
+            $ref: '#/components/schemas/User'
     MspCreateTenantInput:
       required:
         - tenantName
