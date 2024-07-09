@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**users** | [**List[User]**](User.md) | The list of users to be added to the tenant. | 
+**users** | [**List[UserInput]**](UserInput.md) | The list of users to be added to the tenant. | 
 
 ## Example
 

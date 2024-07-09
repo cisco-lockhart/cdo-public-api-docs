@@ -5251,7 +5251,20 @@ components:
           description: The list of users to be added to the tenant.
           example: '[username: burak@cisco.com, role: ROLE_ADMIN]'
           items:
-            $ref: '#/components/schemas/User'
+            $ref: '#/components/schemas/UserInput'
+    UserInput:
+      required:
+        - role
+        - username
+      type: object
+      properties:
+        username:
+          type: string
+          description: The name of the user in CDO. This must be a valid e-mail address.
+        role:
+          $ref: '#/components/schemas/UserRole'
+      description: The list of users to be added to the tenant.
+      example: '[username: burak@cisco.com, role: ROLE_ADMIN]'
     MspCreateTenantInput:
       required:
         - tenantName

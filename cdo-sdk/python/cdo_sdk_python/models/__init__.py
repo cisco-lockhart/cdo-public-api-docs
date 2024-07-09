@@ -138,5 +138,6 @@ from cdo_sdk_python.models.update_request import UpdateRequest
 from cdo_sdk_python.models.url_object_content import UrlObjectContent
 from cdo_sdk_python.models.user import User
 from cdo_sdk_python.models.user_create_or_update_input import UserCreateOrUpdateInput
+from cdo_sdk_python.models.user_input import UserInput
 from cdo_sdk_python.models.user_page import UserPage
 from cdo_sdk_python.models.user_role import UserRole

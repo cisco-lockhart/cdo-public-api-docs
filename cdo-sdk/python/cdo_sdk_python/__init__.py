@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.352"
+__version__ = "1.0.353"
 
 # import apis into sdk package
 from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
@@ -170,5 +170,6 @@ from cdo_sdk_python.models.update_request import UpdateRequest
 from cdo_sdk_python.models.url_object_content import UrlObjectContent
 from cdo_sdk_python.models.user import User
 from cdo_sdk_python.models.user_create_or_update_input import UserCreateOrUpdateInput
+from cdo_sdk_python.models.user_input import UserInput
 from cdo_sdk_python.models.user_page import UserPage
 from cdo_sdk_python.models.user_role import UserRole

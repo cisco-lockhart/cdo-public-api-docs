@@ -18,18 +18,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
-from cdo_sdk_python.models.user_input import UserInput
+from cdo_sdk_python.models.user_role import UserRole
 from typing import Optional, Set
 from typing_extensions import Self
 
-class MspAddUsersToTenantInput(BaseModel):
+class UserInput(BaseModel):
     """
-    MspAddUsersToTenantInput
+    The list of users to be added to the tenant.
     """ # noqa: E501
-    users: List[UserInput] = Field(description="The list of users to be added to the tenant.")
-    __properties: ClassVar[List[str]] = ["users"]
+    username: StrictStr = Field(description="The name of the user in CDO. This must be a valid e-mail address.")
+    role: UserRole
+    __properties: ClassVar[List[str]] = ["username", "role"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +50,7 @@ class MspAddUsersToTenantInput(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of MspAddUsersToTenantInput from a JSON string"""
+        """Create an instance of UserInput from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,18 +71,11 @@ class MspAddUsersToTenantInput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in users (list)
-        _items = []
-        if self.users:
-            for _item in self.users:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['users'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of MspAddUsersToTenantInput from a dict"""
+        """Create an instance of UserInput from a dict"""
         if obj is None:
             return None
 
@@ -89,7 +83,8 @@ class MspAddUsersToTenantInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "users": [UserInput.from_dict(_item) for _item in obj["users"]] if obj.get("users") is not None else None
+            "username": obj.get("username"),
+            "role": obj.get("role")
         })
         return _obj
 

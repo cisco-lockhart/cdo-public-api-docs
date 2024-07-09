@@ -148,6 +148,7 @@ cdo_sdk_python/models/update_request.py
 cdo_sdk_python/models/url_object_content.py
 cdo_sdk_python/models/user.py
 cdo_sdk_python/models/user_create_or_update_input.py
+cdo_sdk_python/models/user_input.py
 cdo_sdk_python/models/user_page.py
 cdo_sdk_python/models/user_role.py
 cdo_sdk_python/py.typed
@@ -290,6 +291,7 @@ docs/UpdateRequest.md
 docs/UrlObjectContent.md
 docs/User.md
 docs/UserCreateOrUpdateInput.md
+docs/UserInput.md
 docs/UserPage.md
 docs/UserRole.md
 docs/UsersApi.md
@@ -300,4 +302,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_user_input.py
 tox.ini
