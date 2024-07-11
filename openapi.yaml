@@ -54,6 +54,8 @@ tags:
     x-displayName: Meta
   - name: Changelogs
     x-displayName: Changelogs
+  - name: Audit Logs
+    x-displayName: Audit Logs
   - name: Object Management
     x-displayName: Object Management
 paths:
@@ -4110,6 +4112,89 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /v1/auditlogs:
+    get:
+      tags:
+        - Audit Logs
+      summary: Get Audit Logs
+      description: Get a list of Audit Logs.
+      operationId: getAuditLogs
+      parameters:
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: searchText
+          in: query
+          description: >-
+            The searchText parameter serves as a flexible search option that
+            allows for text-based filtering across the username fields of the
+            Audit Log object. This parameter can be used independently to search
+            for entries containing the specified text, or in combination with
+            the q query parameter for more targeted results. When used with q,
+            the search conditions of searchText are logically ANDed with the q
+            parameter's criteria, ensuring that the returned entries satisfy
+            both sets of conditions.
+          required: false
+          schema:
+            type: string
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: fieldName:fieldValue
+        - name: sort
+          in: query
+          description: The fields to sort results by.
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          example: name:DESC
+      responses:
+        '200':
+          description: List of Audit Logs objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditLogPage'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '405':
+          $ref: '#/components/responses/http405MethodNotAllowed'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/ai-assistant/conversations/{conversationUid}/messages:
     get:
       tags:
@@ -7104,6 +7189,80 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/ChangeRequest'
+    AuditLog:
+      required:
+        - uid
+      type: object
+      properties:
+        uid:
+          type: string
+          description: The unique identifier of the Audit Log.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        eventType:
+          type: string
+          description: The type of the Audit Log event.
+          example: USER_LOGGED_IN
+          enum:
+            - USER_LOGGED_IN
+            - USER_ADDED_TO_TENANT
+            - USER_REMOVED_FROM_TENANT
+            - USER_ROLE_CHANGED
+            - AD_GROUP_ADDED
+            - AD_GROUP_DELETED
+            - AD_GROUP_ROLE_CHANGED
+            - USER_LOGIN_DATA
+        username:
+          type: string
+          description: The name/email of the of user the Audit Log refers to.
+          example: test@cisco.com
+        eventDescription:
+          type: string
+          description: The description of the Audit Log event.
+          example: test@cisco.com logged in
+        eventTime:
+          type: string
+          description: >-
+            The time (UTC; represented using the RFC-3339 standard) at which the
+            Audit Log event was created.
+          format: date-time
+          example: '2024-06-26T20:44:06Z'
+        roles:
+          uniqueItems: true
+          type: array
+          description: The roles of the user who did the Audit log operation
+          example: '[ROLE_READ_ONLY, ROLE_DEPLOY_ONLY]'
+          items:
+            type: string
+            description: The roles of the user who did the Audit log operation
+            example: '[ROLE_READ_ONLY, ROLE_DEPLOY_ONLY]'
+      description: The list of items retrieved.
+    AuditLogPage:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The total number of results available.
+          format: int32
+          example: 100
+        limit:
+          type: integer
+          description: The number of results retrieved.
+          format: int32
+          example: 50
+        offset:
+          type: integer
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          format: int32
+          example: 0
+        items:
+          type: array
+          description: The list of items retrieved.
+          items:
+            $ref: '#/components/schemas/AuditLog'
     AiAssistantConversationPage:
       type: object
       properties:
@@ -8139,6 +8298,7 @@ x-tagGroups:
       - Transactions
       - Meta
       - Changelogs
+      - Audit Logs
   - name: object-service-openapi
     tags:
       - Object Management

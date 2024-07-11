@@ -35,6 +35,8 @@ from cdo_sdk_python.models.api_token_info import ApiTokenInfo
 from cdo_sdk_python.models.asa_create_or_update_input import AsaCreateOrUpdateInput
 from cdo_sdk_python.models.asa_failover_mate import AsaFailoverMate
 from cdo_sdk_python.models.asa_failover_mode import AsaFailoverMode
+from cdo_sdk_python.models.audit_log import AuditLog
+from cdo_sdk_python.models.audit_log_page import AuditLogPage
 from cdo_sdk_python.models.authentication_error import AuthenticationError
 from cdo_sdk_python.models.browser import Browser
 from cdo_sdk_python.models.cd_fmc_info import CdFmcInfo

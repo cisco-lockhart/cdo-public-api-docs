@@ -7,6 +7,7 @@ cdo_sdk_python/api/__init__.py
 cdo_sdk_python/api/access_groups_api.py
 cdo_sdk_python/api/ai_assistant_api.py
 cdo_sdk_python/api/asa_access_rules_api.py
+cdo_sdk_python/api/audit_logs_api.py
 cdo_sdk_python/api/change_requests_api.py
 cdo_sdk_python/api/changelogs_api.py
 cdo_sdk_python/api/cloud_delivered_fmc_api.py
@@ -45,6 +46,8 @@ cdo_sdk_python/models/api_token_info.py
 cdo_sdk_python/models/asa_create_or_update_input.py
 cdo_sdk_python/models/asa_failover_mate.py
 cdo_sdk_python/models/asa_failover_mode.py
+cdo_sdk_python/models/audit_log.py
+cdo_sdk_python/models/audit_log_page.py
 cdo_sdk_python/models/authentication_error.py
 cdo_sdk_python/models/browser.py
 cdo_sdk_python/models/cd_fmc_info.py
@@ -176,6 +179,9 @@ docs/ApiTokenInfo.md
 docs/AsaCreateOrUpdateInput.md
 docs/AsaFailoverMate.md
 docs/AsaFailoverMode.md
+docs/AuditLog.md
+docs/AuditLogPage.md
+docs/AuditLogsApi.md
 docs/AuthenticationError.md
 docs/Browser.md
 docs/CdFmcInfo.md
@@ -302,4 +308,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_audit_log.py
+test/test_audit_log_page.py
+test/test_audit_logs_api.py
 tox.ini
