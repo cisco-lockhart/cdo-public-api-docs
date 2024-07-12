@@ -35,6 +35,7 @@ Name | Type | Description | Notes
 **state_machine_details** | [**StateMachineDetails**](StateMachineDetails.md) |  | [optional] 
 **labels** | [**Labels**](Labels.md) |  | [optional] 
 **fmc_domain_uid** | **str** | (FMC device managers only) The unique identifier of the [FMC domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html). | [optional] 
+**model_number** | **str** | The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device. | [optional] 
 
 ## Example
 

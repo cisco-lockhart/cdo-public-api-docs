@@ -6154,6 +6154,12 @@ components:
             (FMC device managers only) The unique identifier of the [FMC
             domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html).
           format: uuid
+        modelNumber:
+          type: string
+          description: >-
+            The hardware, or virtualized hardware platform, that the device is
+            running on (ASA-only). This field can be missing in the case of a
+            partially onboarded device.
     DeviceRole:
       type: string
       description: The role this device performs on the network.

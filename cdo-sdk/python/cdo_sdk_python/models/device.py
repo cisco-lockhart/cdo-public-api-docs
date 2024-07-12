@@ -71,7 +71,8 @@ class Device(BaseModel):
     state_machine_details: Optional[StateMachineDetails] = Field(default=None, alias="stateMachineDetails")
     labels: Optional[Labels] = None
     fmc_domain_uid: Optional[StrictStr] = Field(default=None, description="(FMC device managers only) The unique identifier of the [FMC domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html).", alias="fmcDomainUid")
-    __properties: ClassVar[List[str]] = ["uid", "name", "deviceType", "connectorType", "connectorUid", "address", "deviceRole", "serial", "chassisSerial", "softwareVersion", "connectivityState", "configState", "conflictDetectionState", "notes", "asdmVersion", "asaFailoverMode", "asaFailoverState", "asaFailoverMate", "asaLicenseEntitlements", "ftdLicenses", "snortVersion", "ftdPerformanceTier", "cdFmcInfo", "onPremFmcInfo", "merakiDeploymentMode", "merakiNetwork", "state", "stateMachineDetails", "labels", "fmcDomainUid"]
+    model_number: Optional[StrictStr] = Field(default=None, description="The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device.", alias="modelNumber")
+    __properties: ClassVar[List[str]] = ["uid", "name", "deviceType", "connectorType", "connectorUid", "address", "deviceRole", "serial", "chassisSerial", "softwareVersion", "connectivityState", "configState", "conflictDetectionState", "notes", "asdmVersion", "asaFailoverMode", "asaFailoverState", "asaFailoverMate", "asaLicenseEntitlements", "ftdLicenses", "snortVersion", "ftdPerformanceTier", "cdFmcInfo", "onPremFmcInfo", "merakiDeploymentMode", "merakiNetwork", "state", "stateMachineDetails", "labels", "fmcDomainUid", "modelNumber"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -171,7 +172,8 @@ class Device(BaseModel):
             "state": obj.get("state"),
             "stateMachineDetails": StateMachineDetails.from_dict(obj["stateMachineDetails"]) if obj.get("stateMachineDetails") is not None else None,
             "labels": Labels.from_dict(obj["labels"]) if obj.get("labels") is not None else None,
-            "fmcDomainUid": obj.get("fmcDomainUid")
+            "fmcDomainUid": obj.get("fmcDomainUid"),
+            "modelNumber": obj.get("modelNumber")
         })
         return _obj
 
