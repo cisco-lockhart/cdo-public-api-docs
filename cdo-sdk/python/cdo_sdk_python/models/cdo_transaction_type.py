@@ -45,6 +45,7 @@ class CdoTransactionType(str, Enum):
     SEND_AI_ASSISTANT_MESSAGE = 'SEND_AI_ASSISTANT_MESSAGE'
     MSP_CREATE_TENANT = 'MSP_CREATE_TENANT'
     MSP_ADD_USERS_TO_TENANT = 'MSP_ADD_USERS_TO_TENANT'
+    MSP_ADD_EXISTING_TENANT = 'MSP_ADD_EXISTING_TENANT'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
