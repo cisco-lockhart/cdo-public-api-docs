@@ -5043,13 +5043,6 @@ components:
             Rule.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-        sharedAccessGroupUid:
-          type: string
-          description: >-
-            The optional unique identifier for the shared Access Group
-            associated with a shared Access Rule.
-          format: uuid
-          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         entityUid:
           type: string
           description: >-

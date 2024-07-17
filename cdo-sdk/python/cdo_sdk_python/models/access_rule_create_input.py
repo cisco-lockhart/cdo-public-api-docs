@@ -30,7 +30,6 @@ class AccessRuleCreateInput(BaseModel):
     AccessRuleCreateInput
     """ # noqa: E501
     access_group_uid: StrictStr = Field(description="The unique identifier of the Access Group associated with the Access Rule.", alias="accessGroupUid")
-    shared_access_group_uid: Optional[StrictStr] = Field(default=None, description="The optional unique identifier for the shared Access Group associated with a shared Access Rule.", alias="sharedAccessGroupUid")
     entity_uid: StrictStr = Field(description="The unique identifier of the device/manager associated with the Access Rule. Points to the shared Access Group in the case of a shared Access Rule being created.", alias="entityUid")
     index: StrictInt = Field(description="The position of the Access Rule in the orded list of rules in an Access Group.")
     rule_action: Optional[StrictStr] = Field(default=None, description="The rule's action.", alias="ruleAction")
@@ -45,7 +44,7 @@ class AccessRuleCreateInput(BaseModel):
     rule_time_range: Optional[AccessRuleDetailsContent] = Field(default=None, alias="ruleTimeRange")
     remark: Optional[StrictStr] = Field(default=None, description="A human-readable remark. This is typically used to describe the intentions of the access rule.")
     active_rule: Optional[StrictBool] = Field(default=None, alias="activeRule")
-    __properties: ClassVar[List[str]] = ["accessGroupUid", "sharedAccessGroupUid", "entityUid", "index", "ruleAction", "protocol", "sourcePort", "destinationPort", "sourceNetwork", "destinationNetwork", "sourceDynamicObject", "destinationDynamicObject", "logSettings", "ruleTimeRange", "remark", "activeRule"]
+    __properties: ClassVar[List[str]] = ["accessGroupUid", "entityUid", "index", "ruleAction", "protocol", "sourcePort", "destinationPort", "sourceNetwork", "destinationNetwork", "sourceDynamicObject", "destinationDynamicObject", "logSettings", "ruleTimeRange", "remark", "activeRule"]
 
     @field_validator('rule_action')
     def rule_action_validate_enum(cls, value):
@@ -136,7 +135,6 @@ class AccessRuleCreateInput(BaseModel):
 
         _obj = cls.model_validate({
             "accessGroupUid": obj.get("accessGroupUid"),
-            "sharedAccessGroupUid": obj.get("sharedAccessGroupUid"),
             "entityUid": obj.get("entityUid"),
             "index": obj.get("index"),
             "ruleAction": obj.get("ruleAction"),
