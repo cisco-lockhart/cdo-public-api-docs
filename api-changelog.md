@@ -1,3 +1,10 @@
+# Version 1.2.0 (2024-07-19)
+
+## Added
+- ASA Access Groups and Access Rules management: API endpoints to manage ASA Access Groups and Access Rules.
+- MSSP Tenant management: API endpoints for MSSP portal super-admin users to create a new tenant and add it to the CDO MSSP portal and add existing tenants to the portal.
+- Active Directory (AD) groups management: API endpoints to create, remove, modify, list, and fetch Active Directory groups on a CDO tenant.
+
 # Version 1.1.0 (2024-05-30)
 
 ## Added
