@@ -15,6 +15,7 @@ cdo_sdk_python/api/command_line_interface_api.py
 cdo_sdk_python/api/connectors_api.py
 cdo_sdk_python/api/inventory_api.py
 cdo_sdk_python/api/meta_api.py
+cdo_sdk_python/api/msp_api.py
 cdo_sdk_python/api/object_management_api.py
 cdo_sdk_python/api/remote_access_monitoring_api.py
 cdo_sdk_python/api/search_api.py
@@ -245,6 +246,7 @@ docs/Labels.md
 docs/ListObjectResponse.md
 docs/Location.md
 docs/LogSettings.md
+docs/MSPApi.md
 docs/MerakiDeploymentMode.md
 docs/Meta.md
 docs/MetaApi.md
@@ -308,4 +310,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_msp_api.py
 tox.ini
