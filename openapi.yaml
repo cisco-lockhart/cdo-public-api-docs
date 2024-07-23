@@ -913,8 +913,8 @@ paths:
           $ref: '#/components/responses/http401Unauthorised'
         '403':
           $ref: '#/components/responses/http403Forbidden'
-        '422':
-          $ref: '#/components/responses/http422UnprocessableEntity'
+        '409':
+          $ref: '#/components/responses/http409Conflict'
         '500':
           description: Internal server error.
           content:
@@ -1005,8 +1005,8 @@ paths:
           $ref: '#/components/responses/http401Unauthorised'
         '403':
           $ref: '#/components/responses/http403Forbidden'
-        '422':
-          $ref: '#/components/responses/http422UnprocessableEntity'
+        '409':
+          $ref: '#/components/responses/http409Conflict'
         '500':
           description: Internal server error.
           content:
@@ -8316,6 +8316,12 @@ components:
             $ref: '#/components/schemas/CommonApiError'
     http405MethodNotAllowed:
       description: Method not allowed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+    http409Conflict:
+      description: Conflict.
       content:
         application/json:
           schema:

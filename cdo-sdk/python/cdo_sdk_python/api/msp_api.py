@@ -384,7 +384,7 @@ class MSPApi:
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
-            '422': "CommonApiError",
+            '409': "CommonApiError",
             '500': "CommonApiError",
         }
         response_data = self.api_client.call_api(
@@ -456,7 +456,7 @@ class MSPApi:
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
-            '422': "CommonApiError",
+            '409': "CommonApiError",
             '500': "CommonApiError",
         }
         response_data = self.api_client.call_api(
@@ -528,7 +528,7 @@ class MSPApi:
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
-            '422': "CommonApiError",
+            '409': "CommonApiError",
             '500': "CommonApiError",
         }
         response_data = self.api_client.call_api(
@@ -955,7 +955,7 @@ class MSPApi:
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
-            '422': "CommonApiError",
+            '409': "CommonApiError",
             '500': "CommonApiError",
         }
         response_data = self.api_client.call_api(
@@ -1027,7 +1027,7 @@ class MSPApi:
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
-            '422': "CommonApiError",
+            '409': "CommonApiError",
             '500': "CommonApiError",
         }
         response_data = self.api_client.call_api(
@@ -1099,7 +1099,7 @@ class MSPApi:
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
-            '422': "CommonApiError",
+            '409': "CommonApiError",
             '500': "CommonApiError",
         }
         response_data = self.api_client.call_api(
