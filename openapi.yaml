@@ -1015,6 +1015,44 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /v1/inventory/managers/cdfmc:
+    post:
+      tags:
+        - Inventory
+      summary: Provision cdFMC
+      description: >-
+        This is an asynchronous operation to provision a cloud-delivered FMC in
+        a tenant. This operation can only be performed as a super-admin user.
+      operationId: provisionCdFmc
+      responses:
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the status of the
+            operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '409':
+          description: cdFMC already exists or is in the process of being provisioned.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/inventory/devices/ios:
     post:
       tags:
@@ -4867,6 +4905,7 @@ components:
         - MSP_CREATE_TENANT
         - MSP_ADD_USERS_TO_TENANT
         - MSP_ADD_EXISTING_TENANT
+        - PROVISION_CD_FMC
     RaVpnDeviceInput:
       required:
         - deviceUids

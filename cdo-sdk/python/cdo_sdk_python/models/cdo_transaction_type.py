@@ -46,6 +46,7 @@ class CdoTransactionType(str, Enum):
     MSP_CREATE_TENANT = 'MSP_CREATE_TENANT'
     MSP_ADD_USERS_TO_TENANT = 'MSP_ADD_USERS_TO_TENANT'
     MSP_ADD_EXISTING_TENANT = 'MSP_ADD_EXISTING_TENANT'
+    PROVISION_CD_FMC = 'PROVISION_CD_FMC'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
