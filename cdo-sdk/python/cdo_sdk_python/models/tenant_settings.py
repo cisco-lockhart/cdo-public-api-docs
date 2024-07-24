@@ -35,10 +35,11 @@ class TenantSettings(BaseModel):
     scheduled_deployments: Optional[StrictBool] = Field(default=None, description="Indicates if the tenant has scheduled deployments enabled.", alias="scheduledDeployments")
     deny_cisco_support_access_to_tenant: Optional[StrictBool] = Field(default=None, description="Indicates if Cisco support is denied access to the tenant.", alias="denyCiscoSupportAccessToTenant")
     multicloud_defense: Optional[StrictBool] = Field(default=None, description="Indicates if the tenant has the multicloud defense enabled.", alias="multicloudDefense")
+    policy_analyzer: Optional[StrictBool] = Field(default=None, description="Indicates if the tenant has the policy analyzer enabled.", alias="policyAnalyzer")
     ai_assistant: Optional[StrictBool] = Field(default=None, description="Indicates if the tenant has the AI assistant enabled.", alias="aiAssistant")
     auto_discover_on_prem_fmcs: Optional[StrictBool] = Field(default=None, description="Indicates if the system automatically discovers on-premise FMCs.", alias="autoDiscoverOnPremFmcs")
     conflict_detection_interval: Optional[ConflictDetectionInterval] = Field(default=None, alias="conflictDetectionInterval")
-    __properties: ClassVar[List[str]] = ["uid", "changeRequestSupport", "autoAcceptDeviceChanges", "webAnalytics", "scheduledDeployments", "denyCiscoSupportAccessToTenant", "multicloudDefense", "aiAssistant", "autoDiscoverOnPremFmcs", "conflictDetectionInterval"]
+    __properties: ClassVar[List[str]] = ["uid", "changeRequestSupport", "autoAcceptDeviceChanges", "webAnalytics", "scheduledDeployments", "denyCiscoSupportAccessToTenant", "multicloudDefense", "policyAnalyzer", "aiAssistant", "autoDiscoverOnPremFmcs", "conflictDetectionInterval"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,6 +99,7 @@ class TenantSettings(BaseModel):
             "scheduledDeployments": obj.get("scheduledDeployments"),
             "denyCiscoSupportAccessToTenant": obj.get("denyCiscoSupportAccessToTenant"),
             "multicloudDefense": obj.get("multicloudDefense"),
+            "policyAnalyzer": obj.get("policyAnalyzer"),
             "aiAssistant": obj.get("aiAssistant"),
             "autoDiscoverOnPremFmcs": obj.get("autoDiscoverOnPremFmcs"),
             "conflictDetectionInterval": obj.get("conflictDetectionInterval")
