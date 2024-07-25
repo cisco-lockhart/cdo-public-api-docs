@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,8 +28,10 @@ class AccessGroupUpdateInput(BaseModel):
     AccessGroupUpdateInput
     """ # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="A human-readable name for the Access Group.")
-    resources: Optional[List[Dict[str, Dict[str, Any]]]] = Field(default=None, description="The set of of interface and direction pairs or global resource.")
-    __properties: ClassVar[List[str]] = ["name", "resources"]
+    resources: Optional[List[Dict[str, Dict[str, Any]]]] = Field(default=None, description="The set of of interface and direction pairs or global resource.  Resource is an attribute applicable only to devices and will not be propagated to appliedTo devices if Access Group is shared.")
+    is_shared: Optional[StrictBool] = Field(default=None, description="The flag that identifies if access group is shared.  If set to true, appliedTo field should be provided as well and entityUid should point to source device.", alias="isShared")
+    applied_to: Optional[List[StrictStr]] = Field(default=None, description="The set of device unique identifiers to which this Access Group was applied. Only valid for shared access group.", alias="appliedTo")
+    __properties: ClassVar[List[str]] = ["name", "resources", "isShared", "appliedTo"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,7 +85,9 @@ class AccessGroupUpdateInput(BaseModel):
 
         _obj = cls.model_validate({
             "name": obj.get("name"),
-            "resources": obj.get("resources")
+            "resources": obj.get("resources"),
+            "isShared": obj.get("isShared"),
+            "appliedTo": obj.get("appliedTo")
         })
         return _obj
 

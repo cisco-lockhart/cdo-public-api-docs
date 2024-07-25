@@ -5373,13 +5373,17 @@ components:
           type: string
           description: >-
             The unique identifier of the device/manager associated with the
-            Access Group.
+            Access Group. When creating shared Access Group, entityUid
+            represents device that contains source Access Group 
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         resources:
           uniqueItems: true
           type: array
-          description: The set of of interface and direction pairs or global resource.
+          description: >-
+            The set of of interface and direction pairs or global resource. 
+            Resource is an attribute applicable only to devices and will not be
+            propagated to appliedTo devices if Access Group is shared.
           example: >-
             Interface resource: [{"interfaceName": "outside","direction":
             "OUTBOUND"] or Global resource: [{"global": true}]
@@ -5387,14 +5391,40 @@ components:
             type: object
             additionalProperties:
               type: object
-              description: The set of of interface and direction pairs or global resource.
+              description: >-
+                The set of of interface and direction pairs or global resource. 
+                Resource is an attribute applicable only to devices and will not
+                be propagated to appliedTo devices if Access Group is shared.
               example: >-
                 Interface resource: [{"interfaceName": "outside","direction":
                 "OUTBOUND"] or Global resource: [{"global": true}]
-            description: The set of of interface and direction pairs or global resource.
+            description: >-
+              The set of of interface and direction pairs or global resource. 
+              Resource is an attribute applicable only to devices and will not
+              be propagated to appliedTo devices if Access Group is shared.
             example: >-
               Interface resource: [{"interfaceName": "outside","direction":
               "OUTBOUND"] or Global resource: [{"global": true}]
+        isShared:
+          type: boolean
+          description: >-
+            The flag that identifies if access group is shared.  If set to true,
+            appliedTo field should be provided as well and entityUid should
+            point to source device.
+          example: false
+        appliedTo:
+          uniqueItems: true
+          type: array
+          description: >-
+            The set of device unique identifiers to which this Access Group was
+            applied. Only valid for shared access group.
+          example: '[deviceUid1, deviceUid2, ..., deviceUidN]'
+          items:
+            type: string
+            description: >-
+              The set of device unique identifiers to which this Access Group
+              was applied. Only valid for shared access group.
+            format: uuid
     AccessGroup:
       required:
         - entityUid
@@ -6071,7 +6101,10 @@ components:
         resources:
           uniqueItems: true
           type: array
-          description: The set of of interface and direction pairs or global resource.
+          description: >-
+            The set of of interface and direction pairs or global resource. 
+            Resource is an attribute applicable only to devices and will not be
+            propagated to appliedTo devices if Access Group is shared.
           example: >-
             Interface resource: [{"interfaceName": "outside","direction":
             "OUTBOUND"] or Global resource: [{"global": true}]
@@ -6079,14 +6112,40 @@ components:
             type: object
             additionalProperties:
               type: object
-              description: The set of of interface and direction pairs or global resource.
+              description: >-
+                The set of of interface and direction pairs or global resource. 
+                Resource is an attribute applicable only to devices and will not
+                be propagated to appliedTo devices if Access Group is shared.
               example: >-
                 Interface resource: [{"interfaceName": "outside","direction":
                 "OUTBOUND"] or Global resource: [{"global": true}]
-            description: The set of of interface and direction pairs or global resource.
+            description: >-
+              The set of of interface and direction pairs or global resource. 
+              Resource is an attribute applicable only to devices and will not
+              be propagated to appliedTo devices if Access Group is shared.
             example: >-
               Interface resource: [{"interfaceName": "outside","direction":
               "OUTBOUND"] or Global resource: [{"global": true}]
+        isShared:
+          type: boolean
+          description: >-
+            The flag that identifies if access group is shared.  If set to true,
+            appliedTo field should be provided as well and entityUid should
+            point to source device.
+          example: false
+        appliedTo:
+          uniqueItems: true
+          type: array
+          description: >-
+            The set of device unique identifiers to which this Access Group was
+            applied. Only valid for shared access group.
+          example: '[deviceUid1, deviceUid2, ..., deviceUidN]'
+          items:
+            type: string
+            description: >-
+              The set of device unique identifiers to which this Access Group
+              was applied. Only valid for shared access group.
+            format: uuid
     DevicePatchInput:
       type: object
       properties:
