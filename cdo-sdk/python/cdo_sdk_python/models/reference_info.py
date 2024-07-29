@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class ReferenceInfo(BaseModel):
     """
-    ReferenceInfo
+    List of objects referenced in the default content or in any of the overrides.
     """ # noqa: E501
     uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the referenced object")
     name: Optional[StrictStr] = Field(default=None, description="The name of the referenced object")

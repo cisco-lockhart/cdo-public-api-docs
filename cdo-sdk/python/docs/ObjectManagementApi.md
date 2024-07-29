@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**get_object**](ObjectManagementApi.md#get_object) | **GET** /v1/objects/{uid} | Get Object
 [**get_object_usages**](ObjectManagementApi.md#get_object_usages) | **GET** /v1/objects/{uid}/usage | Get Object Usages
 [**get_objects**](ObjectManagementApi.md#get_objects) | **GET** /v1/objects | Get Objects
+[**get_override_object**](ObjectManagementApi.md#get_override_object) | **GET** /v1/objects/overrides/{uid} | Get Override Object With Values For Specific Target
 [**modify_object**](ObjectManagementApi.md#modify_object) | **PATCH** /v1/objects/{uid} | Modify Object
 
 
@@ -674,6 +675,80 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | A paginated view of the CDO objects. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_override_object**
+> ObjectResponse get_override_object(uid, target_uid)
+
+Get Override Object With Values For Specific Target
+
+Gets an object in the CDO tenant with values for specific target uid
+
+### Example
+
+
+```python
+import cdo_sdk_python
+from cdo_sdk_python.models.object_response import ObjectResponse
+from cdo_sdk_python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cdo_sdk_python.Configuration(
+    host = "https://edge.us.cdo.cisco.com/api/rest"
+)
+
+
+# Enter a context with an instance of the API client
+with cdo_sdk_python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
+    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | The unique identifier of the object being retrieved.
+    target_uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | The target UID to calculate values for.
+
+    try:
+        # Get Override Object With Values For Specific Target
+        api_response = api_instance.get_override_object(uid, target_uid)
+        print("The response of ObjectManagementApi->get_override_object:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ObjectManagementApi->get_override_object: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **uid** | **str**| The unique identifier of the object being retrieved. | 
+ **target_uid** | **str**| The target UID to calculate values for. | 
+
+### Return type
+
+[**ObjectResponse**](ObjectResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |

@@ -4831,6 +4831,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
+  /v1/objects/overrides/{uid}:
+    get:
+      tags:
+        - Object Management
+      summary: Get Override Object With Values For Specific Target
+      description: Gets an object in the CDO tenant with values for specific target uid
+      operationId: getOverrideObject
+      parameters:
+        - name: uid
+          in: path
+          description: The unique identifier of the object being retrieved.
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        - name: targetUid
+          in: query
+          description: The target UID to calculate values for.
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectResponse'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
   /v1/objects/issues-count:
     get:
       tags:
@@ -8277,6 +8320,9 @@ components:
             - NETWORK_GROUP
             - URL_GROUP
             - SERVICE_GROUP
+      description: >-
+        List of objects referenced in the default content or in any of the
+        overrides.
     Target:
       type: object
       properties:
