@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**add_tenant_to_msp_portal**](MSPApi.md#add_tenant_to_msp_portal) | **POST** /v1/msp/tenants/{tenantUid} | Add tenant to MSP Portal
 [**add_users_to_tenant_in_msp_portal**](MSPApi.md#add_users_to_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/users | Add users to CDO tenant in MSP Portal
 [**create_tenant**](MSPApi.md#create_tenant) | **POST** /v1/msp/tenants/create | Create CDO Tenant
+[**enable_multicloud_defense_for_tenant_in_msp_portal**](MSPApi.md#enable_multicloud_defense_for_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/mcd | Enable Multicloud Defense for CDO tenant in MSP Portal
 
 
 # **add_active_directory_groups_to_tenant_in_msp_portal**
@@ -401,6 +402,75 @@ Name | Type | Description  | Notes
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
 **409** | Conflict. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **enable_multicloud_defense_for_tenant_in_msp_portal**
+> CdoTransaction enable_multicloud_defense_for_tenant_in_msp_portal(tenant_uid)
+
+Enable Multicloud Defense for CDO tenant in MSP Portal
+
+This is an asynchronous operation to enable Multicloud Defense for a tenant associated with the MSP Portal.
+
+### Example
+
+
+```python
+import cdo_sdk_python
+from cdo_sdk_python.models.cdo_transaction import CdoTransaction
+from cdo_sdk_python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cdo_sdk_python.Configuration(
+    host = "https://edge.us.cdo.cisco.com/api/rest"
+)
+
+
+# Enter a context with an instance of the API client
+with cdo_sdk_python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cdo_sdk_python.MSPApi(api_client)
+    tenant_uid = 'tenant_uid_example' # str | Unique identifier of the tenant that Multicloud Defense will be enabled for.
+
+    try:
+        # Enable Multicloud Defense for CDO tenant in MSP Portal
+        api_response = api_instance.enable_multicloud_defense_for_tenant_in_msp_portal(tenant_uid)
+        print("The response of MSPApi->enable_multicloud_defense_for_tenant_in_msp_portal:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling MSPApi->enable_multicloud_defense_for_tenant_in_msp_portal: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tenant_uid** | **str**| Unique identifier of the tenant that Multicloud Defense will be enabled for. | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | CDO Transaction object that can be used to track the status of the operation. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

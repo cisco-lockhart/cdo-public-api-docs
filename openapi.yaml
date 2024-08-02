@@ -1004,6 +1004,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
+  /v1/msp/tenants/{tenantUid}/mcd:
+    post:
+      tags:
+        - MSP
+      summary: Enable Multicloud Defense for CDO tenant in MSP Portal
+      description: >-
+        This is an asynchronous operation to enable Multicloud Defense for a
+        tenant associated with the MSP Portal.
+      operationId: enableMulticloudDefenseForTenantInMspPortal
+      parameters:
+        - name: tenantUid
+          in: path
+          description: >-
+            Unique identifier of the tenant that Multicloud Defense will be
+            enabled for.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the status of the
+            operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
   /v1/msp/tenants/create:
     post:
       tags:
@@ -1115,11 +1149,7 @@ paths:
         '403':
           $ref: '#/components/responses/http403Forbidden'
         '409':
-          description: cdFMC already exists or is in the process of being provisioned.
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/CdoTransaction'
+          $ref: '#/components/responses/http409Conflict'
         '500':
           description: Internal server error.
           content:
@@ -5024,6 +5054,7 @@ components:
         - MSP_ADD_USERS_TO_TENANT
         - MSP_ADD_USER_GROUPS_TO_TENANT
         - MSP_ADD_EXISTING_TENANT
+        - MSP_ENABLE_MULTICLOUD_DEFENSE
         - ENABLE_MULTICLOUD_DEFENSE
         - PROVISION_CD_FMC
     RaVpnDeviceInput:

@@ -7591,7 +7591,7 @@ class InventoryApi:
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
-            '409': "CdoTransaction",
+            '409': "CommonApiError",
             '500': "CommonApiError",
         }
         response_data = self.api_client.call_api(
@@ -7659,7 +7659,7 @@ class InventoryApi:
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
-            '409': "CdoTransaction",
+            '409': "CommonApiError",
             '500': "CommonApiError",
         }
         response_data = self.api_client.call_api(
@@ -7727,7 +7727,7 @@ class InventoryApi:
             '400': "CommonApiError",
             '401': "AuthenticationError",
             '403': "CommonApiError",
-            '409': "CdoTransaction",
+            '409': "CommonApiError",
             '500': "CommonApiError",
         }
         response_data = self.api_client.call_api(
@@ -7767,8 +7767,7 @@ class InventoryApi:
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(
             [
-                'application/json', 
-                '*/*'
+                'application/json'
             ]
         )
 
