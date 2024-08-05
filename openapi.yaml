@@ -5621,11 +5621,11 @@ components:
       type: object
       properties:
         tenantName:
-          pattern: '[a-zA-Z0-9-_]{1,64}'
+          pattern: '[a-zA-Z0-9-_]{1,50}'
           type: string
           description: >-
             The name of the tenant to create. The tenant name can only contain
-            alphabets, numbers, -, and _, and is limited to 64 characters.
+            alphabets, numbers, -, and _, and is limited to 50 characters.
           example: acme-inc-usa
         displayName:
           type: string

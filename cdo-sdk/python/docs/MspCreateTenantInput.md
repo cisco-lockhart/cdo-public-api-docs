@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tenant_name** | **str** | The name of the tenant to create. The tenant name can only contain alphabets, numbers, -, and _, and is limited to 64 characters. | 
+**tenant_name** | **str** | The name of the tenant to create. The tenant name can only contain alphabets, numbers, -, and _, and is limited to 50 characters. | 
 **display_name** | **str** | A human-readable display name of the tenant to create. Use this field only if you want the display name to be different from the name of the tenant. | [optional] 
 
 ## Example

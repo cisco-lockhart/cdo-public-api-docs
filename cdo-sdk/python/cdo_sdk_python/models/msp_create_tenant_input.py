@@ -28,15 +28,15 @@ class MspCreateTenantInput(BaseModel):
     """
     MspCreateTenantInput
     """ # noqa: E501
-    tenant_name: Annotated[str, Field(strict=True)] = Field(description="The name of the tenant to create. The tenant name can only contain alphabets, numbers, -, and _, and is limited to 64 characters.", alias="tenantName")
+    tenant_name: Annotated[str, Field(strict=True)] = Field(description="The name of the tenant to create. The tenant name can only contain alphabets, numbers, -, and _, and is limited to 50 characters.", alias="tenantName")
     display_name: Optional[StrictStr] = Field(default=None, description="A human-readable display name of the tenant to create. Use this field only if you want the display name to be different from the name of the tenant.", alias="displayName")
     __properties: ClassVar[List[str]] = ["tenantName", "displayName"]
 
     @field_validator('tenant_name')
     def tenant_name_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if not re.match(r"[a-zA-Z0-9-_]{1,64}", value):
-            raise ValueError(r"must validate the regular expression /[a-zA-Z0-9-_]{1,64}/")
+        if not re.match(r"[a-zA-Z0-9-_]{1,50}", value):
+            raise ValueError(r"must validate the regular expression /[a-zA-Z0-9-_]{1,50}/")
         return value
 
     model_config = ConfigDict(
