@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.2.18"
+__version__ = "1.2.19"
 
 # import apis into sdk package
 from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
@@ -102,6 +102,7 @@ from cdo_sdk_python.models.conflict_detection_interval import ConflictDetectionI
 from cdo_sdk_python.models.conflict_detection_state import ConflictDetectionState
 from cdo_sdk_python.models.connectivity_state import ConnectivityState
 from cdo_sdk_python.models.connector_type import ConnectorType
+from cdo_sdk_python.models.cpu_health_metrics import CpuHealthMetrics
 from cdo_sdk_python.models.create_request import CreateRequest
 from cdo_sdk_python.models.device import Device
 from cdo_sdk_python.models.device_page import DevicePage
@@ -112,6 +113,7 @@ from cdo_sdk_python.models.duplicate_group_dto import DuplicateGroupDto
 from cdo_sdk_python.models.entity import Entity
 from cdo_sdk_python.models.entity_type import EntityType
 from cdo_sdk_python.models.event import Event
+from cdo_sdk_python.models.fmc_health_metrics import FmcHealthMetrics
 from cdo_sdk_python.models.ftd_create_or_update_input import FtdCreateOrUpdateInput
 from cdo_sdk_python.models.ftd_registration_input import FtdRegistrationInput
 from cdo_sdk_python.models.global_search_result import GlobalSearchResult

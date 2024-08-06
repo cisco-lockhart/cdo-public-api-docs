@@ -22,6 +22,7 @@ Method | HTTP request | Description
 [**get_device_manager**](InventoryApi.md#get_device_manager) | **GET** /v1/inventory/managers/{deviceManagerUid} | Get Device Manager
 [**get_device_managers**](InventoryApi.md#get_device_managers) | **GET** /v1/inventory/managers | Get Device Managers
 [**get_devices**](InventoryApi.md#get_devices) | **GET** /v1/inventory/devices | Get Devices
+[**get_fmc_health**](InventoryApi.md#get_fmc_health) | **GET** /v1/inventory/managers/{fmcUid}/health/metrics | Get health metrics on devices managed by the FMC (cdFMC only)
 [**get_template_device**](InventoryApi.md#get_template_device) | **GET** /v1/inventory/templates/{templateDeviceUid} | Get Template Device
 [**get_template_devices**](InventoryApi.md#get_template_devices) | **GET** /v1/inventory/templates | Get Template Devices
 [**modify_cloud_service**](InventoryApi.md#modify_cloud_service) | **PATCH** /v1/inventory/services/{cloudServiceUid} | Modify Cloud Service
@@ -1523,6 +1524,91 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of Device objects |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**405** | Method not allowed. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_fmc_health**
+> List[FmcHealthMetrics] get_fmc_health(fmc_uid, time_range=time_range)
+
+Get health metrics on devices managed by the FMC (cdFMC only)
+
+Get metrics that indicate the current health of all devices managed by the cdFMC. Note: For specific health metrics to be available for a given device under management of the cdFMC, the health policy for that device should be configured to collect those metrics. For example, CPU metrics will be unavailable for a device if the health policy applied to that device has CPU metric collection turned off. Note: This endpoint can only be queried once every minute.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import cdo_sdk_python
+from cdo_sdk_python.models.fmc_health_metrics import FmcHealthMetrics
+from cdo_sdk_python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cdo_sdk_python.Configuration(
+    host = "https://edge.us.cdo.cisco.com/api/rest"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = cdo_sdk_python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with cdo_sdk_python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
+    fmc_uid = 'fmc_uid_example' # str | The unique identifier of the FMC in CDO.
+    time_range = 'time_range_example' # str | The time range for which results should be retrieved. (optional)
+
+    try:
+        # Get health metrics on devices managed by the FMC (cdFMC only)
+        api_response = api_instance.get_fmc_health(fmc_uid, time_range=time_range)
+        print("The response of InventoryApi->get_fmc_health:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InventoryApi->get_fmc_health: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **fmc_uid** | **str**| The unique identifier of the FMC in CDO. | 
+ **time_range** | **str**| The time range for which results should be retrieved. | [optional] 
+
+### Return type
+
+[**List[FmcHealthMetrics]**](FmcHealthMetrics.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*, application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | FMC health metrics |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |

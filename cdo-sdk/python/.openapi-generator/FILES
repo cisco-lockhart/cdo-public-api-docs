@@ -80,6 +80,7 @@ cdo_sdk_python/models/conflict_detection_interval.py
 cdo_sdk_python/models/conflict_detection_state.py
 cdo_sdk_python/models/connectivity_state.py
 cdo_sdk_python/models/connector_type.py
+cdo_sdk_python/models/cpu_health_metrics.py
 cdo_sdk_python/models/create_request.py
 cdo_sdk_python/models/device.py
 cdo_sdk_python/models/device_page.py
@@ -90,6 +91,7 @@ cdo_sdk_python/models/duplicate_group_dto.py
 cdo_sdk_python/models/entity.py
 cdo_sdk_python/models/entity_type.py
 cdo_sdk_python/models/event.py
+cdo_sdk_python/models/fmc_health_metrics.py
 cdo_sdk_python/models/ftd_create_or_update_input.py
 cdo_sdk_python/models/ftd_registration_input.py
 cdo_sdk_python/models/global_search_result.py
@@ -219,6 +221,7 @@ docs/ConflictDetectionState.md
 docs/ConnectivityState.md
 docs/ConnectorType.md
 docs/ConnectorsApi.md
+docs/CpuHealthMetrics.md
 docs/CreateRequest.md
 docs/Device.md
 docs/DevicePage.md
@@ -229,6 +232,7 @@ docs/DuplicateGroupDto.md
 docs/Entity.md
 docs/EntityType.md
 docs/Event.md
+docs/FmcHealthMetrics.md
 docs/FtdCreateOrUpdateInput.md
 docs/FtdRegistrationInput.md
 docs/GlobalSearchResult.md
@@ -310,4 +314,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_cpu_health_metrics.py
+test/test_fmc_health_metrics.py
 tox.ini
