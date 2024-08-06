@@ -5,7 +5,7 @@ All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_duo_admin_panel**](InventoryApi.md#create_duo_admin_panel) | **POST** /v1/inventory/devices/duoAdminPanels | Onboard Duo Admin Panel
-[**create_ftd_device**](InventoryApi.md#create_ftd_device) | **POST** /v1/inventory/devices/ftds | Create FTD device.
+[**create_ftd_device**](InventoryApi.md#create_ftd_device) | **POST** /v1/inventory/devices/ftds | Onboard FTD device.
 [**delete_cd_fmc_managed_ftd_device**](InventoryApi.md#delete_cd_fmc_managed_ftd_device) | **POST** /v1/inventory/devices/ftds/cdfmcManaged/{deviceUid}/delete | Delete cdFMC managed FTD device
 [**delete_cloud_service**](InventoryApi.md#delete_cloud_service) | **DELETE** /v1/inventory/services/{cloudServiceUid} | Delete Cloud Service
 [**delete_device**](InventoryApi.md#delete_device) | **DELETE** /v1/inventory/devices/{deviceUid} | Delete Device
@@ -15,7 +15,7 @@ Method | HTTP request | Description
 [**enable_multicloud_defense**](InventoryApi.md#enable_multicloud_defense) | **POST** /v1/inventory/managers/mcd | Enable Multicloud Defense
 [**execute_cli_command**](InventoryApi.md#execute_cli_command) | **POST** /v1/inventory/devices/asas/cli/execute | Execute CLI Command
 [**execute_cli_macro**](InventoryApi.md#execute_cli_macro) | **POST** /v1/inventory/devices/asas/cli/executeMacro | Execute CLI Macro Command
-[**finish_onboarding_ftd_device**](InventoryApi.md#finish_onboarding_ftd_device) | **POST** /v1/inventory/devices/ftds/register | Register FTD device.
+[**finish_onboarding_ftd_device**](InventoryApi.md#finish_onboarding_ftd_device) | **POST** /v1/inventory/devices/ftds/register | Register FTD device to FMC
 [**get_cloud_service**](InventoryApi.md#get_cloud_service) | **GET** /v1/inventory/services/{cloudServiceUid} | Get Cloud Service
 [**get_cloud_services**](InventoryApi.md#get_cloud_services) | **GET** /v1/inventory/services | Get Cloud Services
 [**get_device**](InventoryApi.md#get_device) | **GET** /v1/inventory/devices/{deviceUid} | Get Device
@@ -122,9 +122,9 @@ Name | Type | Description  | Notes
 # **create_ftd_device**
 > CdoTransaction create_ftd_device(ftd_create_or_update_input)
 
-Create FTD device.
+Onboard FTD device.
 
-This is an asynchronous operation to create a cdFMC managed FTD device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation. Onboarding a cdFMC managed FTD device is a two-step process: the first step, handled by this operation, creates an FTD device with a configure manager string that must be pasted into the FTD device's Command-Line Interface. The FTD then uses this information to register itself with the CDO tenant.
+This is an asynchronous operation to generate a registration key for a cdFMC managed FTD device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation. Onboarding a cdFMC managed FTD device is a two-step process: the first step, handled by this operation, creates an FTD device with a configure manager string that must be pasted into the FTD device's Command-Line Interface. The FTD then uses this information to register itself with the CDO tenant.
 
 ### Example
 
@@ -160,7 +160,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     ftd_create_or_update_input = cdo_sdk_python.FtdCreateOrUpdateInput() # FtdCreateOrUpdateInput | 
 
     try:
-        # Create FTD device.
+        # Onboard FTD device.
         api_response = api_instance.create_ftd_device(ftd_create_or_update_input)
         print("The response of InventoryApi->create_ftd_device:\n")
         pprint(api_response)
@@ -937,7 +937,7 @@ Name | Type | Description  | Notes
 # **finish_onboarding_ftd_device**
 > CdoTransaction finish_onboarding_ftd_device(ftd_registration_input)
 
-Register FTD device.
+Register FTD device to FMC
 
 Complete registration of an FTD device managed by an FMC to the CDO tenant. Call this API endpoint after you have created an FTD and pasted the generated CLI output in the FTD. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
@@ -975,7 +975,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     ftd_registration_input = cdo_sdk_python.FtdRegistrationInput() # FtdRegistrationInput | 
 
     try:
-        # Register FTD device.
+        # Register FTD device to FMC
         api_response = api_instance.finish_onboarding_ftd_device(ftd_registration_input)
         print("The response of InventoryApi->finish_onboarding_ftd_device:\n")
         pprint(api_response)

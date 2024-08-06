@@ -314,6 +314,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_cpu_health_metrics.py
-test/test_fmc_health_metrics.py
 tox.ini

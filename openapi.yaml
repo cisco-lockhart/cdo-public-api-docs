@@ -1201,15 +1201,16 @@ paths:
     post:
       tags:
         - Inventory
-      summary: Create FTD device.
+      summary: Onboard FTD device.
       description: >-
-        This is an asynchronous operation to create a cdFMC managed FTD device
-        in the CDO tenant. This operation returns a link to a transaction object
-        that can be used to monitor the progress of the operation. Onboarding a
-        cdFMC managed FTD device is a two-step process: the first step, handled
-        by this operation, creates an FTD device with a configure manager string
-        that must be pasted into the FTD device's Command-Line Interface. The
-        FTD then uses this information to register itself with the CDO tenant.
+        This is an asynchronous operation to generate a registration key for a
+        cdFMC managed FTD device in the CDO tenant. This operation returns a
+        link to a transaction object that can be used to monitor the progress of
+        the operation. Onboarding a cdFMC managed FTD device is a two-step
+        process: the first step, handled by this operation, creates an FTD
+        device with a configure manager string that must be pasted into the FTD
+        device's Command-Line Interface. The FTD then uses this information to
+        register itself with the CDO tenant.
       operationId: createFtdDevice
       requestBody:
         content:
@@ -1244,7 +1245,7 @@ paths:
     post:
       tags:
         - Inventory
-      summary: Register FTD device.
+      summary: Register FTD device to FMC
       description: >-
         Complete registration of an FTD device managed by an FMC to the CDO
         tenant. Call this API endpoint after you have created an FTD and pasted
