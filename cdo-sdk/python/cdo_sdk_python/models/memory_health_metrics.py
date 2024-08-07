@@ -18,22 +18,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from cdo_sdk_python.models.cpu_health_metrics import CpuHealthMetrics
-from cdo_sdk_python.models.memory_health_metrics import MemoryHealthMetrics
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
-class FmcHealthMetrics(BaseModel):
+class MemoryHealthMetrics(BaseModel):
     """
-    FmcHealthMetrics
+    The memory health metrics for the device.
     """ # noqa: E501
-    device_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the device in CDO.", alias="deviceUid")
-    device_name: Optional[StrictStr] = Field(default=None, description="The name of the device in CDO.", alias="deviceName")
-    cpu_health_metrics: Optional[CpuHealthMetrics] = Field(default=None, alias="cpuHealthMetrics")
-    memory_health_metrics: Optional[MemoryHealthMetrics] = Field(default=None, alias="memoryHealthMetrics")
-    __properties: ClassVar[List[str]] = ["deviceUid", "deviceName", "cpuHealthMetrics", "memoryHealthMetrics"]
+    lina_usage_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average memory usage of the Lina process on the device, expressed as a percentage value between 0 and 1.", alias="linaUsageAvg")
+    snort_usage_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average memory usage of the Snort process on the device, expressed as a percentage value between 0 and 1.", alias="snortUsageAvg")
+    system_usage_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average memory usage of all processes on the device, expressed as a percentage value between 0 and 1.", alias="systemUsageAvg")
+    __properties: ClassVar[List[str]] = ["linaUsageAvg", "snortUsageAvg", "systemUsageAvg"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -53,7 +50,7 @@ class FmcHealthMetrics(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of FmcHealthMetrics from a JSON string"""
+        """Create an instance of MemoryHealthMetrics from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -74,17 +71,11 @@ class FmcHealthMetrics(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of cpu_health_metrics
-        if self.cpu_health_metrics:
-            _dict['cpuHealthMetrics'] = self.cpu_health_metrics.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of memory_health_metrics
-        if self.memory_health_metrics:
-            _dict['memoryHealthMetrics'] = self.memory_health_metrics.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of FmcHealthMetrics from a dict"""
+        """Create an instance of MemoryHealthMetrics from a dict"""
         if obj is None:
             return None
 
@@ -92,10 +83,9 @@ class FmcHealthMetrics(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "deviceUid": obj.get("deviceUid"),
-            "deviceName": obj.get("deviceName"),
-            "cpuHealthMetrics": CpuHealthMetrics.from_dict(obj["cpuHealthMetrics"]) if obj.get("cpuHealthMetrics") is not None else None,
-            "memoryHealthMetrics": MemoryHealthMetrics.from_dict(obj["memoryHealthMetrics"]) if obj.get("memoryHealthMetrics") is not None else None
+            "linaUsageAvg": obj.get("linaUsageAvg"),
+            "snortUsageAvg": obj.get("snortUsageAvg"),
+            "systemUsageAvg": obj.get("systemUsageAvg")
         })
         return _obj
 

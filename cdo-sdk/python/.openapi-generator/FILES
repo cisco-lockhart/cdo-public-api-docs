@@ -108,6 +108,7 @@ cdo_sdk_python/models/labels.py
 cdo_sdk_python/models/list_object_response.py
 cdo_sdk_python/models/location.py
 cdo_sdk_python/models/log_settings.py
+cdo_sdk_python/models/memory_health_metrics.py
 cdo_sdk_python/models/meraki_deployment_mode.py
 cdo_sdk_python/models/meta.py
 cdo_sdk_python/models/mfa_event.py
@@ -251,6 +252,7 @@ docs/ListObjectResponse.md
 docs/Location.md
 docs/LogSettings.md
 docs/MSPApi.md
+docs/MemoryHealthMetrics.md
 docs/MerakiDeploymentMode.md
 docs/Meta.md
 docs/MetaApi.md
@@ -314,4 +316,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_memory_health_metrics.py
 tox.ini

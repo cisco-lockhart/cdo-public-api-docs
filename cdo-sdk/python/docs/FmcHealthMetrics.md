@@ -6,7 +6,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **device_uid** | **str** | The unique identifier of the device in CDO. | [optional] 
+**device_name** | **str** | The name of the device in CDO. | [optional] 
 **cpu_health_metrics** | [**CpuHealthMetrics**](CpuHealthMetrics.md) |  | [optional] 
+**memory_health_metrics** | [**MemoryHealthMetrics**](MemoryHealthMetrics.md) |  | [optional] 
 
 ## Example
 

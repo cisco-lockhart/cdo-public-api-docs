@@ -7359,8 +7359,36 @@ components:
           description: The unique identifier of the device in CDO.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        deviceName:
+          type: string
+          description: The name of the device in CDO.
+          example: Burak's FTD device
         cpuHealthMetrics:
           $ref: '#/components/schemas/CpuHealthMetrics'
+        memoryHealthMetrics:
+          $ref: '#/components/schemas/MemoryHealthMetrics'
+    MemoryHealthMetrics:
+      type: object
+      properties:
+        linaUsageAvg:
+          type: number
+          description: >-
+            The average memory usage of the Lina process on the device,
+            expressed as a percentage value between 0 and 1.
+          format: double
+        snortUsageAvg:
+          type: number
+          description: >-
+            The average memory usage of the Snort process on the device,
+            expressed as a percentage value between 0 and 1.
+          format: double
+        systemUsageAvg:
+          type: number
+          description: >-
+            The average memory usage of all processes on the device, expressed
+            as a percentage value between 0 and 1.
+          format: double
+      description: The memory health metrics for the device.
     SdcPage:
       type: object
       properties:

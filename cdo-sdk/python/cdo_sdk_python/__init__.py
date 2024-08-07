@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.2.20"
+__version__ = "1.2.21"
 
 # import apis into sdk package
 from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
@@ -130,6 +130,7 @@ from cdo_sdk_python.models.labels import Labels
 from cdo_sdk_python.models.list_object_response import ListObjectResponse
 from cdo_sdk_python.models.location import Location
 from cdo_sdk_python.models.log_settings import LogSettings
+from cdo_sdk_python.models.memory_health_metrics import MemoryHealthMetrics
 from cdo_sdk_python.models.meraki_deployment_mode import MerakiDeploymentMode
 from cdo_sdk_python.models.meta import Meta
 from cdo_sdk_python.models.mfa_event import MfaEvent
