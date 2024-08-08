@@ -74,6 +74,7 @@ cdo_sdk_python/models/cli_macro_create_input.py
 cdo_sdk_python/models/cli_macro_execute_input.py
 cdo_sdk_python/models/cli_macro_patch_input.py
 cdo_sdk_python/models/client_device.py
+cdo_sdk_python/models/cluster_node.py
 cdo_sdk_python/models/common_api_error.py
 cdo_sdk_python/models/config_state.py
 cdo_sdk_python/models/conflict_detection_interval.py
@@ -92,10 +93,13 @@ cdo_sdk_python/models/entity.py
 cdo_sdk_python/models/entity_type.py
 cdo_sdk_python/models/event.py
 cdo_sdk_python/models/fmc_health_metrics.py
+cdo_sdk_python/models/ftd_cluster_info.py
 cdo_sdk_python/models/ftd_create_or_update_input.py
+cdo_sdk_python/models/ftd_ha_info.py
 cdo_sdk_python/models/ftd_registration_input.py
 cdo_sdk_python/models/global_search_result.py
 cdo_sdk_python/models/group_content.py
+cdo_sdk_python/models/ha_node.py
 cdo_sdk_python/models/icmp4_value.py
 cdo_sdk_python/models/icmp6_value.py
 cdo_sdk_python/models/inventory.py
@@ -214,6 +218,7 @@ docs/CliMacroExecuteInput.md
 docs/CliMacroPatchInput.md
 docs/ClientDevice.md
 docs/CloudDeliveredFMCApi.md
+docs/ClusterNode.md
 docs/CommandLineInterfaceApi.md
 docs/CommonApiError.md
 docs/ConfigState.md
@@ -234,10 +239,13 @@ docs/Entity.md
 docs/EntityType.md
 docs/Event.md
 docs/FmcHealthMetrics.md
+docs/FtdClusterInfo.md
 docs/FtdCreateOrUpdateInput.md
+docs/FtdHaInfo.md
 docs/FtdRegistrationInput.md
 docs/GlobalSearchResult.md
 docs/GroupContent.md
+docs/HaNode.md
 docs/Icmp4Value.md
 docs/Icmp6Value.md
 docs/Inventory.md
@@ -316,5 +324,8 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_memory_health_metrics.py
+test/test_cluster_node.py
+test/test_ftd_cluster_info.py
+test/test_ftd_ha_info.py
+test/test_ha_node.py
 tox.ini
