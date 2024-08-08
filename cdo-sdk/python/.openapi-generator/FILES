@@ -324,8 +324,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_cluster_node.py
-test/test_ftd_cluster_info.py
-test/test_ftd_ha_info.py
-test/test_ha_node.py
 tox.ini
