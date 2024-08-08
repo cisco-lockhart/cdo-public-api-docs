@@ -7432,6 +7432,26 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/Device'
+    ChassisStatsHealthMetrics:
+      type: object
+      properties:
+        fan1RpmAvg:
+          type: number
+          description: The average speed of fan 1, if present, in RPM.
+          format: double
+        fan2RpmAvg:
+          type: number
+          description: The average speed of fan 2, if present, in RPM.
+          format: double
+        fan3RpmAvg:
+          type: number
+          description: The average speed of fan 3, if present, in RPM.
+          format: double
+        fan4RpmAvg:
+          type: number
+          description: The average speed of fan 4, if present, in RPM.
+          format: double
+      description: The chassis health metrics for the device.
     CpuHealthMetrics:
       type: object
       properties:
@@ -7472,6 +7492,8 @@ components:
           $ref: '#/components/schemas/CpuHealthMetrics'
         memoryHealthMetrics:
           $ref: '#/components/schemas/MemoryHealthMetrics'
+        chassisStatsHealthMetrics:
+          $ref: '#/components/schemas/ChassisStatsHealthMetrics'
     MemoryHealthMetrics:
       type: object
       properties:

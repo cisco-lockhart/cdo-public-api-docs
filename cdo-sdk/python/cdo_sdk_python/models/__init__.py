@@ -57,6 +57,7 @@ from cdo_sdk_python.models.change_request_create_input import ChangeRequestCreat
 from cdo_sdk_python.models.change_request_page import ChangeRequestPage
 from cdo_sdk_python.models.changelog import Changelog
 from cdo_sdk_python.models.changelog_page import ChangelogPage
+from cdo_sdk_python.models.chassis_stats_health_metrics import ChassisStatsHealthMetrics
 from cdo_sdk_python.models.cli_command_input import CliCommandInput
 from cdo_sdk_python.models.cli_macro_create_input import CliMacroCreateInput
 from cdo_sdk_python.models.cli_macro_execute_input import CliMacroExecuteInput

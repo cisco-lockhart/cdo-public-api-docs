@@ -69,6 +69,7 @@ cdo_sdk_python/models/change_request_create_input.py
 cdo_sdk_python/models/change_request_page.py
 cdo_sdk_python/models/changelog.py
 cdo_sdk_python/models/changelog_page.py
+cdo_sdk_python/models/chassis_stats_health_metrics.py
 cdo_sdk_python/models/cli_command_input.py
 cdo_sdk_python/models/cli_macro_create_input.py
 cdo_sdk_python/models/cli_macro_execute_input.py
@@ -212,6 +213,7 @@ docs/ChangeRequestsApi.md
 docs/Changelog.md
 docs/ChangelogPage.md
 docs/ChangelogsApi.md
+docs/ChassisStatsHealthMetrics.md
 docs/CliCommandInput.md
 docs/CliMacroCreateInput.md
 docs/CliMacroExecuteInput.md
@@ -324,4 +326,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_chassis_stats_health_metrics.py
 tox.ini
