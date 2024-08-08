@@ -326,5 +326,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_chassis_stats_health_metrics.py
 tox.ini
