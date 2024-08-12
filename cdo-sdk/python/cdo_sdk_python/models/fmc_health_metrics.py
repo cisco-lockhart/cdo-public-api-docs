@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cdo_sdk_python.models.chassis_stats_health_metrics import ChassisStatsHealthMetrics
 from cdo_sdk_python.models.cpu_health_metrics import CpuHealthMetrics
+from cdo_sdk_python.models.disk_health_metrics import DiskHealthMetrics
 from cdo_sdk_python.models.memory_health_metrics import MemoryHealthMetrics
 from typing import Optional, Set
 from typing_extensions import Self
@@ -34,8 +35,9 @@ class FmcHealthMetrics(BaseModel):
     device_name: Optional[StrictStr] = Field(default=None, description="The name of the device in CDO.", alias="deviceName")
     cpu_health_metrics: Optional[CpuHealthMetrics] = Field(default=None, alias="cpuHealthMetrics")
     memory_health_metrics: Optional[MemoryHealthMetrics] = Field(default=None, alias="memoryHealthMetrics")
+    disk_health_metrics: Optional[DiskHealthMetrics] = Field(default=None, alias="diskHealthMetrics")
     chassis_stats_health_metrics: Optional[ChassisStatsHealthMetrics] = Field(default=None, alias="chassisStatsHealthMetrics")
-    __properties: ClassVar[List[str]] = ["deviceUid", "deviceName", "cpuHealthMetrics", "memoryHealthMetrics", "chassisStatsHealthMetrics"]
+    __properties: ClassVar[List[str]] = ["deviceUid", "deviceName", "cpuHealthMetrics", "memoryHealthMetrics", "diskHealthMetrics", "chassisStatsHealthMetrics"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,6 +84,9 @@ class FmcHealthMetrics(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of memory_health_metrics
         if self.memory_health_metrics:
             _dict['memoryHealthMetrics'] = self.memory_health_metrics.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of disk_health_metrics
+        if self.disk_health_metrics:
+            _dict['diskHealthMetrics'] = self.disk_health_metrics.to_dict()
         # override the default output from pydantic by calling `to_dict()` of chassis_stats_health_metrics
         if self.chassis_stats_health_metrics:
             _dict['chassisStatsHealthMetrics'] = self.chassis_stats_health_metrics.to_dict()
@@ -101,6 +106,7 @@ class FmcHealthMetrics(BaseModel):
             "deviceName": obj.get("deviceName"),
             "cpuHealthMetrics": CpuHealthMetrics.from_dict(obj["cpuHealthMetrics"]) if obj.get("cpuHealthMetrics") is not None else None,
             "memoryHealthMetrics": MemoryHealthMetrics.from_dict(obj["memoryHealthMetrics"]) if obj.get("memoryHealthMetrics") is not None else None,
+            "diskHealthMetrics": DiskHealthMetrics.from_dict(obj["diskHealthMetrics"]) if obj.get("diskHealthMetrics") is not None else None,
             "chassisStatsHealthMetrics": ChassisStatsHealthMetrics.from_dict(obj["chassisStatsHealthMetrics"]) if obj.get("chassisStatsHealthMetrics") is not None else None
         })
         return _obj

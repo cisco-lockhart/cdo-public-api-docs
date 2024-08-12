@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **device_name** | **str** | The name of the device in CDO. | [optional] 
 **cpu_health_metrics** | [**CpuHealthMetrics**](CpuHealthMetrics.md) |  | [optional] 
 **memory_health_metrics** | [**MemoryHealthMetrics**](MemoryHealthMetrics.md) |  | [optional] 
+**disk_health_metrics** | [**DiskHealthMetrics**](DiskHealthMetrics.md) |  | [optional] 
 **chassis_stats_health_metrics** | [**ChassisStatsHealthMetrics**](ChassisStatsHealthMetrics.md) |  | [optional] 
 
 ## Example

@@ -7511,6 +7511,16 @@ components:
       description: >-
         The CPU health metrics for the device. This value will be available only
         if the health policy on the device has CPU monitoring enabled.
+    DiskHealthMetrics:
+      type: object
+      properties:
+        totalDiskUsageAvg:
+          type: number
+          description: >-
+            The average total disk usage, expressed as a percentage value
+            between 0 and 1.
+          format: double
+      description: The disk health metrics for the device.
     FmcHealthMetrics:
       type: object
       properties:
@@ -7527,6 +7537,8 @@ components:
           $ref: '#/components/schemas/CpuHealthMetrics'
         memoryHealthMetrics:
           $ref: '#/components/schemas/MemoryHealthMetrics'
+        diskHealthMetrics:
+          $ref: '#/components/schemas/DiskHealthMetrics'
         chassisStatsHealthMetrics:
           $ref: '#/components/schemas/ChassisStatsHealthMetrics'
     MemoryHealthMetrics:
