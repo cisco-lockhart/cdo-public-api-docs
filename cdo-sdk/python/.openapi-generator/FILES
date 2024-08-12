@@ -328,5 +328,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_disk_health_metrics.py
 tox.ini
