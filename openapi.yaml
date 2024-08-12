@@ -1038,6 +1038,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
+  /v1/msp/tenants/{tenantUid}/cdfmc:
+    post:
+      tags:
+        - MSP
+      summary: Provision cdfmc for CDO tenant in MSP Portal
+      description: >-
+        This is an asynchronous operation to Cloud-Delivered FMC for a tenant
+        associated with the MSP Portal.
+      operationId: provisionCdFmcForTenantInMspPortal
+      parameters:
+        - name: tenantUid
+          in: path
+          description: >-
+            Unique identifier of the tenant that Cloud-Delivered FMC
+            provisioning will be enabled for.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the status of the
+            operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
   /v1/msp/tenants/create:
     post:
       tags:
@@ -5118,6 +5152,7 @@ components:
         - MSP_ADD_EXISTING_TENANT
         - MSP_ENABLE_MULTICLOUD_DEFENSE
         - ENABLE_MULTICLOUD_DEFENSE
+        - MSP_PROVISION_CDFMC
         - PROVISION_CD_FMC
     RaVpnDeviceInput:
       required:
