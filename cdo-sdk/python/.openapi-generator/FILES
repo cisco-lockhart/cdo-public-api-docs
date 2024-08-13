@@ -104,6 +104,7 @@ cdo_sdk_python/models/group_content.py
 cdo_sdk_python/models/ha_node.py
 cdo_sdk_python/models/icmp4_value.py
 cdo_sdk_python/models/icmp6_value.py
+cdo_sdk_python/models/interface_health_metrics.py
 cdo_sdk_python/models/inventory.py
 cdo_sdk_python/models/ios_create_or_update_input.py
 cdo_sdk_python/models/issues_count.py
@@ -252,6 +253,7 @@ docs/GroupContent.md
 docs/HaNode.md
 docs/Icmp4Value.md
 docs/Icmp6Value.md
+docs/InterfaceHealthMetrics.md
 docs/Inventory.md
 docs/InventoryApi.md
 docs/IosCreateOrUpdateInput.md
@@ -328,4 +330,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_interface_health_metrics.py
 tox.ini

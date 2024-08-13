@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from cdo_sdk_python.models.chassis_stats_health_metrics import ChassisStatsHealthMetrics
 from cdo_sdk_python.models.cpu_health_metrics import CpuHealthMetrics
 from cdo_sdk_python.models.disk_health_metrics import DiskHealthMetrics
+from cdo_sdk_python.models.interface_health_metrics import InterfaceHealthMetrics
 from cdo_sdk_python.models.memory_health_metrics import MemoryHealthMetrics
 from typing import Optional, Set
 from typing_extensions import Self
@@ -37,7 +38,8 @@ class FmcHealthMetrics(BaseModel):
     memory_health_metrics: Optional[MemoryHealthMetrics] = Field(default=None, alias="memoryHealthMetrics")
     disk_health_metrics: Optional[DiskHealthMetrics] = Field(default=None, alias="diskHealthMetrics")
     chassis_stats_health_metrics: Optional[ChassisStatsHealthMetrics] = Field(default=None, alias="chassisStatsHealthMetrics")
-    __properties: ClassVar[List[str]] = ["deviceUid", "deviceName", "cpuHealthMetrics", "memoryHealthMetrics", "diskHealthMetrics", "chassisStatsHealthMetrics"]
+    interface_health_metrics: Optional[List[InterfaceHealthMetrics]] = Field(default=None, description="The interface health metrics for the device.", alias="interfaceHealthMetrics")
+    __properties: ClassVar[List[str]] = ["deviceUid", "deviceName", "cpuHealthMetrics", "memoryHealthMetrics", "diskHealthMetrics", "chassisStatsHealthMetrics", "interfaceHealthMetrics"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +92,13 @@ class FmcHealthMetrics(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of chassis_stats_health_metrics
         if self.chassis_stats_health_metrics:
             _dict['chassisStatsHealthMetrics'] = self.chassis_stats_health_metrics.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in interface_health_metrics (list)
+        _items = []
+        if self.interface_health_metrics:
+            for _item in self.interface_health_metrics:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['interfaceHealthMetrics'] = _items
         return _dict
 
     @classmethod
@@ -107,7 +116,8 @@ class FmcHealthMetrics(BaseModel):
             "cpuHealthMetrics": CpuHealthMetrics.from_dict(obj["cpuHealthMetrics"]) if obj.get("cpuHealthMetrics") is not None else None,
             "memoryHealthMetrics": MemoryHealthMetrics.from_dict(obj["memoryHealthMetrics"]) if obj.get("memoryHealthMetrics") is not None else None,
             "diskHealthMetrics": DiskHealthMetrics.from_dict(obj["diskHealthMetrics"]) if obj.get("diskHealthMetrics") is not None else None,
-            "chassisStatsHealthMetrics": ChassisStatsHealthMetrics.from_dict(obj["chassisStatsHealthMetrics"]) if obj.get("chassisStatsHealthMetrics") is not None else None
+            "chassisStatsHealthMetrics": ChassisStatsHealthMetrics.from_dict(obj["chassisStatsHealthMetrics"]) if obj.get("chassisStatsHealthMetrics") is not None else None,
+            "interfaceHealthMetrics": [InterfaceHealthMetrics.from_dict(_item) for _item in obj["interfaceHealthMetrics"]] if obj.get("interfaceHealthMetrics") is not None else None
         })
         return _obj
 

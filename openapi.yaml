@@ -7541,6 +7541,27 @@ components:
           $ref: '#/components/schemas/DiskHealthMetrics'
         chassisStatsHealthMetrics:
           $ref: '#/components/schemas/ChassisStatsHealthMetrics'
+        interfaceHealthMetrics:
+          type: array
+          description: The interface health metrics for the device.
+          items:
+            $ref: '#/components/schemas/InterfaceHealthMetrics'
+    InterfaceHealthMetrics:
+      type: object
+      properties:
+        status:
+          type: string
+        bufferUnderrunsAvg:
+          type: number
+          format: double
+        bufferOverrunsAvg:
+          type: number
+          format: double
+        interface:
+          type: string
+        interfaceName:
+          type: string
+      description: The interface health metrics for the device.
     MemoryHealthMetrics:
       type: object
       properties:

@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.2.37"
+__version__ = "1.2.38"
 
 # import apis into sdk package
 from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
@@ -126,6 +126,7 @@ from cdo_sdk_python.models.group_content import GroupContent
 from cdo_sdk_python.models.ha_node import HaNode
 from cdo_sdk_python.models.icmp4_value import Icmp4Value
 from cdo_sdk_python.models.icmp6_value import Icmp6Value
+from cdo_sdk_python.models.interface_health_metrics import InterfaceHealthMetrics
 from cdo_sdk_python.models.inventory import Inventory
 from cdo_sdk_python.models.ios_create_or_update_input import IosCreateOrUpdateInput
 from cdo_sdk_python.models.issues_count import IssuesCount
