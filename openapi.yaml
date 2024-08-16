@@ -7554,6 +7554,36 @@ components:
         bufferOverrunsAvg:
           type: number
           format: double
+        dropPacketsAvg:
+          type: number
+          format: double
+        l2DecodeDropsAvg:
+          type: number
+          format: double
+        operStatus:
+          type: string
+        inputErrorsAvg:
+          type: number
+          format: double
+        outputErrorsAvg:
+          type: number
+          format: double
+        inputBytes:
+          type: number
+          format: double
+        outputBytes:
+          type: number
+          format: double
+        inputPacketSizeAvg:
+          type: number
+          format: double
+        outputPacketSizeAvg:
+          type: number
+          format: double
+        duplexMode:
+          type: string
+        interfaceType:
+          type: string
         interface:
           type: string
         interfaceName:

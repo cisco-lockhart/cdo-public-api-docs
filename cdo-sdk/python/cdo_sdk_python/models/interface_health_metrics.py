@@ -30,9 +30,20 @@ class InterfaceHealthMetrics(BaseModel):
     status: Optional[StrictStr] = None
     buffer_underruns_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="bufferUnderrunsAvg")
     buffer_overruns_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="bufferOverrunsAvg")
+    drop_packets_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="dropPacketsAvg")
+    l2_decode_drops_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="l2DecodeDropsAvg")
+    oper_status: Optional[StrictStr] = Field(default=None, alias="operStatus")
+    input_errors_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="inputErrorsAvg")
+    output_errors_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="outputErrorsAvg")
+    input_bytes: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="inputBytes")
+    output_bytes: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="outputBytes")
+    input_packet_size_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="inputPacketSizeAvg")
+    output_packet_size_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="outputPacketSizeAvg")
+    duplex_mode: Optional[StrictStr] = Field(default=None, alias="duplexMode")
+    interface_type: Optional[StrictStr] = Field(default=None, alias="interfaceType")
     interface: Optional[StrictStr] = None
     interface_name: Optional[StrictStr] = Field(default=None, alias="interfaceName")
-    __properties: ClassVar[List[str]] = ["status", "bufferUnderrunsAvg", "bufferOverrunsAvg", "interface", "interfaceName"]
+    __properties: ClassVar[List[str]] = ["status", "bufferUnderrunsAvg", "bufferOverrunsAvg", "dropPacketsAvg", "l2DecodeDropsAvg", "operStatus", "inputErrorsAvg", "outputErrorsAvg", "inputBytes", "outputBytes", "inputPacketSizeAvg", "outputPacketSizeAvg", "duplexMode", "interfaceType", "interface", "interfaceName"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,6 +99,17 @@ class InterfaceHealthMetrics(BaseModel):
             "status": obj.get("status"),
             "bufferUnderrunsAvg": obj.get("bufferUnderrunsAvg"),
             "bufferOverrunsAvg": obj.get("bufferOverrunsAvg"),
+            "dropPacketsAvg": obj.get("dropPacketsAvg"),
+            "l2DecodeDropsAvg": obj.get("l2DecodeDropsAvg"),
+            "operStatus": obj.get("operStatus"),
+            "inputErrorsAvg": obj.get("inputErrorsAvg"),
+            "outputErrorsAvg": obj.get("outputErrorsAvg"),
+            "inputBytes": obj.get("inputBytes"),
+            "outputBytes": obj.get("outputBytes"),
+            "inputPacketSizeAvg": obj.get("inputPacketSizeAvg"),
+            "outputPacketSizeAvg": obj.get("outputPacketSizeAvg"),
+            "duplexMode": obj.get("duplexMode"),
+            "interfaceType": obj.get("interfaceType"),
             "interface": obj.get("interface"),
             "interfaceName": obj.get("interfaceName")
         })
