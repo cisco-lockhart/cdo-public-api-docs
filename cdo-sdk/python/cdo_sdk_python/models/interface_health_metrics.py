@@ -18,8 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,23 +27,23 @@ class InterfaceHealthMetrics(BaseModel):
     """
     The interface health metrics for the device.
     """ # noqa: E501
-    status: Optional[StrictStr] = None
-    buffer_underruns_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="bufferUnderrunsAvg")
-    buffer_overruns_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="bufferOverrunsAvg")
-    drop_packets_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="dropPacketsAvg")
-    l2_decode_drops_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="l2DecodeDropsAvg")
-    oper_status: Optional[StrictStr] = Field(default=None, alias="operStatus")
-    input_errors_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="inputErrorsAvg")
-    output_errors_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="outputErrorsAvg")
-    input_bytes: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="inputBytes")
-    output_bytes: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="outputBytes")
-    input_packet_size_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="inputPacketSizeAvg")
-    output_packet_size_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="outputPacketSizeAvg")
-    duplex_mode: Optional[StrictStr] = Field(default=None, alias="duplexMode")
-    interface_type: Optional[StrictStr] = Field(default=None, alias="interfaceType")
-    interface: Optional[StrictStr] = None
-    interface_name: Optional[StrictStr] = Field(default=None, alias="interfaceName")
-    __properties: ClassVar[List[str]] = ["status", "bufferUnderrunsAvg", "bufferOverrunsAvg", "dropPacketsAvg", "l2DecodeDropsAvg", "operStatus", "inputErrorsAvg", "outputErrorsAvg", "inputBytes", "outputBytes", "inputPacketSizeAvg", "outputPacketSizeAvg", "duplexMode", "interfaceType", "interface", "interfaceName"]
+    interface_name: Optional[StrictStr] = Field(default=None, description="The name assigned to the interface, facilitating easier identification and configuration.", alias="interfaceName")
+    link_status: Optional[StrictStr] = Field(default=None, description="Indicates whether the physical link of the network interface is active (UP) or inactive (DOWN). The interface will be marked as DOWN if there is no traffic through the interface.", alias="linkStatus")
+    buffer_underruns_avg: Optional[StrictInt] = Field(default=None, description="Tracks the average number of times the data buffer was insufficient to handle outgoing traffic, possibly causing transmission delays.", alias="bufferUnderrunsAvg")
+    buffer_overruns_avg: Optional[StrictInt] = Field(default=None, description="Monitors the average number of times where incoming data exceeded buffer capacity, potentially leading to data loss.", alias="bufferOverrunsAvg")
+    drop_packets_avg: Optional[StrictInt] = Field(default=None, description="Average number of packets dropped by the interface due to network congestion, buffer overflow, or errors.", alias="dropPacketsAvg")
+    l2_decode_drops_avg: Optional[StrictInt] = Field(default=None, description="The average number of packets that could not be processed due to issues at the Data Link layer, including protocol mismatches or corruption.", alias="l2DecodeDropsAvg")
+    operational_status: Optional[StrictStr] = Field(default=None, description="Current state of the interface from a functional standpoint, influenced by both administrative settings and physical connectivity.", alias="operationalStatus")
+    input_errors_avg: Optional[StrictInt] = Field(default=None, description="The average rate of erroneous packets received, indicative of issues like corruption or transmission errors.", alias="inputErrorsAvg")
+    output_errors_avg: Optional[StrictInt] = Field(default=None, description="Average count of error-ridden packets sent from the device, pointing to problems in packet formation or hardware issues.", alias="outputErrorsAvg")
+    input_bytes_avg: Optional[StrictInt] = Field(default=None, description="Total amount of data received through the interface, providing insights into the volume of inbound traffic.", alias="inputBytesAvg")
+    output_bytes_avg: Optional[StrictInt] = Field(default=None, description="Total data sent out through the interface, useful for tracking outbound traffic levels.", alias="outputBytesAvg")
+    input_packet_size_avg: Optional[StrictInt] = Field(default=None, description="Average size of packets received, useful for analysing the nature of inbound traffic.", alias="inputPacketSizeAvg")
+    output_packet_size_avg: Optional[StrictInt] = Field(default=None, description="Average size of packets sent. Helps in understanding the traffic distribution and network load.", alias="outputPacketSizeAvg")
+    duplex_mode: Optional[StrictStr] = Field(default=None, description="Configuration of the interface regarding data transmission, indicating whether it is set to full, half, or auto-duplex.", alias="duplexMode")
+    interface_type: Optional[StrictStr] = Field(default=None, description="The physical or logical type of the interface (e.g., Ethernet, virtual, management).", alias="interfaceType")
+    interface: Optional[StrictStr] = Field(default=None, description="Identifier for a specific network interface on the FTD device, used for network traffic management and monitoring.")
+    __properties: ClassVar[List[str]] = ["interfaceName", "linkStatus", "bufferUnderrunsAvg", "bufferOverrunsAvg", "dropPacketsAvg", "l2DecodeDropsAvg", "operationalStatus", "inputErrorsAvg", "outputErrorsAvg", "inputBytesAvg", "outputBytesAvg", "inputPacketSizeAvg", "outputPacketSizeAvg", "duplexMode", "interfaceType", "interface"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,22 +96,22 @@ class InterfaceHealthMetrics(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "status": obj.get("status"),
+            "interfaceName": obj.get("interfaceName"),
+            "linkStatus": obj.get("linkStatus"),
             "bufferUnderrunsAvg": obj.get("bufferUnderrunsAvg"),
             "bufferOverrunsAvg": obj.get("bufferOverrunsAvg"),
             "dropPacketsAvg": obj.get("dropPacketsAvg"),
             "l2DecodeDropsAvg": obj.get("l2DecodeDropsAvg"),
-            "operStatus": obj.get("operStatus"),
+            "operationalStatus": obj.get("operationalStatus"),
             "inputErrorsAvg": obj.get("inputErrorsAvg"),
             "outputErrorsAvg": obj.get("outputErrorsAvg"),
-            "inputBytes": obj.get("inputBytes"),
-            "outputBytes": obj.get("outputBytes"),
+            "inputBytesAvg": obj.get("inputBytesAvg"),
+            "outputBytesAvg": obj.get("outputBytesAvg"),
             "inputPacketSizeAvg": obj.get("inputPacketSizeAvg"),
             "outputPacketSizeAvg": obj.get("outputPacketSizeAvg"),
             "duplexMode": obj.get("duplexMode"),
             "interfaceType": obj.get("interfaceType"),
-            "interface": obj.get("interface"),
-            "interfaceName": obj.get("interfaceName")
+            "interface": obj.get("interface")
         })
         return _obj
 

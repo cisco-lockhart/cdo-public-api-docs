@@ -27,9 +27,9 @@ class CpuHealthMetrics(BaseModel):
     """
     The CPU health metrics for the device. This value will be available only if the health policy on the device has CPU monitoring enabled.
     """ # noqa: E501
-    lina_usage_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average CPU usage of the Lina process on the device, expressed as a percentage value between 0 and 1.", alias="linaUsageAvg")
-    snort_usage_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average CPU usage of the Snort process on the device, expressed as a percentage value between 0 and 1.", alias="snortUsageAvg")
-    system_usage_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average CPU usage of all processes on the device, expressed as a percentage value between 0 and 1.", alias="systemUsageAvg")
+    lina_usage_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Measures the average CPU utilisation by the LINA (Cisco's ASA software running natively). Expressed as a percentage value between 0 and 100.", alias="linaUsageAvg")
+    snort_usage_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Indicates the average CPU usage by the Snort process, responsible for threat detection, including intrusion prevention and advanced malware protection. Expressed as a percentage value between 0 and 100.", alias="snortUsageAvg")
+    system_usage_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Represents the total average CPU load utilised by the FTD system, including both firewall and threat defense mechanisms. Expressed as a percentage value between 0 and 100.", alias="systemUsageAvg")
     __properties: ClassVar[List[str]] = ["linaUsageAvg", "snortUsageAvg", "systemUsageAvg"]
 
     model_config = ConfigDict(

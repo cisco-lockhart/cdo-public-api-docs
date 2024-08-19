@@ -6,9 +6,9 @@ The CPU health metrics for the device. This value will be available only if the 
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**lina_usage_avg** | **float** | The average CPU usage of the Lina process on the device, expressed as a percentage value between 0 and 1. | [optional] 
-**snort_usage_avg** | **float** | The average CPU usage of the Snort process on the device, expressed as a percentage value between 0 and 1. | [optional] 
-**system_usage_avg** | **float** | The average CPU usage of all processes on the device, expressed as a percentage value between 0 and 1. | [optional] 
+**lina_usage_avg** | **float** | Measures the average CPU utilisation by the LINA (Cisco&#39;s ASA software running natively). Expressed as a percentage value between 0 and 100. | [optional] 
+**snort_usage_avg** | **float** | Indicates the average CPU usage by the Snort process, responsible for threat detection, including intrusion prevention and advanced malware protection. Expressed as a percentage value between 0 and 100. | [optional] 
+**system_usage_avg** | **float** | Represents the total average CPU load utilised by the FTD system, including both firewall and threat defense mechanisms. Expressed as a percentage value between 0 and 100. | [optional] 
 
 ## Example
 

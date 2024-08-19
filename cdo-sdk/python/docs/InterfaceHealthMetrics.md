@@ -6,22 +6,22 @@ The interface health metrics for the device.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **str** |  | [optional] 
-**buffer_underruns_avg** | **float** |  | [optional] 
-**buffer_overruns_avg** | **float** |  | [optional] 
-**drop_packets_avg** | **float** |  | [optional] 
-**l2_decode_drops_avg** | **float** |  | [optional] 
-**oper_status** | **str** |  | [optional] 
-**input_errors_avg** | **float** |  | [optional] 
-**output_errors_avg** | **float** |  | [optional] 
-**input_bytes** | **float** |  | [optional] 
-**output_bytes** | **float** |  | [optional] 
-**input_packet_size_avg** | **float** |  | [optional] 
-**output_packet_size_avg** | **float** |  | [optional] 
-**duplex_mode** | **str** |  | [optional] 
-**interface_type** | **str** |  | [optional] 
-**interface** | **str** |  | [optional] 
-**interface_name** | **str** |  | [optional] 
+**interface_name** | **str** | The name assigned to the interface, facilitating easier identification and configuration. | [optional] 
+**link_status** | **str** | Indicates whether the physical link of the network interface is active (UP) or inactive (DOWN). The interface will be marked as DOWN if there is no traffic through the interface. | [optional] 
+**buffer_underruns_avg** | **int** | Tracks the average number of times the data buffer was insufficient to handle outgoing traffic, possibly causing transmission delays. | [optional] 
+**buffer_overruns_avg** | **int** | Monitors the average number of times where incoming data exceeded buffer capacity, potentially leading to data loss. | [optional] 
+**drop_packets_avg** | **int** | Average number of packets dropped by the interface due to network congestion, buffer overflow, or errors. | [optional] 
+**l2_decode_drops_avg** | **int** | The average number of packets that could not be processed due to issues at the Data Link layer, including protocol mismatches or corruption. | [optional] 
+**operational_status** | **str** | Current state of the interface from a functional standpoint, influenced by both administrative settings and physical connectivity. | [optional] 
+**input_errors_avg** | **int** | The average rate of erroneous packets received, indicative of issues like corruption or transmission errors. | [optional] 
+**output_errors_avg** | **int** | Average count of error-ridden packets sent from the device, pointing to problems in packet formation or hardware issues. | [optional] 
+**input_bytes_avg** | **int** | Total amount of data received through the interface, providing insights into the volume of inbound traffic. | [optional] 
+**output_bytes_avg** | **int** | Total data sent out through the interface, useful for tracking outbound traffic levels. | [optional] 
+**input_packet_size_avg** | **int** | Average size of packets received, useful for analysing the nature of inbound traffic. | [optional] 
+**output_packet_size_avg** | **int** | Average size of packets sent. Helps in understanding the traffic distribution and network load. | [optional] 
+**duplex_mode** | **str** | Configuration of the interface regarding data transmission, indicating whether it is set to full, half, or auto-duplex. | [optional] 
+**interface_type** | **str** | The physical or logical type of the interface (e.g., Ethernet, virtual, management). | [optional] 
+**interface** | **str** | Identifier for a specific network interface on the FTD device, used for network traffic management and monitoring. | [optional] 
 
 ## Example
 

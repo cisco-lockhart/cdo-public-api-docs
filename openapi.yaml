@@ -1038,40 +1038,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
-  /v1/msp/tenants/{tenantUid}/cdfmc:
-    post:
-      tags:
-        - MSP
-      summary: Provision cdfmc for CDO tenant in MSP Portal
-      description: >-
-        This is an asynchronous operation to Cloud-Delivered FMC for a tenant
-        associated with the MSP Portal.
-      operationId: provisionCdFmcForTenantInMspPortal
-      parameters:
-        - name: tenantUid
-          in: path
-          description: >-
-            Unique identifier of the tenant that Cloud-Delivered FMC
-            provisioning will be enabled for.
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '202':
-          description: >-
-            CDO Transaction object that can be used to track the status of the
-            operation.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CdoTransaction'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
   /v1/msp/tenants/create:
     post:
       tags:
@@ -7468,21 +7434,33 @@ components:
       type: object
       properties:
         fan1RpmAvg:
-          type: number
-          description: The average speed of fan 1, if present, in RPM.
-          format: double
+          type: integer
+          description: >-
+            The average speed of fan 1, if present, crucial for assessing the
+            effectiveness of the system’s cooling mechanism under operational
+            load.
+          format: int64
         fan2RpmAvg:
-          type: number
-          description: The average speed of fan 2, if present, in RPM.
-          format: double
+          type: integer
+          description: >-
+            The average speed of fan 2, if present, crucial for assessing the
+            effectiveness of the system’s cooling mechanism under operational
+            load.
+          format: int64
         fan3RpmAvg:
-          type: number
-          description: The average speed of fan 3, if present, in RPM.
-          format: double
+          type: integer
+          description: >-
+            The average speed of fan 3, if present, crucial for assessing the
+            effectiveness of the system’s cooling mechanism under operational
+            load.
+          format: int64
         fan4RpmAvg:
-          type: number
-          description: The average speed of fan 4, if present, in RPM.
-          format: double
+          type: integer
+          description: >-
+            The average speed of fan 4, if present, crucial for assessing the
+            effectiveness of the system’s cooling mechanism under operational
+            load.
+          format: int64
       description: The chassis health metrics for the device.
     CpuHealthMetrics:
       type: object
@@ -7490,20 +7468,24 @@ components:
         linaUsageAvg:
           type: number
           description: >-
-            The average CPU usage of the Lina process on the device, expressed
-            as a percentage value between 0 and 1.
+            Measures the average CPU utilisation by the LINA (Cisco's ASA
+            software running natively). Expressed as a percentage value between
+            0 and 100.
           format: double
         snortUsageAvg:
           type: number
           description: >-
-            The average CPU usage of the Snort process on the device, expressed
-            as a percentage value between 0 and 1.
+            Indicates the average CPU usage by the Snort process, responsible
+            for threat detection, including intrusion prevention and advanced
+            malware protection. Expressed as a percentage value between 0 and
+            100.
           format: double
         systemUsageAvg:
           type: number
           description: >-
-            The average CPU usage of all processes on the device, expressed as a
-            percentage value between 0 and 1.
+            Represents the total average CPU load utilised by the FTD system,
+            including both firewall and threat defense mechanisms. Expressed as
+            a percentage value between 0 and 100.
           format: double
       description: >-
         The CPU health metrics for the device. This value will be available only
@@ -7514,8 +7496,10 @@ components:
         totalDiskUsageAvg:
           type: number
           description: >-
-            The average total disk usage, expressed as a percentage value
-            between 0 and 1.
+            The average utilisation of disk space, important for monitoring log
+            storage, reporting, and archiving activities which are critical for
+            audit and diagnostics. Expressed as a percentage value between 0 and
+            100.
           format: double
       description: The disk health metrics for the device.
     FmcHealthMetrics:
@@ -7546,48 +7530,99 @@ components:
     InterfaceHealthMetrics:
       type: object
       properties:
-        status:
-          type: string
-        bufferUnderrunsAvg:
-          type: number
-          format: double
-        bufferOverrunsAvg:
-          type: number
-          format: double
-        dropPacketsAvg:
-          type: number
-          format: double
-        l2DecodeDropsAvg:
-          type: number
-          format: double
-        operStatus:
-          type: string
-        inputErrorsAvg:
-          type: number
-          format: double
-        outputErrorsAvg:
-          type: number
-          format: double
-        inputBytes:
-          type: number
-          format: double
-        outputBytes:
-          type: number
-          format: double
-        inputPacketSizeAvg:
-          type: number
-          format: double
-        outputPacketSizeAvg:
-          type: number
-          format: double
-        duplexMode:
-          type: string
-        interfaceType:
-          type: string
-        interface:
-          type: string
         interfaceName:
           type: string
+          description: >-
+            The name assigned to the interface, facilitating easier
+            identification and configuration.
+        linkStatus:
+          type: string
+          description: >-
+            Indicates whether the physical link of the network interface is
+            active (UP) or inactive (DOWN). The interface will be marked as DOWN
+            if there is no traffic through the interface.
+        bufferUnderrunsAvg:
+          type: integer
+          description: >-
+            Tracks the average number of times the data buffer was insufficient
+            to handle outgoing traffic, possibly causing transmission delays.
+          format: int64
+        bufferOverrunsAvg:
+          type: integer
+          description: >-
+            Monitors the average number of times where incoming data exceeded
+            buffer capacity, potentially leading to data loss.
+          format: int64
+        dropPacketsAvg:
+          type: integer
+          description: >-
+            Average number of packets dropped by the interface due to network
+            congestion, buffer overflow, or errors.
+          format: int64
+        l2DecodeDropsAvg:
+          type: integer
+          description: >-
+            The average number of packets that could not be processed due to
+            issues at the Data Link layer, including protocol mismatches or
+            corruption.
+          format: int64
+        operationalStatus:
+          type: string
+          description: >-
+            Current state of the interface from a functional standpoint,
+            influenced by both administrative settings and physical
+            connectivity.
+        inputErrorsAvg:
+          type: integer
+          description: >-
+            The average rate of erroneous packets received, indicative of issues
+            like corruption or transmission errors.
+          format: int64
+        outputErrorsAvg:
+          type: integer
+          description: >-
+            Average count of error-ridden packets sent from the device, pointing
+            to problems in packet formation or hardware issues.
+          format: int64
+        inputBytesAvg:
+          type: integer
+          description: >-
+            Total amount of data received through the interface, providing
+            insights into the volume of inbound traffic.
+          format: int64
+        outputBytesAvg:
+          type: integer
+          description: >-
+            Total data sent out through the interface, useful for tracking
+            outbound traffic levels.
+          format: int64
+        inputPacketSizeAvg:
+          type: integer
+          description: >-
+            Average size of packets received, useful for analysing the nature of
+            inbound traffic.
+          format: int64
+        outputPacketSizeAvg:
+          type: integer
+          description: >-
+            Average size of packets sent. Helps in understanding the traffic
+            distribution and network load.
+          format: int64
+        duplexMode:
+          type: string
+          description: >-
+            Configuration of the interface regarding data transmission,
+            indicating whether it is set to full, half, or auto-duplex.
+        interfaceType:
+          type: string
+          description: >-
+            The physical or logical type of the interface (e.g., Ethernet,
+            virtual, management).
+        interface:
+          type: string
+          description: >-
+            Identifier for a specific network interface on the FTD device, used
+            for network traffic management and monitoring.
       description: The interface health metrics for the device.
     MemoryHealthMetrics:
       type: object
@@ -7595,20 +7630,21 @@ components:
         linaUsageAvg:
           type: number
           description: >-
-            The average memory usage of the Lina process on the device,
-            expressed as a percentage value between 0 and 1.
+            Average memory utilisation by the LINA process. Expressed as a
+            percentage value between 0 and 100.
           format: double
         snortUsageAvg:
           type: number
           description: >-
-            The average memory usage of the Snort process on the device,
-            expressed as a percentage value between 0 and 1.
+            Average memory usage by the Snort engine. Expressed as a percentage
+            value between 0 and 100.
           format: double
         systemUsageAvg:
           type: number
           description: >-
-            The average memory usage of all processes on the device, expressed
-            as a percentage value between 0 and 1.
+            Provides an overview of the overall memory usage by the FTD system,
+            useful for monitoring system health and detecting potential resource
+            bottlenecks. Expressed as a percentage value between 0 and 100.
           format: double
       description: The memory health metrics for the device.
     SdcPage:

@@ -27,7 +27,7 @@ class DiskHealthMetrics(BaseModel):
     """
     The disk health metrics for the device.
     """ # noqa: E501
-    total_disk_usage_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average total disk usage, expressed as a percentage value between 0 and 1.", alias="totalDiskUsageAvg")
+    total_disk_usage_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average utilisation of disk space, important for monitoring log storage, reporting, and archiving activities which are critical for audit and diagnostics. Expressed as a percentage value between 0 and 100.", alias="totalDiskUsageAvg")
     __properties: ClassVar[List[str]] = ["totalDiskUsageAvg"]
 
     model_config = ConfigDict(

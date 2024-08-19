@@ -6,7 +6,7 @@ The disk health metrics for the device.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total_disk_usage_avg** | **float** | The average total disk usage, expressed as a percentage value between 0 and 1. | [optional] 
+**total_disk_usage_avg** | **float** | The average utilisation of disk space, important for monitoring log storage, reporting, and archiving activities which are critical for audit and diagnostics. Expressed as a percentage value between 0 and 100. | [optional] 
 
 ## Example
 

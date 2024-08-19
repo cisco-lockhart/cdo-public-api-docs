@@ -6,9 +6,9 @@ The memory health metrics for the device.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**lina_usage_avg** | **float** | The average memory usage of the Lina process on the device, expressed as a percentage value between 0 and 1. | [optional] 
-**snort_usage_avg** | **float** | The average memory usage of the Snort process on the device, expressed as a percentage value between 0 and 1. | [optional] 
-**system_usage_avg** | **float** | The average memory usage of all processes on the device, expressed as a percentage value between 0 and 1. | [optional] 
+**lina_usage_avg** | **float** | Average memory utilisation by the LINA process. Expressed as a percentage value between 0 and 100. | [optional] 
+**snort_usage_avg** | **float** | Average memory usage by the Snort engine. Expressed as a percentage value between 0 and 100. | [optional] 
+**system_usage_avg** | **float** | Provides an overview of the overall memory usage by the FTD system, useful for monitoring system health and detecting potential resource bottlenecks. Expressed as a percentage value between 0 and 100. | [optional] 
 
 ## Example
 

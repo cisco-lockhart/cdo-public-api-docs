@@ -27,9 +27,9 @@ class MemoryHealthMetrics(BaseModel):
     """
     The memory health metrics for the device.
     """ # noqa: E501
-    lina_usage_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average memory usage of the Lina process on the device, expressed as a percentage value between 0 and 1.", alias="linaUsageAvg")
-    snort_usage_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average memory usage of the Snort process on the device, expressed as a percentage value between 0 and 1.", alias="snortUsageAvg")
-    system_usage_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average memory usage of all processes on the device, expressed as a percentage value between 0 and 1.", alias="systemUsageAvg")
+    lina_usage_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Average memory utilisation by the LINA process. Expressed as a percentage value between 0 and 100.", alias="linaUsageAvg")
+    snort_usage_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Average memory usage by the Snort engine. Expressed as a percentage value between 0 and 100.", alias="snortUsageAvg")
+    system_usage_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Provides an overview of the overall memory usage by the FTD system, useful for monitoring system health and detecting potential resource bottlenecks. Expressed as a percentage value between 0 and 100.", alias="systemUsageAvg")
     __properties: ClassVar[List[str]] = ["linaUsageAvg", "snortUsageAvg", "systemUsageAvg"]
 
     model_config = ConfigDict(
