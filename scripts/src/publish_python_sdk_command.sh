@@ -16,6 +16,6 @@ rm -rf dist/ build/ *.egg-info
 python3 setup.py sdist bdist_wheel
 
 echo -n "$(yellow Publishing to PyPI)... "
-/home/jenkins/.local/bin/twine upload --username __token__ --password $secret_value dist/${package_name}-${current_version}.tar.gz dist/${package_name//-/_}-${current_version}-py3-none-any.whl
+twine upload --username __token__ --password $secret_value dist/${package_name}-${current_version}.tar.gz dist/${package_name//-/_}-${current_version}-py3-none-any.whl
 
 unset secret_value
