@@ -6,10 +6,10 @@ The chassis health metrics for the device.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**fan1_rpm_avg** | **int** | The average speed of fan 1, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load. | [optional] 
-**fan2_rpm_avg** | **int** | The average speed of fan 2, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load. | [optional] 
-**fan3_rpm_avg** | **int** | The average speed of fan 3, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load. | [optional] 
-**fan4_rpm_avg** | **int** | The average speed of fan 4, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load. | [optional] 
+**fan1_rpm_avg** | **float** | The average speed of fan 1, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load. | [optional] 
+**fan2_rpm_avg** | **float** | The average speed of fan 2, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load. | [optional] 
+**fan3_rpm_avg** | **float** | The average speed of fan 3, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load. | [optional] 
+**fan4_rpm_avg** | **float** | The average speed of fan 4, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load. | [optional] 
 
 ## Example
 

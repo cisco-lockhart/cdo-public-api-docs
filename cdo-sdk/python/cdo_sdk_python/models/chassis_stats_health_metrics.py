@@ -18,8 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,10 +27,10 @@ class ChassisStatsHealthMetrics(BaseModel):
     """
     The chassis health metrics for the device.
     """ # noqa: E501
-    fan1_rpm_avg: Optional[StrictInt] = Field(default=None, description="The average speed of fan 1, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load.", alias="fan1RpmAvg")
-    fan2_rpm_avg: Optional[StrictInt] = Field(default=None, description="The average speed of fan 2, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load.", alias="fan2RpmAvg")
-    fan3_rpm_avg: Optional[StrictInt] = Field(default=None, description="The average speed of fan 3, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load.", alias="fan3RpmAvg")
-    fan4_rpm_avg: Optional[StrictInt] = Field(default=None, description="The average speed of fan 4, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load.", alias="fan4RpmAvg")
+    fan1_rpm_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average speed of fan 1, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load.", alias="fan1RpmAvg")
+    fan2_rpm_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average speed of fan 2, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load.", alias="fan2RpmAvg")
+    fan3_rpm_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average speed of fan 3, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load.", alias="fan3RpmAvg")
+    fan4_rpm_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average speed of fan 4, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load.", alias="fan4RpmAvg")
     __properties: ClassVar[List[str]] = ["fan1RpmAvg", "fan2RpmAvg", "fan3RpmAvg", "fan4RpmAvg"]
 
     model_config = ConfigDict(
