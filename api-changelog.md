@@ -1,10 +1,9 @@
-# Version 1.2.0 (2024-xx-xx) 
->**Note**:
-This changelog is a work in progress. Update the date and ensure it has all the necessary information before sending a publication request to Devnet.
+# Version 1.3.0 (2024-08-22) 
 
+## Added
 - cdFMC health monitoring: API endpoint to monitor the health of a cloud-delivered FMC (cdFMC).
 - Provisioning: Provision a cdFMC and enable Multicloud Defense on a CDO tenant.
-- MSSP Tenant management: Endpoints to add user groups, provision a cdFMC, and enable Multicloud Defense on a CDO tenant that is associated with a CDO MSSP Portal.
+- MSSP Tenant management: Endpoints to add user groups, and enable Multicloud Defense on a CDO tenant that is associated with a CDO MSSP Portal.
 - Improvements to the devices endpoint: The **Get Devices** endpoint now provides information on the redundancy mode of a firewall, and provides additional High Availability (HA) and clustering information for FTD HA Pairs and clusters.
 
 # Version 1.2.0 (2024-07-19)
