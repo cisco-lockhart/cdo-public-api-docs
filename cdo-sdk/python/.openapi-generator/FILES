@@ -334,6 +334,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_sse_device_data.py
-test/test_ztp_onboarding_input.py
 tox.ini
