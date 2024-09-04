@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **ftd_performance_tier** | **str** | (FTDvs only) The FTDv supports performance-tiered licensing that provides different throughput levels and VPN connection limits based on deployment requirements. This field specifies the performance tier of the FTD. | [optional] 
 **redundancy_mode** | **str** | The redundancy mode this firewall is running in. Note: for High Availability pairs and clusters, CDO represents all of the devices as part of one record. | [optional] 
 **cd_fmc_info** | [**CdFmcInfo**](CdFmcInfo.md) |  | [optional] 
+**sse_device_data** | [**SseDeviceData**](SseDeviceData.md) |  | [optional] 
 **on_prem_fmc_info** | [**OnPremFmcInfo**](OnPremFmcInfo.md) |  | [optional] 
 **ftd_cluster_info** | [**FtdClusterInfo**](FtdClusterInfo.md) |  | [optional] 
 **ftd_ha_info** | [**FtdHaInfo**](FtdHaInfo.md) |  | [optional] 

@@ -147,6 +147,7 @@ cdo_sdk_python/models/service_object_value_content.py
 cdo_sdk_python/models/shared_object_value.py
 cdo_sdk_python/models/single_content.py
 cdo_sdk_python/models/source_destination_ports_value.py
+cdo_sdk_python/models/sse_device_data.py
 cdo_sdk_python/models/state_machine_details.py
 cdo_sdk_python/models/state_machine_error.py
 cdo_sdk_python/models/status.py
@@ -165,6 +166,7 @@ cdo_sdk_python/models/user_create_or_update_input.py
 cdo_sdk_python/models/user_input.py
 cdo_sdk_python/models/user_page.py
 cdo_sdk_python/models/user_role.py
+cdo_sdk_python/models/ztp_onboarding_input.py
 cdo_sdk_python/py.typed
 cdo_sdk_python/rest.py
 docs/AIAssistantApi.md
@@ -302,6 +304,7 @@ docs/ServiceObjectValueContent.md
 docs/SharedObjectValue.md
 docs/SingleContent.md
 docs/SourceDestinationPortsValue.md
+docs/SseDeviceData.md
 docs/StateMachineDetails.md
 docs/StateMachineError.md
 docs/Status.md
@@ -323,6 +326,7 @@ docs/UserInput.md
 docs/UserPage.md
 docs/UserRole.md
 docs/UsersApi.md
+docs/ZtpOnboardingInput.md
 git_push.sh
 pyproject.toml
 requirements.txt
@@ -330,4 +334,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_sse_device_data.py
+test/test_ztp_onboarding_input.py
 tox.ini

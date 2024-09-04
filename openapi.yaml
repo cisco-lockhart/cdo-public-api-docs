@@ -1201,7 +1201,7 @@ paths:
     post:
       tags:
         - Inventory
-      summary: Onboard FTD device.
+      summary: Onboard FTD device
       description: >-
         This is an asynchronous operation to generate a registration key for a
         cdFMC managed FTD device in the CDO tenant. This operation returns a
@@ -1217,6 +1217,48 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/FtdCreateOrUpdateInput'
+        required: true
+      responses:
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the progress of the
+            creation operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+  /v1/inventory/devices/ftds/ztp:
+    post:
+      tags:
+        - Inventory
+      summary: Onboard FTD device using Zero-Touch Provisioning
+      description: >-
+        This is an asynchronous operation to onboard a cdFMC managed FTD using
+        Zero-Touch Provisioning. The operation returns a transaction object that
+        can be used to track the progress of the onboarding operation. Note:
+        This operation will be marked as complete once CDO is ready to handle a
+        response from the device once it is plugged in and connected to the
+        Internet; it does not wait for the device to communicate back to CDO.
+      operationId: onboardFtdDeviceUsingZtp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ZtpOnboardingInput'
         required: true
       responses:
         '202':
@@ -5108,6 +5150,7 @@ components:
         - REFRESH_RA_VPN_SESSIONS
         - TERMINATE_USER_RA_VPN_SESSIONS
         - CREATE_SDC
+        - ONBOARD_FTD_ZTP
         - SEND_AI_ASSISTANT_MESSAGE
         - MSP_CREATE_TENANT
         - MSP_ADD_USERS_TO_TENANT
@@ -5847,6 +5890,68 @@ components:
             CDFMC_MANAGED_FTD
           enum:
             - CDFMC_MANAGED_FTD
+    ZtpOnboardingInput:
+      required:
+        - fmcAccessPolicyUid
+        - licenses
+        - name
+        - serialNumber
+      type: object
+      properties:
+        name:
+          type: string
+          description: Specify a human-readable name for the device.
+          example: My Zero-touch FTD
+        serialNumber:
+          type: string
+          description: >-
+            Specify the serial number of the FTD device to be onboarded. When a
+            device with this serial number is plugged in and connected to the
+            Internet, it will automatically be registered to this CDO tenant.
+        adminPassword:
+          type: string
+          description: >-
+            Specify the initial provisioning password. This is required for
+            setting up the FTD, and can be ignored if password is already set on
+            the device.
+        fmcAccessPolicyUid:
+          type: string
+          description: >-
+            Specify the unique identifier of the FMC access policy to apply to
+            this device.
+          format: uuid
+        licenses:
+          uniqueItems: true
+          type: array
+          description: Specify a set of licenses to apply to the device.
+          example: '[BASE]'
+          items:
+            type: string
+            description: Specify a set of licenses to apply to the device.
+            example: '[BASE]'
+            enum:
+              - BASE
+              - CARRIER
+              - THREAT
+              - MALWARE
+              - URLFilter
+              - BASE
+              - CARRIER
+              - MALWARE
+              - THREAT
+              - URLFilter
+          enum:
+            - BASE
+            - CARRIER
+            - MALWARE
+            - THREAT
+            - URLFilter
+        deviceGroupUid:
+          type: string
+          description: >-
+            Specify the unique identifier of the device group which the device
+            will be a part of after it finishes registering with CDO.
+          format: uuid
     FtdRegistrationInput:
       required:
         - ftdUid
@@ -6536,6 +6641,8 @@ components:
             - STANDALONE
         cdFmcInfo:
           $ref: '#/components/schemas/CdFmcInfo'
+        sseDeviceData:
+          $ref: '#/components/schemas/SseDeviceData'
         onPremFmcInfo:
           $ref: '#/components/schemas/OnPremFmcInfo'
         ftdClusterInfo:
@@ -6681,6 +6788,17 @@ components:
       description: >-
         (Devices managed by on-prem FMC only) Information on the on-prem FMC
         managing this device.
+    SseDeviceData:
+      type: object
+      properties:
+        sseDeviceId:
+          type: string
+        sseProtocolVersion:
+          type: string
+          enum:
+            - ONE
+            - TWO
+      description: SSX related info for the registered device
     StateMachineDetails:
       type: object
       properties:

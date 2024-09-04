@@ -35,6 +35,7 @@ from cdo_sdk_python.models.labels import Labels
 from cdo_sdk_python.models.meraki_deployment_mode import MerakiDeploymentMode
 from cdo_sdk_python.models.network import Network
 from cdo_sdk_python.models.on_prem_fmc_info import OnPremFmcInfo
+from cdo_sdk_python.models.sse_device_data import SseDeviceData
 from cdo_sdk_python.models.state_machine_details import StateMachineDetails
 from typing import Optional, Set
 from typing_extensions import Self
@@ -67,6 +68,7 @@ class Device(BaseModel):
     ftd_performance_tier: Optional[StrictStr] = Field(default=None, description="(FTDvs only) The FTDv supports performance-tiered licensing that provides different throughput levels and VPN connection limits based on deployment requirements. This field specifies the performance tier of the FTD.", alias="ftdPerformanceTier")
     redundancy_mode: Optional[StrictStr] = Field(default=None, description="The redundancy mode this firewall is running in. Note: for High Availability pairs and clusters, CDO represents all of the devices as part of one record.", alias="redundancyMode")
     cd_fmc_info: Optional[CdFmcInfo] = Field(default=None, alias="cdFmcInfo")
+    sse_device_data: Optional[SseDeviceData] = Field(default=None, alias="sseDeviceData")
     on_prem_fmc_info: Optional[OnPremFmcInfo] = Field(default=None, alias="onPremFmcInfo")
     ftd_cluster_info: Optional[FtdClusterInfo] = Field(default=None, alias="ftdClusterInfo")
     ftd_ha_info: Optional[FtdHaInfo] = Field(default=None, alias="ftdHaInfo")
@@ -78,7 +80,7 @@ class Device(BaseModel):
     fmc_domain_uid: Optional[StrictStr] = Field(default=None, description="(FMC device managers only) The unique identifier of the [FMC domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html).", alias="fmcDomainUid")
     uid_on_fmc: Optional[StrictStr] = Field(default=None, description="(cdFMC-managed FTDs only) The unique identifier of the device on a cdFMC.", alias="uidOnFmc")
     model_number: Optional[StrictStr] = Field(default=None, description="The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device.", alias="modelNumber")
-    __properties: ClassVar[List[str]] = ["uid", "name", "deviceType", "connectorType", "connectorUid", "address", "deviceRole", "serial", "chassisSerial", "softwareVersion", "connectivityState", "configState", "conflictDetectionState", "notes", "asdmVersion", "asaFailoverMode", "asaFailoverState", "asaFailoverMate", "asaLicenseEntitlements", "ftdLicenses", "snortVersion", "ftdPerformanceTier", "redundancyMode", "cdFmcInfo", "onPremFmcInfo", "ftdClusterInfo", "ftdHaInfo", "merakiDeploymentMode", "merakiNetwork", "state", "stateMachineDetails", "labels", "fmcDomainUid", "uidOnFmc", "modelNumber"]
+    __properties: ClassVar[List[str]] = ["uid", "name", "deviceType", "connectorType", "connectorUid", "address", "deviceRole", "serial", "chassisSerial", "softwareVersion", "connectivityState", "configState", "conflictDetectionState", "notes", "asdmVersion", "asaFailoverMode", "asaFailoverState", "asaFailoverMate", "asaLicenseEntitlements", "ftdLicenses", "snortVersion", "ftdPerformanceTier", "redundancyMode", "cdFmcInfo", "sseDeviceData", "onPremFmcInfo", "ftdClusterInfo", "ftdHaInfo", "merakiDeploymentMode", "merakiNetwork", "state", "stateMachineDetails", "labels", "fmcDomainUid", "uidOnFmc", "modelNumber"]
 
     @field_validator('redundancy_mode')
     def redundancy_mode_validate_enum(cls, value):
@@ -135,6 +137,9 @@ class Device(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of cd_fmc_info
         if self.cd_fmc_info:
             _dict['cdFmcInfo'] = self.cd_fmc_info.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of sse_device_data
+        if self.sse_device_data:
+            _dict['sseDeviceData'] = self.sse_device_data.to_dict()
         # override the default output from pydantic by calling `to_dict()` of on_prem_fmc_info
         if self.on_prem_fmc_info:
             _dict['onPremFmcInfo'] = self.on_prem_fmc_info.to_dict()
@@ -189,6 +194,7 @@ class Device(BaseModel):
             "ftdPerformanceTier": obj.get("ftdPerformanceTier"),
             "redundancyMode": obj.get("redundancyMode"),
             "cdFmcInfo": CdFmcInfo.from_dict(obj["cdFmcInfo"]) if obj.get("cdFmcInfo") is not None else None,
+            "sseDeviceData": SseDeviceData.from_dict(obj["sseDeviceData"]) if obj.get("sseDeviceData") is not None else None,
             "onPremFmcInfo": OnPremFmcInfo.from_dict(obj["onPremFmcInfo"]) if obj.get("onPremFmcInfo") is not None else None,
             "ftdClusterInfo": FtdClusterInfo.from_dict(obj["ftdClusterInfo"]) if obj.get("ftdClusterInfo") is not None else None,
             "ftdHaInfo": FtdHaInfo.from_dict(obj["ftdHaInfo"]) if obj.get("ftdHaInfo") is not None else None,

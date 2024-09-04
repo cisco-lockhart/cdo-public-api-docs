@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.2.79"
+__version__ = "1.2.80"
 
 # import apis into sdk package
 from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
@@ -169,6 +169,7 @@ from cdo_sdk_python.models.service_object_value_content import ServiceObjectValu
 from cdo_sdk_python.models.shared_object_value import SharedObjectValue
 from cdo_sdk_python.models.single_content import SingleContent
 from cdo_sdk_python.models.source_destination_ports_value import SourceDestinationPortsValue
+from cdo_sdk_python.models.sse_device_data import SseDeviceData
 from cdo_sdk_python.models.state_machine_details import StateMachineDetails
 from cdo_sdk_python.models.state_machine_error import StateMachineError
 from cdo_sdk_python.models.status import Status
@@ -187,3 +188,4 @@ from cdo_sdk_python.models.user_create_or_update_input import UserCreateOrUpdate
 from cdo_sdk_python.models.user_input import UserInput
 from cdo_sdk_python.models.user_page import UserPage
 from cdo_sdk_python.models.user_role import UserRole
+from cdo_sdk_python.models.ztp_onboarding_input import ZtpOnboardingInput

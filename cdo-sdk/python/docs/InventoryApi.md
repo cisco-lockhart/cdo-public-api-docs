@@ -5,7 +5,7 @@ All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_duo_admin_panel**](InventoryApi.md#create_duo_admin_panel) | **POST** /v1/inventory/devices/duoAdminPanels | Onboard Duo Admin Panel
-[**create_ftd_device**](InventoryApi.md#create_ftd_device) | **POST** /v1/inventory/devices/ftds | Onboard FTD device.
+[**create_ftd_device**](InventoryApi.md#create_ftd_device) | **POST** /v1/inventory/devices/ftds | Onboard FTD device
 [**delete_cd_fmc_managed_ftd_device**](InventoryApi.md#delete_cd_fmc_managed_ftd_device) | **POST** /v1/inventory/devices/ftds/cdfmcManaged/{deviceUid}/delete | Delete cdFMC managed FTD device
 [**delete_cloud_service**](InventoryApi.md#delete_cloud_service) | **DELETE** /v1/inventory/services/{cloudServiceUid} | Delete Cloud Service
 [**delete_device**](InventoryApi.md#delete_device) | **DELETE** /v1/inventory/devices/{deviceUid} | Delete Device
@@ -30,6 +30,7 @@ Method | HTTP request | Description
 [**modify_device_manager**](InventoryApi.md#modify_device_manager) | **PATCH** /v1/inventory/managers/{deviceManagerUid} | Modify Device Manager
 [**modify_template_device**](InventoryApi.md#modify_template_device) | **PATCH** /v1/inventory/templates/{templateDeviceUid} | Modify Template Device
 [**onboard_asa_device**](InventoryApi.md#onboard_asa_device) | **POST** /v1/inventory/devices/asas | Onboard ASA device
+[**onboard_ftd_device_using_ztp**](InventoryApi.md#onboard_ftd_device_using_ztp) | **POST** /v1/inventory/devices/ftds/ztp | Onboard FTD device using Zero-Touch Provisioning
 [**onboard_ios_device**](InventoryApi.md#onboard_ios_device) | **POST** /v1/inventory/devices/ios | Onboard IOS Device
 [**provision_cd_fmc**](InventoryApi.md#provision_cd_fmc) | **POST** /v1/inventory/managers/cdfmc | Provision cdFMC
 [**read_asa_device_configuration**](InventoryApi.md#read_asa_device_configuration) | **POST** /v1/inventory/devices/asas/{deviceUid}/read | Read ASA device configuration
@@ -122,7 +123,7 @@ Name | Type | Description  | Notes
 # **create_ftd_device**
 > CdoTransaction create_ftd_device(ftd_create_or_update_input)
 
-Onboard FTD device.
+Onboard FTD device
 
 This is an asynchronous operation to generate a registration key for a cdFMC managed FTD device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation. Onboarding a cdFMC managed FTD device is a two-step process: the first step, handled by this operation, creates an FTD device with a configure manager string that must be pasted into the FTD device's Command-Line Interface. The FTD then uses this information to register itself with the CDO tenant.
 
@@ -160,7 +161,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     ftd_create_or_update_input = cdo_sdk_python.FtdCreateOrUpdateInput() # FtdCreateOrUpdateInput | 
 
     try:
-        # Onboard FTD device.
+        # Onboard FTD device
         api_response = api_instance.create_ftd_device(ftd_create_or_update_input)
         print("The response of InventoryApi->create_ftd_device:\n")
         pprint(api_response)
@@ -2213,6 +2214,89 @@ Name | Type | Description  | Notes
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
 **404** | Entity not found. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **onboard_ftd_device_using_ztp**
+> CdoTransaction onboard_ftd_device_using_ztp(ztp_onboarding_input)
+
+Onboard FTD device using Zero-Touch Provisioning
+
+This is an asynchronous operation to onboard a cdFMC managed FTD using Zero-Touch Provisioning. The operation returns a transaction object that can be used to track the progress of the onboarding operation. Note: This operation will be marked as complete once CDO is ready to handle a response from the device once it is plugged in and connected to the Internet; it does not wait for the device to communicate back to CDO.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import cdo_sdk_python
+from cdo_sdk_python.models.cdo_transaction import CdoTransaction
+from cdo_sdk_python.models.ztp_onboarding_input import ZtpOnboardingInput
+from cdo_sdk_python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cdo_sdk_python.Configuration(
+    host = "https://edge.us.cdo.cisco.com/api/rest"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = cdo_sdk_python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with cdo_sdk_python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cdo_sdk_python.InventoryApi(api_client)
+    ztp_onboarding_input = cdo_sdk_python.ZtpOnboardingInput() # ZtpOnboardingInput | 
+
+    try:
+        # Onboard FTD device using Zero-Touch Provisioning
+        api_response = api_instance.onboard_ftd_device_using_ztp(ztp_onboarding_input)
+        print("The response of InventoryApi->onboard_ftd_device_using_ztp:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InventoryApi->onboard_ftd_device_using_ztp: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ztp_onboarding_input** | [**ZtpOnboardingInput**](ZtpOnboardingInput.md)|  | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | CDO Transaction object that can be used to track the progress of the creation operation. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
