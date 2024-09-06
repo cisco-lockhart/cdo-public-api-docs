@@ -1045,7 +1045,11 @@ paths:
       summary: Provision cdFMC for CDO tenant in MSP Portal
       description: >-
         This is an asynchronous operation to provision a cdFMC for a tenant
-        associated with the MSP Portal.
+        associated with the MSP Portal. This operation does not wait for the
+        cdFMC to be provisioned on the target tenant, and will be marked as
+        successful once the provisioning has been successfully triggered. To
+        monitor the transaction on the target tenant, use the UID in the
+        `TRANSACTION_UID_IN_TARGET_TENANT` key in the transaction details.
       operationId: provisionCdFmcForTenantInMspPortal
       parameters:
         - name: tenantUid

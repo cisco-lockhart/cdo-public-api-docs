@@ -1743,7 +1743,7 @@ class MSPApi:
     ) -> CdoTransaction:
         """Provision cdFMC for CDO tenant in MSP Portal
 
-        This is an asynchronous operation to provision a cdFMC for a tenant associated with the MSP Portal.
+        This is an asynchronous operation to provision a cdFMC for a tenant associated with the MSP Portal. This operation does not wait for the cdFMC to be provisioned on the target tenant, and will be marked as successful once the provisioning has been successfully triggered. To monitor the transaction on the target tenant, use the UID in the `TRANSACTION_UID_IN_TARGET_TENANT` key in the transaction details.
 
         :param tenant_uid: Unique identifier of the tenant that cdFMC provisioning will be enabled for. (required)
         :type tenant_uid: str
@@ -1811,7 +1811,7 @@ class MSPApi:
     ) -> ApiResponse[CdoTransaction]:
         """Provision cdFMC for CDO tenant in MSP Portal
 
-        This is an asynchronous operation to provision a cdFMC for a tenant associated with the MSP Portal.
+        This is an asynchronous operation to provision a cdFMC for a tenant associated with the MSP Portal. This operation does not wait for the cdFMC to be provisioned on the target tenant, and will be marked as successful once the provisioning has been successfully triggered. To monitor the transaction on the target tenant, use the UID in the `TRANSACTION_UID_IN_TARGET_TENANT` key in the transaction details.
 
         :param tenant_uid: Unique identifier of the tenant that cdFMC provisioning will be enabled for. (required)
         :type tenant_uid: str
@@ -1879,7 +1879,7 @@ class MSPApi:
     ) -> RESTResponseType:
         """Provision cdFMC for CDO tenant in MSP Portal
 
-        This is an asynchronous operation to provision a cdFMC for a tenant associated with the MSP Portal.
+        This is an asynchronous operation to provision a cdFMC for a tenant associated with the MSP Portal. This operation does not wait for the cdFMC to be provisioned on the target tenant, and will be marked as successful once the provisioning has been successfully triggered. To monitor the transaction on the target tenant, use the UID in the `TRANSACTION_UID_IN_TARGET_TENANT` key in the transaction details.
 
         :param tenant_uid: Unique identifier of the tenant that cdFMC provisioning will be enabled for. (required)
         :type tenant_uid: str
