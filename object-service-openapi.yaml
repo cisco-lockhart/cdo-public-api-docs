@@ -5,7 +5,7 @@ info:
   contact:
     name: CDO TAC
     email: cdo.tac@cisco.com
-  version: 1.3.0
+  version: 1.4.0
 servers:
 - url: https://edge.us.cdo.cisco.com/api/rest
   description: US
@@ -75,14 +75,14 @@ paths:
           type: string
         example: name:DESC
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "200":
           description: A paginated view of the CDO objects.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListObjectResponse'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -403,8 +403,6 @@ paths:
           format: uuid
         example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "200":
           description: Duplicates of the object.
           content:
@@ -413,6 +411,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DuplicateGroupDto'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
