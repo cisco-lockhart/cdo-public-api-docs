@@ -1,3 +1,9 @@
+# Version 1.4.0 (2024-09-12)
+
+## Added
+- MSSP tenant management: Endpoint to provision cloud-delivered FMC (cdFMC) on a CDO tenant that is associated with a CDO MSSP Portal.
+- Inventory management: Endpoint to provision a FTD using the Zero-Touch Provisioning (ZTP) workflow.
+
 # Version 1.3.0 (2024-08-22) 
 
 ## Added
