@@ -57,7 +57,7 @@ class TransactionsApi:
     ) -> CdoTransaction:
         """Get Transaction
 
-        Get information of an in-progress CDO transaction. A CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create CDO transactions.
+        Get information on an in-progress CDO transaction. A CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create CDO transactions.
 
         :param transaction_uid: (required)
         :type transaction_uid: str
@@ -130,7 +130,7 @@ class TransactionsApi:
     ) -> ApiResponse[CdoTransaction]:
         """Get Transaction
 
-        Get information of an in-progress CDO transaction. A CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create CDO transactions.
+        Get information on an in-progress CDO transaction. A CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create CDO transactions.
 
         :param transaction_uid: (required)
         :type transaction_uid: str
@@ -203,7 +203,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Get Transaction
 
-        Get information of an in-progress CDO transaction. A CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create CDO transactions.
+        Get information on an in-progress CDO transaction. A CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create CDO transactions.
 
         :param transaction_uid: (required)
         :type transaction_uid: str

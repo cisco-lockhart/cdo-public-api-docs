@@ -6,8 +6,9 @@ The list of users to be added to the tenant.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**username** | **str** | The name of the user in CDO. This must be a valid e-mail address. | 
+**username** | **str** | The name of the user in CDO. This must be a valid e-mail address if the user is not an API-only user. | 
 **role** | [**UserRole**](UserRole.md) |  | 
+**api_only_user** | **bool** | Whether the user is an API-only user | [optional] 
 
 ## Example
 

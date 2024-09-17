@@ -18,8 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from cdo_sdk_python.models.user_role import UserRole
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,9 +28,10 @@ class UserInput(BaseModel):
     """
     The list of users to be added to the tenant.
     """ # noqa: E501
-    username: StrictStr = Field(description="The name of the user in CDO. This must be a valid e-mail address.")
+    username: StrictStr = Field(description="The name of the user in CDO. This must be a valid e-mail address if the user is not an API-only user.")
     role: UserRole
-    __properties: ClassVar[List[str]] = ["username", "role"]
+    api_only_user: Optional[StrictBool] = Field(default=None, description="Whether the user is an API-only user", alias="apiOnlyUser")
+    __properties: ClassVar[List[str]] = ["username", "role", "apiOnlyUser"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,7 +85,8 @@ class UserInput(BaseModel):
 
         _obj = cls.model_validate({
             "username": obj.get("username"),
-            "role": obj.get("role")
+            "role": obj.get("role"),
+            "apiOnlyUser": obj.get("apiOnlyUser")
         })
         return _obj
 

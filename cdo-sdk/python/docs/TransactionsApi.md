@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 Get Transaction
 
-Get information of an in-progress CDO transaction. A CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create CDO transactions.
+Get information on an in-progress CDO transaction. A CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create CDO transactions.
 
 ### Example
 

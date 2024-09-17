@@ -3435,7 +3435,7 @@ paths:
         - Transactions
       summary: Get Transaction
       description: >-
-        Get information of an in-progress CDO transaction. A CDO transaction is
+        Get information on an in-progress CDO transaction. A CDO transaction is
         an entity used to monitor progress of, and provide feedback on,
         long-running operations. All asynchronous operations in CDO's API create
         CDO transactions.
@@ -5751,9 +5751,16 @@ components:
       properties:
         username:
           type: string
-          description: The name of the user in CDO. This must be a valid e-mail address.
+          description: >-
+            The name of the user in CDO. This must be a valid e-mail address if
+            the user is not an API-only user.
+          example: smith@jones.com
         role:
           $ref: '#/components/schemas/UserRole'
+        apiOnlyUser:
+          type: boolean
+          description: Whether the user is an API-only user
+          example: false
       description: The list of users to be added to the tenant.
       example: '[username: burak@cisco.com, role: ROLE_ADMIN]'
     MspCreateTenantInput:
