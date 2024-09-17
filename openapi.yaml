@@ -58,6 +58,8 @@ tags:
     x-displayName: Changelogs
   - name: Audit Logs
     x-displayName: Audit Logs
+  - name: swagger-redirect-controller
+    x-displayName: swagger-redirect-controller
   - name: Object Management
     x-displayName: Object Management
   - name: MSP-next-gen
@@ -4625,6 +4627,24 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /swagger-ui/**:
+    get:
+      tags:
+        - swagger-redirect-controller
+      operationId: redirectWithUsingRedirectView
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RedirectView'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
   /.well-known/jwks.json:
     get:
       tags:
@@ -8258,6 +8278,612 @@ components:
             message was sent.
           format: date-time
           example: '2023-12-13T08:15:44Z'
+    ApplicationContext:
+      type: object
+      properties:
+        parent:
+          $ref: '#/components/schemas/ApplicationContext'
+        id:
+          type: string
+        displayName:
+          type: string
+        autowireCapableBeanFactory:
+          $ref: '#/components/schemas/AutowireCapableBeanFactory'
+        applicationName:
+          type: string
+        startupDate:
+          type: integer
+          format: int64
+        environment:
+          $ref: '#/components/schemas/Environment'
+        beanDefinitionCount:
+          type: integer
+          format: int32
+        beanDefinitionNames:
+          type: array
+          items:
+            type: string
+        parentBeanFactory:
+          $ref: '#/components/schemas/BeanFactory'
+        classLoader:
+          type: object
+          properties:
+            name:
+              type: string
+            registeredAsParallelCapable:
+              type: boolean
+            parent:
+              type: object
+              properties:
+                name:
+                  type: string
+                registeredAsParallelCapable:
+                  type: boolean
+                unnamedModule:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    classLoader:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        registeredAsParallelCapable:
+                          type: boolean
+                        definedPackages:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              annotations:
+                                type: array
+                                items:
+                                  type: object
+                              declaredAnnotations:
+                                type: array
+                                items:
+                                  type: object
+                              sealed:
+                                type: boolean
+                              specificationTitle:
+                                type: string
+                              specificationVersion:
+                                type: string
+                              specificationVendor:
+                                type: string
+                              implementationTitle:
+                                type: string
+                              implementationVersion:
+                                type: string
+                              implementationVendor:
+                                type: string
+                        defaultAssertionStatus:
+                          type: boolean
+                          writeOnly: true
+                    descriptor:
+                      type: object
+                      properties:
+                        open:
+                          type: boolean
+                        automatic:
+                          type: boolean
+                    named:
+                      type: boolean
+                    annotations:
+                      type: array
+                      items:
+                        type: object
+                    declaredAnnotations:
+                      type: array
+                      items:
+                        type: object
+                    packages:
+                      uniqueItems: true
+                      type: array
+                      items:
+                        type: string
+                    layer:
+                      type: object
+                definedPackages:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      annotations:
+                        type: array
+                        items:
+                          type: object
+                      declaredAnnotations:
+                        type: array
+                        items:
+                          type: object
+                      sealed:
+                        type: boolean
+                      specificationTitle:
+                        type: string
+                      specificationVersion:
+                        type: string
+                      specificationVendor:
+                        type: string
+                      implementationTitle:
+                        type: string
+                      implementationVersion:
+                        type: string
+                      implementationVendor:
+                        type: string
+                defaultAssertionStatus:
+                  type: boolean
+                  writeOnly: true
+            unnamedModule:
+              type: object
+              properties:
+                name:
+                  type: string
+                classLoader:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    registeredAsParallelCapable:
+                      type: boolean
+                    definedPackages:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          annotations:
+                            type: array
+                            items:
+                              type: object
+                          declaredAnnotations:
+                            type: array
+                            items:
+                              type: object
+                          sealed:
+                            type: boolean
+                          specificationTitle:
+                            type: string
+                          specificationVersion:
+                            type: string
+                          specificationVendor:
+                            type: string
+                          implementationTitle:
+                            type: string
+                          implementationVersion:
+                            type: string
+                          implementationVendor:
+                            type: string
+                    defaultAssertionStatus:
+                      type: boolean
+                      writeOnly: true
+                descriptor:
+                  type: object
+                  properties:
+                    open:
+                      type: boolean
+                    automatic:
+                      type: boolean
+                named:
+                  type: boolean
+                annotations:
+                  type: array
+                  items:
+                    type: object
+                declaredAnnotations:
+                  type: array
+                  items:
+                    type: object
+                packages:
+                  uniqueItems: true
+                  type: array
+                  items:
+                    type: string
+                layer:
+                  type: object
+            definedPackages:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  annotations:
+                    type: array
+                    items:
+                      type: object
+                  declaredAnnotations:
+                    type: array
+                    items:
+                      type: object
+                  sealed:
+                    type: boolean
+                  specificationTitle:
+                    type: string
+                  specificationVersion:
+                    type: string
+                  specificationVendor:
+                    type: string
+                  implementationTitle:
+                    type: string
+                  implementationVersion:
+                    type: string
+                  implementationVendor:
+                    type: string
+            defaultAssertionStatus:
+              type: boolean
+              writeOnly: true
+    AutowireCapableBeanFactory:
+      type: object
+    BeanFactory:
+      type: object
+    Environment:
+      type: object
+      properties:
+        activeProfiles:
+          type: array
+          items:
+            type: string
+        defaultProfiles:
+          type: array
+          items:
+            type: string
+    RedirectView:
+      type: object
+      properties:
+        applicationContext:
+          $ref: '#/components/schemas/ApplicationContext'
+        servletContext:
+          type: object
+          properties:
+            sessionTimeout:
+              type: integer
+              format: int32
+            classLoader:
+              type: object
+              properties:
+                name:
+                  type: string
+                registeredAsParallelCapable:
+                  type: boolean
+                definedPackages:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      annotations:
+                        type: array
+                        items:
+                          type: object
+                      declaredAnnotations:
+                        type: array
+                        items:
+                          type: object
+                      sealed:
+                        type: boolean
+                      specificationTitle:
+                        type: string
+                      specificationVersion:
+                        type: string
+                      specificationVendor:
+                        type: string
+                      implementationTitle:
+                        type: string
+                      implementationVersion:
+                        type: string
+                      implementationVendor:
+                        type: string
+                defaultAssertionStatus:
+                  type: boolean
+                  writeOnly: true
+            majorVersion:
+              type: integer
+              format: int32
+            minorVersion:
+              type: integer
+              format: int32
+            attributeNames:
+              type: object
+            contextPath:
+              type: string
+            initParameterNames:
+              type: object
+            sessionTrackingModes:
+              uniqueItems: true
+              type: array
+              writeOnly: true
+              items:
+                type: string
+                enum:
+                  - COOKIE
+                  - URL
+                  - SSL
+            servletNames:
+              type: object
+              deprecated: true
+            defaultSessionTrackingModes:
+              uniqueItems: true
+              type: array
+              items:
+                type: string
+                enum:
+                  - COOKIE
+                  - URL
+                  - SSL
+            effectiveSessionTrackingModes:
+              uniqueItems: true
+              type: array
+              items:
+                type: string
+                enum:
+                  - COOKIE
+                  - URL
+                  - SSL
+            jspConfigDescriptor:
+              type: object
+              properties:
+                taglibs:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      taglibURI:
+                        type: string
+                      taglibLocation:
+                        type: string
+                jspPropertyGroups:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      elIgnored:
+                        type: string
+                      scriptingInvalid:
+                        type: string
+                      pageEncoding:
+                        type: string
+                      isXml:
+                        type: string
+                      includePreludes:
+                        type: array
+                        items:
+                          type: string
+                      includeCodas:
+                        type: array
+                        items:
+                          type: string
+                      deferredSyntaxAllowedAsLiteral:
+                        type: string
+                      trimDirectiveWhitespaces:
+                        type: string
+                      errorOnUndeclaredNamespace:
+                        type: string
+                      buffer:
+                        type: string
+                      defaultContentType:
+                        type: string
+                      urlPatterns:
+                        type: array
+                        items:
+                          type: string
+            virtualServerName:
+              type: string
+            requestCharacterEncoding:
+              type: string
+            responseCharacterEncoding:
+              type: string
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
+            servletRegistrations:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  mappings:
+                    type: array
+                    items:
+                      type: string
+                  runAsRole:
+                    type: string
+                  name:
+                    type: string
+                  className:
+                    type: string
+                  initParameters:
+                    type: object
+                    additionalProperties:
+                      type: string
+            filterRegistrations:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  servletNameMappings:
+                    type: array
+                    items:
+                      type: string
+                  urlPatternMappings:
+                    type: array
+                    items:
+                      type: string
+                  name:
+                    type: string
+                  className:
+                    type: string
+                  initParameters:
+                    type: object
+                    additionalProperties:
+                      type: string
+            sessionCookieConfig:
+              type: object
+              properties:
+                httpOnly:
+                  type: boolean
+                name:
+                  type: string
+                path:
+                  type: string
+                comment:
+                  type: string
+                secure:
+                  type: boolean
+                domain:
+                  type: string
+                maxAge:
+                  type: integer
+                  format: int32
+          writeOnly: true
+        contentType:
+          type: string
+        requestContextAttribute:
+          type: string
+        staticAttributes:
+          type: object
+          additionalProperties:
+            type: object
+        exposePathVariables:
+          type: boolean
+        exposeContextBeansAsAttributes:
+          type: boolean
+          writeOnly: true
+        exposedContextBeanNames:
+          type: array
+          writeOnly: true
+          items:
+            type: string
+        beanName:
+          type: string
+        url:
+          type: string
+        contextRelative:
+          type: boolean
+          writeOnly: true
+        http10Compatible:
+          type: boolean
+          writeOnly: true
+        exposeModelAttributes:
+          type: boolean
+          writeOnly: true
+        encodingScheme:
+          type: string
+          writeOnly: true
+        statusCode:
+          type: string
+          writeOnly: true
+          enum:
+            - 100 CONTINUE
+            - 101 SWITCHING_PROTOCOLS
+            - 102 PROCESSING
+            - 103 CHECKPOINT
+            - 200 OK
+            - 201 CREATED
+            - 202 ACCEPTED
+            - 203 NON_AUTHORITATIVE_INFORMATION
+            - 204 NO_CONTENT
+            - 205 RESET_CONTENT
+            - 206 PARTIAL_CONTENT
+            - 207 MULTI_STATUS
+            - 208 ALREADY_REPORTED
+            - 226 IM_USED
+            - 300 MULTIPLE_CHOICES
+            - 301 MOVED_PERMANENTLY
+            - 302 FOUND
+            - 302 MOVED_TEMPORARILY
+            - 303 SEE_OTHER
+            - 304 NOT_MODIFIED
+            - 305 USE_PROXY
+            - 307 TEMPORARY_REDIRECT
+            - 308 PERMANENT_REDIRECT
+            - 400 BAD_REQUEST
+            - 401 UNAUTHORIZED
+            - 402 PAYMENT_REQUIRED
+            - 403 FORBIDDEN
+            - 404 NOT_FOUND
+            - 405 METHOD_NOT_ALLOWED
+            - 406 NOT_ACCEPTABLE
+            - 407 PROXY_AUTHENTICATION_REQUIRED
+            - 408 REQUEST_TIMEOUT
+            - 409 CONFLICT
+            - 410 GONE
+            - 411 LENGTH_REQUIRED
+            - 412 PRECONDITION_FAILED
+            - 413 PAYLOAD_TOO_LARGE
+            - 413 REQUEST_ENTITY_TOO_LARGE
+            - 414 URI_TOO_LONG
+            - 414 REQUEST_URI_TOO_LONG
+            - 415 UNSUPPORTED_MEDIA_TYPE
+            - 416 REQUESTED_RANGE_NOT_SATISFIABLE
+            - 417 EXPECTATION_FAILED
+            - 418 I_AM_A_TEAPOT
+            - 419 INSUFFICIENT_SPACE_ON_RESOURCE
+            - 420 METHOD_FAILURE
+            - 421 DESTINATION_LOCKED
+            - 422 UNPROCESSABLE_ENTITY
+            - 423 LOCKED
+            - 424 FAILED_DEPENDENCY
+            - 425 TOO_EARLY
+            - 426 UPGRADE_REQUIRED
+            - 428 PRECONDITION_REQUIRED
+            - 429 TOO_MANY_REQUESTS
+            - 431 REQUEST_HEADER_FIELDS_TOO_LARGE
+            - 451 UNAVAILABLE_FOR_LEGAL_REASONS
+            - 500 INTERNAL_SERVER_ERROR
+            - 501 NOT_IMPLEMENTED
+            - 502 BAD_GATEWAY
+            - 503 SERVICE_UNAVAILABLE
+            - 504 GATEWAY_TIMEOUT
+            - 505 HTTP_VERSION_NOT_SUPPORTED
+            - 506 VARIANT_ALSO_NEGOTIATES
+            - 507 INSUFFICIENT_STORAGE
+            - 508 LOOP_DETECTED
+            - 509 BANDWIDTH_LIMIT_EXCEEDED
+            - 510 NOT_EXTENDED
+            - 511 NETWORK_AUTHENTICATION_REQUIRED
+        expandUriTemplateVariables:
+          type: boolean
+          writeOnly: true
+        propagateQueryParams:
+          type: boolean
+          writeOnly: true
+        hosts:
+          type: array
+          items:
+            type: string
+        redirectView:
+          type: boolean
+        propagateQueryProperties:
+          type: boolean
+        attributesMap:
+          type: object
+          additionalProperties:
+            type: object
+        attributesCSV:
+          type: string
+          writeOnly: true
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          writeOnly: true
     JsonWebKey:
       type: object
       properties:
@@ -9258,6 +9884,7 @@ x-tagGroups:
       - Meta
       - Changelogs
       - Audit Logs
+      - swagger-redirect-controller
   - name: object-service-openapi
     tags:
       - Object Management
