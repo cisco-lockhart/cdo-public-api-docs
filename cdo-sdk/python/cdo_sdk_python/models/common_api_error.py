@@ -27,7 +27,7 @@ class CommonApiError(BaseModel):
     """
     CommonApiError
     """ # noqa: E501
-    error_code: Optional[StrictStr] = Field(default=None, description="A unique error code that describes the error.", alias="errorCode")
+    error_code: Optional[StrictStr] = Field(default=None, description="A unique code that describes the error.", alias="errorCode")
     error_msg: Optional[StrictStr] = Field(default=None, description="A human-readable error description in English.", alias="errorMsg")
     details: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="Additional details, if any, on the error")
     __properties: ClassVar[List[str]] = ["errorCode", "errorMsg", "details"]
@@ -38,8 +38,8 @@ class CommonApiError(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['INVALID_INPUT', 'UNAUTHORIZED', 'FORBIDDEN', 'NOT_FOUND', 'METHOD_NOT_ALLOWED', 'CONFLICT', 'TOO_MANY_REQUESTS', 'CANNOT_DELETE_CDFMC_MANAGED_FTD', 'CANNOT_DELETE_ONPREM_FMC_MANAGED_FTD', 'CANNOT_DELETE_ONPREM_FMC_MANAGED_FIREPOWER', 'CANNOT_DELETE_CDFMC', 'SERVER_ERROR', 'PROXY_ERROR', 'BAD_REQUEST']):
-            raise ValueError("must be one of enum values ('INVALID_INPUT', 'UNAUTHORIZED', 'FORBIDDEN', 'NOT_FOUND', 'METHOD_NOT_ALLOWED', 'CONFLICT', 'TOO_MANY_REQUESTS', 'CANNOT_DELETE_CDFMC_MANAGED_FTD', 'CANNOT_DELETE_ONPREM_FMC_MANAGED_FTD', 'CANNOT_DELETE_ONPREM_FMC_MANAGED_FIREPOWER', 'CANNOT_DELETE_CDFMC', 'SERVER_ERROR', 'PROXY_ERROR', 'BAD_REQUEST')")
+        if value not in set(['INVALID_INPUT', 'UNAUTHORIZED', 'FORBIDDEN', 'NOT_FOUND', 'METHOD_NOT_ALLOWED', 'CONFLICT', 'TOO_MANY_REQUESTS', 'SERVER_ERROR', 'PROXY_ERROR', 'BAD_REQUEST']):
+            raise ValueError("must be one of enum values ('INVALID_INPUT', 'UNAUTHORIZED', 'FORBIDDEN', 'NOT_FOUND', 'METHOD_NOT_ALLOWED', 'CONFLICT', 'TOO_MANY_REQUESTS', 'SERVER_ERROR', 'PROXY_ERROR', 'BAD_REQUEST')")
         return value
 
     model_config = ConfigDict(

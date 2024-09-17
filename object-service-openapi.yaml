@@ -106,16 +106,16 @@ paths:
               $ref: '#/components/schemas/CreateRequest'
         required: true
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "201":
           description: A descriptive representation of the created CDO object.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -249,14 +249,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -451,14 +451,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -1310,7 +1310,7 @@ components:
       properties:
         errorCode:
           type: string
-          description: A unique error code that describes the error.
+          description: A unique code that describes the error.
           example: INVALID_INPUT
           enum:
           - INVALID_INPUT
@@ -1320,10 +1320,6 @@ components:
           - METHOD_NOT_ALLOWED
           - CONFLICT
           - TOO_MANY_REQUESTS
-          - CANNOT_DELETE_CDFMC_MANAGED_FTD
-          - CANNOT_DELETE_ONPREM_FMC_MANAGED_FTD
-          - CANNOT_DELETE_ONPREM_FMC_MANAGED_FIREPOWER
-          - CANNOT_DELETE_CDFMC
           - SERVER_ERROR
           - PROXY_ERROR
           - BAD_REQUEST

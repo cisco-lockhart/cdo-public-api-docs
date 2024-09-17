@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**error_code** | **str** | A unique error code that describes the error. | [optional] 
+**error_code** | **str** | A unique code that describes the error. | [optional] 
 **error_msg** | **str** | A human-readable error description in English. | [optional] 
 **details** | **Dict[str, object]** | Additional details, if any, on the error | [optional] 
 

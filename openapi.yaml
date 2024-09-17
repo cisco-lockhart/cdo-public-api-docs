@@ -5873,11 +5873,13 @@ components:
           uniqueItems: true
           type: array
           description: Specify a set of licenses to apply to the device.
-          example: '[BASE]'
+          example:
+            - BASE
+            - CARRIER
           items:
             type: string
             description: Specify a set of licenses to apply to the device.
-            example: '[BASE]'
+            example: '["BASE","CARRIER"]'
             enum:
               - BASE
               - CARRIER
@@ -8238,7 +8240,7 @@ components:
       properties:
         errorCode:
           type: string
-          description: A unique error code that describes the error.
+          description: A unique code that describes the error.
           example: INVALID_INPUT
           enum:
             - INVALID_INPUT
@@ -8248,10 +8250,6 @@ components:
             - METHOD_NOT_ALLOWED
             - CONFLICT
             - TOO_MANY_REQUESTS
-            - CANNOT_DELETE_CDFMC_MANAGED_FTD
-            - CANNOT_DELETE_ONPREM_FMC_MANAGED_FTD
-            - CANNOT_DELETE_ONPREM_FMC_MANAGED_FIREPOWER
-            - CANNOT_DELETE_CDFMC
             - SERVER_ERROR
             - PROXY_ERROR
             - BAD_REQUEST
