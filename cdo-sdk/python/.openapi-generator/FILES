@@ -16,6 +16,7 @@ cdo_sdk_python/api/connectors_api.py
 cdo_sdk_python/api/inventory_api.py
 cdo_sdk_python/api/meta_api.py
 cdo_sdk_python/api/msp_api.py
+cdo_sdk_python/api/msp_next_gen_api.py
 cdo_sdk_python/api/object_management_api.py
 cdo_sdk_python/api/remote_access_monitoring_api.py
 cdo_sdk_python/api/search_api.py
@@ -123,6 +124,8 @@ cdo_sdk_python/models/mfa_event_page.py
 cdo_sdk_python/models/msp_add_tenant_input.py
 cdo_sdk_python/models/msp_add_users_to_tenant_input.py
 cdo_sdk_python/models/msp_create_tenant_input.py
+cdo_sdk_python/models/msp_managed_tenant.py
+cdo_sdk_python/models/msp_managed_tenant_page.py
 cdo_sdk_python/models/network.py
 cdo_sdk_python/models/network_object_content.py
 cdo_sdk_python/models/object_content.py
@@ -268,6 +271,7 @@ docs/ListObjectResponse.md
 docs/Location.md
 docs/LogSettings.md
 docs/MSPApi.md
+docs/MSPNextGenApi.md
 docs/MemoryHealthMetrics.md
 docs/MerakiDeploymentMode.md
 docs/Meta.md
@@ -277,6 +281,8 @@ docs/MfaEventPage.md
 docs/MspAddTenantInput.md
 docs/MspAddUsersToTenantInput.md
 docs/MspCreateTenantInput.md
+docs/MspManagedTenant.md
+docs/MspManagedTenantPage.md
 docs/Network.md
 docs/NetworkObjectContent.md
 docs/OS.md
@@ -334,4 +340,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_msp_managed_tenant.py
+test/test_msp_managed_tenant_page.py
+test/test_msp_next_gen_api.py
 tox.ini

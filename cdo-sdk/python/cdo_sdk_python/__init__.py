@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.2.107"
+__version__ = "1.2.108"
 
 # import apis into sdk package
 from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
@@ -29,6 +29,7 @@ from cdo_sdk_python.api.command_line_interface_api import CommandLineInterfaceAp
 from cdo_sdk_python.api.connectors_api import ConnectorsApi
 from cdo_sdk_python.api.inventory_api import InventoryApi
 from cdo_sdk_python.api.msp_api import MSPApi
+from cdo_sdk_python.api.msp_next_gen_api import MSPNextGenApi
 from cdo_sdk_python.api.meta_api import MetaApi
 from cdo_sdk_python.api.object_management_api import ObjectManagementApi
 from cdo_sdk_python.api.remote_access_monitoring_api import RemoteAccessMonitoringApi
@@ -145,6 +146,8 @@ from cdo_sdk_python.models.mfa_event_page import MfaEventPage
 from cdo_sdk_python.models.msp_add_tenant_input import MspAddTenantInput
 from cdo_sdk_python.models.msp_add_users_to_tenant_input import MspAddUsersToTenantInput
 from cdo_sdk_python.models.msp_create_tenant_input import MspCreateTenantInput
+from cdo_sdk_python.models.msp_managed_tenant import MspManagedTenant
+from cdo_sdk_python.models.msp_managed_tenant_page import MspManagedTenantPage
 from cdo_sdk_python.models.network import Network
 from cdo_sdk_python.models.network_object_content import NetworkObjectContent
 from cdo_sdk_python.models.os import OS

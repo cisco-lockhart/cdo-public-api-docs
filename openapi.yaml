@@ -60,6 +60,8 @@ tags:
     x-displayName: Audit Logs
   - name: Object Management
     x-displayName: Object Management
+  - name: MSP-next-gen
+    x-displayName: MSP-next-gen
 paths:
   /v1/cdfmc/**:
     get:
@@ -865,6 +867,61 @@ paths:
                 $ref: '#/components/schemas/StatusInfo'
         '400':
           $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+    get:
+      tags:
+        - MSP-next-gen
+      summary: Get CDO tenants managed by MSP Portal
+      description: Fetch a list of CDO tenants managed by the MSP Portal.
+      operationId: getMspManagedTenants
+      parameters:
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: fieldName:fieldValue
+      responses:
+        '200':
+          description: List of CDO tenant objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MspManagedTenantPage'
         '401':
           $ref: '#/components/responses/http401Unauthorised'
         '403':
@@ -9074,6 +9131,65 @@ components:
           description: Number of duplicate Objects
           format: int64
           example: 2
+    MspManagedTenant:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: >-
+            A human-readable display name for the tenant. This is the tenant
+            name displayed in the CDO Web UI.
+          example: mytenantname
+        uid:
+          type: string
+          description: The unique identifier of the tenant in CDO.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        name:
+          type: string
+          description: The name of the device in CDO. Device names are unique in CDO.
+          example: my-example-device
+        region:
+          type: string
+          description: The CDO region the tenant exists in.
+          example: US
+          enum:
+            - US
+            - EU
+            - APJ
+            - AUS
+            - IN
+            - CI
+            - SCALE
+            - STAGING
+            - UNKNOWN
+      description: The list of items retrieved.
+    MspManagedTenantPage:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The total number of results available.
+          format: int32
+          example: 100
+        limit:
+          type: integer
+          description: The number of results retrieved.
+          format: int32
+          example: 50
+        offset:
+          type: integer
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          format: int32
+          example: 0
+        items:
+          type: array
+          description: The list of items retrieved.
+          items:
+            $ref: '#/components/schemas/MspManagedTenant'
   responses:
     http400BadRequest:
       description: Invalid input provided. Check the response for details.
@@ -9145,3 +9261,6 @@ x-tagGroups:
   - name: object-service-openapi
     tags:
       - Object Management
+  - name: msp-api-openapi
+    tags:
+      - MSP-next-gen

@@ -111,6 +111,8 @@ from cdo_sdk_python.models.mfa_event_page import MfaEventPage
 from cdo_sdk_python.models.msp_add_tenant_input import MspAddTenantInput
 from cdo_sdk_python.models.msp_add_users_to_tenant_input import MspAddUsersToTenantInput
 from cdo_sdk_python.models.msp_create_tenant_input import MspCreateTenantInput
+from cdo_sdk_python.models.msp_managed_tenant import MspManagedTenant
+from cdo_sdk_python.models.msp_managed_tenant_page import MspManagedTenantPage
 from cdo_sdk_python.models.network import Network
 from cdo_sdk_python.models.network_object_content import NetworkObjectContent
 from cdo_sdk_python.models.os import OS

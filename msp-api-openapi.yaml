@@ -1,0 +1,228 @@
+openapi: 3.0.1
+info:
+  title: CDO API
+  description: Use the documentation to explore the endpoints CDO has to offer
+  contact:
+    name: CDO TAC
+    email: cdo.tac@cisco.com
+  version: 1.4.0
+servers:
+- url: https://edge.us.cdo.cisco.com/api/rest
+  description: US
+- url: https://edge.eu.cdo.cisco.com/api/rest
+  description: EU
+- url: https://edge.apj.cdo.cisco.com/api/rest
+  description: APJ
+- url: https://edge.aus.cdo.cisco.com/api/rest
+  description: AUS
+- url: https://edge.in.cdo.cisco.com/api/rest
+  description: IN
+- url: https://edge.staging.cdo.cisco.com/api/rest
+  description: Staging
+- url: https://edge.scale.cdo.cisco.com/api/rest
+  description: Scale
+- url: https://edge.ci.cdo.cisco.com/api/rest
+  description: CI
+paths:
+  /v1/msp/tenants:
+    get:
+      tags:
+      - MSP-next-gen
+      summary: Get CDO tenants managed by MSP Portal
+      description: Fetch a list of CDO tenants managed by the MSP Portal.
+      operationId: getMspManagedTenants
+      parameters:
+      - name: limit
+        in: query
+        description: The number of results to retrieve.
+        required: false
+        schema:
+          maximum: 200
+          minimum: 0
+          type: string
+          default: "50"
+      - name: offset
+        in: query
+        description: "The offset of the results retrieved. The CDO API uses the offset\
+          \ field to determine the index of the first result retrieved, and will retrieve\
+          \ `limit` results from the offset specified."
+        required: false
+        schema:
+          minimum: 0
+          type: string
+          default: "0"
+      - name: q
+        in: query
+        description: The query to execute. Use the Lucene Query Syntax to construct
+          your query.
+        required: false
+        schema:
+          type: string
+        example: fieldName:fieldValue
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "200":
+          description: List of CDO tenant objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MspManagedTenantPage'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+      - bearerAuth: []
+components:
+  schemas:
+    MspManagedTenant:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: A human-readable display name for the tenant. This is the tenant
+            name displayed in the CDO Web UI.
+          example: mytenantname
+        uid:
+          type: string
+          description: The unique identifier of the tenant in CDO.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        name:
+          type: string
+          description: The name of the device in CDO. Device names are unique in CDO.
+          example: my-example-device
+        region:
+          type: string
+          description: The CDO region the tenant exists in.
+          example: US
+          enum:
+          - US
+          - EU
+          - APJ
+          - AUS
+          - IN
+          - CI
+          - SCALE
+          - STAGING
+          - UNKNOWN
+      description: The list of items retrieved.
+    MspManagedTenantPage:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The total number of results available.
+          format: int32
+          example: 100
+        limit:
+          type: integer
+          description: The number of results retrieved.
+          format: int32
+          example: 50
+        offset:
+          type: integer
+          description: "The offset of the results retrieved. The CDO API uses the\
+            \ offset field to determine the index of the first result retrieved, and\
+            \ will retrieve `limit` results from the offset specified."
+          format: int32
+          example: 0
+        items:
+          type: array
+          description: The list of items retrieved.
+          items:
+            $ref: '#/components/schemas/MspManagedTenant'
+    AuthenticationError:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error description in English.
+          example: invalid_token
+        errorDescription:
+          type: string
+          description: A human-readable error description in English.
+          example: Your token is invalid
+    CommonApiError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: A unique code that describes the error.
+          example: INVALID_INPUT
+          enum:
+          - INVALID_INPUT
+          - UNAUTHORIZED
+          - FORBIDDEN
+          - NOT_FOUND
+          - METHOD_NOT_ALLOWED
+          - CONFLICT
+          - TOO_MANY_REQUESTS
+          - SERVER_ERROR
+          - PROXY_ERROR
+          - BAD_REQUEST
+        errorMsg:
+          type: string
+          description: A human-readable error description in English.
+          example: sample error
+        details:
+          type: object
+          additionalProperties:
+            type: object
+            description: "Additional details, if any, on the error"
+            example: {}
+          description: "Additional details, if any, on the error"
+          example: {}
+  responses:
+    http400BadRequest:
+      description: Invalid input provided. Check the response for details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+    http401Unauthorised:
+      description: Request not authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthenticationError'
+    http403Forbidden:
+      description: User does not have sufficient privileges to perform this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+    http404NotFound:
+      description: Entity not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+    http405MethodNotAllowed:
+      description: Method not allowed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+    http409Conflict:
+      description: Conflict.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+    http422UnprocessableEntity:
+      description: Unprocessable entity.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
