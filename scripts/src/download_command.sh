@@ -12,6 +12,7 @@ filename=openapi.yaml
 declare -A urls=(
     ["public-api"]="https://edge.staging.cdo.cisco.com/api/platform/public-api/v3/api-docs.yaml"
     ["object-service"]="https://edge.staging.cdo.cisco.com/api/platform/object-service/v3/api-docs.yaml"
+    ["msp-api"]="https://edge.staging.cdo.cisco.com/api/platform/msp-api/v3/api-docs.yaml"
 )
 
 scripts/cli transform-fmc-oas
