@@ -5,6 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**buffer** | **str** |  | [optional] 
+**page_encoding** | **str** |  | [optional] 
 **is_xml** | **str** |  | [optional] 
 **include_preludes** | **List[str]** |  | [optional] 
 **include_codas** | **List[str]** |  | [optional] 
@@ -13,8 +15,6 @@ Name | Type | Description | Notes
 **error_on_undeclared_namespace** | **str** |  | [optional] 
 **el_ignored** | **str** |  | [optional] 
 **scripting_invalid** | **str** |  | [optional] 
-**page_encoding** | **str** |  | [optional] 
-**buffer** | **str** |  | [optional] 
 **default_content_type** | **str** |  | [optional] 
 **url_patterns** | **List[str]** |  | [optional] 
 

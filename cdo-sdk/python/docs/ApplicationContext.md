@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **application_name** | **str** |  | [optional] 
 **startup_date** | **int** |  | [optional] 
 **environment** | [**Environment**](Environment.md) |  | [optional] 
-**bean_definition_count** | **int** |  | [optional] 
 **bean_definition_names** | **List[str]** |  | [optional] 
+**bean_definition_count** | **int** |  | [optional] 
 **parent_bean_factory** | **object** |  | [optional] 
 **class_loader** | [**ApplicationContextClassLoader**](ApplicationContextClassLoader.md) |  | [optional] 
 
