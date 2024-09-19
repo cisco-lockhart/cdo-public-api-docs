@@ -29,8 +29,8 @@ class AccessRuleCreateInput(BaseModel):
     """
     AccessRuleCreateInput
     """ # noqa: E501
-    access_group_uid: StrictStr = Field(description="The unique identifier of the Access Group associated with the Access Rule.", alias="accessGroupUid")
-    entity_uid: StrictStr = Field(description="The unique identifier of the device/manager associated with the Access Rule. Points to the shared Access Group in the case of a shared Access Rule being created.", alias="entityUid")
+    access_group_uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the Access Group associated with the Access Rule.", alias="accessGroupUid")
+    entity_uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the device/manager associated with the Access Rule. Points to the shared Access Group in the case of a shared Access Rule being created.", alias="entityUid")
     index: StrictInt = Field(description="The position of the Access Rule in the orded list of rules in an Access Group.")
     rule_action: Optional[StrictStr] = Field(default=None, description="The rule's action.", alias="ruleAction")
     protocol: Optional[AccessRuleDetailsContent] = None

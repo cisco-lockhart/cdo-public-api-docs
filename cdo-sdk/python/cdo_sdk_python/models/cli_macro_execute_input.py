@@ -28,7 +28,7 @@ class CliMacroExecuteInput(BaseModel):
     CliMacroExecuteInput
     """ # noqa: E501
     device_uids: List[StrictStr] = Field(description="List of UIDs of the devices to execute the CLI macro for.", alias="deviceUids")
-    macro_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the CLI macro.", alias="macroUid")
+    macro_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the CLI macro.", alias="macroUid")
     parameters: Optional[Dict[str, StrictStr]] = Field(default=None, description="Parameters provided for the CLI macro execution as key-value pairs.")
     __properties: ClassVar[List[str]] = ["deviceUids", "macroUid", "parameters"]
 

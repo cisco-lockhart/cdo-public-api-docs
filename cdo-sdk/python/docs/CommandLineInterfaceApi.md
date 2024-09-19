@@ -133,7 +133,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.CommandLineInterfaceApi(api_client)
-    macro_uid = 'macro_uid_example' # str | The unique identifier of the CDO CLI macro in CDO.
+    macro_uid = 'macro_uid_example' # str | The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.
 
     try:
         # Delete CLI Macro
@@ -149,7 +149,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **macro_uid** | **str**| The unique identifier of the CDO CLI macro in CDO. | 
+ **macro_uid** | **str**| The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. | 
 
 ### Return type
 
@@ -214,7 +214,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.CommandLineInterfaceApi(api_client)
-    macro_uid = 'macro_uid_example' # str | The unique identifier of the CDO CLI macro in CDO.
+    macro_uid = 'macro_uid_example' # str | The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.
 
     try:
         # Get CLI Macro
@@ -232,7 +232,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **macro_uid** | **str**| The unique identifier of the CDO CLI macro in CDO. | 
+ **macro_uid** | **str**| The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. | 
 
 ### Return type
 
@@ -387,7 +387,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.CommandLineInterfaceApi(api_client)
-    cli_result_uid = 'cli_result_uid_example' # str | The unique identifier of the CDO CLI result in CDO.
+    cli_result_uid = 'cli_result_uid_example' # str | The unique identifier, represented as a UUID, of the CDO CLI result in CDO.
 
     try:
         # Get CLI Result
@@ -405,7 +405,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cli_result_uid** | **str**| The unique identifier of the CDO CLI result in CDO. | 
+ **cli_result_uid** | **str**| The unique identifier, represented as a UUID, of the CDO CLI result in CDO. | 
 
 ### Return type
 
@@ -561,7 +561,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.CommandLineInterfaceApi(api_client)
-    macro_uid = 'macro_uid_example' # str | The unique identifier of the CDO CLI macro in CDO.
+    macro_uid = 'macro_uid_example' # str | The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.
     cli_macro_patch_input = cdo_sdk_python.CliMacroPatchInput() # CliMacroPatchInput | 
 
     try:
@@ -580,7 +580,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **macro_uid** | **str**| The unique identifier of the CDO CLI macro in CDO. | 
+ **macro_uid** | **str**| The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. | 
  **cli_macro_patch_input** | [**CliMacroPatchInput**](CliMacroPatchInput.md)|  | 
 
 ### Return type

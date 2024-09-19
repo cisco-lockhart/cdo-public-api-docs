@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**access_group_uid** | **str** | The unique identifier of the Access Group associated with the Access Rule. | 
-**entity_uid** | **str** | The unique identifier of the device/manager associated with the Access Rule. Points to the shared Access Group in the case of a shared Access Rule being created. | 
+**access_group_uid** | **str** | The unique identifier, represented as a UUID, of the Access Group associated with the Access Rule. | 
+**entity_uid** | **str** | The unique identifier, represented as a UUID, of the device/manager associated with the Access Rule. Points to the shared Access Group in the case of a shared Access Rule being created. | 
 **index** | **int** | The position of the Access Rule in the orded list of rules in an Access Group. | 
 **rule_action** | **str** | The rule&#39;s action. | [optional] 
 **protocol** | [**AccessRuleDetailsContent**](AccessRuleDetailsContent.md) |  | [optional] 

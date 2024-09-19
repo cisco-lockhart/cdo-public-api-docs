@@ -130,7 +130,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ChangeRequestsApi(api_client)
-    change_request_uid = 'change_request_uid_example' # str | The unique identifier of the Change Request in CDO.
+    change_request_uid = 'change_request_uid_example' # str | The unique identifier, represented as a UUID, of the Change Request in CDO.
 
     try:
         # Delete Change Request
@@ -146,7 +146,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **change_request_uid** | **str**| The unique identifier of the Change Request in CDO. | 
+ **change_request_uid** | **str**| The unique identifier, represented as a UUID, of the Change Request in CDO. | 
 
 ### Return type
 
@@ -211,7 +211,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ChangeRequestsApi(api_client)
-    change_request_uid = 'change_request_uid_example' # str | The unique identifier of the Change Request in CDO.
+    change_request_uid = 'change_request_uid_example' # str | The unique identifier, represented as a UUID, of the Change Request in CDO.
 
     try:
         # Get Change Request
@@ -229,7 +229,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **change_request_uid** | **str**| The unique identifier of the Change Request in CDO. | 
+ **change_request_uid** | **str**| The unique identifier, represented as a UUID, of the Change Request in CDO. | 
 
 ### Return type
 

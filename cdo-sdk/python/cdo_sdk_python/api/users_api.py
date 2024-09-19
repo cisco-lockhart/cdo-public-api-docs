@@ -617,7 +617,7 @@ class UsersApi:
     @validate_call
     def delete_active_directory_group(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier of the Active Directory Group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Active Directory Group in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -635,7 +635,7 @@ class UsersApi:
 
         Delete a Active Directory Group by UID in the CDO tenant.
 
-        :param group_uid: The unique identifier of the Active Directory Group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the Active Directory Group in CDO. (required)
         :type group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -688,7 +688,7 @@ class UsersApi:
     @validate_call
     def delete_active_directory_group_with_http_info(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier of the Active Directory Group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Active Directory Group in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -706,7 +706,7 @@ class UsersApi:
 
         Delete a Active Directory Group by UID in the CDO tenant.
 
-        :param group_uid: The unique identifier of the Active Directory Group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the Active Directory Group in CDO. (required)
         :type group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -759,7 +759,7 @@ class UsersApi:
     @validate_call
     def delete_active_directory_group_without_preload_content(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier of the Active Directory Group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Active Directory Group in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -777,7 +777,7 @@ class UsersApi:
 
         Delete a Active Directory Group by UID in the CDO tenant.
 
-        :param group_uid: The unique identifier of the Active Directory Group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the Active Directory Group in CDO. (required)
         :type group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -887,7 +887,7 @@ class UsersApi:
     @validate_call
     def delete_user(
         self,
-        user_uid: Annotated[StrictStr, Field(description="The unique identifier of the user in CDO.")],
+        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -905,7 +905,7 @@ class UsersApi:
 
         Delete a User by UID in the CDO tenant. If the user is associated with multiple tenants, they will continue to have access to every other tenant.
 
-        :param user_uid: The unique identifier of the user in CDO. (required)
+        :param user_uid: The unique identifier, represented as a UUID, of the user in CDO. (required)
         :type user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -958,7 +958,7 @@ class UsersApi:
     @validate_call
     def delete_user_with_http_info(
         self,
-        user_uid: Annotated[StrictStr, Field(description="The unique identifier of the user in CDO.")],
+        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -976,7 +976,7 @@ class UsersApi:
 
         Delete a User by UID in the CDO tenant. If the user is associated with multiple tenants, they will continue to have access to every other tenant.
 
-        :param user_uid: The unique identifier of the user in CDO. (required)
+        :param user_uid: The unique identifier, represented as a UUID, of the user in CDO. (required)
         :type user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1029,7 +1029,7 @@ class UsersApi:
     @validate_call
     def delete_user_without_preload_content(
         self,
-        user_uid: Annotated[StrictStr, Field(description="The unique identifier of the user in CDO.")],
+        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1047,7 +1047,7 @@ class UsersApi:
 
         Delete a User by UID in the CDO tenant. If the user is associated with multiple tenants, they will continue to have access to every other tenant.
 
-        :param user_uid: The unique identifier of the user in CDO. (required)
+        :param user_uid: The unique identifier, represented as a UUID, of the user in CDO. (required)
         :type user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1157,7 +1157,7 @@ class UsersApi:
     @validate_call
     def generate_api_token(
         self,
-        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API-only user in CDO")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API-only user in CDO")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1175,7 +1175,7 @@ class UsersApi:
 
         Generate API Token for API-only user. API-only users are used for building automations with CDO. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_uid: The unique identifier of the API-only user in CDO (required)
+        :param api_user_uid: The unique identifier, represented as a UUID, of the API-only user in CDO (required)
         :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1228,7 +1228,7 @@ class UsersApi:
     @validate_call
     def generate_api_token_with_http_info(
         self,
-        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API-only user in CDO")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API-only user in CDO")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1246,7 +1246,7 @@ class UsersApi:
 
         Generate API Token for API-only user. API-only users are used for building automations with CDO. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_uid: The unique identifier of the API-only user in CDO (required)
+        :param api_user_uid: The unique identifier, represented as a UUID, of the API-only user in CDO (required)
         :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1299,7 +1299,7 @@ class UsersApi:
     @validate_call
     def generate_api_token_without_preload_content(
         self,
-        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API-only user in CDO")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API-only user in CDO")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1317,7 +1317,7 @@ class UsersApi:
 
         Generate API Token for API-only user. API-only users are used for building automations with CDO. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_uid: The unique identifier of the API-only user in CDO (required)
+        :param api_user_uid: The unique identifier, represented as a UUID, of the API-only user in CDO (required)
         :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1427,7 +1427,7 @@ class UsersApi:
     @validate_call
     def get_active_directory_group(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier of the active directory group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1445,7 +1445,7 @@ class UsersApi:
 
         Fetch a active directory group by UID in the CDO tenant.
 
-        :param group_uid: The unique identifier of the active directory group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in CDO. (required)
         :type group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1499,7 +1499,7 @@ class UsersApi:
     @validate_call
     def get_active_directory_group_with_http_info(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier of the active directory group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1517,7 +1517,7 @@ class UsersApi:
 
         Fetch a active directory group by UID in the CDO tenant.
 
-        :param group_uid: The unique identifier of the active directory group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in CDO. (required)
         :type group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1571,7 +1571,7 @@ class UsersApi:
     @validate_call
     def get_active_directory_group_without_preload_content(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier of the active directory group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1589,7 +1589,7 @@ class UsersApi:
 
         Fetch a active directory group by UID in the CDO tenant.
 
-        :param group_uid: The unique identifier of the active directory group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in CDO. (required)
         :type group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2255,7 +2255,7 @@ class UsersApi:
     @validate_call
     def get_user(
         self,
-        user_uid: Annotated[StrictStr, Field(description="The unique identifier of the user in CDO.")],
+        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2273,7 +2273,7 @@ class UsersApi:
 
         Fetch a user by UID in the CDO tenant. This will only return 200 responses for users associated with the CDO tenant.
 
-        :param user_uid: The unique identifier of the user in CDO. (required)
+        :param user_uid: The unique identifier, represented as a UUID, of the user in CDO. (required)
         :type user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2327,7 +2327,7 @@ class UsersApi:
     @validate_call
     def get_user_with_http_info(
         self,
-        user_uid: Annotated[StrictStr, Field(description="The unique identifier of the user in CDO.")],
+        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2345,7 +2345,7 @@ class UsersApi:
 
         Fetch a user by UID in the CDO tenant. This will only return 200 responses for users associated with the CDO tenant.
 
-        :param user_uid: The unique identifier of the user in CDO. (required)
+        :param user_uid: The unique identifier, represented as a UUID, of the user in CDO. (required)
         :type user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2399,7 +2399,7 @@ class UsersApi:
     @validate_call
     def get_user_without_preload_content(
         self,
-        user_uid: Annotated[StrictStr, Field(description="The unique identifier of the user in CDO.")],
+        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2417,7 +2417,7 @@ class UsersApi:
 
         Fetch a user by UID in the CDO tenant. This will only return 200 responses for users associated with the CDO tenant.
 
-        :param user_uid: The unique identifier of the user in CDO. (required)
+        :param user_uid: The unique identifier, represented as a UUID, of the user in CDO. (required)
         :type user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2834,7 +2834,7 @@ class UsersApi:
     @validate_call
     def modify_active_directory_group(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier of the active directory group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in CDO.")],
         active_directory_group_create_or_update_input: ActiveDirectoryGroupCreateOrUpdateInput,
         _request_timeout: Union[
             None,
@@ -2853,7 +2853,7 @@ class UsersApi:
 
         Modify an Active Directory Group by UID.
 
-        :param group_uid: The unique identifier of the active directory group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in CDO. (required)
         :type group_uid: str
         :param active_directory_group_create_or_update_input: (required)
         :type active_directory_group_create_or_update_input: ActiveDirectoryGroupCreateOrUpdateInput
@@ -2910,7 +2910,7 @@ class UsersApi:
     @validate_call
     def modify_active_directory_group_with_http_info(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier of the active directory group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in CDO.")],
         active_directory_group_create_or_update_input: ActiveDirectoryGroupCreateOrUpdateInput,
         _request_timeout: Union[
             None,
@@ -2929,7 +2929,7 @@ class UsersApi:
 
         Modify an Active Directory Group by UID.
 
-        :param group_uid: The unique identifier of the active directory group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in CDO. (required)
         :type group_uid: str
         :param active_directory_group_create_or_update_input: (required)
         :type active_directory_group_create_or_update_input: ActiveDirectoryGroupCreateOrUpdateInput
@@ -2986,7 +2986,7 @@ class UsersApi:
     @validate_call
     def modify_active_directory_group_without_preload_content(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier of the active directory group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in CDO.")],
         active_directory_group_create_or_update_input: ActiveDirectoryGroupCreateOrUpdateInput,
         _request_timeout: Union[
             None,
@@ -3005,7 +3005,7 @@ class UsersApi:
 
         Modify an Active Directory Group by UID.
 
-        :param group_uid: The unique identifier of the active directory group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in CDO. (required)
         :type group_uid: str
         :param active_directory_group_create_or_update_input: (required)
         :type active_directory_group_create_or_update_input: ActiveDirectoryGroupCreateOrUpdateInput
@@ -3135,7 +3135,7 @@ class UsersApi:
     @validate_call
     def revoke_api_token(
         self,
-        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API user in CDO.")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API user in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3153,7 +3153,7 @@ class UsersApi:
 
         Revoke API Token of API-only user. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_uid: The unique identifier of the API user in CDO. (required)
+        :param api_user_uid: The unique identifier, represented as a UUID, of the API user in CDO. (required)
         :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3206,7 +3206,7 @@ class UsersApi:
     @validate_call
     def revoke_api_token_with_http_info(
         self,
-        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API user in CDO.")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API user in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3224,7 +3224,7 @@ class UsersApi:
 
         Revoke API Token of API-only user. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_uid: The unique identifier of the API user in CDO. (required)
+        :param api_user_uid: The unique identifier, represented as a UUID, of the API user in CDO. (required)
         :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3277,7 +3277,7 @@ class UsersApi:
     @validate_call
     def revoke_api_token_without_preload_content(
         self,
-        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API user in CDO.")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API user in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3295,7 +3295,7 @@ class UsersApi:
 
         Revoke API Token of API-only user. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_uid: The unique identifier of the API user in CDO. (required)
+        :param api_user_uid: The unique identifier, represented as a UUID, of the API user in CDO. (required)
         :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

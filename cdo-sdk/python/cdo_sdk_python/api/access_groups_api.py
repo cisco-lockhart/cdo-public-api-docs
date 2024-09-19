@@ -326,7 +326,7 @@ class AccessGroupsApi:
     @validate_call
     def delete_access_group(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier of the Access Group in CDO.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -344,7 +344,7 @@ class AccessGroupsApi:
 
         Delete Access Group by UID in the CDO tenant.
 
-        :param access_group_uid: The unique identifier of the Access Group in CDO. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in CDO. (required)
         :type access_group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -396,7 +396,7 @@ class AccessGroupsApi:
     @validate_call
     def delete_access_group_with_http_info(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier of the Access Group in CDO.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -414,7 +414,7 @@ class AccessGroupsApi:
 
         Delete Access Group by UID in the CDO tenant.
 
-        :param access_group_uid: The unique identifier of the Access Group in CDO. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in CDO. (required)
         :type access_group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -466,7 +466,7 @@ class AccessGroupsApi:
     @validate_call
     def delete_access_group_without_preload_content(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier of the Access Group in CDO.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -484,7 +484,7 @@ class AccessGroupsApi:
 
         Delete Access Group by UID in the CDO tenant.
 
-        :param access_group_uid: The unique identifier of the Access Group in CDO. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in CDO. (required)
         :type access_group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -593,7 +593,7 @@ class AccessGroupsApi:
     @validate_call
     def fetch_access_group(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier of the Access Group in CDO.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -611,7 +611,7 @@ class AccessGroupsApi:
 
         Get a single ASA Access Group by UUID.
 
-        :param access_group_uid: The unique identifier of the Access Group in CDO. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in CDO. (required)
         :type access_group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -664,7 +664,7 @@ class AccessGroupsApi:
     @validate_call
     def fetch_access_group_with_http_info(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier of the Access Group in CDO.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -682,7 +682,7 @@ class AccessGroupsApi:
 
         Get a single ASA Access Group by UUID.
 
-        :param access_group_uid: The unique identifier of the Access Group in CDO. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in CDO. (required)
         :type access_group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -735,7 +735,7 @@ class AccessGroupsApi:
     @validate_call
     def fetch_access_group_without_preload_content(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier of the Access Group in CDO.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -753,7 +753,7 @@ class AccessGroupsApi:
 
         Get a single ASA Access Group by UUID.
 
-        :param access_group_uid: The unique identifier of the Access Group in CDO. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in CDO. (required)
         :type access_group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1184,7 +1184,7 @@ class AccessGroupsApi:
     @validate_call
     def patch_access_group(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO Access Group.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO Access Group.")],
         access_group_update_input: AccessGroupUpdateInput,
         _request_timeout: Union[
             None,
@@ -1203,7 +1203,7 @@ class AccessGroupsApi:
 
         Modify CDO Access Group by UID.
 
-        :param access_group_uid: The unique identifier of the CDO Access Group. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the CDO Access Group. (required)
         :type access_group_uid: str
         :param access_group_update_input: (required)
         :type access_group_update_input: AccessGroupUpdateInput
@@ -1259,7 +1259,7 @@ class AccessGroupsApi:
     @validate_call
     def patch_access_group_with_http_info(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO Access Group.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO Access Group.")],
         access_group_update_input: AccessGroupUpdateInput,
         _request_timeout: Union[
             None,
@@ -1278,7 +1278,7 @@ class AccessGroupsApi:
 
         Modify CDO Access Group by UID.
 
-        :param access_group_uid: The unique identifier of the CDO Access Group. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the CDO Access Group. (required)
         :type access_group_uid: str
         :param access_group_update_input: (required)
         :type access_group_update_input: AccessGroupUpdateInput
@@ -1334,7 +1334,7 @@ class AccessGroupsApi:
     @validate_call
     def patch_access_group_without_preload_content(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO Access Group.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO Access Group.")],
         access_group_update_input: AccessGroupUpdateInput,
         _request_timeout: Union[
             None,
@@ -1353,7 +1353,7 @@ class AccessGroupsApi:
 
         Modify CDO Access Group by UID.
 
-        :param access_group_uid: The unique identifier of the CDO Access Group. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the CDO Access Group. (required)
         :type access_group_uid: str
         :param access_group_update_input: (required)
         :type access_group_update_input: AccessGroupUpdateInput

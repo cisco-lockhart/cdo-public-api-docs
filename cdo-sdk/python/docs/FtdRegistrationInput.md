@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ftd_uid** | **str** | The unique identifier of the FTD device in CDO for which registration should be triggered. | 
+**ftd_uid** | **str** | The unique identifier, represented as a UUID, of the FTD device in CDO for which registration should be triggered. | 
 
 ## Example
 

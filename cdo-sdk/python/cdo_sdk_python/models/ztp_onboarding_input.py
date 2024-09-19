@@ -30,9 +30,9 @@ class ZtpOnboardingInput(BaseModel):
     name: StrictStr = Field(description="Specify a human-readable name for the device.")
     serial_number: StrictStr = Field(description="Specify the serial number of the FTD device to be onboarded. When a device with this serial number is plugged in and connected to the Internet, it will automatically be registered to this CDO tenant.", alias="serialNumber")
     admin_password: Optional[StrictStr] = Field(default=None, description="Specify the initial provisioning password. This is required for setting up the FTD, and can be ignored if password is already set on the device.", alias="adminPassword")
-    fmc_access_policy_uid: StrictStr = Field(description="Specify the unique identifier of the FMC access policy to apply to this device.", alias="fmcAccessPolicyUid")
+    fmc_access_policy_uid: StrictStr = Field(description="Specify the unique identifier, represented as a UUID, of the FMC access policy to apply to this device.", alias="fmcAccessPolicyUid")
     licenses: List[StrictStr] = Field(description="Specify a set of licenses to apply to the device.")
-    device_group_uid: Optional[StrictStr] = Field(default=None, description="Specify the unique identifier of the device group which the device will be a part of after it finishes registering with CDO.", alias="deviceGroupUid")
+    device_group_uid: Optional[StrictStr] = Field(default=None, description="Specify the unique identifier, represented as a UUID, of the device group which the device will be a part of after it finishes registering with CDO.", alias="deviceGroupUid")
     __properties: ClassVar[List[str]] = ["name", "serialNumber", "adminPassword", "fmcAccessPolicyUid", "licenses", "deviceGroupUid"]
 
     @field_validator('licenses')

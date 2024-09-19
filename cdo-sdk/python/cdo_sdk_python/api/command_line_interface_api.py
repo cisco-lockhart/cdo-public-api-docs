@@ -334,7 +334,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def delete_cli_macro(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -352,7 +352,7 @@ class CommandLineInterfaceApi:
 
         Delete a CDO CLI Macro by UID.
 
-        :param macro_uid: The unique identifier of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
         :type macro_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -406,7 +406,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def delete_cli_macro_with_http_info(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -424,7 +424,7 @@ class CommandLineInterfaceApi:
 
         Delete a CDO CLI Macro by UID.
 
-        :param macro_uid: The unique identifier of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
         :type macro_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -478,7 +478,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def delete_cli_macro_without_preload_content(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -496,7 +496,7 @@ class CommandLineInterfaceApi:
 
         Delete a CDO CLI Macro by UID.
 
-        :param macro_uid: The unique identifier of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
         :type macro_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -607,7 +607,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def get_cli_macro(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -625,7 +625,7 @@ class CommandLineInterfaceApi:
 
         Get a CDO CLI Macro by UID.
 
-        :param macro_uid: The unique identifier of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
         :type macro_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -680,7 +680,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def get_cli_macro_with_http_info(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -698,7 +698,7 @@ class CommandLineInterfaceApi:
 
         Get a CDO CLI Macro by UID.
 
-        :param macro_uid: The unique identifier of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
         :type macro_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -753,7 +753,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def get_cli_macro_without_preload_content(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -771,7 +771,7 @@ class CommandLineInterfaceApi:
 
         Get a CDO CLI Macro by UID.
 
-        :param macro_uid: The unique identifier of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
         :type macro_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1210,7 +1210,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def get_cli_result(
         self,
-        cli_result_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO CLI result in CDO.")],
+        cli_result_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI result in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1228,7 +1228,7 @@ class CommandLineInterfaceApi:
 
         Get the result of a command executed using the CDO Command Line Interface (CLI) by UID.
 
-        :param cli_result_uid: The unique identifier of the CDO CLI result in CDO. (required)
+        :param cli_result_uid: The unique identifier, represented as a UUID, of the CDO CLI result in CDO. (required)
         :type cli_result_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1283,7 +1283,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def get_cli_result_with_http_info(
         self,
-        cli_result_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO CLI result in CDO.")],
+        cli_result_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI result in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1301,7 +1301,7 @@ class CommandLineInterfaceApi:
 
         Get the result of a command executed using the CDO Command Line Interface (CLI) by UID.
 
-        :param cli_result_uid: The unique identifier of the CDO CLI result in CDO. (required)
+        :param cli_result_uid: The unique identifier, represented as a UUID, of the CDO CLI result in CDO. (required)
         :type cli_result_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1356,7 +1356,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def get_cli_result_without_preload_content(
         self,
-        cli_result_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO CLI result in CDO.")],
+        cli_result_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI result in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1374,7 +1374,7 @@ class CommandLineInterfaceApi:
 
         Get the result of a command executed using the CDO Command Line Interface (CLI) by UID.
 
-        :param cli_result_uid: The unique identifier of the CDO CLI result in CDO. (required)
+        :param cli_result_uid: The unique identifier, represented as a UUID, of the CDO CLI result in CDO. (required)
         :type cli_result_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1813,7 +1813,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def modify_cli_macro(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
         cli_macro_patch_input: CliMacroPatchInput,
         _request_timeout: Union[
             None,
@@ -1832,7 +1832,7 @@ class CommandLineInterfaceApi:
 
         Modify a CDO CLI Macro by UID.
 
-        :param macro_uid: The unique identifier of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
         :type macro_uid: str
         :param cli_macro_patch_input: (required)
         :type cli_macro_patch_input: CliMacroPatchInput
@@ -1890,7 +1890,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def modify_cli_macro_with_http_info(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
         cli_macro_patch_input: CliMacroPatchInput,
         _request_timeout: Union[
             None,
@@ -1909,7 +1909,7 @@ class CommandLineInterfaceApi:
 
         Modify a CDO CLI Macro by UID.
 
-        :param macro_uid: The unique identifier of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
         :type macro_uid: str
         :param cli_macro_patch_input: (required)
         :type cli_macro_patch_input: CliMacroPatchInput
@@ -1967,7 +1967,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def modify_cli_macro_without_preload_content(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
         cli_macro_patch_input: CliMacroPatchInput,
         _request_timeout: Union[
             None,
@@ -1986,7 +1986,7 @@ class CommandLineInterfaceApi:
 
         Modify a CDO CLI Macro by UID.
 
-        :param macro_uid: The unique identifier of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
         :type macro_uid: str
         :param cli_macro_patch_input: (required)
         :type cli_macro_patch_input: CliMacroPatchInput

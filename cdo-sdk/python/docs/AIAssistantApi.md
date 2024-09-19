@@ -216,7 +216,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.AIAssistantApi(api_client)
-    conversation_uid = 'conversation_uid_example' # str | The unique identifier of the conversation in CDO.
+    conversation_uid = 'conversation_uid_example' # str | The unique identifier, represented as a UUID, of the conversation in CDO.
 
     try:
         # Get Messages
@@ -234,7 +234,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **conversation_uid** | **str**| The unique identifier of the conversation in CDO. | 
+ **conversation_uid** | **str**| The unique identifier, represented as a UUID, of the conversation in CDO. | 
 
 ### Return type
 
@@ -298,7 +298,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.AIAssistantApi(api_client)
-    conversation_uid = 'conversation_uid_example' # str | The unique identifier of the conversation in CDO.
+    conversation_uid = 'conversation_uid_example' # str | The unique identifier, represented as a UUID, of the conversation in CDO.
 
     try:
         # Get Conversation
@@ -316,7 +316,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **conversation_uid** | **str**| The unique identifier of the conversation in CDO. | 
+ **conversation_uid** | **str**| The unique identifier, represented as a UUID, of the conversation in CDO. | 
 
 ### Return type
 

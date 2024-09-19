@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the Access Rule. | 
+**uid** | **str** | The unique identifier, represented as a UUID, of the Access Rule. | 
 **index** | **int** | Access rule index position in Access Group ordered rule list. | [optional] 
 **rule_action** | **str** | The rule&#39;s action: PERMIT or DENY. | [optional] 
 **protocol** | [**AccessRuleDetailsContent**](AccessRuleDetailsContent.md) |  | [optional] 

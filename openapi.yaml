@@ -436,7 +436,9 @@ paths:
       parameters:
         - name: apiUserUid
           in: path
-          description: The unique identifier of the API user in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the API user in
+            CDO.
           required: true
           schema:
             type: string
@@ -475,7 +477,9 @@ paths:
       parameters:
         - name: apiUserUid
           in: path
-          description: The unique identifier of the API-only user in CDO
+          description: >-
+            The unique identifier, represented as a UUID, of the API-only user
+            in CDO
           required: true
           schema:
             type: string
@@ -1436,7 +1440,9 @@ paths:
       parameters:
         - name: deviceUid
           in: path
-          description: The unique identifier of the cdFMC managed FTD device in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the cdFMC managed
+            FTD device in CDO.
           required: true
           schema:
             type: string
@@ -1559,7 +1565,9 @@ paths:
       parameters:
         - name: deviceUid
           in: path
-          description: The unique identifier of the ASA device in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the ASA device in
+            CDO.
           required: true
           schema:
             type: string
@@ -1601,7 +1609,9 @@ paths:
       parameters:
         - name: deviceUid
           in: path
-          description: The unique identifier of the ASA device in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the ASA device in
+            CDO.
           required: true
           schema:
             type: string
@@ -2160,7 +2170,9 @@ paths:
       parameters:
         - name: conversationUid
           in: path
-          description: The unique identifier of the conversation in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the conversation in
+            CDO.
           required: true
           schema:
             type: string
@@ -2242,7 +2254,9 @@ paths:
       parameters:
         - name: groupUid
           in: path
-          description: The unique identifier of the active directory group in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the active
+            directory group in CDO.
           required: true
           schema:
             type: string
@@ -2279,7 +2293,9 @@ paths:
       parameters:
         - name: groupUid
           in: path
-          description: The unique identifier of the Active Directory Group in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the Active
+            Directory Group in CDO.
           required: true
           schema:
             type: string
@@ -2310,7 +2326,9 @@ paths:
       parameters:
         - name: groupUid
           in: path
-          description: The unique identifier of the active directory group in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the active
+            directory group in CDO.
           required: true
           schema:
             type: string
@@ -2415,7 +2433,9 @@ paths:
       parameters:
         - name: accessRuleUid
           in: path
-          description: The unique identifier of the Access Rule in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the Access Rule in
+            CDO.
           required: true
           schema:
             type: string
@@ -2450,7 +2470,9 @@ paths:
       parameters:
         - name: accessRuleUid
           in: path
-          description: The unique identifier of the Access Rule in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the Access Rule in
+            CDO.
           required: true
           schema:
             type: string
@@ -2479,7 +2501,9 @@ paths:
       parameters:
         - name: accessRuleUid
           in: path
-          description: The unique identifier of the CDO Access Rule.
+          description: >-
+            The unique identifier, represented as a UUID, of the CDO Access
+            Rule.
           required: true
           schema:
             type: string
@@ -2521,7 +2545,9 @@ paths:
       parameters:
         - name: accessGroupUid
           in: path
-          description: The unique identifier of the Access Group in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the Access Group in
+            CDO.
           required: true
           schema:
             type: string
@@ -2556,7 +2582,9 @@ paths:
       parameters:
         - name: accessGroupUid
           in: path
-          description: The unique identifier of the Access Group in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the Access Group in
+            CDO.
           required: true
           schema:
             type: string
@@ -2585,7 +2613,9 @@ paths:
       parameters:
         - name: accessGroupUid
           in: path
-          description: The unique identifier of the CDO Access Group.
+          description: >-
+            The unique identifier, represented as a UUID, of the CDO Access
+            Group.
           required: true
           schema:
             type: string
@@ -2627,7 +2657,9 @@ paths:
       parameters:
         - name: templateDeviceUid
           in: path
-          description: The unique identifier of the template device in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the template device
+            in CDO.
           required: true
           schema:
             type: string
@@ -2664,7 +2696,9 @@ paths:
       parameters:
         - name: templateDeviceUid
           in: path
-          description: The unique identifier of the template device in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the template device
+            in CDO.
           required: true
           schema:
             type: string
@@ -2695,7 +2729,9 @@ paths:
       parameters:
         - name: templateDeviceUid
           in: path
-          description: The unique identifier of the template device in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the template device
+            in CDO.
           required: true
           schema:
             type: string
@@ -2739,7 +2775,9 @@ paths:
       parameters:
         - name: cloudServiceUid
           in: path
-          description: The unique identifier of the cloud service in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the cloud service
+            in CDO.
           required: true
           schema:
             type: string
@@ -2776,7 +2814,9 @@ paths:
       parameters:
         - name: cloudServiceUid
           in: path
-          description: The unique identifier of the cloud service in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the cloud service
+            in CDO.
           required: true
           schema:
             type: string
@@ -2807,7 +2847,9 @@ paths:
       parameters:
         - name: cloudServiceUid
           in: path
-          description: The unique identifier of the cloud service in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the cloud service
+            in CDO.
           required: true
           schema:
             type: string
@@ -2851,7 +2893,9 @@ paths:
       parameters:
         - name: deviceManagerUid
           in: path
-          description: The unique identifier of the device manager in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the device manager
+            in CDO.
           required: true
           schema:
             type: string
@@ -2888,7 +2932,9 @@ paths:
       parameters:
         - name: deviceManagerUid
           in: path
-          description: The unique identifier of the device manager in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the device manager
+            in CDO.
           required: true
           schema:
             type: string
@@ -2921,7 +2967,9 @@ paths:
       parameters:
         - name: deviceManagerUid
           in: path
-          description: The unique identifier of the device manager in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the device manager
+            in CDO.
           required: true
           schema:
             type: string
@@ -2965,7 +3013,7 @@ paths:
       parameters:
         - name: deviceUid
           in: path
-          description: The unique identifier of the device in CDO.
+          description: The unique identifier, represented as a UUID, of the device in CDO.
           required: true
           schema:
             type: string
@@ -3006,7 +3054,7 @@ paths:
       parameters:
         - name: deviceUid
           in: path
-          description: The unique identifier of the device in CDO.
+          description: The unique identifier, represented as a UUID, of the device in CDO.
           required: true
           schema:
             type: string
@@ -3039,7 +3087,7 @@ paths:
       parameters:
         - name: deviceUid
           in: path
-          description: The unique identifier of the device in CDO.
+          description: The unique identifier, represented as a UUID, of the device in CDO.
           required: true
           schema:
             type: string
@@ -3085,7 +3133,7 @@ paths:
       parameters:
         - name: sdcUid
           in: path
-          description: The unique identifier of the SDC in CDO.
+          description: The unique identifier, represented as a UUID, of the SDC in CDO.
           required: true
           schema:
             type: string
@@ -3122,7 +3170,7 @@ paths:
       parameters:
         - name: sdcUid
           in: path
-          description: The unique identifier of the SDC in CDO.
+          description: The unique identifier, represented as a UUID, of the SDC in CDO.
           required: true
           schema:
             type: string
@@ -3153,7 +3201,7 @@ paths:
       parameters:
         - name: sdcUid
           in: path
-          description: The unique identifier of the SDC in CDO.
+          description: The unique identifier, represented as a UUID, of the SDC in CDO.
           required: true
           schema:
             type: string
@@ -3197,7 +3245,9 @@ paths:
       parameters:
         - name: macroUid
           in: path
-          description: The unique identifier of the CDO CLI macro in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the CDO CLI macro
+            in CDO.
           required: true
           schema:
             type: string
@@ -3236,7 +3286,9 @@ paths:
       parameters:
         - name: macroUid
           in: path
-          description: The unique identifier of the CDO CLI macro in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the CDO CLI macro
+            in CDO.
           required: true
           schema:
             type: string
@@ -3269,7 +3321,9 @@ paths:
       parameters:
         - name: macroUid
           in: path
-          description: The unique identifier of the CDO CLI macro in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the CDO CLI macro
+            in CDO.
           required: true
           schema:
             type: string
@@ -3384,7 +3438,9 @@ paths:
       parameters:
         - name: raVpnSessionUid
           in: path
-          description: The unique identifier of the RA VPN session in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the RA VPN session
+            in CDO.
           required: true
           schema:
             type: string
@@ -3426,7 +3482,7 @@ paths:
       parameters:
         - name: userUid
           in: path
-          description: The unique identifier of the user in CDO.
+          description: The unique identifier, represented as a UUID, of the user in CDO.
           required: true
           schema:
             type: string
@@ -3466,7 +3522,7 @@ paths:
       parameters:
         - name: userUid
           in: path
-          description: The unique identifier of the user in CDO.
+          description: The unique identifier, represented as a UUID, of the user in CDO.
           required: true
           schema:
             type: string
@@ -3625,7 +3681,7 @@ paths:
       parameters:
         - name: tenantUid
           in: path
-          description: The unique identifier of the tenant in CDO.
+          description: The unique identifier, represented as a UUID, of the tenant in CDO.
           required: true
           schema:
             type: string
@@ -3793,7 +3849,9 @@ paths:
       parameters:
         - name: mfaEventUid
           in: path
-          description: The unique identifier of the MFA event in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the MFA event in
+            CDO.
           required: true
           schema:
             type: string
@@ -4065,7 +4123,7 @@ paths:
       parameters:
         - name: fmcUid
           in: path
-          description: The unique identifier of the FMC in CDO.
+          description: The unique identifier, represented as a UUID, of the FMC in CDO.
           required: true
           schema:
             type: string
@@ -4289,7 +4347,9 @@ paths:
       parameters:
         - name: cliResultUid
           in: path
-          description: The unique identifier of the CDO CLI result in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the CDO CLI result
+            in CDO.
           required: true
           schema:
             type: string
@@ -4403,7 +4463,9 @@ paths:
       parameters:
         - name: changelogUid
           in: path
-          description: The unique identifier of the changelog in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the changelog in
+            CDO.
           required: true
           schema:
             type: string
@@ -4441,7 +4503,9 @@ paths:
       parameters:
         - name: changeRequestUid
           in: path
-          description: The unique identifier of the Change Request in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the Change Request
+            in CDO.
           required: true
           schema:
             type: string
@@ -4480,7 +4544,9 @@ paths:
       parameters:
         - name: changeRequestUid
           in: path
-          description: The unique identifier of the Change Request in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the Change Request
+            in CDO.
           required: true
           schema:
             type: string
@@ -4599,7 +4665,9 @@ paths:
       parameters:
         - name: conversationUid
           in: path
-          description: The unique identifier of the conversation in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the conversation in
+            CDO.
           required: true
           schema:
             type: string
@@ -5394,8 +5462,8 @@ components:
         groupIdentifier:
           type: string
           description: >-
-            The unique identifier of the Active Directory Group in your Identity
-            Provider (IdP).
+            The unique identifier, represented as a UUID, of the Active
+            Directory Group in your Identity Provider (IdP).
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         issuerUrl:
           type: string
@@ -5449,16 +5517,16 @@ components:
         accessGroupUid:
           type: string
           description: >-
-            The unique identifier of the Access Group associated with the Access
-            Rule.
+            The unique identifier, represented as a UUID, of the Access Group
+            associated with the Access Rule.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         entityUid:
           type: string
           description: >-
-            The unique identifier of the device/manager associated with the
-            Access Rule. Points to the shared Access Group in the case of a
-            shared Access Rule being created.
+            The unique identifier, represented as a UUID, of the device/manager
+            associated with the Access Rule. Points to the shared Access Group
+            in the case of a shared Access Rule being created.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         index:
@@ -5664,9 +5732,9 @@ components:
         entityUid:
           type: string
           description: >-
-            The unique identifier of the device/manager associated with the
-            Access Group. When creating shared Access Group, entityUid
-            represents device that contains source Access Group 
+            The unique identifier, represented as a UUID, of the device/manager
+            associated with the Access Group. When creating shared Access Group,
+            entityUid represents device that contains source Access Group 
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         resources:
@@ -5988,8 +6056,8 @@ components:
         fmcAccessPolicyUid:
           type: string
           description: >-
-            Specify the unique identifier of the FMC access policy to apply to
-            this device.
+            Specify the unique identifier, represented as a UUID, of the FMC
+            access policy to apply to this device.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         performanceTier:
@@ -6041,8 +6109,8 @@ components:
         fmcAccessPolicyUid:
           type: string
           description: >-
-            Specify the unique identifier of the FMC access policy to apply to
-            this device.
+            Specify the unique identifier, represented as a UUID, of the FMC
+            access policy to apply to this device.
           format: uuid
         licenses:
           uniqueItems: true
@@ -6073,8 +6141,9 @@ components:
         deviceGroupUid:
           type: string
           description: >-
-            Specify the unique identifier of the device group which the device
-            will be a part of after it finishes registering with CDO.
+            Specify the unique identifier, represented as a UUID, of the device
+            group which the device will be a part of after it finishes
+            registering with CDO.
           format: uuid
     FtdRegistrationInput:
       required:
@@ -6084,8 +6153,8 @@ components:
         ftdUid:
           type: string
           description: >-
-            The unique identifier of the FTD device in CDO for which
-            registration should be triggered.
+            The unique identifier, represented as a UUID, of the FTD device in
+            CDO for which registration should be triggered.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
     DuoAdminPanelCreateOrUpdateInput:
@@ -6206,7 +6275,7 @@ components:
             example: '["7131daad-e813-4b8f-8f42-be1e241e8cdb"]'
         macroUid:
           type: string
-          description: The unique identifier of the CLI macro.
+          description: The unique identifier, represented as a UUID, of the CLI macro.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         parameters:
@@ -6414,7 +6483,7 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the Access Rule.
+          description: The unique identifier, represented as a UUID, of the Access Rule.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         index:
@@ -8296,13 +8365,13 @@ components:
           format: int64
         environment:
           $ref: '#/components/schemas/Environment'
+        beanDefinitionCount:
+          type: integer
+          format: int32
         beanDefinitionNames:
           type: array
           items:
             type: string
-        beanDefinitionCount:
-          type: integer
-          format: int32
         parentBeanFactory:
           $ref: '#/components/schemas/BeanFactory'
         classLoader:
@@ -8609,40 +8678,6 @@ components:
             servletNames:
               type: object
               deprecated: true
-            responseCharacterEncoding:
-              type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
-            servletRegistrations:
-              type: object
-              additionalProperties:
-                type: object
-                properties:
-                  mappings:
-                    type: array
-                    items:
-                      type: string
-                  runAsRole:
-                    type: string
-                  name:
-                    type: string
-                  className:
-                    type: string
-                  initParameters:
-                    type: object
-                    additionalProperties:
-                      type: string
             filterRegistrations:
               type: object
               additionalProperties:
@@ -8667,14 +8702,14 @@ components:
             sessionCookieConfig:
               type: object
               properties:
+                httpOnly:
+                  type: boolean
                 name:
                   type: string
                 path:
                   type: string
                 comment:
                   type: string
-                httpOnly:
-                  type: boolean
                 secure:
                   type: boolean
                 domain:
@@ -8717,7 +8752,9 @@ components:
                   items:
                     type: object
                     properties:
-                      buffer:
+                      elIgnored:
+                        type: string
+                      scriptingInvalid:
                         type: string
                       pageEncoding:
                         type: string
@@ -8737,9 +8774,7 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
-                      elIgnored:
-                        type: string
-                      scriptingInvalid:
+                      buffer:
                         type: string
                       defaultContentType:
                         type: string
@@ -8751,6 +8786,40 @@ components:
               type: string
             requestCharacterEncoding:
               type: string
+            responseCharacterEncoding:
+              type: string
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
+            servletRegistrations:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  mappings:
+                    type: array
+                    items:
+                      type: string
+                  runAsRole:
+                    type: string
+                  name:
+                    type: string
+                  className:
+                    type: string
+                  initParameters:
+                    type: object
+                    additionalProperties:
+                      type: string
           writeOnly: true
         contentType:
           type: string

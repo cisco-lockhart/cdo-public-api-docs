@@ -45,7 +45,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ChangelogsApi(api_client)
-    changelog_uid = 'changelog_uid_example' # str | The unique identifier of the changelog in CDO.
+    changelog_uid = 'changelog_uid_example' # str | The unique identifier, represented as a UUID, of the changelog in CDO.
 
     try:
         # Get Change Log
@@ -63,7 +63,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **changelog_uid** | **str**| The unique identifier of the changelog in CDO. | 
+ **changelog_uid** | **str**| The unique identifier, represented as a UUID, of the changelog in CDO. | 
 
 ### Return type
 

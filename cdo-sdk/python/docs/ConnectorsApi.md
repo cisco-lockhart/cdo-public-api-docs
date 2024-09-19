@@ -130,7 +130,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ConnectorsApi(api_client)
-    sdc_uid = 'sdc_uid_example' # str | The unique identifier of the SDC in CDO.
+    sdc_uid = 'sdc_uid_example' # str | The unique identifier, represented as a UUID, of the SDC in CDO.
 
     try:
         # Delete SDC
@@ -146,7 +146,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sdc_uid** | **str**| The unique identifier of the SDC in CDO. | 
+ **sdc_uid** | **str**| The unique identifier, represented as a UUID, of the SDC in CDO. | 
 
 ### Return type
 
@@ -210,7 +210,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ConnectorsApi(api_client)
-    sdc_uid = 'sdc_uid_example' # str | The unique identifier of the SDC in CDO.
+    sdc_uid = 'sdc_uid_example' # str | The unique identifier, represented as a UUID, of the SDC in CDO.
 
     try:
         # Get SDC
@@ -228,7 +228,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sdc_uid** | **str**| The unique identifier of the SDC in CDO. | 
+ **sdc_uid** | **str**| The unique identifier, represented as a UUID, of the SDC in CDO. | 
 
 ### Return type
 
@@ -382,7 +382,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ConnectorsApi(api_client)
-    sdc_uid = 'sdc_uid_example' # str | The unique identifier of the SDC in CDO.
+    sdc_uid = 'sdc_uid_example' # str | The unique identifier, represented as a UUID, of the SDC in CDO.
     sdc_patch_input = cdo_sdk_python.SdcPatchInput() # SdcPatchInput | 
 
     try:
@@ -401,7 +401,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sdc_uid** | **str**| The unique identifier of the SDC in CDO. | 
+ **sdc_uid** | **str**| The unique identifier, represented as a UUID, of the SDC in CDO. | 
  **sdc_patch_input** | [**SdcPatchInput**](SdcPatchInput.md)|  | 
 
 ### Return type

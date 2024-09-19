@@ -326,7 +326,7 @@ class ASAAccessRulesApi:
     @validate_call
     def delete_access_rule(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier of the Access Rule in CDO.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -344,7 +344,7 @@ class ASAAccessRulesApi:
 
         Delete Access Rule by UID in the CDO tenant.
 
-        :param access_rule_uid: The unique identifier of the Access Rule in CDO. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in CDO. (required)
         :type access_rule_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -396,7 +396,7 @@ class ASAAccessRulesApi:
     @validate_call
     def delete_access_rule_with_http_info(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier of the Access Rule in CDO.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -414,7 +414,7 @@ class ASAAccessRulesApi:
 
         Delete Access Rule by UID in the CDO tenant.
 
-        :param access_rule_uid: The unique identifier of the Access Rule in CDO. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in CDO. (required)
         :type access_rule_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -466,7 +466,7 @@ class ASAAccessRulesApi:
     @validate_call
     def delete_access_rule_without_preload_content(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier of the Access Rule in CDO.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -484,7 +484,7 @@ class ASAAccessRulesApi:
 
         Delete Access Rule by UID in the CDO tenant.
 
-        :param access_rule_uid: The unique identifier of the Access Rule in CDO. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in CDO. (required)
         :type access_rule_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -593,7 +593,7 @@ class ASAAccessRulesApi:
     @validate_call
     def fetch_access_rule(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier of the Access Rule in CDO.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -611,7 +611,7 @@ class ASAAccessRulesApi:
 
         Get a single ASA Access Rule by UUID.
 
-        :param access_rule_uid: The unique identifier of the Access Rule in CDO. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in CDO. (required)
         :type access_rule_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -664,7 +664,7 @@ class ASAAccessRulesApi:
     @validate_call
     def fetch_access_rule_with_http_info(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier of the Access Rule in CDO.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -682,7 +682,7 @@ class ASAAccessRulesApi:
 
         Get a single ASA Access Rule by UUID.
 
-        :param access_rule_uid: The unique identifier of the Access Rule in CDO. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in CDO. (required)
         :type access_rule_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -735,7 +735,7 @@ class ASAAccessRulesApi:
     @validate_call
     def fetch_access_rule_without_preload_content(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier of the Access Rule in CDO.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -753,7 +753,7 @@ class ASAAccessRulesApi:
 
         Get a single ASA Access Rule by UUID.
 
-        :param access_rule_uid: The unique identifier of the Access Rule in CDO. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in CDO. (required)
         :type access_rule_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1184,7 +1184,7 @@ class ASAAccessRulesApi:
     @validate_call
     def modify_access_rule(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO Access Rule.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO Access Rule.")],
         access_rule_update_input: AccessRuleUpdateInput,
         _request_timeout: Union[
             None,
@@ -1203,7 +1203,7 @@ class ASAAccessRulesApi:
 
         Modify an Access Rule in the CDO tenant by UID.
 
-        :param access_rule_uid: The unique identifier of the CDO Access Rule. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the CDO Access Rule. (required)
         :type access_rule_uid: str
         :param access_rule_update_input: (required)
         :type access_rule_update_input: AccessRuleUpdateInput
@@ -1259,7 +1259,7 @@ class ASAAccessRulesApi:
     @validate_call
     def modify_access_rule_with_http_info(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO Access Rule.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO Access Rule.")],
         access_rule_update_input: AccessRuleUpdateInput,
         _request_timeout: Union[
             None,
@@ -1278,7 +1278,7 @@ class ASAAccessRulesApi:
 
         Modify an Access Rule in the CDO tenant by UID.
 
-        :param access_rule_uid: The unique identifier of the CDO Access Rule. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the CDO Access Rule. (required)
         :type access_rule_uid: str
         :param access_rule_update_input: (required)
         :type access_rule_update_input: AccessRuleUpdateInput
@@ -1334,7 +1334,7 @@ class ASAAccessRulesApi:
     @validate_call
     def modify_access_rule_without_preload_content(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier of the CDO Access Rule.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO Access Rule.")],
         access_rule_update_input: AccessRuleUpdateInput,
         _request_timeout: Union[
             None,
@@ -1353,7 +1353,7 @@ class ASAAccessRulesApi:
 
         Modify an Access Rule in the CDO tenant by UID.
 
-        :param access_rule_uid: The unique identifier of the CDO Access Rule. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the CDO Access Rule. (required)
         :type access_rule_uid: str
         :param access_rule_update_input: (required)
         :type access_rule_update_input: AccessRuleUpdateInput

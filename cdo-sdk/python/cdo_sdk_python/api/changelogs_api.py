@@ -44,7 +44,7 @@ class ChangelogsApi:
     @validate_call
     def get_changelog(
         self,
-        changelog_uid: Annotated[StrictStr, Field(description="The unique identifier of the changelog in CDO.")],
+        changelog_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the changelog in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -62,7 +62,7 @@ class ChangelogsApi:
 
         Get a specific Change Log object by UID in the CDO tenant.
 
-        :param changelog_uid: The unique identifier of the changelog in CDO. (required)
+        :param changelog_uid: The unique identifier, represented as a UUID, of the changelog in CDO. (required)
         :type changelog_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -116,7 +116,7 @@ class ChangelogsApi:
     @validate_call
     def get_changelog_with_http_info(
         self,
-        changelog_uid: Annotated[StrictStr, Field(description="The unique identifier of the changelog in CDO.")],
+        changelog_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the changelog in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -134,7 +134,7 @@ class ChangelogsApi:
 
         Get a specific Change Log object by UID in the CDO tenant.
 
-        :param changelog_uid: The unique identifier of the changelog in CDO. (required)
+        :param changelog_uid: The unique identifier, represented as a UUID, of the changelog in CDO. (required)
         :type changelog_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -188,7 +188,7 @@ class ChangelogsApi:
     @validate_call
     def get_changelog_without_preload_content(
         self,
-        changelog_uid: Annotated[StrictStr, Field(description="The unique identifier of the changelog in CDO.")],
+        changelog_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the changelog in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -206,7 +206,7 @@ class ChangelogsApi:
 
         Get a specific Change Log object by UID in the CDO tenant.
 
-        :param changelog_uid: The unique identifier of the changelog in CDO. (required)
+        :param changelog_uid: The unique identifier, represented as a UUID, of the changelog in CDO. (required)
         :type changelog_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

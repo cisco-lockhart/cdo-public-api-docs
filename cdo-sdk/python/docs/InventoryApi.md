@@ -240,7 +240,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    device_uid = 'device_uid_example' # str | The unique identifier of the cdFMC managed FTD device in CDO.
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the cdFMC managed FTD device in CDO.
 
     try:
         # Delete cdFMC managed FTD device
@@ -258,7 +258,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_uid** | **str**| The unique identifier of the cdFMC managed FTD device in CDO. | 
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the cdFMC managed FTD device in CDO. | 
 
 ### Return type
 
@@ -321,7 +321,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    cloud_service_uid = 'cloud_service_uid_example' # str | The unique identifier of the cloud service in CDO.
+    cloud_service_uid = 'cloud_service_uid_example' # str | The unique identifier, represented as a UUID, of the cloud service in CDO.
 
     try:
         # Delete Cloud Service
@@ -337,7 +337,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cloud_service_uid** | **str**| The unique identifier of the cloud service in CDO. | 
+ **cloud_service_uid** | **str**| The unique identifier, represented as a UUID, of the cloud service in CDO. | 
 
 ### Return type
 
@@ -400,7 +400,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    device_uid = 'device_uid_example' # str | The unique identifier of the device in CDO.
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the device in CDO.
 
     try:
         # Delete Device
@@ -416,7 +416,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_uid** | **str**| The unique identifier of the device in CDO. | 
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the device in CDO. | 
 
 ### Return type
 
@@ -480,7 +480,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    device_manager_uid = 'device_manager_uid_example' # str | The unique identifier of the device manager in CDO.
+    device_manager_uid = 'device_manager_uid_example' # str | The unique identifier, represented as a UUID, of the device manager in CDO.
 
     try:
         # Delete Device Manager
@@ -496,7 +496,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_manager_uid** | **str**| The unique identifier of the device manager in CDO. | 
+ **device_manager_uid** | **str**| The unique identifier, represented as a UUID, of the device manager in CDO. | 
 
 ### Return type
 
@@ -560,7 +560,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    template_device_uid = 'template_device_uid_example' # str | The unique identifier of the template device in CDO.
+    template_device_uid = 'template_device_uid_example' # str | The unique identifier, represented as a UUID, of the template device in CDO.
 
     try:
         # Delete Template Device
@@ -576,7 +576,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_device_uid** | **str**| The unique identifier of the template device in CDO. | 
+ **template_device_uid** | **str**| The unique identifier, represented as a UUID, of the template device in CDO. | 
 
 ### Return type
 
@@ -1055,7 +1055,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    cloud_service_uid = 'cloud_service_uid_example' # str | The unique identifier of the cloud service in CDO.
+    cloud_service_uid = 'cloud_service_uid_example' # str | The unique identifier, represented as a UUID, of the cloud service in CDO.
 
     try:
         # Get Cloud Service
@@ -1073,7 +1073,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cloud_service_uid** | **str**| The unique identifier of the cloud service in CDO. | 
+ **cloud_service_uid** | **str**| The unique identifier, represented as a UUID, of the cloud service in CDO. | 
 
 ### Return type
 
@@ -1226,7 +1226,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    device_uid = 'device_uid_example' # str | The unique identifier of the device in CDO.
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the device in CDO.
 
     try:
         # Get Device
@@ -1244,7 +1244,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_uid** | **str**| The unique identifier of the device in CDO. | 
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the device in CDO. | 
 
 ### Return type
 
@@ -1310,7 +1310,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    device_manager_uid = 'device_manager_uid_example' # str | The unique identifier of the device manager in CDO.
+    device_manager_uid = 'device_manager_uid_example' # str | The unique identifier, represented as a UUID, of the device manager in CDO.
 
     try:
         # Get Device Manager
@@ -1328,7 +1328,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_manager_uid** | **str**| The unique identifier of the device manager in CDO. | 
+ **device_manager_uid** | **str**| The unique identifier, represented as a UUID, of the device manager in CDO. | 
 
 ### Return type
 
@@ -1570,7 +1570,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    fmc_uid = 'fmc_uid_example' # str | The unique identifier of the FMC in CDO.
+    fmc_uid = 'fmc_uid_example' # str | The unique identifier, represented as a UUID, of the FMC in CDO.
     time_range = 'time_range_example' # str | The time range for which results should be retrieved. (optional)
 
     try:
@@ -1589,7 +1589,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fmc_uid** | **str**| The unique identifier of the FMC in CDO. | 
+ **fmc_uid** | **str**| The unique identifier, represented as a UUID, of the FMC in CDO. | 
  **time_range** | **str**| The time range for which results should be retrieved. | [optional] 
 
 ### Return type
@@ -1655,7 +1655,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    template_device_uid = 'template_device_uid_example' # str | The unique identifier of the template device in CDO.
+    template_device_uid = 'template_device_uid_example' # str | The unique identifier, represented as a UUID, of the template device in CDO.
 
     try:
         # Get Template Device
@@ -1673,7 +1673,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_device_uid** | **str**| The unique identifier of the template device in CDO. | 
+ **template_device_uid** | **str**| The unique identifier, represented as a UUID, of the template device in CDO. | 
 
 ### Return type
 
@@ -1827,7 +1827,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    cloud_service_uid = 'cloud_service_uid_example' # str | The unique identifier of the cloud service in CDO.
+    cloud_service_uid = 'cloud_service_uid_example' # str | The unique identifier, represented as a UUID, of the cloud service in CDO.
     device_patch_input = cdo_sdk_python.DevicePatchInput() # DevicePatchInput | 
 
     try:
@@ -1846,7 +1846,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cloud_service_uid** | **str**| The unique identifier of the cloud service in CDO. | 
+ **cloud_service_uid** | **str**| The unique identifier, represented as a UUID, of the cloud service in CDO. | 
  **device_patch_input** | [**DevicePatchInput**](DevicePatchInput.md)|  | 
 
 ### Return type
@@ -1913,7 +1913,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    device_uid = 'device_uid_example' # str | The unique identifier of the device in CDO.
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the device in CDO.
     device_patch_input = cdo_sdk_python.DevicePatchInput() # DevicePatchInput | 
 
     try:
@@ -1932,7 +1932,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_uid** | **str**| The unique identifier of the device in CDO. | 
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the device in CDO. | 
  **device_patch_input** | [**DevicePatchInput**](DevicePatchInput.md)|  | 
 
 ### Return type
@@ -2000,7 +2000,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    device_manager_uid = 'device_manager_uid_example' # str | The unique identifier of the device manager in CDO.
+    device_manager_uid = 'device_manager_uid_example' # str | The unique identifier, represented as a UUID, of the device manager in CDO.
     device_patch_input = cdo_sdk_python.DevicePatchInput() # DevicePatchInput | 
 
     try:
@@ -2019,7 +2019,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_manager_uid** | **str**| The unique identifier of the device manager in CDO. | 
+ **device_manager_uid** | **str**| The unique identifier, represented as a UUID, of the device manager in CDO. | 
  **device_patch_input** | [**DevicePatchInput**](DevicePatchInput.md)|  | 
 
 ### Return type
@@ -2086,7 +2086,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    template_device_uid = 'template_device_uid_example' # str | The unique identifier of the template device in CDO.
+    template_device_uid = 'template_device_uid_example' # str | The unique identifier, represented as a UUID, of the template device in CDO.
     device_patch_input = cdo_sdk_python.DevicePatchInput() # DevicePatchInput | 
 
     try:
@@ -2105,7 +2105,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_device_uid** | **str**| The unique identifier of the template device in CDO. | 
+ **template_device_uid** | **str**| The unique identifier, represented as a UUID, of the template device in CDO. | 
  **device_patch_input** | [**DevicePatchInput**](DevicePatchInput.md)|  | 
 
 ### Return type
@@ -2500,7 +2500,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    device_uid = 'device_uid_example' # str | The unique identifier of the ASA device in CDO.
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the ASA device in CDO.
 
     try:
         # Read ASA device configuration
@@ -2518,7 +2518,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_uid** | **str**| The unique identifier of the ASA device in CDO. | 
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the ASA device in CDO. | 
 
 ### Return type
 
@@ -2582,7 +2582,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    device_uid = 'device_uid_example' # str | The unique identifier of the ASA device in CDO.
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the ASA device in CDO.
 
     try:
         # Reconnect ASA device
@@ -2600,7 +2600,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_uid** | **str**| The unique identifier of the ASA device in CDO. | 
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the ASA device in CDO. | 
 
 ### Return type
 

@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | A human-readable name for the Access Group. | [optional] 
-**entity_uid** | **str** | The unique identifier of the device/manager associated with the Access Group. When creating shared Access Group, entityUid represents device that contains source Access Group  | 
+**entity_uid** | **str** | The unique identifier, represented as a UUID, of the device/manager associated with the Access Group. When creating shared Access Group, entityUid represents device that contains source Access Group  | 
 **resources** | **List[Dict[str, object]]** | The set of of interface and direction pairs or global resource.  Resource is an attribute applicable only to devices and will not be propagated to appliedTo devices if Access Group is shared. | [optional] 
 **is_shared** | **bool** | The flag that identifies if access group is shared.  If set to true, appliedTo field should be provided as well and entityUid should point to source device. | [optional] 
 **applied_to** | **List[str]** | The set of device unique identifiers to which this Access Group was applied. Only valid for shared access group. | [optional] 

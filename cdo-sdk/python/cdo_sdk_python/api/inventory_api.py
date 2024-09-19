@@ -621,7 +621,7 @@ class InventoryApi:
     @validate_call
     def delete_cd_fmc_managed_ftd_device(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the cdFMC managed FTD device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the cdFMC managed FTD device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -639,7 +639,7 @@ class InventoryApi:
 
         This is an asynchronous operation to delete cdFMC managed FTD device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation. The reason this operation is asynchronous is because the device is first removed from the cdFMC, following which it is deleted from the CDO tenant.
 
-        :param device_uid: The unique identifier of the cdFMC managed FTD device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the cdFMC managed FTD device in CDO. (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -692,7 +692,7 @@ class InventoryApi:
     @validate_call
     def delete_cd_fmc_managed_ftd_device_with_http_info(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the cdFMC managed FTD device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the cdFMC managed FTD device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -710,7 +710,7 @@ class InventoryApi:
 
         This is an asynchronous operation to delete cdFMC managed FTD device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation. The reason this operation is asynchronous is because the device is first removed from the cdFMC, following which it is deleted from the CDO tenant.
 
-        :param device_uid: The unique identifier of the cdFMC managed FTD device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the cdFMC managed FTD device in CDO. (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -763,7 +763,7 @@ class InventoryApi:
     @validate_call
     def delete_cd_fmc_managed_ftd_device_without_preload_content(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the cdFMC managed FTD device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the cdFMC managed FTD device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -781,7 +781,7 @@ class InventoryApi:
 
         This is an asynchronous operation to delete cdFMC managed FTD device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation. The reason this operation is asynchronous is because the device is first removed from the cdFMC, following which it is deleted from the CDO tenant.
 
-        :param device_uid: The unique identifier of the cdFMC managed FTD device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the cdFMC managed FTD device in CDO. (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -891,7 +891,7 @@ class InventoryApi:
     @validate_call
     def delete_cloud_service(
         self,
-        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier of the cloud service in CDO.")],
+        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the cloud service in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -909,7 +909,7 @@ class InventoryApi:
 
         Delete a Cloud Service by UID in the CDO tenant.
 
-        :param cloud_service_uid: The unique identifier of the cloud service in CDO. (required)
+        :param cloud_service_uid: The unique identifier, represented as a UUID, of the cloud service in CDO. (required)
         :type cloud_service_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -962,7 +962,7 @@ class InventoryApi:
     @validate_call
     def delete_cloud_service_with_http_info(
         self,
-        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier of the cloud service in CDO.")],
+        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the cloud service in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -980,7 +980,7 @@ class InventoryApi:
 
         Delete a Cloud Service by UID in the CDO tenant.
 
-        :param cloud_service_uid: The unique identifier of the cloud service in CDO. (required)
+        :param cloud_service_uid: The unique identifier, represented as a UUID, of the cloud service in CDO. (required)
         :type cloud_service_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1033,7 +1033,7 @@ class InventoryApi:
     @validate_call
     def delete_cloud_service_without_preload_content(
         self,
-        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier of the cloud service in CDO.")],
+        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the cloud service in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1051,7 +1051,7 @@ class InventoryApi:
 
         Delete a Cloud Service by UID in the CDO tenant.
 
-        :param cloud_service_uid: The unique identifier of the cloud service in CDO. (required)
+        :param cloud_service_uid: The unique identifier, represented as a UUID, of the cloud service in CDO. (required)
         :type cloud_service_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1161,7 +1161,7 @@ class InventoryApi:
     @validate_call
     def delete_device(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1179,7 +1179,7 @@ class InventoryApi:
 
         Delete a device by UID in the CDO tenant. On-prem FMCs and cloud-delivered FMCs cannot be deleted using this endpoint.
 
-        :param device_uid: The unique identifier of the device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the device in CDO. (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1233,7 +1233,7 @@ class InventoryApi:
     @validate_call
     def delete_device_with_http_info(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1251,7 +1251,7 @@ class InventoryApi:
 
         Delete a device by UID in the CDO tenant. On-prem FMCs and cloud-delivered FMCs cannot be deleted using this endpoint.
 
-        :param device_uid: The unique identifier of the device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the device in CDO. (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1305,7 +1305,7 @@ class InventoryApi:
     @validate_call
     def delete_device_without_preload_content(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1323,7 +1323,7 @@ class InventoryApi:
 
         Delete a device by UID in the CDO tenant. On-prem FMCs and cloud-delivered FMCs cannot be deleted using this endpoint.
 
-        :param device_uid: The unique identifier of the device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the device in CDO. (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1434,7 +1434,7 @@ class InventoryApi:
     @validate_call
     def delete_device_manager(
         self,
-        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier of the device manager in CDO.")],
+        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device manager in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1452,7 +1452,7 @@ class InventoryApi:
 
         Delete a Device Manager by UID in the CDO tenant.
 
-        :param device_manager_uid: The unique identifier of the device manager in CDO. (required)
+        :param device_manager_uid: The unique identifier, represented as a UUID, of the device manager in CDO. (required)
         :type device_manager_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1506,7 +1506,7 @@ class InventoryApi:
     @validate_call
     def delete_device_manager_with_http_info(
         self,
-        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier of the device manager in CDO.")],
+        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device manager in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1524,7 +1524,7 @@ class InventoryApi:
 
         Delete a Device Manager by UID in the CDO tenant.
 
-        :param device_manager_uid: The unique identifier of the device manager in CDO. (required)
+        :param device_manager_uid: The unique identifier, represented as a UUID, of the device manager in CDO. (required)
         :type device_manager_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1578,7 +1578,7 @@ class InventoryApi:
     @validate_call
     def delete_device_manager_without_preload_content(
         self,
-        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier of the device manager in CDO.")],
+        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device manager in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1596,7 +1596,7 @@ class InventoryApi:
 
         Delete a Device Manager by UID in the CDO tenant.
 
-        :param device_manager_uid: The unique identifier of the device manager in CDO. (required)
+        :param device_manager_uid: The unique identifier, represented as a UUID, of the device manager in CDO. (required)
         :type device_manager_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1707,7 +1707,7 @@ class InventoryApi:
     @validate_call
     def delete_template_device(
         self,
-        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier of the template device in CDO.")],
+        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the template device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1725,7 +1725,7 @@ class InventoryApi:
 
         Delete a template device by UID in the CDO tenant.
 
-        :param template_device_uid: The unique identifier of the template device in CDO. (required)
+        :param template_device_uid: The unique identifier, represented as a UUID, of the template device in CDO. (required)
         :type template_device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1778,7 +1778,7 @@ class InventoryApi:
     @validate_call
     def delete_template_device_with_http_info(
         self,
-        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier of the template device in CDO.")],
+        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the template device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1796,7 +1796,7 @@ class InventoryApi:
 
         Delete a template device by UID in the CDO tenant.
 
-        :param template_device_uid: The unique identifier of the template device in CDO. (required)
+        :param template_device_uid: The unique identifier, represented as a UUID, of the template device in CDO. (required)
         :type template_device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1849,7 +1849,7 @@ class InventoryApi:
     @validate_call
     def delete_template_device_without_preload_content(
         self,
-        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier of the template device in CDO.")],
+        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the template device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1867,7 +1867,7 @@ class InventoryApi:
 
         Delete a template device by UID in the CDO tenant.
 
-        :param template_device_uid: The unique identifier of the template device in CDO. (required)
+        :param template_device_uid: The unique identifier, represented as a UUID, of the template device in CDO. (required)
         :type template_device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3372,7 +3372,7 @@ class InventoryApi:
     @validate_call
     def get_cloud_service(
         self,
-        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier of the cloud service in CDO.")],
+        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the cloud service in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3390,7 +3390,7 @@ class InventoryApi:
 
         Get a Cloud Service by UID in the CDO tenant.
 
-        :param cloud_service_uid: The unique identifier of the cloud service in CDO. (required)
+        :param cloud_service_uid: The unique identifier, represented as a UUID, of the cloud service in CDO. (required)
         :type cloud_service_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3444,7 +3444,7 @@ class InventoryApi:
     @validate_call
     def get_cloud_service_with_http_info(
         self,
-        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier of the cloud service in CDO.")],
+        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the cloud service in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3462,7 +3462,7 @@ class InventoryApi:
 
         Get a Cloud Service by UID in the CDO tenant.
 
-        :param cloud_service_uid: The unique identifier of the cloud service in CDO. (required)
+        :param cloud_service_uid: The unique identifier, represented as a UUID, of the cloud service in CDO. (required)
         :type cloud_service_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3516,7 +3516,7 @@ class InventoryApi:
     @validate_call
     def get_cloud_service_without_preload_content(
         self,
-        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier of the cloud service in CDO.")],
+        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the cloud service in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3534,7 +3534,7 @@ class InventoryApi:
 
         Get a Cloud Service by UID in the CDO tenant.
 
-        :param cloud_service_uid: The unique identifier of the cloud service in CDO. (required)
+        :param cloud_service_uid: The unique identifier, represented as a UUID, of the cloud service in CDO. (required)
         :type cloud_service_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3969,7 +3969,7 @@ class InventoryApi:
     @validate_call
     def get_device(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3987,7 +3987,7 @@ class InventoryApi:
 
         Get a device by UID in the CDO tenant
 
-        :param device_uid: The unique identifier of the device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the device in CDO. (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4042,7 +4042,7 @@ class InventoryApi:
     @validate_call
     def get_device_with_http_info(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4060,7 +4060,7 @@ class InventoryApi:
 
         Get a device by UID in the CDO tenant
 
-        :param device_uid: The unique identifier of the device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the device in CDO. (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4115,7 +4115,7 @@ class InventoryApi:
     @validate_call
     def get_device_without_preload_content(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4133,7 +4133,7 @@ class InventoryApi:
 
         Get a device by UID in the CDO tenant
 
-        :param device_uid: The unique identifier of the device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the device in CDO. (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4245,7 +4245,7 @@ class InventoryApi:
     @validate_call
     def get_device_manager(
         self,
-        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier of the device manager in CDO.")],
+        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device manager in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4263,7 +4263,7 @@ class InventoryApi:
 
         Get a Device Manager by UID in the CDO tenant.
 
-        :param device_manager_uid: The unique identifier of the device manager in CDO. (required)
+        :param device_manager_uid: The unique identifier, represented as a UUID, of the device manager in CDO. (required)
         :type device_manager_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4317,7 +4317,7 @@ class InventoryApi:
     @validate_call
     def get_device_manager_with_http_info(
         self,
-        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier of the device manager in CDO.")],
+        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device manager in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4335,7 +4335,7 @@ class InventoryApi:
 
         Get a Device Manager by UID in the CDO tenant.
 
-        :param device_manager_uid: The unique identifier of the device manager in CDO. (required)
+        :param device_manager_uid: The unique identifier, represented as a UUID, of the device manager in CDO. (required)
         :type device_manager_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4389,7 +4389,7 @@ class InventoryApi:
     @validate_call
     def get_device_manager_without_preload_content(
         self,
-        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier of the device manager in CDO.")],
+        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device manager in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4407,7 +4407,7 @@ class InventoryApi:
 
         Get a Device Manager by UID in the CDO tenant.
 
-        :param device_manager_uid: The unique identifier of the device manager in CDO. (required)
+        :param device_manager_uid: The unique identifier, represented as a UUID, of the device manager in CDO. (required)
         :type device_manager_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5169,7 +5169,7 @@ class InventoryApi:
     @validate_call
     def get_fmc_health(
         self,
-        fmc_uid: Annotated[StrictStr, Field(description="The unique identifier of the FMC in CDO.")],
+        fmc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the FMC in CDO.")],
         time_range: Annotated[Optional[StrictStr], Field(description="The time range for which results should be retrieved.")] = None,
         _request_timeout: Union[
             None,
@@ -5188,7 +5188,7 @@ class InventoryApi:
 
         Get metrics that indicate the current health of all devices managed by the cdFMC. Note: For specific health metrics to be available for a given device under management of the cdFMC, the health policy for that device should be configured to collect those metrics. For example, CPU metrics will be unavailable for a device if the health policy applied to that device has CPU metric collection turned off. Note: This endpoint can only be queried once every minute.
 
-        :param fmc_uid: The unique identifier of the FMC in CDO. (required)
+        :param fmc_uid: The unique identifier, represented as a UUID, of the FMC in CDO. (required)
         :type fmc_uid: str
         :param time_range: The time range for which results should be retrieved.
         :type time_range: str
@@ -5245,7 +5245,7 @@ class InventoryApi:
     @validate_call
     def get_fmc_health_with_http_info(
         self,
-        fmc_uid: Annotated[StrictStr, Field(description="The unique identifier of the FMC in CDO.")],
+        fmc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the FMC in CDO.")],
         time_range: Annotated[Optional[StrictStr], Field(description="The time range for which results should be retrieved.")] = None,
         _request_timeout: Union[
             None,
@@ -5264,7 +5264,7 @@ class InventoryApi:
 
         Get metrics that indicate the current health of all devices managed by the cdFMC. Note: For specific health metrics to be available for a given device under management of the cdFMC, the health policy for that device should be configured to collect those metrics. For example, CPU metrics will be unavailable for a device if the health policy applied to that device has CPU metric collection turned off. Note: This endpoint can only be queried once every minute.
 
-        :param fmc_uid: The unique identifier of the FMC in CDO. (required)
+        :param fmc_uid: The unique identifier, represented as a UUID, of the FMC in CDO. (required)
         :type fmc_uid: str
         :param time_range: The time range for which results should be retrieved.
         :type time_range: str
@@ -5321,7 +5321,7 @@ class InventoryApi:
     @validate_call
     def get_fmc_health_without_preload_content(
         self,
-        fmc_uid: Annotated[StrictStr, Field(description="The unique identifier of the FMC in CDO.")],
+        fmc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the FMC in CDO.")],
         time_range: Annotated[Optional[StrictStr], Field(description="The time range for which results should be retrieved.")] = None,
         _request_timeout: Union[
             None,
@@ -5340,7 +5340,7 @@ class InventoryApi:
 
         Get metrics that indicate the current health of all devices managed by the cdFMC. Note: For specific health metrics to be available for a given device under management of the cdFMC, the health policy for that device should be configured to collect those metrics. For example, CPU metrics will be unavailable for a device if the health policy applied to that device has CPU metric collection turned off. Note: This endpoint can only be queried once every minute.
 
-        :param fmc_uid: The unique identifier of the FMC in CDO. (required)
+        :param fmc_uid: The unique identifier, represented as a UUID, of the FMC in CDO. (required)
         :type fmc_uid: str
         :param time_range: The time range for which results should be retrieved.
         :type time_range: str
@@ -5460,7 +5460,7 @@ class InventoryApi:
     @validate_call
     def get_template_device(
         self,
-        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier of the template device in CDO.")],
+        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the template device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5478,7 +5478,7 @@ class InventoryApi:
 
         Get a template device by UID in the CDO tenant.
 
-        :param template_device_uid: The unique identifier of the template device in CDO. (required)
+        :param template_device_uid: The unique identifier, represented as a UUID, of the template device in CDO. (required)
         :type template_device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5532,7 +5532,7 @@ class InventoryApi:
     @validate_call
     def get_template_device_with_http_info(
         self,
-        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier of the template device in CDO.")],
+        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the template device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5550,7 +5550,7 @@ class InventoryApi:
 
         Get a template device by UID in the CDO tenant.
 
-        :param template_device_uid: The unique identifier of the template device in CDO. (required)
+        :param template_device_uid: The unique identifier, represented as a UUID, of the template device in CDO. (required)
         :type template_device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5604,7 +5604,7 @@ class InventoryApi:
     @validate_call
     def get_template_device_without_preload_content(
         self,
-        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier of the template device in CDO.")],
+        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the template device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5622,7 +5622,7 @@ class InventoryApi:
 
         Get a template device by UID in the CDO tenant.
 
-        :param template_device_uid: The unique identifier of the template device in CDO. (required)
+        :param template_device_uid: The unique identifier, represented as a UUID, of the template device in CDO. (required)
         :type template_device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6057,7 +6057,7 @@ class InventoryApi:
     @validate_call
     def modify_cloud_service(
         self,
-        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier of the cloud service in CDO.")],
+        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the cloud service in CDO.")],
         device_patch_input: DevicePatchInput,
         _request_timeout: Union[
             None,
@@ -6076,7 +6076,7 @@ class InventoryApi:
 
         Modify a Cloud Service by UID in the CDO tenant.
 
-        :param cloud_service_uid: The unique identifier of the cloud service in CDO. (required)
+        :param cloud_service_uid: The unique identifier, represented as a UUID, of the cloud service in CDO. (required)
         :type cloud_service_uid: str
         :param device_patch_input: (required)
         :type device_patch_input: DevicePatchInput
@@ -6133,7 +6133,7 @@ class InventoryApi:
     @validate_call
     def modify_cloud_service_with_http_info(
         self,
-        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier of the cloud service in CDO.")],
+        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the cloud service in CDO.")],
         device_patch_input: DevicePatchInput,
         _request_timeout: Union[
             None,
@@ -6152,7 +6152,7 @@ class InventoryApi:
 
         Modify a Cloud Service by UID in the CDO tenant.
 
-        :param cloud_service_uid: The unique identifier of the cloud service in CDO. (required)
+        :param cloud_service_uid: The unique identifier, represented as a UUID, of the cloud service in CDO. (required)
         :type cloud_service_uid: str
         :param device_patch_input: (required)
         :type device_patch_input: DevicePatchInput
@@ -6209,7 +6209,7 @@ class InventoryApi:
     @validate_call
     def modify_cloud_service_without_preload_content(
         self,
-        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier of the cloud service in CDO.")],
+        cloud_service_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the cloud service in CDO.")],
         device_patch_input: DevicePatchInput,
         _request_timeout: Union[
             None,
@@ -6228,7 +6228,7 @@ class InventoryApi:
 
         Modify a Cloud Service by UID in the CDO tenant.
 
-        :param cloud_service_uid: The unique identifier of the cloud service in CDO. (required)
+        :param cloud_service_uid: The unique identifier, represented as a UUID, of the cloud service in CDO. (required)
         :type cloud_service_uid: str
         :param device_patch_input: (required)
         :type device_patch_input: DevicePatchInput
@@ -6358,7 +6358,7 @@ class InventoryApi:
     @validate_call
     def modify_device(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device in CDO.")],
         device_patch_input: DevicePatchInput,
         _request_timeout: Union[
             None,
@@ -6377,7 +6377,7 @@ class InventoryApi:
 
         Modify a device in the CDO tenant
 
-        :param device_uid: The unique identifier of the device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the device in CDO. (required)
         :type device_uid: str
         :param device_patch_input: (required)
         :type device_patch_input: DevicePatchInput
@@ -6435,7 +6435,7 @@ class InventoryApi:
     @validate_call
     def modify_device_with_http_info(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device in CDO.")],
         device_patch_input: DevicePatchInput,
         _request_timeout: Union[
             None,
@@ -6454,7 +6454,7 @@ class InventoryApi:
 
         Modify a device in the CDO tenant
 
-        :param device_uid: The unique identifier of the device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the device in CDO. (required)
         :type device_uid: str
         :param device_patch_input: (required)
         :type device_patch_input: DevicePatchInput
@@ -6512,7 +6512,7 @@ class InventoryApi:
     @validate_call
     def modify_device_without_preload_content(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device in CDO.")],
         device_patch_input: DevicePatchInput,
         _request_timeout: Union[
             None,
@@ -6531,7 +6531,7 @@ class InventoryApi:
 
         Modify a device in the CDO tenant
 
-        :param device_uid: The unique identifier of the device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the device in CDO. (required)
         :type device_uid: str
         :param device_patch_input: (required)
         :type device_patch_input: DevicePatchInput
@@ -6662,7 +6662,7 @@ class InventoryApi:
     @validate_call
     def modify_device_manager(
         self,
-        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier of the device manager in CDO.")],
+        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device manager in CDO.")],
         device_patch_input: DevicePatchInput,
         _request_timeout: Union[
             None,
@@ -6681,7 +6681,7 @@ class InventoryApi:
 
         Modify a device manager by UID in the CDO tenant.
 
-        :param device_manager_uid: The unique identifier of the device manager in CDO. (required)
+        :param device_manager_uid: The unique identifier, represented as a UUID, of the device manager in CDO. (required)
         :type device_manager_uid: str
         :param device_patch_input: (required)
         :type device_patch_input: DevicePatchInput
@@ -6738,7 +6738,7 @@ class InventoryApi:
     @validate_call
     def modify_device_manager_with_http_info(
         self,
-        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier of the device manager in CDO.")],
+        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device manager in CDO.")],
         device_patch_input: DevicePatchInput,
         _request_timeout: Union[
             None,
@@ -6757,7 +6757,7 @@ class InventoryApi:
 
         Modify a device manager by UID in the CDO tenant.
 
-        :param device_manager_uid: The unique identifier of the device manager in CDO. (required)
+        :param device_manager_uid: The unique identifier, represented as a UUID, of the device manager in CDO. (required)
         :type device_manager_uid: str
         :param device_patch_input: (required)
         :type device_patch_input: DevicePatchInput
@@ -6814,7 +6814,7 @@ class InventoryApi:
     @validate_call
     def modify_device_manager_without_preload_content(
         self,
-        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier of the device manager in CDO.")],
+        device_manager_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the device manager in CDO.")],
         device_patch_input: DevicePatchInput,
         _request_timeout: Union[
             None,
@@ -6833,7 +6833,7 @@ class InventoryApi:
 
         Modify a device manager by UID in the CDO tenant.
 
-        :param device_manager_uid: The unique identifier of the device manager in CDO. (required)
+        :param device_manager_uid: The unique identifier, represented as a UUID, of the device manager in CDO. (required)
         :type device_manager_uid: str
         :param device_patch_input: (required)
         :type device_patch_input: DevicePatchInput
@@ -6963,7 +6963,7 @@ class InventoryApi:
     @validate_call
     def modify_template_device(
         self,
-        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier of the template device in CDO.")],
+        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the template device in CDO.")],
         device_patch_input: DevicePatchInput,
         _request_timeout: Union[
             None,
@@ -6982,7 +6982,7 @@ class InventoryApi:
 
         Modify a template device in the CDO tenant.
 
-        :param template_device_uid: The unique identifier of the template device in CDO. (required)
+        :param template_device_uid: The unique identifier, represented as a UUID, of the template device in CDO. (required)
         :type template_device_uid: str
         :param device_patch_input: (required)
         :type device_patch_input: DevicePatchInput
@@ -7039,7 +7039,7 @@ class InventoryApi:
     @validate_call
     def modify_template_device_with_http_info(
         self,
-        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier of the template device in CDO.")],
+        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the template device in CDO.")],
         device_patch_input: DevicePatchInput,
         _request_timeout: Union[
             None,
@@ -7058,7 +7058,7 @@ class InventoryApi:
 
         Modify a template device in the CDO tenant.
 
-        :param template_device_uid: The unique identifier of the template device in CDO. (required)
+        :param template_device_uid: The unique identifier, represented as a UUID, of the template device in CDO. (required)
         :type template_device_uid: str
         :param device_patch_input: (required)
         :type device_patch_input: DevicePatchInput
@@ -7115,7 +7115,7 @@ class InventoryApi:
     @validate_call
     def modify_template_device_without_preload_content(
         self,
-        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier of the template device in CDO.")],
+        template_device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the template device in CDO.")],
         device_patch_input: DevicePatchInput,
         _request_timeout: Union[
             None,
@@ -7134,7 +7134,7 @@ class InventoryApi:
 
         Modify a template device in the CDO tenant.
 
-        :param template_device_uid: The unique identifier of the template device in CDO. (required)
+        :param template_device_uid: The unique identifier, represented as a UUID, of the template device in CDO. (required)
         :type template_device_uid: str
         :param device_patch_input: (required)
         :type device_patch_input: DevicePatchInput
@@ -8374,7 +8374,7 @@ class InventoryApi:
     @validate_call
     def read_asa_device_configuration(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the ASA device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the ASA device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8392,7 +8392,7 @@ class InventoryApi:
 
         This is an asynchronous operation to read the latest configuration on an ASA device in to the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
-        :param device_uid: The unique identifier of the ASA device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the ASA device in CDO. (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8445,7 +8445,7 @@ class InventoryApi:
     @validate_call
     def read_asa_device_configuration_with_http_info(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the ASA device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the ASA device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8463,7 +8463,7 @@ class InventoryApi:
 
         This is an asynchronous operation to read the latest configuration on an ASA device in to the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
-        :param device_uid: The unique identifier of the ASA device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the ASA device in CDO. (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8516,7 +8516,7 @@ class InventoryApi:
     @validate_call
     def read_asa_device_configuration_without_preload_content(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the ASA device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the ASA device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8534,7 +8534,7 @@ class InventoryApi:
 
         This is an asynchronous operation to read the latest configuration on an ASA device in to the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
-        :param device_uid: The unique identifier of the ASA device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the ASA device in CDO. (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8644,7 +8644,7 @@ class InventoryApi:
     @validate_call
     def reconnect_asa_device(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the ASA device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the ASA device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8662,7 +8662,7 @@ class InventoryApi:
 
         This is an asynchronous operation to re-establish the connection between an ASA and the CDO cloud. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
-        :param device_uid: The unique identifier of the ASA device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the ASA device in CDO. (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8715,7 +8715,7 @@ class InventoryApi:
     @validate_call
     def reconnect_asa_device_with_http_info(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the ASA device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the ASA device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8733,7 +8733,7 @@ class InventoryApi:
 
         This is an asynchronous operation to re-establish the connection between an ASA and the CDO cloud. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
-        :param device_uid: The unique identifier of the ASA device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the ASA device in CDO. (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8786,7 +8786,7 @@ class InventoryApi:
     @validate_call
     def reconnect_asa_device_without_preload_content(
         self,
-        device_uid: Annotated[StrictStr, Field(description="The unique identifier of the ASA device in CDO.")],
+        device_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the ASA device in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8804,7 +8804,7 @@ class InventoryApi:
 
         This is an asynchronous operation to re-establish the connection between an ASA and the CDO cloud. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
-        :param device_uid: The unique identifier of the ASA device in CDO. (required)
+        :param device_uid: The unique identifier, represented as a UUID, of the ASA device in CDO. (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

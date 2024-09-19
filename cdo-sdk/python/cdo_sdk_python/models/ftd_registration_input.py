@@ -27,7 +27,7 @@ class FtdRegistrationInput(BaseModel):
     """
     FtdRegistrationInput
     """ # noqa: E501
-    ftd_uid: StrictStr = Field(description="The unique identifier of the FTD device in CDO for which registration should be triggered.", alias="ftdUid")
+    ftd_uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the FTD device in CDO for which registration should be triggered.", alias="ftdUid")
     __properties: ClassVar[List[str]] = ["ftdUid"]
 
     model_config = ConfigDict(

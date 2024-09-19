@@ -331,7 +331,7 @@ class ChangeRequestsApi:
     @validate_call
     def delete_change_request(
         self,
-        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier of the Change Request in CDO.")],
+        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -349,7 +349,7 @@ class ChangeRequestsApi:
 
         Delete a Change Request by UID in the CDO tenant.
 
-        :param change_request_uid: The unique identifier of the Change Request in CDO. (required)
+        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in CDO. (required)
         :type change_request_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -403,7 +403,7 @@ class ChangeRequestsApi:
     @validate_call
     def delete_change_request_with_http_info(
         self,
-        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier of the Change Request in CDO.")],
+        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -421,7 +421,7 @@ class ChangeRequestsApi:
 
         Delete a Change Request by UID in the CDO tenant.
 
-        :param change_request_uid: The unique identifier of the Change Request in CDO. (required)
+        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in CDO. (required)
         :type change_request_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -475,7 +475,7 @@ class ChangeRequestsApi:
     @validate_call
     def delete_change_request_without_preload_content(
         self,
-        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier of the Change Request in CDO.")],
+        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -493,7 +493,7 @@ class ChangeRequestsApi:
 
         Delete a Change Request by UID in the CDO tenant.
 
-        :param change_request_uid: The unique identifier of the Change Request in CDO. (required)
+        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in CDO. (required)
         :type change_request_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -604,7 +604,7 @@ class ChangeRequestsApi:
     @validate_call
     def get_change_request(
         self,
-        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier of the Change Request in CDO.")],
+        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -622,7 +622,7 @@ class ChangeRequestsApi:
 
         Get a Change Request by UID in the CDO tenant.
 
-        :param change_request_uid: The unique identifier of the Change Request in CDO. (required)
+        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in CDO. (required)
         :type change_request_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -677,7 +677,7 @@ class ChangeRequestsApi:
     @validate_call
     def get_change_request_with_http_info(
         self,
-        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier of the Change Request in CDO.")],
+        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -695,7 +695,7 @@ class ChangeRequestsApi:
 
         Get a Change Request by UID in the CDO tenant.
 
-        :param change_request_uid: The unique identifier of the Change Request in CDO. (required)
+        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in CDO. (required)
         :type change_request_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -750,7 +750,7 @@ class ChangeRequestsApi:
     @validate_call
     def get_change_request_without_preload_content(
         self,
-        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier of the Change Request in CDO.")],
+        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -768,7 +768,7 @@ class ChangeRequestsApi:
 
         Get a Change Request by UID in the CDO tenant.
 
-        :param change_request_uid: The unique identifier of the Change Request in CDO. (required)
+        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in CDO. (required)
         :type change_request_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

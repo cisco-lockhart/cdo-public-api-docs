@@ -50,7 +50,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.RemoteAccessMonitoringApi(api_client)
-    mfa_event_uid = 'mfa_event_uid_example' # str | The unique identifier of the MFA event in CDO.
+    mfa_event_uid = 'mfa_event_uid_example' # str | The unique identifier, represented as a UUID, of the MFA event in CDO.
 
     try:
         # Get MFA Event
@@ -68,7 +68,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **mfa_event_uid** | **str**| The unique identifier of the MFA event in CDO. | 
+ **mfa_event_uid** | **str**| The unique identifier, represented as a UUID, of the MFA event in CDO. | 
 
 ### Return type
 
@@ -223,7 +223,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.RemoteAccessMonitoringApi(api_client)
-    ra_vpn_session_uid = 'ra_vpn_session_uid_example' # str | The unique identifier of the RA VPN session in CDO.
+    ra_vpn_session_uid = 'ra_vpn_session_uid_example' # str | The unique identifier, represented as a UUID, of the RA VPN session in CDO.
 
     try:
         # Get RA VPN Session
@@ -241,7 +241,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ra_vpn_session_uid** | **str**| The unique identifier of the RA VPN session in CDO. | 
+ **ra_vpn_session_uid** | **str**| The unique identifier, represented as a UUID, of the RA VPN session in CDO. | 
 
 ### Return type
 

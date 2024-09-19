@@ -330,7 +330,7 @@ class ConnectorsApi:
     @validate_call
     def delete_sdc(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier of the SDC in CDO.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -348,7 +348,7 @@ class ConnectorsApi:
 
         Delete an SDC in the CDO tenant
 
-        :param sdc_uid: The unique identifier of the SDC in CDO. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in CDO. (required)
         :type sdc_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -401,7 +401,7 @@ class ConnectorsApi:
     @validate_call
     def delete_sdc_with_http_info(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier of the SDC in CDO.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -419,7 +419,7 @@ class ConnectorsApi:
 
         Delete an SDC in the CDO tenant
 
-        :param sdc_uid: The unique identifier of the SDC in CDO. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in CDO. (required)
         :type sdc_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -472,7 +472,7 @@ class ConnectorsApi:
     @validate_call
     def delete_sdc_without_preload_content(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier of the SDC in CDO.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -490,7 +490,7 @@ class ConnectorsApi:
 
         Delete an SDC in the CDO tenant
 
-        :param sdc_uid: The unique identifier of the SDC in CDO. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in CDO. (required)
         :type sdc_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -600,7 +600,7 @@ class ConnectorsApi:
     @validate_call
     def get_sdc(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier of the SDC in CDO.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -618,7 +618,7 @@ class ConnectorsApi:
 
         Get a SDC by UID in the CDO tenant.
 
-        :param sdc_uid: The unique identifier of the SDC in CDO. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in CDO. (required)
         :type sdc_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -672,7 +672,7 @@ class ConnectorsApi:
     @validate_call
     def get_sdc_with_http_info(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier of the SDC in CDO.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -690,7 +690,7 @@ class ConnectorsApi:
 
         Get a SDC by UID in the CDO tenant.
 
-        :param sdc_uid: The unique identifier of the SDC in CDO. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in CDO. (required)
         :type sdc_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -744,7 +744,7 @@ class ConnectorsApi:
     @validate_call
     def get_sdc_without_preload_content(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier of the SDC in CDO.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -762,7 +762,7 @@ class ConnectorsApi:
 
         Get a SDC by UID in the CDO tenant.
 
-        :param sdc_uid: The unique identifier of the SDC in CDO. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in CDO. (required)
         :type sdc_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1197,7 +1197,7 @@ class ConnectorsApi:
     @validate_call
     def modify_sdc(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier of the SDC in CDO.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in CDO.")],
         sdc_patch_input: SdcPatchInput,
         _request_timeout: Union[
             None,
@@ -1216,7 +1216,7 @@ class ConnectorsApi:
 
         Modify a SDC in the CDO tenant
 
-        :param sdc_uid: The unique identifier of the SDC in CDO. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in CDO. (required)
         :type sdc_uid: str
         :param sdc_patch_input: (required)
         :type sdc_patch_input: SdcPatchInput
@@ -1273,7 +1273,7 @@ class ConnectorsApi:
     @validate_call
     def modify_sdc_with_http_info(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier of the SDC in CDO.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in CDO.")],
         sdc_patch_input: SdcPatchInput,
         _request_timeout: Union[
             None,
@@ -1292,7 +1292,7 @@ class ConnectorsApi:
 
         Modify a SDC in the CDO tenant
 
-        :param sdc_uid: The unique identifier of the SDC in CDO. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in CDO. (required)
         :type sdc_uid: str
         :param sdc_patch_input: (required)
         :type sdc_patch_input: SdcPatchInput
@@ -1349,7 +1349,7 @@ class ConnectorsApi:
     @validate_call
     def modify_sdc_without_preload_content(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier of the SDC in CDO.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in CDO.")],
         sdc_patch_input: SdcPatchInput,
         _request_timeout: Union[
             None,
@@ -1368,7 +1368,7 @@ class ConnectorsApi:
 
         Modify a SDC in the CDO tenant
 
-        :param sdc_uid: The unique identifier of the SDC in CDO. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in CDO. (required)
         :type sdc_uid: str
         :param sdc_patch_input: (required)
         :type sdc_patch_input: SdcPatchInput

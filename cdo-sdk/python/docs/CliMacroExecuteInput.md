@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **device_uids** | **List[str]** | List of UIDs of the devices to execute the CLI macro for. | 
-**macro_uid** | **str** | The unique identifier of the CLI macro. | [optional] 
+**macro_uid** | **str** | The unique identifier, represented as a UUID, of the CLI macro. | [optional] 
 **parameters** | **Dict[str, str]** | Parameters provided for the CLI macro execution as key-value pairs. | [optional] 
 
 ## Example

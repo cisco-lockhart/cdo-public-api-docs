@@ -294,7 +294,7 @@ class TenantManagementApi:
     @validate_call
     def get_tenant(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier of the tenant in CDO.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -312,7 +312,7 @@ class TenantManagementApi:
 
         Fetch a tenant by UID in CDO. This will return a 200 response only if the user is associated with the tenant.
 
-        :param tenant_uid: The unique identifier of the tenant in CDO. (required)
+        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in CDO. (required)
         :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -366,7 +366,7 @@ class TenantManagementApi:
     @validate_call
     def get_tenant_with_http_info(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier of the tenant in CDO.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -384,7 +384,7 @@ class TenantManagementApi:
 
         Fetch a tenant by UID in CDO. This will return a 200 response only if the user is associated with the tenant.
 
-        :param tenant_uid: The unique identifier of the tenant in CDO. (required)
+        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in CDO. (required)
         :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -438,7 +438,7 @@ class TenantManagementApi:
     @validate_call
     def get_tenant_without_preload_content(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier of the tenant in CDO.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -456,7 +456,7 @@ class TenantManagementApi:
 
         Fetch a tenant by UID in CDO. This will return a 200 response only if the user is associated with the tenant.
 
-        :param tenant_uid: The unique identifier of the tenant in CDO. (required)
+        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in CDO. (required)
         :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

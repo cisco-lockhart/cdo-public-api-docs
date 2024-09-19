@@ -221,7 +221,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
-    group_uid = 'group_uid_example' # str | The unique identifier of the Active Directory Group in CDO.
+    group_uid = 'group_uid_example' # str | The unique identifier, represented as a UUID, of the Active Directory Group in CDO.
 
     try:
         # Remove Active Directory Group from CDO Tenant
@@ -237,7 +237,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **group_uid** | **str**| The unique identifier of the Active Directory Group in CDO. | 
+ **group_uid** | **str**| The unique identifier, represented as a UUID, of the Active Directory Group in CDO. | 
 
 ### Return type
 
@@ -300,7 +300,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
-    user_uid = 'user_uid_example' # str | The unique identifier of the user in CDO.
+    user_uid = 'user_uid_example' # str | The unique identifier, represented as a UUID, of the user in CDO.
 
     try:
         # Remove User from CDO Tenant
@@ -316,7 +316,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_uid** | **str**| The unique identifier of the user in CDO. | 
+ **user_uid** | **str**| The unique identifier, represented as a UUID, of the user in CDO. | 
 
 ### Return type
 
@@ -380,7 +380,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
-    api_user_uid = 'api_user_uid_example' # str | The unique identifier of the API-only user in CDO
+    api_user_uid = 'api_user_uid_example' # str | The unique identifier, represented as a UUID, of the API-only user in CDO
 
     try:
         # Generate Token for API-only user
@@ -398,7 +398,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_user_uid** | **str**| The unique identifier of the API-only user in CDO | 
+ **api_user_uid** | **str**| The unique identifier, represented as a UUID, of the API-only user in CDO | 
 
 ### Return type
 
@@ -462,7 +462,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
-    group_uid = 'group_uid_example' # str | The unique identifier of the active directory group in CDO.
+    group_uid = 'group_uid_example' # str | The unique identifier, represented as a UUID, of the active directory group in CDO.
 
     try:
         # Get Active Directory Group
@@ -480,7 +480,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **group_uid** | **str**| The unique identifier of the active directory group in CDO. | 
+ **group_uid** | **str**| The unique identifier, represented as a UUID, of the active directory group in CDO. | 
 
 ### Return type
 
@@ -707,7 +707,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
-    user_uid = 'user_uid_example' # str | The unique identifier of the user in CDO.
+    user_uid = 'user_uid_example' # str | The unique identifier, represented as a UUID, of the user in CDO.
 
     try:
         # Get Tenant User
@@ -725,7 +725,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_uid** | **str**| The unique identifier of the user in CDO. | 
+ **user_uid** | **str**| The unique identifier, represented as a UUID, of the user in CDO. | 
 
 ### Return type
 
@@ -877,7 +877,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
-    group_uid = 'group_uid_example' # str | The unique identifier of the active directory group in CDO.
+    group_uid = 'group_uid_example' # str | The unique identifier, represented as a UUID, of the active directory group in CDO.
     active_directory_group_create_or_update_input = cdo_sdk_python.ActiveDirectoryGroupCreateOrUpdateInput() # ActiveDirectoryGroupCreateOrUpdateInput | 
 
     try:
@@ -896,7 +896,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **group_uid** | **str**| The unique identifier of the active directory group in CDO. | 
+ **group_uid** | **str**| The unique identifier, represented as a UUID, of the active directory group in CDO. | 
  **active_directory_group_create_or_update_input** | [**ActiveDirectoryGroupCreateOrUpdateInput**](ActiveDirectoryGroupCreateOrUpdateInput.md)|  | 
 
 ### Return type
@@ -962,7 +962,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
-    api_user_uid = 'api_user_uid_example' # str | The unique identifier of the API user in CDO.
+    api_user_uid = 'api_user_uid_example' # str | The unique identifier, represented as a UUID, of the API user in CDO.
 
     try:
         # Revoke API-only User's Token
@@ -980,7 +980,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_user_uid** | **str**| The unique identifier of the API user in CDO. | 
+ **api_user_uid** | **str**| The unique identifier, represented as a UUID, of the API user in CDO. | 
 
 ### Return type
 

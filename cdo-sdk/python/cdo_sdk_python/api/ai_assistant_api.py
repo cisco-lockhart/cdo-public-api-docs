@@ -628,7 +628,7 @@ class AIAssistantApi:
     @validate_call
     def get_ai_assistant_conversation_messages(
         self,
-        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier of the conversation in CDO.")],
+        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -646,7 +646,7 @@ class AIAssistantApi:
 
         Get a list of messages in a single AI Assistant conversation. Note: this endpoint is not paginated, and returns the full list of messages.
 
-        :param conversation_uid: The unique identifier of the conversation in CDO. (required)
+        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in CDO. (required)
         :type conversation_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -699,7 +699,7 @@ class AIAssistantApi:
     @validate_call
     def get_ai_assistant_conversation_messages_with_http_info(
         self,
-        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier of the conversation in CDO.")],
+        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -717,7 +717,7 @@ class AIAssistantApi:
 
         Get a list of messages in a single AI Assistant conversation. Note: this endpoint is not paginated, and returns the full list of messages.
 
-        :param conversation_uid: The unique identifier of the conversation in CDO. (required)
+        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in CDO. (required)
         :type conversation_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -770,7 +770,7 @@ class AIAssistantApi:
     @validate_call
     def get_ai_assistant_conversation_messages_without_preload_content(
         self,
-        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier of the conversation in CDO.")],
+        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -788,7 +788,7 @@ class AIAssistantApi:
 
         Get a list of messages in a single AI Assistant conversation. Note: this endpoint is not paginated, and returns the full list of messages.
 
-        :param conversation_uid: The unique identifier of the conversation in CDO. (required)
+        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in CDO. (required)
         :type conversation_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -898,7 +898,7 @@ class AIAssistantApi:
     @validate_call
     def get_conversation(
         self,
-        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier of the conversation in CDO.")],
+        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -916,7 +916,7 @@ class AIAssistantApi:
 
         Get an AI Assistant conversation by UID in the CDO tenant.
 
-        :param conversation_uid: The unique identifier of the conversation in CDO. (required)
+        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in CDO. (required)
         :type conversation_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -970,7 +970,7 @@ class AIAssistantApi:
     @validate_call
     def get_conversation_with_http_info(
         self,
-        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier of the conversation in CDO.")],
+        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -988,7 +988,7 @@ class AIAssistantApi:
 
         Get an AI Assistant conversation by UID in the CDO tenant.
 
-        :param conversation_uid: The unique identifier of the conversation in CDO. (required)
+        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in CDO. (required)
         :type conversation_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1042,7 +1042,7 @@ class AIAssistantApi:
     @validate_call
     def get_conversation_without_preload_content(
         self,
-        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier of the conversation in CDO.")],
+        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1060,7 +1060,7 @@ class AIAssistantApi:
 
         Get an AI Assistant conversation by UID in the CDO tenant.
 
-        :param conversation_uid: The unique identifier of the conversation in CDO. (required)
+        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in CDO. (required)
         :type conversation_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

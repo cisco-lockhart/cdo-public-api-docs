@@ -31,7 +31,7 @@ class FtdCreateOrUpdateInput(BaseModel):
     name: StrictStr = Field(description="Specify a human-readable name for the device.")
     licenses: List[StrictStr] = Field(description="Specify a set of licenses to apply to the device.")
     virtual: Optional[StrictBool] = Field(default=None, description="Indicate whether the FTD is a virtual or a physical device.")
-    fmc_access_policy_uid: StrictStr = Field(description="Specify the unique identifier of the FMC access policy to apply to this device.", alias="fmcAccessPolicyUid")
+    fmc_access_policy_uid: StrictStr = Field(description="Specify the unique identifier, represented as a UUID, of the FMC access policy to apply to this device.", alias="fmcAccessPolicyUid")
     performance_tier: Optional[StrictStr] = Field(default=None, description="Specify the performance tier of the FTDv (required only if isVirtual is set to true)", alias="performanceTier")
     labels: Optional[Labels] = None
     device_type: StrictStr = Field(description="Specify the type of the FTD. The only supported type of FTD is CDFMC_MANAGED_FTD", alias="deviceType")

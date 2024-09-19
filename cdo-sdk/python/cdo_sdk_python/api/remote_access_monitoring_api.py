@@ -48,7 +48,7 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def get_mfa_event(
         self,
-        mfa_event_uid: Annotated[StrictStr, Field(description="The unique identifier of the MFA event in CDO.")],
+        mfa_event_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the MFA event in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -66,7 +66,7 @@ class RemoteAccessMonitoringApi:
 
         Get a MFA event by UID in the CDO tenant.
 
-        :param mfa_event_uid: The unique identifier of the MFA event in CDO. (required)
+        :param mfa_event_uid: The unique identifier, represented as a UUID, of the MFA event in CDO. (required)
         :type mfa_event_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -121,7 +121,7 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def get_mfa_event_with_http_info(
         self,
-        mfa_event_uid: Annotated[StrictStr, Field(description="The unique identifier of the MFA event in CDO.")],
+        mfa_event_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the MFA event in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -139,7 +139,7 @@ class RemoteAccessMonitoringApi:
 
         Get a MFA event by UID in the CDO tenant.
 
-        :param mfa_event_uid: The unique identifier of the MFA event in CDO. (required)
+        :param mfa_event_uid: The unique identifier, represented as a UUID, of the MFA event in CDO. (required)
         :type mfa_event_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -194,7 +194,7 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def get_mfa_event_without_preload_content(
         self,
-        mfa_event_uid: Annotated[StrictStr, Field(description="The unique identifier of the MFA event in CDO.")],
+        mfa_event_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the MFA event in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -212,7 +212,7 @@ class RemoteAccessMonitoringApi:
 
         Get a MFA event by UID in the CDO tenant.
 
-        :param mfa_event_uid: The unique identifier of the MFA event in CDO. (required)
+        :param mfa_event_uid: The unique identifier, represented as a UUID, of the MFA event in CDO. (required)
         :type mfa_event_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -651,7 +651,7 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def get_ra_vpn_session(
         self,
-        ra_vpn_session_uid: Annotated[StrictStr, Field(description="The unique identifier of the RA VPN session in CDO.")],
+        ra_vpn_session_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the RA VPN session in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -669,7 +669,7 @@ class RemoteAccessMonitoringApi:
 
         Get a RA VPN session by UID in the CDO tenant.
 
-        :param ra_vpn_session_uid: The unique identifier of the RA VPN session in CDO. (required)
+        :param ra_vpn_session_uid: The unique identifier, represented as a UUID, of the RA VPN session in CDO. (required)
         :type ra_vpn_session_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -724,7 +724,7 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def get_ra_vpn_session_with_http_info(
         self,
-        ra_vpn_session_uid: Annotated[StrictStr, Field(description="The unique identifier of the RA VPN session in CDO.")],
+        ra_vpn_session_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the RA VPN session in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -742,7 +742,7 @@ class RemoteAccessMonitoringApi:
 
         Get a RA VPN session by UID in the CDO tenant.
 
-        :param ra_vpn_session_uid: The unique identifier of the RA VPN session in CDO. (required)
+        :param ra_vpn_session_uid: The unique identifier, represented as a UUID, of the RA VPN session in CDO. (required)
         :type ra_vpn_session_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -797,7 +797,7 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def get_ra_vpn_session_without_preload_content(
         self,
-        ra_vpn_session_uid: Annotated[StrictStr, Field(description="The unique identifier of the RA VPN session in CDO.")],
+        ra_vpn_session_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the RA VPN session in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -815,7 +815,7 @@ class RemoteAccessMonitoringApi:
 
         Get a RA VPN session by UID in the CDO tenant.
 
-        :param ra_vpn_session_uid: The unique identifier of the RA VPN session in CDO. (required)
+        :param ra_vpn_session_uid: The unique identifier, represented as a UUID, of the RA VPN session in CDO. (required)
         :type ra_vpn_session_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

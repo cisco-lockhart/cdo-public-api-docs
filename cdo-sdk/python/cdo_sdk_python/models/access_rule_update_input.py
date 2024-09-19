@@ -29,7 +29,7 @@ class AccessRuleUpdateInput(BaseModel):
     """
     AccessRuleUpdateInput
     """ # noqa: E501
-    uid: StrictStr = Field(description="The unique identifier of the Access Rule.")
+    uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the Access Rule.")
     index: Optional[StrictInt] = Field(default=None, description="Access rule index position in Access Group ordered rule list.")
     rule_action: Optional[StrictStr] = Field(default=None, description="The rule's action: PERMIT or DENY.", alias="ruleAction")
     protocol: Optional[AccessRuleDetailsContent] = None

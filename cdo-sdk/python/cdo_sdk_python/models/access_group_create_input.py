@@ -28,7 +28,7 @@ class AccessGroupCreateInput(BaseModel):
     AccessGroupCreateInput
     """ # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="A human-readable name for the Access Group.")
-    entity_uid: StrictStr = Field(description="The unique identifier of the device/manager associated with the Access Group. When creating shared Access Group, entityUid represents device that contains source Access Group ", alias="entityUid")
+    entity_uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the device/manager associated with the Access Group. When creating shared Access Group, entityUid represents device that contains source Access Group ", alias="entityUid")
     resources: Optional[List[Dict[str, Dict[str, Any]]]] = Field(default=None, description="The set of of interface and direction pairs or global resource.  Resource is an attribute applicable only to devices and will not be propagated to appliedTo devices if Access Group is shared.")
     is_shared: Optional[StrictBool] = Field(default=None, description="The flag that identifies if access group is shared.  If set to true, appliedTo field should be provided as well and entityUid should point to source device.", alias="isShared")
     applied_to: Optional[List[StrictStr]] = Field(default=None, description="The set of device unique identifiers to which this Access Group was applied. Only valid for shared access group.", alias="appliedTo")

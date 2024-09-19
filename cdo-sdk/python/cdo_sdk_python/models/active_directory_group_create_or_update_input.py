@@ -29,7 +29,7 @@ class ActiveDirectoryGroupCreateOrUpdateInput(BaseModel):
     """ # noqa: E501
     name: StrictStr = Field(description="The name of the Active Directory Group. CDO does not support special characters for this field.")
     role: Optional[StrictStr] = Field(default=None, description="This determines the role for all the users included in this Active Directory Group.")
-    group_identifier: StrictStr = Field(description="The unique identifier of the Active Directory Group in your Identity Provider (IdP).", alias="groupIdentifier")
+    group_identifier: StrictStr = Field(description="The unique identifier, represented as a UUID, of the Active Directory Group in your Identity Provider (IdP).", alias="groupIdentifier")
     issuer_url: StrictStr = Field(description="The Identity Provider (IdP) URL, which Cisco Defense Orchestrator will use to validate SAML assertions during the sign-in process.", alias="issuerUrl")
     notes: Optional[StrictStr] = Field(default=None, description="Any notes that are applicable to this Active Directory Group.")
     __properties: ClassVar[List[str]] = ["name", "role", "groupIdentifier", "issuerUrl", "notes"]

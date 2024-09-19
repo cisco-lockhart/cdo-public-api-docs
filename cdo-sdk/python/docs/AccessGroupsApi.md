@@ -129,7 +129,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.AccessGroupsApi(api_client)
-    access_group_uid = 'access_group_uid_example' # str | The unique identifier of the Access Group in CDO.
+    access_group_uid = 'access_group_uid_example' # str | The unique identifier, represented as a UUID, of the Access Group in CDO.
 
     try:
         # Delete Access Group
@@ -145,7 +145,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **access_group_uid** | **str**| The unique identifier of the Access Group in CDO. | 
+ **access_group_uid** | **str**| The unique identifier, represented as a UUID, of the Access Group in CDO. | 
 
 ### Return type
 
@@ -208,7 +208,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.AccessGroupsApi(api_client)
-    access_group_uid = 'access_group_uid_example' # str | The unique identifier of the Access Group in CDO.
+    access_group_uid = 'access_group_uid_example' # str | The unique identifier, represented as a UUID, of the Access Group in CDO.
 
     try:
         # Get Access Group
@@ -226,7 +226,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **access_group_uid** | **str**| The unique identifier of the Access Group in CDO. | 
+ **access_group_uid** | **str**| The unique identifier, represented as a UUID, of the Access Group in CDO. | 
 
 ### Return type
 
@@ -378,7 +378,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.AccessGroupsApi(api_client)
-    access_group_uid = 'access_group_uid_example' # str | The unique identifier of the CDO Access Group.
+    access_group_uid = 'access_group_uid_example' # str | The unique identifier, represented as a UUID, of the CDO Access Group.
     access_group_update_input = cdo_sdk_python.AccessGroupUpdateInput() # AccessGroupUpdateInput | 
 
     try:
@@ -397,7 +397,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **access_group_uid** | **str**| The unique identifier of the CDO Access Group. | 
+ **access_group_uid** | **str**| The unique identifier, represented as a UUID, of the CDO Access Group. | 
  **access_group_update_input** | [**AccessGroupUpdateInput**](AccessGroupUpdateInput.md)|  | 
 
 ### Return type
