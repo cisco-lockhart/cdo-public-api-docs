@@ -8365,13 +8365,13 @@ components:
           format: int64
         environment:
           $ref: '#/components/schemas/Environment'
-        beanDefinitionCount:
-          type: integer
-          format: int32
         beanDefinitionNames:
           type: array
           items:
             type: string
+        beanDefinitionCount:
+          type: integer
+          format: int32
         parentBeanFactory:
           $ref: '#/components/schemas/BeanFactory'
         classLoader:
@@ -8678,6 +8678,24 @@ components:
             servletNames:
               type: object
               deprecated: true
+            sessionCookieConfig:
+              type: object
+              properties:
+                httpOnly:
+                  type: boolean
+                name:
+                  type: string
+                path:
+                  type: string
+                comment:
+                  type: string
+                secure:
+                  type: boolean
+                domain:
+                  type: string
+                maxAge:
+                  type: integer
+                  format: int32
             defaultSessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8713,8 +8731,6 @@ components:
                   items:
                     type: object
                     properties:
-                      buffer:
-                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -8736,6 +8752,8 @@ components:
                       trimDirectiveWhitespaces:
                         type: string
                       errorOnUndeclaredNamespace:
+                        type: string
+                      buffer:
                         type: string
                       defaultContentType:
                         type: string
@@ -8802,24 +8820,6 @@ components:
                     type: object
                     additionalProperties:
                       type: string
-            sessionCookieConfig:
-              type: object
-              properties:
-                httpOnly:
-                  type: boolean
-                name:
-                  type: string
-                path:
-                  type: string
-                comment:
-                  type: string
-                secure:
-                  type: boolean
-                domain:
-                  type: string
-                maxAge:
-                  type: integer
-                  format: int32
           writeOnly: true
         contentType:
           type: string
