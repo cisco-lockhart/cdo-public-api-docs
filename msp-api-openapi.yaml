@@ -62,14 +62,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: List of CDO tenant objects
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/MspManagedTenantPage'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "500":
           description: Internal server error.
           content:

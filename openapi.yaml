@@ -8661,10 +8661,10 @@ components:
               format: int32
             attributeNames:
               type: object
-            contextPath:
-              type: string
             initParameterNames:
               type: object
+            contextPath:
+              type: string
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8678,25 +8678,6 @@ components:
             servletNames:
               type: object
               deprecated: true
-            servletRegistrations:
-              type: object
-              additionalProperties:
-                type: object
-                properties:
-                  mappings:
-                    type: array
-                    items:
-                      type: string
-                  runAsRole:
-                    type: string
-                  name:
-                    type: string
-                  className:
-                    type: string
-                  initParameters:
-                    type: object
-                    additionalProperties:
-                      type: string
             filterRegistrations:
               type: object
               additionalProperties:
@@ -8773,18 +8754,12 @@ components:
                     properties:
                       buffer:
                         type: string
-                      scriptingInvalid:
+                      defaultContentType:
                         type: string
-                      deferredSyntaxAllowedAsLiteral:
-                        type: string
-                      errorOnUndeclaredNamespace:
-                        type: string
-                      trimDirectiveWhitespaces:
-                        type: string
-                      elIgnored:
-                        type: string
-                      pageEncoding:
-                        type: string
+                      urlPatterns:
+                        type: array
+                        items:
+                          type: string
                       isXml:
                         type: string
                       includePreludes:
@@ -8795,12 +8770,18 @@ components:
                         type: array
                         items:
                           type: string
-                      defaultContentType:
+                      deferredSyntaxAllowedAsLiteral:
                         type: string
-                      urlPatterns:
-                        type: array
-                        items:
-                          type: string
+                      trimDirectiveWhitespaces:
+                        type: string
+                      errorOnUndeclaredNamespace:
+                        type: string
+                      elIgnored:
+                        type: string
+                      scriptingInvalid:
+                        type: string
+                      pageEncoding:
+                        type: string
             virtualServerName:
               type: string
             requestCharacterEncoding:
@@ -8820,6 +8801,25 @@ components:
               type: string
             servletContextName:
               type: string
+            servletRegistrations:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  mappings:
+                    type: array
+                    items:
+                      type: string
+                  runAsRole:
+                    type: string
+                  name:
+                    type: string
+                  className:
+                    type: string
+                  initParameters:
+                    type: object
+                    additionalProperties:
+                      type: string
           writeOnly: true
         contentType:
           type: string

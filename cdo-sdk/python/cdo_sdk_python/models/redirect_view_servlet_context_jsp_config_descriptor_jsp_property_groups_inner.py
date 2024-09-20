@@ -28,18 +28,18 @@ class RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner(BaseMo
     RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner
     """ # noqa: E501
     buffer: Optional[StrictStr] = None
-    scripting_invalid: Optional[StrictStr] = Field(default=None, alias="scriptingInvalid")
-    deferred_syntax_allowed_as_literal: Optional[StrictStr] = Field(default=None, alias="deferredSyntaxAllowedAsLiteral")
-    error_on_undeclared_namespace: Optional[StrictStr] = Field(default=None, alias="errorOnUndeclaredNamespace")
-    trim_directive_whitespaces: Optional[StrictStr] = Field(default=None, alias="trimDirectiveWhitespaces")
-    el_ignored: Optional[StrictStr] = Field(default=None, alias="elIgnored")
-    page_encoding: Optional[StrictStr] = Field(default=None, alias="pageEncoding")
+    default_content_type: Optional[StrictStr] = Field(default=None, alias="defaultContentType")
+    url_patterns: Optional[List[StrictStr]] = Field(default=None, alias="urlPatterns")
     is_xml: Optional[StrictStr] = Field(default=None, alias="isXml")
     include_preludes: Optional[List[StrictStr]] = Field(default=None, alias="includePreludes")
     include_codas: Optional[List[StrictStr]] = Field(default=None, alias="includeCodas")
-    default_content_type: Optional[StrictStr] = Field(default=None, alias="defaultContentType")
-    url_patterns: Optional[List[StrictStr]] = Field(default=None, alias="urlPatterns")
-    __properties: ClassVar[List[str]] = ["buffer", "scriptingInvalid", "deferredSyntaxAllowedAsLiteral", "errorOnUndeclaredNamespace", "trimDirectiveWhitespaces", "elIgnored", "pageEncoding", "isXml", "includePreludes", "includeCodas", "defaultContentType", "urlPatterns"]
+    deferred_syntax_allowed_as_literal: Optional[StrictStr] = Field(default=None, alias="deferredSyntaxAllowedAsLiteral")
+    trim_directive_whitespaces: Optional[StrictStr] = Field(default=None, alias="trimDirectiveWhitespaces")
+    error_on_undeclared_namespace: Optional[StrictStr] = Field(default=None, alias="errorOnUndeclaredNamespace")
+    el_ignored: Optional[StrictStr] = Field(default=None, alias="elIgnored")
+    scripting_invalid: Optional[StrictStr] = Field(default=None, alias="scriptingInvalid")
+    page_encoding: Optional[StrictStr] = Field(default=None, alias="pageEncoding")
+    __properties: ClassVar[List[str]] = ["buffer", "defaultContentType", "urlPatterns", "isXml", "includePreludes", "includeCodas", "deferredSyntaxAllowedAsLiteral", "trimDirectiveWhitespaces", "errorOnUndeclaredNamespace", "elIgnored", "scriptingInvalid", "pageEncoding"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,17 +93,17 @@ class RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner(BaseMo
 
         _obj = cls.model_validate({
             "buffer": obj.get("buffer"),
-            "scriptingInvalid": obj.get("scriptingInvalid"),
-            "deferredSyntaxAllowedAsLiteral": obj.get("deferredSyntaxAllowedAsLiteral"),
-            "errorOnUndeclaredNamespace": obj.get("errorOnUndeclaredNamespace"),
-            "trimDirectiveWhitespaces": obj.get("trimDirectiveWhitespaces"),
-            "elIgnored": obj.get("elIgnored"),
-            "pageEncoding": obj.get("pageEncoding"),
+            "defaultContentType": obj.get("defaultContentType"),
+            "urlPatterns": obj.get("urlPatterns"),
             "isXml": obj.get("isXml"),
             "includePreludes": obj.get("includePreludes"),
             "includeCodas": obj.get("includeCodas"),
-            "defaultContentType": obj.get("defaultContentType"),
-            "urlPatterns": obj.get("urlPatterns")
+            "deferredSyntaxAllowedAsLiteral": obj.get("deferredSyntaxAllowedAsLiteral"),
+            "trimDirectiveWhitespaces": obj.get("trimDirectiveWhitespaces"),
+            "errorOnUndeclaredNamespace": obj.get("errorOnUndeclaredNamespace"),
+            "elIgnored": obj.get("elIgnored"),
+            "scriptingInvalid": obj.get("scriptingInvalid"),
+            "pageEncoding": obj.get("pageEncoding")
         })
         return _obj
 
