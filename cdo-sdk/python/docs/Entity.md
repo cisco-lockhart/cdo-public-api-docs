@@ -6,7 +6,7 @@ Cloud Services that match the search term.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the entity in CDO. | [optional] 
+**uid** | **str** | The unique identifier, represented as a UUID, of the entity in CDO. | [optional] 
 **name** | **str** | The name of the entity in CDO. Device names are unique in CDO. | [optional] 
 **type** | [**EntityType**](EntityType.md) |  | [optional] 
 **address** | **str** | The address of the entity. | [optional] 

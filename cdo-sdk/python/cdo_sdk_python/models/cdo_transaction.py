@@ -30,10 +30,10 @@ class CdoTransaction(BaseModel):
     """
     CdoTransaction
     """ # noqa: E501
-    tenant_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the tenant that asynchronous transaction triggered on.", alias="tenantUid")
+    tenant_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the tenant that asynchronous transaction triggered on.", alias="tenantUid")
     sort_key: Optional[StrictStr] = Field(default=None, description="DynamoDB sort key to provide us with efficient query capabilities.", alias="sortKey")
-    transaction_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the asynchronous transaction triggered.", alias="transactionUid")
-    entity_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the entity that the asynchronous transaction is triggered on.", alias="entityUid")
+    transaction_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the asynchronous transaction triggered.", alias="transactionUid")
+    entity_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the entity that the asynchronous transaction is triggered on.", alias="entityUid")
     entity_url: Optional[StrictStr] = Field(default=None, description="A URL to access the entity that the asynchronous transaction is triggered on.", alias="entityUrl")
     transaction_polling_url: Optional[StrictStr] = Field(default=None, description="The URL to poll to track the progress of the transaction.", alias="transactionPollingUrl")
     submission_time: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) at which the transaction was triggered", alias="submissionTime")

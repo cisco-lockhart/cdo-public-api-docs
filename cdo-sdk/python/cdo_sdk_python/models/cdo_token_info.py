@@ -29,11 +29,11 @@ class CdoTokenInfo(BaseModel):
     """
     CdoTokenInfo
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the user this token belongs to. The user can be API-only or a human.")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the user this token belongs to. The user can be API-only or a human.")
     name: Optional[StrictStr] = Field(default=None, description="The name of the user this token belongs to. The user can be API-only or a human.")
     roles: Optional[List[UserRole]] = Field(default=None, description="The role of the user this token belongs to. The user can be API-only or a human.")
     expires_at: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) the token expires. If this field is missing, the token will never expire.", alias="expiresAt")
-    tenant_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the tenant this token is associated with. While a user can be associated with multiple tenants, a token is associated with a single tenant.", alias="tenantUid")
+    tenant_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the tenant this token is associated with. While a user can be associated with multiple tenants, a token is associated with a single tenant.", alias="tenantUid")
     __properties: ClassVar[List[str]] = ["uid", "name", "roles", "expiresAt", "tenantUid"]
 
     model_config = ConfigDict(

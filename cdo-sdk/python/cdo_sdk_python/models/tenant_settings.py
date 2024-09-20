@@ -28,7 +28,7 @@ class TenantSettings(BaseModel):
     """
     TenantSettings
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the tenant in CDO.")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the tenant in CDO.")
     change_request_support: Optional[StrictBool] = Field(default=None, description="Indicates if the tenant supports change requests.", alias="changeRequestSupport")
     auto_accept_device_changes: Optional[StrictBool] = Field(default=None, description="Indicates if changes made out-of-band on devices on the tenant are automatically accepted without manual approval.", alias="autoAcceptDeviceChanges")
     web_analytics: Optional[StrictBool] = Field(default=None, description="Indicates if web analytics are enabled for the tenant.", alias="webAnalytics")

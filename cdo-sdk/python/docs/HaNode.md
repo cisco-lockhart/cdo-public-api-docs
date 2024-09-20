@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **serial** | **str** | The serial number of the node on the device. This is typically used for licensing, and is not the same as the chassis&#39; serial number. | [optional] 
 **software_version** | **str** | The version of the software running on the device. | [optional] 
-**uid_on_fmc** | **str** | The unique identifier of the device on a cdFMC. | [optional] 
+**uid_on_fmc** | **str** | The unique identifier, represented as a UUID, of the device on a cdFMC. | [optional] 
 **status** | **str** | The status of the HA node. | [optional] 
 
 ## Example

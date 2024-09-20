@@ -28,7 +28,7 @@ class AuditLog(BaseModel):
     """
     The list of items retrieved.
     """ # noqa: E501
-    uid: StrictStr = Field(description="The unique identifier of the Audit Log.")
+    uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the Audit Log.")
     event_type: Optional[StrictStr] = Field(default=None, description="The type of the Audit Log event.", alias="eventType")
     username: Optional[StrictStr] = Field(default=None, description="The name/email of the of user the Audit Log refers to.")
     event_description: Optional[StrictStr] = Field(default=None, description="The description of the Audit Log event.", alias="eventDescription")

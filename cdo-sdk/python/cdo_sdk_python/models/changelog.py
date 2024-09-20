@@ -28,7 +28,7 @@ class Changelog(BaseModel):
     """
     Changelog
     """ # noqa: E501
-    uid: StrictStr = Field(description="The unique identifier of the Change Log.")
+    uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the Change Log.")
     status: Optional[StrictStr] = Field(default=None, description="The status of the Change Log.")
     entity_uid: Optional[StrictStr] = Field(default=None, description="The uid of the device/manager/service the Change Log refers to.", alias="entityUid")
     events: Optional[List[Event]] = Field(default=None, description="The events recorded in this Change Log.")

@@ -6,7 +6,7 @@ Results from the CDO policies that match the search term.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the policy in CDO. | [optional] 
+**uid** | **str** | The unique identifier, represented as a UUID, of the policy in CDO. | [optional] 
 **name** | **str** | The name of the policy in CDO. | [optional] 
 
 ## Example

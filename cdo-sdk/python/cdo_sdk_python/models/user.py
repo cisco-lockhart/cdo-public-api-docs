@@ -29,7 +29,7 @@ class User(BaseModel):
     """
     User
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the user in CDO.")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the user in CDO.")
     name: Optional[StrictStr] = Field(default=None, description="The name of the user in CDO.")
     roles: Optional[List[UserRole]] = Field(default=None, description="Roles associated with this user in CDO.")
     api_only_user: Optional[StrictBool] = Field(default=None, description="Whether the user is API-only, an API-only user cannot access CDO in the UI.", alias="apiOnlyUser")

@@ -31,7 +31,7 @@ class Sdc(BaseModel):
     Sdc
     """ # noqa: E501
     public_key: Optional[PublicKey] = Field(default=None, alias="publicKey")
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the SDC in CDO.")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the SDC in CDO.")
     name: StrictStr = Field(description="The name of the SDC in CDO. SDC names are unique in CDO.")
     software_version: Optional[StrictStr] = Field(default=None, description="The software version running on the SDC.", alias="softwareVersion")
     ip_address: Optional[StrictStr] = Field(default=None, description="The IP address of the SDC.", alias="ipAddress")

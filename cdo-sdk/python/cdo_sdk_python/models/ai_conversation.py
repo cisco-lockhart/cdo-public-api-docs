@@ -28,7 +28,7 @@ class AiConversation(BaseModel):
     """
     AiConversation
     """ # noqa: E501
-    uid: StrictStr = Field(description="The unique identifier of the conversation.")
+    uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the conversation.")
     created_date: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) at which the conversation was created.", alias="createdDate")
     last_interaction_date: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) at which the user interacted with this conversation.", alias="lastInteractionDate")
     last_answer_date: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) at which an answer was received.", alias="lastAnswerDate")

@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The unique identifier of the Meraki Dashboard Network. | [optional] 
+**id** | **str** | The unique identifier, represented as a UUID, of the Meraki Dashboard Network. | [optional] 
 **name** | **str** | The name of the Meraki Dashboard Network. | [optional] 
 **timezone** | **str** | The timezone of the Meraki Dashboard Network. | [optional] 
 

@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tenant_uid** | **str** | The unique identifier of the tenant that asynchronous transaction triggered on. | [optional] 
+**tenant_uid** | **str** | The unique identifier, represented as a UUID, of the tenant that asynchronous transaction triggered on. | [optional] 
 **sort_key** | **str** | DynamoDB sort key to provide us with efficient query capabilities. | [optional] 
-**transaction_uid** | **str** | The unique identifier of the asynchronous transaction triggered. | [optional] 
-**entity_uid** | **str** | The unique identifier of the entity that the asynchronous transaction is triggered on. | [optional] 
+**transaction_uid** | **str** | The unique identifier, represented as a UUID, of the asynchronous transaction triggered. | [optional] 
+**entity_uid** | **str** | The unique identifier, represented as a UUID, of the entity that the asynchronous transaction is triggered on. | [optional] 
 **entity_url** | **str** | A URL to access the entity that the asynchronous transaction is triggered on. | [optional] 
 **transaction_polling_url** | **str** | The URL to poll to track the progress of the transaction. | [optional] 
 **submission_time** | **datetime** | The time (UTC; represented using the RFC-3339 standard) at which the transaction was triggered | [optional] 

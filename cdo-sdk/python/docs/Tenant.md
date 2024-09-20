@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the tenant in CDO. | [optional] 
+**uid** | **str** | The unique identifier, represented as a UUID, of the tenant in CDO. | [optional] 
 **name** | **str** | The name of the tenant in CDO. | [optional] 
-**security_cloud_control_enterprise_id** | **str** | The unique identifier of the Security Cloud Control Enterprise this tenant is associated with. | [optional] 
+**security_cloud_control_enterprise_id** | **str** | The unique identifier, represented as a UUID, of the Security Cloud Control Enterprise this tenant is associated with. | [optional] 
 **display_name** | **str** | A human-readable display name for the tenant. This is the tenant name displayed in the CDO Web UI. | [optional] 
 **pay_type** | [**TenantPayType**](TenantPayType.md) |  | [optional] 
 

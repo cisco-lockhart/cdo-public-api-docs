@@ -28,10 +28,10 @@ class ActiveDirectoryGroup(BaseModel):
     """
     ActiveDirectoryGroup
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the Active Directory Group in CDO.")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the Active Directory Group in CDO.")
     name: Optional[StrictStr] = Field(default=None, description="The name of the Active Directory Group. CDO does not support special characters for this field.")
     role: Optional[UserRole] = None
-    group_identifier: Optional[StrictStr] = Field(default=None, description="The unique identifier of the Active Directory Group in your Identity Provider (IdP).", alias="groupIdentifier")
+    group_identifier: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the Active Directory Group in your Identity Provider (IdP).", alias="groupIdentifier")
     issuer_url: Optional[StrictStr] = Field(default=None, description="The Identity Provider (IdP) URL, which Cisco Defense Orchestrator will use to validate SAML assertions during the sign-in process.", alias="issuerUrl")
     notes: Optional[StrictStr] = Field(default=None, description="Any notes that are applicable to this Active Directory Group.")
     __properties: ClassVar[List[str]] = ["uid", "name", "role", "groupIdentifier", "issuerUrl", "notes"]

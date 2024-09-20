@@ -33,7 +33,7 @@ class Event(BaseModel):
     username: Optional[StrictStr] = Field(default=None, description="The username of the user that triggered the Change Log event.")
     var_date: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) at which the Change Log Event occurred.", alias="date")
     action: Optional[StrictStr] = Field(default=None, description="The action performed.")
-    change_request_uid: Optional[StrictStr] = Field(default=None, description="The unique Identifier of the Change Request associated with the Change Log event.", alias="changeRequestUid")
+    change_request_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the Change Request associated with the Change Log event.", alias="changeRequestUid")
     change_request_name: Optional[StrictStr] = Field(default=None, description="The name of the Change Request associated with the Change Log event.", alias="changeRequestName")
     __properties: ClassVar[List[str]] = ["description", "diff", "username", "date", "action", "changeRequestUid", "changeRequestName"]
 

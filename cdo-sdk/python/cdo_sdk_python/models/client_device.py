@@ -30,7 +30,7 @@ class ClientDevice(BaseModel):
     """
     The client device that triggered this MFA event.
     """ # noqa: E501
-    uid: StrictStr = Field(description="The unique identifier of the device.")
+    uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the device.")
     location: Optional[Location] = None
     ip_address: Optional[StrictStr] = Field(default=None, description="The IP address of the client device that has triggered this MFA event.", alias="ipAddress")
     password_set: Optional[StrictBool] = Field(default=None, description="Indicates whether a password is set on the client device.", alias="passwordSet")

@@ -27,7 +27,7 @@ class ChangeRequest(BaseModel):
     """
     ChangeRequest
     """ # noqa: E501
-    uid: StrictStr = Field(description="The unique identifier of the Change Request.")
+    uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the Change Request.")
     name: StrictStr = Field(description="The name of the Change Request.")
     description: Optional[StrictStr] = Field(default=None, description="The description of the Change Request.")
     __properties: ClassVar[List[str]] = ["uid", "name", "description"]

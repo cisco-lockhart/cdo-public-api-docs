@@ -30,10 +30,10 @@ class AccessRule(BaseModel):
     """
     AccessRule
     """ # noqa: E501
-    uid: StrictStr = Field(description="The unique identifier of Access Rule in CDO.")
-    access_group_uid: StrictStr = Field(description="The unique identifier of the Access Group associated with the Access Rule.", alias="accessGroupUid")
+    uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of Access Rule in CDO.")
+    access_group_uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the Access Group associated with the Access Rule.", alias="accessGroupUid")
     shared_access_group_uid: Optional[StrictStr] = Field(default=None, description="Optional unique identifier for the shared Access Group associated with a shared Access Rule.", alias="sharedAccessGroupUid")
-    entity_uid: StrictStr = Field(description="The unique identifier of the device/manager associated with the Access Rule. Points to shared Access Group in case of shared Rule", alias="entityUid")
+    entity_uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the device/manager associated with the Access Rule. Points to shared Access Group in case of shared Rule", alias="entityUid")
     index: StrictInt = Field(description="Access rule index position in Access Group ordered rule list.")
     rule_type: Optional[StrictStr] = Field(default=None, description="The L3 level rule type. L3, L7 or CONTENT_FILTERING. Defaults to L3.", alias="ruleType")
     rule_action: StrictStr = Field(description="The rule's action: PERMIT or DENY.", alias="ruleAction")

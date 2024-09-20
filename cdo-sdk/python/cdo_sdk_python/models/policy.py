@@ -27,7 +27,7 @@ class Policy(BaseModel):
     """
     Results from the CDO policies that match the search term.
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the policy in CDO.")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the policy in CDO.")
     name: Optional[StrictStr] = Field(default=None, description="The name of the policy in CDO.")
     __properties: ClassVar[List[str]] = ["uid", "name"]
 

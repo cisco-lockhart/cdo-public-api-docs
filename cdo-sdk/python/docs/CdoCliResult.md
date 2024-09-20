@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the CLI execution result. | 
+**uid** | **str** | The unique identifier, represented as a UUID, of the CLI execution result. | 
 **result** | **str** | The result of the CLI execution. | [optional] 
 **error_msg** | **str** | The error message, if any. | [optional] 
-**device_uid** | **str** | The unique identifier of the device. | 
+**device_uid** | **str** | The unique identifier, represented as a UUID, of the device. | 
 **start_time** | **datetime** | The time (in UTC) at which the user run the CLI execution, represented using the RFC-3339 standard. | [optional] 
 **script** | **str** | The script executed to generate the CLI result. | [optional] 
 

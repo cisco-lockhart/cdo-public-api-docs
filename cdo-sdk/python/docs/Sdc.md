@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **public_key** | [**PublicKey**](PublicKey.md) |  | [optional] 
-**uid** | **str** | The unique identifier of the SDC in CDO. | [optional] 
+**uid** | **str** | The unique identifier, represented as a UUID, of the SDC in CDO. | [optional] 
 **name** | **str** | The name of the SDC in CDO. SDC names are unique in CDO. | 
 **software_version** | **str** | The software version running on the SDC. | [optional] 
 **ip_address** | **str** | The IP address of the SDC. | [optional] 

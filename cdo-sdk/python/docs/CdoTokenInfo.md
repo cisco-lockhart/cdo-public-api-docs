@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the user this token belongs to. The user can be API-only or a human. | [optional] 
+**uid** | **str** | The unique identifier, represented as a UUID, of the user this token belongs to. The user can be API-only or a human. | [optional] 
 **name** | **str** | The name of the user this token belongs to. The user can be API-only or a human. | [optional] 
 **roles** | [**List[UserRole]**](UserRole.md) | The role of the user this token belongs to. The user can be API-only or a human. | [optional] 
 **expires_at** | **datetime** | The time (UTC; represented using the RFC-3339 standard) the token expires. If this field is missing, the token will never expire. | [optional] 
-**tenant_uid** | **str** | The unique identifier of the tenant this token is associated with. While a user can be associated with multiple tenants, a token is associated with a single tenant. | [optional] 
+**tenant_uid** | **str** | The unique identifier, represented as a UUID, of the tenant this token is associated with. While a user can be associated with multiple tenants, a token is associated with a single tenant. | [optional] 
 
 ## Example
 

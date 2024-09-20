@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **username** | **str** | The username of the user that triggered the Change Log event. | [optional] 
 **var_date** | **datetime** | The time (UTC; represented using the RFC-3339 standard) at which the Change Log Event occurred. | [optional] 
 **action** | **str** | The action performed. | [optional] 
-**change_request_uid** | **str** | The unique Identifier of the Change Request associated with the Change Log event. | [optional] 
+**change_request_uid** | **str** | The unique identifier, represented as a UUID, of the Change Request associated with the Change Log event. | [optional] 
 **change_request_name** | **str** | The name of the Change Request associated with the Change Log event. | [optional] 
 
 ## Example

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the tenant in CDO. | [optional] 
+**uid** | **str** | The unique identifier, represented as a UUID, of the tenant in CDO. | [optional] 
 **change_request_support** | **bool** | Indicates if the tenant supports change requests. | [optional] 
 **auto_accept_device_changes** | **bool** | Indicates if changes made out-of-band on devices on the tenant are automatically accepted without manual approval. | [optional] 
 **web_analytics** | **bool** | Indicates if web analytics are enabled for the tenant. | [optional] 

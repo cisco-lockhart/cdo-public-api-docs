@@ -6,7 +6,7 @@ The client device that triggered this MFA event.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the device. | 
+**uid** | **str** | The unique identifier, represented as a UUID, of the device. | 
 **location** | [**Location**](Location.md) |  | [optional] 
 **ip_address** | **str** | The IP address of the client device that has triggered this MFA event. | [optional] 
 **password_set** | **bool** | Indicates whether a password is set on the client device. | [optional] 

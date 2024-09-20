@@ -28,7 +28,7 @@ class Entity(BaseModel):
     """
     Cloud Services that match the search term.
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the entity in CDO.")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the entity in CDO.")
     name: Optional[StrictStr] = Field(default=None, description="The name of the entity in CDO. Device names are unique in CDO.")
     type: Optional[EntityType] = None
     address: Optional[StrictStr] = Field(default=None, description="The address of the entity.")

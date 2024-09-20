@@ -28,9 +28,9 @@ class Tenant(BaseModel):
     """
     Tenant
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the tenant in CDO.")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the tenant in CDO.")
     name: Optional[StrictStr] = Field(default=None, description="The name of the tenant in CDO.")
-    security_cloud_control_enterprise_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the Security Cloud Control Enterprise this tenant is associated with.", alias="securityCloudControlEnterpriseId")
+    security_cloud_control_enterprise_id: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the Security Cloud Control Enterprise this tenant is associated with.", alias="securityCloudControlEnterpriseId")
     display_name: Optional[StrictStr] = Field(default=None, description="A human-readable display name for the tenant. This is the tenant name displayed in the CDO Web UI.", alias="displayName")
     pay_type: Optional[TenantPayType] = Field(default=None, alias="payType")
     __properties: ClassVar[List[str]] = ["uid", "name", "securityCloudControlEnterpriseId", "displayName", "payType"]

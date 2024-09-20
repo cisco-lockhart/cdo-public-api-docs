@@ -30,10 +30,10 @@ class RaVpnSession(BaseModel):
     """
     RaVpnSession
     """ # noqa: E501
-    uid: StrictStr = Field(description="The unique identifier of the VPN session.")
+    uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the VPN session.")
     username: StrictStr = Field(description="The name of the user associated with the RA VPN session.")
     status: Optional[StrictStr] = Field(default=None, description="The status of the RA VPN session.")
-    device_uid: StrictStr = Field(description="The unique identifier of the device associated with the RA VPN session.", alias="deviceUid")
+    device_uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the device associated with the RA VPN session.", alias="deviceUid")
     assigned_ip_v4: Optional[StrictStr] = Field(default=None, description="The IPv4 address assigned to the RA VPN session.", alias="assignedIpV4")
     assigned_ip_v6: Optional[StrictStr] = Field(default=None, description="The IPv6 address assigned to the RA VPN session.", alias="assignedIpV6")
     public_ip: Optional[StrictStr] = Field(default=None, description="The public IP address of the client that has established this RA VPN session.", alias="publicIp")

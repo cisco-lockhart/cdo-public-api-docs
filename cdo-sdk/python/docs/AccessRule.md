@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of Access Rule in CDO. | 
-**access_group_uid** | **str** | The unique identifier of the Access Group associated with the Access Rule. | 
+**uid** | **str** | The unique identifier, represented as a UUID, of Access Rule in CDO. | 
+**access_group_uid** | **str** | The unique identifier, represented as a UUID, of the Access Group associated with the Access Rule. | 
 **shared_access_group_uid** | **str** | Optional unique identifier for the shared Access Group associated with a shared Access Rule. | [optional] 
-**entity_uid** | **str** | The unique identifier of the device/manager associated with the Access Rule. Points to shared Access Group in case of shared Rule | 
+**entity_uid** | **str** | The unique identifier, represented as a UUID, of the device/manager associated with the Access Rule. Points to shared Access Group in case of shared Rule | 
 **index** | **int** | Access rule index position in Access Group ordered rule list. | 
 **rule_type** | **str** | The L3 level rule type. L3, L7 or CONTENT_FILTERING. Defaults to L3. | [optional] 
 **rule_action** | **str** | The rule&#39;s action: PERMIT or DENY. | 

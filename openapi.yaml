@@ -5232,8 +5232,8 @@ components:
         tenantUid:
           type: string
           description: >-
-            The unique identifier of the tenant that asynchronous transaction
-            triggered on.
+            The unique identifier, represented as a UUID, of the tenant that
+            asynchronous transaction triggered on.
           format: uuid
           example: 5131daad-e813-4b8f-8f42-be1e241e2cdb
         sortKey:
@@ -5245,14 +5245,16 @@ components:
               `cdoTransactionStatus:<cdoTransactionStatus>`
         transactionUid:
           type: string
-          description: The unique identifier of the asynchronous transaction triggered.
+          description: >-
+            The unique identifier, represented as a UUID, of the asynchronous
+            transaction triggered.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         entityUid:
           type: string
           description: >-
-            The unique identifier of the entity that the asynchronous
-            transaction is triggered on.
+            The unique identifier, represented as a UUID, of the entity that the
+            asynchronous transaction is triggered on.
           format: uuid
           example: f5f660d4-4b81-4374-877d-fbc4bee894e2
         entityUrl:
@@ -5387,7 +5389,7 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the user in CDO.
+          description: The unique identifier, represented as a UUID, of the user in CDO.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
@@ -5480,7 +5482,9 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the Active Directory Group in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of the Active
+            Directory Group in CDO.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
@@ -5494,8 +5498,8 @@ components:
         groupIdentifier:
           type: string
           description: >-
-            The unique identifier of the Active Directory Group in your Identity
-            Provider (IdP).
+            The unique identifier, represented as a UUID, of the Active
+            Directory Group in your Identity Provider (IdP).
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         issuerUrl:
           type: string
@@ -5637,14 +5641,14 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of Access Rule in CDO.
+          description: The unique identifier, represented as a UUID, of Access Rule in CDO.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         accessGroupUid:
           type: string
           description: >-
-            The unique identifier of the Access Group associated with the Access
-            Rule.
+            The unique identifier, represented as a UUID, of the Access Group
+            associated with the Access Rule.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         sharedAccessGroupUid:
@@ -5657,8 +5661,9 @@ components:
         entityUid:
           type: string
           description: >-
-            The unique identifier of the device/manager associated with the
-            Access Rule. Points to shared Access Group in case of shared Rule
+            The unique identifier, represented as a UUID, of the device/manager
+            associated with the Access Rule. Points to shared Access Group in
+            case of shared Rule
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         index:
@@ -5795,7 +5800,9 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of Access Group in CDO.
+          description: >-
+            The unique identifier, represented as a UUID, of Access Group in
+            CDO.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
@@ -5807,15 +5814,15 @@ components:
         entityUid:
           type: string
           description: >-
-            The unique identifier of the device/manager associated with the
-            Access Group.
+            The unique identifier, represented as a UUID, of the device/manager
+            associated with the Access Group.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         sharedAccessGroupUid:
           type: string
           description: >-
-            The unique identifier of the shared access group manager associated
-            with the Access Group.
+            The unique identifier, represented as a UUID, of the shared access
+            group manager associated with the Access Group.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         isShared:
@@ -6326,7 +6333,7 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the CLI macro.
+          description: The unique identifier, represented as a UUID, of the CLI macro.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
@@ -6399,7 +6406,7 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the Change Request.
+          description: The unique identifier, represented as a UUID, of the Change Request.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
@@ -6433,7 +6440,7 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the tenant in CDO.
+          description: The unique identifier, represented as a UUID, of the tenant in CDO.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         changeRequestSupport:
@@ -6667,7 +6674,9 @@ components:
           example: 7.4.1
         uidOnFmc:
           type: string
-          description: The unique identifier of the device on a cdFMC.
+          description: >-
+            The unique identifier, represented as a UUID, of the device on a
+            cdFMC.
           format: uuid
           example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
         status:
@@ -6729,7 +6738,7 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the device in CDO.
+          description: The unique identifier, represented as a UUID, of the device in CDO.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
@@ -6743,12 +6752,12 @@ components:
         connectorUid:
           type: string
           description: >-
-            The unique identifier of the Secure Device Connector (SDC) that will
-            be used to communicate with the device. This value is not required
-            if the connector type selected is Cloud Connector (CDG)The name of
-            the Secure Device Connector (SDC) that will be used to communicate
-            with the device. This value is not required if the connector type
-            selected is Cloud Connector (CDG).
+            The unique identifier, represented as a UUID, of the Secure Device
+            Connector (SDC) that will be used to communicate with the device.
+            This value is not required if the connector type selected is Cloud
+            Connector (CDG)The name of the Secure Device Connector (SDC) that
+            will be used to communicate with the device. This value is not
+            required if the connector type selected is Cloud Connector (CDG).
           format: uuid
           example: 3af473a8-d70f-4090-bcdb-853981696478
         address:
@@ -6856,14 +6865,15 @@ components:
         fmcDomainUid:
           type: string
           description: >-
-            (FMC device managers only) The unique identifier of the [FMC
+            (FMC device managers only) The unique identifier, represented as a
+            UUID, of the [FMC
             domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html).
           format: uuid
         uidOnFmc:
           type: string
           description: >-
-            (cdFMC-managed FTDs only) The unique identifier of the device on a
-            cdFMC.
+            (cdFMC-managed FTDs only) The unique identifier, represented as a
+            UUID, of the device on a cdFMC.
           format: uuid
           example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
         modelNumber:
@@ -6925,7 +6935,9 @@ components:
           example: 7.4.1
         uidOnFmc:
           type: string
-          description: The unique identifier of the device on a cdFMC.
+          description: >-
+            The unique identifier, represented as a UUID, of the device on a
+            cdFMC.
           format: uuid
           example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
         status:
@@ -6951,7 +6963,9 @@ components:
       properties:
         id:
           type: string
-          description: The unique identifier of the Meraki Dashboard Network.
+          description: >-
+            The unique identifier, represented as a UUID, of the Meraki
+            Dashboard Network.
           example: L_583779101697901532
         name:
           type: string
@@ -7042,7 +7056,7 @@ components:
           $ref: '#/components/schemas/PublicKey'
         uid:
           type: string
-          description: The unique identifier of the SDC in CDO.
+          description: The unique identifier, represented as a UUID, of the SDC in CDO.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
@@ -7145,7 +7159,7 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the VPN session.
+          description: The unique identifier, represented as a UUID, of the VPN session.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         username:
@@ -7162,8 +7176,8 @@ components:
         deviceUid:
           type: string
           description: >-
-            The unique identifier of the device associated with the RA VPN
-            session.
+            The unique identifier, represented as a UUID, of the device
+            associated with the RA VPN session.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         assignedIpV4:
@@ -7296,8 +7310,8 @@ components:
         uid:
           type: string
           description: >-
-            The unique identifier of the user this token belongs to. The user
-            can be API-only or a human.
+            The unique identifier, represented as a UUID, of the user this token
+            belongs to. The user can be API-only or a human.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
@@ -7323,16 +7337,16 @@ components:
         tenantUid:
           type: string
           description: >-
-            The unique identifier of the tenant this token is associated with.
-            While a user can be associated with multiple tenants, a token is
-            associated with a single tenant.
+            The unique identifier, represented as a UUID, of the tenant this
+            token is associated with. While a user can be associated with
+            multiple tenants, a token is associated with a single tenant.
           format: uuid
     Tenant:
       type: object
       properties:
         uid:
           type: string
-          description: The unique identifier of the tenant in CDO.
+          description: The unique identifier, represented as a UUID, of the tenant in CDO.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
@@ -7342,8 +7356,8 @@ components:
         securityCloudControlEnterpriseId:
           type: string
           description: >-
-            The unique identifier of the Security Cloud Control Enterprise this
-            tenant is associated with.
+            The unique identifier, represented as a UUID, of the Security Cloud
+            Control Enterprise this tenant is associated with.
           format: uuid
           example: dda3ce52-312c-477a-aa86-1fd1866ddab7
         displayName:
@@ -7396,7 +7410,9 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the entity in Cloud-delivered FMC.
+          description: >-
+            The unique identifier, represented as a UUID, of the entity in
+            Cloud-delivered FMC.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
@@ -7435,7 +7451,7 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the entity in CDO.
+          description: The unique identifier, represented as a UUID, of the entity in CDO.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
@@ -7500,7 +7516,7 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the policy in CDO.
+          description: The unique identifier, represented as a UUID, of the policy in CDO.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
@@ -7600,7 +7616,7 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the device.
+          description: The unique identifier, represented as a UUID, of the device.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         location:
@@ -7636,7 +7652,7 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the MFA event.
+          description: The unique identifier, represented as a UUID, of the MFA event.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         username:
@@ -7810,7 +7826,7 @@ components:
       properties:
         deviceUid:
           type: string
-          description: The unique identifier of the device in CDO.
+          description: The unique identifier, represented as a UUID, of the device in CDO.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         deviceName:
@@ -7971,7 +7987,9 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the CLI execution result.
+          description: >-
+            The unique identifier, represented as a UUID, of the CLI execution
+            result.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         result:
@@ -7984,7 +8002,7 @@ components:
           example: 'Error: Connection timed out'
         deviceUid:
           type: string
-          description: The unique identifier of the device.
+          description: The unique identifier, represented as a UUID, of the device.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         startTime:
@@ -8057,7 +8075,7 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the Change Log.
+          description: The unique identifier, represented as a UUID, of the Change Log.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         status:
@@ -8137,8 +8155,8 @@ components:
         changeRequestUid:
           type: string
           description: >-
-            The unique Identifier of the Change Request associated with the
-            Change Log event.
+            The unique identifier, represented as a UUID, of the Change Request
+            associated with the Change Log event.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         changeRequestName:
@@ -8179,7 +8197,7 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the Audit Log.
+          description: The unique identifier, represented as a UUID, of the Audit Log.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         eventType:
@@ -8279,7 +8297,7 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the conversation.
+          description: The unique identifier, represented as a UUID, of the conversation.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         createdDate:
@@ -8316,7 +8334,7 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier of the Message.
+          description: The unique identifier, represented as a UUID, of the Message.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         type:
@@ -8331,9 +8349,9 @@ components:
         inReplyTo:
           type: string
           description: >-
-            The unique identifier of the message to which this message is
-            replying. This field is populated only for messages of type
-            RESPONSE.
+            The unique identifier, represented as a UUID, of the message to
+            which this message is replying. This field is populated only for
+            messages of type RESPONSE.
           format: uuid
           example: f127a6f6-ec56-400f-a23b-832b0100540b
         content:
@@ -8661,8 +8679,6 @@ components:
               format: int32
             attributeNames:
               type: object
-            initParameterNames:
-              type: object
             contextPath:
               type: string
             sessionTrackingModes:
@@ -8675,9 +8691,114 @@ components:
                   - COOKIE
                   - URL
                   - SSL
+            initParameterNames:
+              type: object
             servletNames:
               type: object
               deprecated: true
+            defaultSessionTrackingModes:
+              uniqueItems: true
+              type: array
+              items:
+                type: string
+                enum:
+                  - COOKIE
+                  - URL
+                  - SSL
+            effectiveSessionTrackingModes:
+              uniqueItems: true
+              type: array
+              items:
+                type: string
+                enum:
+                  - COOKIE
+                  - URL
+                  - SSL
+            jspConfigDescriptor:
+              type: object
+              properties:
+                taglibs:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      taglibLocation:
+                        type: string
+                      taglibURI:
+                        type: string
+                jspPropertyGroups:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      elIgnored:
+                        type: string
+                      scriptingInvalid:
+                        type: string
+                      pageEncoding:
+                        type: string
+                      isXml:
+                        type: string
+                      includePreludes:
+                        type: array
+                        items:
+                          type: string
+                      includeCodas:
+                        type: array
+                        items:
+                          type: string
+                      deferredSyntaxAllowedAsLiteral:
+                        type: string
+                      trimDirectiveWhitespaces:
+                        type: string
+                      errorOnUndeclaredNamespace:
+                        type: string
+                      buffer:
+                        type: string
+                      defaultContentType:
+                        type: string
+                      urlPatterns:
+                        type: array
+                        items:
+                          type: string
+            virtualServerName:
+              type: string
+            requestCharacterEncoding:
+              type: string
+            responseCharacterEncoding:
+              type: string
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
+            servletRegistrations:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  mappings:
+                    type: array
+                    items:
+                      type: string
+                  runAsRole:
+                    type: string
+                  name:
+                    type: string
+                  className:
+                    type: string
+                  initParameters:
+                    type: object
+                    additionalProperties:
+                      type: string
             filterRegistrations:
               type: object
               additionalProperties:
@@ -8717,109 +8838,6 @@ components:
                 maxAge:
                   type: integer
                   format: int32
-            defaultSessionTrackingModes:
-              uniqueItems: true
-              type: array
-              items:
-                type: string
-                enum:
-                  - COOKIE
-                  - URL
-                  - SSL
-            effectiveSessionTrackingModes:
-              uniqueItems: true
-              type: array
-              items:
-                type: string
-                enum:
-                  - COOKIE
-                  - URL
-                  - SSL
-            jspConfigDescriptor:
-              type: object
-              properties:
-                taglibs:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      taglibURI:
-                        type: string
-                      taglibLocation:
-                        type: string
-                jspPropertyGroups:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      buffer:
-                        type: string
-                      defaultContentType:
-                        type: string
-                      urlPatterns:
-                        type: array
-                        items:
-                          type: string
-                      isXml:
-                        type: string
-                      includePreludes:
-                        type: array
-                        items:
-                          type: string
-                      includeCodas:
-                        type: array
-                        items:
-                          type: string
-                      deferredSyntaxAllowedAsLiteral:
-                        type: string
-                      trimDirectiveWhitespaces:
-                        type: string
-                      errorOnUndeclaredNamespace:
-                        type: string
-                      elIgnored:
-                        type: string
-                      scriptingInvalid:
-                        type: string
-                      pageEncoding:
-                        type: string
-            virtualServerName:
-              type: string
-            requestCharacterEncoding:
-              type: string
-            responseCharacterEncoding:
-              type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
-            servletRegistrations:
-              type: object
-              additionalProperties:
-                type: object
-                properties:
-                  mappings:
-                    type: array
-                    items:
-                      type: string
-                  runAsRole:
-                    type: string
-                  name:
-                    type: string
-                  className:
-                    type: string
-                  initParameters:
-                    type: object
-                    additionalProperties:
-                      type: string
           writeOnly: true
         contentType:
           type: string

@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of Access Group in CDO. | 
+**uid** | **str** | The unique identifier, represented as a UUID, of Access Group in CDO. | 
 **name** | **str** | The name of Access Group in CDO. Access Group names are unique in CDO. | 
-**entity_uid** | **str** | The unique identifier of the device/manager associated with the Access Group. | 
-**shared_access_group_uid** | **str** | The unique identifier of the shared access group manager associated with the Access Group. | 
+**entity_uid** | **str** | The unique identifier, represented as a UUID, of the device/manager associated with the Access Group. | 
+**shared_access_group_uid** | **str** | The unique identifier, represented as a UUID, of the shared access group manager associated with the Access Group. | 
 **is_shared** | **bool** | The flag that identifies if access group is shared. | [optional] 
 **applied_to** | **List[str]** | The set of device unique identifiers to which this Access Group was applied. Only valid for shared access group. | [optional] 
 **resources** | **List[Dict[str, object]]** | The set of of interface and direction pairs or global resource. | [optional] 

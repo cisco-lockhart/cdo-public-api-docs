@@ -6,7 +6,7 @@ Policies that match the search term.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the entity in Cloud-delivered FMC. | [optional] 
+**uid** | **str** | The unique identifier, represented as a UUID, of the entity in Cloud-delivered FMC. | [optional] 
 **name** | **str** | The name of the entity in Cloud-delivered FMC. | [optional] 
 **link** | **str** | A URL to access the entity in Cloud-delivered FMC. | [optional] 
 

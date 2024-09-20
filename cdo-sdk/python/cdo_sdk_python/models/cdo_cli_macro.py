@@ -28,7 +28,7 @@ class CdoCliMacro(BaseModel):
     """
     CdoCliMacro
     """ # noqa: E501
-    uid: StrictStr = Field(description="The unique identifier of the CLI macro.")
+    uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the CLI macro.")
     name: Optional[StrictStr] = Field(default=None, description="The name of the CLI macro.")
     script: Optional[StrictStr] = Field(default=None, description="The script executed to generate the CLI result.")
     parameters: Optional[List[StrictStr]] = Field(default=None, description="A set of parameters provided in the script")

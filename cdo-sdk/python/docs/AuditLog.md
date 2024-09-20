@@ -6,7 +6,7 @@ The list of items retrieved.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the Audit Log. | 
+**uid** | **str** | The unique identifier, represented as a UUID, of the Audit Log. | 
 **event_type** | **str** | The type of the Audit Log event. | [optional] 
 **username** | **str** | The name/email of the of user the Audit Log refers to. | [optional] 
 **event_description** | **str** | The description of the Audit Log event. | [optional] 

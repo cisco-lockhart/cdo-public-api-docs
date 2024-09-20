@@ -28,9 +28,9 @@ class AiMessage(BaseModel):
     """
     AiMessage
     """ # noqa: E501
-    uid: StrictStr = Field(description="The unique identifier of the Message.")
+    uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the Message.")
     type: Optional[StrictStr] = Field(default=None, description="The type of the message, indicating whether it is a request or a response.")
-    in_reply_to: Optional[StrictStr] = Field(default=None, description="The unique identifier of the message to which this message is replying. This field is populated only for messages of type RESPONSE.", alias="inReplyTo")
+    in_reply_to: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the message to which this message is replying. This field is populated only for messages of type RESPONSE.", alias="inReplyTo")
     content: Optional[StrictStr] = Field(default=None, description="The content of the message.")
     created_date: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) at which the message was sent.", alias="createdDate")
     __properties: ClassVar[List[str]] = ["uid", "type", "inReplyTo", "content", "createdDate"]

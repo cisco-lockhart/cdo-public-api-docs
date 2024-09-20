@@ -44,11 +44,11 @@ class Device(BaseModel):
     """
     Device
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the device in CDO.")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the device in CDO.")
     name: StrictStr = Field(description="The name of the device in CDO. Device names are unique in CDO.")
     device_type: EntityType = Field(alias="deviceType")
     connector_type: Optional[ConnectorType] = Field(default=None, alias="connectorType")
-    connector_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG)The name of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG).", alias="connectorUid")
+    connector_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG)The name of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG).", alias="connectorUid")
     address: Optional[StrictStr] = Field(default=None, description="The address of the device, in `host:port` format. CDO connects to the device at this address.")
     device_role: Optional[DeviceRole] = Field(default=None, alias="deviceRole")
     serial: Optional[StrictStr] = Field(default=None, description="The serial number of the device. This is typically used for licensing, and is not the same as the chassis' serial number.")
@@ -77,8 +77,8 @@ class Device(BaseModel):
     state: Optional[StrictStr] = Field(default=None, description="The device state.")
     state_machine_details: Optional[StateMachineDetails] = Field(default=None, alias="stateMachineDetails")
     labels: Optional[Labels] = None
-    fmc_domain_uid: Optional[StrictStr] = Field(default=None, description="(FMC device managers only) The unique identifier of the [FMC domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html).", alias="fmcDomainUid")
-    uid_on_fmc: Optional[StrictStr] = Field(default=None, description="(cdFMC-managed FTDs only) The unique identifier of the device on a cdFMC.", alias="uidOnFmc")
+    fmc_domain_uid: Optional[StrictStr] = Field(default=None, description="(FMC device managers only) The unique identifier, represented as a UUID, of the [FMC domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html).", alias="fmcDomainUid")
+    uid_on_fmc: Optional[StrictStr] = Field(default=None, description="(cdFMC-managed FTDs only) The unique identifier, represented as a UUID, of the device on a cdFMC.", alias="uidOnFmc")
     model_number: Optional[StrictStr] = Field(default=None, description="The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device.", alias="modelNumber")
     __properties: ClassVar[List[str]] = ["uid", "name", "deviceType", "connectorType", "connectorUid", "address", "deviceRole", "serial", "chassisSerial", "softwareVersion", "connectivityState", "configState", "conflictDetectionState", "notes", "asdmVersion", "asaFailoverMode", "asaFailoverState", "asaFailoverMate", "asaLicenseEntitlements", "ftdLicenses", "snortVersion", "ftdPerformanceTier", "redundancyMode", "cdFmcInfo", "sseDeviceData", "onPremFmcInfo", "ftdClusterInfo", "ftdHaInfo", "merakiDeploymentMode", "merakiNetwork", "state", "stateMachineDetails", "labels", "fmcDomainUid", "uidOnFmc", "modelNumber"]
 

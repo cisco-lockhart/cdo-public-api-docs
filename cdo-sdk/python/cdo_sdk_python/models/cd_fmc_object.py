@@ -27,7 +27,7 @@ class CdFmcObject(BaseModel):
     """
     Policies that match the search term.
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the entity in Cloud-delivered FMC.")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the entity in Cloud-delivered FMC.")
     name: Optional[StrictStr] = Field(default=None, description="The name of the entity in Cloud-delivered FMC.")
     link: Optional[StrictStr] = Field(default=None, description="A URL to access the entity in Cloud-delivered FMC.")
     __properties: ClassVar[List[str]] = ["uid", "name", "link"]

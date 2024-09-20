@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the Active Directory Group in CDO. | [optional] 
+**uid** | **str** | The unique identifier, represented as a UUID, of the Active Directory Group in CDO. | [optional] 
 **name** | **str** | The name of the Active Directory Group. CDO does not support special characters for this field. | [optional] 
 **role** | [**UserRole**](UserRole.md) |  | [optional] 
-**group_identifier** | **str** | The unique identifier of the Active Directory Group in your Identity Provider (IdP). | [optional] 
+**group_identifier** | **str** | The unique identifier, represented as a UUID, of the Active Directory Group in your Identity Provider (IdP). | [optional] 
 **issuer_url** | **str** | The Identity Provider (IdP) URL, which Cisco Defense Orchestrator will use to validate SAML assertions during the sign-in process. | [optional] 
 **notes** | **str** | Any notes that are applicable to this Active Directory Group. | [optional] 
 

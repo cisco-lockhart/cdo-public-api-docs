@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the device in CDO. | [optional] 
+**uid** | **str** | The unique identifier, represented as a UUID, of the device in CDO. | [optional] 
 **name** | **str** | The name of the device in CDO. Device names are unique in CDO. | 
 **device_type** | [**EntityType**](EntityType.md) |  | 
 **connector_type** | [**ConnectorType**](ConnectorType.md) |  | [optional] 
-**connector_uid** | **str** | The unique identifier of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG)The name of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG). | [optional] 
+**connector_uid** | **str** | The unique identifier, represented as a UUID, of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG)The name of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG). | [optional] 
 **address** | **str** | The address of the device, in &#x60;host:port&#x60; format. CDO connects to the device at this address. | [optional] 
 **device_role** | [**DeviceRole**](DeviceRole.md) |  | [optional] 
 **serial** | **str** | The serial number of the device. This is typically used for licensing, and is not the same as the chassis&#39; serial number. | [optional] 
@@ -38,8 +38,8 @@ Name | Type | Description | Notes
 **state** | **str** | The device state. | [optional] 
 **state_machine_details** | [**StateMachineDetails**](StateMachineDetails.md) |  | [optional] 
 **labels** | [**Labels**](Labels.md) |  | [optional] 
-**fmc_domain_uid** | **str** | (FMC device managers only) The unique identifier of the [FMC domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html). | [optional] 
-**uid_on_fmc** | **str** | (cdFMC-managed FTDs only) The unique identifier of the device on a cdFMC. | [optional] 
+**fmc_domain_uid** | **str** | (FMC device managers only) The unique identifier, represented as a UUID, of the [FMC domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html). | [optional] 
+**uid_on_fmc** | **str** | (cdFMC-managed FTDs only) The unique identifier, represented as a UUID, of the device on a cdFMC. | [optional] 
 **model_number** | **str** | The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device. | [optional] 
 
 ## Example

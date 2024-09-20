@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the VPN session. | 
+**uid** | **str** | The unique identifier, represented as a UUID, of the VPN session. | 
 **username** | **str** | The name of the user associated with the RA VPN session. | 
 **status** | **str** | The status of the RA VPN session. | [optional] 
-**device_uid** | **str** | The unique identifier of the device associated with the RA VPN session. | 
+**device_uid** | **str** | The unique identifier, represented as a UUID, of the device associated with the RA VPN session. | 
 **assigned_ip_v4** | **str** | The IPv4 address assigned to the RA VPN session. | [optional] 
 **assigned_ip_v6** | **str** | The IPv6 address assigned to the RA VPN session. | [optional] 
 **public_ip** | **str** | The public IP address of the client that has established this RA VPN session. | [optional] 

@@ -32,7 +32,7 @@ class FmcHealthMetrics(BaseModel):
     """
     FmcHealthMetrics
     """ # noqa: E501
-    device_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the device in CDO.", alias="deviceUid")
+    device_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the device in CDO.", alias="deviceUid")
     device_name: Optional[StrictStr] = Field(default=None, description="The name of the device in CDO.", alias="deviceName")
     cpu_health_metrics: Optional[CpuHealthMetrics] = Field(default=None, alias="cpuHealthMetrics")
     memory_health_metrics: Optional[MemoryHealthMetrics] = Field(default=None, alias="memoryHealthMetrics")

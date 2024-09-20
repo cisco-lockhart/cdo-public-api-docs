@@ -28,10 +28,10 @@ class CdoCliResult(BaseModel):
     """
     CdoCliResult
     """ # noqa: E501
-    uid: StrictStr = Field(description="The unique identifier of the CLI execution result.")
+    uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the CLI execution result.")
     result: Optional[StrictStr] = Field(default=None, description="The result of the CLI execution.")
     error_msg: Optional[StrictStr] = Field(default=None, description="The error message, if any.", alias="errorMsg")
-    device_uid: StrictStr = Field(description="The unique identifier of the device.", alias="deviceUid")
+    device_uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the device.", alias="deviceUid")
     start_time: Optional[datetime] = Field(default=None, description="The time (in UTC) at which the user run the CLI execution, represented using the RFC-3339 standard.", alias="startTime")
     script: Optional[StrictStr] = Field(default=None, description="The script executed to generate the CLI result.")
     __properties: ClassVar[List[str]] = ["uid", "result", "errorMsg", "deviceUid", "startTime", "script"]

@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the Message. | 
+**uid** | **str** | The unique identifier, represented as a UUID, of the Message. | 
 **type** | **str** | The type of the message, indicating whether it is a request or a response. | [optional] 
-**in_reply_to** | **str** | The unique identifier of the message to which this message is replying. This field is populated only for messages of type RESPONSE. | [optional] 
+**in_reply_to** | **str** | The unique identifier, represented as a UUID, of the message to which this message is replying. This field is populated only for messages of type RESPONSE. | [optional] 
 **content** | **str** | The content of the message. | [optional] 
 **created_date** | **datetime** | The time (UTC; represented using the RFC-3339 standard) at which the message was sent. | [optional] 
 

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the Change Request. | 
+**uid** | **str** | The unique identifier, represented as a UUID, of the Change Request. | 
 **name** | **str** | The name of the Change Request. | 
 **description** | **str** | The description of the Change Request. | [optional] 
 

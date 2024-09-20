@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the Change Log. | 
+**uid** | **str** | The unique identifier, represented as a UUID, of the Change Log. | 
 **status** | **str** | The status of the Change Log. | [optional] 
 **entity_uid** | **str** | The uid of the device/manager/service the Change Log refers to. | [optional] 
 **events** | [**List[Event]**](Event.md) | The events recorded in this Change Log. | [optional] 

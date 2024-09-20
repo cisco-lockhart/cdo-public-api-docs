@@ -28,10 +28,10 @@ class AccessGroup(BaseModel):
     """
     AccessGroup
     """ # noqa: E501
-    uid: StrictStr = Field(description="The unique identifier of Access Group in CDO.")
+    uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of Access Group in CDO.")
     name: StrictStr = Field(description="The name of Access Group in CDO. Access Group names are unique in CDO.")
-    entity_uid: StrictStr = Field(description="The unique identifier of the device/manager associated with the Access Group.", alias="entityUid")
-    shared_access_group_uid: StrictStr = Field(description="The unique identifier of the shared access group manager associated with the Access Group.", alias="sharedAccessGroupUid")
+    entity_uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the device/manager associated with the Access Group.", alias="entityUid")
+    shared_access_group_uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the shared access group manager associated with the Access Group.", alias="sharedAccessGroupUid")
     is_shared: Optional[StrictBool] = Field(default=None, description="The flag that identifies if access group is shared.", alias="isShared")
     applied_to: Optional[List[StrictStr]] = Field(default=None, description="The set of device unique identifiers to which this Access Group was applied. Only valid for shared access group.", alias="appliedTo")
     resources: Optional[List[Dict[str, Dict[str, Any]]]] = Field(default=None, description="The set of of interface and direction pairs or global resource.")

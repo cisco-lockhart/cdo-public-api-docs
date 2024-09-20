@@ -27,7 +27,7 @@ class Network(BaseModel):
     """
     (Meraki devices only) The [Dashboard Network](https://documentation.meraki.com/General_Administration/Organizations_and_Networks/Creating_and_Deleting_Dashboard_Networks) the device is deployed in.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the Meraki Dashboard Network.")
+    id: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the Meraki Dashboard Network.")
     name: Optional[StrictStr] = Field(default=None, description="The name of the Meraki Dashboard Network.")
     timezone: Optional[StrictStr] = Field(default=None, description="The timezone of the Meraki Dashboard Network.")
     __properties: ClassVar[List[str]] = ["id", "name", "timezone"]

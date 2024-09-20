@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the CLI macro. | 
+**uid** | **str** | The unique identifier, represented as a UUID, of the CLI macro. | 
 **name** | **str** | The name of the CLI macro. | [optional] 
 **script** | **str** | The script executed to generate the CLI result. | [optional] 
 **parameters** | **List[str]** | A set of parameters provided in the script | [optional] 

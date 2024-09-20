@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the MFA event. | 
+**uid** | **str** | The unique identifier, represented as a UUID, of the MFA event. | 
 **username** | **str** | The name of the user associated with the MFA event. | 
 **timestamp** | **datetime** | The time (in UTC) at which the user logged in to the MFA event, represented using the RFC-3339 standard. | [optional] 
 **application** | **str** | The name of the application associated with the MFA event. | [optional] 

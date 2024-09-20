@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier of the conversation. | 
+**uid** | **str** | The unique identifier, represented as a UUID, of the conversation. | 
 **created_date** | **datetime** | The time (UTC; represented using the RFC-3339 standard) at which the conversation was created. | [optional] 
 **last_interaction_date** | **datetime** | The time (UTC; represented using the RFC-3339 standard) at which the user interacted with this conversation. | [optional] 
 **last_answer_date** | **datetime** | The time (UTC; represented using the RFC-3339 standard) at which an answer was received. | [optional] 
