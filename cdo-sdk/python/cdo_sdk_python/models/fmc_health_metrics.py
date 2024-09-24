@@ -18,11 +18,13 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cdo_sdk_python.models.chassis_stats_health_metrics import ChassisStatsHealthMetrics
 from cdo_sdk_python.models.cpu_health_metrics import CpuHealthMetrics
 from cdo_sdk_python.models.disk_health_metrics import DiskHealthMetrics
+from cdo_sdk_python.models.ha_health_metrics import HaHealthMetrics
 from cdo_sdk_python.models.interface_health_metrics import InterfaceHealthMetrics
 from cdo_sdk_python.models.memory_health_metrics import MemoryHealthMetrics
 from typing import Optional, Set
@@ -34,12 +36,15 @@ class FmcHealthMetrics(BaseModel):
     """ # noqa: E501
     device_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the device in CDO.", alias="deviceUid")
     device_name: Optional[StrictStr] = Field(default=None, description="The name of the device in CDO.", alias="deviceName")
+    start_time: Optional[datetime] = Field(default=None, description="The start of the time period (inclusive) for which the health metrics were retrieved for this device.", alias="startTime")
+    end_time: Optional[datetime] = Field(default=None, description="The end of the time period (inclusive) for which the health metrics were retrieved for this device.", alias="endTime")
     cpu_health_metrics: Optional[CpuHealthMetrics] = Field(default=None, alias="cpuHealthMetrics")
     memory_health_metrics: Optional[MemoryHealthMetrics] = Field(default=None, alias="memoryHealthMetrics")
     disk_health_metrics: Optional[DiskHealthMetrics] = Field(default=None, alias="diskHealthMetrics")
     chassis_stats_health_metrics: Optional[ChassisStatsHealthMetrics] = Field(default=None, alias="chassisStatsHealthMetrics")
     interface_health_metrics: Optional[List[InterfaceHealthMetrics]] = Field(default=None, description="The interface health metrics for the device.", alias="interfaceHealthMetrics")
-    __properties: ClassVar[List[str]] = ["deviceUid", "deviceName", "cpuHealthMetrics", "memoryHealthMetrics", "diskHealthMetrics", "chassisStatsHealthMetrics", "interfaceHealthMetrics"]
+    ha_health_metrics: Optional[HaHealthMetrics] = Field(default=None, alias="haHealthMetrics")
+    __properties: ClassVar[List[str]] = ["deviceUid", "deviceName", "startTime", "endTime", "cpuHealthMetrics", "memoryHealthMetrics", "diskHealthMetrics", "chassisStatsHealthMetrics", "interfaceHealthMetrics", "haHealthMetrics"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -99,6 +104,9 @@ class FmcHealthMetrics(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['interfaceHealthMetrics'] = _items
+        # override the default output from pydantic by calling `to_dict()` of ha_health_metrics
+        if self.ha_health_metrics:
+            _dict['haHealthMetrics'] = self.ha_health_metrics.to_dict()
         return _dict
 
     @classmethod
@@ -113,11 +121,14 @@ class FmcHealthMetrics(BaseModel):
         _obj = cls.model_validate({
             "deviceUid": obj.get("deviceUid"),
             "deviceName": obj.get("deviceName"),
+            "startTime": obj.get("startTime"),
+            "endTime": obj.get("endTime"),
             "cpuHealthMetrics": CpuHealthMetrics.from_dict(obj["cpuHealthMetrics"]) if obj.get("cpuHealthMetrics") is not None else None,
             "memoryHealthMetrics": MemoryHealthMetrics.from_dict(obj["memoryHealthMetrics"]) if obj.get("memoryHealthMetrics") is not None else None,
             "diskHealthMetrics": DiskHealthMetrics.from_dict(obj["diskHealthMetrics"]) if obj.get("diskHealthMetrics") is not None else None,
             "chassisStatsHealthMetrics": ChassisStatsHealthMetrics.from_dict(obj["chassisStatsHealthMetrics"]) if obj.get("chassisStatsHealthMetrics") is not None else None,
-            "interfaceHealthMetrics": [InterfaceHealthMetrics.from_dict(_item) for _item in obj["interfaceHealthMetrics"]] if obj.get("interfaceHealthMetrics") is not None else None
+            "interfaceHealthMetrics": [InterfaceHealthMetrics.from_dict(_item) for _item in obj["interfaceHealthMetrics"]] if obj.get("interfaceHealthMetrics") is not None else None,
+            "haHealthMetrics": HaHealthMetrics.from_dict(obj["haHealthMetrics"]) if obj.get("haHealthMetrics") is not None else None
         })
         return _obj
 

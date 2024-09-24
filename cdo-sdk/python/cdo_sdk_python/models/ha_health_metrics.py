@@ -18,18 +18,38 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class RedirectViewServletContextJspConfigDescriptorTaglibsInner(BaseModel):
+class HaHealthMetrics(BaseModel):
     """
-    RedirectViewServletContextJspConfigDescriptorTaglibsInner
+    The HA health metrics for the device. This value will be available only if the device is part of an HA pair.
     """ # noqa: E501
-    taglib_location: Optional[StrictStr] = Field(default=None, alias="taglibLocation")
-    taglib_uri: Optional[StrictStr] = Field(default=None, alias="taglibURI")
-    __properties: ClassVar[List[str]] = ["taglibLocation", "taglibURI"]
+    node_type: Optional[StrictStr] = Field(default=None, description="Indicates whether the device is a primary or secondary node in an HA pair.", alias="nodeType")
+    node_status: Optional[StrictStr] = Field(default=None, description="The status of the HA node.", alias="nodeStatus")
+    __properties: ClassVar[List[str]] = ["nodeType", "nodeStatus"]
+
+    @field_validator('node_type')
+    def node_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['PRIMARY', 'SECONDARY']):
+            raise ValueError("must be one of enum values ('PRIMARY', 'SECONDARY')")
+        return value
+
+    @field_validator('node_status')
+    def node_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['NORMAL', 'ERROR', 'WARNING', 'DISABLED', 'UNKNOWN']):
+            raise ValueError("must be one of enum values ('NORMAL', 'ERROR', 'WARNING', 'DISABLED', 'UNKNOWN')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +69,7 @@ class RedirectViewServletContextJspConfigDescriptorTaglibsInner(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of RedirectViewServletContextJspConfigDescriptorTaglibsInner from a JSON string"""
+        """Create an instance of HaHealthMetrics from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -74,7 +94,7 @@ class RedirectViewServletContextJspConfigDescriptorTaglibsInner(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of RedirectViewServletContextJspConfigDescriptorTaglibsInner from a dict"""
+        """Create an instance of HaHealthMetrics from a dict"""
         if obj is None:
             return None
 
@@ -82,8 +102,8 @@ class RedirectViewServletContextJspConfigDescriptorTaglibsInner(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "taglibLocation": obj.get("taglibLocation"),
-            "taglibURI": obj.get("taglibURI")
+            "nodeType": obj.get("nodeType"),
+            "nodeStatus": obj.get("nodeStatus")
         })
         return _obj
 

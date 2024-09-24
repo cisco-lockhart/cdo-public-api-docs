@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**taglib_uri** | **str** |  | [optional] 
 **taglib_location** | **str** |  | [optional] 
+**taglib_uri** | **str** |  | [optional] 
 
 ## Example
 

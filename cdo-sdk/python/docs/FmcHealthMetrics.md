@@ -7,11 +7,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **device_uid** | **str** | The unique identifier, represented as a UUID, of the device in CDO. | [optional] 
 **device_name** | **str** | The name of the device in CDO. | [optional] 
+**start_time** | **datetime** | The start of the time period (inclusive) for which the health metrics were retrieved for this device. | [optional] 
+**end_time** | **datetime** | The end of the time period (inclusive) for which the health metrics were retrieved for this device. | [optional] 
 **cpu_health_metrics** | [**CpuHealthMetrics**](CpuHealthMetrics.md) |  | [optional] 
 **memory_health_metrics** | [**MemoryHealthMetrics**](MemoryHealthMetrics.md) |  | [optional] 
 **disk_health_metrics** | [**DiskHealthMetrics**](DiskHealthMetrics.md) |  | [optional] 
 **chassis_stats_health_metrics** | [**ChassisStatsHealthMetrics**](ChassisStatsHealthMetrics.md) |  | [optional] 
 **interface_health_metrics** | [**List[InterfaceHealthMetrics]**](InterfaceHealthMetrics.md) | The interface health metrics for the device. | [optional] 
+**ha_health_metrics** | [**HaHealthMetrics**](HaHealthMetrics.md) |  | [optional] 
 
 ## Example
 

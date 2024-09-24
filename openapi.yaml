@@ -7833,6 +7833,18 @@ components:
           type: string
           description: The name of the device in CDO.
           example: Burak's FTD device
+        startTime:
+          type: string
+          description: >-
+            The start of the time period (inclusive) for which the health
+            metrics were retrieved for this device.
+          format: date-time
+        endTime:
+          type: string
+          description: >-
+            The end of the time period (inclusive) for which the health metrics
+            were retrieved for this device.
+          format: date-time
         cpuHealthMetrics:
           $ref: '#/components/schemas/CpuHealthMetrics'
         memoryHealthMetrics:
@@ -7846,6 +7858,33 @@ components:
           description: The interface health metrics for the device.
           items:
             $ref: '#/components/schemas/InterfaceHealthMetrics'
+        haHealthMetrics:
+          $ref: '#/components/schemas/HaHealthMetrics'
+    HaHealthMetrics:
+      type: object
+      properties:
+        nodeType:
+          type: string
+          description: >-
+            Indicates whether the device is a primary or secondary node in an HA
+            pair.
+          example: PRIMARY
+          enum:
+            - PRIMARY
+            - SECONDARY
+        nodeStatus:
+          type: string
+          description: The status of the HA node.
+          example: NORMAL
+          enum:
+            - NORMAL
+            - ERROR
+            - WARNING
+            - DISABLED
+            - UNKNOWN
+      description: >-
+        The HA health metrics for the device. This value will be available only
+        if the device is part of an HA pair.
     InterfaceHealthMetrics:
       type: object
       properties:
@@ -8383,13 +8422,13 @@ components:
           format: int64
         environment:
           $ref: '#/components/schemas/Environment'
-        beanDefinitionCount:
-          type: integer
-          format: int32
         beanDefinitionNames:
           type: array
           items:
             type: string
+        beanDefinitionCount:
+          type: integer
+          format: int32
         parentBeanFactory:
           $ref: '#/components/schemas/BeanFactory'
         classLoader:
@@ -8696,6 +8735,90 @@ components:
             servletNames:
               type: object
               deprecated: true
+            defaultSessionTrackingModes:
+              uniqueItems: true
+              type: array
+              items:
+                type: string
+                enum:
+                  - COOKIE
+                  - URL
+                  - SSL
+            effectiveSessionTrackingModes:
+              uniqueItems: true
+              type: array
+              items:
+                type: string
+                enum:
+                  - COOKIE
+                  - URL
+                  - SSL
+            jspConfigDescriptor:
+              type: object
+              properties:
+                taglibs:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      taglibLocation:
+                        type: string
+                      taglibURI:
+                        type: string
+                jspPropertyGroups:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      buffer:
+                        type: string
+                      elIgnored:
+                        type: string
+                      scriptingInvalid:
+                        type: string
+                      pageEncoding:
+                        type: string
+                      isXml:
+                        type: string
+                      includePreludes:
+                        type: array
+                        items:
+                          type: string
+                      includeCodas:
+                        type: array
+                        items:
+                          type: string
+                      deferredSyntaxAllowedAsLiteral:
+                        type: string
+                      trimDirectiveWhitespaces:
+                        type: string
+                      errorOnUndeclaredNamespace:
+                        type: string
+                      defaultContentType:
+                        type: string
+                      urlPatterns:
+                        type: array
+                        items:
+                          type: string
+            virtualServerName:
+              type: string
+            requestCharacterEncoding:
+              type: string
+            responseCharacterEncoding:
+              type: string
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -8754,90 +8877,6 @@ components:
                 maxAge:
                   type: integer
                   format: int32
-            defaultSessionTrackingModes:
-              uniqueItems: true
-              type: array
-              items:
-                type: string
-                enum:
-                  - COOKIE
-                  - URL
-                  - SSL
-            effectiveSessionTrackingModes:
-              uniqueItems: true
-              type: array
-              items:
-                type: string
-                enum:
-                  - COOKIE
-                  - URL
-                  - SSL
-            jspConfigDescriptor:
-              type: object
-              properties:
-                taglibs:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      taglibURI:
-                        type: string
-                      taglibLocation:
-                        type: string
-                jspPropertyGroups:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      buffer:
-                        type: string
-                      elIgnored:
-                        type: string
-                      scriptingInvalid:
-                        type: string
-                      pageEncoding:
-                        type: string
-                      isXml:
-                        type: string
-                      includePreludes:
-                        type: array
-                        items:
-                          type: string
-                      includeCodas:
-                        type: array
-                        items:
-                          type: string
-                      deferredSyntaxAllowedAsLiteral:
-                        type: string
-                      trimDirectiveWhitespaces:
-                        type: string
-                      errorOnUndeclaredNamespace:
-                        type: string
-                      defaultContentType:
-                        type: string
-                      urlPatterns:
-                        type: array
-                        items:
-                          type: string
-            virtualServerName:
-              type: string
-            requestCharacterEncoding:
-              type: string
-            responseCharacterEncoding:
-              type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
           writeOnly: true
         contentType:
           type: string

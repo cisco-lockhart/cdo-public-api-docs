@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.2.125"
+__version__ = "1.2.126"
 
 # import apis into sdk package
 from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
@@ -133,6 +133,7 @@ from cdo_sdk_python.models.ftd_ha_info import FtdHaInfo
 from cdo_sdk_python.models.ftd_registration_input import FtdRegistrationInput
 from cdo_sdk_python.models.global_search_result import GlobalSearchResult
 from cdo_sdk_python.models.group_content import GroupContent
+from cdo_sdk_python.models.ha_health_metrics import HaHealthMetrics
 from cdo_sdk_python.models.ha_node import HaNode
 from cdo_sdk_python.models.icmp4_value import Icmp4Value
 from cdo_sdk_python.models.icmp6_value import Icmp6Value
