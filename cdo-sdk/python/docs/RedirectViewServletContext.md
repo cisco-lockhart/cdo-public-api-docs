@@ -11,9 +11,11 @@ Name | Type | Description | Notes
 **minor_version** | **int** |  | [optional] 
 **attribute_names** | **object** |  | [optional] 
 **context_path** | **str** |  | [optional] 
-**session_tracking_modes** | **List[str]** |  | [optional] 
 **init_parameter_names** | **object** |  | [optional] 
+**session_tracking_modes** | **List[str]** |  | [optional] 
 **servlet_names** | **object** |  | [optional] 
+**filter_registrations** | [**Dict[str, RedirectViewServletContextFilterRegistrationsValue]**](RedirectViewServletContextFilterRegistrationsValue.md) |  | [optional] 
+**session_cookie_config** | [**RedirectViewServletContextSessionCookieConfig**](RedirectViewServletContextSessionCookieConfig.md) |  | [optional] 
 **default_session_tracking_modes** | **List[str]** |  | [optional] 
 **effective_session_tracking_modes** | **List[str]** |  | [optional] 
 **jsp_config_descriptor** | [**RedirectViewServletContextJspConfigDescriptor**](RedirectViewServletContextJspConfigDescriptor.md) |  | [optional] 
@@ -26,8 +28,6 @@ Name | Type | Description | Notes
 **server_info** | **str** |  | [optional] 
 **servlet_context_name** | **str** |  | [optional] 
 **servlet_registrations** | [**Dict[str, RedirectViewServletContextServletRegistrationsValue]**](RedirectViewServletContextServletRegistrationsValue.md) |  | [optional] 
-**filter_registrations** | [**Dict[str, RedirectViewServletContextFilterRegistrationsValue]**](RedirectViewServletContextFilterRegistrationsValue.md) |  | [optional] 
-**session_cookie_config** | [**RedirectViewServletContextSessionCookieConfig**](RedirectViewServletContextSessionCookieConfig.md) |  | [optional] 
 
 ## Example
 
