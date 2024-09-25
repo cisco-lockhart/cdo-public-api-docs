@@ -7205,12 +7205,12 @@ components:
         bytesTx:
           type: integer
           description: The number of bytes transmitted during the RA VPN session.
-          format: int32
+          format: int64
           example: 9157513
         bytesRx:
           type: integer
           description: The number of bytes received during the RA VPN session.
-          format: int32
+          format: int64
           example: 6102087
         loginTime:
           type: string
@@ -8420,13 +8420,13 @@ components:
           format: int64
         environment:
           $ref: '#/components/schemas/Environment'
+        beanDefinitionCount:
+          type: integer
+          format: int32
         beanDefinitionNames:
           type: array
           items:
             type: string
-        beanDefinitionCount:
-          type: integer
-          format: int32
         parentBeanFactory:
           $ref: '#/components/schemas/BeanFactory'
         classLoader:
@@ -8716,10 +8716,6 @@ components:
               format: int32
             attributeNames:
               type: object
-            contextPath:
-              type: string
-            initParameterNames:
-              type: object
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8733,90 +8729,10 @@ components:
             servletNames:
               type: object
               deprecated: true
-            defaultSessionTrackingModes:
-              uniqueItems: true
-              type: array
-              items:
-                type: string
-                enum:
-                  - COOKIE
-                  - URL
-                  - SSL
-            effectiveSessionTrackingModes:
-              uniqueItems: true
-              type: array
-              items:
-                type: string
-                enum:
-                  - COOKIE
-                  - URL
-                  - SSL
-            jspConfigDescriptor:
+            contextPath:
+              type: string
+            initParameterNames:
               type: object
-              properties:
-                taglibs:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      taglibURI:
-                        type: string
-                      taglibLocation:
-                        type: string
-                jspPropertyGroups:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      buffer:
-                        type: string
-                      elIgnored:
-                        type: string
-                      pageEncoding:
-                        type: string
-                      isXml:
-                        type: string
-                      includePreludes:
-                        type: array
-                        items:
-                          type: string
-                      includeCodas:
-                        type: array
-                        items:
-                          type: string
-                      deferredSyntaxAllowedAsLiteral:
-                        type: string
-                      trimDirectiveWhitespaces:
-                        type: string
-                      errorOnUndeclaredNamespace:
-                        type: string
-                      scriptingInvalid:
-                        type: string
-                      defaultContentType:
-                        type: string
-                      urlPatterns:
-                        type: array
-                        items:
-                          type: string
-            virtualServerName:
-              type: string
-            requestCharacterEncoding:
-              type: string
-            responseCharacterEncoding:
-              type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -8875,6 +8791,90 @@ components:
                 maxAge:
                   type: integer
                   format: int32
+            defaultSessionTrackingModes:
+              uniqueItems: true
+              type: array
+              items:
+                type: string
+                enum:
+                  - COOKIE
+                  - URL
+                  - SSL
+            effectiveSessionTrackingModes:
+              uniqueItems: true
+              type: array
+              items:
+                type: string
+                enum:
+                  - COOKIE
+                  - URL
+                  - SSL
+            jspConfigDescriptor:
+              type: object
+              properties:
+                taglibs:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      taglibURI:
+                        type: string
+                      taglibLocation:
+                        type: string
+                jspPropertyGroups:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      buffer:
+                        type: string
+                      elIgnored:
+                        type: string
+                      scriptingInvalid:
+                        type: string
+                      pageEncoding:
+                        type: string
+                      isXml:
+                        type: string
+                      includePreludes:
+                        type: array
+                        items:
+                          type: string
+                      includeCodas:
+                        type: array
+                        items:
+                          type: string
+                      deferredSyntaxAllowedAsLiteral:
+                        type: string
+                      trimDirectiveWhitespaces:
+                        type: string
+                      errorOnUndeclaredNamespace:
+                        type: string
+                      urlPatterns:
+                        type: array
+                        items:
+                          type: string
+                      defaultContentType:
+                        type: string
+            virtualServerName:
+              type: string
+            requestCharacterEncoding:
+              type: string
+            responseCharacterEncoding:
+              type: string
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
           writeOnly: true
         contentType:
           type: string
