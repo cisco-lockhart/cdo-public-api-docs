@@ -18,9 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from cdo_sdk_python.models.tenant_pay_type import TenantPayType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,8 +31,18 @@ class Tenant(BaseModel):
     name: Optional[StrictStr] = Field(default=None, description="The name of the tenant in CDO.")
     security_cloud_control_enterprise_id: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the Security Cloud Control Enterprise this tenant is associated with.", alias="securityCloudControlEnterpriseId")
     display_name: Optional[StrictStr] = Field(default=None, description="A human-readable display name for the tenant. This is the tenant name displayed in the CDO Web UI.", alias="displayName")
-    pay_type: Optional[TenantPayType] = Field(default=None, alias="payType")
+    pay_type: Optional[StrictStr] = Field(default=None, description="An enum that describes the payment type of the tenant in CDO.", alias="payType")
     __properties: ClassVar[List[str]] = ["uid", "name", "securityCloudControlEnterpriseId", "displayName", "payType"]
+
+    @field_validator('pay_type')
+    def pay_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['PAYING', 'NOT_PAYING', 'TRIAL', 'INTERNAL', 'PARTNER', 'DEMO']):
+            raise ValueError("must be one of enum values ('PAYING', 'NOT_PAYING', 'TRIAL', 'INTERNAL', 'PARTNER', 'DEMO')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

@@ -177,7 +177,6 @@ cdo_sdk_python/models/target.py
 cdo_sdk_python/models/targets_request.py
 cdo_sdk_python/models/tenant.py
 cdo_sdk_python/models/tenant_page.py
-cdo_sdk_python/models/tenant_pay_type.py
 cdo_sdk_python/models/tenant_settings.py
 cdo_sdk_python/models/unified_object_list_view.py
 cdo_sdk_python/models/update_request.py
@@ -356,7 +355,6 @@ docs/TargetsRequest.md
 docs/Tenant.md
 docs/TenantManagementApi.md
 docs/TenantPage.md
-docs/TenantPayType.md
 docs/TenantSettings.md
 docs/TransactionsApi.md
 docs/UnifiedObjectListView.md
@@ -376,5 +374,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_ha_health_metrics.py
 tox.ini

@@ -163,7 +163,6 @@ from cdo_sdk_python.models.target import Target
 from cdo_sdk_python.models.targets_request import TargetsRequest
 from cdo_sdk_python.models.tenant import Tenant
 from cdo_sdk_python.models.tenant_page import TenantPage
-from cdo_sdk_python.models.tenant_pay_type import TenantPayType
 from cdo_sdk_python.models.tenant_settings import TenantSettings
 from cdo_sdk_python.models.unified_object_list_view import UnifiedObjectListView
 from cdo_sdk_python.models.update_request import UpdateRequest

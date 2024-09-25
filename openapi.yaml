@@ -7367,7 +7367,16 @@ components:
             name displayed in the CDO Web UI.
           example: mytenantname
         payType:
-          $ref: '#/components/schemas/TenantPayType'
+          type: string
+          description: An enum that describes the payment type of the tenant in CDO.
+          example: TRIAL
+          enum:
+            - PAYING
+            - NOT_PAYING
+            - TRIAL
+            - INTERNAL
+            - PARTNER
+            - DEMO
     TenantPage:
       type: object
       properties:
@@ -7394,17 +7403,6 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/Tenant'
-    TenantPayType:
-      type: string
-      description: An enum that describes the payment type of the tenant in CDO.
-      example: TRIAL
-      enum:
-        - PAYING
-        - NOT_PAYING
-        - TRIAL
-        - INTERNAL
-        - PARTNER
-        - DEMO
     CdFmcObject:
       type: object
       properties:
@@ -8422,13 +8420,13 @@ components:
           format: int64
         environment:
           $ref: '#/components/schemas/Environment'
+        beanDefinitionCount:
+          type: integer
+          format: int32
         beanDefinitionNames:
           type: array
           items:
             type: string
-        beanDefinitionCount:
-          type: integer
-          format: int32
         parentBeanFactory:
           $ref: '#/components/schemas/BeanFactory'
         classLoader:
@@ -8735,6 +8733,45 @@ components:
             servletNames:
               type: object
               deprecated: true
+            filterRegistrations:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  servletNameMappings:
+                    type: array
+                    items:
+                      type: string
+                  urlPatternMappings:
+                    type: array
+                    items:
+                      type: string
+                  name:
+                    type: string
+                  className:
+                    type: string
+                  initParameters:
+                    type: object
+                    additionalProperties:
+                      type: string
+            sessionCookieConfig:
+              type: object
+              properties:
+                name:
+                  type: string
+                path:
+                  type: string
+                comment:
+                  type: string
+                httpOnly:
+                  type: boolean
+                secure:
+                  type: boolean
+                domain:
+                  type: string
+                maxAge:
+                  type: integer
+                  format: int32
             defaultSessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8756,22 +8793,11 @@ components:
             jspConfigDescriptor:
               type: object
               properties:
-                taglibs:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      taglibLocation:
-                        type: string
-                      taglibURI:
-                        type: string
                 jspPropertyGroups:
                   type: array
                   items:
                     type: object
                     properties:
-                      buffer:
-                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -8794,12 +8820,23 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
+                      buffer:
+                        type: string
                       defaultContentType:
                         type: string
                       urlPatterns:
                         type: array
                         items:
                           type: string
+                taglibs:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      taglibURI:
+                        type: string
+                      taglibLocation:
+                        type: string
             virtualServerName:
               type: string
             requestCharacterEncoding:
@@ -8838,45 +8875,6 @@ components:
                     type: object
                     additionalProperties:
                       type: string
-            filterRegistrations:
-              type: object
-              additionalProperties:
-                type: object
-                properties:
-                  servletNameMappings:
-                    type: array
-                    items:
-                      type: string
-                  urlPatternMappings:
-                    type: array
-                    items:
-                      type: string
-                  name:
-                    type: string
-                  className:
-                    type: string
-                  initParameters:
-                    type: object
-                    additionalProperties:
-                      type: string
-            sessionCookieConfig:
-              type: object
-              properties:
-                httpOnly:
-                  type: boolean
-                name:
-                  type: string
-                path:
-                  type: string
-                comment:
-                  type: string
-                secure:
-                  type: boolean
-                domain:
-                  type: string
-                maxAge:
-                  type: integer
-                  format: int32
           writeOnly: true
         contentType:
           type: string
