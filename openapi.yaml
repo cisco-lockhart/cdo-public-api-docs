@@ -8420,13 +8420,13 @@ components:
           format: int64
         environment:
           $ref: '#/components/schemas/Environment'
-        beanDefinitionCount:
-          type: integer
-          format: int32
         beanDefinitionNames:
           type: array
           items:
             type: string
+        beanDefinitionCount:
+          type: integer
+          format: int32
         parentBeanFactory:
           $ref: '#/components/schemas/BeanFactory'
         classLoader:
@@ -8733,45 +8733,6 @@ components:
             servletNames:
               type: object
               deprecated: true
-            filterRegistrations:
-              type: object
-              additionalProperties:
-                type: object
-                properties:
-                  servletNameMappings:
-                    type: array
-                    items:
-                      type: string
-                  urlPatternMappings:
-                    type: array
-                    items:
-                      type: string
-                  name:
-                    type: string
-                  className:
-                    type: string
-                  initParameters:
-                    type: object
-                    additionalProperties:
-                      type: string
-            sessionCookieConfig:
-              type: object
-              properties:
-                name:
-                  type: string
-                path:
-                  type: string
-                comment:
-                  type: string
-                httpOnly:
-                  type: boolean
-                secure:
-                  type: boolean
-                domain:
-                  type: string
-                maxAge:
-                  type: integer
-                  format: int32
             defaultSessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8793,14 +8754,23 @@ components:
             jspConfigDescriptor:
               type: object
               properties:
+                taglibs:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      taglibURI:
+                        type: string
+                      taglibLocation:
+                        type: string
                 jspPropertyGroups:
                   type: array
                   items:
                     type: object
                     properties:
-                      elIgnored:
+                      buffer:
                         type: string
-                      scriptingInvalid:
+                      elIgnored:
                         type: string
                       pageEncoding:
                         type: string
@@ -8820,7 +8790,7 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
-                      buffer:
+                      scriptingInvalid:
                         type: string
                       defaultContentType:
                         type: string
@@ -8828,15 +8798,6 @@ components:
                         type: array
                         items:
                           type: string
-                taglibs:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      taglibURI:
-                        type: string
-                      taglibLocation:
-                        type: string
             virtualServerName:
               type: string
             requestCharacterEncoding:
@@ -8875,6 +8836,45 @@ components:
                     type: object
                     additionalProperties:
                       type: string
+            filterRegistrations:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  servletNameMappings:
+                    type: array
+                    items:
+                      type: string
+                  urlPatternMappings:
+                    type: array
+                    items:
+                      type: string
+                  name:
+                    type: string
+                  className:
+                    type: string
+                  initParameters:
+                    type: object
+                    additionalProperties:
+                      type: string
+            sessionCookieConfig:
+              type: object
+              properties:
+                httpOnly:
+                  type: boolean
+                name:
+                  type: string
+                path:
+                  type: string
+                comment:
+                  type: string
+                secure:
+                  type: boolean
+                domain:
+                  type: string
+                maxAge:
+                  type: integer
+                  format: int32
           writeOnly: true
         contentType:
           type: string

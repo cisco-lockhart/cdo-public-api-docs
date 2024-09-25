@@ -29,9 +29,9 @@ class RedirectViewServletContextJspConfigDescriptor(BaseModel):
     """
     RedirectViewServletContextJspConfigDescriptor
     """ # noqa: E501
-    jsp_property_groups: Optional[List[RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner]] = Field(default=None, alias="jspPropertyGroups")
     taglibs: Optional[List[RedirectViewServletContextJspConfigDescriptorTaglibsInner]] = None
-    __properties: ClassVar[List[str]] = ["jspPropertyGroups", "taglibs"]
+    jsp_property_groups: Optional[List[RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner]] = Field(default=None, alias="jspPropertyGroups")
+    __properties: ClassVar[List[str]] = ["taglibs", "jspPropertyGroups"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -72,13 +72,6 @@ class RedirectViewServletContextJspConfigDescriptor(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in jsp_property_groups (list)
-        _items = []
-        if self.jsp_property_groups:
-            for _item in self.jsp_property_groups:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['jspPropertyGroups'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in taglibs (list)
         _items = []
         if self.taglibs:
@@ -86,6 +79,13 @@ class RedirectViewServletContextJspConfigDescriptor(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['taglibs'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in jsp_property_groups (list)
+        _items = []
+        if self.jsp_property_groups:
+            for _item in self.jsp_property_groups:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['jspPropertyGroups'] = _items
         return _dict
 
     @classmethod
@@ -98,8 +98,8 @@ class RedirectViewServletContextJspConfigDescriptor(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "jspPropertyGroups": [RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner.from_dict(_item) for _item in obj["jspPropertyGroups"]] if obj.get("jspPropertyGroups") is not None else None,
-            "taglibs": [RedirectViewServletContextJspConfigDescriptorTaglibsInner.from_dict(_item) for _item in obj["taglibs"]] if obj.get("taglibs") is not None else None
+            "taglibs": [RedirectViewServletContextJspConfigDescriptorTaglibsInner.from_dict(_item) for _item in obj["taglibs"]] if obj.get("taglibs") is not None else None,
+            "jspPropertyGroups": [RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner.from_dict(_item) for _item in obj["jspPropertyGroups"]] if obj.get("jspPropertyGroups") is not None else None
         })
         return _obj
 
