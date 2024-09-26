@@ -22,7 +22,7 @@ Method | HTTP request | Description
 
 Create Object
 
-Create an object in the CDO tenant.
+Create an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -95,7 +95,7 @@ No authorization required
 
 Create Targets
 
-Create targets for an object in the CDO tenant.
+Create targets for an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -170,7 +170,7 @@ No authorization required
 
 Delete Object
 
-Delete an object in the CDO tenant
+Delete an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -241,7 +241,7 @@ No authorization required
 
 Delete Targets
 
-Delete targets from an object in the CDO tenant.
+Delete targets from an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -315,7 +315,7 @@ No authorization required
 
 Get Duplicate Objects
 
-Get objects in the CDO tenant that are duplicates of the given object.
+Get objects in the CDO tenant that are duplicates of the given object. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -389,7 +389,7 @@ No authorization required
 
 Get Issues Count
 
-Get issues count in the CDO tenant.
+Get issues count in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -461,7 +461,7 @@ No authorization required
 
 Get Object
 
-Gets an object in the CDO tenant
+Gets an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -535,7 +535,7 @@ No authorization required
 
 Get Object Usages
 
-Get usages of an object in the CDO tenant.
+Get usages of an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -607,7 +607,7 @@ No authorization required
 
 Get Objects
 
-Get objects in the CDO tenant.
+Get objects in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -687,7 +687,7 @@ No authorization required
 
 Get Override Object With Values For Specific Target
 
-Gets an object in the CDO tenant with values for specific target uid
+Gets an object in the CDO tenant with values for specific target uid. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -761,7 +761,7 @@ No authorization required
 
 Modify Object
 
-Modify an object in the CDO tenant
+Modify an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 

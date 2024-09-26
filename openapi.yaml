@@ -4743,7 +4743,11 @@ paths:
       tags:
         - Object Management
       summary: Get Objects
-      description: Get objects in the CDO tenant.
+      description: >-
+        Get objects in the CDO tenant. To use the object APIs, contact customer
+        support or provision Multicloud Defense and turn on object sharing.
+        Note: the object APIs only support operations on network objects and
+        groups.
       operationId: getObjects
       parameters:
         - name: q
@@ -4814,7 +4818,11 @@ paths:
       tags:
         - Object Management
       summary: Create Object
-      description: Create an object in the CDO tenant.
+      description: >-
+        Create an object in the CDO tenant. To use the object APIs, contact
+        customer support or provision Multicloud Defense and turn on object
+        sharing. Note: the object APIs only support operations on network
+        objects and groups.
       operationId: createObject
       requestBody:
         content:
@@ -4846,7 +4854,11 @@ paths:
       tags:
         - Object Management
       summary: Create Targets
-      description: Create targets for an object in the CDO tenant.
+      description: >-
+        Create targets for an object in the CDO tenant. To use the object APIs,
+        contact customer support or provision Multicloud Defense and turn on
+        object sharing. Note: the object APIs only support operations on network
+        objects and groups.
       operationId: createTargets
       parameters:
         - name: uid
@@ -4894,7 +4906,11 @@ paths:
       tags:
         - Object Management
       summary: Delete Targets
-      description: Delete targets from an object in the CDO tenant.
+      description: >-
+        Delete targets from an object in the CDO tenant. To use the object APIs,
+        contact customer support or provision Multicloud Defense and turn on
+        object sharing. Note: the object APIs only support operations on network
+        objects and groups.
       operationId: deleteTargets
       parameters:
         - name: uid
@@ -4948,7 +4964,11 @@ paths:
       tags:
         - Object Management
       summary: Get Object
-      description: Gets an object in the CDO tenant
+      description: >-
+        Gets an object in the CDO tenant. To use the object APIs, contact
+        customer support or provision Multicloud Defense and turn on object
+        sharing. Note: the object APIs only support operations on network
+        objects and groups.
       operationId: getObject
       parameters:
         - name: uid
@@ -4991,7 +5011,11 @@ paths:
       tags:
         - Object Management
       summary: Delete Object
-      description: Delete an object in the CDO tenant
+      description: >-
+        Delete an object in the CDO tenant. To use the object APIs, contact
+        customer support or provision Multicloud Defense and turn on object
+        sharing. Note: the object APIs only support operations on network
+        objects and groups.
       operationId: deleteObject
       parameters:
         - name: uid
@@ -5025,7 +5049,11 @@ paths:
       tags:
         - Object Management
       summary: Modify Object
-      description: Modify an object in the CDO tenant
+      description: >-
+        Modify an object in the CDO tenant. To use the object APIs, contact
+        customer support or provision Multicloud Defense and turn on object
+        sharing. Note: the object APIs only support operations on network
+        objects and groups.
       operationId: modifyObject
       parameters:
         - name: uid
@@ -5066,7 +5094,11 @@ paths:
       tags:
         - Object Management
       summary: Get Object Usages
-      description: Get usages of an object in the CDO tenant.
+      description: >-
+        Get usages of an object in the CDO tenant. To use the object APIs,
+        contact customer support or provision Multicloud Defense and turn on
+        object sharing. Note: the object APIs only support operations on network
+        objects and groups.
       operationId: getObjectUsages
       parameters:
         - name: uid
@@ -5103,7 +5135,11 @@ paths:
       tags:
         - Object Management
       summary: Get Duplicate Objects
-      description: Get objects in the CDO tenant that are duplicates of the given object.
+      description: >-
+        Get objects in the CDO tenant that are duplicates of the given object.
+        To use the object APIs, contact customer support or provision Multicloud
+        Defense and turn on object sharing. Note: the object APIs only support
+        operations on network objects and groups.
       operationId: getDuplicateObjects
       parameters:
         - name: uid
@@ -5150,7 +5186,11 @@ paths:
       tags:
         - Object Management
       summary: Get Override Object With Values For Specific Target
-      description: Gets an object in the CDO tenant with values for specific target uid
+      description: >-
+        Gets an object in the CDO tenant with values for specific target uid. To
+        use the object APIs, contact customer support or provision Multicloud
+        Defense and turn on object sharing. Note: the object APIs only support
+        operations on network objects and groups.
       operationId: getOverrideObject
       parameters:
         - name: uid
@@ -5193,7 +5233,11 @@ paths:
       tags:
         - Object Management
       summary: Get Issues Count
-      description: Get issues count in the CDO tenant.
+      description: >-
+        Get issues count in the CDO tenant. To use the object APIs, contact
+        customer support or provision Multicloud Defense and turn on object
+        sharing. Note: the object APIs only support operations on network
+        objects and groups.
       operationId: getIssuesCount
       parameters:
         - name: q
@@ -8420,13 +8464,13 @@ components:
           format: int64
         environment:
           $ref: '#/components/schemas/Environment'
-        beanDefinitionCount:
-          type: integer
-          format: int32
         beanDefinitionNames:
           type: array
           items:
             type: string
+        beanDefinitionCount:
+          type: integer
+          format: int32
         parentBeanFactory:
           $ref: '#/components/schemas/BeanFactory'
         classLoader:
@@ -8733,6 +8777,45 @@ components:
             servletNames:
               type: object
               deprecated: true
+            filterRegistrations:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  servletNameMappings:
+                    type: array
+                    items:
+                      type: string
+                  urlPatternMappings:
+                    type: array
+                    items:
+                      type: string
+                  name:
+                    type: string
+                  className:
+                    type: string
+                  initParameters:
+                    type: object
+                    additionalProperties:
+                      type: string
+            sessionCookieConfig:
+              type: object
+              properties:
+                httpOnly:
+                  type: boolean
+                name:
+                  type: string
+                path:
+                  type: string
+                comment:
+                  type: string
+                secure:
+                  type: boolean
+                domain:
+                  type: string
+                maxAge:
+                  type: integer
+                  format: int32
             defaultSessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8836,45 +8919,6 @@ components:
                     type: object
                     additionalProperties:
                       type: string
-            filterRegistrations:
-              type: object
-              additionalProperties:
-                type: object
-                properties:
-                  servletNameMappings:
-                    type: array
-                    items:
-                      type: string
-                  urlPatternMappings:
-                    type: array
-                    items:
-                      type: string
-                  name:
-                    type: string
-                  className:
-                    type: string
-                  initParameters:
-                    type: object
-                    additionalProperties:
-                      type: string
-            sessionCookieConfig:
-              type: object
-              properties:
-                httpOnly:
-                  type: boolean
-                name:
-                  type: string
-                path:
-                  type: string
-                comment:
-                  type: string
-                domain:
-                  type: string
-                secure:
-                  type: boolean
-                maxAge:
-                  type: integer
-                  format: int32
           writeOnly: true
         contentType:
           type: string
@@ -8996,17 +9040,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
+          writeOnly: true
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
           writeOnly: true
     JsonWebKey:
       type: object
