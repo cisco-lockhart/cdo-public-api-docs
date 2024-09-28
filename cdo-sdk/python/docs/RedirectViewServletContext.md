@@ -5,17 +5,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**session_timeout** | **int** |  | [optional] 
 **class_loader** | [**ApplicationContextClassLoaderParentUnnamedModuleClassLoader**](ApplicationContextClassLoaderParentUnnamedModuleClassLoader.md) |  | [optional] 
 **major_version** | **int** |  | [optional] 
 **minor_version** | **int** |  | [optional] 
+**session_timeout** | **int** |  | [optional] 
 **attribute_names** | **object** |  | [optional] 
 **context_path** | **str** |  | [optional] 
 **init_parameter_names** | **object** |  | [optional] 
 **session_tracking_modes** | **List[str]** |  | [optional] 
 **servlet_names** | **object** |  | [optional] 
-**filter_registrations** | [**Dict[str, RedirectViewServletContextFilterRegistrationsValue]**](RedirectViewServletContextFilterRegistrationsValue.md) |  | [optional] 
-**session_cookie_config** | [**RedirectViewServletContextSessionCookieConfig**](RedirectViewServletContextSessionCookieConfig.md) |  | [optional] 
 **default_session_tracking_modes** | **List[str]** |  | [optional] 
 **effective_session_tracking_modes** | **List[str]** |  | [optional] 
 **jsp_config_descriptor** | [**RedirectViewServletContextJspConfigDescriptor**](RedirectViewServletContextJspConfigDescriptor.md) |  | [optional] 
@@ -28,6 +26,8 @@ Name | Type | Description | Notes
 **server_info** | **str** |  | [optional] 
 **servlet_context_name** | **str** |  | [optional] 
 **servlet_registrations** | [**Dict[str, RedirectViewServletContextServletRegistrationsValue]**](RedirectViewServletContextServletRegistrationsValue.md) |  | [optional] 
+**filter_registrations** | [**Dict[str, RedirectViewServletContextFilterRegistrationsValue]**](RedirectViewServletContextFilterRegistrationsValue.md) |  | [optional] 
+**session_cookie_config** | [**RedirectViewServletContextSessionCookieConfig**](RedirectViewServletContextSessionCookieConfig.md) |  | [optional] 
 
 ## Example
 

@@ -8710,9 +8710,6 @@ components:
         servletContext:
           type: object
           properties:
-            sessionTimeout:
-              type: integer
-              format: int32
             classLoader:
               type: object
               properties:
@@ -8758,6 +8755,9 @@ components:
             minorVersion:
               type: integer
               format: int32
+            sessionTimeout:
+              type: integer
+              format: int32
             attributeNames:
               type: object
             contextPath:
@@ -8777,45 +8777,6 @@ components:
             servletNames:
               type: object
               deprecated: true
-            filterRegistrations:
-              type: object
-              additionalProperties:
-                type: object
-                properties:
-                  servletNameMappings:
-                    type: array
-                    items:
-                      type: string
-                  urlPatternMappings:
-                    type: array
-                    items:
-                      type: string
-                  name:
-                    type: string
-                  className:
-                    type: string
-                  initParameters:
-                    type: object
-                    additionalProperties:
-                      type: string
-            sessionCookieConfig:
-              type: object
-              properties:
-                httpOnly:
-                  type: boolean
-                name:
-                  type: string
-                path:
-                  type: string
-                comment:
-                  type: string
-                secure:
-                  type: boolean
-                domain:
-                  type: string
-                maxAge:
-                  type: integer
-                  format: int32
             defaultSessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8851,6 +8812,10 @@ components:
                   items:
                     type: object
                     properties:
+                      buffer:
+                        type: string
+                      elIgnored:
+                        type: string
                       scriptingInvalid:
                         type: string
                       pageEncoding:
@@ -8870,10 +8835,6 @@ components:
                       trimDirectiveWhitespaces:
                         type: string
                       errorOnUndeclaredNamespace:
-                        type: string
-                      elIgnored:
-                        type: string
-                      buffer:
                         type: string
                       defaultContentType:
                         type: string
@@ -8919,6 +8880,45 @@ components:
                     type: object
                     additionalProperties:
                       type: string
+            filterRegistrations:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  servletNameMappings:
+                    type: array
+                    items:
+                      type: string
+                  urlPatternMappings:
+                    type: array
+                    items:
+                      type: string
+                  name:
+                    type: string
+                  className:
+                    type: string
+                  initParameters:
+                    type: object
+                    additionalProperties:
+                      type: string
+            sessionCookieConfig:
+              type: object
+              properties:
+                httpOnly:
+                  type: boolean
+                name:
+                  type: string
+                path:
+                  type: string
+                comment:
+                  type: string
+                domain:
+                  type: string
+                secure:
+                  type: boolean
+                maxAge:
+                  type: integer
+                  format: int32
           writeOnly: true
         contentType:
           type: string
@@ -9040,17 +9040,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
-          writeOnly: true
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
           writeOnly: true
     JsonWebKey:
       type: object
