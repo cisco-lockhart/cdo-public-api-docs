@@ -24,6 +24,99 @@ servers:
   - url: https://edge.ci.cdo.cisco.com/api/rest
     description: CI
 paths:
+  /v0/msp/tenants:
+    get:
+      tags:
+        - MSP-next-gen
+      summary: Get CDO tenants managed by MSP Portal
+      description: Get a list of CDO tenants managed by the MSP Portal.
+      operationId: getMspManagedTenants_NO_NOT_USE
+      parameters:
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: "50"
+        - name: offset
+          in: query
+          description: The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: "0"
+        - name: q
+          in: query
+          description: The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: fieldName:fieldValue
+      responses:
+        "200":
+          description: List of CDO tenant objects
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MspManagedTenantPage"
+        "400":
+          $ref: "#/components/responses/http400BadRequest"
+        "401":
+          $ref: "#/components/responses/http401Unauthorised"
+        "403":
+          $ref: "#/components/responses/http403Forbidden"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommonApiError"
+      security:
+        - bearerAuth: []
+    post:
+      tags:
+        - MSP-next-gen
+      summary: Add Tenant to MSP Portal (API token)
+      description: "Add a tenant to the MSP Portal by providing an API token for the
+        tenant. Use this endpoint to add a tenant that the user performing the
+        operation is not associated with, or a tenant in a different region to
+        that of the MSP Portal. Note: This endpoint can only be executed by a
+        super-admin in an MSP Portal."
+      operationId: addMspTenant_NO_NOT_USE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MspAddTenantInput"
+        required: true
+      responses:
+        "201":
+          description: Status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusInfo"
+        "400":
+          $ref: "#/components/responses/http400BadRequest"
+        "401":
+          $ref: "#/components/responses/http401Unauthorised"
+        "403":
+          $ref: "#/components/responses/http403Forbidden"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommonApiError"
+      security:
+        - bearerAuth: []
   /v0/msp/tenants/{tenantUid}:
     post:
       tags:
@@ -299,64 +392,24 @@ paths:
                 $ref: "#/components/schemas/CommonApiError"
       security:
         - bearerAuth: []
-  /v0/msp/tenants:
-    get:
-      tags:
-        - MSP-next-gen
-      summary: Get CDO tenants managed by MSP Portal
-      description: Get a list of CDO tenants managed by the MSP Portal.
-      operationId: getMspManagedTenants_NO_NOT_USE
-      parameters:
-        - name: limit
-          in: query
-          description: The number of results to retrieve.
-          required: false
-          schema:
-            maximum: 200
-            minimum: 0
-            type: string
-            default: "50"
-        - name: offset
-          in: query
-          description: The offset of the results retrieved. The CDO API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
-          required: false
-          schema:
-            minimum: 0
-            type: string
-            default: "0"
-        - name: q
-          in: query
-          description: The query to execute. Use the Lucene Query Syntax to construct your
-            query.
-          required: false
-          schema:
-            type: string
-          example: fieldName:fieldValue
-      responses:
-        "200":
-          description: List of CDO tenant objects
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/MspManagedTenantPage"
-        "400":
-          $ref: "#/components/responses/http400BadRequest"
-        "401":
-          $ref: "#/components/responses/http401Unauthorised"
-        "403":
-          $ref: "#/components/responses/http403Forbidden"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CommonApiError"
-      security:
-        - bearerAuth: []
 components:
   schemas:
+    MspAddTenantInput:
+      required:
+        - apiToken
+      type: object
+      properties:
+        apiToken:
+          type: string
+          description: The Tenant API Access Token.
+          example: FaKE-toKeN
+    StatusInfo:
+      type: object
+      properties:
+        status:
+          type: string
+          description: The Status of the request.
+          example: OK
     MspAddUsersToTenantInput:
       required:
         - users

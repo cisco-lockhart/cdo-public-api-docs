@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **failover_state** | **str** | (High Availability ASAs only) Failover state of this device. | [optional] 
 **serial** | **str** | (High Availability ASAs only) The serial number of the device. This is typically used for licensing, and is not the same as the chassis&#39; serial number. | [optional] 
+**chassis_serial** | **str** | (High Availability ASAs only) The serial number of the chassis. | [optional] 
 **software_version** | **str** | (High Availability ASAs only) The version of the software running on the device. | [optional] 
 
 ## Example

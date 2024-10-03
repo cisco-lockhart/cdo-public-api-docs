@@ -28,10 +28,11 @@ class HaNode(BaseModel):
     Information on the secondary unit in the FTD HA Pair.
     """ # noqa: E501
     serial: Optional[StrictStr] = Field(default=None, description="The serial number of the node on the device. This is typically used for licensing, and is not the same as the chassis' serial number.")
+    chassis_serial: Optional[StrictStr] = Field(default=None, description="The serial number of the chassis on the device.", alias="chassisSerial")
     software_version: Optional[StrictStr] = Field(default=None, description="The version of the software running on the device.", alias="softwareVersion")
     uid_on_fmc: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the device on a cdFMC.", alias="uidOnFmc")
     status: Optional[StrictStr] = Field(default=None, description="The status of the HA node.")
-    __properties: ClassVar[List[str]] = ["serial", "softwareVersion", "uidOnFmc", "status"]
+    __properties: ClassVar[List[str]] = ["serial", "chassisSerial", "softwareVersion", "uidOnFmc", "status"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -95,6 +96,7 @@ class HaNode(BaseModel):
 
         _obj = cls.model_validate({
             "serial": obj.get("serial"),
+            "chassisSerial": obj.get("chassisSerial"),
             "softwareVersion": obj.get("softwareVersion"),
             "uidOnFmc": obj.get("uidOnFmc"),
             "status": obj.get("status")

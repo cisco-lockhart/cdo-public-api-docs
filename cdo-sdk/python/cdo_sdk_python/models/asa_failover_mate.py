@@ -29,8 +29,9 @@ class AsaFailoverMate(BaseModel):
     """ # noqa: E501
     failover_state: Optional[StrictStr] = Field(default=None, description="(High Availability ASAs only) Failover state of this device.", alias="failoverState")
     serial: Optional[StrictStr] = Field(default=None, description="(High Availability ASAs only) The serial number of the device. This is typically used for licensing, and is not the same as the chassis' serial number.")
+    chassis_serial: Optional[StrictStr] = Field(default=None, description="(High Availability ASAs only) The serial number of the chassis.", alias="chassisSerial")
     software_version: Optional[StrictStr] = Field(default=None, description="(High Availability ASAs only) The version of the software running on the device.", alias="softwareVersion")
-    __properties: ClassVar[List[str]] = ["failoverState", "serial", "softwareVersion"]
+    __properties: ClassVar[List[str]] = ["failoverState", "serial", "chassisSerial", "softwareVersion"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,6 +86,7 @@ class AsaFailoverMate(BaseModel):
         _obj = cls.model_validate({
             "failoverState": obj.get("failoverState"),
             "serial": obj.get("serial"),
+            "chassisSerial": obj.get("chassisSerial"),
             "softwareVersion": obj.get("softwareVersion")
         })
         return _obj

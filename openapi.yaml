@@ -5213,6 +5213,102 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
+  /v0/msp/tenants:
+    get:
+      tags:
+        - MSP-next-gen
+      summary: Get CDO tenants managed by MSP Portal
+      description: Get a list of CDO tenants managed by the MSP Portal.
+      operationId: getMspManagedTenants_NO_NOT_USE
+      parameters:
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: fieldName:fieldValue
+      responses:
+        '200':
+          description: List of CDO tenant objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MspManagedTenantPage'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+    post:
+      tags:
+        - MSP-next-gen
+      summary: Add Tenant to MSP Portal (API token)
+      description: >-
+        Add a tenant to the MSP Portal by providing an API token for the tenant.
+        Use this endpoint to add a tenant that the user performing the operation
+        is not associated with, or a tenant in a different region to that of the
+        MSP Portal. Note: This endpoint can only be executed by a super-admin in
+        an MSP Portal.
+      operationId: addMspTenant_NO_NOT_USE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MspAddTenantInput'
+        required: true
+      responses:
+        '201':
+          description: Status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusInfo'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v0/msp/tenants/{tenantUid}:
     post:
       tags:
@@ -5496,64 +5592,6 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         '409':
           $ref: '#/components/responses/http409Conflict'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
-  /v0/msp/tenants:
-    get:
-      tags:
-        - MSP-next-gen
-      summary: Get CDO tenants managed by MSP Portal
-      description: Get a list of CDO tenants managed by the MSP Portal.
-      operationId: getMspManagedTenants_NO_NOT_USE
-      parameters:
-        - name: limit
-          in: query
-          description: The number of results to retrieve.
-          required: false
-          schema:
-            maximum: 200
-            minimum: 0
-            type: string
-            default: '50'
-        - name: offset
-          in: query
-          description: >-
-            The offset of the results retrieved. The CDO API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
-          required: false
-          schema:
-            minimum: 0
-            type: string
-            default: '0'
-        - name: q
-          in: query
-          description: >-
-            The query to execute. Use the Lucene Query Syntax to construct your
-            query.
-          required: false
-          schema:
-            type: string
-          example: fieldName:fieldValue
-      responses:
-        '200':
-          description: List of CDO tenant objects
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MspManagedTenantPage'
-        '400':
-          $ref: '#/components/responses/http400BadRequest'
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '403':
-          $ref: '#/components/responses/http403Forbidden'
         '500':
           description: Internal server error.
           content:
@@ -6946,6 +6984,10 @@ components:
             is typically used for licensing, and is not the same as the chassis'
             serial number.
           example: JAD24500xxx
+        chassisSerial:
+          type: string
+          description: (High Availability ASAs only) The serial number of the chassis.
+          example: FTX20131xxx
         softwareVersion:
           type: string
           description: >-
@@ -7267,6 +7309,10 @@ components:
             The serial number of the node on the device. This is typically used
             for licensing, and is not the same as the chassis' serial number.
           example: JAD24500xxx
+        chassisSerial:
+          type: string
+          description: The serial number of the chassis on the device.
+          example: FTX20131xxx
         softwareVersion:
           type: string
           description: The version of the software running on the device.
@@ -8788,13 +8834,13 @@ components:
           format: int64
         environment:
           $ref: '#/components/schemas/Environment'
+        beanDefinitionCount:
+          type: integer
+          format: int32
         beanDefinitionNames:
           type: array
           items:
             type: string
-        beanDefinitionCount:
-          type: integer
-          format: int32
         parentBeanFactory:
           $ref: '#/components/schemas/BeanFactory'
         classLoader:
@@ -9101,6 +9147,38 @@ components:
             servletNames:
               type: object
               deprecated: true
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
+            servletRegistrations:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  mappings:
+                    type: array
+                    items:
+                      type: string
+                  runAsRole:
+                    type: string
+                  name:
+                    type: string
+                  className:
+                    type: string
+                  initParameters:
+                    type: object
+                    additionalProperties:
+                      type: string
             filterRegistrations:
               type: object
               additionalProperties:
@@ -9175,6 +9253,8 @@ components:
                   items:
                     type: object
                     properties:
+                      buffer:
+                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9197,8 +9277,6 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
-                      buffer:
-                        type: string
                       defaultContentType:
                         type: string
                       urlPatterns:
@@ -9211,38 +9289,6 @@ components:
               type: string
             responseCharacterEncoding:
               type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
-            servletRegistrations:
-              type: object
-              additionalProperties:
-                type: object
-                properties:
-                  mappings:
-                    type: array
-                    items:
-                      type: string
-                  runAsRole:
-                    type: string
-                  name:
-                    type: string
-                  className:
-                    type: string
-                  initParameters:
-                    type: object
-                    additionalProperties:
-                      type: string
           writeOnly: true
         contentType:
           type: string
