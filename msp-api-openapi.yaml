@@ -7,79 +7,441 @@ info:
     email: cdo.tac@cisco.com
   version: 1.4.0
 servers:
-- url: https://edge.us.cdo.cisco.com/api/rest
-  description: US
-- url: https://edge.eu.cdo.cisco.com/api/rest
-  description: EU
-- url: https://edge.apj.cdo.cisco.com/api/rest
-  description: APJ
-- url: https://edge.aus.cdo.cisco.com/api/rest
-  description: AUS
-- url: https://edge.in.cdo.cisco.com/api/rest
-  description: IN
-- url: https://edge.staging.cdo.cisco.com/api/rest
-  description: Staging
-- url: https://edge.scale.cdo.cisco.com/api/rest
-  description: Scale
-- url: https://edge.ci.cdo.cisco.com/api/rest
-  description: CI
+  - url: https://edge.us.cdo.cisco.com/api/rest
+    description: US
+  - url: https://edge.eu.cdo.cisco.com/api/rest
+    description: EU
+  - url: https://edge.apj.cdo.cisco.com/api/rest
+    description: APJ
+  - url: https://edge.aus.cdo.cisco.com/api/rest
+    description: AUS
+  - url: https://edge.in.cdo.cisco.com/api/rest
+    description: IN
+  - url: https://edge.staging.cdo.cisco.com/api/rest
+    description: Staging
+  - url: https://edge.scale.cdo.cisco.com/api/rest
+    description: Scale
+  - url: https://edge.ci.cdo.cisco.com/api/rest
+    description: CI
 paths:
-  /v1/msp/tenants:
-    get:
+  /v0/msp/tenants/{tenantUid}:
+    post:
       tags:
-      - MSP-next-gen
-      summary: Get CDO tenants managed by MSP Portal
-      description: Fetch a list of CDO tenants managed by the MSP Portal.
-      operationId: getMspManagedTenants
+        - MSP-next-gen
+      summary: Add tenant to MSP Portal
+      description: "This is an asynchronous operation to add an existing tenant that
+        the user making the API call is associated with to the MSP Portal. This
+        endpoint will add an API-only user to the tenant, generate an API token
+        for the API-only user, and add the tenant to the MSP Portal. Note: this
+        endpoint can only be executed by a super-admin in the MSP Portal who is
+        also associated with the tenant being added."
+      operationId: addTenantToMspPortal_NO_NOT_USE
       parameters:
-      - name: limit
-        in: query
-        description: The number of results to retrieve.
-        required: false
-        schema:
-          maximum: 200
-          minimum: 0
-          type: string
-          default: "50"
-      - name: offset
-        in: query
-        description: "The offset of the results retrieved. The CDO API uses the offset\
-          \ field to determine the index of the first result retrieved, and will retrieve\
-          \ `limit` results from the offset specified."
-        required: false
-        schema:
-          minimum: 0
-          type: string
-          default: "0"
-      - name: q
-        in: query
-        description: The query to execute. Use the Lucene Query Syntax to construct
-          your query.
-        required: false
-        schema:
-          type: string
-        example: fieldName:fieldValue
+        - name: tenantUid
+          in: path
+          description: Unique identifier of the tenant to add to the MSP portal.
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "200":
-          description: List of CDO tenant objects
+        "202":
+          description: CDO Transaction object that can be used to track the status of the
+            operation.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MspManagedTenantPage'
+                $ref: ./public-api-openapi.yaml#/components/schemas/CdoTransaction
+        "400":
+          $ref: "#/components/responses/http400BadRequest"
+        "401":
+          $ref: "#/components/responses/http401Unauthorised"
+        "403":
+          $ref: "#/components/responses/http403Forbidden"
+        "409":
+          $ref: "#/components/responses/http409Conflict"
         "500":
           description: Internal server error.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CommonApiError'
+                $ref: "#/components/schemas/CommonApiError"
       security:
-      - bearerAuth: []
+        - bearerAuth: []
+  /v0/msp/tenants/{tenantUid}/users:
+    post:
+      tags:
+        - MSP-next-gen
+      summary: Add users to CDO tenant in MSP Portal
+      description: "This is an asynchronous operation to add a list of users to a
+        tenant associated with the MSP Portal. Note: this endpoint cannot be
+        used to add API-only users."
+      operationId: addUsersToTenantInMspPortal_NO_NOT_USE
+      parameters:
+        - name: tenantUid
+          in: path
+          description: Unique identifier of the tenant to which the users will be added.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MspAddUsersToTenantInput"
+        required: true
+      responses:
+        "202":
+          description: CDO Transaction object that can be used to track the status of the
+            operation.
+          content:
+            application/json:
+              schema:
+                $ref: ./public-api-openapi.yaml#/components/schemas/CdoTransaction
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommonApiError"
+  /v0/msp/tenants/{tenantUid}/users/{apiUserUid}/token:
+    post:
+      tags:
+        - MSP-next-gen
+      summary: Generate token for API-only user on tenant managed by MSP portal
+      description: Generate API Token for API-only user on a tenant managed by the MSP
+        portal. API-only users are used for building automations with CDO. If
+        the user ID provided is not that of an API-only user, this operation
+        will fail.
+      operationId: generateApiTokenForUserInTenant
+      parameters:
+        - name: tenantUid
+          in: path
+          description: The unique identifier of the tenant in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: apiUserUid
+          in: path
+          description: The unique identifier of the API-only user in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "201":
+          description: API Token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiTokenInfo"
+        "400":
+          $ref: "#/components/responses/http400BadRequest"
+        "401":
+          $ref: "#/components/responses/http401Unauthorised"
+        "403":
+          $ref: "#/components/responses/http403Forbidden"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommonApiError"
+      security:
+        - bearerAuth: []
+  /v0/msp/tenants/{tenantUid}/users/groups:
+    post:
+      tags:
+        - MSP-next-gen
+      summary: Add Active Directory Groups to CDO tenant in MSP Portal
+      description: This is an asynchronous operation to add a list of Active Directory
+        Groups to a tenant associated with the MSP Portal.
+      operationId: addActiveDirectoryGroupsToTenantInMspPortal_NO_NOT_USE
+      parameters:
+        - name: tenantUid
+          in: path
+          description: Unique identifier of the tenant to which the user groups will be
+            added.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/ActiveDirectoryGroupCreateOrUpdateInput"
+        required: true
+      responses:
+        "202":
+          description: CDO Transaction object that can be used to track the status of the
+            operation.
+          content:
+            application/json:
+              schema:
+                $ref: ./public-api-openapi.yaml#/components/schemas/CdoTransaction
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommonApiError"
+  /v0/msp/tenants/{tenantUid}/mcd:
+    post:
+      tags:
+        - MSP-next-gen
+      summary: Enable Multicloud Defense for CDO tenant in MSP Portal
+      description: This is an asynchronous operation to enable Multicloud Defense for
+        a tenant associated with the MSP Portal.
+      operationId: enableMulticloudDefenseForTenantInMspPortal_NO_NOT_USE
+      parameters:
+        - name: tenantUid
+          in: path
+          description: Unique identifier of the tenant that Multicloud Defense will be
+            enabled for.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "202":
+          description: CDO Transaction object that can be used to track the status of the
+            operation.
+          content:
+            application/json:
+              schema:
+                $ref: ./public-api-openapi.yaml#/components/schemas/CdoTransaction
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommonApiError"
+  /v0/msp/tenants/{tenantUid}/cdfmc:
+    post:
+      tags:
+        - MSP-next-gen
+      summary: Provision cdFMC for CDO tenant in MSP Portal
+      description: This is an asynchronous operation to provision a cdFMC for a tenant
+        associated with the MSP Portal. This operation does not wait for the
+        cdFMC to be provisioned on the target tenant, and will be marked as
+        successful once the provisioning has been successfully triggered. To
+        monitor the transaction on the target tenant, use the UID in the
+        `TRANSACTION_UID_IN_TARGET_TENANT` key in the transaction details.
+      operationId: provisionCdFmcForTenantInMspPortal_NO_NOT_USE
+      parameters:
+        - name: tenantUid
+          in: path
+          description: Unique identifier of the tenant that cdFMC provisioning will be
+            enabled for.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "202":
+          description: CDO Transaction object that can be used to track the status of the
+            operation.
+          content:
+            application/json:
+              schema:
+                $ref: ./public-api-openapi.yaml#/components/schemas/CdoTransaction
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommonApiError"
+  /v0/msp/tenants/create:
+    post:
+      tags:
+        - MSP-next-gen
+      summary: Create CDO Tenant
+      description: "Create a new tenant in CDO from an MSP Portal. This endpoint
+        creates a tenant, adds the tenant to the MSP Portal. If the user
+        creating the tenant is not an API-only user, the user is also added to
+        the tenant. Note: This endpoint can only be executed by a super-admin in
+        an MSP Portal. You can create no more than 1 tenant every 30 seconds.
+        Additionally, you are limited to creating a total of 100 tenants: please
+        speak to support to raise this limit."
+      operationId: createTenant_NO_NOT_USE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MspCreateTenantInput"
+        required: true
+      responses:
+        "202":
+          description: CDO Transaction object that can be used to track the status of the
+            tenant creation.
+          content:
+            application/json:
+              schema:
+                $ref: ./public-api-openapi.yaml#/components/schemas/CdoTransaction
+        "400":
+          $ref: "#/components/responses/http400BadRequest"
+        "401":
+          $ref: "#/components/responses/http401Unauthorised"
+        "403":
+          $ref: "#/components/responses/http403Forbidden"
+        "409":
+          $ref: "#/components/responses/http409Conflict"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommonApiError"
+      security:
+        - bearerAuth: []
+  /v0/msp/tenants:
+    get:
+      tags:
+        - MSP-next-gen
+      summary: Get CDO tenants managed by MSP Portal
+      description: Get a list of CDO tenants managed by the MSP Portal.
+      operationId: getMspManagedTenants_NO_NOT_USE
+      parameters:
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: "50"
+        - name: offset
+          in: query
+          description: The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: "0"
+        - name: q
+          in: query
+          description: The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: fieldName:fieldValue
+      responses:
+        "200":
+          description: List of CDO tenant objects
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MspManagedTenantPage"
+        "400":
+          $ref: "#/components/responses/http400BadRequest"
+        "401":
+          $ref: "#/components/responses/http401Unauthorised"
+        "403":
+          $ref: "#/components/responses/http403Forbidden"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommonApiError"
+      security:
+        - bearerAuth: []
 components:
   schemas:
+    MspAddUsersToTenantInput:
+      required:
+        - users
+      type: object
+      properties:
+        users:
+          type: array
+          description: The list of users to be added to the tenant.
+          example: "[username: burak@cisco.com, role: ROLE_ADMIN]"
+          items:
+            $ref: "#/components/schemas/UserInput"
+    UserInput:
+      required:
+        - role
+        - username
+      type: object
+      properties:
+        username:
+          type: string
+          description: The name of the user in CDO. This must be a valid e-mail address if
+            the user is not an API-only user.
+          example: smith@jones.com
+        role:
+          $ref: ./public-api-openapi.yaml#/components/schemas/UserRole
+        apiOnlyUser:
+          type: boolean
+          description: Whether the user is an API-only user
+          example: false
+      description: The list of users to be added to the tenant.
+      example: "[username: burak@cisco.com, role: ROLE_ADMIN]"
+    ApiTokenInfo:
+      type: object
+      properties:
+        apiToken:
+          type: string
+          description: The API Access Token.
+          example: FaKE-toKeN
+    ActiveDirectoryGroupCreateOrUpdateInput:
+      required:
+        - groupIdentifier
+        - issuerUrl
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the Active Directory Group. CDO does not support
+            special characters for this field.
+          example: myusername
+        role:
+          type: string
+          description: This determines the role for all the users included in this Active
+            Directory Group.
+          example: ROLE_ADMIN
+        groupIdentifier:
+          type: string
+          description: The unique identifier, represented as a UUID, of the Active
+            Directory Group in your Identity Provider (IdP).
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        issuerUrl:
+          type: string
+          description: The Identity Provider (IdP) URL, which Cisco Defense Orchestrator
+            will use to validate SAML assertions during the sign-in process.
+          example: https://access.example.com/saml2/idp/metadata.php
+        notes:
+          type: string
+          description: Any notes that are applicable to this Active Directory Group.
+          example: This is an example note on the Active Directory Group.
+    MspCreateTenantInput:
+      required:
+        - tenantName
+      type: object
+      properties:
+        tenantName:
+          pattern: "[a-zA-Z0-9-_]{1,50}"
+          type: string
+          description: The name of the tenant to create. The tenant name can only contain
+            alphabets, numbers, -, and _, and is limited to 50 characters.
+          example: acme-inc-usa
+        displayName:
+          type: string
+          description: A human-readable display name of the tenant to create. Use this
+            field only if you want the display name to be different from the
+            name of the tenant.
+          example: Acme Inc., United States offices
     MspManagedTenant:
       type: object
       properties:
@@ -102,15 +464,15 @@ components:
           description: The CDO region the tenant exists in.
           example: US
           enum:
-          - US
-          - EU
-          - APJ
-          - AUS
-          - IN
-          - CI
-          - SCALE
-          - STAGING
-          - UNKNOWN
+            - US
+            - EU
+            - APJ
+            - AUS
+            - IN
+            - CI
+            - SCALE
+            - STAGING
+            - UNKNOWN
       description: The list of items retrieved.
     MspManagedTenantPage:
       type: object
@@ -127,16 +489,16 @@ components:
           example: 50
         offset:
           type: integer
-          description: "The offset of the results retrieved. The CDO API uses the\
-            \ offset field to determine the index of the first result retrieved, and\
-            \ will retrieve `limit` results from the offset specified."
+          description: The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
           format: int32
           example: 0
         items:
           type: array
           description: The list of items retrieved.
           items:
-            $ref: '#/components/schemas/MspManagedTenant'
+            $ref: "#/components/schemas/MspManagedTenant"
     AuthenticationError:
       type: object
       properties:
@@ -156,16 +518,16 @@ components:
           description: A unique code that describes the error.
           example: INVALID_INPUT
           enum:
-          - INVALID_INPUT
-          - UNAUTHORIZED
-          - FORBIDDEN
-          - NOT_FOUND
-          - METHOD_NOT_ALLOWED
-          - CONFLICT
-          - TOO_MANY_REQUESTS
-          - SERVER_ERROR
-          - PROXY_ERROR
-          - BAD_REQUEST
+            - INVALID_INPUT
+            - UNAUTHORIZED
+            - FORBIDDEN
+            - NOT_FOUND
+            - METHOD_NOT_ALLOWED
+            - CONFLICT
+            - TOO_MANY_REQUESTS
+            - SERVER_ERROR
+            - PROXY_ERROR
+            - BAD_REQUEST
         errorMsg:
           type: string
           description: A human-readable error description in English.
@@ -174,9 +536,9 @@ components:
           type: object
           additionalProperties:
             type: object
-            description: "Additional details, if any, on the error"
+            description: Additional details, if any, on the error
             example: {}
-          description: "Additional details, if any, on the error"
+          description: Additional details, if any, on the error
           example: {}
   responses:
     http400BadRequest:
@@ -184,43 +546,43 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/CommonApiError'
+            $ref: "#/components/schemas/CommonApiError"
     http401Unauthorised:
       description: Request not authorized.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/AuthenticationError'
+            $ref: "#/components/schemas/AuthenticationError"
     http403Forbidden:
       description: User does not have sufficient privileges to perform this operation.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/CommonApiError'
+            $ref: "#/components/schemas/CommonApiError"
     http404NotFound:
       description: Entity not found.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/CommonApiError'
+            $ref: "#/components/schemas/CommonApiError"
     http405MethodNotAllowed:
       description: Method not allowed.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/CommonApiError'
+            $ref: "#/components/schemas/CommonApiError"
     http409Conflict:
       description: Conflict.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/CommonApiError'
+            $ref: "#/components/schemas/CommonApiError"
     http422UnprocessableEntity:
       description: Unprocessable entity.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/CommonApiError'
+            $ref: "#/components/schemas/CommonApiError"
   securitySchemes:
     bearerAuth:
       type: http

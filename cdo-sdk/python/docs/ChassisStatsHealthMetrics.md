@@ -10,6 +10,12 @@ Name | Type | Description | Notes
 **fan2_rpm_avg** | **float** | The average speed of fan 2, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load. | [optional] 
 **fan3_rpm_avg** | **float** | The average speed of fan 3, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load. | [optional] 
 **fan4_rpm_avg** | **float** | The average speed of fan 4, if present, crucial for assessing the effectiveness of the system’s cooling mechanism under operational load. | [optional] 
+**psu1_output_status** | **str** |  | [optional] 
+**psu2_output_status** | **str** |  | [optional] 
+**psu1_input_status** | **str** |  | [optional] 
+**psu2_input_status** | **str** |  | [optional] 
+**psu1_fan_status** | **str** |  | [optional] 
+**psu2_fan_status** | **str** |  | [optional] 
 
 ## Example
 

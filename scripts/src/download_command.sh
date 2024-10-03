@@ -22,7 +22,7 @@ for service in "${!urls[@]}"; do
     url=${urls[${service}]}
     filename="${service}-openapi.yaml"
     echo -n "$(yellow Downloading file from) $(yellow_underlined ${url}) to $(blue_bold ${root_dir}/${filename})... "
-    curl -X GET --silent --url  "${url}" -o $root_dir/$filename
+    # curl -X GET --silent --url  "${url}" -o $root_dir/$filename
     filenames+=("${root_dir}/${filename}")
     echo "✅︎"
 done
@@ -31,6 +31,11 @@ echo "$(yellow Installing redocly from npm)... "
 npm i
 echo "Installed ✅︎"
 
+echo -n "Updating references to shared schemas..."
+npm i yaml fs
+node scripts/src/lib/modify_schema.js msp-api-openapi.yaml CdoTransaction public-api-openapi.yaml
+node scripts/src/lib/modify_schema.js msp-api-openapi.yaml UserRole public-api-openapi.yaml
+echo "Updated ✅︎"
 echo -n "$(yellow Combining all OpenAPI YAMLs into one)... "
  ./node_modules/.bin/redocly join ${filenames[*]} -o openapi.yaml
 echo "Combined ✅︎"

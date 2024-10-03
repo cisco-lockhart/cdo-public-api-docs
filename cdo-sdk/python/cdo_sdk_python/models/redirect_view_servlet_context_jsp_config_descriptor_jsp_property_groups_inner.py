@@ -27,8 +27,8 @@ class RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner(BaseMo
     """
     RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner
     """ # noqa: E501
-    scripting_invalid: Optional[StrictStr] = Field(default=None, alias="scriptingInvalid")
     el_ignored: Optional[StrictStr] = Field(default=None, alias="elIgnored")
+    scripting_invalid: Optional[StrictStr] = Field(default=None, alias="scriptingInvalid")
     page_encoding: Optional[StrictStr] = Field(default=None, alias="pageEncoding")
     is_xml: Optional[StrictStr] = Field(default=None, alias="isXml")
     include_preludes: Optional[List[StrictStr]] = Field(default=None, alias="includePreludes")
@@ -39,7 +39,7 @@ class RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner(BaseMo
     buffer: Optional[StrictStr] = None
     default_content_type: Optional[StrictStr] = Field(default=None, alias="defaultContentType")
     url_patterns: Optional[List[StrictStr]] = Field(default=None, alias="urlPatterns")
-    __properties: ClassVar[List[str]] = ["scriptingInvalid", "elIgnored", "pageEncoding", "isXml", "includePreludes", "includeCodas", "deferredSyntaxAllowedAsLiteral", "trimDirectiveWhitespaces", "errorOnUndeclaredNamespace", "buffer", "defaultContentType", "urlPatterns"]
+    __properties: ClassVar[List[str]] = ["elIgnored", "scriptingInvalid", "pageEncoding", "isXml", "includePreludes", "includeCodas", "deferredSyntaxAllowedAsLiteral", "trimDirectiveWhitespaces", "errorOnUndeclaredNamespace", "buffer", "defaultContentType", "urlPatterns"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,8 +92,8 @@ class RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner(BaseMo
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "scriptingInvalid": obj.get("scriptingInvalid"),
             "elIgnored": obj.get("elIgnored"),
+            "scriptingInvalid": obj.get("scriptingInvalid"),
             "pageEncoding": obj.get("pageEncoding"),
             "isXml": obj.get("isXml"),
             "includePreludes": obj.get("includePreludes"),
