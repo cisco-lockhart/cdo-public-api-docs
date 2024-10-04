@@ -320,6 +320,7 @@ class ChangelogsApi:
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         search_text: Annotated[Optional[StrictStr], Field(description="The searchText parameter serves as a flexible search option that allows for text-based filtering across all fields of the Change Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.")] = None,
+        time_range: Annotated[Optional[StrictStr], Field(description="The time range for which to retrieve Change Logs. This parameter cannot be used in conjunction with a query on the lastEventDate field.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -344,6 +345,8 @@ class ChangelogsApi:
         :type offset: str
         :param search_text: The searchText parameter serves as a flexible search option that allows for text-based filtering across all fields of the Change Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.
         :type search_text: str
+        :param time_range: The time range for which to retrieve Change Logs. This parameter cannot be used in conjunction with a query on the lastEventDate field.
+        :type time_range: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
         :param _request_timeout: timeout setting for this request. If one
@@ -372,6 +375,7 @@ class ChangelogsApi:
             limit=limit,
             offset=offset,
             search_text=search_text,
+            time_range=time_range,
             q=q,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -404,6 +408,7 @@ class ChangelogsApi:
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         search_text: Annotated[Optional[StrictStr], Field(description="The searchText parameter serves as a flexible search option that allows for text-based filtering across all fields of the Change Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.")] = None,
+        time_range: Annotated[Optional[StrictStr], Field(description="The time range for which to retrieve Change Logs. This parameter cannot be used in conjunction with a query on the lastEventDate field.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -428,6 +433,8 @@ class ChangelogsApi:
         :type offset: str
         :param search_text: The searchText parameter serves as a flexible search option that allows for text-based filtering across all fields of the Change Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.
         :type search_text: str
+        :param time_range: The time range for which to retrieve Change Logs. This parameter cannot be used in conjunction with a query on the lastEventDate field.
+        :type time_range: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
         :param _request_timeout: timeout setting for this request. If one
@@ -456,6 +463,7 @@ class ChangelogsApi:
             limit=limit,
             offset=offset,
             search_text=search_text,
+            time_range=time_range,
             q=q,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -488,6 +496,7 @@ class ChangelogsApi:
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         search_text: Annotated[Optional[StrictStr], Field(description="The searchText parameter serves as a flexible search option that allows for text-based filtering across all fields of the Change Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.")] = None,
+        time_range: Annotated[Optional[StrictStr], Field(description="The time range for which to retrieve Change Logs. This parameter cannot be used in conjunction with a query on the lastEventDate field.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -512,6 +521,8 @@ class ChangelogsApi:
         :type offset: str
         :param search_text: The searchText parameter serves as a flexible search option that allows for text-based filtering across all fields of the Change Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.
         :type search_text: str
+        :param time_range: The time range for which to retrieve Change Logs. This parameter cannot be used in conjunction with a query on the lastEventDate field.
+        :type time_range: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
         :param _request_timeout: timeout setting for this request. If one
@@ -540,6 +551,7 @@ class ChangelogsApi:
             limit=limit,
             offset=offset,
             search_text=search_text,
+            time_range=time_range,
             q=q,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -567,6 +579,7 @@ class ChangelogsApi:
         limit,
         offset,
         search_text,
+        time_range,
         q,
         _request_auth,
         _content_type,
@@ -599,6 +612,10 @@ class ChangelogsApi:
         if search_text is not None:
             
             _query_params.append(('searchText', search_text))
+            
+        if time_range is not None:
+            
+            _query_params.append(('timeRange', time_range))
             
         if q is not None:
             

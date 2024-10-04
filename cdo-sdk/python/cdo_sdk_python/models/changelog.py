@@ -18,6 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from cdo_sdk_python.models.event import Event
@@ -30,9 +31,10 @@ class Changelog(BaseModel):
     """ # noqa: E501
     uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the Change Log.")
     status: Optional[StrictStr] = Field(default=None, description="The status of the Change Log.")
+    last_event_date: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) at which the last event in the changelog occurred. You can perform range queries on this endpoint using the syntax `[lastEventDate:YYYY-MM-ddTHH:mm:ssZ TO lastEventDate:YYYY-MM-ddTHH:mm:ssZ]`: please note that this will need to be URL-encoded.", alias="lastEventDate")
     entity_uid: Optional[StrictStr] = Field(default=None, description="The uid of the device/manager/service the Change Log refers to.", alias="entityUid")
     events: Optional[List[Event]] = Field(default=None, description="The events recorded in this Change Log.")
-    __properties: ClassVar[List[str]] = ["uid", "status", "entityUid", "events"]
+    __properties: ClassVar[List[str]] = ["uid", "status", "lastEventDate", "entityUid", "events"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -104,6 +106,7 @@ class Changelog(BaseModel):
         _obj = cls.model_validate({
             "uid": obj.get("uid"),
             "status": obj.get("status"),
+            "lastEventDate": obj.get("lastEventDate"),
             "entityUid": obj.get("entityUid"),
             "events": [Event.from_dict(_item) for _item in obj["events"]] if obj.get("events") is not None else None
         })
