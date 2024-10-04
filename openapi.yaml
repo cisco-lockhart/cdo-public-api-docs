@@ -9151,8 +9151,6 @@ components:
               type: object
             contextPath:
               type: string
-            initParameterNames:
-              type: object
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9163,6 +9161,8 @@ components:
                   - COOKIE
                   - URL
                   - SSL
+            initParameterNames:
+              type: object
             servletNames:
               type: object
               deprecated: true
@@ -9209,18 +9209,18 @@ components:
             sessionCookieConfig:
               type: object
               properties:
-                httpOnly:
-                  type: boolean
                 name:
                   type: string
                 path:
                   type: string
                 comment:
                   type: string
-                secure:
-                  type: boolean
                 domain:
                   type: string
+                httpOnly:
+                  type: boolean
+                secure:
+                  type: boolean
                 maxAge:
                   type: integer
                   format: int32
@@ -9245,12 +9245,25 @@ components:
             jspConfigDescriptor:
               type: object
               properties:
+                taglibs:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      taglibURI:
+                        type: string
+                      taglibLocation:
+                        type: string
                 jspPropertyGroups:
                   type: array
                   items:
                     type: object
                     properties:
                       buffer:
+                        type: string
+                      elIgnored:
+                        type: string
+                      scriptingInvalid:
                         type: string
                       pageEncoding:
                         type: string
@@ -9270,25 +9283,12 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
-                      scriptingInvalid:
-                        type: string
-                      elIgnored:
-                        type: string
                       defaultContentType:
                         type: string
                       urlPatterns:
                         type: array
                         items:
                           type: string
-                taglibs:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      taglibLocation:
-                        type: string
-                      taglibURI:
-                        type: string
             virtualServerName:
               type: string
             requestCharacterEncoding:
@@ -9429,17 +9429,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
-          writeOnly: true
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
           writeOnly: true
     JsonWebKey:
       type: object
