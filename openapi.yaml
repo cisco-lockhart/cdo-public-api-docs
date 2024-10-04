@@ -9147,6 +9147,31 @@ components:
             servletNames:
               type: object
               deprecated: true
+            virtualServerName:
+              type: string
+            requestCharacterEncoding:
+              type: string
+            responseCharacterEncoding:
+              type: string
+            servletRegistrations:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  mappings:
+                    type: array
+                    items:
+                      type: string
+                  runAsRole:
+                    type: string
+                  name:
+                    type: string
+                  className:
+                    type: string
+                  initParameters:
+                    type: object
+                    additionalProperties:
+                      type: string
             filterRegistrations:
               type: object
               additionalProperties:
@@ -9212,19 +9237,15 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
                 jspPropertyGroups:
                   type: array
                   items:
                     type: object
                     properties:
-                      buffer:
-                        type: string
-                      elIgnored:
-                        type: string
                       scriptingInvalid:
                         type: string
                       pageEncoding:
@@ -9245,18 +9266,16 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
+                      elIgnored:
+                        type: string
+                      buffer:
+                        type: string
                       defaultContentType:
                         type: string
                       urlPatterns:
                         type: array
                         items:
                           type: string
-            virtualServerName:
-              type: string
-            requestCharacterEncoding:
-              type: string
-            responseCharacterEncoding:
-              type: string
             effectiveMajorVersion:
               type: integer
               format: int32
@@ -9270,25 +9289,6 @@ components:
               type: string
             servletContextName:
               type: string
-            servletRegistrations:
-              type: object
-              additionalProperties:
-                type: object
-                properties:
-                  mappings:
-                    type: array
-                    items:
-                      type: string
-                  runAsRole:
-                    type: string
-                  name:
-                    type: string
-                  className:
-                    type: string
-                  initParameters:
-                    type: object
-                    additionalProperties:
-                      type: string
           writeOnly: true
         contentType:
           type: string

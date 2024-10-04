@@ -41,21 +41,21 @@ class RedirectViewServletContext(BaseModel):
     init_parameter_names: Optional[Dict[str, Any]] = Field(default=None, alias="initParameterNames")
     session_tracking_modes: Optional[List[StrictStr]] = Field(default=None, alias="sessionTrackingModes")
     servlet_names: Optional[Dict[str, Any]] = Field(default=None, alias="servletNames")
+    virtual_server_name: Optional[StrictStr] = Field(default=None, alias="virtualServerName")
+    request_character_encoding: Optional[StrictStr] = Field(default=None, alias="requestCharacterEncoding")
+    response_character_encoding: Optional[StrictStr] = Field(default=None, alias="responseCharacterEncoding")
+    servlet_registrations: Optional[Dict[str, RedirectViewServletContextServletRegistrationsValue]] = Field(default=None, alias="servletRegistrations")
     filter_registrations: Optional[Dict[str, RedirectViewServletContextFilterRegistrationsValue]] = Field(default=None, alias="filterRegistrations")
     session_cookie_config: Optional[RedirectViewServletContextSessionCookieConfig] = Field(default=None, alias="sessionCookieConfig")
     default_session_tracking_modes: Optional[List[StrictStr]] = Field(default=None, alias="defaultSessionTrackingModes")
     effective_session_tracking_modes: Optional[List[StrictStr]] = Field(default=None, alias="effectiveSessionTrackingModes")
     jsp_config_descriptor: Optional[RedirectViewServletContextJspConfigDescriptor] = Field(default=None, alias="jspConfigDescriptor")
-    virtual_server_name: Optional[StrictStr] = Field(default=None, alias="virtualServerName")
-    request_character_encoding: Optional[StrictStr] = Field(default=None, alias="requestCharacterEncoding")
-    response_character_encoding: Optional[StrictStr] = Field(default=None, alias="responseCharacterEncoding")
     effective_major_version: Optional[StrictInt] = Field(default=None, alias="effectiveMajorVersion")
     effective_minor_version: Optional[StrictInt] = Field(default=None, alias="effectiveMinorVersion")
     servlets: Optional[Dict[str, Any]] = None
     server_info: Optional[StrictStr] = Field(default=None, alias="serverInfo")
     servlet_context_name: Optional[StrictStr] = Field(default=None, alias="servletContextName")
-    servlet_registrations: Optional[Dict[str, RedirectViewServletContextServletRegistrationsValue]] = Field(default=None, alias="servletRegistrations")
-    __properties: ClassVar[List[str]] = ["sessionTimeout", "classLoader", "majorVersion", "minorVersion", "attributeNames", "contextPath", "initParameterNames", "sessionTrackingModes", "servletNames", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "effectiveMajorVersion", "effectiveMinorVersion", "servlets", "serverInfo", "servletContextName", "servletRegistrations"]
+    __properties: ClassVar[List[str]] = ["sessionTimeout", "classLoader", "majorVersion", "minorVersion", "attributeNames", "contextPath", "initParameterNames", "sessionTrackingModes", "servletNames", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "servletRegistrations", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "effectiveMajorVersion", "effectiveMinorVersion", "servlets", "serverInfo", "servletContextName"]
 
     @field_validator('session_tracking_modes')
     def session_tracking_modes_validate_enum(cls, value):
@@ -132,6 +132,13 @@ class RedirectViewServletContext(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of class_loader
         if self.class_loader:
             _dict['classLoader'] = self.class_loader.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in servlet_registrations (dict)
+        _field_dict = {}
+        if self.servlet_registrations:
+            for _key in self.servlet_registrations:
+                if self.servlet_registrations[_key]:
+                    _field_dict[_key] = self.servlet_registrations[_key].to_dict()
+            _dict['servletRegistrations'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each value in filter_registrations (dict)
         _field_dict = {}
         if self.filter_registrations:
@@ -145,13 +152,6 @@ class RedirectViewServletContext(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of jsp_config_descriptor
         if self.jsp_config_descriptor:
             _dict['jspConfigDescriptor'] = self.jsp_config_descriptor.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each value in servlet_registrations (dict)
-        _field_dict = {}
-        if self.servlet_registrations:
-            for _key in self.servlet_registrations:
-                if self.servlet_registrations[_key]:
-                    _field_dict[_key] = self.servlet_registrations[_key].to_dict()
-            _dict['servletRegistrations'] = _field_dict
         return _dict
 
     @classmethod
@@ -173,6 +173,15 @@ class RedirectViewServletContext(BaseModel):
             "initParameterNames": obj.get("initParameterNames"),
             "sessionTrackingModes": obj.get("sessionTrackingModes"),
             "servletNames": obj.get("servletNames"),
+            "virtualServerName": obj.get("virtualServerName"),
+            "requestCharacterEncoding": obj.get("requestCharacterEncoding"),
+            "responseCharacterEncoding": obj.get("responseCharacterEncoding"),
+            "servletRegistrations": dict(
+                (_k, RedirectViewServletContextServletRegistrationsValue.from_dict(_v))
+                for _k, _v in obj["servletRegistrations"].items()
+            )
+            if obj.get("servletRegistrations") is not None
+            else None,
             "filterRegistrations": dict(
                 (_k, RedirectViewServletContextFilterRegistrationsValue.from_dict(_v))
                 for _k, _v in obj["filterRegistrations"].items()
@@ -183,20 +192,11 @@ class RedirectViewServletContext(BaseModel):
             "defaultSessionTrackingModes": obj.get("defaultSessionTrackingModes"),
             "effectiveSessionTrackingModes": obj.get("effectiveSessionTrackingModes"),
             "jspConfigDescriptor": RedirectViewServletContextJspConfigDescriptor.from_dict(obj["jspConfigDescriptor"]) if obj.get("jspConfigDescriptor") is not None else None,
-            "virtualServerName": obj.get("virtualServerName"),
-            "requestCharacterEncoding": obj.get("requestCharacterEncoding"),
-            "responseCharacterEncoding": obj.get("responseCharacterEncoding"),
             "effectiveMajorVersion": obj.get("effectiveMajorVersion"),
             "effectiveMinorVersion": obj.get("effectiveMinorVersion"),
             "servlets": obj.get("servlets"),
             "serverInfo": obj.get("serverInfo"),
-            "servletContextName": obj.get("servletContextName"),
-            "servletRegistrations": dict(
-                (_k, RedirectViewServletContextServletRegistrationsValue.from_dict(_v))
-                for _k, _v in obj["servletRegistrations"].items()
-            )
-            if obj.get("servletRegistrations") is not None
-            else None
+            "servletContextName": obj.get("servletContextName")
         })
         return _obj
 
