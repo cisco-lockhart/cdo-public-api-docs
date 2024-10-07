@@ -50,8 +50,6 @@ tags:
     x-displayName: AI Assistant
   - name: Tenant Management
     x-displayName: Tenant Management
-  - name: Transactions
-    x-displayName: Transactions
   - name: Meta
     x-displayName: Meta
   - name: Changelogs
@@ -3489,55 +3487,6 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
-  /v1/transactions/{transactionUid}:
-    get:
-      tags:
-        - Transactions
-      summary: Get Transaction
-      description: >-
-        Get information on an in-progress CDO transaction. A CDO transaction is
-        an entity used to monitor progress of, and provide feedback on,
-        long-running operations. All asynchronous operations in CDO's API create
-        CDO transactions.
-      operationId: getTransaction
-      parameters:
-        - name: transactionUid
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '200':
-          description: >-
-            CDO Transaction that has completed, either successfully or
-            unsuccessfully. Note: failed CDO Transactions do not roll back.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CdoTransaction'
-        '202':
-          description: CDO Transaction that is in progress
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CdoTransaction'
-        '400':
-          $ref: '#/components/responses/http400BadRequest'
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '403':
-          $ref: '#/components/responses/http403Forbidden'
-        '404':
-          $ref: '#/components/responses/http404NotFound'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
   /v1/token:
     get:
       tags:
@@ -5617,43 +5566,35 @@ components:
         tenantUid:
           type: string
           description: >-
-            The unique identifier, represented as a UUID, of the tenant that
-            asynchronous transaction triggered on.
+            The unique identifier of the tenant that the transaction triggered
+            on.
           format: uuid
           example: 5131daad-e813-4b8f-8f42-be1e241e2cdb
-        sortKey:
-          type: string
-          description: DynamoDB sort key to provide us with efficient query capabilities.
-          example: |2
-              `transactionUid`
-              `operation:<transactionType>#entityUid:<entityUid>`
-              `cdoTransactionStatus:<cdoTransactionStatus>`
         transactionUid:
           type: string
-          description: >-
-            The unique identifier, represented as a UUID, of the asynchronous
-            transaction triggered.
+          description: The unique identifier of the transaction triggered.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         entityUid:
           type: string
           description: >-
-            The unique identifier, represented as a UUID, of the entity that the
-            asynchronous transaction is triggered on.
+            The unique identifier of the entity that the transaction is
+            triggered on. This can be empty, for a transaction that is not tied
+            to an entity, such as transactions which refresh RA VPN sessions.
           format: uuid
           example: f5f660d4-4b81-4374-877d-fbc4bee894e2
         entityUrl:
           type: string
           description: >-
-            A URL to access the entity that the asynchronous transaction is
-            triggered on.
+            A URL to access the entity that the transaction is triggered on.
+            This can also be empty
           example: >-
             https://edge.us.cdo.cisco.com/platform/public-api/v1/inventory/devices/f5f660d4-4b81-4374-877d-fbc4bee894e2
         transactionPollingUrl:
           type: string
           description: The URL to poll to track the progress of the transaction.
           example: >-
-            https://edge.us.cdo.cisco.com/platform/public-api/v1/transactions/7131daad-e813-4b8f-8f42-be1e241e8cdb
+            https://edge.us.cdo.cisco.com/platform/v1/transactions/7131daad-e813-4b8f-8f42-be1e241e8cdb
         submissionTime:
           type: string
           description: >-
@@ -5668,10 +5609,6 @@ components:
             transaction status was last updated
           format: date-time
           example: '2023-12-13T08:15:44Z'
-        transactionType:
-          $ref: '#/components/schemas/CdoTransactionType'
-        cdoTransactionStatus:
-          $ref: '#/components/schemas/CdoTransactionStatus'
         transactionDetails:
           type: object
           additionalProperties:
@@ -5687,49 +5624,43 @@ components:
             type: string
             description: Transaction error details, if any
           description: Transaction error details, if any
-        expireAt:
-          type: integer
-          description: TTL attribute detailing the expiry time this item should be deleted
-          format: int64
-    CdoTransactionStatus:
-      type: string
-      description: The status of the CDO transaction
-      example: IN_PROGRESS
-      enum:
-        - PENDING
-        - IN_PROGRESS
-        - DONE
-        - ERROR
-    CdoTransactionType:
-      type: string
-      description: the type of the transaction
-      example: ONBOARD_ASA
-      enum:
-        - ONBOARD_ASA
-        - ONBOARD_IOS
-        - ONBOARD_DUO_ADMIN_PANEL
-        - CREATE_FTD
-        - REGISTER_FTD
-        - DELETE_CDFMC_MANAGED_FTD
-        - RECONNECT_ASA
-        - READ_ASA
-        - EXECUTE_CLI_COMMAND
-        - DEPLOY_ASA_DEVICE_CHANGES
-        - INDEX_TENANT
-        - TERMINATE_DEVICE_RA_VPN_SESSIONS
-        - REFRESH_RA_VPN_SESSIONS
-        - TERMINATE_USER_RA_VPN_SESSIONS
-        - CREATE_SDC
-        - ONBOARD_FTD_ZTP
-        - SEND_AI_ASSISTANT_MESSAGE
-        - MSP_CREATE_TENANT
-        - MSP_ADD_USERS_TO_TENANT
-        - MSP_ADD_USER_GROUPS_TO_TENANT
-        - MSP_ADD_EXISTING_TENANT
-        - MSP_ENABLE_MULTICLOUD_DEFENSE
-        - ENABLE_MULTICLOUD_DEFENSE
-        - MSP_PROVISION_CDFMC
-        - PROVISION_CD_FMC
+        transactionType:
+          type: string
+          description: the type of the transaction
+          example: ONBOARD_ASA
+          enum:
+            - ONBOARD_ASA
+            - ONBOARD_IOS
+            - ONBOARD_DUO_ADMIN_PANEL
+            - CREATE_FTD
+            - ONBOARD_FTD_ZTP
+            - REGISTER_FTD
+            - DELETE_CDFMC_MANAGED_FTD
+            - RECONNECT_ASA
+            - READ_ASA
+            - EXECUTE_CLI_COMMAND
+            - DEPLOY_ASA_DEVICE_CHANGES
+            - INDEX_TENANT
+            - TERMINATE_DEVICE_RA_VPN_SESSIONS
+            - REFRESH_RA_VPN_SESSIONS
+            - TERMINATE_USER_RA_VPN_SESSIONS
+            - CREATE_SDC
+            - SEND_AI_ASSISTANT_MESSAGE
+            - MSP_CREATE_TENANT
+            - MSP_ADD_USERS_TO_TENANT
+            - MSP_ADD_USER_GROUPS_TO_TENANT
+            - MSP_ADD_EXISTING_TENANT
+            - MSP_ENABLE_MULTICLOUD_DEFENSE
+            - MSP_PROVISION_CDFMC
+        cdoTransactionStatus:
+          type: string
+          description: The status of the CDO transaction
+          example: IN_PROGRESS
+          enum:
+            - PENDING
+            - IN_PROGRESS
+            - DONE
+            - ERROR
     RaVpnDeviceInput:
       required:
         - deviceUids
@@ -9149,10 +9080,10 @@ components:
               format: int32
             attributeNames:
               type: object
-            initParameterNames:
-              type: object
             contextPath:
               type: string
+            initParameterNames:
+              type: object
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9166,6 +9097,19 @@ components:
             servletNames:
               type: object
               deprecated: true
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -9294,19 +9238,6 @@ components:
             requestCharacterEncoding:
               type: string
             responseCharacterEncoding:
-              type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
               type: string
           writeOnly: true
         contentType:
@@ -10437,7 +10368,6 @@ x-tagGroups:
       - Change Requests
       - AI Assistant
       - Tenant Management
-      - Transactions
       - Meta
       - Changelogs
       - Audit Logs

@@ -19,10 +19,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from cdo_sdk_python.models.cdo_transaction_status import CdoTransactionStatus
-from cdo_sdk_python.models.cdo_transaction_type import CdoTransactionType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,21 +28,39 @@ class CdoTransaction(BaseModel):
     """
     CdoTransaction
     """ # noqa: E501
-    tenant_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the tenant that asynchronous transaction triggered on.", alias="tenantUid")
-    sort_key: Optional[StrictStr] = Field(default=None, description="DynamoDB sort key to provide us with efficient query capabilities.", alias="sortKey")
-    transaction_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the asynchronous transaction triggered.", alias="transactionUid")
-    entity_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the entity that the asynchronous transaction is triggered on.", alias="entityUid")
-    entity_url: Optional[StrictStr] = Field(default=None, description="A URL to access the entity that the asynchronous transaction is triggered on.", alias="entityUrl")
+    tenant_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the tenant that the transaction triggered on.", alias="tenantUid")
+    transaction_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the transaction triggered.", alias="transactionUid")
+    entity_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the entity that the transaction is triggered on. This can be empty, for a transaction that is not tied to an entity, such as transactions which refresh RA VPN sessions.", alias="entityUid")
+    entity_url: Optional[StrictStr] = Field(default=None, description="A URL to access the entity that the transaction is triggered on. This can also be empty", alias="entityUrl")
     transaction_polling_url: Optional[StrictStr] = Field(default=None, description="The URL to poll to track the progress of the transaction.", alias="transactionPollingUrl")
     submission_time: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) at which the transaction was triggered", alias="submissionTime")
     last_updated_time: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) at which the transaction status was last updated", alias="lastUpdatedTime")
-    transaction_type: Optional[CdoTransactionType] = Field(default=None, alias="transactionType")
-    cdo_transaction_status: Optional[CdoTransactionStatus] = Field(default=None, alias="cdoTransactionStatus")
     transaction_details: Optional[Dict[str, StrictStr]] = Field(default=None, description="Transaction details, if any", alias="transactionDetails")
     error_message: Optional[StrictStr] = Field(default=None, description="Transaction error message, if any", alias="errorMessage")
     error_details: Optional[Dict[str, StrictStr]] = Field(default=None, description="Transaction error details, if any", alias="errorDetails")
-    expire_at: Optional[StrictInt] = Field(default=None, description="TTL attribute detailing the expiry time this item should be deleted", alias="expireAt")
-    __properties: ClassVar[List[str]] = ["tenantUid", "sortKey", "transactionUid", "entityUid", "entityUrl", "transactionPollingUrl", "submissionTime", "lastUpdatedTime", "transactionType", "cdoTransactionStatus", "transactionDetails", "errorMessage", "errorDetails", "expireAt"]
+    transaction_type: Optional[StrictStr] = Field(default=None, description="the type of the transaction", alias="transactionType")
+    cdo_transaction_status: Optional[StrictStr] = Field(default=None, description="The status of the CDO transaction", alias="cdoTransactionStatus")
+    __properties: ClassVar[List[str]] = ["tenantUid", "transactionUid", "entityUid", "entityUrl", "transactionPollingUrl", "submissionTime", "lastUpdatedTime", "transactionDetails", "errorMessage", "errorDetails", "transactionType", "cdoTransactionStatus"]
+
+    @field_validator('transaction_type')
+    def transaction_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['ONBOARD_ASA', 'ONBOARD_IOS', 'ONBOARD_DUO_ADMIN_PANEL', 'CREATE_FTD', 'ONBOARD_FTD_ZTP', 'REGISTER_FTD', 'DELETE_CDFMC_MANAGED_FTD', 'RECONNECT_ASA', 'READ_ASA', 'EXECUTE_CLI_COMMAND', 'DEPLOY_ASA_DEVICE_CHANGES', 'INDEX_TENANT', 'TERMINATE_DEVICE_RA_VPN_SESSIONS', 'REFRESH_RA_VPN_SESSIONS', 'TERMINATE_USER_RA_VPN_SESSIONS', 'CREATE_SDC', 'SEND_AI_ASSISTANT_MESSAGE', 'MSP_CREATE_TENANT', 'MSP_ADD_USERS_TO_TENANT', 'MSP_ADD_USER_GROUPS_TO_TENANT', 'MSP_ADD_EXISTING_TENANT', 'MSP_ENABLE_MULTICLOUD_DEFENSE', 'MSP_PROVISION_CDFMC']):
+            raise ValueError("must be one of enum values ('ONBOARD_ASA', 'ONBOARD_IOS', 'ONBOARD_DUO_ADMIN_PANEL', 'CREATE_FTD', 'ONBOARD_FTD_ZTP', 'REGISTER_FTD', 'DELETE_CDFMC_MANAGED_FTD', 'RECONNECT_ASA', 'READ_ASA', 'EXECUTE_CLI_COMMAND', 'DEPLOY_ASA_DEVICE_CHANGES', 'INDEX_TENANT', 'TERMINATE_DEVICE_RA_VPN_SESSIONS', 'REFRESH_RA_VPN_SESSIONS', 'TERMINATE_USER_RA_VPN_SESSIONS', 'CREATE_SDC', 'SEND_AI_ASSISTANT_MESSAGE', 'MSP_CREATE_TENANT', 'MSP_ADD_USERS_TO_TENANT', 'MSP_ADD_USER_GROUPS_TO_TENANT', 'MSP_ADD_EXISTING_TENANT', 'MSP_ENABLE_MULTICLOUD_DEFENSE', 'MSP_PROVISION_CDFMC')")
+        return value
+
+    @field_validator('cdo_transaction_status')
+    def cdo_transaction_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['PENDING', 'IN_PROGRESS', 'DONE', 'ERROR']):
+            raise ValueError("must be one of enum values ('PENDING', 'IN_PROGRESS', 'DONE', 'ERROR')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,19 +114,17 @@ class CdoTransaction(BaseModel):
 
         _obj = cls.model_validate({
             "tenantUid": obj.get("tenantUid"),
-            "sortKey": obj.get("sortKey"),
             "transactionUid": obj.get("transactionUid"),
             "entityUid": obj.get("entityUid"),
             "entityUrl": obj.get("entityUrl"),
             "transactionPollingUrl": obj.get("transactionPollingUrl"),
             "submissionTime": obj.get("submissionTime"),
             "lastUpdatedTime": obj.get("lastUpdatedTime"),
-            "transactionType": obj.get("transactionType"),
-            "cdoTransactionStatus": obj.get("cdoTransactionStatus"),
             "transactionDetails": obj.get("transactionDetails"),
             "errorMessage": obj.get("errorMessage"),
             "errorDetails": obj.get("errorDetails"),
-            "expireAt": obj.get("expireAt")
+            "transactionType": obj.get("transactionType"),
+            "cdoTransactionStatus": obj.get("cdoTransactionStatus")
         })
         return _obj
 

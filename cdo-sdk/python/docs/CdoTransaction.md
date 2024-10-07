@@ -5,20 +5,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tenant_uid** | **str** | The unique identifier, represented as a UUID, of the tenant that asynchronous transaction triggered on. | [optional] 
-**sort_key** | **str** | DynamoDB sort key to provide us with efficient query capabilities. | [optional] 
-**transaction_uid** | **str** | The unique identifier, represented as a UUID, of the asynchronous transaction triggered. | [optional] 
-**entity_uid** | **str** | The unique identifier, represented as a UUID, of the entity that the asynchronous transaction is triggered on. | [optional] 
-**entity_url** | **str** | A URL to access the entity that the asynchronous transaction is triggered on. | [optional] 
+**tenant_uid** | **str** | The unique identifier of the tenant that the transaction triggered on. | [optional] 
+**transaction_uid** | **str** | The unique identifier of the transaction triggered. | [optional] 
+**entity_uid** | **str** | The unique identifier of the entity that the transaction is triggered on. This can be empty, for a transaction that is not tied to an entity, such as transactions which refresh RA VPN sessions. | [optional] 
+**entity_url** | **str** | A URL to access the entity that the transaction is triggered on. This can also be empty | [optional] 
 **transaction_polling_url** | **str** | The URL to poll to track the progress of the transaction. | [optional] 
 **submission_time** | **datetime** | The time (UTC; represented using the RFC-3339 standard) at which the transaction was triggered | [optional] 
 **last_updated_time** | **datetime** | The time (UTC; represented using the RFC-3339 standard) at which the transaction status was last updated | [optional] 
-**transaction_type** | [**CdoTransactionType**](CdoTransactionType.md) |  | [optional] 
-**cdo_transaction_status** | [**CdoTransactionStatus**](CdoTransactionStatus.md) |  | [optional] 
 **transaction_details** | **Dict[str, str]** | Transaction details, if any | [optional] 
 **error_message** | **str** | Transaction error message, if any | [optional] 
 **error_details** | **Dict[str, str]** | Transaction error details, if any | [optional] 
-**expire_at** | **int** | TTL attribute detailing the expiry time this item should be deleted | [optional] 
+**transaction_type** | **str** | the type of the transaction | [optional] 
+**cdo_transaction_status** | **str** | The status of the CDO transaction | [optional] 
 
 ## Example
 
