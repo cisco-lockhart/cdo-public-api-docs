@@ -8,7 +8,9 @@
 - MSSP Tenant management: It is now possible to create API-only users in a tenant managed by the MSSP portal.
 - Changelogs: It is now possible to filter changelogs by date, and also retrieve changelogs over the last 5, 15, 30, and 60 minutes.
 - ASA device management: The API now returns the chassis serial number of secondary devices in ASA HA Pairs.
-- The rate limit for the cdFMC health monitoring endpoint has been raised from 1 request per minute to 2 requests per minute.
+- cdFMC Health Monitoring: 
+  - The rate limit for the endpoint has been raised from 1 request per minute to 2 requests per minute.
+  - The health monitoring endpoint returns device HA status and Power Supply Unit (PSU) information.
 
 # Version 1.4.0 (2024-09-12)
 
