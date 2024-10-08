@@ -22,7 +22,6 @@ cdo_sdk_python/api/remote_access_monitoring_api.py
 cdo_sdk_python/api/search_api.py
 cdo_sdk_python/api/swagger_redirect_controller_api.py
 cdo_sdk_python/api/tenant_management_api.py
-cdo_sdk_python/api/transactions_api.py
 cdo_sdk_python/api/users_api.py
 cdo_sdk_python/api_client.py
 cdo_sdk_python/api_response.py
@@ -71,8 +70,6 @@ cdo_sdk_python/models/cdo_region.py
 cdo_sdk_python/models/cdo_region_list.py
 cdo_sdk_python/models/cdo_token_info.py
 cdo_sdk_python/models/cdo_transaction.py
-cdo_sdk_python/models/cdo_transaction_status.py
-cdo_sdk_python/models/cdo_transaction_type.py
 cdo_sdk_python/models/change_request.py
 cdo_sdk_python/models/change_request_create_input.py
 cdo_sdk_python/models/change_request_page.py
@@ -235,8 +232,6 @@ docs/CdoRegion.md
 docs/CdoRegionList.md
 docs/CdoTokenInfo.md
 docs/CdoTransaction.md
-docs/CdoTransactionStatus.md
-docs/CdoTransactionType.md
 docs/ChangeRequest.md
 docs/ChangeRequestCreateInput.md
 docs/ChangeRequestPage.md
@@ -356,7 +351,6 @@ docs/Tenant.md
 docs/TenantManagementApi.md
 docs/TenantPage.md
 docs/TenantSettings.md
-docs/TransactionsApi.md
 docs/UnifiedObjectListView.md
 docs/UpdateRequest.md
 docs/UrlObjectContent.md

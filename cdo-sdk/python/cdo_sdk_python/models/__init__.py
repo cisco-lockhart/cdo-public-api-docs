@@ -57,8 +57,6 @@ from cdo_sdk_python.models.cdo_region import CdoRegion
 from cdo_sdk_python.models.cdo_region_list import CdoRegionList
 from cdo_sdk_python.models.cdo_token_info import CdoTokenInfo
 from cdo_sdk_python.models.cdo_transaction import CdoTransaction
-from cdo_sdk_python.models.cdo_transaction_status import CdoTransactionStatus
-from cdo_sdk_python.models.cdo_transaction_type import CdoTransactionType
 from cdo_sdk_python.models.change_request import ChangeRequest
 from cdo_sdk_python.models.change_request_create_input import ChangeRequestCreateInput
 from cdo_sdk_python.models.change_request_page import ChangeRequestPage

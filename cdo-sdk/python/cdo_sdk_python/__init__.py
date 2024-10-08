@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.2.154"
+__version__ = "1.2.156"
 
 # import apis into sdk package
 from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
@@ -35,7 +35,6 @@ from cdo_sdk_python.api.object_management_api import ObjectManagementApi
 from cdo_sdk_python.api.remote_access_monitoring_api import RemoteAccessMonitoringApi
 from cdo_sdk_python.api.search_api import SearchApi
 from cdo_sdk_python.api.tenant_management_api import TenantManagementApi
-from cdo_sdk_python.api.transactions_api import TransactionsApi
 from cdo_sdk_python.api.users_api import UsersApi
 from cdo_sdk_python.api.swagger_redirect_controller_api import SwaggerRedirectControllerApi
 
@@ -93,8 +92,6 @@ from cdo_sdk_python.models.cdo_region import CdoRegion
 from cdo_sdk_python.models.cdo_region_list import CdoRegionList
 from cdo_sdk_python.models.cdo_token_info import CdoTokenInfo
 from cdo_sdk_python.models.cdo_transaction import CdoTransaction
-from cdo_sdk_python.models.cdo_transaction_status import CdoTransactionStatus
-from cdo_sdk_python.models.cdo_transaction_type import CdoTransactionType
 from cdo_sdk_python.models.change_request import ChangeRequest
 from cdo_sdk_python.models.change_request_create_input import ChangeRequestCreateInput
 from cdo_sdk_python.models.change_request_page import ChangeRequestPage

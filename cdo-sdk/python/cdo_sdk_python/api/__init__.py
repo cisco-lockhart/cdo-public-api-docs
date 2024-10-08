@@ -18,7 +18,6 @@ from cdo_sdk_python.api.object_management_api import ObjectManagementApi
 from cdo_sdk_python.api.remote_access_monitoring_api import RemoteAccessMonitoringApi
 from cdo_sdk_python.api.search_api import SearchApi
 from cdo_sdk_python.api.tenant_management_api import TenantManagementApi
-from cdo_sdk_python.api.transactions_api import TransactionsApi
 from cdo_sdk_python.api.users_api import UsersApi
 from cdo_sdk_python.api.swagger_redirect_controller_api import SwaggerRedirectControllerApi
 
