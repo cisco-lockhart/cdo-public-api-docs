@@ -5186,7 +5186,7 @@ class InventoryApi:
     ) -> List[FmcHealthMetrics]:
         """Get health metrics on devices managed by the FMC (cdFMC only)
 
-        Get metrics that indicate the current health of all devices managed by the cdFMC. Note: For specific health metrics to be available for a given device under management of the cdFMC, the health policy for that device should be configured to collect those metrics. For example, CPU metrics will be unavailable for a device if the health policy applied to that device has CPU metric collection turned off. Note: This endpoint can only be queried once every minute.
+        Get metrics that indicate the current health of all devices managed by the cdFMC. Note: For specific health metrics to be available for a given device under management of the cdFMC, the health policy for that device should be configured to collect those metrics. For example, CPU metrics will be unavailable for a device if the health policy applied to that device has CPU metric collection turned off. Note: This endpoint can only be queried twice every minute.
 
         :param fmc_uid: The unique identifier, represented as a UUID, of the FMC in CDO. (required)
         :type fmc_uid: str
@@ -5262,7 +5262,7 @@ class InventoryApi:
     ) -> ApiResponse[List[FmcHealthMetrics]]:
         """Get health metrics on devices managed by the FMC (cdFMC only)
 
-        Get metrics that indicate the current health of all devices managed by the cdFMC. Note: For specific health metrics to be available for a given device under management of the cdFMC, the health policy for that device should be configured to collect those metrics. For example, CPU metrics will be unavailable for a device if the health policy applied to that device has CPU metric collection turned off. Note: This endpoint can only be queried once every minute.
+        Get metrics that indicate the current health of all devices managed by the cdFMC. Note: For specific health metrics to be available for a given device under management of the cdFMC, the health policy for that device should be configured to collect those metrics. For example, CPU metrics will be unavailable for a device if the health policy applied to that device has CPU metric collection turned off. Note: This endpoint can only be queried twice every minute.
 
         :param fmc_uid: The unique identifier, represented as a UUID, of the FMC in CDO. (required)
         :type fmc_uid: str
@@ -5338,7 +5338,7 @@ class InventoryApi:
     ) -> RESTResponseType:
         """Get health metrics on devices managed by the FMC (cdFMC only)
 
-        Get metrics that indicate the current health of all devices managed by the cdFMC. Note: For specific health metrics to be available for a given device under management of the cdFMC, the health policy for that device should be configured to collect those metrics. For example, CPU metrics will be unavailable for a device if the health policy applied to that device has CPU metric collection turned off. Note: This endpoint can only be queried once every minute.
+        Get metrics that indicate the current health of all devices managed by the cdFMC. Note: For specific health metrics to be available for a given device under management of the cdFMC, the health policy for that device should be configured to collect those metrics. For example, CPU metrics will be unavailable for a device if the health policy applied to that device has CPU metric collection turned off. Note: This endpoint can only be queried twice every minute.
 
         :param fmc_uid: The unique identifier, represented as a UUID, of the FMC in CDO. (required)
         :type fmc_uid: str

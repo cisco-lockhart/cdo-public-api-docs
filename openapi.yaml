@@ -3729,7 +3729,7 @@ paths:
         should be configured to collect those metrics. For example, CPU metrics
         will be unavailable for a device if the health policy applied to that
         device has CPU metric collection turned off. Note: This endpoint can
-        only be queried once every minute.
+        only be queried twice every minute.
       operationId: getFmcHealth
       parameters:
         - name: fmcUid
@@ -8787,9 +8787,6 @@ components:
               format: int32
             attributeNames:
               type: object
-            servletNames:
-              type: object
-              deprecated: true
             contextPath:
               type: string
             initParameterNames:
@@ -8804,6 +8801,9 @@ components:
                   - COOKIE
                   - URL
                   - SSL
+            servletNames:
+              type: object
+              deprecated: true
             servletRegistrations:
               type: object
               additionalProperties:
@@ -8897,8 +8897,6 @@ components:
                   items:
                     type: object
                     properties:
-                      buffer:
-                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -8921,12 +8919,14 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
+                      buffer:
+                        type: string
+                      defaultContentType:
+                        type: string
                       urlPatterns:
                         type: array
                         items:
                           type: string
-                      defaultContentType:
-                        type: string
             virtualServerName:
               type: string
             requestCharacterEncoding:
@@ -9063,17 +9063,17 @@ components:
           type: array
           items:
             type: string
-        propagateQueryProperties:
-          type: boolean
         redirectView:
           type: boolean
-        attributesCSV:
-          type: string
-          writeOnly: true
+        propagateQueryProperties:
+          type: boolean
         attributesMap:
           type: object
           additionalProperties:
             type: object
+        attributesCSV:
+          type: string
+          writeOnly: true
         attributes:
           type: object
           additionalProperties:
