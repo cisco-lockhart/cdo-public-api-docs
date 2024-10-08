@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**jsp_property_groups** | [**List[RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner]**](RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner.md) |  | [optional] 
 **taglibs** | [**List[RedirectViewServletContextJspConfigDescriptorTaglibsInner]**](RedirectViewServletContextJspConfigDescriptorTaglibsInner.md) |  | [optional] 
+**jsp_property_groups** | [**List[RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner]**](RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner.md) |  | [optional] 
 
 ## Example
 

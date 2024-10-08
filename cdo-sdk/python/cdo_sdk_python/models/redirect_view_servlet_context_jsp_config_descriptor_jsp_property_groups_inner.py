@@ -27,8 +27,9 @@ class RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner(BaseMo
     """
     RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner
     """ # noqa: E501
-    scripting_invalid: Optional[StrictStr] = Field(default=None, alias="scriptingInvalid")
+    buffer: Optional[StrictStr] = None
     el_ignored: Optional[StrictStr] = Field(default=None, alias="elIgnored")
+    scripting_invalid: Optional[StrictStr] = Field(default=None, alias="scriptingInvalid")
     page_encoding: Optional[StrictStr] = Field(default=None, alias="pageEncoding")
     is_xml: Optional[StrictStr] = Field(default=None, alias="isXml")
     include_preludes: Optional[List[StrictStr]] = Field(default=None, alias="includePreludes")
@@ -36,10 +37,9 @@ class RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner(BaseMo
     deferred_syntax_allowed_as_literal: Optional[StrictStr] = Field(default=None, alias="deferredSyntaxAllowedAsLiteral")
     trim_directive_whitespaces: Optional[StrictStr] = Field(default=None, alias="trimDirectiveWhitespaces")
     error_on_undeclared_namespace: Optional[StrictStr] = Field(default=None, alias="errorOnUndeclaredNamespace")
-    buffer: Optional[StrictStr] = None
-    default_content_type: Optional[StrictStr] = Field(default=None, alias="defaultContentType")
     url_patterns: Optional[List[StrictStr]] = Field(default=None, alias="urlPatterns")
-    __properties: ClassVar[List[str]] = ["scriptingInvalid", "elIgnored", "pageEncoding", "isXml", "includePreludes", "includeCodas", "deferredSyntaxAllowedAsLiteral", "trimDirectiveWhitespaces", "errorOnUndeclaredNamespace", "buffer", "defaultContentType", "urlPatterns"]
+    default_content_type: Optional[StrictStr] = Field(default=None, alias="defaultContentType")
+    __properties: ClassVar[List[str]] = ["buffer", "elIgnored", "scriptingInvalid", "pageEncoding", "isXml", "includePreludes", "includeCodas", "deferredSyntaxAllowedAsLiteral", "trimDirectiveWhitespaces", "errorOnUndeclaredNamespace", "urlPatterns", "defaultContentType"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,8 +92,9 @@ class RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner(BaseMo
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "scriptingInvalid": obj.get("scriptingInvalid"),
+            "buffer": obj.get("buffer"),
             "elIgnored": obj.get("elIgnored"),
+            "scriptingInvalid": obj.get("scriptingInvalid"),
             "pageEncoding": obj.get("pageEncoding"),
             "isXml": obj.get("isXml"),
             "includePreludes": obj.get("includePreludes"),
@@ -101,9 +102,8 @@ class RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner(BaseMo
             "deferredSyntaxAllowedAsLiteral": obj.get("deferredSyntaxAllowedAsLiteral"),
             "trimDirectiveWhitespaces": obj.get("trimDirectiveWhitespaces"),
             "errorOnUndeclaredNamespace": obj.get("errorOnUndeclaredNamespace"),
-            "buffer": obj.get("buffer"),
-            "defaultContentType": obj.get("defaultContentType"),
-            "urlPatterns": obj.get("urlPatterns")
+            "urlPatterns": obj.get("urlPatterns"),
+            "defaultContentType": obj.get("defaultContentType")
         })
         return _obj
 
