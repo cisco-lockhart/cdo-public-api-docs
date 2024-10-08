@@ -45,17 +45,17 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
-        "202":
-          description: CDO Transaction that is pending or in progress.
+        "200":
+          description: "CDO Transaction that has completed, either successfully or\
+            \ unsuccessfully. Note: failed CDO Transactions do not roll back."
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
-        "200":
-          description: "CDO Transaction that has completed, either successfully or\
-            \ unsuccessfully. Note: failed CDO Transactions do not roll back."
+        "202":
+          description: CDO Transaction that is pending or in progress.
           content:
             application/json:
               schema:
