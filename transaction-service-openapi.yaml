@@ -27,7 +27,7 @@ paths:
   /v1/transactions/{transactionUid}:
     get:
       tags:
-      - Transaction
+      - Transactions
       summary: Get Transaction
       description: "Get information on an in-progress CDO transaction. A CDO transaction\
         \ is an entity used to monitor progress of, and provide feedback on, long-running\
@@ -43,9 +43,8 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "200":
-          description: "CDO Transaction that has completed, either successfully or\
-            \ unsuccessfully. Note: failed CDO Transactions do not roll back."
+        "202":
+          description: CDO Transaction that is pending or in progress.
           content:
             application/json:
               schema:
@@ -56,8 +55,9 @@ paths:
           $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
-        "202":
-          description: CDO Transaction that is pending or in progress.
+        "200":
+          description: "CDO Transaction that has completed, either successfully or\
+            \ unsuccessfully. Note: failed CDO Transactions do not roll back."
           content:
             application/json:
               schema:

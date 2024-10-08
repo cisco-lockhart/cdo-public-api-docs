@@ -27,10 +27,10 @@ paths:
   /v1/msp/tenants:
     get:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Get CDO tenants managed by MSP Portal
       description: Get a list of CDO tenants managed by the MSP Portal.
-      operationId: getMspManagedTenants_NO_NOT_USE
+      operationId: getMspManagedTenants
       parameters:
         - name: limit
           in: query
@@ -82,14 +82,14 @@ paths:
         - bearerAuth: []
     post:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Add Tenant to MSP Portal (API token)
       description: "Add a tenant to the MSP Portal by providing an API token for the
         tenant. Use this endpoint to add a tenant that the user performing the
         operation is not associated with, or a tenant in a different region to
         that of the MSP Portal. Note: This endpoint can only be executed by a
         super-admin in an MSP Portal."
-      operationId: addMspTenant_NO_NOT_USE
+      operationId: addMspTenant
       requestBody:
         content:
           application/json:
@@ -120,7 +120,7 @@ paths:
   /v1/msp/tenants/{tenantUid}:
     post:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Add tenant to MSP Portal
       description: "This is an asynchronous operation to add an existing tenant that
         the user making the API call is associated with to the MSP Portal. This
@@ -128,7 +128,7 @@ paths:
         for the API-only user, and add the tenant to the MSP Portal. Note: this
         endpoint can only be executed by a super-admin in the MSP Portal who is
         also associated with the tenant being added."
-      operationId: addTenantToMspPortal_NO_NOT_USE
+      operationId: addTenantToMspPortal
       parameters:
         - name: tenantUid
           in: path
@@ -164,12 +164,12 @@ paths:
   /v1/msp/tenants/{tenantUid}/users:
     post:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Add users to CDO tenant in MSP Portal
       description: "This is an asynchronous operation to add a list of users to a
         tenant associated with the MSP Portal. Note: this endpoint cannot be
         used to add API-only users."
-      operationId: addUsersToTenantInMspPortal_NO_NOT_USE
+      operationId: addUsersToTenantInMspPortal
       parameters:
         - name: tenantUid
           in: path
@@ -201,7 +201,7 @@ paths:
   /v1/msp/tenants/{tenantUid}/users/{apiUserUid}/token:
     post:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Generate token for API-only user on tenant managed by MSP portal
       description: Generate API Token for API-only user on a tenant managed by the MSP
         portal. API-only users are used for building automations with CDO. If
@@ -247,11 +247,11 @@ paths:
   /v1/msp/tenants/{tenantUid}/users/groups:
     post:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Add Active Directory Groups to CDO tenant in MSP Portal
       description: This is an asynchronous operation to add a list of Active Directory
         Groups to a tenant associated with the MSP Portal.
-      operationId: addActiveDirectoryGroupsToTenantInMspPortal_NO_NOT_USE
+      operationId: addActiveDirectoryGroupsToTenantInMspPortal
       parameters:
         - name: tenantUid
           in: path
@@ -286,11 +286,11 @@ paths:
   /v1/msp/tenants/{tenantUid}/mcd:
     post:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Enable Multicloud Defense for CDO tenant in MSP Portal
       description: This is an asynchronous operation to enable Multicloud Defense for
         a tenant associated with the MSP Portal.
-      operationId: enableMulticloudDefenseForTenantInMspPortal_NO_NOT_USE
+      operationId: enableMulticloudDefenseForTenantInMspPortal
       parameters:
         - name: tenantUid
           in: path
@@ -317,7 +317,7 @@ paths:
   /v1/msp/tenants/{tenantUid}/cdfmc:
     post:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Provision cdFMC for CDO tenant in MSP Portal
       description: This is an asynchronous operation to provision a cdFMC for a tenant
         associated with the MSP Portal. This operation does not wait for the
@@ -325,7 +325,7 @@ paths:
         successful once the provisioning has been successfully triggered. To
         monitor the transaction on the target tenant, use the UID in the
         `TRANSACTION_UID_IN_TARGET_TENANT` key in the transaction details.
-      operationId: provisionCdFmcForTenantInMspPortal_NO_NOT_USE
+      operationId: provisionCdFmcForTenantInMspPortal
       parameters:
         - name: tenantUid
           in: path
@@ -352,7 +352,7 @@ paths:
   /v1/msp/tenants/create:
     post:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Create CDO Tenant
       description: "Create a new tenant in CDO from an MSP Portal. This endpoint
         creates a tenant, adds the tenant to the MSP Portal. If the user
@@ -361,7 +361,7 @@ paths:
         an MSP Portal. You can create no more than 1 tenant every 30 seconds.
         Additionally, you are limited to creating a total of 100 tenants: please
         speak to support to raise this limit."
-      operationId: createTenant_NO_NOT_USE
+      operationId: createTenant
       requestBody:
         content:
           application/json:

@@ -15,13 +15,13 @@ cdo_sdk_python/api/command_line_interface_api.py
 cdo_sdk_python/api/connectors_api.py
 cdo_sdk_python/api/inventory_api.py
 cdo_sdk_python/api/meta_api.py
-cdo_sdk_python/api/msp_next_gen_api.py
+cdo_sdk_python/api/msp_api.py
 cdo_sdk_python/api/object_management_api.py
 cdo_sdk_python/api/remote_access_monitoring_api.py
 cdo_sdk_python/api/search_api.py
 cdo_sdk_python/api/swagger_redirect_controller_api.py
 cdo_sdk_python/api/tenant_management_api.py
-cdo_sdk_python/api/transaction_api.py
+cdo_sdk_python/api/transactions_api.py
 cdo_sdk_python/api/users_api.py
 cdo_sdk_python/api_client.py
 cdo_sdk_python/api_response.py
@@ -291,7 +291,7 @@ docs/Labels.md
 docs/ListObjectResponse.md
 docs/Location.md
 docs/LogSettings.md
-docs/MSPNextGenApi.md
+docs/MSPApi.md
 docs/MemoryHealthMetrics.md
 docs/MerakiDeploymentMode.md
 docs/Meta.md
@@ -350,7 +350,7 @@ docs/Tenant.md
 docs/TenantManagementApi.md
 docs/TenantPage.md
 docs/TenantSettings.md
-docs/TransactionApi.md
+docs/TransactionsApi.md
 docs/UnifiedObjectListView.md
 docs/UpdateRequest.md
 docs/UrlObjectContent.md

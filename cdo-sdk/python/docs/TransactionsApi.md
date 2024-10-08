@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | CDO Transaction that has completed, either successfully or unsuccessfully. Note: failed CDO Transactions do not roll back. |  -  |
-**202** | CDO Transaction that is in progress |  -  |
+**202** | CDO Transaction that is pending or in progress. |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |

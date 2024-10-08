@@ -58,10 +58,10 @@ tags:
     x-displayName: swagger-redirect-controller
   - name: Object Management
     x-displayName: Object Management
-  - name: MSP-next-gen
-    x-displayName: MSP-next-gen
-  - name: Transaction
-    x-displayName: Transaction
+  - name: MSP
+    x-displayName: MSP
+  - name: Transactions
+    x-displayName: Transactions
 paths:
   /v1/cdfmc/**:
     get:
@@ -4891,10 +4891,10 @@ paths:
   /v1/msp/tenants:
     get:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Get CDO tenants managed by MSP Portal
       description: Get a list of CDO tenants managed by the MSP Portal.
-      operationId: getMspManagedTenants_NO_NOT_USE
+      operationId: getMspManagedTenants
       parameters:
         - name: limit
           in: query
@@ -4948,7 +4948,7 @@ paths:
         - bearerAuth: []
     post:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Add Tenant to MSP Portal (API token)
       description: >-
         Add a tenant to the MSP Portal by providing an API token for the tenant.
@@ -4956,7 +4956,7 @@ paths:
         is not associated with, or a tenant in a different region to that of the
         MSP Portal. Note: This endpoint can only be executed by a super-admin in
         an MSP Portal.
-      operationId: addMspTenant_NO_NOT_USE
+      operationId: addMspTenant
       requestBody:
         content:
           application/json:
@@ -4987,7 +4987,7 @@ paths:
   /v1/msp/tenants/{tenantUid}:
     post:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Add tenant to MSP Portal
       description: >-
         This is an asynchronous operation to add an existing tenant that the
@@ -4996,7 +4996,7 @@ paths:
         for the API-only user, and add the tenant to the MSP Portal. Note: this
         endpoint can only be executed by a super-admin in the MSP Portal who is
         also associated with the tenant being added.
-      operationId: addTenantToMspPortal_NO_NOT_USE
+      operationId: addTenantToMspPortal
       parameters:
         - name: tenantUid
           in: path
@@ -5033,13 +5033,13 @@ paths:
   /v1/msp/tenants/{tenantUid}/users:
     post:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Add users to CDO tenant in MSP Portal
       description: >-
         This is an asynchronous operation to add a list of users to a tenant
         associated with the MSP Portal. Note: this endpoint cannot be used to
         add API-only users.
-      operationId: addUsersToTenantInMspPortal_NO_NOT_USE
+      operationId: addUsersToTenantInMspPortal
       parameters:
         - name: tenantUid
           in: path
@@ -5072,7 +5072,7 @@ paths:
   /v1/msp/tenants/{tenantUid}/users/{apiUserUid}/token:
     post:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Generate token for API-only user on tenant managed by MSP portal
       description: >-
         Generate API Token for API-only user on a tenant managed by the MSP
@@ -5119,12 +5119,12 @@ paths:
   /v1/msp/tenants/{tenantUid}/users/groups:
     post:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Add Active Directory Groups to CDO tenant in MSP Portal
       description: >-
         This is an asynchronous operation to add a list of Active Directory
         Groups to a tenant associated with the MSP Portal.
-      operationId: addActiveDirectoryGroupsToTenantInMspPortal_NO_NOT_USE
+      operationId: addActiveDirectoryGroupsToTenantInMspPortal
       parameters:
         - name: tenantUid
           in: path
@@ -5161,12 +5161,12 @@ paths:
   /v1/msp/tenants/{tenantUid}/mcd:
     post:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Enable Multicloud Defense for CDO tenant in MSP Portal
       description: >-
         This is an asynchronous operation to enable Multicloud Defense for a
         tenant associated with the MSP Portal.
-      operationId: enableMulticloudDefenseForTenantInMspPortal_NO_NOT_USE
+      operationId: enableMulticloudDefenseForTenantInMspPortal
       parameters:
         - name: tenantUid
           in: path
@@ -5195,7 +5195,7 @@ paths:
   /v1/msp/tenants/{tenantUid}/cdfmc:
     post:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Provision cdFMC for CDO tenant in MSP Portal
       description: >-
         This is an asynchronous operation to provision a cdFMC for a tenant
@@ -5204,7 +5204,7 @@ paths:
         successful once the provisioning has been successfully triggered. To
         monitor the transaction on the target tenant, use the UID in the
         `TRANSACTION_UID_IN_TARGET_TENANT` key in the transaction details.
-      operationId: provisionCdFmcForTenantInMspPortal_NO_NOT_USE
+      operationId: provisionCdFmcForTenantInMspPortal
       parameters:
         - name: tenantUid
           in: path
@@ -5233,7 +5233,7 @@ paths:
   /v1/msp/tenants/create:
     post:
       tags:
-        - MSP-next-gen
+        - MSP
       summary: Create CDO Tenant
       description: >-
         Create a new tenant in CDO from an MSP Portal. This endpoint creates a
@@ -5243,7 +5243,7 @@ paths:
         Portal. You can create no more than 1 tenant every 30 seconds.
         Additionally, you are limited to creating a total of 100 tenants: please
         speak to support to raise this limit.
-      operationId: createTenant_NO_NOT_USE
+      operationId: createTenant
       requestBody:
         content:
           application/json:
@@ -5278,7 +5278,7 @@ paths:
   /v1/transactions/{transactionUid}:
     get:
       tags:
-        - Transaction
+        - Transactions
       summary: Get Transaction
       description: >-
         Get information on an in-progress CDO transaction. A CDO transaction is
@@ -8860,18 +8860,18 @@ components:
             sessionCookieConfig:
               type: object
               properties:
+                httpOnly:
+                  type: boolean
                 name:
                   type: string
                 path:
                   type: string
                 comment:
                   type: string
-                domain:
-                  type: string
-                httpOnly:
-                  type: boolean
                 secure:
                   type: boolean
+                domain:
+                  type: string
                 maxAge:
                   type: integer
                   format: int32
@@ -8896,25 +8896,14 @@ components:
             jspConfigDescriptor:
               type: object
               properties:
-                taglibs:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      taglibURI:
-                        type: string
-                      taglibLocation:
-                        type: string
                 jspPropertyGroups:
                   type: array
                   items:
                     type: object
                     properties:
-                      buffer:
+                      scriptingInvalid:
                         type: string
                       elIgnored:
-                        type: string
-                      scriptingInvalid:
                         type: string
                       pageEncoding:
                         type: string
@@ -8934,12 +8923,23 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
+                      buffer:
+                        type: string
                       defaultContentType:
                         type: string
                       urlPatterns:
                         type: array
                         items:
                           type: string
+                taglibs:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      taglibURI:
+                        type: string
+                      taglibLocation:
+                        type: string
             virtualServerName:
               type: string
             requestCharacterEncoding:
@@ -9067,17 +9067,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
+          writeOnly: true
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
           writeOnly: true
     JsonWebKey:
       type: object
@@ -10142,7 +10142,7 @@ x-tagGroups:
       - Object Management
   - name: msp-api-openapi
     tags:
-      - MSP-next-gen
+      - MSP
   - name: transaction-service-openapi
     tags:
-      - Transaction
+      - Transactions
