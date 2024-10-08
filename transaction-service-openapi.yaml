@@ -1,0 +1,257 @@
+openapi: 3.0.1
+info:
+  title: CDO API
+  description: Use the documentation to explore the endpoints CDO has to offer
+  contact:
+    name: CDO TAC
+    email: cdo.tac@cisco.com
+  version: 1.4.0
+servers:
+- url: https://edge.us.cdo.cisco.com/api/rest
+  description: US
+- url: https://edge.eu.cdo.cisco.com/api/rest
+  description: EU
+- url: https://edge.apj.cdo.cisco.com/api/rest
+  description: APJ
+- url: https://edge.aus.cdo.cisco.com/api/rest
+  description: AUS
+- url: https://edge.in.cdo.cisco.com/api/rest
+  description: IN
+- url: https://edge.staging.cdo.cisco.com/api/rest
+  description: Staging
+- url: https://edge.scale.cdo.cisco.com/api/rest
+  description: Scale
+- url: https://edge.ci.cdo.cisco.com/api/rest
+  description: CI
+paths:
+  /v1/transactions/{transactionUid}:
+    get:
+      tags:
+      - Transaction
+      summary: Get Transaction
+      description: "Get information on an in-progress CDO transaction. A CDO transaction\
+        \ is an entity used to monitor progress of, and provide feedback on, long-running\
+        \ operations. All asynchronous operations in CDO's API create CDO transactions."
+      operationId: getTransaction
+      parameters:
+      - name: transactionUid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "202":
+          description: CDO Transaction that is pending or in progress.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "200":
+          description: "CDO Transaction that has completed, either successfully or\
+            \ unsuccessfully. Note: failed CDO Transactions do not roll back."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+      - bearerAuth: []
+components:
+  schemas:
+    CdoTransaction:
+      type: object
+      properties:
+        tenantUid:
+          type: string
+          description: The unique identifier of the tenant that the transaction triggered
+            on.
+          format: uuid
+          example: 5131daad-e813-4b8f-8f42-be1e241e2cdb
+        transactionUid:
+          type: string
+          description: The unique identifier of the transaction triggered.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        entityUid:
+          type: string
+          description: "The unique identifier of the entity that the transaction is\
+            \ triggered on. This can be empty, for a transaction that is not tied\
+            \ to an entity, such as transactions which refresh RA VPN sessions."
+          format: uuid
+          example: f5f660d4-4b81-4374-877d-fbc4bee894e2
+        entityUrl:
+          type: string
+          description: A URL to access the entity that the transaction is triggered
+            on. This can also be empty
+          example: https://edge.us.cdo.cisco.com/platform/public-api/v1/inventory/devices/f5f660d4-4b81-4374-877d-fbc4bee894e2
+        transactionPollingUrl:
+          type: string
+          description: The URL to poll to track the progress of the transaction.
+          example: https://edge.us.cdo.cisco.com/platform/v1/transactions/7131daad-e813-4b8f-8f42-be1e241e8cdb
+        submissionTime:
+          type: string
+          description: The time (UTC; represented using the RFC-3339 standard) at
+            which the transaction was triggered
+          format: date-time
+          example: 2023-12-13T05:15:44Z
+        lastUpdatedTime:
+          type: string
+          description: The time (UTC; represented using the RFC-3339 standard) at
+            which the transaction status was last updated
+          format: date-time
+          example: 2023-12-13T08:15:44Z
+        transactionDetails:
+          type: object
+          additionalProperties:
+            type: string
+            description: "Transaction details, if any"
+          description: "Transaction details, if any"
+        errorMessage:
+          type: string
+          description: "Transaction error message, if any"
+        errorDetails:
+          type: object
+          additionalProperties:
+            type: string
+            description: "Transaction error details, if any"
+          description: "Transaction error details, if any"
+        transactionType:
+          type: string
+          description: the type of the transaction
+          example: ONBOARD_ASA
+          enum:
+          - ONBOARD_ASA
+          - ONBOARD_IOS
+          - ONBOARD_DUO_ADMIN_PANEL
+          - CREATE_FTD
+          - ONBOARD_FTD_ZTP
+          - REGISTER_FTD
+          - DELETE_CDFMC_MANAGED_FTD
+          - RECONNECT_ASA
+          - READ_ASA
+          - EXECUTE_CLI_COMMAND
+          - DEPLOY_ASA_DEVICE_CHANGES
+          - INDEX_TENANT
+          - TERMINATE_DEVICE_RA_VPN_SESSIONS
+          - REFRESH_RA_VPN_SESSIONS
+          - TERMINATE_USER_RA_VPN_SESSIONS
+          - CREATE_SDC
+          - SEND_AI_ASSISTANT_MESSAGE
+          - MSP_CREATE_TENANT
+          - MSP_ADD_USERS_TO_TENANT
+          - MSP_ADD_USER_GROUPS_TO_TENANT
+          - MSP_ADD_EXISTING_TENANT
+          - MSP_ENABLE_MULTICLOUD_DEFENSE
+          - MSP_PROVISION_CDFMC
+        cdoTransactionStatus:
+          type: string
+          description: The status of the CDO transaction
+          example: IN_PROGRESS
+          enum:
+          - PENDING
+          - IN_PROGRESS
+          - DONE
+          - ERROR
+    AuthenticationError:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error description in English.
+          example: invalid_token
+        errorDescription:
+          type: string
+          description: A human-readable error description in English.
+          example: Your token is invalid
+    CommonApiError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: A unique code that describes the error.
+          example: INVALID_INPUT
+          enum:
+          - INVALID_INPUT
+          - UNAUTHORIZED
+          - FORBIDDEN
+          - NOT_FOUND
+          - METHOD_NOT_ALLOWED
+          - CONFLICT
+          - TOO_MANY_REQUESTS
+          - SERVER_ERROR
+          - PROXY_ERROR
+          - BAD_REQUEST
+        errorMsg:
+          type: string
+          description: A human-readable error description in English.
+          example: sample error
+        details:
+          type: object
+          additionalProperties:
+            type: object
+            description: "Additional details, if any, on the error"
+            example: {}
+          description: "Additional details, if any, on the error"
+          example: {}
+  responses:
+    http400BadRequest:
+      description: Invalid input provided. Check the response for details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+    http401Unauthorised:
+      description: Request not authorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthenticationError'
+    http403Forbidden:
+      description: User does not have sufficient privileges to perform this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+    http404NotFound:
+      description: Entity not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+    http405MethodNotAllowed:
+      description: Method not allowed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+    http409Conflict:
+      description: Conflict.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+    http422UnprocessableEntity:
+      description: Unprocessable entity.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CommonApiError'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

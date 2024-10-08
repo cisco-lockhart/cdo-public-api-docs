@@ -22,6 +22,7 @@ cdo_sdk_python/api/remote_access_monitoring_api.py
 cdo_sdk_python/api/search_api.py
 cdo_sdk_python/api/swagger_redirect_controller_api.py
 cdo_sdk_python/api/tenant_management_api.py
+cdo_sdk_python/api/transaction_api.py
 cdo_sdk_python/api/users_api.py
 cdo_sdk_python/api_client.py
 cdo_sdk_python/api_response.py
@@ -351,6 +352,7 @@ docs/Tenant.md
 docs/TenantManagementApi.md
 docs/TenantPage.md
 docs/TenantSettings.md
+docs/TransactionApi.md
 docs/UnifiedObjectListView.md
 docs/UpdateRequest.md
 docs/UrlObjectContent.md
@@ -368,4 +370,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_transaction_api.py
 tox.ini

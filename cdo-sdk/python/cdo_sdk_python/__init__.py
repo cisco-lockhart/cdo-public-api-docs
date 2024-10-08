@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.2.156"
+__version__ = "1.2.157"
 
 # import apis into sdk package
 from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
@@ -35,6 +35,7 @@ from cdo_sdk_python.api.object_management_api import ObjectManagementApi
 from cdo_sdk_python.api.remote_access_monitoring_api import RemoteAccessMonitoringApi
 from cdo_sdk_python.api.search_api import SearchApi
 from cdo_sdk_python.api.tenant_management_api import TenantManagementApi
+from cdo_sdk_python.api.transaction_api import TransactionApi
 from cdo_sdk_python.api.users_api import UsersApi
 from cdo_sdk_python.api.swagger_redirect_controller_api import SwaggerRedirectControllerApi
 

@@ -62,6 +62,8 @@ tags:
     x-displayName: Object Management
   - name: MSP-next-gen
     x-displayName: MSP-next-gen
+  - name: Transaction
+    x-displayName: Transaction
 paths:
   /v1/cdfmc/**:
     get:
@@ -5558,6 +5560,55 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
+  /v1/transactions/{transactionUid}:
+    get:
+      tags:
+        - Transaction
+      summary: Get Transaction
+      description: >-
+        Get information on an in-progress CDO transaction. A CDO transaction is
+        an entity used to monitor progress of, and provide feedback on,
+        long-running operations. All asynchronous operations in CDO's API create
+        CDO transactions.
+      operationId: getTransaction
+      parameters:
+        - name: transactionUid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: >-
+            CDO Transaction that has completed, either successfully or
+            unsuccessfully. Note: failed CDO Transactions do not roll back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '202':
+          description: CDO Transaction that is pending or in progress.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
 components:
   schemas:
     CdoTransaction:
@@ -10378,3 +10429,6 @@ x-tagGroups:
   - name: msp-api-openapi
     tags:
       - MSP-next-gen
+  - name: transaction-service-openapi
+    tags:
+      - Transaction
