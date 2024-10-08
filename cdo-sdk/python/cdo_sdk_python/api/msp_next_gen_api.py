@@ -320,7 +320,7 @@ class MSPNextGenApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v0/msp/tenants/{tenantUid}/users/groups',
+            resource_path='/v1/msp/tenants/{tenantUid}/users/groups',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -603,7 +603,7 @@ class MSPNextGenApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v0/msp/tenants',
+            resource_path='/v1/msp/tenants',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -876,7 +876,7 @@ class MSPNextGenApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v0/msp/tenants/{tenantUid}',
+            resource_path='/v1/msp/tenants/{tenantUid}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1164,7 +1164,7 @@ class MSPNextGenApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v0/msp/tenants/{tenantUid}/users',
+            resource_path='/v1/msp/tenants/{tenantUid}/users',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1450,7 +1450,7 @@ class MSPNextGenApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v0/msp/tenants/create',
+            resource_path='/v1/msp/tenants/create',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1710,7 +1710,7 @@ class MSPNextGenApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v0/msp/tenants/{tenantUid}/mcd',
+            resource_path='/v1/msp/tenants/{tenantUid}/mcd',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1995,7 +1995,7 @@ class MSPNextGenApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v0/msp/tenants/{tenantUid}/users/{apiUserUid}/token',
+            resource_path='/v1/msp/tenants/{tenantUid}/users/{apiUserUid}/token',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2301,7 +2301,7 @@ class MSPNextGenApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/v0/msp/tenants',
+            resource_path='/v1/msp/tenants',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2561,7 +2561,7 @@ class MSPNextGenApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v0/msp/tenants/{tenantUid}/cdfmc',
+            resource_path='/v1/msp/tenants/{tenantUid}/cdfmc',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

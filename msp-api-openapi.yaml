@@ -24,7 +24,7 @@ servers:
   - url: https://edge.ci.cdo.cisco.com/api/rest
     description: CI
 paths:
-  /v0/msp/tenants:
+  /v1/msp/tenants:
     get:
       tags:
         - MSP-next-gen
@@ -117,7 +117,7 @@ paths:
                 $ref: "#/components/schemas/CommonApiError"
       security:
         - bearerAuth: []
-  /v0/msp/tenants/{tenantUid}:
+  /v1/msp/tenants/{tenantUid}:
     post:
       tags:
         - MSP-next-gen
@@ -161,7 +161,7 @@ paths:
                 $ref: "#/components/schemas/CommonApiError"
       security:
         - bearerAuth: []
-  /v0/msp/tenants/{tenantUid}/users:
+  /v1/msp/tenants/{tenantUid}/users:
     post:
       tags:
         - MSP-next-gen
@@ -198,7 +198,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CommonApiError"
-  /v0/msp/tenants/{tenantUid}/users/{apiUserUid}/token:
+  /v1/msp/tenants/{tenantUid}/users/{apiUserUid}/token:
     post:
       tags:
         - MSP-next-gen
@@ -244,7 +244,7 @@ paths:
                 $ref: "#/components/schemas/CommonApiError"
       security:
         - bearerAuth: []
-  /v0/msp/tenants/{tenantUid}/users/groups:
+  /v1/msp/tenants/{tenantUid}/users/groups:
     post:
       tags:
         - MSP-next-gen
@@ -283,7 +283,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CommonApiError"
-  /v0/msp/tenants/{tenantUid}/mcd:
+  /v1/msp/tenants/{tenantUid}/mcd:
     post:
       tags:
         - MSP-next-gen
@@ -314,7 +314,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CommonApiError"
-  /v0/msp/tenants/{tenantUid}/cdfmc:
+  /v1/msp/tenants/{tenantUid}/cdfmc:
     post:
       tags:
         - MSP-next-gen
@@ -349,7 +349,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CommonApiError"
-  /v0/msp/tenants/create:
+  /v1/msp/tenants/create:
     post:
       tags:
         - MSP-next-gen

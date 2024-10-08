@@ -4,15 +4,15 @@ All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_active_directory_groups_to_tenant_in_msp_portal_nonotuse**](MSPNextGenApi.md#add_active_directory_groups_to_tenant_in_msp_portal_nonotuse) | **POST** /v0/msp/tenants/{tenantUid}/users/groups | Add Active Directory Groups to CDO tenant in MSP Portal
-[**add_msp_tenant_nonotuse**](MSPNextGenApi.md#add_msp_tenant_nonotuse) | **POST** /v0/msp/tenants | Add Tenant to MSP Portal (API token)
-[**add_tenant_to_msp_portal_nonotuse**](MSPNextGenApi.md#add_tenant_to_msp_portal_nonotuse) | **POST** /v0/msp/tenants/{tenantUid} | Add tenant to MSP Portal
-[**add_users_to_tenant_in_msp_portal_nonotuse**](MSPNextGenApi.md#add_users_to_tenant_in_msp_portal_nonotuse) | **POST** /v0/msp/tenants/{tenantUid}/users | Add users to CDO tenant in MSP Portal
-[**create_tenant_nonotuse**](MSPNextGenApi.md#create_tenant_nonotuse) | **POST** /v0/msp/tenants/create | Create CDO Tenant
-[**enable_multicloud_defense_for_tenant_in_msp_portal_nonotuse**](MSPNextGenApi.md#enable_multicloud_defense_for_tenant_in_msp_portal_nonotuse) | **POST** /v0/msp/tenants/{tenantUid}/mcd | Enable Multicloud Defense for CDO tenant in MSP Portal
-[**generate_api_token_for_user_in_tenant**](MSPNextGenApi.md#generate_api_token_for_user_in_tenant) | **POST** /v0/msp/tenants/{tenantUid}/users/{apiUserUid}/token | Generate token for API-only user on tenant managed by MSP portal
-[**get_msp_managed_tenants_nonotuse**](MSPNextGenApi.md#get_msp_managed_tenants_nonotuse) | **GET** /v0/msp/tenants | Get CDO tenants managed by MSP Portal
-[**provision_cd_fmc_for_tenant_in_msp_portal_nonotuse**](MSPNextGenApi.md#provision_cd_fmc_for_tenant_in_msp_portal_nonotuse) | **POST** /v0/msp/tenants/{tenantUid}/cdfmc | Provision cdFMC for CDO tenant in MSP Portal
+[**add_active_directory_groups_to_tenant_in_msp_portal_nonotuse**](MSPNextGenApi.md#add_active_directory_groups_to_tenant_in_msp_portal_nonotuse) | **POST** /v1/msp/tenants/{tenantUid}/users/groups | Add Active Directory Groups to CDO tenant in MSP Portal
+[**add_msp_tenant_nonotuse**](MSPNextGenApi.md#add_msp_tenant_nonotuse) | **POST** /v1/msp/tenants | Add Tenant to MSP Portal (API token)
+[**add_tenant_to_msp_portal_nonotuse**](MSPNextGenApi.md#add_tenant_to_msp_portal_nonotuse) | **POST** /v1/msp/tenants/{tenantUid} | Add tenant to MSP Portal
+[**add_users_to_tenant_in_msp_portal_nonotuse**](MSPNextGenApi.md#add_users_to_tenant_in_msp_portal_nonotuse) | **POST** /v1/msp/tenants/{tenantUid}/users | Add users to CDO tenant in MSP Portal
+[**create_tenant_nonotuse**](MSPNextGenApi.md#create_tenant_nonotuse) | **POST** /v1/msp/tenants/create | Create CDO Tenant
+[**enable_multicloud_defense_for_tenant_in_msp_portal_nonotuse**](MSPNextGenApi.md#enable_multicloud_defense_for_tenant_in_msp_portal_nonotuse) | **POST** /v1/msp/tenants/{tenantUid}/mcd | Enable Multicloud Defense for CDO tenant in MSP Portal
+[**generate_api_token_for_user_in_tenant**](MSPNextGenApi.md#generate_api_token_for_user_in_tenant) | **POST** /v1/msp/tenants/{tenantUid}/users/{apiUserUid}/token | Generate token for API-only user on tenant managed by MSP portal
+[**get_msp_managed_tenants_nonotuse**](MSPNextGenApi.md#get_msp_managed_tenants_nonotuse) | **GET** /v1/msp/tenants | Get CDO tenants managed by MSP Portal
+[**provision_cd_fmc_for_tenant_in_msp_portal_nonotuse**](MSPNextGenApi.md#provision_cd_fmc_for_tenant_in_msp_portal_nonotuse) | **POST** /v1/msp/tenants/{tenantUid}/cdfmc | Provision cdFMC for CDO tenant in MSP Portal
 
 
 # **add_active_directory_groups_to_tenant_in_msp_portal_nonotuse**
