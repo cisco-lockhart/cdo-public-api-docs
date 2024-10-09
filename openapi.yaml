@@ -8789,6 +8789,8 @@ components:
               type: object
             contextPath:
               type: string
+            initParameterNames:
+              type: object
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8799,8 +8801,6 @@ components:
                   - COOKIE
                   - URL
                   - SSL
-            initParameterNames:
-              type: object
             servletNames:
               type: object
               deprecated: true
@@ -8868,13 +8868,13 @@ components:
                   type: string
                 comment:
                   type: string
-                maxAge:
-                  type: integer
-                  format: int32
                 secure:
                   type: boolean
                 domain:
                   type: string
+                maxAge:
+                  type: integer
+                  format: int32
             defaultSessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8901,9 +8901,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
                 jspPropertyGroups:
                   type: array
