@@ -37,10 +37,8 @@ class RedirectViewServletContext(BaseModel):
     major_version: Optional[StrictInt] = Field(default=None, alias="majorVersion")
     minor_version: Optional[StrictInt] = Field(default=None, alias="minorVersion")
     attribute_names: Optional[Dict[str, Any]] = Field(default=None, alias="attributeNames")
-    context_path: Optional[StrictStr] = Field(default=None, alias="contextPath")
-    init_parameter_names: Optional[Dict[str, Any]] = Field(default=None, alias="initParameterNames")
-    session_tracking_modes: Optional[List[StrictStr]] = Field(default=None, alias="sessionTrackingModes")
-    servlet_names: Optional[Dict[str, Any]] = Field(default=None, alias="servletNames")
+    effective_major_version: Optional[StrictInt] = Field(default=None, alias="effectiveMajorVersion")
+    effective_minor_version: Optional[StrictInt] = Field(default=None, alias="effectiveMinorVersion")
     servlets: Optional[Dict[str, Any]] = None
     server_info: Optional[StrictStr] = Field(default=None, alias="serverInfo")
     servlet_context_name: Optional[StrictStr] = Field(default=None, alias="servletContextName")
@@ -53,20 +51,11 @@ class RedirectViewServletContext(BaseModel):
     virtual_server_name: Optional[StrictStr] = Field(default=None, alias="virtualServerName")
     request_character_encoding: Optional[StrictStr] = Field(default=None, alias="requestCharacterEncoding")
     response_character_encoding: Optional[StrictStr] = Field(default=None, alias="responseCharacterEncoding")
-    effective_major_version: Optional[StrictInt] = Field(default=None, alias="effectiveMajorVersion")
-    effective_minor_version: Optional[StrictInt] = Field(default=None, alias="effectiveMinorVersion")
-    __properties: ClassVar[List[str]] = ["sessionTimeout", "classLoader", "majorVersion", "minorVersion", "attributeNames", "contextPath", "initParameterNames", "sessionTrackingModes", "servletNames", "servlets", "serverInfo", "servletContextName", "servletRegistrations", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "effectiveMajorVersion", "effectiveMinorVersion"]
-
-    @field_validator('session_tracking_modes')
-    def session_tracking_modes_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        for i in value:
-            if i not in set(['COOKIE', 'URL', 'SSL']):
-                raise ValueError("each list item must be one of ('COOKIE', 'URL', 'SSL')")
-        return value
+    context_path: Optional[StrictStr] = Field(default=None, alias="contextPath")
+    init_parameter_names: Optional[Dict[str, Any]] = Field(default=None, alias="initParameterNames")
+    session_tracking_modes: Optional[List[StrictStr]] = Field(default=None, alias="sessionTrackingModes")
+    servlet_names: Optional[Dict[str, Any]] = Field(default=None, alias="servletNames")
+    __properties: ClassVar[List[str]] = ["sessionTimeout", "classLoader", "majorVersion", "minorVersion", "attributeNames", "effectiveMajorVersion", "effectiveMinorVersion", "servlets", "serverInfo", "servletContextName", "servletRegistrations", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "contextPath", "initParameterNames", "sessionTrackingModes", "servletNames"]
 
     @field_validator('default_session_tracking_modes')
     def default_session_tracking_modes_validate_enum(cls, value):
@@ -81,6 +70,17 @@ class RedirectViewServletContext(BaseModel):
 
     @field_validator('effective_session_tracking_modes')
     def effective_session_tracking_modes_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        for i in value:
+            if i not in set(['COOKIE', 'URL', 'SSL']):
+                raise ValueError("each list item must be one of ('COOKIE', 'URL', 'SSL')")
+        return value
+
+    @field_validator('session_tracking_modes')
+    def session_tracking_modes_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
@@ -169,10 +169,8 @@ class RedirectViewServletContext(BaseModel):
             "majorVersion": obj.get("majorVersion"),
             "minorVersion": obj.get("minorVersion"),
             "attributeNames": obj.get("attributeNames"),
-            "contextPath": obj.get("contextPath"),
-            "initParameterNames": obj.get("initParameterNames"),
-            "sessionTrackingModes": obj.get("sessionTrackingModes"),
-            "servletNames": obj.get("servletNames"),
+            "effectiveMajorVersion": obj.get("effectiveMajorVersion"),
+            "effectiveMinorVersion": obj.get("effectiveMinorVersion"),
             "servlets": obj.get("servlets"),
             "serverInfo": obj.get("serverInfo"),
             "servletContextName": obj.get("servletContextName"),
@@ -195,8 +193,10 @@ class RedirectViewServletContext(BaseModel):
             "virtualServerName": obj.get("virtualServerName"),
             "requestCharacterEncoding": obj.get("requestCharacterEncoding"),
             "responseCharacterEncoding": obj.get("responseCharacterEncoding"),
-            "effectiveMajorVersion": obj.get("effectiveMajorVersion"),
-            "effectiveMinorVersion": obj.get("effectiveMinorVersion")
+            "contextPath": obj.get("contextPath"),
+            "initParameterNames": obj.get("initParameterNames"),
+            "sessionTrackingModes": obj.get("sessionTrackingModes"),
+            "servletNames": obj.get("servletNames")
         })
         return _obj
 
