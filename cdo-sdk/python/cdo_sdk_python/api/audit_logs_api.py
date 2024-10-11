@@ -46,6 +46,7 @@ class AuditLogsApi:
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         search_text: Annotated[Optional[StrictStr], Field(description="The searchText parameter serves as a flexible search option that allows for text-based filtering across the username fields of the Audit Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.")] = None,
+        time_range: Annotated[Optional[StrictStr], Field(description="The time range for which to retrieve Audit Logs. This parameter cannot be used in conjunction with a query on the eventTime field.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -71,6 +72,8 @@ class AuditLogsApi:
         :type offset: str
         :param search_text: The searchText parameter serves as a flexible search option that allows for text-based filtering across the username fields of the Audit Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.
         :type search_text: str
+        :param time_range: The time range for which to retrieve Audit Logs. This parameter cannot be used in conjunction with a query on the eventTime field.
+        :type time_range: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
         :param sort: The fields to sort results by.
@@ -101,6 +104,7 @@ class AuditLogsApi:
             limit=limit,
             offset=offset,
             search_text=search_text,
+            time_range=time_range,
             q=q,
             sort=sort,
             _request_auth=_request_auth,
@@ -134,6 +138,7 @@ class AuditLogsApi:
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         search_text: Annotated[Optional[StrictStr], Field(description="The searchText parameter serves as a flexible search option that allows for text-based filtering across the username fields of the Audit Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.")] = None,
+        time_range: Annotated[Optional[StrictStr], Field(description="The time range for which to retrieve Audit Logs. This parameter cannot be used in conjunction with a query on the eventTime field.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -159,6 +164,8 @@ class AuditLogsApi:
         :type offset: str
         :param search_text: The searchText parameter serves as a flexible search option that allows for text-based filtering across the username fields of the Audit Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.
         :type search_text: str
+        :param time_range: The time range for which to retrieve Audit Logs. This parameter cannot be used in conjunction with a query on the eventTime field.
+        :type time_range: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
         :param sort: The fields to sort results by.
@@ -189,6 +196,7 @@ class AuditLogsApi:
             limit=limit,
             offset=offset,
             search_text=search_text,
+            time_range=time_range,
             q=q,
             sort=sort,
             _request_auth=_request_auth,
@@ -222,6 +230,7 @@ class AuditLogsApi:
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         search_text: Annotated[Optional[StrictStr], Field(description="The searchText parameter serves as a flexible search option that allows for text-based filtering across the username fields of the Audit Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.")] = None,
+        time_range: Annotated[Optional[StrictStr], Field(description="The time range for which to retrieve Audit Logs. This parameter cannot be used in conjunction with a query on the eventTime field.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -247,6 +256,8 @@ class AuditLogsApi:
         :type offset: str
         :param search_text: The searchText parameter serves as a flexible search option that allows for text-based filtering across the username fields of the Audit Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.
         :type search_text: str
+        :param time_range: The time range for which to retrieve Audit Logs. This parameter cannot be used in conjunction with a query on the eventTime field.
+        :type time_range: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
         :param sort: The fields to sort results by.
@@ -277,6 +288,7 @@ class AuditLogsApi:
             limit=limit,
             offset=offset,
             search_text=search_text,
+            time_range=time_range,
             q=q,
             sort=sort,
             _request_auth=_request_auth,
@@ -305,6 +317,7 @@ class AuditLogsApi:
         limit,
         offset,
         search_text,
+        time_range,
         q,
         sort,
         _request_auth,
@@ -339,6 +352,10 @@ class AuditLogsApi:
         if search_text is not None:
             
             _query_params.append(('searchText', search_text))
+            
+        if time_range is not None:
+            
+            _query_params.append(('timeRange', time_range))
             
         if q is not None:
             

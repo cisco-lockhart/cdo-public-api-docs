@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_audit_logs**
-> AuditLogPage get_audit_logs(limit=limit, offset=offset, search_text=search_text, q=q, sort=sort)
+> AuditLogPage get_audit_logs(limit=limit, offset=offset, search_text=search_text, time_range=time_range, q=q, sort=sort)
 
 Get Audit Logs
 
@@ -47,12 +47,13 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     search_text = 'search_text_example' # str | The searchText parameter serves as a flexible search option that allows for text-based filtering across the username fields of the Audit Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions. (optional)
+    time_range = 'time_range_example' # str | The time range for which to retrieve Audit Logs. This parameter cannot be used in conjunction with a query on the eventTime field. (optional)
     q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
     sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
         # Get Audit Logs
-        api_response = api_instance.get_audit_logs(limit=limit, offset=offset, search_text=search_text, q=q, sort=sort)
+        api_response = api_instance.get_audit_logs(limit=limit, offset=offset, search_text=search_text, time_range=time_range, q=q, sort=sort)
         print("The response of AuditLogsApi->get_audit_logs:\n")
         pprint(api_response)
     except Exception as e:
@@ -69,6 +70,7 @@ Name | Type | Description  | Notes
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
  **offset** | **str**| The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **search_text** | **str**| The searchText parameter serves as a flexible search option that allows for text-based filtering across the username fields of the Audit Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter&#39;s criteria, ensuring that the returned entries satisfy both sets of conditions. | [optional] 
+ **time_range** | **str**| The time range for which to retrieve Audit Logs. This parameter cannot be used in conjunction with a query on the eventTime field. | [optional] 
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
  **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
