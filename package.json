@@ -8,6 +8,6 @@
     "fs": "^0.0.1-security",
     "openapi-to-postmanv2": "^4.20.0",
     "openapi-transformer": "^0.11.0",
-    "yaml": "^2.5.1"
+    "yaml": "^2.6.0"
   }
 }
