@@ -12,11 +12,6 @@ commands:
   examples:
   - cli download
 
-- name: transform-fmc-oas
-  help: Perform transformations on FMC OAS and generate cdfmc-service-openapi.yaml
-  examples:
-  - cli transform-fmc-oas
-
 - name: publish-python-sdk
   help: Publishes a new version of the CDO SDK to PyPI
   examples:

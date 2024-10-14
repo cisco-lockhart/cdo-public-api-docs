@@ -10,13 +10,11 @@ increment_version() {
 root_dir=$(dirname $(dirname $(readlink -f "$0")))
 filename=openapi.yaml
 declare -A urls=(
-    ["public-api"]="https://edge.staging.cdo.cisco.com/api/platform/public-api/v3/api-docs.yaml"
+    ["public-api"]="https://edge.scale.cdo.cisco.com/api/platform/public-api/v3/api-docs.yaml"
     ["object-service"]="https://edge.staging.cdo.cisco.com/api/platform/object-service/v3/api-docs.yaml"
     ["msp-api"]="https://edge.staging.cdo.cisco.com/api/platform/msp-api/v3/api-docs.yaml"
     ["transaction-service"]="https://edge.staging.cdo.cisco.com/api/platform/transaction-service/v3/api-docs.yaml"
 )
-
-scripts/cli transform-fmc-oas
 
 filenames=()
 for service in "${!urls[@]}"; do
@@ -27,6 +25,11 @@ for service in "${!urls[@]}"; do
     filenames+=("${root_dir}/${filename}")
     echo "✅︎"
 done
+
+# Do the additional special transformations for FMC
+cdfmc_openapi_yaml="${root_dir}/cdFmc-service-openapi.yaml"
+get_fmc_openapi $cdfmc_openapi_yaml
+filenames+=($cdfmc_openapi_yaml)
 
 echo "$(yellow Installing redocly from npm)... "
 npm i
@@ -45,13 +48,13 @@ echo -n "$(yellow Generating Postman collection from combined OpenAPI YAMLs)... 
 ./node_modules/.bin/openapi2postmanv2 -s openapi.yaml -o postman-collection.json -O folderStrategy=Tags
 echo "Postman collection Generated ✅︎"
 
-echo -n "$(yellow Generating Python SDK from combined OpenAPI YAMLs)... "
-current_version=$(grep -Eo "VERSION = \"[0-9]+\.[0-9]+\.[0-9]+\"" cdo-sdk/python/setup.py | cut -d'"' -f2)
-new_version=$(increment_version "$current_version")
-npx @openapitools/openapi-generator-cli generate -i openapi.yaml -g python -o ./cdo-sdk/python \
---additional-properties packageName=cdo_sdk_python,packageVersion="$new_version" \
---openapi-generator-ignore-list ".github/workflows/python.yml"
-echo "Python SDK Generated ✅︎"
+# echo -n "$(yellow Generating Python SDK from combined OpenAPI YAMLs)... "
+# current_version=$(grep -Eo "VERSION = \"[0-9]+\.[0-9]+\.[0-9]+\"" cdo-sdk/python/setup.py | cut -d'"' -f2)
+# new_version=$(increment_version "$current_version")
+# npx @openapitools/openapi-generator-cli generate -i openapi.yaml -g python -o ./cdo-sdk/python \
+# --additional-properties packageName=cdo_sdk_python,packageVersion="$new_version" \
+# --openapi-generator-ignore-list ".github/workflows/python.yml"
+# echo "Python SDK Generated ✅︎"
 
 if [[ -z ${args[--do-not-commit]} ]]; then
     cd ${root_dir}
