@@ -53,8 +53,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: "CDO Transaction that has completed, either successfully or\
             \ unsuccessfully. Note: failed CDO Transactions do not roll back."
@@ -62,6 +60,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:

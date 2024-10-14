@@ -8499,13 +8499,13 @@ components:
           format: int64
         environment:
           $ref: '#/components/schemas/Environment'
-        beanDefinitionCount:
-          type: integer
-          format: int32
         beanDefinitionNames:
           type: array
           items:
             type: string
+        beanDefinitionCount:
+          type: integer
+          format: int32
         parentBeanFactory:
           $ref: '#/components/schemas/BeanFactory'
         classLoader:
@@ -8812,19 +8812,6 @@ components:
             servletNames:
               type: object
               deprecated: true
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -8909,15 +8896,17 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
                 jspPropertyGroups:
                   type: array
                   items:
                     type: object
                     properties:
+                      buffer:
+                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -8940,8 +8929,6 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
-                      buffer:
-                        type: string
                       defaultContentType:
                         type: string
                       urlPatterns:
@@ -8953,6 +8940,19 @@ components:
             requestCharacterEncoding:
               type: string
             responseCharacterEncoding:
+              type: string
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
               type: string
           writeOnly: true
         contentType:
