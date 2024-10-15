@@ -36,11 +36,11 @@ class ApplicationContext(BaseModel):
     application_name: Optional[StrictStr] = Field(default=None, alias="applicationName")
     startup_date: Optional[StrictInt] = Field(default=None, alias="startupDate")
     environment: Optional[Environment] = None
-    bean_definition_names: Optional[List[StrictStr]] = Field(default=None, alias="beanDefinitionNames")
     bean_definition_count: Optional[StrictInt] = Field(default=None, alias="beanDefinitionCount")
+    bean_definition_names: Optional[List[StrictStr]] = Field(default=None, alias="beanDefinitionNames")
     parent_bean_factory: Optional[Dict[str, Any]] = Field(default=None, alias="parentBeanFactory")
     class_loader: Optional[ApplicationContextClassLoader] = Field(default=None, alias="classLoader")
-    __properties: ClassVar[List[str]] = ["parent", "id", "displayName", "autowireCapableBeanFactory", "applicationName", "startupDate", "environment", "beanDefinitionNames", "beanDefinitionCount", "parentBeanFactory", "classLoader"]
+    __properties: ClassVar[List[str]] = ["parent", "id", "displayName", "autowireCapableBeanFactory", "applicationName", "startupDate", "environment", "beanDefinitionCount", "beanDefinitionNames", "parentBeanFactory", "classLoader"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -109,8 +109,8 @@ class ApplicationContext(BaseModel):
             "applicationName": obj.get("applicationName"),
             "startupDate": obj.get("startupDate"),
             "environment": Environment.from_dict(obj["environment"]) if obj.get("environment") is not None else None,
-            "beanDefinitionNames": obj.get("beanDefinitionNames"),
             "beanDefinitionCount": obj.get("beanDefinitionCount"),
+            "beanDefinitionNames": obj.get("beanDefinitionNames"),
             "parentBeanFactory": obj.get("parentBeanFactory"),
             "classLoader": ApplicationContextClassLoader.from_dict(obj["classLoader"]) if obj.get("classLoader") is not None else None
         })
