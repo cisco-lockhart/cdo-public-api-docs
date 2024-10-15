@@ -27,6 +27,7 @@ cli_usage() {
   # :command.usage_commands
   printf "%s\n" "Commands:"
   printf "  %s   Download and add public API YAML to the pubhub docs\n" "download              "
+  printf "  %s   Perform transformations on FMC OAS and generate cdfmc-service-openapi.yaml\n" "transform-fmc-oas     "
   printf "  %s   Publishes a new version of the CDO SDK to PyPI\n" "publish-python-sdk    "
   printf "  %s   Updating the SDK description with SDK-DESC.md\n" "update-sdk-description"
   echo
@@ -75,6 +76,32 @@ cli_download_usage() {
     # :command.usage_examples
     printf "%s\n" "Examples:"
     printf "  cli download\n"
+    echo
+
+  fi
+}
+
+# :command.usage
+cli_transform_fmc_oas_usage() {
+  printf "cli transform-fmc-oas - Perform transformations on FMC OAS and generate cdfmc-service-openapi.yaml\n\n"
+
+  printf "%s\n" "Usage:"
+  printf "  cli transform-fmc-oas\n"
+  printf "  cli transform-fmc-oas --help | -h\n"
+  echo
+
+  # :command.long_usage
+  if [[ -n "$long_usage" ]]; then
+    printf "%s\n" "Options:"
+
+    # :command.usage_fixed_flags
+    printf "  %s\n" "--help, -h"
+    printf "    Show this help\n"
+    echo
+
+    # :command.usage_examples
+    printf "%s\n" "Examples:"
+    printf "  cli transform-fmc-oas\n"
     echo
 
   fi
@@ -237,39 +264,6 @@ blue_underlined() { print_in_color "\e[4;34m" "$*"; }
 magenta_underlined() { print_in_color "\e[4;35m" "$*"; }
 cyan_underlined() { print_in_color "\e[4;36m" "$*"; }
 
-# src/lib/transform_fmc_oas.sh
-function get_fmc_openapi() {
-    url="https://demo-red.app.us.cdo.cisco.com/api/api-explorer/fmc_oas3.json"
-    filename=$1
-    curl -s "$url" | \
-    # Replace cdFMC URLs with the new Public API proxy URL
-    jq '.paths |= with_entries(.key |= gsub("api/"; "v1/cdfmc/api/"))' | \
-    jq 'walk(if type == "object" and .operationId == "getDevice" then .operationId = "getDeviceOnCdFmc" else . end)' | \
-    jq 'walk(if type == "object" and .operationId == "deleteAccessRule" then .operationId = "deleteCdFmcAccessRule" else . end)' | \
-    jq '
-      .tags |= map(if .name then .name |= "cdFMC " + . else . end) |
-      .paths |= with_entries(
-        .value |= with_entries(
-          .value |= if .tags then .tags |= map("cdFMC " + .) else . end
-        )
-      )
-    ' | \
-    jq 'walk(if type == "object" and ."$ref" == "#/components/schemas/AccessRule" then ."$ref" = "#/components/schemas/FmcAccessRule" else . end)' | \
-    jq 'if .components.schemas.AccessRule then .components.schemas.FmcAccessRule = .components.schemas.AccessRule | del(.components.schemas.AccessRule) else . end' | \
-    jq 'walk(if type == "object" and ."$ref" == "#/components/schemas/Device" then ."$ref" = "#/components/schemas/FmcDevice" else . end)' | \
-    jq 'if .components.schemas.Device then .components.schemas.FmcDevice = .components.schemas.Device | del(.components.schemas.Device) else . end' | \
-    # Add servers section
-    jq '.servers = [
-        {"url": "https://us.manage.security.cisco.com/api/rest", "description": "US"},
-        {"url": "https://eu.manage.security.cisco.com/api/rest", "description": "EU"},
-        {"url": "https://apj.manage.security.cisco.com/api/rest", "description": "APJ"},
-        {"url": "https://staging.manage.security.cisco.com/api/rest", "description": "Staging"},
-        {"url": "https://scale.manage.security.cisco.com/api/rest", "description": "Scale"},
-        {"url": "https://ci.manage.security.cisco.com/api/rest", "description": "CI"}
-      ]' | \
-    yq e -P - > "${filename}"
-}
-
 # :command.command_functions
 # :command.function
 cli_download_command() {
@@ -286,11 +280,13 @@ cli_download_command() {
   root_dir=$(dirname $(dirname $(readlink -f "$0")))
   filename=openapi.yaml
   declare -A urls=(
-      ["public-api"]="https://edge.scale.cdo.cisco.com/api/platform/public-api/v3/api-docs.yaml"
+      ["public-api"]="https://edge.staging.cdo.cisco.com/api/platform/public-api/v3/api-docs.yaml"
       ["object-service"]="https://edge.staging.cdo.cisco.com/api/platform/object-service/v3/api-docs.yaml"
       ["msp-api"]="https://edge.staging.cdo.cisco.com/api/platform/msp-api/v3/api-docs.yaml"
       ["transaction-service"]="https://edge.staging.cdo.cisco.com/api/platform/transaction-service/v3/api-docs.yaml"
   )
+
+  scripts/cli transform-fmc-oas
 
   filenames=()
   for service in "${!urls[@]}"; do
@@ -301,11 +297,6 @@ cli_download_command() {
       filenames+=("${root_dir}/${filename}")
       echo "✅︎"
   done
-
-  # Do the additional special transformations for FMC
-  cdfmc_openapi_yaml="${root_dir}/cdFmc-service-openapi.yaml"
-  get_fmc_openapi $cdfmc_openapi_yaml
-  filenames+=($cdfmc_openapi_yaml)
 
   echo "$(yellow Installing redocly from npm)... "
   npm i
@@ -324,13 +315,13 @@ cli_download_command() {
   ./node_modules/.bin/openapi2postmanv2 -s openapi.yaml -o postman-collection.json -O folderStrategy=Tags
   echo "Postman collection Generated ✅︎"
 
-  # echo -n "$(yellow Generating Python SDK from combined OpenAPI YAMLs)... "
-  # current_version=$(grep -Eo "VERSION = \"[0-9]+\.[0-9]+\.[0-9]+\"" cdo-sdk/python/setup.py | cut -d'"' -f2)
-  # new_version=$(increment_version "$current_version")
-  # npx @openapitools/openapi-generator-cli generate -i openapi.yaml -g python -o ./cdo-sdk/python \
-  # --additional-properties packageName=cdo_sdk_python,packageVersion="$new_version" \
-  # --openapi-generator-ignore-list ".github/workflows/python.yml"
-  # echo "Python SDK Generated ✅︎"
+  echo -n "$(yellow Generating Python SDK from combined OpenAPI YAMLs)... "
+  current_version=$(grep -Eo "VERSION = \"[0-9]+\.[0-9]+\.[0-9]+\"" cdo-sdk/python/setup.py | cut -d'"' -f2)
+  new_version=$(increment_version "$current_version")
+  npx @openapitools/openapi-generator-cli generate -i openapi.yaml -g python -o ./cdo-sdk/python \
+  --additional-properties packageName=cdo_sdk_python,packageVersion="$new_version" \
+  --openapi-generator-ignore-list ".github/workflows/python.yml"
+  echo "Python SDK Generated ✅︎"
 
   if [[ -z ${args[--do-not-commit]} ]]; then
       cd ${root_dir}
@@ -341,6 +332,38 @@ cli_download_command() {
       git push origin main
       cd -
   fi
+}
+
+# :command.function
+cli_transform_fmc_oas_command() {
+  # src/transform_fmc_oas_command.sh
+  root_dir=$(dirname $(dirname $(readlink -f "$0")))
+  filename=openapi.yaml
+  declare -A urls=(
+      # Currently dependent on the CDO_cisco-ai-team-cdo tenant cdFMC - need to update
+      ["cdFmc-service"]="https://demo-red.app.us.cdo.cisco.com/api/api-explorer/fmc_oas3.json"
+  )
+
+  filenames=()
+  for service in "${!urls[@]}"; do
+      url=${urls[${service}]}
+      filename="${service}-openapi.yaml"
+      echo -n "$(yellow Downloading file from) $(yellow_underlined ${url}) to $(blue_bold ${root_dir}/${filename})... "
+      curl -s "$url" | \
+      # Replace cdFMC URLs with the new Public API proxy URL
+      jq '.paths |= with_entries(.key |= gsub("api/fmc_config/"; "v1/cdfmc/api/fmc_config/"))' | \
+      # Add servers section
+      jq '.servers = [
+          {"url": "https://edge.us.cdo.cisco.com/api/rest", "description": "US"},
+          {"url": "https://edge.eu.cdo.cisco.com/api/rest", "description": "EU"},
+          {"url": "https://edge.apj.cdo.cisco.com/api/rest", "description": "APJ"},
+          {"url": "https://edge.staging.cdo.cisco.com/api/rest", "description": "Staging"},
+          {"url": "https://edge.scale.cdo.cisco.com/api/rest", "description": "Scale"},
+          {"url": "https://edge.ci.cdo.cisco.com/api/rest", "description": "CI"}
+        ]' | \
+      yq e -P - > "${root_dir}/${filename}"
+      echo "✅︎"
+  done
 }
 
 # :command.function
@@ -417,6 +440,13 @@ parse_requirements() {
       action="download"
       shift
       cli_download_parse_requirements "$@"
+      shift $#
+      ;;
+
+    transform-fmc-oas)
+      action="transform-fmc-oas"
+      shift
+      cli_transform_fmc_oas_parse_requirements "$@"
       shift $#
       ;;
 
@@ -502,6 +532,50 @@ cli_download_parse_requirements() {
         args['--do-not-commit']=1
         shift
         ;;
+
+      -?*)
+        printf "invalid option: %s\n" "$key" >&2
+        exit 1
+        ;;
+
+      *)
+        # :command.parse_requirements_case
+        # :command.parse_requirements_case_simple
+        printf "invalid argument: %s\n" "$key" >&2
+        exit 1
+
+        ;;
+
+    esac
+  done
+
+}
+
+# :command.parse_requirements
+cli_transform_fmc_oas_parse_requirements() {
+  # :command.fixed_flags_filter
+  while [[ $# -gt 0 ]]; do
+    case "${1:-}" in
+      --help | -h)
+        long_usage=yes
+        cli_transform_fmc_oas_usage
+        exit
+        ;;
+
+      *)
+        break
+        ;;
+
+    esac
+  done
+
+  # :command.command_filter
+  action="transform-fmc-oas"
+
+  # :command.parse_requirements_while
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case "$key" in
 
       -?*)
         printf "invalid option: %s\n" "$key" >&2
@@ -629,6 +703,7 @@ run() {
 
   case "$action" in
     "download") cli_download_command ;;
+    "transform-fmc-oas") cli_transform_fmc_oas_command ;;
     "publish-python-sdk") cli_publish_python_sdk_command ;;
     "update-sdk-description") cli_update_sdk_description_command ;;
   esac

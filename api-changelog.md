@@ -1,7 +1,3 @@
-# Version 1.6.0 (2024-11-11)
-
-- cdFMC APIs can be natively accessed from the CDO APIs!
-
 # Version 1.5.0 (2024-10-08)
 
 ## Added
