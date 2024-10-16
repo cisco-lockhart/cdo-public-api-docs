@@ -8836,6 +8836,9 @@ components:
             servletNames:
               type: object
               deprecated: true
+            effectiveMajorVersion:
+              type: integer
+              format: int32
             effectiveMinorVersion:
               type: integer
               format: int32
@@ -8941,16 +8944,6 @@ components:
                     properties:
                       buffer:
                         type: string
-                      includeCodas:
-                        type: array
-                        items:
-                          type: string
-                      deferredSyntaxAllowedAsLiteral:
-                        type: string
-                      trimDirectiveWhitespaces:
-                        type: string
-                      errorOnUndeclaredNamespace:
-                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -8963,6 +8956,16 @@ components:
                         type: array
                         items:
                           type: string
+                      includeCodas:
+                        type: array
+                        items:
+                          type: string
+                      deferredSyntaxAllowedAsLiteral:
+                        type: string
+                      trimDirectiveWhitespaces:
+                        type: string
+                      errorOnUndeclaredNamespace:
+                        type: string
                       defaultContentType:
                         type: string
                       urlPatterns:
@@ -8975,9 +8978,6 @@ components:
               type: string
             responseCharacterEncoding:
               type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
           writeOnly: true
         contentType:
           type: string
