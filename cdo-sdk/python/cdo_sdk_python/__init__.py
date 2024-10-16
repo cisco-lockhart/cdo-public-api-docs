@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.2.187"
+__version__ = "1.2.188"
 
 # import apis into sdk package
 from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
@@ -205,4 +205,5 @@ from cdo_sdk_python.models.user_create_or_update_input import UserCreateOrUpdate
 from cdo_sdk_python.models.user_input import UserInput
 from cdo_sdk_python.models.user_page import UserPage
 from cdo_sdk_python.models.user_role import UserRole
+from cdo_sdk_python.models.vpn_health_metrics import VpnHealthMetrics
 from cdo_sdk_python.models.ztp_onboarding_input import ZtpOnboardingInput

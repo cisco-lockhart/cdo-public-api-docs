@@ -18,18 +18,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
-class RedirectViewServletContextJspConfigDescriptorTaglibsInner(BaseModel):
+class VpnHealthMetrics(BaseModel):
     """
-    RedirectViewServletContextJspConfigDescriptorTaglibsInner
+    The vpn health metrics for the device.
     """ # noqa: E501
-    taglib_location: Optional[StrictStr] = Field(default=None, alias="taglibLocation")
-    taglib_uri: Optional[StrictStr] = Field(default=None, alias="taglibURI")
-    __properties: ClassVar[List[str]] = ["taglibLocation", "taglibURI"]
+    active_ravpn_tunnels_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Measures the average number of active RAVPN tunnels.", alias="activeRavpnTunnelsAvg")
+    cumulative_ravpn_tunnels_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Measures the average number of cumulative RAVPN tunnels since the last system reset or statistics clearing.", alias="cumulativeRavpnTunnelsAvg")
+    inactive_ravpn_tunnels_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Measures the average number of inactive of down RAVPN tunnels.", alias="inactiveRavpnTunnelsAvg")
+    peak_concur_ravpn_tunnels_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Measures the average number of the highest concurrent RAVPN tunnels active since the last system reset or statistics clearing.", alias="peakConcurRavpnTunnelsAvg")
+    __properties: ClassVar[List[str]] = ["activeRavpnTunnelsAvg", "cumulativeRavpnTunnelsAvg", "inactiveRavpnTunnelsAvg", "peakConcurRavpnTunnelsAvg"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +51,7 @@ class RedirectViewServletContextJspConfigDescriptorTaglibsInner(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of RedirectViewServletContextJspConfigDescriptorTaglibsInner from a JSON string"""
+        """Create an instance of VpnHealthMetrics from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -74,7 +76,7 @@ class RedirectViewServletContextJspConfigDescriptorTaglibsInner(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of RedirectViewServletContextJspConfigDescriptorTaglibsInner from a dict"""
+        """Create an instance of VpnHealthMetrics from a dict"""
         if obj is None:
             return None
 
@@ -82,8 +84,10 @@ class RedirectViewServletContextJspConfigDescriptorTaglibsInner(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "taglibLocation": obj.get("taglibLocation"),
-            "taglibURI": obj.get("taglibURI")
+            "activeRavpnTunnelsAvg": obj.get("activeRavpnTunnelsAvg"),
+            "cumulativeRavpnTunnelsAvg": obj.get("cumulativeRavpnTunnelsAvg"),
+            "inactiveRavpnTunnelsAvg": obj.get("inactiveRavpnTunnelsAvg"),
+            "peakConcurRavpnTunnelsAvg": obj.get("peakConcurRavpnTunnelsAvg")
         })
         return _obj
 

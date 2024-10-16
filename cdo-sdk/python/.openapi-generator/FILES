@@ -183,6 +183,7 @@ cdo_sdk_python/models/user_create_or_update_input.py
 cdo_sdk_python/models/user_input.py
 cdo_sdk_python/models/user_page.py
 cdo_sdk_python/models/user_role.py
+cdo_sdk_python/models/vpn_health_metrics.py
 cdo_sdk_python/models/ztp_onboarding_input.py
 cdo_sdk_python/py.typed
 cdo_sdk_python/rest.py
@@ -360,6 +361,7 @@ docs/UserInput.md
 docs/UserPage.md
 docs/UserRole.md
 docs/UsersApi.md
+docs/VpnHealthMetrics.md
 docs/ZtpOnboardingInput.md
 git_push.sh
 pyproject.toml
@@ -368,4 +370,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_vpn_health_metrics.py
 tox.ini

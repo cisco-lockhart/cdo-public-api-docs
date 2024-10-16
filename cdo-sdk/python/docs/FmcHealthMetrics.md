@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **disk_health_metrics** | [**DiskHealthMetrics**](DiskHealthMetrics.md) |  | [optional] 
 **chassis_stats_health_metrics** | [**ChassisStatsHealthMetrics**](ChassisStatsHealthMetrics.md) |  | [optional] 
 **interface_health_metrics** | [**List[InterfaceHealthMetrics]**](InterfaceHealthMetrics.md) | The interface health metrics for the device. | [optional] 
+**vpn_health_metrics** | [**VpnHealthMetrics**](VpnHealthMetrics.md) |  | [optional] 
 **ha_health_metrics** | [**HaHealthMetrics**](HaHealthMetrics.md) |  | [optional] 
 
 ## Example

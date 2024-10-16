@@ -27,6 +27,7 @@ from cdo_sdk_python.models.disk_health_metrics import DiskHealthMetrics
 from cdo_sdk_python.models.ha_health_metrics import HaHealthMetrics
 from cdo_sdk_python.models.interface_health_metrics import InterfaceHealthMetrics
 from cdo_sdk_python.models.memory_health_metrics import MemoryHealthMetrics
+from cdo_sdk_python.models.vpn_health_metrics import VpnHealthMetrics
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -43,8 +44,9 @@ class FmcHealthMetrics(BaseModel):
     disk_health_metrics: Optional[DiskHealthMetrics] = Field(default=None, alias="diskHealthMetrics")
     chassis_stats_health_metrics: Optional[ChassisStatsHealthMetrics] = Field(default=None, alias="chassisStatsHealthMetrics")
     interface_health_metrics: Optional[List[InterfaceHealthMetrics]] = Field(default=None, description="The interface health metrics for the device.", alias="interfaceHealthMetrics")
+    vpn_health_metrics: Optional[VpnHealthMetrics] = Field(default=None, alias="vpnHealthMetrics")
     ha_health_metrics: Optional[HaHealthMetrics] = Field(default=None, alias="haHealthMetrics")
-    __properties: ClassVar[List[str]] = ["deviceUid", "deviceName", "startTime", "endTime", "cpuHealthMetrics", "memoryHealthMetrics", "diskHealthMetrics", "chassisStatsHealthMetrics", "interfaceHealthMetrics", "haHealthMetrics"]
+    __properties: ClassVar[List[str]] = ["deviceUid", "deviceName", "startTime", "endTime", "cpuHealthMetrics", "memoryHealthMetrics", "diskHealthMetrics", "chassisStatsHealthMetrics", "interfaceHealthMetrics", "vpnHealthMetrics", "haHealthMetrics"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -104,6 +106,9 @@ class FmcHealthMetrics(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['interfaceHealthMetrics'] = _items
+        # override the default output from pydantic by calling `to_dict()` of vpn_health_metrics
+        if self.vpn_health_metrics:
+            _dict['vpnHealthMetrics'] = self.vpn_health_metrics.to_dict()
         # override the default output from pydantic by calling `to_dict()` of ha_health_metrics
         if self.ha_health_metrics:
             _dict['haHealthMetrics'] = self.ha_health_metrics.to_dict()
@@ -128,6 +133,7 @@ class FmcHealthMetrics(BaseModel):
             "diskHealthMetrics": DiskHealthMetrics.from_dict(obj["diskHealthMetrics"]) if obj.get("diskHealthMetrics") is not None else None,
             "chassisStatsHealthMetrics": ChassisStatsHealthMetrics.from_dict(obj["chassisStatsHealthMetrics"]) if obj.get("chassisStatsHealthMetrics") is not None else None,
             "interfaceHealthMetrics": [InterfaceHealthMetrics.from_dict(_item) for _item in obj["interfaceHealthMetrics"]] if obj.get("interfaceHealthMetrics") is not None else None,
+            "vpnHealthMetrics": VpnHealthMetrics.from_dict(obj["vpnHealthMetrics"]) if obj.get("vpnHealthMetrics") is not None else None,
             "haHealthMetrics": HaHealthMetrics.from_dict(obj["haHealthMetrics"]) if obj.get("haHealthMetrics") is not None else None
         })
         return _obj

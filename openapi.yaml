@@ -7925,6 +7925,8 @@ components:
           description: The interface health metrics for the device.
           items:
             $ref: '#/components/schemas/InterfaceHealthMetrics'
+        vpnHealthMetrics:
+          $ref: '#/components/schemas/VpnHealthMetrics'
         haHealthMetrics:
           $ref: '#/components/schemas/HaHealthMetrics'
     HaHealthMetrics:
@@ -8059,6 +8061,26 @@ components:
             useful for monitoring system health and detecting potential resource
             bottlenecks. Expressed as a percentage value between 0 and 100.
       description: The memory health metrics for the device.
+    VpnHealthMetrics:
+      type: object
+      properties:
+        activeRavpnTunnelsAvg:
+          type: number
+          description: Measures the average number of active RAVPN tunnels.
+        cumulativeRavpnTunnelsAvg:
+          type: number
+          description: >-
+            Measures the average number of cumulative RAVPN tunnels since the
+            last system reset or statistics clearing.
+        inactiveRavpnTunnelsAvg:
+          type: number
+          description: Measures the average number of inactive of down RAVPN tunnels.
+        peakConcurRavpnTunnelsAvg:
+          type: number
+          description: >-
+            Measures the average number of the highest concurrent RAVPN tunnels
+            active since the last system reset or statistics clearing.
+      description: The vpn health metrics for the device.
     SdcPage:
       type: object
       properties:
@@ -8812,19 +8834,6 @@ components:
             servletNames:
               type: object
               deprecated: true
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -8909,9 +8918,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibURI:
-                        type: string
                       taglibLocation:
+                        type: string
+                      taglibURI:
                         type: string
                 jspPropertyGroups:
                   type: array
@@ -8953,6 +8962,19 @@ components:
             requestCharacterEncoding:
               type: string
             responseCharacterEncoding:
+              type: string
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
               type: string
           writeOnly: true
         contentType:
