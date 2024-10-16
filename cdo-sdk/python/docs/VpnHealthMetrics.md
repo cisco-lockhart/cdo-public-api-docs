@@ -6,10 +6,12 @@ The vpn health metrics for the device.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**active_ravpn_tunnels_avg** | **float** | Measures the average number of active RAVPN tunnels. | [optional] 
-**cumulative_ravpn_tunnels_avg** | **float** | Measures the average number of cumulative RAVPN tunnels since the last system reset or statistics clearing. | [optional] 
-**inactive_ravpn_tunnels_avg** | **float** | Measures the average number of inactive of down RAVPN tunnels. | [optional] 
-**peak_concur_ravpn_tunnels_avg** | **float** | Measures the average number of the highest concurrent RAVPN tunnels active since the last system reset or statistics clearing. | [optional] 
+**active_ravpn_tunnels_avg** | **float** | The average number of active RA VPN tunnels. | [optional] 
+**inactive_ravpn_tunnels_avg** | **float** | The average number of inactive or down RA VPN tunnels. | [optional] 
+**peak_concur_ravpn_tunnels** | **float** | The peak concurrent RA VPN tunnels active since the last reset. | [optional] 
+**active_s2svpn_tunnels_avg** | **float** | The average number of active S2S VPN tunnels. | [optional] 
+**inactive_s2svpn_tunnels_avg** | **float** | The average number of inactive or down S2S VPN tunnels. | [optional] 
+**peak_concur_s2svpn_tunnels** | **float** | The peak concurrent S2S VPN tunnels active since the last reset. | [optional] 
 
 ## Example
 

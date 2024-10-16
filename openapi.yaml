@@ -8066,20 +8066,22 @@ components:
       properties:
         activeRavpnTunnelsAvg:
           type: number
-          description: Measures the average number of active RAVPN tunnels.
-        cumulativeRavpnTunnelsAvg:
-          type: number
-          description: >-
-            Measures the average number of cumulative RAVPN tunnels since the
-            last system reset or statistics clearing.
+          description: The average number of active RA VPN tunnels.
         inactiveRavpnTunnelsAvg:
           type: number
-          description: Measures the average number of inactive of down RAVPN tunnels.
-        peakConcurRavpnTunnelsAvg:
+          description: The average number of inactive or down RA VPN tunnels.
+        peakConcurRavpnTunnels:
           type: number
-          description: >-
-            Measures the average number of the highest concurrent RAVPN tunnels
-            active since the last system reset or statistics clearing.
+          description: The peak concurrent RA VPN tunnels active since the last reset.
+        activeS2svpnTunnelsAvg:
+          type: number
+          description: The average number of active S2S VPN tunnels.
+        inactiveS2svpnTunnelsAvg:
+          type: number
+          description: The average number of inactive or down S2S VPN tunnels.
+        peakConcurS2svpnTunnels:
+          type: number
+          description: The peak concurrent S2S VPN tunnels active since the last reset.
       description: The vpn health metrics for the device.
     SdcPage:
       type: object
@@ -8885,10 +8887,10 @@ components:
                   type: string
                 comment:
                   type: string
-                secure:
-                  type: boolean
                 domain:
                   type: string
+                secure:
+                  type: boolean
                 maxAge:
                   type: integer
                   format: int32
@@ -8918,9 +8920,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
                 jspPropertyGroups:
                   type: array
@@ -9097,17 +9099,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
-          writeOnly: true
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
           writeOnly: true
     JsonWebKey:
       type: object

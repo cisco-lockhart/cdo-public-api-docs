@@ -27,11 +27,13 @@ class VpnHealthMetrics(BaseModel):
     """
     The vpn health metrics for the device.
     """ # noqa: E501
-    active_ravpn_tunnels_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Measures the average number of active RAVPN tunnels.", alias="activeRavpnTunnelsAvg")
-    cumulative_ravpn_tunnels_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Measures the average number of cumulative RAVPN tunnels since the last system reset or statistics clearing.", alias="cumulativeRavpnTunnelsAvg")
-    inactive_ravpn_tunnels_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Measures the average number of inactive of down RAVPN tunnels.", alias="inactiveRavpnTunnelsAvg")
-    peak_concur_ravpn_tunnels_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Measures the average number of the highest concurrent RAVPN tunnels active since the last system reset or statistics clearing.", alias="peakConcurRavpnTunnelsAvg")
-    __properties: ClassVar[List[str]] = ["activeRavpnTunnelsAvg", "cumulativeRavpnTunnelsAvg", "inactiveRavpnTunnelsAvg", "peakConcurRavpnTunnelsAvg"]
+    active_ravpn_tunnels_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average number of active RA VPN tunnels.", alias="activeRavpnTunnelsAvg")
+    inactive_ravpn_tunnels_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average number of inactive or down RA VPN tunnels.", alias="inactiveRavpnTunnelsAvg")
+    peak_concur_ravpn_tunnels: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The peak concurrent RA VPN tunnels active since the last reset.", alias="peakConcurRavpnTunnels")
+    active_s2svpn_tunnels_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average number of active S2S VPN tunnels.", alias="activeS2svpnTunnelsAvg")
+    inactive_s2svpn_tunnels_avg: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The average number of inactive or down S2S VPN tunnels.", alias="inactiveS2svpnTunnelsAvg")
+    peak_concur_s2svpn_tunnels: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The peak concurrent S2S VPN tunnels active since the last reset.", alias="peakConcurS2svpnTunnels")
+    __properties: ClassVar[List[str]] = ["activeRavpnTunnelsAvg", "inactiveRavpnTunnelsAvg", "peakConcurRavpnTunnels", "activeS2svpnTunnelsAvg", "inactiveS2svpnTunnelsAvg", "peakConcurS2svpnTunnels"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,9 +87,11 @@ class VpnHealthMetrics(BaseModel):
 
         _obj = cls.model_validate({
             "activeRavpnTunnelsAvg": obj.get("activeRavpnTunnelsAvg"),
-            "cumulativeRavpnTunnelsAvg": obj.get("cumulativeRavpnTunnelsAvg"),
             "inactiveRavpnTunnelsAvg": obj.get("inactiveRavpnTunnelsAvg"),
-            "peakConcurRavpnTunnelsAvg": obj.get("peakConcurRavpnTunnelsAvg")
+            "peakConcurRavpnTunnels": obj.get("peakConcurRavpnTunnels"),
+            "activeS2svpnTunnelsAvg": obj.get("activeS2svpnTunnelsAvg"),
+            "inactiveS2svpnTunnelsAvg": obj.get("inactiveS2svpnTunnelsAvg"),
+            "peakConcurS2svpnTunnels": obj.get("peakConcurS2svpnTunnels")
         })
         return _obj
 
