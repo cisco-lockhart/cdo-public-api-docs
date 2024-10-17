@@ -8915,27 +8915,18 @@ components:
             jspConfigDescriptor:
               type: object
               properties:
-                taglibs:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      taglibURI:
-                        type: string
-                      taglibLocation:
-                        type: string
                 jspPropertyGroups:
                   type: array
                   items:
                     type: object
                     properties:
-                      buffer:
-                        type: string
-                      elIgnored:
-                        type: string
                       scriptingInvalid:
                         type: string
-                      pageEncoding:
+                      deferredSyntaxAllowedAsLiteral:
+                        type: string
+                      trimDirectiveWhitespaces:
+                        type: string
+                      errorOnUndeclaredNamespace:
                         type: string
                       isXml:
                         type: string
@@ -8947,11 +8938,11 @@ components:
                         type: array
                         items:
                           type: string
-                      deferredSyntaxAllowedAsLiteral:
+                      elIgnored:
                         type: string
-                      trimDirectiveWhitespaces:
+                      pageEncoding:
                         type: string
-                      errorOnUndeclaredNamespace:
+                      buffer:
                         type: string
                       defaultContentType:
                         type: string
@@ -8959,7 +8950,20 @@ components:
                         type: array
                         items:
                           type: string
+                taglibs:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      taglibLocation:
+                        type: string
+                      taglibURI:
+                        type: string
             virtualServerName:
+              type: string
+            requestCharacterEncoding:
+              type: string
+            responseCharacterEncoding:
               type: string
             effectiveMajorVersion:
               type: integer
@@ -8973,10 +8977,6 @@ components:
             serverInfo:
               type: string
             servletContextName:
-              type: string
-            requestCharacterEncoding:
-              type: string
-            responseCharacterEncoding:
               type: string
           writeOnly: true
         contentType:
