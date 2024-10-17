@@ -21,13 +21,13 @@ Name | Type | Description | Notes
 **effective_session_tracking_modes** | **List[str]** |  | [optional] 
 **jsp_config_descriptor** | [**RedirectViewServletContextJspConfigDescriptor**](RedirectViewServletContextJspConfigDescriptor.md) |  | [optional] 
 **virtual_server_name** | **str** |  | [optional] 
-**request_character_encoding** | **str** |  | [optional] 
-**response_character_encoding** | **str** |  | [optional] 
 **effective_major_version** | **int** |  | [optional] 
 **effective_minor_version** | **int** |  | [optional] 
 **servlets** | **object** |  | [optional] 
 **server_info** | **str** |  | [optional] 
 **servlet_context_name** | **str** |  | [optional] 
+**request_character_encoding** | **str** |  | [optional] 
+**response_character_encoding** | **str** |  | [optional] 
 
 ## Example
 
