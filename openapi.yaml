@@ -8836,6 +8836,16 @@ components:
             servletNames:
               type: object
               deprecated: true
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -8920,13 +8930,11 @@ components:
                   items:
                     type: object
                     properties:
+                      elIgnored:
+                        type: string
                       scriptingInvalid:
                         type: string
-                      deferredSyntaxAllowedAsLiteral:
-                        type: string
-                      trimDirectiveWhitespaces:
-                        type: string
-                      errorOnUndeclaredNamespace:
+                      pageEncoding:
                         type: string
                       isXml:
                         type: string
@@ -8938,9 +8946,11 @@ components:
                         type: array
                         items:
                           type: string
-                      elIgnored:
+                      deferredSyntaxAllowedAsLiteral:
                         type: string
-                      pageEncoding:
+                      trimDirectiveWhitespaces:
+                        type: string
+                      errorOnUndeclaredNamespace:
                         type: string
                       buffer:
                         type: string
@@ -8955,9 +8965,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
             virtualServerName:
               type: string
@@ -8968,16 +8978,6 @@ components:
             effectiveMajorVersion:
               type: integer
               format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
           writeOnly: true
         contentType:
           type: string
