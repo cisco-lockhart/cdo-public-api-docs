@@ -8836,12 +8836,6 @@ components:
             servletNames:
               type: object
               deprecated: true
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
             serverInfo:
               type: string
             servletContextName:
@@ -8897,13 +8891,13 @@ components:
                   type: string
                 comment:
                   type: string
+                maxAge:
+                  type: integer
+                  format: int32
                 secure:
                   type: boolean
                 domain:
                   type: string
-                maxAge:
-                  type: integer
-                  format: int32
             defaultSessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8930,6 +8924,8 @@ components:
                   items:
                     type: object
                     properties:
+                      buffer:
+                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -8952,8 +8948,6 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
-                      buffer:
-                        type: string
                       defaultContentType:
                         type: string
                       urlPatterns:
@@ -8965,9 +8959,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibURI:
-                        type: string
                       taglibLocation:
+                        type: string
+                      taglibURI:
                         type: string
             virtualServerName:
               type: string
@@ -8978,6 +8972,12 @@ components:
             effectiveMajorVersion:
               type: integer
               format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
           writeOnly: true
         contentType:
           type: string

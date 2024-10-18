@@ -41,8 +41,6 @@ class RedirectViewServletContext(BaseModel):
     init_parameter_names: Optional[Dict[str, Any]] = Field(default=None, alias="initParameterNames")
     session_tracking_modes: Optional[List[StrictStr]] = Field(default=None, alias="sessionTrackingModes")
     servlet_names: Optional[Dict[str, Any]] = Field(default=None, alias="servletNames")
-    effective_minor_version: Optional[StrictInt] = Field(default=None, alias="effectiveMinorVersion")
-    servlets: Optional[Dict[str, Any]] = None
     server_info: Optional[StrictStr] = Field(default=None, alias="serverInfo")
     servlet_context_name: Optional[StrictStr] = Field(default=None, alias="servletContextName")
     servlet_registrations: Optional[Dict[str, RedirectViewServletContextServletRegistrationsValue]] = Field(default=None, alias="servletRegistrations")
@@ -55,7 +53,9 @@ class RedirectViewServletContext(BaseModel):
     request_character_encoding: Optional[StrictStr] = Field(default=None, alias="requestCharacterEncoding")
     response_character_encoding: Optional[StrictStr] = Field(default=None, alias="responseCharacterEncoding")
     effective_major_version: Optional[StrictInt] = Field(default=None, alias="effectiveMajorVersion")
-    __properties: ClassVar[List[str]] = ["sessionTimeout", "classLoader", "majorVersion", "minorVersion", "attributeNames", "contextPath", "initParameterNames", "sessionTrackingModes", "servletNames", "effectiveMinorVersion", "servlets", "serverInfo", "servletContextName", "servletRegistrations", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "effectiveMajorVersion"]
+    effective_minor_version: Optional[StrictInt] = Field(default=None, alias="effectiveMinorVersion")
+    servlets: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["sessionTimeout", "classLoader", "majorVersion", "minorVersion", "attributeNames", "contextPath", "initParameterNames", "sessionTrackingModes", "servletNames", "serverInfo", "servletContextName", "servletRegistrations", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "effectiveMajorVersion", "effectiveMinorVersion", "servlets"]
 
     @field_validator('session_tracking_modes')
     def session_tracking_modes_validate_enum(cls, value):
@@ -173,8 +173,6 @@ class RedirectViewServletContext(BaseModel):
             "initParameterNames": obj.get("initParameterNames"),
             "sessionTrackingModes": obj.get("sessionTrackingModes"),
             "servletNames": obj.get("servletNames"),
-            "effectiveMinorVersion": obj.get("effectiveMinorVersion"),
-            "servlets": obj.get("servlets"),
             "serverInfo": obj.get("serverInfo"),
             "servletContextName": obj.get("servletContextName"),
             "servletRegistrations": dict(
@@ -196,7 +194,9 @@ class RedirectViewServletContext(BaseModel):
             "virtualServerName": obj.get("virtualServerName"),
             "requestCharacterEncoding": obj.get("requestCharacterEncoding"),
             "responseCharacterEncoding": obj.get("responseCharacterEncoding"),
-            "effectiveMajorVersion": obj.get("effectiveMajorVersion")
+            "effectiveMajorVersion": obj.get("effectiveMajorVersion"),
+            "effectiveMinorVersion": obj.get("effectiveMinorVersion"),
+            "servlets": obj.get("servlets")
         })
         return _obj
 
