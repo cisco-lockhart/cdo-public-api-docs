@@ -5,12 +5,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**session_timeout** | **int** |  | [optional] 
 **class_loader** | [**ApplicationContextClassLoaderParentUnnamedModuleClassLoader**](ApplicationContextClassLoaderParentUnnamedModuleClassLoader.md) |  | [optional] 
 **major_version** | **int** |  | [optional] 
 **minor_version** | **int** |  | [optional] 
-**session_timeout** | **int** |  | [optional] 
 **attribute_names** | **object** |  | [optional] 
 **context_path** | **str** |  | [optional] 
+**init_parameter_names** | **object** |  | [optional] 
+**session_tracking_modes** | **List[str]** |  | [optional] 
+**servlet_names** | **object** |  | [optional] 
+**request_character_encoding** | **str** |  | [optional] 
+**response_character_encoding** | **str** |  | [optional] 
 **effective_major_version** | **int** |  | [optional] 
 **effective_minor_version** | **int** |  | [optional] 
 **servlets** | **object** |  | [optional] 
@@ -23,11 +28,6 @@ Name | Type | Description | Notes
 **effective_session_tracking_modes** | **List[str]** |  | [optional] 
 **jsp_config_descriptor** | [**RedirectViewServletContextJspConfigDescriptor**](RedirectViewServletContextJspConfigDescriptor.md) |  | [optional] 
 **virtual_server_name** | **str** |  | [optional] 
-**request_character_encoding** | **str** |  | [optional] 
-**response_character_encoding** | **str** |  | [optional] 
-**init_parameter_names** | **object** |  | [optional] 
-**session_tracking_modes** | **List[str]** |  | [optional] 
-**servlet_names** | **object** |  | [optional] 
 
 ## Example
 

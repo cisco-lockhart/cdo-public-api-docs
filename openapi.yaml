@@ -8769,6 +8769,9 @@ components:
         servletContext:
           type: object
           properties:
+            sessionTimeout:
+              type: integer
+              format: int32
             classLoader:
               type: object
               properties:
@@ -8814,12 +8817,28 @@ components:
             minorVersion:
               type: integer
               format: int32
-            sessionTimeout:
-              type: integer
-              format: int32
             attributeNames:
               type: object
             contextPath:
+              type: string
+            initParameterNames:
+              type: object
+            sessionTrackingModes:
+              uniqueItems: true
+              type: array
+              writeOnly: true
+              items:
+                type: string
+                enum:
+                  - COOKIE
+                  - URL
+                  - SSL
+            servletNames:
+              type: object
+              deprecated: true
+            requestCharacterEncoding:
+              type: string
+            responseCharacterEncoding:
               type: string
             effectiveMajorVersion:
               type: integer
@@ -8918,6 +8937,16 @@ components:
                   items:
                     type: object
                     properties:
+                      buffer:
+                        type: string
+                      deferredSyntaxAllowedAsLiteral:
+                        type: string
+                      trimDirectiveWhitespaces:
+                        type: string
+                      errorOnUndeclaredNamespace:
+                        type: string
+                      elIgnored:
+                        type: string
                       scriptingInvalid:
                         type: string
                       pageEncoding:
@@ -8932,16 +8961,6 @@ components:
                         type: array
                         items:
                           type: string
-                      deferredSyntaxAllowedAsLiteral:
-                        type: string
-                      trimDirectiveWhitespaces:
-                        type: string
-                      errorOnUndeclaredNamespace:
-                        type: string
-                      elIgnored:
-                        type: string
-                      buffer:
-                        type: string
                       defaultContentType:
                         type: string
                       urlPatterns:
@@ -8953,31 +8972,12 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibURI:
-                        type: string
                       taglibLocation:
+                        type: string
+                      taglibURI:
                         type: string
             virtualServerName:
               type: string
-            requestCharacterEncoding:
-              type: string
-            responseCharacterEncoding:
-              type: string
-            initParameterNames:
-              type: object
-            sessionTrackingModes:
-              uniqueItems: true
-              type: array
-              writeOnly: true
-              items:
-                type: string
-                enum:
-                  - COOKIE
-                  - URL
-                  - SSL
-            servletNames:
-              type: object
-              deprecated: true
           writeOnly: true
         contentType:
           type: string
