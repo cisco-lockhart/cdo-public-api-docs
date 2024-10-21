@@ -8769,9 +8769,6 @@ components:
         servletContext:
           type: object
           properties:
-            sessionTimeout:
-              type: integer
-              format: int32
             classLoader:
               type: object
               properties:
@@ -8817,23 +8814,20 @@ components:
             minorVersion:
               type: integer
               format: int32
+            sessionTimeout:
+              type: integer
+              format: int32
             attributeNames:
               type: object
             contextPath:
               type: string
-            initParameterNames:
-              type: object
-            sessionTrackingModes:
-              uniqueItems: true
-              type: array
-              writeOnly: true
-              items:
-                type: string
-                enum:
-                  - COOKIE
-                  - URL
-                  - SSL
-            servletNames:
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
               type: object
               deprecated: true
             serverInfo:
@@ -8891,13 +8885,13 @@ components:
                   type: string
                 comment:
                   type: string
-                maxAge:
-                  type: integer
-                  format: int32
                 secure:
                   type: boolean
                 domain:
                   type: string
+                maxAge:
+                  type: integer
+                  format: int32
             defaultSessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8924,10 +8918,6 @@ components:
                   items:
                     type: object
                     properties:
-                      buffer:
-                        type: string
-                      elIgnored:
-                        type: string
                       scriptingInvalid:
                         type: string
                       pageEncoding:
@@ -8948,6 +8938,10 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
+                      elIgnored:
+                        type: string
+                      buffer:
+                        type: string
                       defaultContentType:
                         type: string
                       urlPatterns:
@@ -8959,9 +8953,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
             virtualServerName:
               type: string
@@ -8969,13 +8963,19 @@ components:
               type: string
             responseCharacterEncoding:
               type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
+            initParameterNames:
+              type: object
+            sessionTrackingModes:
+              uniqueItems: true
+              type: array
+              writeOnly: true
+              items:
+                type: string
+                enum:
+                  - COOKIE
+                  - URL
+                  - SSL
+            servletNames:
               type: object
               deprecated: true
           writeOnly: true
