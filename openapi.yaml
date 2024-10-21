@@ -4993,6 +4993,43 @@ paths:
       security:
         - bearerAuth: []
   /v1/msp/tenants/{tenantUid}:
+    get:
+      tags:
+        - MSP
+      summary: Get CDO tenant managed by MSP Portal
+      description: Get a CDO tenant managed by the MSP Portal.
+      operationId: getMspManagedTenant
+      parameters:
+        - name: tenantUid
+          in: path
+          description: The unique identifier of the tenant in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: CDO tenant object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MspManagedTenant'
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
+        '404':
+          $ref: '#/components/responses/http404NotFound'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
     post:
       tags:
         - MSP
@@ -5418,6 +5455,9 @@ components:
             - TERMINATE_DEVICE_RA_VPN_SESSIONS
             - REFRESH_RA_VPN_SESSIONS
             - TERMINATE_USER_RA_VPN_SESSIONS
+            - DEVICE_UPGRADE
+            - UPGRADE_ASA
+            - UPGRADE_FTD
             - CREATE_SDC
             - SEND_AI_ASSISTANT_MESSAGE
             - MSP_CREATE_TENANT
@@ -8836,23 +8876,6 @@ components:
             servletNames:
               type: object
               deprecated: true
-            requestCharacterEncoding:
-              type: string
-            responseCharacterEncoding:
-              type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -8937,14 +8960,6 @@ components:
                   items:
                     type: object
                     properties:
-                      buffer:
-                        type: string
-                      deferredSyntaxAllowedAsLiteral:
-                        type: string
-                      trimDirectiveWhitespaces:
-                        type: string
-                      errorOnUndeclaredNamespace:
-                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -8961,6 +8976,14 @@ components:
                         type: array
                         items:
                           type: string
+                      deferredSyntaxAllowedAsLiteral:
+                        type: string
+                      trimDirectiveWhitespaces:
+                        type: string
+                      errorOnUndeclaredNamespace:
+                        type: string
+                      buffer:
+                        type: string
                       defaultContentType:
                         type: string
                       urlPatterns:
@@ -8977,6 +9000,23 @@ components:
                       taglibURI:
                         type: string
             virtualServerName:
+              type: string
+            requestCharacterEncoding:
+              type: string
+            responseCharacterEncoding:
+              type: string
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
               type: string
           writeOnly: true
         contentType:
@@ -10075,7 +10115,6 @@ components:
             - SCALE
             - STAGING
             - UNKNOWN
-      description: The list of items retrieved.
     MspManagedTenantPage:
       type: object
       properties:

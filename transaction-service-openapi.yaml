@@ -43,6 +43,18 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "202":
+          description: CDO Transaction that is pending or in progress.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: "CDO Transaction that has completed, either successfully or\
             \ unsuccessfully. Note: failed CDO Transactions do not roll back."
@@ -50,18 +62,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "202":
-          description: CDO Transaction that is pending or in progress.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CdoTransaction'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -149,6 +149,9 @@ components:
           - TERMINATE_DEVICE_RA_VPN_SESSIONS
           - REFRESH_RA_VPN_SESSIONS
           - TERMINATE_USER_RA_VPN_SESSIONS
+          - DEVICE_UPGRADE
+          - UPGRADE_ASA
+          - UPGRADE_FTD
           - CREATE_SDC
           - SEND_AI_ASSISTANT_MESSAGE
           - MSP_CREATE_TENANT

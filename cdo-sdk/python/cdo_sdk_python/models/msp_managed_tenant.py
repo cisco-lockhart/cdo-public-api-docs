@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class MspManagedTenant(BaseModel):
     """
-    The list of items retrieved.
+    MspManagedTenant
     """ # noqa: E501
     display_name: Optional[StrictStr] = Field(default=None, description="A human-readable display name for the tenant. This is the tenant name displayed in the CDO Web UI.", alias="displayName")
     uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the tenant in CDO.")

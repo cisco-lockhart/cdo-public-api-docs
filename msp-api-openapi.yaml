@@ -118,6 +118,43 @@ paths:
       security:
         - bearerAuth: []
   /v1/msp/tenants/{tenantUid}:
+    get:
+      tags:
+        - MSP
+      summary: Get CDO tenant managed by MSP Portal
+      description: Get a CDO tenant managed by the MSP Portal.
+      operationId: getMspManagedTenant
+      parameters:
+        - name: tenantUid
+          in: path
+          description: The unique identifier of the tenant in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: CDO tenant object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MspManagedTenant"
+        "400":
+          $ref: "#/components/responses/http400BadRequest"
+        "401":
+          $ref: "#/components/responses/http401Unauthorised"
+        "403":
+          $ref: "#/components/responses/http403Forbidden"
+        "404":
+          $ref: "#/components/responses/http404NotFound"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommonApiError"
+      security:
+        - bearerAuth: []
     post:
       tags:
         - MSP
@@ -526,7 +563,6 @@ components:
             - SCALE
             - STAGING
             - UNKNOWN
-      description: The list of items retrieved.
     MspManagedTenantPage:
       type: object
       properties:

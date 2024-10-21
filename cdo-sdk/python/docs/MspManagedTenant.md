@@ -1,6 +1,5 @@
 # MspManagedTenant
 
-The list of items retrieved.
 
 ## Properties
 
