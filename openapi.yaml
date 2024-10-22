@@ -8960,9 +8960,9 @@ components:
                   items:
                     type: object
                     properties:
-                      elIgnored:
+                      deferredSyntaxAllowedAsLiteral:
                         type: string
-                      scriptingInvalid:
+                      elIgnored:
                         type: string
                       pageEncoding:
                         type: string
@@ -8976,11 +8976,11 @@ components:
                         type: array
                         items:
                           type: string
-                      deferredSyntaxAllowedAsLiteral:
-                        type: string
                       trimDirectiveWhitespaces:
                         type: string
                       errorOnUndeclaredNamespace:
+                        type: string
+                      scriptingInvalid:
                         type: string
                       buffer:
                         type: string
@@ -8995,9 +8995,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
             virtualServerName:
               type: string
