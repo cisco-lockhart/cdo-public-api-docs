@@ -27,12 +27,12 @@ class RedirectViewServletContextFilterRegistrationsValue(BaseModel):
     """
     RedirectViewServletContextFilterRegistrationsValue
     """ # noqa: E501
-    url_pattern_mappings: Optional[List[StrictStr]] = Field(default=None, alias="urlPatternMappings")
     servlet_name_mappings: Optional[List[StrictStr]] = Field(default=None, alias="servletNameMappings")
+    url_pattern_mappings: Optional[List[StrictStr]] = Field(default=None, alias="urlPatternMappings")
     name: Optional[StrictStr] = None
     class_name: Optional[StrictStr] = Field(default=None, alias="className")
     init_parameters: Optional[Dict[str, StrictStr]] = Field(default=None, alias="initParameters")
-    __properties: ClassVar[List[str]] = ["urlPatternMappings", "servletNameMappings", "name", "className", "initParameters"]
+    __properties: ClassVar[List[str]] = ["servletNameMappings", "urlPatternMappings", "name", "className", "initParameters"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,8 +85,8 @@ class RedirectViewServletContextFilterRegistrationsValue(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "urlPatternMappings": obj.get("urlPatternMappings"),
             "servletNameMappings": obj.get("servletNameMappings"),
+            "urlPatternMappings": obj.get("urlPatternMappings"),
             "name": obj.get("name"),
             "className": obj.get("className"),
             "initParameters": obj.get("initParameters")

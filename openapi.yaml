@@ -8879,6 +8879,16 @@ components:
             effectiveMajorVersion:
               type: integer
               format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -8898,26 +8908,16 @@ components:
                     type: object
                     additionalProperties:
                       type: string
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
             filterRegistrations:
               type: object
               additionalProperties:
                 type: object
                 properties:
-                  urlPatternMappings:
+                  servletNameMappings:
                     type: array
                     items:
                       type: string
-                  servletNameMappings:
+                  urlPatternMappings:
                     type: array
                     items:
                       type: string
