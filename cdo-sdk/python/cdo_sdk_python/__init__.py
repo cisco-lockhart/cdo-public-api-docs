@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.2.212"
+__version__ = "1.2.213"
 
 # import apis into sdk package
 from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
