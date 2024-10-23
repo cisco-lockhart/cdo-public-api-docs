@@ -32,9 +32,9 @@ class RedirectViewServletContextSessionCookieConfig(BaseModel):
     path: Optional[StrictStr] = None
     comment: Optional[StrictStr] = None
     secure: Optional[StrictBool] = None
-    max_age: Optional[StrictInt] = Field(default=None, alias="maxAge")
     domain: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["httpOnly", "name", "path", "comment", "secure", "maxAge", "domain"]
+    max_age: Optional[StrictInt] = Field(default=None, alias="maxAge")
+    __properties: ClassVar[List[str]] = ["httpOnly", "name", "path", "comment", "secure", "domain", "maxAge"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,8 +92,8 @@ class RedirectViewServletContextSessionCookieConfig(BaseModel):
             "path": obj.get("path"),
             "comment": obj.get("comment"),
             "secure": obj.get("secure"),
-            "maxAge": obj.get("maxAge"),
-            "domain": obj.get("domain")
+            "domain": obj.get("domain"),
+            "maxAge": obj.get("maxAge")
         })
         return _obj
 
