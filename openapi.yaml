@@ -8876,6 +8876,19 @@ components:
             servletNames:
               type: object
               deprecated: true
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -8960,9 +8973,9 @@ components:
                   items:
                     type: object
                     properties:
-                      deferredSyntaxAllowedAsLiteral:
-                        type: string
                       elIgnored:
+                        type: string
+                      scriptingInvalid:
                         type: string
                       pageEncoding:
                         type: string
@@ -8976,11 +8989,11 @@ components:
                         type: array
                         items:
                           type: string
+                      deferredSyntaxAllowedAsLiteral:
+                        type: string
                       trimDirectiveWhitespaces:
                         type: string
                       errorOnUndeclaredNamespace:
-                        type: string
-                      scriptingInvalid:
                         type: string
                       buffer:
                         type: string
@@ -8995,28 +9008,15 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibURI:
-                        type: string
                       taglibLocation:
+                        type: string
+                      taglibURI:
                         type: string
             virtualServerName:
               type: string
             requestCharacterEncoding:
               type: string
             responseCharacterEncoding:
-              type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
               type: string
           writeOnly: true
         contentType:
