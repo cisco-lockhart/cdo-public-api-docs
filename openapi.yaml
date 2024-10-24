@@ -8861,8 +8861,6 @@ components:
               type: object
             contextPath:
               type: string
-            initParameterNames:
-              type: object
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8873,12 +8871,11 @@ components:
                   - COOKIE
                   - URL
                   - SSL
+            initParameterNames:
+              type: object
             servletNames:
               type: object
               deprecated: true
-            effectiveMajorVersion:
-              type: integer
-              format: int32
             effectiveMinorVersion:
               type: integer
               format: int32
@@ -8894,12 +8891,12 @@ components:
               additionalProperties:
                 type: object
                 properties:
+                  runAsRole:
+                    type: string
                   mappings:
                     type: array
                     items:
                       type: string
-                  runAsRole:
-                    type: string
                   name:
                     type: string
                   className:
@@ -8940,13 +8937,13 @@ components:
                   type: string
                 comment:
                   type: string
+                maxAge:
+                  type: integer
+                  format: int32
                 secure:
                   type: boolean
                 domain:
                   type: string
-                maxAge:
-                  type: integer
-                  format: int32
             defaultSessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9008,9 +9005,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
             virtualServerName:
               type: string
@@ -9018,6 +9015,9 @@ components:
               type: string
             responseCharacterEncoding:
               type: string
+            effectiveMajorVersion:
+              type: integer
+              format: int32
           writeOnly: true
         contentType:
           type: string
