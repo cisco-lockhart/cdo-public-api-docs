@@ -14,6 +14,7 @@ declare -A urls=(
     ["object-service"]="https://edge.staging.cdo.cisco.com/api/platform/object-service/v3/api-docs.yaml"
     ["msp-api"]="https://edge.staging.cdo.cisco.com/api/platform/msp-api/v3/api-docs.yaml"
     ["transaction-service"]="https://edge.staging.cdo.cisco.com/api/platform/transaction-service/v3/api-docs.yaml"
+    ["device-upgrade"]="https://edge.staging.cdo.cisco.com/api/platform/device-upgrade/v3/api-docs.yaml"
 )
 
 scripts/cli transform-fmc-oas
