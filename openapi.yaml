@@ -8861,8 +8861,6 @@ components:
               type: object
             contextPath:
               type: string
-            initParameterNames:
-              type: object
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8876,6 +8874,21 @@ components:
             servletNames:
               type: object
               deprecated: true
+            initParameterNames:
+              type: object
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -8927,13 +8940,13 @@ components:
                   type: string
                 comment:
                   type: string
-                domain:
-                  type: string
-                secure:
-                  type: boolean
                 maxAge:
                   type: integer
                   format: int32
+                secure:
+                  type: boolean
+                domain:
+                  type: string
             defaultSessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8960,7 +8973,11 @@ components:
                   items:
                     type: object
                     properties:
+                      buffer:
+                        type: string
                       scriptingInvalid:
+                        type: string
+                      elIgnored:
                         type: string
                       pageEncoding:
                         type: string
@@ -8980,10 +8997,6 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
-                      elIgnored:
-                        type: string
-                      buffer:
-                        type: string
                       defaultContentType:
                         type: string
                       urlPatterns:
@@ -8995,28 +9008,15 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
             virtualServerName:
               type: string
             requestCharacterEncoding:
               type: string
             responseCharacterEncoding:
-              type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
               type: string
           writeOnly: true
         contentType:
@@ -9139,17 +9139,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
+          writeOnly: true
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
           writeOnly: true
     JsonWebKey:
       type: object
