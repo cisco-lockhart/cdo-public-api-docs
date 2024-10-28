@@ -8859,10 +8859,6 @@ components:
               format: int32
             attributeNames:
               type: object
-            initParameterNames:
-              type: object
-            contextPath:
-              type: string
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8873,9 +8869,17 @@ components:
                   - COOKIE
                   - URL
                   - SSL
+            contextPath:
+              type: string
+            initParameterNames:
+              type: object
             servletNames:
               type: object
               deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -8927,13 +8931,13 @@ components:
                   type: string
                 comment:
                   type: string
-                secure:
-                  type: boolean
                 domain:
                   type: string
                 maxAge:
                   type: integer
                   format: int32
+                secure:
+                  type: boolean
             defaultSessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9014,10 +9018,6 @@ components:
             servlets:
               type: object
               deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
           writeOnly: true
         contentType:
           type: string
@@ -9139,17 +9139,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
-          writeOnly: true
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
           writeOnly: true
     JsonWebKey:
       type: object

@@ -10,10 +10,12 @@ Name | Type | Description | Notes
 **major_version** | **int** |  | [optional] 
 **minor_version** | **int** |  | [optional] 
 **attribute_names** | **object** |  | [optional] 
-**init_parameter_names** | **object** |  | [optional] 
-**context_path** | **str** |  | [optional] 
 **session_tracking_modes** | **List[str]** |  | [optional] 
+**context_path** | **str** |  | [optional] 
+**init_parameter_names** | **object** |  | [optional] 
 **servlet_names** | **object** |  | [optional] 
+**server_info** | **str** |  | [optional] 
+**servlet_context_name** | **str** |  | [optional] 
 **servlet_registrations** | [**Dict[str, RedirectViewServletContextServletRegistrationsValue]**](RedirectViewServletContextServletRegistrationsValue.md) |  | [optional] 
 **filter_registrations** | [**Dict[str, RedirectViewServletContextFilterRegistrationsValue]**](RedirectViewServletContextFilterRegistrationsValue.md) |  | [optional] 
 **session_cookie_config** | [**RedirectViewServletContextSessionCookieConfig**](RedirectViewServletContextSessionCookieConfig.md) |  | [optional] 
@@ -26,8 +28,6 @@ Name | Type | Description | Notes
 **effective_major_version** | **int** |  | [optional] 
 **effective_minor_version** | **int** |  | [optional] 
 **servlets** | **object** |  | [optional] 
-**server_info** | **str** |  | [optional] 
-**servlet_context_name** | **str** |  | [optional] 
 
 ## Example
 
