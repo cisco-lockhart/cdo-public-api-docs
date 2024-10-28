@@ -8554,13 +8554,13 @@ components:
           type: string
         displayName:
           type: string
-        autowireCapableBeanFactory:
-          $ref: '#/components/schemas/AutowireCapableBeanFactory'
         applicationName:
           type: string
         startupDate:
           type: integer
           format: int64
+        autowireCapableBeanFactory:
+          $ref: '#/components/schemas/AutowireCapableBeanFactory'
         environment:
           $ref: '#/components/schemas/Environment'
         beanDefinitionCount:
