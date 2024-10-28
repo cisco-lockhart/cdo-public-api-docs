@@ -32,20 +32,15 @@ class RedirectViewServletContext(BaseModel):
     """
     RedirectViewServletContext
     """ # noqa: E501
+    session_timeout: Optional[StrictInt] = Field(default=None, alias="sessionTimeout")
     class_loader: Optional[ApplicationContextClassLoaderParentUnnamedModuleClassLoader] = Field(default=None, alias="classLoader")
     major_version: Optional[StrictInt] = Field(default=None, alias="majorVersion")
     minor_version: Optional[StrictInt] = Field(default=None, alias="minorVersion")
-    session_timeout: Optional[StrictInt] = Field(default=None, alias="sessionTimeout")
     attribute_names: Optional[Dict[str, Any]] = Field(default=None, alias="attributeNames")
-    context_path: Optional[StrictStr] = Field(default=None, alias="contextPath")
     init_parameter_names: Optional[Dict[str, Any]] = Field(default=None, alias="initParameterNames")
+    context_path: Optional[StrictStr] = Field(default=None, alias="contextPath")
     session_tracking_modes: Optional[List[StrictStr]] = Field(default=None, alias="sessionTrackingModes")
     servlet_names: Optional[Dict[str, Any]] = Field(default=None, alias="servletNames")
-    effective_major_version: Optional[StrictInt] = Field(default=None, alias="effectiveMajorVersion")
-    effective_minor_version: Optional[StrictInt] = Field(default=None, alias="effectiveMinorVersion")
-    servlets: Optional[Dict[str, Any]] = None
-    server_info: Optional[StrictStr] = Field(default=None, alias="serverInfo")
-    servlet_context_name: Optional[StrictStr] = Field(default=None, alias="servletContextName")
     servlet_registrations: Optional[Dict[str, RedirectViewServletContextServletRegistrationsValue]] = Field(default=None, alias="servletRegistrations")
     filter_registrations: Optional[Dict[str, RedirectViewServletContextFilterRegistrationsValue]] = Field(default=None, alias="filterRegistrations")
     session_cookie_config: Optional[RedirectViewServletContextSessionCookieConfig] = Field(default=None, alias="sessionCookieConfig")
@@ -55,7 +50,12 @@ class RedirectViewServletContext(BaseModel):
     virtual_server_name: Optional[StrictStr] = Field(default=None, alias="virtualServerName")
     request_character_encoding: Optional[StrictStr] = Field(default=None, alias="requestCharacterEncoding")
     response_character_encoding: Optional[StrictStr] = Field(default=None, alias="responseCharacterEncoding")
-    __properties: ClassVar[List[str]] = ["classLoader", "majorVersion", "minorVersion", "sessionTimeout", "attributeNames", "contextPath", "initParameterNames", "sessionTrackingModes", "servletNames", "effectiveMajorVersion", "effectiveMinorVersion", "servlets", "serverInfo", "servletContextName", "servletRegistrations", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding"]
+    effective_major_version: Optional[StrictInt] = Field(default=None, alias="effectiveMajorVersion")
+    effective_minor_version: Optional[StrictInt] = Field(default=None, alias="effectiveMinorVersion")
+    servlets: Optional[Dict[str, Any]] = None
+    server_info: Optional[StrictStr] = Field(default=None, alias="serverInfo")
+    servlet_context_name: Optional[StrictStr] = Field(default=None, alias="servletContextName")
+    __properties: ClassVar[List[str]] = ["sessionTimeout", "classLoader", "majorVersion", "minorVersion", "attributeNames", "initParameterNames", "contextPath", "sessionTrackingModes", "servletNames", "servletRegistrations", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "effectiveMajorVersion", "effectiveMinorVersion", "servlets", "serverInfo", "servletContextName"]
 
     @field_validator('session_tracking_modes')
     def session_tracking_modes_validate_enum(cls, value):
@@ -164,20 +164,15 @@ class RedirectViewServletContext(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "sessionTimeout": obj.get("sessionTimeout"),
             "classLoader": ApplicationContextClassLoaderParentUnnamedModuleClassLoader.from_dict(obj["classLoader"]) if obj.get("classLoader") is not None else None,
             "majorVersion": obj.get("majorVersion"),
             "minorVersion": obj.get("minorVersion"),
-            "sessionTimeout": obj.get("sessionTimeout"),
             "attributeNames": obj.get("attributeNames"),
-            "contextPath": obj.get("contextPath"),
             "initParameterNames": obj.get("initParameterNames"),
+            "contextPath": obj.get("contextPath"),
             "sessionTrackingModes": obj.get("sessionTrackingModes"),
             "servletNames": obj.get("servletNames"),
-            "effectiveMajorVersion": obj.get("effectiveMajorVersion"),
-            "effectiveMinorVersion": obj.get("effectiveMinorVersion"),
-            "servlets": obj.get("servlets"),
-            "serverInfo": obj.get("serverInfo"),
-            "servletContextName": obj.get("servletContextName"),
             "servletRegistrations": dict(
                 (_k, RedirectViewServletContextServletRegistrationsValue.from_dict(_v))
                 for _k, _v in obj["servletRegistrations"].items()
@@ -196,7 +191,12 @@ class RedirectViewServletContext(BaseModel):
             "jspConfigDescriptor": RedirectViewServletContextJspConfigDescriptor.from_dict(obj["jspConfigDescriptor"]) if obj.get("jspConfigDescriptor") is not None else None,
             "virtualServerName": obj.get("virtualServerName"),
             "requestCharacterEncoding": obj.get("requestCharacterEncoding"),
-            "responseCharacterEncoding": obj.get("responseCharacterEncoding")
+            "responseCharacterEncoding": obj.get("responseCharacterEncoding"),
+            "effectiveMajorVersion": obj.get("effectiveMajorVersion"),
+            "effectiveMinorVersion": obj.get("effectiveMinorVersion"),
+            "servlets": obj.get("servlets"),
+            "serverInfo": obj.get("serverInfo"),
+            "servletContextName": obj.get("servletContextName")
         })
         return _obj
 
