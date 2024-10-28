@@ -8876,6 +8876,19 @@ components:
             servletNames:
               type: object
               deprecated: true
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -8960,14 +8973,6 @@ components:
                   items:
                     type: object
                     properties:
-                      buffer:
-                        type: string
-                      defaultContentType:
-                        type: string
-                      urlPatterns:
-                        type: array
-                        items:
-                          type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -8990,6 +8995,14 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
+                      buffer:
+                        type: string
+                      defaultContentType:
+                        type: string
+                      urlPatterns:
+                        type: array
+                        items:
+                          type: string
                 taglibs:
                   type: array
                   items:
@@ -9004,19 +9017,6 @@ components:
             requestCharacterEncoding:
               type: string
             responseCharacterEncoding:
-              type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
               type: string
           writeOnly: true
         contentType:
