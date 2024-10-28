@@ -6,17 +6,17 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **buffer** | **str** |  | [optional] 
-**error_on_undeclared_namespace** | **str** |  | [optional] 
-**deferred_syntax_allowed_as_literal** | **str** |  | [optional] 
-**scripting_invalid** | **str** |  | [optional] 
+**default_content_type** | **str** |  | [optional] 
+**url_patterns** | **List[str]** |  | [optional] 
 **el_ignored** | **str** |  | [optional] 
+**scripting_invalid** | **str** |  | [optional] 
 **page_encoding** | **str** |  | [optional] 
 **is_xml** | **str** |  | [optional] 
 **include_preludes** | **List[str]** |  | [optional] 
 **include_codas** | **List[str]** |  | [optional] 
+**deferred_syntax_allowed_as_literal** | **str** |  | [optional] 
 **trim_directive_whitespaces** | **str** |  | [optional] 
-**default_content_type** | **str** |  | [optional] 
-**url_patterns** | **List[str]** |  | [optional] 
+**error_on_undeclared_namespace** | **str** |  | [optional] 
 
 ## Example
 
