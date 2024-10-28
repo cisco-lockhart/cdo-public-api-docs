@@ -8859,6 +8859,10 @@ components:
               format: int32
             attributeNames:
               type: object
+            contextPath:
+              type: string
+            initParameterNames:
+              type: object
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8869,17 +8873,9 @@ components:
                   - COOKIE
                   - URL
                   - SSL
-            contextPath:
-              type: string
-            initParameterNames:
-              type: object
             servletNames:
               type: object
               deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -8931,13 +8927,13 @@ components:
                   type: string
                 comment:
                   type: string
+                secure:
+                  type: boolean
                 domain:
                   type: string
                 maxAge:
                   type: integer
                   format: int32
-                secure:
-                  type: boolean
             defaultSessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8964,9 +8960,15 @@ components:
                   items:
                     type: object
                     properties:
-                      elIgnored:
+                      buffer:
+                        type: string
+                      errorOnUndeclaredNamespace:
+                        type: string
+                      deferredSyntaxAllowedAsLiteral:
                         type: string
                       scriptingInvalid:
+                        type: string
+                      elIgnored:
                         type: string
                       pageEncoding:
                         type: string
@@ -8980,13 +8982,7 @@ components:
                         type: array
                         items:
                           type: string
-                      deferredSyntaxAllowedAsLiteral:
-                        type: string
                       trimDirectiveWhitespaces:
-                        type: string
-                      errorOnUndeclaredNamespace:
-                        type: string
-                      buffer:
                         type: string
                       defaultContentType:
                         type: string
@@ -9018,6 +9014,10 @@ components:
             servlets:
               type: object
               deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
           writeOnly: true
         contentType:
           type: string
@@ -9139,17 +9139,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
+          writeOnly: true
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
           writeOnly: true
     JsonWebKey:
       type: object
