@@ -8809,6 +8809,9 @@ components:
         servletContext:
           type: object
           properties:
+            sessionTimeout:
+              type: integer
+              format: int32
             classLoader:
               type: object
               properties:
@@ -8852,9 +8855,6 @@ components:
               type: integer
               format: int32
             minorVersion:
-              type: integer
-              format: int32
-            sessionTimeout:
               type: integer
               format: int32
             attributeNames:
