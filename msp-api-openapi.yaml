@@ -198,6 +198,39 @@ paths:
                 $ref: "#/components/schemas/CommonApiError"
       security:
         - bearerAuth: []
+    delete:
+      tags:
+        - MSP
+      summary: Remove tenant from MSP Portal
+      description: "Removes a tenant currently associated with the MSP Portal. Note:
+        this endpoint can only be executed by a super-admin in the MSP Portal."
+      operationId: removeTenantFromMspPortal
+      parameters:
+        - name: tenantUid
+          in: path
+          description: The unique identifier, represented as a UUID, of the Access Group
+            in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/http400BadRequest"
+        "401":
+          $ref: "#/components/responses/http401Unauthorised"
+        "403":
+          $ref: "#/components/responses/http403Forbidden"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommonApiError"
+      security:
+        - bearerAuth: []
   /v1/msp/tenants/{tenantUid}/users:
     post:
       tags:

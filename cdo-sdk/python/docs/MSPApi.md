@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**get_msp_managed_tenant**](MSPApi.md#get_msp_managed_tenant) | **GET** /v1/msp/tenants/{tenantUid} | Get CDO tenant managed by MSP Portal
 [**get_msp_managed_tenants**](MSPApi.md#get_msp_managed_tenants) | **GET** /v1/msp/tenants | Get CDO tenants managed by MSP Portal
 [**provision_cd_fmc_for_tenant_in_msp_portal**](MSPApi.md#provision_cd_fmc_for_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/cdfmc | Provision cdFMC for CDO tenant in MSP Portal
+[**remove_tenant_from_msp_portal**](MSPApi.md#remove_tenant_from_msp_portal) | **DELETE** /v1/msp/tenants/{tenantUid} | Remove tenant from MSP Portal
 
 
 # **add_active_directory_groups_to_tenant_in_msp_portal**
@@ -797,6 +798,85 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **202** | CDO Transaction object that can be used to track the status of the operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **remove_tenant_from_msp_portal**
+> remove_tenant_from_msp_portal(tenant_uid)
+
+Remove tenant from MSP Portal
+
+Removes a tenant currently associated with the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import cdo_sdk_python
+from cdo_sdk_python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cdo_sdk_python.Configuration(
+    host = "https://edge.us.cdo.cisco.com/api/rest"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = cdo_sdk_python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with cdo_sdk_python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cdo_sdk_python.MSPApi(api_client)
+    tenant_uid = 'tenant_uid_example' # str | The unique identifier, represented as a UUID, of the Access Group in CDO.
+
+    try:
+        # Remove tenant from MSP Portal
+        api_instance.remove_tenant_from_msp_portal(tenant_uid)
+    except Exception as e:
+        print("Exception when calling MSPApi->remove_tenant_from_msp_portal: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tenant_uid** | **str**| The unique identifier, represented as a UUID, of the Access Group in CDO. | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | No Content |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
