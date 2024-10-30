@@ -1,6 +1,6 @@
 # UserInput
 
-The list of users to be added to the tenant.
+The list of users to be added to the tenant. You can add a maximum of 50 users at a time.
 
 ## Properties
 

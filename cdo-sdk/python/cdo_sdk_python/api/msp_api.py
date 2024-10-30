@@ -26,6 +26,7 @@ from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.models.msp_add_tenant_input import MspAddTenantInput
 from cdo_sdk_python.models.msp_add_users_to_tenant_input import MspAddUsersToTenantInput
 from cdo_sdk_python.models.msp_create_tenant_input import MspCreateTenantInput
+from cdo_sdk_python.models.msp_delete_users_from_tenant_input import MspDeleteUsersFromTenantInput
 from cdo_sdk_python.models.msp_managed_tenant import MspManagedTenant
 from cdo_sdk_python.models.msp_managed_tenant_page import MspManagedTenantPage
 from cdo_sdk_python.models.status_info import StatusInfo
@@ -51,8 +52,8 @@ class MSPApi:
     @validate_call
     def add_active_directory_groups_to_tenant_in_msp_portal(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="Unique identifier of the tenant to which the user groups will be added.")],
-        active_directory_group_create_or_update_input: List[ActiveDirectoryGroupCreateOrUpdateInput],
+        tenant_uid: Annotated[StrictStr, Field(description="Unique identifier of the tenant to which the user groups will be added. You can add a maximum of 50 user groups at a time.")],
+        active_directory_group_create_or_update_input: Annotated[List[ActiveDirectoryGroupCreateOrUpdateInput], Field(min_length=0, max_length=50)],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -70,7 +71,7 @@ class MSPApi:
 
         This is an asynchronous operation to add a list of Active Directory Groups to a tenant associated with the MSP Portal.
 
-        :param tenant_uid: Unique identifier of the tenant to which the user groups will be added. (required)
+        :param tenant_uid: Unique identifier of the tenant to which the user groups will be added. You can add a maximum of 50 user groups at a time. (required)
         :type tenant_uid: str
         :param active_directory_group_create_or_update_input: (required)
         :type active_directory_group_create_or_update_input: List[ActiveDirectoryGroupCreateOrUpdateInput]
@@ -123,8 +124,8 @@ class MSPApi:
     @validate_call
     def add_active_directory_groups_to_tenant_in_msp_portal_with_http_info(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="Unique identifier of the tenant to which the user groups will be added.")],
-        active_directory_group_create_or_update_input: List[ActiveDirectoryGroupCreateOrUpdateInput],
+        tenant_uid: Annotated[StrictStr, Field(description="Unique identifier of the tenant to which the user groups will be added. You can add a maximum of 50 user groups at a time.")],
+        active_directory_group_create_or_update_input: Annotated[List[ActiveDirectoryGroupCreateOrUpdateInput], Field(min_length=0, max_length=50)],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -142,7 +143,7 @@ class MSPApi:
 
         This is an asynchronous operation to add a list of Active Directory Groups to a tenant associated with the MSP Portal.
 
-        :param tenant_uid: Unique identifier of the tenant to which the user groups will be added. (required)
+        :param tenant_uid: Unique identifier of the tenant to which the user groups will be added. You can add a maximum of 50 user groups at a time. (required)
         :type tenant_uid: str
         :param active_directory_group_create_or_update_input: (required)
         :type active_directory_group_create_or_update_input: List[ActiveDirectoryGroupCreateOrUpdateInput]
@@ -195,8 +196,8 @@ class MSPApi:
     @validate_call
     def add_active_directory_groups_to_tenant_in_msp_portal_without_preload_content(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="Unique identifier of the tenant to which the user groups will be added.")],
-        active_directory_group_create_or_update_input: List[ActiveDirectoryGroupCreateOrUpdateInput],
+        tenant_uid: Annotated[StrictStr, Field(description="Unique identifier of the tenant to which the user groups will be added. You can add a maximum of 50 user groups at a time.")],
+        active_directory_group_create_or_update_input: Annotated[List[ActiveDirectoryGroupCreateOrUpdateInput], Field(min_length=0, max_length=50)],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -214,7 +215,7 @@ class MSPApi:
 
         This is an asynchronous operation to add a list of Active Directory Groups to a tenant associated with the MSP Portal.
 
-        :param tenant_uid: Unique identifier of the tenant to which the user groups will be added. (required)
+        :param tenant_uid: Unique identifier of the tenant to which the user groups will be added. You can add a maximum of 50 user groups at a time. (required)
         :type tenant_uid: str
         :param active_directory_group_create_or_update_input: (required)
         :type active_directory_group_create_or_update_input: List[ActiveDirectoryGroupCreateOrUpdateInput]
@@ -913,7 +914,7 @@ class MSPApi:
     ) -> CdoTransaction:
         """Add users to CDO tenant in MSP Portal
 
-        This is an asynchronous operation to add a list of users to a tenant associated with the MSP Portal. Note: this endpoint cannot be used to add API-only users.
+        This is an asynchronous operation to add a list of users to a tenant associated with the MSP Portal.
 
         :param tenant_uid: Unique identifier of the tenant to which the users will be added. (required)
         :type tenant_uid: str
@@ -985,7 +986,7 @@ class MSPApi:
     ) -> ApiResponse[CdoTransaction]:
         """Add users to CDO tenant in MSP Portal
 
-        This is an asynchronous operation to add a list of users to a tenant associated with the MSP Portal. Note: this endpoint cannot be used to add API-only users.
+        This is an asynchronous operation to add a list of users to a tenant associated with the MSP Portal.
 
         :param tenant_uid: Unique identifier of the tenant to which the users will be added. (required)
         :type tenant_uid: str
@@ -1057,7 +1058,7 @@ class MSPApi:
     ) -> RESTResponseType:
         """Add users to CDO tenant in MSP Portal
 
-        This is an asynchronous operation to add a list of users to a tenant associated with the MSP Portal. Note: this endpoint cannot be used to add API-only users.
+        This is an asynchronous operation to add a list of users to a tenant associated with the MSP Portal.
 
         :param tenant_uid: Unique identifier of the tenant to which the users will be added. (required)
         :type tenant_uid: str
@@ -1452,6 +1453,294 @@ class MSPApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/v1/msp/tenants/create',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def delete_users_from_tenant_in_msp_portal(
+        self,
+        tenant_uid: Annotated[StrictStr, Field(description="Unique identifier of the tenant from the users will be deleted")],
+        msp_delete_users_from_tenant_input: MspDeleteUsersFromTenantInput,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> CdoTransaction:
+        """Remove users from CDO tenant in MSP Portal
+
+        This is an asynchronous operation to remove a list of users from a tenant associated with the MSP Portal.
+
+        :param tenant_uid: Unique identifier of the tenant from the users will be deleted (required)
+        :type tenant_uid: str
+        :param msp_delete_users_from_tenant_input: (required)
+        :type msp_delete_users_from_tenant_input: MspDeleteUsersFromTenantInput
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_users_from_tenant_in_msp_portal_serialize(
+            tenant_uid=tenant_uid,
+            msp_delete_users_from_tenant_input=msp_delete_users_from_tenant_input,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '202': "CdoTransaction",
+            '500': "CommonApiError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def delete_users_from_tenant_in_msp_portal_with_http_info(
+        self,
+        tenant_uid: Annotated[StrictStr, Field(description="Unique identifier of the tenant from the users will be deleted")],
+        msp_delete_users_from_tenant_input: MspDeleteUsersFromTenantInput,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[CdoTransaction]:
+        """Remove users from CDO tenant in MSP Portal
+
+        This is an asynchronous operation to remove a list of users from a tenant associated with the MSP Portal.
+
+        :param tenant_uid: Unique identifier of the tenant from the users will be deleted (required)
+        :type tenant_uid: str
+        :param msp_delete_users_from_tenant_input: (required)
+        :type msp_delete_users_from_tenant_input: MspDeleteUsersFromTenantInput
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_users_from_tenant_in_msp_portal_serialize(
+            tenant_uid=tenant_uid,
+            msp_delete_users_from_tenant_input=msp_delete_users_from_tenant_input,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '202': "CdoTransaction",
+            '500': "CommonApiError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def delete_users_from_tenant_in_msp_portal_without_preload_content(
+        self,
+        tenant_uid: Annotated[StrictStr, Field(description="Unique identifier of the tenant from the users will be deleted")],
+        msp_delete_users_from_tenant_input: MspDeleteUsersFromTenantInput,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Remove users from CDO tenant in MSP Portal
+
+        This is an asynchronous operation to remove a list of users from a tenant associated with the MSP Portal.
+
+        :param tenant_uid: Unique identifier of the tenant from the users will be deleted (required)
+        :type tenant_uid: str
+        :param msp_delete_users_from_tenant_input: (required)
+        :type msp_delete_users_from_tenant_input: MspDeleteUsersFromTenantInput
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_users_from_tenant_in_msp_portal_serialize(
+            tenant_uid=tenant_uid,
+            msp_delete_users_from_tenant_input=msp_delete_users_from_tenant_input,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '202': "CdoTransaction",
+            '500': "CommonApiError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _delete_users_from_tenant_in_msp_portal_serialize(
+        self,
+        tenant_uid,
+        msp_delete_users_from_tenant_input,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, str] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if tenant_uid is not None:
+            _path_params['tenantUid'] = tenant_uid
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if msp_delete_users_from_tenant_input is not None:
+            _body_params = msp_delete_users_from_tenant_input
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/v1/msp/tenants/{tenantUid}/users/delete',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

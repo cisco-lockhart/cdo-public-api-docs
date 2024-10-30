@@ -26,7 +26,7 @@ from typing_extensions import Self
 
 class UserInput(BaseModel):
     """
-    The list of users to be added to the tenant.
+    The list of users to be added to the tenant. You can add a maximum of 50 users at a time.
     """ # noqa: E501
     username: StrictStr = Field(description="The name of the user in CDO. This must be a valid e-mail address if the user is not an API-only user.")
     role: UserRole

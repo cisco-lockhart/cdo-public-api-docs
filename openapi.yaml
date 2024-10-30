@@ -5117,8 +5117,7 @@ paths:
       summary: Add users to CDO tenant in MSP Portal
       description: >-
         This is an asynchronous operation to add a list of users to a tenant
-        associated with the MSP Portal. Note: this endpoint cannot be used to
-        add API-only users.
+        associated with the MSP Portal.
       operationId: addUsersToTenantInMspPortal
       parameters:
         - name: tenantUid
@@ -5210,7 +5209,7 @@ paths:
           in: path
           description: >-
             Unique identifier of the tenant to which the user groups will be
-            added.
+            added. You can add a maximum of 50 user groups at a time.
           required: true
           schema:
             type: string
@@ -5219,9 +5218,49 @@ paths:
         content:
           application/json:
             schema:
+              maxItems: 50
+              minItems: 0
               type: array
               items:
                 $ref: '#/components/schemas/ActiveDirectoryGroupCreateOrUpdateInput'
+        required: true
+      responses:
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the status of the
+            operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+  /v1/msp/tenants/{tenantUid}/users/delete:
+    post:
+      tags:
+        - MSP
+      summary: Remove users from CDO tenant in MSP Portal
+      description: >-
+        This is an asynchronous operation to remove a list of users from a
+        tenant associated with the MSP Portal.
+      operationId: deleteUsersFromTenantInMspPortal
+      parameters:
+        - name: tenantUid
+          in: path
+          description: Unique identifier of the tenant from the users will be deleted
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MspDeleteUsersFromTenantInput'
         required: true
       responses:
         '202':
@@ -10074,8 +10113,12 @@ components:
       type: object
       properties:
         users:
+          maxItems: 50
+          minItems: 0
           type: array
-          description: The list of users to be added to the tenant.
+          description: >-
+            The list of users to be added to the tenant. You can add a maximum
+            of 50 users at a time.
           example: '[username: burak@cisco.com, role: ROLE_ADMIN]'
           items:
             $ref: '#/components/schemas/UserInput'
@@ -10097,8 +10140,31 @@ components:
           type: boolean
           description: Whether the user is an API-only user
           example: false
-      description: The list of users to be added to the tenant.
+      description: >-
+        The list of users to be added to the tenant. You can add a maximum of 50
+        users at a time.
       example: '[username: burak@cisco.com, role: ROLE_ADMIN]'
+    MspDeleteUsersFromTenantInput:
+      required:
+        - usernames
+      type: object
+      properties:
+        usernames:
+          maxItems: 50
+          minItems: 0
+          type: array
+          description: >-
+            The list of usernames to be removed from the MSP-managed tenant. You
+            can remove a maximum of 50 users at a time.
+          example:
+            - username@example.com
+            - username2@example.com
+          items:
+            type: string
+            description: >-
+              The list of usernames to be removed from the MSP-managed tenant.
+              You can remove a maximum of 50 users at a time.
+            example: '["username@example.com","username2@example.com"]'
     MspCreateTenantInput:
       required:
         - tenantName

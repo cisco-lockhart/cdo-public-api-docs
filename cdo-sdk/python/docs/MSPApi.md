@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**add_tenant_to_msp_portal**](MSPApi.md#add_tenant_to_msp_portal) | **POST** /v1/msp/tenants/{tenantUid} | Add tenant to MSP Portal
 [**add_users_to_tenant_in_msp_portal**](MSPApi.md#add_users_to_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/users | Add users to CDO tenant in MSP Portal
 [**create_tenant**](MSPApi.md#create_tenant) | **POST** /v1/msp/tenants/create | Create CDO Tenant
+[**delete_users_from_tenant_in_msp_portal**](MSPApi.md#delete_users_from_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/users/delete | Remove users from CDO tenant in MSP Portal
 [**enable_multicloud_defense_for_tenant_in_msp_portal**](MSPApi.md#enable_multicloud_defense_for_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/mcd | Enable Multicloud Defense for CDO tenant in MSP Portal
 [**generate_api_token_for_user_in_tenant**](MSPApi.md#generate_api_token_for_user_in_tenant) | **POST** /v1/msp/tenants/{tenantUid}/users/{apiUserUid}/token | Generate token for API-only user on tenant managed by MSP portal
 [**get_msp_managed_tenant**](MSPApi.md#get_msp_managed_tenant) | **GET** /v1/msp/tenants/{tenantUid} | Get CDO tenant managed by MSP Portal
@@ -45,7 +46,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.MSPApi(api_client)
-    tenant_uid = 'tenant_uid_example' # str | Unique identifier of the tenant to which the user groups will be added.
+    tenant_uid = 'tenant_uid_example' # str | Unique identifier of the tenant to which the user groups will be added. You can add a maximum of 50 user groups at a time.
     active_directory_group_create_or_update_input = [cdo_sdk_python.ActiveDirectoryGroupCreateOrUpdateInput()] # List[ActiveDirectoryGroupCreateOrUpdateInput] | 
 
     try:
@@ -64,7 +65,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenant_uid** | **str**| Unique identifier of the tenant to which the user groups will be added. | 
+ **tenant_uid** | **str**| Unique identifier of the tenant to which the user groups will be added. You can add a maximum of 50 user groups at a time. | 
  **active_directory_group_create_or_update_input** | [**List[ActiveDirectoryGroupCreateOrUpdateInput]**](ActiveDirectoryGroupCreateOrUpdateInput.md)|  | 
 
 ### Return type
@@ -260,7 +261,7 @@ Name | Type | Description  | Notes
 
 Add users to CDO tenant in MSP Portal
 
-This is an asynchronous operation to add a list of users to a tenant associated with the MSP Portal. Note: this endpoint cannot be used to add API-only users.
+This is an asynchronous operation to add a list of users to a tenant associated with the MSP Portal.
 
 ### Example
 
@@ -407,6 +408,78 @@ Name | Type | Description  | Notes
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
 **409** | Conflict. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_users_from_tenant_in_msp_portal**
+> CdoTransaction delete_users_from_tenant_in_msp_portal(tenant_uid, msp_delete_users_from_tenant_input)
+
+Remove users from CDO tenant in MSP Portal
+
+This is an asynchronous operation to remove a list of users from a tenant associated with the MSP Portal.
+
+### Example
+
+
+```python
+import cdo_sdk_python
+from cdo_sdk_python.models.cdo_transaction import CdoTransaction
+from cdo_sdk_python.models.msp_delete_users_from_tenant_input import MspDeleteUsersFromTenantInput
+from cdo_sdk_python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cdo_sdk_python.Configuration(
+    host = "https://edge.us.cdo.cisco.com/api/rest"
+)
+
+
+# Enter a context with an instance of the API client
+with cdo_sdk_python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cdo_sdk_python.MSPApi(api_client)
+    tenant_uid = 'tenant_uid_example' # str | Unique identifier of the tenant from the users will be deleted
+    msp_delete_users_from_tenant_input = cdo_sdk_python.MspDeleteUsersFromTenantInput() # MspDeleteUsersFromTenantInput | 
+
+    try:
+        # Remove users from CDO tenant in MSP Portal
+        api_response = api_instance.delete_users_from_tenant_in_msp_portal(tenant_uid, msp_delete_users_from_tenant_input)
+        print("The response of MSPApi->delete_users_from_tenant_in_msp_portal:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling MSPApi->delete_users_from_tenant_in_msp_portal: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tenant_uid** | **str**| Unique identifier of the tenant from the users will be deleted | 
+ **msp_delete_users_from_tenant_input** | [**MspDeleteUsersFromTenantInput**](MspDeleteUsersFromTenantInput.md)|  | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | CDO Transaction object that can be used to track the status of the operation. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

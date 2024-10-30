@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**users** | [**List[UserInput]**](UserInput.md) | The list of users to be added to the tenant. | 
+**users** | [**List[UserInput]**](UserInput.md) | The list of users to be added to the tenant. You can add a maximum of 50 users at a time. | 
 
 ## Example
 
