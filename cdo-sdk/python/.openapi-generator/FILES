@@ -372,5 +372,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_msp_delete_users_from_tenant_input.py
 tox.ini

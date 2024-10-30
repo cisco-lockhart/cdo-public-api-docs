@@ -5537,6 +5537,7 @@ components:
             - MSP_CREATE_TENANT
             - MSP_ADD_USERS_TO_TENANT
             - MSP_ADD_USER_GROUPS_TO_TENANT
+            - MSP_DELETE_USERS_FROM_TENANT
             - MSP_ADD_EXISTING_TENANT
             - MSP_ENABLE_MULTICLOUD_DEFENSE
             - MSP_PROVISION_CDFMC
@@ -9069,9 +9070,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibURI:
-                        type: string
                       taglibLocation:
+                        type: string
+                      taglibURI:
                         type: string
             virtualServerName:
               type: string
