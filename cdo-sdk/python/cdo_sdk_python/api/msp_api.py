@@ -3143,7 +3143,7 @@ class MSPApi:
     @validate_call
     def remove_tenant_from_msp_portal(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in CDO.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3161,7 +3161,7 @@ class MSPApi:
 
         Removes a tenant currently associated with the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal.
 
-        :param tenant_uid: The unique identifier, represented as a UUID, of the Access Group in CDO. (required)
+        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in CDO. (required)
         :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3214,7 +3214,7 @@ class MSPApi:
     @validate_call
     def remove_tenant_from_msp_portal_with_http_info(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in CDO.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3232,7 +3232,7 @@ class MSPApi:
 
         Removes a tenant currently associated with the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal.
 
-        :param tenant_uid: The unique identifier, represented as a UUID, of the Access Group in CDO. (required)
+        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in CDO. (required)
         :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3285,7 +3285,7 @@ class MSPApi:
     @validate_call
     def remove_tenant_from_msp_portal_without_preload_content(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in CDO.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3303,7 +3303,7 @@ class MSPApi:
 
         Removes a tenant currently associated with the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal.
 
-        :param tenant_uid: The unique identifier, represented as a UUID, of the Access Group in CDO. (required)
+        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in CDO. (required)
         :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

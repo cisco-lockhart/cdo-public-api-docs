@@ -5086,9 +5086,7 @@ paths:
       parameters:
         - name: tenantUid
           in: path
-          description: >-
-            The unique identifier, represented as a UUID, of the Access Group in
-            CDO.
+          description: The unique identifier, represented as a UUID, of the tenant in CDO.
           required: true
           schema:
             type: string
