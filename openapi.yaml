@@ -8930,11 +8930,10 @@ components:
             minorVersion:
               type: integer
               format: int32
-            attributeNames:
+            servletNames:
               type: object
-            contextPath:
-              type: string
-            initParameterNames:
+              deprecated: true
+            attributeNames:
               type: object
             sessionTrackingModes:
               uniqueItems: true
@@ -8946,9 +8945,20 @@ components:
                   - COOKIE
                   - URL
                   - SSL
-            servletNames:
+            contextPath:
+              type: string
+            initParameterNames:
+              type: object
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
               type: object
               deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -8992,14 +9002,14 @@ components:
             sessionCookieConfig:
               type: object
               properties:
-                httpOnly:
-                  type: boolean
                 name:
                   type: string
                 path:
                   type: string
                 comment:
                   type: string
+                httpOnly:
+                  type: boolean
                 secure:
                   type: boolean
                 domain:
@@ -9033,9 +9043,9 @@ components:
                   items:
                     type: object
                     properties:
-                      elIgnored:
+                      buffer:
                         type: string
-                      scriptingInvalid:
+                      elIgnored:
                         type: string
                       pageEncoding:
                         type: string
@@ -9049,28 +9059,28 @@ components:
                         type: array
                         items:
                           type: string
+                      scriptingInvalid:
+                        type: string
                       deferredSyntaxAllowedAsLiteral:
                         type: string
                       trimDirectiveWhitespaces:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
-                      buffer:
-                        type: string
-                      defaultContentType:
-                        type: string
                       urlPatterns:
                         type: array
                         items:
                           type: string
+                      defaultContentType:
+                        type: string
                 taglibs:
                   type: array
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
             virtualServerName:
               type: string
@@ -9081,16 +9091,6 @@ components:
             effectiveMajorVersion:
               type: integer
               format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
           writeOnly: true
         contentType:
           type: string
