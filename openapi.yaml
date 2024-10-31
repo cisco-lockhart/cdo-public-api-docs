@@ -8930,10 +8930,11 @@ components:
             minorVersion:
               type: integer
               format: int32
-            servletNames:
-              type: object
-              deprecated: true
             attributeNames:
+              type: object
+            contextPath:
+              type: string
+            initParameterNames:
               type: object
             sessionTrackingModes:
               uniqueItems: true
@@ -8945,10 +8946,12 @@ components:
                   - COOKIE
                   - URL
                   - SSL
-            contextPath:
-              type: string
-            initParameterNames:
+            servletNames:
               type: object
+              deprecated: true
+            effectiveMajorVersion:
+              type: integer
+              format: int32
             effectiveMinorVersion:
               type: integer
               format: int32
@@ -9002,14 +9005,14 @@ components:
             sessionCookieConfig:
               type: object
               properties:
+                httpOnly:
+                  type: boolean
                 name:
                   type: string
                 path:
                   type: string
                 comment:
                   type: string
-                httpOnly:
-                  type: boolean
                 secure:
                   type: boolean
                 domain:
@@ -9043,7 +9046,7 @@ components:
                   items:
                     type: object
                     properties:
-                      buffer:
+                      scriptingInvalid:
                         type: string
                       elIgnored:
                         type: string
@@ -9059,28 +9062,28 @@ components:
                         type: array
                         items:
                           type: string
-                      scriptingInvalid:
-                        type: string
                       deferredSyntaxAllowedAsLiteral:
                         type: string
                       trimDirectiveWhitespaces:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
+                      buffer:
+                        type: string
+                      defaultContentType:
+                        type: string
                       urlPatterns:
                         type: array
                         items:
                           type: string
-                      defaultContentType:
-                        type: string
                 taglibs:
                   type: array
                   items:
                     type: object
                     properties:
-                      taglibURI:
-                        type: string
                       taglibLocation:
+                        type: string
+                      taglibURI:
                         type: string
             virtualServerName:
               type: string
@@ -9088,9 +9091,6 @@ components:
               type: string
             responseCharacterEncoding:
               type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
           writeOnly: true
         contentType:
           type: string

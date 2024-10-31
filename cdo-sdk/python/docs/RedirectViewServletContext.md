@@ -9,11 +9,12 @@ Name | Type | Description | Notes
 **class_loader** | [**ApplicationContextClassLoaderParentUnnamedModuleClassLoader**](ApplicationContextClassLoaderParentUnnamedModuleClassLoader.md) |  | [optional] 
 **major_version** | **int** |  | [optional] 
 **minor_version** | **int** |  | [optional] 
-**servlet_names** | **object** |  | [optional] 
 **attribute_names** | **object** |  | [optional] 
-**session_tracking_modes** | **List[str]** |  | [optional] 
 **context_path** | **str** |  | [optional] 
 **init_parameter_names** | **object** |  | [optional] 
+**session_tracking_modes** | **List[str]** |  | [optional] 
+**servlet_names** | **object** |  | [optional] 
+**effective_major_version** | **int** |  | [optional] 
 **effective_minor_version** | **int** |  | [optional] 
 **servlets** | **object** |  | [optional] 
 **server_info** | **str** |  | [optional] 
@@ -27,7 +28,6 @@ Name | Type | Description | Notes
 **virtual_server_name** | **str** |  | [optional] 
 **request_character_encoding** | **str** |  | [optional] 
 **response_character_encoding** | **str** |  | [optional] 
-**effective_major_version** | **int** |  | [optional] 
 
 ## Example
 
