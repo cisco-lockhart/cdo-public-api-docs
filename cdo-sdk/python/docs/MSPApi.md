@@ -15,7 +15,7 @@ Method | HTTP request | Description
 [**get_msp_managed_tenant**](MSPApi.md#get_msp_managed_tenant) | **GET** /v1/msp/tenants/{tenantUid} | Get CDO tenant managed by MSP Portal
 [**get_msp_managed_tenants**](MSPApi.md#get_msp_managed_tenants) | **GET** /v1/msp/tenants | Get CDO tenants managed by MSP Portal
 [**provision_cd_fmc_for_tenant_in_msp_portal**](MSPApi.md#provision_cd_fmc_for_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/cdfmc | Provision cdFMC for CDO tenant in MSP Portal
-[**remove_tenant_from_msp_portal**](MSPApi.md#remove_tenant_from_msp_portal) | **DELETE** /v1/msp/tenants/{tenantUid} | Remove tenant from MSP Portal
+[**remove_tenant_from_msp_portal**](MSPApi.md#remove_tenant_from_msp_portal) | **DELETE** /v1/msp/tenants | Remove tenant from MSP Portal
 
 
 # **add_active_directory_groups_to_tenant_in_msp_portal**
@@ -876,7 +876,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **remove_tenant_from_msp_portal**
-> remove_tenant_from_msp_portal(tenant_uid)
+> remove_tenant_from_msp_portal(msp_delete_tenant_input)
 
 Remove tenant from MSP Portal
 
@@ -888,6 +888,7 @@ Removes a tenant currently associated with the MSP Portal. Note: this endpoint c
 
 ```python
 import cdo_sdk_python
+from cdo_sdk_python.models.msp_delete_tenant_input import MspDeleteTenantInput
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
@@ -911,11 +912,11 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.MSPApi(api_client)
-    tenant_uid = 'tenant_uid_example' # str | The unique identifier, represented as a UUID, of the tenant in CDO.
+    msp_delete_tenant_input = cdo_sdk_python.MspDeleteTenantInput() # MspDeleteTenantInput | 
 
     try:
         # Remove tenant from MSP Portal
-        api_instance.remove_tenant_from_msp_portal(tenant_uid)
+        api_instance.remove_tenant_from_msp_portal(msp_delete_tenant_input)
     except Exception as e:
         print("Exception when calling MSPApi->remove_tenant_from_msp_portal: %s\n" % e)
 ```
@@ -927,7 +928,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenant_uid** | **str**| The unique identifier, represented as a UUID, of the tenant in CDO. | 
+ **msp_delete_tenant_input** | [**MspDeleteTenantInput**](MspDeleteTenantInput.md)|  | 
 
 ### Return type
 
@@ -939,7 +940,7 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
