@@ -131,7 +131,6 @@ cdo_sdk_python/models/mfa_event_page.py
 cdo_sdk_python/models/msp_add_tenant_input.py
 cdo_sdk_python/models/msp_add_users_to_tenant_input.py
 cdo_sdk_python/models/msp_create_tenant_input.py
-cdo_sdk_python/models/msp_delete_tenant_input.py
 cdo_sdk_python/models/msp_delete_users_from_tenant_input.py
 cdo_sdk_python/models/msp_managed_tenant.py
 cdo_sdk_python/models/msp_managed_tenant_page.py
@@ -304,7 +303,6 @@ docs/MfaEventPage.md
 docs/MspAddTenantInput.md
 docs/MspAddUsersToTenantInput.md
 docs/MspCreateTenantInput.md
-docs/MspDeleteTenantInput.md
 docs/MspDeleteUsersFromTenantInput.md
 docs/MspManagedTenant.md
 docs/MspManagedTenantPage.md
@@ -374,5 +372,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_msp_delete_tenant_input.py
 tox.ini

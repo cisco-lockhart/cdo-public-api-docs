@@ -26,7 +26,6 @@ from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.models.msp_add_tenant_input import MspAddTenantInput
 from cdo_sdk_python.models.msp_add_users_to_tenant_input import MspAddUsersToTenantInput
 from cdo_sdk_python.models.msp_create_tenant_input import MspCreateTenantInput
-from cdo_sdk_python.models.msp_delete_tenant_input import MspDeleteTenantInput
 from cdo_sdk_python.models.msp_delete_users_from_tenant_input import MspDeleteUsersFromTenantInput
 from cdo_sdk_python.models.msp_managed_tenant import MspManagedTenant
 from cdo_sdk_python.models.msp_managed_tenant_page import MspManagedTenantPage
@@ -3144,7 +3143,7 @@ class MSPApi:
     @validate_call
     def remove_tenant_from_msp_portal(
         self,
-        msp_delete_tenant_input: MspDeleteTenantInput,
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3162,8 +3161,8 @@ class MSPApi:
 
         Removes a tenant currently associated with the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal.
 
-        :param msp_delete_tenant_input: (required)
-        :type msp_delete_tenant_input: MspDeleteTenantInput
+        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in CDO. (required)
+        :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3187,7 +3186,7 @@ class MSPApi:
         """ # noqa: E501
 
         _param = self._remove_tenant_from_msp_portal_serialize(
-            msp_delete_tenant_input=msp_delete_tenant_input,
+            tenant_uid=tenant_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3215,7 +3214,7 @@ class MSPApi:
     @validate_call
     def remove_tenant_from_msp_portal_with_http_info(
         self,
-        msp_delete_tenant_input: MspDeleteTenantInput,
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3233,8 +3232,8 @@ class MSPApi:
 
         Removes a tenant currently associated with the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal.
 
-        :param msp_delete_tenant_input: (required)
-        :type msp_delete_tenant_input: MspDeleteTenantInput
+        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in CDO. (required)
+        :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3258,7 +3257,7 @@ class MSPApi:
         """ # noqa: E501
 
         _param = self._remove_tenant_from_msp_portal_serialize(
-            msp_delete_tenant_input=msp_delete_tenant_input,
+            tenant_uid=tenant_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3286,7 +3285,7 @@ class MSPApi:
     @validate_call
     def remove_tenant_from_msp_portal_without_preload_content(
         self,
-        msp_delete_tenant_input: MspDeleteTenantInput,
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in CDO.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3304,8 +3303,8 @@ class MSPApi:
 
         Removes a tenant currently associated with the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal.
 
-        :param msp_delete_tenant_input: (required)
-        :type msp_delete_tenant_input: MspDeleteTenantInput
+        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in CDO. (required)
+        :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3329,7 +3328,7 @@ class MSPApi:
         """ # noqa: E501
 
         _param = self._remove_tenant_from_msp_portal_serialize(
-            msp_delete_tenant_input=msp_delete_tenant_input,
+            tenant_uid=tenant_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3352,7 +3351,7 @@ class MSPApi:
 
     def _remove_tenant_from_msp_portal_serialize(
         self,
-        msp_delete_tenant_input,
+        tenant_uid,
         _request_auth,
         _content_type,
         _headers,
@@ -3372,12 +3371,12 @@ class MSPApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
+        if tenant_uid is not None:
+            _path_params['tenantUid'] = tenant_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if msp_delete_tenant_input is not None:
-            _body_params = msp_delete_tenant_input
 
 
         # set the HTTP header `Accept`
@@ -3387,19 +3386,6 @@ class MSPApi:
             ]
         )
 
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -3408,7 +3394,7 @@ class MSPApi:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/v1/msp/tenants',
+            resource_path='/v1/msp/tenants/{tenantUid}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

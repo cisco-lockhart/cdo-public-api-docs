@@ -4992,37 +4992,6 @@ paths:
                 $ref: '#/components/schemas/CommonApiError'
       security:
         - bearerAuth: []
-    delete:
-      tags:
-        - MSP
-      summary: Remove tenant from MSP Portal
-      description: >-
-        Removes a tenant currently associated with the MSP Portal. Note: this
-        endpoint can only be executed by a super-admin in the MSP Portal.
-      operationId: removeTenantFromMspPortal
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MspDeleteTenantInput'
-        required: true
-      responses:
-        '204':
-          description: No Content
-        '400':
-          $ref: '#/components/responses/http400BadRequest'
-        '401':
-          $ref: '#/components/responses/http401Unauthorised'
-        '403':
-          $ref: '#/components/responses/http403Forbidden'
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommonApiError'
-      security:
-        - bearerAuth: []
   /v1/msp/tenants/{tenantUid}:
     get:
       tags:
@@ -5098,6 +5067,39 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         '409':
           $ref: '#/components/responses/http409Conflict'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - MSP
+      summary: Remove tenant from MSP Portal
+      description: >-
+        Removes a tenant currently associated with the MSP Portal. Note: this
+        endpoint can only be executed by a super-admin in the MSP Portal.
+      operationId: removeTenantFromMspPortal
+      parameters:
+        - name: tenantUid
+          in: path
+          description: The unique identifier, represented as a UUID, of the tenant in CDO.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/http400BadRequest'
+        '401':
+          $ref: '#/components/responses/http401Unauthorised'
+        '403':
+          $ref: '#/components/responses/http403Forbidden'
         '500':
           description: Internal server error.
           content:
@@ -8928,11 +8930,10 @@ components:
             minorVersion:
               type: integer
               format: int32
-            attributeNames:
+            servletNames:
               type: object
-            contextPath:
-              type: string
-            initParameterNames:
+              deprecated: true
+            attributeNames:
               type: object
             sessionTrackingModes:
               uniqueItems: true
@@ -8944,12 +8945,10 @@ components:
                   - COOKIE
                   - URL
                   - SSL
-            servletNames:
+            contextPath:
+              type: string
+            initParameterNames:
               type: object
-              deprecated: true
-            effectiveMajorVersion:
-              type: integer
-              format: int32
             effectiveMinorVersion:
               type: integer
               format: int32
@@ -9003,14 +9002,14 @@ components:
             sessionCookieConfig:
               type: object
               properties:
-                httpOnly:
-                  type: boolean
                 name:
                   type: string
                 path:
                   type: string
                 comment:
                   type: string
+                httpOnly:
+                  type: boolean
                 secure:
                   type: boolean
                 domain:
@@ -9044,7 +9043,7 @@ components:
                   items:
                     type: object
                     properties:
-                      scriptingInvalid:
+                      buffer:
                         type: string
                       elIgnored:
                         type: string
@@ -9060,28 +9059,28 @@ components:
                         type: array
                         items:
                           type: string
+                      scriptingInvalid:
+                        type: string
                       deferredSyntaxAllowedAsLiteral:
                         type: string
                       trimDirectiveWhitespaces:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
-                      buffer:
-                        type: string
-                      defaultContentType:
-                        type: string
                       urlPatterns:
                         type: array
                         items:
                           type: string
+                      defaultContentType:
+                        type: string
                 taglibs:
                   type: array
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
             virtualServerName:
               type: string
@@ -9089,6 +9088,9 @@ components:
               type: string
             responseCharacterEncoding:
               type: string
+            effectiveMajorVersion:
+              type: integer
+              format: int32
           writeOnly: true
         contentType:
           type: string
@@ -10239,20 +10241,6 @@ components:
           description: The list of items retrieved.
           items:
             $ref: '#/components/schemas/MspManagedTenant'
-    MspDeleteTenantInput:
-      required:
-        - tenantCdoRegion
-        - tenantName
-      type: object
-      properties:
-        tenantName:
-          type: string
-          description: The name of the tenant to remove from the MSP portal.
-          example: tenant-name
-        tenantCdoRegion:
-          type: string
-          description: The region in which the tenant to be removed resides.
-          example: prod
   responses:
     http400BadRequest:
       description: Invalid input provided. Check the response for details.
