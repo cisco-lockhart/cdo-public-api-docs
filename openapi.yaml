@@ -8930,10 +8930,11 @@ components:
             minorVersion:
               type: integer
               format: int32
-            servletNames:
-              type: object
-              deprecated: true
             attributeNames:
+              type: object
+            contextPath:
+              type: string
+            initParameterNames:
               type: object
             sessionTrackingModes:
               uniqueItems: true
@@ -8945,10 +8946,9 @@ components:
                   - COOKIE
                   - URL
                   - SSL
-            contextPath:
-              type: string
-            initParameterNames:
+            servletNames:
               type: object
+              deprecated: true
             effectiveMinorVersion:
               type: integer
               format: int32
@@ -8964,12 +8964,12 @@ components:
               additionalProperties:
                 type: object
                 properties:
+                  runAsRole:
+                    type: string
                   mappings:
                     type: array
                     items:
                       type: string
-                  runAsRole:
-                    type: string
                   name:
                     type: string
                   className:
@@ -9002,14 +9002,14 @@ components:
             sessionCookieConfig:
               type: object
               properties:
+                httpOnly:
+                  type: boolean
                 name:
                   type: string
                 path:
                   type: string
                 comment:
                   type: string
-                httpOnly:
-                  type: boolean
                 secure:
                   type: boolean
                 domain:
@@ -9043,9 +9043,9 @@ components:
                   items:
                     type: object
                     properties:
-                      buffer:
-                        type: string
                       elIgnored:
+                        type: string
+                      scriptingInvalid:
                         type: string
                       pageEncoding:
                         type: string
@@ -9059,20 +9059,20 @@ components:
                         type: array
                         items:
                           type: string
-                      scriptingInvalid:
-                        type: string
                       deferredSyntaxAllowedAsLiteral:
                         type: string
                       trimDirectiveWhitespaces:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
+                      buffer:
+                        type: string
+                      defaultContentType:
+                        type: string
                       urlPatterns:
                         type: array
                         items:
                           type: string
-                      defaultContentType:
-                        type: string
                 taglibs:
                   type: array
                   items:
