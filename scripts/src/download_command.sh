@@ -14,7 +14,7 @@ declare -A urls=(
     ["object-service"]="https://edge.staging.cdo.cisco.com/api/platform/object-service/v3/api-docs.yaml"
     ["msp-api"]="https://edge.staging.cdo.cisco.com/api/platform/msp-api/v3/api-docs.yaml"
     ["transaction-service"]="https://edge.staging.cdo.cisco.com/api/platform/transaction-service/v3/api-docs.yaml"
-    ["device-upgrade"]="https://edge.staging.cdo.cisco.com/api/platform/device-upgrade/v3/api-docs.yaml"
+    # ["device-upgrade"]="https://edge.staging.cdo.cisco.com/api/platform/device-upgrade/v3/api-docs.yaml"
 )
 
 scripts/cli transform-fmc-oas
@@ -36,6 +36,7 @@ echo "Installed ✅︎"
 echo -n "Updating references to shared schemas..."
 npm i yaml fs
 node scripts/src/lib/modify_schema.js msp-api-openapi.yaml CdoTransaction public-api-openapi.yaml
+node scripts/src/lib/modify_schema.js msp-api-openapi.yaml User public-api-openapi.yaml
 node scripts/src/lib/modify_schema.js msp-api-openapi.yaml UserRole public-api-openapi.yaml
 echo "Updated ✅︎"
 echo -n "$(yellow Combining all OpenAPI YAMLs into one)... "

@@ -45,11 +45,18 @@ function deleteSchema(openApiFile, schemaToDelete, referenceFile) {
   if (openApiDoc.components && openApiDoc.components.schemas) {
     for (const schema in openApiDoc.components.schemas) {
       const schemaObject = openApiDoc.components.schemas[schema];
+      console.log('Checking schema', schema);
       if (schemaObject.properties) {
         for (const property in schemaObject.properties) {
           const propertyObject = schemaObject.properties[property];
           if (propertyObject.$ref === `#/components/schemas/${schemaToDelete}`) {
             propertyObject.$ref = `./${referenceFile}#/components/schemas/${schemaToDelete}`;
+            console.log(`Updated property ${property} in schema ${schema} to ${propertyObject.$ref}`);  
+          } else if (propertyObject.items && propertyObject.items.$ref) {
+            if (propertyObject.items.$ref === `#/components/schemas/${schemaToDelete}`) {
+              propertyObject.items.$ref = `./${referenceFile}#/components/schemas/${schemaToDelete}`;
+              console.log(`Updated items in property ${property} in schema ${schema} to ${propertyObject.items.$ref}`);
+            }
           }
         }
       }
