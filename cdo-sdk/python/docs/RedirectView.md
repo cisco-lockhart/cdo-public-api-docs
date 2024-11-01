@@ -23,11 +23,11 @@ Name | Type | Description | Notes
 **expand_uri_template_variables** | **bool** |  | [optional] 
 **propagate_query_params** | **bool** |  | [optional] 
 **hosts** | **List[str]** |  | [optional] 
-**propagate_query_properties** | **bool** |  | [optional] 
 **redirect_view** | **bool** |  | [optional] 
+**propagate_query_properties** | **bool** |  | [optional] 
+**attributes** | **Dict[str, str]** |  | [optional] 
 **attributes_map** | **Dict[str, object]** |  | [optional] 
 **attributes_csv** | **str** |  | [optional] 
-**attributes** | **Dict[str, str]** |  | [optional] 
 
 ## Example
 
