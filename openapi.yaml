@@ -9048,25 +9048,19 @@ components:
             servletNames:
               type: object
               deprecated: true
-            servletRegistrations:
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
               type: object
-              additionalProperties:
-                type: object
-                properties:
-                  runAsRole:
-                    type: string
-                  mappings:
-                    type: array
-                    items:
-                      type: string
-                  name:
-                    type: string
-                  className:
-                    type: string
-                  initParameters:
-                    type: object
-                    additionalProperties:
-                      type: string
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             filterRegistrations:
               type: object
               additionalProperties:
@@ -9099,10 +9093,10 @@ components:
                   type: string
                 comment:
                   type: string
-                domain:
-                  type: string
                 secure:
                   type: boolean
+                domain:
+                  type: string
                 maxAge:
                   type: integer
                   format: int32
@@ -9134,6 +9128,8 @@ components:
                     properties:
                       buffer:
                         type: string
+                      elIgnored:
+                        type: string
                       scriptingInvalid:
                         type: string
                       pageEncoding:
@@ -9160,8 +9156,6 @@ components:
                         type: array
                         items:
                           type: string
-                      elIgnored:
-                        type: string
                 taglibs:
                   type: array
                   items:
@@ -9177,19 +9171,25 @@ components:
               type: string
             responseCharacterEncoding:
               type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
+            servletRegistrations:
               type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
+              additionalProperties:
+                type: object
+                properties:
+                  mappings:
+                    type: array
+                    items:
+                      type: string
+                  runAsRole:
+                    type: string
+                  name:
+                    type: string
+                  className:
+                    type: string
+                  initParameters:
+                    type: object
+                    additionalProperties:
+                      type: string
           writeOnly: true
         contentType:
           type: string
@@ -9307,21 +9307,21 @@ components:
           type: array
           items:
             type: string
-        redirectView:
-          type: boolean
         propagateQueryProperties:
           type: boolean
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
+        redirectView:
+          type: boolean
+        attributesCSV:
+          type: string
           writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
-        attributesCSV:
-          type: string
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
           writeOnly: true
     JsonWebKey:
       type: object
