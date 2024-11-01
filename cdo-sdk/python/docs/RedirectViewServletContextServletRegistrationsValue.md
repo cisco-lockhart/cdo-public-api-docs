@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**run_as_role** | **str** |  | [optional] 
 **mappings** | **List[str]** |  | [optional] 
+**run_as_role** | **str** |  | [optional] 
 **name** | **str** |  | [optional] 
 **class_name** | **str** |  | [optional] 
 **init_parameters** | **Dict[str, str]** |  | [optional] 

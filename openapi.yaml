@@ -8932,10 +8932,10 @@ components:
               format: int32
             attributeNames:
               type: object
-            contextPath:
-              type: string
             initParameterNames:
               type: object
+            contextPath:
+              type: string
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8964,12 +8964,12 @@ components:
               additionalProperties:
                 type: object
                 properties:
-                  runAsRole:
-                    type: string
                   mappings:
                     type: array
                     items:
                       type: string
+                  runAsRole:
+                    type: string
                   name:
                     type: string
                   className:
@@ -9078,9 +9078,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibURI:
-                        type: string
                       taglibLocation:
+                        type: string
+                      taglibURI:
                         type: string
             virtualServerName:
               type: string
