@@ -5109,6 +5109,64 @@ paths:
       security:
         - bearerAuth: []
   /v1/msp/tenants/{tenantUid}/users:
+    get:
+      tags:
+        - MSP
+      summary: Get Users associated with tenant in MSP portal
+      description: >-
+        Get a list of users associated with the CDO tenant managed by MSP
+        portal.
+      operationId: getUsersInTenantInMspPortal
+      parameters:
+        - name: tenantUid
+          in: path
+          description: Unique identifier of the tenant to retrieve the users for.
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The CDO API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: fieldName:fieldValue
+      responses:
+        '200':
+          description: List of User objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPage'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
     post:
       tags:
         - MSP

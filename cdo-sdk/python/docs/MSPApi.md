@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**generate_api_token_for_user_in_tenant**](MSPApi.md#generate_api_token_for_user_in_tenant) | **POST** /v1/msp/tenants/{tenantUid}/users/{apiUserUid}/token | Generate token for API-only user on tenant managed by MSP portal
 [**get_msp_managed_tenant**](MSPApi.md#get_msp_managed_tenant) | **GET** /v1/msp/tenants/{tenantUid} | Get CDO tenant managed by MSP Portal
 [**get_msp_managed_tenants**](MSPApi.md#get_msp_managed_tenants) | **GET** /v1/msp/tenants | Get CDO tenants managed by MSP Portal
+[**get_users_in_tenant_in_msp_portal**](MSPApi.md#get_users_in_tenant_in_msp_portal) | **GET** /v1/msp/tenants/{tenantUid}/users | Get Users associated with tenant in MSP portal
 [**provision_cd_fmc_for_tenant_in_msp_portal**](MSPApi.md#provision_cd_fmc_for_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/cdfmc | Provision cdFMC for CDO tenant in MSP Portal
 [**remove_tenant_from_msp_portal**](MSPApi.md#remove_tenant_from_msp_portal) | **DELETE** /v1/msp/tenants/{tenantUid} | Remove tenant from MSP Portal
 
@@ -802,6 +803,81 @@ Name | Type | Description  | Notes
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_users_in_tenant_in_msp_portal**
+> UserPage get_users_in_tenant_in_msp_portal(tenant_uid, limit=limit, offset=offset, q=q)
+
+Get Users associated with tenant in MSP portal
+
+Get a list of users associated with the CDO tenant managed by MSP portal.
+
+### Example
+
+
+```python
+import cdo_sdk_python
+from cdo_sdk_python.models.user_page import UserPage
+from cdo_sdk_python.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cdo_sdk_python.Configuration(
+    host = "https://edge.us.cdo.cisco.com/api/rest"
+)
+
+
+# Enter a context with an instance of the API client
+with cdo_sdk_python.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cdo_sdk_python.MSPApi(api_client)
+    tenant_uid = 'tenant_uid_example' # str | Unique identifier of the tenant to retrieve the users for.
+    limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
+    offset = '0' # str | The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
+
+    try:
+        # Get Users associated with tenant in MSP portal
+        api_response = api_instance.get_users_in_tenant_in_msp_portal(tenant_uid, limit=limit, offset=offset, q=q)
+        print("The response of MSPApi->get_users_in_tenant_in_msp_portal:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling MSPApi->get_users_in_tenant_in_msp_portal: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tenant_uid** | **str**| Unique identifier of the tenant to retrieve the users for. | 
+ **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
+ **offset** | **str**| The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
+
+### Return type
+
+[**UserPage**](UserPage.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of User objects |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
