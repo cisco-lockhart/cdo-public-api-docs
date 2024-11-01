@@ -9029,12 +9029,12 @@ components:
             minorVersion:
               type: integer
               format: int32
-            initParameterNames:
-              type: object
             attributeNames:
               type: object
             contextPath:
               type: string
+            initParameterNames:
+              type: object
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9091,14 +9091,14 @@ components:
             sessionCookieConfig:
               type: object
               properties:
-                httpOnly:
-                  type: boolean
                 name:
                   type: string
                 path:
                   type: string
                 comment:
                   type: string
+                httpOnly:
+                  type: boolean
                 secure:
                   type: boolean
                 domain:
@@ -9307,9 +9307,9 @@ components:
           type: array
           items:
             type: string
-        redirectView:
-          type: boolean
         propagateQueryProperties:
+          type: boolean
+        redirectView:
           type: boolean
         attributesMap:
           type: object
