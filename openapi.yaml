@@ -8932,10 +8932,10 @@ components:
               format: int32
             attributeNames:
               type: object
-            initParameterNames:
-              type: object
             contextPath:
               type: string
+            initParameterNames:
+              type: object
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -8949,6 +8949,9 @@ components:
             servletNames:
               type: object
               deprecated: true
+            effectiveMajorVersion:
+              type: integer
+              format: int32
             effectiveMinorVersion:
               type: integer
               format: int32
@@ -9088,9 +9091,6 @@ components:
               type: string
             responseCharacterEncoding:
               type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
           writeOnly: true
         contentType:
           type: string
