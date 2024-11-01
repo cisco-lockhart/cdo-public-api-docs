@@ -5295,6 +5295,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
+  /v1/msp/tenants/{tenantUid}/users/groups/delete:
+    post:
+      tags:
+        - MSP
+      summary: Remove user groups from CDO tenant in MSP Portal
+      description: >-
+        This is an asynchronous operation to remove a list of user groups from a
+        tenant associated with the MSP Portal.
+      operationId: deleteUserGroupsFromTenantInMspPortal
+      parameters:
+        - name: tenantUid
+          in: path
+          description: >-
+            Unique identifier of the tenant from which the user groups will be
+            deleted
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MspDeleteUserGroupsFromTenantInput'
+        required: true
+      responses:
+        '202':
+          description: >-
+            CDO Transaction object that can be used to track the status of the
+            operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
   /v1/msp/tenants/{tenantUid}/users/delete:
     post:
       tags:
@@ -5307,7 +5347,7 @@ paths:
       parameters:
         - name: tenantUid
           in: path
-          description: Unique identifier of the tenant from the users will be deleted
+          description: Unique identifier of the tenant from which the users will be deleted
           required: true
           schema:
             type: string
@@ -10201,6 +10241,29 @@ components:
         The list of users to be added to the tenant. You can add a maximum of 50
         users at a time.
       example: '[username: burak@cisco.com, role: ROLE_ADMIN]'
+    MspDeleteUserGroupsFromTenantInput:
+      required:
+        - userGroupIdentifiers
+      type: object
+      properties:
+        userGroupIdentifiers:
+          maxItems: 50
+          minItems: 0
+          type: array
+          description: >-
+            The list of user group identifiers to be removed from the
+            MSP-managed tenant. You can remove a maximum of 50 user groups at a
+            time.
+          example:
+            - abfaba1d-2896-44aa-9860-2608a92d6645
+            - 236b1960-67eb-47d7-b25c-64098fe566a4
+          items:
+            type: string
+            description: >-
+              The list of user group identifiers to be removed from the
+              MSP-managed tenant. You can remove a maximum of 50 user groups at
+              a time.
+            format: uuid
     MspDeleteUsersFromTenantInput:
       required:
         - usernames

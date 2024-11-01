@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.2.284"
+__version__ = "1.2.285"
 
 # import apis into sdk package
 from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
@@ -153,6 +153,7 @@ from cdo_sdk_python.models.mfa_event_page import MfaEventPage
 from cdo_sdk_python.models.msp_add_tenant_input import MspAddTenantInput
 from cdo_sdk_python.models.msp_add_users_to_tenant_input import MspAddUsersToTenantInput
 from cdo_sdk_python.models.msp_create_tenant_input import MspCreateTenantInput
+from cdo_sdk_python.models.msp_delete_user_groups_from_tenant_input import MspDeleteUserGroupsFromTenantInput
 from cdo_sdk_python.models.msp_delete_users_from_tenant_input import MspDeleteUsersFromTenantInput
 from cdo_sdk_python.models.msp_managed_tenant import MspManagedTenant
 from cdo_sdk_python.models.msp_managed_tenant_page import MspManagedTenantPage
