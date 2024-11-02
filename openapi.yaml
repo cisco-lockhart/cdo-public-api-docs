@@ -23,22 +23,6 @@ servers:
     description: Scale
   - url: https://edge.ci.cdo.cisco.com/api/rest
     description: CI
-  - url: https://edge.us.SCC.cisco.com/api/rest
-    description: US
-  - url: https://edge.eu.SCC.cisco.com/api/rest
-    description: EU
-  - url: https://edge.apj.SCC.cisco.com/api/rest
-    description: APJ
-  - url: https://edge.aus.SCC.cisco.com/api/rest
-    description: AUS
-  - url: https://edge.in.SCC.cisco.com/api/rest
-    description: IN
-  - url: https://edge.staging.SCC.cisco.com/api/rest
-    description: Staging
-  - url: https://edge.scale.SCC.cisco.com/api/rest
-    description: Scale
-  - url: https://edge.ci.SCC.cisco.com/api/rest
-    description: CI
 tags:
   - name: Cloud-delivered FMC
     x-displayName: Cloud-delivered FMC

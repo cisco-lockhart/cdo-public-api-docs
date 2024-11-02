@@ -7,21 +7,21 @@ info:
     email: cdo.tac@cisco.com
   version: 1.5.0
 servers:
-- url: https://edge.us.SCC.cisco.com/api/rest
+- url: https://edge.us.cdo.cisco.com/api/rest
   description: US
-- url: https://edge.eu.SCC.cisco.com/api/rest
+- url: https://edge.eu.cdo.cisco.com/api/rest
   description: EU
-- url: https://edge.apj.SCC.cisco.com/api/rest
+- url: https://edge.apj.cdo.cisco.com/api/rest
   description: APJ
-- url: https://edge.aus.SCC.cisco.com/api/rest
+- url: https://edge.aus.cdo.cisco.com/api/rest
   description: AUS
-- url: https://edge.in.SCC.cisco.com/api/rest
+- url: https://edge.in.cdo.cisco.com/api/rest
   description: IN
-- url: https://edge.staging.SCC.cisco.com/api/rest
+- url: https://edge.staging.cdo.cisco.com/api/rest
   description: Staging
-- url: https://edge.scale.SCC.cisco.com/api/rest
+- url: https://edge.scale.cdo.cisco.com/api/rest
   description: Scale
-- url: https://edge.ci.SCC.cisco.com/api/rest
+- url: https://edge.ci.cdo.cisco.com/api/rest
   description: CI
 paths:
   /v1/objects:
@@ -79,14 +79,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: A paginated view of the SCC objects.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListObjectResponse'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -261,14 +261,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -341,14 +341,14 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: A descriptive representation of the updated SCC object.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -474,14 +474,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -509,14 +509,14 @@ paths:
           type: string
         example: content:*2.2.* AND name:Lab1
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/IssuesCount'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":

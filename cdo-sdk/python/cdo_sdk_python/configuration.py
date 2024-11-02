@@ -380,7 +380,7 @@ class Configuration:
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 1.5.0\n"\
-               "SDK Package Version: 1.2.306".\
+               "SDK Package Version: 1.2.307".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):
@@ -419,38 +419,6 @@ class Configuration:
             },
             {
                 'url': "https://edge.ci.cdo.cisco.com/api/rest",
-                'description': "CI",
-            },
-            {
-                'url': "https://edge.us.SCC.cisco.com/api/rest",
-                'description': "US",
-            },
-            {
-                'url': "https://edge.eu.SCC.cisco.com/api/rest",
-                'description': "EU",
-            },
-            {
-                'url': "https://edge.apj.SCC.cisco.com/api/rest",
-                'description': "APJ",
-            },
-            {
-                'url': "https://edge.aus.SCC.cisco.com/api/rest",
-                'description': "AUS",
-            },
-            {
-                'url': "https://edge.in.SCC.cisco.com/api/rest",
-                'description': "IN",
-            },
-            {
-                'url': "https://edge.staging.SCC.cisco.com/api/rest",
-                'description': "Staging",
-            },
-            {
-                'url': "https://edge.scale.SCC.cisco.com/api/rest",
-                'description': "Scale",
-            },
-            {
-                'url': "https://edge.ci.SCC.cisco.com/api/rest",
                 'description': "CI",
             }
         ]
