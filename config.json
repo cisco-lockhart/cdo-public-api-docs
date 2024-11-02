@@ -1,7 +1,7 @@
 {
     "items": [
       {
-        "title": "CDO API Documentation",
+        "title": "Security Cloud Control API Documentation",
         "items": [
             {
               "title": "Introduction",
@@ -29,7 +29,7 @@
         },
         "items": [
           {
-            "title": "CDO API",
+            "title": "SCC API",
             "content": "openapi.yaml",
             "type": "oas3"
           }

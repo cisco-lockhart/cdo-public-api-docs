@@ -1,3 +1,18 @@
+# Version 1.6.0 (2024-11-02)
+
+## Welcome to Cisco Security Cloud Control
+
+Cisco Defense Orchestrator is now Security Cloud Control, our unified security management solution for Cisco Firewalls, Multicloud Defense, and Hypershield. See [the FAQ](https://www.cisco.com/c/en/us/products/collateral/security/defense-orchestrator/security-cloud-control-faq.html) to get answers to commonly asked questions.
+
+The existing endpoints, at `<region-name>.cdo.cisco.com`, will continue to work. If you are already a user of the API, you do not need to change anything.
+
+## Added
+
+- MSSP tenant management:
+  - Endpoint to remove a tenant from the MSSP portal.
+  - Endpoint to get the list of users associated with a tenant managed by an MSSP portal.
+  - Endpoints to remove users and user groups associated with a tenant managed by an MSSP portal.
+
 # Version 1.5.0 (2024-10-08)
 
 ## Added

@@ -17,7 +17,7 @@ version_command() {
 
 # :command.usage
 cli_usage() {
-  printf "cli - CDO Public API documentation\n\n"
+  printf "cli - Cisco Security Cloud Control (SCC) Public API documentation\n\n"
 
   printf "%s\n" "Usage:"
   printf "  cli COMMAND\n"
@@ -28,7 +28,7 @@ cli_usage() {
   printf "%s\n" "Commands:"
   printf "  %s   Download and add public API YAML to the pubhub docs\n" "download              "
   printf "  %s   Perform transformations on FMC OAS and generate cdfmc-service-openapi.yaml\n" "transform-fmc-oas     "
-  printf "  %s   Publishes a new version of the CDO SDK to PyPI\n" "publish-python-sdk    "
+  printf "  %s   Publishes a new version of the SCC SDK to PyPI\n" "publish-python-sdk    "
   printf "  %s   Updating the SDK description with SDK-DESC.md\n" "update-sdk-description"
   echo
 
@@ -109,7 +109,7 @@ cli_transform_fmc_oas_usage() {
 
 # :command.usage
 cli_publish_python_sdk_usage() {
-  printf "cli publish-python-sdk - Publishes a new version of the CDO SDK to PyPI\n\n"
+  printf "cli publish-python-sdk - Publishes a new version of the SCC SDK to PyPI\n\n"
 
   printf "%s\n" "Usage:"
   printf "  cli publish-python-sdk\n"
