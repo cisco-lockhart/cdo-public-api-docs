@@ -1,6 +1,6 @@
 # cdo_sdk_python.SearchApi
 
-All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
+All URIs are relative to *https://edge.us.SCC.cisco.com/api/rest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 Rebuild search index
 
-Initiate Full Indexing on the CDO tenant, to improve accuracy of search results. This operation is performed automatically on a schedule by CDO, but can be triggered on demand too. This operation is asynchronous, but its progress cannot be tracked using CDO's API.
+Initiate Full Indexing on the CDO tenant, to improve accuracy of search results. This operation is performed automatically on a schedule by CDO, but can be triggered on demand too. This operation is asynchronous, but its progress cannot be tracked using SCC's API.
 
 ### Example
 
@@ -25,10 +25,10 @@ from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -78,7 +78,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | CDO Transaction object that can be used to track the progress of the indexing operation. |  -  |
+**202** | SCC Transaction object that can be used to track the progress of the indexing operation. |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -92,7 +92,7 @@ This endpoint does not need any parameter.
 
 Search
 
-Search for devices, services, managers, objects and policies across the CDO tenant.
+Search for devices, services, managers, objects and policies across the SCC tenant.
 
 ### Example
 
@@ -104,10 +104,10 @@ from cdo_sdk_python.models.global_search_result import GlobalSearchResult
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters

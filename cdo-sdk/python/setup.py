@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -22,7 +22,7 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "cdo-sdk-python"
-VERSION = "1.2.298"
+VERSION = "1.2.299"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
     "urllib3 >= 1.25.3, < 2.1.0",
@@ -34,17 +34,17 @@ REQUIRES = [
 setup(
     name=NAME,
     version=VERSION,
-    description="CDO API",
-    author="CDO TAC",
+    description="Cisco Security Cloud Control API",
+    author="Cisco Security Cloud Control TAC",
     author_email="cdo.tac@cisco.com",
     url="",
-    keywords=["OpenAPI", "OpenAPI-Generator", "CDO API"],
+    keywords=["OpenAPI", "OpenAPI-Generator", "Cisco Security Cloud Control API"],
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
     long_description_content_type='text/markdown',
     long_description="""\
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
     """,  # noqa: E501
     package_data={"cdo_sdk_python": ["py.typed"]},
 )

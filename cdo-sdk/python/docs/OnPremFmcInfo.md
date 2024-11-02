@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The name of the device in CDO. Device names are unique in CDO. | [optional] 
+**name** | **str** | The name of the device in CDO. Device names are unique in SCC. | [optional] 
 **address** | **str** | The address of the on-prem FMC managing this device, in &#x60;host:port&#x60; format. | [optional] 
 
 ## Example

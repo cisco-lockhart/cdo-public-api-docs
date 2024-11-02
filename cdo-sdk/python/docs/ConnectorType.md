@@ -1,6 +1,6 @@
 # ConnectorType
 
-The type of the connector that will be used to communicate with the device. CDO can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
+The type of the connector that will be used to communicate with the device. SCC can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
 
 ## Properties
 

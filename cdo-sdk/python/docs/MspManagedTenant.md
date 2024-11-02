@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**display_name** | **str** | A human-readable display name for the tenant. This is the tenant name displayed in the CDO Web UI. | [optional] 
-**uid** | **str** | The unique identifier of the tenant in CDO. | [optional] 
-**name** | **str** | The name of the device in CDO. Device names are unique in CDO. | [optional] 
-**region** | **str** | The CDO region the tenant exists in. | [optional] 
+**display_name** | **str** | A human-readable display name for the tenant. This is the tenant name displayed in the SCC Web UI. | [optional] 
+**uid** | **str** | The unique identifier of the tenant in SCC. | [optional] 
+**name** | **str** | The name of the device in CDO. Device names are unique in SCC. | [optional] 
+**region** | **str** | The SCC region the tenant exists in. | [optional] 
 
 ## Example
 

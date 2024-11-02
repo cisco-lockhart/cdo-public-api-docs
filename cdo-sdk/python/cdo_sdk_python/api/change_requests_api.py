@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -61,7 +61,7 @@ class ChangeRequestsApi:
     ) -> ChangeRequest:
         """Create Change Request
 
-        Create a Change Request in the CDO tenant.
+        Create a Change Request in the SCC tenant.
 
         :param change_request_create_input: (required)
         :type change_request_create_input: ChangeRequestCreateInput
@@ -133,7 +133,7 @@ class ChangeRequestsApi:
     ) -> ApiResponse[ChangeRequest]:
         """Create Change Request
 
-        Create a Change Request in the CDO tenant.
+        Create a Change Request in the SCC tenant.
 
         :param change_request_create_input: (required)
         :type change_request_create_input: ChangeRequestCreateInput
@@ -205,7 +205,7 @@ class ChangeRequestsApi:
     ) -> RESTResponseType:
         """Create Change Request
 
-        Create a Change Request in the CDO tenant.
+        Create a Change Request in the SCC tenant.
 
         :param change_request_create_input: (required)
         :type change_request_create_input: ChangeRequestCreateInput
@@ -331,7 +331,7 @@ class ChangeRequestsApi:
     @validate_call
     def delete_change_request(
         self,
-        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in CDO.")],
+        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -347,9 +347,9 @@ class ChangeRequestsApi:
     ) -> None:
         """Delete Change Request
 
-        Delete a Change Request by UID in the CDO tenant.
+        Delete a Change Request by UID in the SCC tenant.
 
-        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in CDO. (required)
+        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in SCC. (required)
         :type change_request_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -403,7 +403,7 @@ class ChangeRequestsApi:
     @validate_call
     def delete_change_request_with_http_info(
         self,
-        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in CDO.")],
+        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -419,9 +419,9 @@ class ChangeRequestsApi:
     ) -> ApiResponse[None]:
         """Delete Change Request
 
-        Delete a Change Request by UID in the CDO tenant.
+        Delete a Change Request by UID in the SCC tenant.
 
-        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in CDO. (required)
+        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in SCC. (required)
         :type change_request_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -475,7 +475,7 @@ class ChangeRequestsApi:
     @validate_call
     def delete_change_request_without_preload_content(
         self,
-        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in CDO.")],
+        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -491,9 +491,9 @@ class ChangeRequestsApi:
     ) -> RESTResponseType:
         """Delete Change Request
 
-        Delete a Change Request by UID in the CDO tenant.
+        Delete a Change Request by UID in the SCC tenant.
 
-        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in CDO. (required)
+        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in SCC. (required)
         :type change_request_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -604,7 +604,7 @@ class ChangeRequestsApi:
     @validate_call
     def get_change_request(
         self,
-        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in CDO.")],
+        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -620,9 +620,9 @@ class ChangeRequestsApi:
     ) -> ChangeRequest:
         """Get Change Request
 
-        Get a Change Request by UID in the CDO tenant.
+        Get a Change Request by UID in the SCC tenant.
 
-        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in CDO. (required)
+        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in SCC. (required)
         :type change_request_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -677,7 +677,7 @@ class ChangeRequestsApi:
     @validate_call
     def get_change_request_with_http_info(
         self,
-        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in CDO.")],
+        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -693,9 +693,9 @@ class ChangeRequestsApi:
     ) -> ApiResponse[ChangeRequest]:
         """Get Change Request
 
-        Get a Change Request by UID in the CDO tenant.
+        Get a Change Request by UID in the SCC tenant.
 
-        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in CDO. (required)
+        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in SCC. (required)
         :type change_request_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -750,7 +750,7 @@ class ChangeRequestsApi:
     @validate_call
     def get_change_request_without_preload_content(
         self,
-        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in CDO.")],
+        change_request_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Change Request in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -766,9 +766,9 @@ class ChangeRequestsApi:
     ) -> RESTResponseType:
         """Get Change Request
 
-        Get a Change Request by UID in the CDO tenant.
+        Get a Change Request by UID in the SCC tenant.
 
-        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in CDO. (required)
+        :param change_request_uid: The unique identifier, represented as a UUID, of the Change Request in SCC. (required)
         :type change_request_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -881,7 +881,7 @@ class ChangeRequestsApi:
     def get_change_requests(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -902,7 +902,7 @@ class ChangeRequestsApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -961,7 +961,7 @@ class ChangeRequestsApi:
     def get_change_requests_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -982,7 +982,7 @@ class ChangeRequestsApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -1041,7 +1041,7 @@ class ChangeRequestsApi:
     def get_change_requests_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -1062,7 +1062,7 @@ class ChangeRequestsApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str

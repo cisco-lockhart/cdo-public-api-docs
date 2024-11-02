@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -21,7 +21,7 @@ from typing_extensions import Self
 
 class ConnectorType(str, Enum):
     """
-    The type of the connector that will be used to communicate with the device. CDO can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
+    The type of the connector that will be used to communicate with the device. SCC can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
     """
 
     """

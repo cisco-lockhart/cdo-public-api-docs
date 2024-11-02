@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -39,7 +39,7 @@ class CdoTransaction(BaseModel):
     error_message: Optional[StrictStr] = Field(default=None, description="Transaction error message, if any", alias="errorMessage")
     error_details: Optional[Dict[str, StrictStr]] = Field(default=None, description="Transaction error details, if any", alias="errorDetails")
     transaction_type: Optional[StrictStr] = Field(default=None, description="the type of the transaction", alias="transactionType")
-    cdo_transaction_status: Optional[StrictStr] = Field(default=None, description="The status of the CDO transaction", alias="cdoTransactionStatus")
+    cdo_transaction_status: Optional[StrictStr] = Field(default=None, description="The status of the transaction", alias="cdoTransactionStatus")
     __properties: ClassVar[List[str]] = ["tenantUid", "transactionUid", "entityUid", "entityUrl", "transactionPollingUrl", "submissionTime", "lastUpdatedTime", "transactionDetails", "errorMessage", "errorDetails", "transactionType", "cdoTransactionStatus"]
 
     @field_validator('transaction_type')

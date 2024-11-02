@@ -1,6 +1,6 @@
 # cdo_sdk_python.TransactionsApi
 
-All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
+All URIs are relative to *https://edge.us.SCC.cisco.com/api/rest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 Get Transaction
 
-Get information on an in-progress CDO transaction. A CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create CDO transactions.
+Get information on an in-progress CDO transaction. An CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create SCC transactions.
 
 ### Example
 
@@ -24,10 +24,10 @@ from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -81,8 +81,8 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | CDO Transaction that has completed, either successfully or unsuccessfully. Note: failed CDO Transactions do not roll back. |  -  |
-**202** | CDO Transaction that is pending or in progress. |  -  |
+**200** | CDO Transaction that has completed, either successfully or unsuccessfully. Note: failed SCC Transactions do not roll back. |  -  |
+**202** | SCC Transaction that is pending or in progress. |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |

@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -28,8 +28,8 @@ class Entity(BaseModel):
     """
     Cloud Services that match the search term.
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the entity in CDO.")
-    name: Optional[StrictStr] = Field(default=None, description="The name of the entity in CDO. Device names are unique in CDO.")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the entity in SCC.")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the entity in CDO. Device names are unique in SCC.")
     type: Optional[EntityType] = None
     address: Optional[StrictStr] = Field(default=None, description="The address of the entity.")
     matching_configurations: Optional[List[StrictStr]] = Field(default=None, description="(ASAs only) Parts of the ASA device configuration that match the search term.", alias="matchingConfigurations")

@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -30,7 +30,7 @@ class MfaEventPage(BaseModel):
     """ # noqa: E501
     count: Optional[StrictInt] = Field(default=None, description="The total number of results available.")
     limit: Optional[StrictInt] = Field(default=None, description="The number of results retrieved.")
-    offset: Optional[StrictInt] = Field(default=None, description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")
+    offset: Optional[StrictInt] = Field(default=None, description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")
     items: Optional[List[MfaEvent]] = Field(default=None, description="The list of items retrieved.")
     __properties: ClassVar[List[str]] = ["count", "limit", "offset", "items"]
 

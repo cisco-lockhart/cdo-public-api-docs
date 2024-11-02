@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -48,7 +48,7 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def get_mfa_event(
         self,
-        mfa_event_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the MFA event in CDO.")],
+        mfa_event_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the MFA event in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -64,9 +64,9 @@ class RemoteAccessMonitoringApi:
     ) -> MfaEvent:
         """Get MFA Event
 
-        Get a MFA event by UID in the CDO tenant.
+        Get a MFA event by UID in the SCC tenant.
 
-        :param mfa_event_uid: The unique identifier, represented as a UUID, of the MFA event in CDO. (required)
+        :param mfa_event_uid: The unique identifier, represented as a UUID, of the MFA event in SCC. (required)
         :type mfa_event_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -121,7 +121,7 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def get_mfa_event_with_http_info(
         self,
-        mfa_event_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the MFA event in CDO.")],
+        mfa_event_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the MFA event in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -137,9 +137,9 @@ class RemoteAccessMonitoringApi:
     ) -> ApiResponse[MfaEvent]:
         """Get MFA Event
 
-        Get a MFA event by UID in the CDO tenant.
+        Get a MFA event by UID in the SCC tenant.
 
-        :param mfa_event_uid: The unique identifier, represented as a UUID, of the MFA event in CDO. (required)
+        :param mfa_event_uid: The unique identifier, represented as a UUID, of the MFA event in SCC. (required)
         :type mfa_event_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -194,7 +194,7 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def get_mfa_event_without_preload_content(
         self,
-        mfa_event_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the MFA event in CDO.")],
+        mfa_event_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the MFA event in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -210,9 +210,9 @@ class RemoteAccessMonitoringApi:
     ) -> RESTResponseType:
         """Get MFA Event
 
-        Get a MFA event by UID in the CDO tenant.
+        Get a MFA event by UID in the SCC tenant.
 
-        :param mfa_event_uid: The unique identifier, represented as a UUID, of the MFA event in CDO. (required)
+        :param mfa_event_uid: The unique identifier, represented as a UUID, of the MFA event in SCC. (required)
         :type mfa_event_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -325,7 +325,7 @@ class RemoteAccessMonitoringApi:
     def get_mfa_events(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -347,7 +347,7 @@ class RemoteAccessMonitoringApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -409,7 +409,7 @@ class RemoteAccessMonitoringApi:
     def get_mfa_events_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -431,7 +431,7 @@ class RemoteAccessMonitoringApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -493,7 +493,7 @@ class RemoteAccessMonitoringApi:
     def get_mfa_events_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -515,7 +515,7 @@ class RemoteAccessMonitoringApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -651,7 +651,7 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def get_ra_vpn_session(
         self,
-        ra_vpn_session_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the RA VPN session in CDO.")],
+        ra_vpn_session_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the RA VPN session in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -667,9 +667,9 @@ class RemoteAccessMonitoringApi:
     ) -> RaVpnSession:
         """Get RA VPN Session
 
-        Get a RA VPN session by UID in the CDO tenant.
+        Get a RA VPN session by UID in the SCC tenant.
 
-        :param ra_vpn_session_uid: The unique identifier, represented as a UUID, of the RA VPN session in CDO. (required)
+        :param ra_vpn_session_uid: The unique identifier, represented as a UUID, of the RA VPN session in SCC. (required)
         :type ra_vpn_session_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -724,7 +724,7 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def get_ra_vpn_session_with_http_info(
         self,
-        ra_vpn_session_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the RA VPN session in CDO.")],
+        ra_vpn_session_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the RA VPN session in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -740,9 +740,9 @@ class RemoteAccessMonitoringApi:
     ) -> ApiResponse[RaVpnSession]:
         """Get RA VPN Session
 
-        Get a RA VPN session by UID in the CDO tenant.
+        Get a RA VPN session by UID in the SCC tenant.
 
-        :param ra_vpn_session_uid: The unique identifier, represented as a UUID, of the RA VPN session in CDO. (required)
+        :param ra_vpn_session_uid: The unique identifier, represented as a UUID, of the RA VPN session in SCC. (required)
         :type ra_vpn_session_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -797,7 +797,7 @@ class RemoteAccessMonitoringApi:
     @validate_call
     def get_ra_vpn_session_without_preload_content(
         self,
-        ra_vpn_session_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the RA VPN session in CDO.")],
+        ra_vpn_session_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the RA VPN session in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -813,9 +813,9 @@ class RemoteAccessMonitoringApi:
     ) -> RESTResponseType:
         """Get RA VPN Session
 
-        Get a RA VPN session by UID in the CDO tenant.
+        Get a RA VPN session by UID in the SCC tenant.
 
-        :param ra_vpn_session_uid: The unique identifier, represented as a UUID, of the RA VPN session in CDO. (required)
+        :param ra_vpn_session_uid: The unique identifier, represented as a UUID, of the RA VPN session in SCC. (required)
         :type ra_vpn_session_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -928,7 +928,7 @@ class RemoteAccessMonitoringApi:
     def get_ra_vpn_sessions(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -950,7 +950,7 @@ class RemoteAccessMonitoringApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -1012,7 +1012,7 @@ class RemoteAccessMonitoringApi:
     def get_ra_vpn_sessions_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -1034,7 +1034,7 @@ class RemoteAccessMonitoringApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -1096,7 +1096,7 @@ class RemoteAccessMonitoringApi:
     def get_ra_vpn_sessions_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -1118,7 +1118,7 @@ class RemoteAccessMonitoringApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -1270,7 +1270,7 @@ class RemoteAccessMonitoringApi:
     ) -> CdoTransaction:
         """Refresh RA VPN Sessions
 
-        This is an asynchronous operation to refresh RA VPN sessions for all devices in the CDO tenant.
+        This is an asynchronous operation to refresh RA VPN sessions for all devices in the SCC tenant.
 
         :param ra_vpn_device_input:
         :type ra_vpn_device_input: RaVpnDeviceInput
@@ -1342,7 +1342,7 @@ class RemoteAccessMonitoringApi:
     ) -> ApiResponse[CdoTransaction]:
         """Refresh RA VPN Sessions
 
-        This is an asynchronous operation to refresh RA VPN sessions for all devices in the CDO tenant.
+        This is an asynchronous operation to refresh RA VPN sessions for all devices in the SCC tenant.
 
         :param ra_vpn_device_input:
         :type ra_vpn_device_input: RaVpnDeviceInput
@@ -1414,7 +1414,7 @@ class RemoteAccessMonitoringApi:
     ) -> RESTResponseType:
         """Refresh RA VPN Sessions
 
-        This is an asynchronous operation to refresh RA VPN sessions for all devices in the CDO tenant.
+        This is an asynchronous operation to refresh RA VPN sessions for all devices in the SCC tenant.
 
         :param ra_vpn_device_input:
         :type ra_vpn_device_input: RaVpnDeviceInput
@@ -1556,7 +1556,7 @@ class RemoteAccessMonitoringApi:
     ) -> CdoTransaction:
         """Terminate RA VPN Sessions
 
-        This is an asynchronous operation to terminate all RA VPN sessions on a device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+        This is an asynchronous operation to terminate all RA VPN sessions on a device in the SCC tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
         :param device_uid: (required)
         :type device_uid: str
@@ -1628,7 +1628,7 @@ class RemoteAccessMonitoringApi:
     ) -> ApiResponse[CdoTransaction]:
         """Terminate RA VPN Sessions
 
-        This is an asynchronous operation to terminate all RA VPN sessions on a device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+        This is an asynchronous operation to terminate all RA VPN sessions on a device in the SCC tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
         :param device_uid: (required)
         :type device_uid: str
@@ -1700,7 +1700,7 @@ class RemoteAccessMonitoringApi:
     ) -> RESTResponseType:
         """Terminate RA VPN Sessions
 
-        This is an asynchronous operation to terminate all RA VPN sessions on a device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+        This is an asynchronous operation to terminate all RA VPN sessions on a device in the SCC tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
         :param device_uid: (required)
         :type device_uid: str
@@ -1830,7 +1830,7 @@ class RemoteAccessMonitoringApi:
     ) -> CdoTransaction:
         """Terminate User's RA VPN Sessions
 
-        This is an asynchronous operation to terminate all of a user's RA VPN sessions on a device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+        This is an asynchronous operation to terminate all of a user's RA VPN sessions on a device in the SCC tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
         :param device_uid: (required)
         :type device_uid: str
@@ -1906,7 +1906,7 @@ class RemoteAccessMonitoringApi:
     ) -> ApiResponse[CdoTransaction]:
         """Terminate User's RA VPN Sessions
 
-        This is an asynchronous operation to terminate all of a user's RA VPN sessions on a device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+        This is an asynchronous operation to terminate all of a user's RA VPN sessions on a device in the SCC tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
         :param device_uid: (required)
         :type device_uid: str
@@ -1982,7 +1982,7 @@ class RemoteAccessMonitoringApi:
     ) -> RESTResponseType:
         """Terminate User's RA VPN Sessions
 
-        This is an asynchronous operation to terminate all of a user's RA VPN sessions on a device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+        This is an asynchronous operation to terminate all of a user's RA VPN sessions on a device in the SCC tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
         :param device_uid: (required)
         :type device_uid: str

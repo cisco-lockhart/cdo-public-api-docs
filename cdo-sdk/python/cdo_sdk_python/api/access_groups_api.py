@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -326,7 +326,7 @@ class AccessGroupsApi:
     @validate_call
     def delete_access_group(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in CDO.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -342,9 +342,9 @@ class AccessGroupsApi:
     ) -> None:
         """Delete Access Group
 
-        Delete Access Group by UID in the CDO tenant.
+        Delete Access Group by UID in the SCC tenant.
 
-        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in CDO. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in SCC. (required)
         :type access_group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -396,7 +396,7 @@ class AccessGroupsApi:
     @validate_call
     def delete_access_group_with_http_info(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in CDO.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -412,9 +412,9 @@ class AccessGroupsApi:
     ) -> ApiResponse[None]:
         """Delete Access Group
 
-        Delete Access Group by UID in the CDO tenant.
+        Delete Access Group by UID in the SCC tenant.
 
-        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in CDO. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in SCC. (required)
         :type access_group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -466,7 +466,7 @@ class AccessGroupsApi:
     @validate_call
     def delete_access_group_without_preload_content(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in CDO.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -482,9 +482,9 @@ class AccessGroupsApi:
     ) -> RESTResponseType:
         """Delete Access Group
 
-        Delete Access Group by UID in the CDO tenant.
+        Delete Access Group by UID in the SCC tenant.
 
-        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in CDO. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in SCC. (required)
         :type access_group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -593,7 +593,7 @@ class AccessGroupsApi:
     @validate_call
     def fetch_access_group(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in CDO.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -611,7 +611,7 @@ class AccessGroupsApi:
 
         Get a single ASA Access Group by UUID.
 
-        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in CDO. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in SCC. (required)
         :type access_group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -664,7 +664,7 @@ class AccessGroupsApi:
     @validate_call
     def fetch_access_group_with_http_info(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in CDO.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -682,7 +682,7 @@ class AccessGroupsApi:
 
         Get a single ASA Access Group by UUID.
 
-        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in CDO. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in SCC. (required)
         :type access_group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -735,7 +735,7 @@ class AccessGroupsApi:
     @validate_call
     def fetch_access_group_without_preload_content(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in CDO.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Group in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -753,7 +753,7 @@ class AccessGroupsApi:
 
         Get a single ASA Access Group by UUID.
 
-        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in CDO. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the Access Group in SCC. (required)
         :type access_group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -864,7 +864,7 @@ class AccessGroupsApi:
     def list_access_groups(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -886,7 +886,7 @@ class AccessGroupsApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -946,7 +946,7 @@ class AccessGroupsApi:
     def list_access_groups_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -968,7 +968,7 @@ class AccessGroupsApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -1028,7 +1028,7 @@ class AccessGroupsApi:
     def list_access_groups_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -1050,7 +1050,7 @@ class AccessGroupsApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -1184,7 +1184,7 @@ class AccessGroupsApi:
     @validate_call
     def patch_access_group(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO Access Group.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SCC Access Group.")],
         access_group_update_input: AccessGroupUpdateInput,
         _request_timeout: Union[
             None,
@@ -1201,9 +1201,9 @@ class AccessGroupsApi:
     ) -> AccessGroup:
         """Modify ASA Access Group
 
-        Modify CDO Access Group by UID.
+        Modify SCC Access Group by UID.
 
-        :param access_group_uid: The unique identifier, represented as a UUID, of the CDO Access Group. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the SCC Access Group. (required)
         :type access_group_uid: str
         :param access_group_update_input: (required)
         :type access_group_update_input: AccessGroupUpdateInput
@@ -1259,7 +1259,7 @@ class AccessGroupsApi:
     @validate_call
     def patch_access_group_with_http_info(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO Access Group.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SCC Access Group.")],
         access_group_update_input: AccessGroupUpdateInput,
         _request_timeout: Union[
             None,
@@ -1276,9 +1276,9 @@ class AccessGroupsApi:
     ) -> ApiResponse[AccessGroup]:
         """Modify ASA Access Group
 
-        Modify CDO Access Group by UID.
+        Modify SCC Access Group by UID.
 
-        :param access_group_uid: The unique identifier, represented as a UUID, of the CDO Access Group. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the SCC Access Group. (required)
         :type access_group_uid: str
         :param access_group_update_input: (required)
         :type access_group_update_input: AccessGroupUpdateInput
@@ -1334,7 +1334,7 @@ class AccessGroupsApi:
     @validate_call
     def patch_access_group_without_preload_content(
         self,
-        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO Access Group.")],
+        access_group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SCC Access Group.")],
         access_group_update_input: AccessGroupUpdateInput,
         _request_timeout: Union[
             None,
@@ -1351,9 +1351,9 @@ class AccessGroupsApi:
     ) -> RESTResponseType:
         """Modify ASA Access Group
 
-        Modify CDO Access Group by UID.
+        Modify SCC Access Group by UID.
 
-        :param access_group_uid: The unique identifier, represented as a UUID, of the CDO Access Group. (required)
+        :param access_group_uid: The unique identifier, represented as a UUID, of the SCC Access Group. (required)
         :type access_group_uid: str
         :param access_group_update_input: (required)
         :type access_group_update_input: AccessGroupUpdateInput

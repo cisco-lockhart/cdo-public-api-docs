@@ -1,6 +1,6 @@
 # cdo_sdk_python.CloudDeliveredFMCApi
 
-All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
+All URIs are relative to *https://edge.us.SCC.cisco.com/api/rest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Proxy Request To Cloud-Delivered FMC
 
-This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the CDO tenant does not have a cdFMC provisioned.
+This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
 
 ### Example
 
@@ -27,10 +27,10 @@ import cdo_sdk_python
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -89,7 +89,7 @@ void (empty response body)
 
 Proxy Request To Cloud-Delivered FMC
 
-This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the CDO tenant does not have a cdFMC provisioned.
+This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
 
 ### Example
 
@@ -100,10 +100,10 @@ import cdo_sdk_python
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -162,7 +162,7 @@ void (empty response body)
 
 Proxy Request To Cloud-Delivered FMC
 
-This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the CDO tenant does not have a cdFMC provisioned.
+This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
 
 ### Example
 
@@ -173,10 +173,10 @@ import cdo_sdk_python
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -235,7 +235,7 @@ void (empty response body)
 
 Proxy Request To Cloud-Delivered FMC
 
-This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the CDO tenant does not have a cdFMC provisioned.
+This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
 
 ### Example
 
@@ -246,10 +246,10 @@ import cdo_sdk_python
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -308,7 +308,7 @@ void (empty response body)
 
 Proxy Request To Cloud-Delivered FMC
 
-This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the CDO tenant does not have a cdFMC provisioned.
+This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
 
 ### Example
 
@@ -319,10 +319,10 @@ import cdo_sdk_python
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters

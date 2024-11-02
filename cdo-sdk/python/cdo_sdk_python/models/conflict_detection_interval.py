@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -21,7 +21,7 @@ from typing_extensions import Self
 
 class ConflictDetectionInterval(str, Enum):
     """
-    Specifies the default interval at which CDO checks for changes made out-of-band on the devices on the tenant.
+    Specifies the default interval at which SCC checks for changes made out-of-band on the devices on the tenant.
     """
 
     """

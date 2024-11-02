@@ -1,6 +1,6 @@
 # cdo_sdk_python.AccessGroupsApi
 
-All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
+All URIs are relative to *https://edge.us.SCC.cisco.com/api/rest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -29,10 +29,10 @@ from cdo_sdk_python.models.access_group_create_input import AccessGroupCreateInp
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | CDO Access Group |  -  |
+**200** | SCC Access Group |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
 **500** | Internal server error. |  -  |
@@ -98,7 +98,7 @@ Name | Type | Description  | Notes
 
 Delete Access Group
 
-Delete Access Group by UID in the CDO tenant.
+Delete Access Group by UID in the SCC tenant.
 
 ### Example
 
@@ -109,10 +109,10 @@ import cdo_sdk_python
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -129,7 +129,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.AccessGroupsApi(api_client)
-    access_group_uid = 'access_group_uid_example' # str | The unique identifier, represented as a UUID, of the Access Group in CDO.
+    access_group_uid = 'access_group_uid_example' # str | The unique identifier, represented as a UUID, of the Access Group in SCC.
 
     try:
         # Delete Access Group
@@ -145,7 +145,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **access_group_uid** | **str**| The unique identifier, represented as a UUID, of the Access Group in CDO. | 
+ **access_group_uid** | **str**| The unique identifier, represented as a UUID, of the Access Group in SCC. | 
 
 ### Return type
 
@@ -188,10 +188,10 @@ from cdo_sdk_python.models.access_group import AccessGroup
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -208,7 +208,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.AccessGroupsApi(api_client)
-    access_group_uid = 'access_group_uid_example' # str | The unique identifier, represented as a UUID, of the Access Group in CDO.
+    access_group_uid = 'access_group_uid_example' # str | The unique identifier, represented as a UUID, of the Access Group in SCC.
 
     try:
         # Get Access Group
@@ -226,7 +226,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **access_group_uid** | **str**| The unique identifier, represented as a UUID, of the Access Group in CDO. | 
+ **access_group_uid** | **str**| The unique identifier, represented as a UUID, of the Access Group in SCC. | 
 
 ### Return type
 
@@ -270,10 +270,10 @@ from cdo_sdk_python.models.access_group_page import AccessGroupPage
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -291,7 +291,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.AccessGroupsApi(api_client)
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    offset = '0' # str | The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
     sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
@@ -312,7 +312,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **offset** | **str**| The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
  **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
@@ -345,7 +345,7 @@ Name | Type | Description  | Notes
 
 Modify ASA Access Group
 
-Modify CDO Access Group by UID.
+Modify SCC Access Group by UID.
 
 ### Example
 
@@ -358,10 +358,10 @@ from cdo_sdk_python.models.access_group_update_input import AccessGroupUpdateInp
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -378,7 +378,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.AccessGroupsApi(api_client)
-    access_group_uid = 'access_group_uid_example' # str | The unique identifier, represented as a UUID, of the CDO Access Group.
+    access_group_uid = 'access_group_uid_example' # str | The unique identifier, represented as a UUID, of the SCC Access Group.
     access_group_update_input = cdo_sdk_python.AccessGroupUpdateInput() # AccessGroupUpdateInput | 
 
     try:
@@ -397,7 +397,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **access_group_uid** | **str**| The unique identifier, represented as a UUID, of the CDO Access Group. | 
+ **access_group_uid** | **str**| The unique identifier, represented as a UUID, of the SCC Access Group. | 
  **access_group_update_input** | [**AccessGroupUpdateInput**](AccessGroupUpdateInput.md)|  | 
 
 ### Return type
@@ -417,7 +417,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | CDO Access Group |  -  |
+**200** | SCC Access Group |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
 **404** | Entity not found. |  -  |

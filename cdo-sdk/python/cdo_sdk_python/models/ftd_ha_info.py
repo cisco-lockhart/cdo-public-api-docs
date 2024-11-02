@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -26,7 +26,7 @@ from typing_extensions import Self
 
 class FtdHaInfo(BaseModel):
     """
-    (High Availability Devices managed by FMC only) High-Available information information. Note: CDO represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.
+    (High Availability Devices managed by FMC only) High-Available information information. Note: SCC represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.
     """ # noqa: E501
     primary_node: Optional[HaNode] = Field(default=None, alias="primaryNode")
     secondary_node: Optional[HaNode] = Field(default=None, alias="secondaryNode")

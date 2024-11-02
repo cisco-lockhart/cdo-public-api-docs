@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -27,9 +27,9 @@ class CdFmcInfo(BaseModel):
     """
     (FTDs managed by cdFMC only) Information on the cloud-delivered FMC managing this FTD. This information is not available for FTDs managed using FDM or on-prem FMCs.
     """ # noqa: E501
-    cli_key: Optional[StrictStr] = Field(default=None, description="The CLI key to paste into the FTD CLI to register the FTD with a cdFMC. You need to paste this value in only once, when the FTD is being onboarded. Refer to the [CDO Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html) for details.", alias="cliKey")
-    reg_key: Optional[StrictStr] = Field(default=None, description="The Network Address Translation (NAT) ID of this FTD. Refer to the [CDO Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html) for details.", alias="regKey")
-    nat_id: Optional[StrictStr] = Field(default=None, description="The Registration Key of this FTD. Refer to the [CDO Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html) for details.", alias="natId")
+    cli_key: Optional[StrictStr] = Field(default=None, description="The CLI key to paste into the FTD CLI to register the FTD with a cdFMC. You need to paste this value in only once, when the FTD is being onboarded. Refer to the [SCC Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html) for details.", alias="cliKey")
+    reg_key: Optional[StrictStr] = Field(default=None, description="The Network Address Translation (NAT) ID of this FTD. Refer to the [SCC Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html) for details.", alias="regKey")
+    nat_id: Optional[StrictStr] = Field(default=None, description="The Registration Key of this FTD. Refer to the [SCC Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html) for details.", alias="natId")
     __properties: ClassVar[List[str]] = ["cliKey", "regKey", "natId"]
 
     model_config = ConfigDict(

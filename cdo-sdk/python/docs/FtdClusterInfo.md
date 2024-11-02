@@ -1,6 +1,6 @@
 # FtdClusterInfo
 
-(Device Clusters managed by FMC only) Clustering information. Note: CDO represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.
+(Device Clusters managed by FMC only) Clustering information. Note: SCC represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.
 
 ## Properties
 

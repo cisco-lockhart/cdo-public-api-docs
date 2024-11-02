@@ -1,6 +1,6 @@
 # ConflictDetectionState
 
-Indicates whether there have been changes made to the device's configuration outside of CDO.
+Indicates whether there have been changes made to the device's configuration outside of SCC.
 
 ## Properties
 

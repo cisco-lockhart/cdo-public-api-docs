@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The name of the change request in CDO. | 
-**description** | **str** | The description of the change request in CDO. | [optional] 
+**name** | **str** | The name of the change request in SCC. | 
+**description** | **str** | The description of the change request in SCC. | [optional] 
 
 ## Example
 

@@ -1,29 +1,29 @@
 # cdo_sdk_python.MSPApi
 
-All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
+All URIs are relative to *https://edge.us.SCC.cisco.com/api/rest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_active_directory_groups_to_tenant_in_msp_portal**](MSPApi.md#add_active_directory_groups_to_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/users/groups | Add Active Directory Groups to CDO tenant in MSP Portal
+[**add_active_directory_groups_to_tenant_in_msp_portal**](MSPApi.md#add_active_directory_groups_to_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/users/groups | Add Active Directory Groups to SCC tenant in MSP Portal
 [**add_msp_tenant**](MSPApi.md#add_msp_tenant) | **POST** /v1/msp/tenants | Add Tenant to MSP Portal (API token)
 [**add_tenant_to_msp_portal**](MSPApi.md#add_tenant_to_msp_portal) | **POST** /v1/msp/tenants/{tenantUid} | Add tenant to MSP Portal
-[**add_users_to_tenant_in_msp_portal**](MSPApi.md#add_users_to_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/users | Add users to CDO tenant in MSP Portal
-[**create_tenant**](MSPApi.md#create_tenant) | **POST** /v1/msp/tenants/create | Create CDO Tenant
-[**delete_user_groups_from_tenant_in_msp_portal**](MSPApi.md#delete_user_groups_from_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/users/groups/delete | Remove user groups from CDO tenant in MSP Portal
-[**delete_users_from_tenant_in_msp_portal**](MSPApi.md#delete_users_from_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/users/delete | Remove users from CDO tenant in MSP Portal
-[**enable_multicloud_defense_for_tenant_in_msp_portal**](MSPApi.md#enable_multicloud_defense_for_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/mcd | Enable Multicloud Defense for CDO tenant in MSP Portal
+[**add_users_to_tenant_in_msp_portal**](MSPApi.md#add_users_to_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/users | Add users to SCC tenant in MSP Portal
+[**create_tenant**](MSPApi.md#create_tenant) | **POST** /v1/msp/tenants/create | Create SCC Tenant
+[**delete_user_groups_from_tenant_in_msp_portal**](MSPApi.md#delete_user_groups_from_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/users/groups/delete | Remove user groups from SCC tenant in MSP Portal
+[**delete_users_from_tenant_in_msp_portal**](MSPApi.md#delete_users_from_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/users/delete | Remove users from SCC tenant in MSP Portal
+[**enable_multicloud_defense_for_tenant_in_msp_portal**](MSPApi.md#enable_multicloud_defense_for_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/mcd | Enable Multicloud Defense for SCC tenant in MSP Portal
 [**generate_api_token_for_user_in_tenant**](MSPApi.md#generate_api_token_for_user_in_tenant) | **POST** /v1/msp/tenants/{tenantUid}/users/{apiUserUid}/token | Generate token for API-only user on tenant managed by MSP portal
-[**get_msp_managed_tenant**](MSPApi.md#get_msp_managed_tenant) | **GET** /v1/msp/tenants/{tenantUid} | Get CDO tenant managed by MSP Portal
-[**get_msp_managed_tenants**](MSPApi.md#get_msp_managed_tenants) | **GET** /v1/msp/tenants | Get CDO tenants managed by MSP Portal
+[**get_msp_managed_tenant**](MSPApi.md#get_msp_managed_tenant) | **GET** /v1/msp/tenants/{tenantUid} | Get SCC tenant managed by MSP Portal
+[**get_msp_managed_tenants**](MSPApi.md#get_msp_managed_tenants) | **GET** /v1/msp/tenants | Get SCC tenants managed by MSP Portal
 [**get_users_in_tenant_in_msp_portal**](MSPApi.md#get_users_in_tenant_in_msp_portal) | **GET** /v1/msp/tenants/{tenantUid}/users | Get Users associated with tenant in MSP portal
-[**provision_cd_fmc_for_tenant_in_msp_portal**](MSPApi.md#provision_cd_fmc_for_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/cdfmc | Provision cdFMC for CDO tenant in MSP Portal
+[**provision_cd_fmc_for_tenant_in_msp_portal**](MSPApi.md#provision_cd_fmc_for_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/cdfmc | Provision cdFMC for SCC tenant in MSP Portal
 [**remove_tenant_from_msp_portal**](MSPApi.md#remove_tenant_from_msp_portal) | **DELETE** /v1/msp/tenants/{tenantUid} | Remove tenant from MSP Portal
 
 
 # **add_active_directory_groups_to_tenant_in_msp_portal**
 > CdoTransaction add_active_directory_groups_to_tenant_in_msp_portal(tenant_uid, active_directory_group_create_or_update_input)
 
-Add Active Directory Groups to CDO tenant in MSP Portal
+Add Active Directory Groups to SCC tenant in MSP Portal
 
 This is an asynchronous operation to add a list of Active Directory Groups to a tenant associated with the MSP Portal.
 
@@ -37,10 +37,10 @@ from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 
@@ -52,7 +52,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     active_directory_group_create_or_update_input = [cdo_sdk_python.ActiveDirectoryGroupCreateOrUpdateInput()] # List[ActiveDirectoryGroupCreateOrUpdateInput] | 
 
     try:
-        # Add Active Directory Groups to CDO tenant in MSP Portal
+        # Add Active Directory Groups to SCC tenant in MSP Portal
         api_response = api_instance.add_active_directory_groups_to_tenant_in_msp_portal(tenant_uid, active_directory_group_create_or_update_input)
         print("The response of MSPApi->add_active_directory_groups_to_tenant_in_msp_portal:\n")
         pprint(api_response)
@@ -87,7 +87,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | CDO Transaction object that can be used to track the status of the operation. |  -  |
+**202** | SCC Transaction object that can be used to track the status of the operation. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -110,10 +110,10 @@ from cdo_sdk_python.models.status_info import StatusInfo
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -192,10 +192,10 @@ from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -249,7 +249,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | CDO Transaction object that can be used to track the status of the operation. |  -  |
+**202** | SCC Transaction object that can be used to track the status of the operation. |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -261,7 +261,7 @@ Name | Type | Description  | Notes
 # **add_users_to_tenant_in_msp_portal**
 > CdoTransaction add_users_to_tenant_in_msp_portal(tenant_uid, msp_add_users_to_tenant_input)
 
-Add users to CDO tenant in MSP Portal
+Add users to SCC tenant in MSP Portal
 
 This is an asynchronous operation to add a list of users to a tenant associated with the MSP Portal.
 
@@ -275,10 +275,10 @@ from cdo_sdk_python.models.msp_add_users_to_tenant_input import MspAddUsersToTen
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 
@@ -290,7 +290,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     msp_add_users_to_tenant_input = cdo_sdk_python.MspAddUsersToTenantInput() # MspAddUsersToTenantInput | 
 
     try:
-        # Add users to CDO tenant in MSP Portal
+        # Add users to SCC tenant in MSP Portal
         api_response = api_instance.add_users_to_tenant_in_msp_portal(tenant_uid, msp_add_users_to_tenant_input)
         print("The response of MSPApi->add_users_to_tenant_in_msp_portal:\n")
         pprint(api_response)
@@ -325,7 +325,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | CDO Transaction object that can be used to track the status of the operation. |  -  |
+**202** | SCC Transaction object that can be used to track the status of the operation. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -333,9 +333,9 @@ No authorization required
 # **create_tenant**
 > CdoTransaction create_tenant(msp_create_tenant_input)
 
-Create CDO Tenant
+Create SCC Tenant
 
-Create a new tenant in CDO from an MSP Portal. This endpoint creates a tenant, adds the tenant to the MSP Portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal. You can create no more than 1 tenant every 30 seconds. Additionally, you are limited to creating a total of 100 tenants: please speak to support to raise this limit.
+Create a new tenant in SCC from an MSP Portal. This endpoint creates a tenant, adds the tenant to the MSP Portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal. You can create no more than 1 tenant every 30 seconds. Additionally, you are limited to creating a total of 100 tenants: please speak to support to raise this limit.
 
 ### Example
 
@@ -348,10 +348,10 @@ from cdo_sdk_python.models.msp_create_tenant_input import MspCreateTenantInput
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -371,7 +371,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     msp_create_tenant_input = cdo_sdk_python.MspCreateTenantInput() # MspCreateTenantInput | 
 
     try:
-        # Create CDO Tenant
+        # Create SCC Tenant
         api_response = api_instance.create_tenant(msp_create_tenant_input)
         print("The response of MSPApi->create_tenant:\n")
         pprint(api_response)
@@ -405,7 +405,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | CDO Transaction object that can be used to track the status of the tenant creation. |  -  |
+**202** | SCC Transaction object that can be used to track the status of the tenant creation. |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -417,7 +417,7 @@ Name | Type | Description  | Notes
 # **delete_user_groups_from_tenant_in_msp_portal**
 > CdoTransaction delete_user_groups_from_tenant_in_msp_portal(tenant_uid, msp_delete_user_groups_from_tenant_input)
 
-Remove user groups from CDO tenant in MSP Portal
+Remove user groups from SCC tenant in MSP Portal
 
 This is an asynchronous operation to remove a list of user groups from a tenant associated with the MSP Portal.
 
@@ -431,10 +431,10 @@ from cdo_sdk_python.models.msp_delete_user_groups_from_tenant_input import MspDe
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 
@@ -446,7 +446,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     msp_delete_user_groups_from_tenant_input = cdo_sdk_python.MspDeleteUserGroupsFromTenantInput() # MspDeleteUserGroupsFromTenantInput | 
 
     try:
-        # Remove user groups from CDO tenant in MSP Portal
+        # Remove user groups from SCC tenant in MSP Portal
         api_response = api_instance.delete_user_groups_from_tenant_in_msp_portal(tenant_uid, msp_delete_user_groups_from_tenant_input)
         print("The response of MSPApi->delete_user_groups_from_tenant_in_msp_portal:\n")
         pprint(api_response)
@@ -481,7 +481,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | CDO Transaction object that can be used to track the status of the operation. |  -  |
+**202** | SCC Transaction object that can be used to track the status of the operation. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -489,7 +489,7 @@ No authorization required
 # **delete_users_from_tenant_in_msp_portal**
 > CdoTransaction delete_users_from_tenant_in_msp_portal(tenant_uid, msp_delete_users_from_tenant_input)
 
-Remove users from CDO tenant in MSP Portal
+Remove users from SCC tenant in MSP Portal
 
 This is an asynchronous operation to remove a list of users from a tenant associated with the MSP Portal.
 
@@ -503,10 +503,10 @@ from cdo_sdk_python.models.msp_delete_users_from_tenant_input import MspDeleteUs
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 
@@ -518,7 +518,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     msp_delete_users_from_tenant_input = cdo_sdk_python.MspDeleteUsersFromTenantInput() # MspDeleteUsersFromTenantInput | 
 
     try:
-        # Remove users from CDO tenant in MSP Portal
+        # Remove users from SCC tenant in MSP Portal
         api_response = api_instance.delete_users_from_tenant_in_msp_portal(tenant_uid, msp_delete_users_from_tenant_input)
         print("The response of MSPApi->delete_users_from_tenant_in_msp_portal:\n")
         pprint(api_response)
@@ -553,7 +553,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | CDO Transaction object that can be used to track the status of the operation. |  -  |
+**202** | SCC Transaction object that can be used to track the status of the operation. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -561,7 +561,7 @@ No authorization required
 # **enable_multicloud_defense_for_tenant_in_msp_portal**
 > CdoTransaction enable_multicloud_defense_for_tenant_in_msp_portal(tenant_uid)
 
-Enable Multicloud Defense for CDO tenant in MSP Portal
+Enable Multicloud Defense for SCC tenant in MSP Portal
 
 This is an asynchronous operation to enable Multicloud Defense for a tenant associated with the MSP Portal.
 
@@ -574,10 +574,10 @@ from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 
@@ -588,7 +588,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     tenant_uid = 'tenant_uid_example' # str | Unique identifier of the tenant that Multicloud Defense will be enabled for.
 
     try:
-        # Enable Multicloud Defense for CDO tenant in MSP Portal
+        # Enable Multicloud Defense for SCC tenant in MSP Portal
         api_response = api_instance.enable_multicloud_defense_for_tenant_in_msp_portal(tenant_uid)
         print("The response of MSPApi->enable_multicloud_defense_for_tenant_in_msp_portal:\n")
         pprint(api_response)
@@ -622,7 +622,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | CDO Transaction object that can be used to track the status of the operation. |  -  |
+**202** | SCC Transaction object that can be used to track the status of the operation. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -632,7 +632,7 @@ No authorization required
 
 Generate token for API-only user on tenant managed by MSP portal
 
-Generate API Token for API-only user on a tenant managed by the MSP portal. API-only users are used for building automations with CDO. If the user ID provided is not that of an API-only user, this operation will fail.
+Generate API Token for API-only user on a tenant managed by the MSP portal. API-only users are used for building automations with SCC. If the user ID provided is not that of an API-only user, this operation will fail.
 
 ### Example
 
@@ -644,10 +644,10 @@ from cdo_sdk_python.models.api_token_info import ApiTokenInfo
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -664,8 +664,8 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.MSPApi(api_client)
-    tenant_uid = 'tenant_uid_example' # str | The unique identifier of the tenant in CDO.
-    api_user_uid = 'api_user_uid_example' # str | The unique identifier of the API-only user in CDO.
+    tenant_uid = 'tenant_uid_example' # str | The unique identifier of the tenant in SCC.
+    api_user_uid = 'api_user_uid_example' # str | The unique identifier of the API-only user in SCC.
 
     try:
         # Generate token for API-only user on tenant managed by MSP portal
@@ -683,8 +683,8 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenant_uid** | **str**| The unique identifier of the tenant in CDO. | 
- **api_user_uid** | **str**| The unique identifier of the API-only user in CDO. | 
+ **tenant_uid** | **str**| The unique identifier of the tenant in SCC. | 
+ **api_user_uid** | **str**| The unique identifier of the API-only user in SCC. | 
 
 ### Return type
 
@@ -714,9 +714,9 @@ Name | Type | Description  | Notes
 # **get_msp_managed_tenant**
 > MspManagedTenant get_msp_managed_tenant(tenant_uid)
 
-Get CDO tenant managed by MSP Portal
+Get SCC tenant managed by MSP Portal
 
-Get a CDO tenant managed by the MSP Portal.
+Get a SCC tenant managed by the MSP Portal.
 
 ### Example
 
@@ -728,10 +728,10 @@ from cdo_sdk_python.models.msp_managed_tenant import MspManagedTenant
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -748,10 +748,10 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.MSPApi(api_client)
-    tenant_uid = 'tenant_uid_example' # str | The unique identifier of the tenant in CDO.
+    tenant_uid = 'tenant_uid_example' # str | The unique identifier of the tenant in SCC.
 
     try:
-        # Get CDO tenant managed by MSP Portal
+        # Get SCC tenant managed by MSP Portal
         api_response = api_instance.get_msp_managed_tenant(tenant_uid)
         print("The response of MSPApi->get_msp_managed_tenant:\n")
         pprint(api_response)
@@ -766,7 +766,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenant_uid** | **str**| The unique identifier of the tenant in CDO. | 
+ **tenant_uid** | **str**| The unique identifier of the tenant in SCC. | 
 
 ### Return type
 
@@ -785,7 +785,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | CDO tenant object |  -  |
+**200** | SCC tenant object |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -797,9 +797,9 @@ Name | Type | Description  | Notes
 # **get_msp_managed_tenants**
 > MspManagedTenantPage get_msp_managed_tenants(limit=limit, offset=offset, q=q)
 
-Get CDO tenants managed by MSP Portal
+Get SCC tenants managed by MSP Portal
 
-Get a list of CDO tenants managed by the MSP Portal.
+Get a list of SCC tenants managed by the MSP Portal.
 
 ### Example
 
@@ -811,10 +811,10 @@ from cdo_sdk_python.models.msp_managed_tenant_page import MspManagedTenantPage
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -832,11 +832,11 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.MSPApi(api_client)
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    offset = '0' # str | The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
 
     try:
-        # Get CDO tenants managed by MSP Portal
+        # Get SCC tenants managed by MSP Portal
         api_response = api_instance.get_msp_managed_tenants(limit=limit, offset=offset, q=q)
         print("The response of MSPApi->get_msp_managed_tenants:\n")
         pprint(api_response)
@@ -852,7 +852,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **offset** | **str**| The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
 
 ### Return type
@@ -872,7 +872,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of CDO tenant objects |  -  |
+**200** | List of SCC tenant objects |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -885,7 +885,7 @@ Name | Type | Description  | Notes
 
 Get Users associated with tenant in MSP portal
 
-Get a list of users associated with the CDO tenant managed by MSP portal.
+Get a list of users associated with the SCC tenant managed by MSP portal.
 
 ### Example
 
@@ -896,10 +896,10 @@ from cdo_sdk_python.models.user_page import UserPage
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 
@@ -909,7 +909,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     api_instance = cdo_sdk_python.MSPApi(api_client)
     tenant_uid = 'tenant_uid_example' # str | Unique identifier of the tenant to retrieve the users for.
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    offset = '0' # str | The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
 
     try:
@@ -930,7 +930,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tenant_uid** | **str**| Unique identifier of the tenant to retrieve the users for. | 
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **offset** | **str**| The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
 
 ### Return type
@@ -958,7 +958,7 @@ No authorization required
 # **provision_cd_fmc_for_tenant_in_msp_portal**
 > CdoTransaction provision_cd_fmc_for_tenant_in_msp_portal(tenant_uid)
 
-Provision cdFMC for CDO tenant in MSP Portal
+Provision cdFMC for SCC tenant in MSP Portal
 
 This is an asynchronous operation to provision a cdFMC for a tenant associated with the MSP Portal. This operation does not wait for the cdFMC to be provisioned on the target tenant, and will be marked as successful once the provisioning has been successfully triggered. To monitor the transaction on the target tenant, use the UID in the `TRANSACTION_UID_IN_TARGET_TENANT` key in the transaction details.
 
@@ -971,10 +971,10 @@ from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 
@@ -985,7 +985,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     tenant_uid = 'tenant_uid_example' # str | Unique identifier of the tenant that cdFMC provisioning will be enabled for.
 
     try:
-        # Provision cdFMC for CDO tenant in MSP Portal
+        # Provision cdFMC for SCC tenant in MSP Portal
         api_response = api_instance.provision_cd_fmc_for_tenant_in_msp_portal(tenant_uid)
         print("The response of MSPApi->provision_cd_fmc_for_tenant_in_msp_portal:\n")
         pprint(api_response)
@@ -1019,7 +1019,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | CDO Transaction object that can be used to track the status of the operation. |  -  |
+**202** | SCC Transaction object that can be used to track the status of the operation. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1040,10 +1040,10 @@ import cdo_sdk_python
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1060,7 +1060,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.MSPApi(api_client)
-    tenant_uid = 'tenant_uid_example' # str | The unique identifier, represented as a UUID, of the tenant in CDO.
+    tenant_uid = 'tenant_uid_example' # str | The unique identifier, represented as a UUID, of the tenant in SCC.
 
     try:
         # Remove tenant from MSP Portal
@@ -1076,7 +1076,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenant_uid** | **str**| The unique identifier, represented as a UUID, of the tenant in CDO. | 
+ **tenant_uid** | **str**| The unique identifier, represented as a UUID, of the tenant in SCC. | 
 
 ### Return type
 

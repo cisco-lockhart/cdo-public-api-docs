@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -27,7 +27,7 @@ class FtdRegistrationInput(BaseModel):
     """
     FtdRegistrationInput
     """ # noqa: E501
-    ftd_uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the FTD device in CDO for which registration should be triggered.", alias="ftdUid")
+    ftd_uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the FTD device in SCC for which registration should be triggered.", alias="ftdUid")
     __properties: ClassVar[List[str]] = ["ftdUid"]
 
     model_config = ConfigDict(

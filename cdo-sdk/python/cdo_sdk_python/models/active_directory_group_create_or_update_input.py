@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -27,7 +27,7 @@ class ActiveDirectoryGroupCreateOrUpdateInput(BaseModel):
     """
     ActiveDirectoryGroupCreateOrUpdateInput
     """ # noqa: E501
-    name: StrictStr = Field(description="The name of the Active Directory Group. CDO does not support special characters for this field.")
+    name: StrictStr = Field(description="The name of the Active Directory Group. SCC does not support special characters for this field.")
     role: Optional[StrictStr] = Field(default=None, description="This determines the role for all the users included in this Active Directory Group.")
     group_identifier: StrictStr = Field(description="The unique identifier, represented as a UUID, of the Active Directory Group in your Identity Provider (IdP).", alias="groupIdentifier")
     issuer_url: StrictStr = Field(description="The Identity Provider (IdP) URL, which Cisco Defense Orchestrator will use to validate SAML assertions during the sign-in process.", alias="issuerUrl")

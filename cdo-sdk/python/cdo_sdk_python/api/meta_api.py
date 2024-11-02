@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -302,7 +302,7 @@ class MetaApi:
     ) -> Meta:
         """Get Meta information
 
-        Get Meta information about CDO, including the IP addresses of CDO services.
+        Get Meta information about CDO, including the IP addresses of SCC services.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -366,7 +366,7 @@ class MetaApi:
     ) -> ApiResponse[Meta]:
         """Get Meta information
 
-        Get Meta information about CDO, including the IP addresses of CDO services.
+        Get Meta information about CDO, including the IP addresses of SCC services.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -430,7 +430,7 @@ class MetaApi:
     ) -> RESTResponseType:
         """Get Meta information
 
-        Get Meta information about CDO, including the IP addresses of CDO services.
+        Get Meta information about CDO, including the IP addresses of SCC services.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -545,9 +545,9 @@ class MetaApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CdoRegionList:
-        """Get CDO Regions
+        """Get SCC Regions
 
-        Get the list of regions that CDO is deployed in.
+        Get the list of regions that SCC is deployed in.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -609,9 +609,9 @@ class MetaApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CdoRegionList]:
-        """Get CDO Regions
+        """Get SCC Regions
 
-        Get the list of regions that CDO is deployed in.
+        Get the list of regions that SCC is deployed in.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -673,9 +673,9 @@ class MetaApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get CDO Regions
+        """Get SCC Regions
 
-        Get the list of regions that CDO is deployed in.
+        Get the list of regions that SCC is deployed in.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

@@ -6,7 +6,7 @@ The list of users to be added to the tenant. You can add a maximum of 50 users a
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**username** | **str** | The name of the user in CDO. This must be a valid e-mail address if the user is not an API-only user. | 
+**username** | **str** | The name of the user in SCC. This must be a valid e-mail address if the user is not an API-only user. | 
 **role** | [**UserRole**](UserRole.md) |  | 
 **api_only_user** | **bool** | Whether the user is an API-only user | [optional] 
 

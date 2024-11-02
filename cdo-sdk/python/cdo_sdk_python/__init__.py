@@ -3,9 +3,9 @@
 # flake8: noqa
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.2.298"
+__version__ = "1.2.299"
 
 # import apis into sdk package
 from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi

@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -35,8 +35,8 @@ class FmcHealthMetrics(BaseModel):
     """
     FmcHealthMetrics
     """ # noqa: E501
-    device_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the device in CDO.", alias="deviceUid")
-    device_name: Optional[StrictStr] = Field(default=None, description="The name of the device in CDO.", alias="deviceName")
+    device_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the device in SCC.", alias="deviceUid")
+    device_name: Optional[StrictStr] = Field(default=None, description="The name of the device in SCC.", alias="deviceName")
     start_time: Optional[datetime] = Field(default=None, description="The start of the time period (inclusive) for which the health metrics were retrieved for this device.", alias="startTime")
     end_time: Optional[datetime] = Field(default=None, description="The end of the time period (inclusive) for which the health metrics were retrieved for this device.", alias="endTime")
     cpu_health_metrics: Optional[CpuHealthMetrics] = Field(default=None, alias="cpuHealthMetrics")

@@ -1,13 +1,13 @@
 # Labels
 
-Labels used to identify/tag CDO entities.
+Labels used to identify/tag SCC entities.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**grouped_labels** | **Dict[str, List[str]]** | Groups of labels used to identify/tag CDO entities. | [optional] 
-**ungrouped_labels** | **List[str]** | Set of free-labels used to identify/tag CDO entities. | [optional] 
+**grouped_labels** | **Dict[str, List[str]]** | Groups of labels used to identify/tag SCC entities. | [optional] 
+**ungrouped_labels** | **List[str]** | Set of free-labels used to identify/tag SCC entities. | [optional] 
 
 ## Example
 

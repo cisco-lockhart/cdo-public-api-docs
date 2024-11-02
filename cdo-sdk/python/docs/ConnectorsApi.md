@@ -1,6 +1,6 @@
 # cdo_sdk_python.ConnectorsApi
 
-All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
+All URIs are relative to *https://edge.us.SCC.cisco.com/api/rest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Create SDC
 
-This is an asynchronous operation to create an SDC to a CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+This is an asynchronous operation to create an SDC to a SCC tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
 ### Example
 
@@ -29,10 +29,10 @@ from cdo_sdk_python.models.sdc_create_input import SdcCreateInput
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | CDO Transaction object that can be used to track the progress of the creation operation. |  -  |
+**202** | SCC Transaction object that can be used to track the progress of the creation operation. |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 
 Delete SDC
 
-Delete an SDC in the CDO tenant
+Delete an SDC in the SCC tenant
 
 ### Example
 
@@ -110,10 +110,10 @@ import cdo_sdk_python
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -130,7 +130,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ConnectorsApi(api_client)
-    sdc_uid = 'sdc_uid_example' # str | The unique identifier, represented as a UUID, of the SDC in CDO.
+    sdc_uid = 'sdc_uid_example' # str | The unique identifier, represented as a UUID, of the SDC in SCC.
 
     try:
         # Delete SDC
@@ -146,7 +146,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sdc_uid** | **str**| The unique identifier, represented as a UUID, of the SDC in CDO. | 
+ **sdc_uid** | **str**| The unique identifier, represented as a UUID, of the SDC in SCC. | 
 
 ### Return type
 
@@ -178,7 +178,7 @@ void (empty response body)
 
 Get SDC
 
-Get a SDC by UID in the CDO tenant.
+Get a SDC by UID in the SCC tenant.
 
 ### Example
 
@@ -190,10 +190,10 @@ from cdo_sdk_python.models.sdc import Sdc
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -210,7 +210,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ConnectorsApi(api_client)
-    sdc_uid = 'sdc_uid_example' # str | The unique identifier, represented as a UUID, of the SDC in CDO.
+    sdc_uid = 'sdc_uid_example' # str | The unique identifier, represented as a UUID, of the SDC in SCC.
 
     try:
         # Get SDC
@@ -228,7 +228,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sdc_uid** | **str**| The unique identifier, represented as a UUID, of the SDC in CDO. | 
+ **sdc_uid** | **str**| The unique identifier, represented as a UUID, of the SDC in SCC. | 
 
 ### Return type
 
@@ -261,7 +261,7 @@ Name | Type | Description  | Notes
 
 Get SDCs
 
-Get a list of on-prem SDCs in the CDO tenant.
+Get a list of on-prem SDCs in the SCC tenant.
 
 ### Example
 
@@ -273,10 +273,10 @@ from cdo_sdk_python.models.sdc_page import SdcPage
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -294,7 +294,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ConnectorsApi(api_client)
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    offset = '0' # str | The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
     sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
@@ -315,7 +315,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **offset** | **str**| The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
  **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
@@ -349,7 +349,7 @@ Name | Type | Description  | Notes
 
 Modify SDC
 
-Modify a SDC in the CDO tenant
+Modify a SDC in the SCC tenant
 
 ### Example
 
@@ -362,10 +362,10 @@ from cdo_sdk_python.models.sdc_patch_input import SdcPatchInput
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -382,7 +382,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.ConnectorsApi(api_client)
-    sdc_uid = 'sdc_uid_example' # str | The unique identifier, represented as a UUID, of the SDC in CDO.
+    sdc_uid = 'sdc_uid_example' # str | The unique identifier, represented as a UUID, of the SDC in SCC.
     sdc_patch_input = cdo_sdk_python.SdcPatchInput() # SdcPatchInput | 
 
     try:
@@ -401,7 +401,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sdc_uid** | **str**| The unique identifier, represented as a UUID, of the SDC in CDO. | 
+ **sdc_uid** | **str**| The unique identifier, represented as a UUID, of the SDC in SCC. | 
  **sdc_patch_input** | [**SdcPatchInput**](SdcPatchInput.md)|  | 
 
 ### Return type

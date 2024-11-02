@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -628,7 +628,7 @@ class AIAssistantApi:
     @validate_call
     def get_ai_assistant_conversation_messages(
         self,
-        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in CDO.")],
+        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -646,7 +646,7 @@ class AIAssistantApi:
 
         Get a list of messages in a single AI Assistant conversation. Note: this endpoint is not paginated, and returns the full list of messages.
 
-        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in CDO. (required)
+        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in SCC. (required)
         :type conversation_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -699,7 +699,7 @@ class AIAssistantApi:
     @validate_call
     def get_ai_assistant_conversation_messages_with_http_info(
         self,
-        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in CDO.")],
+        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -717,7 +717,7 @@ class AIAssistantApi:
 
         Get a list of messages in a single AI Assistant conversation. Note: this endpoint is not paginated, and returns the full list of messages.
 
-        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in CDO. (required)
+        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in SCC. (required)
         :type conversation_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -770,7 +770,7 @@ class AIAssistantApi:
     @validate_call
     def get_ai_assistant_conversation_messages_without_preload_content(
         self,
-        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in CDO.")],
+        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -788,7 +788,7 @@ class AIAssistantApi:
 
         Get a list of messages in a single AI Assistant conversation. Note: this endpoint is not paginated, and returns the full list of messages.
 
-        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in CDO. (required)
+        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in SCC. (required)
         :type conversation_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -898,7 +898,7 @@ class AIAssistantApi:
     @validate_call
     def get_conversation(
         self,
-        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in CDO.")],
+        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -914,9 +914,9 @@ class AIAssistantApi:
     ) -> AiConversation:
         """Get Conversation
 
-        Get an AI Assistant conversation by UID in the CDO tenant.
+        Get an AI Assistant conversation by UID in the SCC tenant.
 
-        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in CDO. (required)
+        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in SCC. (required)
         :type conversation_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -970,7 +970,7 @@ class AIAssistantApi:
     @validate_call
     def get_conversation_with_http_info(
         self,
-        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in CDO.")],
+        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -986,9 +986,9 @@ class AIAssistantApi:
     ) -> ApiResponse[AiConversation]:
         """Get Conversation
 
-        Get an AI Assistant conversation by UID in the CDO tenant.
+        Get an AI Assistant conversation by UID in the SCC tenant.
 
-        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in CDO. (required)
+        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in SCC. (required)
         :type conversation_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1042,7 +1042,7 @@ class AIAssistantApi:
     @validate_call
     def get_conversation_without_preload_content(
         self,
-        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in CDO.")],
+        conversation_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the conversation in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1058,9 +1058,9 @@ class AIAssistantApi:
     ) -> RESTResponseType:
         """Get Conversation
 
-        Get an AI Assistant conversation by UID in the CDO tenant.
+        Get an AI Assistant conversation by UID in the SCC tenant.
 
-        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in CDO. (required)
+        :param conversation_uid: The unique identifier, represented as a UUID, of the conversation in SCC. (required)
         :type conversation_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1172,7 +1172,7 @@ class AIAssistantApi:
     def get_conversations(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
             None,
@@ -1193,7 +1193,7 @@ class AIAssistantApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param sort: The fields to sort results by.
         :type sort: List[str]
@@ -1251,7 +1251,7 @@ class AIAssistantApi:
     def get_conversations_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
             None,
@@ -1272,7 +1272,7 @@ class AIAssistantApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param sort: The fields to sort results by.
         :type sort: List[str]
@@ -1330,7 +1330,7 @@ class AIAssistantApi:
     def get_conversations_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
             None,
@@ -1351,7 +1351,7 @@ class AIAssistantApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param sort: The fields to sort results by.
         :type sort: List[str]

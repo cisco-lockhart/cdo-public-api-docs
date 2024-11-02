@@ -1,27 +1,27 @@
 openapi: 3.0.1
 info:
-  title: CDO API
-  description: Use the documentation to explore the endpoints CDO has to offer
+  title: Cisco Security Cloud Control API
+  description: Use the documentation to explore the endpoints SCC has to offer
   contact:
-    name: CDO TAC
+    name: Cisco Security Cloud Control TAC
     email: cdo.tac@cisco.com
   version: 1.5.0
 servers:
-- url: https://edge.us.cdo.cisco.com/api/rest
+- url: https://edge.us.SCC.cisco.com/api/rest
   description: US
-- url: https://edge.eu.cdo.cisco.com/api/rest
+- url: https://edge.eu.SCC.cisco.com/api/rest
   description: EU
-- url: https://edge.apj.cdo.cisco.com/api/rest
+- url: https://edge.apj.SCC.cisco.com/api/rest
   description: APJ
-- url: https://edge.aus.cdo.cisco.com/api/rest
+- url: https://edge.aus.SCC.cisco.com/api/rest
   description: AUS
-- url: https://edge.in.cdo.cisco.com/api/rest
+- url: https://edge.in.SCC.cisco.com/api/rest
   description: IN
-- url: https://edge.staging.cdo.cisco.com/api/rest
+- url: https://edge.staging.SCC.cisco.com/api/rest
   description: Staging
-- url: https://edge.scale.cdo.cisco.com/api/rest
+- url: https://edge.scale.SCC.cisco.com/api/rest
   description: Scale
-- url: https://edge.ci.cdo.cisco.com/api/rest
+- url: https://edge.ci.SCC.cisco.com/api/rest
   description: CI
 paths:
   /v1/transactions/{transactionUid}:
@@ -29,9 +29,9 @@ paths:
       tags:
       - Transactions
       summary: Get Transaction
-      description: "Get information on an in-progress CDO transaction. A CDO transaction\
+      description: "Get information on an in-progress CDO transaction. An CDO transaction\
         \ is an entity used to monitor progress of, and provide feedback on, long-running\
-        \ operations. All asynchronous operations in CDO's API create CDO transactions."
+        \ operations. All asynchronous operations in CDO's API create SCC transactions."
       operationId: getTransaction
       parameters:
       - name: transactionUid
@@ -43,11 +43,17 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "200":
           description: "CDO Transaction that has completed, either successfully or\
-            \ unsuccessfully. Note: failed CDO Transactions do not roll back."
+            \ unsuccessfully. Note: failed SCC Transactions do not roll back."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "202":
+          description: SCC Transaction that is pending or in progress.
           content:
             application/json:
               schema:
@@ -56,12 +62,6 @@ paths:
           $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
-        "202":
-          description: CDO Transaction that is pending or in progress.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CdoTransaction'
         "500":
           description: Internal server error.
           content:
@@ -164,7 +164,7 @@ components:
           - MSP_PROVISION_CDFMC
         cdoTransactionStatus:
           type: string
-          description: The status of the CDO transaction
+          description: The status of the transaction
           example: IN_PROGRESS
           enum:
           - PENDING

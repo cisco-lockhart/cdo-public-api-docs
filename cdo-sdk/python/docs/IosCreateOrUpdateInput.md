@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **device_address** | **str** | The address of the device to onboard, specified in the format &#x60;host:port&#x60;. | [optional] 
 **username** | **str** | The username used to authenticate with the device. | 
 **password** | **str** | The password used to authenticate with the device. | 
-**ignore_certificate** | **bool** | Set this attribute to true if you do not want CDO to validate the certificate of this device before onboarding. | [optional] [default to False]
+**ignore_certificate** | **bool** | Set this attribute to true if you do not want SCC to validate the certificate of this device before onboarding. | [optional] [default to False]
 **connector_name** | **str** | The name of the Secure Device Connector (SDC) that will be used to communicate with the device. | 
 **labels** | [**Labels**](Labels.md) |  | [optional] 
 

@@ -1,6 +1,6 @@
 # cdo_sdk_python.RemoteAccessMonitoringApi
 
-All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
+All URIs are relative to *https://edge.us.SCC.cisco.com/api/rest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 Get MFA Event
 
-Get a MFA event by UID in the CDO tenant.
+Get a MFA event by UID in the SCC tenant.
 
 ### Example
 
@@ -30,10 +30,10 @@ from cdo_sdk_python.models.mfa_event import MfaEvent
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -50,7 +50,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.RemoteAccessMonitoringApi(api_client)
-    mfa_event_uid = 'mfa_event_uid_example' # str | The unique identifier, represented as a UUID, of the MFA event in CDO.
+    mfa_event_uid = 'mfa_event_uid_example' # str | The unique identifier, represented as a UUID, of the MFA event in SCC.
 
     try:
         # Get MFA Event
@@ -68,7 +68,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **mfa_event_uid** | **str**| The unique identifier, represented as a UUID, of the MFA event in CDO. | 
+ **mfa_event_uid** | **str**| The unique identifier, represented as a UUID, of the MFA event in SCC. | 
 
 ### Return type
 
@@ -114,10 +114,10 @@ from cdo_sdk_python.models.mfa_event_page import MfaEventPage
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -135,7 +135,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.RemoteAccessMonitoringApi(api_client)
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    offset = '0' # str | The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
     sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
@@ -156,7 +156,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **offset** | **str**| The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
  **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
@@ -191,7 +191,7 @@ Name | Type | Description  | Notes
 
 Get RA VPN Session
 
-Get a RA VPN session by UID in the CDO tenant.
+Get a RA VPN session by UID in the SCC tenant.
 
 ### Example
 
@@ -203,10 +203,10 @@ from cdo_sdk_python.models.ra_vpn_session import RaVpnSession
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -223,7 +223,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.RemoteAccessMonitoringApi(api_client)
-    ra_vpn_session_uid = 'ra_vpn_session_uid_example' # str | The unique identifier, represented as a UUID, of the RA VPN session in CDO.
+    ra_vpn_session_uid = 'ra_vpn_session_uid_example' # str | The unique identifier, represented as a UUID, of the RA VPN session in SCC.
 
     try:
         # Get RA VPN Session
@@ -241,7 +241,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ra_vpn_session_uid** | **str**| The unique identifier, represented as a UUID, of the RA VPN session in CDO. | 
+ **ra_vpn_session_uid** | **str**| The unique identifier, represented as a UUID, of the RA VPN session in SCC. | 
 
 ### Return type
 
@@ -287,10 +287,10 @@ from cdo_sdk_python.models.ra_vpn_session_page import RaVpnSessionPage
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -308,7 +308,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.RemoteAccessMonitoringApi(api_client)
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    offset = '0' # str | The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
     sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
@@ -329,7 +329,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **offset** | **str**| The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
  **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
@@ -364,7 +364,7 @@ Name | Type | Description  | Notes
 
 Refresh RA VPN Sessions
 
-This is an asynchronous operation to refresh RA VPN sessions for all devices in the CDO tenant.
+This is an asynchronous operation to refresh RA VPN sessions for all devices in the SCC tenant.
 
 ### Example
 
@@ -377,10 +377,10 @@ from cdo_sdk_python.models.ra_vpn_device_input import RaVpnDeviceInput
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -434,7 +434,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | CDO Transaction object that can be used to track the progress of the refresh operation |  -  |
+**202** | SCC Transaction object that can be used to track the progress of the refresh operation |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -448,7 +448,7 @@ Name | Type | Description  | Notes
 
 Terminate RA VPN Sessions
 
-This is an asynchronous operation to terminate all RA VPN sessions on a device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+This is an asynchronous operation to terminate all RA VPN sessions on a device in the SCC tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
 ### Example
 
@@ -460,10 +460,10 @@ from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -517,7 +517,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | CDO Transaction object that can be used to track the progress of the termination operation |  -  |
+**202** | SCC Transaction object that can be used to track the progress of the termination operation |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -531,7 +531,7 @@ Name | Type | Description  | Notes
 
 Terminate User's RA VPN Sessions
 
-This is an asynchronous operation to terminate all of a user's RA VPN sessions on a device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+This is an asynchronous operation to terminate all of a user's RA VPN sessions on a device in the SCC tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
 ### Example
 
@@ -543,10 +543,10 @@ from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -602,7 +602,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | CDO Transaction object that can be used to track the progress of the termination operation |  -  |
+**202** | SCC Transaction object that can be used to track the progress of the termination operation |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |

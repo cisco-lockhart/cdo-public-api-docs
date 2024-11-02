@@ -1,6 +1,6 @@
 # FtdHaInfo
 
-(High Availability Devices managed by FMC only) High-Available information information. Note: CDO represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.
+(High Availability Devices managed by FMC only) High-Available information information. Note: SCC represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.
 
 ## Properties
 

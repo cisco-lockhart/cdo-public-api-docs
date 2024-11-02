@@ -35,6 +35,10 @@ function deleteSchema(openApiFile, schemaToDelete, referenceFile) {
             const contentObject = operation.requestBody.content[contentType];
             if (contentObject.schema && contentObject.schema.$ref === `#/components/schemas/${schemaToDelete}`) {
               contentObject.schema.$ref = `./${referenceFile}#/components/schemas/${schemaToDelete}`;
+            } else if (contentObject.schema && contentObject.schema.items && contentObject.schema.items.$ref) {
+              if (contentObject.schema.items.$ref === `#/components/schemas/${schemaToDelete}`) {
+                contentObject.schema.items.$ref = `./${referenceFile}#/components/schemas/${schemaToDelete}`;
+              }
             }
           }
         }

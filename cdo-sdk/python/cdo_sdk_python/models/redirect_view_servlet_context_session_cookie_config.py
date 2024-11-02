@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -31,10 +31,10 @@ class RedirectViewServletContextSessionCookieConfig(BaseModel):
     name: Optional[StrictStr] = None
     path: Optional[StrictStr] = None
     comment: Optional[StrictStr] = None
-    domain: Optional[StrictStr] = None
-    secure: Optional[StrictBool] = None
     max_age: Optional[StrictInt] = Field(default=None, alias="maxAge")
-    __properties: ClassVar[List[str]] = ["httpOnly", "name", "path", "comment", "domain", "secure", "maxAge"]
+    secure: Optional[StrictBool] = None
+    domain: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["httpOnly", "name", "path", "comment", "maxAge", "secure", "domain"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,9 +91,9 @@ class RedirectViewServletContextSessionCookieConfig(BaseModel):
             "name": obj.get("name"),
             "path": obj.get("path"),
             "comment": obj.get("comment"),
-            "domain": obj.get("domain"),
+            "maxAge": obj.get("maxAge"),
             "secure": obj.get("secure"),
-            "maxAge": obj.get("maxAge")
+            "domain": obj.get("domain")
         })
         return _obj
 

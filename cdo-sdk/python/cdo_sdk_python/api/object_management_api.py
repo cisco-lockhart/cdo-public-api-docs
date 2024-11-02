@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -66,7 +66,7 @@ class ObjectManagementApi:
     ) -> ObjectResponse:
         """Create Object
 
-        Create an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Create an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param create_request: (required)
         :type create_request: CreateRequest
@@ -137,7 +137,7 @@ class ObjectManagementApi:
     ) -> ApiResponse[ObjectResponse]:
         """Create Object
 
-        Create an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Create an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param create_request: (required)
         :type create_request: CreateRequest
@@ -208,7 +208,7 @@ class ObjectManagementApi:
     ) -> RESTResponseType:
         """Create Object
 
-        Create an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Create an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param create_request: (required)
         :type create_request: CreateRequest
@@ -349,7 +349,7 @@ class ObjectManagementApi:
     ) -> object:
         """Create Targets
 
-        Create targets for an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Create targets for an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: the unique identifier of the object for which the targets are being added to. (required)
         :type uid: str
@@ -425,7 +425,7 @@ class ObjectManagementApi:
     ) -> ApiResponse[object]:
         """Create Targets
 
-        Create targets for an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Create targets for an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: the unique identifier of the object for which the targets are being added to. (required)
         :type uid: str
@@ -501,7 +501,7 @@ class ObjectManagementApi:
     ) -> RESTResponseType:
         """Create Targets
 
-        Create targets for an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Create targets for an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: the unique identifier of the object for which the targets are being added to. (required)
         :type uid: str
@@ -649,7 +649,7 @@ class ObjectManagementApi:
     ) -> object:
         """Delete Object
 
-        Delete an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Delete an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object being deleted. (required)
         :type uid: str
@@ -720,7 +720,7 @@ class ObjectManagementApi:
     ) -> ApiResponse[object]:
         """Delete Object
 
-        Delete an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Delete an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object being deleted. (required)
         :type uid: str
@@ -791,7 +791,7 @@ class ObjectManagementApi:
     ) -> RESTResponseType:
         """Delete Object
 
-        Delete an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Delete an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object being deleted. (required)
         :type uid: str
@@ -920,7 +920,7 @@ class ObjectManagementApi:
     ) -> object:
         """Delete Targets
 
-        Delete targets from an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Delete targets from an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: the unique identifier of the object for which the targets are being removed from. (required)
         :type uid: str
@@ -996,7 +996,7 @@ class ObjectManagementApi:
     ) -> ApiResponse[object]:
         """Delete Targets
 
-        Delete targets from an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Delete targets from an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: the unique identifier of the object for which the targets are being removed from. (required)
         :type uid: str
@@ -1072,7 +1072,7 @@ class ObjectManagementApi:
     ) -> RESTResponseType:
         """Delete Targets
 
-        Delete targets from an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Delete targets from an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: the unique identifier of the object for which the targets are being removed from. (required)
         :type uid: str
@@ -1211,7 +1211,7 @@ class ObjectManagementApi:
     ) -> List[DuplicateGroupDto]:
         """Get Duplicate Objects
 
-        Get objects in the CDO tenant that are duplicates of the given object. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Get objects in the SCC tenant that are duplicates of the given object. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object to retrieve duplicates for. (required)
         :type uid: str
@@ -1286,7 +1286,7 @@ class ObjectManagementApi:
     ) -> ApiResponse[List[DuplicateGroupDto]]:
         """Get Duplicate Objects
 
-        Get objects in the CDO tenant that are duplicates of the given object. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Get objects in the SCC tenant that are duplicates of the given object. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object to retrieve duplicates for. (required)
         :type uid: str
@@ -1361,7 +1361,7 @@ class ObjectManagementApi:
     ) -> RESTResponseType:
         """Get Duplicate Objects
 
-        Get objects in the CDO tenant that are duplicates of the given object. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Get objects in the SCC tenant that are duplicates of the given object. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object to retrieve duplicates for. (required)
         :type uid: str
@@ -1496,7 +1496,7 @@ class ObjectManagementApi:
     ) -> IssuesCount:
         """Get Issues Count
 
-        Get issues count in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Get issues count in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.
         :type q: str
@@ -1567,7 +1567,7 @@ class ObjectManagementApi:
     ) -> ApiResponse[IssuesCount]:
         """Get Issues Count
 
-        Get issues count in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Get issues count in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.
         :type q: str
@@ -1638,7 +1638,7 @@ class ObjectManagementApi:
     ) -> RESTResponseType:
         """Get Issues Count
 
-        Get issues count in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Get issues count in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.
         :type q: str
@@ -1768,7 +1768,7 @@ class ObjectManagementApi:
     ) -> ObjectResponse:
         """Get Object
 
-        Gets an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Gets an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object being retrieved. (required)
         :type uid: str
@@ -1843,7 +1843,7 @@ class ObjectManagementApi:
     ) -> ApiResponse[ObjectResponse]:
         """Get Object
 
-        Gets an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Gets an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object being retrieved. (required)
         :type uid: str
@@ -1918,7 +1918,7 @@ class ObjectManagementApi:
     ) -> RESTResponseType:
         """Get Object
 
-        Gets an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Gets an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object being retrieved. (required)
         :type uid: str
@@ -2053,7 +2053,7 @@ class ObjectManagementApi:
     ) -> List[ReferenceInfo]:
         """Get Object Usages
 
-        Get usages of an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Get usages of an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object to retrieve usages for. (required)
         :type uid: str
@@ -2124,7 +2124,7 @@ class ObjectManagementApi:
     ) -> ApiResponse[List[ReferenceInfo]]:
         """Get Object Usages
 
-        Get usages of an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Get usages of an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object to retrieve usages for. (required)
         :type uid: str
@@ -2195,7 +2195,7 @@ class ObjectManagementApi:
     ) -> RESTResponseType:
         """Get Object Usages
 
-        Get usages of an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Get usages of an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object to retrieve usages for. (required)
         :type uid: str
@@ -2308,7 +2308,7 @@ class ObjectManagementApi:
         self,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.")] = None,
         include_overrides: Annotated[Optional[StrictBool], Field(description="If enabled, the search will also include results from override objects.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -2326,13 +2326,13 @@ class ObjectManagementApi:
     ) -> ListObjectResponse:
         """Get Objects
 
-        Get objects in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Get objects in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.
         :type q: str
         :param include_overrides: If enabled, the search will also include results from override objects.
         :type include_overrides: bool
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param limit: The number of results to retrieve.
         :type limit: str
@@ -2395,7 +2395,7 @@ class ObjectManagementApi:
         self,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.")] = None,
         include_overrides: Annotated[Optional[StrictBool], Field(description="If enabled, the search will also include results from override objects.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -2413,13 +2413,13 @@ class ObjectManagementApi:
     ) -> ApiResponse[ListObjectResponse]:
         """Get Objects
 
-        Get objects in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Get objects in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.
         :type q: str
         :param include_overrides: If enabled, the search will also include results from override objects.
         :type include_overrides: bool
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param limit: The number of results to retrieve.
         :type limit: str
@@ -2482,7 +2482,7 @@ class ObjectManagementApi:
         self,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.")] = None,
         include_overrides: Annotated[Optional[StrictBool], Field(description="If enabled, the search will also include results from override objects.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
         sort_by: Annotated[Optional[StrictStr], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -2500,13 +2500,13 @@ class ObjectManagementApi:
     ) -> RESTResponseType:
         """Get Objects
 
-        Get objects in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Get objects in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.
         :type q: str
         :param include_overrides: If enabled, the search will also include results from override objects.
         :type include_overrides: bool
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param limit: The number of results to retrieve.
         :type limit: str
@@ -2662,7 +2662,7 @@ class ObjectManagementApi:
     ) -> ObjectResponse:
         """Get Override Object With Values For Specific Target
 
-        Gets an object in the CDO tenant with values for specific target uid. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Gets an object in the SCC tenant with values for specific target uid. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object being retrieved. (required)
         :type uid: str
@@ -2737,7 +2737,7 @@ class ObjectManagementApi:
     ) -> ApiResponse[ObjectResponse]:
         """Get Override Object With Values For Specific Target
 
-        Gets an object in the CDO tenant with values for specific target uid. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Gets an object in the SCC tenant with values for specific target uid. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object being retrieved. (required)
         :type uid: str
@@ -2812,7 +2812,7 @@ class ObjectManagementApi:
     ) -> RESTResponseType:
         """Get Override Object With Values For Specific Target
 
-        Gets an object in the CDO tenant with values for specific target uid. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Gets an object in the SCC tenant with values for specific target uid. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object being retrieved. (required)
         :type uid: str
@@ -2948,7 +2948,7 @@ class ObjectManagementApi:
     ) -> ObjectResponse:
         """Modify Object
 
-        Modify an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Modify an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object being updated. (required)
         :type uid: str
@@ -3023,7 +3023,7 @@ class ObjectManagementApi:
     ) -> ApiResponse[ObjectResponse]:
         """Modify Object
 
-        Modify an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Modify an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object being updated. (required)
         :type uid: str
@@ -3098,7 +3098,7 @@ class ObjectManagementApi:
     ) -> RESTResponseType:
         """Modify Object
 
-        Modify an object in the CDO tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+        Modify an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
         :param uid: The unique identifier of the object being updated. (required)
         :type uid: str

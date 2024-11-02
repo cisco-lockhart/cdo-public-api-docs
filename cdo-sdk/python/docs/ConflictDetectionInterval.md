@@ -1,6 +1,6 @@
 # ConflictDetectionInterval
 
-Specifies the default interval at which CDO checks for changes made out-of-band on the devices on the tenant.
+Specifies the default interval at which SCC checks for changes made out-of-band on the devices on the tenant.
 
 ## Properties
 

@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -71,7 +71,7 @@ class Configuration:
                  ) -> None:
         """Constructor
         """
-        self._base_path = "https://edge.us.cdo.cisco.com/api/rest" if host is None else host
+        self._base_path = "https://edge.us.SCC.cisco.com/api/rest" if host is None else host
         """Default Base url
         """
         self.server_index = 0 if server_index is None and host is None else server_index
@@ -380,7 +380,7 @@ class Configuration:
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 1.5.0\n"\
-               "SDK Package Version: 1.2.298".\
+               "SDK Package Version: 1.2.299".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):
@@ -390,35 +390,35 @@ class Configuration:
         """
         return [
             {
-                'url': "https://edge.us.cdo.cisco.com/api/rest",
+                'url': "https://edge.us.SCC.cisco.com/api/rest",
                 'description': "US",
             },
             {
-                'url': "https://edge.eu.cdo.cisco.com/api/rest",
+                'url': "https://edge.eu.SCC.cisco.com/api/rest",
                 'description': "EU",
             },
             {
-                'url': "https://edge.apj.cdo.cisco.com/api/rest",
+                'url': "https://edge.apj.SCC.cisco.com/api/rest",
                 'description': "APJ",
             },
             {
-                'url': "https://edge.aus.cdo.cisco.com/api/rest",
+                'url': "https://edge.aus.SCC.cisco.com/api/rest",
                 'description': "AUS",
             },
             {
-                'url': "https://edge.in.cdo.cisco.com/api/rest",
+                'url': "https://edge.in.SCC.cisco.com/api/rest",
                 'description': "IN",
             },
             {
-                'url': "https://edge.staging.cdo.cisco.com/api/rest",
+                'url': "https://edge.staging.SCC.cisco.com/api/rest",
                 'description': "Staging",
             },
             {
-                'url': "https://edge.scale.cdo.cisco.com/api/rest",
+                'url': "https://edge.scale.SCC.cisco.com/api/rest",
                 'description': "Scale",
             },
             {
-                'url': "https://edge.ci.cdo.cisco.com/api/rest",
+                'url': "https://edge.ci.SCC.cisco.com/api/rest",
                 'description': "CI",
             }
         ]

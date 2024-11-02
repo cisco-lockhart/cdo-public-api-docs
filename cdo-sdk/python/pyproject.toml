@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "cdo_sdk_python"
-version = "1.2.298"
-description = "CDO API"
-authors = ["CDO TAC <cdo.tac@cisco.com>"]
+version = "1.2.299"
+description = "Cisco Security Cloud Control API"
+authors = ["Cisco Security Cloud Control TAC <cdo.tac@cisco.com>"]
 license = "NoLicense"
 readme = "README.md"
 repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
-keywords = ["OpenAPI", "OpenAPI-Generator", "CDO API"]
+keywords = ["OpenAPI", "OpenAPI-Generator", "Cisco Security Cloud Control API"]
 include = ["cdo_sdk_python/py.typed"]
 
 [tool.poetry.dependencies]

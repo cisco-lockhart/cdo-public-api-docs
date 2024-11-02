@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -60,7 +60,7 @@ class TenantManagementApi:
     ) -> List[str]:
         """Get Feature Flags
 
-        Get the feature flags enabled in the CDO tenant.
+        Get the feature flags enabled in the SCC tenant.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -125,7 +125,7 @@ class TenantManagementApi:
     ) -> ApiResponse[List[str]]:
         """Get Feature Flags
 
-        Get the feature flags enabled in the CDO tenant.
+        Get the feature flags enabled in the SCC tenant.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -190,7 +190,7 @@ class TenantManagementApi:
     ) -> RESTResponseType:
         """Get Feature Flags
 
-        Get the feature flags enabled in the CDO tenant.
+        Get the feature flags enabled in the SCC tenant.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -294,7 +294,7 @@ class TenantManagementApi:
     @validate_call
     def get_tenant(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in CDO.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -310,9 +310,9 @@ class TenantManagementApi:
     ) -> Tenant:
         """Get Tenant
 
-        Fetch a tenant by UID in CDO. This will return a 200 response only if the user is associated with the tenant.
+        Fetch a tenant by UID in SCC. This will return a 200 response only if the user is associated with the tenant.
 
-        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in CDO. (required)
+        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in SCC. (required)
         :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -366,7 +366,7 @@ class TenantManagementApi:
     @validate_call
     def get_tenant_with_http_info(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in CDO.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -382,9 +382,9 @@ class TenantManagementApi:
     ) -> ApiResponse[Tenant]:
         """Get Tenant
 
-        Fetch a tenant by UID in CDO. This will return a 200 response only if the user is associated with the tenant.
+        Fetch a tenant by UID in SCC. This will return a 200 response only if the user is associated with the tenant.
 
-        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in CDO. (required)
+        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in SCC. (required)
         :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -438,7 +438,7 @@ class TenantManagementApi:
     @validate_call
     def get_tenant_without_preload_content(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in CDO.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -454,9 +454,9 @@ class TenantManagementApi:
     ) -> RESTResponseType:
         """Get Tenant
 
-        Fetch a tenant by UID in CDO. This will return a 200 response only if the user is associated with the tenant.
+        Fetch a tenant by UID in SCC. This will return a 200 response only if the user is associated with the tenant.
 
-        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in CDO. (required)
+        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in SCC. (required)
         :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -582,7 +582,7 @@ class TenantManagementApi:
     ) -> TenantSettings:
         """Get Tenant Settings
 
-        Get the settings for the CDO tenant.
+        Get the settings for the SCC tenant.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -649,7 +649,7 @@ class TenantManagementApi:
     ) -> ApiResponse[TenantSettings]:
         """Get Tenant Settings
 
-        Get the settings for the CDO tenant.
+        Get the settings for the SCC tenant.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -716,7 +716,7 @@ class TenantManagementApi:
     ) -> RESTResponseType:
         """Get Tenant Settings
 
-        Get the settings for the CDO tenant.
+        Get the settings for the SCC tenant.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -823,7 +823,7 @@ class TenantManagementApi:
     def get_tenants(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -839,11 +839,11 @@ class TenantManagementApi:
     ) -> TenantPage:
         """Get Tenants
 
-        Get a list of tenants with which the CDO user is associated.
+        Get a list of tenants with which the SCC user is associated.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -898,7 +898,7 @@ class TenantManagementApi:
     def get_tenants_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -914,11 +914,11 @@ class TenantManagementApi:
     ) -> ApiResponse[TenantPage]:
         """Get Tenants
 
-        Get a list of tenants with which the CDO user is associated.
+        Get a list of tenants with which the SCC user is associated.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -973,7 +973,7 @@ class TenantManagementApi:
     def get_tenants_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -989,11 +989,11 @@ class TenantManagementApi:
     ) -> RESTResponseType:
         """Get Tenants
 
-        Get a list of tenants with which the CDO user is associated.
+        Get a list of tenants with which the SCC user is associated.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1127,7 +1127,7 @@ class TenantManagementApi:
     ) -> TenantSettings:
         """Modify Tenant Settings
 
-        Modify the settings for the CDO tenant.
+        Modify the settings for the SCC tenant.
 
         :param tenant_settings: (required)
         :type tenant_settings: TenantSettings
@@ -1198,7 +1198,7 @@ class TenantManagementApi:
     ) -> ApiResponse[TenantSettings]:
         """Modify Tenant Settings
 
-        Modify the settings for the CDO tenant.
+        Modify the settings for the SCC tenant.
 
         :param tenant_settings: (required)
         :type tenant_settings: TenantSettings
@@ -1269,7 +1269,7 @@ class TenantManagementApi:
     ) -> RESTResponseType:
         """Modify Tenant Settings
 
-        Modify the settings for the CDO tenant.
+        Modify the settings for the SCC tenant.
 
         :param tenant_settings: (required)
         :type tenant_settings: TenantSettings

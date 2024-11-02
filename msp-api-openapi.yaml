@@ -1,35 +1,35 @@
 openapi: 3.0.1
 info:
-  title: CDO API
-  description: Use the documentation to explore the endpoints CDO has to offer
+  title: Cisco Security Cloud Control API
+  description: Use the documentation to explore the endpoints SCC has to offer
   contact:
-    name: CDO TAC
+    name: Cisco Security Cloud Control TAC
     email: cdo.tac@cisco.com
   version: 1.5.0
 servers:
-  - url: https://edge.us.cdo.cisco.com/api/rest
+  - url: https://edge.us.SCC.cisco.com/api/rest
     description: US
-  - url: https://edge.eu.cdo.cisco.com/api/rest
+  - url: https://edge.eu.SCC.cisco.com/api/rest
     description: EU
-  - url: https://edge.apj.cdo.cisco.com/api/rest
+  - url: https://edge.apj.SCC.cisco.com/api/rest
     description: APJ
-  - url: https://edge.aus.cdo.cisco.com/api/rest
+  - url: https://edge.aus.SCC.cisco.com/api/rest
     description: AUS
-  - url: https://edge.in.cdo.cisco.com/api/rest
+  - url: https://edge.in.SCC.cisco.com/api/rest
     description: IN
-  - url: https://edge.staging.cdo.cisco.com/api/rest
+  - url: https://edge.staging.SCC.cisco.com/api/rest
     description: Staging
-  - url: https://edge.scale.cdo.cisco.com/api/rest
+  - url: https://edge.scale.SCC.cisco.com/api/rest
     description: Scale
-  - url: https://edge.ci.cdo.cisco.com/api/rest
+  - url: https://edge.ci.SCC.cisco.com/api/rest
     description: CI
 paths:
   /v1/msp/tenants:
     get:
       tags:
         - MSP
-      summary: Get CDO tenants managed by MSP Portal
-      description: Get a list of CDO tenants managed by the MSP Portal.
+      summary: Get SCC tenants managed by MSP Portal
+      description: Get a list of SCC tenants managed by the MSP Portal.
       operationId: getMspManagedTenants
       parameters:
         - name: limit
@@ -43,7 +43,7 @@ paths:
             default: "50"
         - name: offset
           in: query
-          description: The offset of the results retrieved. The CDO API uses the offset
+          description: The offset of the results retrieved. The SCC API uses the offset
             field to determine the index of the first result retrieved, and will
             retrieve `limit` results from the offset specified.
           required: false
@@ -61,7 +61,7 @@ paths:
           example: fieldName:fieldValue
       responses:
         "200":
-          description: List of CDO tenant objects
+          description: List of SCC tenant objects
           content:
             application/json:
               schema:
@@ -121,20 +121,20 @@ paths:
     get:
       tags:
         - MSP
-      summary: Get CDO tenant managed by MSP Portal
-      description: Get a CDO tenant managed by the MSP Portal.
+      summary: Get SCC tenant managed by MSP Portal
+      description: Get a SCC tenant managed by the MSP Portal.
       operationId: getMspManagedTenant
       parameters:
         - name: tenantUid
           in: path
-          description: The unique identifier of the tenant in CDO.
+          description: The unique identifier of the tenant in SCC.
           required: true
           schema:
             type: string
             format: uuid
       responses:
         "200":
-          description: CDO tenant object
+          description: SCC tenant object
           content:
             application/json:
               schema:
@@ -176,7 +176,7 @@ paths:
             format: uuid
       responses:
         "202":
-          description: CDO Transaction object that can be used to track the status of the
+          description: SCC Transaction object that can be used to track the status of the
             operation.
           content:
             application/json:
@@ -208,7 +208,7 @@ paths:
       parameters:
         - name: tenantUid
           in: path
-          description: The unique identifier, represented as a UUID, of the tenant in CDO.
+          description: The unique identifier, represented as a UUID, of the tenant in SCC.
           required: true
           schema:
             type: string
@@ -235,7 +235,7 @@ paths:
       tags:
         - MSP
       summary: Get Users associated with tenant in MSP portal
-      description: Get a list of users associated with the CDO tenant managed by MSP portal.
+      description: Get a list of users associated with the SCC tenant managed by MSP portal.
       operationId: getUsersInTenantInMspPortal
       parameters:
         - name: tenantUid
@@ -256,7 +256,7 @@ paths:
             default: "50"
         - name: offset
           in: query
-          description: The offset of the results retrieved. The CDO API uses the offset
+          description: The offset of the results retrieved. The SCC API uses the offset
             field to determine the index of the first result retrieved, and will
             retrieve `limit` results from the offset specified.
           required: false
@@ -288,7 +288,7 @@ paths:
     post:
       tags:
         - MSP
-      summary: Add users to CDO tenant in MSP Portal
+      summary: Add users to SCC tenant in MSP Portal
       description: This is an asynchronous operation to add a list of users to a
         tenant associated with the MSP Portal.
       operationId: addUsersToTenantInMspPortal
@@ -308,7 +308,7 @@ paths:
         required: true
       responses:
         "202":
-          description: CDO Transaction object that can be used to track the status of the
+          description: SCC Transaction object that can be used to track the status of the
             operation.
           content:
             application/json:
@@ -326,21 +326,21 @@ paths:
         - MSP
       summary: Generate token for API-only user on tenant managed by MSP portal
       description: Generate API Token for API-only user on a tenant managed by the MSP
-        portal. API-only users are used for building automations with CDO. If
+        portal. API-only users are used for building automations with SCC. If
         the user ID provided is not that of an API-only user, this operation
         will fail.
       operationId: generateApiTokenForUserInTenant
       parameters:
         - name: tenantUid
           in: path
-          description: The unique identifier of the tenant in CDO.
+          description: The unique identifier of the tenant in SCC.
           required: true
           schema:
             type: string
             format: uuid
         - name: apiUserUid
           in: path
-          description: The unique identifier of the API-only user in CDO.
+          description: The unique identifier of the API-only user in SCC.
           required: true
           schema:
             type: string
@@ -370,7 +370,7 @@ paths:
     post:
       tags:
         - MSP
-      summary: Add Active Directory Groups to CDO tenant in MSP Portal
+      summary: Add Active Directory Groups to SCC tenant in MSP Portal
       description: This is an asynchronous operation to add a list of Active Directory
         Groups to a tenant associated with the MSP Portal.
       operationId: addActiveDirectoryGroupsToTenantInMspPortal
@@ -391,11 +391,11 @@ paths:
               minItems: 0
               type: array
               items:
-                $ref: "#/components/schemas/ActiveDirectoryGroupCreateOrUpdateInput"
+                $ref: ./public-api-openapi.yaml#/components/schemas/ActiveDirectoryGroupCreateOrUpdateInput
         required: true
       responses:
         "202":
-          description: CDO Transaction object that can be used to track the status of the
+          description: SCC Transaction object that can be used to track the status of the
             operation.
           content:
             application/json:
@@ -411,7 +411,7 @@ paths:
     post:
       tags:
         - MSP
-      summary: Remove user groups from CDO tenant in MSP Portal
+      summary: Remove user groups from SCC tenant in MSP Portal
       description: This is an asynchronous operation to remove a list of user groups
         from a tenant associated with the MSP Portal.
       operationId: deleteUserGroupsFromTenantInMspPortal
@@ -432,7 +432,7 @@ paths:
         required: true
       responses:
         "202":
-          description: CDO Transaction object that can be used to track the status of the
+          description: SCC Transaction object that can be used to track the status of the
             operation.
           content:
             application/json:
@@ -448,7 +448,7 @@ paths:
     post:
       tags:
         - MSP
-      summary: Remove users from CDO tenant in MSP Portal
+      summary: Remove users from SCC tenant in MSP Portal
       description: This is an asynchronous operation to remove a list of users from a
         tenant associated with the MSP Portal.
       operationId: deleteUsersFromTenantInMspPortal
@@ -468,7 +468,7 @@ paths:
         required: true
       responses:
         "202":
-          description: CDO Transaction object that can be used to track the status of the
+          description: SCC Transaction object that can be used to track the status of the
             operation.
           content:
             application/json:
@@ -484,7 +484,7 @@ paths:
     post:
       tags:
         - MSP
-      summary: Enable Multicloud Defense for CDO tenant in MSP Portal
+      summary: Enable Multicloud Defense for SCC tenant in MSP Portal
       description: This is an asynchronous operation to enable Multicloud Defense for
         a tenant associated with the MSP Portal.
       operationId: enableMulticloudDefenseForTenantInMspPortal
@@ -499,7 +499,7 @@ paths:
             format: uuid
       responses:
         "202":
-          description: CDO Transaction object that can be used to track the status of the
+          description: SCC Transaction object that can be used to track the status of the
             operation.
           content:
             application/json:
@@ -515,7 +515,7 @@ paths:
     post:
       tags:
         - MSP
-      summary: Provision cdFMC for CDO tenant in MSP Portal
+      summary: Provision cdFMC for SCC tenant in MSP Portal
       description: This is an asynchronous operation to provision a cdFMC for a tenant
         associated with the MSP Portal. This operation does not wait for the
         cdFMC to be provisioned on the target tenant, and will be marked as
@@ -534,7 +534,7 @@ paths:
             format: uuid
       responses:
         "202":
-          description: CDO Transaction object that can be used to track the status of the
+          description: SCC Transaction object that can be used to track the status of the
             operation.
           content:
             application/json:
@@ -550,8 +550,8 @@ paths:
     post:
       tags:
         - MSP
-      summary: Create CDO Tenant
-      description: "Create a new tenant in CDO from an MSP Portal. This endpoint
+      summary: Create SCC Tenant
+      description: "Create a new tenant in SCC from an MSP Portal. This endpoint
         creates a tenant, adds the tenant to the MSP Portal. If the user
         creating the tenant is not an API-only user, the user is also added to
         the tenant. Note: This endpoint can only be executed by a super-admin in
@@ -567,7 +567,7 @@ paths:
         required: true
       responses:
         "202":
-          description: CDO Transaction object that can be used to track the status of the
+          description: SCC Transaction object that can be used to track the status of the
             tenant creation.
           content:
             application/json:
@@ -629,7 +629,7 @@ components:
       properties:
         username:
           type: string
-          description: The name of the user in CDO. This must be a valid e-mail address if
+          description: The name of the user in SCC. This must be a valid e-mail address if
             the user is not an API-only user.
           example: smith@jones.com
         role:
@@ -648,37 +648,6 @@ components:
           type: string
           description: The API Access Token.
           example: FaKE-toKeN
-    ActiveDirectoryGroupCreateOrUpdateInput:
-      required:
-        - groupIdentifier
-        - issuerUrl
-        - name
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the Active Directory Group. CDO does not support
-            special characters for this field.
-          example: myusername
-        role:
-          type: string
-          description: This determines the role for all the users included in this Active
-            Directory Group.
-          example: ROLE_ADMIN
-        groupIdentifier:
-          type: string
-          description: The unique identifier, represented as a UUID, of the Active
-            Directory Group in your Identity Provider (IdP).
-          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-        issuerUrl:
-          type: string
-          description: The Identity Provider (IdP) URL, which Cisco Defense Orchestrator
-            will use to validate SAML assertions during the sign-in process.
-          example: https://access.example.com/saml2/idp/metadata.php
-        notes:
-          type: string
-          description: Any notes that are applicable to this Active Directory Group.
-          example: This is an example note on the Active Directory Group.
     MspDeleteUserGroupsFromTenantInput:
       required:
         - userGroupIdentifiers
@@ -742,20 +711,20 @@ components:
         displayName:
           type: string
           description: A human-readable display name for the tenant. This is the tenant
-            name displayed in the CDO Web UI.
+            name displayed in the SCC Web UI.
           example: mytenantname
         uid:
           type: string
-          description: The unique identifier of the tenant in CDO.
+          description: The unique identifier of the tenant in SCC.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
           type: string
-          description: The name of the device in CDO. Device names are unique in CDO.
+          description: The name of the device in CDO. Device names are unique in SCC.
           example: my-example-device
         region:
           type: string
-          description: The CDO region the tenant exists in.
+          description: The SCC region the tenant exists in.
           example: US
           enum:
             - US
@@ -782,7 +751,7 @@ components:
           example: 50
         offset:
           type: integer
-          description: The offset of the results retrieved. The CDO API uses the offset
+          description: The offset of the results retrieved. The SCC API uses the offset
             field to determine the index of the first result retrieved, and will
             retrieve `limit` results from the offset specified.
           format: int32
@@ -807,7 +776,7 @@ components:
           example: 50
         offset:
           type: integer
-          description: The offset of the results retrieved. The CDO API uses the offset
+          description: The offset of the results retrieved. The SCC API uses the offset
             field to determine the index of the first result retrieved, and will
             retrieve `limit` results from the offset specified.
           format: int32

@@ -1,6 +1,6 @@
 # cdo_sdk_python.CommandLineInterfaceApi
 
-All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
+All URIs are relative to *https://edge.us.SCC.cisco.com/api/rest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -31,10 +31,10 @@ from cdo_sdk_python.models.cli_macro_create_input import CliMacroCreateInput
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | CDO CLI macro |  -  |
+**200** | SCC CLI macro |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -102,7 +102,7 @@ Name | Type | Description  | Notes
 
 Delete CLI Macro
 
-Delete a CDO CLI Macro by UID.
+Delete a SCC CLI Macro by UID.
 
 ### Example
 
@@ -113,10 +113,10 @@ import cdo_sdk_python
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -133,7 +133,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.CommandLineInterfaceApi(api_client)
-    macro_uid = 'macro_uid_example' # str | The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.
+    macro_uid = 'macro_uid_example' # str | The unique identifier, represented as a UUID, of the CDO CLI macro in SCC.
 
     try:
         # Delete CLI Macro
@@ -149,7 +149,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **macro_uid** | **str**| The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. | 
+ **macro_uid** | **str**| The unique identifier, represented as a UUID, of the CDO CLI macro in SCC. | 
 
 ### Return type
 
@@ -168,7 +168,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | CDO CLI macro |  -  |
+**204** | SCC CLI macro |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -182,7 +182,7 @@ void (empty response body)
 
 Get CLI Macro
 
-Get a CDO CLI Macro by UID.
+Get a SCC CLI Macro by UID.
 
 ### Example
 
@@ -194,10 +194,10 @@ from cdo_sdk_python.models.cdo_cli_macro import CdoCliMacro
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -214,7 +214,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.CommandLineInterfaceApi(api_client)
-    macro_uid = 'macro_uid_example' # str | The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.
+    macro_uid = 'macro_uid_example' # str | The unique identifier, represented as a UUID, of the CDO CLI macro in SCC.
 
     try:
         # Get CLI Macro
@@ -232,7 +232,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **macro_uid** | **str**| The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. | 
+ **macro_uid** | **str**| The unique identifier, represented as a UUID, of the CDO CLI macro in SCC. | 
 
 ### Return type
 
@@ -251,7 +251,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | CDO CLI macro |  -  |
+**200** | SCC CLI macro |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -278,10 +278,10 @@ from cdo_sdk_python.models.cdo_cli_macro_page import CdoCliMacroPage
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -299,7 +299,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.CommandLineInterfaceApi(api_client)
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    offset = '0' # str | The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
     sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
@@ -320,7 +320,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **offset** | **str**| The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
  **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
@@ -341,7 +341,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of CDO CLI macros |  -  |
+**200** | List of SCC CLI macros |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 Get CLI Result
 
-Get the result of a command executed using the CDO Command Line Interface (CLI) by UID.
+Get the result of a command executed using the SCC Command Line Interface (CLI) by UID.
 
 ### Example
 
@@ -367,10 +367,10 @@ from cdo_sdk_python.models.cdo_cli_result import CdoCliResult
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -387,7 +387,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.CommandLineInterfaceApi(api_client)
-    cli_result_uid = 'cli_result_uid_example' # str | The unique identifier, represented as a UUID, of the CDO CLI result in CDO.
+    cli_result_uid = 'cli_result_uid_example' # str | The unique identifier, represented as a UUID, of the CDO CLI result in SCC.
 
     try:
         # Get CLI Result
@@ -405,7 +405,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cli_result_uid** | **str**| The unique identifier, represented as a UUID, of the CDO CLI result in CDO. | 
+ **cli_result_uid** | **str**| The unique identifier, represented as a UUID, of the CDO CLI result in SCC. | 
 
 ### Return type
 
@@ -424,7 +424,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | CDO CLI result |  -  |
+**200** | SCC CLI result |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -439,7 +439,7 @@ Name | Type | Description  | Notes
 
 Get CLI Results
 
-Get a list of results from command lines executed using the [CDO Command Line Interface (CLI)](https://docs.defenseorchestrator.com/c-using-the-cdo-command-line-interface.html). These commands can be executed using either the CDO UI or the API.
+Get a list of results from command lines executed using the [CDO Command Line Interface (CLI)](https://docs.defenseorchestrator.com/c-using-the-cdo-command-line-interface.html). These commands can be executed using either the SCC UI or the API.
 
 ### Example
 
@@ -451,10 +451,10 @@ from cdo_sdk_python.models.cdo_cli_result_page import CdoCliResultPage
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -472,7 +472,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.CommandLineInterfaceApi(api_client)
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    offset = '0' # str | The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
     sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
@@ -493,7 +493,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **offset** | **str**| The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
  **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
@@ -514,7 +514,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of CDO CLI execution results |  -  |
+**200** | List of SCC CLI execution results |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -528,7 +528,7 @@ Name | Type | Description  | Notes
 
 Modify CLI Macro
 
-Modify a CDO CLI Macro by UID.
+Modify a SCC CLI Macro by UID.
 
 ### Example
 
@@ -541,10 +541,10 @@ from cdo_sdk_python.models.cli_macro_patch_input import CliMacroPatchInput
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -561,7 +561,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.CommandLineInterfaceApi(api_client)
-    macro_uid = 'macro_uid_example' # str | The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.
+    macro_uid = 'macro_uid_example' # str | The unique identifier, represented as a UUID, of the CDO CLI macro in SCC.
     cli_macro_patch_input = cdo_sdk_python.CliMacroPatchInput() # CliMacroPatchInput | 
 
     try:
@@ -580,7 +580,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **macro_uid** | **str**| The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. | 
+ **macro_uid** | **str**| The unique identifier, represented as a UUID, of the CDO CLI macro in SCC. | 
  **cli_macro_patch_input** | [**CliMacroPatchInput**](CliMacroPatchInput.md)|  | 
 
 ### Return type
@@ -600,7 +600,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | CDO CLI macro |  -  |
+**200** | SCC CLI macro |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |

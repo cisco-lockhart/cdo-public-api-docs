@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -58,7 +58,7 @@ class SearchApi:
     ) -> CdoTransaction:
         """Rebuild search index
 
-        Initiate Full Indexing on the CDO tenant, to improve accuracy of search results. This operation is performed automatically on a schedule by CDO, but can be triggered on demand too. This operation is asynchronous, but its progress cannot be tracked using CDO's API.
+        Initiate Full Indexing on the CDO tenant, to improve accuracy of search results. This operation is performed automatically on a schedule by CDO, but can be triggered on demand too. This operation is asynchronous, but its progress cannot be tracked using SCC's API.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -126,7 +126,7 @@ class SearchApi:
     ) -> ApiResponse[CdoTransaction]:
         """Rebuild search index
 
-        Initiate Full Indexing on the CDO tenant, to improve accuracy of search results. This operation is performed automatically on a schedule by CDO, but can be triggered on demand too. This operation is asynchronous, but its progress cannot be tracked using CDO's API.
+        Initiate Full Indexing on the CDO tenant, to improve accuracy of search results. This operation is performed automatically on a schedule by CDO, but can be triggered on demand too. This operation is asynchronous, but its progress cannot be tracked using SCC's API.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -194,7 +194,7 @@ class SearchApi:
     ) -> RESTResponseType:
         """Rebuild search index
 
-        Initiate Full Indexing on the CDO tenant, to improve accuracy of search results. This operation is performed automatically on a schedule by CDO, but can be triggered on demand too. This operation is asynchronous, but its progress cannot be tracked using CDO's API.
+        Initiate Full Indexing on the CDO tenant, to improve accuracy of search results. This operation is performed automatically on a schedule by CDO, but can be triggered on demand too. This operation is asynchronous, but its progress cannot be tracked using SCC's API.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -317,7 +317,7 @@ class SearchApi:
     ) -> GlobalSearchResult:
         """Search
 
-        Search for devices, services, managers, objects and policies across the CDO tenant.
+        Search for devices, services, managers, objects and policies across the SCC tenant.
 
         :param q: This can be any non-empty string, and represents the search criteria. Spaces are allowed, but must be URL encoded. (required)
         :type q: str
@@ -389,7 +389,7 @@ class SearchApi:
     ) -> ApiResponse[GlobalSearchResult]:
         """Search
 
-        Search for devices, services, managers, objects and policies across the CDO tenant.
+        Search for devices, services, managers, objects and policies across the SCC tenant.
 
         :param q: This can be any non-empty string, and represents the search criteria. Spaces are allowed, but must be URL encoded. (required)
         :type q: str
@@ -461,7 +461,7 @@ class SearchApi:
     ) -> RESTResponseType:
         """Search
 
-        Search for devices, services, managers, objects and policies across the CDO tenant.
+        Search for devices, services, managers, objects and policies across the SCC tenant.
 
         :param q: This can be any non-empty string, and represents the search criteria. Spaces are allowed, but must be URL encoded. (required)
         :type q: str

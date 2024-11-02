@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -32,7 +32,7 @@ class IosCreateOrUpdateInput(BaseModel):
     device_address: Optional[StrictStr] = Field(default=None, description="The address of the device to onboard, specified in the format `host:port`.", alias="deviceAddress")
     username: StrictStr = Field(description="The username used to authenticate with the device.")
     password: StrictStr = Field(description="The password used to authenticate with the device.")
-    ignore_certificate: Optional[StrictBool] = Field(default=False, description="Set this attribute to true if you do not want CDO to validate the certificate of this device before onboarding.", alias="ignoreCertificate")
+    ignore_certificate: Optional[StrictBool] = Field(default=False, description="Set this attribute to true if you do not want SCC to validate the certificate of this device before onboarding.", alias="ignoreCertificate")
     connector_name: StrictStr = Field(description="The name of the Secure Device Connector (SDC) that will be used to communicate with the device.", alias="connectorName")
     labels: Optional[Labels] = None
     __properties: ClassVar[List[str]] = ["name", "deviceAddress", "username", "password", "ignoreCertificate", "connectorName", "labels"]

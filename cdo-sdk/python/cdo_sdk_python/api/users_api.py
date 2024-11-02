@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -65,9 +65,9 @@ class UsersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ActiveDirectoryGroup:
-        """Create Active Directory Group in CDO Tenant
+        """Create Active Directory Group in SCC Tenant
 
-        Create an Active Directory Group in the CDO tenant.
+        Create an Active Directory Group in the SCC tenant.
 
         :param active_directory_group_create_or_update_input: (required)
         :type active_directory_group_create_or_update_input: ActiveDirectoryGroupCreateOrUpdateInput
@@ -136,9 +136,9 @@ class UsersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ActiveDirectoryGroup]:
-        """Create Active Directory Group in CDO Tenant
+        """Create Active Directory Group in SCC Tenant
 
-        Create an Active Directory Group in the CDO tenant.
+        Create an Active Directory Group in the SCC tenant.
 
         :param active_directory_group_create_or_update_input: (required)
         :type active_directory_group_create_or_update_input: ActiveDirectoryGroupCreateOrUpdateInput
@@ -207,9 +207,9 @@ class UsersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create Active Directory Group in CDO Tenant
+        """Create Active Directory Group in SCC Tenant
 
-        Create an Active Directory Group in the CDO tenant.
+        Create an Active Directory Group in the SCC tenant.
 
         :param active_directory_group_create_or_update_input: (required)
         :type active_directory_group_create_or_update_input: ActiveDirectoryGroupCreateOrUpdateInput
@@ -348,9 +348,9 @@ class UsersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> User:
-        """Create User in CDO Tenant
+        """Create User in SCC Tenant
 
-        Create a user in the CDO tenant. The user may already exist and have access to other tenants, in which case this endpoint adds the user to this tenant.
+        Create a user in the SCC tenant. The user may already exist and have access to other tenants, in which case this endpoint adds the user to this tenant.
 
         :param user_create_or_update_input: (required)
         :type user_create_or_update_input: UserCreateOrUpdateInput
@@ -419,9 +419,9 @@ class UsersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[User]:
-        """Create User in CDO Tenant
+        """Create User in SCC Tenant
 
-        Create a user in the CDO tenant. The user may already exist and have access to other tenants, in which case this endpoint adds the user to this tenant.
+        Create a user in the SCC tenant. The user may already exist and have access to other tenants, in which case this endpoint adds the user to this tenant.
 
         :param user_create_or_update_input: (required)
         :type user_create_or_update_input: UserCreateOrUpdateInput
@@ -490,9 +490,9 @@ class UsersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create User in CDO Tenant
+        """Create User in SCC Tenant
 
-        Create a user in the CDO tenant. The user may already exist and have access to other tenants, in which case this endpoint adds the user to this tenant.
+        Create a user in the SCC tenant. The user may already exist and have access to other tenants, in which case this endpoint adds the user to this tenant.
 
         :param user_create_or_update_input: (required)
         :type user_create_or_update_input: UserCreateOrUpdateInput
@@ -617,7 +617,7 @@ class UsersApi:
     @validate_call
     def delete_active_directory_group(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Active Directory Group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Active Directory Group in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -631,11 +631,11 @@ class UsersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Remove Active Directory Group from CDO Tenant
+        """Remove Active Directory Group from SCC Tenant
 
-        Delete a Active Directory Group by UID in the CDO tenant.
+        Delete a Active Directory Group by UID in the SCC tenant.
 
-        :param group_uid: The unique identifier, represented as a UUID, of the Active Directory Group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the Active Directory Group in SCC. (required)
         :type group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -688,7 +688,7 @@ class UsersApi:
     @validate_call
     def delete_active_directory_group_with_http_info(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Active Directory Group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Active Directory Group in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -702,11 +702,11 @@ class UsersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Remove Active Directory Group from CDO Tenant
+        """Remove Active Directory Group from SCC Tenant
 
-        Delete a Active Directory Group by UID in the CDO tenant.
+        Delete a Active Directory Group by UID in the SCC tenant.
 
-        :param group_uid: The unique identifier, represented as a UUID, of the Active Directory Group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the Active Directory Group in SCC. (required)
         :type group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -759,7 +759,7 @@ class UsersApi:
     @validate_call
     def delete_active_directory_group_without_preload_content(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Active Directory Group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Active Directory Group in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -773,11 +773,11 @@ class UsersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Remove Active Directory Group from CDO Tenant
+        """Remove Active Directory Group from SCC Tenant
 
-        Delete a Active Directory Group by UID in the CDO tenant.
+        Delete a Active Directory Group by UID in the SCC tenant.
 
-        :param group_uid: The unique identifier, represented as a UUID, of the Active Directory Group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the Active Directory Group in SCC. (required)
         :type group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -887,7 +887,7 @@ class UsersApi:
     @validate_call
     def delete_user(
         self,
-        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in CDO.")],
+        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -901,11 +901,11 @@ class UsersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Remove User from CDO Tenant
+        """Remove User from SCC Tenant
 
-        Delete a User by UID in the CDO tenant. If the user is associated with multiple tenants, they will continue to have access to every other tenant.
+        Delete a User by UID in the SCC tenant. If the user is associated with multiple tenants, they will continue to have access to every other tenant.
 
-        :param user_uid: The unique identifier, represented as a UUID, of the user in CDO. (required)
+        :param user_uid: The unique identifier, represented as a UUID, of the user in SCC. (required)
         :type user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -958,7 +958,7 @@ class UsersApi:
     @validate_call
     def delete_user_with_http_info(
         self,
-        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in CDO.")],
+        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -972,11 +972,11 @@ class UsersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Remove User from CDO Tenant
+        """Remove User from SCC Tenant
 
-        Delete a User by UID in the CDO tenant. If the user is associated with multiple tenants, they will continue to have access to every other tenant.
+        Delete a User by UID in the SCC tenant. If the user is associated with multiple tenants, they will continue to have access to every other tenant.
 
-        :param user_uid: The unique identifier, represented as a UUID, of the user in CDO. (required)
+        :param user_uid: The unique identifier, represented as a UUID, of the user in SCC. (required)
         :type user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1029,7 +1029,7 @@ class UsersApi:
     @validate_call
     def delete_user_without_preload_content(
         self,
-        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in CDO.")],
+        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1043,11 +1043,11 @@ class UsersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Remove User from CDO Tenant
+        """Remove User from SCC Tenant
 
-        Delete a User by UID in the CDO tenant. If the user is associated with multiple tenants, they will continue to have access to every other tenant.
+        Delete a User by UID in the SCC tenant. If the user is associated with multiple tenants, they will continue to have access to every other tenant.
 
-        :param user_uid: The unique identifier, represented as a UUID, of the user in CDO. (required)
+        :param user_uid: The unique identifier, represented as a UUID, of the user in SCC. (required)
         :type user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1157,7 +1157,7 @@ class UsersApi:
     @validate_call
     def generate_api_token(
         self,
-        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API-only user in CDO")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API-only user in SCC")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1173,9 +1173,9 @@ class UsersApi:
     ) -> ApiTokenInfo:
         """Generate Token for API-only user
 
-        Generate API Token for API-only user. API-only users are used for building automations with CDO. If the user ID provided is not that of an API-only user, this operation will fail.
+        Generate API Token for API-only user. API-only users are used for building automations with SCC. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_uid: The unique identifier, represented as a UUID, of the API-only user in CDO (required)
+        :param api_user_uid: The unique identifier, represented as a UUID, of the API-only user in SCC (required)
         :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1228,7 +1228,7 @@ class UsersApi:
     @validate_call
     def generate_api_token_with_http_info(
         self,
-        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API-only user in CDO")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API-only user in SCC")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1244,9 +1244,9 @@ class UsersApi:
     ) -> ApiResponse[ApiTokenInfo]:
         """Generate Token for API-only user
 
-        Generate API Token for API-only user. API-only users are used for building automations with CDO. If the user ID provided is not that of an API-only user, this operation will fail.
+        Generate API Token for API-only user. API-only users are used for building automations with SCC. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_uid: The unique identifier, represented as a UUID, of the API-only user in CDO (required)
+        :param api_user_uid: The unique identifier, represented as a UUID, of the API-only user in SCC (required)
         :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1299,7 +1299,7 @@ class UsersApi:
     @validate_call
     def generate_api_token_without_preload_content(
         self,
-        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API-only user in CDO")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API-only user in SCC")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1315,9 +1315,9 @@ class UsersApi:
     ) -> RESTResponseType:
         """Generate Token for API-only user
 
-        Generate API Token for API-only user. API-only users are used for building automations with CDO. If the user ID provided is not that of an API-only user, this operation will fail.
+        Generate API Token for API-only user. API-only users are used for building automations with SCC. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_uid: The unique identifier, represented as a UUID, of the API-only user in CDO (required)
+        :param api_user_uid: The unique identifier, represented as a UUID, of the API-only user in SCC (required)
         :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1427,7 +1427,7 @@ class UsersApi:
     @validate_call
     def get_active_directory_group(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1443,9 +1443,9 @@ class UsersApi:
     ) -> ActiveDirectoryGroup:
         """Get Active Directory Group
 
-        Fetch a active directory group by UID in the CDO tenant.
+        Fetch a active directory group by UID in the SCC tenant.
 
-        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in SCC. (required)
         :type group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1499,7 +1499,7 @@ class UsersApi:
     @validate_call
     def get_active_directory_group_with_http_info(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1515,9 +1515,9 @@ class UsersApi:
     ) -> ApiResponse[ActiveDirectoryGroup]:
         """Get Active Directory Group
 
-        Fetch a active directory group by UID in the CDO tenant.
+        Fetch a active directory group by UID in the SCC tenant.
 
-        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in SCC. (required)
         :type group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1571,7 +1571,7 @@ class UsersApi:
     @validate_call
     def get_active_directory_group_without_preload_content(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1587,9 +1587,9 @@ class UsersApi:
     ) -> RESTResponseType:
         """Get Active Directory Group
 
-        Fetch a active directory group by UID in the CDO tenant.
+        Fetch a active directory group by UID in the SCC tenant.
 
-        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in SCC. (required)
         :type group_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1701,7 +1701,7 @@ class UsersApi:
     def get_active_directory_groups(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -1718,11 +1718,11 @@ class UsersApi:
     ) -> ActiveDirectoryGroupPage:
         """Get Active Directory Groups
 
-        Get a list of active directory groups associated with the CDO tenant.
+        Get a list of active directory groups associated with the SCC tenant.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -1780,7 +1780,7 @@ class UsersApi:
     def get_active_directory_groups_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -1797,11 +1797,11 @@ class UsersApi:
     ) -> ApiResponse[ActiveDirectoryGroupPage]:
         """Get Active Directory Groups
 
-        Get a list of active directory groups associated with the CDO tenant.
+        Get a list of active directory groups associated with the SCC tenant.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -1859,7 +1859,7 @@ class UsersApi:
     def get_active_directory_groups_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -1876,11 +1876,11 @@ class UsersApi:
     ) -> RESTResponseType:
         """Get Active Directory Groups
 
-        Get a list of active directory groups associated with the CDO tenant.
+        Get a list of active directory groups associated with the SCC tenant.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -2021,7 +2021,7 @@ class UsersApi:
     ) -> CdoTokenInfo:
         """Get Token Info
 
-        Fetch information on the current token. Each CDO token is associated with a specific user and a specific tenant. A token can only be used to perform operations on the tenant it is associated with.
+        Fetch information on the current token. Each SCC token is associated with a specific user and a specific tenant. A token can only be used to perform operations on the tenant it is associated with.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2086,7 +2086,7 @@ class UsersApi:
     ) -> ApiResponse[CdoTokenInfo]:
         """Get Token Info
 
-        Fetch information on the current token. Each CDO token is associated with a specific user and a specific tenant. A token can only be used to perform operations on the tenant it is associated with.
+        Fetch information on the current token. Each SCC token is associated with a specific user and a specific tenant. A token can only be used to perform operations on the tenant it is associated with.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2151,7 +2151,7 @@ class UsersApi:
     ) -> RESTResponseType:
         """Get Token Info
 
-        Fetch information on the current token. Each CDO token is associated with a specific user and a specific tenant. A token can only be used to perform operations on the tenant it is associated with.
+        Fetch information on the current token. Each SCC token is associated with a specific user and a specific tenant. A token can only be used to perform operations on the tenant it is associated with.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2255,7 +2255,7 @@ class UsersApi:
     @validate_call
     def get_user(
         self,
-        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in CDO.")],
+        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2271,9 +2271,9 @@ class UsersApi:
     ) -> User:
         """Get Tenant User
 
-        Fetch a user by UID in the CDO tenant. This will only return 200 responses for users associated with the CDO tenant.
+        Fetch a user by UID in the CDO tenant. This will only return 200 responses for users associated with the SCC tenant.
 
-        :param user_uid: The unique identifier, represented as a UUID, of the user in CDO. (required)
+        :param user_uid: The unique identifier, represented as a UUID, of the user in SCC. (required)
         :type user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2327,7 +2327,7 @@ class UsersApi:
     @validate_call
     def get_user_with_http_info(
         self,
-        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in CDO.")],
+        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2343,9 +2343,9 @@ class UsersApi:
     ) -> ApiResponse[User]:
         """Get Tenant User
 
-        Fetch a user by UID in the CDO tenant. This will only return 200 responses for users associated with the CDO tenant.
+        Fetch a user by UID in the CDO tenant. This will only return 200 responses for users associated with the SCC tenant.
 
-        :param user_uid: The unique identifier, represented as a UUID, of the user in CDO. (required)
+        :param user_uid: The unique identifier, represented as a UUID, of the user in SCC. (required)
         :type user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2399,7 +2399,7 @@ class UsersApi:
     @validate_call
     def get_user_without_preload_content(
         self,
-        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in CDO.")],
+        user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the user in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2415,9 +2415,9 @@ class UsersApi:
     ) -> RESTResponseType:
         """Get Tenant User
 
-        Fetch a user by UID in the CDO tenant. This will only return 200 responses for users associated with the CDO tenant.
+        Fetch a user by UID in the CDO tenant. This will only return 200 responses for users associated with the SCC tenant.
 
-        :param user_uid: The unique identifier, represented as a UUID, of the user in CDO. (required)
+        :param user_uid: The unique identifier, represented as a UUID, of the user in SCC. (required)
         :type user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2529,7 +2529,7 @@ class UsersApi:
     def get_users(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -2546,11 +2546,11 @@ class UsersApi:
     ) -> UserPage:
         """Get Tenant Users
 
-        Get a list of users associated with the CDO tenant.
+        Get a list of users associated with the SCC tenant.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -2608,7 +2608,7 @@ class UsersApi:
     def get_users_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -2625,11 +2625,11 @@ class UsersApi:
     ) -> ApiResponse[UserPage]:
         """Get Tenant Users
 
-        Get a list of users associated with the CDO tenant.
+        Get a list of users associated with the SCC tenant.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -2687,7 +2687,7 @@ class UsersApi:
     def get_users_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -2704,11 +2704,11 @@ class UsersApi:
     ) -> RESTResponseType:
         """Get Tenant Users
 
-        Get a list of users associated with the CDO tenant.
+        Get a list of users associated with the SCC tenant.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -2834,7 +2834,7 @@ class UsersApi:
     @validate_call
     def modify_active_directory_group(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in SCC.")],
         active_directory_group_create_or_update_input: ActiveDirectoryGroupCreateOrUpdateInput,
         _request_timeout: Union[
             None,
@@ -2853,7 +2853,7 @@ class UsersApi:
 
         Modify an Active Directory Group by UID.
 
-        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in SCC. (required)
         :type group_uid: str
         :param active_directory_group_create_or_update_input: (required)
         :type active_directory_group_create_or_update_input: ActiveDirectoryGroupCreateOrUpdateInput
@@ -2910,7 +2910,7 @@ class UsersApi:
     @validate_call
     def modify_active_directory_group_with_http_info(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in SCC.")],
         active_directory_group_create_or_update_input: ActiveDirectoryGroupCreateOrUpdateInput,
         _request_timeout: Union[
             None,
@@ -2929,7 +2929,7 @@ class UsersApi:
 
         Modify an Active Directory Group by UID.
 
-        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in SCC. (required)
         :type group_uid: str
         :param active_directory_group_create_or_update_input: (required)
         :type active_directory_group_create_or_update_input: ActiveDirectoryGroupCreateOrUpdateInput
@@ -2986,7 +2986,7 @@ class UsersApi:
     @validate_call
     def modify_active_directory_group_without_preload_content(
         self,
-        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in CDO.")],
+        group_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the active directory group in SCC.")],
         active_directory_group_create_or_update_input: ActiveDirectoryGroupCreateOrUpdateInput,
         _request_timeout: Union[
             None,
@@ -3005,7 +3005,7 @@ class UsersApi:
 
         Modify an Active Directory Group by UID.
 
-        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in CDO. (required)
+        :param group_uid: The unique identifier, represented as a UUID, of the active directory group in SCC. (required)
         :type group_uid: str
         :param active_directory_group_create_or_update_input: (required)
         :type active_directory_group_create_or_update_input: ActiveDirectoryGroupCreateOrUpdateInput
@@ -3135,7 +3135,7 @@ class UsersApi:
     @validate_call
     def revoke_api_token(
         self,
-        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API user in CDO.")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API user in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3153,7 +3153,7 @@ class UsersApi:
 
         Revoke API Token of API-only user. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_uid: The unique identifier, represented as a UUID, of the API user in CDO. (required)
+        :param api_user_uid: The unique identifier, represented as a UUID, of the API user in SCC. (required)
         :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3206,7 +3206,7 @@ class UsersApi:
     @validate_call
     def revoke_api_token_with_http_info(
         self,
-        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API user in CDO.")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API user in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3224,7 +3224,7 @@ class UsersApi:
 
         Revoke API Token of API-only user. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_uid: The unique identifier, represented as a UUID, of the API user in CDO. (required)
+        :param api_user_uid: The unique identifier, represented as a UUID, of the API user in SCC. (required)
         :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3277,7 +3277,7 @@ class UsersApi:
     @validate_call
     def revoke_api_token_without_preload_content(
         self,
-        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API user in CDO.")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the API user in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3295,7 +3295,7 @@ class UsersApi:
 
         Revoke API Token of API-only user. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param api_user_uid: The unique identifier, represented as a UUID, of the API user in CDO. (required)
+        :param api_user_uid: The unique identifier, represented as a UUID, of the API user in SCC. (required)
         :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

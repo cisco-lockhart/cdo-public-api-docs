@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -27,12 +27,12 @@ class RedirectViewServletContextServletRegistrationsValue(BaseModel):
     """
     RedirectViewServletContextServletRegistrationsValue
     """ # noqa: E501
-    run_as_role: Optional[StrictStr] = Field(default=None, alias="runAsRole")
     mappings: Optional[List[StrictStr]] = None
+    run_as_role: Optional[StrictStr] = Field(default=None, alias="runAsRole")
     name: Optional[StrictStr] = None
     class_name: Optional[StrictStr] = Field(default=None, alias="className")
     init_parameters: Optional[Dict[str, StrictStr]] = Field(default=None, alias="initParameters")
-    __properties: ClassVar[List[str]] = ["runAsRole", "mappings", "name", "className", "initParameters"]
+    __properties: ClassVar[List[str]] = ["mappings", "runAsRole", "name", "className", "initParameters"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,8 +85,8 @@ class RedirectViewServletContextServletRegistrationsValue(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "runAsRole": obj.get("runAsRole"),
             "mappings": obj.get("mappings"),
+            "runAsRole": obj.get("runAsRole"),
             "name": obj.get("name"),
             "className": obj.get("className"),
             "initParameters": obj.get("initParameters")

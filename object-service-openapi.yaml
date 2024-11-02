@@ -1,27 +1,27 @@
 openapi: 3.0.1
 info:
-  title: CDO API
-  description: Use the documentation to explore the endpoints CDO has to offer
+  title: Cisco Security Cloud Control API
+  description: Use the documentation to explore the endpoints SCC has to offer
   contact:
-    name: CDO TAC
+    name: Cisco Security Cloud Control TAC
     email: cdo.tac@cisco.com
   version: 1.5.0
 servers:
-- url: https://edge.us.cdo.cisco.com/api/rest
+- url: https://edge.us.SCC.cisco.com/api/rest
   description: US
-- url: https://edge.eu.cdo.cisco.com/api/rest
+- url: https://edge.eu.SCC.cisco.com/api/rest
   description: EU
-- url: https://edge.apj.cdo.cisco.com/api/rest
+- url: https://edge.apj.SCC.cisco.com/api/rest
   description: APJ
-- url: https://edge.aus.cdo.cisco.com/api/rest
+- url: https://edge.aus.SCC.cisco.com/api/rest
   description: AUS
-- url: https://edge.in.cdo.cisco.com/api/rest
+- url: https://edge.in.SCC.cisco.com/api/rest
   description: IN
-- url: https://edge.staging.cdo.cisco.com/api/rest
+- url: https://edge.staging.SCC.cisco.com/api/rest
   description: Staging
-- url: https://edge.scale.cdo.cisco.com/api/rest
+- url: https://edge.scale.SCC.cisco.com/api/rest
   description: Scale
-- url: https://edge.ci.cdo.cisco.com/api/rest
+- url: https://edge.ci.SCC.cisco.com/api/rest
   description: CI
 paths:
   /v1/objects:
@@ -29,7 +29,7 @@ paths:
       tags:
       - Object Management
       summary: Get Objects
-      description: "Get objects in the CDO tenant. To use the object APIs, contact\
+      description: "Get objects in the SCC tenant. To use the object APIs, contact\
         \ customer support or provision Multicloud Defense and turn on object sharing.\
         \ Note: the object APIs only support operations on network objects and groups."
       operationId: getObjects
@@ -52,7 +52,7 @@ paths:
           default: false
       - name: offset
         in: query
-        description: "The offset of the results retrieved. The CDO API uses the offset\
+        description: "The offset of the results retrieved. The SCC API uses the offset\
           \ field to determine the index of the first result retrieved, and will retrieve\
           \ `limit` results from the offset specified."
         required: false
@@ -79,14 +79,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
-          description: A paginated view of the CDO objects.
+          description: A paginated view of the SCC objects.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListObjectResponse'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -99,7 +99,7 @@ paths:
       tags:
       - Object Management
       summary: Create Object
-      description: "Create an object in the CDO tenant. To use the object APIs, contact\
+      description: "Create an object in the SCC tenant. To use the object APIs, contact\
         \ customer support or provision Multicloud Defense and turn on object sharing.\
         \ Note: the object APIs only support operations on network objects and groups."
       operationId: createObject
@@ -113,7 +113,7 @@ paths:
         "403":
           $ref: '#/components/responses/http403Forbidden'
         "201":
-          description: A descriptive representation of the created CDO object.
+          description: A descriptive representation of the created SCC object.
           content:
             application/json:
               schema:
@@ -133,7 +133,7 @@ paths:
       tags:
       - Object Management
       summary: Create Targets
-      description: "Create targets for an object in the CDO tenant. To use the object\
+      description: "Create targets for an object in the SCC tenant. To use the object\
         \ APIs, contact customer support or provision Multicloud Defense and turn\
         \ on object sharing. Note: the object APIs only support operations on network\
         \ objects and groups."
@@ -183,7 +183,7 @@ paths:
       tags:
       - Object Management
       summary: Delete Targets
-      description: "Delete targets from an object in the CDO tenant. To use the object\
+      description: "Delete targets from an object in the SCC tenant. To use the object\
         \ APIs, contact customer support or provision Multicloud Defense and turn\
         \ on object sharing. Note: the object APIs only support operations on network\
         \ objects and groups."
@@ -237,7 +237,7 @@ paths:
       tags:
       - Object Management
       summary: Get Object
-      description: "Gets an object in the CDO tenant. To use the object APIs, contact\
+      description: "Gets an object in the SCC tenant. To use the object APIs, contact\
         \ customer support or provision Multicloud Defense and turn on object sharing.\
         \ Note: the object APIs only support operations on network objects and groups."
       operationId: getObject
@@ -261,14 +261,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -281,7 +281,7 @@ paths:
       tags:
       - Object Management
       summary: Delete Object
-      description: "Delete an object in the CDO tenant. To use the object APIs, contact\
+      description: "Delete an object in the SCC tenant. To use the object APIs, contact\
         \ customer support or provision Multicloud Defense and turn on object sharing.\
         \ Note: the object APIs only support operations on network objects and groups."
       operationId: deleteObject
@@ -317,7 +317,7 @@ paths:
       tags:
       - Object Management
       summary: Modify Object
-      description: "Modify an object in the CDO tenant. To use the object APIs, contact\
+      description: "Modify an object in the SCC tenant. To use the object APIs, contact\
         \ customer support or provision Multicloud Defense and turn on object sharing.\
         \ Note: the object APIs only support operations on network objects and groups."
       operationId: modifyObject
@@ -340,7 +340,7 @@ paths:
         "403":
           $ref: '#/components/responses/http403Forbidden'
         "200":
-          description: A descriptive representation of the updated CDO object.
+          description: A descriptive representation of the updated SCC object.
           content:
             application/json:
               schema:
@@ -360,7 +360,7 @@ paths:
       tags:
       - Object Management
       summary: Get Object Usages
-      description: "Get usages of an object in the CDO tenant. To use the object APIs,\
+      description: "Get usages of an object in the SCC tenant. To use the object APIs,\
         \ contact customer support or provision Multicloud Defense and turn on object\
         \ sharing. Note: the object APIs only support operations on network objects\
         \ and groups."
@@ -378,7 +378,7 @@ paths:
         "403":
           $ref: '#/components/responses/http403Forbidden'
         "200":
-          description: A descriptive representation of the created CDO object.
+          description: A descriptive representation of the created SCC object.
           content:
             application/json:
               schema:
@@ -400,7 +400,7 @@ paths:
       tags:
       - Object Management
       summary: Get Duplicate Objects
-      description: "Get objects in the CDO tenant that are duplicates of the given\
+      description: "Get objects in the SCC tenant that are duplicates of the given\
         \ object. To use the object APIs, contact customer support or provision Multicloud\
         \ Defense and turn on object sharing. Note: the object APIs only support operations\
         \ on network objects and groups."
@@ -449,7 +449,7 @@ paths:
       tags:
       - Object Management
       summary: Get Override Object With Values For Specific Target
-      description: "Gets an object in the CDO tenant with values for specific target\
+      description: "Gets an object in the SCC tenant with values for specific target\
         \ uid. To use the object APIs, contact customer support or provision Multicloud\
         \ Defense and turn on object sharing. Note: the object APIs only support operations\
         \ on network objects and groups."
@@ -474,14 +474,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -495,7 +495,7 @@ paths:
       tags:
       - Object Management
       summary: Get Issues Count
-      description: "Get issues count in the CDO tenant. To use the object APIs, contact\
+      description: "Get issues count in the SCC tenant. To use the object APIs, contact\
         \ customer support or provision Multicloud Defense and turn on object sharing.\
         \ Note: the object APIs only support operations on network objects and groups."
       operationId: getIssuesCount

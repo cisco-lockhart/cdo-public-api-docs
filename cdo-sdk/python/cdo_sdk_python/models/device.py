@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -44,12 +44,12 @@ class Device(BaseModel):
     """
     Device
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the device in CDO.")
-    name: StrictStr = Field(description="The name of the device in CDO. Device names are unique in CDO.")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the device in SCC.")
+    name: StrictStr = Field(description="The name of the device in CDO. Device names are unique in SCC.")
     device_type: EntityType = Field(alias="deviceType")
     connector_type: Optional[ConnectorType] = Field(default=None, alias="connectorType")
     connector_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG)The name of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG).", alias="connectorUid")
-    address: Optional[StrictStr] = Field(default=None, description="The address of the device, in `host:port` format. CDO connects to the device at this address.")
+    address: Optional[StrictStr] = Field(default=None, description="The address of the device, in `host:port` format. SCC connects to the device at this address.")
     device_role: Optional[DeviceRole] = Field(default=None, alias="deviceRole")
     serial: Optional[StrictStr] = Field(default=None, description="The serial number of the device. This is typically used for licensing, and is not the same as the chassis' serial number.")
     chassis_serial: Optional[StrictStr] = Field(default=None, description="The serial number on the chassis of the device (ASA-only). This is typically used to type up to Cisco SmartNet, and is not the same as the serial number.", alias="chassisSerial")
@@ -66,7 +66,7 @@ class Device(BaseModel):
     ftd_licenses: Optional[List[StrictStr]] = Field(default=None, description="(FTDs only) List of FTD License entitlements.", alias="ftdLicenses")
     snort_version: Optional[StrictStr] = Field(default=None, description="(FTDs only) List of FTD License entitlements.", alias="snortVersion")
     ftd_performance_tier: Optional[StrictStr] = Field(default=None, description="(FTDvs only) The FTDv supports performance-tiered licensing that provides different throughput levels and VPN connection limits based on deployment requirements. This field specifies the performance tier of the FTD.", alias="ftdPerformanceTier")
-    redundancy_mode: Optional[StrictStr] = Field(default=None, description="The redundancy mode this firewall is running in. Note: for High Availability pairs and clusters, CDO represents all of the devices as part of one record.", alias="redundancyMode")
+    redundancy_mode: Optional[StrictStr] = Field(default=None, description="The redundancy mode this firewall is running in. Note: for High Availability pairs and clusters, SCC represents all of the devices as part of one record.", alias="redundancyMode")
     cd_fmc_info: Optional[CdFmcInfo] = Field(default=None, alias="cdFmcInfo")
     sse_device_data: Optional[SseDeviceData] = Field(default=None, alias="sseDeviceData")
     on_prem_fmc_info: Optional[OnPremFmcInfo] = Field(default=None, alias="onPremFmcInfo")

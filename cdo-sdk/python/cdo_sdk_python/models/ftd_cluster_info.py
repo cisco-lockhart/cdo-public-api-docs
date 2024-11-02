@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -26,7 +26,7 @@ from typing_extensions import Self
 
 class FtdClusterInfo(BaseModel):
     """
-    (Device Clusters managed by FMC only) Clustering information. Note: CDO represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.
+    (Device Clusters managed by FMC only) Clustering information. Note: SCC represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.
     """ # noqa: E501
     control_node: Optional[ClusterNode] = Field(default=None, alias="controlNode")
     data_nodes: Optional[List[ClusterNode]] = Field(default=None, description="Information on the data nodes, which are individual units within a cluster that process and forward network traffic based on policies and configurations managed by the control node.", alias="dataNodes")

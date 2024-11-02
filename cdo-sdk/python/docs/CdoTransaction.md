@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **error_message** | **str** | Transaction error message, if any | [optional] 
 **error_details** | **Dict[str, str]** | Transaction error details, if any | [optional] 
 **transaction_type** | **str** | the type of the transaction | [optional] 
-**cdo_transaction_status** | **str** | The status of the CDO transaction | [optional] 
+**cdo_transaction_status** | **str** | The status of the transaction | [optional] 
 
 ## Example
 

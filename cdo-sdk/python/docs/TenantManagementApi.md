@@ -1,6 +1,6 @@
 # cdo_sdk_python.TenantManagementApi
 
-All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
+All URIs are relative to *https://edge.us.SCC.cisco.com/api/rest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Get Feature Flags
 
-Get the feature flags enabled in the CDO tenant.
+Get the feature flags enabled in the SCC tenant.
 
 ### Example
 
@@ -27,10 +27,10 @@ import cdo_sdk_python
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -91,7 +91,7 @@ This endpoint does not need any parameter.
 
 Get Tenant
 
-Fetch a tenant by UID in CDO. This will return a 200 response only if the user is associated with the tenant.
+Fetch a tenant by UID in SCC. This will return a 200 response only if the user is associated with the tenant.
 
 ### Example
 
@@ -103,10 +103,10 @@ from cdo_sdk_python.models.tenant import Tenant
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -123,7 +123,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.TenantManagementApi(api_client)
-    tenant_uid = 'tenant_uid_example' # str | The unique identifier, represented as a UUID, of the tenant in CDO.
+    tenant_uid = 'tenant_uid_example' # str | The unique identifier, represented as a UUID, of the tenant in SCC.
 
     try:
         # Get Tenant
@@ -141,7 +141,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenant_uid** | **str**| The unique identifier, represented as a UUID, of the tenant in CDO. | 
+ **tenant_uid** | **str**| The unique identifier, represented as a UUID, of the tenant in SCC. | 
 
 ### Return type
 
@@ -174,7 +174,7 @@ Name | Type | Description  | Notes
 
 Get Tenant Settings
 
-Get the settings for the CDO tenant.
+Get the settings for the SCC tenant.
 
 ### Example
 
@@ -186,10 +186,10 @@ from cdo_sdk_python.models.tenant_settings import TenantSettings
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -252,7 +252,7 @@ This endpoint does not need any parameter.
 
 Get Tenants
 
-Get a list of tenants with which the CDO user is associated.
+Get a list of tenants with which the SCC user is associated.
 
 ### Example
 
@@ -264,10 +264,10 @@ from cdo_sdk_python.models.tenant_page import TenantPage
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -285,7 +285,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.TenantManagementApi(api_client)
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    offset = '0' # str | The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
 
     try:
         # Get Tenants
@@ -304,7 +304,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **offset** | **str**| The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
 
 ### Return type
 
@@ -336,7 +336,7 @@ Name | Type | Description  | Notes
 
 Modify Tenant Settings
 
-Modify the settings for the CDO tenant.
+Modify the settings for the SCC tenant.
 
 ### Example
 
@@ -348,10 +348,10 @@ from cdo_sdk_python.models.tenant_settings import TenantSettings
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.cdo.cisco.com/api/rest"
+    host = "https://edge.us.SCC.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters

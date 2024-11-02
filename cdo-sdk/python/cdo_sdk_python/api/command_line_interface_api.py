@@ -1,9 +1,9 @@
 # coding: utf-8
 
 """
-    CDO API
+    Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints CDO has to offer
+    Use the documentation to explore the endpoints SCC has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -334,7 +334,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def delete_cli_macro(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -350,9 +350,9 @@ class CommandLineInterfaceApi:
     ) -> None:
         """Delete CLI Macro
 
-        Delete a CDO CLI Macro by UID.
+        Delete a SCC CLI Macro by UID.
 
-        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in SCC. (required)
         :type macro_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -406,7 +406,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def delete_cli_macro_with_http_info(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -422,9 +422,9 @@ class CommandLineInterfaceApi:
     ) -> ApiResponse[None]:
         """Delete CLI Macro
 
-        Delete a CDO CLI Macro by UID.
+        Delete a SCC CLI Macro by UID.
 
-        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in SCC. (required)
         :type macro_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -478,7 +478,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def delete_cli_macro_without_preload_content(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -494,9 +494,9 @@ class CommandLineInterfaceApi:
     ) -> RESTResponseType:
         """Delete CLI Macro
 
-        Delete a CDO CLI Macro by UID.
+        Delete a SCC CLI Macro by UID.
 
-        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in SCC. (required)
         :type macro_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -607,7 +607,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def get_cli_macro(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -623,9 +623,9 @@ class CommandLineInterfaceApi:
     ) -> CdoCliMacro:
         """Get CLI Macro
 
-        Get a CDO CLI Macro by UID.
+        Get a SCC CLI Macro by UID.
 
-        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in SCC. (required)
         :type macro_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -680,7 +680,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def get_cli_macro_with_http_info(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -696,9 +696,9 @@ class CommandLineInterfaceApi:
     ) -> ApiResponse[CdoCliMacro]:
         """Get CLI Macro
 
-        Get a CDO CLI Macro by UID.
+        Get a SCC CLI Macro by UID.
 
-        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in SCC. (required)
         :type macro_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -753,7 +753,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def get_cli_macro_without_preload_content(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -769,9 +769,9 @@ class CommandLineInterfaceApi:
     ) -> RESTResponseType:
         """Get CLI Macro
 
-        Get a CDO CLI Macro by UID.
+        Get a SCC CLI Macro by UID.
 
-        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in SCC. (required)
         :type macro_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -884,7 +884,7 @@ class CommandLineInterfaceApi:
     def get_cli_macros(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -906,7 +906,7 @@ class CommandLineInterfaceApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -968,7 +968,7 @@ class CommandLineInterfaceApi:
     def get_cli_macros_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -990,7 +990,7 @@ class CommandLineInterfaceApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -1052,7 +1052,7 @@ class CommandLineInterfaceApi:
     def get_cli_macros_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -1074,7 +1074,7 @@ class CommandLineInterfaceApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -1210,7 +1210,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def get_cli_result(
         self,
-        cli_result_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI result in CDO.")],
+        cli_result_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI result in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1226,9 +1226,9 @@ class CommandLineInterfaceApi:
     ) -> CdoCliResult:
         """Get CLI Result
 
-        Get the result of a command executed using the CDO Command Line Interface (CLI) by UID.
+        Get the result of a command executed using the SCC Command Line Interface (CLI) by UID.
 
-        :param cli_result_uid: The unique identifier, represented as a UUID, of the CDO CLI result in CDO. (required)
+        :param cli_result_uid: The unique identifier, represented as a UUID, of the CDO CLI result in SCC. (required)
         :type cli_result_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1283,7 +1283,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def get_cli_result_with_http_info(
         self,
-        cli_result_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI result in CDO.")],
+        cli_result_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI result in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1299,9 +1299,9 @@ class CommandLineInterfaceApi:
     ) -> ApiResponse[CdoCliResult]:
         """Get CLI Result
 
-        Get the result of a command executed using the CDO Command Line Interface (CLI) by UID.
+        Get the result of a command executed using the SCC Command Line Interface (CLI) by UID.
 
-        :param cli_result_uid: The unique identifier, represented as a UUID, of the CDO CLI result in CDO. (required)
+        :param cli_result_uid: The unique identifier, represented as a UUID, of the CDO CLI result in SCC. (required)
         :type cli_result_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1356,7 +1356,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def get_cli_result_without_preload_content(
         self,
-        cli_result_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI result in CDO.")],
+        cli_result_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI result in SCC.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1372,9 +1372,9 @@ class CommandLineInterfaceApi:
     ) -> RESTResponseType:
         """Get CLI Result
 
-        Get the result of a command executed using the CDO Command Line Interface (CLI) by UID.
+        Get the result of a command executed using the SCC Command Line Interface (CLI) by UID.
 
-        :param cli_result_uid: The unique identifier, represented as a UUID, of the CDO CLI result in CDO. (required)
+        :param cli_result_uid: The unique identifier, represented as a UUID, of the CDO CLI result in SCC. (required)
         :type cli_result_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1487,7 +1487,7 @@ class CommandLineInterfaceApi:
     def get_cli_results(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -1505,11 +1505,11 @@ class CommandLineInterfaceApi:
     ) -> CdoCliResultPage:
         """Get CLI Results
 
-        Get a list of results from command lines executed using the [CDO Command Line Interface (CLI)](https://docs.defenseorchestrator.com/c-using-the-cdo-command-line-interface.html). These commands can be executed using either the CDO UI or the API.
+        Get a list of results from command lines executed using the [CDO Command Line Interface (CLI)](https://docs.defenseorchestrator.com/c-using-the-cdo-command-line-interface.html). These commands can be executed using either the SCC UI or the API.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -1571,7 +1571,7 @@ class CommandLineInterfaceApi:
     def get_cli_results_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -1589,11 +1589,11 @@ class CommandLineInterfaceApi:
     ) -> ApiResponse[CdoCliResultPage]:
         """Get CLI Results
 
-        Get a list of results from command lines executed using the [CDO Command Line Interface (CLI)](https://docs.defenseorchestrator.com/c-using-the-cdo-command-line-interface.html). These commands can be executed using either the CDO UI or the API.
+        Get a list of results from command lines executed using the [CDO Command Line Interface (CLI)](https://docs.defenseorchestrator.com/c-using-the-cdo-command-line-interface.html). These commands can be executed using either the SCC UI or the API.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -1655,7 +1655,7 @@ class CommandLineInterfaceApi:
     def get_cli_results_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -1673,11 +1673,11 @@ class CommandLineInterfaceApi:
     ) -> RESTResponseType:
         """Get CLI Results
 
-        Get a list of results from command lines executed using the [CDO Command Line Interface (CLI)](https://docs.defenseorchestrator.com/c-using-the-cdo-command-line-interface.html). These commands can be executed using either the CDO UI or the API.
+        Get a list of results from command lines executed using the [CDO Command Line Interface (CLI)](https://docs.defenseorchestrator.com/c-using-the-cdo-command-line-interface.html). These commands can be executed using either the SCC UI or the API.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The CDO API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -1813,7 +1813,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def modify_cli_macro(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in SCC.")],
         cli_macro_patch_input: CliMacroPatchInput,
         _request_timeout: Union[
             None,
@@ -1830,9 +1830,9 @@ class CommandLineInterfaceApi:
     ) -> CdoCliMacro:
         """Modify CLI Macro
 
-        Modify a CDO CLI Macro by UID.
+        Modify a SCC CLI Macro by UID.
 
-        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in SCC. (required)
         :type macro_uid: str
         :param cli_macro_patch_input: (required)
         :type cli_macro_patch_input: CliMacroPatchInput
@@ -1890,7 +1890,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def modify_cli_macro_with_http_info(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in SCC.")],
         cli_macro_patch_input: CliMacroPatchInput,
         _request_timeout: Union[
             None,
@@ -1907,9 +1907,9 @@ class CommandLineInterfaceApi:
     ) -> ApiResponse[CdoCliMacro]:
         """Modify CLI Macro
 
-        Modify a CDO CLI Macro by UID.
+        Modify a SCC CLI Macro by UID.
 
-        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in SCC. (required)
         :type macro_uid: str
         :param cli_macro_patch_input: (required)
         :type cli_macro_patch_input: CliMacroPatchInput
@@ -1967,7 +1967,7 @@ class CommandLineInterfaceApi:
     @validate_call
     def modify_cli_macro_without_preload_content(
         self,
-        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in CDO.")],
+        macro_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the CDO CLI macro in SCC.")],
         cli_macro_patch_input: CliMacroPatchInput,
         _request_timeout: Union[
             None,
@@ -1984,9 +1984,9 @@ class CommandLineInterfaceApi:
     ) -> RESTResponseType:
         """Modify CLI Macro
 
-        Modify a CDO CLI Macro by UID.
+        Modify a SCC CLI Macro by UID.
 
-        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in CDO. (required)
+        :param macro_uid: The unique identifier, represented as a UUID, of the CDO CLI macro in SCC. (required)
         :type macro_uid: str
         :param cli_macro_patch_input: (required)
         :type cli_macro_patch_input: CliMacroPatchInput

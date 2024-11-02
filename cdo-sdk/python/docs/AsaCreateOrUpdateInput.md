@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **username** | **str** | The username used to authenticate with the device. | 
 **password** | **str** | The password used to authenticate with the device. | 
 **connector_type** | [**ConnectorType**](ConnectorType.md) |  | 
-**ignore_certificate** | **bool** | Set this attribute to true if you do not want CDO to validate the certificate of this device before onboarding. | [optional] [default to False]
+**ignore_certificate** | **bool** | Set this attribute to true if you do not want SCC to validate the certificate of this device before onboarding. | [optional] [default to False]
 **connector_name** | **str** | The name of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG). | [optional] 
 **labels** | [**Labels**](Labels.md) |  | [optional] 
 

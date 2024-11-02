@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cloud_connector_ips** | **List[str]** | The IP addresses from which to allow inbound access to your network if you wish to connect to your devices through CDO&#39;s Cloud Connector. | [optional] 
+**cloud_connector_ips** | **List[str]** | The IP addresses from which to allow inbound access to your network if you wish to connect to your devices through SCC&#39;s Cloud Connector. | [optional] 
 
 ## Example
 
