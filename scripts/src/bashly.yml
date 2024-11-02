@@ -1,5 +1,5 @@
 name: cli
-help: CDO Public API documentation
+help: Cisco Security Cloud Control (SCC) Public API documentation
 version: 1.0.0
 
 commands:
@@ -18,7 +18,7 @@ commands:
   - cli transform-fmc-oas
 
 - name: publish-python-sdk
-  help: Publishes a new version of the CDO SDK to PyPI
+  help: Publishes a new version of the SCC SDK to PyPI
   examples:
   - cli publish-python-sdk
   
