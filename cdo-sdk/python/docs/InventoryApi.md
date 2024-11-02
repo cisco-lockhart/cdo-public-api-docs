@@ -1,6 +1,6 @@
 # cdo_sdk_python.InventoryApi
 
-All URIs are relative to *https://edge.us.SCC.cisco.com/api/rest*
+All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -55,10 +55,10 @@ from cdo_sdk_python.models.duo_admin_panel_create_or_update_input import DuoAdmi
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -138,10 +138,10 @@ from cdo_sdk_python.models.ftd_create_or_update_input import FtdCreateOrUpdateIn
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -220,10 +220,10 @@ from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -301,10 +301,10 @@ import cdo_sdk_python
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -380,10 +380,10 @@ import cdo_sdk_python
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -460,10 +460,10 @@ import cdo_sdk_python
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -540,10 +540,10 @@ import cdo_sdk_python
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -620,10 +620,10 @@ from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -703,10 +703,10 @@ from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -787,10 +787,10 @@ from cdo_sdk_python.models.cli_command_input import CliCommandInput
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -870,10 +870,10 @@ from cdo_sdk_python.models.cli_macro_execute_input import CliMacroExecuteInput
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -953,10 +953,10 @@ from cdo_sdk_python.models.ftd_registration_input import FtdRegistrationInput
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1035,10 +1035,10 @@ from cdo_sdk_python.models.device import Device
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1118,10 +1118,10 @@ from cdo_sdk_python.models.device_page import DevicePage
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1206,10 +1206,10 @@ from cdo_sdk_python.models.device import Device
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1290,10 +1290,10 @@ from cdo_sdk_python.models.device import Device
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1373,10 +1373,10 @@ from cdo_sdk_python.models.device_page import DevicePage
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1461,10 +1461,10 @@ from cdo_sdk_python.models.device_page import DevicePage
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1550,10 +1550,10 @@ from cdo_sdk_python.models.fmc_health_metrics import FmcHealthMetrics
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1635,10 +1635,10 @@ from cdo_sdk_python.models.device import Device
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1718,10 +1718,10 @@ from cdo_sdk_python.models.device_page import DevicePage
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1807,10 +1807,10 @@ from cdo_sdk_python.models.device_patch_input import DevicePatchInput
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1893,10 +1893,10 @@ from cdo_sdk_python.models.device_patch_input import DevicePatchInput
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -1980,10 +1980,10 @@ from cdo_sdk_python.models.device_patch_input import DevicePatchInput
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2066,10 +2066,10 @@ from cdo_sdk_python.models.device_patch_input import DevicePatchInput
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2152,10 +2152,10 @@ from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2236,10 +2236,10 @@ from cdo_sdk_python.models.ztp_onboarding_input import ZtpOnboardingInput
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2319,10 +2319,10 @@ from cdo_sdk_python.models.ios_create_or_update_input import IosCreateOrUpdateIn
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2401,10 +2401,10 @@ from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2480,10 +2480,10 @@ from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -2562,10 +2562,10 @@ from cdo_sdk_python.models.cdo_transaction import CdoTransaction
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 # The client must configure the authentication and authorization parameters

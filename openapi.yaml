@@ -7,6 +7,22 @@ info:
     email: cdo.tac@cisco.com
   version: 1.5.0
 servers:
+  - url: https://edge.us.cdo.cisco.com/api/rest
+    description: US
+  - url: https://edge.eu.cdo.cisco.com/api/rest
+    description: EU
+  - url: https://edge.apj.cdo.cisco.com/api/rest
+    description: APJ
+  - url: https://edge.aus.cdo.cisco.com/api/rest
+    description: AUS
+  - url: https://edge.in.cdo.cisco.com/api/rest
+    description: IN
+  - url: https://edge.staging.cdo.cisco.com/api/rest
+    description: Staging
+  - url: https://edge.scale.cdo.cisco.com/api/rest
+    description: Scale
+  - url: https://edge.ci.cdo.cisco.com/api/rest
+    description: CI
   - url: https://edge.us.SCC.cisco.com/api/rest
     description: US
   - url: https://edge.eu.SCC.cisco.com/api/rest
@@ -9048,19 +9064,6 @@ components:
             servletNames:
               type: object
               deprecated: true
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -9145,6 +9148,8 @@ components:
                   items:
                     type: object
                     properties:
+                      buffer:
+                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9167,8 +9172,6 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
-                      buffer:
-                        type: string
                       defaultContentType:
                         type: string
                       urlPatterns:
@@ -9189,6 +9192,19 @@ components:
             requestCharacterEncoding:
               type: string
             responseCharacterEncoding:
+              type: string
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
               type: string
           writeOnly: true
         contentType:

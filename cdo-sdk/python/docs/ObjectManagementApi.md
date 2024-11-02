@@ -1,6 +1,6 @@
 # cdo_sdk_python.ObjectManagementApi
 
-All URIs are relative to *https://edge.us.SCC.cisco.com/api/rest*
+All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -34,10 +34,10 @@ from cdo_sdk_python.models.object_response import ObjectResponse
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
@@ -106,10 +106,10 @@ from cdo_sdk_python.models.targets_request import TargetsRequest
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
@@ -180,10 +180,10 @@ import cdo_sdk_python
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
@@ -251,10 +251,10 @@ import cdo_sdk_python
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
@@ -326,10 +326,10 @@ from cdo_sdk_python.models.duplicate_group_dto import DuplicateGroupDto
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
@@ -400,10 +400,10 @@ from cdo_sdk_python.models.issues_count import IssuesCount
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
@@ -472,10 +472,10 @@ from cdo_sdk_python.models.object_response import ObjectResponse
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
@@ -546,10 +546,10 @@ from cdo_sdk_python.models.reference_info import ReferenceInfo
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
@@ -618,10 +618,10 @@ from cdo_sdk_python.models.list_object_response import ListObjectResponse
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
@@ -698,10 +698,10 @@ from cdo_sdk_python.models.object_response import ObjectResponse
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 
@@ -773,10 +773,10 @@ from cdo_sdk_python.models.update_request import UpdateRequest
 from cdo_sdk_python.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://edge.us.SCC.cisco.com/api/rest
+# Defining the host is optional and defaults to https://edge.us.cdo.cisco.com/api/rest
 # See configuration.py for a list of all supported configuration parameters.
 configuration = cdo_sdk_python.Configuration(
-    host = "https://edge.us.SCC.cisco.com/api/rest"
+    host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
 

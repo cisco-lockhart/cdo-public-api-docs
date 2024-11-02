@@ -7,21 +7,21 @@ info:
     email: cdo.tac@cisco.com
   version: 1.5.0
 servers:
-- url: https://edge.us.SCC.cisco.com/api/rest
+- url: https://edge.us.cdo.cisco.com/api/rest
   description: US
-- url: https://edge.eu.SCC.cisco.com/api/rest
+- url: https://edge.eu.cdo.cisco.com/api/rest
   description: EU
-- url: https://edge.apj.SCC.cisco.com/api/rest
+- url: https://edge.apj.cdo.cisco.com/api/rest
   description: APJ
-- url: https://edge.aus.SCC.cisco.com/api/rest
+- url: https://edge.aus.cdo.cisco.com/api/rest
   description: AUS
-- url: https://edge.in.SCC.cisco.com/api/rest
+- url: https://edge.in.cdo.cisco.com/api/rest
   description: IN
-- url: https://edge.staging.SCC.cisco.com/api/rest
+- url: https://edge.staging.cdo.cisco.com/api/rest
   description: Staging
-- url: https://edge.scale.SCC.cisco.com/api/rest
+- url: https://edge.scale.cdo.cisco.com/api/rest
   description: Scale
-- url: https://edge.ci.SCC.cisco.com/api/rest
+- url: https://edge.ci.cdo.cisco.com/api/rest
   description: CI
 paths:
   /v1/transactions/{transactionUid}:
@@ -43,21 +43,21 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "202":
-          description: SCC Transaction that is pending or in progress.
+        "200":
+          description: "CDO Transaction that has completed, either successfully or\
+            \ unsuccessfully. Note: failed SCC Transactions do not roll back."
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
-        "200":
-          description: "CDO Transaction that has completed, either successfully or\
-            \ unsuccessfully. Note: failed SCC Transactions do not roll back."
+        "202":
+          description: SCC Transaction that is pending or in progress.
           content:
             application/json:
               schema:
