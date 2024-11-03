@@ -29,6 +29,7 @@ This is an asynchronous operation to add a list of Active Directory Groups to a 
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import cdo_sdk_python
@@ -43,6 +44,15 @@ configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = cdo_sdk_python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with cdo_sdk_python.ApiClient(configuration) as api_client:
@@ -76,7 +86,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -267,6 +277,7 @@ This is an asynchronous operation to add a list of users to a tenant associated 
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import cdo_sdk_python
@@ -281,6 +292,15 @@ configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = cdo_sdk_python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with cdo_sdk_python.ApiClient(configuration) as api_client:
@@ -314,7 +334,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -423,6 +443,7 @@ This is an asynchronous operation to remove a list of user groups from a tenant 
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import cdo_sdk_python
@@ -437,6 +458,15 @@ configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = cdo_sdk_python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with cdo_sdk_python.ApiClient(configuration) as api_client:
@@ -470,7 +500,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -495,6 +525,7 @@ This is an asynchronous operation to remove a list of users from a tenant associ
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import cdo_sdk_python
@@ -509,6 +540,15 @@ configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = cdo_sdk_python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with cdo_sdk_python.ApiClient(configuration) as api_client:
@@ -542,7 +582,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -567,6 +607,7 @@ This is an asynchronous operation to enable Multicloud Defense for a tenant asso
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import cdo_sdk_python
@@ -580,6 +621,15 @@ configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = cdo_sdk_python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with cdo_sdk_python.ApiClient(configuration) as api_client:
@@ -611,7 +661,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -889,6 +939,7 @@ Get a list of users associated with the SCC tenant managed by MSP portal.
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import cdo_sdk_python
@@ -902,6 +953,15 @@ configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = cdo_sdk_python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with cdo_sdk_python.ApiClient(configuration) as api_client:
@@ -939,7 +999,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -964,6 +1024,7 @@ This is an asynchronous operation to provision a cdFMC for a tenant associated w
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import cdo_sdk_python
@@ -977,6 +1038,15 @@ configuration = cdo_sdk_python.Configuration(
     host = "https://edge.us.cdo.cisco.com/api/rest"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = cdo_sdk_python.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with cdo_sdk_python.ApiClient(configuration) as api_client:
@@ -1008,7 +1078,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

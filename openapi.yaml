@@ -5167,6 +5167,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
     post:
       tags:
         - MSP
@@ -5204,6 +5206,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/msp/tenants/{tenantUid}/users/{apiUserUid}/token:
     post:
       tags:
@@ -5295,6 +5299,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/msp/tenants/{tenantUid}/users/groups/delete:
     post:
       tags:
@@ -5335,6 +5341,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/msp/tenants/{tenantUid}/users/delete:
     post:
       tags:
@@ -5373,6 +5381,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/msp/tenants/{tenantUid}/mcd:
     post:
       tags:
@@ -5407,6 +5417,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/msp/tenants/{tenantUid}/cdfmc:
     post:
       tags:
@@ -5445,6 +5457,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
   /v1/msp/tenants/create:
     post:
       tags:
