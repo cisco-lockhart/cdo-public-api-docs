@@ -8995,9 +8995,6 @@ components:
         servletContext:
           type: object
           properties:
-            sessionTimeout:
-              type: integer
-              format: int32
             classLoader:
               type: object
               properties:
@@ -9043,6 +9040,9 @@ components:
             minorVersion:
               type: integer
               format: int32
+            sessionTimeout:
+              type: integer
+              format: int32
             attributeNames:
               type: object
             contextPath:
@@ -9062,10 +9062,6 @@ components:
             servletNames:
               type: object
               deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -9117,10 +9113,10 @@ components:
                   type: string
                 comment:
                   type: string
-                domain:
-                  type: string
                 secure:
                   type: boolean
+                domain:
+                  type: string
                 maxAge:
                   type: integer
                   format: int32
@@ -9204,6 +9200,10 @@ components:
             servlets:
               type: object
               deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
           writeOnly: true
         contentType:
           type: string
@@ -9321,21 +9321,21 @@ components:
           type: array
           items:
             type: string
-        redirectView:
-          type: boolean
         propagateQueryProperties:
           type: boolean
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-          writeOnly: true
+        redirectView:
+          type: boolean
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
+          writeOnly: true
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
           writeOnly: true
     JsonWebKey:
       type: object
