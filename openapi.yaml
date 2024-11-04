@@ -8995,6 +8995,9 @@ components:
         servletContext:
           type: object
           properties:
+            sessionTimeout:
+              type: integer
+              format: int32
             classLoader:
               type: object
               properties:
@@ -9038,9 +9041,6 @@ components:
               type: integer
               format: int32
             minorVersion:
-              type: integer
-              format: int32
-            sessionTimeout:
               type: integer
               format: int32
             attributeNames:
@@ -9146,6 +9146,14 @@ components:
                   items:
                     type: object
                     properties:
+                      buffer:
+                        type: string
+                      defaultContentType:
+                        type: string
+                      urlPatterns:
+                        type: array
+                        items:
+                          type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9168,14 +9176,6 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
-                      buffer:
-                        type: string
-                      defaultContentType:
-                        type: string
-                      urlPatterns:
-                        type: array
-                        items:
-                          type: string
                 taglibs:
                   type: array
                   items:
@@ -9321,9 +9321,9 @@ components:
           type: array
           items:
             type: string
-        propagateQueryProperties:
-          type: boolean
         redirectView:
+          type: boolean
+        propagateQueryProperties:
           type: boolean
         attributesMap:
           type: object
