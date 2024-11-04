@@ -39,6 +39,7 @@ node scripts/src/lib/modify_schema.js msp-api-openapi.yaml CdoTransaction public
 node scripts/src/lib/modify_schema.js msp-api-openapi.yaml User public-api-openapi.yaml
 node scripts/src/lib/modify_schema.js msp-api-openapi.yaml UserRole public-api-openapi.yaml
 node scripts/src/lib/modify_schema.js msp-api-openapi.yaml ActiveDirectoryGroupCreateOrUpdateInput public-api-openapi.yaml
+node scripts/src/lib/modify_schema.js msp-api-openapi.yaml ActiveDirectoryGroup public-api-openapi.yaml
 echo "Updated ✅︎"
 echo -n "$(yellow Combining all OpenAPI YAMLs into one)... "
  ./node_modules/.bin/redocly join ${filenames[*]} -o openapi.yaml
