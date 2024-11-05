@@ -9105,10 +9105,10 @@ components:
               format: int32
             attributeNames:
               type: object
-            contextPath:
-              type: string
             initParameterNames:
               type: object
+            contextPath:
+              type: string
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9122,6 +9122,38 @@ components:
             servletNames:
               type: object
               deprecated: true
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
+            servletRegistrations:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  mappings:
+                    type: array
+                    items:
+                      type: string
+                  runAsRole:
+                    type: string
+                  name:
+                    type: string
+                  className:
+                    type: string
+                  initParameters:
+                    type: object
+                    additionalProperties:
+                      type: string
             filterRegistrations:
               type: object
               additionalProperties:
@@ -9222,9 +9254,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibURI:
-                        type: string
                       taglibLocation:
+                        type: string
+                      taglibURI:
                         type: string
             virtualServerName:
               type: string
@@ -9232,38 +9264,6 @@ components:
               type: string
             responseCharacterEncoding:
               type: string
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
-            servletRegistrations:
-              type: object
-              additionalProperties:
-                type: object
-                properties:
-                  mappings:
-                    type: array
-                    items:
-                      type: string
-                  runAsRole:
-                    type: string
-                  name:
-                    type: string
-                  className:
-                    type: string
-                  initParameters:
-                    type: object
-                    additionalProperties:
-                      type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
           writeOnly: true
         contentType:
           type: string
@@ -9385,13 +9385,13 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
-        attributesCSV:
-          type: string
-          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
+        attributesCSV:
+          type: string
+          writeOnly: true
         attributes:
           type: object
           additionalProperties:
