@@ -5256,6 +5256,66 @@ paths:
       security:
         - bearerAuth: []
   /v1/msp/tenants/{tenantUid}/users/groups:
+    get:
+      tags:
+        - MSP
+      summary: Get user groups associated with tenant in MSP portal
+      description: >-
+        Get a list of user groups associated with the CDO tenant managed by MSP
+        portal.
+      operationId: getUserGroupsInTenantInMspPortal
+      parameters:
+        - name: tenantUid
+          in: path
+          description: Unique identifier of the tenant to retrieve the users groups for.
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: '50'
+        - name: offset
+          in: query
+          description: >-
+            The offset of the results retrieved. The SCC API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: '0'
+        - name: q
+          in: query
+          description: >-
+            The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: fieldName:fieldValue
+      responses:
+        '200':
+          description: List of UserGroup objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActiveDirectoryGroupPage'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonApiError'
+      security:
+        - bearerAuth: []
     post:
       tags:
         - MSP
@@ -9062,25 +9122,6 @@ components:
             servletNames:
               type: object
               deprecated: true
-            servletRegistrations:
-              type: object
-              additionalProperties:
-                type: object
-                properties:
-                  mappings:
-                    type: array
-                    items:
-                      type: string
-                  runAsRole:
-                    type: string
-                  name:
-                    type: string
-                  className:
-                    type: string
-                  initParameters:
-                    type: object
-                    additionalProperties:
-                      type: string
             filterRegistrations:
               type: object
               additionalProperties:
@@ -9191,12 +9232,6 @@ components:
               type: string
             responseCharacterEncoding:
               type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
             servlets:
               type: object
               deprecated: true
@@ -9204,6 +9239,31 @@ components:
               type: string
             servletContextName:
               type: string
+            servletRegistrations:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  mappings:
+                    type: array
+                    items:
+                      type: string
+                  runAsRole:
+                    type: string
+                  name:
+                    type: string
+                  className:
+                    type: string
+                  initParameters:
+                    type: object
+                    additionalProperties:
+                      type: string
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
           writeOnly: true
         contentType:
           type: string
@@ -9325,13 +9385,13 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
+        attributesCSV:
+          type: string
+          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
-        attributesCSV:
-          type: string
-          writeOnly: true
         attributes:
           type: object
           additionalProperties:

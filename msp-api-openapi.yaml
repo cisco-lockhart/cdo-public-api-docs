@@ -371,6 +371,63 @@ paths:
       security:
         - bearerAuth: []
   /v1/msp/tenants/{tenantUid}/users/groups:
+    get:
+      tags:
+        - MSP
+      summary: Get user groups associated with tenant in MSP portal
+      description: Get a list of user groups associated with the CDO tenant managed by
+        MSP portal.
+      operationId: getUserGroupsInTenantInMspPortal
+      parameters:
+        - name: tenantUid
+          in: path
+          description: Unique identifier of the tenant to retrieve the users groups for.
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: The number of results to retrieve.
+          required: false
+          schema:
+            maximum: 200
+            minimum: 0
+            type: string
+            default: "50"
+        - name: offset
+          in: query
+          description: The offset of the results retrieved. The SCC API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          required: false
+          schema:
+            minimum: 0
+            type: string
+            default: "0"
+        - name: q
+          in: query
+          description: The query to execute. Use the Lucene Query Syntax to construct your
+            query.
+          required: false
+          schema:
+            type: string
+          example: fieldName:fieldValue
+      responses:
+        "200":
+          description: List of UserGroup objects
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActiveDirectoryGroupPage"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommonApiError"
+      security:
+        - bearerAuth: []
     post:
       tags:
         - MSP
@@ -800,6 +857,31 @@ components:
           description: The list of items retrieved.
           items:
             $ref: ./public-api-openapi.yaml#/components/schemas/User
+    ActiveDirectoryGroupPage:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The total number of results available.
+          format: int32
+          example: 100
+        limit:
+          type: integer
+          description: The number of results retrieved.
+          format: int32
+          example: 50
+        offset:
+          type: integer
+          description: The offset of the results retrieved. The SCC API uses the offset
+            field to determine the index of the first result retrieved, and will
+            retrieve `limit` results from the offset specified.
+          format: int32
+          example: 0
+        items:
+          type: array
+          description: The list of items retrieved.
+          items:
+            $ref: ./public-api-openapi.yaml#/components/schemas/ActiveDirectoryGroup
     AuthenticationError:
       type: object
       properties:
