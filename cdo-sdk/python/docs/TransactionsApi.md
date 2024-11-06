@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 Get Transaction
 
-Get information on an in-progress CDO transaction. An CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create SCC transactions.
+Get information on an in-progress CDO transaction. An CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create Security Cloud Control transactions.
 
 ### Example
 
@@ -81,8 +81,8 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | CDO Transaction that has completed, either successfully or unsuccessfully. Note: failed SCC Transactions do not roll back. |  -  |
-**202** | SCC Transaction that is pending or in progress. |  -  |
+**200** | CDO Transaction that has completed, either successfully or unsuccessfully. Note: failed Security Cloud Control Transactions do not roll back. |  -  |
+**202** | Security Cloud Control Transaction that is pending or in progress. |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |

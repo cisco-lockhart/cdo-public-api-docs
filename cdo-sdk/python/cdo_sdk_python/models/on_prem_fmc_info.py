@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -27,7 +27,7 @@ class OnPremFmcInfo(BaseModel):
     """
     (Devices managed by on-prem FMC only) Information on the on-prem FMC managing this device.
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The name of the device in CDO. Device names are unique in SCC.")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the device in CDO. Device names are unique in Security Cloud Control.")
     address: Optional[StrictStr] = Field(default=None, description="The address of the on-prem FMC managing this device, in `host:port` format.")
     __properties: ClassVar[List[str]] = ["name", "address"]
 

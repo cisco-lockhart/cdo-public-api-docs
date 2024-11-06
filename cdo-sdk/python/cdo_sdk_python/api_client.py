@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -88,7 +88,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/1.2.327/python'
+        self.user_agent = 'OpenAPI-Generator/1.2.328/python'
         self.client_side_validation = configuration.client_side_validation
 
     def __enter__(self):

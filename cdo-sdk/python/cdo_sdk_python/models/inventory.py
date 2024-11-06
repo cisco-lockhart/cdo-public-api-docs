@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -26,7 +26,7 @@ from typing_extensions import Self
 
 class Inventory(BaseModel):
     """
-    Results from the SCC inventory that match the search term.
+    Results from the Security Cloud Control inventory that match the search term.
     """ # noqa: E501
     devices: Optional[List[Entity]] = Field(default=None, description="Devices that match the search term.")
     managers: Optional[List[Entity]] = Field(default=None, description="Device Managers that match the search term.")

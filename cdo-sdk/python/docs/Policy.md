@@ -1,13 +1,13 @@
 # Policy
 
-Results from the SCC policies that match the search term.
+Results from the Security Cloud Control policies that match the search term.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier, represented as a UUID, of the policy in SCC. | [optional] 
-**name** | **str** | The name of the policy in SCC. | [optional] 
+**uid** | **str** | The unique identifier, represented as a UUID, of the policy in Security Cloud Control. | [optional] 
+**name** | **str** | The name of the policy in Security Cloud Control. | [optional] 
 
 ## Example
 

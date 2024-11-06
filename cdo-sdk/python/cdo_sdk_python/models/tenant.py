@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -27,11 +27,11 @@ class Tenant(BaseModel):
     """
     Tenant
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the tenant in SCC.")
-    name: Optional[StrictStr] = Field(default=None, description="The name of the tenant in SCC.")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the tenant in Security Cloud Control.")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the tenant in Security Cloud Control.")
     security_cloud_control_enterprise_id: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the Security Cloud Control Enterprise this tenant is associated with.", alias="securityCloudControlEnterpriseId")
-    display_name: Optional[StrictStr] = Field(default=None, description="A human-readable display name for the tenant. This is the tenant name displayed in the SCC Web UI.", alias="displayName")
-    pay_type: Optional[StrictStr] = Field(default=None, description="An enum that describes the payment type of the tenant in SCC.", alias="payType")
+    display_name: Optional[StrictStr] = Field(default=None, description="A human-readable display name for the tenant. This is the tenant name displayed in the Security Cloud Control Web UI.", alias="displayName")
+    pay_type: Optional[StrictStr] = Field(default=None, description="An enum that describes the payment type of the tenant in Security Cloud Control.", alias="payType")
     __properties: ClassVar[List[str]] = ["uid", "name", "securityCloudControlEnterpriseId", "displayName", "payType"]
 
     @field_validator('pay_type')

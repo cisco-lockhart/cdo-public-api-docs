@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -28,7 +28,7 @@ class UserInput(BaseModel):
     """
     The list of users to be added to the tenant. You can add a maximum of 50 users at a time.
     """ # noqa: E501
-    username: StrictStr = Field(description="The name of the user in SCC. This must be a valid e-mail address if the user is not an API-only user.")
+    username: StrictStr = Field(description="The name of the user in Security Cloud Control. This must be a valid e-mail address if the user is not an API-only user.")
     role: UserRole
     api_only_user: Optional[StrictBool] = Field(default=None, description="Whether the user is an API-only user", alias="apiOnlyUser")
     __properties: ClassVar[List[str]] = ["username", "role", "apiOnlyUser"]

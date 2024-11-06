@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -25,10 +25,10 @@ from typing_extensions import Self
 
 class Labels(BaseModel):
     """
-    Labels used to identify/tag SCC entities.
+    Labels used to identify/tag Security Cloud Control entities.
     """ # noqa: E501
-    grouped_labels: Optional[Dict[str, List[StrictStr]]] = Field(default=None, description="Groups of labels used to identify/tag SCC entities.", alias="groupedLabels")
-    ungrouped_labels: Optional[List[StrictStr]] = Field(default=None, description="Set of free-labels used to identify/tag SCC entities.", alias="ungroupedLabels")
+    grouped_labels: Optional[Dict[str, List[StrictStr]]] = Field(default=None, description="Groups of labels used to identify/tag Security Cloud Control entities.", alias="groupedLabels")
+    ungrouped_labels: Optional[List[StrictStr]] = Field(default=None, description="Set of free-labels used to identify/tag Security Cloud Control entities.", alias="ungroupedLabels")
     __properties: ClassVar[List[str]] = ["groupedLabels", "ungroupedLabels"]
 
     model_config = ConfigDict(

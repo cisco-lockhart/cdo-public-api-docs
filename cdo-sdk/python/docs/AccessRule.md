@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier, represented as a UUID, of Access Rule in SCC. | 
+**uid** | **str** | The unique identifier, represented as a UUID, of Access Rule in Security Cloud Control. | 
 **access_group_uid** | **str** | The unique identifier, represented as a UUID, of the Access Group associated with the Access Rule. | 
 **shared_access_group_uid** | **str** | Optional unique identifier for the shared Access Group associated with a shared Access Rule. | [optional] 
 **entity_uid** | **str** | The unique identifier, represented as a UUID, of the device/manager associated with the Access Rule. Points to shared Access Group in case of shared Rule | 

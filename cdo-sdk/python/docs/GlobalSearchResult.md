@@ -6,8 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **inventory** | [**Inventory**](Inventory.md) |  | [optional] 
-**objects** | **List[object]** | Results from the SCC objects that match the search term. | [optional] 
-**policies** | [**List[Policy]**](Policy.md) | Results from the SCC policies that match the search term. | [optional] 
+**objects** | **List[object]** | Results from the Security Cloud Control objects that match the search term. | [optional] 
+**policies** | [**List[Policy]**](Policy.md) | Results from the Security Cloud Control policies that match the search term. | [optional] 
 **cd_fmc_result** | [**CdFmcResult**](CdFmcResult.md) |  | [optional] 
 
 ## Example

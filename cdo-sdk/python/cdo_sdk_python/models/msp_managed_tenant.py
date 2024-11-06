@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -27,10 +27,10 @@ class MspManagedTenant(BaseModel):
     """
     MspManagedTenant
     """ # noqa: E501
-    display_name: Optional[StrictStr] = Field(default=None, description="A human-readable display name for the tenant. This is the tenant name displayed in the SCC Web UI.", alias="displayName")
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the tenant in SCC.")
-    name: Optional[StrictStr] = Field(default=None, description="The name of the device in CDO. Device names are unique in SCC.")
-    region: Optional[StrictStr] = Field(default=None, description="The SCC region the tenant exists in.")
+    display_name: Optional[StrictStr] = Field(default=None, description="A human-readable display name for the tenant. This is the tenant name displayed in the Security Cloud Control Web UI.", alias="displayName")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the tenant in Security Cloud Control.")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the device in CDO. Device names are unique in Security Cloud Control.")
+    region: Optional[StrictStr] = Field(default=None, description="The Security Cloud Control region the tenant exists in.")
     __properties: ClassVar[List[str]] = ["displayName", "uid", "name", "region"]
 
     @field_validator('region')

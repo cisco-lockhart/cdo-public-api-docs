@@ -4,10 +4,10 @@ All URIs are relative to *https://edge.us.cdo.cisco.com/api/rest*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_active_directory_group**](UsersApi.md#create_active_directory_group) | **POST** /v1/users/groups | Create Active Directory Group in SCC Tenant
-[**create_user**](UsersApi.md#create_user) | **POST** /v1/users | Create User in SCC Tenant
-[**delete_active_directory_group**](UsersApi.md#delete_active_directory_group) | **DELETE** /v1/users/groups/{groupUid} | Remove Active Directory Group from SCC Tenant
-[**delete_user**](UsersApi.md#delete_user) | **DELETE** /v1/users/{userUid} | Remove User from SCC Tenant
+[**create_active_directory_group**](UsersApi.md#create_active_directory_group) | **POST** /v1/users/groups | Create Active Directory Group in Security Cloud Control Tenant
+[**create_user**](UsersApi.md#create_user) | **POST** /v1/users | Create User in Security Cloud Control Tenant
+[**delete_active_directory_group**](UsersApi.md#delete_active_directory_group) | **DELETE** /v1/users/groups/{groupUid} | Remove Active Directory Group from Security Cloud Control Tenant
+[**delete_user**](UsersApi.md#delete_user) | **DELETE** /v1/users/{userUid} | Remove User from Security Cloud Control Tenant
 [**generate_api_token**](UsersApi.md#generate_api_token) | **POST** /v1/users/{apiUserUid}/apiToken/generate | Generate Token for API-only user
 [**get_active_directory_group**](UsersApi.md#get_active_directory_group) | **GET** /v1/users/groups/{groupUid} | Get Active Directory Group
 [**get_active_directory_groups**](UsersApi.md#get_active_directory_groups) | **GET** /v1/users/groups | Get Active Directory Groups
@@ -22,9 +22,9 @@ Method | HTTP request | Description
 # **create_active_directory_group**
 > ActiveDirectoryGroup create_active_directory_group(active_directory_group_create_or_update_input)
 
-Create Active Directory Group in SCC Tenant
+Create Active Directory Group in Security Cloud Control Tenant
 
-Create an Active Directory Group in the SCC tenant.
+Create an Active Directory Group in the Security Cloud Control tenant.
 
 ### Example
 
@@ -60,7 +60,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     active_directory_group_create_or_update_input = cdo_sdk_python.ActiveDirectoryGroupCreateOrUpdateInput() # ActiveDirectoryGroupCreateOrUpdateInput | 
 
     try:
-        # Create Active Directory Group in SCC Tenant
+        # Create Active Directory Group in Security Cloud Control Tenant
         api_response = api_instance.create_active_directory_group(active_directory_group_create_or_update_input)
         print("The response of UsersApi->create_active_directory_group:\n")
         pprint(api_response)
@@ -105,9 +105,9 @@ Name | Type | Description  | Notes
 # **create_user**
 > User create_user(user_create_or_update_input)
 
-Create User in SCC Tenant
+Create User in Security Cloud Control Tenant
 
-Create a user in the SCC tenant. The user may already exist and have access to other tenants, in which case this endpoint adds the user to this tenant.
+Create a user in the Security Cloud Control tenant. The user may already exist and have access to other tenants, in which case this endpoint adds the user to this tenant.
 
 ### Example
 
@@ -143,7 +143,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     user_create_or_update_input = cdo_sdk_python.UserCreateOrUpdateInput() # UserCreateOrUpdateInput | 
 
     try:
-        # Create User in SCC Tenant
+        # Create User in Security Cloud Control Tenant
         api_response = api_instance.create_user(user_create_or_update_input)
         print("The response of UsersApi->create_user:\n")
         pprint(api_response)
@@ -188,9 +188,9 @@ Name | Type | Description  | Notes
 # **delete_active_directory_group**
 > delete_active_directory_group(group_uid)
 
-Remove Active Directory Group from SCC Tenant
+Remove Active Directory Group from Security Cloud Control Tenant
 
-Delete a Active Directory Group by UID in the SCC tenant.
+Delete a Active Directory Group by UID in the Security Cloud Control tenant.
 
 ### Example
 
@@ -221,10 +221,10 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
-    group_uid = 'group_uid_example' # str | The unique identifier, represented as a UUID, of the Active Directory Group in SCC.
+    group_uid = 'group_uid_example' # str | The unique identifier, represented as a UUID, of the Active Directory Group in Security Cloud Control.
 
     try:
-        # Remove Active Directory Group from SCC Tenant
+        # Remove Active Directory Group from Security Cloud Control Tenant
         api_instance.delete_active_directory_group(group_uid)
     except Exception as e:
         print("Exception when calling UsersApi->delete_active_directory_group: %s\n" % e)
@@ -237,7 +237,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **group_uid** | **str**| The unique identifier, represented as a UUID, of the Active Directory Group in SCC. | 
+ **group_uid** | **str**| The unique identifier, represented as a UUID, of the Active Directory Group in Security Cloud Control. | 
 
 ### Return type
 
@@ -267,9 +267,9 @@ void (empty response body)
 # **delete_user**
 > delete_user(user_uid)
 
-Remove User from SCC Tenant
+Remove User from Security Cloud Control Tenant
 
-Delete a User by UID in the SCC tenant. If the user is associated with multiple tenants, they will continue to have access to every other tenant.
+Delete a User by UID in the Security Cloud Control tenant. If the user is associated with multiple tenants, they will continue to have access to every other tenant.
 
 ### Example
 
@@ -300,10 +300,10 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
-    user_uid = 'user_uid_example' # str | The unique identifier, represented as a UUID, of the user in SCC.
+    user_uid = 'user_uid_example' # str | The unique identifier, represented as a UUID, of the user in Security Cloud Control.
 
     try:
-        # Remove User from SCC Tenant
+        # Remove User from Security Cloud Control Tenant
         api_instance.delete_user(user_uid)
     except Exception as e:
         print("Exception when calling UsersApi->delete_user: %s\n" % e)
@@ -316,7 +316,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_uid** | **str**| The unique identifier, represented as a UUID, of the user in SCC. | 
+ **user_uid** | **str**| The unique identifier, represented as a UUID, of the user in Security Cloud Control. | 
 
 ### Return type
 
@@ -348,7 +348,7 @@ void (empty response body)
 
 Generate Token for API-only user
 
-Generate API Token for API-only user. API-only users are used for building automations with SCC. If the user ID provided is not that of an API-only user, this operation will fail.
+Generate API Token for API-only user. API-only users are used for building automations with Security Cloud Control. If the user ID provided is not that of an API-only user, this operation will fail.
 
 ### Example
 
@@ -380,7 +380,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
-    api_user_uid = 'api_user_uid_example' # str | The unique identifier, represented as a UUID, of the API-only user in SCC
+    api_user_uid = 'api_user_uid_example' # str | The unique identifier, represented as a UUID, of the API-only user in Security Cloud Control
 
     try:
         # Generate Token for API-only user
@@ -398,7 +398,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_user_uid** | **str**| The unique identifier, represented as a UUID, of the API-only user in SCC | 
+ **api_user_uid** | **str**| The unique identifier, represented as a UUID, of the API-only user in Security Cloud Control | 
 
 ### Return type
 
@@ -430,7 +430,7 @@ Name | Type | Description  | Notes
 
 Get Active Directory Group
 
-Fetch a active directory group by UID in the SCC tenant.
+Fetch a active directory group by UID in the Security Cloud Control tenant.
 
 ### Example
 
@@ -462,7 +462,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
-    group_uid = 'group_uid_example' # str | The unique identifier, represented as a UUID, of the active directory group in SCC.
+    group_uid = 'group_uid_example' # str | The unique identifier, represented as a UUID, of the active directory group in Security Cloud Control.
 
     try:
         # Get Active Directory Group
@@ -480,7 +480,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **group_uid** | **str**| The unique identifier, represented as a UUID, of the active directory group in SCC. | 
+ **group_uid** | **str**| The unique identifier, represented as a UUID, of the active directory group in Security Cloud Control. | 
 
 ### Return type
 
@@ -513,7 +513,7 @@ Name | Type | Description  | Notes
 
 Get Active Directory Groups
 
-Get a list of active directory groups associated with the SCC tenant.
+Get a list of active directory groups associated with the Security Cloud Control tenant.
 
 ### Example
 
@@ -546,7 +546,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    offset = '0' # str | The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
 
     try:
@@ -566,7 +566,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **offset** | **str**| The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
 
 ### Return type
@@ -599,7 +599,7 @@ Name | Type | Description  | Notes
 
 Get Token Info
 
-Fetch information on the current token. Each SCC token is associated with a specific user and a specific tenant. A token can only be used to perform operations on the tenant it is associated with.
+Fetch information on the current token. Each Security Cloud Control token is associated with a specific user and a specific tenant. A token can only be used to perform operations on the tenant it is associated with.
 
 ### Example
 
@@ -675,7 +675,7 @@ This endpoint does not need any parameter.
 
 Get Tenant User
 
-Fetch a user by UID in the CDO tenant. This will only return 200 responses for users associated with the SCC tenant.
+Fetch a user by UID in the CDO tenant. This will only return 200 responses for users associated with the Security Cloud Control tenant.
 
 ### Example
 
@@ -707,7 +707,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
-    user_uid = 'user_uid_example' # str | The unique identifier, represented as a UUID, of the user in SCC.
+    user_uid = 'user_uid_example' # str | The unique identifier, represented as a UUID, of the user in Security Cloud Control.
 
     try:
         # Get Tenant User
@@ -725,7 +725,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_uid** | **str**| The unique identifier, represented as a UUID, of the user in SCC. | 
+ **user_uid** | **str**| The unique identifier, represented as a UUID, of the user in Security Cloud Control. | 
 
 ### Return type
 
@@ -758,7 +758,7 @@ Name | Type | Description  | Notes
 
 Get Tenant Users
 
-Get a list of users associated with the SCC tenant.
+Get a list of users associated with the Security Cloud Control tenant.
 
 ### Example
 
@@ -791,7 +791,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    offset = '0' # str | The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
 
     try:
@@ -811,7 +811,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **offset** | **str**| The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
 
 ### Return type
@@ -877,7 +877,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
-    group_uid = 'group_uid_example' # str | The unique identifier, represented as a UUID, of the active directory group in SCC.
+    group_uid = 'group_uid_example' # str | The unique identifier, represented as a UUID, of the active directory group in Security Cloud Control.
     active_directory_group_create_or_update_input = cdo_sdk_python.ActiveDirectoryGroupCreateOrUpdateInput() # ActiveDirectoryGroupCreateOrUpdateInput | 
 
     try:
@@ -896,7 +896,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **group_uid** | **str**| The unique identifier, represented as a UUID, of the active directory group in SCC. | 
+ **group_uid** | **str**| The unique identifier, represented as a UUID, of the active directory group in Security Cloud Control. | 
  **active_directory_group_create_or_update_input** | [**ActiveDirectoryGroupCreateOrUpdateInput**](ActiveDirectoryGroupCreateOrUpdateInput.md)|  | 
 
 ### Return type
@@ -962,7 +962,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.UsersApi(api_client)
-    api_user_uid = 'api_user_uid_example' # str | The unique identifier, represented as a UUID, of the API user in SCC.
+    api_user_uid = 'api_user_uid_example' # str | The unique identifier, represented as a UUID, of the API user in Security Cloud Control.
 
     try:
         # Revoke API-only User's Token
@@ -980,7 +980,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_user_uid** | **str**| The unique identifier, represented as a UUID, of the API user in SCC. | 
+ **api_user_uid** | **str**| The unique identifier, represented as a UUID, of the API user in Security Cloud Control. | 
 
 ### Return type
 

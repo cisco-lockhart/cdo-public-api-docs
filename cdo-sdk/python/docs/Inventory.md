@@ -1,6 +1,6 @@
 # Inventory
 
-Results from the SCC inventory that match the search term.
+Results from the Security Cloud Control inventory that match the search term.
 
 ## Properties
 

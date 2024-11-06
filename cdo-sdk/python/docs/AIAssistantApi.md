@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | SCC Transaction object that can be used to track the status of the question. |  -  |
+**202** | Security Cloud Control Transaction object that can be used to track the status of the question. |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -171,7 +171,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | SCC Transaction object that can be used to track the status of the question. |  -  |
+**202** | Security Cloud Control Transaction object that can be used to track the status of the question. |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -216,7 +216,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.AIAssistantApi(api_client)
-    conversation_uid = 'conversation_uid_example' # str | The unique identifier, represented as a UUID, of the conversation in SCC.
+    conversation_uid = 'conversation_uid_example' # str | The unique identifier, represented as a UUID, of the conversation in Security Cloud Control.
 
     try:
         # Get Messages
@@ -234,7 +234,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **conversation_uid** | **str**| The unique identifier, represented as a UUID, of the conversation in SCC. | 
+ **conversation_uid** | **str**| The unique identifier, represented as a UUID, of the conversation in Security Cloud Control. | 
 
 ### Return type
 
@@ -266,7 +266,7 @@ Name | Type | Description  | Notes
 
 Get Conversation
 
-Get an AI Assistant conversation by UID in the SCC tenant.
+Get an AI Assistant conversation by UID in the Security Cloud Control tenant.
 
 ### Example
 
@@ -298,7 +298,7 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.AIAssistantApi(api_client)
-    conversation_uid = 'conversation_uid_example' # str | The unique identifier, represented as a UUID, of the conversation in SCC.
+    conversation_uid = 'conversation_uid_example' # str | The unique identifier, represented as a UUID, of the conversation in Security Cloud Control.
 
     try:
         # Get Conversation
@@ -316,7 +316,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **conversation_uid** | **str**| The unique identifier, represented as a UUID, of the conversation in SCC. | 
+ **conversation_uid** | **str**| The unique identifier, represented as a UUID, of the conversation in Security Cloud Control. | 
 
 ### Return type
 
@@ -382,7 +382,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.AIAssistantApi(api_client)
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    offset = '0' # str | The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
@@ -402,7 +402,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **offset** | **str**| The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
 ### Return type

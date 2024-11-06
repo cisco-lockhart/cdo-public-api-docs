@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -54,7 +54,7 @@ class CloudDeliveredFMCApi:
     ) -> None:
         """Proxy Request To Cloud-Delivered FMC
 
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the Security Cloud Control tenant does not have a cdFMC provisioned.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -119,7 +119,7 @@ class CloudDeliveredFMCApi:
     ) -> ApiResponse[None]:
         """Proxy Request To Cloud-Delivered FMC
 
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the Security Cloud Control tenant does not have a cdFMC provisioned.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -184,7 +184,7 @@ class CloudDeliveredFMCApi:
     ) -> RESTResponseType:
         """Proxy Request To Cloud-Delivered FMC
 
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the Security Cloud Control tenant does not have a cdFMC provisioned.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -303,7 +303,7 @@ class CloudDeliveredFMCApi:
     ) -> None:
         """Proxy Request To Cloud-Delivered FMC
 
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the Security Cloud Control tenant does not have a cdFMC provisioned.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -368,7 +368,7 @@ class CloudDeliveredFMCApi:
     ) -> ApiResponse[None]:
         """Proxy Request To Cloud-Delivered FMC
 
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the Security Cloud Control tenant does not have a cdFMC provisioned.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -433,7 +433,7 @@ class CloudDeliveredFMCApi:
     ) -> RESTResponseType:
         """Proxy Request To Cloud-Delivered FMC
 
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the Security Cloud Control tenant does not have a cdFMC provisioned.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -552,7 +552,7 @@ class CloudDeliveredFMCApi:
     ) -> None:
         """Proxy Request To Cloud-Delivered FMC
 
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the Security Cloud Control tenant does not have a cdFMC provisioned.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -617,7 +617,7 @@ class CloudDeliveredFMCApi:
     ) -> ApiResponse[None]:
         """Proxy Request To Cloud-Delivered FMC
 
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the Security Cloud Control tenant does not have a cdFMC provisioned.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -682,7 +682,7 @@ class CloudDeliveredFMCApi:
     ) -> RESTResponseType:
         """Proxy Request To Cloud-Delivered FMC
 
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the Security Cloud Control tenant does not have a cdFMC provisioned.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -801,7 +801,7 @@ class CloudDeliveredFMCApi:
     ) -> None:
         """Proxy Request To Cloud-Delivered FMC
 
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the Security Cloud Control tenant does not have a cdFMC provisioned.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -866,7 +866,7 @@ class CloudDeliveredFMCApi:
     ) -> ApiResponse[None]:
         """Proxy Request To Cloud-Delivered FMC
 
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the Security Cloud Control tenant does not have a cdFMC provisioned.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -931,7 +931,7 @@ class CloudDeliveredFMCApi:
     ) -> RESTResponseType:
         """Proxy Request To Cloud-Delivered FMC
 
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the Security Cloud Control tenant does not have a cdFMC provisioned.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1050,7 +1050,7 @@ class CloudDeliveredFMCApi:
     ) -> None:
         """Proxy Request To Cloud-Delivered FMC
 
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the Security Cloud Control tenant does not have a cdFMC provisioned.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1115,7 +1115,7 @@ class CloudDeliveredFMCApi:
     ) -> ApiResponse[None]:
         """Proxy Request To Cloud-Delivered FMC
 
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the Security Cloud Control tenant does not have a cdFMC provisioned.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1180,7 +1180,7 @@ class CloudDeliveredFMCApi:
     ) -> RESTResponseType:
         """Proxy Request To Cloud-Delivered FMC
 
-        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the SCC tenant does not have a cdFMC provisioned.
+        This endpoint proxies the request to the Cloud-Delivered FMC (cdFMC). Refer to the <a href=\"https://www.cisco.com/c/en/us/td/docs/security/firepower/730/Rapid-Release/API/CDO/cloud_delivered_firewall_management_center_rest_api_quick_start_guide/About_The_API_Explorer.html\">cdFMC API Explorer in CDO</a> for the list of available endpoints. You can append the relative API paths provided in the cdFMC API documentation to the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant. <b>Note:</b> These endpoints will return 404 if the Security Cloud Control tenant does not have a cdFMC provisioned.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

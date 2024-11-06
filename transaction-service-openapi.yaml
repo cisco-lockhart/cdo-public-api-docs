@@ -1,7 +1,8 @@
 openapi: 3.0.1
 info:
   title: Cisco Security Cloud Control API
-  description: Use the documentation to explore the endpoints SCC has to offer
+  description: Use the documentation to explore the endpoints Security Cloud Control
+    has to offer
   contact:
     name: Cisco Security Cloud Control TAC
     email: cdo.tac@cisco.com
@@ -31,7 +32,8 @@ paths:
       summary: Get Transaction
       description: "Get information on an in-progress CDO transaction. An CDO transaction\
         \ is an entity used to monitor progress of, and provide feedback on, long-running\
-        \ operations. All asynchronous operations in CDO's API create SCC transactions."
+        \ operations. All asynchronous operations in CDO's API create Security Cloud\
+        \ Control transactions."
       operationId: getTransaction
       parameters:
       - name: transactionUid
@@ -45,21 +47,22 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
-        "200":
-          description: "CDO Transaction that has completed, either successfully or\
-            \ unsuccessfully. Note: failed SCC Transactions do not roll back."
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CdoTransaction'
         "202":
-          description: SCC Transaction that is pending or in progress.
+          description: Security Cloud Control Transaction that is pending or in progress.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
+        "200":
+          description: "CDO Transaction that has completed, either successfully or\
+            \ unsuccessfully. Note: failed Security Cloud Control Transactions do\
+            \ not roll back."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":

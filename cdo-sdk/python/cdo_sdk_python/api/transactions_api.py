@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -57,7 +57,7 @@ class TransactionsApi:
     ) -> CdoTransaction:
         """Get Transaction
 
-        Get information on an in-progress CDO transaction. An CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create SCC transactions.
+        Get information on an in-progress CDO transaction. An CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create Security Cloud Control transactions.
 
         :param transaction_uid: (required)
         :type transaction_uid: str
@@ -130,7 +130,7 @@ class TransactionsApi:
     ) -> ApiResponse[CdoTransaction]:
         """Get Transaction
 
-        Get information on an in-progress CDO transaction. An CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create SCC transactions.
+        Get information on an in-progress CDO transaction. An CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create Security Cloud Control transactions.
 
         :param transaction_uid: (required)
         :type transaction_uid: str
@@ -203,7 +203,7 @@ class TransactionsApi:
     ) -> RESTResponseType:
         """Get Transaction
 
-        Get information on an in-progress CDO transaction. An CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create SCC transactions.
+        Get information on an in-progress CDO transaction. An CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create Security Cloud Control transactions.
 
         :param transaction_uid: (required)
         :type transaction_uid: str

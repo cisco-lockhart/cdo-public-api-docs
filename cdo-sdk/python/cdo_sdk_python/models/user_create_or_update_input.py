@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -27,9 +27,9 @@ class UserCreateOrUpdateInput(BaseModel):
     """
     UserCreateOrUpdateInput
     """ # noqa: E501
-    name: StrictStr = Field(description="The name of the user in SCC.")
-    role: Optional[StrictStr] = Field(default=None, description="The user role in SCC.")
-    api_only_user: Optional[StrictBool] = Field(default=False, description="Whether the user is API-only, an API-only user cannot access SCC in the UI.", alias="apiOnlyUser")
+    name: StrictStr = Field(description="The name of the user in Security Cloud Control.")
+    role: Optional[StrictStr] = Field(default=None, description="The user role in Security Cloud Control.")
+    api_only_user: Optional[StrictBool] = Field(default=False, description="Whether the user is API-only, an API-only user cannot access Security Cloud Control in the UI.", alias="apiOnlyUser")
     __properties: ClassVar[List[str]] = ["name", "role", "apiOnlyUser"]
 
     model_config = ConfigDict(

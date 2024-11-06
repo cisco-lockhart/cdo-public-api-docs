@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -70,7 +70,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CdoTransaction:
-        """Add Active Directory Groups to SCC tenant in MSP Portal
+        """Add Active Directory Groups to Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to add a list of Active Directory Groups to a tenant associated with the MSP Portal.
 
@@ -142,7 +142,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CdoTransaction]:
-        """Add Active Directory Groups to SCC tenant in MSP Portal
+        """Add Active Directory Groups to Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to add a list of Active Directory Groups to a tenant associated with the MSP Portal.
 
@@ -214,7 +214,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Add Active Directory Groups to SCC tenant in MSP Portal
+        """Add Active Directory Groups to Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to add a list of Active Directory Groups to a tenant associated with the MSP Portal.
 
@@ -916,7 +916,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CdoTransaction:
-        """Add users to SCC tenant in MSP Portal
+        """Add users to Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to add a list of users to a tenant associated with the MSP Portal.
 
@@ -988,7 +988,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CdoTransaction]:
-        """Add users to SCC tenant in MSP Portal
+        """Add users to Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to add a list of users to a tenant associated with the MSP Portal.
 
@@ -1060,7 +1060,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Add users to SCC tenant in MSP Portal
+        """Add users to Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to add a list of users to a tenant associated with the MSP Portal.
 
@@ -1204,9 +1204,9 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CdoTransaction:
-        """Create SCC Tenant
+        """Create Security Cloud Control Tenant
 
-        Create a new tenant in SCC from an MSP Portal. This endpoint creates a tenant, adds the tenant to the MSP Portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal. You can create no more than 1 tenant every 30 seconds. Additionally, you are limited to creating a total of 100 tenants: please speak to support to raise this limit.
+        Create a new tenant in Security Cloud Control from an MSP Portal. This endpoint creates a tenant, adds the tenant to the MSP Portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal. You can create no more than 1 tenant every 30 seconds. Additionally, you are limited to creating a total of 100 tenants: please speak to support to raise this limit.
 
         :param msp_create_tenant_input: (required)
         :type msp_create_tenant_input: MspCreateTenantInput
@@ -1276,9 +1276,9 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CdoTransaction]:
-        """Create SCC Tenant
+        """Create Security Cloud Control Tenant
 
-        Create a new tenant in SCC from an MSP Portal. This endpoint creates a tenant, adds the tenant to the MSP Portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal. You can create no more than 1 tenant every 30 seconds. Additionally, you are limited to creating a total of 100 tenants: please speak to support to raise this limit.
+        Create a new tenant in Security Cloud Control from an MSP Portal. This endpoint creates a tenant, adds the tenant to the MSP Portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal. You can create no more than 1 tenant every 30 seconds. Additionally, you are limited to creating a total of 100 tenants: please speak to support to raise this limit.
 
         :param msp_create_tenant_input: (required)
         :type msp_create_tenant_input: MspCreateTenantInput
@@ -1348,9 +1348,9 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create SCC Tenant
+        """Create Security Cloud Control Tenant
 
-        Create a new tenant in SCC from an MSP Portal. This endpoint creates a tenant, adds the tenant to the MSP Portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal. You can create no more than 1 tenant every 30 seconds. Additionally, you are limited to creating a total of 100 tenants: please speak to support to raise this limit.
+        Create a new tenant in Security Cloud Control from an MSP Portal. This endpoint creates a tenant, adds the tenant to the MSP Portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal. You can create no more than 1 tenant every 30 seconds. Additionally, you are limited to creating a total of 100 tenants: please speak to support to raise this limit.
 
         :param msp_create_tenant_input: (required)
         :type msp_create_tenant_input: MspCreateTenantInput
@@ -1491,7 +1491,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CdoTransaction:
-        """Remove user groups from SCC tenant in MSP Portal
+        """Remove user groups from Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to remove a list of user groups from a tenant associated with the MSP Portal.
 
@@ -1563,7 +1563,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CdoTransaction]:
-        """Remove user groups from SCC tenant in MSP Portal
+        """Remove user groups from Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to remove a list of user groups from a tenant associated with the MSP Portal.
 
@@ -1635,7 +1635,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Remove user groups from SCC tenant in MSP Portal
+        """Remove user groups from Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to remove a list of user groups from a tenant associated with the MSP Portal.
 
@@ -1780,7 +1780,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CdoTransaction:
-        """Remove users from SCC tenant in MSP Portal
+        """Remove users from Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to remove a list of users from a tenant associated with the MSP Portal.
 
@@ -1852,7 +1852,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CdoTransaction]:
-        """Remove users from SCC tenant in MSP Portal
+        """Remove users from Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to remove a list of users from a tenant associated with the MSP Portal.
 
@@ -1924,7 +1924,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Remove users from SCC tenant in MSP Portal
+        """Remove users from Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to remove a list of users from a tenant associated with the MSP Portal.
 
@@ -2068,7 +2068,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CdoTransaction:
-        """Enable Multicloud Defense for SCC tenant in MSP Portal
+        """Enable Multicloud Defense for Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to enable Multicloud Defense for a tenant associated with the MSP Portal.
 
@@ -2136,7 +2136,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CdoTransaction]:
-        """Enable Multicloud Defense for SCC tenant in MSP Portal
+        """Enable Multicloud Defense for Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to enable Multicloud Defense for a tenant associated with the MSP Portal.
 
@@ -2204,7 +2204,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Enable Multicloud Defense for SCC tenant in MSP Portal
+        """Enable Multicloud Defense for Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to enable Multicloud Defense for a tenant associated with the MSP Portal.
 
@@ -2315,8 +2315,8 @@ class MSPApi:
     @validate_call
     def generate_api_token_for_user_in_tenant(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier of the tenant in SCC.")],
-        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API-only user in SCC.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier of the tenant in Security Cloud Control.")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API-only user in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2332,11 +2332,11 @@ class MSPApi:
     ) -> ApiTokenInfo:
         """Generate token for API-only user on tenant managed by MSP portal
 
-        Generate API Token for API-only user on a tenant managed by the MSP portal. API-only users are used for building automations with SCC. If the user ID provided is not that of an API-only user, this operation will fail.
+        Generate API Token for API-only user on a tenant managed by the MSP portal. API-only users are used for building automations with Security Cloud Control. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param tenant_uid: The unique identifier of the tenant in SCC. (required)
+        :param tenant_uid: The unique identifier of the tenant in Security Cloud Control. (required)
         :type tenant_uid: str
-        :param api_user_uid: The unique identifier of the API-only user in SCC. (required)
+        :param api_user_uid: The unique identifier of the API-only user in Security Cloud Control. (required)
         :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2390,8 +2390,8 @@ class MSPApi:
     @validate_call
     def generate_api_token_for_user_in_tenant_with_http_info(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier of the tenant in SCC.")],
-        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API-only user in SCC.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier of the tenant in Security Cloud Control.")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API-only user in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2407,11 +2407,11 @@ class MSPApi:
     ) -> ApiResponse[ApiTokenInfo]:
         """Generate token for API-only user on tenant managed by MSP portal
 
-        Generate API Token for API-only user on a tenant managed by the MSP portal. API-only users are used for building automations with SCC. If the user ID provided is not that of an API-only user, this operation will fail.
+        Generate API Token for API-only user on a tenant managed by the MSP portal. API-only users are used for building automations with Security Cloud Control. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param tenant_uid: The unique identifier of the tenant in SCC. (required)
+        :param tenant_uid: The unique identifier of the tenant in Security Cloud Control. (required)
         :type tenant_uid: str
-        :param api_user_uid: The unique identifier of the API-only user in SCC. (required)
+        :param api_user_uid: The unique identifier of the API-only user in Security Cloud Control. (required)
         :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2465,8 +2465,8 @@ class MSPApi:
     @validate_call
     def generate_api_token_for_user_in_tenant_without_preload_content(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier of the tenant in SCC.")],
-        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API-only user in SCC.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier of the tenant in Security Cloud Control.")],
+        api_user_uid: Annotated[StrictStr, Field(description="The unique identifier of the API-only user in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2482,11 +2482,11 @@ class MSPApi:
     ) -> RESTResponseType:
         """Generate token for API-only user on tenant managed by MSP portal
 
-        Generate API Token for API-only user on a tenant managed by the MSP portal. API-only users are used for building automations with SCC. If the user ID provided is not that of an API-only user, this operation will fail.
+        Generate API Token for API-only user on a tenant managed by the MSP portal. API-only users are used for building automations with Security Cloud Control. If the user ID provided is not that of an API-only user, this operation will fail.
 
-        :param tenant_uid: The unique identifier of the tenant in SCC. (required)
+        :param tenant_uid: The unique identifier of the tenant in Security Cloud Control. (required)
         :type tenant_uid: str
-        :param api_user_uid: The unique identifier of the API-only user in SCC. (required)
+        :param api_user_uid: The unique identifier of the API-only user in Security Cloud Control. (required)
         :type api_user_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2600,7 +2600,7 @@ class MSPApi:
     @validate_call
     def get_msp_managed_tenant(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier of the tenant in SCC.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier of the tenant in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2614,11 +2614,11 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> MspManagedTenant:
-        """Get SCC tenant managed by MSP Portal
+        """Get Security Cloud Control tenant managed by MSP Portal
 
-        Get a SCC tenant managed by the MSP Portal.
+        Get a Security Cloud Control tenant managed by the MSP Portal.
 
-        :param tenant_uid: The unique identifier of the tenant in SCC. (required)
+        :param tenant_uid: The unique identifier of the tenant in Security Cloud Control. (required)
         :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2672,7 +2672,7 @@ class MSPApi:
     @validate_call
     def get_msp_managed_tenant_with_http_info(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier of the tenant in SCC.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier of the tenant in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2686,11 +2686,11 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[MspManagedTenant]:
-        """Get SCC tenant managed by MSP Portal
+        """Get Security Cloud Control tenant managed by MSP Portal
 
-        Get a SCC tenant managed by the MSP Portal.
+        Get a Security Cloud Control tenant managed by the MSP Portal.
 
-        :param tenant_uid: The unique identifier of the tenant in SCC. (required)
+        :param tenant_uid: The unique identifier of the tenant in Security Cloud Control. (required)
         :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2744,7 +2744,7 @@ class MSPApi:
     @validate_call
     def get_msp_managed_tenant_without_preload_content(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier of the tenant in SCC.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier of the tenant in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2758,11 +2758,11 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get SCC tenant managed by MSP Portal
+        """Get Security Cloud Control tenant managed by MSP Portal
 
-        Get a SCC tenant managed by the MSP Portal.
+        Get a Security Cloud Control tenant managed by the MSP Portal.
 
-        :param tenant_uid: The unique identifier of the tenant in SCC. (required)
+        :param tenant_uid: The unique identifier of the tenant in Security Cloud Control. (required)
         :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2874,7 +2874,7 @@ class MSPApi:
     def get_msp_managed_tenants(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -2889,13 +2889,13 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> MspManagedTenantPage:
-        """Get SCC tenants managed by MSP Portal
+        """Get Security Cloud Control tenants managed by MSP Portal
 
-        Get a list of SCC tenants managed by the MSP Portal.
+        Get a list of Security Cloud Control tenants managed by the MSP Portal.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -2953,7 +2953,7 @@ class MSPApi:
     def get_msp_managed_tenants_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -2968,13 +2968,13 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[MspManagedTenantPage]:
-        """Get SCC tenants managed by MSP Portal
+        """Get Security Cloud Control tenants managed by MSP Portal
 
-        Get a list of SCC tenants managed by the MSP Portal.
+        Get a list of Security Cloud Control tenants managed by the MSP Portal.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -3032,7 +3032,7 @@ class MSPApi:
     def get_msp_managed_tenants_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -3047,13 +3047,13 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get SCC tenants managed by MSP Portal
+        """Get Security Cloud Control tenants managed by MSP Portal
 
-        Get a list of SCC tenants managed by the MSP Portal.
+        Get a list of Security Cloud Control tenants managed by the MSP Portal.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -3181,7 +3181,7 @@ class MSPApi:
         self,
         tenant_uid: Annotated[StrictStr, Field(description="Unique identifier of the tenant to retrieve the users groups for.")],
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -3204,7 +3204,7 @@ class MSPApi:
         :type tenant_uid: str
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -3261,7 +3261,7 @@ class MSPApi:
         self,
         tenant_uid: Annotated[StrictStr, Field(description="Unique identifier of the tenant to retrieve the users groups for.")],
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -3284,7 +3284,7 @@ class MSPApi:
         :type tenant_uid: str
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -3341,7 +3341,7 @@ class MSPApi:
         self,
         tenant_uid: Annotated[StrictStr, Field(description="Unique identifier of the tenant to retrieve the users groups for.")],
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -3364,7 +3364,7 @@ class MSPApi:
         :type tenant_uid: str
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -3493,7 +3493,7 @@ class MSPApi:
         self,
         tenant_uid: Annotated[StrictStr, Field(description="Unique identifier of the tenant to retrieve the users for.")],
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -3510,13 +3510,13 @@ class MSPApi:
     ) -> UserPage:
         """Get Users associated with tenant in MSP portal
 
-        Get a list of users associated with the SCC tenant managed by MSP portal.
+        Get a list of users associated with the Security Cloud Control tenant managed by MSP portal.
 
         :param tenant_uid: Unique identifier of the tenant to retrieve the users for. (required)
         :type tenant_uid: str
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -3573,7 +3573,7 @@ class MSPApi:
         self,
         tenant_uid: Annotated[StrictStr, Field(description="Unique identifier of the tenant to retrieve the users for.")],
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -3590,13 +3590,13 @@ class MSPApi:
     ) -> ApiResponse[UserPage]:
         """Get Users associated with tenant in MSP portal
 
-        Get a list of users associated with the SCC tenant managed by MSP portal.
+        Get a list of users associated with the Security Cloud Control tenant managed by MSP portal.
 
         :param tenant_uid: Unique identifier of the tenant to retrieve the users for. (required)
         :type tenant_uid: str
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -3653,7 +3653,7 @@ class MSPApi:
         self,
         tenant_uid: Annotated[StrictStr, Field(description="Unique identifier of the tenant to retrieve the users for.")],
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         _request_timeout: Union[
             None,
@@ -3670,13 +3670,13 @@ class MSPApi:
     ) -> RESTResponseType:
         """Get Users associated with tenant in MSP portal
 
-        Get a list of users associated with the SCC tenant managed by MSP portal.
+        Get a list of users associated with the Security Cloud Control tenant managed by MSP portal.
 
         :param tenant_uid: Unique identifier of the tenant to retrieve the users for. (required)
         :type tenant_uid: str
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -3817,7 +3817,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CdoTransaction:
-        """Provision cdFMC for SCC tenant in MSP Portal
+        """Provision cdFMC for Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to provision a cdFMC for a tenant associated with the MSP Portal. This operation does not wait for the cdFMC to be provisioned on the target tenant, and will be marked as successful once the provisioning has been successfully triggered. To monitor the transaction on the target tenant, use the UID in the `TRANSACTION_UID_IN_TARGET_TENANT` key in the transaction details.
 
@@ -3885,7 +3885,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CdoTransaction]:
-        """Provision cdFMC for SCC tenant in MSP Portal
+        """Provision cdFMC for Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to provision a cdFMC for a tenant associated with the MSP Portal. This operation does not wait for the cdFMC to be provisioned on the target tenant, and will be marked as successful once the provisioning has been successfully triggered. To monitor the transaction on the target tenant, use the UID in the `TRANSACTION_UID_IN_TARGET_TENANT` key in the transaction details.
 
@@ -3953,7 +3953,7 @@ class MSPApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Provision cdFMC for SCC tenant in MSP Portal
+        """Provision cdFMC for Security Cloud Control tenant in MSP Portal
 
         This is an asynchronous operation to provision a cdFMC for a tenant associated with the MSP Portal. This operation does not wait for the cdFMC to be provisioned on the target tenant, and will be marked as successful once the provisioning has been successfully triggered. To monitor the transaction on the target tenant, use the UID in the `TRANSACTION_UID_IN_TARGET_TENANT` key in the transaction details.
 
@@ -4064,7 +4064,7 @@ class MSPApi:
     @validate_call
     def remove_tenant_from_msp_portal(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in SCC.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4082,7 +4082,7 @@ class MSPApi:
 
         Removes a tenant currently associated with the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal.
 
-        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in SCC. (required)
+        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in Security Cloud Control. (required)
         :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4135,7 +4135,7 @@ class MSPApi:
     @validate_call
     def remove_tenant_from_msp_portal_with_http_info(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in SCC.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4153,7 +4153,7 @@ class MSPApi:
 
         Removes a tenant currently associated with the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal.
 
-        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in SCC. (required)
+        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in Security Cloud Control. (required)
         :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4206,7 +4206,7 @@ class MSPApi:
     @validate_call
     def remove_tenant_from_msp_portal_without_preload_content(
         self,
-        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in SCC.")],
+        tenant_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the tenant in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4224,7 +4224,7 @@ class MSPApi:
 
         Removes a tenant currently associated with the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal.
 
-        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in SCC. (required)
+        :param tenant_uid: The unique identifier, represented as a UUID, of the tenant in Security Cloud Control. (required)
         :type tenant_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

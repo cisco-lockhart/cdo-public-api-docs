@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -21,7 +21,7 @@ from typing_extensions import Self
 
 class ConnectivityState(str, Enum):
     """
-    The connectivity state of the device to CDO. A connectivity state that is not ONLINE can indicate either a problem with the device, or the communication pathways between the device and SCC.
+    The connectivity state of the device to CDO. A connectivity state that is not ONLINE can indicate either a problem with the device, or the communication pathways between the device and Security Cloud Control.
     """
 
     """

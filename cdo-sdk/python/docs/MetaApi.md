@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_jwks**](MetaApi.md#get_jwks) | **GET** /.well-known/jwks.json | Fetch JSON Web Key Set
 [**get_meta**](MetaApi.md#get_meta) | **GET** /v1/meta | Get Meta information
-[**get_regions**](MetaApi.md#get_regions) | **GET** /v1/regions | Get SCC Regions
+[**get_regions**](MetaApi.md#get_regions) | **GET** /v1/regions | Get Security Cloud Control Regions
 
 
 # **get_jwks**
@@ -79,7 +79,7 @@ No authorization required
 
 Get Meta information
 
-Get Meta information about CDO, including the IP addresses of SCC services.
+Get Meta information about CDO, including the IP addresses of Security Cloud Control services.
 
 ### Example
 
@@ -134,7 +134,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Meta information about SCC. |  -  |
+**200** | Meta information about Security Cloud Control. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -142,9 +142,9 @@ No authorization required
 # **get_regions**
 > CdoRegionList get_regions()
 
-Get SCC Regions
+Get Security Cloud Control Regions
 
-Get the list of regions that SCC is deployed in.
+Get the list of regions that Security Cloud Control is deployed in.
 
 ### Example
 
@@ -168,7 +168,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     api_instance = cdo_sdk_python.MetaApi(api_client)
 
     try:
-        # Get SCC Regions
+        # Get Security Cloud Control Regions
         api_response = api_instance.get_regions()
         print("The response of MetaApi->get_regions:\n")
         pprint(api_response)
@@ -199,7 +199,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of SCC regions |  -  |
+**200** | List of Security Cloud Control regions |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

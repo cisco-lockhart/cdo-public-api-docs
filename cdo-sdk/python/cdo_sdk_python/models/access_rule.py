@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -30,7 +30,7 @@ class AccessRule(BaseModel):
     """
     AccessRule
     """ # noqa: E501
-    uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of Access Rule in SCC.")
+    uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of Access Rule in Security Cloud Control.")
     access_group_uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the Access Group associated with the Access Rule.", alias="accessGroupUid")
     shared_access_group_uid: Optional[StrictStr] = Field(default=None, description="Optional unique identifier for the shared Access Group associated with a shared Access Rule.", alias="sharedAccessGroupUid")
     entity_uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the device/manager associated with the Access Rule. Points to shared Access Group in case of shared Rule", alias="entityUid")

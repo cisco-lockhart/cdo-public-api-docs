@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -63,7 +63,7 @@ class ConnectorsApi:
     ) -> CdoTransaction:
         """Create SDC
 
-        This is an asynchronous operation to create an SDC to a SCC tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+        This is an asynchronous operation to create an SDC to a Security Cloud Control tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
         :param sdc_create_input: (required)
         :type sdc_create_input: SdcCreateInput
@@ -134,7 +134,7 @@ class ConnectorsApi:
     ) -> ApiResponse[CdoTransaction]:
         """Create SDC
 
-        This is an asynchronous operation to create an SDC to a SCC tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+        This is an asynchronous operation to create an SDC to a Security Cloud Control tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
         :param sdc_create_input: (required)
         :type sdc_create_input: SdcCreateInput
@@ -205,7 +205,7 @@ class ConnectorsApi:
     ) -> RESTResponseType:
         """Create SDC
 
-        This is an asynchronous operation to create an SDC to a SCC tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+        This is an asynchronous operation to create an SDC to a Security Cloud Control tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
         :param sdc_create_input: (required)
         :type sdc_create_input: SdcCreateInput
@@ -330,7 +330,7 @@ class ConnectorsApi:
     @validate_call
     def delete_sdc(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in SCC.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -346,9 +346,9 @@ class ConnectorsApi:
     ) -> None:
         """Delete SDC
 
-        Delete an SDC in the SCC tenant
+        Delete an SDC in the Security Cloud Control tenant
 
-        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in SCC. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in Security Cloud Control. (required)
         :type sdc_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -401,7 +401,7 @@ class ConnectorsApi:
     @validate_call
     def delete_sdc_with_http_info(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in SCC.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -417,9 +417,9 @@ class ConnectorsApi:
     ) -> ApiResponse[None]:
         """Delete SDC
 
-        Delete an SDC in the SCC tenant
+        Delete an SDC in the Security Cloud Control tenant
 
-        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in SCC. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in Security Cloud Control. (required)
         :type sdc_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -472,7 +472,7 @@ class ConnectorsApi:
     @validate_call
     def delete_sdc_without_preload_content(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in SCC.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -488,9 +488,9 @@ class ConnectorsApi:
     ) -> RESTResponseType:
         """Delete SDC
 
-        Delete an SDC in the SCC tenant
+        Delete an SDC in the Security Cloud Control tenant
 
-        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in SCC. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in Security Cloud Control. (required)
         :type sdc_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -600,7 +600,7 @@ class ConnectorsApi:
     @validate_call
     def get_sdc(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in SCC.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -616,9 +616,9 @@ class ConnectorsApi:
     ) -> Sdc:
         """Get SDC
 
-        Get a SDC by UID in the SCC tenant.
+        Get a SDC by UID in the Security Cloud Control tenant.
 
-        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in SCC. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in Security Cloud Control. (required)
         :type sdc_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -672,7 +672,7 @@ class ConnectorsApi:
     @validate_call
     def get_sdc_with_http_info(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in SCC.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -688,9 +688,9 @@ class ConnectorsApi:
     ) -> ApiResponse[Sdc]:
         """Get SDC
 
-        Get a SDC by UID in the SCC tenant.
+        Get a SDC by UID in the Security Cloud Control tenant.
 
-        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in SCC. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in Security Cloud Control. (required)
         :type sdc_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -744,7 +744,7 @@ class ConnectorsApi:
     @validate_call
     def get_sdc_without_preload_content(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in SCC.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -760,9 +760,9 @@ class ConnectorsApi:
     ) -> RESTResponseType:
         """Get SDC
 
-        Get a SDC by UID in the SCC tenant.
+        Get a SDC by UID in the Security Cloud Control tenant.
 
-        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in SCC. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in Security Cloud Control. (required)
         :type sdc_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -874,7 +874,7 @@ class ConnectorsApi:
     def get_sdcs(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -892,11 +892,11 @@ class ConnectorsApi:
     ) -> SdcPage:
         """Get SDCs
 
-        Get a list of on-prem SDCs in the SCC tenant.
+        Get a list of on-prem SDCs in the Security Cloud Control tenant.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -957,7 +957,7 @@ class ConnectorsApi:
     def get_sdcs_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -975,11 +975,11 @@ class ConnectorsApi:
     ) -> ApiResponse[SdcPage]:
         """Get SDCs
 
-        Get a list of on-prem SDCs in the SCC tenant.
+        Get a list of on-prem SDCs in the Security Cloud Control tenant.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -1040,7 +1040,7 @@ class ConnectorsApi:
     def get_sdcs_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -1058,11 +1058,11 @@ class ConnectorsApi:
     ) -> RESTResponseType:
         """Get SDCs
 
-        Get a list of on-prem SDCs in the SCC tenant.
+        Get a list of on-prem SDCs in the Security Cloud Control tenant.
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -1197,7 +1197,7 @@ class ConnectorsApi:
     @validate_call
     def modify_sdc(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in SCC.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in Security Cloud Control.")],
         sdc_patch_input: SdcPatchInput,
         _request_timeout: Union[
             None,
@@ -1214,9 +1214,9 @@ class ConnectorsApi:
     ) -> Sdc:
         """Modify SDC
 
-        Modify a SDC in the SCC tenant
+        Modify a SDC in the Security Cloud Control tenant
 
-        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in SCC. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in Security Cloud Control. (required)
         :type sdc_uid: str
         :param sdc_patch_input: (required)
         :type sdc_patch_input: SdcPatchInput
@@ -1273,7 +1273,7 @@ class ConnectorsApi:
     @validate_call
     def modify_sdc_with_http_info(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in SCC.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in Security Cloud Control.")],
         sdc_patch_input: SdcPatchInput,
         _request_timeout: Union[
             None,
@@ -1290,9 +1290,9 @@ class ConnectorsApi:
     ) -> ApiResponse[Sdc]:
         """Modify SDC
 
-        Modify a SDC in the SCC tenant
+        Modify a SDC in the Security Cloud Control tenant
 
-        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in SCC. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in Security Cloud Control. (required)
         :type sdc_uid: str
         :param sdc_patch_input: (required)
         :type sdc_patch_input: SdcPatchInput
@@ -1349,7 +1349,7 @@ class ConnectorsApi:
     @validate_call
     def modify_sdc_without_preload_content(
         self,
-        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in SCC.")],
+        sdc_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SDC in Security Cloud Control.")],
         sdc_patch_input: SdcPatchInput,
         _request_timeout: Union[
             None,
@@ -1366,9 +1366,9 @@ class ConnectorsApi:
     ) -> RESTResponseType:
         """Modify SDC
 
-        Modify a SDC in the SCC tenant
+        Modify a SDC in the Security Cloud Control tenant
 
-        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in SCC. (required)
+        :param sdc_uid: The unique identifier, represented as a UUID, of the SDC in Security Cloud Control. (required)
         :type sdc_uid: str
         :param sdc_patch_input: (required)
         :type sdc_patch_input: SdcPatchInput

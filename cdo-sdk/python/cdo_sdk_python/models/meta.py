@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -27,7 +27,7 @@ class Meta(BaseModel):
     """
     Meta
     """ # noqa: E501
-    cloud_connector_ips: Optional[List[StrictStr]] = Field(default=None, description="The IP addresses from which to allow inbound access to your network if you wish to connect to your devices through SCC's Cloud Connector.", alias="cloudConnectorIps")
+    cloud_connector_ips: Optional[List[StrictStr]] = Field(default=None, description="The IP addresses from which to allow inbound access to your network if you wish to connect to your devices through Security Cloud Control's Cloud Connector.", alias="cloudConnectorIps")
     __properties: ClassVar[List[str]] = ["cloudConnectorIps"]
 
     model_config = ConfigDict(

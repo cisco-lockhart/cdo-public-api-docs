@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier, represented as a UUID, of the device in SCC. | [optional] 
-**name** | **str** | The name of the device in CDO. Device names are unique in SCC. | 
+**uid** | **str** | The unique identifier, represented as a UUID, of the device in Security Cloud Control. | [optional] 
+**name** | **str** | The name of the device in CDO. Device names are unique in Security Cloud Control. | 
 **device_type** | [**EntityType**](EntityType.md) |  | 
 **connector_type** | [**ConnectorType**](ConnectorType.md) |  | [optional] 
 **connector_uid** | **str** | The unique identifier, represented as a UUID, of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG)The name of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG). | [optional] 
-**address** | **str** | The address of the device, in &#x60;host:port&#x60; format. SCC connects to the device at this address. | [optional] 
+**address** | **str** | The address of the device, in &#x60;host:port&#x60; format. Security Cloud Control connects to the device at this address. | [optional] 
 **device_role** | [**DeviceRole**](DeviceRole.md) |  | [optional] 
 **serial** | **str** | The serial number of the device. This is typically used for licensing, and is not the same as the chassis&#39; serial number. | [optional] 
 **chassis_serial** | **str** | The serial number on the chassis of the device (ASA-only). This is typically used to type up to Cisco SmartNet, and is not the same as the serial number. | [optional] 
@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 **ftd_licenses** | **List[str]** | (FTDs only) List of FTD License entitlements. | [optional] 
 **snort_version** | **str** | (FTDs only) List of FTD License entitlements. | [optional] 
 **ftd_performance_tier** | **str** | (FTDvs only) The FTDv supports performance-tiered licensing that provides different throughput levels and VPN connection limits based on deployment requirements. This field specifies the performance tier of the FTD. | [optional] 
-**redundancy_mode** | **str** | The redundancy mode this firewall is running in. Note: for High Availability pairs and clusters, SCC represents all of the devices as part of one record. | [optional] 
+**redundancy_mode** | **str** | The redundancy mode this firewall is running in. Note: for High Availability pairs and clusters, Security Cloud Control represents all of the devices as part of one record. | [optional] 
 **cd_fmc_info** | [**CdFmcInfo**](CdFmcInfo.md) |  | [optional] 
 **sse_device_data** | [**SseDeviceData**](SseDeviceData.md) |  | [optional] 
 **on_prem_fmc_info** | [**OnPremFmcInfo**](OnPremFmcInfo.md) |  | [optional] 

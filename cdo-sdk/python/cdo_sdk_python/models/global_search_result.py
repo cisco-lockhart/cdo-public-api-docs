@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -31,8 +31,8 @@ class GlobalSearchResult(BaseModel):
     GlobalSearchResult
     """ # noqa: E501
     inventory: Optional[Inventory] = None
-    objects: Optional[List[Dict[str, Any]]] = Field(default=None, description="Results from the SCC objects that match the search term.")
-    policies: Optional[List[Policy]] = Field(default=None, description="Results from the SCC policies that match the search term.")
+    objects: Optional[List[Dict[str, Any]]] = Field(default=None, description="Results from the Security Cloud Control objects that match the search term.")
+    policies: Optional[List[Policy]] = Field(default=None, description="Results from the Security Cloud Control policies that match the search term.")
     cd_fmc_result: Optional[CdFmcResult] = Field(default=None, alias="cdFmcResult")
     __properties: ClassVar[List[str]] = ["inventory", "objects", "policies", "cdFmcResult"]
 

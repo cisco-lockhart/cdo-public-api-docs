@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier, represented as a UUID, of Access Group in SCC. | 
-**name** | **str** | The name of Access Group in CDO. Access Group names are unique in SCC. | 
+**uid** | **str** | The unique identifier, represented as a UUID, of Access Group in Security Cloud Control. | 
+**name** | **str** | The name of Access Group in CDO. Access Group names are unique in Security Cloud Control. | 
 **entity_uid** | **str** | The unique identifier, represented as a UUID, of the device/manager associated with the Access Group. | 
 **shared_access_group_uid** | **str** | The unique identifier, represented as a UUID, of the shared access group manager associated with the Access Group. | 
 **is_shared** | **bool** | The flag that identifies if access group is shared. | [optional] 

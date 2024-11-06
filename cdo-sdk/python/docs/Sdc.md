@@ -6,13 +6,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **public_key** | [**PublicKey**](PublicKey.md) |  | [optional] 
-**uid** | **str** | The unique identifier, represented as a UUID, of the SDC in SCC. | [optional] 
-**name** | **str** | The name of the SDC in CDO. SDC names are unique in SCC. | 
+**uid** | **str** | The unique identifier, represented as a UUID, of the SDC in Security Cloud Control. | [optional] 
+**name** | **str** | The name of the SDC in CDO. SDC names are unique in Security Cloud Control. | 
 **software_version** | **str** | The software version running on the SDC. | [optional] 
 **ip_address** | **str** | The IP address of the SDC. | [optional] 
 **status** | [**Status**](Status.md) |  | [optional] 
 **last_heartbeat** | **datetime** | The time (UTC; represented using the RFC-3339 standard) that a heartbeat was last received from the SDC. This serves as an indicator of the health of the SDC. | [optional] 
-**bootstrap_data** | **str** | The bootstrap data is information used to automatically configure the SDC during its initial setup. This data is base64 encoded and includes essential details like the unique registration token and customer-specific settings that enable the SDC to communicate with and send data to SCC. This field is populated only if the SDC is not onboarded. | [optional] 
+**bootstrap_data** | **str** | The bootstrap data is information used to automatically configure the SDC during its initial setup. This data is base64 encoded and includes essential details like the unique registration token and customer-specific settings that enable the SDC to communicate with and send data to Security Cloud Control. This field is populated only if the SDC is not onboarded. | [optional] 
 
 ## Example
 

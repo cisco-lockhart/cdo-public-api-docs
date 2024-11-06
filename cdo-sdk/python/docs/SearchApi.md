@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 Rebuild search index
 
-Initiate Full Indexing on the CDO tenant, to improve accuracy of search results. This operation is performed automatically on a schedule by CDO, but can be triggered on demand too. This operation is asynchronous, but its progress cannot be tracked using SCC's API.
+Initiate Full Indexing on the CDO tenant, to improve accuracy of search results. This operation is performed automatically on a schedule by CDO, but can be triggered on demand too. This operation is asynchronous, but its progress cannot be tracked using Security Cloud Control's API.
 
 ### Example
 
@@ -78,7 +78,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | SCC Transaction object that can be used to track the progress of the indexing operation. |  -  |
+**202** | Security Cloud Control Transaction object that can be used to track the progress of the indexing operation. |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -92,7 +92,7 @@ This endpoint does not need any parameter.
 
 Search
 
-Search for devices, services, managers, objects and policies across the SCC tenant.
+Search for devices, services, managers, objects and policies across the Security Cloud Control tenant.
 
 ### Example
 

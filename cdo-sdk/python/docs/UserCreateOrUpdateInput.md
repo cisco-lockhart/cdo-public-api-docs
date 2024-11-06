@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The name of the user in SCC. | 
-**role** | **str** | The user role in SCC. | [optional] 
-**api_only_user** | **bool** | Whether the user is API-only, an API-only user cannot access SCC in the UI. | [optional] [default to False]
+**name** | **str** | The name of the user in Security Cloud Control. | 
+**role** | **str** | The user role in Security Cloud Control. | [optional] 
+**api_only_user** | **bool** | Whether the user is API-only, an API-only user cannot access Security Cloud Control in the UI. | [optional] [default to False]
 
 ## Example
 

@@ -1,7 +1,9 @@
 openapi: 3.0.1
 info:
   title: Cisco Security Cloud Control API
-  description: Use the documentation to explore the endpoints SCC has to offer
+  description: >-
+    Use the documentation to explore the endpoints Security Cloud Control has to
+    offer
   contact:
     name: Cisco Security Cloud Control TAC
     email: cdo.tac@cisco.com
@@ -75,8 +77,8 @@ paths:
         API Explorer in CDO</a> for the list of available endpoints. You can
         append the relative API paths provided in the cdFMC API documentation to
         the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant.
-        <b>Note:</b> These endpoints will return 404 if the SCC tenant does not
-        have a cdFMC provisioned.
+        <b>Note:</b> These endpoints will return 404 if the Security Cloud
+        Control tenant does not have a cdFMC provisioned.
       operationId: proxyFmcRequest
       responses:
         '401':
@@ -102,8 +104,8 @@ paths:
         API Explorer in CDO</a> for the list of available endpoints. You can
         append the relative API paths provided in the cdFMC API documentation to
         the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant.
-        <b>Note:</b> These endpoints will return 404 if the SCC tenant does not
-        have a cdFMC provisioned.
+        <b>Note:</b> These endpoints will return 404 if the Security Cloud
+        Control tenant does not have a cdFMC provisioned.
       operationId: proxyFmcRequest_2
       responses:
         '401':
@@ -129,8 +131,8 @@ paths:
         API Explorer in CDO</a> for the list of available endpoints. You can
         append the relative API paths provided in the cdFMC API documentation to
         the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant.
-        <b>Note:</b> These endpoints will return 404 if the SCC tenant does not
-        have a cdFMC provisioned.
+        <b>Note:</b> These endpoints will return 404 if the Security Cloud
+        Control tenant does not have a cdFMC provisioned.
       operationId: proxyFmcRequest_1
       responses:
         '401':
@@ -156,8 +158,8 @@ paths:
         API Explorer in CDO</a> for the list of available endpoints. You can
         append the relative API paths provided in the cdFMC API documentation to
         the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant.
-        <b>Note:</b> These endpoints will return 404 if the SCC tenant does not
-        have a cdFMC provisioned.
+        <b>Note:</b> These endpoints will return 404 if the Security Cloud
+        Control tenant does not have a cdFMC provisioned.
       operationId: proxyFmcRequest_4
       responses:
         '401':
@@ -183,8 +185,8 @@ paths:
         API Explorer in CDO</a> for the list of available endpoints. You can
         append the relative API paths provided in the cdFMC API documentation to
         the `/v1/cdfmc` URL to make requests to the cdFMC in your CDO tenant.
-        <b>Note:</b> These endpoints will return 404 if the SCC tenant does not
-        have a cdFMC provisioned.
+        <b>Note:</b> These endpoints will return 404 if the Security Cloud
+        Control tenant does not have a cdFMC provisioned.
       operationId: proxyFmcRequest_3
       responses:
         '401':
@@ -206,8 +208,9 @@ paths:
       summary: Terminate RA VPN Sessions
       description: >-
         This is an asynchronous operation to terminate all RA VPN sessions on a
-        device in the SCC tenant. This operation returns a link to a transaction
-        object that can be used to monitor the progress of the operation.
+        device in the Security Cloud Control tenant. This operation returns a
+        link to a transaction object that can be used to monitor the progress of
+        the operation.
       operationId: terminateRaVpnSessionsByDevice
       parameters:
         - name: deviceUid
@@ -219,8 +222,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the progress of the
-            termination operation
+            Security Cloud Control Transaction object that can be used to track
+            the progress of the termination operation
           content:
             application/json:
               schema:
@@ -248,9 +251,9 @@ paths:
       summary: Terminate User's RA VPN Sessions
       description: >-
         This is an asynchronous operation to terminate all of a user's RA VPN
-        sessions on a device in the SCC tenant. This operation returns a link to
-        a transaction object that can be used to monitor the progress of the
-        operation.
+        sessions on a device in the Security Cloud Control tenant. This
+        operation returns a link to a transaction object that can be used to
+        monitor the progress of the operation.
       operationId: terminateRaVpnSessionsByDeviceAndUserName
       parameters:
         - name: deviceUid
@@ -267,8 +270,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the progress of the
-            termination operation
+            Security Cloud Control Transaction object that can be used to track
+            the progress of the termination operation
           content:
             application/json:
               schema:
@@ -296,7 +299,7 @@ paths:
       summary: Refresh RA VPN Sessions
       description: >-
         This is an asynchronous operation to refresh RA VPN sessions for all
-        devices in the SCC tenant.
+        devices in the Security Cloud Control tenant.
       operationId: refreshRaVpnSessionsByDevice
       requestBody:
         content:
@@ -306,8 +309,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the progress of the
-            refresh operation
+            Security Cloud Control Transaction object that can be used to track
+            the progress of the refresh operation
           content:
             application/json:
               schema:
@@ -333,7 +336,7 @@ paths:
       tags:
         - Users
       summary: Get Tenant Users
-      description: Get a list of users associated with the SCC tenant.
+      description: Get a list of users associated with the Security Cloud Control tenant.
       operationId: getUsers
       parameters:
         - name: limit
@@ -348,9 +351,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -389,11 +393,11 @@ paths:
     post:
       tags:
         - Users
-      summary: Create User in SCC Tenant
+      summary: Create User in Security Cloud Control Tenant
       description: >-
-        Create a user in the SCC tenant. The user may already exist and have
-        access to other tenants, in which case this endpoint adds the user to
-        this tenant.
+        Create a user in the Security Cloud Control tenant. The user may already
+        exist and have access to other tenants, in which case this endpoint adds
+        the user to this tenant.
       operationId: createUser
       requestBody:
         content:
@@ -436,7 +440,7 @@ paths:
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the API user in
-            SCC.
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -469,15 +473,15 @@ paths:
       summary: Generate Token for API-only user
       description: >-
         Generate API Token for API-only user. API-only users are used for
-        building automations with SCC. If the user ID provided is not that of an
-        API-only user, this operation will fail.
+        building automations with Security Cloud Control. If the user ID
+        provided is not that of an API-only user, this operation will fail.
       operationId: generateApiToken
       parameters:
         - name: apiUserUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the API-only user
-            in SCC
+            in Security Cloud Control
           required: true
           schema:
             type: string
@@ -508,7 +512,9 @@ paths:
       tags:
         - Users
       summary: Get Active Directory Groups
-      description: Get a list of active directory groups associated with the SCC tenant.
+      description: >-
+        Get a list of active directory groups associated with the Security Cloud
+        Control tenant.
       operationId: getActiveDirectoryGroups
       parameters:
         - name: limit
@@ -523,9 +529,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -564,8 +571,8 @@ paths:
     post:
       tags:
         - Users
-      summary: Create Active Directory Group in SCC Tenant
-      description: Create an Active Directory Group in the SCC tenant.
+      summary: Create Active Directory Group in Security Cloud Control Tenant
+      description: Create an Active Directory Group in the Security Cloud Control tenant.
       operationId: createActiveDirectoryGroup
       requestBody:
         content:
@@ -625,13 +632,13 @@ paths:
         Initiate Full Indexing on the CDO tenant, to improve accuracy of search
         results. This operation is performed automatically on a schedule by CDO,
         but can be triggered on demand too. This operation is asynchronous, but
-        its progress cannot be tracked using SCC's API.
+        its progress cannot be tracked using Security Cloud Control's API.
       operationId: initiateFullIndexing
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the progress of the
-            indexing operation.
+            Security Cloud Control Transaction object that can be used to track
+            the progress of the indexing operation.
           content:
             application/json:
               schema:
@@ -672,9 +679,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -721,7 +729,7 @@ paths:
       tags:
         - ASA Access Rules
       summary: Create Access Rule
-      description: Create an Access Rule in the SCC tenant.
+      description: Create an Access Rule in the Security Cloud Control tenant.
       operationId: createAccessRule
       requestBody:
         content:
@@ -731,7 +739,7 @@ paths:
         required: true
       responses:
         '201':
-          description: SCC Access Rule.
+          description: Security Cloud Control Access Rule.
           content:
             application/json:
               schema:
@@ -768,9 +776,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -827,7 +836,7 @@ paths:
         required: true
       responses:
         '200':
-          description: SCC Access Group
+          description: Security Cloud Control Access Group
           content:
             application/json:
               schema:
@@ -851,8 +860,9 @@ paths:
       summary: Enable Multicloud Defense
       description: >-
         This is an asynchronous operation to Enable Multicloud Defense for the
-        SCC tenant. This operation returns a link to a transaction object that
-        can be used to monitor the progress of the operation.
+        Security Cloud Control tenant. This operation returns a link to a
+        transaction object that can be used to monitor the progress of the
+        operation.
       operationId: enableMulticloudDefense
       parameters:
         - name: Authorization
@@ -863,8 +873,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the status of the
-            operation.
+            Security Cloud Control Transaction object that can be used to track
+            the status of the operation.
           content:
             application/json:
               schema:
@@ -897,8 +907,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the status of the
-            operation.
+            Security Cloud Control Transaction object that can be used to track
+            the status of the operation.
           content:
             application/json:
               schema:
@@ -925,9 +935,9 @@ paths:
         - Inventory
       summary: Onboard IOS Device
       description: >-
-        Onboard a IOS device in the SCC tenant. This operation returns a link to
-        a transaction object that can be used to monitor the progress of the
-        operation.
+        Onboard a IOS device in the Security Cloud Control tenant. This
+        operation returns a link to a transaction object that can be used to
+        monitor the progress of the operation.
       operationId: onboardIosDevice
       requestBody:
         content:
@@ -938,8 +948,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the progress of the
-            onboarding operation.
+            Security Cloud Control Transaction object that can be used to track
+            the progress of the onboarding operation.
           content:
             application/json:
               schema:
@@ -971,7 +981,7 @@ paths:
         process: the first step, handled by this operation, creates an FTD
         device with a configure manager string that must be pasted into the FTD
         device's Command-Line Interface. The FTD then uses this information to
-        register itself with the SCC tenant.
+        register itself with the Security Cloud Control tenant.
       operationId: createFtdDevice
       requestBody:
         content:
@@ -982,8 +992,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the progress of the
-            creation operation.
+            Security Cloud Control Transaction object that can be used to track
+            the progress of the creation operation.
           content:
             application/json:
               schema:
@@ -1013,7 +1023,8 @@ paths:
         can be used to track the progress of the onboarding operation. Note:
         This operation will be marked as complete once CDO is ready to handle a
         response from the device once it is plugged in and connected to the
-        Internet; it does not wait for the device to communicate back to SCC.
+        Internet; it does not wait for the device to communicate back to
+        Security Cloud Control.
       operationId: onboardFtdDeviceUsingZtp
       requestBody:
         content:
@@ -1024,8 +1035,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the progress of the
-            creation operation.
+            Security Cloud Control Transaction object that can be used to track
+            the progress of the creation operation.
           content:
             application/json:
               schema:
@@ -1050,11 +1061,11 @@ paths:
         - Inventory
       summary: Register FTD device to FMC
       description: >-
-        Complete registration of an FTD device managed by an FMC to the SCC
-        tenant. Call this API endpoint after you have created an FTD and pasted
-        the generated CLI output in the FTD. This operation returns a link to a
-        transaction object that can be used to monitor the progress of the
-        operation.
+        Complete registration of an FTD device managed by an FMC to the Security
+        Cloud Control tenant. Call this API endpoint after you have created an
+        FTD and pasted the generated CLI output in the FTD. This operation
+        returns a link to a transaction object that can be used to monitor the
+        progress of the operation.
       operationId: finishOnboardingFtdDevice
       requestBody:
         content:
@@ -1065,8 +1076,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the progress of the
-            creation operation.
+            Security Cloud Control Transaction object that can be used to track
+            the progress of the creation operation.
           content:
             application/json:
               schema:
@@ -1095,14 +1106,15 @@ paths:
         the CDO tenant. This operation returns a link to a transaction object
         that can be used to monitor the progress of the operation. The reason
         this operation is asynchronous is because the device is first removed
-        from the cdFMC, following which it is deleted from the SCC tenant.
+        from the cdFMC, following which it is deleted from the Security Cloud
+        Control tenant.
       operationId: deleteCdFmcManagedFtdDevice
       parameters:
         - name: deviceUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the cdFMC managed
-            FTD device in SCC.
+            FTD device in Security Cloud Control.
           required: true
           schema:
             type: string
@@ -1110,8 +1122,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the progress of the
-            deletion operation.
+            Security Cloud Control Transaction object that can be used to track
+            the progress of the deletion operation.
           content:
             application/json:
               schema:
@@ -1137,10 +1149,10 @@ paths:
       summary: Onboard Duo Admin Panel
       description: >-
         Onboard a Duo Admin Panel to the CDO tenant. The credentials to onboard
-        the Duo Admin Panel to SCC must be generated by creating an Admin API
-        application on https://www.duo.com. This operation returns a link to a
-        transaction object that can be used to monitor the progress of the
-        operation.
+        the Duo Admin Panel to Security Cloud Control must be generated by
+        creating an Admin API application on https://www.duo.com. This operation
+        returns a link to a transaction object that can be used to monitor the
+        progress of the operation.
       operationId: createDuoAdminPanel
       requestBody:
         content:
@@ -1151,8 +1163,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the progress of the
-            onboarding operation
+            Security Cloud Control Transaction object that can be used to track
+            the progress of the onboarding operation
           content:
             application/json:
               schema:
@@ -1177,9 +1189,9 @@ paths:
         - Inventory
       summary: Onboard ASA device
       description: >-
-        This is an asynchronous operation to onboard an ASA to a SCC tenant.
-        This operation returns a link to a transaction object that can be used
-        to monitor the progress of the operation.
+        This is an asynchronous operation to onboard an ASA to a Security Cloud
+        Control tenant. This operation returns a link to a transaction object
+        that can be used to monitor the progress of the operation.
       operationId: onboardAsaDevice
       requestBody:
         content:
@@ -1190,8 +1202,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the progress of the
-            onboarding operation.
+            Security Cloud Control Transaction object that can be used to track
+            the progress of the onboarding operation.
           content:
             application/json:
               schema:
@@ -1219,15 +1231,16 @@ paths:
       summary: Reconnect ASA device
       description: >-
         This is an asynchronous operation to re-establish the connection between
-        an ASA and the SCC cloud. This operation returns a link to a transaction
-        object that can be used to monitor the progress of the operation.
+        an ASA and the Security Cloud Control cloud. This operation returns a
+        link to a transaction object that can be used to monitor the progress of
+        the operation.
       operationId: reconnectAsaDevice
       parameters:
         - name: deviceUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the ASA device in
-            SCC.
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -1235,8 +1248,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the progress of the
-            reconnecting operation.
+            Security Cloud Control Transaction object that can be used to track
+            the progress of the reconnecting operation.
           content:
             application/json:
               schema:
@@ -1262,16 +1275,16 @@ paths:
       summary: Read ASA device configuration
       description: >-
         This is an asynchronous operation to read the latest configuration on an
-        ASA device in to the SCC tenant. This operation returns a link to a
-        transaction object that can be used to monitor the progress of the
-        operation.
+        ASA device in to the Security Cloud Control tenant. This operation
+        returns a link to a transaction object that can be used to monitor the
+        progress of the operation.
       operationId: readAsaDeviceConfiguration
       parameters:
         - name: deviceUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the ASA device in
-            SCC.
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -1279,8 +1292,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the progress of the
-            read operation
+            Security Cloud Control Transaction object that can be used to track
+            the progress of the read operation
           content:
             application/json:
               schema:
@@ -1306,9 +1319,9 @@ paths:
       summary: Deploy ASA device changes
       description: >-
         This is an asynchronous operation to deploy changes made to an ASA
-        device's configuration on SCC to the device. This operation returns a
-        link to a transaction object that can be used to monitor the progress of
-        the operation.
+        device's configuration on Security Cloud Control to the device. This
+        operation returns a link to a transaction object that can be used to
+        monitor the progress of the operation.
       operationId: deployAsaDeviceChanges
       parameters:
         - name: deviceUid
@@ -1320,8 +1333,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the progress of the
-            ASA deploy operation.
+            Security Cloud Control Transaction object that can be used to track
+            the progress of the ASA deploy operation.
           content:
             application/json:
               schema:
@@ -1348,8 +1361,8 @@ paths:
         - Inventory
       summary: Execute CLI Command
       description: >-
-        This is an asynchronous operation to execute CLI commands in the SCC
-        tenant.
+        This is an asynchronous operation to execute CLI commands in the
+        Security Cloud Control tenant.
       operationId: executeCliCommand
       requestBody:
         content:
@@ -1359,8 +1372,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the progress of the
-            execute CLI operation
+            Security Cloud Control Transaction object that can be used to track
+            the progress of the execute CLI operation
           content:
             application/json:
               schema:
@@ -1386,7 +1399,7 @@ paths:
       summary: Execute CLI Macro Command
       description: >-
         This is an asynchronous operation to execute CLI macro command in the
-        SCC tenant.
+        Security Cloud Control tenant.
       operationId: executeCliMacro
       requestBody:
         content:
@@ -1396,8 +1409,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the progress of the
-            execute CLI operation
+            Security Cloud Control Transaction object that can be used to track
+            the progress of the execute CLI operation
           content:
             application/json:
               schema:
@@ -1421,7 +1434,7 @@ paths:
       tags:
         - Connectors
       summary: Get SDCs
-      description: Get a list of on-prem SDCs in the SCC tenant.
+      description: Get a list of on-prem SDCs in the Security Cloud Control tenant.
       operationId: getSdcs
       parameters:
         - name: limit
@@ -1436,9 +1449,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -1488,9 +1502,9 @@ paths:
         - Connectors
       summary: Create SDC
       description: >-
-        This is an asynchronous operation to create an SDC to a SCC tenant. This
-        operation returns a link to a transaction object that can be used to
-        monitor the progress of the operation.
+        This is an asynchronous operation to create an SDC to a Security Cloud
+        Control tenant. This operation returns a link to a transaction object
+        that can be used to monitor the progress of the operation.
       operationId: createSdc
       requestBody:
         content:
@@ -1501,8 +1515,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the progress of the
-            creation operation.
+            Security Cloud Control Transaction object that can be used to track
+            the progress of the creation operation.
           content:
             application/json:
               schema:
@@ -1544,9 +1558,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -1572,7 +1587,7 @@ paths:
           example: name:DESC
       responses:
         '200':
-          description: List of SCC CLI macros
+          description: List of Security Cloud Control CLI macros
           content:
             application/json:
               schema:
@@ -1609,7 +1624,7 @@ paths:
         required: true
       responses:
         '200':
-          description: SCC CLI macro
+          description: Security Cloud Control CLI macro
           content:
             application/json:
               schema:
@@ -1650,9 +1665,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -1694,7 +1710,7 @@ paths:
       tags:
         - Change Requests
       summary: Create Change Request
-      description: Create a Change Request in the SCC tenant.
+      description: Create a Change Request in the Security Cloud Control tenant.
       operationId: createChangeRequest
       requestBody:
         content:
@@ -1747,9 +1763,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -1800,8 +1817,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the status of the
-            question.
+            Security Cloud Control Transaction object that can be used to track
+            the status of the question.
           content:
             application/json:
               schema:
@@ -1825,14 +1842,16 @@ paths:
       tags:
         - AI Assistant
       summary: Get Conversation
-      description: Get an AI Assistant conversation by UID in the SCC tenant.
+      description: >-
+        Get an AI Assistant conversation by UID in the Security Cloud Control
+        tenant.
       operationId: getConversation
       parameters:
         - name: conversationUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the conversation in
-            SCC.
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -1884,8 +1903,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the status of the
-            question.
+            Security Cloud Control Transaction object that can be used to track
+            the status of the question.
           content:
             application/json:
               schema:
@@ -1909,14 +1928,16 @@ paths:
       tags:
         - Users
       summary: Get Active Directory Group
-      description: Fetch a active directory group by UID in the SCC tenant.
+      description: >-
+        Fetch a active directory group by UID in the Security Cloud Control
+        tenant.
       operationId: getActiveDirectoryGroup
       parameters:
         - name: groupUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the active
-            directory group in SCC.
+            directory group in Security Cloud Control.
           required: true
           schema:
             type: string
@@ -1947,15 +1968,17 @@ paths:
     delete:
       tags:
         - Users
-      summary: Remove Active Directory Group from SCC Tenant
-      description: Delete a Active Directory Group by UID in the SCC tenant.
+      summary: Remove Active Directory Group from Security Cloud Control Tenant
+      description: >-
+        Delete a Active Directory Group by UID in the Security Cloud Control
+        tenant.
       operationId: deleteActiveDirectoryGroup
       parameters:
         - name: groupUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the Active
-            Directory Group in SCC.
+            Directory Group in Security Cloud Control.
           required: true
           schema:
             type: string
@@ -1988,7 +2011,7 @@ paths:
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the active
-            directory group in SCC.
+            directory group in Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2027,7 +2050,7 @@ paths:
       tags:
         - Tenant Management
       summary: Get Tenant Settings
-      description: Get the settings for the SCC tenant.
+      description: Get the settings for the Security Cloud Control tenant.
       operationId: getTenantSettings
       responses:
         '200':
@@ -2054,7 +2077,7 @@ paths:
       tags:
         - Tenant Management
       summary: Modify Tenant Settings
-      description: Modify the settings for the SCC tenant.
+      description: Modify the settings for the Security Cloud Control tenant.
       operationId: modifyTenantSettings
       requestBody:
         content:
@@ -2095,7 +2118,7 @@ paths:
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the Access Rule in
-            SCC.
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2125,14 +2148,14 @@ paths:
       tags:
         - ASA Access Rules
       summary: Delete Access Rule
-      description: Delete Access Rule by UID in the SCC tenant.
+      description: Delete Access Rule by UID in the Security Cloud Control tenant.
       operationId: deleteAccessRule
       parameters:
         - name: accessRuleUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the Access Rule in
-            SCC.
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2156,14 +2179,14 @@ paths:
       tags:
         - ASA Access Rules
       summary: Modify ASA Access Rule
-      description: Modify an Access Rule in the SCC tenant by UID.
+      description: Modify an Access Rule in the Security Cloud Control tenant by UID.
       operationId: modifyAccessRule
       parameters:
         - name: accessRuleUid
           in: path
           description: >-
-            The unique identifier, represented as a UUID, of the SCC Access
-            Rule.
+            The unique identifier, represented as a UUID, of the Security Cloud
+            Control Access Rule.
           required: true
           schema:
             type: string
@@ -2176,7 +2199,7 @@ paths:
         required: true
       responses:
         '200':
-          description: SCC Access Rule
+          description: Security Cloud Control Access Rule
           content:
             application/json:
               schema:
@@ -2207,7 +2230,7 @@ paths:
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the Access Group in
-            SCC.
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2237,14 +2260,14 @@ paths:
       tags:
         - Access Groups
       summary: Delete Access Group
-      description: Delete Access Group by UID in the SCC tenant.
+      description: Delete Access Group by UID in the Security Cloud Control tenant.
       operationId: deleteAccessGroup
       parameters:
         - name: accessGroupUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the Access Group in
-            SCC.
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2268,14 +2291,14 @@ paths:
       tags:
         - Access Groups
       summary: Modify ASA Access Group
-      description: Modify SCC Access Group by UID.
+      description: Modify Security Cloud Control Access Group by UID.
       operationId: patchAccessGroup
       parameters:
         - name: accessGroupUid
           in: path
           description: >-
-            The unique identifier, represented as a UUID, of the SCC Access
-            Group.
+            The unique identifier, represented as a UUID, of the Security Cloud
+            Control Access Group.
           required: true
           schema:
             type: string
@@ -2288,7 +2311,7 @@ paths:
         required: true
       responses:
         '200':
-          description: SCC Access Group
+          description: Security Cloud Control Access Group
           content:
             application/json:
               schema:
@@ -2312,14 +2335,14 @@ paths:
       tags:
         - Inventory
       summary: Get Template Device
-      description: Get a template device by UID in the SCC tenant.
+      description: Get a template device by UID in the Security Cloud Control tenant.
       operationId: getTemplateDevice
       parameters:
         - name: templateDeviceUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the template device
-            in SCC.
+            in Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2351,14 +2374,14 @@ paths:
       tags:
         - Inventory
       summary: Delete Template Device
-      description: Delete a template device by UID in the SCC tenant.
+      description: Delete a template device by UID in the Security Cloud Control tenant.
       operationId: deleteTemplateDevice
       parameters:
         - name: templateDeviceUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the template device
-            in SCC.
+            in Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2384,14 +2407,14 @@ paths:
       tags:
         - Inventory
       summary: Modify Template Device
-      description: Modify a template device in the SCC tenant.
+      description: Modify a template device in the Security Cloud Control tenant.
       operationId: modifyTemplateDevice
       parameters:
         - name: templateDeviceUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the template device
-            in SCC.
+            in Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2430,14 +2453,14 @@ paths:
       tags:
         - Inventory
       summary: Get Cloud Service
-      description: Get a Cloud Service by UID in the SCC tenant.
+      description: Get a Cloud Service by UID in the Security Cloud Control tenant.
       operationId: getCloudService
       parameters:
         - name: cloudServiceUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the cloud service
-            in SCC.
+            in Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2469,14 +2492,14 @@ paths:
       tags:
         - Inventory
       summary: Delete Cloud Service
-      description: Delete a Cloud Service by UID in the SCC tenant.
+      description: Delete a Cloud Service by UID in the Security Cloud Control tenant.
       operationId: deleteCloudService
       parameters:
         - name: cloudServiceUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the cloud service
-            in SCC.
+            in Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2502,14 +2525,14 @@ paths:
       tags:
         - Inventory
       summary: Modify Cloud Service
-      description: Modify a Cloud Service by UID in the SCC tenant.
+      description: Modify a Cloud Service by UID in the Security Cloud Control tenant.
       operationId: modifyCloudService
       parameters:
         - name: cloudServiceUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the cloud service
-            in SCC.
+            in Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2548,14 +2571,14 @@ paths:
       tags:
         - Inventory
       summary: Get Device Manager
-      description: Get a Device Manager by UID in the SCC tenant.
+      description: Get a Device Manager by UID in the Security Cloud Control tenant.
       operationId: getDeviceManager
       parameters:
         - name: deviceManagerUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the device manager
-            in SCC.
+            in Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2587,14 +2610,14 @@ paths:
       tags:
         - Inventory
       summary: Delete Device Manager
-      description: Delete a Device Manager by UID in the SCC tenant.
+      description: Delete a Device Manager by UID in the Security Cloud Control tenant.
       operationId: deleteDeviceManager
       parameters:
         - name: deviceManagerUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the device manager
-            in SCC.
+            in Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2622,14 +2645,14 @@ paths:
       tags:
         - Inventory
       summary: Modify Device Manager
-      description: Modify a device manager by UID in the SCC tenant.
+      description: Modify a device manager by UID in the Security Cloud Control tenant.
       operationId: modifyDeviceManager
       parameters:
         - name: deviceManagerUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the device manager
-            in SCC.
+            in Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2668,12 +2691,14 @@ paths:
       tags:
         - Inventory
       summary: Get Device
-      description: Get a device by UID in the SCC tenant
+      description: Get a device by UID in the Security Cloud Control tenant
       operationId: getDevice
       parameters:
         - name: deviceUid
           in: path
-          description: The unique identifier, represented as a UUID, of the device in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the device in
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2708,13 +2733,15 @@ paths:
         - Inventory
       summary: Delete Device
       description: >-
-        Delete a device by UID in the SCC tenant. On-prem FMCs and
-        cloud-delivered FMCs cannot be deleted using this endpoint.
+        Delete a device by UID in the Security Cloud Control tenant. On-prem
+        FMCs and cloud-delivered FMCs cannot be deleted using this endpoint.
       operationId: deleteDevice
       parameters:
         - name: deviceUid
           in: path
-          description: The unique identifier, represented as a UUID, of the device in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the device in
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2742,12 +2769,14 @@ paths:
       tags:
         - Inventory
       summary: Modify Device
-      description: Modify a device in the SCC tenant
+      description: Modify a device in the Security Cloud Control tenant
       operationId: modifyDevice
       parameters:
         - name: deviceUid
           in: path
-          description: The unique identifier, represented as a UUID, of the device in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the device in
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2788,12 +2817,14 @@ paths:
       tags:
         - Connectors
       summary: Get SDC
-      description: Get a SDC by UID in the SCC tenant.
+      description: Get a SDC by UID in the Security Cloud Control tenant.
       operationId: getSdc
       parameters:
         - name: sdcUid
           in: path
-          description: The unique identifier, represented as a UUID, of the SDC in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the SDC in Security
+            Cloud Control.
           required: true
           schema:
             type: string
@@ -2825,12 +2856,14 @@ paths:
       tags:
         - Connectors
       summary: Delete SDC
-      description: Delete an SDC in the SCC tenant
+      description: Delete an SDC in the Security Cloud Control tenant
       operationId: deleteSdc
       parameters:
         - name: sdcUid
           in: path
-          description: The unique identifier, represented as a UUID, of the SDC in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the SDC in Security
+            Cloud Control.
           required: true
           schema:
             type: string
@@ -2856,12 +2889,14 @@ paths:
       tags:
         - Connectors
       summary: Modify SDC
-      description: Modify a SDC in the SCC tenant
+      description: Modify a SDC in the Security Cloud Control tenant
       operationId: modifySdc
       parameters:
         - name: sdcUid
           in: path
-          description: The unique identifier, represented as a UUID, of the SDC in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the SDC in Security
+            Cloud Control.
           required: true
           schema:
             type: string
@@ -2900,21 +2935,21 @@ paths:
       tags:
         - Command Line Interface
       summary: Get CLI Macro
-      description: Get a SCC CLI Macro by UID.
+      description: Get a Security Cloud Control CLI Macro by UID.
       operationId: getCliMacro
       parameters:
         - name: macroUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the CDO CLI macro
-            in SCC.
+            in Security Cloud Control.
           required: true
           schema:
             type: string
             format: uuid
       responses:
         '200':
-          description: SCC CLI macro
+          description: Security Cloud Control CLI macro
           content:
             application/json:
               schema:
@@ -2941,21 +2976,21 @@ paths:
       tags:
         - Command Line Interface
       summary: Delete CLI Macro
-      description: Delete a SCC CLI Macro by UID.
+      description: Delete a Security Cloud Control CLI Macro by UID.
       operationId: deleteCliMacro
       parameters:
         - name: macroUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the CDO CLI macro
-            in SCC.
+            in Security Cloud Control.
           required: true
           schema:
             type: string
             format: uuid
       responses:
         '204':
-          description: SCC CLI macro
+          description: Security Cloud Control CLI macro
         '400':
           $ref: '#/components/responses/http400BadRequest'
         '401':
@@ -2976,14 +3011,14 @@ paths:
       tags:
         - Command Line Interface
       summary: Modify CLI Macro
-      description: Modify a SCC CLI Macro by UID.
+      description: Modify a Security Cloud Control CLI Macro by UID.
       operationId: modifyCliMacro
       parameters:
         - name: macroUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the CDO CLI macro
-            in SCC.
+            in Security Cloud Control.
           required: true
           schema:
             type: string
@@ -2996,7 +3031,7 @@ paths:
         required: true
       responses:
         '200':
-          description: SCC CLI macro
+          description: Security Cloud Control CLI macro
           content:
             application/json:
               schema:
@@ -3039,9 +3074,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -3093,14 +3129,14 @@ paths:
       tags:
         - Remote Access Monitoring
       summary: Get RA VPN Session
-      description: Get a RA VPN session by UID in the SCC tenant.
+      description: Get a RA VPN session by UID in the Security Cloud Control tenant.
       operationId: getRaVpnSession
       parameters:
         - name: raVpnSessionUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the RA VPN session
-            in SCC.
+            in Security Cloud Control.
           required: true
           schema:
             type: string
@@ -3137,12 +3173,14 @@ paths:
       summary: Get Tenant User
       description: >-
         Fetch a user by UID in the CDO tenant. This will only return 200
-        responses for users associated with the SCC tenant.
+        responses for users associated with the Security Cloud Control tenant.
       operationId: getUser
       parameters:
         - name: userUid
           in: path
-          description: The unique identifier, represented as a UUID, of the user in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the user in
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -3173,16 +3211,18 @@ paths:
     delete:
       tags:
         - Users
-      summary: Remove User from SCC Tenant
+      summary: Remove User from Security Cloud Control Tenant
       description: >-
-        Delete a User by UID in the SCC tenant. If the user is associated with
-        multiple tenants, they will continue to have access to every other
-        tenant.
+        Delete a User by UID in the Security Cloud Control tenant. If the user
+        is associated with multiple tenants, they will continue to have access
+        to every other tenant.
       operationId: deleteUser
       parameters:
         - name: userUid
           in: path
-          description: The unique identifier, represented as a UUID, of the user in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the user in
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -3210,9 +3250,10 @@ paths:
         - Users
       summary: Get Token Info
       description: >-
-        Fetch information on the current token. Each SCC token is associated
-        with a specific user and a specific tenant. A token can only be used to
-        perform operations on the tenant it is associated with.
+        Fetch information on the current token. Each Security Cloud Control
+        token is associated with a specific user and a specific tenant. A token
+        can only be used to perform operations on the tenant it is associated
+        with.
       operationId: getToken
       responses:
         '200':
@@ -3236,7 +3277,9 @@ paths:
       tags:
         - Tenant Management
       summary: Get Tenants
-      description: Get a list of tenants with which the SCC user is associated.
+      description: >-
+        Get a list of tenants with which the Security Cloud Control user is
+        associated.
       operationId: getTenants
       parameters:
         - name: limit
@@ -3251,9 +3294,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -3286,13 +3330,15 @@ paths:
         - Tenant Management
       summary: Get Tenant
       description: >-
-        Fetch a tenant by UID in SCC. This will return a 200 response only if
-        the user is associated with the tenant.
+        Fetch a tenant by UID in Security Cloud Control. This will return a 200
+        response only if the user is associated with the tenant.
       operationId: getTenant
       parameters:
         - name: tenantUid
           in: path
-          description: The unique identifier, represented as a UUID, of the tenant in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the tenant in
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -3327,7 +3373,7 @@ paths:
       summary: Search
       description: >-
         Search for devices, services, managers, objects and policies across the
-        SCC tenant.
+        Security Cloud Control tenant.
       operationId: search
       parameters:
         - name: q
@@ -3365,12 +3411,12 @@ paths:
     get:
       tags:
         - Meta
-      summary: Get SCC Regions
-      description: Get the list of regions that SCC is deployed in.
+      summary: Get Security Cloud Control Regions
+      description: Get the list of regions that Security Cloud Control is deployed in.
       operationId: getRegions
       responses:
         '200':
-          description: List of SCC regions
+          description: List of Security Cloud Control regions
           content:
             application/json:
               schema:
@@ -3401,9 +3447,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -3455,14 +3502,14 @@ paths:
       tags:
         - Remote Access Monitoring
       summary: Get MFA Event
-      description: Get a MFA event by UID in the SCC tenant.
+      description: Get a MFA event by UID in the Security Cloud Control tenant.
       operationId: getMfaEvent
       parameters:
         - name: mfaEventUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the MFA event in
-            SCC.
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -3498,12 +3545,12 @@ paths:
         - Meta
       summary: Get Meta information
       description: >-
-        Get Meta information about CDO, including the IP addresses of SCC
-        services.
+        Get Meta information about CDO, including the IP addresses of Security
+        Cloud Control services.
       operationId: getMeta
       responses:
         '200':
-          description: Meta information about SCC.
+          description: Meta information about Security Cloud Control.
           content:
             application/json:
               schema:
@@ -3519,7 +3566,7 @@ paths:
       tags:
         - Inventory
       summary: Get Template Devices
-      description: Get a list of template devices in the SCC tenant.
+      description: Get a list of template devices in the Security Cloud Control tenant.
       operationId: getTemplateDevices
       parameters:
         - name: limit
@@ -3534,9 +3581,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -3586,7 +3634,7 @@ paths:
       tags:
         - Inventory
       summary: Get Cloud Services
-      description: Get a list of Cloud Services in the SCC tenant.
+      description: Get a list of Cloud Services in the Security Cloud Control tenant.
       operationId: getCloudServices
       parameters:
         - name: limit
@@ -3601,9 +3649,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -3655,7 +3704,7 @@ paths:
       summary: Get Device Managers
       description: >-
         Fetch a list of Device Managers (on-prem FMCs and cloud-delivered FMCs)
-        in the SCC tenant.
+        in the Security Cloud Control tenant.
       operationId: getDeviceManagers
       parameters:
         - name: limit
@@ -3670,9 +3719,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -3734,7 +3784,9 @@ paths:
       parameters:
         - name: fmcUid
           in: path
-          description: The unique identifier, represented as a UUID, of the FMC in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the FMC in Security
+            Cloud Control.
           required: true
           schema:
             type: string
@@ -3780,7 +3832,7 @@ paths:
       tags:
         - Inventory
       summary: Get Devices
-      description: Get a list of devices in the SCC tenant.
+      description: Get a list of devices in the Security Cloud Control tenant.
       operationId: getDevices
       parameters:
         - name: limit
@@ -3795,9 +3847,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -3849,7 +3902,7 @@ paths:
       tags:
         - Tenant Management
       summary: Get Feature Flags
-      description: Get the feature flags enabled in the SCC tenant.
+      description: Get the feature flags enabled in the Security Cloud Control tenant.
       operationId: getFeatureFlags
       responses:
         '200':
@@ -3882,7 +3935,8 @@ paths:
         Get a list of results from command lines executed using the [CDO Command
         Line Interface
         (CLI)](https://docs.defenseorchestrator.com/c-using-the-cdo-command-line-interface.html).
-        These commands can be executed using either the SCC UI or the API.
+        These commands can be executed using either the Security Cloud Control
+        UI or the API.
       operationId: getCliResults
       parameters:
         - name: limit
@@ -3897,9 +3951,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -3925,7 +3980,7 @@ paths:
           example: name:DESC
       responses:
         '200':
-          description: List of SCC CLI execution results
+          description: List of Security Cloud Control CLI execution results
           content:
             application/json:
               schema:
@@ -3952,22 +4007,22 @@ paths:
         - Command Line Interface
       summary: Get CLI Result
       description: >-
-        Get the result of a command executed using the SCC Command Line
-        Interface (CLI) by UID.
+        Get the result of a command executed using the Security Cloud Control
+        Command Line Interface (CLI) by UID.
       operationId: getCliResult
       parameters:
         - name: cliResultUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the CDO CLI result
-            in SCC.
+            in Security Cloud Control.
           required: true
           schema:
             type: string
             format: uuid
       responses:
         '200':
-          description: SCC CLI result
+          description: Security Cloud Control CLI result
           content:
             application/json:
               schema:
@@ -3995,7 +4050,7 @@ paths:
       tags:
         - Changelogs
       summary: Get Change Logs
-      description: Get a list of Change Logs in the SCC tenant.
+      description: Get a list of Change Logs in the Security Cloud Control tenant.
       operationId: getChangelogs
       parameters:
         - name: limit
@@ -4010,9 +4065,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -4078,14 +4134,16 @@ paths:
       tags:
         - Changelogs
       summary: Get Change Log
-      description: Get a specific Change Log object by UID in the SCC tenant.
+      description: >-
+        Get a specific Change Log object by UID in the Security Cloud Control
+        tenant.
       operationId: getChangelog
       parameters:
         - name: changelogUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the changelog in
-            SCC.
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -4118,14 +4176,14 @@ paths:
       tags:
         - Change Requests
       summary: Get Change Request
-      description: Get a Change Request by UID in the SCC tenant.
+      description: Get a Change Request by UID in the Security Cloud Control tenant.
       operationId: getChangeRequest
       parameters:
         - name: changeRequestUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the Change Request
-            in SCC.
+            in Security Cloud Control.
           required: true
           schema:
             type: string
@@ -4159,14 +4217,14 @@ paths:
       tags:
         - Change Requests
       summary: Delete Change Request
-      description: Delete a Change Request by UID in the SCC tenant.
+      description: Delete a Change Request by UID in the Security Cloud Control tenant.
       operationId: deleteChangeRequest
       parameters:
         - name: changeRequestUid
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the Change Request
-            in SCC.
+            in Security Cloud Control.
           required: true
           schema:
             type: string
@@ -4210,9 +4268,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -4295,7 +4354,7 @@ paths:
           in: path
           description: >-
             The unique identifier, represented as a UUID, of the conversation in
-            SCC.
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -4900,8 +4959,8 @@ paths:
     get:
       tags:
         - MSP
-      summary: Get SCC tenants managed by MSP Portal
-      description: Get a list of SCC tenants managed by the MSP Portal.
+      summary: Get Security Cloud Control tenants managed by MSP Portal
+      description: Get a list of Security Cloud Control tenants managed by the MSP Portal.
       operationId: getMspManagedTenants
       parameters:
         - name: limit
@@ -4916,9 +4975,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -4935,7 +4995,7 @@ paths:
           example: fieldName:fieldValue
       responses:
         '200':
-          description: List of SCC tenant objects
+          description: List of Security Cloud Control tenant objects
           content:
             application/json:
               schema:
@@ -4996,20 +5056,20 @@ paths:
     get:
       tags:
         - MSP
-      summary: Get SCC tenant managed by MSP Portal
-      description: Get a SCC tenant managed by the MSP Portal.
+      summary: Get Security Cloud Control tenant managed by MSP Portal
+      description: Get a Security Cloud Control tenant managed by the MSP Portal.
       operationId: getMspManagedTenant
       parameters:
         - name: tenantUid
           in: path
-          description: The unique identifier of the tenant in SCC.
+          description: The unique identifier of the tenant in Security Cloud Control.
           required: true
           schema:
             type: string
             format: uuid
       responses:
         '200':
-          description: SCC tenant object
+          description: Security Cloud Control tenant object
           content:
             application/json:
               schema:
@@ -5053,8 +5113,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the status of the
-            operation.
+            Security Cloud Control Transaction object that can be used to track
+            the status of the operation.
           content:
             application/json:
               schema:
@@ -5086,7 +5146,9 @@ paths:
       parameters:
         - name: tenantUid
           in: path
-          description: The unique identifier, represented as a UUID, of the tenant in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the tenant in
+            Security Cloud Control.
           required: true
           schema:
             type: string
@@ -5114,8 +5176,8 @@ paths:
         - MSP
       summary: Get Users associated with tenant in MSP portal
       description: >-
-        Get a list of users associated with the SCC tenant managed by MSP
-        portal.
+        Get a list of users associated with the Security Cloud Control tenant
+        managed by MSP portal.
       operationId: getUsersInTenantInMspPortal
       parameters:
         - name: tenantUid
@@ -5137,9 +5199,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -5172,7 +5235,7 @@ paths:
     post:
       tags:
         - MSP
-      summary: Add users to SCC tenant in MSP Portal
+      summary: Add users to Security Cloud Control tenant in MSP Portal
       description: >-
         This is an asynchronous operation to add a list of users to a tenant
         associated with the MSP Portal.
@@ -5194,8 +5257,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the status of the
-            operation.
+            Security Cloud Control Transaction object that can be used to track
+            the status of the operation.
           content:
             application/json:
               schema:
@@ -5215,21 +5278,23 @@ paths:
       summary: Generate token for API-only user on tenant managed by MSP portal
       description: >-
         Generate API Token for API-only user on a tenant managed by the MSP
-        portal. API-only users are used for building automations with SCC. If
-        the user ID provided is not that of an API-only user, this operation
-        will fail.
+        portal. API-only users are used for building automations with Security
+        Cloud Control. If the user ID provided is not that of an API-only user,
+        this operation will fail.
       operationId: generateApiTokenForUserInTenant
       parameters:
         - name: tenantUid
           in: path
-          description: The unique identifier of the tenant in SCC.
+          description: The unique identifier of the tenant in Security Cloud Control.
           required: true
           schema:
             type: string
             format: uuid
         - name: apiUserUid
           in: path
-          description: The unique identifier of the API-only user in SCC.
+          description: >-
+            The unique identifier of the API-only user in Security Cloud
+            Control.
           required: true
           schema:
             type: string
@@ -5284,9 +5349,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -5319,7 +5385,9 @@ paths:
     post:
       tags:
         - MSP
-      summary: Add Active Directory Groups to SCC tenant in MSP Portal
+      summary: >-
+        Add Active Directory Groups to Security Cloud Control tenant in MSP
+        Portal
       description: >-
         This is an asynchronous operation to add a list of Active Directory
         Groups to a tenant associated with the MSP Portal.
@@ -5347,8 +5415,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the status of the
-            operation.
+            Security Cloud Control Transaction object that can be used to track
+            the status of the operation.
           content:
             application/json:
               schema:
@@ -5365,7 +5433,7 @@ paths:
     post:
       tags:
         - MSP
-      summary: Remove user groups from SCC tenant in MSP Portal
+      summary: Remove user groups from Security Cloud Control tenant in MSP Portal
       description: >-
         This is an asynchronous operation to remove a list of user groups from a
         tenant associated with the MSP Portal.
@@ -5389,8 +5457,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the status of the
-            operation.
+            Security Cloud Control Transaction object that can be used to track
+            the status of the operation.
           content:
             application/json:
               schema:
@@ -5407,7 +5475,7 @@ paths:
     post:
       tags:
         - MSP
-      summary: Remove users from SCC tenant in MSP Portal
+      summary: Remove users from Security Cloud Control tenant in MSP Portal
       description: >-
         This is an asynchronous operation to remove a list of users from a
         tenant associated with the MSP Portal.
@@ -5429,8 +5497,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the status of the
-            operation.
+            Security Cloud Control Transaction object that can be used to track
+            the status of the operation.
           content:
             application/json:
               schema:
@@ -5447,7 +5515,9 @@ paths:
     post:
       tags:
         - MSP
-      summary: Enable Multicloud Defense for SCC tenant in MSP Portal
+      summary: >-
+        Enable Multicloud Defense for Security Cloud Control tenant in MSP
+        Portal
       description: >-
         This is an asynchronous operation to enable Multicloud Defense for a
         tenant associated with the MSP Portal.
@@ -5465,8 +5535,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the status of the
-            operation.
+            Security Cloud Control Transaction object that can be used to track
+            the status of the operation.
           content:
             application/json:
               schema:
@@ -5483,7 +5553,7 @@ paths:
     post:
       tags:
         - MSP
-      summary: Provision cdFMC for SCC tenant in MSP Portal
+      summary: Provision cdFMC for Security Cloud Control tenant in MSP Portal
       description: >-
         This is an asynchronous operation to provision a cdFMC for a tenant
         associated with the MSP Portal. This operation does not wait for the
@@ -5505,8 +5575,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the status of the
-            operation.
+            Security Cloud Control Transaction object that can be used to track
+            the status of the operation.
           content:
             application/json:
               schema:
@@ -5523,13 +5593,13 @@ paths:
     post:
       tags:
         - MSP
-      summary: Create SCC Tenant
+      summary: Create Security Cloud Control Tenant
       description: >-
-        Create a new tenant in SCC from an MSP Portal. This endpoint creates a
-        tenant, adds the tenant to the MSP Portal. If the user creating the
-        tenant is not an API-only user, the user is also added to the tenant.
-        Note: This endpoint can only be executed by a super-admin in an MSP
-        Portal. You can create no more than 1 tenant every 30 seconds.
+        Create a new tenant in Security Cloud Control from an MSP Portal. This
+        endpoint creates a tenant, adds the tenant to the MSP Portal. If the
+        user creating the tenant is not an API-only user, the user is also added
+        to the tenant. Note: This endpoint can only be executed by a super-admin
+        in an MSP Portal. You can create no more than 1 tenant every 30 seconds.
         Additionally, you are limited to creating a total of 100 tenants: please
         speak to support to raise this limit.
       operationId: createTenant
@@ -5542,8 +5612,8 @@ paths:
       responses:
         '202':
           description: >-
-            SCC Transaction object that can be used to track the status of the
-            tenant creation.
+            Security Cloud Control Transaction object that can be used to track
+            the status of the tenant creation.
           content:
             application/json:
               schema:
@@ -5573,7 +5643,7 @@ paths:
         Get information on an in-progress CDO transaction. An CDO transaction is
         an entity used to monitor progress of, and provide feedback on,
         long-running operations. All asynchronous operations in CDO's API create
-        SCC transactions.
+        Security Cloud Control transactions.
       operationId: getTransaction
       parameters:
         - name: transactionUid
@@ -5586,13 +5656,14 @@ paths:
         '200':
           description: >-
             CDO Transaction that has completed, either successfully or
-            unsuccessfully. Note: failed SCC Transactions do not roll back.
+            unsuccessfully. Note: failed Security Cloud Control Transactions do
+            not roll back.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
         '202':
-          description: SCC Transaction that is pending or in progress.
+          description: Security Cloud Control Transaction that is pending or in progress.
           content:
             application/json:
               schema:
@@ -5747,17 +5818,17 @@ components:
       properties:
         name:
           type: string
-          description: The name of the user in SCC.
+          description: The name of the user in Security Cloud Control.
           example: myusername@cisco.com
         role:
           type: string
-          description: The user role in SCC.
+          description: The user role in Security Cloud Control.
           example: ROLE_ADMIN
         apiOnlyUser:
           type: boolean
           description: >-
-            Whether the user is API-only, an API-only user cannot access SCC in
-            the UI.
+            Whether the user is API-only, an API-only user cannot access
+            Security Cloud Control in the UI.
           example: false
           default: false
     User:
@@ -5765,30 +5836,33 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier, represented as a UUID, of the user in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the user in
+            Security Cloud Control.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
           type: string
-          description: The name of the user in SCC.
+          description: The name of the user in Security Cloud Control.
           example: myusername@cisco.com
         roles:
           type: array
-          description: Roles associated with this user in SCC.
+          description: Roles associated with this user in Security Cloud Control.
           example: '[ROLE_ADMIN]'
           items:
             $ref: '#/components/schemas/UserRole'
         apiOnlyUser:
           type: boolean
           description: >-
-            Whether the user is API-only, an API-only user cannot access SCC in
-            the UI.
+            Whether the user is API-only, an API-only user cannot access
+            Security Cloud Control in the UI.
           example: false
         lastSuccessfulLogin:
           type: string
           description: >-
             The time (UTC; represented using the RFC-3339 standard) that
-            indicate the last time the user successfully logged in to SCC.
+            indicate the last time the user successfully logged in to Security
+            Cloud Control.
           format: date-time
           example: '2023-12-13T05:15:44Z'
     UserRole:
@@ -5828,8 +5902,8 @@ components:
         name:
           type: string
           description: >-
-            The name of the Active Directory Group. SCC does not support special
-            characters for this field.
+            The name of the Active Directory Group. Security Cloud Control does
+            not support special characters for this field.
           example: myusername
         role:
           type: string
@@ -5860,14 +5934,14 @@ components:
           type: string
           description: >-
             The unique identifier, represented as a UUID, of the Active
-            Directory Group in SCC.
+            Directory Group in Security Cloud Control.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
           type: string
           description: >-
-            The name of the Active Directory Group. SCC does not support special
-            characters for this field.
+            The name of the Active Directory Group. Security Cloud Control does
+            not support special characters for this field.
           example: myusername
         role:
           $ref: '#/components/schemas/UserRole'
@@ -6017,7 +6091,9 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier, represented as a UUID, of Access Rule in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of Access Rule in
+            Security Cloud Control.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         accessGroupUid:
@@ -6178,14 +6254,14 @@ components:
           type: string
           description: >-
             The unique identifier, represented as a UUID, of Access Group in
-            SCC.
+            Security Cloud Control.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
           type: string
           description: >-
             The name of Access Group in CDO. Access Group names are unique in
-            SCC.
+            Security Cloud Control.
           example: my-example-access-group
         entityUid:
           type: string
@@ -6280,8 +6356,8 @@ components:
         ignoreCertificate:
           type: boolean
           description: >-
-            Set this attribute to true if you do not want SCC to validate the
-            certificate of this device before onboarding.
+            Set this attribute to true if you do not want Security Cloud Control
+            to validate the certificate of this device before onboarding.
           example: false
           default: false
         connectorName:
@@ -6300,7 +6376,9 @@ components:
           additionalProperties:
             uniqueItems: true
             type: array
-            description: Groups of labels used to identify/tag SCC entities.
+            description: >-
+              Groups of labels used to identify/tag Security Cloud Control
+              entities.
             example:
               group1:
                 - label-1
@@ -6310,9 +6388,13 @@ components:
                 - label-2
             items:
               type: string
-              description: Groups of labels used to identify/tag SCC entities.
+              description: >-
+                Groups of labels used to identify/tag Security Cloud Control
+                entities.
               example: '{"group1":["label-1","label-2"],"group2":["label-1","label-2"]}'
-          description: Groups of labels used to identify/tag SCC entities.
+          description: >-
+            Groups of labels used to identify/tag Security Cloud Control
+            entities.
           example:
             group1:
               - label-1
@@ -6323,16 +6405,20 @@ components:
         ungroupedLabels:
           uniqueItems: true
           type: array
-          description: Set of free-labels used to identify/tag SCC entities.
+          description: >-
+            Set of free-labels used to identify/tag Security Cloud Control
+            entities.
           example:
             - label-a
             - label-b
             - label-c
           items:
             type: string
-            description: Set of free-labels used to identify/tag SCC entities.
+            description: >-
+              Set of free-labels used to identify/tag Security Cloud Control
+              entities.
             example: '["label-a","label-b","label-c"]'
-      description: Labels used to identify/tag SCC entities.
+      description: Labels used to identify/tag Security Cloud Control entities.
     FtdCreateOrUpdateInput:
       required:
         - deviceType
@@ -6423,7 +6509,8 @@ components:
           description: >-
             Specify the serial number of the FTD device to be onboarded. When a
             device with this serial number is plugged in and connected to the
-            Internet, it will automatically be registered to this SCC tenant.
+            Internet, it will automatically be registered to this Security Cloud
+            Control tenant.
         adminPassword:
           type: string
           description: >-
@@ -6467,7 +6554,7 @@ components:
           description: >-
             Specify the unique identifier, represented as a UUID, of the device
             group which the device will be a part of after it finishes
-            registering with SCC.
+            registering with Security Cloud Control.
           format: uuid
     FtdRegistrationInput:
       required:
@@ -6478,7 +6565,7 @@ components:
           type: string
           description: >-
             The unique identifier, represented as a UUID, of the FTD device in
-            SCC for which registration should be triggered.
+            Security Cloud Control for which registration should be triggered.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
     DuoAdminPanelCreateOrUpdateInput:
@@ -6541,8 +6628,8 @@ components:
         ignoreCertificate:
           type: boolean
           description: >-
-            Set this attribute to true if you do not want SCC to validate the
-            certificate of this device before onboarding.
+            Set this attribute to true if you do not want Security Cloud Control
+            to validate the certificate of this device before onboarding.
           example: false
           default: false
         connectorName:
@@ -6558,8 +6645,8 @@ components:
       type: string
       description: >-
         The type of the connector that will be used to communicate with the
-        device. SCC can communicate with your device using either a Cloud
-        Connector (CDG) or a Secure Device Connector (SDC).
+        device. Security Cloud Control can communicate with your device using
+        either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
       example: CDG
       enum:
         - SDC
@@ -6709,11 +6796,11 @@ components:
       properties:
         name:
           type: string
-          description: The name of the change request in SCC.
+          description: The name of the change request in Security Cloud Control.
           example: SecureNewBranchChange
         description:
           type: string
-          description: The description of the change request in SCC.
+          description: The description of the change request in Security Cloud Control.
           example: Changes related to securing the new branch.
     ChangeRequest:
       required:
@@ -6744,8 +6831,8 @@ components:
     ConflictDetectionInterval:
       type: string
       description: >-
-        Specifies the default interval at which SCC checks for changes made
-        out-of-band on the devices on the tenant.
+        Specifies the default interval at which Security Cloud Control checks
+        for changes made out-of-band on the devices on the tenant.
       example: EVERY_6_HOURS
       enum:
         - EVERY_10_MINUTES
@@ -6757,7 +6844,9 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier, represented as a UUID, of the tenant in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the tenant in
+            Security Cloud Control.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         changeRequestSupport:
@@ -6954,7 +7043,7 @@ components:
           description: >-
             The CLI key to paste into the FTD CLI to register the FTD with a
             cdFMC. You need to paste this value in only once, when the FTD is
-            being onboarded. Refer to the [SCC
+            being onboarded. Refer to the [Security Cloud Control
             Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html)
             for details.
           example: >-
@@ -6965,14 +7054,15 @@ components:
           type: string
           description: >-
             The Network Address Translation (NAT) ID of this FTD. Refer to the
-            [SCC
+            [Security Cloud Control
             Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html)
             for details.
           example: E2jsyiZggyeCfFfCUaMK2kD1a1bxxx
         natId:
           type: string
           description: >-
-            The Registration Key of this FTD. Refer to the [SCC
+            The Registration Key of this FTD. Refer to the [Security Cloud
+            Control
             Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html)
             for details.
           example: 5Do6FwUaXY4EFlyraC2yVnxodLxhuxxx
@@ -7022,7 +7112,7 @@ components:
         changes which have to be manually applied to the device; this field
         indicates whether the configuration on CDO does not match the
         configuration on the device, which indicates whether there are changes
-        to be deployed from SCC to the device.
+        to be deployed from Security Cloud Control to the device.
       example: SYNCED
       enum:
         - NO_CONFIG
@@ -7033,7 +7123,7 @@ components:
       type: string
       description: >-
         Indicates whether there have been changes made to the device's
-        configuration outside of SCC.
+        configuration outside of Security Cloud Control.
       example: NO_CONFLICTS
       enum:
         - CONFLICT_DETECTED
@@ -7043,7 +7133,7 @@ components:
       description: >-
         The connectivity state of the device to CDO. A connectivity state that
         is not ONLINE can indicate either a problem with the device, or the
-        communication pathways between the device and SCC.
+        communication pathways between the device and Security Cloud Control.
       example: ONLINE
       enum:
         - ONLINE
@@ -7059,12 +7149,16 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier, represented as a UUID, of the device in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the device in
+            Security Cloud Control.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
           type: string
-          description: The name of the device in CDO. Device names are unique in SCC.
+          description: >-
+            The name of the device in CDO. Device names are unique in Security
+            Cloud Control.
           example: my-example-device
         deviceType:
           $ref: '#/components/schemas/EntityType'
@@ -7084,8 +7178,8 @@ components:
         address:
           type: string
           description: >-
-            The address of the device, in `host:port` format. SCC connects to
-            the device at this address.
+            The address of the device, in `host:port` format. Security Cloud
+            Control connects to the device at this address.
           example: my-example-device.example.com:443
         deviceRole:
           $ref: '#/components/schemas/DeviceRole'
@@ -7156,8 +7250,8 @@ components:
           type: string
           description: >-
             The redundancy mode this firewall is running in. Note: for High
-            Availability pairs and clusters, SCC represents all of the devices
-            as part of one record.
+            Availability pairs and clusters, Security Cloud Control represents
+            all of the devices as part of one record.
           enum:
             - HA
             - CLUSTER
@@ -7226,9 +7320,9 @@ components:
           items:
             $ref: '#/components/schemas/ClusterNode'
       description: >-
-        (Device Clusters managed by FMC only) Clustering information. Note: SCC
-        represents all of the nodes on an FTD cluster in a single device record
-        with the UID of the cluster control node.
+        (Device Clusters managed by FMC only) Clustering information. Note:
+        Security Cloud Control represents all of the nodes on an FTD cluster in
+        a single device record with the UID of the cluster control node.
     FtdHaInfo:
       type: object
       properties:
@@ -7238,9 +7332,9 @@ components:
           $ref: '#/components/schemas/HaNode'
       description: >-
         (High Availability Devices managed by FMC only) High-Available
-        information information. Note: SCC represents all of the nodes on an FTD
-        cluster in a single device record with the UID of the cluster control
-        node.
+        information information. Note: Security Cloud Control represents all of
+        the nodes on an FTD cluster in a single device record with the UID of
+        the cluster control node.
     HaNode:
       type: object
       properties:
@@ -7309,7 +7403,9 @@ components:
       properties:
         name:
           type: string
-          description: The name of the device in CDO. Device names are unique in SCC.
+          description: >-
+            The name of the device in CDO. Device names are unique in Security
+            Cloud Control.
           example: my-example-fmc
         address:
           type: string
@@ -7381,12 +7477,16 @@ components:
           $ref: '#/components/schemas/PublicKey'
         uid:
           type: string
-          description: The unique identifier, represented as a UUID, of the SDC in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the SDC in Security
+            Cloud Control.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
           type: string
-          description: The name of the SDC in CDO. SDC names are unique in SCC.
+          description: >-
+            The name of the SDC in CDO. SDC names are unique in Security Cloud
+            Control.
           example: my-example-sdc
         softwareVersion:
           type: string
@@ -7413,8 +7513,8 @@ components:
             the SDC during its initial setup. This data is base64 encoded and
             includes essential details like the unique registration token and
             customer-specific settings that enable the SDC to communicate with
-            and send data to SCC. This field is populated only if the SDC is not
-            onboarded.
+            and send data to Security Cloud Control. This field is populated
+            only if the SDC is not onboarded.
           example: >-
             Q0RPX1RPS0VOPSJleGFtcGxlLWNkby1hcGktdG9rZW4iCkNET19ET01BSU49ImNkby5jaXNjby5jb20iCkNET19URU5BTlQ9IkNET190ZXN0LXRlbmFudCIKQ0RPX0JPT1RTVFJBUF9VUkw9Imh0dHBzOi8vY2RvLmNpc2NvLmNvbS9zZGMvYm9vdHN0cmFwL0NET190ZXN0LXRlbmFudC9teS1zaGlueS1uZXctc2RjIgo=
     Status:
@@ -7567,9 +7667,10 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           format: int32
           example: 0
         items:
@@ -7593,9 +7694,10 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           format: int32
           example: 0
         items:
@@ -7619,9 +7721,10 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           format: int32
           example: 0
         items:
@@ -7671,12 +7774,14 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier, represented as a UUID, of the tenant in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the tenant in
+            Security Cloud Control.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
           type: string
-          description: The name of the tenant in SCC.
+          description: The name of the tenant in Security Cloud Control.
           example: mytenantname@cisco.com
         securityCloudControlEnterpriseId:
           type: string
@@ -7689,11 +7794,13 @@ components:
           type: string
           description: >-
             A human-readable display name for the tenant. This is the tenant
-            name displayed in the SCC Web UI.
+            name displayed in the Security Cloud Control Web UI.
           example: mytenantname
         payType:
           type: string
-          description: An enum that describes the payment type of the tenant in SCC.
+          description: >-
+            An enum that describes the payment type of the tenant in Security
+            Cloud Control.
           example: TRIAL
           enum:
             - PAYING
@@ -7718,9 +7825,10 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           format: int32
           example: 0
         items:
@@ -7774,12 +7882,16 @@ components:
       properties:
         uid:
           type: string
-          description: The unique identifier, represented as a UUID, of the entity in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the entity in
+            Security Cloud Control.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
           type: string
-          description: The name of the entity in CDO. Device names are unique in SCC.
+          description: >-
+            The name of the entity in CDO. Device names are unique in Security
+            Cloud Control.
           example: my-example-entity
         type:
           $ref: '#/components/schemas/EntityType'
@@ -7805,12 +7917,16 @@ components:
           $ref: '#/components/schemas/Inventory'
         objects:
           type: array
-          description: Results from the SCC objects that match the search term.
+          description: >-
+            Results from the Security Cloud Control objects that match the
+            search term.
           items:
             type: object
         policies:
           type: array
-          description: Results from the SCC policies that match the search term.
+          description: >-
+            Results from the Security Cloud Control policies that match the
+            search term.
           items:
             $ref: '#/components/schemas/Policy'
         cdFmcResult:
@@ -7833,20 +7949,26 @@ components:
           description: Cloud Services that match the search term.
           items:
             $ref: '#/components/schemas/Entity'
-      description: Results from the SCC inventory that match the search term.
+      description: >-
+        Results from the Security Cloud Control inventory that match the search
+        term.
     Policy:
       type: object
       properties:
         uid:
           type: string
-          description: The unique identifier, represented as a UUID, of the policy in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the policy in
+            Security Cloud Control.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
           type: string
-          description: The name of the policy in SCC.
+          description: The name of the policy in Security Cloud Control.
           example: my-example-policy
-      description: Results from the SCC policies that match the search term.
+      description: >-
+        Results from the Security Cloud Control policies that match the search
+        term.
     CdoRegion:
       type: object
       properties:
@@ -7884,9 +8006,10 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           format: int32
           example: 0
         items:
@@ -7910,9 +8033,10 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           format: int32
           example: 0
         items:
@@ -8029,9 +8153,10 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           format: int32
           example: 0
         items:
@@ -8046,14 +8171,14 @@ components:
           type: array
           description: >-
             The IP addresses from which to allow inbound access to your network
-            if you wish to connect to your devices through SCC's Cloud
-            Connector.
+            if you wish to connect to your devices through Security Cloud
+            Control's Cloud Connector.
           items:
             type: string
             description: >-
               The IP addresses from which to allow inbound access to your
-              network if you wish to connect to your devices through SCC's Cloud
-              Connector.
+              network if you wish to connect to your devices through Security
+              Cloud Control's Cloud Connector.
     DevicePage:
       type: object
       properties:
@@ -8070,9 +8195,10 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           format: int32
           example: 0
         items:
@@ -8179,12 +8305,14 @@ components:
       properties:
         deviceUid:
           type: string
-          description: The unique identifier, represented as a UUID, of the device in SCC.
+          description: >-
+            The unique identifier, represented as a UUID, of the device in
+            Security Cloud Control.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         deviceName:
           type: string
-          description: The name of the device in SCC.
+          description: The name of the device in Security Cloud Control.
           example: Burak's FTD device
         startTime:
           type: string
@@ -8385,9 +8513,10 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           format: int32
           example: 0
         items:
@@ -8448,9 +8577,10 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           format: int32
           example: 0
         items:
@@ -8474,9 +8604,10 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           format: int32
           example: 0
         items:
@@ -8538,9 +8669,10 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           format: int32
           example: 0
         items:
@@ -8606,9 +8738,10 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           format: int32
           example: 0
         items:
@@ -8680,9 +8813,10 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           format: int32
           example: 0
         items:
@@ -8706,9 +8840,10 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           format: int32
           example: 0
         items:
@@ -9055,6 +9190,9 @@ components:
         servletContext:
           type: object
           properties:
+            sessionTimeout:
+              type: integer
+              format: int32
             classLoader:
               type: object
               properties:
@@ -9100,9 +9238,6 @@ components:
             minorVersion:
               type: integer
               format: int32
-            sessionTimeout:
-              type: integer
-              format: int32
             attributeNames:
               type: object
             contextPath:
@@ -9122,17 +9257,27 @@ components:
             servletNames:
               type: object
               deprecated: true
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
                 type: object
                 properties:
+                  runAsRole:
+                    type: string
                   mappings:
                     type: array
                     items:
                       type: string
-                  runAsRole:
-                    type: string
                   name:
                     type: string
                   className:
@@ -9206,8 +9351,6 @@ components:
                   items:
                     type: object
                     properties:
-                      buffer:
-                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9230,6 +9373,8 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
+                      buffer:
+                        type: string
                       defaultContentType:
                         type: string
                       urlPatterns:
@@ -9241,9 +9386,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibURI:
-                        type: string
                       taglibLocation:
+                        type: string
+                      taglibURI:
                         type: string
             virtualServerName:
               type: string
@@ -9254,16 +9399,6 @@ components:
             effectiveMajorVersion:
               type: integer
               format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
           writeOnly: true
         contentType:
           type: string
@@ -10303,8 +10438,8 @@ components:
         username:
           type: string
           description: >-
-            The name of the user in SCC. This must be a valid e-mail address if
-            the user is not an API-only user.
+            The name of the user in Security Cloud Control. This must be a valid
+            e-mail address if the user is not an API-only user.
           example: smith@jones.com
         role:
           $ref: '#/components/schemas/UserRole'
@@ -10386,20 +10521,22 @@ components:
           type: string
           description: >-
             A human-readable display name for the tenant. This is the tenant
-            name displayed in the SCC Web UI.
+            name displayed in the Security Cloud Control Web UI.
           example: mytenantname
         uid:
           type: string
-          description: The unique identifier of the tenant in SCC.
+          description: The unique identifier of the tenant in Security Cloud Control.
           format: uuid
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
         name:
           type: string
-          description: The name of the device in CDO. Device names are unique in SCC.
+          description: >-
+            The name of the device in CDO. Device names are unique in Security
+            Cloud Control.
           example: my-example-device
         region:
           type: string
-          description: The SCC region the tenant exists in.
+          description: The Security Cloud Control region the tenant exists in.
           example: US
           enum:
             - US
@@ -10427,9 +10564,10 @@ components:
         offset:
           type: integer
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           format: int32
           example: 0
         items:

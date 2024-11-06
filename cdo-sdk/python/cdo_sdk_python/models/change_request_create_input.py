@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -27,8 +27,8 @@ class ChangeRequestCreateInput(BaseModel):
     """
     ChangeRequestCreateInput
     """ # noqa: E501
-    name: StrictStr = Field(description="The name of the change request in SCC.")
-    description: Optional[StrictStr] = Field(default=None, description="The description of the change request in SCC.")
+    name: StrictStr = Field(description="The name of the change request in Security Cloud Control.")
+    description: Optional[StrictStr] = Field(default=None, description="The description of the change request in Security Cloud Control.")
     __properties: ClassVar[List[str]] = ["name", "description"]
 
     model_config = ConfigDict(

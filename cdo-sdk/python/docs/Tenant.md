@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier, represented as a UUID, of the tenant in SCC. | [optional] 
-**name** | **str** | The name of the tenant in SCC. | [optional] 
+**uid** | **str** | The unique identifier, represented as a UUID, of the tenant in Security Cloud Control. | [optional] 
+**name** | **str** | The name of the tenant in Security Cloud Control. | [optional] 
 **security_cloud_control_enterprise_id** | **str** | The unique identifier, represented as a UUID, of the Security Cloud Control Enterprise this tenant is associated with. | [optional] 
-**display_name** | **str** | A human-readable display name for the tenant. This is the tenant name displayed in the SCC Web UI. | [optional] 
-**pay_type** | **str** | An enum that describes the payment type of the tenant in SCC. | [optional] 
+**display_name** | **str** | A human-readable display name for the tenant. This is the tenant name displayed in the Security Cloud Control Web UI. | [optional] 
+**pay_type** | **str** | An enum that describes the payment type of the tenant in Security Cloud Control. | [optional] 
 
 ## Example
 

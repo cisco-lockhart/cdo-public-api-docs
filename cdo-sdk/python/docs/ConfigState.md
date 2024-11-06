@@ -1,6 +1,6 @@
 # ConfigState
 
-The state of the device configuration in CDO. CDO stages configuration changes which have to be manually applied to the device; this field indicates whether the configuration on CDO does not match the configuration on the device, which indicates whether there are changes to be deployed from SCC to the device.
+The state of the device configuration in CDO. CDO stages configuration changes which have to be manually applied to the device; this field indicates whether the configuration on CDO does not match the configuration on the device, which indicates whether there are changes to be deployed from Security Cloud Control to the device.
 
 ## Properties
 

@@ -6,8 +6,8 @@ Cloud Services that match the search term.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier, represented as a UUID, of the entity in SCC. | [optional] 
-**name** | **str** | The name of the entity in CDO. Device names are unique in SCC. | [optional] 
+**uid** | **str** | The unique identifier, represented as a UUID, of the entity in Security Cloud Control. | [optional] 
+**name** | **str** | The name of the entity in CDO. Device names are unique in Security Cloud Control. | [optional] 
 **type** | [**EntityType**](EntityType.md) |  | [optional] 
 **address** | **str** | The address of the entity. | [optional] 
 **matching_configurations** | **List[str]** | (ASAs only) Parts of the ASA device configuration that match the search term. | [optional] 

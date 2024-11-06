@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The name of the change request in SCC. | 
-**description** | **str** | The description of the change request in SCC. | [optional] 
+**name** | **str** | The name of the change request in Security Cloud Control. | 
+**description** | **str** | The description of the change request in Security Cloud Control. | [optional] 
 
 ## Example
 

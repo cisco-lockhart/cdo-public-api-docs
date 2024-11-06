@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -29,11 +29,11 @@ class User(BaseModel):
     """
     User
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the user in SCC.")
-    name: Optional[StrictStr] = Field(default=None, description="The name of the user in SCC.")
-    roles: Optional[List[UserRole]] = Field(default=None, description="Roles associated with this user in SCC.")
-    api_only_user: Optional[StrictBool] = Field(default=None, description="Whether the user is API-only, an API-only user cannot access SCC in the UI.", alias="apiOnlyUser")
-    last_successful_login: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) that indicate the last time the user successfully logged in to SCC.", alias="lastSuccessfulLogin")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the user in Security Cloud Control.")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the user in Security Cloud Control.")
+    roles: Optional[List[UserRole]] = Field(default=None, description="Roles associated with this user in Security Cloud Control.")
+    api_only_user: Optional[StrictBool] = Field(default=None, description="Whether the user is API-only, an API-only user cannot access Security Cloud Control in the UI.", alias="apiOnlyUser")
+    last_successful_login: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) that indicate the last time the user successfully logged in to Security Cloud Control.", alias="lastSuccessfulLogin")
     __properties: ClassVar[List[str]] = ["uid", "name", "roles", "apiOnlyUser", "lastSuccessfulLogin"]
 
     model_config = ConfigDict(

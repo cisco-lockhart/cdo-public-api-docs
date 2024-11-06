@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -44,7 +44,7 @@ class AuditLogsApi:
     def get_audit_logs(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         search_text: Annotated[Optional[StrictStr], Field(description="The searchText parameter serves as a flexible search option that allows for text-based filtering across the username fields of the Audit Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.")] = None,
         time_range: Annotated[Optional[StrictStr], Field(description="The time range for which to retrieve Audit Logs. This parameter cannot be used in conjunction with a query on the eventTime field.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
@@ -68,7 +68,7 @@ class AuditLogsApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param search_text: The searchText parameter serves as a flexible search option that allows for text-based filtering across the username fields of the Audit Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.
         :type search_text: str
@@ -136,7 +136,7 @@ class AuditLogsApi:
     def get_audit_logs_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         search_text: Annotated[Optional[StrictStr], Field(description="The searchText parameter serves as a flexible search option that allows for text-based filtering across the username fields of the Audit Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.")] = None,
         time_range: Annotated[Optional[StrictStr], Field(description="The time range for which to retrieve Audit Logs. This parameter cannot be used in conjunction with a query on the eventTime field.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
@@ -160,7 +160,7 @@ class AuditLogsApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param search_text: The searchText parameter serves as a flexible search option that allows for text-based filtering across the username fields of the Audit Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.
         :type search_text: str
@@ -228,7 +228,7 @@ class AuditLogsApi:
     def get_audit_logs_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         search_text: Annotated[Optional[StrictStr], Field(description="The searchText parameter serves as a flexible search option that allows for text-based filtering across the username fields of the Audit Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.")] = None,
         time_range: Annotated[Optional[StrictStr], Field(description="The time range for which to retrieve Audit Logs. This parameter cannot be used in conjunction with a query on the eventTime field.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
@@ -252,7 +252,7 @@ class AuditLogsApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param search_text: The searchText parameter serves as a flexible search option that allows for text-based filtering across the username fields of the Audit Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions.
         :type search_text: str

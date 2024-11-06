@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -31,13 +31,13 @@ class Sdc(BaseModel):
     Sdc
     """ # noqa: E501
     public_key: Optional[PublicKey] = Field(default=None, alias="publicKey")
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the SDC in SCC.")
-    name: StrictStr = Field(description="The name of the SDC in CDO. SDC names are unique in SCC.")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the SDC in Security Cloud Control.")
+    name: StrictStr = Field(description="The name of the SDC in CDO. SDC names are unique in Security Cloud Control.")
     software_version: Optional[StrictStr] = Field(default=None, description="The software version running on the SDC.", alias="softwareVersion")
     ip_address: Optional[StrictStr] = Field(default=None, description="The IP address of the SDC.", alias="ipAddress")
     status: Optional[Status] = None
     last_heartbeat: Optional[datetime] = Field(default=None, description="The time (UTC; represented using the RFC-3339 standard) that a heartbeat was last received from the SDC. This serves as an indicator of the health of the SDC.", alias="lastHeartbeat")
-    bootstrap_data: Optional[StrictStr] = Field(default=None, description="The bootstrap data is information used to automatically configure the SDC during its initial setup. This data is base64 encoded and includes essential details like the unique registration token and customer-specific settings that enable the SDC to communicate with and send data to SCC. This field is populated only if the SDC is not onboarded.", alias="bootstrapData")
+    bootstrap_data: Optional[StrictStr] = Field(default=None, description="The bootstrap data is information used to automatically configure the SDC during its initial setup. This data is base64 encoded and includes essential details like the unique registration token and customer-specific settings that enable the SDC to communicate with and send data to Security Cloud Control. This field is populated only if the SDC is not onboarded.", alias="bootstrapData")
     __properties: ClassVar[List[str]] = ["publicKey", "uid", "name", "softwareVersion", "ipAddress", "status", "lastHeartbeat", "bootstrapData"]
 
     model_config = ConfigDict(

@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -62,7 +62,7 @@ class ASAAccessRulesApi:
     ) -> AccessRule:
         """Create Access Rule
 
-        Create an Access Rule in the SCC tenant.
+        Create an Access Rule in the Security Cloud Control tenant.
 
         :param access_rule_create_input: (required)
         :type access_rule_create_input: AccessRuleCreateInput
@@ -132,7 +132,7 @@ class ASAAccessRulesApi:
     ) -> ApiResponse[AccessRule]:
         """Create Access Rule
 
-        Create an Access Rule in the SCC tenant.
+        Create an Access Rule in the Security Cloud Control tenant.
 
         :param access_rule_create_input: (required)
         :type access_rule_create_input: AccessRuleCreateInput
@@ -202,7 +202,7 @@ class ASAAccessRulesApi:
     ) -> RESTResponseType:
         """Create Access Rule
 
-        Create an Access Rule in the SCC tenant.
+        Create an Access Rule in the Security Cloud Control tenant.
 
         :param access_rule_create_input: (required)
         :type access_rule_create_input: AccessRuleCreateInput
@@ -326,7 +326,7 @@ class ASAAccessRulesApi:
     @validate_call
     def delete_access_rule(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in SCC.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -342,9 +342,9 @@ class ASAAccessRulesApi:
     ) -> None:
         """Delete Access Rule
 
-        Delete Access Rule by UID in the SCC tenant.
+        Delete Access Rule by UID in the Security Cloud Control tenant.
 
-        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in SCC. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in Security Cloud Control. (required)
         :type access_rule_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -396,7 +396,7 @@ class ASAAccessRulesApi:
     @validate_call
     def delete_access_rule_with_http_info(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in SCC.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -412,9 +412,9 @@ class ASAAccessRulesApi:
     ) -> ApiResponse[None]:
         """Delete Access Rule
 
-        Delete Access Rule by UID in the SCC tenant.
+        Delete Access Rule by UID in the Security Cloud Control tenant.
 
-        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in SCC. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in Security Cloud Control. (required)
         :type access_rule_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -466,7 +466,7 @@ class ASAAccessRulesApi:
     @validate_call
     def delete_access_rule_without_preload_content(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in SCC.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -482,9 +482,9 @@ class ASAAccessRulesApi:
     ) -> RESTResponseType:
         """Delete Access Rule
 
-        Delete Access Rule by UID in the SCC tenant.
+        Delete Access Rule by UID in the Security Cloud Control tenant.
 
-        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in SCC. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in Security Cloud Control. (required)
         :type access_rule_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -593,7 +593,7 @@ class ASAAccessRulesApi:
     @validate_call
     def fetch_access_rule(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in SCC.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -611,7 +611,7 @@ class ASAAccessRulesApi:
 
         Get a single ASA Access Rule by UUID.
 
-        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in SCC. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in Security Cloud Control. (required)
         :type access_rule_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -664,7 +664,7 @@ class ASAAccessRulesApi:
     @validate_call
     def fetch_access_rule_with_http_info(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in SCC.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -682,7 +682,7 @@ class ASAAccessRulesApi:
 
         Get a single ASA Access Rule by UUID.
 
-        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in SCC. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in Security Cloud Control. (required)
         :type access_rule_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -735,7 +735,7 @@ class ASAAccessRulesApi:
     @validate_call
     def fetch_access_rule_without_preload_content(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in SCC.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Access Rule in Security Cloud Control.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -753,7 +753,7 @@ class ASAAccessRulesApi:
 
         Get a single ASA Access Rule by UUID.
 
-        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in SCC. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the Access Rule in Security Cloud Control. (required)
         :type access_rule_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -864,7 +864,7 @@ class ASAAccessRulesApi:
     def list_access_rules(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -886,7 +886,7 @@ class ASAAccessRulesApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -946,7 +946,7 @@ class ASAAccessRulesApi:
     def list_access_rules_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -968,7 +968,7 @@ class ASAAccessRulesApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -1028,7 +1028,7 @@ class ASAAccessRulesApi:
     def list_access_rules_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The number of results to retrieve.")] = None,
-        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
+        offset: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.")] = None,
         q: Annotated[Optional[StrictStr], Field(description="The query to execute. Use the Lucene Query Syntax to construct your query.")] = None,
         sort: Annotated[Optional[List[StrictStr]], Field(description="The fields to sort results by.")] = None,
         _request_timeout: Union[
@@ -1050,7 +1050,7 @@ class ASAAccessRulesApi:
 
         :param limit: The number of results to retrieve.
         :type limit: str
-        :param offset: The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+        :param offset: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
         :type offset: str
         :param q: The query to execute. Use the Lucene Query Syntax to construct your query.
         :type q: str
@@ -1184,7 +1184,7 @@ class ASAAccessRulesApi:
     @validate_call
     def modify_access_rule(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SCC Access Rule.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Security Cloud Control Access Rule.")],
         access_rule_update_input: AccessRuleUpdateInput,
         _request_timeout: Union[
             None,
@@ -1201,9 +1201,9 @@ class ASAAccessRulesApi:
     ) -> AccessRule:
         """Modify ASA Access Rule
 
-        Modify an Access Rule in the SCC tenant by UID.
+        Modify an Access Rule in the Security Cloud Control tenant by UID.
 
-        :param access_rule_uid: The unique identifier, represented as a UUID, of the SCC Access Rule. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the Security Cloud Control Access Rule. (required)
         :type access_rule_uid: str
         :param access_rule_update_input: (required)
         :type access_rule_update_input: AccessRuleUpdateInput
@@ -1259,7 +1259,7 @@ class ASAAccessRulesApi:
     @validate_call
     def modify_access_rule_with_http_info(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SCC Access Rule.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Security Cloud Control Access Rule.")],
         access_rule_update_input: AccessRuleUpdateInput,
         _request_timeout: Union[
             None,
@@ -1276,9 +1276,9 @@ class ASAAccessRulesApi:
     ) -> ApiResponse[AccessRule]:
         """Modify ASA Access Rule
 
-        Modify an Access Rule in the SCC tenant by UID.
+        Modify an Access Rule in the Security Cloud Control tenant by UID.
 
-        :param access_rule_uid: The unique identifier, represented as a UUID, of the SCC Access Rule. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the Security Cloud Control Access Rule. (required)
         :type access_rule_uid: str
         :param access_rule_update_input: (required)
         :type access_rule_update_input: AccessRuleUpdateInput
@@ -1334,7 +1334,7 @@ class ASAAccessRulesApi:
     @validate_call
     def modify_access_rule_without_preload_content(
         self,
-        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the SCC Access Rule.")],
+        access_rule_uid: Annotated[StrictStr, Field(description="The unique identifier, represented as a UUID, of the Security Cloud Control Access Rule.")],
         access_rule_update_input: AccessRuleUpdateInput,
         _request_timeout: Union[
             None,
@@ -1351,9 +1351,9 @@ class ASAAccessRulesApi:
     ) -> RESTResponseType:
         """Modify ASA Access Rule
 
-        Modify an Access Rule in the SCC tenant by UID.
+        Modify an Access Rule in the Security Cloud Control tenant by UID.
 
-        :param access_rule_uid: The unique identifier, represented as a UUID, of the SCC Access Rule. (required)
+        :param access_rule_uid: The unique identifier, represented as a UUID, of the Security Cloud Control Access Rule. (required)
         :type access_rule_uid: str
         :param access_rule_update_input: (required)
         :type access_rule_update_input: AccessRuleUpdateInput

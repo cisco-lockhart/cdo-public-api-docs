@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -25,10 +25,10 @@ from typing_extensions import Self
 
 class Policy(BaseModel):
     """
-    Results from the SCC policies that match the search term.
+    Results from the Security Cloud Control policies that match the search term.
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the policy in SCC.")
-    name: Optional[StrictStr] = Field(default=None, description="The name of the policy in SCC.")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the policy in Security Cloud Control.")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the policy in Security Cloud Control.")
     __properties: ClassVar[List[str]] = ["uid", "name"]
 
     model_config = ConfigDict(

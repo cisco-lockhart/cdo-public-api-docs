@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -21,7 +21,7 @@ from typing_extensions import Self
 
 class ConfigState(str, Enum):
     """
-    The state of the device configuration in CDO. CDO stages configuration changes which have to be manually applied to the device; this field indicates whether the configuration on CDO does not match the configuration on the device, which indicates whether there are changes to be deployed from SCC to the device.
+    The state of the device configuration in CDO. CDO stages configuration changes which have to be manually applied to the device; this field indicates whether the configuration on CDO does not match the configuration on the device, which indicates whether there are changes to be deployed from Security Cloud Control to the device.
     """
 
     """

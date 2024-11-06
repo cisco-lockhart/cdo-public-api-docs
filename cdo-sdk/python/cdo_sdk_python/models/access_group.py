@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -28,8 +28,8 @@ class AccessGroup(BaseModel):
     """
     AccessGroup
     """ # noqa: E501
-    uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of Access Group in SCC.")
-    name: StrictStr = Field(description="The name of Access Group in CDO. Access Group names are unique in SCC.")
+    uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of Access Group in Security Cloud Control.")
+    name: StrictStr = Field(description="The name of Access Group in CDO. Access Group names are unique in Security Cloud Control.")
     entity_uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the device/manager associated with the Access Group.", alias="entityUid")
     shared_access_group_uid: StrictStr = Field(description="The unique identifier, represented as a UUID, of the shared access group manager associated with the Access Group.", alias="sharedAccessGroupUid")
     is_shared: Optional[StrictBool] = Field(default=None, description="The flag that identifies if access group is shared.", alias="isShared")

@@ -3,7 +3,7 @@
 """
     Cisco Security Cloud Control API
 
-    Use the documentation to explore the endpoints SCC has to offer
+    Use the documentation to explore the endpoints Security Cloud Control has to offer
 
     The version of the OpenAPI document: 1.5.0
     Contact: cdo.tac@cisco.com
@@ -28,8 +28,8 @@ class ActiveDirectoryGroup(BaseModel):
     """
     ActiveDirectoryGroup
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the Active Directory Group in SCC.")
-    name: Optional[StrictStr] = Field(default=None, description="The name of the Active Directory Group. SCC does not support special characters for this field.")
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the Active Directory Group in Security Cloud Control.")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the Active Directory Group. Security Cloud Control does not support special characters for this field.")
     role: Optional[UserRole] = None
     group_identifier: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the Active Directory Group in your Identity Provider (IdP).", alias="groupIdentifier")
     issuer_url: Optional[StrictStr] = Field(default=None, description="The Identity Provider (IdP) URL, which Cisco Defense Orchestrator will use to validate SAML assertions during the sign-in process.", alias="issuerUrl")
