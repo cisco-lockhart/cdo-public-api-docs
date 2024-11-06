@@ -22,7 +22,7 @@ Method | HTTP request | Description
 
 Create Object
 
-Create an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Create an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -82,7 +82,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | A descriptive representation of the created SCC object. |  -  |
+**201** | A descriptive representation of the created Security Cloud Control object. |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -95,7 +95,7 @@ No authorization required
 
 Create Targets
 
-Create targets for an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Create targets for an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -170,7 +170,7 @@ No authorization required
 
 Delete Object
 
-Delete an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Delete an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -241,7 +241,7 @@ No authorization required
 
 Delete Targets
 
-Delete targets from an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Delete targets from an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -315,7 +315,7 @@ No authorization required
 
 Get Duplicate Objects
 
-Get objects in the SCC tenant that are duplicates of the given object. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Get objects in the Security Cloud Control tenant that are duplicates of the given object. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -389,7 +389,7 @@ No authorization required
 
 Get Issues Count
 
-Get issues count in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Get issues count in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -461,7 +461,7 @@ No authorization required
 
 Get Object
 
-Gets an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Gets an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -535,7 +535,7 @@ No authorization required
 
 Get Object Usages
 
-Get usages of an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Get usages of an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -594,7 +594,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | A descriptive representation of the created SCC object. |  -  |
+**200** | A descriptive representation of the created Security Cloud Control object. |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -607,7 +607,7 @@ No authorization required
 
 Get Objects
 
-Get objects in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Get objects in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -631,7 +631,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
     api_instance = cdo_sdk_python.ObjectManagementApi(api_client)
     q = 'content:*2.2.* AND name:Lab1' # str | The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content. (optional)
     include_overrides = False # bool | If enabled, the search will also include results from override objects. (optional) (default to False)
-    offset = '0' # str | The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    offset = '0' # str | The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
     sort_by = 'name:DESC' # str | The fields to sort results by. (optional)
 
@@ -653,7 +653,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content. | [optional] 
  **include_overrides** | **bool**| If enabled, the search will also include results from override objects. | [optional] [default to False]
- **offset** | **str**| The offset of the results retrieved. The SCC API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **offset** | **str**| The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
  **sort_by** | **str**| The fields to sort results by. | [optional] 
 
@@ -674,7 +674,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | A paginated view of the SCC objects. |  -  |
+**200** | A paginated view of the Security Cloud Control objects. |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -687,7 +687,7 @@ No authorization required
 
 Get Override Object With Values For Specific Target
 
-Gets an object in the SCC tenant with values for specific target uid. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Gets an object in the Security Cloud Control tenant with values for specific target uid. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -761,7 +761,7 @@ No authorization required
 
 Modify Object
 
-Modify an object in the SCC tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Modify an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 
@@ -823,7 +823,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | A descriptive representation of the updated SCC object. |  -  |
+**200** | A descriptive representation of the updated Security Cloud Control object. |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |

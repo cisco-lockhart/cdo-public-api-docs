@@ -1,7 +1,8 @@
 openapi: 3.0.1
 info:
   title: Cisco Security Cloud Control API
-  description: Use the documentation to explore the endpoints SCC has to offer
+  description: Use the documentation to explore the endpoints Security Cloud Control
+    has to offer
   contact:
     name: Cisco Security Cloud Control TAC
     email: cdo.tac@cisco.com
@@ -29,9 +30,10 @@ paths:
       tags:
       - Object Management
       summary: Get Objects
-      description: "Get objects in the SCC tenant. To use the object APIs, contact\
-        \ customer support or provision Multicloud Defense and turn on object sharing.\
-        \ Note: the object APIs only support operations on network objects and groups."
+      description: "Get objects in the Security Cloud Control tenant. To use the object\
+        \ APIs, contact customer support or provision Multicloud Defense and turn\
+        \ on object sharing. Note: the object APIs only support operations on network\
+        \ objects and groups."
       operationId: getObjects
       parameters:
       - name: q
@@ -52,9 +54,9 @@ paths:
           default: false
       - name: offset
         in: query
-        description: "The offset of the results retrieved. The SCC API uses the offset\
-          \ field to determine the index of the first result retrieved, and will retrieve\
-          \ `limit` results from the offset specified."
+        description: "The offset of the results retrieved. The Security Cloud Control\
+          \ API uses the offset field to determine the index of the first result retrieved,\
+          \ and will retrieve `limit` results from the offset specified."
         required: false
         schema:
           minimum: 0
@@ -80,7 +82,7 @@ paths:
         "403":
           $ref: '#/components/responses/http403Forbidden'
         "200":
-          description: A paginated view of the SCC objects.
+          description: A paginated view of the Security Cloud Control objects.
           content:
             application/json:
               schema:
@@ -99,9 +101,10 @@ paths:
       tags:
       - Object Management
       summary: Create Object
-      description: "Create an object in the SCC tenant. To use the object APIs, contact\
-        \ customer support or provision Multicloud Defense and turn on object sharing.\
-        \ Note: the object APIs only support operations on network objects and groups."
+      description: "Create an object in the Security Cloud Control tenant. To use\
+        \ the object APIs, contact customer support or provision Multicloud Defense\
+        \ and turn on object sharing. Note: the object APIs only support operations\
+        \ on network objects and groups."
       operationId: createObject
       requestBody:
         content:
@@ -113,7 +116,8 @@ paths:
         "403":
           $ref: '#/components/responses/http403Forbidden'
         "201":
-          description: A descriptive representation of the created SCC object.
+          description: A descriptive representation of the created Security Cloud
+            Control object.
           content:
             application/json:
               schema:
@@ -133,10 +137,10 @@ paths:
       tags:
       - Object Management
       summary: Create Targets
-      description: "Create targets for an object in the SCC tenant. To use the object\
-        \ APIs, contact customer support or provision Multicloud Defense and turn\
-        \ on object sharing. Note: the object APIs only support operations on network\
-        \ objects and groups."
+      description: "Create targets for an object in the Security Cloud Control tenant.\
+        \ To use the object APIs, contact customer support or provision Multicloud\
+        \ Defense and turn on object sharing. Note: the object APIs only support operations\
+        \ on network objects and groups."
       operationId: createTargets
       parameters:
       - name: uid
@@ -183,10 +187,10 @@ paths:
       tags:
       - Object Management
       summary: Delete Targets
-      description: "Delete targets from an object in the SCC tenant. To use the object\
-        \ APIs, contact customer support or provision Multicloud Defense and turn\
-        \ on object sharing. Note: the object APIs only support operations on network\
-        \ objects and groups."
+      description: "Delete targets from an object in the Security Cloud Control tenant.\
+        \ To use the object APIs, contact customer support or provision Multicloud\
+        \ Defense and turn on object sharing. Note: the object APIs only support operations\
+        \ on network objects and groups."
       operationId: deleteTargets
       parameters:
       - name: uid
@@ -237,9 +241,10 @@ paths:
       tags:
       - Object Management
       summary: Get Object
-      description: "Gets an object in the SCC tenant. To use the object APIs, contact\
-        \ customer support or provision Multicloud Defense and turn on object sharing.\
-        \ Note: the object APIs only support operations on network objects and groups."
+      description: "Gets an object in the Security Cloud Control tenant. To use the\
+        \ object APIs, contact customer support or provision Multicloud Defense and\
+        \ turn on object sharing. Note: the object APIs only support operations on\
+        \ network objects and groups."
       operationId: getObject
       parameters:
       - name: uid
@@ -263,14 +268,14 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -281,9 +286,10 @@ paths:
       tags:
       - Object Management
       summary: Delete Object
-      description: "Delete an object in the SCC tenant. To use the object APIs, contact\
-        \ customer support or provision Multicloud Defense and turn on object sharing.\
-        \ Note: the object APIs only support operations on network objects and groups."
+      description: "Delete an object in the Security Cloud Control tenant. To use\
+        \ the object APIs, contact customer support or provision Multicloud Defense\
+        \ and turn on object sharing. Note: the object APIs only support operations\
+        \ on network objects and groups."
       operationId: deleteObject
       parameters:
       - name: uid
@@ -317,9 +323,10 @@ paths:
       tags:
       - Object Management
       summary: Modify Object
-      description: "Modify an object in the SCC tenant. To use the object APIs, contact\
-        \ customer support or provision Multicloud Defense and turn on object sharing.\
-        \ Note: the object APIs only support operations on network objects and groups."
+      description: "Modify an object in the Security Cloud Control tenant. To use\
+        \ the object APIs, contact customer support or provision Multicloud Defense\
+        \ and turn on object sharing. Note: the object APIs only support operations\
+        \ on network objects and groups."
       operationId: modifyObject
       parameters:
       - name: uid
@@ -339,14 +346,15 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
-          description: A descriptive representation of the updated SCC object.
+          description: A descriptive representation of the updated Security Cloud
+            Control object.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -360,10 +368,10 @@ paths:
       tags:
       - Object Management
       summary: Get Object Usages
-      description: "Get usages of an object in the SCC tenant. To use the object APIs,\
-        \ contact customer support or provision Multicloud Defense and turn on object\
-        \ sharing. Note: the object APIs only support operations on network objects\
-        \ and groups."
+      description: "Get usages of an object in the Security Cloud Control tenant.\
+        \ To use the object APIs, contact customer support or provision Multicloud\
+        \ Defense and turn on object sharing. Note: the object APIs only support operations\
+        \ on network objects and groups."
       operationId: getObjectUsages
       parameters:
       - name: uid
@@ -375,18 +383,19 @@ paths:
           format: uuid
         example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
       responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
-          description: A descriptive representation of the created SCC object.
+          description: A descriptive representation of the created Security Cloud
+            Control object.
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/ReferenceInfo'
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -400,10 +409,10 @@ paths:
       tags:
       - Object Management
       summary: Get Duplicate Objects
-      description: "Get objects in the SCC tenant that are duplicates of the given\
-        \ object. To use the object APIs, contact customer support or provision Multicloud\
-        \ Defense and turn on object sharing. Note: the object APIs only support operations\
-        \ on network objects and groups."
+      description: "Get objects in the Security Cloud Control tenant that are duplicates\
+        \ of the given object. To use the object APIs, contact customer support or\
+        \ provision Multicloud Defense and turn on object sharing. Note: the object\
+        \ APIs only support operations on network objects and groups."
       operationId: getDuplicateObjects
       parameters:
       - name: uid
@@ -424,6 +433,8 @@ paths:
           format: uuid
         example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
       responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "200":
           description: Duplicates of the object.
           content:
@@ -432,8 +443,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DuplicateGroupDto'
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
@@ -449,10 +458,10 @@ paths:
       tags:
       - Object Management
       summary: Get Override Object With Values For Specific Target
-      description: "Gets an object in the SCC tenant with values for specific target\
-        \ uid. To use the object APIs, contact customer support or provision Multicloud\
-        \ Defense and turn on object sharing. Note: the object APIs only support operations\
-        \ on network objects and groups."
+      description: "Gets an object in the Security Cloud Control tenant with values\
+        \ for specific target uid. To use the object APIs, contact customer support\
+        \ or provision Multicloud Defense and turn on object sharing. Note: the object\
+        \ APIs only support operations on network objects and groups."
       operationId: getOverrideObject
       parameters:
       - name: uid
@@ -476,14 +485,14 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectResponse'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:
@@ -495,9 +504,10 @@ paths:
       tags:
       - Object Management
       summary: Get Issues Count
-      description: "Get issues count in the SCC tenant. To use the object APIs, contact\
-        \ customer support or provision Multicloud Defense and turn on object sharing.\
-        \ Note: the object APIs only support operations on network objects and groups."
+      description: "Get issues count in the Security Cloud Control tenant. To use\
+        \ the object APIs, contact customer support or provision Multicloud Defense\
+        \ and turn on object sharing. Note: the object APIs only support operations\
+        \ on network objects and groups."
       operationId: getIssuesCount
       parameters:
       - name: q
@@ -511,16 +521,16 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "400":
+          $ref: '#/components/responses/http400BadRequest'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/IssuesCount'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
-        "400":
-          $ref: '#/components/responses/http400BadRequest'
         "500":
           description: Internal server error.
           content:

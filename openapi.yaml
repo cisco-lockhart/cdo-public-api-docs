@@ -4431,10 +4431,10 @@ paths:
         - Object Management
       summary: Get Objects
       description: >-
-        Get objects in the SCC tenant. To use the object APIs, contact customer
-        support or provision Multicloud Defense and turn on object sharing.
-        Note: the object APIs only support operations on network objects and
-        groups.
+        Get objects in the Security Cloud Control tenant. To use the object
+        APIs, contact customer support or provision Multicloud Defense and turn
+        on object sharing. Note: the object APIs only support operations on
+        network objects and groups.
       operationId: getObjects
       parameters:
         - name: q
@@ -4458,9 +4458,10 @@ paths:
         - name: offset
           in: query
           description: >-
-            The offset of the results retrieved. The SCC API uses the offset
-            field to determine the index of the first result retrieved, and will
-            retrieve `limit` results from the offset specified.
+            The offset of the results retrieved. The Security Cloud Control API
+            uses the offset field to determine the index of the first result
+            retrieved, and will retrieve `limit` results from the offset
+            specified.
           required: false
           schema:
             minimum: 0
@@ -4484,7 +4485,7 @@ paths:
           example: name:DESC
       responses:
         '200':
-          description: A paginated view of the SCC objects.
+          description: A paginated view of the Security Cloud Control objects.
           content:
             application/json:
               schema:
@@ -4506,10 +4507,10 @@ paths:
         - Object Management
       summary: Create Object
       description: >-
-        Create an object in the SCC tenant. To use the object APIs, contact
-        customer support or provision Multicloud Defense and turn on object
-        sharing. Note: the object APIs only support operations on network
-        objects and groups.
+        Create an object in the Security Cloud Control tenant. To use the object
+        APIs, contact customer support or provision Multicloud Defense and turn
+        on object sharing. Note: the object APIs only support operations on
+        network objects and groups.
       operationId: createObject
       requestBody:
         content:
@@ -4519,7 +4520,9 @@ paths:
         required: true
       responses:
         '201':
-          description: A descriptive representation of the created SCC object.
+          description: >-
+            A descriptive representation of the created Security Cloud Control
+            object.
           content:
             application/json:
               schema:
@@ -4542,10 +4545,10 @@ paths:
         - Object Management
       summary: Create Targets
       description: >-
-        Create targets for an object in the SCC tenant. To use the object APIs,
-        contact customer support or provision Multicloud Defense and turn on
-        object sharing. Note: the object APIs only support operations on network
-        objects and groups.
+        Create targets for an object in the Security Cloud Control tenant. To
+        use the object APIs, contact customer support or provision Multicloud
+        Defense and turn on object sharing. Note: the object APIs only support
+        operations on network objects and groups.
       operationId: createTargets
       parameters:
         - name: uid
@@ -4594,10 +4597,10 @@ paths:
         - Object Management
       summary: Delete Targets
       description: >-
-        Delete targets from an object in the SCC tenant. To use the object APIs,
-        contact customer support or provision Multicloud Defense and turn on
-        object sharing. Note: the object APIs only support operations on network
-        objects and groups.
+        Delete targets from an object in the Security Cloud Control tenant. To
+        use the object APIs, contact customer support or provision Multicloud
+        Defense and turn on object sharing. Note: the object APIs only support
+        operations on network objects and groups.
       operationId: deleteTargets
       parameters:
         - name: uid
@@ -4652,10 +4655,10 @@ paths:
         - Object Management
       summary: Get Object
       description: >-
-        Gets an object in the SCC tenant. To use the object APIs, contact
-        customer support or provision Multicloud Defense and turn on object
-        sharing. Note: the object APIs only support operations on network
-        objects and groups.
+        Gets an object in the Security Cloud Control tenant. To use the object
+        APIs, contact customer support or provision Multicloud Defense and turn
+        on object sharing. Note: the object APIs only support operations on
+        network objects and groups.
       operationId: getObject
       parameters:
         - name: uid
@@ -4699,10 +4702,10 @@ paths:
         - Object Management
       summary: Delete Object
       description: >-
-        Delete an object in the SCC tenant. To use the object APIs, contact
-        customer support or provision Multicloud Defense and turn on object
-        sharing. Note: the object APIs only support operations on network
-        objects and groups.
+        Delete an object in the Security Cloud Control tenant. To use the object
+        APIs, contact customer support or provision Multicloud Defense and turn
+        on object sharing. Note: the object APIs only support operations on
+        network objects and groups.
       operationId: deleteObject
       parameters:
         - name: uid
@@ -4737,10 +4740,10 @@ paths:
         - Object Management
       summary: Modify Object
       description: >-
-        Modify an object in the SCC tenant. To use the object APIs, contact
-        customer support or provision Multicloud Defense and turn on object
-        sharing. Note: the object APIs only support operations on network
-        objects and groups.
+        Modify an object in the Security Cloud Control tenant. To use the object
+        APIs, contact customer support or provision Multicloud Defense and turn
+        on object sharing. Note: the object APIs only support operations on
+        network objects and groups.
       operationId: modifyObject
       parameters:
         - name: uid
@@ -4759,7 +4762,9 @@ paths:
         required: true
       responses:
         '200':
-          description: A descriptive representation of the updated SCC object.
+          description: >-
+            A descriptive representation of the updated Security Cloud Control
+            object.
           content:
             application/json:
               schema:
@@ -4782,10 +4787,10 @@ paths:
         - Object Management
       summary: Get Object Usages
       description: >-
-        Get usages of an object in the SCC tenant. To use the object APIs,
-        contact customer support or provision Multicloud Defense and turn on
-        object sharing. Note: the object APIs only support operations on network
-        objects and groups.
+        Get usages of an object in the Security Cloud Control tenant. To use the
+        object APIs, contact customer support or provision Multicloud Defense
+        and turn on object sharing. Note: the object APIs only support
+        operations on network objects and groups.
       operationId: getObjectUsages
       parameters:
         - name: uid
@@ -4798,7 +4803,9 @@ paths:
           example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
       responses:
         '200':
-          description: A descriptive representation of the created SCC object.
+          description: >-
+            A descriptive representation of the created Security Cloud Control
+            object.
           content:
             application/json:
               schema:
@@ -4823,10 +4830,10 @@ paths:
         - Object Management
       summary: Get Duplicate Objects
       description: >-
-        Get objects in the SCC tenant that are duplicates of the given object.
-        To use the object APIs, contact customer support or provision Multicloud
-        Defense and turn on object sharing. Note: the object APIs only support
-        operations on network objects and groups.
+        Get objects in the Security Cloud Control tenant that are duplicates of
+        the given object. To use the object APIs, contact customer support or
+        provision Multicloud Defense and turn on object sharing. Note: the
+        object APIs only support operations on network objects and groups.
       operationId: getDuplicateObjects
       parameters:
         - name: uid
@@ -4874,10 +4881,10 @@ paths:
         - Object Management
       summary: Get Override Object With Values For Specific Target
       description: >-
-        Gets an object in the SCC tenant with values for specific target uid. To
-        use the object APIs, contact customer support or provision Multicloud
-        Defense and turn on object sharing. Note: the object APIs only support
-        operations on network objects and groups.
+        Gets an object in the Security Cloud Control tenant with values for
+        specific target uid. To use the object APIs, contact customer support or
+        provision Multicloud Defense and turn on object sharing. Note: the
+        object APIs only support operations on network objects and groups.
       operationId: getOverrideObject
       parameters:
         - name: uid
@@ -4921,10 +4928,10 @@ paths:
         - Object Management
       summary: Get Issues Count
       description: >-
-        Get issues count in the SCC tenant. To use the object APIs, contact
-        customer support or provision Multicloud Defense and turn on object
-        sharing. Note: the object APIs only support operations on network
-        objects and groups.
+        Get issues count in the Security Cloud Control tenant. To use the object
+        APIs, contact customer support or provision Multicloud Defense and turn
+        on object sharing. Note: the object APIs only support operations on
+        network objects and groups.
       operationId: getIssuesCount
       parameters:
         - name: q
@@ -9238,12 +9245,12 @@ components:
             minorVersion:
               type: integer
               format: int32
+            initParameterNames:
+              type: object
             attributeNames:
               type: object
             contextPath:
               type: string
-            initParameterNames:
-              type: object
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9257,27 +9264,17 @@ components:
             servletNames:
               type: object
               deprecated: true
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
             servletRegistrations:
               type: object
               additionalProperties:
                 type: object
                 properties:
-                  runAsRole:
-                    type: string
                   mappings:
                     type: array
                     items:
                       type: string
+                  runAsRole:
+                    type: string
                   name:
                     type: string
                   className:
@@ -9351,6 +9348,14 @@ components:
                   items:
                     type: object
                     properties:
+                      buffer:
+                        type: string
+                      defaultContentType:
+                        type: string
+                      urlPatterns:
+                        type: array
+                        items:
+                          type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9373,14 +9378,6 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
-                      buffer:
-                        type: string
-                      defaultContentType:
-                        type: string
-                      urlPatterns:
-                        type: array
-                        items:
-                          type: string
                 taglibs:
                   type: array
                   items:
@@ -9399,6 +9396,16 @@ components:
             effectiveMajorVersion:
               type: integer
               format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
           writeOnly: true
         contentType:
           type: string
