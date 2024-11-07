@@ -43,6 +43,14 @@ paths:
           type: string
           format: uuid
       responses:
+        "200":
+          description: "CDO Transaction that has completed, either successfully or\
+            \ unsuccessfully. Note: failed Security Cloud Control Transactions do\
+            \ not roll back."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
         "403":
           $ref: '#/components/responses/http403Forbidden'
         "404":
@@ -55,14 +63,6 @@ paths:
                 $ref: '#/components/schemas/CdoTransaction'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
-        "200":
-          description: "CDO Transaction that has completed, either successfully or\
-            \ unsuccessfully. Note: failed Security Cloud Control Transactions do\
-            \ not roll back."
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CdoTransaction'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
