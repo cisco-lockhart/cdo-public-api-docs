@@ -28,8 +28,8 @@ class MspDeleteUserGroupsFromTenantInput(BaseModel):
     """
     MspDeleteUserGroupsFromTenantInput
     """ # noqa: E501
-    user_group_identifiers: Annotated[List[StrictStr], Field(min_length=0, max_length=50)] = Field(description="The list of user group identifiers to be removed from the MSP-managed tenant. You can remove a maximum of 50 user groups at a time.", alias="userGroupIdentifiers")
-    __properties: ClassVar[List[str]] = ["userGroupIdentifiers"]
+    user_group_uids: Annotated[List[StrictStr], Field(min_length=0, max_length=50)] = Field(description="The list of unique user group identifiers, represented as UUIDs, to be removed from the MSP-managed tenant. You can remove a maximum of 50 user groups at a time.", alias="userGroupUids")
+    __properties: ClassVar[List[str]] = ["userGroupUids"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,7 +82,7 @@ class MspDeleteUserGroupsFromTenantInput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "userGroupIdentifiers": obj.get("userGroupIdentifiers")
+            "userGroupUids": obj.get("userGroupUids")
         })
         return _obj
 

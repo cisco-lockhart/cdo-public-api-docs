@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_group_identifiers** | **List[str]** | The list of user group identifiers to be removed from the MSP-managed tenant. You can remove a maximum of 50 user groups at a time. | 
+**user_group_uids** | **List[str]** | The list of unique user group identifiers, represented as UUIDs, to be removed from the MSP-managed tenant. You can remove a maximum of 50 user groups at a time. | 
 
 ## Example
 
