@@ -1,4 +1,4 @@
-# Version 1.6.0 (2024-11-02)
+# Version 1.6.0 (2024-11-08)
 
 ## Welcome to Cisco Security Cloud Control
 
