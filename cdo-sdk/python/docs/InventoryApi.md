@@ -687,7 +687,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **enable_multicloud_defense**
-> CdoTransaction enable_multicloud_defense(authorization)
+> CdoTransaction enable_multicloud_defense()
 
 Enable Multicloud Defense
 
@@ -723,11 +723,10 @@ configuration = cdo_sdk_python.Configuration(
 with cdo_sdk_python.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = cdo_sdk_python.InventoryApi(api_client)
-    authorization = 'authorization_example' # str | 
 
     try:
         # Enable Multicloud Defense
-        api_response = api_instance.enable_multicloud_defense(authorization)
+        api_response = api_instance.enable_multicloud_defense()
         print("The response of InventoryApi->enable_multicloud_defense:\n")
         pprint(api_response)
     except Exception as e:
@@ -738,10 +737,7 @@ with cdo_sdk_python.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **authorization** | **str**|  | 
+This endpoint does not need any parameter.
 
 ### Return type
 

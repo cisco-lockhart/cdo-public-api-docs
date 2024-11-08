@@ -864,12 +864,6 @@ paths:
         transaction object that can be used to monitor the progress of the
         operation.
       operationId: enableMulticloudDefense
-      parameters:
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
       responses:
         '202':
           description: >-
@@ -9264,6 +9258,12 @@ components:
             servletNames:
               type: object
               deprecated: true
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
             servlets:
               type: object
               deprecated: true
@@ -9271,12 +9271,6 @@ components:
               type: string
             servletContextName:
               type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
             servletRegistrations:
               type: object
               additionalProperties:
@@ -9328,10 +9322,10 @@ components:
                   type: string
                 comment:
                   type: string
-                domain:
-                  type: string
                 secure:
                   type: boolean
+                domain:
+                  type: string
                 maxAge:
                   type: integer
                   format: int32
@@ -9361,6 +9355,8 @@ components:
                   items:
                     type: object
                     properties:
+                      buffer:
+                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9383,8 +9379,6 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
-                      buffer:
-                        type: string
                       defaultContentType:
                         type: string
                       urlPatterns:
@@ -9396,9 +9390,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
             virtualServerName:
               type: string
@@ -9527,17 +9521,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
+          writeOnly: true
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
           writeOnly: true
     JsonWebKey:
       type: object

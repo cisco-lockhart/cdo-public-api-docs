@@ -2250,7 +2250,6 @@ class InventoryApi:
     @validate_call
     def enable_multicloud_defense(
         self,
-        authorization: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2268,8 +2267,6 @@ class InventoryApi:
 
         This is an asynchronous operation to Enable Multicloud Defense for the Security Cloud Control tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
-        :param authorization: (required)
-        :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2293,7 +2290,6 @@ class InventoryApi:
         """ # noqa: E501
 
         _param = self._enable_multicloud_defense_serialize(
-            authorization=authorization,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2322,7 +2318,6 @@ class InventoryApi:
     @validate_call
     def enable_multicloud_defense_with_http_info(
         self,
-        authorization: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2340,8 +2335,6 @@ class InventoryApi:
 
         This is an asynchronous operation to Enable Multicloud Defense for the Security Cloud Control tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
-        :param authorization: (required)
-        :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2365,7 +2358,6 @@ class InventoryApi:
         """ # noqa: E501
 
         _param = self._enable_multicloud_defense_serialize(
-            authorization=authorization,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2394,7 +2386,6 @@ class InventoryApi:
     @validate_call
     def enable_multicloud_defense_without_preload_content(
         self,
-        authorization: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2412,8 +2403,6 @@ class InventoryApi:
 
         This is an asynchronous operation to Enable Multicloud Defense for the Security Cloud Control tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
-        :param authorization: (required)
-        :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2437,7 +2426,6 @@ class InventoryApi:
         """ # noqa: E501
 
         _param = self._enable_multicloud_defense_serialize(
-            authorization=authorization,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2461,7 +2449,6 @@ class InventoryApi:
 
     def _enable_multicloud_defense_serialize(
         self,
-        authorization,
         _request_auth,
         _content_type,
         _headers,
@@ -2483,8 +2470,6 @@ class InventoryApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
         # process the form parameters
         # process the body parameter
 
