@@ -43,8 +43,6 @@ paths:
           type: string
           format: uuid
       responses:
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "200":
           description: "CDO Transaction that has completed, either successfully or\
             \ unsuccessfully. Note: failed Security Cloud Control Transactions do\
@@ -53,6 +51,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
         "202":
