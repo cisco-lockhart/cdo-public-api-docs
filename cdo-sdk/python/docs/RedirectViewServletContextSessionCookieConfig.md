@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | [optional] 
 **path** | **str** |  | [optional] 
-**comment** | **str** |  | [optional] 
-**domain** | **str** |  | [optional] 
 **http_only** | **bool** |  | [optional] 
+**name** | **str** |  | [optional] 
+**comment** | **str** |  | [optional] 
 **secure** | **bool** |  | [optional] 
+**domain** | **str** |  | [optional] 
 **max_age** | **int** |  | [optional] 
 
 ## Example

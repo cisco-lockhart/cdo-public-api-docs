@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**servlet_name_mappings** | **List[str]** |  | [optional] 
 **url_pattern_mappings** | **List[str]** |  | [optional] 
+**servlet_name_mappings** | **List[str]** |  | [optional] 
 **name** | **str** |  | [optional] 
 **class_name** | **str** |  | [optional] 
 **init_parameters** | **Dict[str, str]** |  | [optional] 
