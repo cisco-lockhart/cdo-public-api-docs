@@ -6,11 +6,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **path** | **str** |  | [optional] 
-**http_only** | **bool** |  | [optional] 
 **name** | **str** |  | [optional] 
 **comment** | **str** |  | [optional] 
-**secure** | **bool** |  | [optional] 
 **domain** | **str** |  | [optional] 
+**http_only** | **bool** |  | [optional] 
+**secure** | **bool** |  | [optional] 
 **max_age** | **int** |  | [optional] 
 
 ## Example

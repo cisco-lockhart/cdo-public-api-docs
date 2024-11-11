@@ -5,8 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**el_ignored** | **str** |  | [optional] 
+**buffer** | **str** |  | [optional] 
 **scripting_invalid** | **str** |  | [optional] 
+**el_ignored** | **str** |  | [optional] 
 **page_encoding** | **str** |  | [optional] 
 **is_xml** | **str** |  | [optional] 
 **include_preludes** | **List[str]** |  | [optional] 
@@ -14,7 +15,6 @@ Name | Type | Description | Notes
 **deferred_syntax_allowed_as_literal** | **str** |  | [optional] 
 **trim_directive_whitespaces** | **str** |  | [optional] 
 **error_on_undeclared_namespace** | **str** |  | [optional] 
-**buffer** | **str** |  | [optional] 
 **default_content_type** | **str** |  | [optional] 
 **url_patterns** | **List[str]** |  | [optional] 
 
