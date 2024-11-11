@@ -7298,6 +7298,11 @@ components:
             The hardware, or virtualized hardware platform, that the device is
             running on (ASA-only). This field can be missing in the case of a
             partially onboarded device.
+        hardwareModel:
+          type: string
+          description: >-
+            The hardware model of the device (ASAs, FDM-managed FTDs, and
+            FMC-managed FTDs only)
     DeviceRole:
       type: string
       description: The role this device performs on the network.
@@ -9241,10 +9246,6 @@ components:
               format: int32
             attributeNames:
               type: object
-            contextPath:
-              type: string
-            initParameterNames:
-              type: object
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9255,9 +9256,26 @@ components:
                   - COOKIE
                   - URL
                   - SSL
+            contextPath:
+              type: string
+            initParameterNames:
+              type: object
             servletNames:
               type: object
               deprecated: true
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -9301,8 +9319,6 @@ components:
             sessionCookieConfig:
               type: object
               properties:
-                httpOnly:
-                  type: boolean
                 name:
                   type: string
                 path:
@@ -9311,6 +9327,8 @@ components:
                   type: string
                 domain:
                   type: string
+                httpOnly:
+                  type: boolean
                 secure:
                   type: boolean
                 maxAge:
@@ -9342,8 +9360,6 @@ components:
                   items:
                     type: object
                     properties:
-                      buffer:
-                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9366,6 +9382,8 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
+                      buffer:
+                        type: string
                       defaultContentType:
                         type: string
                       urlPatterns:
@@ -9386,19 +9404,6 @@ components:
             requestCharacterEncoding:
               type: string
             responseCharacterEncoding:
-              type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
               type: string
           writeOnly: true
         contentType:

@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**http_only** | **bool** |  | [optional] 
 **name** | **str** |  | [optional] 
 **path** | **str** |  | [optional] 
 **comment** | **str** |  | [optional] 
 **domain** | **str** |  | [optional] 
+**http_only** | **bool** |  | [optional] 
 **secure** | **bool** |  | [optional] 
 **max_age** | **int** |  | [optional] 
 
