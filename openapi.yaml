@@ -9319,10 +9319,10 @@ components:
             sessionCookieConfig:
               type: object
               properties:
-                path:
-                  type: string
                 httpOnly:
                   type: boolean
+                path:
+                  type: string
                 name:
                   type: string
                 comment:

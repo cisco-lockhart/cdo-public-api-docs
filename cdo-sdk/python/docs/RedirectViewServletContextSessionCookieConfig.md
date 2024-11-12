@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**path** | **str** |  | [optional] 
 **http_only** | **bool** |  | [optional] 
+**path** | **str** |  | [optional] 
 **name** | **str** |  | [optional] 
 **comment** | **str** |  | [optional] 
 **secure** | **bool** |  | [optional] 
