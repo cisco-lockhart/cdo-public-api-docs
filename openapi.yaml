@@ -9263,19 +9263,6 @@ components:
             servletNames:
               type: object
               deprecated: true
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -9327,10 +9314,10 @@ components:
                   type: string
                 comment:
                   type: string
-                secure:
-                  type: boolean
                 domain:
                   type: string
+                secure:
+                  type: boolean
                 maxAge:
                   type: integer
                   format: int32
@@ -9404,6 +9391,19 @@ components:
             requestCharacterEncoding:
               type: string
             responseCharacterEncoding:
+              type: string
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
               type: string
           writeOnly: true
         contentType:
@@ -9522,21 +9522,21 @@ components:
           type: array
           items:
             type: string
-        propagateQueryProperties:
-          type: boolean
         redirectView:
           type: boolean
+        propagateQueryProperties:
+          type: boolean
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
-          writeOnly: true
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
           writeOnly: true
     JsonWebKey:
       type: object
