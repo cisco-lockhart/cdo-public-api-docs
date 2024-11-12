@@ -9244,12 +9244,10 @@ components:
             minorVersion:
               type: integer
               format: int32
-            contextPath:
-              type: string
             attributeNames:
               type: object
-            initParameterNames:
-              type: object
+            contextPath:
+              type: string
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9260,33 +9258,22 @@ components:
                   - COOKIE
                   - URL
                   - SSL
+            initParameterNames:
+              type: object
             servletNames:
               type: object
               deprecated: true
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
             servletRegistrations:
               type: object
               additionalProperties:
                 type: object
                 properties:
+                  runAsRole:
+                    type: string
                   mappings:
                     type: array
                     items:
                       type: string
-                  runAsRole:
-                    type: string
                   name:
                     type: string
                   className:
@@ -9300,11 +9287,11 @@ components:
               additionalProperties:
                 type: object
                 properties:
-                  urlPatternMappings:
+                  servletNameMappings:
                     type: array
                     items:
                       type: string
-                  servletNameMappings:
+                  urlPatternMappings:
                     type: array
                     items:
                       type: string
@@ -9321,19 +9308,19 @@ components:
               properties:
                 httpOnly:
                   type: boolean
-                path:
-                  type: string
                 name:
                   type: string
-                comment:
+                path:
                   type: string
-                secure:
-                  type: boolean
-                domain:
+                comment:
                   type: string
                 maxAge:
                   type: integer
                   format: int32
+                secure:
+                  type: boolean
+                domain:
+                  type: string
             defaultSessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9360,9 +9347,15 @@ components:
                   items:
                     type: object
                     properties:
-                      elIgnored:
+                      deferredSyntaxAllowedAsLiteral:
+                        type: string
+                      errorOnUndeclaredNamespace:
+                        type: string
+                      trimDirectiveWhitespaces:
                         type: string
                       scriptingInvalid:
+                        type: string
+                      elIgnored:
                         type: string
                       pageEncoding:
                         type: string
@@ -9376,12 +9369,6 @@ components:
                         type: array
                         items:
                           type: string
-                      deferredSyntaxAllowedAsLiteral:
-                        type: string
-                      trimDirectiveWhitespaces:
-                        type: string
-                      errorOnUndeclaredNamespace:
-                        type: string
                       buffer:
                         type: string
                       defaultContentType:
@@ -9404,6 +9391,19 @@ components:
             requestCharacterEncoding:
               type: string
             responseCharacterEncoding:
+              type: string
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
               type: string
           writeOnly: true
         contentType:

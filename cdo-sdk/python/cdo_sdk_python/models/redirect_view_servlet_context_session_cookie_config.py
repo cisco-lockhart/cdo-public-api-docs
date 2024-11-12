@@ -28,13 +28,13 @@ class RedirectViewServletContextSessionCookieConfig(BaseModel):
     RedirectViewServletContextSessionCookieConfig
     """ # noqa: E501
     http_only: Optional[StrictBool] = Field(default=None, alias="httpOnly")
-    path: Optional[StrictStr] = None
     name: Optional[StrictStr] = None
+    path: Optional[StrictStr] = None
     comment: Optional[StrictStr] = None
+    max_age: Optional[StrictInt] = Field(default=None, alias="maxAge")
     secure: Optional[StrictBool] = None
     domain: Optional[StrictStr] = None
-    max_age: Optional[StrictInt] = Field(default=None, alias="maxAge")
-    __properties: ClassVar[List[str]] = ["httpOnly", "path", "name", "comment", "secure", "domain", "maxAge"]
+    __properties: ClassVar[List[str]] = ["httpOnly", "name", "path", "comment", "maxAge", "secure", "domain"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,12 +88,12 @@ class RedirectViewServletContextSessionCookieConfig(BaseModel):
 
         _obj = cls.model_validate({
             "httpOnly": obj.get("httpOnly"),
-            "path": obj.get("path"),
             "name": obj.get("name"),
+            "path": obj.get("path"),
             "comment": obj.get("comment"),
+            "maxAge": obj.get("maxAge"),
             "secure": obj.get("secure"),
-            "domain": obj.get("domain"),
-            "maxAge": obj.get("maxAge")
+            "domain": obj.get("domain")
         })
         return _obj
 
