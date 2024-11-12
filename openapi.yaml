@@ -9248,6 +9248,8 @@ components:
               type: object
             contextPath:
               type: string
+            initParameterNames:
+              type: object
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9258,22 +9260,33 @@ components:
                   - COOKIE
                   - URL
                   - SSL
-            initParameterNames:
-              type: object
             servletNames:
               type: object
               deprecated: true
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
                 type: object
                 properties:
-                  runAsRole:
-                    type: string
                   mappings:
                     type: array
                     items:
                       type: string
+                  runAsRole:
+                    type: string
                   name:
                     type: string
                   className:
@@ -9314,13 +9327,13 @@ components:
                   type: string
                 comment:
                   type: string
-                maxAge:
-                  type: integer
-                  format: int32
                 secure:
                   type: boolean
                 domain:
                   type: string
+                maxAge:
+                  type: integer
+                  format: int32
             defaultSessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9347,15 +9360,9 @@ components:
                   items:
                     type: object
                     properties:
-                      deferredSyntaxAllowedAsLiteral:
-                        type: string
-                      errorOnUndeclaredNamespace:
-                        type: string
-                      trimDirectiveWhitespaces:
+                      elIgnored:
                         type: string
                       scriptingInvalid:
-                        type: string
-                      elIgnored:
                         type: string
                       pageEncoding:
                         type: string
@@ -9369,6 +9376,12 @@ components:
                         type: array
                         items:
                           type: string
+                      deferredSyntaxAllowedAsLiteral:
+                        type: string
+                      trimDirectiveWhitespaces:
+                        type: string
+                      errorOnUndeclaredNamespace:
+                        type: string
                       buffer:
                         type: string
                       defaultContentType:
@@ -9382,28 +9395,15 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibURI:
-                        type: string
                       taglibLocation:
+                        type: string
+                      taglibURI:
                         type: string
             virtualServerName:
               type: string
             requestCharacterEncoding:
               type: string
             responseCharacterEncoding:
-              type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
               type: string
           writeOnly: true
         contentType:
@@ -9522,9 +9522,9 @@ components:
           type: array
           items:
             type: string
-        redirectView:
-          type: boolean
         propagateQueryProperties:
+          type: boolean
+        redirectView:
           type: boolean
         attributesMap:
           type: object
