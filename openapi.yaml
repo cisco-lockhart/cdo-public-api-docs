@@ -9347,10 +9347,6 @@ components:
                   items:
                     type: object
                     properties:
-                      trimDirectiveWhitespaces:
-                        type: string
-                      errorOnUndeclaredNamespace:
-                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9368,6 +9364,10 @@ components:
                         items:
                           type: string
                       deferredSyntaxAllowedAsLiteral:
+                        type: string
+                      trimDirectiveWhitespaces:
+                        type: string
+                      errorOnUndeclaredNamespace:
                         type: string
                       buffer:
                         type: string
