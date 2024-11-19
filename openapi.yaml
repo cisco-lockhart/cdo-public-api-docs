@@ -9263,17 +9263,30 @@ components:
             servletNames:
               type: object
               deprecated: true
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
                 type: object
                 properties:
-                  runAsRole:
-                    type: string
                   mappings:
                     type: array
                     items:
                       type: string
+                  runAsRole:
+                    type: string
                   name:
                     type: string
                   className:
@@ -9347,10 +9360,6 @@ components:
                   items:
                     type: object
                     properties:
-                      trimDirectiveWhitespaces:
-                        type: string
-                      errorOnUndeclaredNamespace:
-                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9369,6 +9378,10 @@ components:
                           type: string
                       deferredSyntaxAllowedAsLiteral:
                         type: string
+                      trimDirectiveWhitespaces:
+                        type: string
+                      errorOnUndeclaredNamespace:
+                        type: string
                       buffer:
                         type: string
                       defaultContentType:
@@ -9382,28 +9395,15 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
             virtualServerName:
               type: string
             requestCharacterEncoding:
               type: string
             responseCharacterEncoding:
-              type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
               type: string
           writeOnly: true
         contentType:

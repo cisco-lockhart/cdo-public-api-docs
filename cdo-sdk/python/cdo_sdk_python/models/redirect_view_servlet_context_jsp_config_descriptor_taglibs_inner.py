@@ -27,9 +27,9 @@ class RedirectViewServletContextJspConfigDescriptorTaglibsInner(BaseModel):
     """
     RedirectViewServletContextJspConfigDescriptorTaglibsInner
     """ # noqa: E501
-    taglib_location: Optional[StrictStr] = Field(default=None, alias="taglibLocation")
     taglib_uri: Optional[StrictStr] = Field(default=None, alias="taglibURI")
-    __properties: ClassVar[List[str]] = ["taglibLocation", "taglibURI"]
+    taglib_location: Optional[StrictStr] = Field(default=None, alias="taglibLocation")
+    __properties: ClassVar[List[str]] = ["taglibURI", "taglibLocation"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,8 +82,8 @@ class RedirectViewServletContextJspConfigDescriptorTaglibsInner(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "taglibLocation": obj.get("taglibLocation"),
-            "taglibURI": obj.get("taglibURI")
+            "taglibURI": obj.get("taglibURI"),
+            "taglibLocation": obj.get("taglibLocation")
         })
         return _obj
 
