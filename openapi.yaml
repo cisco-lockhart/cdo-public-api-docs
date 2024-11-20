@@ -9362,6 +9362,12 @@ components:
                     properties:
                       buffer:
                         type: string
+                      defaultContentType:
+                        type: string
+                      urlPatterns:
+                        type: array
+                        items:
+                          type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9384,20 +9390,14 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
-                      defaultContentType:
-                        type: string
-                      urlPatterns:
-                        type: array
-                        items:
-                          type: string
                 taglibs:
                   type: array
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
             virtualServerName:
               type: string
