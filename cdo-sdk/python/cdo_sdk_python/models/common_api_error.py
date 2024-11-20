@@ -38,8 +38,8 @@ class CommonApiError(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['INVALID_INPUT', 'UNAUTHORIZED', 'FORBIDDEN', 'NOT_FOUND', 'METHOD_NOT_ALLOWED', 'CONFLICT', 'TOO_MANY_REQUESTS', 'SERVER_ERROR', 'PROXY_ERROR', 'BAD_REQUEST']):
-            raise ValueError("must be one of enum values ('INVALID_INPUT', 'UNAUTHORIZED', 'FORBIDDEN', 'NOT_FOUND', 'METHOD_NOT_ALLOWED', 'CONFLICT', 'TOO_MANY_REQUESTS', 'SERVER_ERROR', 'PROXY_ERROR', 'BAD_REQUEST')")
+        if value not in set(['INVALID_INPUT', 'UNAUTHORIZED', 'FORBIDDEN', 'NOT_FOUND', 'METHOD_NOT_ALLOWED', 'CONFLICT', 'TOO_MANY_REQUESTS', 'SERVER_ERROR', 'PROXY_ERROR', 'BAD_REQUEST', 'UNPROCESSABLE_ENTITY']):
+            raise ValueError("must be one of enum values ('INVALID_INPUT', 'UNAUTHORIZED', 'FORBIDDEN', 'NOT_FOUND', 'METHOD_NOT_ALLOWED', 'CONFLICT', 'TOO_MANY_REQUESTS', 'SERVER_ERROR', 'PROXY_ERROR', 'BAD_REQUEST', 'UNPROCESSABLE_ENTITY')")
         return value
 
     model_config = ConfigDict(
