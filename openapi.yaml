@@ -7292,6 +7292,15 @@ components:
             UUID, of the device on a cdFMC.
           format: uuid
           example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
+        ztpOnboardingJobId:
+          type: string
+          description: >-
+            The unique identifier, represented as a UUID, for an internal job
+            that orchestrates the onboarding of devices through Zero-Touch
+            Provisioning. This applies to devices managed by both on-premises
+            and Cloud-delivered FMC.
+          format: uuid
+          example: 7e9789b4-8389-4029-933f-ec7e385335ef
         modelNumber:
           type: string
           description: >-
@@ -9263,6 +9272,19 @@ components:
             servletNames:
               type: object
               deprecated: true
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -9314,10 +9336,10 @@ components:
                   type: string
                 comment:
                   type: string
-                secure:
-                  type: boolean
                 domain:
                   type: string
+                secure:
+                  type: boolean
                 maxAge:
                   type: integer
                   format: int32
@@ -9349,12 +9371,6 @@ components:
                     properties:
                       buffer:
                         type: string
-                      defaultContentType:
-                        type: string
-                      urlPatterns:
-                        type: array
-                        items:
-                          type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9377,33 +9393,26 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
+                      defaultContentType:
+                        type: string
+                      urlPatterns:
+                        type: array
+                        items:
+                          type: string
                 taglibs:
                   type: array
                   items:
                     type: object
                     properties:
-                      taglibURI:
-                        type: string
                       taglibLocation:
+                        type: string
+                      taglibURI:
                         type: string
             virtualServerName:
               type: string
             requestCharacterEncoding:
               type: string
             responseCharacterEncoding:
-              type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
               type: string
           writeOnly: true
         contentType:
@@ -9526,17 +9535,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
-          writeOnly: true
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
           writeOnly: true
     JsonWebKey:
       type: object

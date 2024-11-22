@@ -40,6 +40,7 @@ Name | Type | Description | Notes
 **labels** | [**Labels**](Labels.md) |  | [optional] 
 **fmc_domain_uid** | **str** | (FMC device managers only) The unique identifier, represented as a UUID, of the [FMC domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html). | [optional] 
 **uid_on_fmc** | **str** | (cdFMC-managed FTDs only) The unique identifier, represented as a UUID, of the device on a cdFMC. | [optional] 
+**ztp_onboarding_job_id** | **str** | The unique identifier, represented as a UUID, for an internal job that orchestrates the onboarding of devices through Zero-Touch Provisioning. This applies to devices managed by both on-premises and Cloud-delivered FMC. | [optional] 
 **model_number** | **str** | The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device. | [optional] 
 **hardware_model** | **str** | The hardware model of the device (ASAs, FDM-managed FTDs, and FMC-managed FTDs only) | [optional] 
 
