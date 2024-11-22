@@ -9196,9 +9196,6 @@ components:
         servletContext:
           type: object
           properties:
-            sessionTimeout:
-              type: integer
-              format: int32
             classLoader:
               type: object
               properties:
@@ -9244,44 +9241,6 @@ components:
             minorVersion:
               type: integer
               format: int32
-            attributeNames:
-              type: object
-            contextPath:
-              type: string
-            initParameterNames:
-              type: object
-            sessionTrackingModes:
-              uniqueItems: true
-              type: array
-              writeOnly: true
-              items:
-                type: string
-                enum:
-                  - COOKIE
-                  - URL
-                  - SSL
-            servletNames:
-              type: object
-              deprecated: true
-            servletRegistrations:
-              type: object
-              additionalProperties:
-                type: object
-                properties:
-                  mappings:
-                    type: array
-                    items:
-                      type: string
-                  runAsRole:
-                    type: string
-                  name:
-                    type: string
-                  className:
-                    type: string
-                  initParameters:
-                    type: object
-                    additionalProperties:
-                      type: string
             filterRegistrations:
               type: object
               additionalProperties:
@@ -9347,14 +9306,8 @@ components:
                   items:
                     type: object
                     properties:
-                      buffer:
+                      errorOnUndeclaredNamespace:
                         type: string
-                      defaultContentType:
-                        type: string
-                      urlPatterns:
-                        type: array
-                        items:
-                          type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9375,8 +9328,14 @@ components:
                         type: string
                       trimDirectiveWhitespaces:
                         type: string
-                      errorOnUndeclaredNamespace:
+                      buffer:
                         type: string
+                      defaultContentType:
+                        type: string
+                      urlPatterns:
+                        type: array
+                        items:
+                          type: string
                 taglibs:
                   type: array
                   items:
@@ -9392,6 +9351,9 @@ components:
               type: string
             responseCharacterEncoding:
               type: string
+            sessionTimeout:
+              type: integer
+              format: int32
             effectiveMajorVersion:
               type: integer
               format: int32
@@ -9405,6 +9367,44 @@ components:
               type: string
             servletContextName:
               type: string
+            servletRegistrations:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  mappings:
+                    type: array
+                    items:
+                      type: string
+                  runAsRole:
+                    type: string
+                  name:
+                    type: string
+                  className:
+                    type: string
+                  initParameters:
+                    type: object
+                    additionalProperties:
+                      type: string
+            attributeNames:
+              type: object
+            contextPath:
+              type: string
+            initParameterNames:
+              type: object
+            sessionTrackingModes:
+              uniqueItems: true
+              type: array
+              writeOnly: true
+              items:
+                type: string
+                enum:
+                  - COOKIE
+                  - URL
+                  - SSL
+            servletNames:
+              type: object
+              deprecated: true
           writeOnly: true
         contentType:
           type: string
