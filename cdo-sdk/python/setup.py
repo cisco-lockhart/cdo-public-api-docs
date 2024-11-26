@@ -21,7 +21,7 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "cdo-sdk-python"
+NAME = "cdo_sdk_python"
 VERSION = "1.2.413"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
