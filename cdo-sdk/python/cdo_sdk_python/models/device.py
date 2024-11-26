@@ -79,9 +79,10 @@ class Device(BaseModel):
     labels: Optional[Labels] = None
     fmc_domain_uid: Optional[StrictStr] = Field(default=None, description="(FMC device managers only) The unique identifier, represented as a UUID, of the [FMC domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html).", alias="fmcDomainUid")
     uid_on_fmc: Optional[StrictStr] = Field(default=None, description="(cdFMC-managed FTDs only) The unique identifier, represented as a UUID, of the device on a cdFMC.", alias="uidOnFmc")
+    ztp_onboarding_job_id: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, for an internal job that orchestrates the onboarding of devices through Zero-Touch Provisioning. This applies to devices managed by both on-premises and Cloud-delivered FMC.", alias="ztpOnboardingJobId")
     model_number: Optional[StrictStr] = Field(default=None, description="The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device.", alias="modelNumber")
     hardware_model: Optional[StrictStr] = Field(default=None, description="The hardware model of the device (ASAs, FDM-managed FTDs, and FMC-managed FTDs only)", alias="hardwareModel")
-    __properties: ClassVar[List[str]] = ["uid", "name", "deviceType", "connectorType", "connectorUid", "address", "deviceRole", "serial", "chassisSerial", "softwareVersion", "connectivityState", "configState", "conflictDetectionState", "notes", "asdmVersion", "asaFailoverMode", "asaFailoverState", "asaFailoverMate", "asaLicenseEntitlements", "ftdLicenses", "snortVersion", "ftdPerformanceTier", "redundancyMode", "cdFmcInfo", "sseDeviceData", "onPremFmcInfo", "ftdClusterInfo", "ftdHaInfo", "merakiDeploymentMode", "merakiNetwork", "state", "stateMachineDetails", "labels", "fmcDomainUid", "uidOnFmc", "modelNumber", "hardwareModel"]
+    __properties: ClassVar[List[str]] = ["uid", "name", "deviceType", "connectorType", "connectorUid", "address", "deviceRole", "serial", "chassisSerial", "softwareVersion", "connectivityState", "configState", "conflictDetectionState", "notes", "asdmVersion", "asaFailoverMode", "asaFailoverState", "asaFailoverMate", "asaLicenseEntitlements", "ftdLicenses", "snortVersion", "ftdPerformanceTier", "redundancyMode", "cdFmcInfo", "sseDeviceData", "onPremFmcInfo", "ftdClusterInfo", "ftdHaInfo", "merakiDeploymentMode", "merakiNetwork", "state", "stateMachineDetails", "labels", "fmcDomainUid", "uidOnFmc", "ztpOnboardingJobId", "modelNumber", "hardwareModel"]
 
     @field_validator('redundancy_mode')
     def redundancy_mode_validate_enum(cls, value):
@@ -206,6 +207,7 @@ class Device(BaseModel):
             "labels": Labels.from_dict(obj["labels"]) if obj.get("labels") is not None else None,
             "fmcDomainUid": obj.get("fmcDomainUid"),
             "uidOnFmc": obj.get("uidOnFmc"),
+            "ztpOnboardingJobId": obj.get("ztpOnboardingJobId"),
             "modelNumber": obj.get("modelNumber"),
             "hardwareModel": obj.get("hardwareModel")
         })

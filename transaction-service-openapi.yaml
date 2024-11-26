@@ -45,14 +45,14 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "404":
-          $ref: '#/components/responses/http404NotFound'
         "202":
           description: Security Cloud Control Transaction that is pending or in progress.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "404":
+          $ref: '#/components/responses/http404NotFound'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "200":
@@ -203,6 +203,7 @@ components:
           - SERVER_ERROR
           - PROXY_ERROR
           - BAD_REQUEST
+          - UNPROCESSABLE_ENTITY
         errorMsg:
           type: string
           description: A human-readable error description in English.

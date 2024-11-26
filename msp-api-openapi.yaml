@@ -922,6 +922,7 @@ components:
             - SERVER_ERROR
             - PROXY_ERROR
             - BAD_REQUEST
+            - UNPROCESSABLE_ENTITY
         errorMsg:
           type: string
           description: A human-readable error description in English.
