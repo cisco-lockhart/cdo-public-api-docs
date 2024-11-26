@@ -5784,6 +5784,7 @@ components:
             - MSP_ADD_EXISTING_TENANT
             - MSP_ENABLE_MULTICLOUD_DEFENSE
             - MSP_PROVISION_CDFMC
+            - ASA_DEVICE_UPGRADE
         cdoTransactionStatus:
           type: string
           description: The status of the transaction
@@ -9205,9 +9206,6 @@ components:
         servletContext:
           type: object
           properties:
-            sessionTimeout:
-              type: integer
-              format: int32
             classLoader:
               type: object
               properties:
@@ -9253,6 +9251,9 @@ components:
             minorVersion:
               type: integer
               format: int32
+            sessionTimeout:
+              type: integer
+              format: int32
             attributeNames:
               type: object
             contextPath:
@@ -9272,16 +9273,6 @@ components:
             servletNames:
               type: object
               deprecated: true
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -9335,11 +9326,11 @@ components:
                   type: string
                 secure:
                   type: boolean
-                domain:
-                  type: string
                 maxAge:
                   type: integer
                   format: int32
+                domain:
+                  type: string
             defaultSessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9414,6 +9405,16 @@ components:
             effectiveMajorVersion:
               type: integer
               format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
           writeOnly: true
         contentType:
           type: string

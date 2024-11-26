@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **path** | **str** |  | [optional] 
 **comment** | **str** |  | [optional] 
 **secure** | **bool** |  | [optional] 
-**domain** | **str** |  | [optional] 
 **max_age** | **int** |  | [optional] 
+**domain** | **str** |  | [optional] 
 
 ## Example
 

@@ -45,20 +45,20 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
-        "202":
-          description: Security Cloud Control Transaction that is pending or in progress.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CdoTransaction'
         "404":
           $ref: '#/components/responses/http404NotFound'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: "CDO Transaction that has completed, either successfully or\
             \ unsuccessfully. Note: failed Security Cloud Control Transactions do\
             \ not roll back."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
+        "202":
+          description: Security Cloud Control Transaction that is pending or in progress.
           content:
             application/json:
               schema:
@@ -165,6 +165,7 @@ components:
           - MSP_ADD_EXISTING_TENANT
           - MSP_ENABLE_MULTICLOUD_DEFENSE
           - MSP_PROVISION_CDFMC
+          - ASA_DEVICE_UPGRADE
         cdoTransactionStatus:
           type: string
           description: The status of the transaction
