@@ -32,13 +32,13 @@ class RedirectViewServletContext(BaseModel):
     """
     RedirectViewServletContext
     """ # noqa: E501
-    session_timeout: Optional[StrictInt] = Field(default=None, alias="sessionTimeout")
     class_loader: Optional[ApplicationContextClassLoaderParentUnnamedModuleClassLoader] = Field(default=None, alias="classLoader")
     major_version: Optional[StrictInt] = Field(default=None, alias="majorVersion")
     minor_version: Optional[StrictInt] = Field(default=None, alias="minorVersion")
+    session_timeout: Optional[StrictInt] = Field(default=None, alias="sessionTimeout")
     attribute_names: Optional[Dict[str, Any]] = Field(default=None, alias="attributeNames")
-    context_path: Optional[StrictStr] = Field(default=None, alias="contextPath")
     init_parameter_names: Optional[Dict[str, Any]] = Field(default=None, alias="initParameterNames")
+    context_path: Optional[StrictStr] = Field(default=None, alias="contextPath")
     session_tracking_modes: Optional[List[StrictStr]] = Field(default=None, alias="sessionTrackingModes")
     servlet_names: Optional[Dict[str, Any]] = Field(default=None, alias="servletNames")
     servlet_registrations: Optional[Dict[str, RedirectViewServletContextServletRegistrationsValue]] = Field(default=None, alias="servletRegistrations")
@@ -55,7 +55,7 @@ class RedirectViewServletContext(BaseModel):
     servlets: Optional[Dict[str, Any]] = None
     server_info: Optional[StrictStr] = Field(default=None, alias="serverInfo")
     servlet_context_name: Optional[StrictStr] = Field(default=None, alias="servletContextName")
-    __properties: ClassVar[List[str]] = ["sessionTimeout", "classLoader", "majorVersion", "minorVersion", "attributeNames", "contextPath", "initParameterNames", "sessionTrackingModes", "servletNames", "servletRegistrations", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "effectiveMajorVersion", "effectiveMinorVersion", "servlets", "serverInfo", "servletContextName"]
+    __properties: ClassVar[List[str]] = ["classLoader", "majorVersion", "minorVersion", "sessionTimeout", "attributeNames", "initParameterNames", "contextPath", "sessionTrackingModes", "servletNames", "servletRegistrations", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "effectiveMajorVersion", "effectiveMinorVersion", "servlets", "serverInfo", "servletContextName"]
 
     @field_validator('session_tracking_modes')
     def session_tracking_modes_validate_enum(cls, value):
@@ -164,13 +164,13 @@ class RedirectViewServletContext(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "sessionTimeout": obj.get("sessionTimeout"),
             "classLoader": ApplicationContextClassLoaderParentUnnamedModuleClassLoader.from_dict(obj["classLoader"]) if obj.get("classLoader") is not None else None,
             "majorVersion": obj.get("majorVersion"),
             "minorVersion": obj.get("minorVersion"),
+            "sessionTimeout": obj.get("sessionTimeout"),
             "attributeNames": obj.get("attributeNames"),
-            "contextPath": obj.get("contextPath"),
             "initParameterNames": obj.get("initParameterNames"),
+            "contextPath": obj.get("contextPath"),
             "sessionTrackingModes": obj.get("sessionTrackingModes"),
             "servletNames": obj.get("servletNames"),
             "servletRegistrations": dict(

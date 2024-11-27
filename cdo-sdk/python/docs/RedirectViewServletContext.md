@@ -5,13 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**session_timeout** | **int** |  | [optional] 
 **class_loader** | [**ApplicationContextClassLoaderParentUnnamedModuleClassLoader**](ApplicationContextClassLoaderParentUnnamedModuleClassLoader.md) |  | [optional] 
 **major_version** | **int** |  | [optional] 
 **minor_version** | **int** |  | [optional] 
+**session_timeout** | **int** |  | [optional] 
 **attribute_names** | **object** |  | [optional] 
-**context_path** | **str** |  | [optional] 
 **init_parameter_names** | **object** |  | [optional] 
+**context_path** | **str** |  | [optional] 
 **session_tracking_modes** | **List[str]** |  | [optional] 
 **servlet_names** | **object** |  | [optional] 
 **servlet_registrations** | [**Dict[str, RedirectViewServletContextServletRegistrationsValue]**](RedirectViewServletContextServletRegistrationsValue.md) |  | [optional] 
