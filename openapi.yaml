@@ -9206,6 +9206,9 @@ components:
         servletContext:
           type: object
           properties:
+            sessionTimeout:
+              type: integer
+              format: int32
             classLoader:
               type: object
               properties:
@@ -9251,15 +9254,12 @@ components:
             minorVersion:
               type: integer
               format: int32
-            sessionTimeout:
-              type: integer
-              format: int32
             attributeNames:
-              type: object
-            initParameterNames:
               type: object
             contextPath:
               type: string
+            initParameterNames:
+              type: object
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9273,6 +9273,19 @@ components:
             servletNames:
               type: object
               deprecated: true
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -9324,10 +9337,10 @@ components:
                   type: string
                 comment:
                   type: string
-                domain:
-                  type: string
                 secure:
                   type: boolean
+                domain:
+                  type: string
                 maxAge:
                   type: integer
                   format: int32
@@ -9357,6 +9370,16 @@ components:
                   items:
                     type: object
                     properties:
+                      buffer:
+                        type: string
+                      defaultContentType:
+                        type: string
+                      elIgnored:
+                        type: string
+                      scriptingInvalid:
+                        type: string
+                      pageEncoding:
+                        type: string
                       isXml:
                         type: string
                       includePreludes:
@@ -9373,16 +9396,6 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
-                      elIgnored:
-                        type: string
-                      scriptingInvalid:
-                        type: string
-                      pageEncoding:
-                        type: string
-                      buffer:
-                        type: string
-                      defaultContentType:
-                        type: string
                       urlPatterns:
                         type: array
                         items:
@@ -9392,28 +9405,15 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
             virtualServerName:
               type: string
             requestCharacterEncoding:
               type: string
             responseCharacterEncoding:
-              type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
               type: string
           writeOnly: true
         contentType:
@@ -9532,21 +9532,21 @@ components:
           type: array
           items:
             type: string
-        redirectView:
-          type: boolean
         propagateQueryProperties:
           type: boolean
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
+        redirectView:
+          type: boolean
+        attributesCSV:
+          type: string
           writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
-        attributesCSV:
-          type: string
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
           writeOnly: true
     JsonWebKey:
       type: object

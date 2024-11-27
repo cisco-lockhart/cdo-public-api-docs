@@ -47,12 +47,12 @@ class RedirectView(BaseModel):
     expand_uri_template_variables: Optional[StrictBool] = Field(default=None, alias="expandUriTemplateVariables")
     propagate_query_params: Optional[StrictBool] = Field(default=None, alias="propagateQueryParams")
     hosts: Optional[List[StrictStr]] = None
-    redirect_view: Optional[StrictBool] = Field(default=None, alias="redirectView")
     propagate_query_properties: Optional[StrictBool] = Field(default=None, alias="propagateQueryProperties")
-    attributes: Optional[Dict[str, StrictStr]] = None
-    attributes_map: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="attributesMap")
+    redirect_view: Optional[StrictBool] = Field(default=None, alias="redirectView")
     attributes_csv: Optional[StrictStr] = Field(default=None, alias="attributesCSV")
-    __properties: ClassVar[List[str]] = ["applicationContext", "servletContext", "contentType", "requestContextAttribute", "staticAttributes", "exposePathVariables", "exposeContextBeansAsAttributes", "exposedContextBeanNames", "beanName", "url", "contextRelative", "http10Compatible", "exposeModelAttributes", "encodingScheme", "statusCode", "expandUriTemplateVariables", "propagateQueryParams", "hosts", "redirectView", "propagateQueryProperties", "attributes", "attributesMap", "attributesCSV"]
+    attributes_map: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="attributesMap")
+    attributes: Optional[Dict[str, StrictStr]] = None
+    __properties: ClassVar[List[str]] = ["applicationContext", "servletContext", "contentType", "requestContextAttribute", "staticAttributes", "exposePathVariables", "exposeContextBeansAsAttributes", "exposedContextBeanNames", "beanName", "url", "contextRelative", "http10Compatible", "exposeModelAttributes", "encodingScheme", "statusCode", "expandUriTemplateVariables", "propagateQueryParams", "hosts", "propagateQueryProperties", "redirectView", "attributesCSV", "attributesMap", "attributes"]
 
     @field_validator('status_code')
     def status_code_validate_enum(cls, value):
@@ -139,11 +139,11 @@ class RedirectView(BaseModel):
             "expandUriTemplateVariables": obj.get("expandUriTemplateVariables"),
             "propagateQueryParams": obj.get("propagateQueryParams"),
             "hosts": obj.get("hosts"),
-            "redirectView": obj.get("redirectView"),
             "propagateQueryProperties": obj.get("propagateQueryProperties"),
-            "attributes": obj.get("attributes"),
+            "redirectView": obj.get("redirectView"),
+            "attributesCSV": obj.get("attributesCSV"),
             "attributesMap": obj.get("attributesMap"),
-            "attributesCSV": obj.get("attributesCSV")
+            "attributes": obj.get("attributes")
         })
         return _obj
 
