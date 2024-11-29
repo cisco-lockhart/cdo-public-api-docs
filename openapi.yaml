@@ -9273,6 +9273,13 @@ components:
             servletNames:
               type: object
               deprecated: true
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -9316,18 +9323,18 @@ components:
             sessionCookieConfig:
               type: object
               properties:
-                httpOnly:
-                  type: boolean
                 name:
                   type: string
                 path:
                   type: string
                 comment:
                   type: string
-                secure:
-                  type: boolean
                 domain:
                   type: string
+                httpOnly:
+                  type: boolean
+                secure:
+                  type: boolean
                 maxAge:
                   type: integer
                   format: int32
@@ -9392,9 +9399,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
             virtualServerName:
               type: string
@@ -9408,13 +9415,6 @@ components:
             effectiveMinorVersion:
               type: integer
               format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
           writeOnly: true
         contentType:
           type: string
@@ -9536,17 +9536,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
-          writeOnly: true
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
           writeOnly: true
     JsonWebKey:
       type: object
