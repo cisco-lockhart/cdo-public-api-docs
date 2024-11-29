@@ -9297,11 +9297,11 @@ components:
               additionalProperties:
                 type: object
                 properties:
-                  urlPatternMappings:
+                  servletNameMappings:
                     type: array
                     items:
                       type: string
-                  servletNameMappings:
+                  urlPatternMappings:
                     type: array
                     items:
                       type: string
@@ -9357,8 +9357,6 @@ components:
                   items:
                     type: object
                     properties:
-                      buffer:
-                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9381,6 +9379,8 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
+                      buffer:
+                        type: string
                       defaultContentType:
                         type: string
                       urlPatterns:
@@ -9392,9 +9392,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibURI:
-                        type: string
                       taglibLocation:
+                        type: string
+                      taglibURI:
                         type: string
             virtualServerName:
               type: string
