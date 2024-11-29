@@ -9297,11 +9297,11 @@ components:
               additionalProperties:
                 type: object
                 properties:
-                  servletNameMappings:
+                  urlPatternMappings:
                     type: array
                     items:
                       type: string
-                  urlPatternMappings:
+                  servletNameMappings:
                     type: array
                     items:
                       type: string
@@ -9357,6 +9357,8 @@ components:
                   items:
                     type: object
                     properties:
+                      buffer:
+                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9378,8 +9380,6 @@ components:
                       trimDirectiveWhitespaces:
                         type: string
                       errorOnUndeclaredNamespace:
-                        type: string
-                      buffer:
                         type: string
                       defaultContentType:
                         type: string
