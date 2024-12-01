@@ -9273,12 +9273,6 @@ components:
             servletNames:
               type: object
               deprecated: true
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
             servlets:
               type: object
               deprecated: true
@@ -9329,18 +9323,18 @@ components:
             sessionCookieConfig:
               type: object
               properties:
-                httpOnly:
-                  type: boolean
                 name:
                   type: string
                 path:
                   type: string
                 comment:
                   type: string
-                secure:
-                  type: boolean
                 domain:
                   type: string
+                httpOnly:
+                  type: boolean
+                secure:
+                  type: boolean
                 maxAge:
                   type: integer
                   format: int32
@@ -9370,10 +9364,6 @@ components:
                   items:
                     type: object
                     properties:
-                      buffer:
-                        type: string
-                      defaultContentType:
-                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9396,6 +9386,10 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
+                      buffer:
+                        type: string
+                      defaultContentType:
+                        type: string
                       urlPatterns:
                         type: array
                         items:
@@ -9415,6 +9409,12 @@ components:
               type: string
             responseCharacterEncoding:
               type: string
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
           writeOnly: true
         contentType:
           type: string
@@ -9532,21 +9532,21 @@ components:
           type: array
           items:
             type: string
-        propagateQueryProperties:
-          type: boolean
         redirectView:
           type: boolean
-        attributesCSV:
-          type: string
+        propagateQueryProperties:
+          type: boolean
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
           writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
+        attributesCSV:
+          type: string
           writeOnly: true
     JsonWebKey:
       type: object

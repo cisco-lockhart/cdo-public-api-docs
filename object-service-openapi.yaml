@@ -385,6 +385,8 @@ paths:
       responses:
         "403":
           $ref: '#/components/responses/http403Forbidden'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "200":
           description: A descriptive representation of the created Security Cloud
             Control object.
@@ -394,8 +396,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ReferenceInfo'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -519,14 +519,14 @@ paths:
           type: string
         example: content:*2.2.* AND name:Lab1
       responses:
+        "403":
+          $ref: '#/components/responses/http403Forbidden'
         "200":
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/IssuesCount'
-        "403":
-          $ref: '#/components/responses/http403Forbidden'
         "401":
           $ref: '#/components/responses/http401Unauthorised'
         "400":
