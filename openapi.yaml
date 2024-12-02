@@ -9324,10 +9324,10 @@ components:
                   type: string
                 comment:
                   type: string
-                domain:
-                  type: string
                 secure:
                   type: boolean
+                domain:
+                  type: string
                 maxAge:
                   type: integer
                   format: int32
@@ -9357,14 +9357,6 @@ components:
                   items:
                     type: object
                     properties:
-                      buffer:
-                        type: string
-                      defaultContentType:
-                        type: string
-                      urlPatterns:
-                        type: array
-                        items:
-                          type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9387,6 +9379,14 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
+                      buffer:
+                        type: string
+                      defaultContentType:
+                        type: string
+                      urlPatterns:
+                        type: array
+                        items:
+                          type: string
                 taglibs:
                   type: array
                   items:
@@ -9536,17 +9536,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
+          writeOnly: true
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
           writeOnly: true
     JsonWebKey:
       type: object
