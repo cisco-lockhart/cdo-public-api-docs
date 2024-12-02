@@ -9256,13 +9256,6 @@ components:
               format: int32
             attributeNames:
               type: object
-            servletNames:
-              type: object
-              deprecated: true
-            contextPath:
-              type: string
-            initParameterNames:
-              type: object
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9273,17 +9266,37 @@ components:
                   - COOKIE
                   - URL
                   - SSL
+            contextPath:
+              type: string
+            initParameterNames:
+              type: object
+            servletNames:
+              type: object
+              deprecated: true
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
                 type: object
                 properties:
+                  runAsRole:
+                    type: string
                   mappings:
                     type: array
                     items:
                       type: string
-                  runAsRole:
-                    type: string
                   name:
                     type: string
                   className:
@@ -9401,19 +9414,6 @@ components:
             requestCharacterEncoding:
               type: string
             responseCharacterEncoding:
-              type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
               type: string
           writeOnly: true
         contentType:
