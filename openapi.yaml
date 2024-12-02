@@ -9256,6 +9256,9 @@ components:
               format: int32
             attributeNames:
               type: object
+            servletNames:
+              type: object
+              deprecated: true
             contextPath:
               type: string
             initParameterNames:
@@ -9270,9 +9273,6 @@ components:
                   - COOKIE
                   - URL
                   - SSL
-            servletNames:
-              type: object
-              deprecated: true
             servletRegistrations:
               type: object
               additionalProperties:

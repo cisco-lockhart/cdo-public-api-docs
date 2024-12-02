@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cdo_sdk_python"
-version = "1.2.481"
+version = "1.2.482"
 description = "Cisco Security Cloud Control API"
 authors = ["Cisco Security Cloud Control TAC <cdo.tac@cisco.com>"]
 license = "NoLicense"
