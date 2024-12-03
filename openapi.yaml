@@ -9256,6 +9256,10 @@ components:
               format: int32
             attributeNames:
               type: object
+            contextPath:
+              type: string
+            initParameterNames:
+              type: object
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9266,10 +9270,6 @@ components:
                   - COOKIE
                   - URL
                   - SSL
-            contextPath:
-              type: string
-            initParameterNames:
-              type: object
             servletNames:
               type: object
               deprecated: true
@@ -9291,12 +9291,12 @@ components:
               additionalProperties:
                 type: object
                 properties:
-                  runAsRole:
-                    type: string
                   mappings:
                     type: array
                     items:
                       type: string
+                  runAsRole:
+                    type: string
                   name:
                     type: string
                   className:
@@ -9337,10 +9337,10 @@ components:
                   type: string
                 comment:
                   type: string
-                secure:
-                  type: boolean
                 domain:
                   type: string
+                secure:
+                  type: boolean
                 maxAge:
                   type: integer
                   format: int32
@@ -9365,6 +9365,15 @@ components:
             jspConfigDescriptor:
               type: object
               properties:
+                taglibs:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      taglibURI:
+                        type: string
+                      taglibLocation:
+                        type: string
                 jspPropertyGroups:
                   type: array
                   items:
@@ -9400,15 +9409,6 @@ components:
                         type: array
                         items:
                           type: string
-                taglibs:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      taglibURI:
-                        type: string
-                      taglibLocation:
-                        type: string
             virtualServerName:
               type: string
             requestCharacterEncoding:
@@ -9536,17 +9536,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
-          writeOnly: true
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
           writeOnly: true
     JsonWebKey:
       type: object
