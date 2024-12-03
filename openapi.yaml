@@ -9254,31 +9254,6 @@ components:
             minorVersion:
               type: integer
               format: int32
-            attributeNames:
-              type: object
-            contextPath:
-              type: string
-            initParameterNames:
-              type: object
-            sessionTrackingModes:
-              uniqueItems: true
-              type: array
-              writeOnly: true
-              items:
-                type: string
-                enum:
-                  - COOKIE
-                  - URL
-                  - SSL
-            servletNames:
-              type: object
-              deprecated: true
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
             servlets:
               type: object
               deprecated: true
@@ -9305,6 +9280,12 @@ components:
                     type: object
                     additionalProperties:
                       type: string
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
             filterRegistrations:
               type: object
               additionalProperties:
@@ -9337,10 +9318,10 @@ components:
                   type: string
                 comment:
                   type: string
-                domain:
-                  type: string
                 secure:
                   type: boolean
+                domain:
+                  type: string
                 maxAge:
                   type: integer
                   format: int32
@@ -9365,15 +9346,6 @@ components:
             jspConfigDescriptor:
               type: object
               properties:
-                taglibs:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      taglibURI:
-                        type: string
-                      taglibLocation:
-                        type: string
                 jspPropertyGroups:
                   type: array
                   items:
@@ -9409,12 +9381,40 @@ components:
                         type: array
                         items:
                           type: string
+                taglibs:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      taglibURI:
+                        type: string
+                      taglibLocation:
+                        type: string
             virtualServerName:
               type: string
             requestCharacterEncoding:
               type: string
             responseCharacterEncoding:
               type: string
+            attributeNames:
+              type: object
+            contextPath:
+              type: string
+            initParameterNames:
+              type: object
+            sessionTrackingModes:
+              uniqueItems: true
+              type: array
+              writeOnly: true
+              items:
+                type: string
+                enum:
+                  - COOKIE
+                  - URL
+                  - SSL
+            servletNames:
+              type: object
+              deprecated: true
           writeOnly: true
         contentType:
           type: string
@@ -9536,17 +9536,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
+          writeOnly: true
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
           writeOnly: true
     JsonWebKey:
       type: object
