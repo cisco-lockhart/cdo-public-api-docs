@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**el_ignored** | **str** |  | [optional] 
+**include_preludes** | **List[str]** |  | [optional] 
 **scripting_invalid** | **str** |  | [optional] 
+**el_ignored** | **str** |  | [optional] 
 **page_encoding** | **str** |  | [optional] 
 **is_xml** | **str** |  | [optional] 
-**include_preludes** | **List[str]** |  | [optional] 
 **include_codas** | **List[str]** |  | [optional] 
 **deferred_syntax_allowed_as_literal** | **str** |  | [optional] 
 **trim_directive_whitespaces** | **str** |  | [optional] 
