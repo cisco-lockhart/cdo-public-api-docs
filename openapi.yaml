@@ -9324,10 +9324,10 @@ components:
                   type: string
                 comment:
                   type: string
-                domain:
-                  type: string
                 secure:
                   type: boolean
+                domain:
+                  type: string
                 maxAge:
                   type: integer
                   format: int32
@@ -9357,6 +9357,8 @@ components:
                   items:
                     type: object
                     properties:
+                      buffer:
+                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9378,8 +9380,6 @@ components:
                       trimDirectiveWhitespaces:
                         type: string
                       errorOnUndeclaredNamespace:
-                        type: string
-                      buffer:
                         type: string
                       defaultContentType:
                         type: string
@@ -9532,21 +9532,21 @@ components:
           type: array
           items:
             type: string
-        propagateQueryProperties:
-          type: boolean
         redirectView:
           type: boolean
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-          writeOnly: true
+        propagateQueryProperties:
+          type: boolean
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
+          writeOnly: true
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
           writeOnly: true
     JsonWebKey:
       type: object
