@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **name** | **str** |  | [optional] 
 **path** | **str** |  | [optional] 
 **comment** | **str** |  | [optional] 
-**secure** | **bool** |  | [optional] 
 **domain** | **str** |  | [optional] 
+**secure** | **bool** |  | [optional] 
 **max_age** | **int** |  | [optional] 
 
 ## Example
