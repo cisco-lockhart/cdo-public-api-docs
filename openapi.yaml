@@ -9273,25 +9273,6 @@ components:
             servletNames:
               type: object
               deprecated: true
-            servletRegistrations:
-              type: object
-              additionalProperties:
-                type: object
-                properties:
-                  mappings:
-                    type: array
-                    items:
-                      type: string
-                  runAsRole:
-                    type: string
-                  name:
-                    type: string
-                  className:
-                    type: string
-                  initParameters:
-                    type: object
-                    additionalProperties:
-                      type: string
             filterRegistrations:
               type: object
               additionalProperties:
@@ -9316,14 +9297,14 @@ components:
             sessionCookieConfig:
               type: object
               properties:
-                httpOnly:
-                  type: boolean
                 name:
                   type: string
                 path:
                   type: string
                 comment:
                   type: string
+                httpOnly:
+                  type: boolean
                 secure:
                   type: boolean
                 domain:
@@ -9357,11 +9338,9 @@ components:
                   items:
                     type: object
                     properties:
-                      elIgnored:
+                      errorOnUndeclaredNamespace:
                         type: string
-                      scriptingInvalid:
-                        type: string
-                      pageEncoding:
+                      trimDirectiveWhitespaces:
                         type: string
                       isXml:
                         type: string
@@ -9373,11 +9352,13 @@ components:
                         type: array
                         items:
                           type: string
+                      pageEncoding:
+                        type: string
+                      elIgnored:
+                        type: string
                       deferredSyntaxAllowedAsLiteral:
                         type: string
-                      trimDirectiveWhitespaces:
-                        type: string
-                      errorOnUndeclaredNamespace:
+                      scriptingInvalid:
                         type: string
                       buffer:
                         type: string
@@ -9415,6 +9396,25 @@ components:
               type: string
             servletContextName:
               type: string
+            servletRegistrations:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  mappings:
+                    type: array
+                    items:
+                      type: string
+                  runAsRole:
+                    type: string
+                  name:
+                    type: string
+                  className:
+                    type: string
+                  initParameters:
+                    type: object
+                    additionalProperties:
+                      type: string
           writeOnly: true
         contentType:
           type: string
