@@ -8951,13 +8951,13 @@ components:
           type: string
         displayName:
           type: string
-        autowireCapableBeanFactory:
-          $ref: '#/components/schemas/AutowireCapableBeanFactory'
         applicationName:
           type: string
         startupDate:
           type: integer
           format: int64
+        autowireCapableBeanFactory:
+          $ref: '#/components/schemas/AutowireCapableBeanFactory'
         environment:
           $ref: '#/components/schemas/Environment'
         beanDefinitionCount:
@@ -9254,6 +9254,9 @@ components:
             minorVersion:
               type: integer
               format: int32
+            servletNames:
+              type: object
+              deprecated: true
             attributeNames:
               type: object
             contextPath:
@@ -9270,9 +9273,6 @@ components:
                   - COOKIE
                   - URL
                   - SSL
-            servletNames:
-              type: object
-              deprecated: true
             filterRegistrations:
               type: object
               additionalProperties:
@@ -9303,12 +9303,12 @@ components:
                   type: string
                 comment:
                   type: string
+                domain:
+                  type: string
                 httpOnly:
                   type: boolean
                 secure:
                   type: boolean
-                domain:
-                  type: string
                 maxAge:
                   type: integer
                   format: int32
@@ -9338,9 +9338,13 @@ components:
                   items:
                     type: object
                     properties:
-                      errorOnUndeclaredNamespace:
+                      buffer:
                         type: string
-                      trimDirectiveWhitespaces:
+                      elIgnored:
+                        type: string
+                      scriptingInvalid:
+                        type: string
+                      pageEncoding:
                         type: string
                       isXml:
                         type: string
@@ -9352,15 +9356,11 @@ components:
                         type: array
                         items:
                           type: string
-                      pageEncoding:
-                        type: string
-                      elIgnored:
-                        type: string
                       deferredSyntaxAllowedAsLiteral:
                         type: string
-                      scriptingInvalid:
+                      trimDirectiveWhitespaces:
                         type: string
-                      buffer:
+                      errorOnUndeclaredNamespace:
                         type: string
                       defaultContentType:
                         type: string
@@ -9536,17 +9536,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
-          writeOnly: true
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
           writeOnly: true
     JsonWebKey:
       type: object
