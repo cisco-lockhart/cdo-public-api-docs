@@ -9256,6 +9256,10 @@ components:
               format: int32
             attributeNames:
               type: object
+            contextPath:
+              type: string
+            initParameterNames:
+              type: object
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9266,13 +9270,19 @@ components:
                   - COOKIE
                   - URL
                   - SSL
-            contextPath:
-              type: string
-            initParameterNames:
-              type: object
             servletNames:
               type: object
               deprecated: true
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -9392,9 +9402,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
             virtualServerName:
               type: string
@@ -9405,16 +9415,6 @@ components:
             effectiveMajorVersion:
               type: integer
               format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
-              type: string
           writeOnly: true
         contentType:
           type: string
