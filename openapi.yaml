@@ -9273,6 +9273,25 @@ components:
             servletNames:
               type: object
               deprecated: true
+            servletRegistrations:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  mappings:
+                    type: array
+                    items:
+                      type: string
+                  runAsRole:
+                    type: string
+                  name:
+                    type: string
+                  className:
+                    type: string
+                  initParameters:
+                    type: object
+                    additionalProperties:
+                      type: string
             filterRegistrations:
               type: object
               additionalProperties:
@@ -9338,8 +9357,6 @@ components:
                   items:
                     type: object
                     properties:
-                      buffer:
-                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9361,6 +9378,8 @@ components:
                       trimDirectiveWhitespaces:
                         type: string
                       errorOnUndeclaredNamespace:
+                        type: string
+                      buffer:
                         type: string
                       defaultContentType:
                         type: string
@@ -9396,25 +9415,6 @@ components:
               type: string
             servletContextName:
               type: string
-            servletRegistrations:
-              type: object
-              additionalProperties:
-                type: object
-                properties:
-                  mappings:
-                    type: array
-                    items:
-                      type: string
-                  runAsRole:
-                    type: string
-                  name:
-                    type: string
-                  className:
-                    type: string
-                  initParameters:
-                    type: object
-                    additionalProperties:
-                      type: string
           writeOnly: true
         contentType:
           type: string
