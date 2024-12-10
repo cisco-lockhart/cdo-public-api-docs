@@ -9268,8 +9268,6 @@ components:
               type: object
             contextPath:
               type: string
-            initParameterNames:
-              type: object
             sessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9280,6 +9278,8 @@ components:
                   - COOKIE
                   - URL
                   - SSL
+            initParameterNames:
+              type: object
             servletNames:
               type: object
               deprecated: true
@@ -9334,13 +9334,13 @@ components:
                   type: string
                 comment:
                   type: string
+                maxAge:
+                  type: integer
+                  format: int32
                 secure:
                   type: boolean
                 domain:
                   type: string
-                maxAge:
-                  type: integer
-                  format: int32
             defaultSessionTrackingModes:
               uniqueItems: true
               type: array
@@ -9367,6 +9367,10 @@ components:
                   items:
                     type: object
                     properties:
+                      buffer:
+                        type: string
+                      defaultContentType:
+                        type: string
                       elIgnored:
                         type: string
                       scriptingInvalid:
@@ -9389,10 +9393,6 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
-                      buffer:
-                        type: string
-                      defaultContentType:
-                        type: string
                       urlPatterns:
                         type: array
                         items:
@@ -9402,9 +9402,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibLocation:
-                        type: string
                       taglibURI:
+                        type: string
+                      taglibLocation:
                         type: string
             virtualServerName:
               type: string
@@ -9542,9 +9542,9 @@ components:
           type: array
           items:
             type: string
-        propagateQueryProperties:
-          type: boolean
         redirectView:
+          type: boolean
+        propagateQueryProperties:
           type: boolean
         attributesMap:
           type: object
