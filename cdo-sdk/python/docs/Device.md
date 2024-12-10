@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **connector_uid** | **str** | The unique identifier, represented as a UUID, of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG)The name of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG). | [optional] 
 **address** | **str** | The address of the device, in &#x60;host:port&#x60; format. Security Cloud Control connects to the device at this address. | [optional] 
 **device_role** | [**DeviceRole**](DeviceRole.md) |  | [optional] 
+**device_roles** | [**List[DeviceRole]**](DeviceRole.md) | The roles that this device performs on the network. | [optional] 
 **serial** | **str** | The serial number of the device. This is typically used for licensing, and is not the same as the chassis&#39; serial number. | [optional] 
 **chassis_serial** | **str** | The serial number on the chassis of the device (ASA-only). This is typically used to type up to Cisco SmartNet, and is not the same as the serial number. | [optional] 
 **software_version** | **str** | The version of the software running on the device. | [optional] 

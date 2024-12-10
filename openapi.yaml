@@ -7185,6 +7185,13 @@ components:
           example: my-example-device.example.com:443
         deviceRole:
           $ref: '#/components/schemas/DeviceRole'
+        deviceRoles:
+          type: array
+          description: The roles that this device performs on the network.
+          example: ASA_RA_VPN_HEADEND
+          deprecated: true
+          items:
+            $ref: '#/components/schemas/DeviceRole'
         serial:
           type: string
           description: >-
@@ -7315,13 +7322,16 @@ components:
             FMC-managed FTDs only)
     DeviceRole:
       type: string
-      description: The role this device performs on the network.
-      example: RA_VPN_HEADEND
+      description: The roles that this device performs on the network.
+      example: ASA_RA_VPN_HEADEND
+      deprecated: true
       enum:
-        - RA_VPN_HEADEND
+        - FTD_RA_VPN_HEADEND
+        - ASA_RA_VPN_HEADEND
         - MFA_PROVIDER
         - ZTNA_PROVIDER
         - ANYCONNECT_VPN_HEAD_END
+        - CLIENT_BASED_ZTNA_HEADEND
     FtdClusterInfo:
       type: object
       properties:
@@ -9357,6 +9367,8 @@ components:
                   items:
                     type: object
                     properties:
+                      elIgnored:
+                        type: string
                       scriptingInvalid:
                         type: string
                       pageEncoding:
@@ -9377,8 +9389,6 @@ components:
                         type: string
                       errorOnUndeclaredNamespace:
                         type: string
-                      elIgnored:
-                        type: string
                       buffer:
                         type: string
                       defaultContentType:
@@ -9392,9 +9402,9 @@ components:
                   items:
                     type: object
                     properties:
-                      taglibURI:
-                        type: string
                       taglibLocation:
+                        type: string
+                      taglibURI:
                         type: string
             virtualServerName:
               type: string
@@ -9532,9 +9542,9 @@ components:
           type: array
           items:
             type: string
-        redirectView:
-          type: boolean
         propagateQueryProperties:
+          type: boolean
+        redirectView:
           type: boolean
         attributesMap:
           type: object

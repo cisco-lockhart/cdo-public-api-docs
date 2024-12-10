@@ -21,16 +21,18 @@ from typing_extensions import Self
 
 class DeviceRole(str, Enum):
     """
-    The role this device performs on the network.
+    The roles that this device performs on the network.
     """
 
     """
     allowed enum values
     """
-    RA_VPN_HEADEND = 'RA_VPN_HEADEND'
+    FTD_RA_VPN_HEADEND = 'FTD_RA_VPN_HEADEND'
+    ASA_RA_VPN_HEADEND = 'ASA_RA_VPN_HEADEND'
     MFA_PROVIDER = 'MFA_PROVIDER'
     ZTNA_PROVIDER = 'ZTNA_PROVIDER'
     ANYCONNECT_VPN_HEAD_END = 'ANYCONNECT_VPN_HEAD_END'
+    CLIENT_BASED_ZTNA_HEADEND = 'CLIENT_BASED_ZTNA_HEADEND'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

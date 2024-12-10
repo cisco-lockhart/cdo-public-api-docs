@@ -51,6 +51,7 @@ class Device(BaseModel):
     connector_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG)The name of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG).", alias="connectorUid")
     address: Optional[StrictStr] = Field(default=None, description="The address of the device, in `host:port` format. Security Cloud Control connects to the device at this address.")
     device_role: Optional[DeviceRole] = Field(default=None, alias="deviceRole")
+    device_roles: Optional[List[DeviceRole]] = Field(default=None, description="The roles that this device performs on the network.", alias="deviceRoles")
     serial: Optional[StrictStr] = Field(default=None, description="The serial number of the device. This is typically used for licensing, and is not the same as the chassis' serial number.")
     chassis_serial: Optional[StrictStr] = Field(default=None, description="The serial number on the chassis of the device (ASA-only). This is typically used to type up to Cisco SmartNet, and is not the same as the serial number.", alias="chassisSerial")
     software_version: Optional[StrictStr] = Field(default=None, description="The version of the software running on the device.", alias="softwareVersion")
@@ -82,7 +83,7 @@ class Device(BaseModel):
     ztp_onboarding_job_id: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, for an internal job that orchestrates the onboarding of devices through Zero-Touch Provisioning. This applies to devices managed by both on-premises and Cloud-delivered FMC.", alias="ztpOnboardingJobId")
     model_number: Optional[StrictStr] = Field(default=None, description="The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device.", alias="modelNumber")
     hardware_model: Optional[StrictStr] = Field(default=None, description="The hardware model of the device (ASAs, FDM-managed FTDs, and FMC-managed FTDs only)", alias="hardwareModel")
-    __properties: ClassVar[List[str]] = ["uid", "name", "deviceType", "connectorType", "connectorUid", "address", "deviceRole", "serial", "chassisSerial", "softwareVersion", "connectivityState", "configState", "conflictDetectionState", "notes", "asdmVersion", "asaFailoverMode", "asaFailoverState", "asaFailoverMate", "asaLicenseEntitlements", "ftdLicenses", "snortVersion", "ftdPerformanceTier", "redundancyMode", "cdFmcInfo", "sseDeviceData", "onPremFmcInfo", "ftdClusterInfo", "ftdHaInfo", "merakiDeploymentMode", "merakiNetwork", "state", "stateMachineDetails", "labels", "fmcDomainUid", "uidOnFmc", "ztpOnboardingJobId", "modelNumber", "hardwareModel"]
+    __properties: ClassVar[List[str]] = ["uid", "name", "deviceType", "connectorType", "connectorUid", "address", "deviceRole", "deviceRoles", "serial", "chassisSerial", "softwareVersion", "connectivityState", "configState", "conflictDetectionState", "notes", "asdmVersion", "asaFailoverMode", "asaFailoverState", "asaFailoverMate", "asaLicenseEntitlements", "ftdLicenses", "snortVersion", "ftdPerformanceTier", "redundancyMode", "cdFmcInfo", "sseDeviceData", "onPremFmcInfo", "ftdClusterInfo", "ftdHaInfo", "merakiDeploymentMode", "merakiNetwork", "state", "stateMachineDetails", "labels", "fmcDomainUid", "uidOnFmc", "ztpOnboardingJobId", "modelNumber", "hardwareModel"]
 
     @field_validator('redundancy_mode')
     def redundancy_mode_validate_enum(cls, value):
@@ -179,6 +180,7 @@ class Device(BaseModel):
             "connectorUid": obj.get("connectorUid"),
             "address": obj.get("address"),
             "deviceRole": obj.get("deviceRole"),
+            "deviceRoles": obj.get("deviceRoles"),
             "serial": obj.get("serial"),
             "chassisSerial": obj.get("chassisSerial"),
             "softwareVersion": obj.get("softwareVersion"),
