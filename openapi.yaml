@@ -9264,10 +9264,10 @@ components:
             minorVersion:
               type: integer
               format: int32
-            contextPath:
-              type: string
             attributeNames:
               type: object
+            contextPath:
+              type: string
             initParameterNames:
               type: object
             sessionTrackingModes:
@@ -9283,6 +9283,19 @@ components:
             servletNames:
               type: object
               deprecated: true
+            effectiveMajorVersion:
+              type: integer
+              format: int32
+            effectiveMinorVersion:
+              type: integer
+              format: int32
+            servlets:
+              type: object
+              deprecated: true
+            serverInfo:
+              type: string
+            servletContextName:
+              type: string
             servletRegistrations:
               type: object
               additionalProperties:
@@ -9367,15 +9380,9 @@ components:
                   items:
                     type: object
                     properties:
-                      deferredSyntaxAllowedAsLiteral:
+                      elIgnored:
                         type: string
                       scriptingInvalid:
-                        type: string
-                      trimDirectiveWhitespaces:
-                        type: string
-                      errorOnUndeclaredNamespace:
-                        type: string
-                      elIgnored:
                         type: string
                       pageEncoding:
                         type: string
@@ -9389,6 +9396,12 @@ components:
                         type: array
                         items:
                           type: string
+                      deferredSyntaxAllowedAsLiteral:
+                        type: string
+                      trimDirectiveWhitespaces:
+                        type: string
+                      errorOnUndeclaredNamespace:
+                        type: string
                       buffer:
                         type: string
                       defaultContentType:
@@ -9411,19 +9424,6 @@ components:
             requestCharacterEncoding:
               type: string
             responseCharacterEncoding:
-              type: string
-            effectiveMajorVersion:
-              type: integer
-              format: int32
-            effectiveMinorVersion:
-              type: integer
-              format: int32
-            servlets:
-              type: object
-              deprecated: true
-            serverInfo:
-              type: string
-            servletContextName:
               type: string
           writeOnly: true
         contentType:
