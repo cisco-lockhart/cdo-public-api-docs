@@ -50,10 +50,10 @@ class RedirectView(BaseModel):
     hosts: Optional[List[StrictStr]] = None
     redirect_view: Optional[StrictBool] = Field(default=None, alias="redirectView")
     propagate_query_properties: Optional[StrictBool] = Field(default=None, alias="propagateQueryProperties")
+    attributes: Optional[Dict[str, StrictStr]] = None
     attributes_map: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="attributesMap")
     attributes_csv: Optional[StrictStr] = Field(default=None, alias="attributesCSV")
-    attributes: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["applicationContext", "servletContext", "contentType", "requestContextAttribute", "staticAttributes", "exposePathVariables", "exposeContextBeansAsAttributes", "exposedContextBeanNames", "beanName", "url", "contextRelative", "http10Compatible", "exposeModelAttributes", "encodingScheme", "statusCode", "expandUriTemplateVariables", "propagateQueryParams", "hosts", "redirectView", "propagateQueryProperties", "attributesMap", "attributesCSV", "attributes"]
+    __properties: ClassVar[List[str]] = ["applicationContext", "servletContext", "contentType", "requestContextAttribute", "staticAttributes", "exposePathVariables", "exposeContextBeansAsAttributes", "exposedContextBeanNames", "beanName", "url", "contextRelative", "http10Compatible", "exposeModelAttributes", "encodingScheme", "statusCode", "expandUriTemplateVariables", "propagateQueryParams", "hosts", "redirectView", "propagateQueryProperties", "attributes", "attributesMap", "attributesCSV"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -135,9 +135,9 @@ class RedirectView(BaseModel):
             "hosts": obj.get("hosts"),
             "redirectView": obj.get("redirectView"),
             "propagateQueryProperties": obj.get("propagateQueryProperties"),
+            "attributes": obj.get("attributes"),
             "attributesMap": obj.get("attributesMap"),
-            "attributesCSV": obj.get("attributesCSV"),
-            "attributes": obj.get("attributes")
+            "attributesCSV": obj.get("attributesCSV")
         })
         return _obj
 

@@ -376,12 +376,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_filter_registration.py
-test/test_http_status_code.py
-test/test_jsp_config_descriptor.py
-test/test_jsp_property_group_descriptor.py
-test/test_servlet_context.py
-test/test_servlet_registration.py
-test/test_session_cookie_config.py
-test/test_taglib_descriptor.py
 tox.ini

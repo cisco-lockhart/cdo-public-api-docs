@@ -9345,17 +9345,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
-          writeOnly: true
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
           writeOnly: true
     ServletContext:
       type: object
@@ -9410,14 +9410,14 @@ components:
           format: int32
         attributeNames:
           type: object
-        contextPath:
-          type: string
-        initParameterNames:
-          type: object
         servletRegistrations:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ServletRegistration'
+        contextPath:
+          type: string
+        initParameterNames:
+          type: object
         sessionTrackingModes:
           uniqueItems: true
           type: array
@@ -9503,10 +9503,10 @@ components:
         comment:
           type: string
           deprecated: true
-        secure:
-          type: boolean
         domain:
           type: string
+        secure:
+          type: boolean
         maxAge:
           type: integer
           format: int32
