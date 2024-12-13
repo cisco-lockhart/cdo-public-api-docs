@@ -18,10 +18,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from cdo_sdk_python.models.application_context import ApplicationContext
-from cdo_sdk_python.models.redirect_view_servlet_context import RedirectViewServletContext
+from cdo_sdk_python.models.http_status_code import HttpStatusCode
+from cdo_sdk_python.models.servlet_context import ServletContext
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +31,7 @@ class RedirectView(BaseModel):
     RedirectView
     """ # noqa: E501
     application_context: Optional[ApplicationContext] = Field(default=None, alias="applicationContext")
-    servlet_context: Optional[RedirectViewServletContext] = Field(default=None, alias="servletContext")
+    servlet_context: Optional[ServletContext] = Field(default=None, alias="servletContext")
     content_type: Optional[StrictStr] = Field(default=None, alias="contentType")
     request_context_attribute: Optional[StrictStr] = Field(default=None, alias="requestContextAttribute")
     static_attributes: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="staticAttributes")
@@ -43,7 +44,7 @@ class RedirectView(BaseModel):
     http10_compatible: Optional[StrictBool] = Field(default=None, alias="http10Compatible")
     expose_model_attributes: Optional[StrictBool] = Field(default=None, alias="exposeModelAttributes")
     encoding_scheme: Optional[StrictStr] = Field(default=None, alias="encodingScheme")
-    status_code: Optional[StrictStr] = Field(default=None, alias="statusCode")
+    status_code: Optional[HttpStatusCode] = Field(default=None, alias="statusCode")
     expand_uri_template_variables: Optional[StrictBool] = Field(default=None, alias="expandUriTemplateVariables")
     propagate_query_params: Optional[StrictBool] = Field(default=None, alias="propagateQueryParams")
     hosts: Optional[List[StrictStr]] = None
@@ -53,16 +54,6 @@ class RedirectView(BaseModel):
     attributes_csv: Optional[StrictStr] = Field(default=None, alias="attributesCSV")
     attributes: Optional[Dict[str, StrictStr]] = None
     __properties: ClassVar[List[str]] = ["applicationContext", "servletContext", "contentType", "requestContextAttribute", "staticAttributes", "exposePathVariables", "exposeContextBeansAsAttributes", "exposedContextBeanNames", "beanName", "url", "contextRelative", "http10Compatible", "exposeModelAttributes", "encodingScheme", "statusCode", "expandUriTemplateVariables", "propagateQueryParams", "hosts", "redirectView", "propagateQueryProperties", "attributesMap", "attributesCSV", "attributes"]
-
-    @field_validator('status_code')
-    def status_code_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['100 CONTINUE', '101 SWITCHING_PROTOCOLS', '102 PROCESSING', '103 CHECKPOINT', '200 OK', '201 CREATED', '202 ACCEPTED', '203 NON_AUTHORITATIVE_INFORMATION', '204 NO_CONTENT', '205 RESET_CONTENT', '206 PARTIAL_CONTENT', '207 MULTI_STATUS', '208 ALREADY_REPORTED', '226 IM_USED', '300 MULTIPLE_CHOICES', '301 MOVED_PERMANENTLY', '302 FOUND', '302 MOVED_TEMPORARILY', '303 SEE_OTHER', '304 NOT_MODIFIED', '305 USE_PROXY', '307 TEMPORARY_REDIRECT', '308 PERMANENT_REDIRECT', '400 BAD_REQUEST', '401 UNAUTHORIZED', '402 PAYMENT_REQUIRED', '403 FORBIDDEN', '404 NOT_FOUND', '405 METHOD_NOT_ALLOWED', '406 NOT_ACCEPTABLE', '407 PROXY_AUTHENTICATION_REQUIRED', '408 REQUEST_TIMEOUT', '409 CONFLICT', '410 GONE', '411 LENGTH_REQUIRED', '412 PRECONDITION_FAILED', '413 PAYLOAD_TOO_LARGE', '413 REQUEST_ENTITY_TOO_LARGE', '414 URI_TOO_LONG', '414 REQUEST_URI_TOO_LONG', '415 UNSUPPORTED_MEDIA_TYPE', '416 REQUESTED_RANGE_NOT_SATISFIABLE', '417 EXPECTATION_FAILED', '418 I_AM_A_TEAPOT', '419 INSUFFICIENT_SPACE_ON_RESOURCE', '420 METHOD_FAILURE', '421 DESTINATION_LOCKED', '422 UNPROCESSABLE_ENTITY', '423 LOCKED', '424 FAILED_DEPENDENCY', '425 TOO_EARLY', '426 UPGRADE_REQUIRED', '428 PRECONDITION_REQUIRED', '429 TOO_MANY_REQUESTS', '431 REQUEST_HEADER_FIELDS_TOO_LARGE', '451 UNAVAILABLE_FOR_LEGAL_REASONS', '500 INTERNAL_SERVER_ERROR', '501 NOT_IMPLEMENTED', '502 BAD_GATEWAY', '503 SERVICE_UNAVAILABLE', '504 GATEWAY_TIMEOUT', '505 HTTP_VERSION_NOT_SUPPORTED', '506 VARIANT_ALSO_NEGOTIATES', '507 INSUFFICIENT_STORAGE', '508 LOOP_DETECTED', '509 BANDWIDTH_LIMIT_EXCEEDED', '510 NOT_EXTENDED', '511 NETWORK_AUTHENTICATION_REQUIRED']):
-            raise ValueError("must be one of enum values ('100 CONTINUE', '101 SWITCHING_PROTOCOLS', '102 PROCESSING', '103 CHECKPOINT', '200 OK', '201 CREATED', '202 ACCEPTED', '203 NON_AUTHORITATIVE_INFORMATION', '204 NO_CONTENT', '205 RESET_CONTENT', '206 PARTIAL_CONTENT', '207 MULTI_STATUS', '208 ALREADY_REPORTED', '226 IM_USED', '300 MULTIPLE_CHOICES', '301 MOVED_PERMANENTLY', '302 FOUND', '302 MOVED_TEMPORARILY', '303 SEE_OTHER', '304 NOT_MODIFIED', '305 USE_PROXY', '307 TEMPORARY_REDIRECT', '308 PERMANENT_REDIRECT', '400 BAD_REQUEST', '401 UNAUTHORIZED', '402 PAYMENT_REQUIRED', '403 FORBIDDEN', '404 NOT_FOUND', '405 METHOD_NOT_ALLOWED', '406 NOT_ACCEPTABLE', '407 PROXY_AUTHENTICATION_REQUIRED', '408 REQUEST_TIMEOUT', '409 CONFLICT', '410 GONE', '411 LENGTH_REQUIRED', '412 PRECONDITION_FAILED', '413 PAYLOAD_TOO_LARGE', '413 REQUEST_ENTITY_TOO_LARGE', '414 URI_TOO_LONG', '414 REQUEST_URI_TOO_LONG', '415 UNSUPPORTED_MEDIA_TYPE', '416 REQUESTED_RANGE_NOT_SATISFIABLE', '417 EXPECTATION_FAILED', '418 I_AM_A_TEAPOT', '419 INSUFFICIENT_SPACE_ON_RESOURCE', '420 METHOD_FAILURE', '421 DESTINATION_LOCKED', '422 UNPROCESSABLE_ENTITY', '423 LOCKED', '424 FAILED_DEPENDENCY', '425 TOO_EARLY', '426 UPGRADE_REQUIRED', '428 PRECONDITION_REQUIRED', '429 TOO_MANY_REQUESTS', '431 REQUEST_HEADER_FIELDS_TOO_LARGE', '451 UNAVAILABLE_FOR_LEGAL_REASONS', '500 INTERNAL_SERVER_ERROR', '501 NOT_IMPLEMENTED', '502 BAD_GATEWAY', '503 SERVICE_UNAVAILABLE', '504 GATEWAY_TIMEOUT', '505 HTTP_VERSION_NOT_SUPPORTED', '506 VARIANT_ALSO_NEGOTIATES', '507 INSUFFICIENT_STORAGE', '508 LOOP_DETECTED', '509 BANDWIDTH_LIMIT_EXCEEDED', '510 NOT_EXTENDED', '511 NETWORK_AUTHENTICATION_REQUIRED')")
-        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -109,6 +100,9 @@ class RedirectView(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of servlet_context
         if self.servlet_context:
             _dict['servletContext'] = self.servlet_context.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of status_code
+        if self.status_code:
+            _dict['statusCode'] = self.status_code.to_dict()
         return _dict
 
     @classmethod
@@ -122,7 +116,7 @@ class RedirectView(BaseModel):
 
         _obj = cls.model_validate({
             "applicationContext": ApplicationContext.from_dict(obj["applicationContext"]) if obj.get("applicationContext") is not None else None,
-            "servletContext": RedirectViewServletContext.from_dict(obj["servletContext"]) if obj.get("servletContext") is not None else None,
+            "servletContext": ServletContext.from_dict(obj["servletContext"]) if obj.get("servletContext") is not None else None,
             "contentType": obj.get("contentType"),
             "requestContextAttribute": obj.get("requestContextAttribute"),
             "staticAttributes": obj.get("staticAttributes"),
@@ -135,7 +129,7 @@ class RedirectView(BaseModel):
             "http10Compatible": obj.get("http10Compatible"),
             "exposeModelAttributes": obj.get("exposeModelAttributes"),
             "encodingScheme": obj.get("encodingScheme"),
-            "statusCode": obj.get("statusCode"),
+            "statusCode": HttpStatusCode.from_dict(obj["statusCode"]) if obj.get("statusCode") is not None else None,
             "expandUriTemplateVariables": obj.get("expandUriTemplateVariables"),
             "propagateQueryParams": obj.get("propagateQueryParams"),
             "hosts": obj.get("hosts"),

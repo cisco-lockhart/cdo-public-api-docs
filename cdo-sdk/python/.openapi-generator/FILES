@@ -101,6 +101,7 @@ cdo_sdk_python/models/entity.py
 cdo_sdk_python/models/entity_type.py
 cdo_sdk_python/models/environment.py
 cdo_sdk_python/models/event.py
+cdo_sdk_python/models/filter_registration.py
 cdo_sdk_python/models/fmc_health_metrics.py
 cdo_sdk_python/models/ftd_cluster_info.py
 cdo_sdk_python/models/ftd_create_or_update_input.py
@@ -110,6 +111,7 @@ cdo_sdk_python/models/global_search_result.py
 cdo_sdk_python/models/group_content.py
 cdo_sdk_python/models/ha_health_metrics.py
 cdo_sdk_python/models/ha_node.py
+cdo_sdk_python/models/http_status_code.py
 cdo_sdk_python/models/icmp4_value.py
 cdo_sdk_python/models/icmp6_value.py
 cdo_sdk_python/models/interface_health_metrics.py
@@ -118,6 +120,8 @@ cdo_sdk_python/models/ios_create_or_update_input.py
 cdo_sdk_python/models/issues_count.py
 cdo_sdk_python/models/issues_dto.py
 cdo_sdk_python/models/json_web_key.py
+cdo_sdk_python/models/jsp_config_descriptor.py
+cdo_sdk_python/models/jsp_property_group_descriptor.py
 cdo_sdk_python/models/jwk_set.py
 cdo_sdk_python/models/labels.py
 cdo_sdk_python/models/list_object_response.py
@@ -150,13 +154,6 @@ cdo_sdk_python/models/ra_vpn_device_input.py
 cdo_sdk_python/models/ra_vpn_session.py
 cdo_sdk_python/models/ra_vpn_session_page.py
 cdo_sdk_python/models/redirect_view.py
-cdo_sdk_python/models/redirect_view_servlet_context.py
-cdo_sdk_python/models/redirect_view_servlet_context_filter_registrations_value.py
-cdo_sdk_python/models/redirect_view_servlet_context_jsp_config_descriptor.py
-cdo_sdk_python/models/redirect_view_servlet_context_jsp_config_descriptor_jsp_property_groups_inner.py
-cdo_sdk_python/models/redirect_view_servlet_context_jsp_config_descriptor_taglibs_inner.py
-cdo_sdk_python/models/redirect_view_servlet_context_servlet_registrations_value.py
-cdo_sdk_python/models/redirect_view_servlet_context_session_cookie_config.py
 cdo_sdk_python/models/reference_info.py
 cdo_sdk_python/models/sdc.py
 cdo_sdk_python/models/sdc_create_input.py
@@ -164,6 +161,9 @@ cdo_sdk_python/models/sdc_page.py
 cdo_sdk_python/models/sdc_patch_input.py
 cdo_sdk_python/models/service_object_content.py
 cdo_sdk_python/models/service_object_value_content.py
+cdo_sdk_python/models/servlet_context.py
+cdo_sdk_python/models/servlet_registration.py
+cdo_sdk_python/models/session_cookie_config.py
 cdo_sdk_python/models/shared_object_value.py
 cdo_sdk_python/models/single_content.py
 cdo_sdk_python/models/source_destination_ports_value.py
@@ -172,6 +172,7 @@ cdo_sdk_python/models/state_machine_details.py
 cdo_sdk_python/models/state_machine_error.py
 cdo_sdk_python/models/status.py
 cdo_sdk_python/models/status_info.py
+cdo_sdk_python/models/taglib_descriptor.py
 cdo_sdk_python/models/target.py
 cdo_sdk_python/models/targets_request.py
 cdo_sdk_python/models/tenant.py
@@ -271,6 +272,7 @@ docs/Entity.md
 docs/EntityType.md
 docs/Environment.md
 docs/Event.md
+docs/FilterRegistration.md
 docs/FmcHealthMetrics.md
 docs/FtdClusterInfo.md
 docs/FtdCreateOrUpdateInput.md
@@ -280,6 +282,7 @@ docs/GlobalSearchResult.md
 docs/GroupContent.md
 docs/HaHealthMetrics.md
 docs/HaNode.md
+docs/HttpStatusCode.md
 docs/Icmp4Value.md
 docs/Icmp6Value.md
 docs/InterfaceHealthMetrics.md
@@ -289,6 +292,8 @@ docs/IosCreateOrUpdateInput.md
 docs/IssuesCount.md
 docs/IssuesDto.md
 docs/JsonWebKey.md
+docs/JspConfigDescriptor.md
+docs/JspPropertyGroupDescriptor.md
 docs/JwkSet.md
 docs/Labels.md
 docs/ListObjectResponse.md
@@ -324,13 +329,6 @@ docs/RaVpnDeviceInput.md
 docs/RaVpnSession.md
 docs/RaVpnSessionPage.md
 docs/RedirectView.md
-docs/RedirectViewServletContext.md
-docs/RedirectViewServletContextFilterRegistrationsValue.md
-docs/RedirectViewServletContextJspConfigDescriptor.md
-docs/RedirectViewServletContextJspConfigDescriptorJspPropertyGroupsInner.md
-docs/RedirectViewServletContextJspConfigDescriptorTaglibsInner.md
-docs/RedirectViewServletContextServletRegistrationsValue.md
-docs/RedirectViewServletContextSessionCookieConfig.md
 docs/ReferenceInfo.md
 docs/RemoteAccessMonitoringApi.md
 docs/Sdc.md
@@ -340,6 +338,9 @@ docs/SdcPatchInput.md
 docs/SearchApi.md
 docs/ServiceObjectContent.md
 docs/ServiceObjectValueContent.md
+docs/ServletContext.md
+docs/ServletRegistration.md
+docs/SessionCookieConfig.md
 docs/SharedObjectValue.md
 docs/SingleContent.md
 docs/SourceDestinationPortsValue.md
@@ -349,6 +350,7 @@ docs/StateMachineError.md
 docs/Status.md
 docs/StatusInfo.md
 docs/SwaggerRedirectControllerApi.md
+docs/TaglibDescriptor.md
 docs/Target.md
 docs/TargetsRequest.md
 docs/Tenant.md
@@ -374,4 +376,12 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_filter_registration.py
+test/test_http_status_code.py
+test/test_jsp_config_descriptor.py
+test/test_jsp_property_group_descriptor.py
+test/test_servlet_context.py
+test/test_servlet_registration.py
+test/test_session_cookie_config.py
+test/test_taglib_descriptor.py
 tox.ini

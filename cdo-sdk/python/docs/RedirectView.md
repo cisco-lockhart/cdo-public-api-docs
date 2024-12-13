@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **application_context** | [**ApplicationContext**](ApplicationContext.md) |  | [optional] 
-**servlet_context** | [**RedirectViewServletContext**](RedirectViewServletContext.md) |  | [optional] 
+**servlet_context** | [**ServletContext**](ServletContext.md) |  | [optional] 
 **content_type** | **str** |  | [optional] 
 **request_context_attribute** | **str** |  | [optional] 
 **static_attributes** | **Dict[str, object]** |  | [optional] 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **http10_compatible** | **bool** |  | [optional] 
 **expose_model_attributes** | **bool** |  | [optional] 
 **encoding_scheme** | **str** |  | [optional] 
-**status_code** | **str** |  | [optional] 
+**status_code** | [**HttpStatusCode**](HttpStatusCode.md) |  | [optional] 
 **expand_uri_template_variables** | **bool** |  | [optional] 
 **propagate_query_params** | **bool** |  | [optional] 
 **hosts** | **List[str]** |  | [optional] 
