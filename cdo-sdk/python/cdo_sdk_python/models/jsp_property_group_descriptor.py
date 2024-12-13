@@ -27,6 +27,9 @@ class JspPropertyGroupDescriptor(BaseModel):
     """
     JspPropertyGroupDescriptor
     """ # noqa: E501
+    buffer: Optional[StrictStr] = None
+    default_content_type: Optional[StrictStr] = Field(default=None, alias="defaultContentType")
+    url_patterns: Optional[List[StrictStr]] = Field(default=None, alias="urlPatterns")
     el_ignored: Optional[StrictStr] = Field(default=None, alias="elIgnored")
     error_on_el_not_found: Optional[StrictStr] = Field(default=None, alias="errorOnELNotFound")
     page_encoding: Optional[StrictStr] = Field(default=None, alias="pageEncoding")
@@ -37,10 +40,7 @@ class JspPropertyGroupDescriptor(BaseModel):
     deferred_syntax_allowed_as_literal: Optional[StrictStr] = Field(default=None, alias="deferredSyntaxAllowedAsLiteral")
     trim_directive_whitespaces: Optional[StrictStr] = Field(default=None, alias="trimDirectiveWhitespaces")
     error_on_undeclared_namespace: Optional[StrictStr] = Field(default=None, alias="errorOnUndeclaredNamespace")
-    buffer: Optional[StrictStr] = None
-    default_content_type: Optional[StrictStr] = Field(default=None, alias="defaultContentType")
-    url_patterns: Optional[List[StrictStr]] = Field(default=None, alias="urlPatterns")
-    __properties: ClassVar[List[str]] = ["elIgnored", "errorOnELNotFound", "pageEncoding", "scriptingInvalid", "isXml", "includePreludes", "includeCodas", "deferredSyntaxAllowedAsLiteral", "trimDirectiveWhitespaces", "errorOnUndeclaredNamespace", "buffer", "defaultContentType", "urlPatterns"]
+    __properties: ClassVar[List[str]] = ["buffer", "defaultContentType", "urlPatterns", "elIgnored", "errorOnELNotFound", "pageEncoding", "scriptingInvalid", "isXml", "includePreludes", "includeCodas", "deferredSyntaxAllowedAsLiteral", "trimDirectiveWhitespaces", "errorOnUndeclaredNamespace"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,6 +93,9 @@ class JspPropertyGroupDescriptor(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "buffer": obj.get("buffer"),
+            "defaultContentType": obj.get("defaultContentType"),
+            "urlPatterns": obj.get("urlPatterns"),
             "elIgnored": obj.get("elIgnored"),
             "errorOnELNotFound": obj.get("errorOnELNotFound"),
             "pageEncoding": obj.get("pageEncoding"),
@@ -102,10 +105,7 @@ class JspPropertyGroupDescriptor(BaseModel):
             "includeCodas": obj.get("includeCodas"),
             "deferredSyntaxAllowedAsLiteral": obj.get("deferredSyntaxAllowedAsLiteral"),
             "trimDirectiveWhitespaces": obj.get("trimDirectiveWhitespaces"),
-            "errorOnUndeclaredNamespace": obj.get("errorOnUndeclaredNamespace"),
-            "buffer": obj.get("buffer"),
-            "defaultContentType": obj.get("defaultContentType"),
-            "urlPatterns": obj.get("urlPatterns")
+            "errorOnUndeclaredNamespace": obj.get("errorOnUndeclaredNamespace")
         })
         return _obj
 

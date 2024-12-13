@@ -9256,6 +9256,14 @@ components:
     JspPropertyGroupDescriptor:
       type: object
       properties:
+        buffer:
+          type: string
+        defaultContentType:
+          type: string
+        urlPatterns:
+          type: array
+          items:
+            type: string
         elIgnored:
           type: string
         errorOnELNotFound:
@@ -9280,14 +9288,6 @@ components:
           type: string
         errorOnUndeclaredNamespace:
           type: string
-        buffer:
-          type: string
-        defaultContentType:
-          type: string
-        urlPatterns:
-          type: array
-          items:
-            type: string
     RedirectView:
       type: object
       properties:
@@ -9345,17 +9345,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
-          writeOnly: true
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
           writeOnly: true
     ServletContext:
       type: object
@@ -9503,10 +9503,10 @@ components:
         comment:
           type: string
           deprecated: true
-        secure:
-          type: boolean
         domain:
           type: string
+        secure:
+          type: boolean
         maxAge:
           type: integer
           format: int32
