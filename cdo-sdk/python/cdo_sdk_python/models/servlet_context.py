@@ -37,9 +37,9 @@ class ServletContext(BaseModel):
     major_version: Optional[StrictInt] = Field(default=None, alias="majorVersion")
     minor_version: Optional[StrictInt] = Field(default=None, alias="minorVersion")
     attribute_names: Optional[Dict[str, Any]] = Field(default=None, alias="attributeNames")
-    servlet_registrations: Optional[Dict[str, ServletRegistration]] = Field(default=None, alias="servletRegistrations")
     context_path: Optional[StrictStr] = Field(default=None, alias="contextPath")
     init_parameter_names: Optional[Dict[str, Any]] = Field(default=None, alias="initParameterNames")
+    servlet_registrations: Optional[Dict[str, ServletRegistration]] = Field(default=None, alias="servletRegistrations")
     session_tracking_modes: Optional[List[StrictStr]] = Field(default=None, alias="sessionTrackingModes")
     filter_registrations: Optional[Dict[str, FilterRegistration]] = Field(default=None, alias="filterRegistrations")
     session_cookie_config: Optional[SessionCookieConfig] = Field(default=None, alias="sessionCookieConfig")
@@ -53,7 +53,7 @@ class ServletContext(BaseModel):
     effective_minor_version: Optional[StrictInt] = Field(default=None, alias="effectiveMinorVersion")
     server_info: Optional[StrictStr] = Field(default=None, alias="serverInfo")
     servlet_context_name: Optional[StrictStr] = Field(default=None, alias="servletContextName")
-    __properties: ClassVar[List[str]] = ["sessionTimeout", "classLoader", "majorVersion", "minorVersion", "attributeNames", "servletRegistrations", "contextPath", "initParameterNames", "sessionTrackingModes", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "effectiveMajorVersion", "effectiveMinorVersion", "serverInfo", "servletContextName"]
+    __properties: ClassVar[List[str]] = ["sessionTimeout", "classLoader", "majorVersion", "minorVersion", "attributeNames", "contextPath", "initParameterNames", "servletRegistrations", "sessionTrackingModes", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "effectiveMajorVersion", "effectiveMinorVersion", "serverInfo", "servletContextName"]
 
     @field_validator('session_tracking_modes')
     def session_tracking_modes_validate_enum(cls, value):
@@ -167,14 +167,14 @@ class ServletContext(BaseModel):
             "majorVersion": obj.get("majorVersion"),
             "minorVersion": obj.get("minorVersion"),
             "attributeNames": obj.get("attributeNames"),
+            "contextPath": obj.get("contextPath"),
+            "initParameterNames": obj.get("initParameterNames"),
             "servletRegistrations": dict(
                 (_k, ServletRegistration.from_dict(_v))
                 for _k, _v in obj["servletRegistrations"].items()
             )
             if obj.get("servletRegistrations") is not None
             else None,
-            "contextPath": obj.get("contextPath"),
-            "initParameterNames": obj.get("initParameterNames"),
             "sessionTrackingModes": obj.get("sessionTrackingModes"),
             "filterRegistrations": dict(
                 (_k, FilterRegistration.from_dict(_v))
