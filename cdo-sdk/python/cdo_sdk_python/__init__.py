@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.2.557"
+__version__ = "1.2.558"
 
 # import apis into sdk package
 from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
@@ -124,6 +124,8 @@ from cdo_sdk_python.models.entity_type import EntityType
 from cdo_sdk_python.models.environment import Environment
 from cdo_sdk_python.models.event import Event
 from cdo_sdk_python.models.filter_registration import FilterRegistration
+from cdo_sdk_python.models.fmc_access_policy_reference import FmcAccessPolicyReference
+from cdo_sdk_python.models.fmc_device_record import FmcDeviceRecord
 from cdo_sdk_python.models.fmc_health_metrics import FmcHealthMetrics
 from cdo_sdk_python.models.ftd_cluster_info import FtdClusterInfo
 from cdo_sdk_python.models.ftd_create_or_update_input import FtdCreateOrUpdateInput

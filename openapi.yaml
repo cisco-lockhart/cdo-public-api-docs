@@ -7040,6 +7040,19 @@ components:
     CdFmcInfo:
       type: object
       properties:
+        uid:
+          type: string
+          description: >-
+            The unique identifier, represented as a UUID, of the cdFMC that
+            manages this device.
+          format: uuid
+        deviceRecordOnFmc:
+          $ref: '#/components/schemas/FmcDeviceRecord'
+        link:
+          type: string
+          description: The endpoint to access this resource from.
+          example: >-
+            https://us.manage.security.cisco.com/api/rest/v1/inventory/managers/7e9789b4-8389-4029-933f-ec7e385335ef
         cliKey:
           type: string
           description: >-
@@ -7088,8 +7101,8 @@ components:
         uidOnFmc:
           type: string
           description: >-
-            The unique identifier, represented as a UUID, of the device on a
-            cdFMC.
+            The unique identifier, represented as a UUID, of the device on the
+            FMC.
           format: uuid
           example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
         status:
@@ -7104,9 +7117,10 @@ components:
             - NOT_AVAILABLE
             - UNKNOWN
       description: >-
-        Information on the data nodes, which are individual units within a
-        cluster that process and forward network traffic based on policies and
-        configurations managed by the control node.
+        (cdFMC-managed FTDs only) Information on the data nodes, which are
+        individual units within a cluster that process and forward network
+        traffic based on policies and configurations managed by the control
+        node.
     ConfigState:
       type: string
       description: >-
@@ -7189,7 +7203,6 @@ components:
           type: array
           description: The roles that this device performs on the network.
           example: ASA_RA_VPN_HEADEND
-          deprecated: true
           items:
             $ref: '#/components/schemas/DeviceRole'
         serial:
@@ -7296,10 +7309,14 @@ components:
         uidOnFmc:
           type: string
           description: >-
-            (cdFMC-managed FTDs only) The unique identifier, represented as a
-            UUID, of the device on a cdFMC.
+            (FMC-managed FTDs only) The unique identifier, represented as a
+            UUID, of the device on a cdFMC. This field is deprecated. Please see
+            `cdFmcInfo.deviceRecordOnFmc` or `onPremFmcInfo.deviceRecordOnFmc`.
           format: uuid
           example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
+          deprecated: true
+        fmcAccessPolicy:
+          $ref: '#/components/schemas/FmcAccessPolicyReference'
         ztpOnboardingJobId:
           type: string
           description: >-
@@ -7318,13 +7335,12 @@ components:
         hardwareModel:
           type: string
           description: >-
-            The hardware model of the device (ASAs, FDM-managed FTDs, and
-            FMC-managed FTDs only)
+            (ASAs, FDM-managed FTDs, and FMC-managed FTDs only) The hardware
+            model of the device
     DeviceRole:
       type: string
       description: The roles that this device performs on the network.
       example: ASA_RA_VPN_HEADEND
-      deprecated: true
       enum:
         - FTD_RA_VPN_HEADEND
         - ASA_RA_VPN_HEADEND
@@ -7332,6 +7348,41 @@ components:
         - ZTNA_PROVIDER
         - ANYCONNECT_VPN_HEAD_END
         - CLIENT_BASED_ZTNA_HEADEND
+    FmcAccessPolicyReference:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: >-
+            The unique identifier, represented as a UUID, of the FMC Access
+            Policy in Security Cloud Control.
+          format: uuid
+          example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+        link:
+          type: string
+          description: The endpoint to access this resource from.
+          example: >-
+            https://us.manage.security.cisco.com/api/rest/v1/cdfmc/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/policy/accesspolicies/0276f012-3875-0ed3-0000-004294981364
+      description: (FMC-managed FTDs only) The FMC Access Policy applied to the device.
+      example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
+    FmcDeviceRecord:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: >-
+            The unique identifier, represented as a UUID, of the device on the
+            FMC.
+          format: uuid
+          example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
+        link:
+          type: string
+          description: The endpoint to access this resource from on the FMC.
+          example: >-
+            https://fmc.example.com/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/6131daad-e813-4b8f-8f42-be1e241e8cdb
+      description: >-
+        The device record in FMC. A FMC-managed device on SCC can also be
+        accessed directly using the FMC APIs; this field provides details.
     FtdClusterInfo:
       type: object
       properties:
@@ -7340,11 +7391,40 @@ components:
         dataNodes:
           type: array
           description: >-
-            Information on the data nodes, which are individual units within a
-            cluster that process and forward network traffic based on policies
-            and configurations managed by the control node.
+            (cdFMC-managed FTDs only) Information on the data nodes, which are
+            individual units within a cluster that process and forward network
+            traffic based on policies and configurations managed by the control
+            node.
           items:
             $ref: '#/components/schemas/ClusterNode'
+        clusterUid:
+          type: string
+          description: >-
+            The unique identifier, represented as a UUID, of the cluster, on the
+            FMC
+          format: uuid
+        clusterNodeType:
+          type: string
+          description: >-
+            (on-prem FMC-managed FTDs only) Information on the type of this node
+            in the FTD cluster. Note: Each node in an on-prem-FMC-managed FTD
+            cluster is represented as a separate device entry in the API.
+          enum:
+            - CONTROL
+            - DATA
+        clusterNodeStatus:
+          type: string
+          description: >-
+            (on-prem FMC-managed FTDs only) Information on the type of this node
+            in the FTD cluster. Note: Each node in an on-prem-FMC-managed FTD
+            cluster is represented as a separate device entry in the API.
+          enum:
+            - ADDED_OUT_OF_BOX
+            - DISABLED
+            - JOINING
+            - NORMAL
+            - NOT_AVAILABLE
+            - UNKNOWN
       description: >-
         (Device Clusters managed by FMC only) Clustering information. Note:
         Security Cloud Control represents all of the nodes on an FTD cluster in
@@ -7352,10 +7432,34 @@ components:
     FtdHaInfo:
       type: object
       properties:
+        haPairUid:
+          type: string
+          description: >-
+            The unique identifier, represented as a UUID, of the HA Pair, on the
+            FMC
+          format: uuid
         primaryNode:
           $ref: '#/components/schemas/HaNode'
         secondaryNode:
           $ref: '#/components/schemas/HaNode'
+        haNodeType:
+          type: string
+          description: >-
+            (on-prem FMC-managed FTDs only) Information on the type of this node
+            in the HA Pair. Note: Each node in an on-prem-FMC-managed FTD HA
+            Pair is represented as a separate device entry in the API.
+          enum:
+            - PRIMARY
+            - SECONDARY
+        currentRole:
+          type: string
+          description: >-
+            (on-prem FMC-managed FTDs only) Information on the current role of
+            the node in the HA Pair. Note: Each node in an on-prem-FMC-managed
+            FTD HA Pair is represented as a separate device entry in the API.
+          enum:
+            - ACTIVE
+            - STANDBY
       description: >-
         (High Availability Devices managed by FMC only) High-Available
         information information. Note: Security Cloud Control represents all of
@@ -7381,8 +7485,8 @@ components:
         uidOnFmc:
           type: string
           description: >-
-            The unique identifier, represented as a UUID, of the device on a
-            cdFMC.
+            The unique identifier, represented as a UUID, of the device on the
+            FMC.
           format: uuid
           example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
         status:
@@ -7395,7 +7499,9 @@ components:
             - WARNING
             - DISABLED
             - UNKNOWN
-      description: Information on the secondary unit in the FTD HA Pair.
+      description: >-
+        (cdFMC-managed FTDs only) Information on the secondary unit in the FTD
+        HA Pair.
     MerakiDeploymentMode:
       type: string
       description: (Meraki devices only) The deployment mode of the Meraki device.
@@ -7427,18 +7533,26 @@ components:
     OnPremFmcInfo:
       type: object
       properties:
-        name:
+        uid:
           type: string
           description: >-
-            The name of the device in CDO. Device names are unique in Security
-            Cloud Control.
-          example: my-example-fmc
-        address:
+            The unique identifier, represented as a UUID, of the on-prem FMC
+            that manages this device.
+          format: uuid
+          example: 7e9789b4-8389-4029-933f-ec7e385335ef
+        deviceRecordOnFmc:
+          $ref: '#/components/schemas/FmcDeviceRecord'
+        link:
+          type: string
+          description: The endpoint to access this resource from.
+          example: >-
+            https://us.manage.security.cisco.com/api/rest/v1/inventory/managers/7e9789b4-8389-4029-933f-ec7e385335ef
+        location:
           type: string
           description: >-
-            The address of the on-prem FMC managing this device, in `host:port`
-            format.
-          example: my-example-fmc.example.com:443
+            The fully-qualified domain name or IP address of the on-prem FMC
+            managing this device.
+          example: my-example-fmc.example.com
       description: >-
         (Devices managed by on-prem FMC only) Information on the on-prem FMC
         managing this device.
@@ -9256,8 +9370,6 @@ components:
     JspPropertyGroupDescriptor:
       type: object
       properties:
-        buffer:
-          type: string
         elIgnored:
           type: string
         errorOnELNotFound:
@@ -9281,6 +9393,8 @@ components:
         trimDirectiveWhitespaces:
           type: string
         errorOnUndeclaredNamespace:
+          type: string
+        buffer:
           type: string
         defaultContentType:
           type: string
@@ -9410,14 +9524,14 @@ components:
           format: int32
         attributeNames:
           type: object
-        contextPath:
-          type: string
-        initParameterNames:
-          type: object
         servletRegistrations:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ServletRegistration'
+        contextPath:
+          type: string
+        initParameterNames:
+          type: object
         sessionTrackingModes:
           uniqueItems: true
           type: array

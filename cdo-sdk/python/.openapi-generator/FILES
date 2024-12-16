@@ -102,6 +102,8 @@ cdo_sdk_python/models/entity_type.py
 cdo_sdk_python/models/environment.py
 cdo_sdk_python/models/event.py
 cdo_sdk_python/models/filter_registration.py
+cdo_sdk_python/models/fmc_access_policy_reference.py
+cdo_sdk_python/models/fmc_device_record.py
 cdo_sdk_python/models/fmc_health_metrics.py
 cdo_sdk_python/models/ftd_cluster_info.py
 cdo_sdk_python/models/ftd_create_or_update_input.py
@@ -273,6 +275,8 @@ docs/EntityType.md
 docs/Environment.md
 docs/Event.md
 docs/FilterRegistration.md
+docs/FmcAccessPolicyReference.md
+docs/FmcDeviceRecord.md
 docs/FmcHealthMetrics.md
 docs/FtdClusterInfo.md
 docs/FtdCreateOrUpdateInput.md
@@ -376,4 +380,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_fmc_access_policy_reference.py
+test/test_fmc_device_record.py
 tox.ini

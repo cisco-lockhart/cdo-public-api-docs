@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from cdo_sdk_python.models.ha_node import HaNode
 from typing import Optional, Set
@@ -28,9 +28,32 @@ class FtdHaInfo(BaseModel):
     """
     (High Availability Devices managed by FMC only) High-Available information information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.
     """ # noqa: E501
+    ha_pair_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the HA Pair, on the FMC", alias="haPairUid")
     primary_node: Optional[HaNode] = Field(default=None, alias="primaryNode")
     secondary_node: Optional[HaNode] = Field(default=None, alias="secondaryNode")
-    __properties: ClassVar[List[str]] = ["primaryNode", "secondaryNode"]
+    ha_node_type: Optional[StrictStr] = Field(default=None, description="(on-prem FMC-managed FTDs only) Information on the type of this node in the HA Pair. Note: Each node in an on-prem-FMC-managed FTD HA Pair is represented as a separate device entry in the API.", alias="haNodeType")
+    current_role: Optional[StrictStr] = Field(default=None, description="(on-prem FMC-managed FTDs only) Information on the current role of the node in the HA Pair. Note: Each node in an on-prem-FMC-managed FTD HA Pair is represented as a separate device entry in the API.", alias="currentRole")
+    __properties: ClassVar[List[str]] = ["haPairUid", "primaryNode", "secondaryNode", "haNodeType", "currentRole"]
+
+    @field_validator('ha_node_type')
+    def ha_node_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['PRIMARY', 'SECONDARY']):
+            raise ValueError("must be one of enum values ('PRIMARY', 'SECONDARY')")
+        return value
+
+    @field_validator('current_role')
+    def current_role_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['ACTIVE', 'STANDBY']):
+            raise ValueError("must be one of enum values ('ACTIVE', 'STANDBY')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,8 +112,11 @@ class FtdHaInfo(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "haPairUid": obj.get("haPairUid"),
             "primaryNode": HaNode.from_dict(obj["primaryNode"]) if obj.get("primaryNode") is not None else None,
-            "secondaryNode": HaNode.from_dict(obj["secondaryNode"]) if obj.get("secondaryNode") is not None else None
+            "secondaryNode": HaNode.from_dict(obj["secondaryNode"]) if obj.get("secondaryNode") is not None else None,
+            "haNodeType": obj.get("haNodeType"),
+            "currentRole": obj.get("currentRole")
         })
         return _obj
 

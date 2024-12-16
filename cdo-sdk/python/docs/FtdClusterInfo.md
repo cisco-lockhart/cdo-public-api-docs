@@ -7,7 +7,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **control_node** | [**ClusterNode**](ClusterNode.md) |  | [optional] 
-**data_nodes** | [**List[ClusterNode]**](ClusterNode.md) | Information on the data nodes, which are individual units within a cluster that process and forward network traffic based on policies and configurations managed by the control node. | [optional] 
+**data_nodes** | [**List[ClusterNode]**](ClusterNode.md) | (cdFMC-managed FTDs only) Information on the data nodes, which are individual units within a cluster that process and forward network traffic based on policies and configurations managed by the control node. | [optional] 
+**cluster_uid** | **str** | The unique identifier, represented as a UUID, of the cluster, on the FMC | [optional] 
+**cluster_node_type** | **str** | (on-prem FMC-managed FTDs only) Information on the type of this node in the FTD cluster. Note: Each node in an on-prem-FMC-managed FTD cluster is represented as a separate device entry in the API. | [optional] 
+**cluster_node_status** | **str** | (on-prem FMC-managed FTDs only) Information on the type of this node in the FTD cluster. Note: Each node in an on-prem-FMC-managed FTD cluster is represented as a separate device entry in the API. | [optional] 
 
 ## Example
 

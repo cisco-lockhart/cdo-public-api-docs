@@ -1,6 +1,6 @@
 # ClusterNode
 
-Information on the data nodes, which are individual units within a cluster that process and forward network traffic based on policies and configurations managed by the control node.
+(cdFMC-managed FTDs only) Information on the data nodes, which are individual units within a cluster that process and forward network traffic based on policies and configurations managed by the control node.
 
 ## Properties
 
@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **serial** | **str** | The serial number of the node on the device. This is typically used for licensing, and is not the same as the chassis&#39; serial number. | [optional] 
 **software_version** | **str** | The version of the software running on the device. | [optional] 
-**uid_on_fmc** | **str** | The unique identifier, represented as a UUID, of the device on a cdFMC. | [optional] 
+**uid_on_fmc** | **str** | The unique identifier, represented as a UUID, of the device on the FMC. | [optional] 
 **status** | **str** | The status of the cluster node. | [optional] 
 
 ## Example

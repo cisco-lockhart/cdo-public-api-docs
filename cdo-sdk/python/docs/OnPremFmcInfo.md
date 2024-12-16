@@ -6,8 +6,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The name of the device in CDO. Device names are unique in Security Cloud Control. | [optional] 
-**address** | **str** | The address of the on-prem FMC managing this device, in &#x60;host:port&#x60; format. | [optional] 
+**uid** | **str** | The unique identifier, represented as a UUID, of the on-prem FMC that manages this device. | [optional] 
+**device_record_on_fmc** | [**FmcDeviceRecord**](FmcDeviceRecord.md) |  | [optional] 
+**link** | **str** | The endpoint to access this resource from. | [optional] 
+**location** | **str** | The fully-qualified domain name or IP address of the on-prem FMC managing this device. | [optional] 
 
 ## Example
 

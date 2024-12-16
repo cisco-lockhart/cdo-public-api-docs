@@ -6,8 +6,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ha_pair_uid** | **str** | The unique identifier, represented as a UUID, of the HA Pair, on the FMC | [optional] 
 **primary_node** | [**HaNode**](HaNode.md) |  | [optional] 
 **secondary_node** | [**HaNode**](HaNode.md) |  | [optional] 
+**ha_node_type** | **str** | (on-prem FMC-managed FTDs only) Information on the type of this node in the HA Pair. Note: Each node in an on-prem-FMC-managed FTD HA Pair is represented as a separate device entry in the API. | [optional] 
+**current_role** | **str** | (on-prem FMC-managed FTDs only) Information on the current role of the node in the HA Pair. Note: Each node in an on-prem-FMC-managed FTD HA Pair is represented as a separate device entry in the API. | [optional] 
 
 ## Example
 

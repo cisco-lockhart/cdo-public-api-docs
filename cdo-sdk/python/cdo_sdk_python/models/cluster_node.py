@@ -25,11 +25,11 @@ from typing_extensions import Self
 
 class ClusterNode(BaseModel):
     """
-    Information on the data nodes, which are individual units within a cluster that process and forward network traffic based on policies and configurations managed by the control node.
+    (cdFMC-managed FTDs only) Information on the data nodes, which are individual units within a cluster that process and forward network traffic based on policies and configurations managed by the control node.
     """ # noqa: E501
     serial: Optional[StrictStr] = Field(default=None, description="The serial number of the node on the device. This is typically used for licensing, and is not the same as the chassis' serial number.")
     software_version: Optional[StrictStr] = Field(default=None, description="The version of the software running on the device.", alias="softwareVersion")
-    uid_on_fmc: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the device on a cdFMC.", alias="uidOnFmc")
+    uid_on_fmc: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the device on the FMC.", alias="uidOnFmc")
     status: Optional[StrictStr] = Field(default=None, description="The status of the cluster node.")
     __properties: ClassVar[List[str]] = ["serial", "softwareVersion", "uidOnFmc", "status"]
 

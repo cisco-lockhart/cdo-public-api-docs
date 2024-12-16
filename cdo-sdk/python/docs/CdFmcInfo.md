@@ -6,6 +6,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**uid** | **str** | The unique identifier, represented as a UUID, of the cdFMC that manages this device. | [optional] 
+**device_record_on_fmc** | [**FmcDeviceRecord**](FmcDeviceRecord.md) |  | [optional] 
+**link** | **str** | The endpoint to access this resource from. | [optional] 
 **cli_key** | **str** | The CLI key to paste into the FTD CLI to register the FTD with a cdFMC. You need to paste this value in only once, when the FTD is being onboarded. Refer to the [Security Cloud Control Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html) for details. | [optional] 
 **reg_key** | **str** | The Network Address Translation (NAT) ID of this FTD. Refer to the [Security Cloud Control Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html) for details. | [optional] 
 **nat_id** | **str** | The Registration Key of this FTD. Refer to the [Security Cloud Control Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html) for details. | [optional] 

@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from cdo_sdk_python.models.cluster_node import ClusterNode
 from typing import Optional, Set
@@ -29,8 +29,31 @@ class FtdClusterInfo(BaseModel):
     (Device Clusters managed by FMC only) Clustering information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.
     """ # noqa: E501
     control_node: Optional[ClusterNode] = Field(default=None, alias="controlNode")
-    data_nodes: Optional[List[ClusterNode]] = Field(default=None, description="Information on the data nodes, which are individual units within a cluster that process and forward network traffic based on policies and configurations managed by the control node.", alias="dataNodes")
-    __properties: ClassVar[List[str]] = ["controlNode", "dataNodes"]
+    data_nodes: Optional[List[ClusterNode]] = Field(default=None, description="(cdFMC-managed FTDs only) Information on the data nodes, which are individual units within a cluster that process and forward network traffic based on policies and configurations managed by the control node.", alias="dataNodes")
+    cluster_uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the cluster, on the FMC", alias="clusterUid")
+    cluster_node_type: Optional[StrictStr] = Field(default=None, description="(on-prem FMC-managed FTDs only) Information on the type of this node in the FTD cluster. Note: Each node in an on-prem-FMC-managed FTD cluster is represented as a separate device entry in the API.", alias="clusterNodeType")
+    cluster_node_status: Optional[StrictStr] = Field(default=None, description="(on-prem FMC-managed FTDs only) Information on the type of this node in the FTD cluster. Note: Each node in an on-prem-FMC-managed FTD cluster is represented as a separate device entry in the API.", alias="clusterNodeStatus")
+    __properties: ClassVar[List[str]] = ["controlNode", "dataNodes", "clusterUid", "clusterNodeType", "clusterNodeStatus"]
+
+    @field_validator('cluster_node_type')
+    def cluster_node_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['CONTROL', 'DATA']):
+            raise ValueError("must be one of enum values ('CONTROL', 'DATA')")
+        return value
+
+    @field_validator('cluster_node_status')
+    def cluster_node_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['ADDED_OUT_OF_BOX', 'DISABLED', 'JOINING', 'NORMAL', 'NOT_AVAILABLE', 'UNKNOWN']):
+            raise ValueError("must be one of enum values ('ADDED_OUT_OF_BOX', 'DISABLED', 'JOINING', 'NORMAL', 'NOT_AVAILABLE', 'UNKNOWN')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,7 +117,10 @@ class FtdClusterInfo(BaseModel):
 
         _obj = cls.model_validate({
             "controlNode": ClusterNode.from_dict(obj["controlNode"]) if obj.get("controlNode") is not None else None,
-            "dataNodes": [ClusterNode.from_dict(_item) for _item in obj["dataNodes"]] if obj.get("dataNodes") is not None else None
+            "dataNodes": [ClusterNode.from_dict(_item) for _item in obj["dataNodes"]] if obj.get("dataNodes") is not None else None,
+            "clusterUid": obj.get("clusterUid"),
+            "clusterNodeType": obj.get("clusterNodeType"),
+            "clusterNodeStatus": obj.get("clusterNodeStatus")
         })
         return _obj
 

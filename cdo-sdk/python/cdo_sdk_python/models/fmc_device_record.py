@@ -20,19 +20,16 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cdo_sdk_python.models.fmc_device_record import FmcDeviceRecord
 from typing import Optional, Set
 from typing_extensions import Self
 
-class OnPremFmcInfo(BaseModel):
+class FmcDeviceRecord(BaseModel):
     """
-    (Devices managed by on-prem FMC only) Information on the on-prem FMC managing this device.
+    The device record in FMC. A FMC-managed device on SCC can also be accessed directly using the FMC APIs; this field provides details.
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the on-prem FMC that manages this device.")
-    device_record_on_fmc: Optional[FmcDeviceRecord] = Field(default=None, alias="deviceRecordOnFmc")
-    link: Optional[StrictStr] = Field(default=None, description="The endpoint to access this resource from.")
-    location: Optional[StrictStr] = Field(default=None, description="The fully-qualified domain name or IP address of the on-prem FMC managing this device.")
-    __properties: ClassVar[List[str]] = ["uid", "deviceRecordOnFmc", "link", "location"]
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the device on the FMC.")
+    link: Optional[StrictStr] = Field(default=None, description="The endpoint to access this resource from on the FMC.")
+    __properties: ClassVar[List[str]] = ["uid", "link"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +49,7 @@ class OnPremFmcInfo(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of OnPremFmcInfo from a JSON string"""
+        """Create an instance of FmcDeviceRecord from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,14 +70,11 @@ class OnPremFmcInfo(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of device_record_on_fmc
-        if self.device_record_on_fmc:
-            _dict['deviceRecordOnFmc'] = self.device_record_on_fmc.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of OnPremFmcInfo from a dict"""
+        """Create an instance of FmcDeviceRecord from a dict"""
         if obj is None:
             return None
 
@@ -89,9 +83,7 @@ class OnPremFmcInfo(BaseModel):
 
         _obj = cls.model_validate({
             "uid": obj.get("uid"),
-            "deviceRecordOnFmc": FmcDeviceRecord.from_dict(obj["deviceRecordOnFmc"]) if obj.get("deviceRecordOnFmc") is not None else None,
-            "link": obj.get("link"),
-            "location": obj.get("location")
+            "link": obj.get("link")
         })
         return _obj
 

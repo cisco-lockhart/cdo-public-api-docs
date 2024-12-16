@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from cdo_sdk_python.models.fmc_device_record import FmcDeviceRecord
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,10 +28,13 @@ class CdFmcInfo(BaseModel):
     """
     (FTDs managed by cdFMC only) Information on the cloud-delivered FMC managing this FTD. This information is not available for FTDs managed using FDM or on-prem FMCs.
     """ # noqa: E501
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the cdFMC that manages this device.")
+    device_record_on_fmc: Optional[FmcDeviceRecord] = Field(default=None, alias="deviceRecordOnFmc")
+    link: Optional[StrictStr] = Field(default=None, description="The endpoint to access this resource from.")
     cli_key: Optional[StrictStr] = Field(default=None, description="The CLI key to paste into the FTD CLI to register the FTD with a cdFMC. You need to paste this value in only once, when the FTD is being onboarded. Refer to the [Security Cloud Control Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html) for details.", alias="cliKey")
     reg_key: Optional[StrictStr] = Field(default=None, description="The Network Address Translation (NAT) ID of this FTD. Refer to the [Security Cloud Control Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html) for details.", alias="regKey")
     nat_id: Optional[StrictStr] = Field(default=None, description="The Registration Key of this FTD. Refer to the [Security Cloud Control Documentation](https://www.cisco.com/c/en/us/td/docs/security/cdo/cloud-delivered-firewall-management-center-in-cdo/managing-firewall-threat-defense-services-with-cisco-defense-orchestrator/m-onboard-for-ftd-management.html) for details.", alias="natId")
-    __properties: ClassVar[List[str]] = ["cliKey", "regKey", "natId"]
+    __properties: ClassVar[List[str]] = ["uid", "deviceRecordOnFmc", "link", "cliKey", "regKey", "natId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,6 +75,9 @@ class CdFmcInfo(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of device_record_on_fmc
+        if self.device_record_on_fmc:
+            _dict['deviceRecordOnFmc'] = self.device_record_on_fmc.to_dict()
         return _dict
 
     @classmethod
@@ -83,6 +90,9 @@ class CdFmcInfo(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "uid": obj.get("uid"),
+            "deviceRecordOnFmc": FmcDeviceRecord.from_dict(obj["deviceRecordOnFmc"]) if obj.get("deviceRecordOnFmc") is not None else None,
+            "link": obj.get("link"),
             "cliKey": obj.get("cliKey"),
             "regKey": obj.get("regKey"),
             "natId": obj.get("natId")
