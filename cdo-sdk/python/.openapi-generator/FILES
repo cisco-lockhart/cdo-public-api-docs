@@ -380,6 +380,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_fmc_access_policy_reference.py
-test/test_fmc_device_record.py
 tox.ini
