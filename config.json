@@ -16,6 +16,10 @@
               "content": "overview/getting-started.md"
             },
             {
+              "title": "Searching",
+              "content": "overview/searching.md"
+            },
+            {
               "title": "API Changelog",
               "content": "api-changelog.md"
             }
