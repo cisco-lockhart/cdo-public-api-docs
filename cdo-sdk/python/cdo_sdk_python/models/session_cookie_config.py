@@ -31,11 +31,11 @@ class SessionCookieConfig(BaseModel):
     path: Optional[StrictStr] = None
     attributes: Optional[Dict[str, StrictStr]] = None
     comment: Optional[StrictStr] = None
-    secure: Optional[StrictBool] = None
     http_only: Optional[StrictBool] = Field(default=None, alias="httpOnly")
+    secure: Optional[StrictBool] = None
     domain: Optional[StrictStr] = None
     max_age: Optional[StrictInt] = Field(default=None, alias="maxAge")
-    __properties: ClassVar[List[str]] = ["name", "path", "attributes", "comment", "secure", "httpOnly", "domain", "maxAge"]
+    __properties: ClassVar[List[str]] = ["name", "path", "attributes", "comment", "httpOnly", "secure", "domain", "maxAge"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,8 +92,8 @@ class SessionCookieConfig(BaseModel):
             "path": obj.get("path"),
             "attributes": obj.get("attributes"),
             "comment": obj.get("comment"),
-            "secure": obj.get("secure"),
             "httpOnly": obj.get("httpOnly"),
+            "secure": obj.get("secure"),
             "domain": obj.get("domain"),
             "maxAge": obj.get("maxAge")
         })

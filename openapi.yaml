@@ -9680,9 +9680,9 @@ components:
         comment:
           type: string
           deprecated: true
-        secure:
-          type: boolean
         httpOnly:
+          type: boolean
+        secure:
           type: boolean
         domain:
           type: string
