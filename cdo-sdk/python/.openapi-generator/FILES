@@ -386,7 +386,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_domain_settings.py
-test/test_fmc_object_reference.py
-test/test_universal_ztna_settings.py
 tox.ini
