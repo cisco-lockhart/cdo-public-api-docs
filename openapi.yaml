@@ -9589,10 +9589,10 @@ components:
           format: int32
         attributeNames:
           type: object
-        contextPath:
-          type: string
         initParameterNames:
           type: object
+        contextPath:
+          type: string
         servletRegistrations:
           type: object
           additionalProperties:
