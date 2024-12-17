@@ -1,3 +1,17 @@
+# Version 1.7.0 (2025-01-xx)
+
+## Improvements
+- Get Devices endpoint:
+  - Provide High Availability (HA) and Clustering information for on-prem FMC-managed FTDs. Note: Unlike with a cdFMC-managed FTD HA pair or cluster, each node of an n-prem FMC-managed FTD HA pairs and cluster is represented as a separate device record.
+  - Add links from FMC-managed devices to the FMC, and access policies managed by the FMC.
+  - Improve searchability of the endpoint by adding multiple new searchable fields.
+- List VPN Sessions endpoint:
+  - It is now possible to search VPN sessions by `loginTime` and `lastActiveTime`.
+
+## Deprecations
+- The `uidOnFmc` field is deprecated and will be removed in v2 of the API. It has been supplanted by the `cdFmcInfo.deviceRecordOnFmc` and `onPremFmcInfo.deviceRecordOnFmc` fields, which contain additional information.
+- The `deviceRole` field is deprecated and will be removed in v2 of the API. It has been supplanted by the `deviceRoles` field, which is a list and can represent the multiple roles a device can take.
+
 # Version 1.6.0 (2024-11-08)
 
 ## Welcome to Cisco Security Cloud Control
