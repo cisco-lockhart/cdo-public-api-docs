@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **path** | **str** |  | [optional] 
 **attributes** | **Dict[str, str]** |  | [optional] 
 **comment** | **str** |  | [optional] 
-**http_only** | **bool** |  | [optional] 
 **secure** | **bool** |  | [optional] 
+**http_only** | **bool** |  | [optional] 
 **domain** | **str** |  | [optional] 
 **max_age** | **int** |  | [optional] 
 
