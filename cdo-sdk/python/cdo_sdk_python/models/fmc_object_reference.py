@@ -20,21 +20,16 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cdo_sdk_python.models.user_role import UserRole
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ActiveDirectoryGroup(BaseModel):
+class FmcObjectReference(BaseModel):
     """
-    ActiveDirectoryGroup
+    Reference to the network object on the FMC, defining the IPv4 address used for Network Address Translation (NAT) and/or Port Address Translation (PAT). Note: Required only if the device needs to support more than 65,000 simultaneous active connections.
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the Active Directory Group in Security Cloud Control.")
-    name: Optional[StrictStr] = Field(default=None, description="The name of the user group. Security Cloud Control does not support special characters for this field.")
-    role: Optional[UserRole] = None
-    group_identifier: Optional[StrictStr] = Field(default=None, description="The unique identifier of the user group in your Identity Provider (IdP).", alias="groupIdentifier")
-    issuer_url: Optional[StrictStr] = Field(default=None, description="The Identity Provider (IdP) URL, which Cisco Defense Orchestrator will use to validate SAML assertions during the sign-in process.", alias="issuerUrl")
-    notes: Optional[StrictStr] = Field(default=None, description="Any notes that are applicable to this user group.")
-    __properties: ClassVar[List[str]] = ["uid", "name", "role", "groupIdentifier", "issuerUrl", "notes"]
+    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the FMC Object.")
+    link: Optional[StrictStr] = Field(default=None, description="The endpoint to access this resource from.")
+    __properties: ClassVar[List[str]] = ["uid", "link"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -54,7 +49,7 @@ class ActiveDirectoryGroup(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ActiveDirectoryGroup from a JSON string"""
+        """Create an instance of FmcObjectReference from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -79,7 +74,7 @@ class ActiveDirectoryGroup(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ActiveDirectoryGroup from a dict"""
+        """Create an instance of FmcObjectReference from a dict"""
         if obj is None:
             return None
 
@@ -88,11 +83,7 @@ class ActiveDirectoryGroup(BaseModel):
 
         _obj = cls.model_validate({
             "uid": obj.get("uid"),
-            "name": obj.get("name"),
-            "role": obj.get("role"),
-            "groupIdentifier": obj.get("groupIdentifier"),
-            "issuerUrl": obj.get("issuerUrl"),
-            "notes": obj.get("notes")
+            "link": obj.get("link")
         })
         return _obj
 

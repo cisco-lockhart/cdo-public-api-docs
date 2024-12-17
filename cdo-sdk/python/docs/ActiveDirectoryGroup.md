@@ -6,11 +6,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **uid** | **str** | The unique identifier, represented as a UUID, of the Active Directory Group in Security Cloud Control. | [optional] 
-**name** | **str** | The name of the Active Directory Group. Security Cloud Control does not support special characters for this field. | [optional] 
+**name** | **str** | The name of the user group. Security Cloud Control does not support special characters for this field. | [optional] 
 **role** | [**UserRole**](UserRole.md) |  | [optional] 
-**group_identifier** | **str** | The unique identifier, represented as a UUID, of the Active Directory Group in your Identity Provider (IdP). | [optional] 
+**group_identifier** | **str** | The unique identifier of the user group in your Identity Provider (IdP). | [optional] 
 **issuer_url** | **str** | The Identity Provider (IdP) URL, which Cisco Defense Orchestrator will use to validate SAML assertions during the sign-in process. | [optional] 
-**notes** | **str** | Any notes that are applicable to this Active Directory Group. | [optional] 
+**notes** | **str** | Any notes that are applicable to this user group. | [optional] 
 
 ## Example
 

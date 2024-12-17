@@ -95,6 +95,7 @@ cdo_sdk_python/models/device_page.py
 cdo_sdk_python/models/device_patch_input.py
 cdo_sdk_python/models/device_role.py
 cdo_sdk_python/models/disk_health_metrics.py
+cdo_sdk_python/models/domain_settings.py
 cdo_sdk_python/models/duo_admin_panel_create_or_update_input.py
 cdo_sdk_python/models/duplicate_group_dto.py
 cdo_sdk_python/models/entity.py
@@ -105,6 +106,7 @@ cdo_sdk_python/models/filter_registration.py
 cdo_sdk_python/models/fmc_access_policy_reference.py
 cdo_sdk_python/models/fmc_device_record.py
 cdo_sdk_python/models/fmc_health_metrics.py
+cdo_sdk_python/models/fmc_object_reference.py
 cdo_sdk_python/models/ftd_cluster_info.py
 cdo_sdk_python/models/ftd_create_or_update_input.py
 cdo_sdk_python/models/ftd_ha_info.py
@@ -181,6 +183,7 @@ cdo_sdk_python/models/tenant.py
 cdo_sdk_python/models/tenant_page.py
 cdo_sdk_python/models/tenant_settings.py
 cdo_sdk_python/models/unified_object_list_view.py
+cdo_sdk_python/models/universal_ztna_settings.py
 cdo_sdk_python/models/update_request.py
 cdo_sdk_python/models/url_object_content.py
 cdo_sdk_python/models/user.py
@@ -268,6 +271,7 @@ docs/DevicePage.md
 docs/DevicePatchInput.md
 docs/DeviceRole.md
 docs/DiskHealthMetrics.md
+docs/DomainSettings.md
 docs/DuoAdminPanelCreateOrUpdateInput.md
 docs/DuplicateGroupDto.md
 docs/Entity.md
@@ -278,6 +282,7 @@ docs/FilterRegistration.md
 docs/FmcAccessPolicyReference.md
 docs/FmcDeviceRecord.md
 docs/FmcHealthMetrics.md
+docs/FmcObjectReference.md
 docs/FtdClusterInfo.md
 docs/FtdCreateOrUpdateInput.md
 docs/FtdHaInfo.md
@@ -363,6 +368,7 @@ docs/TenantPage.md
 docs/TenantSettings.md
 docs/TransactionsApi.md
 docs/UnifiedObjectListView.md
+docs/UniversalZtnaSettings.md
 docs/UpdateRequest.md
 docs/UrlObjectContent.md
 docs/User.md
@@ -380,4 +386,7 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_domain_settings.py
+test/test_fmc_object_reference.py
+test/test_universal_ztna_settings.py
 tox.ini

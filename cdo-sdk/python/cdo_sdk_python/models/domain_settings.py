@@ -20,21 +20,18 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cdo_sdk_python.models.user_role import UserRole
+from cdo_sdk_python.models.fmc_object_reference import FmcObjectReference
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ActiveDirectoryGroup(BaseModel):
+class DomainSettings(BaseModel):
     """
-    ActiveDirectoryGroup
+    Configuration that defines how Secure Client communicates with the device.
     """ # noqa: E501
-    uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the Active Directory Group in Security Cloud Control.")
-    name: Optional[StrictStr] = Field(default=None, description="The name of the user group. Security Cloud Control does not support special characters for this field.")
-    role: Optional[UserRole] = None
-    group_identifier: Optional[StrictStr] = Field(default=None, description="The unique identifier of the user group in your Identity Provider (IdP).", alias="groupIdentifier")
-    issuer_url: Optional[StrictStr] = Field(default=None, description="The Identity Provider (IdP) URL, which Cisco Defense Orchestrator will use to validate SAML assertions during the sign-in process.", alias="issuerUrl")
-    notes: Optional[StrictStr] = Field(default=None, description="Any notes that are applicable to this user group.")
-    __properties: ClassVar[List[str]] = ["uid", "name", "role", "groupIdentifier", "issuerUrl", "notes"]
+    fqdn: Optional[StrictStr] = Field(default=None, description="The fully qualified domain name (FQDN) of the device. Secure Client uses this to communicate with the device.")
+    certificate: Optional[FmcObjectReference] = None
+    interfaces: Optional[List[FmcObjectReference]] = Field(default=None, description="List of references to interface objects on the FMC, which defines the interfaces on the device that are used for ZTNA.")
+    __properties: ClassVar[List[str]] = ["fqdn", "certificate", "interfaces"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -54,7 +51,7 @@ class ActiveDirectoryGroup(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ActiveDirectoryGroup from a JSON string"""
+        """Create an instance of DomainSettings from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,11 +72,21 @@ class ActiveDirectoryGroup(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of certificate
+        if self.certificate:
+            _dict['certificate'] = self.certificate.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in interfaces (list)
+        _items = []
+        if self.interfaces:
+            for _item in self.interfaces:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['interfaces'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ActiveDirectoryGroup from a dict"""
+        """Create an instance of DomainSettings from a dict"""
         if obj is None:
             return None
 
@@ -87,12 +94,9 @@ class ActiveDirectoryGroup(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "uid": obj.get("uid"),
-            "name": obj.get("name"),
-            "role": obj.get("role"),
-            "groupIdentifier": obj.get("groupIdentifier"),
-            "issuerUrl": obj.get("issuerUrl"),
-            "notes": obj.get("notes")
+            "fqdn": obj.get("fqdn"),
+            "certificate": FmcObjectReference.from_dict(obj["certificate"]) if obj.get("certificate") is not None else None,
+            "interfaces": [FmcObjectReference.from_dict(_item) for _item in obj["interfaces"]] if obj.get("interfaces") is not None else None
         })
         return _obj
 

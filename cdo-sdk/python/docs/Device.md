@@ -45,6 +45,7 @@ Name | Type | Description | Notes
 **ztp_onboarding_job_id** | **str** | The unique identifier, represented as a UUID, for an internal job that orchestrates the onboarding of devices through Zero-Touch Provisioning. This applies to devices managed by both on-premises and Cloud-delivered FMC. | [optional] 
 **model_number** | **str** | The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device. | [optional] 
 **hardware_model** | **str** | (ASAs, FDM-managed FTDs, and FMC-managed FTDs only) The hardware model of the device | [optional] 
+**universal_ztna_settings** | [**UniversalZtnaSettings**](UniversalZtnaSettings.md) |  | [optional] 
 
 ## Example
 

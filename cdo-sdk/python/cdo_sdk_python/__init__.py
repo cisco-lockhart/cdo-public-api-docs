@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.2.559"
+__version__ = "1.2.560"
 
 # import apis into sdk package
 from cdo_sdk_python.api.ai_assistant_api import AIAssistantApi
@@ -117,6 +117,7 @@ from cdo_sdk_python.models.device_page import DevicePage
 from cdo_sdk_python.models.device_patch_input import DevicePatchInput
 from cdo_sdk_python.models.device_role import DeviceRole
 from cdo_sdk_python.models.disk_health_metrics import DiskHealthMetrics
+from cdo_sdk_python.models.domain_settings import DomainSettings
 from cdo_sdk_python.models.duo_admin_panel_create_or_update_input import DuoAdminPanelCreateOrUpdateInput
 from cdo_sdk_python.models.duplicate_group_dto import DuplicateGroupDto
 from cdo_sdk_python.models.entity import Entity
@@ -127,6 +128,7 @@ from cdo_sdk_python.models.filter_registration import FilterRegistration
 from cdo_sdk_python.models.fmc_access_policy_reference import FmcAccessPolicyReference
 from cdo_sdk_python.models.fmc_device_record import FmcDeviceRecord
 from cdo_sdk_python.models.fmc_health_metrics import FmcHealthMetrics
+from cdo_sdk_python.models.fmc_object_reference import FmcObjectReference
 from cdo_sdk_python.models.ftd_cluster_info import FtdClusterInfo
 from cdo_sdk_python.models.ftd_create_or_update_input import FtdCreateOrUpdateInput
 from cdo_sdk_python.models.ftd_ha_info import FtdHaInfo
@@ -203,6 +205,7 @@ from cdo_sdk_python.models.tenant import Tenant
 from cdo_sdk_python.models.tenant_page import TenantPage
 from cdo_sdk_python.models.tenant_settings import TenantSettings
 from cdo_sdk_python.models.unified_object_list_view import UnifiedObjectListView
+from cdo_sdk_python.models.universal_ztna_settings import UniversalZtnaSettings
 from cdo_sdk_python.models.update_request import UpdateRequest
 from cdo_sdk_python.models.url_object_content import UrlObjectContent
 from cdo_sdk_python.models.user import User

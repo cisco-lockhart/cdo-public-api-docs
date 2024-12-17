@@ -38,6 +38,7 @@ from cdo_sdk_python.models.network import Network
 from cdo_sdk_python.models.on_prem_fmc_info import OnPremFmcInfo
 from cdo_sdk_python.models.sse_device_data import SseDeviceData
 from cdo_sdk_python.models.state_machine_details import StateMachineDetails
+from cdo_sdk_python.models.universal_ztna_settings import UniversalZtnaSettings
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -85,7 +86,8 @@ class Device(BaseModel):
     ztp_onboarding_job_id: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, for an internal job that orchestrates the onboarding of devices through Zero-Touch Provisioning. This applies to devices managed by both on-premises and Cloud-delivered FMC.", alias="ztpOnboardingJobId")
     model_number: Optional[StrictStr] = Field(default=None, description="The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device.", alias="modelNumber")
     hardware_model: Optional[StrictStr] = Field(default=None, description="(ASAs, FDM-managed FTDs, and FMC-managed FTDs only) The hardware model of the device", alias="hardwareModel")
-    __properties: ClassVar[List[str]] = ["uid", "name", "deviceType", "connectorType", "connectorUid", "address", "deviceRole", "deviceRoles", "serial", "chassisSerial", "softwareVersion", "connectivityState", "configState", "conflictDetectionState", "notes", "asdmVersion", "asaFailoverMode", "asaFailoverState", "asaFailoverMate", "asaLicenseEntitlements", "ftdLicenses", "snortVersion", "ftdPerformanceTier", "redundancyMode", "cdFmcInfo", "sseDeviceData", "onPremFmcInfo", "ftdClusterInfo", "ftdHaInfo", "merakiDeploymentMode", "merakiNetwork", "state", "stateMachineDetails", "labels", "fmcDomainUid", "uidOnFmc", "fmcAccessPolicy", "ztpOnboardingJobId", "modelNumber", "hardwareModel"]
+    universal_ztna_settings: Optional[UniversalZtnaSettings] = Field(default=None, alias="universalZtnaSettings")
+    __properties: ClassVar[List[str]] = ["uid", "name", "deviceType", "connectorType", "connectorUid", "address", "deviceRole", "deviceRoles", "serial", "chassisSerial", "softwareVersion", "connectivityState", "configState", "conflictDetectionState", "notes", "asdmVersion", "asaFailoverMode", "asaFailoverState", "asaFailoverMate", "asaLicenseEntitlements", "ftdLicenses", "snortVersion", "ftdPerformanceTier", "redundancyMode", "cdFmcInfo", "sseDeviceData", "onPremFmcInfo", "ftdClusterInfo", "ftdHaInfo", "merakiDeploymentMode", "merakiNetwork", "state", "stateMachineDetails", "labels", "fmcDomainUid", "uidOnFmc", "fmcAccessPolicy", "ztpOnboardingJobId", "modelNumber", "hardwareModel", "universalZtnaSettings"]
 
     @field_validator('redundancy_mode')
     def redundancy_mode_validate_enum(cls, value):
@@ -166,6 +168,9 @@ class Device(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of fmc_access_policy
         if self.fmc_access_policy:
             _dict['fmcAccessPolicy'] = self.fmc_access_policy.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of universal_ztna_settings
+        if self.universal_ztna_settings:
+            _dict['universalZtnaSettings'] = self.universal_ztna_settings.to_dict()
         return _dict
 
     @classmethod
@@ -217,7 +222,8 @@ class Device(BaseModel):
             "fmcAccessPolicy": FmcAccessPolicyReference.from_dict(obj["fmcAccessPolicy"]) if obj.get("fmcAccessPolicy") is not None else None,
             "ztpOnboardingJobId": obj.get("ztpOnboardingJobId"),
             "modelNumber": obj.get("modelNumber"),
-            "hardwareModel": obj.get("hardwareModel")
+            "hardwareModel": obj.get("hardwareModel"),
+            "universalZtnaSettings": UniversalZtnaSettings.from_dict(obj["universalZtnaSettings"]) if obj.get("universalZtnaSettings") is not None else None
         })
         return _obj
 
