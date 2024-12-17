@@ -9435,8 +9435,6 @@ components:
     JspPropertyGroupDescriptor:
       type: object
       properties:
-        errorOnUndeclaredNamespace:
-          type: string
         elIgnored:
           type: string
         errorOnELNotFound:
@@ -9458,6 +9456,8 @@ components:
         deferredSyntaxAllowedAsLiteral:
           type: string
         trimDirectiveWhitespaces:
+          type: string
+        errorOnUndeclaredNamespace:
           type: string
         buffer:
           type: string
@@ -9587,12 +9587,12 @@ components:
         minorVersion:
           type: integer
           format: int32
-        initParameterNames:
-          type: object
         attributeNames:
           type: object
         contextPath:
           type: string
+        initParameterNames:
+          type: object
         servletRegistrations:
           type: object
           additionalProperties:
