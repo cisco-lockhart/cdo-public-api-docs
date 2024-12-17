@@ -9589,10 +9589,10 @@ components:
           format: int32
         attributeNames:
           type: object
-        initParameterNames:
-          type: object
         contextPath:
           type: string
+        initParameterNames:
+          type: object
         servletRegistrations:
           type: object
           additionalProperties:
@@ -9669,8 +9669,6 @@ components:
     SessionCookieConfig:
       type: object
       properties:
-        httpOnly:
-          type: boolean
         name:
           type: string
         path:
@@ -9682,6 +9680,8 @@ components:
         comment:
           type: string
           deprecated: true
+        httpOnly:
+          type: boolean
         secure:
           type: boolean
         domain:
