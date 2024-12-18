@@ -30,6 +30,7 @@ from cdo_sdk_python.models.connector_type import ConnectorType
 from cdo_sdk_python.models.device_role import DeviceRole
 from cdo_sdk_python.models.entity_type import EntityType
 from cdo_sdk_python.models.fmc_access_policy_reference import FmcAccessPolicyReference
+from cdo_sdk_python.models.fmc_device_record import FmcDeviceRecord
 from cdo_sdk_python.models.ftd_cluster_info import FtdClusterInfo
 from cdo_sdk_python.models.ftd_ha_info import FtdHaInfo
 from cdo_sdk_python.models.labels import Labels
@@ -82,12 +83,13 @@ class Device(BaseModel):
     labels: Optional[Labels] = None
     fmc_domain_uid: Optional[StrictStr] = Field(default=None, description="(FMC device managers only) The unique identifier, represented as a UUID, of the [FMC domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html).", alias="fmcDomainUid")
     uid_on_fmc: Optional[StrictStr] = Field(default=None, description="(FMC-managed FTDs only) The unique identifier, represented as a UUID, of the device on a cdFMC. This field is deprecated. Please see `cdFmcInfo.deviceRecordOnFmc` or `onPremFmcInfo.deviceRecordOnFmc`.", alias="uidOnFmc")
+    device_record_on_fmc: Optional[FmcDeviceRecord] = Field(default=None, alias="deviceRecordOnFmc")
     fmc_access_policy: Optional[FmcAccessPolicyReference] = Field(default=None, alias="fmcAccessPolicy")
     ztp_onboarding_job_id: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, for an internal job that orchestrates the onboarding of devices through Zero-Touch Provisioning. This applies to devices managed by both on-premises and Cloud-delivered FMC.", alias="ztpOnboardingJobId")
     model_number: Optional[StrictStr] = Field(default=None, description="The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device.", alias="modelNumber")
     hardware_model: Optional[StrictStr] = Field(default=None, description="(ASAs, FDM-managed FTDs, and FMC-managed FTDs only) The hardware model of the device", alias="hardwareModel")
     universal_ztna_settings: Optional[UniversalZtnaSettings] = Field(default=None, alias="universalZtnaSettings")
-    __properties: ClassVar[List[str]] = ["uid", "name", "deviceType", "connectorType", "connectorUid", "address", "deviceRole", "deviceRoles", "serial", "chassisSerial", "softwareVersion", "connectivityState", "configState", "conflictDetectionState", "notes", "asdmVersion", "asaFailoverMode", "asaFailoverState", "asaFailoverMate", "asaLicenseEntitlements", "ftdLicenses", "snortVersion", "ftdPerformanceTier", "redundancyMode", "cdFmcInfo", "sseDeviceData", "onPremFmcInfo", "ftdClusterInfo", "ftdHaInfo", "merakiDeploymentMode", "merakiNetwork", "state", "stateMachineDetails", "labels", "fmcDomainUid", "uidOnFmc", "fmcAccessPolicy", "ztpOnboardingJobId", "modelNumber", "hardwareModel", "universalZtnaSettings"]
+    __properties: ClassVar[List[str]] = ["uid", "name", "deviceType", "connectorType", "connectorUid", "address", "deviceRole", "deviceRoles", "serial", "chassisSerial", "softwareVersion", "connectivityState", "configState", "conflictDetectionState", "notes", "asdmVersion", "asaFailoverMode", "asaFailoverState", "asaFailoverMate", "asaLicenseEntitlements", "ftdLicenses", "snortVersion", "ftdPerformanceTier", "redundancyMode", "cdFmcInfo", "sseDeviceData", "onPremFmcInfo", "ftdClusterInfo", "ftdHaInfo", "merakiDeploymentMode", "merakiNetwork", "state", "stateMachineDetails", "labels", "fmcDomainUid", "uidOnFmc", "deviceRecordOnFmc", "fmcAccessPolicy", "ztpOnboardingJobId", "modelNumber", "hardwareModel", "universalZtnaSettings"]
 
     @field_validator('redundancy_mode')
     def redundancy_mode_validate_enum(cls, value):
@@ -165,6 +167,9 @@ class Device(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of labels
         if self.labels:
             _dict['labels'] = self.labels.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of device_record_on_fmc
+        if self.device_record_on_fmc:
+            _dict['deviceRecordOnFmc'] = self.device_record_on_fmc.to_dict()
         # override the default output from pydantic by calling `to_dict()` of fmc_access_policy
         if self.fmc_access_policy:
             _dict['fmcAccessPolicy'] = self.fmc_access_policy.to_dict()
@@ -219,6 +224,7 @@ class Device(BaseModel):
             "labels": Labels.from_dict(obj["labels"]) if obj.get("labels") is not None else None,
             "fmcDomainUid": obj.get("fmcDomainUid"),
             "uidOnFmc": obj.get("uidOnFmc"),
+            "deviceRecordOnFmc": FmcDeviceRecord.from_dict(obj["deviceRecordOnFmc"]) if obj.get("deviceRecordOnFmc") is not None else None,
             "fmcAccessPolicy": FmcAccessPolicyReference.from_dict(obj["fmcAccessPolicy"]) if obj.get("fmcAccessPolicy") is not None else None,
             "ztpOnboardingJobId": obj.get("ztpOnboardingJobId"),
             "modelNumber": obj.get("modelNumber"),

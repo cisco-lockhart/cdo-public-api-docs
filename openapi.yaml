@@ -7046,8 +7046,6 @@ components:
             The unique identifier, represented as a UUID, of the cdFMC that
             manages this device.
           format: uuid
-        deviceRecordOnFmc:
-          $ref: '#/components/schemas/FmcDeviceRecord'
         link:
           type: string
           description: The endpoint to access this resource from.
@@ -7315,6 +7313,8 @@ components:
           format: uuid
           example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
           deprecated: true
+        deviceRecordOnFmc:
+          $ref: '#/components/schemas/FmcDeviceRecord'
         fmcAccessPolicy:
           $ref: '#/components/schemas/FmcAccessPolicyReference'
         ztpOnboardingJobId:
@@ -7404,8 +7404,9 @@ components:
           example: >-
             https://fmc.example.com/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/6131daad-e813-4b8f-8f42-be1e241e8cdb
       description: >-
-        The device record in FMC. A FMC-managed device on SCC can also be
-        accessed directly using the FMC APIs; this field provides details.
+        (FMC-managed FTDs only) The device record in FMC. A FMC-managed device
+        on SCC can also be accessed directly using the FMC APIs; this field
+        provides details.
     FmcObjectReference:
       type: object
       properties:
@@ -7581,8 +7582,6 @@ components:
             that manages this device.
           format: uuid
           example: 7e9789b4-8389-4029-933f-ec7e385335ef
-        deviceRecordOnFmc:
-          $ref: '#/components/schemas/FmcDeviceRecord'
         link:
           type: string
           description: The endpoint to access this resource from.
@@ -9520,21 +9519,21 @@ components:
           type: array
           items:
             type: string
-        redirectView:
-          type: boolean
         propagateQueryProperties:
           type: boolean
+        redirectView:
+          type: boolean
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
-          writeOnly: true
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
           writeOnly: true
     ServletContext:
       type: object
@@ -9587,12 +9586,12 @@ components:
         minorVersion:
           type: integer
           format: int32
+        initParameterNames:
+          type: object
         attributeNames:
           type: object
         contextPath:
           type: string
-        initParameterNames:
-          type: object
         servletRegistrations:
           type: object
           additionalProperties:
@@ -9607,6 +9606,16 @@ components:
               - COOKIE
               - URL
               - SSL
+        effectiveMajorVersion:
+          type: integer
+          format: int32
+        effectiveMinorVersion:
+          type: integer
+          format: int32
+        serverInfo:
+          type: string
+        servletContextName:
+          type: string
         filterRegistrations:
           type: object
           additionalProperties:
@@ -9639,16 +9648,6 @@ components:
           type: string
         responseCharacterEncoding:
           type: string
-        effectiveMajorVersion:
-          type: integer
-          format: int32
-        effectiveMinorVersion:
-          type: integer
-          format: int32
-        serverInfo:
-          type: string
-        servletContextName:
-          type: string
     ServletRegistration:
       type: object
       properties:
@@ -9669,6 +9668,8 @@ components:
     SessionCookieConfig:
       type: object
       properties:
+        httpOnly:
+          type: boolean
         name:
           type: string
         path:
@@ -9680,12 +9681,10 @@ components:
         comment:
           type: string
           deprecated: true
-        httpOnly:
-          type: boolean
-        secure:
-          type: boolean
         domain:
           type: string
+        secure:
+          type: boolean
         maxAge:
           type: integer
           format: int32

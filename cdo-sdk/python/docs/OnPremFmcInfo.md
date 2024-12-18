@@ -7,7 +7,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **uid** | **str** | The unique identifier, represented as a UUID, of the on-prem FMC that manages this device. | [optional] 
-**device_record_on_fmc** | [**FmcDeviceRecord**](FmcDeviceRecord.md) |  | [optional] 
 **link** | **str** | The endpoint to access this resource from. | [optional] 
 **location** | **str** | The fully-qualified domain name or IP address of the on-prem FMC managing this device. | [optional] 
 

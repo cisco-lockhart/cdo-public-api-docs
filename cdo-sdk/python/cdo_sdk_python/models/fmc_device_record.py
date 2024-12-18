@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class FmcDeviceRecord(BaseModel):
     """
-    The device record in FMC. A FMC-managed device on SCC can also be accessed directly using the FMC APIs; this field provides details.
+    (FMC-managed FTDs only) The device record in FMC. A FMC-managed device on SCC can also be accessed directly using the FMC APIs; this field provides details.
     """ # noqa: E501
     uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the device on the FMC.")
     link: Optional[StrictStr] = Field(default=None, description="The endpoint to access this resource from on the FMC.")

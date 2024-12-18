@@ -20,7 +20,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from cdo_sdk_python.models.fmc_device_record import FmcDeviceRecord
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,10 +28,9 @@ class OnPremFmcInfo(BaseModel):
     (Devices managed by on-prem FMC only) Information on the on-prem FMC managing this device.
     """ # noqa: E501
     uid: Optional[StrictStr] = Field(default=None, description="The unique identifier, represented as a UUID, of the on-prem FMC that manages this device.")
-    device_record_on_fmc: Optional[FmcDeviceRecord] = Field(default=None, alias="deviceRecordOnFmc")
     link: Optional[StrictStr] = Field(default=None, description="The endpoint to access this resource from.")
     location: Optional[StrictStr] = Field(default=None, description="The fully-qualified domain name or IP address of the on-prem FMC managing this device.")
-    __properties: ClassVar[List[str]] = ["uid", "deviceRecordOnFmc", "link", "location"]
+    __properties: ClassVar[List[str]] = ["uid", "link", "location"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,9 +71,6 @@ class OnPremFmcInfo(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of device_record_on_fmc
-        if self.device_record_on_fmc:
-            _dict['deviceRecordOnFmc'] = self.device_record_on_fmc.to_dict()
         return _dict
 
     @classmethod
@@ -89,7 +84,6 @@ class OnPremFmcInfo(BaseModel):
 
         _obj = cls.model_validate({
             "uid": obj.get("uid"),
-            "deviceRecordOnFmc": FmcDeviceRecord.from_dict(obj["deviceRecordOnFmc"]) if obj.get("deviceRecordOnFmc") is not None else None,
             "link": obj.get("link"),
             "location": obj.get("location")
         })

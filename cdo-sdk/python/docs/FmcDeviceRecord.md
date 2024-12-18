@@ -1,6 +1,6 @@
 # FmcDeviceRecord
 
-The device record in FMC. A FMC-managed device on SCC can also be accessed directly using the FMC APIs; this field provides details.
+(FMC-managed FTDs only) The device record in FMC. A FMC-managed device on SCC can also be accessed directly using the FMC APIs; this field provides details.
 
 ## Properties
 
