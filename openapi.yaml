@@ -5784,7 +5784,6 @@ components:
             - MSP_ADD_EXISTING_TENANT
             - MSP_ENABLE_MULTICLOUD_DEFENSE
             - MSP_PROVISION_CDFMC
-            - ASA_DEVICE_UPGRADE
         cdoTransactionStatus:
           type: string
           description: The status of the transaction

@@ -55,14 +55,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
+        "401":
+          $ref: '#/components/responses/http401Unauthorised'
         "202":
           description: Security Cloud Control Transaction that is pending or in progress.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CdoTransaction'
-        "401":
-          $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
         "500":
@@ -165,7 +165,6 @@ components:
           - MSP_ADD_EXISTING_TENANT
           - MSP_ENABLE_MULTICLOUD_DEFENSE
           - MSP_PROVISION_CDFMC
-          - ASA_DEVICE_UPGRADE
         cdoTransactionStatus:
           type: string
           description: The status of the transaction
