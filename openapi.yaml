@@ -7615,6 +7615,7 @@ components:
         lastError:
           $ref: '#/components/schemas/StateMachineError'
       description: The device state machine details.
+      deprecated: true
     StateMachineError:
       type: object
       properties:
@@ -9434,9 +9435,7 @@ components:
     JspPropertyGroupDescriptor:
       type: object
       properties:
-        elIgnored:
-          type: string
-        errorOnELNotFound:
+        buffer:
           type: string
         pageEncoding:
           type: string
@@ -9458,7 +9457,9 @@ components:
           type: string
         errorOnUndeclaredNamespace:
           type: string
-        buffer:
+        elIgnored:
+          type: string
+        errorOnELNotFound:
           type: string
         defaultContentType:
           type: string
@@ -9519,21 +9520,21 @@ components:
           type: array
           items:
             type: string
-        propagateQueryProperties:
-          type: boolean
         redirectView:
           type: boolean
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-          writeOnly: true
+        propagateQueryProperties:
+          type: boolean
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
+          writeOnly: true
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
           writeOnly: true
     ServletContext:
       type: object
@@ -9586,16 +9587,16 @@ components:
         minorVersion:
           type: integer
           format: int32
-        initParameterNames:
-          type: object
         attributeNames:
           type: object
-        contextPath:
-          type: string
         servletRegistrations:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ServletRegistration'
+        contextPath:
+          type: string
+        initParameterNames:
+          type: object
         sessionTrackingModes:
           uniqueItems: true
           type: array
@@ -9606,16 +9607,6 @@ components:
               - COOKIE
               - URL
               - SSL
-        effectiveMajorVersion:
-          type: integer
-          format: int32
-        effectiveMinorVersion:
-          type: integer
-          format: int32
-        serverInfo:
-          type: string
-        servletContextName:
-          type: string
         filterRegistrations:
           type: object
           additionalProperties:
@@ -9647,6 +9638,16 @@ components:
         requestCharacterEncoding:
           type: string
         responseCharacterEncoding:
+          type: string
+        effectiveMajorVersion:
+          type: integer
+          format: int32
+        effectiveMinorVersion:
+          type: integer
+          format: int32
+        serverInfo:
+          type: string
+        servletContextName:
           type: string
     ServletRegistration:
       type: object
@@ -9681,10 +9682,10 @@ components:
         comment:
           type: string
           deprecated: true
-        domain:
-          type: string
         secure:
           type: boolean
+        domain:
+          type: string
         maxAge:
           type: integer
           format: int32
