@@ -9435,7 +9435,9 @@ components:
     JspPropertyGroupDescriptor:
       type: object
       properties:
-        buffer:
+        elIgnored:
+          type: string
+        errorOnELNotFound:
           type: string
         pageEncoding:
           type: string
@@ -9457,9 +9459,7 @@ components:
           type: string
         errorOnUndeclaredNamespace:
           type: string
-        elIgnored:
-          type: string
-        errorOnELNotFound:
+        buffer:
           type: string
         defaultContentType:
           type: string
@@ -9589,14 +9589,14 @@ components:
           format: int32
         attributeNames:
           type: object
-        servletRegistrations:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ServletRegistration'
         contextPath:
           type: string
         initParameterNames:
           type: object
+        servletRegistrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ServletRegistration'
         sessionTrackingModes:
           uniqueItems: true
           type: array
