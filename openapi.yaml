@@ -9586,16 +9586,16 @@ components:
         minorVersion:
           type: integer
           format: int32
-        servletRegistrations:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ServletRegistration'
         attributeNames:
           type: object
         contextPath:
           type: string
         initParameterNames:
           type: object
+        servletRegistrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ServletRegistration'
         sessionTrackingModes:
           uniqueItems: true
           type: array
@@ -9606,16 +9606,6 @@ components:
               - COOKIE
               - URL
               - SSL
-        effectiveMajorVersion:
-          type: integer
-          format: int32
-        effectiveMinorVersion:
-          type: integer
-          format: int32
-        serverInfo:
-          type: string
-        servletContextName:
-          type: string
         filterRegistrations:
           type: object
           additionalProperties:
@@ -9647,6 +9637,16 @@ components:
         requestCharacterEncoding:
           type: string
         responseCharacterEncoding:
+          type: string
+        effectiveMajorVersion:
+          type: integer
+          format: int32
+        effectiveMinorVersion:
+          type: integer
+          format: int32
+        serverInfo:
+          type: string
+        servletContextName:
           type: string
     ServletRegistration:
       type: object
@@ -9681,13 +9681,13 @@ components:
         comment:
           type: string
           deprecated: true
-        maxAge:
-          type: integer
-          format: int32
         secure:
           type: boolean
         domain:
           type: string
+        maxAge:
+          type: integer
+          format: int32
     TaglibDescriptor:
       type: object
       properties:
