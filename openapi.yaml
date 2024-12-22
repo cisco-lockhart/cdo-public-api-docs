@@ -9139,13 +9139,13 @@ components:
           type: string
         displayName:
           type: string
-        autowireCapableBeanFactory:
-          $ref: '#/components/schemas/AutowireCapableBeanFactory'
         applicationName:
           type: string
         startupDate:
           type: integer
           format: int64
+        autowireCapableBeanFactory:
+          $ref: '#/components/schemas/AutowireCapableBeanFactory'
         environment:
           $ref: '#/components/schemas/Environment'
         beanDefinitionCount:
@@ -9588,10 +9588,10 @@ components:
           format: int32
         attributeNames:
           type: object
-        contextPath:
-          type: string
         initParameterNames:
           type: object
+        contextPath:
+          type: string
         servletRegistrations:
           type: object
           additionalProperties:

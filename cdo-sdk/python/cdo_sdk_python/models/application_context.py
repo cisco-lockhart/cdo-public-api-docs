@@ -32,15 +32,15 @@ class ApplicationContext(BaseModel):
     parent: Optional[ApplicationContext] = None
     id: Optional[StrictStr] = None
     display_name: Optional[StrictStr] = Field(default=None, alias="displayName")
-    autowire_capable_bean_factory: Optional[Dict[str, Any]] = Field(default=None, alias="autowireCapableBeanFactory")
     application_name: Optional[StrictStr] = Field(default=None, alias="applicationName")
     startup_date: Optional[StrictInt] = Field(default=None, alias="startupDate")
+    autowire_capable_bean_factory: Optional[Dict[str, Any]] = Field(default=None, alias="autowireCapableBeanFactory")
     environment: Optional[Environment] = None
     bean_definition_count: Optional[StrictInt] = Field(default=None, alias="beanDefinitionCount")
     bean_definition_names: Optional[List[StrictStr]] = Field(default=None, alias="beanDefinitionNames")
     parent_bean_factory: Optional[Dict[str, Any]] = Field(default=None, alias="parentBeanFactory")
     class_loader: Optional[ApplicationContextClassLoader] = Field(default=None, alias="classLoader")
-    __properties: ClassVar[List[str]] = ["parent", "id", "displayName", "autowireCapableBeanFactory", "applicationName", "startupDate", "environment", "beanDefinitionCount", "beanDefinitionNames", "parentBeanFactory", "classLoader"]
+    __properties: ClassVar[List[str]] = ["parent", "id", "displayName", "applicationName", "startupDate", "autowireCapableBeanFactory", "environment", "beanDefinitionCount", "beanDefinitionNames", "parentBeanFactory", "classLoader"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -105,9 +105,9 @@ class ApplicationContext(BaseModel):
             "parent": ApplicationContext.from_dict(obj["parent"]) if obj.get("parent") is not None else None,
             "id": obj.get("id"),
             "displayName": obj.get("displayName"),
-            "autowireCapableBeanFactory": obj.get("autowireCapableBeanFactory"),
             "applicationName": obj.get("applicationName"),
             "startupDate": obj.get("startupDate"),
+            "autowireCapableBeanFactory": obj.get("autowireCapableBeanFactory"),
             "environment": Environment.from_dict(obj["environment"]) if obj.get("environment") is not None else None,
             "beanDefinitionCount": obj.get("beanDefinitionCount"),
             "beanDefinitionNames": obj.get("beanDefinitionNames"),
