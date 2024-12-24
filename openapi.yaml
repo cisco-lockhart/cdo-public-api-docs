@@ -9139,13 +9139,13 @@ components:
           type: string
         displayName:
           type: string
+        autowireCapableBeanFactory:
+          $ref: '#/components/schemas/AutowireCapableBeanFactory'
         applicationName:
           type: string
         startupDate:
           type: integer
           format: int64
-        autowireCapableBeanFactory:
-          $ref: '#/components/schemas/AutowireCapableBeanFactory'
         environment:
           $ref: '#/components/schemas/Environment'
         beanDefinitionCount:
@@ -9434,6 +9434,8 @@ components:
     JspPropertyGroupDescriptor:
       type: object
       properties:
+        buffer:
+          type: string
         elIgnored:
           type: string
         errorOnELNotFound:
@@ -9457,8 +9459,6 @@ components:
         trimDirectiveWhitespaces:
           type: string
         errorOnUndeclaredNamespace:
-          type: string
-        buffer:
           type: string
         defaultContentType:
           type: string
@@ -9588,10 +9588,10 @@ components:
           format: int32
         attributeNames:
           type: object
-        initParameterNames:
-          type: object
         contextPath:
           type: string
+        initParameterNames:
+          type: object
         servletRegistrations:
           type: object
           additionalProperties:
