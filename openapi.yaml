@@ -9434,8 +9434,6 @@ components:
     JspPropertyGroupDescriptor:
       type: object
       properties:
-        buffer:
-          type: string
         elIgnored:
           type: string
         errorOnELNotFound:
@@ -9459,6 +9457,8 @@ components:
         trimDirectiveWhitespaces:
           type: string
         errorOnUndeclaredNamespace:
+          type: string
+        buffer:
           type: string
         defaultContentType:
           type: string
@@ -9523,17 +9523,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
-          writeOnly: true
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
           writeOnly: true
     ServletContext:
       type: object
@@ -9592,10 +9592,6 @@ components:
           type: string
         initParameterNames:
           type: object
-        servletRegistrations:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ServletRegistration'
         sessionTrackingModes:
           uniqueItems: true
           type: array
@@ -9606,6 +9602,10 @@ components:
               - COOKIE
               - URL
               - SSL
+        servletRegistrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ServletRegistration'
         filterRegistrations:
           type: object
           additionalProperties:
@@ -9681,10 +9681,10 @@ components:
         comment:
           type: string
           deprecated: true
-        secure:
-          type: boolean
         domain:
           type: string
+        secure:
+          type: boolean
         maxAge:
           type: integer
           format: int32
