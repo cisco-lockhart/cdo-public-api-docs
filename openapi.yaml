@@ -9410,15 +9410,15 @@ components:
       properties:
         error:
           type: boolean
-        is4xxClientError:
-          type: boolean
-        is5xxServerError:
-          type: boolean
         is1xxInformational:
           type: boolean
         is2xxSuccessful:
           type: boolean
         is3xxRedirection:
+          type: boolean
+        is4xxClientError:
+          type: boolean
+        is5xxServerError:
           type: boolean
     JspConfigDescriptor:
       type: object
