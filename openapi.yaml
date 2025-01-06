@@ -9434,8 +9434,6 @@ components:
     JspPropertyGroupDescriptor:
       type: object
       properties:
-        buffer:
-          type: string
         elIgnored:
           type: string
         errorOnELNotFound:
@@ -9459,6 +9457,8 @@ components:
         trimDirectiveWhitespaces:
           type: string
         errorOnUndeclaredNamespace:
+          type: string
+        buffer:
           type: string
         defaultContentType:
           type: string
@@ -9523,17 +9523,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
+          writeOnly: true
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
           writeOnly: true
     ServletContext:
       type: object
@@ -9606,10 +9606,6 @@ components:
               - COOKIE
               - URL
               - SSL
-        filterRegistrations:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/FilterRegistration'
         sessionCookieConfig:
           $ref: '#/components/schemas/SessionCookieConfig'
         defaultSessionTrackingModes:
@@ -9638,6 +9634,12 @@ components:
           type: string
         responseCharacterEncoding:
           type: string
+        servletContextName:
+          type: string
+        filterRegistrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/FilterRegistration'
         effectiveMajorVersion:
           type: integer
           format: int32
@@ -9645,8 +9647,6 @@ components:
           type: integer
           format: int32
         serverInfo:
-          type: string
-        servletContextName:
           type: string
     ServletRegistration:
       type: object
@@ -9681,10 +9681,10 @@ components:
         comment:
           type: string
           deprecated: true
-        domain:
-          type: string
         secure:
           type: boolean
+        domain:
+          type: string
         maxAge:
           type: integer
           format: int32

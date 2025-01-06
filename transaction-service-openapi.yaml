@@ -47,16 +47,16 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
-        "202":
-          description: Security Cloud Control Transaction that is pending or in progress.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CdoTransaction'
         "200":
           description: "CDO Transaction that has completed, either successfully or\
             \ unsuccessfully. Note: failed Security Cloud Control Transactions do\
             \ not roll back."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CdoTransaction'
+        "202":
+          description: Security Cloud Control Transaction that is pending or in progress.
           content:
             application/json:
               schema:
