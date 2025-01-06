@@ -37,11 +37,10 @@ class ServletContext(BaseModel):
     major_version: Optional[StrictInt] = Field(default=None, alias="majorVersion")
     minor_version: Optional[StrictInt] = Field(default=None, alias="minorVersion")
     attribute_names: Optional[Dict[str, Any]] = Field(default=None, alias="attributeNames")
-    context_path: Optional[StrictStr] = Field(default=None, alias="contextPath")
     init_parameter_names: Optional[Dict[str, Any]] = Field(default=None, alias="initParameterNames")
+    context_path: Optional[StrictStr] = Field(default=None, alias="contextPath")
     servlet_registrations: Optional[Dict[str, ServletRegistration]] = Field(default=None, alias="servletRegistrations")
     session_tracking_modes: Optional[List[StrictStr]] = Field(default=None, alias="sessionTrackingModes")
-    filter_registrations: Optional[Dict[str, FilterRegistration]] = Field(default=None, alias="filterRegistrations")
     session_cookie_config: Optional[SessionCookieConfig] = Field(default=None, alias="sessionCookieConfig")
     default_session_tracking_modes: Optional[List[StrictStr]] = Field(default=None, alias="defaultSessionTrackingModes")
     effective_session_tracking_modes: Optional[List[StrictStr]] = Field(default=None, alias="effectiveSessionTrackingModes")
@@ -49,11 +48,12 @@ class ServletContext(BaseModel):
     virtual_server_name: Optional[StrictStr] = Field(default=None, alias="virtualServerName")
     request_character_encoding: Optional[StrictStr] = Field(default=None, alias="requestCharacterEncoding")
     response_character_encoding: Optional[StrictStr] = Field(default=None, alias="responseCharacterEncoding")
+    servlet_context_name: Optional[StrictStr] = Field(default=None, alias="servletContextName")
+    filter_registrations: Optional[Dict[str, FilterRegistration]] = Field(default=None, alias="filterRegistrations")
     effective_major_version: Optional[StrictInt] = Field(default=None, alias="effectiveMajorVersion")
     effective_minor_version: Optional[StrictInt] = Field(default=None, alias="effectiveMinorVersion")
     server_info: Optional[StrictStr] = Field(default=None, alias="serverInfo")
-    servlet_context_name: Optional[StrictStr] = Field(default=None, alias="servletContextName")
-    __properties: ClassVar[List[str]] = ["sessionTimeout", "classLoader", "majorVersion", "minorVersion", "attributeNames", "contextPath", "initParameterNames", "servletRegistrations", "sessionTrackingModes", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "effectiveMajorVersion", "effectiveMinorVersion", "serverInfo", "servletContextName"]
+    __properties: ClassVar[List[str]] = ["sessionTimeout", "classLoader", "majorVersion", "minorVersion", "attributeNames", "initParameterNames", "contextPath", "servletRegistrations", "sessionTrackingModes", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "servletContextName", "filterRegistrations", "effectiveMajorVersion", "effectiveMinorVersion", "serverInfo"]
 
     @field_validator('session_tracking_modes')
     def session_tracking_modes_validate_enum(cls, value):
@@ -137,6 +137,12 @@ class ServletContext(BaseModel):
                 if self.servlet_registrations[_key]:
                     _field_dict[_key] = self.servlet_registrations[_key].to_dict()
             _dict['servletRegistrations'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of session_cookie_config
+        if self.session_cookie_config:
+            _dict['sessionCookieConfig'] = self.session_cookie_config.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of jsp_config_descriptor
+        if self.jsp_config_descriptor:
+            _dict['jspConfigDescriptor'] = self.jsp_config_descriptor.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in filter_registrations (dict)
         _field_dict = {}
         if self.filter_registrations:
@@ -144,12 +150,6 @@ class ServletContext(BaseModel):
                 if self.filter_registrations[_key]:
                     _field_dict[_key] = self.filter_registrations[_key].to_dict()
             _dict['filterRegistrations'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of session_cookie_config
-        if self.session_cookie_config:
-            _dict['sessionCookieConfig'] = self.session_cookie_config.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of jsp_config_descriptor
-        if self.jsp_config_descriptor:
-            _dict['jspConfigDescriptor'] = self.jsp_config_descriptor.to_dict()
         return _dict
 
     @classmethod
@@ -167,8 +167,8 @@ class ServletContext(BaseModel):
             "majorVersion": obj.get("majorVersion"),
             "minorVersion": obj.get("minorVersion"),
             "attributeNames": obj.get("attributeNames"),
-            "contextPath": obj.get("contextPath"),
             "initParameterNames": obj.get("initParameterNames"),
+            "contextPath": obj.get("contextPath"),
             "servletRegistrations": dict(
                 (_k, ServletRegistration.from_dict(_v))
                 for _k, _v in obj["servletRegistrations"].items()
@@ -176,12 +176,6 @@ class ServletContext(BaseModel):
             if obj.get("servletRegistrations") is not None
             else None,
             "sessionTrackingModes": obj.get("sessionTrackingModes"),
-            "filterRegistrations": dict(
-                (_k, FilterRegistration.from_dict(_v))
-                for _k, _v in obj["filterRegistrations"].items()
-            )
-            if obj.get("filterRegistrations") is not None
-            else None,
             "sessionCookieConfig": SessionCookieConfig.from_dict(obj["sessionCookieConfig"]) if obj.get("sessionCookieConfig") is not None else None,
             "defaultSessionTrackingModes": obj.get("defaultSessionTrackingModes"),
             "effectiveSessionTrackingModes": obj.get("effectiveSessionTrackingModes"),
@@ -189,10 +183,16 @@ class ServletContext(BaseModel):
             "virtualServerName": obj.get("virtualServerName"),
             "requestCharacterEncoding": obj.get("requestCharacterEncoding"),
             "responseCharacterEncoding": obj.get("responseCharacterEncoding"),
+            "servletContextName": obj.get("servletContextName"),
+            "filterRegistrations": dict(
+                (_k, FilterRegistration.from_dict(_v))
+                for _k, _v in obj["filterRegistrations"].items()
+            )
+            if obj.get("filterRegistrations") is not None
+            else None,
             "effectiveMajorVersion": obj.get("effectiveMajorVersion"),
             "effectiveMinorVersion": obj.get("effectiveMinorVersion"),
-            "serverInfo": obj.get("serverInfo"),
-            "servletContextName": obj.get("servletContextName")
+            "serverInfo": obj.get("serverInfo")
         })
         return _obj
 

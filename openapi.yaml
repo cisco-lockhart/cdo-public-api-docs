@@ -9588,10 +9588,10 @@ components:
           format: int32
         attributeNames:
           type: object
-        contextPath:
-          type: string
         initParameterNames:
           type: object
+        contextPath:
+          type: string
         servletRegistrations:
           type: object
           additionalProperties:
@@ -9606,10 +9606,6 @@ components:
               - COOKIE
               - URL
               - SSL
-        filterRegistrations:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/FilterRegistration'
         sessionCookieConfig:
           $ref: '#/components/schemas/SessionCookieConfig'
         defaultSessionTrackingModes:
@@ -9638,6 +9634,12 @@ components:
           type: string
         responseCharacterEncoding:
           type: string
+        servletContextName:
+          type: string
+        filterRegistrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/FilterRegistration'
         effectiveMajorVersion:
           type: integer
           format: int32
@@ -9645,8 +9647,6 @@ components:
           type: integer
           format: int32
         serverInfo:
-          type: string
-        servletContextName:
           type: string
     ServletRegistration:
       type: object
