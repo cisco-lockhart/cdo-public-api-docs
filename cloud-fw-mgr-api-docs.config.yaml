@@ -1,0 +1,36 @@
+services:
+  - name: "api-facade"
+    url: "https://staging.manage.security.cisco.com/api/platform/public-api/v3/api-docs.yaml"
+  - name: "msp-api"
+    url: "https://staging.manage.security.cisco.com/api/platform/msp-api/v3/api-docs.yaml"
+  - name: "device-upgrade"
+    url: "https://staging.manage.security.cisco.com/api/platform/device-upgrade/v3/api-docs.yaml"
+info:
+  title: "Cisco Security Cloud Control API"
+  version: "1.5.0"
+  description: "Use the documentation to explore the endpoints Security Cloud Control has to offer"
+  contact:
+    name: "Cisco Security Cloud Control TAC"
+    email: "cdo.tac@cisco.com"
+servers:
+ - url: https://edge.us.cdo.cisco.com/api/rest
+   description: US
+ - url: https://edge.eu.cdo.cisco.com/api/rest
+   description: EU
+ - url: https://edge.apj.cdo.cisco.com/api/rest
+   description: APJ
+ - url: https://edge.aus.cdo.cisco.com/api/rest
+   description: AUS
+ - url: https://edge.in.cdo.cisco.com/api/rest
+   description: IN
+ - url: https://edge.staging.cdo.cisco.com/api/rest
+   description: Staging
+ - url: https://edge.scale.cdo.cisco.com/api/rest
+   description: Scale
+ - url: https://edge.ci.cdo.cisco.com/api/rest
+   description: CI
+securitySchemes:
+  bearerAuth:
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
