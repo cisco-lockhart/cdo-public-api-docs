@@ -4,12 +4,8 @@ Copyright © 2025 Cisco Systems
 package cmd
 
 import (
-	"fmt"
-	"github.com/pterm/pterm"
-	"os"
-	"path/filepath"
-
 	"github.com/spf13/cobra"
+	"os"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -29,10 +25,5 @@ func Execute() {
 }
 
 func init() {
-	homeDir, err := os.UserHomeDir()
-	if err != nil {
-		pterm.Error.Println("Failed to get home directory", err)
-	}
-	defaultConfigFilePath := filepath.Join(homeDir, ".cloud-fw-mgr-api-docs.config.yaml")
-	rootCmd.PersistentFlags().StringP("config", "c", defaultConfigFilePath, fmt.Sprintf("config file (default is %s)", defaultConfigFilePath))
+	rootCmd.PersistentFlags().StringP("config", "c", "https://github.com/cisco-lockhart/cdo-public-api-docs/blob/LH-89186-improve-api-doc-generation/cloud-fw-mgr-api-docs.config.yaml", "config URL")
 }

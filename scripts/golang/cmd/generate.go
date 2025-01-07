@@ -23,9 +23,9 @@ var generateCmd = &cobra.Command{
 			the Firewall public API and merges them together (including by removing schemas shared 
 			between the microservices).`,
 	Run: func(cmd *cobra.Command, args []string) {
-		configFile, err := cmd.Flags().GetString("config")
+		configUrl, err := cmd.Flags().GetString("config")
 		if err != nil {
-			pterm.Error.Println("Failed to get config file path", err)
+			pterm.Error.Println("Failed to get config URL", err)
 			os.Exit(1)
 		}
 		outputFile, err := cmd.Flags().GetString("output")
@@ -34,8 +34,8 @@ var generateCmd = &cobra.Command{
 		}
 
 		spinner, _ := pterm.DefaultSpinner.Start("Loading configuration file...")
-		config := services.LoadConfig(configFile)
-		spinner.Success(fmt.Sprintf("Configuration file loaded successfully: %s", configFile))
+		config := services.LoadConfig(configUrl)
+		spinner.Success(fmt.Sprintf("Configuration file loaded successfully: %s", configUrl))
 
 		serviceSpecs := make(map[string]*models.OpenAPI)
 		for _, service := range config.Services {
