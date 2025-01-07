@@ -5,6 +5,10 @@ services:
     url: "https://staging.manage.security.cisco.com/api/platform/msp-api/v3/api-docs.yaml"
   - name: "device-upgrade"
     url: "https://staging.manage.security.cisco.com/api/platform/device-upgrade/v3/api-docs.yaml"
+  - name: "object-service"
+    url: "https://staging.manage.security.cisco.com/api/platform/object-service/v3/api-docs.yaml"
+  - name: "transaction-service"
+    url: "https://staging.manage.security.cisco.com/api/platform/transaction-service/v3/api-docs.yaml"
 info:
   title: "Cisco Security Cloud Control API"
   version: "1.5.0"
