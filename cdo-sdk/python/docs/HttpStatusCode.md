@@ -6,11 +6,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **error** | **bool** |  | [optional] 
+**is4xx_client_error** | **bool** |  | [optional] 
+**is5xx_server_error** | **bool** |  | [optional] 
 **is1xx_informational** | **bool** |  | [optional] 
 **is2xx_successful** | **bool** |  | [optional] 
 **is3xx_redirection** | **bool** |  | [optional] 
-**is4xx_client_error** | **bool** |  | [optional] 
-**is5xx_server_error** | **bool** |  | [optional] 
 
 ## Example
 
