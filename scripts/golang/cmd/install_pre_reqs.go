@@ -6,6 +6,7 @@ package cmd
 import (
 	"github.com/cisco-lockhart/fcm-api-docs-generator/services"
 	"github.com/pterm/pterm"
+	"os"
 	"os/exec"
 	"runtime"
 
@@ -13,6 +14,8 @@ import (
 )
 
 var nodePackagesToInstall = []string{"openapi-to-postmanv2", "@openapitools/openapi-generator-cli"}
+var homebrewPackages = []string{"pipx"}
+var pipxPackages = []string{"twine"}
 
 // installPreReqsCmd represents the installPreReqs command
 var installPreReqsCmd = &cobra.Command{
@@ -28,16 +31,32 @@ var installPreReqsCmd = &cobra.Command{
 		_, err := npmVersionCmd.Output()
 		if err != nil {
 			pterm.Error.Println("npm is not installed.")
-			return
+			os.Exit(1)
 		}
 		for _, nodePackage := range nodePackagesToInstall {
 			spinner, _ := pterm.DefaultSpinner.Start("Installing node package " + nodePackage)
 			err := services.InstallNodePackage(nodePackage)
 			if err != nil {
 				spinner.Fail("Error installing node package", nodePackage)
-				return
+				os.Exit(1)
 			}
 			spinner.Success("Node package " + nodePackage + " installed successfully")
+		}
+		for _, brewPackage := range homebrewPackages {
+			spinner, _ := pterm.DefaultSpinner.Start("Installing brew package " + brewPackage)
+			if err := services.InstallHomebrewPackage("pipx"); err != nil {
+				spinner.Fail("Error installing brew package", brewPackage)
+				os.Exit(1)
+			}
+			spinner.Success("Homebrew package " + brewPackage + " installed successfully")
+		}
+		for _, pipxPackage := range pipxPackages {
+			spinner, _ := pterm.DefaultSpinner.Start("Installing pipx package " + pipxPackage)
+			if err := services.InstallPipxPackage(pipxPackage); err != nil {
+				spinner.Fail("Error installing pipx package", pipxPackage)
+				os.Exit(1)
+			}
+			spinner.Success("Pipx package " + pipxPackage + " installed successfully")
 		}
 
 		pterm.Success.Println("All pre-requisites installed successfully.")

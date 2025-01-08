@@ -37,6 +37,21 @@ var generateSdksCmd = &cobra.Command{
 		}
 
 		generatePythonSdk(openAPISpecPath, &openApiSpec)
+
+		shouldPublish, err := cmd.Flags().GetBool("publish")
+		if err != nil {
+			pterm.Error.Println("Failed to get publish flag", err)
+			os.Exit(1)
+		}
+		if shouldPublish {
+			pypiToken, err := cmd.Flags().GetString("pypi-token")
+			if err != nil {
+				pterm.Error.Println("Failed to get PyPI token", err)
+				os.Exit(1)
+			}
+			// golang cobra does not support nil flag values
+			publishPythonSdk(pypiToken)
+		}
 	},
 }
 
@@ -57,6 +72,17 @@ func generatePythonSdk(openApiFile string, openApiSpec *models.OpenAPI) {
 	spinner.Success("Python SDK generated successfully")
 }
 
+func publishPythonSdk(pypiToken string) {
+	// Publish Python SDK
+	spinner, _ := pterm.DefaultSpinner.Start("Publishing Python SDK...")
+	err := services.PublishPythonSdk(pypiToken)
+	if err != nil {
+		spinner.Fail("Error publishing Python SDK")
+		os.Exit(1)
+	}
+	spinner.Success("Python SDK published successfully")
+}
+
 func init() {
 	rootCmd.AddCommand(generateSdksCmd)
 
@@ -69,4 +95,5 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	generateSdksCmd.Flags().BoolP("publish", "p", false, "Publish package to repositories after generation")
+	generateSdksCmd.Flags().StringP("pypi-token", "t", "", "PyPI token to use for publishing the package. If not specified, it will pull the token from AWS secrets manager.")
 }

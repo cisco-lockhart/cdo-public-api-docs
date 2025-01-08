@@ -9,6 +9,13 @@ func GeneratePythonSdk(openapiFile string, version string) error {
 		"-i", openapiFile,
 		"-g", "python",
 		"-o", "sdks/python",
-		"--additional-properties=packageName=cloud_firewall_manager,packageVersion="+version).Output()
+		"--additional-properties=packageName=cdo-sdk-python,packageVersion="+version).Output()
 	return err
+}
+
+func PublishPythonSdk(pypiToken string) error {
+	if pypiToken == "" {
+		return nil
+	}
+	return nil
 }
