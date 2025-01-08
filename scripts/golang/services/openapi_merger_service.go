@@ -1,12 +1,13 @@
 package services
 
 import (
+	"errors"
 	"fmt"
 	"github.com/cisco-lockhart/fcm-api-docs-generator/models"
 	"github.com/pterm/pterm"
 )
 
-func MergeOpenApiSpecs(serviceSpecs map[string]*models.OpenAPI, config *models.Config) *models.OpenAPI {
+func MergeOpenApiSpecs(serviceSpecs map[string]*models.OpenAPI, config *models.Config) (*models.OpenAPI, error) {
 	mergedSpec := models.OpenAPI{}
 	mergedSpec.OpenAPI = "3.0.1"
 	mergedSpec.Info = config.Info
@@ -22,7 +23,7 @@ func MergeOpenApiSpecs(serviceSpecs map[string]*models.OpenAPI, config *models.C
 		// Merge paths
 		for path, pathItem := range spec.Paths {
 			if _, exists := mergedSpec.Paths[path]; exists {
-				panic(fmt.Sprintf("duplicate path found: %s", path))
+				return nil, errors.New(fmt.Sprintf("duplicate path found: %s", path))
 			}
 			mergedSpec.Paths[path] = pathItem
 		}
@@ -41,5 +42,5 @@ func MergeOpenApiSpecs(serviceSpecs map[string]*models.OpenAPI, config *models.C
 		spinner.Success(fmt.Sprintf("Merged OpenAPI spec for service: %s", serviceName))
 	}
 
-	return &mergedSpec
+	return &mergedSpec, nil
 }

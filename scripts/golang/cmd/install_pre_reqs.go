@@ -16,7 +16,7 @@ var nodePackagesToInstall = []string{"openapi-to-postmanv2", "@openapitools/open
 
 // installPreReqsCmd represents the installPreReqs command
 var installPreReqsCmd = &cobra.Command{
-	Use:   "install",
+	Use:   "install-pre-reqs",
 	Short: "Install pre-requisites for the CLI tool",
 	Long:  `Installs all the pre-requisites (such as NPM etc) to allow the CLI tool to generate SDKs etc. Only supports MacOS at the moment. Requires npm to be installed and in your path.`,
 	Run: func(cmd *cobra.Command, args []string) {

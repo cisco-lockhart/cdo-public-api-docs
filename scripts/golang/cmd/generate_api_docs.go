@@ -17,7 +17,7 @@ import (
 
 // generateCmd represents the generate command
 var generateCmd = &cobra.Command{
-	Use:   "generate",
+	Use:   "generate-api-docs",
 	Short: "Combine the API documentation from each microservice that constitutes the FCM API into one single API spec.",
 	Long: `This command downloads OpenAPI specs for all of the microservices that constitute 
 			the Firewall public API and merges them together (including by removing schemas shared 
@@ -31,6 +31,7 @@ var generateCmd = &cobra.Command{
 		outputFile, err := cmd.Flags().GetString("output")
 		if err != nil {
 			pterm.Error.Println("Failed to get output file path", err)
+			os.Exit(1)
 		}
 
 		spinner, _ := pterm.DefaultSpinner.Start("Loading configuration file...")
@@ -40,12 +41,22 @@ var generateCmd = &cobra.Command{
 		serviceSpecs := make(map[string]*models.OpenAPI)
 		for _, service := range config.Services {
 			spinner, _ = pterm.DefaultSpinner.Start(fmt.Sprintf("Loading OpenAPI spec for service: %s...", service.Name))
-			openApiSpec := services.LoadOpenApi(service.URL)
+			openApiSpec, err := services.LoadOpenApi(service.URL)
+			if err != nil {
+				spinner.Fail(fmt.Sprintf("failed to load OpenAPI spec for service: %s, error: %v\n", service.Name, err))
+				os.Exit(1)
+			}
 			serviceSpecs[service.Name] = openApiSpec
 			spinner.Success(fmt.Sprintf("OpenAPI spec loaded successfully for service: %s", service.Name))
 		}
 
-		mergedSpec := services.MergeOpenApiSpecs(serviceSpecs, config)
+		spinner, _ = pterm.DefaultSpinner.Start("Merging OpenAPI specs...")
+		mergedSpec, err := services.MergeOpenApiSpecs(serviceSpecs, config)
+		if err != nil {
+			spinner.Fail(fmt.Sprintf("failed to merge OpenAPI specs: %v\n", err))
+			os.Exit(1)
+		}
+		spinner.Success("OpenAPI specs merged successfully")
 
 		spinner, _ = pterm.DefaultSpinner.Start(fmt.Sprintf("Marshalling merged spec to YAML and writing to %s...", outputFile))
 		yamlData, err := yaml.Marshal(mergedSpec)
@@ -56,6 +67,7 @@ var generateCmd = &cobra.Command{
 		err = os.WriteFile(outputFile, yamlData, 0644)
 		if err != nil {
 			spinner.Fail(fmt.Sprintf("failed to write merged spec to file: %v\n", err))
+			os.Exit(1)
 		}
 		spinner.Success("Merged spec marshalled to YAML successfully")
 	},

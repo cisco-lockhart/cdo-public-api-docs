@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func LoadOpenApi(url string) *models.OpenAPI {
+func LoadOpenApi(url string) (*models.OpenAPI, error) {
 	// Make an HTTP GET request
 	resp, err := http.Get(url)
 	if err != nil {
@@ -29,15 +29,15 @@ func LoadOpenApi(url string) *models.OpenAPI {
 	// Read the response body
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	// unmarshall it
 	openApiSpec := models.OpenAPI{}
 	err = yaml.Unmarshal(data, &openApiSpec)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
-	return &openApiSpec
+	return &openApiSpec, nil
 }
