@@ -28,12 +28,12 @@ class HttpStatusCode(BaseModel):
     HttpStatusCode
     """ # noqa: E501
     error: Optional[StrictBool] = None
+    is4xx_client_error: Optional[StrictBool] = Field(default=None, alias="is4xxClientError")
+    is5xx_server_error: Optional[StrictBool] = Field(default=None, alias="is5xxServerError")
     is1xx_informational: Optional[StrictBool] = Field(default=None, alias="is1xxInformational")
     is2xx_successful: Optional[StrictBool] = Field(default=None, alias="is2xxSuccessful")
     is3xx_redirection: Optional[StrictBool] = Field(default=None, alias="is3xxRedirection")
-    is4xx_client_error: Optional[StrictBool] = Field(default=None, alias="is4xxClientError")
-    is5xx_server_error: Optional[StrictBool] = Field(default=None, alias="is5xxServerError")
-    __properties: ClassVar[List[str]] = ["error", "is1xxInformational", "is2xxSuccessful", "is3xxRedirection", "is4xxClientError", "is5xxServerError"]
+    __properties: ClassVar[List[str]] = ["error", "is4xxClientError", "is5xxServerError", "is1xxInformational", "is2xxSuccessful", "is3xxRedirection"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,11 +87,11 @@ class HttpStatusCode(BaseModel):
 
         _obj = cls.model_validate({
             "error": obj.get("error"),
+            "is4xxClientError": obj.get("is4xxClientError"),
+            "is5xxServerError": obj.get("is5xxServerError"),
             "is1xxInformational": obj.get("is1xxInformational"),
             "is2xxSuccessful": obj.get("is2xxSuccessful"),
-            "is3xxRedirection": obj.get("is3xxRedirection"),
-            "is4xxClientError": obj.get("is4xxClientError"),
-            "is5xxServerError": obj.get("is5xxServerError")
+            "is3xxRedirection": obj.get("is3xxRedirection")
         })
         return _obj
 
