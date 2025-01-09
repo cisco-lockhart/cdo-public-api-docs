@@ -783,6 +783,11 @@ components:
             field only if you want the display name to be different from the
             name of the tenant.
           example: Acme Inc., United States offices
+        salesOrderNumber:
+          type: string
+          description: The sales order number. If this value is not provided, the tenant
+            will be created as a trial tenant.
+          example: "98241346"
     MspManagedTenant:
       type: object
       properties:

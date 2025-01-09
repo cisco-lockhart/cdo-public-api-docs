@@ -10,10 +10,12 @@ Name | Type | Description | Notes
 **major_version** | **int** |  | [optional] 
 **minor_version** | **int** |  | [optional] 
 **attribute_names** | **object** |  | [optional] 
-**servlet_registrations** | [**Dict[str, ServletRegistration]**](ServletRegistration.md) |  | [optional] 
 **context_path** | **str** |  | [optional] 
 **init_parameter_names** | **object** |  | [optional] 
+**servlet_registrations** | [**Dict[str, ServletRegistration]**](ServletRegistration.md) |  | [optional] 
 **session_tracking_modes** | **List[str]** |  | [optional] 
+**filter_registrations** | [**Dict[str, FilterRegistration]**](FilterRegistration.md) |  | [optional] 
+**session_cookie_config** | [**SessionCookieConfig**](SessionCookieConfig.md) |  | [optional] 
 **default_session_tracking_modes** | **List[str]** |  | [optional] 
 **effective_session_tracking_modes** | **List[str]** |  | [optional] 
 **jsp_config_descriptor** | [**JspConfigDescriptor**](JspConfigDescriptor.md) |  | [optional] 
@@ -24,8 +26,6 @@ Name | Type | Description | Notes
 **effective_minor_version** | **int** |  | [optional] 
 **server_info** | **str** |  | [optional] 
 **servlet_context_name** | **str** |  | [optional] 
-**filter_registrations** | [**Dict[str, FilterRegistration]**](FilterRegistration.md) |  | [optional] 
-**session_cookie_config** | [**SessionCookieConfig**](SessionCookieConfig.md) |  | [optional] 
 
 ## Example
 
