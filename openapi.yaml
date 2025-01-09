@@ -9423,23 +9423,17 @@ components:
     JspConfigDescriptor:
       type: object
       properties:
-        jspPropertyGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/JspPropertyGroupDescriptor'
         taglibs:
           type: array
           items:
             $ref: '#/components/schemas/TaglibDescriptor'
+        jspPropertyGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/JspPropertyGroupDescriptor'
     JspPropertyGroupDescriptor:
       type: object
       properties:
-        elIgnored:
-          type: string
-        errorOnELNotFound:
-          type: string
-        pageEncoding:
-          type: string
         scriptingInvalid:
           type: string
         isXml:
@@ -9453,6 +9447,12 @@ components:
           items:
             type: string
         deferredSyntaxAllowedAsLiteral:
+          type: string
+        elIgnored:
+          type: string
+        errorOnELNotFound:
+          type: string
+        pageEncoding:
           type: string
         trimDirectiveWhitespaces:
           type: string
@@ -9523,17 +9523,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
+          writeOnly: true
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
           writeOnly: true
     ServletContext:
       type: object
@@ -9588,14 +9588,14 @@ components:
           format: int32
         attributeNames:
           type: object
-        servletRegistrations:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ServletRegistration'
         contextPath:
           type: string
         initParameterNames:
           type: object
+        servletRegistrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ServletRegistration'
         sessionTrackingModes:
           uniqueItems: true
           type: array
@@ -9606,6 +9606,22 @@ components:
               - COOKIE
               - URL
               - SSL
+        serverInfo:
+          type: string
+        servletContextName:
+          type: string
+        effectiveMajorVersion:
+          type: integer
+          format: int32
+        effectiveMinorVersion:
+          type: integer
+          format: int32
+        filterRegistrations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/FilterRegistration'
+        sessionCookieConfig:
+          $ref: '#/components/schemas/SessionCookieConfig'
         defaultSessionTrackingModes:
           uniqueItems: true
           type: array
@@ -9632,22 +9648,6 @@ components:
           type: string
         responseCharacterEncoding:
           type: string
-        effectiveMajorVersion:
-          type: integer
-          format: int32
-        effectiveMinorVersion:
-          type: integer
-          format: int32
-        serverInfo:
-          type: string
-        servletContextName:
-          type: string
-        filterRegistrations:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/FilterRegistration'
-        sessionCookieConfig:
-          $ref: '#/components/schemas/SessionCookieConfig'
     ServletRegistration:
       type: object
       properties:
@@ -9681,19 +9681,19 @@ components:
         comment:
           type: string
           deprecated: true
-        domain:
-          type: string
         secure:
           type: boolean
+        domain:
+          type: string
         maxAge:
           type: integer
           format: int32
     TaglibDescriptor:
       type: object
       properties:
-        taglibURI:
-          type: string
         taglibLocation:
+          type: string
+        taglibURI:
           type: string
     JsonWebKey:
       type: object

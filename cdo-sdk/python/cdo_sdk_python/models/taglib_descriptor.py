@@ -27,9 +27,9 @@ class TaglibDescriptor(BaseModel):
     """
     TaglibDescriptor
     """ # noqa: E501
-    taglib_uri: Optional[StrictStr] = Field(default=None, alias="taglibURI")
     taglib_location: Optional[StrictStr] = Field(default=None, alias="taglibLocation")
-    __properties: ClassVar[List[str]] = ["taglibURI", "taglibLocation"]
+    taglib_uri: Optional[StrictStr] = Field(default=None, alias="taglibURI")
+    __properties: ClassVar[List[str]] = ["taglibLocation", "taglibURI"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,8 +82,8 @@ class TaglibDescriptor(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "taglibURI": obj.get("taglibURI"),
-            "taglibLocation": obj.get("taglibLocation")
+            "taglibLocation": obj.get("taglibLocation"),
+            "taglibURI": obj.get("taglibURI")
         })
         return _obj
 
