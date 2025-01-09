@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**jsp_property_groups** | [**List[JspPropertyGroupDescriptor]**](JspPropertyGroupDescriptor.md) |  | [optional] 
 **taglibs** | [**List[TaglibDescriptor]**](TaglibDescriptor.md) |  | [optional] 
+**jsp_property_groups** | [**List[JspPropertyGroupDescriptor]**](JspPropertyGroupDescriptor.md) |  | [optional] 
 
 ## Example
 

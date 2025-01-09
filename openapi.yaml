@@ -9410,36 +9410,30 @@ components:
       properties:
         error:
           type: boolean
+        is4xxClientError:
+          type: boolean
+        is5xxServerError:
+          type: boolean
         is1xxInformational:
           type: boolean
         is2xxSuccessful:
           type: boolean
         is3xxRedirection:
           type: boolean
-        is4xxClientError:
-          type: boolean
-        is5xxServerError:
-          type: boolean
     JspConfigDescriptor:
       type: object
       properties:
-        jspPropertyGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/JspPropertyGroupDescriptor'
         taglibs:
           type: array
           items:
             $ref: '#/components/schemas/TaglibDescriptor'
+        jspPropertyGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/JspPropertyGroupDescriptor'
     JspPropertyGroupDescriptor:
       type: object
       properties:
-        elIgnored:
-          type: string
-        errorOnELNotFound:
-          type: string
-        pageEncoding:
-          type: string
         scriptingInvalid:
           type: string
         isXml:
@@ -9453,6 +9447,12 @@ components:
           items:
             type: string
         deferredSyntaxAllowedAsLiteral:
+          type: string
+        elIgnored:
+          type: string
+        errorOnELNotFound:
+          type: string
+        pageEncoding:
           type: string
         trimDirectiveWhitespaces:
           type: string
@@ -9606,6 +9606,16 @@ components:
               - COOKIE
               - URL
               - SSL
+        serverInfo:
+          type: string
+        servletContextName:
+          type: string
+        effectiveMajorVersion:
+          type: integer
+          format: int32
+        effectiveMinorVersion:
+          type: integer
+          format: int32
         filterRegistrations:
           type: object
           additionalProperties:
@@ -9637,16 +9647,6 @@ components:
         requestCharacterEncoding:
           type: string
         responseCharacterEncoding:
-          type: string
-        effectiveMajorVersion:
-          type: integer
-          format: int32
-        effectiveMinorVersion:
-          type: integer
-          format: int32
-        serverInfo:
-          type: string
-        servletContextName:
           type: string
     ServletRegistration:
       type: object
@@ -9691,9 +9691,9 @@ components:
     TaglibDescriptor:
       type: object
       properties:
-        taglibURI:
-          type: string
         taglibLocation:
+          type: string
+        taglibURI:
           type: string
     JsonWebKey:
       type: object
@@ -10678,6 +10678,12 @@ components:
             field only if you want the display name to be different from the
             name of the tenant.
           example: Acme Inc., United States offices
+        salesOrderNumber:
+          type: string
+          description: >-
+            The sales order number. If this value is not provided, the tenant
+            will be created as a trial tenant.
+          example: '98241346'
     MspManagedTenant:
       type: object
       properties:
