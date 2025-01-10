@@ -54,8 +54,5 @@ jobs:
         with:
           args: release
           workdir: 'scripts/golang'
-
-      - name: Create Github release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: scripts/golang/dist/cdo-public-api-docs_darwin_arm64/*,scripts/golang/dist/cdo-public-api-docs_linux_amd64_v1/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
