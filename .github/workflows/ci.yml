@@ -1,9 +1,9 @@
 name: build OpenAPI docs generation tool
 on:
   push:
-    branches: [ master, main ]
-  pull_request:
-    branches: [ master, main ]
+    branches: [ LH-89186-improve-api-doc-generation, master, main ]
+#  pull_request:
+#    branches: [ master, main ]
 jobs:
   build:
     runs-on: ubuntu-latest
