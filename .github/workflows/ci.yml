@@ -2,8 +2,12 @@ name: build OpenAPI docs generation tool
 on:
   push:
     branches: [ LH-89186-improve-api-doc-generation, master, main ]
-#  pull_request:
-#    branches: [ master, main ]
+    paths:
+      - scripts/golang/**
+  pull_request:
+    branches: [ master, main ]
+    paths:
+      - scripts/golang/**
 jobs:
   build:
     runs-on: ubuntu-latest
