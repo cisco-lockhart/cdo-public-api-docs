@@ -3,7 +3,7 @@ package services
 import (
 	"errors"
 	"fmt"
-	"github.com/cisco-lockhart/fcm-api-docs-generator/models"
+	"github.com/cisco-lockhart/cloud-fw-mgr-api-docs/models"
 	"github.com/pterm/pterm"
 )
 

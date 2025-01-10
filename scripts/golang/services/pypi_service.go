@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"github.com/Masterminds/semver/v3"
-	"github.com/cisco-lockhart/fcm-api-docs-generator/models"
+	"github.com/cisco-lockhart/cloud-fw-mgr-api-docs/models"
 	"io"
 	"net/http"
 )

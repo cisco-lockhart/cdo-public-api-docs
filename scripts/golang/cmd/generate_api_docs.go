@@ -5,8 +5,8 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/cisco-lockhart/fcm-api-docs-generator/models"
-	"github.com/cisco-lockhart/fcm-api-docs-generator/services"
+	"github.com/cisco-lockhart/cloud-fw-mgr-api-docs/models"
+	"github.com/cisco-lockhart/cloud-fw-mgr-api-docs/services"
 	"github.com/pterm/pterm"
 	"gopkg.in/yaml.v3"
 	"os"
@@ -35,7 +35,11 @@ var generateCmd = &cobra.Command{
 		}
 
 		spinner, _ := pterm.DefaultSpinner.Start("Loading configuration file...")
-		config := services.LoadConfig(configUrl)
+		config, err := services.LoadConfig(configUrl)
+		if err != nil {
+			spinner.Fail(fmt.Sprintf("failed to load configuration file: %v\n", err))
+			os.Exit(1)
+		}
 		spinner.Success(fmt.Sprintf("Configuration file loaded successfully: %s", configUrl))
 
 		serviceSpecs := make(map[string]*models.OpenAPI)

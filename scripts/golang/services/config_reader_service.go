@@ -2,13 +2,13 @@ package services
 
 import (
 	"fmt"
-	"github.com/cisco-lockhart/fcm-api-docs-generator/models"
+	"github.com/cisco-lockhart/cloud-fw-mgr-api-docs/models"
 	"gopkg.in/yaml.v3"
 	"io"
 	"net/http"
 )
 
-func LoadConfig(url string) *models.Config {
+func LoadConfig(url string) (*models.Config, error) {
 	// Load the configuration file
 	resp, err := http.Get(url)
 	if err != nil {
@@ -29,14 +29,14 @@ func LoadConfig(url string) *models.Config {
 	// Read the response body
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	config := models.Config{}
 	err = yaml.Unmarshal(data, &config)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
-	return &config
+	return &config, nil
 }

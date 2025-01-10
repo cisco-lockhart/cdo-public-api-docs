@@ -4,8 +4,8 @@ Copyright © 2025 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"github.com/cisco-lockhart/fcm-api-docs-generator/models"
-	"github.com/cisco-lockhart/fcm-api-docs-generator/services"
+	"github.com/cisco-lockhart/cloud-fw-mgr-api-docs/models"
+	"github.com/cisco-lockhart/cloud-fw-mgr-api-docs/services"
 	"github.com/pterm/pterm"
 	"gopkg.in/yaml.v3"
 	"os"

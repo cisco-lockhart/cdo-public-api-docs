@@ -2,7 +2,7 @@ package services
 
 import (
 	"fmt"
-	"github.com/cisco-lockhart/fcm-api-docs-generator/models"
+	"github.com/cisco-lockhart/cloud-fw-mgr-api-docs/models"
 	"gopkg.in/yaml.v3"
 	"io"
 	"net/http"

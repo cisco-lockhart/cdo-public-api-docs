@@ -4,7 +4,7 @@ Copyright © 2025 Cisco Systems
 package cmd
 
 import (
-	"github.com/cisco-lockhart/fcm-api-docs-generator/services"
+	"github.com/cisco-lockhart/cloud-fw-mgr-api-docs/services"
 	"github.com/pterm/pterm"
 	"os"
 	"os/exec"
