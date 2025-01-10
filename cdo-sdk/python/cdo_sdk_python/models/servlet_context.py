@@ -41,10 +41,6 @@ class ServletContext(BaseModel):
     init_parameter_names: Optional[Dict[str, Any]] = Field(default=None, alias="initParameterNames")
     servlet_registrations: Optional[Dict[str, ServletRegistration]] = Field(default=None, alias="servletRegistrations")
     session_tracking_modes: Optional[List[StrictStr]] = Field(default=None, alias="sessionTrackingModes")
-    server_info: Optional[StrictStr] = Field(default=None, alias="serverInfo")
-    servlet_context_name: Optional[StrictStr] = Field(default=None, alias="servletContextName")
-    effective_major_version: Optional[StrictInt] = Field(default=None, alias="effectiveMajorVersion")
-    effective_minor_version: Optional[StrictInt] = Field(default=None, alias="effectiveMinorVersion")
     filter_registrations: Optional[Dict[str, FilterRegistration]] = Field(default=None, alias="filterRegistrations")
     session_cookie_config: Optional[SessionCookieConfig] = Field(default=None, alias="sessionCookieConfig")
     default_session_tracking_modes: Optional[List[StrictStr]] = Field(default=None, alias="defaultSessionTrackingModes")
@@ -53,7 +49,11 @@ class ServletContext(BaseModel):
     virtual_server_name: Optional[StrictStr] = Field(default=None, alias="virtualServerName")
     request_character_encoding: Optional[StrictStr] = Field(default=None, alias="requestCharacterEncoding")
     response_character_encoding: Optional[StrictStr] = Field(default=None, alias="responseCharacterEncoding")
-    __properties: ClassVar[List[str]] = ["sessionTimeout", "classLoader", "majorVersion", "minorVersion", "attributeNames", "contextPath", "initParameterNames", "servletRegistrations", "sessionTrackingModes", "serverInfo", "servletContextName", "effectiveMajorVersion", "effectiveMinorVersion", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding"]
+    effective_major_version: Optional[StrictInt] = Field(default=None, alias="effectiveMajorVersion")
+    effective_minor_version: Optional[StrictInt] = Field(default=None, alias="effectiveMinorVersion")
+    server_info: Optional[StrictStr] = Field(default=None, alias="serverInfo")
+    servlet_context_name: Optional[StrictStr] = Field(default=None, alias="servletContextName")
+    __properties: ClassVar[List[str]] = ["sessionTimeout", "classLoader", "majorVersion", "minorVersion", "attributeNames", "contextPath", "initParameterNames", "servletRegistrations", "sessionTrackingModes", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "effectiveMajorVersion", "effectiveMinorVersion", "serverInfo", "servletContextName"]
 
     @field_validator('session_tracking_modes')
     def session_tracking_modes_validate_enum(cls, value):
@@ -176,10 +176,6 @@ class ServletContext(BaseModel):
             if obj.get("servletRegistrations") is not None
             else None,
             "sessionTrackingModes": obj.get("sessionTrackingModes"),
-            "serverInfo": obj.get("serverInfo"),
-            "servletContextName": obj.get("servletContextName"),
-            "effectiveMajorVersion": obj.get("effectiveMajorVersion"),
-            "effectiveMinorVersion": obj.get("effectiveMinorVersion"),
             "filterRegistrations": dict(
                 (_k, FilterRegistration.from_dict(_v))
                 for _k, _v in obj["filterRegistrations"].items()
@@ -192,7 +188,11 @@ class ServletContext(BaseModel):
             "jspConfigDescriptor": JspConfigDescriptor.from_dict(obj["jspConfigDescriptor"]) if obj.get("jspConfigDescriptor") is not None else None,
             "virtualServerName": obj.get("virtualServerName"),
             "requestCharacterEncoding": obj.get("requestCharacterEncoding"),
-            "responseCharacterEncoding": obj.get("responseCharacterEncoding")
+            "responseCharacterEncoding": obj.get("responseCharacterEncoding"),
+            "effectiveMajorVersion": obj.get("effectiveMajorVersion"),
+            "effectiveMinorVersion": obj.get("effectiveMinorVersion"),
+            "serverInfo": obj.get("serverInfo"),
+            "servletContextName": obj.get("servletContextName")
         })
         return _obj
 

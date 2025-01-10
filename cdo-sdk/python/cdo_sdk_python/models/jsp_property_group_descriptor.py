@@ -27,20 +27,20 @@ class JspPropertyGroupDescriptor(BaseModel):
     """
     JspPropertyGroupDescriptor
     """ # noqa: E501
+    el_ignored: Optional[StrictStr] = Field(default=None, alias="elIgnored")
+    error_on_el_not_found: Optional[StrictStr] = Field(default=None, alias="errorOnELNotFound")
+    page_encoding: Optional[StrictStr] = Field(default=None, alias="pageEncoding")
     scripting_invalid: Optional[StrictStr] = Field(default=None, alias="scriptingInvalid")
     is_xml: Optional[StrictStr] = Field(default=None, alias="isXml")
     include_preludes: Optional[List[StrictStr]] = Field(default=None, alias="includePreludes")
     include_codas: Optional[List[StrictStr]] = Field(default=None, alias="includeCodas")
     deferred_syntax_allowed_as_literal: Optional[StrictStr] = Field(default=None, alias="deferredSyntaxAllowedAsLiteral")
-    el_ignored: Optional[StrictStr] = Field(default=None, alias="elIgnored")
-    error_on_el_not_found: Optional[StrictStr] = Field(default=None, alias="errorOnELNotFound")
-    page_encoding: Optional[StrictStr] = Field(default=None, alias="pageEncoding")
     trim_directive_whitespaces: Optional[StrictStr] = Field(default=None, alias="trimDirectiveWhitespaces")
     error_on_undeclared_namespace: Optional[StrictStr] = Field(default=None, alias="errorOnUndeclaredNamespace")
     buffer: Optional[StrictStr] = None
     default_content_type: Optional[StrictStr] = Field(default=None, alias="defaultContentType")
     url_patterns: Optional[List[StrictStr]] = Field(default=None, alias="urlPatterns")
-    __properties: ClassVar[List[str]] = ["scriptingInvalid", "isXml", "includePreludes", "includeCodas", "deferredSyntaxAllowedAsLiteral", "elIgnored", "errorOnELNotFound", "pageEncoding", "trimDirectiveWhitespaces", "errorOnUndeclaredNamespace", "buffer", "defaultContentType", "urlPatterns"]
+    __properties: ClassVar[List[str]] = ["elIgnored", "errorOnELNotFound", "pageEncoding", "scriptingInvalid", "isXml", "includePreludes", "includeCodas", "deferredSyntaxAllowedAsLiteral", "trimDirectiveWhitespaces", "errorOnUndeclaredNamespace", "buffer", "defaultContentType", "urlPatterns"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,14 +93,14 @@ class JspPropertyGroupDescriptor(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "elIgnored": obj.get("elIgnored"),
+            "errorOnELNotFound": obj.get("errorOnELNotFound"),
+            "pageEncoding": obj.get("pageEncoding"),
             "scriptingInvalid": obj.get("scriptingInvalid"),
             "isXml": obj.get("isXml"),
             "includePreludes": obj.get("includePreludes"),
             "includeCodas": obj.get("includeCodas"),
             "deferredSyntaxAllowedAsLiteral": obj.get("deferredSyntaxAllowedAsLiteral"),
-            "elIgnored": obj.get("elIgnored"),
-            "errorOnELNotFound": obj.get("errorOnELNotFound"),
-            "pageEncoding": obj.get("pageEncoding"),
             "trimDirectiveWhitespaces": obj.get("trimDirectiveWhitespaces"),
             "errorOnUndeclaredNamespace": obj.get("errorOnUndeclaredNamespace"),
             "buffer": obj.get("buffer"),

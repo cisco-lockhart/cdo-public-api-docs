@@ -14,10 +14,6 @@ Name | Type | Description | Notes
 **init_parameter_names** | **object** |  | [optional] 
 **servlet_registrations** | [**Dict[str, ServletRegistration]**](ServletRegistration.md) |  | [optional] 
 **session_tracking_modes** | **List[str]** |  | [optional] 
-**server_info** | **str** |  | [optional] 
-**servlet_context_name** | **str** |  | [optional] 
-**effective_major_version** | **int** |  | [optional] 
-**effective_minor_version** | **int** |  | [optional] 
 **filter_registrations** | [**Dict[str, FilterRegistration]**](FilterRegistration.md) |  | [optional] 
 **session_cookie_config** | [**SessionCookieConfig**](SessionCookieConfig.md) |  | [optional] 
 **default_session_tracking_modes** | **List[str]** |  | [optional] 
@@ -26,6 +22,10 @@ Name | Type | Description | Notes
 **virtual_server_name** | **str** |  | [optional] 
 **request_character_encoding** | **str** |  | [optional] 
 **response_character_encoding** | **str** |  | [optional] 
+**effective_major_version** | **int** |  | [optional] 
+**effective_minor_version** | **int** |  | [optional] 
+**server_info** | **str** |  | [optional] 
+**servlet_context_name** | **str** |  | [optional] 
 
 ## Example
 

@@ -9410,9 +9410,9 @@ components:
       properties:
         error:
           type: boolean
-        is4xxClientError:
-          type: boolean
         is5xxServerError:
+          type: boolean
+        is4xxClientError:
           type: boolean
         is1xxInformational:
           type: boolean
@@ -9423,17 +9423,23 @@ components:
     JspConfigDescriptor:
       type: object
       properties:
-        taglibs:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaglibDescriptor'
         jspPropertyGroups:
           type: array
           items:
             $ref: '#/components/schemas/JspPropertyGroupDescriptor'
+        taglibs:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaglibDescriptor'
     JspPropertyGroupDescriptor:
       type: object
       properties:
+        elIgnored:
+          type: string
+        errorOnELNotFound:
+          type: string
+        pageEncoding:
+          type: string
         scriptingInvalid:
           type: string
         isXml:
@@ -9447,12 +9453,6 @@ components:
           items:
             type: string
         deferredSyntaxAllowedAsLiteral:
-          type: string
-        elIgnored:
-          type: string
-        errorOnELNotFound:
-          type: string
-        pageEncoding:
           type: string
         trimDirectiveWhitespaces:
           type: string
@@ -9523,17 +9523,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
-          writeOnly: true
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
           writeOnly: true
     ServletContext:
       type: object
@@ -9606,16 +9606,6 @@ components:
               - COOKIE
               - URL
               - SSL
-        serverInfo:
-          type: string
-        servletContextName:
-          type: string
-        effectiveMajorVersion:
-          type: integer
-          format: int32
-        effectiveMinorVersion:
-          type: integer
-          format: int32
         filterRegistrations:
           type: object
           additionalProperties:
@@ -9647,6 +9637,16 @@ components:
         requestCharacterEncoding:
           type: string
         responseCharacterEncoding:
+          type: string
+        effectiveMajorVersion:
+          type: integer
+          format: int32
+        effectiveMinorVersion:
+          type: integer
+          format: int32
+        serverInfo:
+          type: string
+        servletContextName:
           type: string
     ServletRegistration:
       type: object
@@ -9681,10 +9681,10 @@ components:
         comment:
           type: string
           deprecated: true
-        secure:
-          type: boolean
         domain:
           type: string
+        secure:
+          type: boolean
         maxAge:
           type: integer
           format: int32
