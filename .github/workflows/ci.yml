@@ -31,7 +31,6 @@ jobs:
       - name: Release Snapshot
         uses: goreleaser/goreleaser-action@v6
         with:
-          version: snapshot
           args: release --snapshot
           workdir: 'scripts/golang'
       - name: Archive Snapshots
