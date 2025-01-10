@@ -36,7 +36,11 @@ var generateSdksCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		generatePythonSdk(openAPISpecPath, &openApiSpec)
+		version, err := generatePythonSdk(openAPISpecPath, &openApiSpec)
+		if err != nil {
+			pterm.Error.Println("Failed to generate Python SDK", err)
+			os.Exit(1)
+		}
 
 		shouldPublish, err := cmd.Flags().GetBool("publish")
 		if err != nil {
@@ -50,34 +54,40 @@ var generateSdksCmd = &cobra.Command{
 				os.Exit(1)
 			}
 			// golang cobra does not support nil flag values
-			publishPythonSdk(pypiToken)
+			publishPythonSdk(pypiToken, *version)
 		}
 	},
 }
 
-func generatePythonSdk(openApiFile string, openApiSpec *models.OpenAPI) {
+func generatePythonSdk(openApiFile string, openApiSpec *models.OpenAPI) (*string, error) {
 	// Generate Python SDK
 	version, err := services.GetCurrentVersion(openApiSpec.Info.Version)
 	if err != nil {
 		pterm.Error.Println("Failed to get current version", err)
-		return
+		return nil, err
 	}
 	pterm.Info.Printf("Generating Python SDK with version %s\n", *version)
 	spinner, _ := pterm.DefaultSpinner.Start("Generating Python SDK...")
 	err = services.GeneratePythonSdk(openApiFile, *version)
 	if err != nil {
-		spinner.Fail("Error generating Python SDK")
+		spinner.Fail("Error generating Python SDK", err)
 		os.Exit(1)
 	}
 	spinner.Success("Python SDK generated successfully")
+
+	return version, nil
 }
 
-func publishPythonSdk(pypiToken string) {
+func publishPythonSdk(pypiToken string, version string) {
 	// Publish Python SDK
 	spinner, _ := pterm.DefaultSpinner.Start("Publishing Python SDK...")
-	err := services.PublishPythonSdk(pypiToken)
+	var tokenPtr *string
+	if pypiToken != "" {
+		tokenPtr = &pypiToken
+	}
+	err := services.PublishPythonSdk(tokenPtr, version)
 	if err != nil {
-		spinner.Fail("Error publishing Python SDK")
+		spinner.Fail("Error publishing Python SDK", err)
 		os.Exit(1)
 	}
 	spinner.Success("Python SDK published successfully")

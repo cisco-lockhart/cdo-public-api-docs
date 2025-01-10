@@ -15,7 +15,7 @@ import (
 
 var nodePackagesToInstall = []string{"openapi-to-postmanv2", "@openapitools/openapi-generator-cli"}
 var homebrewPackages = []string{"pipx"}
-var pipxPackages = []string{"twine"}
+var pipxPackages = []string{"twine", "wheel"}
 
 // installPreReqsCmd represents the installPreReqs command
 var installPreReqsCmd = &cobra.Command{
