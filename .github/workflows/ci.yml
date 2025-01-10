@@ -1,3 +1,9 @@
+name: build OpenAPI docs generation tool
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
 jobs:
   test:
     runs-on: ubuntu-latest
