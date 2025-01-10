@@ -44,3 +44,16 @@ changelog:
     exclude:
       - "^docs:"
       - "^test:"
+
+nfpms:
+  -
+    id: cloud-fw-mgr-api-docs
+    section: default
+    priority: extra
+    maintainer: "CDO Ops <cdo.ops@cisco.com>"
+    formats:
+      - deb
+    description: |
+        Cloud Firewall Manager API Docs
+    vendor: "Cisco Systems"
+    homepage: "https://www.cisco.com"
