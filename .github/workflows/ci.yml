@@ -69,7 +69,7 @@ jobs:
       - name: Build using Goreleaser
         uses: goreleaser/goreleaser-action@v6
         with:
-          args: release --debug --clean
+          args: release
           workdir: 'scripts/golang'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
