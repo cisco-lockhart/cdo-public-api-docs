@@ -41,19 +41,19 @@ class ServletContext(BaseModel):
     init_parameter_names: Optional[Dict[str, Any]] = Field(default=None, alias="initParameterNames")
     servlet_registrations: Optional[Dict[str, ServletRegistration]] = Field(default=None, alias="servletRegistrations")
     session_tracking_modes: Optional[List[StrictStr]] = Field(default=None, alias="sessionTrackingModes")
-    jsp_config_descriptor: Optional[JspConfigDescriptor] = Field(default=None, alias="jspConfigDescriptor")
-    virtual_server_name: Optional[StrictStr] = Field(default=None, alias="virtualServerName")
-    request_character_encoding: Optional[StrictStr] = Field(default=None, alias="requestCharacterEncoding")
-    response_character_encoding: Optional[StrictStr] = Field(default=None, alias="responseCharacterEncoding")
     filter_registrations: Optional[Dict[str, FilterRegistration]] = Field(default=None, alias="filterRegistrations")
     session_cookie_config: Optional[SessionCookieConfig] = Field(default=None, alias="sessionCookieConfig")
     default_session_tracking_modes: Optional[List[StrictStr]] = Field(default=None, alias="defaultSessionTrackingModes")
     effective_session_tracking_modes: Optional[List[StrictStr]] = Field(default=None, alias="effectiveSessionTrackingModes")
+    jsp_config_descriptor: Optional[JspConfigDescriptor] = Field(default=None, alias="jspConfigDescriptor")
+    virtual_server_name: Optional[StrictStr] = Field(default=None, alias="virtualServerName")
+    request_character_encoding: Optional[StrictStr] = Field(default=None, alias="requestCharacterEncoding")
+    response_character_encoding: Optional[StrictStr] = Field(default=None, alias="responseCharacterEncoding")
     effective_major_version: Optional[StrictInt] = Field(default=None, alias="effectiveMajorVersion")
     effective_minor_version: Optional[StrictInt] = Field(default=None, alias="effectiveMinorVersion")
     server_info: Optional[StrictStr] = Field(default=None, alias="serverInfo")
     servlet_context_name: Optional[StrictStr] = Field(default=None, alias="servletContextName")
-    __properties: ClassVar[List[str]] = ["sessionTimeout", "classLoader", "majorVersion", "minorVersion", "attributeNames", "contextPath", "initParameterNames", "servletRegistrations", "sessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "effectiveMajorVersion", "effectiveMinorVersion", "serverInfo", "servletContextName"]
+    __properties: ClassVar[List[str]] = ["sessionTimeout", "classLoader", "majorVersion", "minorVersion", "attributeNames", "contextPath", "initParameterNames", "servletRegistrations", "sessionTrackingModes", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "effectiveMajorVersion", "effectiveMinorVersion", "serverInfo", "servletContextName"]
 
     @field_validator('session_tracking_modes')
     def session_tracking_modes_validate_enum(cls, value):
@@ -137,9 +137,6 @@ class ServletContext(BaseModel):
                 if self.servlet_registrations[_key]:
                     _field_dict[_key] = self.servlet_registrations[_key].to_dict()
             _dict['servletRegistrations'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of jsp_config_descriptor
-        if self.jsp_config_descriptor:
-            _dict['jspConfigDescriptor'] = self.jsp_config_descriptor.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in filter_registrations (dict)
         _field_dict = {}
         if self.filter_registrations:
@@ -150,6 +147,9 @@ class ServletContext(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of session_cookie_config
         if self.session_cookie_config:
             _dict['sessionCookieConfig'] = self.session_cookie_config.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of jsp_config_descriptor
+        if self.jsp_config_descriptor:
+            _dict['jspConfigDescriptor'] = self.jsp_config_descriptor.to_dict()
         return _dict
 
     @classmethod
@@ -176,10 +176,6 @@ class ServletContext(BaseModel):
             if obj.get("servletRegistrations") is not None
             else None,
             "sessionTrackingModes": obj.get("sessionTrackingModes"),
-            "jspConfigDescriptor": JspConfigDescriptor.from_dict(obj["jspConfigDescriptor"]) if obj.get("jspConfigDescriptor") is not None else None,
-            "virtualServerName": obj.get("virtualServerName"),
-            "requestCharacterEncoding": obj.get("requestCharacterEncoding"),
-            "responseCharacterEncoding": obj.get("responseCharacterEncoding"),
             "filterRegistrations": dict(
                 (_k, FilterRegistration.from_dict(_v))
                 for _k, _v in obj["filterRegistrations"].items()
@@ -189,6 +185,10 @@ class ServletContext(BaseModel):
             "sessionCookieConfig": SessionCookieConfig.from_dict(obj["sessionCookieConfig"]) if obj.get("sessionCookieConfig") is not None else None,
             "defaultSessionTrackingModes": obj.get("defaultSessionTrackingModes"),
             "effectiveSessionTrackingModes": obj.get("effectiveSessionTrackingModes"),
+            "jspConfigDescriptor": JspConfigDescriptor.from_dict(obj["jspConfigDescriptor"]) if obj.get("jspConfigDescriptor") is not None else None,
+            "virtualServerName": obj.get("virtualServerName"),
+            "requestCharacterEncoding": obj.get("requestCharacterEncoding"),
+            "responseCharacterEncoding": obj.get("responseCharacterEncoding"),
             "effectiveMajorVersion": obj.get("effectiveMajorVersion"),
             "effectiveMinorVersion": obj.get("effectiveMinorVersion"),
             "serverInfo": obj.get("serverInfo"),
