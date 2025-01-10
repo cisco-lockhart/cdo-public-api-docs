@@ -35,7 +35,7 @@ jobs:
           workdir: 'scripts/golang'
       - name: Archive Snapshots
         if: always()
-        uses: actions/upload-artifact@v4.6.0
+        uses: actions/upload-artifact@v4
         with:
           name: dist-snapshots
-          path: scripts/golang/dist/
+          path: scripts/golang/dist/*.tar.gz
