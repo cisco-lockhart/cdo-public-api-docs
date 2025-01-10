@@ -30,16 +30,16 @@ jobs:
           ginkgo -r
 
       - name: Release Snapshot
-        working-directory: scripts/golang
         uses: goreleaser/goreleaser-action@v6
+        working-directory: scripts/golang
         with:
           version: snapshot
           args: release --snapshot
 
       - name: Archive Snapshots
         if: always()
-        working-directory: scripts/golang
         uses: actions/upload-artifact@v4.6.0
+        working-directory: scripts/golang
         with:
           name: dist-snapshots
           path: dist/
