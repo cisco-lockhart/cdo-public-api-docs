@@ -1,1 +1,7 @@
 node_modules/
+.DS_Store
+**/.idea
+**/.DS_Store
+scripts/golang/sdks/
+scripts/golang/openapitools.json
+**/cloud-fw-mgr-api-docs

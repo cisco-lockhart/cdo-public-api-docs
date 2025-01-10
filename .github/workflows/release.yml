@@ -1,0 +1,25 @@
+name: Release using Goreleaser
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+
+      - name: Build using Goreleaser
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          args: release
+          workdir: 'scripts/golang'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
