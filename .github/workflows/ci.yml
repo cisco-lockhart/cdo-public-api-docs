@@ -26,19 +26,17 @@ jobs:
       - name: Run tests
         working-directory: scripts/golang
         run: |
-          cd scripts/golang
           ginkgo -r
 
       - name: Release Snapshot
-        working-directory: scripts/golang
         uses: goreleaser/goreleaser-action@v6
         with:
           version: snapshot
           args: release --snapshot
+          workdir: 'scripts/golang'
       - name: Archive Snapshots
-        working-directory: scripts/golang
         if: always()
         uses: actions/upload-artifact@v4.6.0
         with:
           name: dist-snapshots
-          path: dist/
+          path: scripts/golang/dist/
