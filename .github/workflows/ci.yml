@@ -52,6 +52,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
   release:
     runs-on: ubuntu-latest
+    depends-on: build
 
     steps:
       - name: Checkout code
