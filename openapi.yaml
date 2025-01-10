@@ -9410,9 +9410,9 @@ components:
       properties:
         error:
           type: boolean
-        is5xxServerError:
-          type: boolean
         is4xxClientError:
+          type: boolean
+        is5xxServerError:
           type: boolean
         is1xxInformational:
           type: boolean
@@ -9523,17 +9523,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
+          writeOnly: true
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
           writeOnly: true
     ServletContext:
       type: object
@@ -9681,19 +9681,19 @@ components:
         comment:
           type: string
           deprecated: true
-        domain:
-          type: string
         secure:
           type: boolean
+        domain:
+          type: string
         maxAge:
           type: integer
           format: int32
     TaglibDescriptor:
       type: object
       properties:
-        taglibLocation:
-          type: string
         taglibURI:
+          type: string
+        taglibLocation:
           type: string
     JsonWebKey:
       type: object
