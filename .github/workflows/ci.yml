@@ -57,6 +57,5 @@ jobs:
 
       - name: Create Github release
         uses: ncipollo/release-action@v1
-        working-directory: scripts/golang
         with:
-          artifacts: dist/cdo-public-api-docs_darwin_arm64/*,dist/cdo-public-api-docs_linux_amd64_v1/*
+          artifacts: scripts/golang/dist/cdo-public-api-docs_darwin_arm64/*,scripts/golang/dist/cdo-public-api-docs_linux_amd64_v1/*
