@@ -9434,6 +9434,8 @@ components:
     JspPropertyGroupDescriptor:
       type: object
       properties:
+        buffer:
+          type: string
         elIgnored:
           type: string
         errorOnELNotFound:
@@ -9457,8 +9459,6 @@ components:
         trimDirectiveWhitespaces:
           type: string
         errorOnUndeclaredNamespace:
-          type: string
-        buffer:
           type: string
         defaultContentType:
           type: string
@@ -9606,14 +9606,6 @@ components:
               - COOKIE
               - URL
               - SSL
-        jspConfigDescriptor:
-          $ref: '#/components/schemas/JspConfigDescriptor'
-        virtualServerName:
-          type: string
-        requestCharacterEncoding:
-          type: string
-        responseCharacterEncoding:
-          type: string
         filterRegistrations:
           type: object
           additionalProperties:
@@ -9638,6 +9630,14 @@ components:
               - COOKIE
               - URL
               - SSL
+        jspConfigDescriptor:
+          $ref: '#/components/schemas/JspConfigDescriptor'
+        virtualServerName:
+          type: string
+        requestCharacterEncoding:
+          type: string
+        responseCharacterEncoding:
+          type: string
         effectiveMajorVersion:
           type: integer
           format: int32
