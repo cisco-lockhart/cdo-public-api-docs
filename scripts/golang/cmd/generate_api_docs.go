@@ -86,6 +86,4 @@ func init() {
 	}
 	defaultOutputFile := filepath.Join(currDir, "openapi.yaml")
 	generateCmd.Flags().StringP("output", "o", defaultOutputFile, fmt.Sprintf("Specify the output file path to write the merged OpenAPI spec to (default: %s)", defaultOutputFile))
-	generateCmd.Flags().BoolP("generate-sdks", "s", true, "Generate SDKs from the merged OpenAPI spec")
-	generateCmd.Flags().BoolP("generate-postman-collection", "d", true, "Generate documentation from the merged OpenAPI spec")
 }
