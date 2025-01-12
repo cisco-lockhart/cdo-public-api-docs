@@ -24,7 +24,7 @@ var installPreReqsCmd = &cobra.Command{
 	Long:  `Installs all the pre-requisites (such as NPM etc) to allow the CLI tool to generate SDKs etc. Only supports MacOS at the moment. Requires npm to be installed and in your path.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if runtime.GOOS != "darwin" {
-			pterm.Error.Println("This command is only supported on MacOS at the moment.")
+			pterm.Warning.Println("This command will not install pipx.")
 			return
 		}
 		npmVersionCmd := exec.Command("npm", "-v")
@@ -42,13 +42,15 @@ var installPreReqsCmd = &cobra.Command{
 			}
 			spinner.Success("Node package " + nodePackage + " installed successfully")
 		}
-		for _, brewPackage := range homebrewPackages {
-			spinner, _ := pterm.DefaultSpinner.Start("Installing brew package " + brewPackage)
-			if err := services.InstallHomebrewPackage("pipx"); err != nil {
-				spinner.Fail("Error installing brew package", brewPackage)
-				os.Exit(1)
+		if runtime.GOOS == "darwin" {
+			for _, brewPackage := range homebrewPackages {
+				spinner, _ := pterm.DefaultSpinner.Start("Installing brew package " + brewPackage)
+				if err := services.InstallHomebrewPackage("pipx"); err != nil {
+					spinner.Fail("Error installing brew package", brewPackage)
+					os.Exit(1)
+				}
+				spinner.Success("Homebrew package " + brewPackage + " installed successfully")
 			}
-			spinner.Success("Homebrew package " + brewPackage + " installed successfully")
 		}
 		for _, pipxPackage := range pipxPackages {
 			spinner, _ := pterm.DefaultSpinner.Start("Installing pipx package " + pipxPackage)
