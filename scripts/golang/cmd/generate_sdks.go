@@ -73,7 +73,7 @@ func generatePythonSdk(openApiFile string, useLocalInstallation bool, openApiSpe
 	}
 	pterm.Info.Printf("Generating Python SDK with version %s\n", *version)
 	spinner, _ := pterm.DefaultSpinner.Start("Generating Python SDK...")
-	err = services.GeneratePythonSdk(openApiFile, *version)
+	err = services.GeneratePythonSdk(openApiFile, *version, useLocalInstallation)
 	if err != nil {
 		spinner.Fail("Error generating Python SDK", err)
 		os.Exit(1)
@@ -110,6 +110,6 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	generateSdksCmd.Flags().BoolP("publish", "p", false, "Publish package to repositories after generation")
-	generateSdksCmd.Flags().BoolP("use-local-installation", "p", false, "Install @openapitools/openapi-generator-cli locally and use local installation instead of global installation. This is required for Jenins agents, where the global installation fails.")
+	generateSdksCmd.Flags().BoolP("use-local-installation", "l", false, "Install @openapitools/openapi-generator-cli locally and use local installation instead of global installation. This is required for Jenins agents, where the global installation fails.")
 	generateSdksCmd.Flags().StringP("pypi-token", "t", "", "PyPI token to use for publishing the package. If not specified, it will pull the token from AWS secrets manager.")
 }

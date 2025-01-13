@@ -5,7 +5,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
 	"github.com/pterm/pterm"
-	"os/exec"
 )
 
 func GeneratePythonSdk(openapiFile string, version string, useLocalInstallation bool) error {
@@ -19,7 +18,7 @@ func GeneratePythonSdk(openapiFile string, version string, useLocalInstallation 
 	} else {
 		commandName = "@openapitools/openapi-generator-cli"
 	}
-	_, err := exec.Command("npx",
+	_, err := ExecCommand("npx",
 		commandName,
 		"generate",
 		"-i", openapiFile,
@@ -37,7 +36,7 @@ func PublishPythonSdk(pypiToken *string, version string) error {
 			return err
 		}
 	}
-	cmd := exec.Command("bash", "-c", "cd sdks/python && rm -rf dist build *.egg-info && python3 setup.py sdist bdist_wheel")
+	cmd := ExecCommand("bash", "-c", "cd sdks/python && rm -rf dist build *.egg-info && python3 setup.py sdist bdist_wheel")
 	out, err := cmd.Output()
 	if err != nil {
 		pterm.Error.Println(string(out))

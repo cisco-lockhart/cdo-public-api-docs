@@ -32,7 +32,7 @@ jobs:
       - name: Run tests
         working-directory: scripts/golang
         run: |
-          ginkgo -r
+          ginkgo -r -v
 
       - name: Build Snapshots using Goreleaser
         if: github.ref != 'refs/heads/main'

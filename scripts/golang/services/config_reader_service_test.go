@@ -8,21 +8,19 @@ import (
 
 var _ = Describe("ConfigReaderService", func() {
 	Describe("LoadConfig", func() {
-		Context("when the URL is valid", func() {
-			It("should return a valid configuration", func() {
-				url := "https://raw.githubusercontent.com/cisco-lockhart/cdo-public-api-docs/refs/heads/LH-89186-improve-api-doc-generation/cloud-fw-mgr-api-docs.config.yaml"
-				config, err := services.LoadConfig(url)
-				Expect(config).NotTo(BeNil())
-				Expect(err).To(BeNil())
-				Expect(config.Services).NotTo(BeEmpty())
-			})
+		It("should return a valid configuration", func() {
+			url := "https://raw.githubusercontent.com/cisco-lockhart/cdo-public-api-docs/refs/heads/LH-89186-improve-api-doc-generation/cloud-fw-mgr-api-docs.config.yaml"
+			config, err := services.LoadConfig(url)
+			Expect(config).NotTo(BeNil())
+			Expect(err).To(BeNil())
+			Expect(config.Services).NotTo(BeEmpty())
+		})
 
-			It("should fail if the URL is not a valid YAML", func() {
-				invalidUrl := "https://raw.githubusercontent.com/cisco-lockhart/cdo-public-api-docs/refs/heads/main/README.md"
-				config, err := services.LoadConfig(invalidUrl)
-				Expect(config).To(BeNil())
-				Expect(err).NotTo(BeNil())
-			})
+		It("should fail if the URL is not a valid YAML", func() {
+			invalidUrl := "https://raw.githubusercontent.com/cisco-lockhart/cdo-public-api-docs/refs/heads/main/README.md"
+			config, err := services.LoadConfig(invalidUrl)
+			Expect(config).To(BeNil())
+			Expect(err).NotTo(BeNil())
 		})
 	})
 })
