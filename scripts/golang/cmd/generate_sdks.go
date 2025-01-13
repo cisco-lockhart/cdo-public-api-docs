@@ -35,8 +35,13 @@ var generateSdksCmd = &cobra.Command{
 			pterm.Error.Println("Failed to unmarshal OpenAPI spec", err)
 			os.Exit(1)
 		}
+		useLocalInstallation, err := cmd.Flags().GetBool("use-local-installation")
+		if err != nil {
+			pterm.Error.Println("Failed to get publish flag", err)
+			os.Exit(1)
+		}
 
-		version, err := generatePythonSdk(openAPISpecPath, &openApiSpec)
+		version, err := generatePythonSdk(openAPISpecPath, useLocalInstallation, &openApiSpec)
 		if err != nil {
 			pterm.Error.Println("Failed to generate Python SDK", err)
 			os.Exit(1)
@@ -59,7 +64,7 @@ var generateSdksCmd = &cobra.Command{
 	},
 }
 
-func generatePythonSdk(openApiFile string, openApiSpec *models.OpenAPI) (*string, error) {
+func generatePythonSdk(openApiFile string, useLocalInstallation bool, openApiSpec *models.OpenAPI) (*string, error) {
 	// Generate Python SDK
 	version, err := services.GetCurrentVersion(openApiSpec.Info.Version)
 	if err != nil {
@@ -105,5 +110,6 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	generateSdksCmd.Flags().BoolP("publish", "p", false, "Publish package to repositories after generation")
+	generateSdksCmd.Flags().BoolP("use-local-installation", "p", false, "Install @openapitools/openapi-generator-cli locally and use local installation instead of global installation. This is required for Jenins agents, where the global installation fails.")
 	generateSdksCmd.Flags().StringP("pypi-token", "t", "", "PyPI token to use for publishing the package. If not specified, it will pull the token from AWS secrets manager.")
 }

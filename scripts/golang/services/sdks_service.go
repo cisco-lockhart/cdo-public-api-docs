@@ -8,9 +8,19 @@ import (
 	"os/exec"
 )
 
-func GeneratePythonSdk(openapiFile string, version string) error {
+func GeneratePythonSdk(openapiFile string, version string, useLocalInstallation bool) error {
+	var commandName string
+	if useLocalInstallation {
+		err := InstallNodePackageGloballyOrLocally("@openapitools/openapi-generator-cli", false)
+		if err != nil {
+			return err
+		}
+		commandName = "./node_modules/@openapitools/openapi-generator-cli"
+	} else {
+		commandName = "@openapitools/openapi-generator-cli"
+	}
 	_, err := exec.Command("npx",
-		"@openapitools/openapi-generator-cli",
+		commandName,
 		"generate",
 		"-i", openapiFile,
 		"-g", "python",
