@@ -9523,17 +9523,17 @@ components:
           type: boolean
         propagateQueryProperties:
           type: boolean
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-          writeOnly: true
         attributesMap:
           type: object
           additionalProperties:
             type: object
         attributesCSV:
           type: string
+          writeOnly: true
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
           writeOnly: true
     ServletContext:
       type: object
@@ -9606,14 +9606,6 @@ components:
               - COOKIE
               - URL
               - SSL
-        jspConfigDescriptor:
-          $ref: '#/components/schemas/JspConfigDescriptor'
-        virtualServerName:
-          type: string
-        requestCharacterEncoding:
-          type: string
-        responseCharacterEncoding:
-          type: string
         filterRegistrations:
           type: object
           additionalProperties:
@@ -9638,6 +9630,14 @@ components:
               - COOKIE
               - URL
               - SSL
+        jspConfigDescriptor:
+          $ref: '#/components/schemas/JspConfigDescriptor'
+        virtualServerName:
+          type: string
+        requestCharacterEncoding:
+          type: string
+        responseCharacterEncoding:
+          type: string
         effectiveMajorVersion:
           type: integer
           format: int32
@@ -9681,10 +9681,10 @@ components:
         comment:
           type: string
           deprecated: true
-        domain:
-          type: string
         secure:
           type: boolean
+        domain:
+          type: string
         maxAge:
           type: integer
           format: int32
