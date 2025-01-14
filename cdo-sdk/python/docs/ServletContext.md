@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**session_timeout** | **int** |  | [optional] 
 **class_loader** | [**ApplicationContextClassLoaderParentUnnamedModuleClassLoader**](ApplicationContextClassLoaderParentUnnamedModuleClassLoader.md) |  | [optional] 
 **major_version** | **int** |  | [optional] 
 **minor_version** | **int** |  | [optional] 
+**session_timeout** | **int** |  | [optional] 
 **attribute_names** | **object** |  | [optional] 
 **context_path** | **str** |  | [optional] 
 **init_parameter_names** | **object** |  | [optional] 

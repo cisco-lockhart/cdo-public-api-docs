@@ -9410,27 +9410,27 @@ components:
       properties:
         error:
           type: boolean
-        is4xxClientError:
-          type: boolean
-        is5xxServerError:
-          type: boolean
         is1xxInformational:
           type: boolean
         is2xxSuccessful:
           type: boolean
         is3xxRedirection:
           type: boolean
+        is4xxClientError:
+          type: boolean
+        is5xxServerError:
+          type: boolean
     JspConfigDescriptor:
       type: object
       properties:
-        jspPropertyGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/JspPropertyGroupDescriptor'
         taglibs:
           type: array
           items:
             $ref: '#/components/schemas/TaglibDescriptor'
+        jspPropertyGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/JspPropertyGroupDescriptor'
     JspPropertyGroupDescriptor:
       type: object
       properties:
@@ -9538,9 +9538,6 @@ components:
     ServletContext:
       type: object
       properties:
-        sessionTimeout:
-          type: integer
-          format: int32
         classLoader:
           type: object
           properties:
@@ -9584,6 +9581,9 @@ components:
           type: integer
           format: int32
         minorVersion:
+          type: integer
+          format: int32
+        sessionTimeout:
           type: integer
           format: int32
         attributeNames:

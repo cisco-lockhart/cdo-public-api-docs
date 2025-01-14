@@ -32,10 +32,10 @@ class ServletContext(BaseModel):
     """
     ServletContext
     """ # noqa: E501
-    session_timeout: Optional[StrictInt] = Field(default=None, alias="sessionTimeout")
     class_loader: Optional[ApplicationContextClassLoaderParentUnnamedModuleClassLoader] = Field(default=None, alias="classLoader")
     major_version: Optional[StrictInt] = Field(default=None, alias="majorVersion")
     minor_version: Optional[StrictInt] = Field(default=None, alias="minorVersion")
+    session_timeout: Optional[StrictInt] = Field(default=None, alias="sessionTimeout")
     attribute_names: Optional[Dict[str, Any]] = Field(default=None, alias="attributeNames")
     context_path: Optional[StrictStr] = Field(default=None, alias="contextPath")
     init_parameter_names: Optional[Dict[str, Any]] = Field(default=None, alias="initParameterNames")
@@ -53,7 +53,7 @@ class ServletContext(BaseModel):
     effective_minor_version: Optional[StrictInt] = Field(default=None, alias="effectiveMinorVersion")
     server_info: Optional[StrictStr] = Field(default=None, alias="serverInfo")
     servlet_context_name: Optional[StrictStr] = Field(default=None, alias="servletContextName")
-    __properties: ClassVar[List[str]] = ["sessionTimeout", "classLoader", "majorVersion", "minorVersion", "attributeNames", "contextPath", "initParameterNames", "servletRegistrations", "sessionTrackingModes", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "effectiveMajorVersion", "effectiveMinorVersion", "serverInfo", "servletContextName"]
+    __properties: ClassVar[List[str]] = ["classLoader", "majorVersion", "minorVersion", "sessionTimeout", "attributeNames", "contextPath", "initParameterNames", "servletRegistrations", "sessionTrackingModes", "filterRegistrations", "sessionCookieConfig", "defaultSessionTrackingModes", "effectiveSessionTrackingModes", "jspConfigDescriptor", "virtualServerName", "requestCharacterEncoding", "responseCharacterEncoding", "effectiveMajorVersion", "effectiveMinorVersion", "serverInfo", "servletContextName"]
 
     @field_validator('session_tracking_modes')
     def session_tracking_modes_validate_enum(cls, value):
@@ -162,10 +162,10 @@ class ServletContext(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "sessionTimeout": obj.get("sessionTimeout"),
             "classLoader": ApplicationContextClassLoaderParentUnnamedModuleClassLoader.from_dict(obj["classLoader"]) if obj.get("classLoader") is not None else None,
             "majorVersion": obj.get("majorVersion"),
             "minorVersion": obj.get("minorVersion"),
+            "sessionTimeout": obj.get("sessionTimeout"),
             "attributeNames": obj.get("attributeNames"),
             "contextPath": obj.get("contextPath"),
             "initParameterNames": obj.get("initParameterNames"),
