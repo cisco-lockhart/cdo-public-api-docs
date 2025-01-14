@@ -25,5 +25,5 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.PersistentFlags().StringP("config", "c", "https://raw.githubusercontent.com/cisco-lockhart/cdo-public-api-docs/refs/heads/LH-89186-improve-api-doc-generation/cloud-fw-mgr-api-docs.config.yaml", "config URL")
+	rootCmd.PersistentFlags().StringP("config", "c", "https://raw.githubusercontent.com/cisco-lockhart/cdo-public-api-docs/refs/heads/main/cloud-fw-mgr-api-docs.config.yaml", "config URL")
 }
