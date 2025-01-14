@@ -47,10 +47,8 @@ paths:
           $ref: '#/components/responses/http403Forbidden'
         "404":
           $ref: '#/components/responses/http404NotFound'
-        "200":
-          description: "CDO Transaction that has completed, either successfully or\
-            \ unsuccessfully. Note: failed Security Cloud Control Transactions do\
-            \ not roll back."
+        "202":
+          description: Security Cloud Control Transaction that is pending or in progress.
           content:
             application/json:
               schema:
@@ -59,8 +57,10 @@ paths:
           $ref: '#/components/responses/http401Unauthorised'
         "400":
           $ref: '#/components/responses/http400BadRequest'
-        "202":
-          description: Security Cloud Control Transaction that is pending or in progress.
+        "200":
+          description: "CDO Transaction that has completed, either successfully or\
+            \ unsuccessfully. Note: failed Security Cloud Control Transactions do\
+            \ not roll back."
           content:
             application/json:
               schema:
