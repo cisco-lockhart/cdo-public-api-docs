@@ -1,6 +1,13 @@
 # Version 1.7.0 (2025-01-xx)
 
+## Added
+- Endpoints to upgrade ASA devices.
+- Endpoints to execute arbitrary API endpoints on an on-prem FMC.
+- Endpoint to fetch the raw config of an ASA.
+
 ## Improvements
+- MSSP tenant management:
+  - When creating a SCC tenant, you can now optionally provide a sales order number.
 - Get Devices endpoint:
   - Provide High Availability (HA) and Clustering information for on-prem FMC-managed FTDs. Note: Unlike with a cdFMC-managed FTD HA pair or cluster, each node of an n-prem FMC-managed FTD HA pairs and cluster is represented as a separate device record.
   - Add links from FMC-managed devices to the FMC, and access policies managed by the FMC.
