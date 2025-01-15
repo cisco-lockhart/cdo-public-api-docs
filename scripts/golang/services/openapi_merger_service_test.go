@@ -9,6 +9,8 @@ import (
 
 var _ = Describe("MergeOpenApiSpecs", func() {
 	It("should merge multiple OpenAPI specs", func() {
+		prefixToAddForService1 := "v1/another-custom-prefix/"
+		prefixToAddForService2 := "/custom-prefix"
 		config := models.Config{
 			Info: models.Info{
 				Title:       "API Docs",
@@ -23,6 +25,16 @@ var _ = Describe("MergeOpenApiSpecs", func() {
 				URL:         "https://edge.us.cdo.cisco.com",
 				Description: "US",
 			}},
+			Services: []models.Service{
+				{
+					Name:        "service1",
+					URL:         "https://service1.us.cdo.cisco.com",
+					PrefixToAdd: &prefixToAddForService1,
+				}, {
+					Name:        "service2",
+					URL:         "https://service2.us.cdo.cisco.com",
+					PrefixToAdd: &prefixToAddForService2,
+				}},
 		}
 
 		service1Paths := map[string]interface{}{
@@ -77,6 +89,11 @@ var _ = Describe("MergeOpenApiSpecs", func() {
 		Expect(mergedSpec.Paths).To(HaveLen(4))
 		Expect(mergedSpec.Components.Schemas).To(HaveLen(3))
 		Expect(mergedSpec.Components.Responses).To(HaveLen(3))
+		// Verify that /path3 and /path4 are labeled /custom-prefix/path3 and /custom-prefix/path4
+		Expect(mergedSpec.Paths).To(HaveKey("/v1/another-custom-prefix/path1"))
+		Expect(mergedSpec.Paths).To(HaveKey("/v1/another-custom-prefix/path2"))
+		Expect(mergedSpec.Paths).To(HaveKey("/custom-prefix/path3"))
+		Expect(mergedSpec.Paths).To(HaveKey("/custom-prefix/path4"))
 	})
 
 	It("Should fail on conflicting paths", func() {

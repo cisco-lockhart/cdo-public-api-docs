@@ -21,6 +21,8 @@ Go to [https://devnetapps.cisco.com/docs/cisco-defense-orchestrator/].
 ```yaml
   - name: "my-new-service"
     url: "https://staging.manage.security.cisco.com/api/platform/my-new-service/v3/api-docs.yaml"
+    # Optional: if your endpoints are accessible on /api/platform/myapp/foos, but the public-api-gateway makes them available on /api/rest/v1/bars/foos, you should specify /v1/bars as the prefix. Start with a /, and no trailing slashes.
+    prefixToAdd: "/v1/bars"
 ```
 - Edit `api-changelog.md` to add a short description of what APIs your new microservice provides.
 - Submit a PR (please see commit message guidelines).

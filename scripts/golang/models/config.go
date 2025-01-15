@@ -1,8 +1,9 @@
 package models
 
 type Service struct {
-	Name string `yaml:"name"`
-	URL  string `yaml:"url"`
+	Name        string  `yaml:"name"`
+	URL         string  `yaml:"url"`
+	PrefixToAdd *string `yaml:"prefixToAdd"`
 }
 type Info struct {
 	Title       string  `yaml:"title"`
