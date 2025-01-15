@@ -9,6 +9,8 @@ services:
     url: "https://staging.manage.security.cisco.com/api/platform/object-service/v3/api-docs.yaml"
   - name: "transaction-service"
     url: "https://staging.manage.security.cisco.com/api/platform/transaction-service/v3/api-docs.yaml"
+  - name: "device-gateway-service"
+    url: "https://edge.staging.cdo.cisco.com/api/platform/device-gateway/v3/api-docs.yaml"
 info:
   title: "Cisco Security Cloud Control API"
   version: "1.5.0"
