@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/cisco-lockhart/cloud-fw-mgr-api-docs/models"
 	"github.com/pterm/pterm"
+	"strings"
 )
 
 func MergeOpenApiSpecs(serviceSpecs map[string]*models.OpenAPI, config *models.Config) (*models.OpenAPI, error) {
@@ -19,9 +20,24 @@ func MergeOpenApiSpecs(serviceSpecs map[string]*models.OpenAPI, config *models.C
 	mergedSpec.Components.SecuritySchemes = config.SecuritySchemes
 
 	for serviceName, spec := range serviceSpecs {
+		var prefixToAdd *string
+		for _, service := range config.Services {
+			if service.Name == serviceName {
+				trimmedPrefix := strings.TrimSuffix(*service.PrefixToAdd, "/")
+				if !strings.HasPrefix(trimmedPrefix, "/") {
+					trimmedPrefix = "/" + trimmedPrefix
+				}
+				prefixToAdd = &trimmedPrefix
+				break
+			}
+		}
+
 		spinner, _ := pterm.DefaultSpinner.Start(fmt.Sprintf("Merging OpenAPI spec for service: %s...", serviceName))
 		// Merge paths
 		for path, pathItem := range spec.Paths {
+			if prefixToAdd != nil {
+				path = *prefixToAdd + path
+			}
 			if _, exists := mergedSpec.Paths[path]; exists {
 				return nil, errors.New(fmt.Sprintf("duplicate path found: %s", path))
 			}
