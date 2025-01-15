@@ -8,6 +8,10 @@ import (
 	"github.com/pterm/pterm"
 )
 
+const region = "us-west-2"
+const awsAccountId = "107042026245"
+const secretName = "jenkins-pypi-credentials-mD4NdK"
+
 func GeneratePythonSdk(openapiFile string, version string, useLocalInstallation bool) error {
 	var commandName string
 	if useLocalInstallation {
@@ -53,12 +57,12 @@ func PublishPythonSdk(pypiToken *string, version string) error {
 }
 
 func getPyPiTokenFromSecretsManager() (*string, error) {
-	cfg, err := config.LoadDefaultConfig(context.TODO())
+	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("us-west-2"))
 	if err != nil {
 		return nil, err
 	}
 	secretsManagerClient := secretsmanager.NewFromConfig(cfg)
-	secretId := "arn:aws:secretsmanager:us-west-2:107042026245:secret:jenkins-pypi-credentials-mD4NdK"
+	secretId := fmt.Sprintf("arn:aws:secretsmanager:%s:%s:secret:%s", region, awsAccountId, secretName)
 	secretValue, err := secretsManagerClient.GetSecretValue(context.TODO(), &secretsmanager.GetSecretValueInput{
 		SecretId: &secretId,
 	})
