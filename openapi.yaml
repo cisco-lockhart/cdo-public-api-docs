@@ -9434,13 +9434,7 @@ components:
     JspPropertyGroupDescriptor:
       type: object
       properties:
-        errorOnUndeclaredNamespace:
-          type: string
-        elIgnored:
-          type: string
-        errorOnELNotFound:
-          type: string
-        pageEncoding:
+        buffer:
           type: string
         scriptingInvalid:
           type: string
@@ -9458,7 +9452,13 @@ components:
           type: string
         trimDirectiveWhitespaces:
           type: string
-        buffer:
+        errorOnUndeclaredNamespace:
+          type: string
+        elIgnored:
+          type: string
+        errorOnELNotFound:
+          type: string
+        pageEncoding:
           type: string
         defaultContentType:
           type: string
@@ -9668,8 +9668,6 @@ components:
     SessionCookieConfig:
       type: object
       properties:
-        httpOnly:
-          type: boolean
         name:
           type: string
         path:
@@ -9683,6 +9681,8 @@ components:
           deprecated: true
         domain:
           type: string
+        httpOnly:
+          type: boolean
         secure:
           type: boolean
         maxAge:

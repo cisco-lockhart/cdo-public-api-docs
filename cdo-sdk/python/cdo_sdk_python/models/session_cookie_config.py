@@ -27,15 +27,15 @@ class SessionCookieConfig(BaseModel):
     """
     SessionCookieConfig
     """ # noqa: E501
-    http_only: Optional[StrictBool] = Field(default=None, alias="httpOnly")
     name: Optional[StrictStr] = None
     path: Optional[StrictStr] = None
     attributes: Optional[Dict[str, StrictStr]] = None
     comment: Optional[StrictStr] = None
     domain: Optional[StrictStr] = None
+    http_only: Optional[StrictBool] = Field(default=None, alias="httpOnly")
     secure: Optional[StrictBool] = None
     max_age: Optional[StrictInt] = Field(default=None, alias="maxAge")
-    __properties: ClassVar[List[str]] = ["httpOnly", "name", "path", "attributes", "comment", "domain", "secure", "maxAge"]
+    __properties: ClassVar[List[str]] = ["name", "path", "attributes", "comment", "domain", "httpOnly", "secure", "maxAge"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,12 +88,12 @@ class SessionCookieConfig(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "httpOnly": obj.get("httpOnly"),
             "name": obj.get("name"),
             "path": obj.get("path"),
             "attributes": obj.get("attributes"),
             "comment": obj.get("comment"),
             "domain": obj.get("domain"),
+            "httpOnly": obj.get("httpOnly"),
             "secure": obj.get("secure"),
             "maxAge": obj.get("maxAge")
         })
