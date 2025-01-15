@@ -22,7 +22,7 @@ func MergeOpenApiSpecs(serviceSpecs map[string]*models.OpenAPI, config *models.C
 	for serviceName, spec := range serviceSpecs {
 		var prefixToAdd *string
 		for _, service := range config.Services {
-			if service.Name == serviceName {
+			if service.Name == serviceName && service.PrefixToAdd != nil {
 				trimmedPrefix := strings.TrimSuffix(*service.PrefixToAdd, "/")
 				if !strings.HasPrefix(trimmedPrefix, "/") {
 					trimmedPrefix = "/" + trimmedPrefix
