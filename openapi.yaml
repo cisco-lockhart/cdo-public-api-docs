@@ -27,6 +27,118 @@ paths:
             summary: Fetch JSON Web Key Set
             tags:
                 - Meta
+    /command:
+        post:
+            description: Send a direct command to the specified device.
+            operationId: executeDeviceCommand
+            parameters:
+                - description: By default, the API waits up to 27 seconds for a device response. Append the 'async' flag to return immediately without waiting for the response.
+                  in: query
+                  name: async
+                  required: false
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeviceGatewayApiRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            examples:
+                                responded:
+                                    value:
+                                        data:
+                                            inResponseTo:
+                                                command: executeFmcRequests
+                                                deviceType: fmc
+                                                deviceUid: fb8e46fc-30b0-437f-921d-606c53d4b94c
+                                                larUid: b5a71c7b-f309-4102-8fa2-9eec2260a1b7
+                                            responseBody: '[{"id":"0050568A-5AB4-0ed3-0000-021474986635","name":"Marketing","agentId":"agent_007","topicName":"aws365","description":"IPs of marketing department","type":"DynamicObject","objectType":"IP","links":{"self":"https://fmc.acme.com/api/fmc_config/v1/domain/e276abe1-e0f2-11e3-8169-6d9ed49b625f/object/dynamicobjects/0050568C-5AB4-0ed3-0000-021474986635"},"metadata":{"domain":{"name":"Global","id":"e276abec-e0f2-11e3-8169-6d9ed49b625f","type":"Domain"}}}]'
+                                            responseStatus: SUCCESS
+                                            tenantUid: 936fca6c-000b-4375-b903-46e6a95c7153
+                                        requestId: 11111111-1111-1111-1111-111111111111
+                                        responseOrigin: secure-connector
+                                        status: responded
+                                timeout:
+                                    value:
+                                        data: The request timed out due to a hard limit of 27 seconds. You may poll for a belated response using the url provided in the 'data' field
+                                        requestId: 11111111-1111-1111-1111-111111111111
+                                        responseOrigin: device-gateway-api
+                                        status: timeout
+                    description: The request was successfully processed, and the device command was executed.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            summary: Send a direct request to a registered device in Security Cloud Control
+            tags:
+                - Commands
+    /command/{requestId}:
+        get:
+            description: Get the response from a device for a command previously issued.
+            operationId: getDeviceCommandResponse
+            parameters:
+                - description: The unique identifier of the request, represented as a UUID, returned from a previous POST request to the /command endpoint.
+                  in: path
+                  name: requestId
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            examples:
+                                responded:
+                                    value:
+                                        data:
+                                            inResponseTo:
+                                                command: executeFmcRequests
+                                                deviceType: fmc
+                                                deviceUid: fb8e46fc-30b0-437f-921d-606c53d4b94c
+                                                larUid: b5a71c7b-f309-4102-8fa2-9eec2260a1b7
+                                            responseBody: '[{"id":"0050568A-5AB4-0ed3-0000-021474986635","name":"Marketing","agentId":"agent_007","topicName":"aws365","description":"IPs of marketing department","type":"DynamicObject","objectType":"IP","links":{"self":"https://fmc.acme.com/api/fmc_config/v1/domain/e276abe1-e0f2-11e3-8169-6d9ed49b625f/object/dynamicobjects/0050568C-5AB4-0ed3-0000-021474986635"},"metadata":{"domain":{"name":"Global","id":"e276abec-e0f2-11e3-8169-6d9ed49b625f","type":"Domain"}}}]'
+                                            responseStatus: SUCCESS
+                                            tenantUid: 936fca6c-000b-4375-b903-46e6a95c7153
+                                        requestId: 11111111-1111-1111-1111-111111111111
+                                        responseOrigin: secure-connector
+                                        status: responded
+                    description: The device responded. The response may indicate success or contain an error returned by the device.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            summary: Retrieve the response for a previously sent command
+            tags:
+                - Commands
+    /listcommands:
+        get:
+            description: Retrieve a list of supported device command endpoint patterns.
+            operationId: getDeviceCommands
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommandResponse'
+                    description: The list of supported command patterns.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            summary: Get supported endpoint patterns
+            tags:
+                - Commands
     /swagger-ui/**:
         get:
             operationId: redirectWithUsingRedirectView
@@ -6782,6 +6894,66 @@ components:
                     format: uuid
                     type: string
             type: object
+        Command:
+            description: A list of commands to be executed on the device.
+            properties:
+                body:
+                    description: The body of the command (optional).
+                    example: '{}'
+                    nullable: true
+                    type: string
+                link:
+                    description: The FMC endpoint to invoke for this command.
+                    example: /api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f
+                    type: string
+                method:
+                    description: The HTTP method for the command.
+                    example: GET
+                    type: string
+            required:
+                - link
+                - method
+            type: object
+        CommandResponse:
+            properties:
+                data:
+                    description: The data associated with the command response.
+                    example:
+                        inResponseTo:
+                            command: executeFmcRequests
+                            deviceType: fmc
+                            deviceUid: fb8e46fc-30b0-437f-921d-606c53d4b94c
+                            larUid: b5a71c7b-f309-4102-8fa2-9eec2260a1b7
+                        responseBody: '[{"id":"0050568A-5AB4-0ed3-0000-021474986635","name":"Marketing","agentId":"agent_007","topicName":"aws365","description":"IPs of marketing department","type":"DynamicObject","objectType":"IP"}]'
+                        responseStatus: SUCCESS
+                        tenantUid: 936fca6c-000b-4375-b903-46e6a95c7153
+                    type: object
+                message:
+                    description: The response message, if applicable.
+                    example: The request timed out due to a hard limit of 27 seconds. You may poll for a belated response using the url provided in the 'data' field
+                    type: string
+                requestId:
+                    description: The unique identifier of the request, represented as a UUID.
+                    example: 6e3492c6-083a-4ead-9da9-cd2db32a965d
+                    type: string
+                responseOrigin:
+                    description: The origin system of the response.
+                    enum:
+                        - device-gateway-api
+                        - secure-connector
+                        - secure-connector-sse
+                    example: secure-connector
+                    type: string
+                status:
+                    description: The status of the command.
+                    enum:
+                        - failed
+                        - pending
+                        - responded
+                        - timeout
+                    example: responded
+                    type: string
+            type: object
         CommonApiError:
             properties:
                 details:
@@ -7065,6 +7237,18 @@ components:
             required:
                 - deviceType
                 - name
+            type: object
+        DeviceGatewayApiRequest:
+            properties:
+                deviceUid:
+                    description: The unique identifier, represented as a UUID, of the target device for the command. Currently, only FMC devices are supported.
+                    example: 6e3492c6-083a-4ead-9da9-cd2db32a965d
+                    type: string
+                request:
+                    $ref: '#/components/schemas/FmcRequest'
+            required:
+                - deviceUid
+                - request
             type: object
         DevicePage:
             properties:
@@ -7364,6 +7548,17 @@ components:
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
+            type: object
+        FmcRequest:
+            description: The request that the user wants to execute on the device.
+            properties:
+                commands:
+                    description: A list of commands to be executed on the device.
+                    items:
+                        $ref: '#/components/schemas/Command'
+                    type: array
+            required:
+                - commands
             type: object
         FtdClusterInfo:
             description: '(Device Clusters managed by FMC only) Clustering information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
