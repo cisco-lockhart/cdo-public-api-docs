@@ -2,6 +2,7 @@ package services
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
 	"github.com/pterm/pterm"
@@ -37,10 +38,17 @@ func PublishPythonSdk(pypiToken *string, version string) error {
 		}
 	}
 	cmd := ExecCommand("bash", "-c", "cd sdks/python && rm -rf dist build *.egg-info && python3 setup.py sdist bdist_wheel")
-	out, err := cmd.Output()
+	_, err := cmd.Output()
 	if err != nil {
-		pterm.Error.Println(string(out))
+		pterm.Error.Println(err)
 	}
+
+	cmd = ExecCommand("twine", "upload", "-u", "__token__", "-p", *pypiToken, fmt.Sprintf("sdks/python/dist/cdo_sdk_python-%s-py3-none-any.whl", version))
+	_, err = cmd.Output()
+	if err != nil {
+		pterm.Error.Println(err)
+	}
+
 	return err
 }
 
