@@ -1728,6 +1728,41 @@ paths:
             summary: Onboard ASA device
             tags:
                 - Inventory
+    /v1/inventory/devices/asas/{deviceUid}/configs:
+        get:
+            description: Fetches the ASA configuration for a specified device by its unique identifier, represented as a UUID. This endpoint returns both the current configuration from the device ('configOnDevice') and the configuration stored in Security Cloud Control ('configOnCloud').
+            operationId: getAsaConfiguration
+            parameters:
+                - in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaConfig'
+                    description: Successfully retrieved ASA configuration details from both device and Security Cloud Control.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get ASA configuration details
+            tags:
+                - Inventory
     /v1/inventory/devices/asas/{deviceUid}/deploy:
         post:
             description: This is an asynchronous operation to deploy changes made to an ASA device's configuration on Security Cloud Control to the device. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
@@ -6117,6 +6152,15 @@ components:
                 startupDate:
                     format: int64
                     type: integer
+            type: object
+        AsaConfig:
+            properties:
+                configOnCloud:
+                    description: The configuration of the ASA device in Security Cloud Control. This may include changes staged on Security Cloud Control that have not been deployed to the device.
+                    type: string
+                configOnDevice:
+                    description: 'The running configuration on the ASA device. Note: this may not include changes made out-of-band directly on the device since the last Out-of-Band check ran on Security Cloud Control.'
+                    type: string
             type: object
         AsaCreateOrUpdateInput:
             properties:
