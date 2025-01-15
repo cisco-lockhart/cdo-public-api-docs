@@ -57,7 +57,7 @@ func PublishPythonSdk(pypiToken *string, version string) error {
 }
 
 func getPyPiTokenFromSecretsManager() (*string, error) {
-	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("us-west-2"))
+	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion(region))
 	if err != nil {
 		return nil, err
 	}
