@@ -7580,6 +7580,29 @@ components:
                 vpnHealthMetrics:
                     $ref: '#/components/schemas/VpnHealthMetrics'
             type: object
+        FmcObjectOverride:
+            description: 'Specify a list of objects to override. All objects that have been marked as overridable in the template must be defined here. Note: Any overrides defined here that are not present in the template configuration will be ignored.'
+            properties:
+                name:
+                    description: Specify the name of the object to override.
+                    type: string
+                type:
+                    description: Specify the type of the object to override. The type should match the type of the object used in the template.
+                    enum:
+                        - Network
+                        - Host
+                        - Fqdn
+                        - Range
+                    example: Network
+                    type: string
+                value:
+                    description: Specify the value to override the object with.
+                    type: string
+            required:
+                - name
+                - type
+                - value
+            type: object
         FmcObjectReference:
             description: 'Reference to the network object on the FMC, defining the IPv4 address used for Network Address Translation (NAT) and/or Port Address Translation (PAT). Note: Required only if the device needs to support more than 65,000 simultaneous active connections.'
             properties:
@@ -7603,6 +7626,19 @@ components:
                     type: array
             required:
                 - commands
+            type: object
+        FmcTemplateVariable:
+            description: 'Specify the list of template variables configured on the template. All required template variables must be defined here, and should have values valid for the type of the variable. Any invalid input will result in the template not being applied to the device upon onboarding. Note: Any variables defined here that are not present in the template will be ignored.'
+            properties:
+                name:
+                    description: Specify the name of the object to override.
+                    type: string
+                value:
+                    description: Specify the value of the template variable. The value specified should be valid for the template variable, as defined in the template configuration.
+                    type: string
+            required:
+                - name
+                - value
             type: object
         FtdClusterInfo:
             description: '(Device Clusters managed by FMC only) Clustering information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
@@ -9849,7 +9885,7 @@ components:
                     format: uuid
                     type: string
                 fmcAccessPolicyUid:
-                    description: Specify the unique identifier, represented as a UUID, of the FMC access policy to apply to this device.
+                    description: 'Specify the unique identifier, represented as a UUID, of the FMC access policy to apply to this device. If this field is specified, the ''templates'' field must remain unspecified. Note: If both ''fmcAccessPolicyUid'' and ''template'' fields are unspecified, the operation will fail.'
                     format: uuid
                     type: string
                 licenses:
@@ -9885,11 +9921,33 @@ components:
                 serialNumber:
                     description: Specify the serial number of the FTD device to be onboarded. When a device with this serial number is plugged in and connected to the Internet, it will automatically be registered to this Security Cloud Control tenant.
                     type: string
+                template:
+                    $ref: '#/components/schemas/ZtpOnboardingTemplateConfiguration'
             required:
-                - fmcAccessPolicyUid
                 - licenses
                 - name
                 - serialNumber
+            type: object
+        ZtpOnboardingTemplateConfiguration:
+            description: 'Specify the template to apply to this device. If this field is specified, the ''fmcAccessPolicyUid'' field must remain unspecified. Note: If both ''fmcAccessPolicyUid'' and ''template'' fields are unspecified, the operation will fail.'
+            properties:
+                objectOverrides:
+                    description: 'Specify a list of objects to override. All objects that have been marked as overridable in the template must be defined here. Note: Any overrides defined here that are not present in the template configuration will be ignored.'
+                    items:
+                        $ref: '#/components/schemas/FmcObjectOverride'
+                    type: array
+                templateVariables:
+                    description: 'Specify the list of template variables configured on the template. All required template variables must be defined here, and should have values valid for the type of the variable. Any invalid input will result in the template not being applied to the device upon onboarding. Note: Any variables defined here that are not present in the template will be ignored.'
+                    items:
+                        $ref: '#/components/schemas/FmcTemplateVariable'
+                    type: array
+                uid:
+                    description: Specify the unique identifier, represented as a UUID, of the template to apply to the onboarded device.
+                    example: 2cadad15-dc8b-4bc4-899f-b9badcfc56a3
+                    format: uuid
+                    type: string
+            required:
+                - uid
             type: object
     responses:
         http400BadRequest:
