@@ -9,11 +9,15 @@
 - MSSP tenant management:
   - When creating a SCC tenant, you can now optionally provide a sales order number.
 - Get Devices endpoint:
-  - Provide High Availability (HA) and Clustering information for on-prem FMC-managed FTDs. Note: Unlike with a cdFMC-managed FTD HA pair or cluster, each node of an n-prem FMC-managed FTD HA pairs and cluster is represented as a separate device record.
+  - Provide High Availability (HA) and Clustering information for on-prem FMC-managed FTDs. Note: Unlike with a cdFMC-managed FTD HA pair or cluster, each node of an on-prem FMC-managed FTD HA pairs and cluster is represented as a separate device record.
+    - Note: Full HA and clustering information for on-prem FMC is currently gated behind a feature flag.
   - Add links from FMC-managed devices to the FMC, and access policies managed by the FMC.
   - Improve searchability of the endpoint by adding multiple new searchable fields.
 - List VPN Sessions endpoint:
   - It is now possible to search VPN sessions by `loginTime` and `lastActiveTime`.
+
+## Fixes
+- Multiple fixes to correct the value of counts displayed in list endpoints.
 
 ## Deprecations
 - The `uidOnFmc` field is deprecated and will be removed in v2 of the API. It has been supplanted by the `cdFmcInfo.deviceRecordOnFmc` and `onPremFmcInfo.deviceRecordOnFmc` fields, which contain additional information.
