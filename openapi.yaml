@@ -7267,7 +7267,7 @@ components:
                     type: string
                 uidOnFmc:
                     deprecated: true
-                    description: (FMC-managed FTDs only) The unique identifier, represented as a UUID, of the device on a cdFMC. This field is deprecated. Please see `cdFmcInfo.deviceRecordOnFmc` or `onPremFmcInfo.deviceRecordOnFmc`.
+                    description: (FMC-managed FTDs only) The unique identifier, represented as a UUID, of the device on a cdFMC. This field is deprecated. Please see `deviceRecordOnFmc`.
                     example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
@@ -7742,13 +7742,13 @@ components:
             description: '(High Availability Devices managed by FMC only) High-Available information information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
             properties:
                 currentRole:
-                    description: '(on-prem FMC-managed FTDs only) Information on the current role of the node in the HA Pair. Note: Each node in an on-prem-FMC-managed FTD HA Pair is represented as a separate device entry in the API.'
+                    description: '(on-prem FMC-managed FTDs only) Information on the current role of the node in the HA Pair. Note: Each node in an on-prem-FMC-managed FTD HA Pair is represented as a separate device entry in the API response.'
                     enum:
                         - ACTIVE
                         - STANDBY
                     type: string
                 haNodeType:
-                    description: '(on-prem FMC-managed FTDs only) Information on the type of this node in the HA Pair. Note: Each node in an on-prem-FMC-managed FTD HA Pair is represented as a separate device entry in the API.'
+                    description: '(on-prem FMC-managed FTDs only) Information on the type of this node in the HA Pair. Note: Each node in an on-prem-FMC-managed FTD HA Pair is represented as a separate device entry in the API response.'
                     enum:
                         - PRIMARY
                         - SECONDARY
@@ -7878,7 +7878,7 @@ components:
                     type: string
             type: object
         HaNode:
-            description: (cdFMC-managed FTDs only) Information on the secondary unit in the FTD HA Pair.
+            description: 'Information on the secondary unit in the FTD HA Pair. Note: for an on-prem FMC managed FTD, this information is available only if the `cdfmc_and_onprem_fmc_enhanced_flow` feature flag is enabled on your tenant.'
             properties:
                 chassisSerial:
                     description: The serial number of the chassis on the device.
