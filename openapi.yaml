@@ -1217,72 +1217,6 @@ paths:
             summary: Modify SDC
             tags:
                 - Connectors
-    /v1/devices/asas/{deviceUid}/upgrades/trigger:
-        post:
-            description: 'This asynchronous operation upgrades the ASA firmware and ASDM software versions on the device. Note: Newly detected or modified certificates will be automatically approved.'
-            operationId: upgradeAsaDevice
-            parameters:
-                - description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
-                  in: path
-                  name: deviceUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/UpgradeAsaDeviceInput'
-                required: true
-            responses:
-                "202":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CdoTransaction'
-                    description: Security Cloud Control Transaction object that can be used to track the status of the operation.
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Trigger ASA device upgrade
-            tags:
-                - Device Upgrades
-    /v1/devices/asas/{deviceUid}/upgrades/versions:
-        get:
-            description: Get a list of compatible upgrade versions for a given ASA device.
-            operationId: getAsaUpgradeVersions
-            parameters:
-                - description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
-                  in: path
-                  name: deviceUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ItemsResponse'
-                    description: List of compatible upgrade versions
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get compatible upgrade versions for an ASA
-            tags:
-                - Device Upgrades
     /v1/features:
         get:
             description: Get the feature flags enabled in the Security Cloud Control tenant.
@@ -1786,6 +1720,72 @@ paths:
             summary: Reconnect ASA device
             tags:
                 - Inventory
+    /v1/inventory/devices/asas/{deviceUid}/upgrades/trigger:
+        post:
+            description: 'This asynchronous operation upgrades the ASA firmware and ASDM software versions on the device. Note: Newly detected or modified certificates will be automatically approved.'
+            operationId: upgradeAsaDevice
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpgradeAsaDeviceInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the operation.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Trigger ASA device upgrade
+            tags:
+                - Device Upgrades
+    /v1/inventory/devices/asas/{deviceUid}/upgrades/versions:
+        get:
+            description: Get a list of compatible upgrade versions for a given ASA device.
+            operationId: getAsaUpgradeVersions
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ItemsResponse'
+                    description: List of compatible upgrade versions
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get compatible upgrade versions for an ASA
+            tags:
+                - Device Upgrades
     /v1/inventory/devices/asas/cli/execute:
         post:
             description: This is an asynchronous operation to execute CLI commands in the Security Cloud Control tenant.
