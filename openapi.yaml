@@ -1283,92 +1283,6 @@ paths:
             summary: Get compatible upgrade versions for an ASA
             tags:
                 - Device Upgrades
-    /v1/devices/ftds/{deviceUid}/upgrades/trigger:
-        post:
-            description: Upgrade FTD device using a specified upgrade package.
-            operationId: upgradeFtdDevice
-            parameters:
-                - description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
-                  in: path
-                  name: deviceUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/UpgradeFtdDeviceInput'
-                required: true
-            responses:
-                "202":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CdoTransaction'
-                    description: Security Cloud Control Transaction object that can be used to track the progress of the upgrade operation.
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "404":
-                    $ref: '#/components/responses/http404NotFound'
-                "422":
-                    $ref: '#/components/responses/http422UnprocessableEntity'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Upgrade FTD device
-            tags:
-                - Device Upgrades
-    /v1/devices/ftds/{deviceUid}/upgrades/versions:
-        get:
-            description: Get a list of compatible upgrade versions for a given FTD device.
-            operationId: getCompatibleFtdVersions
-            parameters:
-                - description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
-                  in: path
-                  name: deviceUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/FtdVersionsPage'
-                    description: List of compatible upgrade versions
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "404":
-                    $ref: '#/components/responses/http404NotFound'
-                "422":
-                    $ref: '#/components/responses/http422UnprocessableEntity'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get compatible upgrade versions for an FTD
-            tags:
-                - Device Upgrades
     /v1/features:
         get:
             description: Get the feature flags enabled in the Security Cloud Control tenant.
@@ -7772,54 +7686,6 @@ components:
             required:
                 - ftdUid
             type: object
-        FtdVersion:
-            description: The list of items retrieved.
-            properties:
-                filename:
-                    description: The name of the file
-                    example: Cisco_FTD_SSP_FP2K_Upgrade-7.4.2-172.sh.REL.tar
-                    type: string
-                softwareVersion:
-                    description: The version to which this package will upgrade the FTD.
-                    example: 7.4.2-172 IMS 172
-                    type: string
-                upgradePackageUid:
-                    description: The unique identifier, represented as a UUID, of the version in Security Cloud Control
-                    example: 25608540-bd60-11ef-8beb-6cf1610cf55d
-                    format: uuid
-                    type: string
-                upgradeType:
-                    description: The type of the upgrade
-                    enum:
-                        - UPGRADE
-                        - PATCH
-                        - HOTFIX
-                    example: UPGRADE
-                    type: string
-            type: object
-        FtdVersionsPage:
-            properties:
-                count:
-                    description: The total number of results available.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/FtdVersion'
-                    type: array
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
-            type: object
         GlobalSearchResult:
             properties:
                 cdFmcResult:
@@ -9724,26 +9590,16 @@ components:
             type: object
         UpgradeAsaDeviceInput:
             properties:
-                asaVersion:
-                    description: The target ASA firmware version to upgrade the device to. This field cannot be blank.
-                    example: 9.4(1)
-                    type: string
                 asdmVersion:
                     description: The target ASDM software version to upgrade the device to.
                     example: '''7.6(2)'' or ''7.6(2).openjre'''
                     type: string
-            required:
-                - asaVersion
-            type: object
-        UpgradeFtdDeviceInput:
-            properties:
-                upgradePackageUid:
-                    description: The unique identifier, represented as a UUID, of the upgrade package to be applied to the device.
-                    example: 256461f6-bd60-11ef-8beb-6cf1610cf55d
-                    format: uuid
+                softwareVersion:
+                    description: The target ASA firmware version to upgrade the device to. This field cannot be blank.
+                    example: 9.4(1)
                     type: string
             required:
-                - upgradePackageUid
+                - softwareVersion
             type: object
         UrlObjectContent:
             properties:
