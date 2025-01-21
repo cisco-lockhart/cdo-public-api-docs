@@ -1773,7 +1773,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/ItemsResponse'
+                                $ref: '#/components/schemas/AsaCompatibleVersionsResponse'
                     description: List of compatible upgrade versions
                 "500":
                     content:
@@ -6067,6 +6067,31 @@ components:
                     format: int64
                     type: integer
             type: object
+        AsaCompatibleVersion:
+            description: The list of items retrieved.
+            properties:
+                asdmImageUrl:
+                    type: string
+                asdmVersion:
+                    type: string
+                softwareImageUrl:
+                    type: string
+                softwareVersion:
+                    type: string
+            type: object
+        AsaCompatibleVersionsResponse:
+            properties:
+                count:
+                    description: The item count.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/AsaCompatibleVersion'
+                    type: array
+            type: object
         AsaConfig:
             properties:
                 configOnCloud:
@@ -8077,20 +8102,6 @@ components:
                         type: string
                     type: array
                     uniqueItems: true
-            type: object
-        ItemsResponse:
-            properties:
-                count:
-                    description: The item count.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        description: The list of items retrieved.
-                        type: object
-                    type: array
             type: object
         JsonWebKey:
             description: The JSON Web Key Set.
