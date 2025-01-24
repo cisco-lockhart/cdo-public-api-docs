@@ -1,4 +1,4 @@
-# Version 1.7.0 (2025-01-25)
+# Version 1.7.0 (2025-01-24)
 
 ## Added
 - Endpoints to upgrade ASA devices.
