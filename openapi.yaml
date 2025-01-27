@@ -9605,12 +9605,12 @@ components:
                     description: The target ASDM software version to upgrade the device to.
                     example: '''7.6(2)'' or ''7.6(2).openjre'''
                     type: string
+                oneFieldPresent:
+                    type: boolean
                 softwareVersion:
-                    description: The target ASA firmware version to upgrade the device to. This field cannot be blank.
+                    description: The target ASA firmware version to upgrade the device to.
                     example: 9.4(1)
                     type: string
-            required:
-                - softwareVersion
             type: object
         UrlObjectContent:
             properties:
