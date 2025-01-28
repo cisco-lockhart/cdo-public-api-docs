@@ -29,7 +29,7 @@ func GeneratePythonSdk(openapiFile string, version string, useLocalInstallation 
 		"-i", openapiFile,
 		"-g", "python",
 		"-o", "sdks/python",
-		"--additional-properties=packageName=cdo-sdk-python,packageVersion="+version).Output()
+		"--additional-properties=packageName=cdo_sdk_python,packageVersion="+version).Output()
 	return err
 }
 
