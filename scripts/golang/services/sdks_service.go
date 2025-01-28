@@ -42,14 +42,16 @@ func PublishPythonSdk(pypiToken *string, version string) error {
 		}
 	}
 	cmd := ExecCommand("bash", "-c", "cd sdks/python && rm -rf dist build *.egg-info && python3 setup.py sdist bdist_wheel")
-	_, err := cmd.Output()
+	out, err := cmd.Output()
 	if err != nil {
+		pterm.Error.Println(out)
 		pterm.Error.Println(err)
 	}
 
 	cmd = ExecCommand("twine", "upload", "-u", "__token__", "-p", *pypiToken, fmt.Sprintf("sdks/python/dist/cdo_sdk_python-%s-py3-none-any.whl", version))
-	_, err = cmd.Output()
+	out, err = cmd.Output()
 	if err != nil {
+		pterm.Error.Println(out)
 		pterm.Error.Println(err)
 	}
 
