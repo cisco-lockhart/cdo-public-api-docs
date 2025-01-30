@@ -7616,9 +7616,14 @@ components:
                     enum:
                         - Network
                         - Host
-                        - Fqdn
+                        - FQDN
                         - Range
                     example: Network
+                    type: string
+                uid:
+                    description: Specify the unique identifier, represented as a UUID, of the object to override.
+                    example: 0d0cc559-43a0-449a-84a9-28310ede72ec
+                    format: uuid
                     type: string
                 value:
                     description: Specify the value to override the object with.
@@ -7626,6 +7631,7 @@ components:
             required:
                 - name
                 - type
+                - uid
                 - value
             type: object
         FmcObjectReference:
