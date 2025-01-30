@@ -3497,20 +3497,20 @@ paths:
                   example: content:*2.2.* AND name:Lab1
                   in: query
                   name: q
-                  required: false
+                  required: true
                   schema:
                     type: string
                 - description: If enabled, the search will also include results from override objects.
                   in: query
                   name: includeOverrides
-                  required: false
+                  required: true
                   schema:
                     default: false
                     type: boolean
                 - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
                   in: query
                   name: offset
-                  required: false
+                  required: true
                   schema:
                     default: "0"
                     minimum: 0
@@ -3518,7 +3518,7 @@ paths:
                 - description: The number of results to retrieve.
                   in: query
                   name: limit
-                  required: false
+                  required: true
                   schema:
                     default: "50"
                     maximum: 200
@@ -3528,7 +3528,7 @@ paths:
                   example: name:DESC
                   in: query
                   name: sortBy
-                  required: false
+                  required: true
                   schema:
                     type: string
             responses:
@@ -3635,7 +3635,7 @@ paths:
                   example: '@detailed'
                   in: query
                   name: fields
-                  required: false
+                  required: true
                   schema:
                     type: string
             responses:
@@ -3887,7 +3887,7 @@ paths:
                   example: content:*2.2.* AND name:Lab1
                   in: query
                   name: q
-                  required: false
+                  required: true
                   schema:
                     type: string
             responses:
