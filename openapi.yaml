@@ -5518,11 +5518,10 @@ components:
                     format: int32
                     type: integer
                 isActiveRule:
-                    description: Is active. True by default
-                    example: false
+                    description: Indicates whether this rule is active.
                     type: boolean
                 issue:
-                    description: Issues. SHADOWED or null.
+                    description: Indicates if rule has SHADOWED issue.
                     example: SHADOWED
                     type: string
                 logSettings:
@@ -5533,11 +5532,23 @@ components:
                     description: A remark.
                     type: string
                 ruleAction:
-                    description: 'The rule''s action: PERMIT or DENY.'
+                    description: Representation of the rule action.
                     enum:
                         - PERMIT
                         - DENY
-                    example: PERMIT
+                    type: string
+                ruleConfigurationLineNumber:
+                    description: Representation of the rule's line number in configuration.
+                    example: 1021
+                    format: int64
+                    type: integer
+                ruleConfigurationText:
+                    description: Representation of the rule in configuration.
+                    example: access-list ExampleList extended permit ip any any
+                    type: string
+                ruleParsingError:
+                    description: The error, if any, that was encountered when parsing the rule.
+                    example: Could not parse [255.0.0.255]
                     type: string
                 ruleTimeRange:
                     $ref: '#/components/schemas/AccessRuleDetailsContent'
@@ -5570,7 +5581,6 @@ components:
                 - accessGroupUid
                 - entityUid
                 - index
-                - ruleAction
                 - uid
             type: object
         AccessRuleCreateInput:
