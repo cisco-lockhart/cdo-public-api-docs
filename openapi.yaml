@@ -1983,7 +1983,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/FtdVersionsPage'
+                                $ref: '#/components/schemas/FtdVersionsResponse'
                     description: List of compatible upgrade versions
                 "400":
                     $ref: '#/components/responses/http400BadRequest'
@@ -7831,10 +7831,10 @@ components:
                     example: UPGRADE
                     type: string
             type: object
-        FtdVersionsPage:
+        FtdVersionsResponse:
             properties:
                 count:
-                    description: The total number of results available.
+                    description: The item count.
                     example: 100
                     format: int32
                     type: integer
@@ -7843,16 +7843,6 @@ components:
                     items:
                         $ref: '#/components/schemas/FtdVersion'
                     type: array
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
             type: object
         GlobalSearchResult:
             properties:
