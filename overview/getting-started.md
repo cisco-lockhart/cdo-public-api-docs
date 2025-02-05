@@ -48,6 +48,9 @@ Cisco Security Cloud Control is deployed in multiple regions, and the API is ava
 - Australia: https://api.au.security.cisco.com/firewall (use this if the Security Cloud Control URL you visit is https://aus.cdo.cisco.com or https://aus.manage.security.cisco.com)
 - India: https://api.in.security.cisco.com/firewall (use this if the Security Cloud Control URL you visit is https://in.cdo.cisco.com or https://in.manage.security.cisco.com)
 
+>**Note**:
+If you were using the old base URIs (https://edge.<region>.cdo.cisco.com), they will continue to work. But please switch your automation to use the new URLs.
+
 ## 1. Authorization
 
 In addition to the base URL, an Authorization header must be added to every API request with the following format.
