@@ -42,11 +42,14 @@ In order to perform the operation described in this page, the API-only user shou
 
 Cisco Security Cloud Control is deployed in multiple regions, and the API is available in all of these. The server URL for each region is as follows:
 
-- US: https://edge.us.cdo.cisco.com (use this if the Security Cloud Control URL you visit is https://www.defenseorchestrator.com or https://us.manage.security.cisco.com)
-- EU: https://edge.eu.cdo.cisco.com (use this if the Security Cloud Control URL you visit is https://www.defenseorchestrator.eu or https://eu.manage.security.cisco.com)
-- APJ: https://edge.apj.cdo.cisco.com (use this if the Security Cloud Control URL you visit is https://apj.cdo.cisco.com or https://apj.manage.security.cisco.com)
-- Australia: https://edge.aus.cdo.cisco.com (use this if the Security Cloud Control URL you visit is https://aus.cdo.cisco.com or https://aus.manage.security.cisco.com)
-- India: https://edge.in.cdo.cisco.com (use this if the Security Cloud Control URL you visit is https://in.cdo.cisco.com or https://in.manage.security.cisco.com)
+- US: https://api.us.security.cisco.com/firewall (use this if the Security Cloud Control URL you visit is https://www.defenseorchestrator.com or https://us.manage.security.cisco.com)
+- EU: https://api.eu.security.cisco.com/firewall (use this if the Security Cloud Control URL you visit is https://www.defenseorchestrator.eu or https://eu.manage.security.cisco.com)
+- APJ: https://api.apj.security.cisco.com/firewall (use this if the Security Cloud Control URL you visit is https://apj.cdo.cisco.com or https://apj.manage.security.cisco.com)
+- Australia: https://api.au.security.cisco.com/firewall (use this if the Security Cloud Control URL you visit is https://aus.cdo.cisco.com or https://aus.manage.security.cisco.com)
+- India: https://api.in.security.cisco.com/firewall (use this if the Security Cloud Control URL you visit is https://in.cdo.cisco.com or https://in.manage.security.cisco.com)
+
+>**Note**:
+If you were using the old base URIs (https://edge.<region>.cdo.cisco.com), they will continue to work. But please switch your automation to use the new URLs.
 
 ## 1. Authorization
 

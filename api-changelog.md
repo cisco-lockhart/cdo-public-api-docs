@@ -1,3 +1,10 @@
+# Version 1.8.0 (2025-02-05)
+
+## Improvements
+
+- You can now access the Security Cloud Control Firewall APIs from `https://api.<your-region>.security.cisco.com/firewall`. The old URLs (`https://edge.<region>.cdo.cisco.com/api/rest` and `https://<region>.manage.security.cisco.com/api/rest` will continue to work).
+- Support added to perform zero-touch provisioning of FTDs using cdFMC templates.
+
 # Version 1.7.0 (2025-01-24)
 
 ## Added
