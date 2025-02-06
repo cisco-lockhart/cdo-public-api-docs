@@ -1920,92 +1920,6 @@ paths:
             summary: Onboard FTD device
             tags:
                 - Inventory
-    /v1/inventory/devices/ftds/{deviceUid}/upgrades/trigger:
-        post:
-            description: Upgrade FTD device using a specified upgrade package.
-            operationId: upgradeFtdDevice
-            parameters:
-                - description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
-                  in: path
-                  name: deviceUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/UpgradeFtdDeviceInput'
-                required: true
-            responses:
-                "202":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CdoTransaction'
-                    description: Security Cloud Control Transaction object that can be used to track the progress of the upgrade operation.
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "404":
-                    $ref: '#/components/responses/http404NotFound'
-                "422":
-                    $ref: '#/components/responses/http422UnprocessableEntity'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Upgrade FTD device
-            tags:
-                - Device Upgrades
-    /v1/inventory/devices/ftds/{deviceUid}/upgrades/versions:
-        get:
-            description: 'Get a list of compatible upgrade versions for a given FTD device. Note: this endpoint will only return versions that are directly downloadable to the FTD from the Cisco support site.'
-            operationId: getCompatibleFtdVersions
-            parameters:
-                - description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
-                  in: path
-                  name: deviceUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/FtdVersionsResponse'
-                    description: List of compatible upgrade versions
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "404":
-                    $ref: '#/components/responses/http404NotFound'
-                "422":
-                    $ref: '#/components/responses/http422UnprocessableEntity'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get compatible upgrade versions for an FTD
-            tags:
-                - Device Upgrades
     /v1/inventory/devices/ftds/cdfmcManaged/{deviceUid}/delete:
         post:
             description: This is an asynchronous operation to delete cdFMC managed FTD device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation. The reason this operation is asynchronous is because the device is first removed from the cdFMC, following which it is deleted from the Security Cloud Control tenant.
@@ -7813,47 +7727,6 @@ components:
             required:
                 - ftdUid
             type: object
-        FtdVersion:
-            description: The list of items retrieved.
-            properties:
-                filename:
-                    description: The name of the file
-                    example: Cisco_FTD_SSP_FP2K_Upgrade-7.4.2-172.sh.REL.tar
-                    type: string
-                isSuggestedVersion:
-                    description: A boolean value, indicating whether this version is a suggested version to upgrade to.
-                    type: boolean
-                softwareVersion:
-                    description: The version to which this package will upgrade the FTD.
-                    example: 7.4.2-172 IMS 172
-                    type: string
-                upgradePackageUid:
-                    description: The unique identifier, represented as a UUID, of the version in Security Cloud Control
-                    example: 25608540-bd60-11ef-8beb-6cf1610cf55d
-                    format: uuid
-                    type: string
-                upgradeType:
-                    description: The type of the upgrade
-                    enum:
-                        - UPGRADE
-                        - PATCH
-                        - HOTFIX
-                    example: UPGRADE
-                    type: string
-            type: object
-        FtdVersionsResponse:
-            properties:
-                count:
-                    description: The item count.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/FtdVersion'
-                    type: array
-            type: object
         GlobalSearchResult:
             properties:
                 cdFmcResult:
@@ -9754,16 +9627,6 @@ components:
                     description: The target ASA firmware version to upgrade the device to.
                     example: 9.4(1)
                     type: string
-            type: object
-        UpgradeFtdDeviceInput:
-            properties:
-                upgradePackageUid:
-                    description: The unique identifier, represented as a UUID, of the upgrade package to be applied to the device.
-                    example: 256461f6-bd60-11ef-8beb-6cf1610cf55d
-                    format: uuid
-                    type: string
-            required:
-                - upgradePackageUid
             type: object
         UrlObjectContent:
             properties:
