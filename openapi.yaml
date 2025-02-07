@@ -7598,6 +7598,9 @@ components:
         FtdClusterInfo:
             description: '(Device Clusters managed by FMC only) Clustering information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
             properties:
+                clusterName:
+                    description: The name of the cluster on the FMC.
+                    type: string
                 clusterNodeStatus:
                     description: '(on-prem FMC-managed FTDs only) Information on the type of this node in the FTD cluster. Note: Each node in an on-prem-FMC-managed FTD cluster is represented as a separate device entry in the API.'
                     enum:
@@ -7707,6 +7710,9 @@ components:
                     enum:
                         - PRIMARY
                         - SECONDARY
+                    type: string
+                haPairName:
+                    description: The name of the HA Pair on the FMC.
                     type: string
                 haPairUid:
                     description: The unique identifier, represented as a UUID, of the HA Pair, on the FMC
