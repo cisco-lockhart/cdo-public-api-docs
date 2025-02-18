@@ -5434,10 +5434,12 @@ components:
                 isActiveRule:
                     description: Indicates whether this rule is active.
                     type: boolean
-                issue:
-                    description: Indicates if rule has SHADOWED issue.
-                    example: SHADOWED
-                    type: string
+                issues:
+                    description: Indicates if rule has SHADOWED or SHARED issue.
+                    items:
+                        $ref: '#/components/schemas/AccessRuleIssue'
+                    type: array
+                    uniqueItems: true
                 logSettings:
                     $ref: '#/components/schemas/LogSettings'
                 protocol:
@@ -5582,6 +5584,7 @@ components:
                         - URL_OBJECT
                         - URL_GROUP
                         - APPLICATION_FILTER_OBJECT
+                        - TIME_RANGE
                     example: NETWORK_OBJECT
                     type: string
                 uid:
@@ -5591,6 +5594,28 @@ components:
                     type: string
             required:
                 - name
+            type: object
+        AccessRuleIssue:
+            description: Represents an access rule issue, including issue type and causes.
+            properties:
+                causes:
+                    description: A list of the causes for the rule being marked with an issue.
+                    example:
+                        - causeTypes:
+                            - SHADOWED_BY_NETWORK_ADDRESS
+                            - SHADOWED_BY_ICMP
+                          causingRule: Rule_1
+                          causingRuleIdx: 5
+                    items:
+                        $ref: '#/components/schemas/Cause'
+                    type: array
+                issueType:
+                    description: Indicates if the rule has any known issue. For unknown issues, UNKNOWN value will be used.
+                    enum:
+                        - SHADOWED
+                        - SHARED
+                        - UNKNOWN
+                    type: string
             type: object
         AccessRulePage:
             properties:
@@ -6271,6 +6296,40 @@ components:
                     description: The version of the web browser running on the client device.
                     example: 121.0.6167.160
                     type: string
+            type: object
+        Cause:
+            description: Represents a specific cause for an access rule issue.
+            example:
+                - causeTypes:
+                    - SHADOWED_BY_NETWORK_ADDRESS
+                    - SHADOWED_BY_ICMP
+                  causingRule: Rule_1
+                  causingRuleIdx: 5
+            properties:
+                causeTypes:
+                    description: A set of cause types for the issue.
+                    example:
+                        - SHADOWED_BY_NETWORK_ADDRESS
+                        - SHADOWED_BY_ICMP
+                    items:
+                        description: A set of cause types for the issue.
+                        enum:
+                            - SHADOWED_BY_NETWORK_ADDRESS
+                            - SHADOWED_BY_PORT
+                            - SHADOWED_BY_ICMP
+                            - SHADOWED_BY_ACTION
+                            - UNKNOWN
+                        example: '["SHADOWED_BY_NETWORK_ADDRESS","SHADOWED_BY_ICMP"]'
+                        type: string
+                    type: array
+                    uniqueItems: true
+                causingRule:
+                    description: The rule that is causing the issue.
+                    type: string
+                causingRuleIdx:
+                    description: The index of the causing rule.
+                    format: int32
+                    type: integer
             type: object
         CdFmcInfo:
             description: (FTDs managed by cdFMC only) Information on the cloud-delivered FMC managing this FTD. This information is not available for FTDs managed using FDM or on-prem FMCs.
