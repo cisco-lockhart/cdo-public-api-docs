@@ -7074,6 +7074,7 @@ components:
                 - BAD_CREDENTIALS
                 - UNKNOWN
                 - PENDING_SETUP
+                - PENDING
             example: ONLINE
             type: string
         ConnectorType:
