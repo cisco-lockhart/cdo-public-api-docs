@@ -5692,7 +5692,6 @@ components:
                 - uid
             type: object
         ActiveDirectoryGroup:
-            description: The list of items retrieved.
             properties:
                 groupIdentifier:
                     description: The unique identifier of the user group in your Identity Provider (IdP).
@@ -5721,11 +5720,11 @@ components:
         ActiveDirectoryGroupCreateOrUpdateInput:
             properties:
                 groupIdentifier:
-                    description: The object ID of the Active Directory group in your Identity Provider (IdP), or the group name in the IdP if the ID is unavailable.
+                    description: The unique identifier, represented as a UUID, of the Active Directory Group in your Identity Provider (IdP).
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     type: string
                 issuerUrl:
-                    description: The Identity Provider (IdP) URL, which Cisco Security Cloud Control will use to validate SAML assertions during the sign-in process.
+                    description: The Identity Provider (IdP) URL, which Cisco Defense Orchestrator will use to validate SAML assertions during the sign-in process.
                     example: https://access.example.com/saml2/idp/metadata.php
                     type: string
                 name:
@@ -7152,6 +7151,19 @@ components:
                 - name
                 - value
             type: object
+        Deployed:
+            description: Indicates that the settings have been successfully configured and deployed.
+            properties:
+                autoDeployEnabled:
+                    description: 'Specifies whether changes to ZTNA settings are automatically deployed to the device. Note: This applies only to ZTNA-specific changes and does not affect the deployment of other pending changes.'
+                    example: false
+                    type: boolean
+                domainSettings:
+                    description: Configuration that defines how Secure Client communicates with the device.
+                    items:
+                        $ref: '#/components/schemas/DomainSettings'
+                    type: array
+            type: object
         Device:
             properties:
                 address:
@@ -7623,7 +7635,7 @@ components:
                 - value
             type: object
         FmcObjectReference:
-            description: 'Reference to the network object on the FMC, defining the IPv4 address used for Network Address Translation (NAT) and/or Port Address Translation (PAT). Note: Required only if the device needs to support more than 65,000 simultaneous active connections.'
+            description: List of references to interface objects on the FMC, which defines the interfaces on the device that are used for ZTNA.
             properties:
                 link:
                     description: The endpoint to access this resource from.
@@ -9404,6 +9416,19 @@ components:
                         - TWO
                     type: string
             type: object
+        Staged:
+            description: Indicates that the settings have been configured but are not yet deployed.
+            properties:
+                autoDeployEnabled:
+                    description: 'Specifies whether changes to ZTNA settings are automatically deployed to the device. Note: This applies only to ZTNA-specific changes and does not affect the deployment of other pending changes.'
+                    example: false
+                    type: boolean
+                domainSettings:
+                    description: Configuration that defines how Secure Client communicates with the device.
+                    items:
+                        $ref: '#/components/schemas/DomainSettings'
+                    type: array
+            type: object
         StateMachineDetails:
             deprecated: true
             description: The device state machine details.
@@ -9629,19 +9654,22 @@ components:
         UniversalZtnaSettings:
             description: (FMC-managed FTDs only) Universal Zero-Trust Network Access (ZTNA) configuration.
             properties:
-                autoDeployEnabled:
-                    description: 'Specifies whether changes to ZTNA settings are automatically deployed to the device. Note: This applies only to ZTNA-specific changes and does not affect the deployment of other pending changes.'
-                    example: false
+                deployed:
+                    $ref: '#/components/schemas/Deployed'
+                staged:
+                    $ref: '#/components/schemas/Staged'
+                universalZtnaConfigured:
+                    description: Indicates whether a device is configured for Zero Trust Network Access (ZTNA).
+                    example: true
                     type: boolean
-                domainSettings:
-                    description: Configuration that defines how Secure Client communicates with the device.
-                    items:
-                        $ref: '#/components/schemas/DomainSettings'
-                    type: array
-                sourceNatV4:
-                    $ref: '#/components/schemas/FmcObjectReference'
-                sourceNatV6:
-                    $ref: '#/components/schemas/FmcObjectReference'
+                universalZtnaEnabled:
+                    description: Indicates whether a device is enabled for Zero Trust Network Access (ZTNA).
+                    example: true
+                    type: boolean
+                universalZtnaSupported:
+                    description: Indicates whether a device supports Zero Trust Network Access (ZTNA).
+                    example: true
+                    type: boolean
             type: object
         UpdateRequest:
             properties:
@@ -9708,7 +9736,6 @@ components:
                 - url
             type: object
         User:
-            description: The list of items retrieved.
             properties:
                 apiOnlyUser:
                     description: Whether the user is API-only, an API-only user cannot access Security Cloud Control in the UI.
@@ -9795,7 +9822,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: This determines the role for all the users included in this Active Directory Group.
+            description: The role of the user this token belongs to. The user can be API-only or a human.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -9804,7 +9831,6 @@ components:
                 - ROLE_EDIT_ONLY
                 - ROLE_VPN_SESSIONS_MANAGER
                 - ROLE_FWAAS
-            example: ROLE_ADMIN
             type: string
         VpnHealthMetrics:
             description: The vpn health metrics for the device.
