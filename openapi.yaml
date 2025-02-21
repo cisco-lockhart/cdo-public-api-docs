@@ -689,76 +689,6 @@ paths:
             summary: Get Change Log
             tags:
                 - Changelogs
-    /v1/cli/execute:
-        post:
-            description: This is an asynchronous operation to execute CLI commands in the Security Cloud Control tenant.
-            operationId: executeCliCommand
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/CliCommandInput'
-            responses:
-                "202":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CdoTransaction'
-                    description: Security Cloud Control Transaction object that can be used to track the progress of the execute CLI operation
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Execute CLI Command
-            tags:
-                - Command Line Interface
-    /v1/cli/executeMacro:
-        post:
-            description: This is an asynchronous operation to execute CLI macro command in the Security Cloud Control tenant.
-            operationId: executeCliMacro
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/CliMacroExecuteInput'
-            responses:
-                "202":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CdoTransaction'
-                    description: Security Cloud Control Transaction object that can be used to track the progress of the execute CLI operation
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Execute CLI Macro Command
-            tags:
-                - Command Line Interface
     /v1/cli/macros:
         get:
             description: Get a list of CLI macros. A CLI macro is a fully-formed CLI command ready to use, or a template of a CLI command you can modify before you run it.
@@ -893,7 +823,7 @@ paths:
             tags:
                 - Command Line Interface
         get:
-            description: 'Get a Security Cloud Control CLI Macro by UID. Note: This operation only returns the SCC CLI Macro. For executing the SCC CLI Macro, refer to the [Execute CLI Macro Operation](https://developer.cisco.com/docs/cisco-security-cloud-control/execute-cli-macro-command/)'
+            description: 'Get a Security Cloud Control CLI Macro by UID. Note: This operation only returns the SCC CLI Macro. For executing the SCC CLI Macro, refer to the [Execute CLI Macro](https://developer.cisco.com/docs/cisco-security-cloud-control/execute-cli-macro-command/) command.'
             operationId: getCliMacro
             parameters:
                 - description: The unique identifier, represented as a UUID, of the CDO CLI macro in Security Cloud Control.
@@ -1856,6 +1786,72 @@ paths:
             summary: Get compatible upgrade versions for an ASA
             tags:
                 - Device Upgrades
+    /v1/inventory/devices/asas/cli/execute:
+        post:
+            description: This is an asynchronous operation to execute CLI commands on an ASA device in the Security Cloud Control tenant.
+            operationId: executeCliCommand
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CliCommandInput'
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the progress of the execute CLI operation
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Execute CLI Command
+            tags:
+                - Command Line Interface
+    /v1/inventory/devices/asas/cli/executeMacro:
+        post:
+            description: This is an asynchronous operation to execute an CLI macro on an ASA device in the Security Cloud Control tenant.
+            operationId: executeCliMacro
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CliMacroExecuteInput'
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the progress of the execute CLI operation
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Execute CLI Macro Command
+            tags:
+                - Command Line Interface
     /v1/inventory/devices/duoAdminPanels:
         post:
             description: Onboard a Duo Admin Panel to the CDO tenant. The credentials to onboard the Duo Admin Panel to Security Cloud Control must be generated by creating an Admin API application on https://www.duo.com. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
