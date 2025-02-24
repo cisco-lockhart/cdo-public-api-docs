@@ -7639,6 +7639,13 @@ components:
                     description: The endpoint to access this resource from.
                     example: https://us.manage.security.cisco.com/api/rest/v1/cdfmc/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/networks/0276f012-3875-0ed3-0000-004294981364
                     type: string
+                name:
+                    description: The name of the FMC Object.
+                    type: string
+                type:
+                    description: The type of the FMC Object.
+                    example: PhysicalInterface
+                    type: string
                 uid:
                     description: The unique identifier, represented as a UUID, of the FMC Object.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
