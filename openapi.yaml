@@ -1920,6 +1920,56 @@ paths:
             summary: Onboard FTD device
             tags:
                 - Inventory
+    /v1/inventory/devices/ftds/{deviceUid}/deploy:
+        post:
+            description: |
+                This is an asynchronous operation to deploy changes made to a cdFMC-managed FTD device's configuration on Security Cloud Control to the device. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+
+                Notes:
+
+                - This operation is only supported for cdFMC-managed FTD devices.
+
+                - This operation will only deploy changes to the device if there are pending changes to deploy.
+
+                - Once this operation is finished, it can take up to 10 minutes for the [device](https://developer.cisco.com/docs/cisco-security-cloud-control/device/) [configState](https://developer.cisco.com/docs/cisco-security-cloud-control/configstate/) to be updated from `SYNCED` to `NOT_SYNCED` on Security Cloud Control.
+            operationId: deployFtdDeviceChanges
+            parameters:
+                - in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/FtdDeploymentInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the progress of the creation operation.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: (cdFMC-managed FTDs only) Deploy FTD device changes
+            tags:
+                - Inventory
     /v1/inventory/devices/ftds/cdfmcManaged/{deviceUid}/delete:
         post:
             description: This is an asynchronous operation to delete cdFMC managed FTD device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation. The reason this operation is asynchronous is because the device is first removed from the cdFMC, following which it is deleted from the Security Cloud Control tenant.
@@ -7776,6 +7826,21 @@ components:
                 - fmcAccessPolicyUid
                 - licenses
                 - name
+            type: object
+        FtdDeploymentInput:
+            properties:
+                deploymentNotes:
+                    description: Specify notes, if any, for the deployment.
+                    example: 'This deployment addresses ticket #12345.'
+                    type: string
+                description:
+                    description: Specify a human-readable description for the deployment.
+                    example: This deployment is for the branch office in San Francisco.
+                    type: string
+                ignoreWarnings:
+                    default: false
+                    description: 'Specify whether to ignore warnings generated during the pre-validation of the deployment job and proceed with the deployment regardless. **Warning**: Do not set this to `true` unless you know what you are doing.'
+                    type: boolean
             type: object
         FtdHaInfo:
             description: '(High Availability Devices managed by FMC only) High-Available information information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
