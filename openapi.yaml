@@ -3759,6 +3759,64 @@ paths:
             summary: Delete Targets
             tags:
                 - Object Management
+        get:
+            description: 'Get targets from an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
+            operationId: getTargets
+            parameters:
+                - description: the unique identifier of the object for which the targets are being added to.
+                  example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                  in: path
+                  name: uid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: 'The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are: targetType.'
+                  example: targetType:MCD
+                  in: query
+                  name: q
+                  required: true
+                  schema:
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: true
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: true
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 1
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListObjectResponse'
+                    description: A paginated view of the Security Cloud Control targets.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            summary: Get Targets
+            tags:
+                - Object Management
         post:
             description: 'Create targets for an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
             operationId: createTargets
