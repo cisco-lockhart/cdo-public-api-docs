@@ -6733,7 +6733,6 @@ components:
                         - TERMINATE_DEVICE_RA_VPN_SESSIONS
                         - REFRESH_RA_VPN_SESSIONS
                         - TERMINATE_USER_RA_VPN_SESSIONS
-                        - DEVICE_UPGRADE
                         - UPGRADE_ASA
                         - UPGRADE_FTD
                         - CREATE_SDC
