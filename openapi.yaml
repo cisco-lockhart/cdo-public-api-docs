@@ -7933,6 +7933,10 @@ components:
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
+                skipInitialDeployment:
+                    default: false
+                    description: Boolean flag to specify initial deployment should be triggered or not after device onboarding is completed. Defaults to false if not provided.
+                    type: boolean
             required:
                 - ftdUid
             type: object
