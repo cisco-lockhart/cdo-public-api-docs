@@ -6810,8 +6810,12 @@ components:
             type: object
         Changelog:
             properties:
+                entityName:
+                    description: The name of the device, manager or service to which the Change Log refers.
+                    example: example-asa
+                    type: string
                 entityUid:
-                    description: The uid of the device/manager/service the Change Log refers to.
+                    description: The unique identifier, represented as a UUID, of the device, manager or service to which the Change Log refers.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
