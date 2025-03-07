@@ -4692,7 +4692,7 @@ paths:
                 - Transactions
     /v1/users:
         get:
-            description: Get a list of users associated with the Security Cloud Control tenant.
+            description: 'Get a list of (non-API-only) users associated with the Security Cloud Control tenant. Note: This endpoint returns only human users, not API-only users.'
             operationId: getUsers
             parameters:
                 - description: The number of results to retrieve.
@@ -4915,6 +4915,59 @@ paths:
             security:
                 - bearerAuth: []
             summary: Get Tenant User
+            tags:
+                - Users
+    /v1/users/api-only:
+        get:
+            description: Get a list of API-only users associated with the Security Cloud Control Firewall Cloud Manager tenant.
+            operationId: getApiOnlyUsers
+            parameters:
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UserPage'
+                    description: List of User objects
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Tenant API-only Users
             tags:
                 - Users
     /v1/users/groups:
@@ -5796,6 +5849,7 @@ components:
                 - uid
             type: object
         ActiveDirectoryGroup:
+            description: The list of items retrieved.
             properties:
                 groupIdentifier:
                     description: The unique identifier of the user group in your Identity Provider (IdP).
@@ -5824,11 +5878,11 @@ components:
         ActiveDirectoryGroupCreateOrUpdateInput:
             properties:
                 groupIdentifier:
-                    description: The unique identifier, represented as a UUID, of the Active Directory Group in your Identity Provider (IdP).
+                    description: The object ID of the Active Directory group in your Identity Provider (IdP), or the group name in the IdP if the ID is unavailable.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     type: string
                 issuerUrl:
-                    description: The Identity Provider (IdP) URL, which Cisco Defense Orchestrator will use to validate SAML assertions during the sign-in process.
+                    description: The Identity Provider (IdP) URL, which Cisco Security Cloud Control will use to validate SAML assertions during the sign-in process.
                     example: https://access.example.com/saml2/idp/metadata.php
                     type: string
                 name:
@@ -9878,6 +9932,7 @@ components:
                 - url
             type: object
         User:
+            description: The list of items retrieved.
             properties:
                 apiOnlyUser:
                     description: Whether the user is API-only, an API-only user cannot access Security Cloud Control in the UI.
@@ -9976,7 +10031,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: The role of the user this token belongs to. The user can be API-only or a human.
+            description: This determines the role for all the users included in this Active Directory Group.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -9985,6 +10040,7 @@ components:
                 - ROLE_EDIT_ONLY
                 - ROLE_VPN_SESSIONS_MANAGER
                 - ROLE_FWAAS
+            example: ROLE_ADMIN
             type: string
         VpnHealthMetrics:
             description: The vpn health metrics for the device.
