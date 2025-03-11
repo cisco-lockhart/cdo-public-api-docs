@@ -7677,6 +7677,9 @@ components:
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
+                commands:
+                    description: The commands executed, if any, by the Change Log event.
+                    type: string
                 date:
                     description: The time (UTC; represented using the RFC-3339 standard) at which the Change Log Event occurred.
                     format: date-time
