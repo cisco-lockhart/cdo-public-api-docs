@@ -9980,8 +9980,16 @@ components:
                     description: Whether the user is API-only, an API-only user cannot access Security Cloud Control in the UI.
                     example: false
                     type: boolean
+                firstName:
+                    description: 'The first name of the user in Security Cloud Control. Note: This field must not be specified for API-only users.'
+                    example: Ram
+                    type: string
+                lastName:
+                    description: 'The last name of the user in Security Cloud Control. Note: This field must not be specified for API-only users.'
+                    example: Singh
+                    type: string
                 name:
-                    description: The name of the user in Security Cloud Control.
+                    description: The name of the user in Security Cloud Control. This has to be a valid email if creating a human user, and must not be an email if creating an API-only user.
                     example: myusername@cisco.com
                     type: string
                 role:
