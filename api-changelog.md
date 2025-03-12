@@ -1,3 +1,13 @@
+# Version 1.9.0 (2025-03-12)
+
+## Added
+- Endpoints to upgrade FTD devices
+  - Identify which versions are compatible with a given FTD device
+  - Upgrade FTD device to compatible version
+- Endpoint to deploy changes to FTD devices
+- Endpoint to fetch API-only users on a tenant
+- Endpoint to fetch targets associated with an object
+
 # Version 1.8.0 (2025-02-05)
 
 ## Improvements
