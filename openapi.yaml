@@ -4778,7 +4778,7 @@ paths:
                 - Transactions
     /v1/users:
         get:
-            description: 'Get a list of (non-API-only) users associated with the Security Cloud Control tenant. Note: This endpoint returns only human users, not API-only users.'
+            description: 'Get a list of (non-API-only) users associated with the Security Cloud Control tenant assigned to the SCC Firewall Manager. Note: This endpoint returns only human users, not API-only users.'
             operationId: getUsers
             parameters:
                 - description: The number of results to retrieve.
@@ -4830,7 +4830,7 @@ paths:
             tags:
                 - Users
         post:
-            description: Create a user in the Security Cloud Control tenant. The user may already exist and have access to other tenants, in which case this endpoint adds the user to this tenant.
+            description: Create a user in the Security Cloud Control enterprise and assigns the specified role for access to the Firewall Manager application.
             operationId: createUser
             requestBody:
                 content:
@@ -4936,15 +4936,14 @@ paths:
                 - Users
     /v1/users/{userUid}:
         delete:
-            description: Delete a User by UID in the Security Cloud Control tenant. If the user is associated with multiple tenants, they will continue to have access to every other tenant.
+            description: Revokes a user's access to Firewall Manager within a specific Security Cloud Control enterprise. This action will not affect the user's access to other products in the enterprise or their access to Firewall Manager in other enterprises.
             operationId: deleteUser
             parameters:
-                - description: The unique identifier, represented as a UUID, of the user in Security Cloud Control.
+                - description: The unique identifier of the user in Security Cloud Control.
                   in: path
                   name: userUid
                   required: true
                   schema:
-                    format: uuid
                     type: string
             responses:
                 "204":
@@ -4963,11 +4962,11 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Remove User from Security Cloud Control Tenant
+            summary: Delete User from Security Cloud Control Firewall Manager Tenant
             tags:
                 - Users
         get:
-            description: Fetch a user by UID in the CDO tenant. This will only return 200 responses for users associated with the Security Cloud Control tenant.
+            description: Fetch a user by UID in the CDO tenant. This will only return 200 responses for users associated with the Security Cloud Control tenant and assigned to the SCC Firewall Manager.
             operationId: getUser
             parameters:
                 - description: The unique identifier of the user in Security Cloud Control.
@@ -5004,7 +5003,7 @@ paths:
                 - Users
     /v1/users/api-only:
         get:
-            description: Get a list of API-only users associated with the Security Cloud Control Firewall Cloud Manager tenant.
+            description: Get a list of API-only users associated with the Security Cloud Control Firewall Manager tenant.
             operationId: getApiOnlyUsers
             parameters:
                 - description: The number of results to retrieve.
@@ -5170,7 +5169,7 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Remove Active Directory Group from Security Cloud Control Tenant
+            summary: Delete Active Directory Group from Security Cloud Control Tenant
             tags:
                 - Users
         get:
