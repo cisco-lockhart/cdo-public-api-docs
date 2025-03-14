@@ -6890,6 +6890,7 @@ components:
                         - MSP_ENABLE_MULTICLOUD_DEFENSE
                         - MSP_PROVISION_CDFMC
                         - CREATE_USERS
+                        - EXECUTE_ASA_COMMAND
                     example: ONBOARD_ASA
                     type: string
                 transactionUid:
