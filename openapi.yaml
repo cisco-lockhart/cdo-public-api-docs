@@ -5054,6 +5054,43 @@ paths:
             summary: Get Tenant API-only Users
             tags:
                 - Users
+    /v1/users/bulk:
+        post:
+            description: This is an asynchronous operation to create multiple users in the Security Cloud Control enterprise and assign the specified role to each user for access to the Firewall Manager application.
+            operationId: createUser_1
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            items:
+                                $ref: '#/components/schemas/UserCreateOrUpdateInput'
+                            type: array
+                            uniqueItems: true
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the progress of the creation operation.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Create multiple users in Security Cloud Control Tenant
+            tags:
+                - Users
     /v1/users/groups:
         get:
             description: Get a list of active directory groups associated with the Security Cloud Control tenant.
