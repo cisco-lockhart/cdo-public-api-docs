@@ -1,4 +1,4 @@
-# Version 1.9.0 (2025-03-12)
+# Version 1.9.0 (2025-03-17)
 
 ## Added
 - Endpoints to upgrade FTD devices
