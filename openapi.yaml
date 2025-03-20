@@ -5058,6 +5058,18 @@ paths:
         post:
             description: This is an asynchronous operation to create multiple users in the Security Cloud Control enterprise and assign the specified role to each user for access to the Firewall Manager application.
             operationId: createUser_1
+            parameters:
+                - in: header
+                  name: X-Calling-Service
+                  required: false
+                  schema:
+                    type: string
+                - description: Custom metadata to identify the request
+                  in: header
+                  name: X-Request-Metadata
+                  required: false
+                  schema:
+                    type: string
             requestBody:
                 content:
                     application/json:
