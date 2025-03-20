@@ -10182,6 +10182,14 @@ components:
                     description: Whether the user is an API-only user
                     example: false
                     type: boolean
+                firstName:
+                    description: 'The first name of the user in Security Cloud Control. If this is not set, the first name is set to the username. Note: This field must not be specified for API-only users.'
+                    example: Ram
+                    type: string
+                lastName:
+                    description: 'The last name of the user in Security Cloud Control. If this is not set, the last name is set to the username. Note: This field must not be specified for API-only users.'
+                    example: Singh
+                    type: string
                 role:
                     $ref: '#/components/schemas/UserRole'
                 username:
