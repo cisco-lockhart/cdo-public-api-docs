@@ -9891,14 +9891,16 @@ components:
         Tenant:
             properties:
                 displayName:
-                    description: A human-readable display name for the tenant. This is the tenant name displayed in the Security Cloud Control Web UI.
+                    deprecated: true
+                    description: A human-readable display name for the enterprise (tenant). This is the tenant name displayed in the Security Cloud Control Web UI.
                     example: mytenantname
                     type: string
                 name:
-                    description: The name of the tenant in Security Cloud Control.
+                    description: The name of the enterprise (tenant) in Security Cloud Control.
                     example: mytenantname@cisco.com
                     type: string
                 payType:
+                    deprecated: true
                     description: An enum that describes the payment type of the tenant in Security Cloud Control.
                     enum:
                         - PAYING
@@ -9915,7 +9917,7 @@ components:
                     format: uuid
                     type: string
                 uid:
-                    description: The unique identifier, represented as a UUID, of the tenant in Security Cloud Control.
+                    description: The unique identifier, represented as a UUID, of the enterprise (tenant) in Security Cloud Control.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
