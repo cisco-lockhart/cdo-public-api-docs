@@ -9804,6 +9804,10 @@ components:
                     description: Indicates if the tenant has the AI assistant enabled.
                     example: true
                     type: boolean
+                asaHealthMetrics:
+                    description: Indicates if the tenant collects ASA health metrics.
+                    example: false
+                    type: boolean
                 autoAcceptDeviceChanges:
                     description: Indicates if changes made out-of-band on devices on the tenant are automatically accepted without manual approval.
                     example: true
