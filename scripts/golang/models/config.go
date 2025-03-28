@@ -5,6 +5,9 @@ type Service struct {
 	URL         string  `yaml:"url"`
 	PrefixToAdd *string `yaml:"prefixToAdd"`
 }
+type CdFmc struct {
+	URL string `yaml:"url"`
+}
 type Info struct {
 	Title       string  `yaml:"title"`
 	Version     string  `yaml:"version"`
@@ -24,6 +27,7 @@ type Server struct {
 
 type Config struct {
 	Services        []Service              `yaml:"services"`
+	CdFmc           CdFmc                  `json:"cdfmc"`
 	Info            Info                   `yaml:"info"`
 	Servers         []Server               `yaml:"servers"`
 	SecuritySchemes map[string]interface{} `yaml:"securitySchemes"`

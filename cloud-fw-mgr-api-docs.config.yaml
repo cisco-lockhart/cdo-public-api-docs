@@ -12,6 +12,8 @@ services:
   - name: "device-gateway-service"
     url: "https://edge.staging.cdo.cisco.com/api/platform/device-gateway/v3/api-docs.yaml"
     prefixToAdd: "/v1/fmc/gateway"
+cdfmc:
+  url: "https://demo-red.app.us.cdo.cisco.com/api/api-explorer/fmc_oas3.json"
 info:
   title: "Cisco Security Cloud Control API"
   version: "1.9.0"
