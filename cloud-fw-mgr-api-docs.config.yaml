@@ -14,6 +14,13 @@ services:
     prefixToAdd: "/v1/fmc/gateway"
 cdfmc:
   url: "https://demo-red.app.us.cdo.cisco.com/api/api-explorer/fmc_oas3.json"
+cdFmcInfo:
+  title: "Cisco cloud-delivered Firewall Management Center API"
+  version: "1.0.0"
+  description: "Use the documentation to explore the endpoints the cdFMC has to offer"
+  contact:
+    name: "Cisco Security Cloud Control TAC"
+    email: "cdo.tac@cisco.com"
 info:
   title: "Cisco Security Cloud Control API"
   version: "1.9.0"
@@ -22,21 +29,21 @@ info:
     name: "Cisco Security Cloud Control TAC"
     email: "cdo.tac@cisco.com"
 servers:
- - url: https://edge.us.cdo.cisco.com/api/rest
+ - url: https://api.us.security.cisco.com/firewall
    description: US
- - url: https://edge.eu.cdo.cisco.com/api/rest
+ - url: https://api.eu.security.cisco.com/firewall
    description: EU
- - url: https://edge.apj.cdo.cisco.com/api/rest
+ - url: https://api.apj.security.cisco.com/firewall
    description: APJ
- - url: https://edge.aus.cdo.cisco.com/api/rest
+ - url: https://api.au.security.cisco.com/firewall
    description: AUS
- - url: https://edge.in.cdo.cisco.com/api/rest
+ - url: https://api.in.security.cisco.com/firewall
    description: IN
- - url: https://edge.staging.cdo.cisco.com/api/rest
+ - url: https://api.int.security.cisco.com/firewall
    description: Staging
- - url: https://edge.scale.cdo.cisco.com/api/rest
+ - url: https://scale.manage.security.cisco.com/api/rest
    description: Scale
- - url: https://edge.ci.cdo.cisco.com/api/rest
+ - url: https://ci.manage.security.cisco.com/api/rest
    description: CI
 securitySchemes:
   bearerAuth:

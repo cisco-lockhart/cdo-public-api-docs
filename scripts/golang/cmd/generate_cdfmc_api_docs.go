@@ -37,7 +37,7 @@ var generateCdfmcApiDocsCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		openApiSpec, err := services.LoadOpenApiJson(config.CdFmc.URL)
+		openApiSpec, err := loadOpenApiSpec(config.CdFmc.URL)
 		if err != nil {
 			os.Exit(1)
 		}
@@ -71,13 +71,17 @@ func writeModifiedCdFmcSpecToFile(modifiedOpenApiSpec *models.OpenAPI, outputFil
 
 func modifySpec(openApiSpec *models.OpenAPI, config *models.Config) *models.OpenAPI {
 	spinner, _ := pterm.DefaultSpinner.Start("Rewriting paths and modifying servers...")
+	openApiSpec.OpenAPI = "3.0.1"
+	openApiSpec.Servers = config.Servers
+	openApiSpec.Info = config.CdFmcInfo
+	openApiSpec.Components.SecuritySchemes = config.SecuritySchemes
+
 	newPaths := make(map[string]interface{})
 	for path, pathItem := range openApiSpec.Paths {
 		newPath := "/v1/cdfmc" + path
 		newPaths[newPath] = pathItem
 	}
 	openApiSpec.Paths = newPaths
-	openApiSpec.Servers = config.Servers
 	spinner.Success("Paths and servers modified successfully")
 	return openApiSpec
 }
@@ -96,7 +100,7 @@ func loadConfig(configUrl string) (*models.Config, error) {
 
 func loadOpenApiSpec(url string) (*models.OpenAPI, error) {
 	spinner, _ := pterm.DefaultSpinner.Start(fmt.Sprintf("Loading OpenAPI spec for cdFMC"))
-	openApiSpec, err := services.LoadOpenApi(url)
+	openApiSpec, err := services.LoadOpenApiJson(url)
 	if err != nil {
 		spinner.Fail(fmt.Sprintf("failed to load OpenAPI spec for cdFMC, error: %v\n", err))
 		return nil, err
