@@ -34,7 +34,6 @@ type Config struct {
 	Services        []Service              `yaml:"services"`
 	CdFmc           CdFmc                  `json:"cdfmc"`
 	Info            Info                   `yaml:"info"`
-	CdFmcInfo       Info                   `json:"cdFmcInfo"`
 	Servers         []Server               `yaml:"servers"`
 	SecuritySchemes map[string]interface{} `yaml:"securitySchemes"`
 }

@@ -9,7 +9,7 @@ import (
 var _ = Describe("ConfigReaderService", func() {
 	Describe("LoadConfig", func() {
 		It("should return a valid configuration", func() {
-			url := "https://raw.githubusercontent.com/cisco-lockhart/cdo-public-api-docs/refs/heads/LH-89186-improve-api-doc-generation/cloud-fw-mgr-api-docs.config.yaml"
+			url := "https://raw.githubusercontent.com/cisco-lockhart/cdo-public-api-docs/refs/heads/LH-92055-add-cdfmc-docs-to-cdo-docs/cloud-fw-mgr-api-docs.config.yaml"
 			config, err := services.LoadConfig(url)
 			Expect(config).NotTo(BeNil())
 			Expect(err).To(BeNil())

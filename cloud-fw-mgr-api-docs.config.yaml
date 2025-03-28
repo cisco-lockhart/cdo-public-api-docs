@@ -27,8 +27,8 @@ info:
     version: "1.0.0"
     description: "Use the documentation to explore the endpoints the cdFMC has to offer"
     contact:
-      name: "Cisco Security Cloud Control TAC"
-      email: "cdo.tac@cisco.com"
+      name: "Cisco Firepower TAC"
+      email: "ngfw-support@cisco.com"
 servers:
  - url: https://api.us.security.cisco.com/firewall
    description: US
