@@ -11,7 +11,7 @@ import (
 func MergeOpenApiSpecs(serviceSpecs map[string]*models.OpenAPI, config *models.Config) (*models.OpenAPI, error) {
 	mergedSpec := models.OpenAPI{}
 	mergedSpec.OpenAPI = "3.0.1"
-	mergedSpec.Info = config.Info
+	mergedSpec.Info = config.Info.Cdo
 	mergedSpec.Servers = config.Servers
 	mergedSpec.Paths = make(map[string]interface{})
 	mergedSpec.Components = models.Components{}

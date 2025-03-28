@@ -14,20 +14,21 @@ services:
     prefixToAdd: "/v1/fmc/gateway"
 cdfmc:
   url: "https://demo-red.app.us.cdo.cisco.com/api/api-explorer/fmc_oas3.json"
-cdFmcInfo:
-  title: "Cisco cloud-delivered Firewall Management Center API"
-  version: "1.0.0"
-  description: "Use the documentation to explore the endpoints the cdFMC has to offer"
-  contact:
-    name: "Cisco Security Cloud Control TAC"
-    email: "cdo.tac@cisco.com"
 info:
-  title: "Cisco Security Cloud Control API"
-  version: "1.9.0"
-  description: "Use the documentation to explore the endpoints Security Cloud Control has to offer"
-  contact:
-    name: "Cisco Security Cloud Control TAC"
-    email: "cdo.tac@cisco.com"
+  cdo:
+    title: "Cisco Security Cloud Control API"
+    version: "1.9.0"
+    description: "Use the documentation to explore the endpoints Security Cloud Control has to offer"
+    contact:
+      name: "Cisco Security Cloud Control TAC"
+      email: "cdo.tac@cisco.com"
+  cdfmc:
+    title: "Cisco cloud-delivered Firewall Management Center API"
+    version: "1.0.0"
+    description: "Use the documentation to explore the endpoints the cdFMC has to offer"
+    contact:
+      name: "Cisco Security Cloud Control TAC"
+      email: "cdo.tac@cisco.com"
 servers:
  - url: https://api.us.security.cisco.com/firewall
    description: US

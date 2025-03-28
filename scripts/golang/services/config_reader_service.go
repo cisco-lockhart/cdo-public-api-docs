@@ -31,9 +31,11 @@ func LoadConfig(url string) (*models.Config, error) {
 	if err != nil {
 		return nil, err
 	}
+	fmt.Printf("data: %s\n", data)
 
 	config := models.Config{}
 	err = yaml.Unmarshal(data, &config)
+	fmt.Printf("%v\n", config.Info)
 	if err != nil {
 		return nil, err
 	}

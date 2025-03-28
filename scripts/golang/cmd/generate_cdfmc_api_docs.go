@@ -73,7 +73,8 @@ func modifySpec(openApiSpec *models.OpenAPI, config *models.Config) *models.Open
 	spinner, _ := pterm.DefaultSpinner.Start("Rewriting paths and modifying servers...")
 	openApiSpec.OpenAPI = "3.0.1"
 	openApiSpec.Servers = config.Servers
-	openApiSpec.Info = config.CdFmcInfo
+	fmt.Printf("%v\n", config.CdFmcInfo)
+	openApiSpec.Info = config.Info.CdFmc
 	openApiSpec.Components.SecuritySchemes = config.SecuritySchemes
 
 	newPaths := make(map[string]interface{})

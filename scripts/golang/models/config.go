@@ -9,6 +9,11 @@ type CdFmc struct {
 	URL string `yaml:"url"`
 }
 type Info struct {
+	Cdo   InfoData `yaml:"cdo"`
+	CdFmc InfoData `yaml:"cdfmc"`
+}
+
+type InfoData struct {
 	Title       string  `yaml:"title"`
 	Version     string  `yaml:"version"`
 	Description string  `yaml:"description"`
@@ -29,7 +34,7 @@ type Config struct {
 	Services        []Service              `yaml:"services"`
 	CdFmc           CdFmc                  `json:"cdfmc"`
 	Info            Info                   `yaml:"info"`
-	CdFmcInfo       Info                   `json:"cdfmcInfo"`
+	CdFmcInfo       Info                   `json:"cdFmcInfo"`
 	Servers         []Server               `yaml:"servers"`
 	SecuritySchemes map[string]interface{} `yaml:"securitySchemes"`
 }
