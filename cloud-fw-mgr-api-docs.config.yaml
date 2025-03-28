@@ -16,9 +16,9 @@ cdfmc:
   url: "https://demo-red.app.us.cdo.cisco.com/api/api-explorer/fmc_oas3.json"
 info:
   cdo:
-    title: "Cisco Security Cloud Control API"
+    title: "Cisco Security Cloud Control Firewall Manager API"
     version: "1.9.0"
-    description: "Use the documentation to explore the endpoints Security Cloud Control has to offer"
+    description: "Use the documentation to explore the endpoints Security Cloud Control Firewall Manager has to offer"
     contact:
       name: "Cisco Security Cloud Control TAC"
       email: "cdo.tac@cisco.com"

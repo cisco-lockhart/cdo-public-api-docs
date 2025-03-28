@@ -1,8 +1,8 @@
-<seotitle>Cloud Firewall Manager, Security Policy, Network Management, Deploy, Upgrade, Security Cloud Control, Cisco Security Cloud Control, Cisco Security Cloud Control API</seotitle>
+<seotitle>Cloud Firewall Manager, Firewall Cloud Manager, Security Policy, Network Management, Deploy, Upgrade, Security Cloud Control, Cisco Security Cloud Control, Cisco Security Cloud Control API</seotitle>
 
-# Cisco Security Cloud Control API Documentation
+# Cisco Security Cloud Control Firewall Manager API Documentation
 
-Cisco Security Cloud Control exposes a rich REST API. This document describes the semantics of the REST API. Backwards compatibility of the API is guaranteed using a versioning system.
+Cisco Security Cloud Control Firewall Manager exposes a rich REST API. This document describes the semantics of the REST API. Backwards compatibility of the API is guaranteed using a versioning system.
 
 ## What can you do with it?
 - Manage your devices, services, and device managers
