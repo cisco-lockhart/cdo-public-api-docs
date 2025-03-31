@@ -2,6 +2,7 @@ package models
 
 type Components struct {
 	Schemas         map[string]interface{} `yaml:"schemas,omitempty"`
+	Parameters      map[string]interface{} `yaml:"parameters,omitempty"`
 	Responses       map[string]interface{} `yaml:"responses,omitempty"`
 	SecuritySchemes map[string]interface{} `yaml:"securitySchemes,omitempty"`
 }
