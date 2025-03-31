@@ -40,7 +40,7 @@
           {
             "title": "cdFMC API",
             "content": "cdfmc-openapi.yaml",
-            "type": "oas3"
+            "type": "swagger3"
           }
         ]
       },
