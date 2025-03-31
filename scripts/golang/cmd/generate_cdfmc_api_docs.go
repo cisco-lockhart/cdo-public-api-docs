@@ -73,12 +73,28 @@ func modifySpec(openApiSpec *models.OpenAPI, config *models.Config) *models.Open
 	spinner, _ := pterm.DefaultSpinner.Start("Rewriting paths and modifying servers...")
 	openApiSpec.OpenAPI = "3.0.1"
 	openApiSpec.Servers = config.Servers
-	fmt.Printf("%v\n", config.Info)
 	openApiSpec.Info = config.Info.CdFmc
 	openApiSpec.Components.SecuritySchemes = config.SecuritySchemes
 
 	newPaths := make(map[string]interface{})
 	for path, pathItem := range openApiSpec.Paths {
+		pathItemMap, ok := pathItem.(map[string]interface{})
+		if ok {
+			discard := false
+			for _, subItem := range pathItemMap {
+				subItemMap, subOk := subItem.(map[string]interface{})
+				if subOk {
+					if deprecated, exists := subItemMap["deprecated"].(bool); exists && deprecated {
+						fmt.Printf("Discarding deprecated path: %s\n", path)
+						discard = true
+						break
+					}
+				}
+			}
+			if discard {
+				continue
+			}
+		}
 		newPath := "/v1/cdfmc" + path
 		newPaths[newPath] = pathItem
 	}
