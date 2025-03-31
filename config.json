@@ -55,6 +55,10 @@
             "content": "developer-resources/postman-collection.md"
           },
           {
+            "title": "SDKs",
+            "content": "developer-resources/sdks.md"
+          },
+          {
             "title": "Learning Labs",
             "content": "https://developer.cisco.com/learning/modules/automating-cisco-defense-orchestrator/",
             "type": "url"
