@@ -1,3 +1,8 @@
+# Version 1.10.0 (2025-03-31)
+
+## Added
+- The Cloud-delivered Firewall Management Center (cdFMC) APIs are now available to use.
+
 # Version 1.9.0 (2025-03-17)
 
 ## Added

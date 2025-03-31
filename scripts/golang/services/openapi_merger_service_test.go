@@ -13,12 +13,14 @@ var _ = Describe("MergeOpenApiSpecs", func() {
 		prefixToAddForService2 := "/custom-prefix"
 		config := models.Config{
 			Info: models.Info{
-				Title:       "API Docs",
-				Version:     "1.0.0",
-				Description: "Description",
-				Contact: models.Contact{
-					Name:  "SCC TAC",
-					Email: "cdo.tac@cisco.com",
+				Cdo: models.InfoData{
+					Title:       "API Docs",
+					Version:     "1.0.0",
+					Description: "Description",
+					Contact: models.Contact{
+						Name:  "SCC TAC",
+						Email: "cdo.tac@cisco.com",
+					},
 				},
 			},
 			Servers: []models.Server{models.Server{
@@ -99,12 +101,14 @@ var _ = Describe("MergeOpenApiSpecs", func() {
 	It("Should fail on conflicting paths", func() {
 		config := models.Config{
 			Info: models.Info{
-				Title:       "API Docs",
-				Version:     "1.0.0",
-				Description: "Description",
-				Contact: models.Contact{
-					Name:  "SCC TAC",
-					Email: "cdo.tac@cisco.com",
+				Cdo: models.InfoData{
+					Title:       "API Docs",
+					Version:     "1.0.0",
+					Description: "Description",
+					Contact: models.Contact{
+						Name:  "SCC TAC",
+						Email: "cdo.tac@cisco.com",
+					},
 				},
 			},
 			Servers: []models.Server{models.Server{

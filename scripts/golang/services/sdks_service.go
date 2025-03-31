@@ -29,7 +29,7 @@ func GeneratePythonSdk(openapiFile string, version string, useLocalInstallation 
 		"-i", openapiFile,
 		"-g", "python",
 		"-o", "sdks/python",
-		"--additional-properties=packageName=cdo_sdk_python,packageVersion="+version).Output()
+		"--additional-properties=packageName=scc_firewall_manager_sdk,packageVersion="+version).Output()
 	return err
 }
 
@@ -48,11 +48,11 @@ func PublishPythonSdk(pypiToken *string, version string) error {
 		pterm.Error.Println(err)
 	}
 
-	cmd = ExecCommand("twine", "upload", "-u", "__token__", "-p", *pypiToken, fmt.Sprintf("sdks/python/dist/cdo_sdk_python-%s-py3-none-any.whl", version))
+	cmd = ExecCommand("twine", "upload", "-u", "__token__", "-p", *pypiToken, fmt.Sprintf("sdks/python/dist/scc_firewall_manager_sdk-%s-py3-none-any.whl", version))
 	out, err = cmd.Output()
 	if err != nil {
-		pterm.Error.Println(out)
-		pterm.Error.Println(err)
+		pterm.Error.Println(string(out))
+		pterm.Error.Println(err.Error())
 	}
 
 	return err

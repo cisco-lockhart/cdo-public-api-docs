@@ -33,8 +33,13 @@
         },
         "items": [
           {
-            "title": "SCC API",
+            "title": "SCC Firewall Manager API",
             "content": "openapi.yaml",
+            "type": "oas3"
+          },
+          {
+            "title": "cdFMC API",
+            "content": "cdfmc-openapi.yaml",
             "type": "oas3"
           }
         ]
@@ -46,8 +51,12 @@
         },
         "items": [
           {
-            "title": "Postman Collection",
+            "title": "Postman Collections",
             "content": "developer-resources/postman-collection.md"
+          },
+          {
+            "title": "SDKs",
+            "content": "developer-resources/sdks.md"
           },
           {
             "title": "Learning Labs",

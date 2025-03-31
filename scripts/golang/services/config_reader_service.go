@@ -34,6 +34,7 @@ func LoadConfig(url string) (*models.Config, error) {
 
 	config := models.Config{}
 	err = yaml.Unmarshal(data, &config)
+	fmt.Printf("%v\n", config.Info)
 	if err != nil {
 		return nil, err
 	}

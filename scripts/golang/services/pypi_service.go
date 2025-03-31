@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-const pypiPackageName = "cdo_sdk_python"
+const pypiPackageName = "scc_firewall_manager_sdk"
 
 func GetCurrentVersion(openApiVersionStr string) (*string, error) {
 	resp, err := http.Get("https://pypi.org/pypi/" + pypiPackageName + "/json")
@@ -23,6 +23,9 @@ func GetCurrentVersion(openApiVersionStr string) (*string, error) {
 		}
 	}(resp.Body)
 	// Check if the request was successful
+	if resp.StatusCode == http.StatusNotFound {
+		return &openApiVersionStr, nil
+	}
 	if resp.StatusCode != http.StatusOK {
 		return nil, errors.New("failed to fetch URL: " + resp.Request.URL.String() + ", status code: " + resp.Status)
 	}
