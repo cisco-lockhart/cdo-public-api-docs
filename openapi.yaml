@@ -7776,12 +7776,17 @@ components:
                     type: array
                 memoryHealthMetrics:
                     $ref: '#/components/schemas/MemoryHealthMetrics'
+                raVpnSessionHealthMetrics:
+                    $ref: '#/components/schemas/RaVpnSessionHealthMetrics'
+                s2sVpnTunnelHealthMetrics:
+                    description: The S2S VPN tunnel health metrics for the device. The maximum number of tunnels retrieved is 1000.
+                    items:
+                        $ref: '#/components/schemas/S2sVpnTunnelHealthMetrics'
+                    type: array
                 startTime:
                     description: The start of the time period (inclusive) for which the health metrics were retrieved for this device.
                     format: date-time
                     type: string
-                vpnHealthMetrics:
-                    $ref: '#/components/schemas/VpnHealthMetrics'
             type: object
         FmcObjectOverride:
             description: 'Specify a list of objects to override. All objects that have been marked as overridable in the template must be defined here. Note: Any overrides defined here that are not present in the template configuration will be ignored.'
@@ -9086,6 +9091,19 @@ components:
                 - uid
                 - username
             type: object
+        RaVpnSessionHealthMetrics:
+            description: The RA VPN session health metrics for the device.
+            properties:
+                activeRavpnSessionsAvg:
+                    description: The average number of active RA VPN sessions.
+                    type: number
+                inactiveRavpnSessionsAvg:
+                    description: The average number of inactive or down RA VPN sessions.
+                    type: number
+                peakConcurRavpnSessions:
+                    description: The peak concurrent RA VPN sessions active since the last reset.
+                    type: number
+            type: object
         RaVpnSessionPage:
             properties:
                 count:
@@ -9200,6 +9218,23 @@ components:
                     description: The unique identifier of the referenced object
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
+                    type: string
+            type: object
+        S2sVpnTunnelHealthMetrics:
+            description: The S2S VPN tunnel health metrics for the device. The maximum number of tunnels retrieved is 1000.
+            properties:
+                tunnelId:
+                    description: The unique identifier of the S2S VPN tunnel.
+                    type: string
+                tunnelName:
+                    description: The name assigned to the S2S VPN tunnel.
+                    type: string
+                tunnelState:
+                    description: The state of the S2S VPN tunnel. The possible values are TUNNEL_UP, TUNNEL_DOWN, and UNKNOWN.
+                    enum:
+                        - TUNNEL_UP
+                        - TUNNEL_DOWN
+                        - UNKNOWN
                     type: string
             type: object
         Sdc:
@@ -10106,28 +10141,6 @@ components:
                 - ROLE_FWAAS
             example: '[ROLE_ADMIN]'
             type: string
-        VpnHealthMetrics:
-            description: The vpn health metrics for the device.
-            properties:
-                activeRavpnTunnelsAvg:
-                    description: The average number of active RA VPN tunnels.
-                    type: number
-                activeS2svpnTunnelsAvg:
-                    description: The average number of active S2S VPN tunnels.
-                    type: number
-                inactiveRavpnTunnelsAvg:
-                    description: The average number of inactive or down RA VPN tunnels.
-                    type: number
-                inactiveS2svpnTunnelsAvg:
-                    description: The average number of inactive or down S2S VPN tunnels.
-                    type: number
-                peakConcurRavpnTunnels:
-                    description: The peak concurrent RA VPN tunnels active since the last reset.
-                    type: number
-                peakConcurS2svpnTunnels:
-                    description: The peak concurrent S2S VPN tunnels active since the last reset.
-                    type: number
-            type: object
         ZtpOnboardingInput:
             properties:
                 adminPassword:
