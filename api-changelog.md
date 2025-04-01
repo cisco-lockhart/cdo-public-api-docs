@@ -7,6 +7,11 @@
   See [here](https://developer.cisco.com/docs/cisco-security-cloud-control/cdfmc-api-overview/) for
   more information.
 
+## Improvements
+
+- Improved the accuracy and quality of S2S VPN tunnel and RA VPN session information provided by the
+  cdFMC health monitoring endpoint.
+
 # Version 1.9.0 (2025-03-17)
 
 ## Added
