@@ -1137,7 +1137,7 @@ paths:
             description: Send a direct command to the specified device.
             operationId: executeDeviceCommand
             parameters:
-                - description: By default, the API waits up to 27 seconds for a device response. Append the 'async' flag to return immediately without waiting for the response.
+                - description: By default, the API waits up to 70 seconds for a device response. Append the 'async' flag to return immediately without waiting for the response.
                   in: query
                   name: async
                   required: false
@@ -1170,7 +1170,7 @@ paths:
                                         status: responded
                                 timeout:
                                     value:
-                                        data: The request timed out due to a hard limit of 27 seconds. You may poll for a belated response using the url provided in the 'data' field
+                                        data: The request timed out due to a hard limit of 70 seconds. You may poll for a belated response using the url provided in the 'data' field
                                         requestId: 11111111-1111-1111-1111-111111111111
                                         responseOrigin: device-gateway-api
                                         status: timeout
@@ -6801,7 +6801,7 @@ components:
                     type: object
                 message:
                     description: The response message, if applicable.
-                    example: The request timed out due to a hard limit of 27 seconds. You may poll for a belated response using the url provided in the 'data' field
+                    example: The request timed out due to a hard limit of 70 seconds. You may poll for a belated response using the url provided in the 'data' field
                     type: string
                 requestId:
                     description: The unique identifier of the request, represented as a UUID.
