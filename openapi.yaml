@@ -1967,6 +1967,8 @@ paths:
                     $ref: '#/components/responses/http401Unauthorised'
                 "403":
                     $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
                 "500":
                     content:
                         application/json:
