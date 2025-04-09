@@ -6447,6 +6447,7 @@ components:
                         - DELETE_CDFMC_MANAGED_FTD
                         - RECONNECT_ASA
                         - READ_ASA
+                        - BULK_READ_ASA
                         - EXECUTE_CLI_COMMAND
                         - DEPLOY_ASA_DEVICE_CHANGES
                         - DEPLOY_FTD_DEVICE_CHANGES
