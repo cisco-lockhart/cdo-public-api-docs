@@ -6515,6 +6515,7 @@ components:
                         - MSP_PROVISION_CDFMC
                         - CREATE_USERS
                         - EXECUTE_ASA_COMMAND
+                        - ANALYZE_POLICIES
                     example: ONBOARD_ASA
                     type: string
                 transactionUid:
