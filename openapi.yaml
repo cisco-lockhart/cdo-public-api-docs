@@ -6568,7 +6568,6 @@ components:
                         - MSP_ENABLE_MULTICLOUD_DEFENSE
                         - MSP_PROVISION_CDFMC
                         - CREATE_USERS
-                        - DELETE_USERS
                         - EXECUTE_ASA_COMMAND
                         - ANALYZE_POLICIES
                     example: ONBOARD_ASA
@@ -9570,7 +9569,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: Roles associated with this user in Security Cloud Control.
+            description: The role of the user this token belongs to. The user can be API-only or a human.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -9579,7 +9578,6 @@ components:
                 - ROLE_EDIT_ONLY
                 - ROLE_VPN_SESSIONS_MANAGER
                 - ROLE_FWAAS
-            example: '[ROLE_ADMIN]'
             type: string
         ZtpOnboardingInput:
             properties:
