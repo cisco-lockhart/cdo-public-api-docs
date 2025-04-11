@@ -3139,8 +3139,8 @@ paths:
                 - MSP
     /v1/msp/tenants/{tenantUid}/users:
         get:
-            description: Get a list of users associated with the Security Cloud Control tenant managed by MSP portal.
-            operationId: getUsersInTenantInMspPortal
+            description: Get a list of (non-API-only) users associated with the Security Cloud Control tenant managed by MSP portal.
+            operationId: getHumanUsersInMspManagedTenant
             parameters:
                 - description: Unique identifier of the tenant to retrieve the users for.
                   in: path
@@ -3188,7 +3188,7 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Get Users associated with tenant in MSP portal
+            summary: Get non-API-only Users associated with tenant in MSP portal
             tags:
                 - MSP
         post:
@@ -3267,6 +3267,60 @@ paths:
             security:
                 - bearerAuth: []
             summary: Generate token for API-only user on tenant managed by MSP portal
+            tags:
+                - MSP
+    /v1/msp/tenants/{tenantUid}/users/api-only:
+        get:
+            description: Get a list of API-only users associated with the Security Cloud Control tenant managed by MSP portal.
+            operationId: getApiOnlyUsersInMspManagedTenant
+            parameters:
+                - description: Unique identifier of the tenant to retrieve the users for.
+                  in: path
+                  name: tenantUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UserPage'
+                    description: List of User objects
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get API-only Users associated with tenant in MSP portal
             tags:
                 - MSP
     /v1/msp/tenants/{tenantUid}/users/delete:
