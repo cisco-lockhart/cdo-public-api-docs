@@ -4964,6 +4964,57 @@ paths:
             summary: Create multiple users in Security Cloud Control Tenant
             tags:
                 - Users
+    /v1/users/delete:
+        post:
+            description: This is an asynchronous operation that revokes a user's access to Firewall Manager within a specific Security Cloud Control enterprise. This action will not affect the user's access to other products in the enterprise or their access to Firewall Manager in other enterprises.
+            operationId: deleteMultipleUsers
+            parameters:
+                - in: header
+                  name: X-Calling-Service
+                  required: false
+                  schema:
+                    type: string
+                - description: Custom metadata to identify the request
+                  in: header
+                  name: X-Request-Metadata
+                  required: false
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            items:
+                                type: string
+                            maxItems: 50
+                            minItems: 1
+                            type: array
+                            uniqueItems: true
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the progress of the deletion operation.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Delete Multiple Users from Security Cloud Control Firewall Manager Tenant
+            tags:
+                - Users
     /v1/users/groups:
         get:
             description: Get a list of active directory groups associated with the Security Cloud Control tenant.
@@ -6568,6 +6619,7 @@ components:
                         - MSP_ENABLE_MULTICLOUD_DEFENSE
                         - MSP_PROVISION_CDFMC
                         - CREATE_USERS
+                        - DELETE_USERS
                         - EXECUTE_ASA_COMMAND
                         - ANALYZE_POLICIES
                     example: ONBOARD_ASA
@@ -9569,7 +9621,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: The role of the user this token belongs to. The user can be API-only or a human.
+            description: Roles associated with this user in Security Cloud Control.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -9578,6 +9630,7 @@ components:
                 - ROLE_EDIT_ONLY
                 - ROLE_VPN_SESSIONS_MANAGER
                 - ROLE_FWAAS
+            example: '[ROLE_ADMIN]'
             type: string
         ZtpOnboardingInput:
             properties:
