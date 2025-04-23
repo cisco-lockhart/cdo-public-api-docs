@@ -1682,6 +1682,40 @@ paths:
             summary: Get compatible upgrade versions for an ASA
             tags:
                 - Device Upgrades
+    /v1/inventory/devices/asas/acceptCert:
+        post:
+            description: This is an asynchronous operation to accept certificates for multiple ASA devices. This operation returns a link to a transaction object that can be used to monitor the progress of the operation for all devices.
+            operationId: bulkAcceptAsaCertificates
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/BulkOperationAsaDeviceRequest'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the progress of the accept certificates operation
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Accept certificates for multiple ASA devices
+            tags:
+                - Inventory
     /v1/inventory/devices/asas/cli/execute:
         post:
             description: This is an asynchronous operation to execute CLI commands on an ASA device in the Security Cloud Control tenant.
@@ -1756,7 +1790,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/BulkAsaDeviceConfigReadRequest'
+                            $ref: '#/components/schemas/BulkOperationAsaDeviceRequest'
                 required: true
             responses:
                 "202":
@@ -6257,7 +6291,7 @@ components:
                     example: 121.0.6167.160
                     type: string
             type: object
-        BulkAsaDeviceConfigReadRequest:
+        BulkOperationAsaDeviceRequest:
             properties:
                 deviceUids:
                     description: A collection of up to 50 unique identifiers (UUIDs) for the ASA devices in Security Cloud Control.
@@ -6600,6 +6634,7 @@ components:
                         - READ_ASA
                         - BULK_READ_ASA
                         - EXECUTE_CLI_COMMAND
+                        - BULK_ACCEPT_ASA_CERTIFICATES
                         - DEPLOY_ASA_DEVICE_CHANGES
                         - DEPLOY_FTD_DEVICE_CHANGES
                         - INDEX_TENANT
@@ -9973,7 +10008,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: The role of the user this token belongs to. The user can be API-only or a human.
+            description: Roles associated with this user in Security Cloud Control.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -9982,6 +10017,7 @@ components:
                 - ROLE_EDIT_ONLY
                 - ROLE_VPN_SESSIONS_MANAGER
                 - ROLE_FWAAS
+            example: '[ROLE_ADMIN]'
             type: string
         ZtpOnboardingInput:
             properties:
