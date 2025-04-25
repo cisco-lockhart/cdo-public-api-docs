@@ -7095,6 +7095,7 @@ components:
                 - UNKNOWN
                 - PENDING_SETUP
                 - PENDING
+                - NEW_CERT_DETECTED
             example: ONLINE
             type: string
         ConnectorType:
