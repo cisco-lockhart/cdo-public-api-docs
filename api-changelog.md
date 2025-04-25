@@ -2,7 +2,7 @@
 
 ## Added
 - Endpoint to [read configuration from multiple ASAs](https://developer.cisco.com/docs/cisco-security-cloud-control/read-configurations-for-multiple-asa-devices/) into SCC Firewall Manager.
-- Endpoint to [accept certificates on multiple ASAs](https://devnetapps.cisco.com/docs/cisco-security-cloud-control/accept-certificates-for-multiple-asa-devices/) into SCC Firewall Manager.
+- Endpoint to [accept certificates on multiple ASAs](https://developer.cisco.com/docs/cisco-security-cloud-control/accept-certificates-for-multiple-asa-devices/) into SCC Firewall Manager.
 - Endpoint to delete multiple users on a tenant.
 
 ## Fixes
