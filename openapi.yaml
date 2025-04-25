@@ -1684,7 +1684,7 @@ paths:
                 - Device Upgrades
     /v1/inventory/devices/asas/acceptCert:
         post:
-            description: This is an asynchronous operation to accept certificates for multiple ASA devices. This operation returns a link to a transaction object that can be used to monitor the progress of the operation for all devices.
+            description: This is an asynchronous operation to accept certificates for multiple ASA devices. This operation returns a link to a transaction object that can be used to monitor the progress of the operation for all devices.<br/>**Warning:** This operation will accept the certificates for the ASA devices in the body without providing the user with the ability to view the certificates. It is recommended to use this operation only when you are sure that all certificates are valid.
             operationId: bulkAcceptAsaCertificates
             requestBody:
                 content:
