@@ -1,6 +1,7 @@
-# Version 1.11.0 (2025-04-25)
+# Version 1.11.0 (2025-04-26)
 
 ## Added
+- Endpoint to [upgrade multiple (up to 10) FTDs simultaneously](https://developer.cisco.com/docs/cisco-security-cloud-control/upgrade-multiple-ftd-devices/)
 - Endpoint to [read configuration from multiple ASAs](https://developer.cisco.com/docs/cisco-security-cloud-control/read-configurations-for-multiple-asa-devices/) into SCC Firewall Manager.
 - Endpoint to [accept certificates on multiple ASAs](https://developer.cisco.com/docs/cisco-security-cloud-control/accept-certificates-for-multiple-asa-devices/) into SCC Firewall Manager.
 - Endpoint to delete multiple users on a tenant.
