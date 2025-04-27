@@ -49,7 +49,7 @@ Cisco Security Cloud Control is deployed in multiple regions, and the API is ava
 - India: https://api.in.security.cisco.com/firewall (use this if the Security Cloud Control URL you visit is https://in.cdo.cisco.com or https://in.manage.security.cisco.com)
 
 >**Note**:
-If you were using the old base URIs (https://edge.<region>.cdo.cisco.com), they will continue to work. But please switch your automation to use the new URLs.
+If you were using the old base URIs (`https://edge.<region>.cdo.cisco.com`), they will continue to work. But please switch your automation to use the new URLs.
 
 ## 1. Authorization
 
