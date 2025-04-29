@@ -2092,6 +2092,34 @@ paths:
             summary: Register FTD device to FMC
             tags:
                 - Inventory
+    /v1/inventory/devices/ftds/upgrades/packages/build-cache:
+        put:
+            description: Update cache of compatible upgrade packages for a all FTD devices.
+            operationId: updateFtdUpgradePackagesCache
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the progress of the cache building operation.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Update cache of compatible upgrade packages for all FTDs
+            tags:
+                - Device Upgrades
     /v1/inventory/devices/ftds/upgrades/trigger:
         post:
             description: Upgrade up to 10 FTD devices using a specified upgrade package. All of the FTDs in the list have to be compatible with the upgrade package.
@@ -6679,6 +6707,7 @@ components:
                         - TERMINATE_USER_RA_VPN_SESSIONS
                         - UPGRADE_ASA
                         - UPGRADE_FTD
+                        - UPGRADE_FTD_CACHE
                         - CREATE_SDC
                         - SEND_AI_ASSISTANT_MESSAGE
                         - MSP_CREATE_TENANT
