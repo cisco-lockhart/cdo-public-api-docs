@@ -1,15 +1,34 @@
+# Version 1.12.0 (2025-05-06)
+
+## Added
+
+- Endpoint
+  to [rebuild cache for cdFMC upgrade packages](https://developer.cisco.com/docs/cisco-security-cloud-control/update-cache-of-compatible-upgrade-packages-for-all-ftds/)
+  on a tenant.
+
 # Version 1.11.0 (2025-04-27)
 
 ## Added
-- Endpoint to [upgrade multiple (up to 10) FTDs simultaneously](https://developer.cisco.com/docs/cisco-security-cloud-control/upgrade-multiple-ftd-devices/)
-- Endpoint to [read configuration from multiple ASAs](https://developer.cisco.com/docs/cisco-security-cloud-control/read-configurations-for-multiple-asa-devices/) into SCC Firewall Manager.
-- Endpoint to [accept certificates on multiple ASAs](https://developer.cisco.com/docs/cisco-security-cloud-control/accept-certificates-for-multiple-asa-devices/) into SCC Firewall Manager.
-- Endpoint to [delete multiple users](https://developer.cisco.com/docs/cisco-security-cloud-control/delete-multiple-users-from-security-cloud-control-firewall-manager-tenant/) on a tenant.
+
+- Endpoint
+  to [upgrade multiple (up to 10) FTDs simultaneously](https://developer.cisco.com/docs/cisco-security-cloud-control/upgrade-multiple-ftd-devices/)
+- Endpoint
+  to [read configuration from multiple ASAs](https://developer.cisco.com/docs/cisco-security-cloud-control/read-configurations-for-multiple-asa-devices/)
+  into SCC Firewall Manager.
+- Endpoint
+  to [accept certificates on multiple ASAs](https://developer.cisco.com/docs/cisco-security-cloud-control/accept-certificates-for-multiple-asa-devices/)
+  into SCC Firewall Manager.
+- Endpoint
+  to [delete multiple users](https://developer.cisco.com/docs/cisco-security-cloud-control/delete-multiple-users-from-security-cloud-control-firewall-manager-tenant/)
+  on a tenant.
 
 ## Fixes
+
 - Fixed regression that prevented searches on users by name working.
-- Fixed performance issues when triggering deploys on FTDs managed by cdFMCs with large numbers of devices.
-- Fixed performance issues when triggering upgrades on FTDs managed by cdFMCs with large numbers of devices.
+- Fixed performance issues when triggering deploys on FTDs managed by cdFMCs with large numbers of
+  devices.
+- Fixed performance issues when triggering upgrades on FTDs managed by cdFMCs with large numbers of
+  devices.
 
 # Version 1.10.0 (2025-04-01)
 
