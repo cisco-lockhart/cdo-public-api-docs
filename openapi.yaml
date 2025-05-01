@@ -7925,7 +7925,9 @@ components:
                     $ref: '#/components/schemas/Labels'
                 licenses:
                     description: Specify a set of licenses to apply to the device.
-                    example: '[BASE, CARRIER]'
+                    example:
+                        - BASE
+                        - CARRIER
                     items:
                         description: Specify a set of licenses to apply to the device.
                         enum:
@@ -7934,7 +7936,7 @@ components:
                             - THREAT
                             - MALWARE
                             - URLFilter
-                        example: '[BASE, CARRIER]'
+                        example: '["BASE","CARRIER"]'
                         type: string
                     type: array
                     uniqueItems: true
@@ -10110,7 +10112,9 @@ components:
                     type: string
                 licenses:
                     description: Specify a set of licenses to apply to the device.
-                    example: '[BASE, CARRIER]'
+                    example:
+                        - BASE
+                        - CARRIER
                     items:
                         description: Specify a set of licenses to apply to the device.
                         enum:
@@ -10119,7 +10123,7 @@ components:
                             - THREAT
                             - MALWARE
                             - URLFilter
-                        example: '[BASE, CARRIER]'
+                        example: '["BASE","CARRIER"]'
                         type: string
                     type: array
                     uniqueItems: true
