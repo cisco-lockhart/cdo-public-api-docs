@@ -7925,15 +7925,7 @@ components:
                     $ref: '#/components/schemas/Labels'
                 licenses:
                     description: Specify a set of licenses to apply to the device.
-                    enum:
-                        - BASE
-                        - CARRIER
-                        - MALWARE
-                        - THREAT
-                        - URLFilter
-                    example:
-                        - BASE
-                        - CARRIER
+                    example: '[BASE, CARRIER]'
                     items:
                         description: Specify a set of licenses to apply to the device.
                         enum:
@@ -7942,12 +7934,7 @@ components:
                             - THREAT
                             - MALWARE
                             - URLFilter
-                            - BASE
-                            - CARRIER
-                            - MALWARE
-                            - THREAT
-                            - URLFilter
-                        example: '["BASE","CARRIER"]'
+                        example: '[BASE, CARRIER]'
                         type: string
                     type: array
                     uniqueItems: true
@@ -10097,7 +10084,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: Roles associated with this user in Security Cloud Control.
+            description: The role of the user this token belongs to. The user can be API-only or a human.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -10106,7 +10093,6 @@ components:
                 - ROLE_EDIT_ONLY
                 - ROLE_VPN_SESSIONS_MANAGER
                 - ROLE_FWAAS
-            example: '[ROLE_ADMIN]'
             type: string
         ZtpOnboardingInput:
             properties:
@@ -10123,13 +10109,7 @@ components:
                     type: string
                 licenses:
                     description: Specify a set of licenses to apply to the device.
-                    enum:
-                        - BASE
-                        - CARRIER
-                        - MALWARE
-                        - THREAT
-                        - URLFilter
-                    example: '[BASE]'
+                    example: '[BASE, CARRIER]'
                     items:
                         description: Specify a set of licenses to apply to the device.
                         enum:
@@ -10138,12 +10118,7 @@ components:
                             - THREAT
                             - MALWARE
                             - URLFilter
-                            - BASE
-                            - CARRIER
-                            - MALWARE
-                            - THREAT
-                            - URLFilter
-                        example: '[BASE]'
+                        example: '[BASE, CARRIER]'
                         type: string
                     type: array
                     uniqueItems: true
