@@ -9694,6 +9694,7 @@ components:
                         - ONPREM_FMC_MANAGED_FTD
                         - MCD
                         - SDWAN
+                        - SECURE_ACCESS
                     example: ASA
                     type: string
             type: object
