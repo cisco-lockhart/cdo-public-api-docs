@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
     title: Cisco Security Cloud Control Firewall Manager API
-    version: 1.11.0
+    version: 1.12.0
     description: Use the documentation to explore the endpoints Security Cloud Control Firewall Manager has to offer
     contact:
         name: Cisco Security Cloud Control TAC
@@ -10087,7 +10087,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: The role of the user this token belongs to. The user can be API-only or a human.
+            description: Roles associated with this user in Security Cloud Control.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -10096,6 +10096,7 @@ components:
                 - ROLE_EDIT_ONLY
                 - ROLE_VPN_SESSIONS_MANAGER
                 - ROLE_FWAAS
+            example: '[ROLE_ADMIN]'
             type: string
         ZtpOnboardingInput:
             properties:
