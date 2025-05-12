@@ -1436,6 +1436,44 @@ paths:
             summary: Modify Device
             tags:
                 - Inventory
+    /v1/inventory/devices/{deviceUid}/endoflifereports:
+        get:
+            description: Get the Device End-of-Life (EOL) report that details the EOL dates for the device hardware along with recommended hardware upgrade options.
+            operationId: getDeviceEndOfLifeReport
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the Device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeviceEndOfLifeReport'
+                    description: Device End-of-Life (EOL) report detailing the EOL dates for the device hardware along with recommended hardware upgrade options.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Device End-Of-Life Report
+            tags:
+                - Device End-Of-Life Report
     /v1/inventory/devices/asas:
         post:
             description: This is an asynchronous operation to onboard an ASA to a Security Cloud Control tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
@@ -1850,6 +1888,44 @@ paths:
             summary: Onboard Duo Admin Panel
             tags:
                 - Inventory
+    /v1/inventory/devices/endoflifereports:
+        get:
+            description: The reports provide information on devices approaching their End-Of-Life (EOL) status, indicating that they will cease to receive vendor support. For each hardware, the report outlines key EOL dates, offers recommendations for appropriate hardware upgrades, and includes an inventory of affected devices.
+            operationId: getDeviceEndOfLifeReports
+            parameters:
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/DeviceEndOfLifeReport'
+                                type: array
+                    description: List of device End-Of-Life reports. For each hardware, the report outlines key EOL dates, offers recommendations for appropriate hardware upgrades, and includes an inventory of affected devices.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Device End-Of-Life Reports
+            tags:
+                - Device End-Of-Life Report
     /v1/inventory/devices/ftds:
         post:
             description: 'This is an asynchronous operation to generate a registration key for a cdFMC managed FTD device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation. Onboarding a cdFMC managed FTD device is a two-step process: the first step, handled by this operation, creates an FTD device with a configure manager string that must be pasted into the FTD device''s Command-Line Interface. The FTD then uses this information to register itself with the Security Cloud Control tenant.'
@@ -5574,7 +5650,7 @@ components:
                     example: false
                     type: boolean
                 name:
-                    description: The name of Access Group in CDO. Access Group names are unique in Security Cloud Control.
+                    description: The name of Access Group. Access Group names are unique in Security Cloud Control.
                     example: my-example-access-group
                     type: string
                 resources:
@@ -7470,7 +7546,7 @@ components:
                     description: The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device.
                     type: string
                 name:
-                    description: The name of the device in CDO. Device names are unique in Security Cloud Control.
+                    description: The name of the device. Device names are unique in Security Cloud Control.
                     example: my-example-device
                     type: string
                 notes:
@@ -7525,6 +7601,100 @@ components:
             required:
                 - deviceType
                 - name
+            type: object
+        DeviceEndOfLife:
+            description: The device End-Of-Life information, including key EOL dates and recommendations for appropriate hardware upgrades.
+            properties:
+                endOfLifeDetails:
+                    $ref: '#/components/schemas/DeviceEndOfLifeDetails'
+                modelNumbers:
+                    description: A list of hardware models subject to the End-of-Life evaluation.
+                    example: ASA5525, ASA5525 (V01),Cisco ASA5525-X Threat Defense
+                    items:
+                        description: A list of hardware models subject to the End-of-Life evaluation.
+                        example: ASA5525, ASA5525 (V01),Cisco ASA5525-X Threat Defense
+                        type: string
+                    type: array
+                recommendations:
+                    description: End-Of-Life appropriate upgrade recommendations for the hardware models.
+                    items:
+                        $ref: '#/components/schemas/DeviceEndOfLifeRecommendation'
+                    type: array
+            type: object
+        DeviceEndOfLifeDetails:
+            description: End-of-Life details, including key EOL dates and links to official vendor notices.
+            properties:
+                endOfLifeAnnouncementDate:
+                    description: The date (UTC; represented using the RFC-3339 standard), the hardware End-Of_life was announced
+                    format: date-time
+                    type: string
+                endOfSaleDate:
+                    description: The date (UTC; represented using the RFC-3339 standard), the hardware is eligible for sale.
+                    format: date-time
+                    type: string
+                lastDateOfSupport:
+                    description: The date (UTC; represented using the RFC-3339 standard), the hardware is eligible for support.
+                    format: date-time
+                    type: string
+                url:
+                    description: The hardware End-Of-Life notice URL with more information on the End-Of-Life details.
+                    example: https://www.cisco.com/c/en/us/products/collateral/security/asa-firepower-services/eos-eol-notice-c51-743545.html
+                    type: string
+            type: object
+        DeviceEndOfLifeDeviceInfo:
+            description: An inventory of End-Of-Life affected devices.
+            properties:
+                modelNumber:
+                    description: The hardware, or virtualized hardware platform, that the device is running on.
+                    example: ASA5525
+                    type: string
+                name:
+                    description: The name of the device. Device names are unique in Security Cloud Control.
+                    example: my-example-device
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            type: object
+        DeviceEndOfLifeRecommendation:
+            description: End-Of-Life appropriate upgrade recommendations for the hardware models.
+            properties:
+                dataSheetUrl:
+                    description: The Link to the Product Datasheet.
+                    example: https://www.cisco.com/c/en/us/products/collateral/security/firepower-1000-series/datasheet-c78-742469.html
+                    type: string
+                formFactor:
+                    description: The physical or virtual design and deployment format of the device.
+                    example: Rack mount, 1U
+                    type: string
+                interfaces:
+                    description: The physical or virtual ports through which the device communicates with networks.
+                    example: 8x RJ45, 2x SFP, 2x 10G SFP+
+                    type: string
+                productLabel:
+                    description: Cisco product labels specify the firewall series name, model number, and included security feature set (e.g., Threat Defense, VPN), providing clear identification of the device’s capabilities, performance level, and intended deployment use case.
+                    example: Cisco Secure Firewall 1150 Threat Defense
+                    type: string
+                productNumber:
+                    description: A unique identifier assigned to a specific Cisco device model or configuration, used to specify its features, performance tier, and hardware specifications
+                    example: FPR1150
+                    type: string
+                throughput:
+                    description: The rate at which the firewall can process network traffic.
+                    example: 5.3 Gbps
+                    type: string
+            type: object
+        DeviceEndOfLifeReport:
+            properties:
+                deviceEndOfLife:
+                    $ref: '#/components/schemas/DeviceEndOfLife'
+                devices:
+                    description: An inventory of End-Of-Life affected devices.
+                    items:
+                        $ref: '#/components/schemas/DeviceEndOfLifeDeviceInfo'
+                    type: array
             type: object
         DeviceGatewayApiRequest:
             properties:
@@ -7658,7 +7828,7 @@ components:
                         type: string
                     type: array
                 name:
-                    description: The name of the entity in CDO. Device names are unique in Security Cloud Control.
+                    description: The name of the entity. Device names are unique in Security Cloud Control.
                     example: my-example-entity
                     type: string
                 type:
@@ -9214,7 +9384,7 @@ components:
                     format: date-time
                     type: string
                 name:
-                    description: The name of the SDC in CDO. SDC names are unique in Security Cloud Control.
+                    description: The name of the SDC. SDC names are unique in Security Cloud Control.
                     example: my-example-sdc
                     type: string
                 publicKey:
