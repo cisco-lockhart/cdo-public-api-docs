@@ -6992,6 +6992,8 @@ components:
                     example: 3af473a8-d70f-4090-bcdb-853981696478
                     format: uuid
                     type: string
+                deviceMetadata:
+                    $ref: '#/components/schemas/DeviceMetadata'
                 deviceRecordOnFmc:
                     $ref: '#/components/schemas/FmcDeviceRecord'
                 deviceRole:
@@ -7198,6 +7200,18 @@ components:
                 - deviceUid
                 - request
             type: object
+        DeviceMetadata:
+            description: Metadata for the device. This field contains a combination of structured service-specific metadata persisted by other Cisco services and arbitrary metadata.
+            properties:
+                additional:
+                    additionalProperties:
+                        description: Additional metadata as a map of key-value pairs.
+                        type: string
+                    description: Additional metadata as a map of key-value pairs.
+                    type: object
+                secureAccess:
+                    $ref: '#/components/schemas/SecureAccessMetadata'
+            type: object
         DevicePage:
             properties:
                 count:
@@ -7223,6 +7237,8 @@ components:
             type: object
         DevicePatchInput:
             properties:
+                deviceMetadata:
+                    $ref: '#/components/schemas/DeviceMetadata'
                 labels:
                     $ref: '#/components/schemas/Labels'
                 name:
@@ -8815,6 +8831,31 @@ components:
             properties:
                 name:
                     type: string
+            type: object
+        SecureAccessMetadata:
+            description: Structured [Cisco Secure Access](https://www.cisco.com/site/uk/en/products/security/secure-access/index.html) metadata (applicable to UZTNA-enabled FTDs only).
+            properties:
+                commitStatus:
+                    description: The deployment status of the Secure Access configuration associated with the device.
+                    enum:
+                        - CREATED
+                        - VALIDATION_FAILED
+                        - QUEUED
+                        - IN_PROGRESS
+                        - SKIPPED
+                        - PARTIALLY_SUCCESSFUL
+                        - SUCCESSFULLY_COMPLETED
+                        - FAILED
+                        - UNKNOWN
+                    type: string
+                numResources:
+                    description: The number of private Cisco Secure Access resources associated with the device.
+                    format: int32
+                    type: integer
+                numRules:
+                    description: The number of Cisco Secure Access rules associated with the device.
+                    format: int32
+                    type: integer
             type: object
         ServiceObjectContent:
             properties:
