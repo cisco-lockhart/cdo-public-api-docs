@@ -9540,7 +9540,7 @@ components:
                         description: The list of unique identifiers, represented as UUIDs, of the devices to upgrade in Security Cloud Control. All of the devices in the list have to be compatible with the upgrade package.
                         format: uuid
                         type: string
-                    maxItems: 10
+                    maxItems: 50
                     minItems: 1
                     type: array
                     uniqueItems: true
