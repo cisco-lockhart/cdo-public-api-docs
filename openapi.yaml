@@ -2134,6 +2134,49 @@ paths:
             summary: Delete cdFMC managed FTD device
             tags:
                 - Inventory
+    /v1/inventory/devices/ftds/deploy:
+        post:
+            description: |+
+                This is an asynchronous operation to deploy changes made to the configurations of multiple cdFMC-managed FTD devices on Security Cloud Control. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+
+                Notes:
+
+                - This operation is only supported for cdFMC-managed FTD devices.
+
+                - This operation will only deploy changes to the device if there are pending changes to deploy.
+
+
+            operationId: deployChangesToMultipleFtdDevices
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/FtdMultiDeviceDeploymentInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the progress of the creation operation.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: (cdFMC-managed FTDs only) Deploy changes to multiple FTD devices
+            tags:
+                - Inventory
     /v1/inventory/devices/ftds/register:
         post:
             description: Complete registration of an FTD device managed by an FMC to the Security Cloud Control tenant. Call this API endpoint after you have created an FTD and pasted the generated CLI output in the FTD. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
@@ -7683,6 +7726,35 @@ components:
                 secondaryNode:
                     $ref: '#/components/schemas/HaNode'
             type: object
+        FtdMultiDeviceDeploymentInput:
+            properties:
+                deploymentNotes:
+                    description: Specify notes, if any, for the deployment.
+                    example: 'This deployment addresses ticket #12345.'
+                    type: string
+                description:
+                    description: Specify a human-readable description for the deployment.
+                    example: This deployment is for the branch office in San Francisco.
+                    type: string
+                deviceUids:
+                    description: The set of unique identifiers, represented as UUIDs, of the devices to upgrade in Security Cloud Control. All of the devices in the list have to be compatible with the upgrade package.
+                    example:
+                        - 256461f6-bd60-11ef-8beb-6cf1610cf55d
+                    items:
+                        description: The set of unique identifiers, represented as UUIDs, of the devices to upgrade in Security Cloud Control. All of the devices in the list have to be compatible with the upgrade package.
+                        format: uuid
+                        type: string
+                    maxItems: 50
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                ignoreWarnings:
+                    default: false
+                    description: 'Specify whether to ignore warnings generated during the pre-validation of the deployment job and proceed with the deployment regardless. **Warning**: Do not set this to `true` unless you know what you are doing.'
+                    type: boolean
+            required:
+                - deviceUids
+            type: object
         FtdRegistrationInput:
             properties:
                 ftdUid:
@@ -9533,11 +9605,11 @@ components:
         UpgradeFtdDevicesInput:
             properties:
                 deviceUids:
-                    description: The list of unique identifiers, represented as UUIDs, of the devices to upgrade in Security Cloud Control. All of the devices in the list have to be compatible with the upgrade package.
+                    description: The set of unique identifiers, represented as UUIDs, of the devices to upgrade in Security Cloud Control. All of the devices in the list have to be compatible with the upgrade package.
                     example:
                         - 256461f6-bd60-11ef-8beb-6cf1610cf55d
                     items:
-                        description: The list of unique identifiers, represented as UUIDs, of the devices to upgrade in Security Cloud Control. All of the devices in the list have to be compatible with the upgrade package.
+                        description: The set of unique identifiers, represented as UUIDs, of the devices to upgrade in Security Cloud Control. All of the devices in the list have to be compatible with the upgrade package.
                         format: uuid
                         type: string
                     maxItems: 50
