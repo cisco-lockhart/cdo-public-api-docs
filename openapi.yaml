@@ -2241,7 +2241,7 @@ paths:
                 - Device Upgrades
     /v1/inventory/devices/ftds/upgrades/trigger:
         post:
-            description: Upgrade up to 10 FTD devices using a specified upgrade package. All of the FTDs in the list have to be compatible with the upgrade package.
+            description: Upgrade up to 50 FTD devices using a specified upgrade package. All of the FTDs in the list have to be compatible with the upgrade package.
             operationId: upgradeFtdDevices
             requestBody:
                 content:
