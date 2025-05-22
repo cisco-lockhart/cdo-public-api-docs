@@ -1,7 +1,14 @@
-# Version 1.13.0 (2025-05-16)
+# Version 1.13.0 (2025-05-23)
+
+## Added
+
+- New endpoint to [deploy changes to up to 50 FTDs simultaneously](https://developer.cisco.com/docs/cisco-security-cloud-control/cdfmc-managed-ftds-only-deploy-changes-to-multiple-ftd-devices/).
 
 ## Improvements
-- You can now upgrade up to 50 FTDs simultaneously using the [Upgrade multiple FTD devices](https://developer.cisco.com/docs/cisco-security-cloud-control/upgrade-multiple-ftd-devices/) endpoint.
+
+- You can now upgrade up to 50 FTDs simultaneously using
+  the [Upgrade multiple FTD devices](https://developer.cisco.com/docs/cisco-security-cloud-control/upgrade-multiple-ftd-devices/)
+  endpoint.
 - It is now possible to store arbitrary metadata in a device record on SCC Firewall Manager. This
   metadata is not used by the API, but can be used by other applications to store information
   related to the device.
