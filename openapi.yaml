@@ -5860,7 +5860,7 @@ components:
                     description: Indicates whether this rule is active.
                     type: boolean
                 issues:
-                    description: Indicates if rule has SHADOWED or SHARED issue.
+                    description: Indicates if rule has SHADOWED, SHARED or DUPLICATE (remark) issue.
                     items:
                         $ref: '#/components/schemas/AccessRuleIssue'
                     type: array
@@ -6039,6 +6039,7 @@ components:
                     enum:
                         - SHADOWED
                         - SHARED
+                        - DUPLICATE
                         - UNKNOWN
                     type: string
             type: object
@@ -6502,6 +6503,7 @@ components:
                     example:
                         - SHADOWED_BY_NETWORK_ADDRESS
                         - SHADOWED_BY_ICMP
+                        - DUPLICATE_REMARK
                     items:
                         description: A set of cause types for the issue.
                         enum:
@@ -6509,8 +6511,9 @@ components:
                             - SHADOWED_BY_PORT
                             - SHADOWED_BY_ICMP
                             - SHADOWED_BY_ACTION
+                            - DUPLICATE_REMARK
                             - UNKNOWN
-                        example: '["SHADOWED_BY_NETWORK_ADDRESS","SHADOWED_BY_ICMP"]'
+                        example: '["SHADOWED_BY_NETWORK_ADDRESS","SHADOWED_BY_ICMP","DUPLICATE_REMARK"]'
                         type: string
                     type: array
                     uniqueItems: true
