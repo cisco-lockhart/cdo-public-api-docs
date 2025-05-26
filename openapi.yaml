@@ -7251,13 +7251,12 @@ components:
                     type: string
             type: object
         ConfigState:
-            description: The state of the device configuration in CDO. CDO stages configuration changes which have to be manually applied to the device; this field indicates whether the configuration on CDO does not match the configuration on the device, which indicates whether there are changes to be deployed from Security Cloud Control to the device.
+            description: The distinct config states for the devices managed by the MSP Portal.
             enum:
                 - NO_CONFIG
                 - SYNCED
                 - NOT_SYNCED
                 - UNKNOWN
-            example: SYNCED
             type: string
         ConflictDetectionInterval:
             description: Specifies the default interval at which Security Cloud Control checks for changes made out-of-band on the devices on the tenant.
@@ -7269,14 +7268,13 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: Indicates whether there have been changes made to the device's configuration outside of Security Cloud Control.
+            description: The distinct conflict detection states for the devices managed by the MSP Portal.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
-            example: NO_CONFLICTS
             type: string
         ConnectivityState:
-            description: The connectivity state of the device to CDO. A connectivity state that is not ONLINE can indicate either a problem with the device, or the communication pathways between the device and Security Cloud Control.
+            description: The distinct connectivity states for the devices managed by the MSP Portal.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -7285,7 +7283,6 @@ components:
                 - PENDING_SETUP
                 - PENDING
                 - NEW_CERT_DETECTED
-            example: ONLINE
             type: string
         ConnectorType:
             description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
@@ -7810,7 +7807,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The type of the device.
+            description: The distinct device types for the devices managed by the MSP Portal.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -7832,7 +7829,6 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: ASA
             type: string
         Event:
             description: The events recorded in this Change Log.
@@ -10429,7 +10425,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: The role of the user this token belongs to. The user can be API-only or a human.
+            description: Roles associated with this user in Security Cloud Control.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -10438,6 +10434,7 @@ components:
                 - ROLE_EDIT_ONLY
                 - ROLE_VPN_SESSIONS_MANAGER
                 - ROLE_FWAAS
+            example: '[ROLE_ADMIN]'
             type: string
         ZtpOnboardingInput:
             properties:
