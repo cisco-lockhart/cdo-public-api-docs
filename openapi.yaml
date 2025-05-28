@@ -3082,6 +3082,38 @@ paths:
             summary: Get MSP-managed devices
             tags:
                 - MSP
+    /v1/msp/inventory/devices/{deviceUid}:
+        get:
+            description: Get the device managed by the MSP portal using its UID.
+            operationId: getMspManagedDevice
+            parameters:
+                - description: The unique identifier of MSP-managed device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedDevice'
+                    description: MSP-managed device
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP-managed device by UID
+            tags:
+                - MSP
     /v1/msp/inventory/devices/attribute-values:
         get:
             description: Get distinct values for multiple fields across all tenants managed by the MSP portal.
@@ -8881,7 +8913,6 @@ components:
                 - usernames
             type: object
         MspManagedDevice:
-            description: The list of items retrieved.
             properties:
                 address:
                     description: The address of the device, in `host:port` format. Security Cloud Control connects to the device at this address.
