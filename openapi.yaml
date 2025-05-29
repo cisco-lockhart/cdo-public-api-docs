@@ -3136,6 +3136,38 @@ paths:
             summary: Get distinct attribute values for MSP-managed devices
             tags:
                 - MSP
+    /v1/msp/inventory/managers/{deviceManagerUid}:
+        get:
+            description: Get the device manager managed by the MSP portal using its UID.
+            operationId: getMspManagedDeviceManager
+            parameters:
+                - description: The unique identifier of MSP-managed device manager.
+                  in: path
+                  name: deviceManagerUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedDeviceManager'
+                    description: MSP-managed device manager
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP-managed device manager by UID
+            tags:
+                - MSP
     /v1/msp/tenants:
         get:
             description: Get a list of Security Cloud Control tenants managed by the MSP Portal.
@@ -9035,6 +9067,57 @@ components:
                         uniqueItems: true
                     description: The software versions of the devices managed by the MSP Portal.
                     type: object
+            type: object
+        MspManagedDeviceManager:
+            properties:
+                address:
+                    description: The address of the device, in `host:port` format. Security Cloud Control connects to the device at this address.
+                    example: my-example-device.example.com:443
+                    type: string
+                connectivityState:
+                    $ref: '#/components/schemas/ConnectivityState'
+                deviceManagerType:
+                    $ref: '#/components/schemas/EntityType'
+                fmcDomainUid:
+                    description: (FMC-only) The Domain UID of the FMC.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                managedTenantDisplayName:
+                    description: The display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: The name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantRegion:
+                    description: The region of the managed tenant in CDO. This is the region where the device is located.
+                    example: us1
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                name:
+                    description: The name of the device in CDO. Device names are unique in Security Cloud Control.
+                    example: my-example-device
+                    type: string
+                softwareVersion:
+                    description: The version of the software running on the device.
+                    example: 7.4.1
+                    type: string
+                tenantUid:
+                    format: uuid
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            required:
+                - name
             type: object
         MspManagedDevicePage:
             properties:
