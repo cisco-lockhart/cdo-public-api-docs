@@ -3136,6 +3136,62 @@ paths:
             summary: Get distinct attribute values for MSP-managed devices
             tags:
                 - MSP
+    /v1/msp/inventory/managers:
+        get:
+            description: Get device managers, across all tenants, managed by the MSP portal.
+            operationId: getMspManagedDeviceManagers
+            parameters:
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedDeviceManagersPage'
+                    description: List of MSP-managed device managers
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP-managed device managers
+            tags:
+                - MSP
     /v1/msp/inventory/managers/{deviceManagerUid}:
         get:
             description: Get the device manager managed by the MSP portal using its UID.
@@ -9118,6 +9174,29 @@ components:
                     type: string
             required:
                 - name
+            type: object
+        MspManagedDeviceManagersPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MspManagedDeviceManager'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
             type: object
         MspManagedDevicePage:
             properties:
