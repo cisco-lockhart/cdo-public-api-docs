@@ -3280,6 +3280,38 @@ paths:
             summary: Get MSP-managed cloud services
             tags:
                 - MSP
+    /v1/msp/inventory/services/{cloudServiceUid}:
+        get:
+            description: Get the cloud service managed by the MSP portal using its UID.
+            operationId: getMspManagedCloudService
+            parameters:
+                - description: The unique identifier of MSP-managed cloud service.
+                  in: path
+                  name: cloudServiceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedCloudService'
+                    description: MSP-managed cloud service
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP-managed cloud service by UID
+            tags:
+                - MSP
     /v1/msp/inventory/services/attribute-values:
         get:
             description: Get distinct values for multiple fields in the MSP-managed cloud services across all tenants managed by the MSP portal.
@@ -7449,13 +7481,12 @@ components:
                     type: string
             type: object
         ConfigState:
-            description: The state of the device configuration in CDO. CDO stages configuration changes which have to be manually applied to the device; this field indicates whether the configuration on CDO does not match the configuration on the device, which indicates whether there are changes to be deployed from Security Cloud Control to the device.
+            description: The distinct config states for the devices managed by the MSP Portal.
             enum:
                 - NO_CONFIG
                 - SYNCED
                 - NOT_SYNCED
                 - UNKNOWN
-            example: SYNCED
             type: string
         ConflictDetectionInterval:
             description: Specifies the default interval at which Security Cloud Control checks for changes made out-of-band on the devices on the tenant.
@@ -7467,14 +7498,13 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: Indicates whether there have been changes made to the device's configuration outside of Security Cloud Control.
+            description: The distinct conflict detection states for the devices managed by the MSP Portal.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
-            example: NO_CONFLICTS
             type: string
         ConnectivityState:
-            description: The connectivity state of the device to CDO. A connectivity state that is not ONLINE can indicate either a problem with the device, or the communication pathways between the device and Security Cloud Control.
+            description: The distinct connectivity states for the devices managed by the MSP Portal.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -7483,7 +7513,6 @@ components:
                 - PENDING_SETUP
                 - PENDING
                 - NEW_CERT_DETECTED
-            example: ONLINE
             type: string
         ConnectorType:
             description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
@@ -8008,7 +8037,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The type of the device.
+            description: The distinct device types for the devices managed by the MSP Portal.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -8031,7 +8060,6 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: ASA
             type: string
         Event:
             description: The events recorded in this Change Log.
@@ -9084,7 +9112,6 @@ components:
                 - usernames
             type: object
         MspManagedCloudService:
-            description: The list of items retrieved.
             properties:
                 address:
                     description: The address of the cloud service (if applicable), in `host:port` format. Security Cloud Control connects to the cloud service at this address.
@@ -9351,7 +9378,7 @@ components:
                     format: uuid
                     type: string
                 name:
-                    description: The name of the device in CDO. Device names are unique in Security Cloud Control.
+                    description: The name of the device manager in CDO. Device manager names are unique in Security Cloud Control.
                     example: my-example-device
                     type: string
                 softwareVersion:
@@ -9362,7 +9389,7 @@ components:
                     format: uuid
                     type: string
                 uid:
-                    description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
+                    description: The unique identifier, represented as a UUID, of the device manager in Security Cloud Control.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
@@ -10812,7 +10839,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: The role of the user this token belongs to. The user can be API-only or a human.
+            description: Roles associated with this user in Security Cloud Control.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -10821,6 +10848,7 @@ components:
                 - ROLE_EDIT_ONLY
                 - ROLE_VPN_SESSIONS_MANAGER
                 - ROLE_FWAAS
+            example: '[ROLE_ADMIN]'
             type: string
         ZtpOnboardingInput:
             properties:
