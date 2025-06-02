@@ -3224,6 +3224,84 @@ paths:
             summary: Get MSP-managed device manager by UID
             tags:
                 - MSP
+    /v1/msp/inventory/services:
+        get:
+            description: Get cloud services, across all tenants, managed by the MSP portal.
+            operationId: getMspManagedCloudServices
+            parameters:
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedCloudServicePage'
+                    description: List of MSP-managed cloud services
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP-managed cloud services
+            tags:
+                - MSP
+    /v1/msp/inventory/services/attribute-values:
+        get:
+            description: Get distinct values for multiple fields in the MSP-managed cloud services across all tenants managed by the MSP portal.
+            operationId: getMspManagedCloudServicesAttributeValues
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedCloudServiceDistinctAttributeValues'
+                    description: Distinct attribute values for MSP-managed devices
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get distinct attribute values for MSP-managed cloud services
+            tags:
+                - MSP
     /v1/msp/tenants:
         get:
             description: Get a list of Security Cloud Control tenants managed by the MSP Portal.
@@ -9000,6 +9078,117 @@ components:
             required:
                 - usernames
             type: object
+        MspManagedCloudService:
+            description: The list of items retrieved.
+            properties:
+                address:
+                    description: The address of the cloud service (if applicable), in `host:port` format. Security Cloud Control connects to the cloud service at this address.
+                    example: my-example-duo.example.com:443
+                    type: string
+                cloudServiceType:
+                    $ref: '#/components/schemas/EntityType'
+                configState:
+                    $ref: '#/components/schemas/ConfigState'
+                conflictDetectionState:
+                    $ref: '#/components/schemas/ConflictDetectionState'
+                connectivityState:
+                    $ref: '#/components/schemas/ConnectivityState'
+                managedTenantDisplayName:
+                    description: The display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: The name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantRegion:
+                    description: The region of the managed tenant in CDO. This is the region where the cloud service is located.
+                    example: us1
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this cloud service belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                name:
+                    description: The name of the cloud service in CDO. Cloud service names are unique in Security Cloud Control.
+                    example: my-example-duo-admin-panel
+                    type: string
+                tenantUid:
+                    format: uuid
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the cloud service in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            required:
+                - name
+            type: object
+        MspManagedCloudServiceDistinctAttributeValues:
+            properties:
+                cloudServiceTypes:
+                    description: The distinct device types for the cloud services managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/EntityType'
+                    type: array
+                    uniqueItems: true
+                configStates:
+                    description: The distinct config states for the cloud services managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/ConfigState'
+                    type: array
+                    uniqueItems: true
+                conflictDetectionStates:
+                    description: The distinct conflict detection states for the cloud services managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/ConflictDetectionState'
+                    type: array
+                    uniqueItems: true
+                connectivityStates:
+                    description: The distinct connectivity states for the cloud services managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/ConnectivityState'
+                    type: array
+                    uniqueItems: true
+                managedTenantDisplayNames:
+                    description: The display names of the tenants that have cloud services onboarded and are managed by the MSP Portal.
+                    items:
+                        description: The display names of the tenants that have cloud services onboarded and are managed by the MSP Portal.
+                        type: string
+                    type: array
+                    uniqueItems: true
+                managedTenantNames:
+                    description: The names of the tenants that have cloud services onboarded and are managed by the MSP Portal.
+                    items:
+                        description: The names of the tenants that have cloud services onboarded and are managed by the MSP Portal.
+                        type: string
+                    type: array
+                    uniqueItems: true
+            type: object
+        MspManagedCloudServicePage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MspManagedCloudService'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
         MspManagedDevice:
             properties:
                 address:
@@ -9148,11 +9337,11 @@ components:
                     example: my-example-tenant
                     type: string
                 managedTenantRegion:
-                    description: The region of the managed tenant in CDO. This is the region where the device is located.
+                    description: The region of the managed tenant in CDO. This is the region where the device manager is located.
                     example: us1
                     type: string
                 managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device manager belongs to.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
