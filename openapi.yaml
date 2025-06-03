@@ -3116,7 +3116,7 @@ paths:
                 - MSP
     /v1/msp/inventory/devices/attribute-values:
         get:
-            description: Get distinct values for multiple fields across all tenants managed by the MSP portal.
+            description: Get distinct values for multiple fields in the MSP-managed devices across all tenants managed by the MSP portal.
             operationId: getMspManagedDevicesAttributeValues
             responses:
                 "200":
@@ -3222,6 +3222,28 @@ paths:
             security:
                 - bearerAuth: []
             summary: Get MSP-managed device manager by UID
+            tags:
+                - MSP
+    /v1/msp/inventory/managers/attribute-values:
+        get:
+            description: Get distinct values for multiple fields in the MSP-managed device managers across all tenants managed by the MSP portal.
+            operationId: getMspManagedDeviceManagersAttributeValues
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedDeviceManagerDistinctAttributeValues'
+                    description: Distinct attribute values for MSP-managed device managers
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get distinct attribute values for MSP-managed device managers
             tags:
                 - MSP
     /v1/msp/inventory/services:
@@ -9395,6 +9417,45 @@ components:
                     type: string
             required:
                 - name
+            type: object
+        MspManagedDeviceManagerDistinctAttributeValues:
+            properties:
+                connectivityStates:
+                    description: The distinct connectivity states for the device managers managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/ConnectivityState'
+                    type: array
+                    uniqueItems: true
+                deviceManagerTypes:
+                    description: The distinct device manager types for the device managers managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/EntityType'
+                    type: array
+                    uniqueItems: true
+                managedTenantDisplayNames:
+                    description: The display names of the tenants that have device managers onboarded and are managed by the MSP Portal.
+                    items:
+                        description: The display names of the tenants that have device managers onboarded and are managed by the MSP Portal.
+                        type: string
+                    type: array
+                    uniqueItems: true
+                managedTenantNames:
+                    description: The names of the tenants that have device managers onboarded and are managed by the MSP Portal.
+                    items:
+                        description: The names of the tenants that have device managers onboarded and are managed by the MSP Portal.
+                        type: string
+                    type: array
+                    uniqueItems: true
+                softwareVersions:
+                    additionalProperties:
+                        description: The software versions of the device managers managed by the MSP Portal.
+                        items:
+                            description: The software versions of the device managers managed by the MSP Portal.
+                            type: string
+                        type: array
+                        uniqueItems: true
+                    description: The software versions of the device managers managed by the MSP Portal.
+                    type: object
             type: object
         MspManagedDeviceManagersPage:
             properties:
