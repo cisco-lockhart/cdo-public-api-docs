@@ -3902,10 +3902,18 @@ paths:
                     maximum: 200
                     minimum: 1
                     type: string
-                - description: The fields to sort results by.
+                - deprecated: true
+                  description: The fields to sort results by. This parameter is deprecated.
                   example: name:DESC
                   in: query
                   name: sortBy
+                  required: true
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
                   required: true
                   schema:
                     type: string
