@@ -1782,6 +1782,103 @@ paths:
             summary: Execute CLI Macro Command
             tags:
                 - Command Line Interface
+    /v1/inventory/devices/asas/health/metrics:
+        get:
+            description: Returns time-series metrics such as CPU, memory, disk, connections, and environment data over a specified time range. Supports filtering by device and metric. Pagination applies only when device UIDs are not specified.
+            operationId: getAsaHealthMetrics
+            parameters:
+                - description: Start of the time range (ISO 8601 format)
+                  example: 2025-04-05T00:00:00Z
+                  in: query
+                  name: start
+                  required: false
+                  schema:
+                    type: string
+                - description: End of the time range (ISO 8601 format)
+                  example: 2025-04-05T04:00:00Z
+                  in: query
+                  name: end
+                  required: false
+                  schema:
+                    type: string
+                - description: Relative time range (mutually exclusive with start/end)
+                  example: 15m
+                  in: query
+                  name: timeRange
+                  required: false
+                  schema:
+                    enum:
+                        - 5m
+                        - 15m
+                        - 30m
+                        - 1h
+                    type: string
+                - description: Maximum number of device records to return (used only when no deviceUids are provided)
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 50
+                    minimum: 0
+                    type: string
+                - description: Offset for pagination (used only when no deviceUids are provided)
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: Comma-separated list of device UIDs to query. Max 50. If omitted, results are paginated.
+                  example: 256461f6-bd60-11ef-8beb-6cf1610cf55d,41a1d57b-ffc2-49aa-933b-440cdd76b2fc
+                  in: query
+                  name: deviceUids
+                  required: false
+                  schema:
+                    maxLength: 50
+                    maximum: 50
+                    minLength: 0
+                    type: string
+                - description: Comma-separated list of metrics to return (e.g. cpu, mem). Returns all if omitted.
+                  example: cpu,mem
+                  in: query
+                  name: metrics
+                  required: false
+                  schema:
+                    enum:
+                        - cpu
+                        - mem
+                        - disk
+                        - env
+                        - connections
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeviceMetricsResponse'
+                    description: Successfully retrieved time-series metrics for one or more ASA devices
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get time-series health metrics for one or more ASA devices
+            tags:
+                - Device Health
     /v1/inventory/devices/asas/read:
         post:
             description: This is an asynchronous operation to read the latest configurations for multiple ASA devices into the Security Cloud Control tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation for all devices.
@@ -7933,6 +8030,32 @@ components:
                 secureAccess:
                     $ref: '#/components/schemas/SecureAccessMetadata'
             type: object
+        DeviceMetricsItem:
+            properties:
+                metrics:
+                    additionalProperties:
+                        $ref: '#/components/schemas/Metric'
+                    type: object
+                uid:
+                    format: uuid
+                    type: string
+            type: object
+        DeviceMetricsResponse:
+            properties:
+                items:
+                    items:
+                        $ref: '#/components/schemas/DeviceMetricsItem'
+                    type: array
+                limit:
+                    format: int32
+                    type: integer
+                offset:
+                    format: int32
+                    type: integer
+                total:
+                    format: int32
+                    type: integer
+            type: object
         DevicePage:
             properties:
                 count:
@@ -9020,6 +9143,15 @@ components:
                         type: string
                     type: array
             type: object
+        Metric:
+            properties:
+                series:
+                    items:
+                        $ref: '#/components/schemas/Series'
+                    type: array
+                summary:
+                    $ref: '#/components/schemas/Summary'
+            type: object
         MfaEvent:
             properties:
                 application:
@@ -10087,6 +10219,15 @@ components:
                     format: int32
                     type: integer
             type: object
+        Series:
+            properties:
+                timestamp:
+                    format: date-time
+                    type: string
+                value:
+                    format: double
+                    type: number
+            type: object
         ServiceObjectContent:
             properties:
                 protocol:
@@ -10488,6 +10629,18 @@ components:
                     description: The Status of the request.
                     example: OK
                     type: string
+            type: object
+        Summary:
+            properties:
+                average:
+                    format: double
+                    type: number
+                latest:
+                    format: double
+                    type: number
+                max:
+                    format: double
+                    type: number
             type: object
         Target:
             description: Set of targets that contain the object. A target can be, for example, a device, service, or a shared policy (Ruleset).
