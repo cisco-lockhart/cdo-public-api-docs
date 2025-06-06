@@ -1,10 +1,10 @@
 {
 	"id": "6c27f329-928c-402d-ac02-f428d2e8bd33",
-	"name": "Cisco CDO API",
+	"name": "Cisco SCC Firewall Manager API",
 	"values": [
 		{
 			"key": "baseUrl",
-			"value": "replace with appropriate base url, example: https://us.cdo.cisco.com/api/platform/public-api",
+			"value": "replace with appropriate base url, example: https://api.us.security.cisco.com/firewall",
 			"type": "default",
 			"enabled": true
 		},
