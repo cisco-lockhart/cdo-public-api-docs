@@ -3453,6 +3453,38 @@ paths:
             summary: Get distinct attribute values for MSP-managed cloud services
             tags:
                 - MSP
+    /v1/msp/inventory/templates/{templateUid}:
+        get:
+            description: Get the template managed by the MSP portal using its UID.
+            operationId: getMspManagedTemplate
+            parameters:
+                - description: The unique identifier of MSP-managed template.
+                  in: path
+                  name: templateUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedTemplate'
+                    description: MSP-managed template
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP-managed template by UID
+            tags:
+                - MSP
     /v1/msp/tenants:
         get:
             description: Get a list of Security Cloud Control tenants managed by the MSP Portal.
@@ -9642,6 +9674,48 @@ components:
                     example: 0
                     format: int32
                     type: integer
+            type: object
+        MspManagedTemplate:
+            properties:
+                configState:
+                    $ref: '#/components/schemas/ConfigState'
+                managedTenantDisplayName:
+                    description: The display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: The name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantRegion:
+                    description: The region of the managed tenant in CDO. This is the region where the template is located.
+                    example: us1
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this template belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                name:
+                    description: The name of the template in CDO. Template names are unique in Security Cloud Control.
+                    example: my-example-device
+                    type: string
+                softwareVersion:
+                    description: The software version that the template is applicable to.
+                    example: 7.4.1
+                    type: string
+                templateType:
+                    $ref: '#/components/schemas/EntityType'
+                tenantUid:
+                    format: uuid
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the template in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            required:
+                - name
             type: object
         MspManagedTenant:
             properties:
