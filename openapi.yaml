@@ -3541,6 +3541,28 @@ paths:
             summary: Get MSP-managed template by UID
             tags:
                 - MSP
+    /v1/msp/inventory/templates/attribute-values:
+        get:
+            description: Get distinct values for multiple fields in the MSP-managed templates across all tenants managed by the MSP portal.
+            operationId: getMspManagedTemplateAttributeValues
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedTemplateDistinctAttributeValues'
+                    description: Distinct attribute values for MSP-managed templates
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get distinct attribute values for MSP-managed templates
+            tags:
+                - MSP
     /v1/msp/tenants:
         get:
             description: Get a list of Security Cloud Control tenants managed by the MSP Portal.
@@ -9772,6 +9794,45 @@ components:
                     type: string
             required:
                 - name
+            type: object
+        MspManagedTemplateDistinctAttributeValues:
+            properties:
+                configStates:
+                    description: The distinct config states for the templates managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/ConfigState'
+                    type: array
+                    uniqueItems: true
+                managedTenantDisplayNames:
+                    description: The display names of the tenants that have templates managed by the MSP Portal.
+                    items:
+                        description: The display names of the tenants that have templates managed by the MSP Portal.
+                        type: string
+                    type: array
+                    uniqueItems: true
+                managedTenantNames:
+                    description: The names of the tenants that have templates managed by the MSP Portal.
+                    items:
+                        description: The names of the tenants that have templates managed by the MSP Portal.
+                        type: string
+                    type: array
+                    uniqueItems: true
+                softwareVersions:
+                    additionalProperties:
+                        description: The software versions of the templates managed by the MSP Portal.
+                        items:
+                            description: The software versions of the templates managed by the MSP Portal.
+                            type: string
+                        type: array
+                        uniqueItems: true
+                    description: The software versions of the templates managed by the MSP Portal.
+                    type: object
+                templateTypes:
+                    description: The distinct templates types for the templates managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/EntityType'
+                    type: array
+                    uniqueItems: true
             type: object
         MspManagedTemplatesPage:
             properties:
