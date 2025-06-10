@@ -6134,6 +6134,8 @@ servers:
       description: Scale
     - url: https://ci.manage.security.cisco.com/api/rest
       description: CI
+    - url: https://manage.stg.secure.cisco/api/rest
+      description: Stgf9
 components:
     schemas:
         AccessGroup:
