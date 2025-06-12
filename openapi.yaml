@@ -7315,6 +7315,7 @@ components:
                         - DELETE_USERS
                         - EXECUTE_ASA_COMMAND
                         - ANALYZE_POLICIES
+                        - TRIGGER_FMC_DATA_EXPORT
                     example: ONBOARD_ASA
                     type: string
                 transactionUid:
