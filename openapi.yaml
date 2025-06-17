@@ -2384,6 +2384,57 @@ paths:
             summary: Upgrade multiple FTD devices
             tags:
                 - Device Upgrades
+    /v1/inventory/devices/ftds/upgrades/versions:
+        get:
+            description: 'Get a list of compatible upgrade versions for the specified FTD devices. Note 1: this endpoint will only return versions that are directly downloadable to the FTD from the Cisco support site. Note 2: If compatible versions need computation, returns 202 with a transaction containing the entityUrl for tracking progress. Otherwise, returns 200 with the complete result.'
+            operationId: getCompatibleFtdVersionsForMultipleFtds
+            parameters:
+                - description: A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control.
+                  in: query
+                  name: deviceUids
+                  required: true
+                  schema:
+                    items:
+                        format: uuid
+                        type: string
+                    maxItems: 50
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/FtdCompatibilityVersion'
+                    description: List of compatible upgrade versions
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Returns a Security Cloud Control returns a Transaction object that can be used to track the progress of the operation to get the set of compatibility versions.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "422":
+                    $ref: '#/components/responses/http422UnprocessableEntity'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get upgrade versions compatible with multiple FTDs
+            tags:
+                - Device Upgrades
     /v1/inventory/devices/ftds/ztp:
         post:
             description: 'This is an asynchronous operation to onboard a cdFMC managed FTD using Zero-Touch Provisioning. The operation returns a transaction object that can be used to track the progress of the onboarding operation. Note: Zero-Touch Onboarding can be done with Secure Firewall 1xxx, 2xxx, and 3xxx Series devices. This operation will be marked as complete once CDO is ready to handle a response from the device once it is plugged in and connected to the Internet; it does not wait for the device to communicate back to Security Cloud Control.'
@@ -8572,6 +8623,20 @@ components:
                     items:
                         $ref: '#/components/schemas/ClusterNode'
                     type: array
+            type: object
+        FtdCompatibilityVersion:
+            properties:
+                compatibleFtdVersions:
+                    items:
+                        $ref: '#/components/schemas/FtdVersion'
+                    type: array
+                deviceUids:
+                    items:
+                        format: uuid
+                        type: string
+                    type: array
+                hardwareModel:
+                    type: string
             type: object
         FtdCreateOrUpdateInput:
             properties:
