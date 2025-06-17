@@ -7,118 +7,6 @@ info:
         name: Cisco Security Cloud Control TAC
         email: cdo.tac@cisco.com
 paths:
-    /v1/fmc/gateway/command:
-        post:
-            description: Send a direct command to the specified device.
-            operationId: executeDeviceCommand
-            parameters:
-                - description: By default, the API waits up to 70 seconds for a device response. Append the 'async' flag to return immediately without waiting for the response.
-                  in: query
-                  name: async
-                  required: false
-                  schema:
-                    type: string
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/DeviceGatewayApiRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            examples:
-                                responded:
-                                    value:
-                                        data:
-                                            inResponseTo:
-                                                command: executeFmcRequests
-                                                deviceType: fmc
-                                                deviceUid: fb8e46fc-30b0-437f-921d-606c53d4b94c
-                                                larUid: b5a71c7b-f309-4102-8fa2-9eec2260a1b7
-                                            responseBody: '[{"id":"0050568A-5AB4-0ed3-0000-021474986635","name":"Marketing","agentId":"agent_007","topicName":"aws365","description":"IPs of marketing department","type":"DynamicObject","objectType":"IP","links":{"self":"https://fmc.acme.com/api/fmc_config/v1/domain/e276abe1-e0f2-11e3-8169-6d9ed49b625f/object/dynamicobjects/0050568C-5AB4-0ed3-0000-021474986635"},"metadata":{"domain":{"name":"Global","id":"e276abec-e0f2-11e3-8169-6d9ed49b625f","type":"Domain"}}}]'
-                                            responseStatus: SUCCESS
-                                            tenantUid: 936fca6c-000b-4375-b903-46e6a95c7153
-                                        requestId: 11111111-1111-1111-1111-111111111111
-                                        responseOrigin: secure-connector
-                                        status: responded
-                                timeout:
-                                    value:
-                                        data: The request timed out due to a hard limit of 70 seconds. You may poll for a belated response using the url provided in the 'data' field
-                                        requestId: 11111111-1111-1111-1111-111111111111
-                                        responseOrigin: device-gateway-api
-                                        status: timeout
-                    description: The request was successfully processed, and the device command was executed.
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            summary: Send a direct request to a registered device in Security Cloud Control
-            tags:
-                - Commands
-    /v1/fmc/gateway/command/{requestId}:
-        get:
-            description: Get the response from a device for a command previously issued.
-            operationId: getDeviceCommandResponse
-            parameters:
-                - description: The unique identifier of the request, represented as a UUID, returned from a previous POST request to the /command endpoint.
-                  in: path
-                  name: requestId
-                  required: true
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            examples:
-                                responded:
-                                    value:
-                                        data:
-                                            inResponseTo:
-                                                command: executeFmcRequests
-                                                deviceType: fmc
-                                                deviceUid: fb8e46fc-30b0-437f-921d-606c53d4b94c
-                                                larUid: b5a71c7b-f309-4102-8fa2-9eec2260a1b7
-                                            responseBody: '[{"id":"0050568A-5AB4-0ed3-0000-021474986635","name":"Marketing","agentId":"agent_007","topicName":"aws365","description":"IPs of marketing department","type":"DynamicObject","objectType":"IP","links":{"self":"https://fmc.acme.com/api/fmc_config/v1/domain/e276abe1-e0f2-11e3-8169-6d9ed49b625f/object/dynamicobjects/0050568C-5AB4-0ed3-0000-021474986635"},"metadata":{"domain":{"name":"Global","id":"e276abec-e0f2-11e3-8169-6d9ed49b625f","type":"Domain"}}}]'
-                                            responseStatus: SUCCESS
-                                            tenantUid: 936fca6c-000b-4375-b903-46e6a95c7153
-                                        requestId: 11111111-1111-1111-1111-111111111111
-                                        responseOrigin: secure-connector
-                                        status: responded
-                    description: The device responded. The response may indicate success or contain an error returned by the device.
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            summary: Retrieve the response for a previously sent command
-            tags:
-                - Commands
-    /v1/fmc/gateway/listcommands:
-        get:
-            description: Retrieve a list of supported device command endpoint patterns.
-            operationId: getDeviceCommands
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommandResponse'
-                    description: The list of supported command patterns.
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            summary: Get supported endpoint patterns
-            tags:
-                - Commands
     /v1/inventory/devices/asas/health/{deviceUid}/interfaces:
         get:
             description: Returns time-series interface metrics - including link status, overruns, and other key performance indicators - over a specified time range. Supports filtering by interface and metric. Pagination applies only when interface UIDs are not specified.
@@ -320,6 +208,942 @@ paths:
             summary: Get time-series health metrics for one or more ASA devices
             tags:
                 - Device Health
+    /v1/msp/inventory/devices:
+        get:
+            description: Get devices, across all tenants, managed by the MSP portal.
+            operationId: getMspManagedDevices
+            parameters:
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedDevicePage'
+                    description: List of MSP-managed devices
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP-managed devices
+            tags:
+                - MSP
+    /v1/msp/inventory/devices/{deviceUid}:
+        get:
+            description: Get the device managed by the MSP portal using its UID.
+            operationId: getMspManagedDevice
+            parameters:
+                - description: The unique identifier of MSP-managed device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedDevice'
+                    description: MSP-managed device
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP-managed device by UID
+            tags:
+                - MSP
+    /v1/msp/inventory/devices/attribute-values:
+        get:
+            description: Get distinct values for multiple fields in the MSP-managed devices across all tenants managed by the MSP portal.
+            operationId: getMspManagedDevicesAttributeValues
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedDeviceDistinctAttributeValues'
+                    description: Distinct attribute values for MSP-managed devices
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get distinct attribute values for MSP-managed devices
+            tags:
+                - MSP
+    /v1/msp/inventory/managers:
+        get:
+            description: Get device managers, across all tenants, managed by the MSP portal.
+            operationId: getMspManagedDeviceManagers
+            parameters:
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedDeviceManagersPage'
+                    description: List of MSP-managed device managers
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP-managed device managers
+            tags:
+                - MSP
+    /v1/msp/inventory/managers/{deviceManagerUid}:
+        get:
+            description: Get the device manager managed by the MSP portal using its UID.
+            operationId: getMspManagedDeviceManager
+            parameters:
+                - description: The unique identifier of MSP-managed device manager.
+                  in: path
+                  name: deviceManagerUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedDeviceManager'
+                    description: MSP-managed device manager
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP-managed device manager by UID
+            tags:
+                - MSP
+    /v1/msp/inventory/managers/attribute-values:
+        get:
+            description: Get distinct values for multiple fields in the MSP-managed device managers across all tenants managed by the MSP portal.
+            operationId: getMspManagedDeviceManagersAttributeValues
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedDeviceManagerDistinctAttributeValues'
+                    description: Distinct attribute values for MSP-managed device managers
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get distinct attribute values for MSP-managed device managers
+            tags:
+                - MSP
+    /v1/msp/inventory/services:
+        get:
+            description: Get cloud services, across all tenants, managed by the MSP portal.
+            operationId: getMspManagedCloudServices
+            parameters:
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedCloudServicePage'
+                    description: List of MSP-managed cloud services
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP-managed cloud services
+            tags:
+                - MSP
+    /v1/msp/inventory/services/{cloudServiceUid}:
+        get:
+            description: Get the cloud service managed by the MSP portal using its UID.
+            operationId: getMspManagedCloudService
+            parameters:
+                - description: The unique identifier of MSP-managed cloud service.
+                  in: path
+                  name: cloudServiceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedCloudService'
+                    description: MSP-managed cloud service
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP-managed cloud service by UID
+            tags:
+                - MSP
+    /v1/msp/inventory/services/attribute-values:
+        get:
+            description: Get distinct values for multiple fields in the MSP-managed cloud services across all tenants managed by the MSP portal.
+            operationId: getMspManagedCloudServicesAttributeValues
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedCloudServiceDistinctAttributeValues'
+                    description: Distinct attribute values for MSP-managed devices
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get distinct attribute values for MSP-managed cloud services
+            tags:
+                - MSP
+    /v1/msp/inventory/templates:
+        get:
+            description: Get templates, across all tenants, managed by the MSP portal.
+            operationId: getMspManagedTemplates
+            parameters:
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedTemplatesPage'
+                    description: List of MSP-managed templates
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP-managed templates
+            tags:
+                - MSP
+    /v1/msp/inventory/templates/{templateUid}:
+        get:
+            description: Get the template managed by the MSP portal using its UID.
+            operationId: getMspManagedTemplate
+            parameters:
+                - description: The unique identifier of MSP-managed template.
+                  in: path
+                  name: templateUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedTemplate'
+                    description: MSP-managed template
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP-managed template by UID
+            tags:
+                - MSP
+    /v1/msp/inventory/templates/attribute-values:
+        get:
+            description: Get distinct values for multiple fields in the MSP-managed templates across all tenants managed by the MSP portal.
+            operationId: getMspManagedTemplateAttributeValues
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedTemplateDistinctAttributeValues'
+                    description: Distinct attribute values for MSP-managed templates
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get distinct attribute values for MSP-managed templates
+            tags:
+                - MSP
+    /v1/msp/tenants:
+        get:
+            description: Get a list of Security Cloud Control tenants managed by the MSP Portal.
+            operationId: getMspManagedTenants
+            parameters:
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedTenantPage'
+                    description: List of Security Cloud Control tenant objects
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Security Cloud Control tenants managed by MSP Portal
+            tags:
+                - MSP
+        post:
+            description: 'Add a tenant to the MSP Portal by providing an API token for the tenant. Use this endpoint to add a tenant that the user performing the operation is not associated with, or a tenant in a different region to that of the MSP Portal. Note: This endpoint can only be executed by a super-admin in an MSP Portal.'
+            operationId: addMspTenant
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MspAddTenantInput'
+                required: true
+            responses:
+                "201":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/StatusInfo'
+                    description: Status
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Add Tenant to MSP Portal (API token)
+            tags:
+                - MSP
+    /v1/msp/tenants/{tenantUid}:
+        delete:
+            description: 'Removes a tenant currently associated with the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal.'
+            operationId: removeTenantFromMspPortal
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the tenant in Security Cloud Control.
+                  in: path
+                  name: tenantUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "204":
+                    description: No Content
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Remove tenant from MSP Portal
+            tags:
+                - MSP
+        get:
+            description: Get a Security Cloud Control tenant managed by the MSP Portal.
+            operationId: getMspManagedTenant
+            parameters:
+                - description: The unique identifier of the tenant in Security Cloud Control.
+                  in: path
+                  name: tenantUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedTenant'
+                    description: Security Cloud Control tenant object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Security Cloud Control tenant managed by MSP Portal
+            tags:
+                - MSP
+        post:
+            description: 'This is an asynchronous operation to add an existing tenant that the user making the API call is associated with to the MSP Portal. This endpoint will add an API-only user to the tenant, generate an API token for the API-only user, and add the tenant to the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal who is also associated with the tenant being added.'
+            operationId: addTenantToMspPortal
+            parameters:
+                - description: Unique identifier of the tenant to add to the MSP portal.
+                  in: path
+                  name: tenantUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the operation.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "409":
+                    $ref: '#/components/responses/http409Conflict'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Add tenant to MSP Portal
+            tags:
+                - MSP
+    /v1/msp/tenants/{tenantUid}/cdfmc:
+        post:
+            description: This is an asynchronous operation to provision a cdFMC for a tenant associated with the MSP Portal. This operation does not wait for the cdFMC to be provisioned on the target tenant, and will be marked as successful once the provisioning has been successfully triggered. To monitor the transaction on the target tenant, use the UID in the `TRANSACTION_UID_IN_TARGET_TENANT` key in the transaction details.
+            operationId: provisionCdFmcForTenantInMspPortal
+            parameters:
+                - description: Unique identifier of the tenant that cdFMC provisioning will be enabled for.
+                  in: path
+                  name: tenantUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the operation.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Provision cdFMC for Security Cloud Control tenant in MSP Portal
+            tags:
+                - MSP
+    /v1/msp/tenants/{tenantUid}/mcd:
+        post:
+            description: This is an asynchronous operation to enable Multicloud Defense for a tenant associated with the MSP Portal.
+            operationId: enableMulticloudDefenseForTenantInMspPortal
+            parameters:
+                - description: Unique identifier of the tenant that Multicloud Defense will be enabled for.
+                  in: path
+                  name: tenantUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the operation.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Enable Multicloud Defense for Security Cloud Control tenant in MSP Portal
+            tags:
+                - MSP
+    /v1/msp/tenants/{tenantUid}/users:
+        get:
+            description: Get a list of (non-API-only) users associated with the Security Cloud Control tenant managed by MSP portal.
+            operationId: getHumanUsersInMspManagedTenant
+            parameters:
+                - description: Unique identifier of the tenant to retrieve the users for.
+                  in: path
+                  name: tenantUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UserPage'
+                    description: List of User objects
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get non-API-only Users associated with tenant in MSP portal
+            tags:
+                - MSP
+        post:
+            description: This is an asynchronous operation to add a list of users to a tenant associated with the MSP Portal.
+            operationId: addUsersToTenantInMspPortal
+            parameters:
+                - description: Unique identifier of the tenant to which the users will be added.
+                  in: path
+                  name: tenantUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MspAddUsersToTenantInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the operation.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Add users to Security Cloud Control tenant in MSP Portal
+            tags:
+                - MSP
+    /v1/msp/tenants/{tenantUid}/users/{apiUserUid}/token:
+        post:
+            description: Generate API Token for API-only user on a tenant managed by the MSP portal. API-only users are used for building automations with Security Cloud Control. If the user ID provided is not that of an API-only user, this operation will fail.
+            operationId: generateApiTokenForUserInTenant
+            parameters:
+                - description: The unique identifier of the tenant in Security Cloud Control.
+                  in: path
+                  name: tenantUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier of the API-only user in Security Cloud Control.
+                  in: path
+                  name: apiUserUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "201":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ApiTokenInfo'
+                    description: API Token
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Generate token for API-only user on tenant managed by MSP portal
+            tags:
+                - MSP
+    /v1/msp/tenants/{tenantUid}/users/api-only:
+        get:
+            description: Get a list of API-only users associated with the Security Cloud Control tenant managed by MSP portal.
+            operationId: getApiOnlyUsersInMspManagedTenant
+            parameters:
+                - description: Unique identifier of the tenant to retrieve the users for.
+                  in: path
+                  name: tenantUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UserPage'
+                    description: List of User objects
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get API-only Users associated with tenant in MSP portal
+            tags:
+                - MSP
+    /v1/msp/tenants/{tenantUid}/users/delete:
+        post:
+            description: This is an asynchronous operation to remove a list of users from a tenant associated with the MSP Portal.
+            operationId: deleteUsersFromTenantInMspPortal
+            parameters:
+                - description: Unique identifier of the tenant from which the users will be deleted
+                  in: path
+                  name: tenantUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MspDeleteUsersFromTenantInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the operation.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Remove users from Security Cloud Control tenant in MSP Portal
+            tags:
+                - MSP
+    /v1/msp/tenants/create:
+        post:
+            description: 'Create a new tenant in Security Cloud Control from an MSP Portal. This endpoint creates a tenant, adds the tenant to the MSP Portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal. You can create no more than 1 tenant every 30 seconds. Additionally, you are limited to creating a total of 100 tenants: please speak to support to raise this limit.'
+            operationId: createTenant
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MspCreateTenantInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the tenant creation.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "409":
+                    $ref: '#/components/responses/http409Conflict'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Create Security Cloud Control Tenant
+            tags:
+                - MSP
     /v1/transactions/{transactionUid}:
         get:
             description: Get information on an in-progress CDO transaction. An CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create Security Cloud Control transactions.
@@ -384,6 +1208,13 @@ servers:
       description: Stgf9
 components:
     schemas:
+        ApiTokenInfo:
+            properties:
+                apiToken:
+                    description: The API Access Token.
+                    example: FaKE-toKeN
+                    type: string
+            type: object
         AuthenticationError:
             properties:
                 error:
@@ -493,65 +1324,6 @@ components:
                     format: uuid
                     type: string
             type: object
-        Command:
-            properties:
-                body:
-                    description: The body of the command (optional).
-                    example: {}
-                    type: string
-                link:
-                    description: The FMC endpoint to invoke for this command.
-                    example: /api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f
-                    minLength: 1
-                    type: string
-                method:
-                    description: The HTTP method for the command.
-                    example: GET
-                    minLength: 1
-                    type: string
-            required:
-                - link
-                - method
-            type: object
-        CommandResponse:
-            properties:
-                data:
-                    description: The data associated with the command response.
-                    example:
-                        inResponseTo:
-                            command: executeFmcRequests
-                            deviceType: fmc
-                            deviceUid: fb8e46fc-30b0-437f-921d-606c53d4b94c
-                            larUid: b5a71c7b-f309-4102-8fa2-9eec2260a1b7
-                        responseBody: '[{"id":"0050568A-5AB4-0ed3-0000-021474986635","name":"Marketing","agentId":"agent_007","topicName":"aws365","description":"IPs of marketing department","type":"DynamicObject","objectType":"IP"}]'
-                        responseStatus: SUCCESS
-                        tenantUid: 936fca6c-000b-4375-b903-46e6a95c7153
-                message:
-                    description: The response message, if applicable.
-                    example: The request timed out due to a hard limit of 70 seconds. You may poll for a belated response using the url provided in the 'data' field
-                    type: string
-                requestId:
-                    description: The unique identifier of the request, represented as a UUID.
-                    example: 6e3492c6-083a-4ead-9da9-cd2db32a965d
-                    type: string
-                responseOrigin:
-                    description: The origin system of the response.
-                    enum:
-                        - device-gateway-api
-                        - secure-connector
-                        - secure-connector-sse
-                    example: secure-connector
-                    type: string
-                status:
-                    description: The status of the command.
-                    enum:
-                        - failed
-                        - pending
-                        - responded
-                        - timeout
-                    example: responded
-                    type: string
-            type: object
         CommonApiError:
             properties:
                 details:
@@ -582,20 +1354,28 @@ components:
                     description: A human-readable error description in English.
                     example: sample error
                     type: string
-        DeviceGatewayApiRequest:
-            properties:
-                deviceUid:
-                    description: The unique identifier, represented as a UUID, of the target device for the command. Currently, only FMC devices are supported.
-                    example: 6e3492c6-083a-4ead-9da9-cd2db32a965d
-                    minLength: 1
-                    type: string
-                request:
-                    $ref: '#/components/schemas/FmcRequest'
-                    description: The request that the user wants to execute on the device.
-            required:
-                - deviceUid
-                - request
-            type: object
+        ConfigState:
+            enum:
+                - NO_CONFIG
+                - SYNCED
+                - NOT_SYNCED
+                - UNKNOWN
+            type: string
+        ConflictDetectionState:
+            enum:
+                - CONFLICT_DETECTED
+                - NO_CONFLICTS
+            type: string
+        ConnectivityState:
+            enum:
+                - ONLINE
+                - UNREACHABLE
+                - BAD_CREDENTIALS
+                - UNKNOWN
+                - PENDING_SETUP
+                - PENDING
+                - NEW_CERT_DETECTED
+            type: string
         DeviceMetricsItem:
             properties:
                 description:
@@ -610,16 +1390,58 @@ components:
                     format: uuid
                     type: string
             type: object
-        FmcRequest:
+        EntityType:
+            enum:
+                - ASA
+                - CDFMC_MANAGED_FTD
+                - ONPREM_FMC_MANAGED_FTD
+                - ONPREM_FMC_MANAGED_FIREPOWER
+                - ONPREM_FMC_NGIPS
+                - FDM_MANAGED_FTD
+                - IOS
+                - ISR
+                - SSH_DEVICE
+                - GENERIC_DEVICE
+                - MERAKI_MX
+                - CLOUD_DNG
+                - SFCN
+                - SFCN_DNG
+                - SFCN_STS
+                - ONPREM_FMC
+                - CDFMC
+                - AWS_VPC
+                - AZURE_VNET
+                - DUO_ADMIN_PANEL
+                - UMBRELLA_ORGANIZATION
+            type: string
+        Labels:
+            description: Labels used to identify/tag Security Cloud Control entities.
             properties:
-                commands:
-                    description: A list of commands to be executed on the device.
+                groupedLabels:
+                    additionalProperties:
+                        items:
+                            type: string
+                        type: array
+                        uniqueItems: true
+                    description: Groups of labels used to identify/tag Security Cloud Control entities.
+                    example:
+                        group1:
+                            - label-1
+                            - label-2
+                        group2:
+                            - label-1
+                            - label-2
+                    type: object
+                ungroupedLabels:
+                    description: Set of free-labels used to identify/tag Security Cloud Control entities.
+                    example:
+                        - label-a
+                        - label-b
+                        - label-c
                     items:
-                        $ref: '#/components/schemas/Command'
-                    minItems: 1
+                        type: string
                     type: array
-            required:
-                - commands
+                    uniqueItems: true
             type: object
         Metric:
             properties:
@@ -646,6 +1468,601 @@ components:
                     format: int32
                     type: integer
             type: object
+        MspAddTenantInput:
+            properties:
+                apiToken:
+                    description: The Tenant API Access Token.
+                    example: FaKE-toKeN
+                    minLength: 1
+                    type: string
+            required:
+                - apiToken
+            type: object
+        MspAddUsersToTenantInput:
+            properties:
+                users:
+                    description: The list of users to be added to the tenant. You can add a maximum of 50 users at a time.
+                    example: '[username: burak@cisco.com, role: ROLE_ADMIN]'
+                    items:
+                        $ref: '#/components/schemas/UserInput'
+                    maxItems: 50
+                    minItems: 0
+                    type: array
+            required:
+                - users
+            type: object
+        MspCreateTenantInput:
+            properties:
+                displayName:
+                    description: A human-readable display name of the tenant to create. Use this field only if you want the display name to be different from the name of the tenant.
+                    example: Acme Inc., United States offices
+                    type: string
+                salesOrderNumber:
+                    description: The sales order number. If this value is not provided, the tenant will be created as a trial tenant.
+                    example: 98241346
+                    type: string
+                tenantName:
+                    description: The name of the tenant to create. The tenant name can only contain alphabets, numbers, -, and _, and is limited to 50 characters.
+                    example: acme-inc-usa
+                    minLength: 1
+                    pattern: '[a-zA-Z0-9-_]{1,50}'
+                    type: string
+            required:
+                - tenantName
+            type: object
+        MspDeleteUsersFromTenantInput:
+            properties:
+                usernames:
+                    description: The list of usernames to be removed from the MSP-managed tenant. You can remove a maximum of 50 users at a time.
+                    example:
+                        - username@example.com
+                        - username2@example.com
+                    items:
+                        type: string
+                    maxItems: 50
+                    minItems: 0
+                    type: array
+            required:
+                - usernames
+            type: object
+        MspManagedCloudService:
+            properties:
+                address:
+                    description: The address of the cloud service (if applicable), in `host:port` format. Security Cloud Control connects to the cloud service at this address.
+                    example: my-example-duo.example.com:443
+                    type: string
+                cloudServiceType:
+                    $ref: '#/components/schemas/EntityType'
+                    description: The type of the cloud service.
+                    example: UMBRELLA
+                configState:
+                    $ref: '#/components/schemas/ConfigState'
+                    description: The state of the cloud service configuration in CDO. CDO stages configuration changes which have to be manually applied to the cloud service; this field indicates whether the configuration on CDO does not match the configuration on the cloud service, which indicates whether there are changes to be deployed from Security Cloud Control to the cloud service.
+                    example: SYNCED
+                conflictDetectionState:
+                    $ref: '#/components/schemas/ConflictDetectionState'
+                    description: Indicates whether there have been changes made to the cloud service's configuration outside of Security Cloud Control.
+                    example: NO_CONFLICTS
+                connectivityState:
+                    $ref: '#/components/schemas/ConnectivityState'
+                    description: The connectivity state of the cloud service to CDO. A connectivity state that is not ONLINE can indicate either a problem with the cloud service, or the communication pathways between the cloud service and Security Cloud Control.
+                    example: ONLINE
+                managedTenantDisplayName:
+                    description: The display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: The name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantRegion:
+                    description: The region of the managed tenant in CDO. This is the region where the cloud service is located.
+                    example: us1
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this cloud service belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                name:
+                    description: The name of the cloud service in CDO. Cloud service names are unique in Security Cloud Control.
+                    example: my-example-duo-admin-panel
+                    type: string
+                tenantUid:
+                    format: uuid
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the cloud service in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            required:
+                - name
+            type: object
+        MspManagedCloudServiceDistinctAttributeValues:
+            properties:
+                cloudServiceTypes:
+                    description: The distinct device types for the cloud services managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/EntityType'
+                    type: array
+                    uniqueItems: true
+                configStates:
+                    description: The distinct config states for the cloud services managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/ConfigState'
+                    type: array
+                    uniqueItems: true
+                conflictDetectionStates:
+                    description: The distinct conflict detection states for the cloud services managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/ConflictDetectionState'
+                    type: array
+                    uniqueItems: true
+                connectivityStates:
+                    description: The distinct connectivity states for the cloud services managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/ConnectivityState'
+                    type: array
+                    uniqueItems: true
+                managedTenantDisplayNames:
+                    description: The display names of the tenants that have cloud services onboarded and are managed by the MSP Portal.
+                    items:
+                        type: string
+                    type: array
+                    uniqueItems: true
+                managedTenantNames:
+                    description: The names of the tenants that have cloud services onboarded and are managed by the MSP Portal.
+                    items:
+                        type: string
+                    type: array
+                    uniqueItems: true
+            type: object
+        MspManagedCloudServicePage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MspManagedCloudService'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
+        MspManagedDevice:
+            properties:
+                address:
+                    description: The address of the device, in `host:port` format. Security Cloud Control connects to the device at this address.
+                    example: my-example-device.example.com:443
+                    type: string
+                chassisSerial:
+                    description: The serial number on the chassis of the device (ASA-only). This is typically used to type up to Cisco SmartNet, and is not the same as the serial number.
+                    example: JMX2450Xxxx
+                    type: string
+                configState:
+                    $ref: '#/components/schemas/ConfigState'
+                    description: The state of the device configuration in CDO. CDO stages configuration changes which have to be manually applied to the device; this field indicates whether the configuration on CDO does not match the configuration on the device, which indicates whether there are changes to be deployed from Security Cloud Control to the device.
+                    example: SYNCED
+                conflictDetectionState:
+                    $ref: '#/components/schemas/ConflictDetectionState'
+                    description: Indicates whether there have been changes made to the device's configuration outside of Security Cloud Control.
+                    example: NO_CONFLICTS
+                connectivityState:
+                    $ref: '#/components/schemas/ConnectivityState'
+                    description: The connectivity state of the device to CDO. A connectivity state that is not ONLINE can indicate either a problem with the device, or the communication pathways between the device and Security Cloud Control.
+                    example: ONLINE
+                deviceType:
+                    $ref: '#/components/schemas/EntityType'
+                    description: The type of the device.
+                    example: CDFMC_MANAGED_FTD
+                hardwareModel:
+                    description: (ASAs, FDM-managed FTDs, and FMC-managed FTDs only) The hardware model of the device
+                    type: string
+                labels:
+                    $ref: '#/components/schemas/Labels'
+                    description: The labels associated with the device.
+                managedTenantDisplayName:
+                    description: The display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: The name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantRegion:
+                    description: The region of the managed tenant in CDO. This is the region where the device is located.
+                    example: us1
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                modelNumber:
+                    description: The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device.
+                    type: string
+                name:
+                    description: The name of the device in CDO. Device names are unique in Security Cloud Control.
+                    example: my-example-device
+                    type: string
+                redundancyMode:
+                    description: 'The redundancy mode this firewall is running in. Note: for High Availability pairs and clusters, Security Cloud Control represents all of the devices as part of one record.'
+                    enum:
+                        - HA
+                        - CLUSTER
+                        - STANDALONE
+                    type: string
+                serial:
+                    description: The serial number of the device. This is typically used for licensing, and is not the same as the chassis' serial number.
+                    example: JAD24500xxx
+                    type: string
+                softwareVersion:
+                    description: The version of the software running on the device.
+                    example: 7.4.1
+                    type: string
+                tenantUid:
+                    format: uuid
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            required:
+                - name
+            type: object
+        MspManagedDeviceDistinctAttributeValues:
+            properties:
+                configStates:
+                    description: The distinct config states for the devices managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/ConfigState'
+                    type: array
+                    uniqueItems: true
+                conflictDetectionStates:
+                    description: The distinct conflict detection states for the devices managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/ConflictDetectionState'
+                    type: array
+                    uniqueItems: true
+                connectivityStates:
+                    description: The distinct connectivity states for the devices managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/ConnectivityState'
+                    type: array
+                    uniqueItems: true
+                deviceTypes:
+                    description: The distinct device types for the devices managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/EntityType'
+                    type: array
+                    uniqueItems: true
+                managedTenantDisplayNames:
+                    description: The display names of the tenants that have devices onboarded and are managed by the MSP Portal.
+                    items:
+                        type: string
+                    type: array
+                    uniqueItems: true
+                managedTenantNames:
+                    description: The names of the tenants that have devices onboarded and are managed by the MSP Portal.
+                    items:
+                        type: string
+                    type: array
+                    uniqueItems: true
+                softwareVersions:
+                    additionalProperties:
+                        items:
+                            type: string
+                        type: array
+                        uniqueItems: true
+                    description: The software versions of the devices managed by the MSP Portal.
+                    type: object
+            type: object
+        MspManagedDeviceManager:
+            properties:
+                address:
+                    description: The address of the device, in `host:port` format. Security Cloud Control connects to the device at this address.
+                    example: my-example-device.example.com:443
+                    type: string
+                connectivityState:
+                    $ref: '#/components/schemas/ConnectivityState'
+                    description: The connectivity state of the device to CDO. A connectivity state that is not ONLINE can indicate either a problem with the device, or the communication pathways between the device and Security Cloud Control.
+                    example: ONLINE
+                deviceManagerType:
+                    $ref: '#/components/schemas/EntityType'
+                    description: The type of the device manager.
+                    example: CDFMC
+                fmcDomainUid:
+                    description: (FMC-only) The Domain UID of the FMC.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                managedTenantDisplayName:
+                    description: The display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: The name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantRegion:
+                    description: The region of the managed tenant in CDO. This is the region where the device manager is located.
+                    example: us1
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device manager belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                name:
+                    description: The name of the device manager in CDO. Device manager names are unique in Security Cloud Control.
+                    example: my-example-device
+                    type: string
+                softwareVersion:
+                    description: The version of the software running on the device.
+                    example: 7.4.1
+                    type: string
+                tenantUid:
+                    format: uuid
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device manager in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            required:
+                - name
+            type: object
+        MspManagedDeviceManagerDistinctAttributeValues:
+            properties:
+                connectivityStates:
+                    description: The distinct connectivity states for the device managers managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/ConnectivityState'
+                    type: array
+                    uniqueItems: true
+                deviceManagerTypes:
+                    description: The distinct device manager types for the device managers managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/EntityType'
+                    type: array
+                    uniqueItems: true
+                managedTenantDisplayNames:
+                    description: The display names of the tenants that have device managers onboarded and are managed by the MSP Portal.
+                    items:
+                        type: string
+                    type: array
+                    uniqueItems: true
+                managedTenantNames:
+                    description: The names of the tenants that have device managers onboarded and are managed by the MSP Portal.
+                    items:
+                        type: string
+                    type: array
+                    uniqueItems: true
+                softwareVersions:
+                    additionalProperties:
+                        items:
+                            type: string
+                        type: array
+                        uniqueItems: true
+                    description: The software versions of the device managers managed by the MSP Portal.
+                    type: object
+            type: object
+        MspManagedDeviceManagersPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MspManagedDeviceManager'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
+        MspManagedDevicePage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MspManagedDevice'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
+        MspManagedTemplate:
+            properties:
+                configState:
+                    $ref: '#/components/schemas/ConfigState'
+                    description: The connectivity state of the template to CDO. A connectivity state that is not ONLINE can indicate either a problem with the template, or the communication pathways between the template and Security Cloud Control.
+                    example: ONLINE
+                managedTenantDisplayName:
+                    description: The display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: The name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantRegion:
+                    description: The region of the managed tenant in CDO. This is the region where the template is located.
+                    example: us1
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this template belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                name:
+                    description: The name of the template in CDO. Template names are unique in Security Cloud Control.
+                    example: my-example-device
+                    type: string
+                softwareVersion:
+                    description: The software version that the template is applicable to.
+                    example: 7.4.1
+                    type: string
+                templateType:
+                    $ref: '#/components/schemas/EntityType'
+                    description: The type of the template.
+                    example: CDFMC
+                tenantUid:
+                    format: uuid
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the template in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            required:
+                - name
+            type: object
+        MspManagedTemplateDistinctAttributeValues:
+            properties:
+                configStates:
+                    description: The distinct config states for the templates managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/ConfigState'
+                    type: array
+                    uniqueItems: true
+                managedTenantDisplayNames:
+                    description: The display names of the tenants that have templates managed by the MSP Portal.
+                    items:
+                        type: string
+                    type: array
+                    uniqueItems: true
+                managedTenantNames:
+                    description: The names of the tenants that have templates managed by the MSP Portal.
+                    items:
+                        type: string
+                    type: array
+                    uniqueItems: true
+                softwareVersions:
+                    additionalProperties:
+                        items:
+                            type: string
+                        type: array
+                        uniqueItems: true
+                    description: The software versions of the templates managed by the MSP Portal.
+                    type: object
+                templateTypes:
+                    description: The distinct templates types for the templates managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/EntityType'
+                    type: array
+                    uniqueItems: true
+            type: object
+        MspManagedTemplatesPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MspManagedTemplate'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
+        MspManagedTenant:
+            properties:
+                displayName:
+                    description: A human-readable display name for the tenant. This is the tenant name displayed in the Security Cloud Control Web UI.
+                    example: mytenantname
+                    type: string
+                name:
+                    description: The name of the device in CDO. Device names are unique in Security Cloud Control.
+                    example: my-example-device
+                    type: string
+                region:
+                    description: The Security Cloud Control region the tenant exists in.
+                    enum:
+                        - US
+                        - EU
+                        - APJ
+                        - AUS
+                        - IN
+                        - CI
+                        - SCALE
+                        - STAGING
+                        - UNKNOWN
+                    example: US
+                    type: string
+                uid:
+                    description: The unique identifier of the tenant in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            type: object
+        MspManagedTenantPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MspManagedTenant'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
         Series:
             properties:
                 timestamp:
@@ -654,6 +2071,13 @@ components:
                 value:
                     format: double
                     type: number
+            type: object
+        StatusInfo:
+            properties:
+                status:
+                    description: The Status of the request.
+                    example: OK
+                    type: string
             type: object
         Summary:
             properties:
@@ -667,6 +2091,105 @@ components:
                     format: double
                     type: number
             type: object
+        User:
+            properties:
+                apiOnlyUser:
+                    description: Whether the user is API-only, an API-only user cannot access Security Cloud Control in the UI.
+                    example: false
+                    type: boolean
+                emailAddress:
+                    description: The e-mail address in Security Cloud Control.
+                    example: ram.singh@cisco.com
+                    type: string
+                firstName:
+                    description: The first name of the user in Security Cloud Control.
+                    example: Ram
+                    type: string
+                lastName:
+                    description: The last name of the user in Security Cloud Control.
+                    example: Singh
+                    type: string
+                lastSuccessfulLogin:
+                    description: The time (UTC; represented using the RFC-3339 standard) that indicate the last time the user successfully logged in to Security Cloud Control.
+                    example: 2023-12-13T05:15:44Z
+                    format: date-time
+                    type: string
+                name:
+                    deprecated: true
+                    description: The username (e-mail address) in Security Cloud Control.
+                    example: ram.singh@cisco.com
+                    type: string
+                roles:
+                    description: Roles associated with this user in Security Cloud Control.
+                    example: '[ROLE_ADMIN]'
+                    items:
+                        $ref: '#/components/schemas/UserRole'
+                    type: array
+                uid:
+                    description: The unique identifier of the user in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    type: string
+            type: object
+        UserInput:
+            properties:
+                apiOnlyUser:
+                    description: Whether the user is an API-only user
+                    example: false
+                    type: boolean
+                firstName:
+                    description: 'The first name of the user in Security Cloud Control. If this is not set, the first name is set to the username. Note: This field must not be specified for API-only users.'
+                    example: Ram
+                    type: string
+                lastName:
+                    description: 'The last name of the user in Security Cloud Control. If this is not set, the last name is set to the username. Note: This field must not be specified for API-only users.'
+                    example: Singh
+                    type: string
+                role:
+                    $ref: '#/components/schemas/UserRole'
+                    description: The role to assign to the user in the Security Cloud Control tenant.
+                    example: ROLE_ADMIN
+                username:
+                    description: The name of the user in Security Cloud Control. This must be a valid e-mail address if the user is not an API-only user.
+                    example: smith@jones.com
+                    minLength: 1
+                    type: string
+            required:
+                - role
+                - username
+            type: object
+        UserPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/User'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
+        UserRole:
+            enum:
+                - ROLE_ADMIN
+                - ROLE_SUPER_ADMIN
+                - ROLE_READ_ONLY
+                - ROLE_DEPLOY_ONLY
+                - ROLE_EDIT_ONLY
+                - ROLE_VPN_SESSIONS_MANAGER
+                - ROLE_FWAAS
+            type: string
     responses:
         http400BadRequest:
             content:
