@@ -7,6 +7,118 @@ info:
         name: Cisco Security Cloud Control TAC
         email: cdo.tac@cisco.com
 paths:
+    /v1/fmc/gateway/command:
+        post:
+            description: Send a direct command to the specified device.
+            operationId: executeDeviceCommand
+            parameters:
+                - description: By default, the API waits up to 70 seconds for a device response. Append the 'async' flag to return immediately without waiting for the response.
+                  in: query
+                  name: async
+                  required: false
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeviceGatewayApiRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            examples:
+                                responded:
+                                    value:
+                                        data:
+                                            inResponseTo:
+                                                command: executeFmcRequests
+                                                deviceType: fmc
+                                                deviceUid: fb8e46fc-30b0-437f-921d-606c53d4b94c
+                                                larUid: b5a71c7b-f309-4102-8fa2-9eec2260a1b7
+                                            responseBody: '[{"id":"0050568A-5AB4-0ed3-0000-021474986635","name":"Marketing","agentId":"agent_007","topicName":"aws365","description":"IPs of marketing department","type":"DynamicObject","objectType":"IP","links":{"self":"https://fmc.acme.com/api/fmc_config/v1/domain/e276abe1-e0f2-11e3-8169-6d9ed49b625f/object/dynamicobjects/0050568C-5AB4-0ed3-0000-021474986635"},"metadata":{"domain":{"name":"Global","id":"e276abec-e0f2-11e3-8169-6d9ed49b625f","type":"Domain"}}}]'
+                                            responseStatus: SUCCESS
+                                            tenantUid: 936fca6c-000b-4375-b903-46e6a95c7153
+                                        requestId: 11111111-1111-1111-1111-111111111111
+                                        responseOrigin: secure-connector
+                                        status: responded
+                                timeout:
+                                    value:
+                                        data: The request timed out due to a hard limit of 70 seconds. You may poll for a belated response using the url provided in the 'data' field
+                                        requestId: 11111111-1111-1111-1111-111111111111
+                                        responseOrigin: device-gateway-api
+                                        status: timeout
+                    description: The request was successfully processed, and the device command was executed.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            summary: Send a direct request to a registered device in Security Cloud Control
+            tags:
+                - Commands
+    /v1/fmc/gateway/command/{requestId}:
+        get:
+            description: Get the response from a device for a command previously issued.
+            operationId: getDeviceCommandResponse
+            parameters:
+                - description: The unique identifier of the request, represented as a UUID, returned from a previous POST request to the /command endpoint.
+                  in: path
+                  name: requestId
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            examples:
+                                responded:
+                                    value:
+                                        data:
+                                            inResponseTo:
+                                                command: executeFmcRequests
+                                                deviceType: fmc
+                                                deviceUid: fb8e46fc-30b0-437f-921d-606c53d4b94c
+                                                larUid: b5a71c7b-f309-4102-8fa2-9eec2260a1b7
+                                            responseBody: '[{"id":"0050568A-5AB4-0ed3-0000-021474986635","name":"Marketing","agentId":"agent_007","topicName":"aws365","description":"IPs of marketing department","type":"DynamicObject","objectType":"IP","links":{"self":"https://fmc.acme.com/api/fmc_config/v1/domain/e276abe1-e0f2-11e3-8169-6d9ed49b625f/object/dynamicobjects/0050568C-5AB4-0ed3-0000-021474986635"},"metadata":{"domain":{"name":"Global","id":"e276abec-e0f2-11e3-8169-6d9ed49b625f","type":"Domain"}}}]'
+                                            responseStatus: SUCCESS
+                                            tenantUid: 936fca6c-000b-4375-b903-46e6a95c7153
+                                        requestId: 11111111-1111-1111-1111-111111111111
+                                        responseOrigin: secure-connector
+                                        status: responded
+                    description: The device responded. The response may indicate success or contain an error returned by the device.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            summary: Retrieve the response for a previously sent command
+            tags:
+                - Commands
+    /v1/fmc/gateway/listcommands:
+        get:
+            description: Retrieve a list of supported device command endpoint patterns.
+            operationId: getDeviceCommands
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommandResponse'
+                    description: The list of supported command patterns.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            summary: Get supported endpoint patterns
+            tags:
+                - Commands
     /v1/inventory/devices/asas/health/{deviceUid}/interfaces:
         get:
             description: Returns time-series interface metrics - including link status, overruns, and other key performance indicators - over a specified time range. Supports filtering by interface and metric. Pagination applies only when interface UIDs are not specified.
@@ -208,6 +320,49 @@ paths:
             summary: Get time-series health metrics for one or more ASA devices
             tags:
                 - Device Health
+    /v1/transactions/{transactionUid}:
+        get:
+            description: Get information on an in-progress CDO transaction. An CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create Security Cloud Control transactions.
+            operationId: getTransaction
+            parameters:
+                - in: path
+                  name: transactionUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: 'CDO Transaction that has completed, either successfully or unsuccessfully. Note: failed Security Cloud Control Transactions do not roll back.'
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction that is pending or in progress.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Transaction
+            tags:
+                - Transactions
 servers:
     - url: https://api.us.security.cisco.com/firewall
       description: US
@@ -239,6 +394,164 @@ components:
                     description: A human-readable error description in English.
                     example: Your token is invalid
                     type: string
+        CdoTransaction:
+            properties:
+                cdoTransactionStatus:
+                    description: The status of the transaction
+                    enum:
+                        - PENDING
+                        - IN_PROGRESS
+                        - DONE
+                        - ERROR
+                    example: IN_PROGRESS
+                    type: string
+                entityUid:
+                    description: The unique identifier of the entity that the transaction is triggered on. This can be empty, for a transaction that is not tied to an entity, such as transactions which refresh RA VPN sessions.
+                    example: f5f660d4-4b81-4374-877d-fbc4bee894e2
+                    format: uuid
+                    type: string
+                entityUrl:
+                    description: A URL to access the entity that the transaction is triggered on. This can also be empty
+                    example: https://edge.us.cdo.cisco.com/platform/public-api/v1/inventory/devices/f5f660d4-4b81-4374-877d-fbc4bee894e2
+                    type: string
+                errorDetails:
+                    additionalProperties:
+                        type: string
+                    description: Transaction error details, if any
+                    type: object
+                errorMessage:
+                    description: Transaction error message, if any
+                    type: string
+                lastUpdatedTime:
+                    description: The time (UTC; represented using the RFC-3339 standard) at which the transaction status was last updated
+                    example: 2023-12-13T08:15:44Z
+                    format: date-time
+                    type: string
+                submissionTime:
+                    description: The time (UTC; represented using the RFC-3339 standard) at which the transaction was triggered
+                    example: 2023-12-13T05:15:44Z
+                    format: date-time
+                    type: string
+                tenantUid:
+                    description: The unique identifier of the tenant that the transaction triggered on.
+                    example: 5131daad-e813-4b8f-8f42-be1e241e2cdb
+                    format: uuid
+                    type: string
+                transactionDetails:
+                    additionalProperties:
+                        type: string
+                    description: Transaction details, if any
+                    type: object
+                transactionPollingUrl:
+                    description: The URL to poll to track the progress of the transaction.
+                    example: https://edge.us.cdo.cisco.com/platform/v1/transactions/7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    type: string
+                transactionType:
+                    description: the type of the transaction
+                    enum:
+                        - ONBOARD_ASA
+                        - ONBOARD_IOS
+                        - ONBOARD_DUO_ADMIN_PANEL
+                        - CREATE_FTD
+                        - ONBOARD_FTD_ZTP
+                        - REGISTER_FTD
+                        - DELETE_CDFMC_MANAGED_FTD
+                        - RECONNECT_ASA
+                        - READ_ASA
+                        - BULK_READ_ASA
+                        - EXECUTE_CLI_COMMAND
+                        - BULK_ACCEPT_ASA_CERTIFICATES
+                        - DEPLOY_ASA_DEVICE_CHANGES
+                        - DEPLOY_FTD_DEVICE_CHANGES
+                        - INDEX_TENANT
+                        - TERMINATE_DEVICE_RA_VPN_SESSIONS
+                        - REFRESH_RA_VPN_SESSIONS
+                        - TERMINATE_USER_RA_VPN_SESSIONS
+                        - UPGRADE_ASA
+                        - UPGRADE_FTD
+                        - UPGRADE_FTD_CACHE
+                        - CREATE_SDC
+                        - SEND_AI_ASSISTANT_MESSAGE
+                        - MSP_CREATE_TENANT
+                        - MSP_ADD_USERS_TO_TENANT
+                        - MSP_ADD_USER_GROUPS_TO_TENANT
+                        - MSP_DELETE_USERS_FROM_TENANT
+                        - MSP_DELETE_USER_GROUPS_FROM_TENANT
+                        - MSP_ADD_EXISTING_TENANT
+                        - MSP_ENABLE_MULTICLOUD_DEFENSE
+                        - MSP_PROVISION_CDFMC
+                        - CREATE_USERS
+                        - DELETE_USERS
+                        - EXECUTE_ASA_COMMAND
+                        - ANALYZE_POLICIES
+                        - TRIGGER_FMC_DATA_EXPORT
+                    example: ONBOARD_ASA
+                    type: string
+                transactionUid:
+                    description: The unique identifier of the transaction triggered.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            type: object
+        Command:
+            properties:
+                body:
+                    description: The body of the command (optional).
+                    example: {}
+                    type: string
+                link:
+                    description: The FMC endpoint to invoke for this command.
+                    example: /api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f
+                    minLength: 1
+                    type: string
+                method:
+                    description: The HTTP method for the command.
+                    example: GET
+                    minLength: 1
+                    type: string
+            required:
+                - link
+                - method
+            type: object
+        CommandResponse:
+            properties:
+                data:
+                    description: The data associated with the command response.
+                    example:
+                        inResponseTo:
+                            command: executeFmcRequests
+                            deviceType: fmc
+                            deviceUid: fb8e46fc-30b0-437f-921d-606c53d4b94c
+                            larUid: b5a71c7b-f309-4102-8fa2-9eec2260a1b7
+                        responseBody: '[{"id":"0050568A-5AB4-0ed3-0000-021474986635","name":"Marketing","agentId":"agent_007","topicName":"aws365","description":"IPs of marketing department","type":"DynamicObject","objectType":"IP"}]'
+                        responseStatus: SUCCESS
+                        tenantUid: 936fca6c-000b-4375-b903-46e6a95c7153
+                message:
+                    description: The response message, if applicable.
+                    example: The request timed out due to a hard limit of 70 seconds. You may poll for a belated response using the url provided in the 'data' field
+                    type: string
+                requestId:
+                    description: The unique identifier of the request, represented as a UUID.
+                    example: 6e3492c6-083a-4ead-9da9-cd2db32a965d
+                    type: string
+                responseOrigin:
+                    description: The origin system of the response.
+                    enum:
+                        - device-gateway-api
+                        - secure-connector
+                        - secure-connector-sse
+                    example: secure-connector
+                    type: string
+                status:
+                    description: The status of the command.
+                    enum:
+                        - failed
+                        - pending
+                        - responded
+                        - timeout
+                    example: responded
+                    type: string
+            type: object
         CommonApiError:
             properties:
                 details:
@@ -269,6 +582,20 @@ components:
                     description: A human-readable error description in English.
                     example: sample error
                     type: string
+        DeviceGatewayApiRequest:
+            properties:
+                deviceUid:
+                    description: The unique identifier, represented as a UUID, of the target device for the command. Currently, only FMC devices are supported.
+                    example: 6e3492c6-083a-4ead-9da9-cd2db32a965d
+                    minLength: 1
+                    type: string
+                request:
+                    $ref: '#/components/schemas/FmcRequest'
+                    description: The request that the user wants to execute on the device.
+            required:
+                - deviceUid
+                - request
+            type: object
         DeviceMetricsItem:
             properties:
                 description:
@@ -282,6 +609,17 @@ components:
                 uid:
                     format: uuid
                     type: string
+            type: object
+        FmcRequest:
+            properties:
+                commands:
+                    description: A list of commands to be executed on the device.
+                    items:
+                        $ref: '#/components/schemas/Command'
+                    minItems: 1
+                    type: array
+            required:
+                - commands
             type: object
         Metric:
             properties:
