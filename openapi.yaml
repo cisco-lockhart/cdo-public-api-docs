@@ -6,6 +6,208 @@ info:
     contact:
         name: Cisco Security Cloud Control TAC
         email: cdo.tac@cisco.com
+paths:
+    /v1/inventory/devices/asas/health/{deviceUid}/interfaces:
+        get:
+            description: Returns time-series interface metrics - including link status, overruns, and other key performance indicators - over a specified time range. Supports filtering by interface and metric. Pagination applies only when interface UIDs are not specified.
+            operationId: getAsaInterfaceHealthMetrics
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the ASA device in Security Cloud Control.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: Start of the time range (ISO 8601 format).
+                  example: 2025-04-05T00:00:00Z
+                  in: query
+                  name: start
+                  required: false
+                  schema:
+                    type: string
+                - description: End of the time range (ISO 8601 format).
+                  example: 2025-04-05T04:00:00Z
+                  in: query
+                  name: end
+                  required: false
+                  schema:
+                    type: string
+                - description: Relative time range (mutually exclusive with start/end).
+                  example: 15m
+                  in: query
+                  name: timeRange
+                  required: false
+                  schema:
+                    enum:
+                        - 5m
+                        - 15m
+                        - 30m
+                        - 1h
+                    type: string
+                - description: Maximum number of device records to return (used only when no deviceUids are provided).
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 50
+                    minimum: 0
+                    type: string
+                - description: Offset for pagination (used only when no deviceUids are provided).
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: Comma-separated list of interface UIDs to query. Max 50. If omitted, results are paginated.
+                  example: def6c34a-a5d4-45c1-8d96-820fb00de723,4bc125a0-cf08-4dcc-bfac-45669ba898b0
+                  in: query
+                  name: interfaceUids
+                  required: false
+                  schema:
+                    maxLength: 50
+                    maximum: 50
+                    minLength: 0
+                    type: string
+                - description: Comma-separated list of metrics to return (e.g. linkStatus, overruns). Returns all if omitted.
+                  example: linkStatus,overruns
+                  in: query
+                  name: metrics
+                  required: false
+                  schema:
+                    enum:
+                        - overruns
+                        - underruns
+                        - droppedPackets
+                        - l2DecodeDrops
+                        - inputErrors
+                        - outputErrors
+                        - inputPacketSize
+                        - outputPacketSize
+                        - linkStatus
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MetricsResponse'
+                    description: Successfully retrieved time-series metrics for one or more interfaces.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get time-series interface metrics for an ASA device
+            tags:
+                - Device Health
+    /v1/inventory/devices/asas/health/metrics:
+        get:
+            description: Returns time-series metrics such as CPU, memory, disk, connections, and environment data over a specified time range. Supports filtering by device and metric. Pagination applies only when device UIDs are not specified.
+            operationId: getAsaHealthMetrics
+            parameters:
+                - description: Start of the time range (ISO 8601 format).
+                  example: 2025-04-05T00:00:00Z
+                  in: query
+                  name: start
+                  required: false
+                  schema:
+                    type: string
+                - description: End of the time range (ISO 8601 format).
+                  example: 2025-04-05T04:00:00Z
+                  in: query
+                  name: end
+                  required: false
+                  schema:
+                    type: string
+                - description: Relative time range (mutually exclusive with start/end).
+                  example: 15m
+                  in: query
+                  name: timeRange
+                  required: false
+                  schema:
+                    enum:
+                        - 5m
+                        - 15m
+                        - 30m
+                        - 1h
+                    type: string
+                - description: Maximum number of device records to return (used only when no deviceUids are provided).
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 50
+                    minimum: 0
+                    type: string
+                - description: Offset for pagination (used only when no deviceUids are provided).
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: Comma-separated list of device UIDs to query. Max 50. If omitted, results are paginated.
+                  example: 256461f6-bd60-11ef-8beb-6cf1610cf55d,41a1d57b-ffc2-49aa-933b-440cdd76b2fc
+                  in: query
+                  name: deviceUids
+                  required: false
+                  schema:
+                    maxLength: 50
+                    maximum: 50
+                    minLength: 0
+                    type: string
+                - description: Comma-separated list of metrics to return (e.g. cpu, mem). Returns all if omitted.
+                  example: cpu,mem
+                  in: query
+                  name: metrics
+                  required: false
+                  schema:
+                    enum:
+                        - cpu
+                        - mem
+                        - disk
+                        - env
+                        - connections
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MetricsResponse'
+                    description: Successfully retrieved time-series metrics for one or more ASA devices.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get time-series health metrics for one or more ASA devices
+            tags:
+                - Device Health
 servers:
     - url: https://api.us.security.cisco.com/firewall
       description: US
@@ -26,6 +228,150 @@ servers:
     - url: https://manage.stg.secure.cisco/api/rest
       description: Stgf9
 components:
+    schemas:
+        AuthenticationError:
+            properties:
+                error:
+                    description: A human-readable error description in English.
+                    example: invalid_token
+                    type: string
+                errorDescription:
+                    description: A human-readable error description in English.
+                    example: Your token is invalid
+                    type: string
+        CommonApiError:
+            properties:
+                details:
+                    additionalProperties:
+                        description: Additional details, if any, on the error
+                        example: {}
+                        type: object
+                    description: Additional details, if any, on the error
+                    example: {}
+                    type: object
+                errorCode:
+                    description: A unique code that describes the error.
+                    enum:
+                        - INVALID_INPUT
+                        - UNAUTHORIZED
+                        - FORBIDDEN
+                        - NOT_FOUND
+                        - METHOD_NOT_ALLOWED
+                        - CONFLICT
+                        - TOO_MANY_REQUESTS
+                        - SERVER_ERROR
+                        - PROXY_ERROR
+                        - BAD_REQUEST
+                        - UNPROCESSABLE_ENTITY
+                    example: INVALID_INPUT
+                    type: string
+                errorMsg:
+                    description: A human-readable error description in English.
+                    example: sample error
+                    type: string
+        DeviceMetricsItem:
+            properties:
+                description:
+                    type: string
+                metrics:
+                    additionalProperties:
+                        $ref: '#/components/schemas/Metric'
+                    type: object
+                name:
+                    type: string
+                uid:
+                    format: uuid
+                    type: string
+            type: object
+        Metric:
+            properties:
+                series:
+                    items:
+                        $ref: '#/components/schemas/Series'
+                    type: array
+                summary:
+                    $ref: '#/components/schemas/Summary'
+            type: object
+        MetricsResponse:
+            properties:
+                items:
+                    items:
+                        $ref: '#/components/schemas/DeviceMetricsItem'
+                    type: array
+                limit:
+                    format: int32
+                    type: integer
+                offset:
+                    format: int32
+                    type: integer
+                total:
+                    format: int32
+                    type: integer
+            type: object
+        Series:
+            properties:
+                timestamp:
+                    format: date-time
+                    type: string
+                value:
+                    format: double
+                    type: number
+            type: object
+        Summary:
+            properties:
+                average:
+                    format: double
+                    type: number
+                latest:
+                    format: double
+                    type: number
+                max:
+                    format: double
+                    type: number
+            type: object
+    responses:
+        http400BadRequest:
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/CommonApiError'
+            description: Invalid input provided. Check the response for details.
+        http401Unauthorised:
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/AuthenticationError'
+            description: Request not authorized.
+        http403Forbidden:
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/CommonApiError'
+            description: User does not have sufficient privileges to perform this operation.
+        http404NotFound:
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/CommonApiError'
+            description: Entity not found.
+        http405MethodNotAllowed:
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/CommonApiError'
+            description: Method not allowed.
+        http409Conflict:
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/CommonApiError'
+            description: Conflict.
+        http422UnprocessableEntity:
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/CommonApiError'
+            description: Unprocessable entity.
     securitySchemes:
         bearerAuth:
             bearerFormat: JWT
