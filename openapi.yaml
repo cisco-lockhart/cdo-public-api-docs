@@ -11362,6 +11362,7 @@ components:
                 - ROLE_EDIT_ONLY
                 - ROLE_VPN_SESSIONS_MANAGER
                 - ROLE_FWAAS
+                - ROLE_PASSIVE_IDENTITY_AGENT
             type: string
         ZtpOnboardingInput:
             properties:
