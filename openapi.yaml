@@ -1847,7 +1847,7 @@ paths:
                         - linkStatus
                     type: string
                 - description: Lucene-style query filter. Supports logical operators AND, OR, and NOT.Applicable only to the fields name and linkStatus.
-                  example: name:GigabitEthernet* OR linkStatus:UP
+                  example: name:GigabitEthernet* OR linkStatus:1
                   in: query
                   name: q
                   required: false
