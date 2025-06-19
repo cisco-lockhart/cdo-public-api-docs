@@ -7404,6 +7404,10 @@ components:
                         - EXECUTE_ASA_COMMAND
                         - ANALYZE_POLICIES
                         - TRIGGER_FMC_DATA_EXPORT
+                        - EXPORT_DEVICES
+                        - EXPORT_CLOUD_SERVICES
+                        - EXPORT_MANAGERS
+                        - EXPORT_TEMPLATES
                     example: ONBOARD_ASA
                     type: string
                 transactionUid:
