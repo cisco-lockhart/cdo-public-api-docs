@@ -1799,8 +1799,7 @@ paths:
                   required: false
                   schema:
                     enum:
-                        - 5m
-                        - 15m
+                        - 10m
                         - 30m
                         - 1h
                     type: string
@@ -1905,8 +1904,7 @@ paths:
                   required: false
                   schema:
                     enum:
-                        - 5m
-                        - 15m
+                        - 10m
                         - 30m
                         - 1h
                     type: string
