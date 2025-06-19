@@ -1792,8 +1792,8 @@ paths:
                   required: false
                   schema:
                     type: string
-                - description: Relative time range (mutually exclusive with start/end).
-                  example: 15m
+                - description: Relative time range (mutually exclusive with start/end). Data is collected every 10 minutes, so shorter time ranges may return fewer data points.
+                  example: 10m
                   in: query
                   name: timeRange
                   required: false
@@ -1897,8 +1897,8 @@ paths:
                   required: false
                   schema:
                     type: string
-                - description: Relative time range (mutually exclusive with start/end).
-                  example: 15m
+                - description: Relative time range (mutually exclusive with start/end). Data is collected every 10 minutes, so shorter time ranges may return fewer data points.
+                  example: 10m
                   in: query
                   name: timeRange
                   required: false
