@@ -1945,6 +1945,7 @@ paths:
                         - disk
                         - env
                         - connections
+                        - natTranslations
                     type: string
             responses:
                 "200":
