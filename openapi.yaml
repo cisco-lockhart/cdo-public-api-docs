@@ -3368,6 +3368,34 @@ paths:
             summary: Get distinct attribute values for MSP-managed devices
             tags:
                 - MSP
+    /v1/msp/inventory/devices/export:
+        post:
+            description: This is an asynchronous operation to export MSP-managed devices in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
+            operationId: exportMspManagedDevices
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MspExportInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the `entityUrl` field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Export MSP-managed Devices
+            tags:
+                - MSP
     /v1/msp/inventory/managers:
         get:
             description: Get device managers, across all tenants, managed by the MSP portal.
@@ -9488,6 +9516,13 @@ components:
                     type: array
             required:
                 - usernames
+            type: object
+        MspExportInput:
+            properties:
+                query:
+                    description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
+                    type: string
             type: object
         MspManagedCloudService:
             properties:
