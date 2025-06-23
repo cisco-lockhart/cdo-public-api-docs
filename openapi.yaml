@@ -3368,6 +3368,32 @@ paths:
             summary: Get distinct attribute values for MSP-managed devices
             tags:
                 - MSP
+    /v1/msp/inventory/devices/export:
+        post:
+            operationId: exportMspManagedDevices
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MspExportInput'
+                required: true
+            responses:
+                "200":
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: OK
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            tags:
+                - MSP
     /v1/msp/inventory/managers:
         get:
             description: Get device managers, across all tenants, managed by the MSP portal.
@@ -8242,20 +8268,6 @@ components:
                     $ref: '#/components/schemas/SecureAccessMetadata'
                     description: Structured [Cisco Secure Access](https://www.cisco.com/site/uk/en/products/security/secure-access/index.html) metadata (applicable to UZTNA-enabled FTDs only).
             type: object
-        DeviceMetricsItem:
-            properties:
-                description:
-                    type: string
-                metrics:
-                    additionalProperties:
-                        $ref: '#/components/schemas/Metric'
-                    type: object
-                name:
-                    type: string
-                uid:
-                    format: uuid
-                    type: string
-            type: object
         DevicePage:
             properties:
                 count:
@@ -9351,11 +9363,25 @@ components:
                 summary:
                     $ref: '#/components/schemas/Summary'
             type: object
+        MetricsItem:
+            properties:
+                description:
+                    type: string
+                metrics:
+                    additionalProperties:
+                        $ref: '#/components/schemas/Metric'
+                    type: object
+                name:
+                    type: string
+                uid:
+                    format: uuid
+                    type: string
+            type: object
         MetricsResponse:
             properties:
                 items:
                     items:
-                        $ref: '#/components/schemas/DeviceMetricsItem'
+                        $ref: '#/components/schemas/MetricsItem'
                     type: array
                 limit:
                     format: int32
@@ -9488,6 +9514,13 @@ components:
                     type: array
             required:
                 - usernames
+            type: object
+        MspExportInput:
+            properties:
+                query:
+                    description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
+                    type: string
             type: object
         MspManagedCloudService:
             properties:
