@@ -3368,32 +3368,6 @@ paths:
             summary: Get distinct attribute values for MSP-managed devices
             tags:
                 - MSP
-    /v1/msp/inventory/devices/export:
-        post:
-            operationId: exportMspManagedDevices
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/MspExportInput'
-                required: true
-            responses:
-                "200":
-                    content:
-                        '*/*':
-                            schema:
-                                $ref: '#/components/schemas/CdoTransaction'
-                    description: OK
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            tags:
-                - MSP
     /v1/msp/inventory/managers:
         get:
             description: Get device managers, across all tenants, managed by the MSP portal.
@@ -9514,13 +9488,6 @@ components:
                     type: array
             required:
                 - usernames
-            type: object
-        MspExportInput:
-            properties:
-                query:
-                    description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
-                    type: string
             type: object
         MspManagedCloudService:
             properties:
