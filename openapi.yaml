@@ -2358,6 +2358,18 @@ paths:
         post:
             description: Upgrade up to 50 FTD devices using a specified upgrade package. All of the FTDs in the list have to be compatible with the upgrade package.
             operationId: upgradeFtdDevices
+            parameters:
+                - in: header
+                  name: X-Calling-Service
+                  required: false
+                  schema:
+                    type: string
+                - description: Custom metadata to identify the request
+                  in: header
+                  name: X-Request-Metadata
+                  required: false
+                  schema:
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -2407,6 +2419,17 @@ paths:
                     minItems: 1
                     type: array
                     uniqueItems: true
+                - in: header
+                  name: X-Calling-Service
+                  required: false
+                  schema:
+                    type: string
+                - description: Custom metadata to identify the request
+                  in: header
+                  name: X-Request-Metadata
+                  required: false
+                  schema:
+                    type: string
             responses:
                 "200":
                     content:
