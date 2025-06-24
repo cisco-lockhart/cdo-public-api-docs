@@ -3651,7 +3651,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/MspManagedCloudServiceDistinctAttributeValues'
-                    description: Distinct attribute values for MSP-managed devices
+                    description: Distinct attribute values for MSP-managed cloud services
                 "500":
                     content:
                         application/json:
@@ -3661,6 +3661,34 @@ paths:
             security:
                 - bearerAuth: []
             summary: Get distinct attribute values for MSP-managed cloud services
+            tags:
+                - MSP
+    /v1/msp/inventory/services/export:
+        post:
+            description: This is an asynchronous operation to export MSP-managed cloud services in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
+            operationId: exportMspManagedCloudServices
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MspExportInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the <code>entityUrl</code> field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Export MSP-managed Cloud Services
             tags:
                 - MSP
     /v1/msp/inventory/templates:
