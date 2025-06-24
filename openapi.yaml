@@ -7446,6 +7446,8 @@ components:
                         - UPGRADE_ASA
                         - UPGRADE_FTD
                         - UPGRADE_FTD_CACHE
+                        - MSP_UPGRADE_FTDS
+                        - MSP_GET_COMPATIBLE_FTD_UPGRADE_PACKAGES
                         - CREATE_SDC
                         - SEND_AI_ASSISTANT_MESSAGE
                         - MSP_CREATE_TENANT
