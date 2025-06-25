@@ -2330,6 +2330,18 @@ paths:
         put:
             description: Update cache of compatible upgrade packages for a all FTD devices.
             operationId: updateFtdUpgradePackagesCache
+            parameters:
+                - in: header
+                  name: X-Calling-Service
+                  required: false
+                  schema:
+                    type: string
+                - description: Custom metadata to identify the request
+                  in: header
+                  name: X-Request-Metadata
+                  required: false
+                  schema:
+                    type: string
             responses:
                 "202":
                     content:
