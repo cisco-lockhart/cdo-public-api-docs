@@ -4660,7 +4660,7 @@ paths:
             description: 'Get targets from an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
             operationId: getTargets
             parameters:
-                - description: the unique identifier of the object for which the targets are being added to.
+                - description: The unique identifier of the object for which the targets are being retrieved.
                   example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                   in: path
                   name: uid
