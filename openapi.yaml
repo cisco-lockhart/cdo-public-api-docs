@@ -8348,6 +8348,10 @@ components:
                 onPremFmcInfo:
                     $ref: '#/components/schemas/OnPremFmcInfo'
                     description: (Devices managed by on-prem FMC only) Information on the on-prem FMC managing this device.
+                optedInToAsaHealthMetrics:
+                    description: Indicates whether the device has been opted in to collect ASA health metrics (SDC-managed ASAs only).
+                    example: true
+                    type: boolean
                 redundancyMode:
                     description: 'The redundancy mode this firewall is running in. Note: for High Availability pairs and clusters, Security Cloud Control represents all of the devices as part of one record.'
                     enum:
@@ -8459,6 +8463,10 @@ components:
                     description: A human-readable name for the device.
                     example: My ASA
                     type: string
+                optedInToAsaHealthMetrics:
+                    description: Specify whether to enable or disable health metrics collection (SDC-managed ASA devices only).
+                    example: true
+                    type: boolean
             type: object
         DeviceRole:
             enum:
