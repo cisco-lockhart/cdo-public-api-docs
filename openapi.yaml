@@ -4026,6 +4026,7 @@ paths:
             tags:
                 - MSP
         post:
+            deprecated: true
             description: 'This is an asynchronous operation to add an existing tenant that the user making the API call is associated with to the MSP Portal. This endpoint will add an API-only user to the tenant, generate an API token for the API-only user, and add the tenant to the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal who is also associated with the tenant being added.'
             operationId: addTenantToMspPortal
             parameters:
