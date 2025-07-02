@@ -7592,8 +7592,6 @@ components:
                         - EXPORT_CLOUD_SERVICES
                         - EXPORT_MANAGERS
                         - EXPORT_TEMPLATES
-                        - ASA_HEALTH_METRICS_TENANT_OPT_IN
-                        - ASA_HEALTH_METRICS_TENANT_OPT_OUT
                     example: ONBOARD_ASA
                     type: string
                 transactionUid:
