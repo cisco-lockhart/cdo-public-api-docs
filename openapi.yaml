@@ -7592,6 +7592,10 @@ components:
                         - EXPORT_CLOUD_SERVICES
                         - EXPORT_MANAGERS
                         - EXPORT_TEMPLATES
+                        - PROVISION_SDWAN_SAL_RESOURCES
+                        - DEPROVISION_SDWAN_SAL_RESOURCES
+                        - PROVISION_FIREWALL_SAL_RESOURCES
+                        - DEPROVISION_FIREWALL_SAL_RESOURCES
                         - ASA_HEALTH_METRICS_TENANT_OPT_IN
                         - ASA_HEALTH_METRICS_TENANT_OPT_OUT
                     example: ONBOARD_ASA
