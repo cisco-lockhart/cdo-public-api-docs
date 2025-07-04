@@ -1879,6 +1879,37 @@ paths:
             tags:
                 - Device Health
     /v1/inventory/devices/asas/health/metrics:
+        delete:
+            description: Allows a tenant to opt out of receiving health metrics for their ASAs.
+            operationId: optOutOfAsaHealthMetrics
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the operation.
+                "204":
+                    description: No Content - the tenant was already in the desired state.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Opt out of ASA Health Metrics
+            tags:
+                - Device Health
         get:
             description: Returns time-series metrics such as CPU, memory, disk, connections, and environment data over a specified time range. Supports filtering by device and metric. Pagination applies only when device UIDs are not specified.
             operationId: getAsaHealthMetrics
@@ -1971,6 +2002,37 @@ paths:
             security:
                 - bearerAuth: []
             summary: Get time-series health metrics for one or more ASA devices
+            tags:
+                - Device Health
+        put:
+            description: Allows a tenant to opt in to receive health metrics for their ASAs.
+            operationId: optInToAsaHealthMetrics
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the operation.
+                "204":
+                    description: No Content - the tenant was already in the desired state.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Opt in to ASA Health Metrics
             tags:
                 - Device Health
     /v1/inventory/devices/asas/read:
