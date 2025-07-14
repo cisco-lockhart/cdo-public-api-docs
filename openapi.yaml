@@ -11344,6 +11344,11 @@ components:
                     description: Indicates if Cisco support is denied access to the tenant.
                     example: true
                     type: boolean
+                mspPortalUid:
+                    description: The unique identifier, represented as a UUID, of the MSP portal associated with the tenant.
+                    example: dda3ce11-111c-477a-aa86-1fd1866ddab6
+                    format: uuid
+                    type: string
                 multicloudDefense:
                     description: Indicates if the tenant has the multicloud defense enabled.
                     example: false
