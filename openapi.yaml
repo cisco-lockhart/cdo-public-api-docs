@@ -2004,7 +2004,7 @@ paths:
             summary: Get time-series health metrics for one or more ASA devices
             tags:
                 - Device Health
-        put:
+        post:
             description: Allows a tenant to opt in to receive health metrics for their ASAs.
             operationId: optInToAsaHealthMetrics
             responses:
