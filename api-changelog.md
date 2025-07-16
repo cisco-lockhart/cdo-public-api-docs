@@ -1,3 +1,16 @@
+# Version 1.14.0 (2025-07-25)
+
+## Added
+
+- Multiple new API endpoints to collect and monitor health metrics for ASA devices.
+  - Endpoints to [enable](https://developer.cisco.com/docs/cisco-security-cloud-control/opt-in-to-asa-health-metrics/) and [disable](https://developer.cisco.com/docs/cisco-security-cloud-control/opt-out-of-asa-health-metrics/) ASA health metrics collection.
+  - Endpoint to get [device health metrics](https://developer.cisco.com/docs/cisco-security-cloud-control/get-time-series-health-metrics-for-one-or-more-asa-devices/) (such as CPU usage, memory usage etc), and an [interface metrics](https://developer.cisco.com/docs/cisco-security-cloud-control/get-time-series-interface-metrics-for-an-asa-device/) for ASAs across multiple time ranges.
+- Multiple new API endpoints to query and export MSSP portal inventory.
+  - Endpoints to get managed [devices](https://developer.cisco.com/docs/cisco-security-cloud-control/get-msp-managed-devices/), [device managers](https://developer.cisco.com/docs/cisco-security-cloud-control/get-msp-managed-device-managers/), [templates](https://developer.cisco.com/docs/cisco-security-cloud-control/get-msp-managed-templates/), and [cloud services](https://developer.cisco.com/docs/cisco-security-cloud-control/get-msp-managed-cloud-services/) across all tenants in an MSSP portal.
+  - Endpoints to get an individual managed [device](https://developer.cisco.com/docs/cisco-security-cloud-control/get-msp-managed-device-by-uid/), [device manager](https://developer.cisco.com/docs/cisco-security-cloud-control/get-msp-managed-device-manager-by-uid/), [template](https://developer.cisco.com/docs/cisco-security-cloud-control/get-msp-managed-template-by-uid/), or [cloud service](https://developer.cisco.com/docs/cisco-security-cloud-control/get-msp-managed-cloud-service-by-uid/) across any of the tenants managed by an MSSP portal.
+  - Endpoints to export [managed devices](https://developer.cisco.com/docs/cisco-security-cloud-control/export-msp-managed-devices/), [device managers](https://developer.cisco.com/docs/cisco-security-cloud-control/export-msp-managed-device-managers/), [templates](https://developer.cisco.com/docs/cisco-security-cloud-control/export-msp-managed-templates/), and [cloud services](https://developer.cisco.com/docs/cisco-security-cloud-control/export-msp-managed-cloud-services/) across all tenants in an MSSP portal to CSV.
+- Endpoint to [get upgrade versions](https://developer.cisco.com/docs/cisco-security-cloud-control/get-upgrade-versions-compatible-with-multiple-ftds/) compatible with multiple FTDs.
+
 # Version 1.13.0 (2025-05-23)
 
 ## Added
