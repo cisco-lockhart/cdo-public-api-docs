@@ -2005,7 +2005,7 @@ paths:
             tags:
                 - Device Health
         post:
-            description: Allows a tenant to opt in to receive health metrics for their ASAs.
+            description: Allow Security Cloud Control Firewall Manager to collect health metrics for ASAs in this tenant. By default, metrics are collected from all Cloud Device Gateway–managed ASAs. To let Security Cloud Control Firewall Manager collect metrics from Secure Device Connector–managed devices, set the <code>optedInToAsaHealthMetrics</code> property on each device using the <a href="https://developer.cisco.com/docs/cisco-security-cloud-control/modify-device/">Modify Device</a> endpoint. <b>Note:</b> A single Secure Device Connector can support metrics collection for up to 50 ASAs.
             operationId: optInToAsaHealthMetrics
             responses:
                 "202":
