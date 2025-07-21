@@ -2752,7 +2752,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/DevicePatchInput'
+                            $ref: '#/components/schemas/DeviceManagerPatchInput'
                 required: true
             responses:
                 "200":
@@ -8484,6 +8484,19 @@ components:
             required:
                 - deviceUid
                 - request
+            type: object
+        DeviceManagerPatchInput:
+            properties:
+                deviceMetadata:
+                    $ref: '#/components/schemas/DeviceMetadata'
+                    description: Specify metadata for the device manager. This field contains a combination of structured service-specific metadata persisted by other Cisco services and arbitrary metadata.
+                labels:
+                    $ref: '#/components/schemas/Labels'
+                    description: Specify a set of labels to identify the device manager as part of a group. Refer to the CDO documentation for details on how labels are used in Security Cloud Control.
+                name:
+                    description: A human-readable name for the device manager.
+                    example: My CDFMC
+                    type: string
             type: object
         DeviceMetadata:
             properties:
