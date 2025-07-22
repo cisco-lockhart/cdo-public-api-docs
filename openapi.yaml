@@ -3493,39 +3493,6 @@ paths:
             summary: Export MSP-managed Devices
             tags:
                 - MSP
-    /v1/msp/inventory/devices/ftds/upgrades/versions:
-        get:
-            operationId: getFtdUpgradeVersions
-            parameters:
-                - description: 'A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. Note: All of the devices specified have to be on tenants managed by the MSP portal.'
-                  in: query
-                  name: deviceUids
-                  required: true
-                  schema:
-                    items:
-                        format: uuid
-                        type: string
-                    maxItems: 50
-                    minItems: 1
-                    type: array
-                    uniqueItems: true
-            responses:
-                "200":
-                    content:
-                        '*/*':
-                            schema:
-                                $ref: '#/components/schemas/CdoTransaction'
-                    description: OK
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            tags:
-                - MSP
     /v1/msp/inventory/managers:
         get:
             description: Get device managers, across all tenants, managed by the MSP portal.
