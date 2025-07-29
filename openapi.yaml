@@ -7707,7 +7707,7 @@ components:
                         $ref: '#/components/schemas/Event'
                     type: array
                 lastEventDate:
-                    description: 'The time (UTC; represented using the RFC-3339 standard) at which the last event in the changelog occurred. You can perform range queries on this endpoint using the syntax `[lastEventDate:YYYY-MM-ddTHH:mm:ssZ TO lastEventDate:YYYY-MM-ddTHH:mm:ssZ]`: please note that this will need to be URL-encoded.'
+                    description: 'The time (UTC; represented using the RFC-3339 standard) at which the last event in the changelog occurred. You can perform range queries on this endpoint using the syntax `[lastEventDate:YYYY-MM-ddTHH:mm:ssZ TO lastEventDate:YYYY-MM-ddTHH:mm:ssZ]`: please note that this will need to be URL-encoded. Please note that the timeRange request parameter is mapped to the lastEventDate field. For further details on the timeRange parameter, refer to the Changelogs API documentation.'
                     format: date-time
                     type: string
                 status:
