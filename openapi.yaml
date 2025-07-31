@@ -7625,6 +7625,7 @@ components:
                         - DEPROVISION_SDWAN_SAL_RESOURCES
                         - PROVISION_FIREWALL_SAL_RESOURCES
                         - DEPROVISION_FIREWALL_SAL_RESOURCES
+                        - REMOVE_SSX_SAL_SUBSCRIPTION
                         - ASA_HEALTH_METRICS_TENANT_PROVISIONING
                     example: ONBOARD_ASA
                     type: string
