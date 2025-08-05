@@ -7627,7 +7627,6 @@ components:
                         - DEPROVISION_FIREWALL_SAL_RESOURCES
                         - REMOVE_SSX_SAL_SUBSCRIPTION
                         - ASA_HEALTH_METRICS_TENANT_PROVISIONING
-                        - UPDATE_DEVICE_BULK
                     example: ONBOARD_ASA
                     type: string
                 transactionUid:
