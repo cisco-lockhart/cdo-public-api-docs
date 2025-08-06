@@ -11508,6 +11508,11 @@ components:
             type: object
         UpgradeFtdDeviceInput:
             properties:
+                stageUpgrade:
+                    default: false
+                    description: A boolean value, indicating whether the upgrade should be staged. If this is set to true, the image will be downloaded on to the device and readiness checks will be performed. However, the upgrade will not be applied to the device.
+                    example: false
+                    type: boolean
                 upgradePackageUid:
                     description: The unique identifier, represented as a UUID, of the upgrade package to be applied to the device.
                     example: 256461f6-bd60-11ef-8beb-6cf1610cf55d
@@ -11529,6 +11534,11 @@ components:
                     minItems: 1
                     type: array
                     uniqueItems: true
+                stageUpgrade:
+                    default: false
+                    description: A boolean value, indicating whether the upgrade should be staged. If this is set to true, the image will be downloaded on to the device and readiness checks will be performed. However, the upgrade will not be applied to the device.
+                    example: false
+                    type: boolean
                 upgradePackageUid:
                     description: The unique identifier, represented as a UUID, of the upgrade package to be applied to the device.
                     example: 256461f6-bd60-11ef-8beb-6cf1610cf55d
