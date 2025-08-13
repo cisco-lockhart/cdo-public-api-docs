@@ -1528,6 +1528,531 @@ paths:
             summary: Deploy ASA device changes
             tags:
                 - Inventory
+    /v1/inventory/devices/asas/{deviceUid}/etherchannelinterfaces:
+        get:
+            description: Get a list of ASA EtherChannel interfaces. An EtherChannel interface is a logical port-channel interface that aggregates multiple physical Ethernet links into a single logical interface to increase bandwidth and provide redundancy, and it is configured and used like a physical interface for interface-related features, supporting up to 48 EtherChannels depending on the ASA model.
+            operationId: getAsaEtherChannelInterfaces
+            parameters:
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterfacePage'
+                    description: List of AsaInterface objects
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get ASA EtherChannel interfaces
+            tags:
+                - ASA Interfaces
+        post:
+            description: Create an ASA EtherChannel interface. An EtherChannel interface is a logical port-channel interface that aggregates multiple physical Ethernet links into a single logical interface to increase bandwidth and provide redundancy, and it is configured and used like a physical interface for interface-related features, supporting up to 48 EtherChannels depending on the ASA model.
+            operationId: createAsaEtherChannelInterface
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/EtherChannelInterfaceCreateInput'
+                required: true
+            responses:
+                "201":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterface'
+                    description: AsaInterface object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Create ASA EtherChannel Interface
+            tags:
+                - ASA Interfaces
+    /v1/inventory/devices/asas/{deviceUid}/etherchannelinterfaces/{interfaceUid}:
+        delete:
+            description: Delete an ASA EtherChannel interface. An EtherChannel interface is a logical port-channel interface that aggregates multiple physical Ethernet links into a single logical interface to increase bandwidth and provide redundancy, and it is configured and used like a physical interface for interface-related features, supporting up to 48 EtherChannels depending on the ASA model.
+            operationId: deleteAsaEtherChannelInterface
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the ASA EtherChannel interface.
+                  in: path
+                  name: interfaceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "204":
+                    description: No Content
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Delete ASA EtherChannel Interface
+            tags:
+                - ASA Interfaces
+        get:
+            description: Get an ASA EtherChannel interface by UID. An EtherChannel interface is a logical port-channel interface that aggregates multiple physical Ethernet links into a single logical interface to increase bandwidth and provide redundancy, and it is configured and used like a physical interface for interface-related features, supporting up to 48 EtherChannels depending on the ASA model.
+            operationId: getAsaEtherChannelInterface
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the ASA EtherChannel interface.
+                  in: path
+                  name: interfaceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterface'
+                    description: AsaInterface object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get an ASA EtherChannel interface
+            tags:
+                - ASA Interfaces
+        patch:
+            description: Modify an ASA EtherChannel interface. An EtherChannel interface is a logical port-channel interface that aggregates multiple physical Ethernet links into a single logical interface to increase bandwidth and provide redundancy, and it is configured and used like a physical interface for interface-related features, supporting up to 48 EtherChannels depending on the ASA model.
+            operationId: modifyAsaEtherChannelInterface
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the ASA EtherChannel interface.
+                  in: path
+                  name: interfaceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/EtherChannelInterfacePatchInput'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterface'
+                    description: AsaInterface object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Modify ASA EtherChannel Interface
+            tags:
+                - ASA Interfaces
+    /v1/inventory/devices/asas/{deviceUid}/interfaces/{interfaceUid}/subinterfaces:
+        get:
+            description: Get a list of ASA interface subinterfaces. A subinterface is a logical interface created on a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
+            operationId: getAsaInterfaceSubInterfaces
+            parameters:
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the ASA parent interface.
+                  in: path
+                  name: interfaceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterfacePage'
+                    description: List of AsaInterface objects
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get ASA interface subinterfaces
+            tags:
+                - ASA Interfaces
+        post:
+            description: Create an ASA subinterface. A subinterface is a logical interface created on a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
+            operationId: createAsaSubInterface
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the ASA parent subinterface.
+                  in: path
+                  name: interfaceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/SubInterfaceCreateInput'
+                required: true
+            responses:
+                "201":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterface'
+                    description: AsaInterface object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Create ASA subinterface
+            tags:
+                - ASA Interfaces
+    /v1/inventory/devices/asas/{deviceUid}/physicalinterfaces:
+        get:
+            description: Get a list of ASA physical interfaces. A physical interface is a hardware port on the ASA device that can be enabled and configured to connect the firewall to a network.
+            operationId: getAsaPhysicalInterfaces
+            parameters:
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterfacePage'
+                    description: List of AsaInterface objects
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get ASA physical interfaces
+            tags:
+                - ASA Interfaces
+    /v1/inventory/devices/asas/{deviceUid}/physicalinterfaces/{interfaceUid}:
+        get:
+            description: Get an ASA physical interface by UID. A physical interface is a hardware port on the ASA device that can be enabled and configured to connect the firewall to a network.
+            operationId: getAsaPhysicalInterface
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the ASA physical interface.
+                  in: path
+                  name: interfaceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterface'
+                    description: AsaInterface object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get an ASA physical interface
+            tags:
+                - ASA Interfaces
+        patch:
+            description: Modify an ASA physical interface. A physical interface is a hardware port on the ASA device that can be enabled and configured to connect the firewall to a network.
+            operationId: modifyAsaPhysicalInterface
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the ASA physical interface.
+                  in: path
+                  name: interfaceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/PhysicalInterfacePatchInput'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterface'
+                    description: AsaInterface object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Modify ASA Physical Interface
+            tags:
+                - ASA Interfaces
     /v1/inventory/devices/asas/{deviceUid}/read:
         post:
             description: This is an asynchronous operation to read the latest configuration on an ASA device in to the Security Cloud Control tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
@@ -1600,6 +2125,206 @@ paths:
             summary: Reconnect ASA device
             tags:
                 - Inventory
+    /v1/inventory/devices/asas/{deviceUid}/subinterfaces:
+        get:
+            description: Get a list of ASA subinterfaces. A subinterface is a logical interface created on a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
+            operationId: getAsaSubInterfaces
+            parameters:
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterfacePage'
+                    description: List of AsaInterface objects
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get ASA subinterfaces
+            tags:
+                - ASA Interfaces
+    /v1/inventory/devices/asas/{deviceUid}/subinterfaces/{interfaceUid}:
+        delete:
+            description: Delete an ASA subinterface. A subinterface is a logical interface created on a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
+            operationId: deleteAsaSubInterface
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the ASA subinterface.
+                  in: path
+                  name: interfaceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "204":
+                    description: No Content
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Delete ASA subinterface
+            tags:
+                - ASA Interfaces
+        get:
+            description: Get an ASA subinterface by UID. A subinterface is a logical interface created on a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
+            operationId: getAsaSubInterface
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the ASA subinterface.
+                  in: path
+                  name: interfaceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterface'
+                    description: AsaInterface object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get an ASA subinterface
+            tags:
+                - ASA Interfaces
+        patch:
+            description: Modify an ASA subinterface. A subinterface is a logical interface created on a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
+            operationId: modifyAsaSubInterface
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the ASA subinterface.
+                  in: path
+                  name: interfaceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/SubInterfacePatchInput'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterface'
+                    description: AsaInterface object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Modify ASA subinterface
+            tags:
+                - ASA Interfaces
     /v1/inventory/devices/asas/{deviceUid}/upgrades/trigger:
         post:
             description: 'This asynchronous operation upgrades the ASA firmware and ASDM software versions on the device. Note: Newly detected or modified certificates will be automatically approved.'
@@ -1666,6 +2391,359 @@ paths:
             summary: Get compatible upgrade versions for an ASA
             tags:
                 - Device Upgrades
+    /v1/inventory/devices/asas/{deviceUid}/virtualtunnelinterfaces:
+        get:
+            description: Get a list of ASA virtual tunnel interfaces. A virtual tunnel interface (VTI) is a logical interface that provides a point-to-point GRE or IPsec tunnel endpoint, enabling simplified VPN configuration and routing integration on the ASA device.
+            operationId: getAsaVirtualTunnelInterfaces
+            parameters:
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterfacePage'
+                    description: List of AsaInterface objects
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get ASA virtual tunnel interfaces
+            tags:
+                - ASA Interfaces
+    /v1/inventory/devices/asas/{deviceUid}/virtualtunnelinterfaces/{interfaceUid}:
+        get:
+            description: Get an ASA virtual tunnel interface by UID. A virtual tunnel interface (VTI) is a logical interface that provides a point-to-point GRE or IPsec tunnel endpoint, enabling simplified VPN configuration and routing integration on the ASA device.
+            operationId: getAsaVirtualTunnelInterface
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the ASA virtual tunnel interface.
+                  in: path
+                  name: interfaceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterface'
+                    description: AsaInterface object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get an ASA virtual tunnel interface
+            tags:
+                - ASA Interfaces
+    /v1/inventory/devices/asas/{deviceUid}/vlaninterfaces:
+        get:
+            description: Get a list of ASA VLAN interfaces. A VLAN interface is a logical interface that represents a virtual LAN on a physical interface, allowing multiple VLANs to be configured and segmented on a single physical interface for traffic separation and security purposes.
+            operationId: getAsaVlanInterfaces
+            parameters:
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterfacePage'
+                    description: List of AsaInterface objects
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get ASA VLAN interfaces
+            tags:
+                - ASA Interfaces
+        post:
+            description: Create an ASA VLAN interface. A VLAN interface is a logical interface that represents a virtual LAN on a physical interface, allowing multiple VLANs to be configured and segmented on a single physical interface for traffic separation and security purposes.
+            operationId: createAsaVlanInterface
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/VlanInterfaceCreateInput'
+                required: true
+            responses:
+                "201":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterface'
+                    description: AsaInterface object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Create ASA VLAN Interface
+            tags:
+                - ASA Interfaces
+    /v1/inventory/devices/asas/{deviceUid}/vlaninterfaces/{interfaceUid}:
+        delete:
+            description: Delete an ASA VLAN interface. A VLAN interface is a logical interface that represents a virtual LAN on a physical interface, allowing multiple VLANs to be configured and segmented on a single physical interface for traffic separation and security purposes.
+            operationId: deleteAsaVlanInterface
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the ASA VLAN interface.
+                  in: path
+                  name: interfaceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "204":
+                    description: No Content
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Delete ASA VLAN Interface
+            tags:
+                - ASA Interfaces
+        get:
+            description: Get an ASA VLAN interface by UID. A VLAN interface is a logical interface that represents a virtual LAN on a physical interface, allowing multiple VLANs to be configured and segmented on a single physical interface for traffic separation and security purposes.
+            operationId: getAsaVlanInterface
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the ASA VLAN interface.
+                  in: path
+                  name: interfaceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterface'
+                    description: AsaInterface object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get an ASA VLAN interface
+            tags:
+                - ASA Interfaces
+        patch:
+            description: Modify an ASA VLAN interface. A VLAN interface is a logical interface that represents a virtual LAN on a physical interface, allowing multiple VLANs to be configured and segmented on a single physical interface for traffic separation and security purposes.
+            operationId: modifyAsaVlanInterface
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the ASA VLAN interface.
+                  in: path
+                  name: interfaceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/VlanInterfacePatchInput'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaInterface'
+                    description: AsaInterface object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Modify ASA VLAN Interface
+            tags:
+                - ASA Interfaces
     /v1/inventory/devices/asas/acceptCert:
         post:
             description: This is an asynchronous operation to accept certificates for multiple ASA devices. This operation returns a link to a transaction object that can be used to monitor the progress of the operation for all devices.<br/>**Warning:** This operation will accept the certificates for the ASA devices in the body without providing the user with the ability to view the certificates. It is recommended to use this operation only when you are sure that all certificates are valid.
@@ -7208,6 +8286,154 @@ components:
                 - ACTIVE_STANDBY
                 - ACTIVE_ACTIVE
             type: string
+        AsaInterface:
+            properties:
+                description:
+                    description: The description of the interface.
+                    type: string
+                deviceUid:
+                    description: The unique identifier, represented as a UUID, of the device associated with the interface.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                duplexType:
+                    $ref: '#/components/schemas/DuplexType'
+                    description: The duplex mode controls how data transmission occurs on a physical interface. It determines whether the interface can send and receive data simultaneously or only one direction at a time.
+                    example: AUTO, FULL or HALF
+                enabled:
+                    description: Indicates whether the interface is enabled.
+                    type: boolean
+                etherChannelGroupUid:
+                    description: The unique identifier, represented as a UUID, of the EtherChannel group this interface belong to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                etherChannelId:
+                    description: The identifier of the EtherChannel interface in the scope of the device.
+                    format: int32
+                    type: integer
+                hardwareName:
+                    description: The interface hardware name. It is usually structured from the type, speed, slot and port number.
+                    example: GigabitEthernet0/0 for a physical interface or GigabitEthernet0/0.100 for a subinterface
+                    type: string
+                interfaceType:
+                    $ref: '#/components/schemas/InterfaceType'
+                    description: The type of the interface.
+                    example: PHYSICAL_INTERFACE, SUB_INTERFACE, VIRTUAL_TUNNEL_INTERFACE, VLAN_INTERFACE, ETHER_CHANNEL_INTERFACE
+                ipv4:
+                    $ref: '#/components/schemas/InterfaceIpv4Address'
+                    description: The interface IPV4 address information.
+                ipv6:
+                    $ref: '#/components/schemas/InterfaceIpv6Address'
+                    description: The interface IPV6 address information.
+                lacpMode:
+                    description: The Link Aggregation Control Protocol (LACP) mode of the EtherChannel interface.
+                    enum:
+                        - ACTIVE
+                        - PASSIVE
+                        - "ON"
+                    example: ACTIVE, PASSIVE or ON
+                    type: string
+                macAddress:
+                    description: The interface Media Access Control (MAC) address, a unique hardware identifier assigned to each physical interface. it is used for Layer 2 communication within a network segment.
+                    type: string
+                managementInterface:
+                    description: Indicates whether the interface is used for device management purposes.
+                    type: boolean
+                managementOnly:
+                    description: Indicates whether the interface is exclusively used for management traffic and does not carry regular user or data traffic
+                    type: boolean
+                memberInterfaces:
+                    description: The set of unique identifiers, represented as UUIDs, of the member interfaces that are part of the EtherChannel group.
+                    items:
+                        format: uuid
+                        type: string
+                    type: array
+                    uniqueItems: true
+                mode:
+                    $ref: '#/components/schemas/InterfaceMode'
+                    description: The interface mode, describing how it operates within the network.
+                    example: ROUTED, PASSIVE or SWITCHPORT
+                monitorInterface:
+                    description: Indicates if the interface is actively monitored for checking its operational status and health as part of an HA setup. It helps determine if the interface is functioning correctly and whether a failover to a standby device should be triggered in case of failure.
+                    type: boolean
+                mtu:
+                    description: The interface MTU (Maximum Transmission Unit), the largest size, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. It defines the maximum payload size that the interface can handle in a single transmission. Range is 64 - 9198.
+                    format: int32
+                    type: integer
+                name:
+                    description: The logical name of the interface. Interface names are unique in the scope of the device.
+                    example: my-example-interface
+                    type: string
+                parentInterfaceUid:
+                    description: The unique identifier, represented as a UUID, of the parent interface for sub-interfaces.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                runtimeData:
+                    $ref: '#/components/schemas/InterfaceRuntimeData'
+                    description: The interface runtime data displays the actual state of the interface, including the values selected during operation.
+                securityLevel:
+                    description: Indicates the interface trust level, ranging from 0 (lowest) to 100 (highest).
+                    format: int32
+                    type: integer
+                speedType:
+                    $ref: '#/components/schemas/SpeedType'
+                    description: The speed of a physical interface. It can be auto detected or set to a specific value.
+                    example: AUTO or THOUSAND
+                standbyMacAddress:
+                    description: The standby interface Media Access Control (MAC) address, for use in a high-availability (HA) pair.
+                    type: string
+                subInterfaceId:
+                    description: The unique identifier of the sub-interface in the scope of the parent interface. It is used to differentiate between multiple sub-interfaces on the same parent interface. Range is 1 - 4294967295.
+                    format: int64
+                    type: integer
+                switchPortConfig:
+                    $ref: '#/components/schemas/SwitchPortConfig'
+                    description: The switch port configuration for the interface, which includes settings such as switch port mode, access VLAN and trunk VLAN. This is applicable for interfaces operating in switchport mode.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the interface in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                vlanId:
+                    description: The unique identifier of the VLAN associated with the VLAN interface. Range is 1 - 4070.
+                    format: int32
+                    type: integer
+                vlanPrimaryId:
+                    description: The primary unique identifier of the VLAN associated with the sub-interface. Range is 1 - 4094.
+                    format: int32
+                    type: integer
+                vlanSecondaryIds:
+                    description: The secondary identifiers of the VLAN associated with the sub-interface. Each range is defined by a start and end value, allowing for multiple VLANs to be associated with the sub-interface. Ranges are inclusive.
+                    items:
+                        $ref: '#/components/schemas/VlanIdRange'
+                    type: array
+                    uniqueItems: true
+            type: object
+        AsaInterfacePage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/AsaInterface'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
         AuditLog:
             properties:
                 eventDescription:
@@ -8629,6 +9855,12 @@ components:
                 - name
                 - secretKey
             type: object
+        DuplexType:
+            enum:
+                - AUTO
+                - FULL
+                - HALF
+            type: string
         DuplicateGroupDto:
             properties:
                 targetUid:
@@ -8693,6 +9925,118 @@ components:
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
             type: string
+        EtherChannelInterfaceCreateInput:
+            properties:
+                description:
+                    description: The description of the interface.
+                    type: string
+                enabled:
+                    description: Indicates whether the interface is enabled.
+                    type: boolean
+                etherChannelId:
+                    description: The identifier of the EtherChannel interface in the scope of the device.
+                    format: int32
+                    type: integer
+                ipv4:
+                    $ref: '#/components/schemas/InterfaceIpv4Address'
+                    description: The interface ipv4 address information.
+                ipv6:
+                    $ref: '#/components/schemas/InterfaceIpv6Address'
+                    description: The interface ipv6 address information.
+                lacpMode:
+                    description: The Link Aggregation Control Protocol (LACP) mode of the EtherChannel interface.
+                    enum:
+                        - ACTIVE
+                        - PASSIVE
+                        - "ON"
+                    example: ACTIVE, PASSIVE or ON
+                    type: string
+                macAddress:
+                    description: The interface Media Access Control (MAC) address, a unique hardware identifier assigned to each physical interface. it is used for Layer 2 communication within a network segment.
+                    type: string
+                managementOnly:
+                    description: Indicates whether the interface is exclusively used for management traffic and does not carry regular user or data traffic
+                    type: boolean
+                memberInterfaces:
+                    description: The set of unique identifiers, represented as UUIDs, of the member interfaces that are part of the EtherChannel group.
+                    items:
+                        format: uuid
+                        type: string
+                    type: array
+                    uniqueItems: true
+                monitorInterface:
+                    description: Indicates if the interface is actively monitored for checking its operational status and health as part of an HA setup. It helps determine if the interface is functioning correctly and whether a failover to a standby device should be triggered in case of failure.
+                    type: boolean
+                mtu:
+                    description: The interface MTU (Maximum Transmission Unit), the largest size, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. It defines the maximum payload size that the interface can handle in a single transmission.
+                    format: int32
+                    type: integer
+                name:
+                    description: The logical name of the interface. Interface names are unique in the scope of the device.
+                    example: my-example-interface
+                    type: string
+                securityLevel:
+                    description: Indicates the interface trust level, ranging from 0 (lowest) to 100 (highest).
+                    format: int32
+                    type: integer
+                standbyMacAddress:
+                    description: The standby interface Media Access Control (MAC) address, for use in a high-availability (HA) pair.
+                    type: string
+            type: object
+        EtherChannelInterfacePatchInput:
+            properties:
+                description:
+                    description: The description of the interface.
+                    type: string
+                enabled:
+                    description: Indicates whether the interface is enabled.
+                    type: boolean
+                ipv4:
+                    $ref: '#/components/schemas/InterfaceIpv4Address'
+                    description: The interface ipv4 address information.
+                ipv6:
+                    $ref: '#/components/schemas/InterfaceIpv6Address'
+                    description: The interface ipv6 address information.
+                lacpMode:
+                    description: The Link Aggregation Control Protocol (LACP) mode of the EtherChannel interface.
+                    enum:
+                        - ACTIVE
+                        - PASSIVE
+                        - "ON"
+                    example: ACTIVE, PASSIVE or ON
+                    type: string
+                macAddress:
+                    description: The interface Media Access Control (MAC) address, a unique hardware identifier assigned to each physical interface. it is used for Layer 2 communication within a network segment.
+                    type: string
+                managementOnly:
+                    description: Indicates whether the interface is exclusively used for management traffic and does not carry regular user or data traffic
+                    type: boolean
+                memberInterfaces:
+                    description: The set of unique identifiers, represented as UUIDs, of the member interfaces that are part of the EtherChannel group.
+                    items:
+                        format: uuid
+                        type: string
+                    type: array
+                    uniqueItems: true
+                monitorInterface:
+                    description: Indicates if the interface is actively monitored for checking its operational status and health as part of an HA setup. It helps determine if the interface is functioning correctly and whether a failover to a standby device should be triggered in case of failure.
+                    type: boolean
+                mtu:
+                    description: The interface MTU (Maximum Transmission Unit), the largest size, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. It defines the maximum payload size that the interface can handle in a single transmission.
+                    format: int32
+                    type: integer
+                name:
+                    description: The logical name of the interface. Interface names are unique in the scope of the device.
+                    example: my-example-interface
+                    type: string
+                securityLevel:
+                    description: Indicates the interface trust level, ranging from 0 (lowest) to 100 (highest).
+                    format: int32
+                    type: integer
+                standbyMacAddress:
+                    description: The standby interface Media Access Control (MAC) address, for use in a high-availability (HA) pair.
+                    type: string
+            type: object
         Event:
             properties:
                 action:
@@ -9387,6 +10731,96 @@ components:
                     description: Average size of packets sent. Helps in understanding the traffic distribution and network load.
                     type: number
             type: object
+        InterfaceIpAddress:
+            properties:
+                ipAddress:
+                    description: A unique network address assigned to a physical or logical port, enabling it to communicate on a specific network segment and enforce security policies for traffic traversing that interface.
+                    example: Ipv4 address like 192.168.1.1 or Ipv6 address like 2001:db8::1
+                    type: string
+                netmask:
+                    description: A 32-bit number that defines the network portion of the IP address, differentiating it from the host portion. It determines the size of the local network segment directly connected to that interface, allowing to identify which traffic belongs to its local network and which needs to be routed.
+                    example: 255.255.255.0
+                    type: string
+                setroute:
+                    description: Indicates whether a default route using the gateway information provided by the DHCP server is created automatically. Essentially, the DHCP-assigned gateway is used as the next-hop for routing traffic
+                    type: boolean
+                standbyIpAddress:
+                    description: A secondary IP address configured on an interface, specifically for use in a high-availability (HA) pair. This address remains inactive on the standby unit until a failover occurs, at which point the standby assumes ownership of this IP address (along with the primary IP) to maintain network connectivity for devices.
+                    example: Ipv4 address like 192.168.1.1 or Ipv6 address like 2001:db8::1
+                    type: string
+            type: object
+        InterfaceIpv4Address:
+            properties:
+                ipAddress:
+                    $ref: '#/components/schemas/InterfaceIpAddress'
+                    description: The interface IPV4 address properties.
+                ipType:
+                    $ref: '#/components/schemas/IpType'
+                    description: The type of the IP address, such as STATIC or DHCP.
+            type: object
+        InterfaceIpv6Address:
+            properties:
+                autoConfig:
+                    description: Indicates whether the address is automatically configured.
+                    type: boolean
+                dadAttempts:
+                    description: Indicates how many times the device performs Duplicate Address Detection (DAD) to verify the uniqueness of an address before assigning the IPv6 address. Range is 0-600.
+                    format: int32
+                    type: integer
+                enabled:
+                    description: Indicates whether IPV6 is enabled on the interface.
+                    type: boolean
+                ipAddresses:
+                    description: List of IPV6 addresses assigned to the interface.
+                    items:
+                        $ref: '#/components/schemas/InterfaceIpAddress'
+                    type: array
+                linkLocalAddress:
+                    $ref: '#/components/schemas/InterfaceIpAddress'
+                    description: IPV6 address that is only used for communication within the same network link.
+                suppressRA:
+                    description: Indicates whether to suppress router advertisements.
+                    type: boolean
+            type: object
+        InterfaceMode:
+            enum:
+                - ROUTED
+                - PASSIVE
+                - SWITCHPORT
+            type: string
+        InterfaceRuntimeData:
+            properties:
+                duplexType:
+                    description: The actual duplex mode of the physical interface.
+                    type: string
+                ipAddress:
+                    description: The actual IP address of the interface.
+                    type: string
+                linkEnabled:
+                    description: Indicates whether the interface link is enabled.
+                    type: boolean
+                linkState:
+                    $ref: '#/components/schemas/LinkState'
+                    description: The interface link state, such as UP or DOWN.
+                macAddress:
+                    description: The actual Media Access Control (MAC) address of the interface.
+                    type: string
+                mtu:
+                    description: The actual MTU (Maximum Transmission Unit) of the interface.
+                    format: int32
+                    type: integer
+                speedType:
+                    description: The actual speed of the physical interface.
+                    type: string
+            type: object
+        InterfaceType:
+            enum:
+                - PHYSICAL_INTERFACE
+                - SUB_INTERFACE
+                - VIRTUAL_TUNNEL_INTERFACE
+                - VLAN_INTERFACE
+                - ETHER_CHANNEL_INTERFACE
+            type: string
         Inventory:
             properties:
                 devices:
@@ -9446,6 +10880,12 @@ components:
                 - password
                 - username
             type: object
+        IpType:
+            enum:
+                - STATIC
+                - DHCP
+                - PPPOE
+            type: string
         IssuesCount:
             properties:
                 duplicates:
@@ -9540,6 +10980,11 @@ components:
                     type: array
                     uniqueItems: true
             type: object
+        LinkState:
+            enum:
+                - UP
+                - DOWN
+            type: string
         ListObjectResponse:
             properties:
                 count:
@@ -10462,6 +11907,57 @@ components:
             required:
                 - content
             type: object
+        PhysicalInterfacePatchInput:
+            properties:
+                description:
+                    description: The description of the interface.
+                    type: string
+                duplexType:
+                    $ref: '#/components/schemas/DuplexType'
+                    description: The duplex mode controls how data transmission occurs on a physical interface. It determines whether the interface can send and receive data simultaneously or only one direction at a time.
+                    example: AUTO, FULL or HALF
+                enabled:
+                    description: Indicates whether the interface is enabled.
+                    type: boolean
+                ipv4:
+                    $ref: '#/components/schemas/InterfaceIpv4Address'
+                    description: The interface ipv4 address information.
+                ipv6:
+                    $ref: '#/components/schemas/InterfaceIpv6Address'
+                    description: The interface ipv6 address information.
+                macAddress:
+                    description: The interface Media Access Control (MAC) address, a unique hardware identifier assigned to each physical interface. it is used for Layer 2 communication within a network segment.
+                    type: string
+                managementOnly:
+                    description: Indicates whether the interface is exclusively used for management traffic and does not carry regular user or data traffic
+                    type: boolean
+                mode:
+                    $ref: '#/components/schemas/InterfaceMode'
+                    description: The interface mode, describing how it operates within the network.
+                    example: ROUTED, PASSIVE or SWITCHPORT
+                monitorInterface:
+                    description: Indicates if the interface is actively monitored for checking its operational status and health as part of an HA setup. It helps determine if the interface is functioning correctly and whether a failover to a standby device should be triggered in case of failure.
+                    type: boolean
+                mtu:
+                    description: The interface MTU (Maximum Transmission Unit), the largest size, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. It defines the maximum payload size that the interface can handle in a single transmission.
+                    format: int32
+                    type: integer
+                name:
+                    description: The logical name of the interface. Interface names are unique in the scope of the device.
+                    example: my-example-interface
+                    type: string
+                securityLevel:
+                    description: Indicates the interface trust level, ranging from 0 (lowest) to 100 (highest).
+                    format: int32
+                    type: integer
+                speedType:
+                    $ref: '#/components/schemas/SpeedType'
+                    description: The speed of a physical interface. It can be auto detected or set to a specific value.
+                    example: AUTO or THOUSAND
+                standbyMacAddress:
+                    description: The standby interface Media Access Control (MAC) address, for use in a high-availability (HA) pair.
+                    type: string
+            type: object
         Policy:
             properties:
                 name:
@@ -11185,6 +12681,14 @@ components:
             required:
                 - name
             type: object
+        SpeedType:
+            enum:
+                - AUTO
+                - TEN
+                - HUNDRED
+                - THOUSAND
+                - TEN_THOUSAND
+            type: string
         SseDeviceData:
             properties:
                 sseDeviceId:
@@ -11239,6 +12743,98 @@ components:
                     example: OK
                     type: string
             type: object
+        SubInterfaceCreateInput:
+            properties:
+                description:
+                    description: The description of the interface.
+                    type: string
+                enabled:
+                    description: Indicates whether the interface is enabled.
+                    type: boolean
+                ipv4:
+                    $ref: '#/components/schemas/InterfaceIpv4Address'
+                    description: The interface ipv4 address information.
+                ipv6:
+                    $ref: '#/components/schemas/InterfaceIpv6Address'
+                    description: The interface ipv6 address information.
+                macAddress:
+                    description: The interface Media Access Control (MAC) address, a unique hardware identifier assigned to each physical interface. it is used for Layer 2 communication within a network segment.
+                    type: string
+                managementOnly:
+                    description: Indicates whether the interface is exclusively used for management traffic and does not carry regular user or data traffic
+                    type: boolean
+                monitorInterface:
+                    description: Indicates if the interface is actively monitored for checking its operational status and health as part of an HA setup. It helps determine if the interface is functioning correctly and whether a failover to a standby device should be triggered in case of failure.
+                    type: boolean
+                mtu:
+                    description: The interface MTU (Maximum Transmission Unit), the largest size, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. It defines the maximum payload size that the interface can handle in a single transmission.
+                    format: int32
+                    type: integer
+                name:
+                    description: The logical name of the interface. Interface names are unique in the scope of the device.
+                    example: my-example-interface
+                    type: string
+                securityLevel:
+                    description: Indicates the interface trust level, ranging from 0 (lowest) to 100 (highest).
+                    format: int32
+                    type: integer
+                standbyMacAddress:
+                    description: The standby interface Media Access Control (MAC) address, for use in a high-availability (HA) pair.
+                    type: string
+                subInterfaceId:
+                    description: The unique identifier of the sub-interface in the scope of the parent interface. It is used to differentiate between multiple sub-interfaces on the same parent interface. Range is 1 - 4294967295.
+                    format: int64
+                    type: integer
+                vlanPrimaryId:
+                    description: The primary unique identifier of the VLAN associated with the sub-interface. Range is 1 - 4094.
+                    format: int32
+                    type: integer
+                vlanSecondaryIds:
+                    description: The secondary identifiers of the VLAN associated with the sub-interface. Each range is defined by a start and end value, allowing for multiple VLANs to be associated with the sub-interface. Ranges are inclusive.
+                    items:
+                        $ref: '#/components/schemas/VlanIdRange'
+                    type: array
+                    uniqueItems: true
+            type: object
+        SubInterfacePatchInput:
+            properties:
+                description:
+                    description: The description of the interface.
+                    type: string
+                enabled:
+                    description: Indicates whether the interface is enabled.
+                    type: boolean
+                ipv4:
+                    $ref: '#/components/schemas/InterfaceIpv4Address'
+                    description: The interface ipv4 address information.
+                ipv6:
+                    $ref: '#/components/schemas/InterfaceIpv6Address'
+                    description: The interface ipv6 address information.
+                macAddress:
+                    description: The interface Media Access Control (MAC) address, a unique hardware identifier assigned to each physical interface. it is used for Layer 2 communication within a network segment.
+                    type: string
+                managementOnly:
+                    description: Indicates whether the interface is exclusively used for management traffic and does not carry regular user or data traffic
+                    type: boolean
+                monitorInterface:
+                    description: Indicates if the interface is actively monitored for checking its operational status and health as part of an HA setup. It helps determine if the interface is functioning correctly and whether a failover to a standby device should be triggered in case of failure.
+                    type: boolean
+                mtu:
+                    description: The interface MTU (Maximum Transmission Unit), the largest size, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. It defines the maximum payload size that the interface can handle in a single transmission.
+                    format: int32
+                    type: integer
+                name:
+                    description: The logical name of the interface. Interface names are unique in the scope of the device.
+                    example: my-example-interface
+                    type: string
+                securityLevel:
+                    description: Indicates the interface trust level, ranging from 0 (lowest) to 100 (highest).
+                    format: int32
+                    type: integer
+                standbyMacAddress:
+                    description: The standby interface Media Access Control (MAC) address, for use in a high-availability (HA) pair.
+                    type: string
+            type: object
         Summary:
             properties:
                 average:
@@ -11250,6 +12846,27 @@ components:
                 max:
                     format: double
                     type: number
+            type: object
+        SwitchPortConfig:
+            properties:
+                accessModeVlan:
+                    description: The unique identifier, represented as a UUID, of the access VLAN that this interface is associated with.
+                    format: uuid
+                    type: string
+                protectedEnabled:
+                    description: Indicates whether the switch port interface is protected or not. Protected prevents any Layer 2 communication (unicast, multicast, broadcast) between other protected ports on the same VLAN.
+                    type: boolean
+                trunkModeAllowedVlans:
+                    description: The unique identifiers, represented as UUIDs, of the VLAN interfaces that are permitted to pass traffic over the trunk port.
+                    items:
+                        format: uuid
+                        type: string
+                    type: array
+                    uniqueItems: true
+                trunkModeNativeVlan:
+                    description: The unique identifier, represented as a UUID, of the trunk VLAN that this interface is associated with.
+                    format: uuid
+                    type: string
             type: object
         Target:
             properties:
@@ -11685,6 +13302,111 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
             type: string
+        VlanIdRange:
+            properties:
+                end:
+                    format: int32
+                    type: integer
+                start:
+                    format: int32
+                    type: integer
+            type: object
+        VlanInterfaceCreateInput:
+            properties:
+                description:
+                    description: The description of the interface.
+                    type: string
+                enabled:
+                    description: Indicates whether the interface is enabled.
+                    type: boolean
+                ipv4:
+                    $ref: '#/components/schemas/InterfaceIpv4Address'
+                    description: The interface ipv4 address information.
+                ipv6:
+                    $ref: '#/components/schemas/InterfaceIpv6Address'
+                    description: The interface ipv6 address information.
+                macAddress:
+                    description: The interface Media Access Control (MAC) address, a unique hardware identifier assigned to each physical interface. it is used for Layer 2 communication within a network segment.
+                    type: string
+                managementOnly:
+                    description: Indicates whether the interface is exclusively used for management traffic and does not carry regular user or data traffic
+                    type: boolean
+                memberInterfaces:
+                    description: The set of unique identifiers, represented as UUIDs, of the member interfaces that are part of the vlan group.
+                    items:
+                        format: uuid
+                        type: string
+                    type: array
+                    uniqueItems: true
+                monitorInterface:
+                    description: Indicates if the interface is actively monitored for checking its operational status and health as part of an HA setup. It helps determine if the interface is functioning correctly and whether a failover to a standby device should be triggered in case of failure.
+                    type: boolean
+                mtu:
+                    description: The interface MTU (Maximum Transmission Unit), the largest size, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. It defines the maximum payload size that the interface can handle in a single transmission.
+                    format: int32
+                    type: integer
+                name:
+                    description: The logical name of the interface. Interface names are unique in the scope of the device.
+                    example: my-example-interface
+                    type: string
+                securityLevel:
+                    description: Indicates the interface trust level, ranging from 0 (lowest) to 100 (highest).
+                    format: int32
+                    type: integer
+                standbyMacAddress:
+                    description: The standby interface Media Access Control (MAC) address, for use in a high-availability (HA) pair.
+                    type: string
+                vlanId:
+                    description: The unique identifier of the VLAN associated with the VLAN interface. Range is 1 - 4070.
+                    format: int32
+                    type: integer
+            type: object
+        VlanInterfacePatchInput:
+            properties:
+                description:
+                    description: The description of the interface.
+                    type: string
+                enabled:
+                    description: Indicates whether the interface is enabled.
+                    type: boolean
+                ipv4:
+                    $ref: '#/components/schemas/InterfaceIpv4Address'
+                    description: The interface ipv4 address information.
+                ipv6:
+                    $ref: '#/components/schemas/InterfaceIpv6Address'
+                    description: The interface ipv6 address information.
+                macAddress:
+                    description: The interface Media Access Control (MAC) address, a unique hardware identifier assigned to each physical interface. it is used for Layer 2 communication within a network segment.
+                    type: string
+                managementOnly:
+                    description: Indicates whether the interface is exclusively used for management traffic and does not carry regular user or data traffic
+                    type: boolean
+                memberInterfaces:
+                    description: The set of unique identifiers, represented as UUIDs, of the member interfaces that are part of the vlan group.
+                    items:
+                        format: uuid
+                        type: string
+                    type: array
+                    uniqueItems: true
+                monitorInterface:
+                    description: Indicates if the interface is actively monitored for checking its operational status and health as part of an HA setup. It helps determine if the interface is functioning correctly and whether a failover to a standby device should be triggered in case of failure.
+                    type: boolean
+                mtu:
+                    description: The interface MTU (Maximum Transmission Unit), the largest size, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. It defines the maximum payload size that the interface can handle in a single transmission.
+                    format: int32
+                    type: integer
+                name:
+                    description: The logical name of the interface. Interface names are unique in the scope of the device.
+                    example: my-example-interface
+                    type: string
+                securityLevel:
+                    description: Indicates the interface trust level, ranging from 0 (lowest) to 100 (highest).
+                    format: int32
+                    type: integer
+                standbyMacAddress:
+                    description: The standby interface Media Access Control (MAC) address, for use in a high-availability (HA) pair.
+                    type: string
+            type: object
         ZtpOnboardingInput:
             properties:
                 adminPassword:
