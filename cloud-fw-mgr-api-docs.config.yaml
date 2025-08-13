@@ -5,6 +5,8 @@ services:
     url: "https://staging.manage.security.cisco.com/api/platform/msp-api/v3/api-docs.yaml"
   - name: "device-upgrade"
     url: "https://staging.manage.security.cisco.com/api/platform/device-upgrade/v3/api-docs.yaml"
+  - name: "device-interfaces-api"
+    url: "https://staging.manage.security.cisco.com/api/platform/device-interfaces-api/v3/api-docs.yaml"    
   - name: "object-service"
     url: "https://staging.manage.security.cisco.com/api/platform/object-service/v3/api-docs.yaml"
   - name: "transaction-service"
