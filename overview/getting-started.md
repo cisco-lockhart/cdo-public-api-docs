@@ -510,83 +510,85 @@ curl --location 'https://api.eu.security.cisco.com/firewall/v1/cdfmc/api/fmc_con
 > - Replace `us` with your region
 
 ### Response
-The response will be a `HTTP 201` with a JSON object that looks like this (the response will vary depending on the request you make).
+
+The response will be a `HTTP 201` with a JSON object that looks like this (the response will vary
+depending on the request you make).
 
 ```json
 {
-    "metadata": {
-        "ruleIndex": 6,
-        "section": "Default",
-        "category": "--Undefined--",
-        "accessPolicy": {
-            "name": "Default Access Control Policy",
-            "id": "0AB208F0-1FF7-0ed3-0000-004294967299",
-            "type": "AccessPolicy"
+  "metadata": {
+    "ruleIndex": 6,
+    "section": "Default",
+    "category": "--Undefined--",
+    "accessPolicy": {
+      "name": "Default Access Control Policy",
+      "id": "0AB208F0-1FF7-0ed3-0000-004294967299",
+      "type": "AccessPolicy"
+    }
+  },
+  "links": {
+    "self": "https://api.eu.security.cisco.com/firewall/v1/cdfmc/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/policy/accesspolicies/0AB208F0-1FF7-0ed3-0000-004294967299/accessrules/0AB208F0-1FF7-0ed3-0000-000268435466"
+  },
+  "enabled": true,
+  "sourceZones": {
+    "objects": [
+      {
+        "name": "inside",
+        "id": "c2bdfa72-11e6-11f0-8c56-4a5ba7afc6cc",
+        "type": "SecurityZone",
+        "subType": "Routed"
+      }
+    ]
+  },
+  "destinationZones": {
+    "objects": [
+      {
+        "name": "outside",
+        "id": "ca032564-11e6-11f0-8c56-4a5ba7afc6cc",
+        "type": "SecurityZone",
+        "subType": "Routed"
+      }
+    ]
+  },
+  "logBegin": true,
+  "logFiles": false,
+  "sourceDynamicObjects": {},
+  "urls": {
+    "urlCategoriesWithReputation": [
+      {
+        "reputation": "ANY_AND_UNKNOWN",
+        "type": "UrlCategoryAndReputation",
+        "category": {
+          "name": "Adult",
+          "id": "abba9b63-bb10-4729-b901-2e2aa0f02006",
+          "type": "URLCategory"
         }
-    },
-    "links": {
-        "self": "https://api.eu.security.cisco.com/firewall/v1/cdfmc/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/policy/accesspolicies/0AB208F0-1FF7-0ed3-0000-004294967299/accessrules/0AB208F0-1FF7-0ed3-0000-000268435466"
-    },
-    "enabled": true,
-    "sourceZones": {
-        "objects": [
-            {
-                "name": "inside",
-                "id": "c2bdfa72-11e6-11f0-8c56-4a5ba7afc6cc",
-                "type": "SecurityZone",
-                "subType": "Routed"
-            }
-        ]
-    },
-    "destinationZones": {
-        "objects": [
-            {
-                "name": "outside",
-                "id": "ca032564-11e6-11f0-8c56-4a5ba7afc6cc",
-                "type": "SecurityZone",
-                "subType": "Routed"
-            }
-        ]
-    },
-    "logBegin": true,
-    "logFiles": false,
-    "sourceDynamicObjects": {},
-    "urls": {
-        "urlCategoriesWithReputation": [
-            {
-                "reputation": "ANY_AND_UNKNOWN",
-                "type": "UrlCategoryAndReputation",
-                "category": {
-                    "name": "Adult",
-                    "id": "abba9b63-bb10-4729-b901-2e2aa0f02006",
-                    "type": "URLCategory"
-                }
-            },
-            {
-                "reputation": "ANY_AND_UNKNOWN",
-                "type": "UrlCategoryAndReputation",
-                "category": {
-                    "name": "Pornography",
-                    "id": "abba9b63-bb10-4729-b901-2e2aa0f02054",
-                    "type": "URLCategory"
-                }
-            }
-        ]
-    },
-    "variableSet": {
-        "name": "Default-Set",
-        "id": "76fa83ea-c972-11e2-8be8-8e45bb1343c0",
-        "type": "VariableSet"
-    },
-    "sendEventsToFMC": true,
-    "enableSyslog": false,
-    "vlanTags": {},
-    "logEnd": false,
-    "destinationDynamicObjects": {},
-    "action": "BLOCK",
-    "type": "AccessRule",
-    "id": "0AB208F0-1FF7-0ed3-0000-000268435466",
-    "name": "block-unsuitable-content"
+      },
+      {
+        "reputation": "ANY_AND_UNKNOWN",
+        "type": "UrlCategoryAndReputation",
+        "category": {
+          "name": "Pornography",
+          "id": "abba9b63-bb10-4729-b901-2e2aa0f02054",
+          "type": "URLCategory"
+        }
+      }
+    ]
+  },
+  "variableSet": {
+    "name": "Default-Set",
+    "id": "76fa83ea-c972-11e2-8be8-8e45bb1343c0",
+    "type": "VariableSet"
+  },
+  "sendEventsToFMC": true,
+  "enableSyslog": false,
+  "vlanTags": {},
+  "logEnd": false,
+  "destinationDynamicObjects": {},
+  "action": "BLOCK",
+  "type": "AccessRule",
+  "id": "0AB208F0-1FF7-0ed3-0000-000268435466",
+  "name": "block-unsuitable-content"
 }
 ```
 
