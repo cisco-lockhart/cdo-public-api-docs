@@ -195,7 +195,7 @@ the following command:
 jq -r '.items[0].fmcDomainUid'
 ```
 
-## 5. Get all access policies on a cdFMC
+## 4. Get all access policies on a cdFMC
 
 > **Note**:
 > All of the cdFMC API endpoints are available under APIs prefixed by `/v1/cdfmc`. These endpoints
@@ -253,7 +253,7 @@ access policies configured on your cdFMC).
 }
 ```
 
-## 6. Get an access policy on a cdFMC
+## 5. Get an access policy on a cdFMC
 
 To retrieve the details of an access policy on a cdFMC, you need the `id` (reresented as a
 universally unique UUIDv4 identifier) of the access policy, which you can retrieve using the API
@@ -338,7 +338,7 @@ access policy you selected).
 }
 ```
 
-## 7. Get access rules associated with an access policy on a cdFMC
+## 6. Get access rules associated with an access policy on a cdFMC
 
 To retrieve the access rules associated with an access policy on a cdFMC, you need the `id` of the
 access policy, which you can retrieve using the API call in example *5*.
@@ -427,7 +427,7 @@ on the access rules configured on your cdFMC).
 }
 ```
 
-## 8. Add an access rule to an access policy on a cdFMC
+## 7. Add an access rule to an access policy on a cdFMC
 
 To add an access rule to an access policy on a cdFMC, you need the `id` of the access policy, which
 you can retrieve using the API call in example *5*.
