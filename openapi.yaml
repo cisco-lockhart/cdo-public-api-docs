@@ -12970,6 +12970,10 @@ components:
                     description: Indicates if the tenant has the AI assistant enabled.
                     example: true
                     type: boolean
+                allowCrossRegionTenantAddition:
+                    description: Indicates whether adding tenants from different regions to this MSP Portal is allowed.
+                    example: true
+                    type: boolean
                 asaHealthMetrics:
                     description: Indicates if the tenant collects ASA health metrics.
                     example: false
