@@ -11738,6 +11738,8 @@ components:
                         - CI
                         - SCALE
                         - STAGING
+                        - DEVFED
+                        - STGF9
                         - UNKNOWN
                     example: US
                     type: string
