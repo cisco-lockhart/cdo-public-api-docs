@@ -6719,7 +6719,7 @@ paths:
                 - Users
     /v1/transactions/{transactionUid}:
         get:
-            description: Get information on an in-progress CDO transaction. An CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO's API create Security Cloud Control transactions.
+            description: 'Get information on a CDO transaction. An CDO transaction is an entity used to monitor progress of, and provide feedback on, long-running operations. All asynchronous operations in CDO''s API create Security Cloud Control transactions. Note: CDO transactions are deleted two hours after the last update to it.'
             operationId: getTransaction
             parameters:
                 - in: path
