@@ -11549,6 +11549,9 @@ components:
                     $ref: '#/components/schemas/EntityType'
                     description: The type of the device.
                     example: CDFMC_MANAGED_FTD
+                ftdClusterInfo:
+                    $ref: '#/components/schemas/FtdClusterInfo'
+                    description: '(Device Clusters managed by FMC only) Clustering information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
                 hardwareModel:
                     description: (ASAs, FDM-managed FTDs, and FMC-managed FTDs only) The hardware model of the device
                     type: string
@@ -11640,6 +11643,16 @@ components:
                 managedTenantNames:
                     description: The names of the tenants that have devices onboarded and are managed by the MSP Portal.
                     items:
+                        type: string
+                    type: array
+                    uniqueItems: true
+                redundancyModes:
+                    description: The distinct redundancy modes for the devices managed by the MSP Portal.
+                    items:
+                        enum:
+                            - HA
+                            - CLUSTER
+                            - STANDALONE
                         type: string
                     type: array
                     uniqueItems: true
