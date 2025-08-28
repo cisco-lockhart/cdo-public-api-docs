@@ -11552,6 +11552,9 @@ components:
                 ftdClusterInfo:
                     $ref: '#/components/schemas/FtdClusterInfo'
                     description: '(Device Clusters managed by FMC only) Clustering information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
+                ftdHaInfo:
+                    $ref: '#/components/schemas/FtdHaInfo'
+                    description: '(High Availability Devices managed by FMC only) High-Available information information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
                 hardwareModel:
                     description: (ASAs, FDM-managed FTDs, and FMC-managed FTDs only) The hardware model of the device
                     type: string
