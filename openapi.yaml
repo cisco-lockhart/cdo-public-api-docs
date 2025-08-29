@@ -11529,6 +11529,17 @@ components:
                     description: The address of the device, in <code>host:port</code> format. Security Cloud Control connects to the device at this address.
                     example: my-example-device.example.com:443
                     type: string
+                asaFailoverMate:
+                    $ref: '#/components/schemas/AsaFailoverMate'
+                    description: (High Availability ASAs only) Information on the failover mate of this device.
+                asaFailoverMode:
+                    $ref: '#/components/schemas/AsaFailoverMode'
+                    description: (ASAs only) Failover mode of the device.
+                    example: ACTIVE_STANDBY
+                asaFailoverState:
+                    description: (High Availability ASAs only) Failover state of this device.
+                    example: Primary - Active
+                    type: string
                 chassisSerial:
                     description: The serial number on the chassis of the device (ASA-only). This is typically used to type up to Cisco SmartNet, and is not the same as the serial number.
                     example: JMX2450Xxxx
