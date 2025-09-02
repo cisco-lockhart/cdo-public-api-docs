@@ -1,42 +1,58 @@
 # Getting Started
 
-The following sections introduce you to the resources available in the Security Cloud Control Firewall Manager API and provide instructions for your first API request. Sample requests are shown using [curl](https://curl.se/), a CLI tool. 
+The following sections introduce you to the resources in the Security Cloud Control API, and provide
+instructions to make your first API request. Examples will be shown using the command line with
+cURL.
 
 ## Supported RESTful Operations
 
-The resources in the Security Cloud Control API support one or more `GET`, `POST`, `PATCH`,
+The resources in the Security Cloud Control API support one or more of the `GET`, `POST`, `PATCH`,
 `PUT`, and `DELETE` operations.
 
 > **Note**:
-> Not every resource supports all these operations.
+> Not all of the resources support all of these operations.
 
-- **GET**: There are two types of `GET` operations in Security Cloud Control: 
-  - List `GET` operations, which return a paginated list of resources. List endpoints enable searching and sorting using a subset of the resource fields.
-  - Individual GET operations, which return a single resource by its UID.
-- **POST**: These operations are used to create resources or to trigger asynchronous operations. All POST operations that use an action verb initiate asynchronous operations, which can be tracked using the Security Cloud Control transaction API. 
-- **PATCH**: These operations are used to modify existing resources.
-- **PUT**: hese operations are used by the cloud-delivered Firewall Management Center (cdFMC) API endpoints to modify resources. 
-- **DELETE**: hese operations are used to remove resources. All DELETE operations in the Security Cloud Control API are idempotent.
+- **GET**: There are two kinds of `GET` operations in Security Cloud Control: list `GET` operations,
+  which return a paged list of resources, and individual `GET` operations which return a single
+  resource by UID. In the list endpoints, it is possible to search and sort by a subset of the
+  fields in the resource.
+- **POST**: `POST` operations are used in Security Cloud Control to either create a resource or
+  trigger an asynchronous operation. All POST operations with an action verb trigger asynchronous
+  operations. Asynchronous operations can be tracked using the Security Cloud Control transaction
+  API.
+- **PATCH**: `PATCH` operations are used in Security Cloud Control to modify resources.
+- **PUT**: `PUT` operations are used by the Cloud-delivered FMC API endpoints to modify resources.
+- **DELETE**: `DELETE` operations are used in Security Cloud Control to delete resources. All
+  `DELETE` operations in the Security Cloud Control API are idempotent.
 
-All the responses from the Security Cloud Control Firewall Manager API are in JSON format. Additionally, all the request payloads sent to a Security Cloud Control API must be in JSON format. 
+All responses from the Security Cloud Control API are in the JSON format. Additionally, all payloads
+must be sent to the Security Cloud Control API as JSON.
 
 ## API Resources
 
-At a high level, the Security Cloud Control Firewall Manager APIs support operations in these resources:
+At a high level, the Security Cloud Control API supports operations on the following resources:
 
-- **Inventory Management** -Manage the devices, device managers, cloud services, and templates in your Security Cloud Control tenant.
-- **Connector Management** - Add, remove, and view information about the connectors used to communicate with devices in your Security Cloud Control tenant.
-- **Cloud-delivered FMC** - Manage the cloud-delivered Firewall Management Center (cdFMC) in your Security Cloud Control tenant (if present).
-- **Object Management** - Manage the firewall policy objects in your Security Cloud Control tenant.
-- **User Management** - Manage the users in your Security Cloud Control tenant.
-- **Tenant Management** - Manage your Security Cloud Control tenant or Managed Service Provider (MSP) Portal.
-- **Remote Access Monitoring** - View and manage the Remote Access Virtual Private Network (RA VPN) sessions and Multi-factor Authentication (MFA) events in your Security Cloud Control tenant.
-- **Search** - Perform searches across all the resources in your Security Cloud Control tenant.
-- **Changelogs** - View a detailed history of all the changes made to your Security Cloud Control tenant.
+- **Inventory Management** - Manage devices, device managers, cloud services, and templates in your
+  Security Cloud Control tenant.
+- **Connector Management** - Add, remove, and view information on connectors used to communicate
+  with devices in your Security Cloud Control tenant.
+- **Cloud-delivered FMC** - Manage the Cloud-delivered FMC in your Security Cloud Control tenant (if
+  present).
+- **Object Management** - Manage firewall policy objects in your Security Cloud Control tenant.
+- **User Management** - Manage users in your Security Cloud Control tenant.
+- **Tenant Management** - Manage your Security Cloud Control tenant, or Managed Service Portal.
+- **Remote Access Monitoring** - View and manage the Remote Access Virtual Private Network (RA VPN)
+  sessions, and Multi-factor Authentication (MFA) events in your Security Cloud Control tenant.
+- **Search** - Perform searches across all of the resources in your Security Cloud Control tenant.
+- **Changelogs** - View a detailed history of all changes made to your Security Cloud Control
+  tenant.
 - **Change Requests** - Manage change requests, which can be used to associate changes made to your
   security policy on Security Cloud Control with external change-management systems.
-- **Transaction Management** - Track the progress of asynchronous operations triggered via Security Cloud Control APIs. For example, use transaction management to monitor the deployment progress of a configuration to an ASA.
-- **Meta endpoints** - Information about Security Cloud Control Firewall Manager itself. This includes information such as details on available regions, cloud connector IPs and JSON Web Key Set.
+- **Transaction Management** - Security Cloud Control transactions are used to track the progress of
+  asynchronous operations triggered using the API on your Security Cloud Control tenant. For
+  example, use Security Cloud Control transactions to monitor the progress of deploying
+  configuration to an ASA.
+- **Meta endpoints** - Meta information about Security Cloud Control itself.
 
 ## API User Prerequisites
 
@@ -44,24 +60,29 @@ To use the Security Cloud Control API, you must have an API token. We recommend 
 an [API-only user](https://docs.defenseorchestrator.com/c-secure-device-connector-sdc.html#!t-create-api-only-users.html)
 in your Security Cloud Control tenant, and generating a token for it.
 
-To use the Security Cloud Control API, you must have an API token. We recommend that you create an API-only user in your Security Cloud Control tenant and generate a token for that user. 
+In order to perform the operation described in this page, the API-only user should at least have the
+**Read Only** role. However, different endpoints in the Security Cloud Control API can require admin
+or super-admin privileges.
 
-To perform the operations described in this page, the API-only user must have at least **Edit-only** privileges. However, some endpoints in the Security Cloud Control API may still require Admin or Super Admin privileges. 
+## Base URI
 
-## Base URL
+Cisco Security Cloud Control is deployed in multiple regions, and the API is available in all of
+these. The server URL for each region is as follows:
 
-Cisco Security Cloud Control is deployed across multiple regions, and the API is available in all of
-them. The server URLs for each region is as follows:
-
-- US: https://api.us.security.cisco.com/firewall
-- EU: https://api.eu.security.cisco.com/firewall
-- APJ: https://api.apj.security.cisco.com/firewall
-- Australia: https://api.au.security.cisco.com/firewall
-- India: https://api.in.security.cisco.com/firewall
+- US: https://api.us.security.cisco.com/firewall (use this if the Security Cloud Control URL you
+  visit is https://www.defenseorchestrator.com or https://us.manage.security.cisco.com)
+- EU: https://api.eu.security.cisco.com/firewall (use this if the Security Cloud Control URL you
+  visit is https://www.defenseorchestrator.eu or https://eu.manage.security.cisco.com)
+- APJ: https://api.apj.security.cisco.com/firewall (use this if the Security Cloud Control URL you
+  visit is https://apj.cdo.cisco.com or https://apj.manage.security.cisco.com)
+- Australia: https://api.au.security.cisco.com/firewall (use this if the Security Cloud Control URL
+  you visit is https://aus.cdo.cisco.com or https://aus.manage.security.cisco.com)
+- India: https://api.in.security.cisco.com/firewall (use this if the Security Cloud Control URL you
+  visit is https://in.cdo.cisco.com or https://in.manage.security.cisco.com)
 
 > **Note**:
-> If you are still using the old base URLs (`https://edge.<region>.cdo.cisco.com`), they will continue to
-> work. But please switch your scripts to use the new URLs.
+> If you were using the old base URIs (`https://edge.<region>.cdo.cisco.com`), they will continue to
+> work. But please switch your automation to use the new URLs.
 
 ## 1. Authorization
 
@@ -78,7 +99,7 @@ where `$API_TOKEN` is an API token for your Security Cloud Control tenant.
 
 ### Request
 
-Use this `curl` command to make a request to retrieve the list of devices from the
+Use this `CuRL` command to make a request to retrieve the list of devices from the
 `/v1/inventory/devices` endpoint.
 
 ```curl
@@ -105,8 +126,8 @@ The response returned is a JSON object that has some metadata on the request its
 
 ### Request
 
-Use this `curl` command to request the retrieval of the UUID of the cloud-delivered FMC (cdFMC)  on your
-tenant from the `/v1/inventory/managers` endpoint with the query parameter `q` set to
+Use this `CuRL` command to make a request to retrieve the UUID of the Cloud-delivered FMC on your
+tenant from the `/v1/inventory/managers` endpoint with the query `q` parameter set to
 `deviceType:CDFMC`.
 
 ```curl
@@ -117,8 +138,8 @@ curl -X GET \
 
 ### Response
 
-If your tenant has a cdFMC, the response will be a list of size 1. If not, the response will
-be an empty list. A non-empty response should look something like this:
+If your tenant has a cdFMC, the response will be a list of size 1. If it doesn't, the response will
+be an empty list. The response will look like this:
 
 ```json
 {
@@ -155,8 +176,8 @@ be an empty list. A non-empty response should look something like this:
 #### Get the UID from the response
 
 The response field `items[0].uid` contains the unique identifier of the cdFMC on your tenant. This
-is a UUIDv4. If you are using [jq](https://jqlang.org/) to parse the response, extract the UID with
-this command:
+is a UUIDv4. If using [jq](https://jqlang.org/) to parse the response, you can extract the UID with
+the following command:
 
 ```bash
 jq -r '.items[0].uid'
@@ -167,7 +188,8 @@ jq -r '.items[0].uid'
 The response field `items[0].fmcDomainUid` contains the unique identifier of the cdFMC on your
 tenant. This
 is a UUIDv4. If using [jq](https://jqlang.org/) to parse the response, you can extract the domain
-UUID from the `fmcDomainUid` field with this command:
+UID with
+the following command:
 
 ```bash
 jq -r '.items[0].fmcDomainUid'
@@ -176,20 +198,19 @@ jq -r '.items[0].fmcDomainUid'
 ## 4. Get all access policies on a cdFMC
 
 > **Note**:
-> All the cdFMC API endpoints are prefixed by `/v1/cdfmc`. These endpoints
+> All of the cdFMC API endpoints are available under APIs prefixed by `/v1/cdfmc`. These endpoints
 > are
-> compatible with the endpoints used to communicate with an on-premise FMC. So, for example, if you make an API call to
+> compatible with endpoints on an on-premise FMC. So, for example, if you were making an API call to
 > the FMC to fetch all access policies using the endpoint
 >
-`https://<your-fmc-ip>/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/policy/accesspolicies`,
-
-> the same call to your cdFMC will be
+`https://10.2.2.4/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/policy/accesspolicies`,
+> the same call to your cdFMC would be
 >
 `https://api.us.security.cisco.com/firewall/v1/cdfmc/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/policy/accesspolicies`.
 
 ### Request
 
-Use this `curl` command to request the retrieval of the UUID of the cdFMC on your
+Use this `CuRL` command to make a request to retrieve the UUID of the Cloud-delivered FMC on your
 tenant from the `/v1/cdfmc/api/fmc_config/v1/domain/<domainUid>/policy/accesspolicies` endpoint.
 
 ```curl
@@ -205,8 +226,8 @@ curl -X GET \
 
 ### Responses
 
-The response will be a JSON object that is similar to this example. Note that the response will vary depending on the
-access policies configured in your cdFMC.
+The response will be a JSON object that looks like this (the response will vary depending on the
+access policies configured on your cdFMC).
 
 ```json
 {
@@ -234,13 +255,13 @@ access policies configured in your cdFMC.
 
 ## 5. Get an access policy on a cdFMC
 
-To retrieve the details of an access policy in cdFMC, you need the `id` (represented as a
+To retrieve the details of an access policy on a cdFMC, you need the `id` (reresented as a
 universally unique UUIDv4 identifier) of the access policy, which you can retrieve using the API
-call described in the previous example.
+call in the previous example.
 
 ### Request
 
-Use this `curl` command to make a request to retrieve the UUID of the Cloud-delivered FMC on your
+Use this `CuRL` command to make a request to retrieve the UUID of the Cloud-delivered FMC on your
 tenant from the `/v1/cdfmc/api/fmc_config/v1/domain/<domainUid>/policy/accesspolicies/<id>`
 endpoint.
 
@@ -259,8 +280,8 @@ curl -X GET \                                                                   
 
 ### Response
 
-The response will be a JSON object that is similar to this example. Note that the response will vary depending on the
-access policy you selected.
+The response will be a JSON object that looks like this (the response will vary depending on the
+access policy you selected).
 
 ```json
 {
@@ -319,12 +340,12 @@ access policy you selected.
 
 ## 6. Get access rules associated with an access policy on a cdFMC
 
-To retrieve the access rules associated with an access policy in cdFMC, you need the `id` of the
-access policy, which you can retrieve using the API call described in example *5*.
+To retrieve the access rules associated with an access policy on a cdFMC, you need the `id` of the
+access policy, which you can retrieve using the API call in example *5*.
 
 ### Request
 
-Use this `curl` command to to retrieve the access rules associated with a cdFMC access policy on your
+Use this `CuRL` command to make a request to retrieve the UUID of the Cloud-delivered FMC on your
 tenant from the
 `/v1/cdfmc/api/fmc_config/v1/domain/<domainUid>/policy/accesspolicies/<id>/accessrules` endpoint.
 
@@ -338,17 +359,17 @@ curl --location 'https://api.eu.security.cisco.com/firewall/v1/cdfmc/api/fmc_con
 > - Replace `e276abec-e0f2-11e3-8169-6d9ed49b625f` with the domain UUID you retrieved in the
     previous step.
 > - Replace `0248CDE2-456F-0ed3-0000-004294967323` with the `id` of the access policy you want to
-    retrieve the rules for.
+    retrieve.
 > - Replace `us` with your region
 > - Set the query parameter `expanded` to `true` (`?expanded=true`) to expand the
-    response to include all the fields in the access rules. If you do not set this query
+    response to include all of the fields in the access rules. If you do not set this query
     parameter, the response will only include the `id`, `name`, and `links` fields of each access
     rule.
 
 ### Response
 
-The response provided will be a JSON object that is similar to this example. Note that the actual response will vary depending
-on the access rules configured on your cdFMC.
+The response provided will be a JSON object that looks like this (the response will vary depending
+on the access rules configured on your cdFMC).
 
 ```json
 {
@@ -408,18 +429,18 @@ on the access rules configured on your cdFMC.
 
 ## 7. Add an access rule to an access policy on a cdFMC
 
-To add an access rule to an access policy in cdFMC, you need the `id` of the access policy, which
-you can retrieve using the API call described in example *5*.
+To add an access rule to an access policy on a cdFMC, you need the `id` of the access policy, which
+you can retrieve using the API call in example *5*.
 
 ### Request
 
-Use this `curl` command to make a request to add an access rule to an access policy in cdFMC to
-block unsuitable content. The assumption is that you have defined `inside` and `outside` security zones
+Use this `CuRL` command to make a request to add an access rule to an access policy on a cdFMC to
+block unsuitable content. This assumes that you have defined `inside` and `outside` security zones
 on your cdFMC (
 See [the documentation on creating security zones](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/create-multiple-security-zone-object/)
 for more information).
 
-Multiple options are available when creating an access rule. This example is a simple
+There are many options available when creating an access rule. The example below is a simple
 access rule that blocks traffic from the `inside` security zone to the `outside` security zone
 to URLs in the `adult` and `pornography` categories.
 
@@ -484,14 +505,14 @@ curl --location 'https://api.eu.security.cisco.com/firewall/v1/cdfmc/api/fmc_con
 > **Notes**:
 > - Replace `e276abec-e0f2-11e3-8169-6d9ed49b625f` with the domain UUID you retrieved in the
     previous step.
-> - Replace `0248CDE2-456F-0ed3-0000-004294967323` with the `id` of the access policy to which you want to
-    add the access rule.
+> - Replace `0248CDE2-456F-0ed3-0000-004294967323` with the `id` of the access policy you want to
+    add the access rule to.
 > - Replace `us` with your region
 
 ### Response
 
-The response will be an `HTTP 201` with a JSON object that is similar to this example. Note that the response will vary
-depending on the request you make.
+The response will be a `HTTP 201` with a JSON object that looks like this (the response will vary
+depending on the request you make).
 
 ```json
 {
