@@ -11550,6 +11550,11 @@ components:
                     description: (High Availability ASAs only) Failover state of this device.
                     example: Primary - Active
                     type: string
+                certificateExpiryDate:
+                    description: (ASAs and FDM-managed FTDs only) Expiration date of the certificate used on the management interface of the device.
+                    example: 2033-12-13T05:15:44Z
+                    format: date-time
+                    type: string
                 chassisSerial:
                     description: The serial number on the chassis of the device (ASA-only). This is typically used to type up to Cisco SmartNet, and is not the same as the serial number.
                     example: JMX2450Xxxx
@@ -11605,6 +11610,11 @@ components:
                 name:
                     description: The name of the device in CDO. Device names are unique in Security Cloud Control.
                     example: my-example-device
+                    type: string
+                raVpnCertificateExpiryDate:
+                    description: (Remote Access VPN headends — ASA, FDM-managed FTD, and cdFMC-managed FTD — only) Expiration date of the Secure Client certificate installed on the device.
+                    example: 2026-12-13T05:15:44Z
+                    format: date-time
                     type: string
                 redundancyMode:
                     description: 'The redundancy mode this firewall is running in. Note: for High Availability pairs and clusters, Security Cloud Control represents all of the devices as part of one record.'
