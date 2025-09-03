@@ -4600,7 +4600,7 @@ paths:
                 - bearerAuth: []
             summary: Get MSP-managed devices
             tags:
-                - MSP
+                - MSP Inventory
     /v1/msp/inventory/devices/{deviceUid}:
         get:
             description: Get the device managed by the MSP portal using its UID.
@@ -4632,7 +4632,7 @@ paths:
                 - bearerAuth: []
             summary: Get MSP-managed device by UID
             tags:
-                - MSP
+                - MSP Inventory
     /v1/msp/inventory/devices/attribute-values:
         get:
             description: Get distinct values for multiple fields in the MSP-managed devices across all tenants managed by the MSP portal.
@@ -4654,7 +4654,7 @@ paths:
                 - bearerAuth: []
             summary: Get distinct attribute values for MSP-managed devices
             tags:
-                - MSP
+                - MSP Inventory
     /v1/msp/inventory/devices/export:
         post:
             description: This is an asynchronous operation to export MSP-managed devices in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
@@ -4682,7 +4682,7 @@ paths:
                 - bearerAuth: []
             summary: Export MSP-managed Devices
             tags:
-                - MSP
+                - MSP Inventory
     /v1/msp/inventory/managers:
         get:
             description: Get device managers, across all tenants, managed by the MSP portal.
@@ -4736,7 +4736,7 @@ paths:
                 - bearerAuth: []
             summary: Get MSP-managed device managers
             tags:
-                - MSP
+                - MSP Inventory
     /v1/msp/inventory/managers/{deviceManagerUid}:
         get:
             description: Get the device manager managed by the MSP portal using its UID.
@@ -4768,7 +4768,7 @@ paths:
                 - bearerAuth: []
             summary: Get MSP-managed device manager by UID
             tags:
-                - MSP
+                - MSP Inventory
     /v1/msp/inventory/managers/attribute-values:
         get:
             description: Get distinct values for multiple fields in the MSP-managed device managers across all tenants managed by the MSP portal.
@@ -4790,7 +4790,7 @@ paths:
                 - bearerAuth: []
             summary: Get distinct attribute values for MSP-managed device managers
             tags:
-                - MSP
+                - MSP Inventory
     /v1/msp/inventory/managers/export:
         post:
             description: This is an asynchronous operation to export MSP-managed device managers in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
@@ -4818,7 +4818,7 @@ paths:
                 - bearerAuth: []
             summary: Export MSP-managed Device Managers
             tags:
-                - MSP
+                - MSP Inventory
     /v1/msp/inventory/services:
         get:
             description: Get cloud services, across all tenants, managed by the MSP portal.
@@ -4872,7 +4872,7 @@ paths:
                 - bearerAuth: []
             summary: Get MSP-managed cloud services
             tags:
-                - MSP
+                - MSP Inventory
     /v1/msp/inventory/services/{cloudServiceUid}:
         get:
             description: Get the cloud service managed by the MSP portal using its UID.
@@ -4904,7 +4904,7 @@ paths:
                 - bearerAuth: []
             summary: Get MSP-managed cloud service by UID
             tags:
-                - MSP
+                - MSP Inventory
     /v1/msp/inventory/services/attribute-values:
         get:
             description: Get distinct values for multiple fields in the MSP-managed cloud services across all tenants managed by the MSP portal.
@@ -4926,7 +4926,7 @@ paths:
                 - bearerAuth: []
             summary: Get distinct attribute values for MSP-managed cloud services
             tags:
-                - MSP
+                - MSP Inventory
     /v1/msp/inventory/services/export:
         post:
             description: This is an asynchronous operation to export MSP-managed cloud services in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
@@ -4954,7 +4954,7 @@ paths:
                 - bearerAuth: []
             summary: Export MSP-managed Cloud Services
             tags:
-                - MSP
+                - MSP Inventory
     /v1/msp/inventory/templates:
         get:
             description: Get templates, across all tenants, managed by the MSP portal.
@@ -5008,7 +5008,7 @@ paths:
                 - bearerAuth: []
             summary: Get MSP-managed templates
             tags:
-                - MSP
+                - MSP Inventory
     /v1/msp/inventory/templates/{templateUid}:
         get:
             description: Get the template managed by the MSP portal using its UID.
@@ -5040,7 +5040,7 @@ paths:
                 - bearerAuth: []
             summary: Get MSP-managed template by UID
             tags:
-                - MSP
+                - MSP Inventory
     /v1/msp/inventory/templates/attribute-values:
         get:
             description: Get distinct values for multiple fields in the MSP-managed templates across all tenants managed by the MSP portal.
@@ -5062,7 +5062,7 @@ paths:
                 - bearerAuth: []
             summary: Get distinct attribute values for MSP-managed templates
             tags:
-                - MSP
+                - MSP Inventory
     /v1/msp/inventory/templates/export:
         post:
             description: This is an asynchronous operation to export MSP-managed templates in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
@@ -5090,7 +5090,7 @@ paths:
                 - bearerAuth: []
             summary: Export MSP-managed Templates
             tags:
-                - MSP
+                - MSP Inventory
     /v1/msp/tenants:
         get:
             description: Get a list of Security Cloud Control tenants managed by the MSP Portal.
@@ -5141,7 +5141,7 @@ paths:
                 - bearerAuth: []
             summary: Get Security Cloud Control tenants managed by MSP Portal
             tags:
-                - MSP
+                - MSP Tenant Management
         post:
             description: 'Add a tenant to the MSP Portal by providing an API token for the tenant. Use this endpoint to add a tenant that the user performing the operation is not associated with, or a tenant in a different region to that of the MSP Portal. Note: This endpoint can only be executed by a super-admin in an MSP Portal.'
             operationId: addMspTenant
@@ -5174,7 +5174,7 @@ paths:
                 - bearerAuth: []
             summary: Add Tenant to MSP Portal (API token)
             tags:
-                - MSP
+                - MSP Tenant Management
     /v1/msp/tenants/{tenantUid}:
         delete:
             description: 'Removes a tenant currently associated with the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal.'
@@ -5206,7 +5206,7 @@ paths:
                 - bearerAuth: []
             summary: Remove tenant from MSP Portal
             tags:
-                - MSP
+                - MSP Tenant Management
         get:
             description: Get a Security Cloud Control tenant managed by the MSP Portal.
             operationId: getMspManagedTenant
@@ -5243,7 +5243,7 @@ paths:
                 - bearerAuth: []
             summary: Get Security Cloud Control tenant managed by MSP Portal
             tags:
-                - MSP
+                - MSP Tenant Management
         post:
             deprecated: true
             description: 'This is an asynchronous operation to add an existing tenant that the user making the API call is associated with to the MSP Portal. This endpoint will add an API-only user to the tenant, generate an API token for the API-only user, and add the tenant to the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal who is also associated with the tenant being added.'
@@ -5281,7 +5281,7 @@ paths:
                 - bearerAuth: []
             summary: Add tenant to MSP Portal
             tags:
-                - MSP
+                - MSP Tenant Management
     /v1/msp/tenants/{tenantUid}/cdfmc:
         post:
             description: This is an asynchronous operation to provision a cdFMC for a tenant associated with the MSP Portal. This operation does not wait for the cdFMC to be provisioned on the target tenant, and will be marked as successful once the provisioning has been successfully triggered. To monitor the transaction on the target tenant, use the UID in the `TRANSACTION_UID_IN_TARGET_TENANT` key in the transaction details.
@@ -5311,7 +5311,7 @@ paths:
                 - bearerAuth: []
             summary: Provision cdFMC for Security Cloud Control tenant in MSP Portal
             tags:
-                - MSP
+                - MSP Tenant Management
     /v1/msp/tenants/{tenantUid}/mcd:
         post:
             description: This is an asynchronous operation to enable Multicloud Defense for a tenant associated with the MSP Portal.
@@ -5341,7 +5341,7 @@ paths:
                 - bearerAuth: []
             summary: Enable Multicloud Defense for Security Cloud Control tenant in MSP Portal
             tags:
-                - MSP
+                - MSP Tenant Management
     /v1/msp/tenants/{tenantUid}/users:
         get:
             description: Get a list of (non-API-only) users associated with the Security Cloud Control tenant managed by MSP portal.
@@ -5393,7 +5393,7 @@ paths:
                 - bearerAuth: []
             summary: Get non-API-only Users associated with tenant in MSP portal
             tags:
-                - MSP
+                - MSP User Management
         post:
             description: This is an asynchronous operation to add a list of users to a tenant associated with the MSP Portal.
             operationId: addUsersToTenantInMspPortal
@@ -5428,7 +5428,7 @@ paths:
                 - bearerAuth: []
             summary: Add users to Security Cloud Control tenant in MSP Portal
             tags:
-                - MSP
+                - MSP User Management
     /v1/msp/tenants/{tenantUid}/users/{apiUserUid}/token:
         post:
             description: Generate API Token for API-only user on a tenant managed by the MSP portal. API-only users are used for building automations with Security Cloud Control. If the user ID provided is not that of an API-only user, this operation will fail.
@@ -5471,7 +5471,7 @@ paths:
                 - bearerAuth: []
             summary: Generate token for API-only user on tenant managed by MSP portal
             tags:
-                - MSP
+                - MSP Tenant Management
     /v1/msp/tenants/{tenantUid}/users/api-only:
         get:
             description: Get a list of API-only users associated with the Security Cloud Control tenant managed by MSP portal.
@@ -5523,7 +5523,7 @@ paths:
                 - bearerAuth: []
             summary: Get API-only Users associated with tenant in MSP portal
             tags:
-                - MSP
+                - MSP User Management
     /v1/msp/tenants/{tenantUid}/users/delete:
         post:
             description: This is an asynchronous operation to remove a list of users from a tenant associated with the MSP Portal.
@@ -5559,7 +5559,7 @@ paths:
                 - bearerAuth: []
             summary: Remove users from Security Cloud Control tenant in MSP Portal
             tags:
-                - MSP
+                - MSP User Management
     /v1/msp/tenants/create:
         post:
             description: 'Create a new tenant in Security Cloud Control from an MSP Portal. This endpoint creates a tenant, adds the tenant to the MSP Portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal. You can create no more than 1 tenant every 30 seconds. Additionally, you are limited to creating a total of 100 tenants: please speak to support to raise this limit.'
@@ -5595,7 +5595,7 @@ paths:
                 - bearerAuth: []
             summary: Create Security Cloud Control Tenant
             tags:
-                - MSP
+                - MSP Tenant Management
     /v1/objects:
         get:
             description: 'Get objects in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
