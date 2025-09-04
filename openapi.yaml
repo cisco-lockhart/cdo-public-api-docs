@@ -1568,7 +1568,7 @@ paths:
                 - Inventory
     /v1/inventory/devices/asas/{deviceUid}/etherchannelinterfaces:
         get:
-            description: Get a list of ASA EtherChannel interfaces. An EtherChannel interface is a logical port-channel interface that aggregates multiple physical Ethernet links into a single logical interface to increase bandwidth and provide redundancy, and it is configured and used like a physical interface for interface-related features, supporting up to 48 EtherChannels depending on the ASA model.
+            description: Get a list of ASA EtherChannel interfaces. An EtherChannel interface is a logical port-channel interface that aggregates multiple physical Ethernet links into a single logical interface to increase bandwidth and provide redundancy. It is configured and used like a physical interface for interface-related features, and supports up to 48 EtherChannels, depending on the ASA model.
             operationId: getAsaEtherChannelInterfaces
             parameters:
                 - description: The number of results to retrieve.
@@ -1586,7 +1586,7 @@ paths:
                   schema:
                     minimum: 0
                     type: string
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
@@ -1634,10 +1634,10 @@ paths:
             tags:
                 - ASA Interfaces
         post:
-            description: Create an ASA EtherChannel interface. An EtherChannel interface is a logical port-channel interface that aggregates multiple physical Ethernet links into a single logical interface to increase bandwidth and provide redundancy, and it is configured and used like a physical interface for interface-related features, supporting up to 48 EtherChannels depending on the ASA model.
+            description: Create an ASA EtherChannel interface. An EtherChannel interface is a logical port-channel interface that aggregates multiple physical Ethernet links into a single logical interface to increase bandwidth and provide redundancy. It is configured and used like a physical interface for interface-related features, and supports up to 48 EtherChannels, depending on the ASA model.
             operationId: createAsaEtherChannelInterface
             parameters:
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
@@ -1671,22 +1671,22 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Create ASA EtherChannel Interface
+            summary: Create ASA EtherChannel interface
             tags:
                 - ASA Interfaces
     /v1/inventory/devices/asas/{deviceUid}/etherchannelinterfaces/{interfaceUid}:
         delete:
-            description: Delete an ASA EtherChannel interface. An EtherChannel interface is a logical port-channel interface that aggregates multiple physical Ethernet links into a single logical interface to increase bandwidth and provide redundancy, and it is configured and used like a physical interface for interface-related features, supporting up to 48 EtherChannels depending on the ASA model.
+            description: Delete the ASA EtherChannel interface. An EtherChannel interface is a logical port-channel interface that aggregates multiple physical Ethernet links into a single logical interface to increase bandwidth and provide redundancy. It is configured and used like a physical interface for interface-related features and supports up to 48 EtherChannels, depending on the ASA model.
             operationId: deleteAsaEtherChannelInterface
             parameters:
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
                   schema:
                     format: uuid
                     type: string
-                - description: The unique identifier, represented as a UUID, of the ASA EtherChannel interface.
+                - description: Unique identifier (UUID) of the ASA EtherChannel interface.
                   in: path
                   name: interfaceUid
                   required: true
@@ -1710,21 +1710,21 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Delete ASA EtherChannel Interface
+            summary: Delete ASA EtherChannel interface
             tags:
                 - ASA Interfaces
         get:
-            description: Get an ASA EtherChannel interface by UID. An EtherChannel interface is a logical port-channel interface that aggregates multiple physical Ethernet links into a single logical interface to increase bandwidth and provide redundancy, and it is configured and used like a physical interface for interface-related features, supporting up to 48 EtherChannels depending on the ASA model.
+            description: Get an ASA EtherChannel interface using its UUID. An EtherChannel interface is a logical port-channel interface that aggregates multiple physical Ethernet links into a single logical interface to increase bandwidth and provide redundancy. It is configured and used like a physical interface for interface-related features, and supports up to 48 EtherChannels, depending on the ASA model.
             operationId: getAsaEtherChannelInterface
             parameters:
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
                   schema:
                     format: uuid
                     type: string
-                - description: The unique identifier, represented as a UUID, of the ASA EtherChannel interface.
+                - description: Unique identifier (UUID) of the ASA EtherChannel interface.
                   in: path
                   name: interfaceUid
                   required: true
@@ -1754,21 +1754,21 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Get an ASA EtherChannel interface
+            summary: Get ASA EtherChannel interface
             tags:
                 - ASA Interfaces
         patch:
-            description: Modify an ASA EtherChannel interface. An EtherChannel interface is a logical port-channel interface that aggregates multiple physical Ethernet links into a single logical interface to increase bandwidth and provide redundancy, and it is configured and used like a physical interface for interface-related features, supporting up to 48 EtherChannels depending on the ASA model.
+            description: Modify the ASA EtherChannel interface. An EtherChannel interface is a logical port-channel interface that aggregates multiple physical Ethernet links into a single logical interface to increase bandwidth and provide redundancy. It is configured and used like a physical interface for interface-related features, and supports up to 48 EtherChannels, depending on the ASA model.
             operationId: modifyAsaEtherChannelInterface
             parameters:
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
                   schema:
                     format: uuid
                     type: string
-                - description: The unique identifier, represented as a UUID, of the ASA EtherChannel interface.
+                - description: Unique identifier (UUID) of the ASA EtherChannel interface.
                   in: path
                   name: interfaceUid
                   required: true
@@ -1804,12 +1804,12 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Modify ASA EtherChannel Interface
+            summary: Modify ASA EtherChannel interface
             tags:
                 - ASA Interfaces
     /v1/inventory/devices/asas/{deviceUid}/interfaces/{interfaceUid}/subinterfaces:
         get:
-            description: Get a list of ASA interface subinterfaces. A subinterface is a logical interface created on a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
+            description: Get a list of an ASA interface’s subinterfaces. A subinterface is a logical interface created in a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
             operationId: getAsaInterfaceSubInterfaces
             parameters:
                 - description: The number of results to retrieve.
@@ -1827,14 +1827,14 @@ paths:
                   schema:
                     minimum: 0
                     type: string
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
                   schema:
                     format: uuid
                     type: string
-                - description: The unique identifier, represented as a UUID, of the ASA parent interface.
+                - description: Unique identifier (UUID) of the ASA parent interface.
                   in: path
                   name: interfaceUid
                   required: true
@@ -1878,21 +1878,21 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Get ASA interface subinterfaces
+            summary: Get an ASA interface’s subinterfaces
             tags:
                 - ASA Interfaces
         post:
-            description: Create an ASA subinterface. A subinterface is a logical interface created on a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
+            description: Create an ASA subinterface. A subinterface is a logical interface created in a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
             operationId: createAsaSubInterface
             parameters:
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
                   schema:
                     format: uuid
                     type: string
-                - description: The unique identifier, represented as a UUID, of the ASA parent subinterface.
+                - description: Unique identifier (UUID) of the ASA parent interface.
                   in: path
                   name: interfaceUid
                   required: true
@@ -1931,7 +1931,7 @@ paths:
                 - ASA Interfaces
     /v1/inventory/devices/asas/{deviceUid}/physicalinterfaces:
         get:
-            description: Get a list of ASA physical interfaces. A physical interface is a hardware port on the ASA device that can be enabled and configured to connect the firewall to a network.
+            description: Get a list of ASA physical interfaces. A physical interface is a hardware port in an ASA device, which can be enabled and configured to connect the firewall to a network.
             operationId: getAsaPhysicalInterfaces
             parameters:
                 - description: The number of results to retrieve.
@@ -1949,7 +1949,7 @@ paths:
                   schema:
                     minimum: 0
                     type: string
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
@@ -1998,17 +1998,17 @@ paths:
                 - ASA Interfaces
     /v1/inventory/devices/asas/{deviceUid}/physicalinterfaces/{interfaceUid}:
         get:
-            description: Get an ASA physical interface by UID. A physical interface is a hardware port on the ASA device that can be enabled and configured to connect the firewall to a network.
+            description: Get an ASA physical interface using its UUID. A physical interface is a hardware port in an ASA device that can be enabled and configured to connect the firewall to a network.
             operationId: getAsaPhysicalInterface
             parameters:
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
                   schema:
                     format: uuid
                     type: string
-                - description: The unique identifier, represented as a UUID, of the ASA physical interface.
+                - description: Unique identifier (UUID) of the ASA physical interface.
                   in: path
                   name: interfaceUid
                   required: true
@@ -2042,17 +2042,17 @@ paths:
             tags:
                 - ASA Interfaces
         patch:
-            description: Modify an ASA physical interface. A physical interface is a hardware port on the ASA device that can be enabled and configured to connect the firewall to a network.
+            description: Modify the ASA physical interface. A physical interface is a hardware port in an ASA device that can be enabled and configured to connect the firewall to a network.
             operationId: modifyAsaPhysicalInterface
             parameters:
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
                   schema:
                     format: uuid
                     type: string
-                - description: The unique identifier, represented as a UUID, of the ASA physical interface.
+                - description: Unique identifier (UUID) of the ASA physical interface.
                   in: path
                   name: interfaceUid
                   required: true
@@ -2088,7 +2088,7 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Modify ASA Physical Interface
+            summary: Modify ASA Physical interface
             tags:
                 - ASA Interfaces
     /v1/inventory/devices/asas/{deviceUid}/read:
@@ -2165,7 +2165,7 @@ paths:
                 - Inventory
     /v1/inventory/devices/asas/{deviceUid}/subinterfaces:
         get:
-            description: Get a list of ASA subinterfaces. A subinterface is a logical interface created on a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
+            description: Get a list of the ASA subinterfaces. A subinterface is a logical interface created in a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
             operationId: getAsaSubInterfaces
             parameters:
                 - description: The number of results to retrieve.
@@ -2183,7 +2183,7 @@ paths:
                   schema:
                     minimum: 0
                     type: string
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
@@ -2232,17 +2232,17 @@ paths:
                 - ASA Interfaces
     /v1/inventory/devices/asas/{deviceUid}/subinterfaces/{interfaceUid}:
         delete:
-            description: Delete an ASA subinterface. A subinterface is a logical interface created on a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
+            description: Delete the ASA subinterface. A subinterface is a logical interface created in a physical interface allowing the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
             operationId: deleteAsaSubInterface
             parameters:
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
                   schema:
                     format: uuid
                     type: string
-                - description: The unique identifier, represented as a UUID, of the ASA subinterface.
+                - description: Unique identifier (UUID) of the ASA subinterface.
                   in: path
                   name: interfaceUid
                   required: true
@@ -2270,17 +2270,17 @@ paths:
             tags:
                 - ASA Interfaces
         get:
-            description: Get an ASA subinterface by UID. A subinterface is a logical interface created on a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
+            description: Get an ASA subinterface using its UUID. A subinterface is a logical interface created in a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
             operationId: getAsaSubInterface
             parameters:
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
                   schema:
                     format: uuid
                     type: string
-                - description: The unique identifier, represented as a UUID, of the ASA subinterface.
+                - description: Unique identifier (UUID) of the ASA subinterface.
                   in: path
                   name: interfaceUid
                   required: true
@@ -2314,17 +2314,17 @@ paths:
             tags:
                 - ASA Interfaces
         patch:
-            description: Modify an ASA subinterface. A subinterface is a logical interface created on a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
+            description: Modify the ASA subinterface. A subinterface is a logical interface created in a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
             operationId: modifyAsaSubInterface
             parameters:
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
                   schema:
                     format: uuid
                     type: string
-                - description: The unique identifier, represented as a UUID, of the ASA subinterface.
+                - description: Unique identifier (UUID) of the ASA subinterface.
                   in: path
                   name: interfaceUid
                   required: true
@@ -2431,7 +2431,7 @@ paths:
                 - Device Upgrades
     /v1/inventory/devices/asas/{deviceUid}/virtualtunnelinterfaces:
         get:
-            description: Get a list of ASA virtual tunnel interfaces. A virtual tunnel interface (VTI) is a logical interface that provides a point-to-point GRE or IPsec tunnel endpoint, enabling simplified VPN configuration and routing integration on the ASA device.
+            description: Get a list of ASA virtual tunnel interfaces. A virtual tunnel interface (VTI) is a logical interface that provides a point-to-point GRE or IPsec tunnel endpoint, enabling simplified VPN configuration and routing integration in the ASA device.
             operationId: getAsaVirtualTunnelInterfaces
             parameters:
                 - description: The number of results to retrieve.
@@ -2449,7 +2449,7 @@ paths:
                   schema:
                     minimum: 0
                     type: string
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
@@ -2498,17 +2498,17 @@ paths:
                 - ASA Interfaces
     /v1/inventory/devices/asas/{deviceUid}/virtualtunnelinterfaces/{interfaceUid}:
         get:
-            description: Get an ASA virtual tunnel interface by UID. A virtual tunnel interface (VTI) is a logical interface that provides a point-to-point GRE or IPsec tunnel endpoint, enabling simplified VPN configuration and routing integration on the ASA device.
+            description: Get an ASA virtual tunnel interface using its UUID. A virtual tunnel interface (VTI) is a logical interface that provides a point-to-point GRE or IPsec tunnel endpoint, enabling simplified VPN configuration and routing integration in the ASA device.
             operationId: getAsaVirtualTunnelInterface
             parameters:
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
                   schema:
                     format: uuid
                     type: string
-                - description: The unique identifier, represented as a UUID, of the ASA virtual tunnel interface.
+                - description: Unique identifier (UUID) of the ASA virtual tunnel interface.
                   in: path
                   name: interfaceUid
                   required: true
@@ -2543,7 +2543,7 @@ paths:
                 - ASA Interfaces
     /v1/inventory/devices/asas/{deviceUid}/vlaninterfaces:
         get:
-            description: Get a list of ASA VLAN interfaces. A VLAN interface is a logical interface that represents a virtual LAN on a physical interface, allowing multiple VLANs to be configured and segmented on a single physical interface for traffic separation and security purposes.
+            description: Get a list of ASA VLAN interfaces. A VLAN interface is a logical interface that represents a virtual LAN in a physical interface, allowing multiple VLANs to be configured and segmented in a single physical interface for traffic separation and security purposes.
             operationId: getAsaVlanInterfaces
             parameters:
                 - description: The number of results to retrieve.
@@ -2561,7 +2561,7 @@ paths:
                   schema:
                     minimum: 0
                     type: string
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
@@ -2609,10 +2609,10 @@ paths:
             tags:
                 - ASA Interfaces
         post:
-            description: Create an ASA VLAN interface. A VLAN interface is a logical interface that represents a virtual LAN on a physical interface, allowing multiple VLANs to be configured and segmented on a single physical interface for traffic separation and security purposes.
+            description: Create an ASA VLAN interface. A VLAN interface is a logical interface that represents a virtual LAN in a physical interface, allowing multiple VLANs to be configured and segmented in a single physical interface for traffic separation and security purposes.
             operationId: createAsaVlanInterface
             parameters:
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
@@ -2646,22 +2646,22 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Create ASA VLAN Interface
+            summary: Create ASA VLAN interface
             tags:
                 - ASA Interfaces
     /v1/inventory/devices/asas/{deviceUid}/vlaninterfaces/{interfaceUid}:
         delete:
-            description: Delete an ASA VLAN interface. A VLAN interface is a logical interface that represents a virtual LAN on a physical interface, allowing multiple VLANs to be configured and segmented on a single physical interface for traffic separation and security purposes.
+            description: Delete the ASA VLAN interface. A VLAN interface is a logical interface that represents a virtual LAN in a physical interface, allowing multiple VLANs to be configured and segmented in a single physical interface for traffic separation and security.
             operationId: deleteAsaVlanInterface
             parameters:
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
                   schema:
                     format: uuid
                     type: string
-                - description: The unique identifier, represented as a UUID, of the ASA VLAN interface.
+                - description: Unique identifier (UUID) of the ASA VLAN interface.
                   in: path
                   name: interfaceUid
                   required: true
@@ -2685,21 +2685,21 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Delete ASA VLAN Interface
+            summary: Delete ASA VLAN interface
             tags:
                 - ASA Interfaces
         get:
-            description: Get an ASA VLAN interface by UID. A VLAN interface is a logical interface that represents a virtual LAN on a physical interface, allowing multiple VLANs to be configured and segmented on a single physical interface for traffic separation and security purposes.
+            description: Get an ASA VLAN interface using its UUID. A VLAN interface is a logical interface that represents a virtual LAN in a physical interface, allowing multiple VLANs to be configured and segmented in a single physical interface for traffic separation and security purposes.
             operationId: getAsaVlanInterface
             parameters:
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
                   schema:
                     format: uuid
                     type: string
-                - description: The unique identifier, represented as a UUID, of the ASA VLAN interface.
+                - description: Unique identifier (UUID) of the ASA VLAN interface.
                   in: path
                   name: interfaceUid
                   required: true
@@ -2733,17 +2733,17 @@ paths:
             tags:
                 - ASA Interfaces
         patch:
-            description: Modify an ASA VLAN interface. A VLAN interface is a logical interface that represents a virtual LAN on a physical interface, allowing multiple VLANs to be configured and segmented on a single physical interface for traffic separation and security purposes.
+            description: Modify the ASA VLAN interface. A VLAN interface is a logical interface that represents a virtual LAN in a physical interface, allowing multiple VLANs to be configured and segmented in a single physical interface for traffic separation and security.
             operationId: modifyAsaVlanInterface
             parameters:
-                - description: The unique identifier, represented as a UUID, of the device.
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: deviceUid
                   required: true
                   schema:
                     format: uuid
                     type: string
-                - description: The unique identifier, represented as a UUID, of the ASA VLAN interface.
+                - description: Unique identifier (UUID) of the ASA VLAN interface.
                   in: path
                   name: interfaceUid
                   required: true
@@ -2779,7 +2779,7 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Modify ASA VLAN Interface
+            summary: Modify ASA VLAN interface
             tags:
                 - ASA Interfaces
     /v1/inventory/devices/asas/acceptCert:
@@ -6180,9 +6180,9 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Get Access Groups
+            summary: Get ASA Access Groups
             tags:
-                - Access Groups
+                - ASA Access Groups
         post:
             description: Create an Access Group
             operationId: createAccessGroup
@@ -6211,9 +6211,9 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Create Access Group
+            summary: Create ASA Access Group
             tags:
-                - Access Groups
+                - ASA Access Groups
     /v1/policies/asa/accessgroups/{accessGroupUid}:
         delete:
             description: Delete Access Group by UID in the Security Cloud Control tenant.
@@ -6241,9 +6241,9 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Delete Access Group
+            summary: Delete ASA Access Group
             tags:
-                - Access Groups
+                - ASA Access Groups
         get:
             description: Get a single ASA Access Group by UUID.
             operationId: fetchAccessGroup
@@ -6276,9 +6276,9 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Get Access Group
+            summary: Get ASA Access Group
             tags:
-                - Access Groups
+                - ASA Access Groups
         patch:
             description: Modify Security Cloud Control Access Group by UID.
             operationId: patchAccessGroup
@@ -6319,7 +6319,7 @@ paths:
                 - bearerAuth: []
             summary: Modify ASA Access Group
             tags:
-                - Access Groups
+                - ASA Access Groups
     /v1/policies/asa/accessrules:
         get:
             description: Get a list of ASA Access Rules.
@@ -6375,7 +6375,7 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Get Access Rules
+            summary: Get ASA Access Rules
             tags:
                 - ASA Access Rules
         post:
@@ -6406,7 +6406,7 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Create Access Rule
+            summary: Create ASA Access Rule
             tags:
                 - ASA Access Rules
     /v1/policies/asa/accessrules/{accessRuleUid}:
@@ -6436,7 +6436,7 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Delete Access Rule
+            summary: Delete ASA Access Rule
             tags:
                 - ASA Access Rules
         get:
@@ -6471,7 +6471,7 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Get Access Rule
+            summary: Get ASA Access Rule
             tags:
                 - ASA Access Rules
         patch:
@@ -8365,62 +8365,62 @@ components:
         AsaInterface:
             properties:
                 description:
-                    description: The description of the interface.
+                    description: Interface description.
                     type: string
                 deviceUid:
-                    description: The unique identifier, represented as a UUID, of the device associated with the interface.
+                    description: Unique identifier (UUID) of the device associated with the interface.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
                 duplexType:
                     $ref: '#/components/schemas/DuplexType'
-                    description: The duplex mode controls how data transmission occurs on a physical interface. It determines whether the interface can send and receive data simultaneously or only one direction at a time.
+                    description: Duplex mode controls how data transmission occurs in a physical interface. It determines whether the interface can send and receive data simultaneously or either send or receive at a given time.
                     example: AUTO, FULL or HALF
                 enabled:
                     description: Indicates whether the interface is enabled.
                     type: boolean
                 etherChannelGroupUid:
-                    description: The unique identifier, represented as a UUID, of the EtherChannel group this interface belong to.
+                    description: Unique identifier (UUID) of the EtherChannel group to which this interface belongs.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
                 etherChannelId:
-                    description: The identifier of the EtherChannel interface in the scope of the device.
+                    description: Identifier of the EtherChannel interface in the scope of the device.
                     format: int32
                     type: integer
                 hardwareName:
-                    description: The interface hardware name. It is usually structured from the type, speed, slot and port number.
+                    description: Interface hardware name. It is usually structured from the type, speed, slot and port number.
                     example: GigabitEthernet0/0 for a physical interface or GigabitEthernet0/0.100 for a subinterface
                     type: string
                 interfaceType:
                     $ref: '#/components/schemas/InterfaceType'
-                    description: The type of the interface.
+                    description: Interface type.
                     example: PHYSICAL_INTERFACE, SUB_INTERFACE, VIRTUAL_TUNNEL_INTERFACE, VLAN_INTERFACE, ETHER_CHANNEL_INTERFACE
                 ipv4:
                     $ref: '#/components/schemas/InterfaceIpv4Address'
-                    description: The interface IPV4 address information.
+                    description: IPv4 address details of the interface.
                 ipv6:
                     $ref: '#/components/schemas/InterfaceIpv6Address'
-                    description: The interface IPV6 address information.
+                    description: IPv6 address details of the interface.
                 lacpMode:
                     description: The Link Aggregation Control Protocol (LACP) mode of the EtherChannel interface.
                     enum:
                         - ACTIVE
                         - PASSIVE
                         - "ON"
-                    example: ACTIVE, PASSIVE or ON
+                    example: ACTIVE, PASSIVE, or ON
                     type: string
                 macAddress:
-                    description: The interface Media Access Control (MAC) address, a unique hardware identifier assigned to each physical interface. it is used for Layer 2 communication within a network segment.
+                    description: Interface MAC address is a unique hardware identifier assigned to each physical interface and used for Layer 2 communication in a network segment.
                     type: string
                 managementInterface:
-                    description: Indicates whether the interface is used for device management purposes.
+                    description: Indicates whether the interface is used for device management.
                     type: boolean
                 managementOnly:
-                    description: Indicates whether the interface is exclusively used for management traffic and does not carry regular user or data traffic
+                    description: Indicates whether the interface is exclusively used for management traffic and not regular user or data traffic.
                     type: boolean
                 memberInterfaces:
-                    description: The set of unique identifiers, represented as UUIDs, of the member interfaces that are part of the EtherChannel group.
+                    description: Set of unique identifiers (UUIDs) of interfaces that are part of an EtherChannel group.
                     items:
                         format: uuid
                         type: string
@@ -8428,60 +8428,60 @@ components:
                     uniqueItems: true
                 mode:
                     $ref: '#/components/schemas/InterfaceMode'
-                    description: The interface mode, describing how it operates within the network.
+                    description: Interface mode, which describes how an interface operates in the network.
                     example: ROUTED, PASSIVE or SWITCHPORT
                 monitorInterface:
-                    description: Indicates if the interface is actively monitored for checking its operational status and health as part of an HA setup. It helps determine if the interface is functioning correctly and whether a failover to a standby device should be triggered in case of failure.
+                    description: Indicates if the interface is actively monitored as part of an HA setup. The check determines if the interface is functioning correctly and whether a failover to a standby device should be triggered, if required.
                     type: boolean
                 mtu:
-                    description: The interface MTU (Maximum Transmission Unit), the largest size, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. It defines the maximum payload size that the interface can handle in a single transmission. Range is 64 - 9198.
+                    description: Interface MTU, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. It defines the maximum payload size the interface can handle in a single transmission. Valid range is from 64 to 9198.
                     format: int32
                     type: integer
                 name:
-                    description: The logical name of the interface. Interface names are unique in the scope of the device.
+                    description: Logical name of the interface, unique in the scope of the device.
                     example: my-example-interface
                     type: string
                 parentInterfaceUid:
-                    description: The unique identifier, represented as a UUID, of the parent interface for sub-interfaces.
+                    description: Unique identifier (UUID) of the parent interface.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
                 runtimeData:
                     $ref: '#/components/schemas/InterfaceRuntimeData'
-                    description: The interface runtime data displays the actual state of the interface, including the values selected during operation.
+                    description: Interface runtime data displays the state of the interface, including values selected during operation.
                 securityLevel:
-                    description: Indicates the interface trust level, ranging from 0 (lowest) to 100 (highest).
+                    description: Indicates interface trust level, ranging from 0 (lowest) to 100 (highest).
                     format: int32
                     type: integer
                 speedType:
                     $ref: '#/components/schemas/SpeedType'
-                    description: The speed of a physical interface. It can be auto detected or set to a specific value.
+                    description: Physical interface speed, which can be auto detected or set to a specific value.
                     example: AUTO or THOUSAND
                 standbyMacAddress:
-                    description: The standby interface Media Access Control (MAC) address, for use in a high-availability (HA) pair.
+                    description: Standby interface MAC address for use in HA pairs.
                     type: string
                 subInterfaceId:
-                    description: The unique identifier of the sub-interface in the scope of the parent interface. It is used to differentiate between multiple sub-interfaces on the same parent interface. Range is 1 - 4294967295.
+                    description: Unique identifier of the subinterface, which is used to differentiate between the subinterfaces of the same parent interface. Valid range is from 1 to 4294967295.
                     format: int64
                     type: integer
                 switchPortConfig:
                     $ref: '#/components/schemas/SwitchPortConfig'
-                    description: The switch port configuration for the interface, which includes settings such as switch port mode, access VLAN and trunk VLAN. This is applicable for interfaces operating in switchport mode.
+                    description: Switchport configuration of the interface, which includes settings such as switchport mode, access VLAN, and trunk VLAN. This configuration is applicable for interfaces operating in switchport mode.
                 uid:
-                    description: The unique identifier, represented as a UUID, of the interface in Security Cloud Control.
+                    description: Unique identifier (UUID) of the interface in Security Cloud Control.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
                 vlanId:
-                    description: The unique identifier of the VLAN associated with the VLAN interface. Range is 1 - 4070.
+                    description: Unique identifier of the VLAN associated with VLAN interface. Valid range is from 1 to 4070.
                     format: int32
                     type: integer
                 vlanPrimaryId:
-                    description: The primary unique identifier of the VLAN associated with the sub-interface. Range is 1 - 4094.
+                    description: Primary unique identifier of the VLAN associated with subinterface. Valid range is from 1 to 4094.
                     format: int32
                     type: integer
                 vlanSecondaryIds:
-                    description: The secondary identifiers of the VLAN associated with the sub-interface. Each range is defined by a start and end value, allowing for multiple VLANs to be associated with the sub-interface. Ranges are inclusive.
+                    description: Secondary identifiers of the VLAN associated with subinterface. Each range is defined by a start and end value, which allows multiple VLANs to be associated with a subinterface. All ranges are inclusive.
                     items:
                         $ref: '#/components/schemas/VlanIdRange'
                     type: array
@@ -10113,51 +10113,51 @@ components:
         EtherChannelInterfaceCreateInput:
             properties:
                 description:
-                    description: The description of the interface.
+                    description: Interface description.
                     type: string
                 enabled:
                     description: Indicates whether the interface is enabled.
                     type: boolean
                 etherChannelId:
-                    description: The identifier of the EtherChannel interface in the scope of the device.
+                    description: EtherChannel interface identifier in the scope of the device.
                     format: int32
                     type: integer
                 ipv4:
                     $ref: '#/components/schemas/InterfaceIpv4Address'
-                    description: The interface ipv4 address information.
+                    description: Interface IPv4 address.
                 ipv6:
                     $ref: '#/components/schemas/InterfaceIpv6Address'
-                    description: The interface ipv6 address information.
+                    description: Interface IPv6 address.
                 lacpMode:
-                    description: The Link Aggregation Control Protocol (LACP) mode of the EtherChannel interface.
+                    description: Link Aggregation Control Protocol (LACP) mode of EtherChannel interface.
                     enum:
                         - ACTIVE
                         - PASSIVE
                         - "ON"
-                    example: ACTIVE, PASSIVE or ON
+                    example: ACTIVE, PASSIVE, or ON
                     type: string
                 macAddress:
-                    description: The interface Media Access Control (MAC) address, a unique hardware identifier assigned to each physical interface. it is used for Layer 2 communication within a network segment.
+                    description: Interface MAC address is a unique hardware identifier assigned to each physical interface and used for Layer 2 communication in a network segment.
                     type: string
                 managementOnly:
-                    description: Indicates whether the interface is exclusively used for management traffic and does not carry regular user or data traffic
+                    description: Indicates if the interface is used exclusively for management traffic and not regular user or data traffic.
                     type: boolean
                 memberInterfaces:
-                    description: The set of unique identifiers, represented as UUIDs, of the member interfaces that are part of the EtherChannel group.
+                    description: Set of unique identifiers (UUIDs) of the member interfaces that are a part of the EtherChannel group.
                     items:
                         format: uuid
                         type: string
                     type: array
                     uniqueItems: true
                 monitorInterface:
-                    description: Indicates if the interface is actively monitored for checking its operational status and health as part of an HA setup. It helps determine if the interface is functioning correctly and whether a failover to a standby device should be triggered in case of failure.
+                    description: Indicates if the interface is actively monitored as part of an HA setup. The check determines if the interface is functioning correctly and whether a failover to a standby device should be triggered, if required.
                     type: boolean
                 mtu:
-                    description: The interface MTU (Maximum Transmission Unit), the largest size, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. It defines the maximum payload size that the interface can handle in a single transmission.
+                    description: Interface MTU, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. MTU defines the maximum payload size the interface can handle in a single transmission. . Valid range is from 64 to 9198.
                     format: int32
                     type: integer
                 name:
-                    description: The logical name of the interface. Interface names are unique in the scope of the device.
+                    description: Logical name of the interface, which must be unique in the scope of the device.
                     example: my-example-interface
                     type: string
                 securityLevel:
@@ -10171,47 +10171,47 @@ components:
         EtherChannelInterfacePatchInput:
             properties:
                 description:
-                    description: The description of the interface.
+                    description: Interface description.
                     type: string
                 enabled:
                     description: Indicates whether the interface is enabled.
                     type: boolean
                 ipv4:
                     $ref: '#/components/schemas/InterfaceIpv4Address'
-                    description: The interface ipv4 address information.
+                    description: Interface IPv4 address.
                 ipv6:
                     $ref: '#/components/schemas/InterfaceIpv6Address'
-                    description: The interface ipv6 address information.
+                    description: Interface IPv6 address.
                 lacpMode:
-                    description: The Link Aggregation Control Protocol (LACP) mode of the EtherChannel interface.
+                    description: Link Aggregation Control Protocol (LACP) mode of the EtherChannel interface.
                     enum:
                         - ACTIVE
                         - PASSIVE
                         - "ON"
-                    example: ACTIVE, PASSIVE or ON
+                    example: ACTIVE, PASSIVE, or ON
                     type: string
                 macAddress:
-                    description: The interface Media Access Control (MAC) address, a unique hardware identifier assigned to each physical interface. it is used for Layer 2 communication within a network segment.
+                    description: Interface MAC address is a unique hardware identifier assigned to each physical interface and used for Layer 2 communication in a network segment.
                     type: string
                 managementOnly:
-                    description: Indicates whether the interface is exclusively used for management traffic and does not carry regular user or data traffic
+                    description: Indicates if the interface is used exclusively for management traffic and not regular user or data traffic.
                     type: boolean
                 memberInterfaces:
-                    description: The set of unique identifiers, represented as UUIDs, of the member interfaces that are part of the EtherChannel group.
+                    description: Set of unique identifiers (UUIDs) of the member interfaces that are a part of the EtherChannel group.
                     items:
                         format: uuid
                         type: string
                     type: array
                     uniqueItems: true
                 monitorInterface:
-                    description: Indicates if the interface is actively monitored for checking its operational status and health as part of an HA setup. It helps determine if the interface is functioning correctly and whether a failover to a standby device should be triggered in case of failure.
+                    description: Indicates if the interface is actively monitored as part of an HA setup. The check determines if the interface is functioning correctly and whether a failover to a standby device should be triggered, if required.
                     type: boolean
                 mtu:
-                    description: The interface MTU (Maximum Transmission Unit), the largest size, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. It defines the maximum payload size that the interface can handle in a single transmission.
+                    description: Interface MTU, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. MTU defines the maximum payload size the interface can handle in a single transmission. . Valid range is from 64 to 9198.
                     format: int32
                     type: integer
                 name:
-                    description: The logical name of the interface. Interface names are unique in the scope of the device.
+                    description: Logical name of the interface, which must be unique in the scope of the device.
                     example: my-example-interface
                     type: string
                 securityLevel:
@@ -10919,52 +10919,52 @@ components:
         InterfaceIpAddress:
             properties:
                 ipAddress:
-                    description: A unique network address assigned to a physical or logical port, enabling it to communicate on a specific network segment and enforce security policies for traffic traversing that interface.
-                    example: Ipv4 address like 192.168.1.1 or Ipv6 address like 2001:db8::1
+                    description: Unique network address assigned to a physical or logical port, which enables the port to communicate on a specific network segment and enforce security policies for traffic traversing that interface.
+                    example: IPv4 address such as 192.168.1.1 or IPv6 address such as  2001:db8::1
                     type: string
                 netmask:
-                    description: A 32-bit number that defines the network portion of the IP address, differentiating it from the host portion. It determines the size of the local network segment directly connected to that interface, allowing to identify which traffic belongs to its local network and which needs to be routed.
+                    description: A 32-bit number that defines the network portion of an IP address, differentiating it from the host portion. This number determines the size of the local network segment directly connected to the interface, allowing it to identify which traffic belongs to its local network and which needs to be routed.
                     example: 255.255.255.0
                     type: string
                 setroute:
-                    description: Indicates whether a default route using the gateway information provided by the DHCP server is created automatically. Essentially, the DHCP-assigned gateway is used as the next-hop for routing traffic
+                    description: Indicates whether a default route using the gateway information provided by the DHCP server is created automatically. The DHCP-assigned gateway is used as the next-hop for routing traffic.
                     type: boolean
                 standbyIpAddress:
-                    description: A secondary IP address configured on an interface, specifically for use in a high-availability (HA) pair. This address remains inactive on the standby unit until a failover occurs, at which point the standby assumes ownership of this IP address (along with the primary IP) to maintain network connectivity for devices.
-                    example: Ipv4 address like 192.168.1.1 or Ipv6 address like 2001:db8::1
+                    description: Secondary IP address configured in an interface, specifically for use in an HA pair. This address stays inactive in the standby unit until a failover occurs, at which point, the standby assumes ownership of both the primary and secondary IP addresses to ensure network connectivity for devices.
+                    example: IPv4 address such as 192.168.1.1 or IPv6 address such as 2001:db8::1
                     type: string
             type: object
         InterfaceIpv4Address:
             properties:
                 ipAddress:
                     $ref: '#/components/schemas/InterfaceIpAddress'
-                    description: The interface IPV4 address properties.
+                    description: Interface IPv4 address properties.
                 ipType:
                     $ref: '#/components/schemas/IpType'
-                    description: The type of the IP address, such as STATIC or DHCP.
+                    description: IP address type, such as STATIC or DHCP.
             type: object
         InterfaceIpv6Address:
             properties:
                 autoConfig:
-                    description: Indicates whether the address is automatically configured.
+                    description: Indicates whether address is automatically configured.
                     type: boolean
                 dadAttempts:
-                    description: Indicates how many times the device performs Duplicate Address Detection (DAD) to verify the uniqueness of an address before assigning the IPv6 address. Range is 0-600.
+                    description: Indicates the number of times a device performs Duplicate Address Detection (DAD) to verify the uniqueness of an address before assigning the IPv6 address. Valid range is from 0 to 600.
                     format: int32
                     type: integer
                 enabled:
-                    description: Indicates whether IPV6 is enabled on the interface.
+                    description: Indicates whether IPv6 is enabled in interface.
                     type: boolean
                 ipAddresses:
-                    description: List of IPV6 addresses assigned to the interface.
+                    description: List of IPv6 addresses assigned to interface.
                     items:
                         $ref: '#/components/schemas/InterfaceIpAddress'
                     type: array
                 linkLocalAddress:
                     $ref: '#/components/schemas/InterfaceIpAddress'
-                    description: IPV6 address that is only used for communication within the same network link.
+                    description: IPv6 address that is used only for communication within the same network link.
                 suppressRA:
-                    description: Indicates whether to suppress router advertisements.
+                    description: Indicates whether router advertisements should be suppressed.
                     type: boolean
             type: object
         InterfaceMode:
@@ -10976,26 +10976,26 @@ components:
         InterfaceRuntimeData:
             properties:
                 duplexType:
-                    description: The actual duplex mode of the physical interface.
+                    description: Actual duplex mode of the physical interface.
                     type: string
                 ipAddress:
-                    description: The actual IP address of the interface.
+                    description: Actual IP address of the interface.
                     type: string
                 linkEnabled:
-                    description: Indicates whether the interface link is enabled.
+                    description: Indicates whether interface link is enabled.
                     type: boolean
                 linkState:
                     $ref: '#/components/schemas/LinkState'
                     description: The interface link state, such as UP or DOWN.
                 macAddress:
-                    description: The actual Media Access Control (MAC) address of the interface.
+                    description: Actual MAC address of the interface.
                     type: string
                 mtu:
-                    description: The actual MTU (Maximum Transmission Unit) of the interface.
+                    description: Actual MTU of the interface.
                     format: int32
                     type: integer
                 speedType:
-                    description: The actual speed of the physical interface.
+                    description: Actual speed of the physical interface.
                     type: string
             type: object
         InterfaceType:
@@ -12134,40 +12134,40 @@ components:
         PhysicalInterfacePatchInput:
             properties:
                 description:
-                    description: The description of the interface.
+                    description: Interface description.
                     type: string
                 duplexType:
                     $ref: '#/components/schemas/DuplexType'
-                    description: The duplex mode controls how data transmission occurs on a physical interface. It determines whether the interface can send and receive data simultaneously or only one direction at a time.
-                    example: AUTO, FULL or HALF
+                    description: Duplex mode controls how data transmission occurs in a physical interface. It determines whether the interface can send and receive data simultaneously or just send or receive at a given time.
+                    example: AUTO, FULL, or HALF
                 enabled:
                     description: Indicates whether the interface is enabled.
                     type: boolean
                 ipv4:
                     $ref: '#/components/schemas/InterfaceIpv4Address'
-                    description: The interface ipv4 address information.
+                    description: Interface IPv4 address.
                 ipv6:
                     $ref: '#/components/schemas/InterfaceIpv6Address'
-                    description: The interface ipv6 address information.
+                    description: Interface IPv6 address.
                 macAddress:
-                    description: The interface Media Access Control (MAC) address, a unique hardware identifier assigned to each physical interface. it is used for Layer 2 communication within a network segment.
+                    description: Interface MAC address is a unique hardware identifier assigned to each physical interface and used for Layer 2 communication in a network segment.
                     type: string
                 managementOnly:
-                    description: Indicates whether the interface is exclusively used for management traffic and does not carry regular user or data traffic
+                    description: Indicates if the interface is used exclusively for management traffic and not regular user or data traffic.
                     type: boolean
                 mode:
                     $ref: '#/components/schemas/InterfaceMode'
-                    description: The interface mode, describing how it operates within the network.
-                    example: ROUTED, PASSIVE or SWITCHPORT
+                    description: TInterface mode, which describes how the interface works in the network.
+                    example: ROUTED, PASSIVE, or SWITCHPORT
                 monitorInterface:
-                    description: Indicates if the interface is actively monitored for checking its operational status and health as part of an HA setup. It helps determine if the interface is functioning correctly and whether a failover to a standby device should be triggered in case of failure.
+                    description: Indicates if the interface is actively monitored as part of an HA setup. The check determines if the interface is functioning correctly and whether a failover to a standby device should be triggered, if required.
                     type: boolean
                 mtu:
-                    description: The interface MTU (Maximum Transmission Unit), the largest size, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. It defines the maximum payload size that the interface can handle in a single transmission.
+                    description: Interface MTU, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. MTU defines the maximum payload size the interface can handle in a single transmission. . Valid range is from 64 to 9198.
                     format: int32
                     type: integer
                 name:
-                    description: The logical name of the interface. Interface names are unique in the scope of the device.
+                    description: Logical name of the interface, which must be unique in the scope of the device.
                     example: my-example-interface
                     type: string
                 securityLevel:
@@ -12176,7 +12176,7 @@ components:
                     type: integer
                 speedType:
                     $ref: '#/components/schemas/SpeedType'
-                    description: The speed of a physical interface. It can be auto detected or set to a specific value.
+                    description: Physical interface speed, which can be auto detected or set to a specific value.
                     example: AUTO or THOUSAND
                 standbyMacAddress:
                     description: The standby interface Media Access Control (MAC) address, for use in a high-availability (HA) pair.
@@ -12970,32 +12970,32 @@ components:
         SubInterfaceCreateInput:
             properties:
                 description:
-                    description: The description of the interface.
+                    description: Interface description.
                     type: string
                 enabled:
                     description: Indicates whether the interface is enabled.
                     type: boolean
                 ipv4:
                     $ref: '#/components/schemas/InterfaceIpv4Address'
-                    description: The interface ipv4 address information.
+                    description: Interface IPv4 address.
                 ipv6:
                     $ref: '#/components/schemas/InterfaceIpv6Address'
-                    description: The interface ipv6 address information.
+                    description: Interface IPv6 address.
                 macAddress:
-                    description: The interface Media Access Control (MAC) address, a unique hardware identifier assigned to each physical interface. it is used for Layer 2 communication within a network segment.
+                    description: Interface MAC address is a unique hardware identifier assigned to each physical interface and used for Layer 2 communication in a network segment.
                     type: string
                 managementOnly:
-                    description: Indicates whether the interface is exclusively used for management traffic and does not carry regular user or data traffic
+                    description: Indicates if the interface is used exclusively for management traffic and not regular user or data traffic.
                     type: boolean
                 monitorInterface:
-                    description: Indicates if the interface is actively monitored for checking its operational status and health as part of an HA setup. It helps determine if the interface is functioning correctly and whether a failover to a standby device should be triggered in case of failure.
+                    description: Indicates if the interface is actively monitored as part of an HA setup. The check determines if the interface is functioning correctly and whether a failover to a standby device should be triggered, if required.
                     type: boolean
                 mtu:
-                    description: The interface MTU (Maximum Transmission Unit), the largest size, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. It defines the maximum payload size that the interface can handle in a single transmission.
+                    description: Interface MTU, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. MTU defines the maximum payload size the interface can handle in a single transmission. . Valid range is from 64 to 9198.
                     format: int32
                     type: integer
                 name:
-                    description: The logical name of the interface. Interface names are unique in the scope of the device.
+                    description: Logical name of the interface, which must be unique in the scope of the device.
                     example: my-example-interface
                     type: string
                 securityLevel:
@@ -13006,15 +13006,15 @@ components:
                     description: The standby interface Media Access Control (MAC) address, for use in a high-availability (HA) pair.
                     type: string
                 subInterfaceId:
-                    description: The unique identifier of the sub-interface in the scope of the parent interface. It is used to differentiate between multiple sub-interfaces on the same parent interface. Range is 1 - 4294967295.
+                    description: Unique identifier of the subinterface. The identifier is used to differentiate between multiple subinterfaces in the same parent interface. Valid range is from 1 to 4294967295.
                     format: int64
                     type: integer
                 vlanPrimaryId:
-                    description: The primary unique identifier of the VLAN associated with the sub-interface. Range is 1 - 4094.
+                    description: Primary unique identifier of the VLAN associated with the subinterface. Valid range is from 1 to 4094.
                     format: int32
                     type: integer
                 vlanSecondaryIds:
-                    description: The secondary identifiers of the VLAN associated with the sub-interface. Each range is defined by a start and end value, allowing for multiple VLANs to be associated with the sub-interface. Ranges are inclusive.
+                    description: Secondary identifiers of the VLAN associated with the subinterface. Each range is defined by a start and an end value, which allows multiple VLANs to be associated with a subinterface. Ranges are inclusive.
                     items:
                         $ref: '#/components/schemas/VlanIdRange'
                     type: array
@@ -13023,32 +13023,32 @@ components:
         SubInterfacePatchInput:
             properties:
                 description:
-                    description: The description of the interface.
+                    description: Interface description.
                     type: string
                 enabled:
                     description: Indicates whether the interface is enabled.
                     type: boolean
                 ipv4:
                     $ref: '#/components/schemas/InterfaceIpv4Address'
-                    description: The interface ipv4 address information.
+                    description: Interface IPv4 address.
                 ipv6:
                     $ref: '#/components/schemas/InterfaceIpv6Address'
-                    description: The interface ipv6 address information.
+                    description: Interface IPv6 address.
                 macAddress:
-                    description: The interface Media Access Control (MAC) address, a unique hardware identifier assigned to each physical interface. it is used for Layer 2 communication within a network segment.
+                    description: Interface MAC address is a unique hardware identifier assigned to each physical interface and used for Layer 2 communication in a network segment.
                     type: string
                 managementOnly:
-                    description: Indicates whether the interface is exclusively used for management traffic and does not carry regular user or data traffic
+                    description: Indicates if the interface is used exclusively for management traffic and not regular user or data traffic.
                     type: boolean
                 monitorInterface:
-                    description: Indicates if the interface is actively monitored for checking its operational status and health as part of an HA setup. It helps determine if the interface is functioning correctly and whether a failover to a standby device should be triggered in case of failure.
+                    description: Indicates if the interface is actively monitored as part of an HA setup. The check determines if the interface is functioning correctly and whether a failover to a standby device should be triggered, if required.
                     type: boolean
                 mtu:
-                    description: The interface MTU (Maximum Transmission Unit), the largest size, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. It defines the maximum payload size that the interface can handle in a single transmission.
+                    description: Interface MTU, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. MTU defines the maximum payload size the interface can handle in a single transmission. . Valid range is from 64 to 9198.
                     format: int32
                     type: integer
                 name:
-                    description: The logical name of the interface. Interface names are unique in the scope of the device.
+                    description: Logical name of the interface, which must be unique in the scope of the device.
                     example: my-example-interface
                     type: string
                 securityLevel:
@@ -13074,21 +13074,21 @@ components:
         SwitchPortConfig:
             properties:
                 accessModeVlan:
-                    description: The unique identifier, represented as a UUID, of the access VLAN that this interface is associated with.
+                    description: Unique identifier (UUID) of the access VLAN with which the interface is associated.
                     format: uuid
                     type: string
                 protectedEnabled:
-                    description: Indicates whether the switch port interface is protected or not. Protected prevents any Layer 2 communication (unicast, multicast, broadcast) between other protected ports on the same VLAN.
+                    description: Indicates whether switchport interface is protected or not. Protection prevents Layer 2 communication (unicast, multicast, or broadcast) between other protected ports on the same VLAN.
                     type: boolean
                 trunkModeAllowedVlans:
-                    description: The unique identifiers, represented as UUIDs, of the VLAN interfaces that are permitted to pass traffic over the trunk port.
+                    description: Unique identifiers (UUIDs) of the VLAN interfaces that are permitted to send and receive traffic over trunk port.
                     items:
                         format: uuid
                         type: string
                     type: array
                     uniqueItems: true
                 trunkModeNativeVlan:
-                    description: The unique identifier, represented as a UUID, of the trunk VLAN that this interface is associated with.
+                    description: Unique identifier (UUID) of the trunk VLAN with which the interface is associated.
                     format: uuid
                     type: string
             type: object
@@ -13542,39 +13542,39 @@ components:
         VlanInterfaceCreateInput:
             properties:
                 description:
-                    description: The description of the interface.
+                    description: Interface description.
                     type: string
                 enabled:
                     description: Indicates whether the interface is enabled.
                     type: boolean
                 ipv4:
                     $ref: '#/components/schemas/InterfaceIpv4Address'
-                    description: The interface ipv4 address information.
+                    description: Interface IPv4 address.
                 ipv6:
                     $ref: '#/components/schemas/InterfaceIpv6Address'
-                    description: The interface ipv6 address information.
+                    description: Interface IPv6 address.
                 macAddress:
-                    description: The interface Media Access Control (MAC) address, a unique hardware identifier assigned to each physical interface. it is used for Layer 2 communication within a network segment.
+                    description: Interface MAC address is a unique hardware identifier assigned to each physical interface and used for Layer 2 communication in a network segment.
                     type: string
                 managementOnly:
-                    description: Indicates whether the interface is exclusively used for management traffic and does not carry regular user or data traffic
+                    description: Indicates if the interface is used exclusively for management traffic and not regular user or data traffic.
                     type: boolean
                 memberInterfaces:
-                    description: The set of unique identifiers, represented as UUIDs, of the member interfaces that are part of the vlan group.
+                    description: Set of unique identifiers (UUIDs) of the member interfaces that are a part of the VLAN group.
                     items:
                         format: uuid
                         type: string
                     type: array
                     uniqueItems: true
                 monitorInterface:
-                    description: Indicates if the interface is actively monitored for checking its operational status and health as part of an HA setup. It helps determine if the interface is functioning correctly and whether a failover to a standby device should be triggered in case of failure.
+                    description: Indicates if the interface is actively monitored as part of an HA setup. The check determines if the interface is functioning correctly and whether a failover to a standby device should be triggered, if required.
                     type: boolean
                 mtu:
-                    description: The interface MTU (Maximum Transmission Unit), the largest size, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. It defines the maximum payload size that the interface can handle in a single transmission.
+                    description: Interface MTU, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. MTU defines the maximum payload size the interface can handle in a single transmission. . Valid range is from 64 to 9198.
                     format: int32
                     type: integer
                 name:
-                    description: The logical name of the interface. Interface names are unique in the scope of the device.
+                    description: Logical name of the interface, which must be unique in the scope of the device.
                     example: my-example-interface
                     type: string
                 securityLevel:
@@ -13585,46 +13585,46 @@ components:
                     description: The standby interface Media Access Control (MAC) address, for use in a high-availability (HA) pair.
                     type: string
                 vlanId:
-                    description: The unique identifier of the VLAN associated with the VLAN interface. Range is 1 - 4070.
+                    description: Unique identifier of the VLAN associated with the VLAN interface. Valid range is from 1 to 4070.
                     format: int32
                     type: integer
             type: object
         VlanInterfacePatchInput:
             properties:
                 description:
-                    description: The description of the interface.
+                    description: Interface description.
                     type: string
                 enabled:
                     description: Indicates whether the interface is enabled.
                     type: boolean
                 ipv4:
                     $ref: '#/components/schemas/InterfaceIpv4Address'
-                    description: The interface ipv4 address information.
+                    description: Interface IPv4 address.
                 ipv6:
                     $ref: '#/components/schemas/InterfaceIpv6Address'
-                    description: The interface ipv6 address information.
+                    description: Interface IPv6 address.
                 macAddress:
-                    description: The interface Media Access Control (MAC) address, a unique hardware identifier assigned to each physical interface. it is used for Layer 2 communication within a network segment.
+                    description: Interface MAC address is a unique hardware identifier assigned to each physical interface and used for Layer 2 communication in a network segment.
                     type: string
                 managementOnly:
-                    description: Indicates whether the interface is exclusively used for management traffic and does not carry regular user or data traffic
+                    description: Indicates if the interface is used exclusively for management traffic and not regular user or data traffic.
                     type: boolean
                 memberInterfaces:
-                    description: The set of unique identifiers, represented as UUIDs, of the member interfaces that are part of the vlan group.
+                    description: Set of unique identifiers (UUIDs) of the member interfaces that are a part of the VLAN group.
                     items:
                         format: uuid
                         type: string
                     type: array
                     uniqueItems: true
                 monitorInterface:
-                    description: Indicates if the interface is actively monitored for checking its operational status and health as part of an HA setup. It helps determine if the interface is functioning correctly and whether a failover to a standby device should be triggered in case of failure.
+                    description: Indicates if the interface is actively monitored as part of an HA setup. The check determines if the interface is functioning correctly and whether a failover to a standby device should be triggered, if required.
                     type: boolean
                 mtu:
-                    description: The interface MTU (Maximum Transmission Unit), the largest size, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. It defines the maximum payload size that the interface can handle in a single transmission.
+                    description: Interface MTU, in bytes, of a packet or frame that can be sent over a network interface without needing to be fragmented. MTU defines the maximum payload size the interface can handle in a single transmission. . Valid range is from 64 to 9198.
                     format: int32
                     type: integer
                 name:
-                    description: The logical name of the interface. Interface names are unique in the scope of the device.
+                    description: Logical name of the interface, which must be unique in the scope of the device.
                     example: my-example-interface
                     type: string
                 securityLevel:
