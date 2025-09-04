@@ -21,7 +21,7 @@ cdfmc:
 info:
   cdo:
     title: "Cisco Security Cloud Control Firewall Manager API"
-    version: "1.13.0"
+    version: "1.15.0"
     description: "Use the documentation to explore the endpoints Security Cloud Control Firewall Manager has to offer"
     contact:
       name: "Cisco Security Cloud Control TAC"
