@@ -28,7 +28,7 @@ info:
       email: "cdo.tac@cisco.com"
   cdfmc:
     title: "Cisco Cloud-delivered Firewall Management Center (cdFMC) API"
-    version: "1.13.0"
+    version: "1.15.0"
     description: "Use the documentation to explore the endpoints the cdFMC has to offer"
     contact:
       name: "Cisco Firepower TAC"
