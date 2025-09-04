@@ -1,4 +1,4 @@
-# Version 1.15.0 (2025-08-29)
+# Version 1.15.0 (2025-09-05)
 
 ## Added
 
@@ -16,6 +16,9 @@
   using the `stageUpgrade` parameter.
     - If `stageUpgrade` is set to true, the image will be downloaded on to the device and readiness
       checks will be performed. However, the upgrade will not be applied to the device.
+- The [Get MSP-managed Devices API](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-devices/) endpoint
+now provides additional information on HA devices and FTD clusters.
+- The [Get Devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-devices/) and [Get MSP-managed Devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-devices/) endpoints now also provide additional information on certificate expiry dates.
 
 # Version 1.14.0 (2025-07-25)
 
