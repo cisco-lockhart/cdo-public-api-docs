@@ -13105,6 +13105,7 @@ components:
                 type:
                     description: The target type
                     enum:
+                        - GENERIC
                         - ASA
                         - FDM_MANAGED_FTD
                         - CDFMC
