@@ -13354,6 +13354,10 @@ components:
             type: object
         UpgradeFtdDeviceInput:
             properties:
+                name:
+                    description: An optional name for the upgrade operation to help identify and track the upgrade.
+                    example: Production FTD Upgrade - January 2025
+                    type: string
                 stageUpgrade:
                     default: false
                     description: A boolean value, indicating whether the upgrade should be staged. If this is set to true, the image will be downloaded on to the device and readiness checks will be performed. However, the upgrade will not be applied to the device.
@@ -13380,6 +13384,10 @@ components:
                     minItems: 1
                     type: array
                     uniqueItems: true
+                name:
+                    description: An optional name for the upgrade operation to help identify and track the upgrade.
+                    example: Production FTD Upgrade - January 2025
+                    type: string
                 stageUpgrade:
                     default: false
                     description: A boolean value, indicating whether the upgrade should be staged. If this is set to true, the image will be downloaded on to the device and readiness checks will be performed. However, the upgrade will not be applied to the device.
