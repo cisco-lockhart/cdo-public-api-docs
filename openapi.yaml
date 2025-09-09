@@ -4633,6 +4633,60 @@ paths:
             summary: Get MSP-managed device by UID
             tags:
                 - MSP Inventory
+    /v1/msp/inventory/devices/asas/health/metrics/aggregations:
+        get:
+            description: Retrieve aggregation device health metrics for all the MSP managed devices.
+            operationId: getMspAsaDeviceHealthMetricAggregations
+            parameters:
+                - description: Comma-separated list of metrics to return (e.g. cpu,mem). Returns all if omitted.
+                  example: cpu,mem,disk
+                  in: query
+                  name: metrics
+                  required: false
+                  schema:
+                    enum:
+                        - cpu
+                        - mem
+                        - disk
+                    type: string
+                - description: The aggregation period of the metrics returned
+                  example: 24h
+                  in: query
+                  name: aggregationPeriod
+                  required: false
+                  schema:
+                    enum:
+                        - 30m
+                        - 2h
+                        - 6h
+                        - 24h
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspDeviceMetricAggregationResponse'
+                    description: Successfully retrieved device metric aggregations.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP device health metric aggregations
+            tags:
+                - MSP Device Health Aggregations
     /v1/msp/inventory/devices/attribute-values:
         get:
             description: Get distinct values for multiple fields in the MSP-managed devices across all tenants managed by the MSP portal.
@@ -8163,6 +8217,14 @@ components:
                     format: int32
                     type: integer
             type: object
+        AggregationThresholdItem:
+            properties:
+                name:
+                    type: string
+                value:
+                    format: int32
+                    type: integer
+            type: object
         AiAssistantConversationPage:
             properties:
                 count:
@@ -11258,6 +11320,15 @@ components:
                 summary:
                     $ref: '#/components/schemas/Summary'
             type: object
+        MetricAggregationItem:
+            properties:
+                aggregations:
+                    items:
+                        $ref: '#/components/schemas/AggregationThresholdItem'
+                    type: array
+                metric:
+                    type: string
+            type: object
         MetricsItem:
             properties:
                 description:
@@ -11409,6 +11480,13 @@ components:
                     type: array
             required:
                 - usernames
+            type: object
+        MspDeviceMetricAggregationResponse:
+            properties:
+                metricAggregations:
+                    items:
+                        $ref: '#/components/schemas/MetricAggregationItem'
+                    type: array
             type: object
         MspExportInput:
             properties:
