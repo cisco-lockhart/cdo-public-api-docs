@@ -4729,7 +4729,57 @@ paths:
             summary: Get MSP-managed device by UID
             tags:
                 - MSP Inventory
-    /v1/msp/inventory/devices/asas/health/metrics/aggregations:
+    /v1/msp/inventory/devices/attribute-values:
+        get:
+            description: Get distinct values for multiple fields in the MSP-managed devices across all tenants managed by the MSP portal.
+            operationId: getMspManagedDevicesAttributeValues
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedDeviceDistinctAttributeValues'
+                    description: Distinct attribute values for MSP-managed devices
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get distinct attribute values for MSP-managed devices
+            tags:
+                - MSP Inventory
+    /v1/msp/inventory/devices/export:
+        post:
+            description: This is an asynchronous operation to export MSP-managed devices in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
+            operationId: exportMspManagedDevices
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MspExportInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the <code>entityUrl</code> field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Export MSP-managed Devices
+            tags:
+                - MSP Inventory
+    /v1/msp/inventory/devices/health/metrics/aggregations:
         get:
             description: Retrieve aggregation device health metrics for all the MSP managed devices.
             operationId: getMspAsaDeviceHealthMetricAggregations
@@ -4783,56 +4833,6 @@ paths:
             summary: Get MSP device health metric aggregations
             tags:
                 - MSP Device Health Aggregations
-    /v1/msp/inventory/devices/attribute-values:
-        get:
-            description: Get distinct values for multiple fields in the MSP-managed devices across all tenants managed by the MSP portal.
-            operationId: getMspManagedDevicesAttributeValues
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MspManagedDeviceDistinctAttributeValues'
-                    description: Distinct attribute values for MSP-managed devices
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get distinct attribute values for MSP-managed devices
-            tags:
-                - MSP Inventory
-    /v1/msp/inventory/devices/export:
-        post:
-            description: This is an asynchronous operation to export MSP-managed devices in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
-            operationId: exportMspManagedDevices
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/MspExportInput'
-                required: true
-            responses:
-                "202":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CdoTransaction'
-                    description: Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the <code>entityUrl</code> field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file.
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Export MSP-managed Devices
-            tags:
-                - MSP Inventory
     /v1/msp/inventory/managers:
         get:
             description: Get device managers, across all tenants, managed by the MSP portal.
