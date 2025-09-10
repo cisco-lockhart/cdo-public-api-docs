@@ -3853,7 +3853,7 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Get FTD Device Upgrade Runs
+            summary: Get Device Upgrade Runs
             tags:
                 - Device Upgrades
     /v1/inventory/devices/upgrades/runs/{upgradeRunUid}:
@@ -3889,7 +3889,7 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Get FTD Device Upgrade Run
+            summary: Get Device Upgrade Run
             tags:
                 - Device Upgrades
     /v1/inventory/managers:
