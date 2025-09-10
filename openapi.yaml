@@ -9411,6 +9411,14 @@ components:
             type: object
         ClusterNode:
             properties:
+                chassisSerial:
+                    description: The serial number of the chassis on the device.
+                    example: FTX20131xxx
+                    type: string
+                name:
+                    description: The name of the node on the device.
+                    example: node-a
+                    type: string
                 serial:
                     description: The serial number of the node on the device. This is typically used for licensing, and is not the same as the chassis' serial number.
                     example: JAD24500xxx
@@ -10931,6 +10939,10 @@ components:
                 chassisSerial:
                     description: The serial number of the chassis on the device.
                     example: FTX20131xxx
+                    type: string
+                name:
+                    description: The name of the node on the device.
+                    example: node-a
                     type: string
                 serial:
                     description: The serial number of the node on the device. This is typically used for licensing, and is not the same as the chassis' serial number.
