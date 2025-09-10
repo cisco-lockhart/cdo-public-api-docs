@@ -9721,6 +9721,9 @@ components:
                     example: 3af473a8-d70f-4090-bcdb-853981696478
                     format: uuid
                     type: string
+                deviceMaintenanceWindow:
+                    $ref: '#/components/schemas/DeviceMaintenanceWindow'
+                    description: The maintenance window configuration for the device.
                 deviceMetadata:
                     $ref: '#/components/schemas/DeviceMetadata'
                     description: Metadata for the device. This field contains a combination of structured service-specific metadata persisted by other Cisco services and arbitrary metadata.
@@ -9963,6 +9966,38 @@ components:
                 - deviceUid
                 - request
             type: object
+        DeviceMaintenanceWindow:
+            properties:
+                currentEnd:
+                    description: 'End time of the current maintenance window in ISO 8601 format. Note: This field is only populated when isMaintenanceWindowOpen is true.'
+                    example: 2025-06-21T04:00:00Z
+                    type: string
+                currentStart:
+                    description: 'Start time of the current maintenance window in ISO 8601 format. Note: This field is only populated when isMaintenanceWindowOpen is true.'
+                    example: 2025-06-21T02:00:00Z
+                    type: string
+                durationMinutes:
+                    description: Duration of the maintenance window in minutes.
+                    example: 120
+                    format: int32
+                    type: integer
+                isOpen:
+                    description: Indicates whether the maintenance window is currently open.
+                    example: true
+                    type: boolean
+                nextEnd:
+                    description: End time of the next scheduled maintenance window in ISO 8601 format.
+                    example: 2025-06-28T04:00:00Z
+                    type: string
+                nextStart:
+                    description: Start time of the next scheduled maintenance window in ISO 8601 format.
+                    example: 2025-06-28T02:00:00Z
+                    type: string
+                startCron:
+                    description: 'CRON expression defining the scheduled start time of the maintenance window in format: Minute, Hour, Day of Month, Month, Day of Week.'
+                    example: '* 12 * * *'
+                    type: string
+            type: object
         DeviceManagerPatchInput:
             properties:
                 deviceMetadata:
@@ -10018,6 +10053,15 @@ components:
                 labels:
                     $ref: '#/components/schemas/Labels'
                     description: Specify a set of labels to identify the device as part of a group. Refer to the CDO documentation for details on how labels are used in Security Cloud Control.
+                maintenanceWindowDurationMinutes:
+                    description: Duration of the maintenance window in minutes.
+                    example: 120
+                    format: int32
+                    type: integer
+                maintenanceWindowStartCron:
+                    description: 'CRON expression defining the scheduled start time of the maintenance window in format: Minute, Hour, Day of Month, Month, Day of Week.'
+                    example: '* 12 * * *'
+                    type: string
                 name:
                     description: A human-readable name for the device.
                     example: My ASA
@@ -10046,6 +10090,15 @@ components:
                     minItems: 1
                     type: array
                     uniqueItems: true
+                maintenanceWindowDurationMinutes:
+                    description: Duration of the maintenance window in minutes.
+                    example: 120
+                    format: int32
+                    type: integer
+                maintenanceWindowStartCron:
+                    description: 'CRON expression defining the scheduled start time of the maintenance window in format: Minute, Hour, Day of Month, Month, Day of Week.'
+                    example: '* 12 * * *'
+                    type: string
                 optedInToAsaHealthMetrics:
                     description: Specify whether to enable or disable health metrics collection (SDC-managed ASA devices only).
                     example: true
