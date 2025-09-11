@@ -6986,6 +6986,47 @@ paths:
             summary: Get Transaction
             tags:
                 - Transactions
+    /v1/transactions/{transactionUid}/cancel:
+        post:
+            description: 'Cancel a running transaction. **Note:**: Only transactions of cancellable types can be cancelled; whether a transaction is cancellable is indicated by the <pre>isCancellable</pre> field in the <pre>CdoTransaction</pre> object.'
+            operationId: cancelTransaction
+            parameters:
+                - in: path
+                  name: transactionUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: The cancelled CDO transaction.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "422":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: The transaction cannot be cancelled, because the transaction type is not cancellable.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Cancel Transaction
+            tags:
+                - Transactions
     /v1/users:
         get:
             description: 'Get a list of (non-API-only) users associated with the Security Cloud Control tenant assigned to the SCC Firewall Manager. Note: This endpoint returns only human users, not API-only users.'
@@ -9022,11 +9063,14 @@ components:
             type: object
         CdoTransaction:
             properties:
+                cancellable:
+                    type: boolean
                 cdoTransactionStatus:
                     description: The status of the transaction
                     enum:
                         - PENDING
                         - IN_PROGRESS
+                        - CANCELLED
                         - DONE
                         - ERROR
                     example: IN_PROGRESS
