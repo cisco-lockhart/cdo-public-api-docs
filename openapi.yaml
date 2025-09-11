@@ -9063,11 +9063,14 @@ components:
             type: object
         CdoTransaction:
             properties:
+                cancellable:
+                    type: boolean
                 cdoTransactionStatus:
                     description: The status of the transaction
                     enum:
                         - PENDING
                         - IN_PROGRESS
+                        - CANCELLED
                         - DONE
                         - ERROR
                     example: IN_PROGRESS
