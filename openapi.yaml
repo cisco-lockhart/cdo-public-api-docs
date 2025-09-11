@@ -3799,7 +3799,7 @@ paths:
     /v1/inventory/devices/upgrades/runs:
         get:
             description: Get a list of FTD device upgrade runs in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices being upgraded, or staged for upgrades, together.
-            operationId: getFtdDeviceUpgradeRuns
+            operationId: getDeviceUpgradeRuns
             parameters:
                 - description: The number of results to retrieve.
                   in: query
@@ -3859,7 +3859,7 @@ paths:
     /v1/inventory/devices/upgrades/runs/{upgradeRunUid}:
         get:
             description: Get an FTD Device Upgrade Run by UID in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices being upgraded, or staged for upgrades, together.
-            operationId: getFtdDeviceUpgradeRun
+            operationId: getDeviceUpgradeRun
             parameters:
                 - description: The unique identifier, represented as a UUID, of the FTD Device Upgrade Run in SCC Firewall Manager.
                   in: path
@@ -3874,13 +3874,15 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/FtdUpgradeRunDtoPage'
-                    description: List of Device Upgrade Run objects
+                    description: The Device Upgrade Run object
                 "400":
                     $ref: '#/components/responses/http400BadRequest'
                 "401":
                     $ref: '#/components/responses/http401Unauthorised'
                 "403":
                     $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
                 "500":
                     content:
                         application/json:
@@ -3890,6 +3892,49 @@ paths:
             security:
                 - bearerAuth: []
             summary: Get Device Upgrade Run
+            tags:
+                - Device Upgrades
+        patch:
+            description: Modify an FTD Device Upgrade Run by UID in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices being upgraded, or staged for upgrades, together.
+            operationId: modifyDeviceUpgradeRun
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the FTD Device Upgrade Run in SCC Firewall Manager.
+                  in: path
+                  name: upgradeRunUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpgradeRunModifyInput'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/FtdUpgradeRunDtoPage'
+                    description: The Device Upgrade Run object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Modify Device Upgrade Run
             tags:
                 - Device Upgrades
     /v1/inventory/managers:
@@ -13766,6 +13811,16 @@ components:
                         - ASA_SECURE_CLIENT_UPGRADE
                     example: ASA_DEVICE_UPGRADE
                     type: string
+            type: object
+        UpgradeRunModifyInput:
+            properties:
+                name:
+                    description: A human-readable name for the upgrade run.
+                    example: My Upgrade Run
+                    minLength: 1
+                    type: string
+            required:
+                - name
             type: object
         UrlObjectContent:
             properties:
