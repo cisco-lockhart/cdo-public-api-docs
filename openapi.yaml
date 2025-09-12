@@ -3655,6 +3655,8 @@ paths:
                     $ref: '#/components/responses/http403Forbidden'
                 "404":
                     $ref: '#/components/responses/http404NotFound'
+                "409":
+                    $ref: '#/components/responses/http409Conflict'
                 "500":
                     content:
                         application/json:
