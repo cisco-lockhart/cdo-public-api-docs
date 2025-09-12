@@ -13623,8 +13623,6 @@ components:
                         type: string
                     type: array
                     uniqueItems: true
-                readonly:
-                    type: boolean
                 tags:
                     additionalProperties:
                         items:
