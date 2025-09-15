@@ -12457,6 +12457,10 @@ components:
                     description: The name of the object
                     example: my-object
                     type: string
+                readOnly:
+                    description: Indicates if the object is read-only
+                    example: false
+                    type: boolean
                 referencesInfoFromDefaultAndOverrides:
                     description: List of objects referenced in the default content or in any of the overrides.
                     items:
@@ -13656,6 +13660,8 @@ components:
                         type: string
                     type: array
                     uniqueItems: true
+                readonly:
+                    type: boolean
                 tags:
                     additionalProperties:
                         items:
