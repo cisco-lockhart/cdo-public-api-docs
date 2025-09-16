@@ -13741,6 +13741,10 @@ components:
                     description: The target ASDM software version to upgrade the device to.
                     example: '''7.6(2)'' or ''7.6(2).openjre'''
                     type: string
+                ignoreMaintenanceWindow:
+                    description: A boolean value, indicating whether device maintenance window should be ignored. If this is set to true, upgrade will be allowed even if device is outside maintenance window.
+                    example: false
+                    type: boolean
                 softwareVersion:
                     description: The target ASA firmware version to upgrade the device to.
                     example: 9.4(1)
@@ -13748,6 +13752,10 @@ components:
             type: object
         UpgradeFtdDeviceInput:
             properties:
+                ignoreMaintenanceWindow:
+                    description: A boolean value, indicating whether device maintenance window should be ignored. If this is set to true, upgrade will be allowed even if device is outside maintenance window.
+                    example: false
+                    type: boolean
                 name:
                     description: An optional name for the upgrade operation to help identify and track the upgrade.
                     example: Production FTD Upgrade - January 2025
@@ -13778,6 +13786,10 @@ components:
                     minItems: 1
                     type: array
                     uniqueItems: true
+                ignoreMaintenanceWindow:
+                    description: A boolean value, indicating whether devices maintenance window should be ignored. If this is set to true, upgrade will be allowed even if there are devices outside their maintenance window.
+                    example: false
+                    type: boolean
                 name:
                     description: An optional name for the upgrade operation to help identify and track the upgrade.
                     example: Production FTD Upgrade - January 2025
