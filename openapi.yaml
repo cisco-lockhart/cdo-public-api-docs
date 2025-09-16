@@ -3764,6 +3764,118 @@ paths:
             summary: Onboard FTD device using Zero-Touch Provisioning
             tags:
                 - Inventory
+    /v1/inventory/devices/health/interfaces/aggregations:
+        get:
+            description: Retrieve aggregation interface health metrics for all managed devices.
+            operationId: getInterfaceHealthMetricAggregations
+            parameters:
+                - description: Comma-separated list of metrics to return (e.g. linkStatus,overruns). Returns all if omitted.
+                  example: linkStatus,overruns
+                  in: query
+                  name: metrics
+                  required: false
+                  schema:
+                    enum:
+                        - linkStatus
+                        - overruns
+                        - underruns
+                        - droppedPackets
+                        - l2DecodeDrops
+                        - inputErrors
+                        - outputErrors
+                    type: string
+                - description: The aggregation period of the metrics returned
+                  example: 24h
+                  in: query
+                  name: aggregationPeriod
+                  required: false
+                  schema:
+                    enum:
+                        - 30m
+                        - 2h
+                        - 6h
+                        - 24h
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MetricAggregationResponse'
+                    description: Successfully retrieved interface metric aggregations.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get interface health metric aggregations
+            tags:
+                - Interface Health Aggregations
+    /v1/inventory/devices/health/metrics/aggregations:
+        get:
+            description: Retrieve aggregation device health metrics for all managed devices.
+            operationId: getDeviceHealthMetricAggregations
+            parameters:
+                - description: Comma-separated list of metrics to return (e.g. cpu,mem). Returns all if omitted.
+                  example: cpu,mem,disk
+                  in: query
+                  name: metrics
+                  required: false
+                  schema:
+                    enum:
+                        - cpu
+                        - mem
+                        - disk
+                    type: string
+                - description: The aggregation period of the metrics returned
+                  example: 24h
+                  in: query
+                  name: aggregationPeriod
+                  required: false
+                  schema:
+                    enum:
+                        - 30m
+                        - 2h
+                        - 6h
+                        - 24h
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MetricAggregationResponse'
+                    description: Successfully retrieved device metric aggregations.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get device health metric aggregations
+            tags:
+                - Device Health Aggregations
     /v1/inventory/devices/ios:
         post:
             description: Onboard a IOS device in the Security Cloud Control tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
@@ -4857,60 +4969,6 @@ paths:
             summary: Export MSP-managed Devices
             tags:
                 - MSP Inventory
-    /v1/msp/inventory/devices/health/metrics/aggregations:
-        get:
-            description: Retrieve aggregation device health metrics for all the MSP managed devices.
-            operationId: getMspAsaDeviceHealthMetricAggregations
-            parameters:
-                - description: Comma-separated list of metrics to return (e.g. cpu,mem). Returns all if omitted.
-                  example: cpu,mem,disk
-                  in: query
-                  name: metrics
-                  required: false
-                  schema:
-                    enum:
-                        - cpu
-                        - mem
-                        - disk
-                    type: string
-                - description: The aggregation period of the metrics returned
-                  example: 24h
-                  in: query
-                  name: aggregationPeriod
-                  required: false
-                  schema:
-                    enum:
-                        - 30m
-                        - 2h
-                        - 6h
-                        - 24h
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MspDeviceMetricAggregationResponse'
-                    description: Successfully retrieved device metric aggregations.
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "404":
-                    $ref: '#/components/responses/http404NotFound'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get MSP device health metric aggregations
-            tags:
-                - MSP Device Health Aggregations
     /v1/msp/inventory/managers:
         get:
             description: Get device managers, across all tenants, managed by the MSP portal.
@@ -11639,6 +11697,13 @@ components:
                 metric:
                     type: string
             type: object
+        MetricAggregationResponse:
+            properties:
+                metricAggregations:
+                    items:
+                        $ref: '#/components/schemas/MetricAggregationItem'
+                    type: array
+            type: object
         MetricsItem:
             properties:
                 description:
@@ -11790,13 +11855,6 @@ components:
                     type: array
             required:
                 - usernames
-            type: object
-        MspDeviceMetricAggregationResponse:
-            properties:
-                metricAggregations:
-                    items:
-                        $ref: '#/components/schemas/MetricAggregationItem'
-                    type: array
             type: object
         MspExportInput:
             properties:
