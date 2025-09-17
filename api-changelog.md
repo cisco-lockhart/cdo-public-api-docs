@@ -2,7 +2,8 @@
 
 ## Added
 
-- Endpoint to get [device health data aggregations](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-device-health-metric-aggregations/) for a tenant.
+- Endpoint to get [device health data aggregations](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-health-metric-aggregations/) for a tenant.
+- Endpoint to get [interface health data aggregations](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-interface-health-metric-aggregations/) for a tenant.
 - Multiple endpoints to monitor device upgrade runs([1](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-upgrade-runs/), [2](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-upgrade-run/), [3](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/modify-device-upgrade-run/)), on a tenant.
 
 # Version 1.15.0 (2025-09-05)
