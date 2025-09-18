@@ -13858,7 +13858,7 @@ components:
                     example: false
                     type: boolean
                 upgradePackageUid:
-                    description: The unique identifier, represented as a UUID, of the upgrade package to be applied to the device.
+                    description: The unique identifier, represented as a UUID, of the upgrade package to be applied to the devices.
                     example: 256461f6-bd60-11ef-8beb-6cf1610cf55d
                     format: uuid
                     type: string
