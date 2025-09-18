@@ -4969,6 +4969,71 @@ paths:
             summary: Export MSP-managed Devices
             tags:
                 - MSP Inventory
+    /v1/msp/inventory/devices/ftds/upgrades/versions:
+        get:
+            description: |-
+                <p>List of compatible upgrade versions, grouped by tenant and hardware model.</p>
+                <p><strong>First Request:</strong></p>
+                <ul>
+                <li>When called with a list of device UUIDs for the first time</li>
+                <li>Returns <strong>HTTP 202</strong> (Accepted) with a transaction ID</li>
+                <li>Asynchronously builds the list of compatible upgrade versions in the background</li>
+                </ul>
+                <p><strong>Subsequent Requests:</strong></p>
+                <ul>
+                <li>When called again after the transaction completes</li>
+                <li>Returns <strong>HTTP 200</strong> (OK) with the actual compatible upgrade versions data, grouped by the unique identifiers of the managed tenant and the hardware model of the device. </li>
+                </ul>
+                <p><strong>Usage Pattern:</strong></p>
+                <ol>
+                <li>Make initial request with device UUIDs</li>
+                <li>Receive 202 response with transaction details</li>
+                <li>Poll the endpoint until you receive a 200 response with the results</li>
+                </ol>
+                <p><em>Note:</em> The response will be grouped by tenant for easier organization and processing.</p>
+                <p><em>Note:</em> The response will return a single compatible version, if available, for all of the devices in a single tenant..</p>
+            operationId: getCompatibleFtdVersionsForMspManagedFtdDevices
+            parameters:
+                - description: 'A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. Note: All of the devices specified have to be on tenants managed by the MSP portal.'
+                  in: query
+                  name: deviceUids
+                  required: true
+                  schema:
+                    items:
+                        format: uuid
+                        type: string
+                    maxItems: 50
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/TenantFtdCompatibilityVersion'
+                    description: List of compatible upgrade versions, grouped by the unique identifier of the managed tenant.
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Returns a Security Cloud Control returns a Transaction object that can be used to track the progress of the operation to get the set of compatibility versions.
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "422":
+                    $ref: '#/components/responses/http422UnprocessableEntity'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get upgrade versions compatible with multiple FTDs per tenant
+            tags:
+                - MSP Device Upgrades
     /v1/msp/inventory/managers:
         get:
             description: Get device managers, across all tenants, managed by the MSP portal.
@@ -13613,6 +13678,23 @@ components:
                 uid:
                     description: The unique identifier, represented as a UUID, of the enterprise (tenant) in Security Cloud Control.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            type: object
+        TenantFtdCompatibilityVersion:
+            properties:
+                compatibleFtdVersions:
+                    items:
+                        $ref: '#/components/schemas/FtdVersion'
+                    type: array
+                deviceUids:
+                    items:
+                        format: uuid
+                        type: string
+                    type: array
+                hardwareModel:
+                    type: string
+                managedTenantUid:
                     format: uuid
                     type: string
             type: object
