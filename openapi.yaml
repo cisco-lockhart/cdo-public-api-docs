@@ -3822,6 +3822,49 @@ paths:
             summary: Get interface health metric aggregations
             tags:
                 - Interface Health Aggregations
+    /v1/inventory/devices/health/interfaces/errors/aggregations:
+        get:
+            description: Retrieve aggregation of interface health metrics errors for all managed devices.
+            operationId: getInterfaceHealthMetricErrorAggregations
+            parameters:
+                - description: The aggregation period of the metrics returned
+                  example: 24h
+                  in: query
+                  name: aggregationPeriod
+                  required: false
+                  schema:
+                    enum:
+                        - 30m
+                        - 2h
+                        - 6h
+                        - 24h
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/InterfaceMetricErrorAggregationResponse'
+                    description: Successfully retrieved interface metric error aggregations.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get interface health metric error aggregations
+            tags:
+                - Interface Health Aggregations
     /v1/inventory/devices/health/metrics/aggregations:
         get:
             description: Retrieve aggregation device health metrics for all managed devices.
@@ -11360,6 +11403,15 @@ components:
                     example: DESTINATION_UNREACHABLE
                     type: string
             type: object
+        InterfaceErrorSummary:
+            properties:
+                error:
+                    format: int32
+                    type: integer
+                stable:
+                    format: int32
+                    type: integer
+            type: object
         InterfaceHealthMetrics:
             properties:
                 bufferOverrunsAvg:
@@ -11461,6 +11513,23 @@ components:
                 suppressRA:
                     description: Indicates whether router advertisements should be suppressed.
                     type: boolean
+            type: object
+        InterfaceMetricError:
+            properties:
+                count:
+                    format: int32
+                    type: integer
+                name:
+                    type: string
+            type: object
+        InterfaceMetricErrorAggregationResponse:
+            properties:
+                interfaceErrors:
+                    items:
+                        $ref: '#/components/schemas/InterfaceMetricError'
+                    type: array
+                summary:
+                    $ref: '#/components/schemas/InterfaceErrorSummary'
             type: object
         InterfaceMode:
             enum:
