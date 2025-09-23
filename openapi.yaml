@@ -11236,6 +11236,12 @@ components:
                     description: The name of the node on the device.
                     example: node-a
                     type: string
+                role:
+                    description: (cdFMC-managed FTDs only) Information on the current role of the node in the HA Pair.
+                    enum:
+                        - ACTIVE
+                        - STANDBY
+                    type: string
                 serial:
                     description: The serial number of the node on the device. This is typically used for licensing, and is not the same as the chassis' serial number.
                     example: JAD24500xxx
