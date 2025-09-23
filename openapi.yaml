@@ -7281,7 +7281,7 @@ paths:
                   name: limit
                   required: false
                   schema:
-                    maximum: 200
+                    maximum: 50
                     minimum: 0
                     type: string
                 - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
