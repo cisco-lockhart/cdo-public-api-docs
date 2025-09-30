@@ -3919,6 +3919,86 @@ paths:
             summary: Get device health metric aggregations
             tags:
                 - Device Health Aggregations
+    /v1/inventory/devices/health/metrics/aggregations/list:
+        get:
+            description: Retrieve filtered device list corresponding to aggregation metrics.
+            operationId: getDeviceHealthMetricAggregationList
+            parameters:
+                - description: The metric for the device health aggregation list.
+                  example: cpu
+                  in: query
+                  name: metric
+                  required: true
+                  schema:
+                    enum:
+                        - cpu
+                        - mem
+                        - disk
+                    type: string
+                - description: The metric threshold (e.g. CRITICAL).
+                  example: CRITICAL
+                  in: query
+                  name: threshold
+                  required: true
+                  schema:
+                    enum:
+                        - CRITICAL
+                        - WARNING
+                        - OK
+                    type: string
+                - description: The aggregation period of the metrics returned.
+                  example: 24h
+                  in: query
+                  name: aggregationPeriod
+                  required: false
+                  schema:
+                    enum:
+                        - 30m
+                        - 2h
+                        - 6h
+                        - 24h
+                    type: string
+                - description: A managed tenant UUID to filter list, if applicable.
+                  example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                  in: query
+                  name: managedTenantUid
+                  required: false
+                  schema:
+                    format: uuid
+                    type: string
+                - description: Lucene-style query filter. Only prefix queries (e.g. field:value*) are supported for filtering.
+                  example: name:my-devi*
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MetricAggregationListResponse'
+                    description: Successfully retrieved device metric aggregation list
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get device list for aggregations
+            tags:
+                - Device Health Aggregations
     /v1/inventory/devices/ios:
         post:
             description: Onboard a IOS device in the Security Cloud Control tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
@@ -11836,6 +11916,31 @@ components:
                     type: array
                 metric:
                     type: string
+            type: object
+        MetricAggregationListItem:
+            properties:
+                deviceName:
+                    type: string
+                deviceUid:
+                    format: uuid
+                    type: string
+                managedTenantName:
+                    type: string
+                managedTenantUid:
+                    format: uuid
+                    type: string
+                metric:
+                    type: string
+                value:
+                    format: double
+                    type: number
+            type: object
+        MetricAggregationListResponse:
+            properties:
+                items:
+                    items:
+                        $ref: '#/components/schemas/MetricAggregationListItem'
+                    type: array
             type: object
         MetricAggregationResponse:
             properties:
