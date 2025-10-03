@@ -9490,6 +9490,8 @@ components:
                         - PROVISION_FIREWALL_SAL_RESOURCES
                         - DEPROVISION_FIREWALL_SAL_RESOURCES
                         - RENEW_SAL_LICENSE
+                        - PAID_SAL_LICENSE
+                        - EXPIRE_SAL_LICENSE
                         - REMOVE_SSX_SAL_SUBSCRIPTION
                         - ASA_HEALTH_METRICS_TENANT_PROVISIONING
                         - UPDATE_DEVICE_BULK
