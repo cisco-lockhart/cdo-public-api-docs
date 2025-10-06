@@ -3822,6 +3822,90 @@ paths:
             summary: Get interface health metric aggregations
             tags:
                 - Interface Health Aggregations
+    /v1/inventory/devices/health/interfaces/aggregations/details:
+        get:
+            description: Retrieve filtered device interface detailed list corresponding to aggregation metrics.
+            operationId: getInterfaceHealthMetricAggregationList
+            parameters:
+                - description: The metric for the device interface health aggregation detailed list. (e.g. linkStatus,overruns).
+                  example: linkStatus
+                  in: query
+                  name: metric
+                  required: true
+                  schema:
+                    enum:
+                        - linkStatus
+                        - overruns
+                        - underruns
+                        - droppedPackets
+                        - l2DecodeDrops
+                        - inputErrors
+                        - outputErrors
+                    type: string
+                - description: The metric threshold (e.g. CRITICAL).
+                  example: CRITICAL
+                  in: query
+                  name: threshold
+                  required: true
+                  schema:
+                    enum:
+                        - CRITICAL
+                        - WARNING
+                        - OK
+                    type: string
+                - description: The aggregation period of the metrics returned.
+                  example: 24h
+                  in: query
+                  name: aggregationPeriod
+                  required: false
+                  schema:
+                    enum:
+                        - 30m
+                        - 2h
+                        - 6h
+                        - 24h
+                    type: string
+                - description: A managed tenant UUID to filter list, if applicable.
+                  example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                  in: query
+                  name: managedTenantUid
+                  required: false
+                  schema:
+                    format: uuid
+                    type: string
+                - description: Lucene-style query filter. Only prefix queries (e.g. field:value*) are supported for filtering.
+                  example: name:my-interfac*
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MetricAggregationListResponse'
+                    description: Successfully retrieved device interface metric aggregation detailed list.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get device interface detailed list for aggregations
+            tags:
+                - Interface Health Aggregations
     /v1/inventory/devices/health/interfaces/errors/aggregations:
         get:
             description: Retrieve aggregation of interface health metrics errors for all managed devices.
@@ -3919,12 +4003,12 @@ paths:
             summary: Get device health metric aggregations
             tags:
                 - Device Health Aggregations
-    /v1/inventory/devices/health/metrics/aggregations/list:
+    /v1/inventory/devices/health/metrics/aggregations/details:
         get:
-            description: Retrieve filtered device list corresponding to aggregation metrics.
+            description: Retrieve filtered device detailed list corresponding to aggregation metrics.
             operationId: getDeviceHealthMetricAggregationList
             parameters:
-                - description: The metric for the device health aggregation list.
+                - description: The metric for the device health aggregation detailed list.
                   example: cpu
                   in: query
                   name: metric
@@ -3979,7 +4063,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/MetricAggregationListResponse'
-                    description: Successfully retrieved device metric aggregation list
+                    description: Successfully retrieved device metric aggregation detailed list
                 "400":
                     $ref: '#/components/responses/http400BadRequest'
                 "401":
@@ -3996,7 +4080,7 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Get device list for aggregations
+            summary: Get device detailed list for aggregations
             tags:
                 - Device Health Aggregations
     /v1/inventory/devices/ios:
@@ -11926,6 +12010,11 @@ components:
                 deviceUid:
                     format: uuid
                     type: string
+                interfaceName:
+                    type: string
+                interfaceUid:
+                    format: uuid
+                    type: string
                 managedTenantName:
                     type: string
                 managedTenantUid:
@@ -11934,8 +12023,7 @@ components:
                 metric:
                     type: string
                 value:
-                    format: double
-                    type: number
+                    type: string
             type: object
         MetricAggregationListResponse:
             properties:
