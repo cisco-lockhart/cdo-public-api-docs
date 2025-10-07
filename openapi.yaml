@@ -9470,6 +9470,10 @@ components:
                         $ref: '#/components/schemas/UserRole'
                     type: array
                     uniqueItems: true
+                tenantName:
+                    description: The name of the enterprise (tenant) in Security Cloud Control.
+                    example: my-tenant-name
+                    type: string
                 tenantUid:
                     description: The unique identifier, represented as a UUID, of the tenant this token is associated with. While a user can be associated with multiple tenants, a token is associated with a single tenant.
                     format: uuid
