@@ -5177,55 +5177,28 @@ paths:
             tags:
                 - MSP Inventory
     /v1/msp/inventory/devices/ftds/upgrades/versions:
-        get:
-            description: |-
-                <p>List of compatible upgrade versions, grouped by tenant and hardware model.</p>
-                <p><strong>First Request:</strong></p>
-                <ul>
-                <li>When called with a list of device UUIDs for the first time</li>
-                <li>Returns <strong>HTTP 202</strong> (Accepted) with a transaction ID</li>
-                <li>Asynchronously builds the list of compatible upgrade versions in the background</li>
-                </ul>
-                <p><strong>Subsequent Requests:</strong></p>
-                <ul>
-                <li>When called again after the transaction completes</li>
-                <li>Returns <strong>HTTP 200</strong> (OK) with the actual compatible upgrade versions data, grouped by the unique identifiers of the managed tenant and the hardware model of the device. </li>
-                </ul>
-                <p><strong>Usage Pattern:</strong></p>
-                <ol>
-                <li>Make initial request with device UUIDs</li>
-                <li>Receive 202 response with transaction details</li>
-                <li>Poll the endpoint until you receive a 200 response with the results</li>
-                </ol>
-                <p><em>Note:</em> The response will be grouped by tenant for easier organization and processing.</p>
-                <p><em>Note:</em> The response will return a single compatible version, if available, for all of the devices in a single tenant..</p>
-            operationId: getCompatibleFtdVersionsForMspManagedFtdDevices
-            parameters:
-                - description: 'A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. Note: All of the devices specified have to be on tenants managed by the MSP portal.'
-                  in: query
-                  name: deviceUids
-                  required: true
-                  schema:
-                    items:
-                        format: uuid
-                        type: string
-                    maxItems: 50
-                    minItems: 1
-                    type: array
-                    uniqueItems: true
+        post:
+            description: This is an asynchronous operation to calculate a list of compatible upgrade versions for a list of CdFMC-managed FTD devices across multiple managed tenants.
+            operationId: calculateMspFtdCompatibleUpgradeVersions
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MspCalculateCompatibleUpgradeVersionsInput'
+                required: true
             responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/TenantFtdCompatibilityVersion'
-                    description: List of compatible upgrade versions, grouped by the unique identifier of the managed tenant.
                 "202":
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/CdoTransaction'
                     description: Returns a Security Cloud Control returns a Transaction object that can be used to track the progress of the operation to get the set of compatibility versions.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
                 "404":
                     $ref: '#/components/responses/http404NotFound'
                 "422":
@@ -5238,7 +5211,45 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Get upgrade versions compatible with multiple FTDs per tenant
+            summary: Calculate compatible FTD upgrade versions
+            tags:
+                - MSP Device Upgrades
+    /v1/msp/inventory/devices/ftds/upgrades/versions/{upgradeVersionUid}:
+        get:
+            description: Get a Device Upgrade Run by UID in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices being upgraded, or staged for upgrades, together.
+            operationId: getMspFtdCompatibleUpgradeVersions
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the Device Upgrade Version object in SCC Firewall Manager.
+                  in: path
+                  name: upgradeVersionUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpgradeCompatibilityInfoDto'
+                    description: Compatible upgrade versions for MSP managed devices across multiple tenants.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get compatible FTD upgrade versions
             tags:
                 - MSP Device Upgrades
     /v1/msp/inventory/managers:
@@ -9987,6 +9998,79 @@ components:
                     description: A human-readable error description in English.
                     example: sample error
                     type: string
+        CompatibleDeviceDto:
+            description: Information about a device that is compatible with a specific upgrade version.
+            properties:
+                currentSoftwareVersion:
+                    description: The software version currently running on the device
+                    type: string
+                hardwareModel:
+                    description: The hardware model of the device
+                    example: Firepower 2110
+                    type: string
+                managedTenantDisplayName:
+                    description: The display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: The name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: tenant-uuid-1
+                    format: uuid
+                    type: string
+                name:
+                    description: The name of the device
+                    example: FTD-Device-1
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
+                    example: device-uuid-1
+                    format: uuid
+                    type: string
+            required:
+                - hardwareModel
+                - managedTenantUid
+                - name
+                - uid
+            type: object
+        CompatibleVersionInfoDto:
+            description: Information about a compatible upgrade version and the devices that support it.
+            properties:
+                compatibleDevices:
+                    description: List of devices that are compatible with this upgrade version
+                    items:
+                        $ref: '#/components/schemas/CompatibleDeviceDto'
+                    type: array
+                isSuggestedVersion:
+                    description: A boolean value, indicating whether this version is a suggested version to upgrade to.
+                    example: true
+                    type: boolean
+                releaseDate:
+                    description: The release date of this software version
+                    example: 2024-01-15T10:30:00Z
+                    format: date-time
+                    type: string
+                softwareVersion:
+                    description: The software version
+                    example: 7.4.2
+                    type: string
+                upgradeType:
+                    description: The type of the upgrade
+                    enum:
+                        - UPGRADE
+                        - PATCH
+                        - HOTFIX
+                    example: UPGRADE
+                    type: string
+            required:
+                - compatibleDevices
+                - isSuggestedVersion
+                - softwareVersion
+                - upgradeType
+            type: object
         ConfigState:
             enum:
                 - NO_CONFIG
@@ -12157,6 +12241,19 @@ components:
             required:
                 - users
             type: object
+        MspCalculateCompatibleUpgradeVersionsInput:
+            description: 'A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. Note: All of the devices specified have to be on tenants managed by the MSP portal.'
+            properties:
+                deviceUids:
+                    description: The list of devices to calculate compatible upgrade versions for. All of the devices must exist, be associated with the managed tenant, and be in the connectivity state 'ONLINE'.
+                    items:
+                        format: uuid
+                        type: string
+                    maxItems: 50
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+            type: object
         MspCreateTenantInput:
             properties:
                 displayName:
@@ -13951,23 +14048,6 @@ components:
                     format: uuid
                     type: string
             type: object
-        TenantFtdCompatibilityVersion:
-            properties:
-                compatibleFtdVersions:
-                    items:
-                        $ref: '#/components/schemas/FtdVersion'
-                    type: array
-                deviceUids:
-                    items:
-                        format: uuid
-                        type: string
-                    type: array
-                hardwareModel:
-                    type: string
-                managedTenantUid:
-                    format: uuid
-                    type: string
-            type: object
         TenantPage:
             properties:
                 count:
@@ -14159,6 +14239,31 @@ components:
                     description: The target ASA firmware version to upgrade the device to.
                     example: 9.4(1)
                     type: string
+            type: object
+        UpgradeCompatibilityInfoDto:
+            description: Compatible upgrade versions for MSP managed devices across multiple tenants.
+            properties:
+                compatibleVersions:
+                    description: List of compatible upgrade versions available for the specified devices.
+                    items:
+                        $ref: '#/components/schemas/CompatibleVersionInfoDto'
+                    type: array
+                status:
+                    description: The current status of the retrieval of upgrade versions.
+                    enum:
+                        - IN_PROGRESS
+                        - DONE
+                        - ERROR
+                    example: DONE
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of this list of compatible versions.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            required:
+                - status
+                - uid
             type: object
         UpgradeFtdDeviceInput:
             properties:
