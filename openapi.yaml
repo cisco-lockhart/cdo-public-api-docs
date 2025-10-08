@@ -12103,12 +12103,12 @@ components:
                 interfaceUid:
                     format: uuid
                     type: string
-                managedTenantName:
-                    type: string
-                managedTenantUid:
-                    format: uuid
-                    type: string
                 metric:
+                    type: string
+                tenantName:
+                    type: string
+                tenantUid:
+                    format: uuid
                     type: string
                 value:
                     type: string
