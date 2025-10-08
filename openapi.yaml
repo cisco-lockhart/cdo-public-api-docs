@@ -5176,6 +5176,124 @@ paths:
             summary: Export MSP-managed Devices
             tags:
                 - MSP Inventory
+    /v1/msp/inventory/devices/ftds/upgrades/runs:
+        get:
+            description: Get a list of MSP device upgrade runs in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices across multiple managed tenants being upgraded, or staged for upgrades, together.
+            operationId: getDeviceUpgradeRuns
+            parameters:
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspUpgradeRunDtoPage'
+                    description: List of MSP Device Upgrade Run objects
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP Device Upgrade Runs
+            tags:
+                - MSP Device Upgrades
+    /v1/msp/inventory/devices/ftds/upgrades/runs/{mspUpgradeRunUid}:
+        get:
+            description: Get a MSP Device Upgrade Run by UID in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices across multiple managed tenants being upgraded, or staged for upgrades, together.
+            operationId: getDeviceUpgradeRun
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the FTD Device Upgrade Run in SCC Firewall Manager.
+                  in: path
+                  name: mspUpgradeRunUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspUpgradeRunDto'
+                    description: The MSP Device Upgrade Run object
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP Device Upgrade Run
+            tags:
+                - MSP Device Upgrades
+    /v1/msp/inventory/devices/ftds/upgrades/trigger:
+        post:
+            description: |-
+                <p>Asynchronous operation to upgrade multiple FTD devices across managed tenants.</p>
+                <p><strong>Notes:</strong></p>
+                <ul>
+                <li>Maximum of 50 FTD devices per hardware model per managed tenant per request</li>
+                </ul>
+                <p><strong>Response:</strong></p>
+                <ul>
+                <li>Returns a transaction object to track upgrade operation progress</li>
+                <li>Use the transaction ID or the entity UID to monitor the status of the upgrade</li>
+                </ul>
+            operationId: upgradeMspManagedFtdDevices
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Returns a Security Cloud Control returns a Transaction object that can be used to track the progress of the multi-tenant device upgrade operation.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Upgrade multiple FTDs across multiple tenants
+            tags:
+                - MSP Device Upgrades
     /v1/msp/inventory/devices/ftds/upgrades/versions:
         post:
             description: This is an asynchronous operation to calculate a list of compatible upgrade versions for a list of CdFMC-managed FTD devices across multiple managed tenants.
@@ -10726,6 +10844,51 @@ components:
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
             type: string
+        DeviceUpgradeStatusDto:
+            properties:
+                hardwareModel:
+                    description: The hardware model of the devices being upgraded.
+                    example: Firepower 2110
+                    type: string
+                managedTenantDisplayName:
+                    description: The display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: The name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: tenant-uuid-1
+                    format: uuid
+                    type: string
+                name:
+                    description: The name of the device being upgraded.
+                    example: my-firepower
+                    type: string
+                transactionUid:
+                    description: The unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device being upgraded.
+                    format: uuid
+                    type: string
+                upgradeRunStatus:
+                    description: The current status of the upgrade run.
+                    enum:
+                        - IN_PROGRESS
+                        - REBUILDING_UPGRADE_CACHE
+                        - PERFORMING_UPGRADE
+                        - UPGRADE_STAGED
+                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_COMPLETED
+                        - UPGRADE_FAILED
+                    example: PERFORMING_UPGRADE
+                    type: string
+            type: object
         DevicesPatchInput:
             properties:
                 deviceUids:
@@ -12876,6 +13039,92 @@ components:
                     format: int32
                     type: integer
             type: object
+        MspUpgradeRunDto:
+            properties:
+                errorMsg:
+                    description: The error message if the upgrade run failed.
+                    example: Timeout error
+                    type: string
+                lastUpdatedTime:
+                    description: The time (UTC; represented using the RFC-3339 standard) at which the upgrade run was last updated.
+                    example: 2023-12-13T08:15:44Z
+                    format: date-time
+                    type: string
+                metadata:
+                    $ref: '#/components/schemas/UpgradeRunMetadataDto'
+                    description: Information on the progress of each upgrade run, grouped by the tenant and the hardware model.
+                name:
+                    description: The name of the upgrade run. Upgrade runs names are unique in a tenant in SCC Firewall Manager.
+                    example: my-example-device
+                    type: string
+                softwareVersion:
+                    description: The target software version for the upgrade.
+                    example: 7.4.2
+                    type: string
+                stageUpgradeOnly:
+                    description: Indicates if this upgrade run is to stage the upgrade on the device. If set to true, the upgrade is not applied on the device.
+                    example: false
+                    type: boolean
+                submissionTime:
+                    description: The time (UTC; represented using the RFC-3339 standard) at which the upgrade run was triggered.
+                    example: 2023-12-13T05:15:44Z
+                    format: date-time
+                    type: string
+                transactionUid:
+                    description: The unique identifier, represented as a UUID, of the CDO transaction that tracks this upgrade run.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the upgrade run in SCC Firewall Manager.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                upgradeRunStatus:
+                    description: The current status of the upgrade run.
+                    enum:
+                        - IN_PROGRESS
+                        - REBUILDING_UPGRADE_CACHE
+                        - PERFORMING_UPGRADE
+                        - UPGRADE_STAGED
+                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_COMPLETED
+                        - UPGRADE_FAILED
+                    example: PERFORMING_UPGRADE
+                    type: string
+                upgradeRunType:
+                    description: The type of upgrade run
+                    enum:
+                        - ASA_DEVICE_UPGRADE
+                        - FTD_DEVICE_UPGRADE
+                        - FTD_SECURE_CLIENT_UPGRADE
+                        - ASA_SECURE_CLIENT_UPGRADE
+                    example: FTD_DEVICE_UPGRADE
+                    type: string
+            type: object
+        MspUpgradeRunDtoPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MspUpgradeRunDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
         Network:
             properties:
                 id:
@@ -14383,6 +14632,14 @@ components:
                         - ASA_SECURE_CLIENT_UPGRADE
                     example: ASA_DEVICE_UPGRADE
                     type: string
+            type: object
+        UpgradeRunMetadataDto:
+            properties:
+                devices:
+                    description: The set of device UIDs that are part of this upgrade run.
+                    items:
+                        $ref: '#/components/schemas/DeviceUpgradeStatusDto'
+                    type: array
             type: object
         UpgradeRunModifyInput:
             properties:
