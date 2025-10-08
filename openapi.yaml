@@ -4225,7 +4225,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/FtdUpgradeRunDtoPage'
+                                $ref: '#/components/schemas/UpgradeRunDto'
                     description: The Device Upgrade Run object
                 "400":
                     $ref: '#/components/responses/http400BadRequest'
