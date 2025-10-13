@@ -4177,14 +4177,14 @@ paths:
             summary: Get Device Upgrade Runs
             tags:
                 - Device Upgrades
-    /v1/inventory/devices/upgrades/runs/{upgradeRunUid}:
+    /v1/inventory/devices/upgrades/runs/{uid}:
         delete:
             description: 'Delete a Device Upgrade Run by UID in the SCC Firewall Manager Tenant. Warning: if you delete an upgrade run currently in progress, you may end up allowing multiple upgrades to be triggered on devices.'
-            operationId: modifyDeviceUpgradeRun
+            operationId: deleteDeviceUpgradeRun
             parameters:
                 - description: The unique identifier, represented as a UUID, of the FTD Device Upgrade Run in SCC Firewall Manager.
                   in: path
-                  name: upgradeRunUid
+                  name: uid
                   required: true
                   schema:
                     format: uuid
@@ -4209,6 +4209,7 @@ paths:
             summary: Delete Device Upgrade Run
             tags:
                 - Device Upgrades
+    /v1/inventory/devices/upgrades/runs/{upgradeRunUid}:
         get:
             description: Get a Device Upgrade Run by UID in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices being upgraded, or staged for upgrades, together.
             operationId: getDeviceUpgradeRun
@@ -4248,7 +4249,7 @@ paths:
                 - Device Upgrades
         patch:
             description: Modify a Device Upgrade Run by UID in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices being upgraded, or staged for upgrades, together.
-            operationId: modifyDeviceUpgradeRun_1
+            operationId: modifyDeviceUpgradeRun
             parameters:
                 - description: The unique identifier, represented as a UUID, of the FTD Device Upgrade Run in SCC Firewall Manager.
                   in: path
