@@ -10910,7 +10910,7 @@ components:
                         - REBUILDING_UPGRADE_CACHE
                         - PERFORMING_UPGRADE
                         - UPGRADE_STAGED
-                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_STAGING_FAILED
                         - UPGRADE_COMPLETED
                         - UPGRADE_FAILED
                     example: PERFORMING_UPGRADE
@@ -13117,7 +13117,7 @@ components:
                         - REBUILDING_UPGRADE_CACHE
                         - PERFORMING_UPGRADE
                         - UPGRADE_STAGED
-                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_STAGING_FAILED
                         - UPGRADE_COMPLETED
                         - UPGRADE_FAILED
                     example: PERFORMING_UPGRADE
