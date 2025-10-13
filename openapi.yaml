@@ -5263,6 +5263,32 @@ paths:
             summary: Get MSP Device Upgrade Run
             tags:
                 - MSP Device Upgrades
+    /v1/msp/inventory/devices/ftds/upgrades/runs/{uid}:
+        delete:
+            description: 'Delete a MSP Device Upgrade Run by UID in the SCC Firewall Manager Tenant. Warning: if you delete an upgrade run currently in progress, you may end up allowing multiple upgrades to be triggered on devices.'
+            operationId: deleteDeviceUpgradeRun
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the FTD Device Upgrade Run in SCC Firewall Manager.
+                  in: path
+                  name: uid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "204":
+                    description: No Content
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Delete MSP Device Upgrade Run
+            tags:
+                - MSP Device Upgrades
     /v1/msp/inventory/devices/ftds/upgrades/trigger:
         post:
             description: |-
