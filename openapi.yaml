@@ -10911,6 +10911,7 @@ components:
                         - PERFORMING_UPGRADE
                         - UPGRADE_STAGED
                         - UPGRADE_STAGING_FAILED
+                        - UGPRADE_STAGING_FAILED
                         - UPGRADE_COMPLETED
                         - UPGRADE_FAILED
                     example: PERFORMING_UPGRADE
@@ -13118,6 +13119,7 @@ components:
                         - PERFORMING_UPGRADE
                         - UPGRADE_STAGED
                         - UPGRADE_STAGING_FAILED
+                        - UGPRADE_STAGING_FAILED
                         - UPGRADE_COMPLETED
                         - UPGRADE_FAILED
                     example: PERFORMING_UPGRADE
