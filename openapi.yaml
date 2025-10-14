@@ -14658,6 +14658,7 @@ components:
                         - PERFORMING_READINESS_CHECK
                         - UPGRADE_STAGED
                         - UPGRADE_STAGING_FAILED
+                        - UGPRADE_STAGING_FAILED
                         - PERFORMING_UPGRADE
                         - UPGRADE_COMPLETED
                         - UPGRADE_FAILED
