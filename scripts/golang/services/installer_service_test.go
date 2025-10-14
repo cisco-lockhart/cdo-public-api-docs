@@ -2,6 +2,7 @@ package services_test
 
 import (
 	"errors"
+
 	"github.com/cisco-lockhart/cloud-fw-mgr-api-docs/services"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -16,6 +17,14 @@ type MockCommandExecutor struct {
 
 // Implements the commandExecutor interface
 func (m *MockCommandExecutor) Output() ([]byte, error) {
+	if m.output == nil {
+		return nil, m.err
+	} else {
+		return []byte(*m.output), m.err
+	}
+}
+
+func (m *MockCommandExecutor) CombinedOutput() ([]byte, error) {
 	if m.output == nil {
 		return nil, m.err
 	} else {

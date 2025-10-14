@@ -2,7 +2,9 @@ package services
 
 import (
 	"context"
+	"errors"
 	"fmt"
+
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
 	"github.com/pterm/pterm"
@@ -23,14 +25,17 @@ func GeneratePythonSdk(openapiFile string, version string, useLocalInstallation 
 	} else {
 		commandName = "@openapitools/openapi-generator-cli"
 	}
-	_, err := ExecCommand("npx",
+	out, err := ExecCommand("npx",
 		commandName,
 		"generate",
 		"-i", openapiFile,
 		"-g", "python",
 		"-o", "sdks/python",
-		"--additional-properties=packageName=scc_firewall_manager_sdk,packageVersion="+version).Output()
-	return err
+		"--additional-properties=packageName=scc_firewall_manager_sdk,packageVersion="+version).CombinedOutput()
+	if err != nil {
+		return errors.New(fmt.Sprintf("Error: %s.\nSDK Output: %s", err.Error(), out))
+	}
+	return nil
 }
 
 func PublishPythonSdk(pypiToken *string, version string) error {
