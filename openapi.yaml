@@ -5180,7 +5180,7 @@ paths:
     /v1/msp/inventory/devices/ftds/upgrades/runs:
         get:
             description: Get a list of MSP device upgrade runs in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices across multiple managed tenants being upgraded, or staged for upgrades, together.
-            operationId: getDeviceUpgradeRuns
+            operationId: getMspDeviceUpgradeRuns
             parameters:
                 - description: The number of results to retrieve.
                   in: query
@@ -5234,7 +5234,7 @@ paths:
     /v1/msp/inventory/devices/ftds/upgrades/runs/{mspUpgradeRunUid}:
         get:
             description: Get a MSP Device Upgrade Run by UID in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices across multiple managed tenants being upgraded, or staged for upgrades, together.
-            operationId: getDeviceUpgradeRun
+            operationId: getMspDeviceUpgradeRun
             parameters:
                 - description: The unique identifier, represented as a UUID, of the FTD Device Upgrade Run in SCC Firewall Manager.
                   in: path
@@ -5266,7 +5266,7 @@ paths:
     /v1/msp/inventory/devices/ftds/upgrades/runs/{uid}:
         delete:
             description: 'Delete a MSP Device Upgrade Run by UID in the SCC Firewall Manager Tenant. Warning: if you delete an upgrade run currently in progress, you may end up allowing multiple upgrades to be triggered on devices.'
-            operationId: deleteDeviceUpgradeRun
+            operationId: deleteMspDeviceUpgradeRun
             parameters:
                 - description: The unique identifier, represented as a UUID, of the FTD Device Upgrade Run in SCC Firewall Manager.
                   in: path
