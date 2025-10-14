@@ -2,6 +2,8 @@ package services_test
 
 import (
 	"errors"
+	"fmt"
+
 	"github.com/cisco-lockhart/cloud-fw-mgr-api-docs/services"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -77,19 +79,21 @@ var _ = Describe("SdksService", func() {
 		It("should fail if python SDK generation fails", func() {
 			openapiFile := "test-file"
 			version := "1.0.0"
-			expectedErrMsg := "test-error"
+			expectedSdkOutput := "test-output"
+			errMsg := "test-error"
+			expectedErr := errors.New(fmt.Sprintf("Error: %s.\nSDK Output: %s", errMsg, expectedSdkOutput))
 			mockShellCommandFunc := func(name string, args ...string) services.CommandExecutor {
 				// validate args
 				Expect(name).To(Equal("npx"))
 				Expect(args).To(HaveLen(9))
 				Expect(args).To(Equal([]string{"@openapitools/openapi-generator-cli", "generate", "-i", openapiFile, "-g", "python", "-o", "sdks/python", "--additional-properties=packageName=scc_firewall_manager_sdk,packageVersion=" + version}))
 
-				return &MockCommandExecutor{err: errors.New(expectedErrMsg)}
+				return &MockCommandExecutor{err: errors.New(errMsg), output: &expectedSdkOutput}
 			}
 			services.ExecCommand = mockShellCommandFunc
 			err := services.GeneratePythonSdk(openapiFile, version, false)
 			Expect(err).ToNot(BeNil())
-			Expect(err.Error()).To(Equal(expectedErrMsg))
+			Expect(err).To(Equal(expectedErr))
 		})
 	})
 })
