@@ -6425,6 +6425,14 @@ paths:
                   schema:
                     format: uuid
                     type: string
+                - description: Force mode is required to delete an object that hasn't targets but is in use by another object.
+                  example: false
+                  in: query
+                  name: forcedDelete
+                  required: false
+                  schema:
+                    default: false
+                    type: boolean
             responses:
                 "204":
                     content:
