@@ -14647,7 +14647,7 @@ components:
                         - UPLOADING_IMAGE
                         - PERFORMING_READINESS_CHECK
                         - UPGRADE_STAGED
-                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_STAGING_FAILED
                         - PERFORMING_UPGRADE
                         - UPGRADE_COMPLETED
                         - UPGRADE_FAILED
