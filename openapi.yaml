@@ -1099,6 +1099,46 @@ paths:
             summary: Modify SDC
             tags:
                 - Connectors
+    /v1/events/reports:
+        get:
+            description: Get a list of reports containing the results of event log searches executed using the Report feature in the Event Logging page.
+            operationId: getSearchReports
+            parameters:
+                - description: The number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Page'
+                    description: List of reports, including a presigned URL to download the reports
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get event search reports
+            tags:
+                - Connectors
     /v1/features:
         get:
             description: Get the feature flags enabled in the Security Cloud Control tenant.
@@ -13305,6 +13345,28 @@ components:
                     type: string
             required:
                 - content
+            type: object
+        Page:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items: {}
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
             type: object
         PhysicalInterfacePatchInput:
             properties:
