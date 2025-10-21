@@ -5336,6 +5336,28 @@ paths:
             summary: Delete MSP Device Upgrade Run
             tags:
                 - MSP Device Upgrades
+    /v1/msp/inventory/devices/ftds/upgrades/runs/attribute-values:
+        get:
+            description: Get distinct attribute values for fields in the MSP upgrade runs.
+            operationId: getMspUpgradeRunsAttributeValues
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspUpgradeRunsAttributeValues'
+                    description: Distinct attribute values for MSP upgrade runs
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get distinct attribute values for MSP upgrade runs
+            tags:
+                - MSP Device Upgrades
     /v1/msp/inventory/devices/ftds/upgrades/trigger:
         post:
             description: |-
@@ -10928,61 +10950,17 @@ components:
             type: string
         DeviceUpgradeStatusDto:
             properties:
-                hardwareModel:
-                    description: The hardware model of the devices being upgraded.
-                    example: Firepower 2110
-                    type: string
-                managedTenantDisplayName:
-                    description: The display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: The name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: tenant-uuid-1
-                    format: uuid
-                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
-                    type: string
-                name:
-                    description: The name of the device being upgraded.
-                    example: my-firepower
                     type: string
                 percentageComplete:
                     description: The percentage completion of the current task being performed
                     format: double
                     type: number
-                softwareVersionBeforeUpgrade:
-                    description: The software version of the device before the upgrade.
-                    example: 7.2.3
-                    type: string
-                transactionUid:
-                    description: The unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of the device being upgraded.
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: The current status of the upgrade run.
-                    enum:
-                        - IN_PROGRESS
-                        - REBUILDING_UPGRADE_CACHE
-                        - PERFORMING_UPGRADE
-                        - UPLOADING_IMAGE
-                        - PERFORMING_READINESS_CHECK
-                        - UPGRADE_STAGED
-                        - UPGRADE_STAGING_FAILED
-                        - UGPRADE_STAGING_FAILED
-                        - UPGRADE_COMPLETED
-                        - UPGRADE_FAILED
-                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -13230,6 +13208,26 @@ components:
                     example: 0
                     format: int32
                     type: integer
+            type: object
+        MspUpgradeRunsAttributeValues:
+            properties:
+                upgradeRunStatuses:
+                    description: The distinct status values for the MSP upgrade runs on this MSP portal.
+                    items:
+                        enum:
+                            - IN_PROGRESS
+                            - REBUILDING_UPGRADE_CACHE
+                            - PERFORMING_UPGRADE
+                            - UPLOADING_IMAGE
+                            - PERFORMING_READINESS_CHECK
+                            - UPGRADE_STAGED
+                            - UPGRADE_STAGING_FAILED
+                            - UGPRADE_STAGING_FAILED
+                            - UPGRADE_COMPLETED
+                            - UPGRADE_FAILED
+                        type: string
+                    type: array
+                    uniqueItems: true
             type: object
         Network:
             properties:
