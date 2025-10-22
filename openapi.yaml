@@ -1126,6 +1126,15 @@ paths:
                   required: false
                   schema:
                     type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
             responses:
                 "200":
                     content:
