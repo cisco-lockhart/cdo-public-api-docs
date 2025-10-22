@@ -6086,6 +6086,11 @@ paths:
                   schema:
                     format: uuid
                     type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/EnableCdFmcForTenantRequest'
             responses:
                 "202":
                     content:
@@ -11071,6 +11076,13 @@ components:
                         type: string
                     type: array
                     uniqueItems: true
+            type: object
+        EnableCdFmcForTenantRequest:
+            properties:
+                dedicatedCdFmcInstance:
+                    type: boolean
+            required:
+                - dedicatedCdFmcInstance
             type: object
         Entity:
             properties:
