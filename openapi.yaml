@@ -14514,6 +14514,10 @@ components:
                     description: Indicates if the tenant has the multicloud defense enabled.
                     example: false
                     type: boolean
+                objectSharingEnabled:
+                    description: Indicates if the tenant has Object Sharing enabled.
+                    example: false
+                    type: boolean
                 policyAnalyzer:
                     description: Indicates if the tenant has the policy analyzer enabled.
                     example: true
