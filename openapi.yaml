@@ -12711,6 +12711,9 @@ components:
                     $ref: '#/components/schemas/ConnectivityState'
                     description: The connectivity state of the device to CDO. A connectivity state that is not ONLINE can indicate either a problem with the device, or the communication pathways between the device and Security Cloud Control.
                     example: ONLINE
+                deviceMaintenanceWindow:
+                    $ref: '#/components/schemas/DeviceMaintenanceWindow'
+                    description: The maintenance window configuration for the device.
                 deviceRecordOnFmc:
                     $ref: '#/components/schemas/FmcDeviceRecord'
                     description: (FMC-managed FTDs only) The device record in FMC. A FMC-managed device on SCC can also be accessed directly using the FMC APIs; this field provides details.
