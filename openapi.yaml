@@ -12814,6 +12814,12 @@ components:
                         $ref: '#/components/schemas/EntityType'
                     type: array
                     uniqueItems: true
+                hardwareModels:
+                    description: The distinct hardware models for the devices managed by the MSP Portal.
+                    items:
+                        type: string
+                    type: array
+                    uniqueItems: true
                 managedTenantDisplayNames:
                     description: The display names of the tenants that have devices onboarded and are managed by the MSP Portal.
                     items:
@@ -12822,6 +12828,12 @@ components:
                     uniqueItems: true
                 managedTenantNames:
                     description: The names of the tenants that have devices onboarded and are managed by the MSP Portal.
+                    items:
+                        type: string
+                    type: array
+                    uniqueItems: true
+                modelNumbers:
+                    description: The distinct model numbers for the devices managed by the MSP Portal.
                     items:
                         type: string
                     type: array
