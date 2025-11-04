@@ -13264,6 +13264,21 @@ components:
                         type: string
                     type: array
                     uniqueItems: true
+                upgradeRunTypes:
+                    items:
+                        enum:
+                            - ASA_DEVICE_UPGRADE
+                            - FTD_DEVICE_UPGRADE
+                            - FTD_SECURE_CLIENT_UPGRADE
+                            - ASA_SECURE_CLIENT_UPGRADE
+                        type: string
+                    type: array
+                    uniqueItems: true
+                users:
+                    items:
+                        type: string
+                    type: array
+                    uniqueItems: true
             type: object
         Network:
             properties:
