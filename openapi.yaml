@@ -3929,7 +3929,7 @@ paths:
                   schema:
                     format: uuid
                     type: string
-                - description: Lucene-style query filter. Only prefix queries (e.g. field:value*) are supported for filtering.
+                - description: Lucene-style query filter. Only prefix queries (e.g. field:value*) and wildcard queries (e.g. field:*value or field:*value*) are supported for filtering.
                   example: name:my-interfac*
                   in: query
                   name: q
@@ -4106,7 +4106,7 @@ paths:
                   schema:
                     format: uuid
                     type: string
-                - description: Lucene-style query filter. Only prefix queries (e.g. field:value*) are supported for filtering.
+                - description: Lucene-style query filter. Only prefix queries (e.g. field:value*) and wildcard queries (e.g. field:*value or field:*value*) are supported for filtering.
                   example: name:my-devi*
                   in: query
                   name: q
