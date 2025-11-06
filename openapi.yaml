@@ -1627,7 +1627,7 @@ paths:
             description: Get a list of ASA EtherChannel interfaces. An EtherChannel interface is a logical port-channel interface that aggregates multiple physical Ethernet links into a single logical interface to increase bandwidth and provide redundancy. It is configured and used like a physical interface for interface-related features, and supports up to 48 EtherChannels, depending on the ASA model.
             operationId: getAsaEtherChannelInterfaces
             parameters:
-                - description: The number of results to retrieve.
+                - description: Number of results to retrieve.
                   in: query
                   name: limit
                   required: false
@@ -1635,7 +1635,7 @@ paths:
                     maximum: 200
                     minimum: 0
                     type: string
-                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
                   in: query
                   name: offset
                   required: false
@@ -1868,7 +1868,7 @@ paths:
             description: Get a list of an ASA interface’s subinterfaces. A subinterface is a logical interface created in a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
             operationId: getAsaInterfaceSubInterfaces
             parameters:
-                - description: The number of results to retrieve.
+                - description: Number of results to retrieve.
                   in: query
                   name: limit
                   required: false
@@ -1876,7 +1876,7 @@ paths:
                     maximum: 200
                     minimum: 0
                     type: string
-                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
                   in: query
                   name: offset
                   required: false
@@ -1990,7 +1990,7 @@ paths:
             description: Get a list of ASA physical interfaces. A physical interface is a hardware port in an ASA device, which can be enabled and configured to connect the firewall to a network.
             operationId: getAsaPhysicalInterfaces
             parameters:
-                - description: The number of results to retrieve.
+                - description: Number of results to retrieve.
                   in: query
                   name: limit
                   required: false
@@ -1998,7 +1998,7 @@ paths:
                     maximum: 200
                     minimum: 0
                     type: string
-                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
                   in: query
                   name: offset
                   required: false
@@ -2224,7 +2224,7 @@ paths:
             description: Get a list of the ASA subinterfaces. A subinterface is a logical interface created in a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
             operationId: getAsaSubInterfaces
             parameters:
-                - description: The number of results to retrieve.
+                - description: Number of results to retrieve.
                   in: query
                   name: limit
                   required: false
@@ -2232,7 +2232,7 @@ paths:
                     maximum: 200
                     minimum: 0
                     type: string
-                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
                   in: query
                   name: offset
                   required: false
@@ -2490,7 +2490,7 @@ paths:
             description: Get a list of ASA virtual tunnel interfaces. A virtual tunnel interface (VTI) is a logical interface that provides a point-to-point GRE or IPsec tunnel endpoint, enabling simplified VPN configuration and routing integration in the ASA device.
             operationId: getAsaVirtualTunnelInterfaces
             parameters:
-                - description: The number of results to retrieve.
+                - description: Number of results to retrieve.
                   in: query
                   name: limit
                   required: false
@@ -2498,7 +2498,7 @@ paths:
                     maximum: 200
                     minimum: 0
                     type: string
-                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
                   in: query
                   name: offset
                   required: false
@@ -2602,7 +2602,7 @@ paths:
             description: Get a list of ASA VLAN interfaces. A VLAN interface is a logical interface that represents a virtual LAN in a physical interface, allowing multiple VLANs to be configured and segmented in a single physical interface for traffic separation and security purposes.
             operationId: getAsaVlanInterfaces
             parameters:
-                - description: The number of results to retrieve.
+                - description: Number of results to retrieve.
                   in: query
                   name: limit
                   required: false
@@ -2610,7 +2610,7 @@ paths:
                     maximum: 200
                     minimum: 0
                     type: string
-                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
                   in: query
                   name: offset
                   required: false
@@ -4178,7 +4178,7 @@ paths:
             description: Get a list of FTD device upgrade runs in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices being upgraded, or staged for upgrades, together.
             operationId: getDeviceUpgradeRuns
             parameters:
-                - description: The number of results to retrieve.
+                - description: Number of results to retrieve.
                   in: query
                   name: limit
                   required: false
@@ -4186,7 +4186,7 @@ paths:
                     maximum: 200
                     minimum: 0
                     type: string
-                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
                   in: query
                   name: offset
                   required: false
@@ -10992,14 +10992,58 @@ components:
         DeviceUpgradeStatusDto:
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+                    description: The completion status of the upgrade on the device.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                uid:
-                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+                hardwareModel:
+                    description: The hardware model of the devices being upgraded.
+                    example: Firepower 2110
+                    type: string
+                managedTenantDisplayName:
+                    description: The display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: The name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: tenant-uuid-1
+                    format: uuid
+                    type: string
+                name:
+                    description: The name of the device being upgraded.
+                    example: my-firepower
+                    type: string
+                softwareVersionBeforeUpgrade:
+                    description: The software version of the device before the upgrade.
+                    example: 7.2.3
+                    type: string
+                transactionUid:
+                    description: The unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device being upgraded.
+                    format: uuid
+                    type: string
+                upgradeRunStatus:
+                    description: The current status of the upgrade run.
+                    enum:
+                        - IN_PROGRESS
+                        - REBUILDING_UPGRADE_CACHE
+                        - PERFORMING_UPGRADE
+                        - UPLOADING_IMAGE
+                        - PERFORMING_READINESS_CHECK
+                        - UPGRADE_STAGED
+                        - UPGRADE_STAGING_FAILED
+                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_COMPLETED
+                        - UPGRADE_FAILED
+                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
