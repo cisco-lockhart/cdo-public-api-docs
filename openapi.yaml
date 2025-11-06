@@ -9731,7 +9731,7 @@ components:
                 cancellable:
                     type: boolean
                 cdoTransactionStatus:
-                    description: The status of the transaction
+                    description: Status of the transaction.
                     enum:
                         - PENDING
                         - IN_PROGRESS
@@ -9741,48 +9741,48 @@ components:
                     example: IN_PROGRESS
                     type: string
                 entityUid:
-                    description: The unique identifier of the entity that the transaction is triggered on. This can be empty, for a transaction that is not tied to an entity, such as transactions which refresh RA VPN sessions.
+                    description: Unique identifier of the entity that the transaction is triggered on. This can be empty, for a transaction that is not tied to an entity, such as transactions which refresh RA VPN sessions.
                     example: f5f660d4-4b81-4374-877d-fbc4bee894e2
                     format: uuid
                     type: string
                 entityUrl:
-                    description: A URL to access the entity that the transaction is triggered on. This can also be empty
+                    description: URL to access the entity that the transaction is triggered on. This can also be empty if not applicable.
                     example: https://edge.us.cdo.cisco.com/platform/public-api/v1/inventory/devices/f5f660d4-4b81-4374-877d-fbc4bee894e2
                     type: string
                 errorDetails:
                     additionalProperties:
                         type: string
-                    description: Transaction error details, if any
+                    description: Transaction error details, if any.
                     type: object
                 errorMessage:
-                    description: Transaction error message, if any
+                    description: Transaction error message, if any.
                     type: string
                 lastUpdatedTime:
-                    description: The time (UTC; represented using the RFC-3339 standard) at which the transaction status was last updated
+                    description: Time (UTC; represented using the RFC-3339 standard) at which the transaction status was last updated.
                     example: 2023-12-13T08:15:44Z
                     format: date-time
                     type: string
                 submissionTime:
-                    description: The time (UTC; represented using the RFC-3339 standard) at which the transaction was triggered
+                    description: Time (UTC; represented using the RFC-3339 standard) at which the transaction was triggered.
                     example: 2023-12-13T05:15:44Z
                     format: date-time
                     type: string
                 tenantUid:
-                    description: The unique identifier of the tenant that the transaction triggered on.
+                    description: Unique identifier of the tenant that the transaction was triggered on.
                     example: 5131daad-e813-4b8f-8f42-be1e241e2cdb
                     format: uuid
                     type: string
                 transactionDetails:
                     additionalProperties:
                         type: string
-                    description: Transaction details, if any
+                    description: Transaction details, if any.
                     type: object
                 transactionPollingUrl:
-                    description: The URL to poll to track the progress of the transaction.
+                    description: Polling URL to track the progress of the transaction.
                     example: https://edge.us.cdo.cisco.com/platform/v1/transactions/7131daad-e813-4b8f-8f42-be1e241e8cdb
                     type: string
                 transactionType:
-                    description: the type of the transaction
+                    description: Type of the transaction.
                     enum:
                         - ONBOARD_ASA
                         - ONBOARD_IOS
@@ -9839,7 +9839,7 @@ components:
                     example: ONBOARD_ASA
                     type: string
                 transactionUid:
-                    description: The unique identifier of the transaction triggered.
+                    description: Unique identifier of the transaction triggered.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
@@ -10992,58 +10992,14 @@ components:
         DeviceUpgradeStatusDto:
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device.
+                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                hardwareModel:
-                    description: The hardware model of the devices being upgraded.
-                    example: Firepower 2110
-                    type: string
-                managedTenantDisplayName:
-                    description: The display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: The name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: tenant-uuid-1
-                    format: uuid
-                    type: string
-                name:
-                    description: The name of the device being upgraded.
-                    example: my-firepower
-                    type: string
-                softwareVersionBeforeUpgrade:
-                    description: The software version of the device before the upgrade.
-                    example: 7.2.3
-                    type: string
-                transactionUid:
-                    description: The unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of the device being upgraded.
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: The current status of the upgrade run.
-                    enum:
-                        - IN_PROGRESS
-                        - REBUILDING_UPGRADE_CACHE
-                        - PERFORMING_UPGRADE
-                        - UPLOADING_IMAGE
-                        - PERFORMING_READINESS_CHECK
-                        - UPGRADE_STAGED
-                        - UPGRADE_STAGING_FAILED
-                        - UGPRADE_STAGING_FAILED
-                        - UPGRADE_COMPLETED
-                        - UPGRADE_FAILED
-                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
