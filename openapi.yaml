@@ -5381,6 +5381,12 @@ paths:
                 <li>Use the transaction ID or the entity UID to monitor the status of the upgrade</li>
                 </ul>
             operationId: upgradeMspManagedFtdDevices
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MspUpgradeFtdDevicesInput'
+                required: true
             responses:
                 "202":
                     content:
@@ -10985,61 +10991,15 @@ components:
             type: string
         DeviceUpgradeStatusDto:
             properties:
-                hardwareModel:
-                    description: The hardware model of the devices being upgraded.
-                    example: Firepower 2110
-                    type: string
-                managedTenantDisplayName:
-                    description: The display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: The name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: tenant-uuid-1
-                    format: uuid
-                    type: string
-                message:
-                    description: A message, indicating current progress, returned from the device.
-                    type: string
-                name:
-                    description: The name of the device being upgraded.
-                    example: my-firepower
-                    type: string
-                percentageComplete:
-                    description: The percentage completion of the current task being performed
-                    format: double
-                    type: number
-                softwareVersionBeforeUpgrade:
-                    description: The software version of the device before the upgrade.
-                    example: 7.2.3
-                    type: string
-                transactionUid:
-                    description: The unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                completionStatuses:
+                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+                    items:
+                        $ref: '#/components/schemas/CompletionStatusDto'
+                    type: array
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of the device being upgraded.
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: The current status of the upgrade run.
-                    enum:
-                        - IN_PROGRESS
-                        - REBUILDING_UPGRADE_CACHE
-                        - PERFORMING_UPGRADE
-                        - UPLOADING_IMAGE
-                        - PERFORMING_READINESS_CHECK
-                        - UPGRADE_STAGED
-                        - UPGRADE_STAGING_FAILED
-                        - UGPRADE_STAGING_FAILED
-                        - UPGRADE_COMPLETED
-                        - UPGRADE_FAILED
-                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -13216,6 +13176,38 @@ components:
                     example: 0
                     format: int32
                     type: integer
+            type: object
+        MspUpgradeFtdDevicesInput:
+            properties:
+                deviceUids:
+                    description: Set of device unique identifiers (UUIDs) to upgrade in Security Cloud Control. All of the devices have to be managed by the MSSP portal, be of type CDFMC_MANAGED_FTD, have the connectivity state ONLINE, and be compatible with the software version specified.
+                    example:
+                        - 256461f6-bd60-11ef-8beb-6cf1610cf55d
+                    items:
+                        format: uuid
+                        type: string
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                ignoreMaintenanceWindow:
+                    description: A boolean value, indicating whether devices maintenance window should be ignored. If this is set to true, upgrade will be allowed even if there are devices outside their maintenance window.
+                    example: false
+                    type: boolean
+                name:
+                    description: Specify a human-readable name for the upgrade run.
+                    example: Production FTD Upgrade - January 2025
+                    type: string
+                softwareVersion:
+                    description: Specify the software version to which all devices will be upgraded.
+                    example: 7.3.0
+                    type: string
+                stageUpgradeOnly:
+                    default: false
+                    description: A boolean value, indicating whether the upgrade should be staged. If set to true, the image will be downloaded onto the devices and readiness checks will be performed. However, the upgrade will not be applied to the devices.
+                    example: false
+                    type: boolean
+            required:
+                - deviceUids
             type: object
         MspUpgradeRunDto:
             properties:
