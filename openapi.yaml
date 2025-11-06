@@ -5102,7 +5102,7 @@ paths:
             description: Get devices, across all tenants, managed by the MSP portal.
             operationId: getMspManagedDevices
             parameters:
-                - description: The number of results to retrieve.
+                - description: Number of results to retrieve.
                   in: query
                   name: limit
                   required: false
@@ -5110,7 +5110,7 @@ paths:
                     maximum: 200
                     minimum: 0
                     type: string
-                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
                   in: query
                   name: offset
                   required: false
@@ -5238,7 +5238,7 @@ paths:
             description: Get a list of MSP device upgrade runs in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices across multiple managed tenants being upgraded, or staged for upgrades, together.
             operationId: getMspDeviceUpgradeRuns
             parameters:
-                - description: The number of results to retrieve.
+                - description: Number of results to retrieve.
                   in: query
                   name: limit
                   required: false
@@ -5246,7 +5246,7 @@ paths:
                     maximum: 200
                     minimum: 0
                     type: string
-                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
                   in: query
                   name: offset
                   required: false
@@ -5321,7 +5321,7 @@ paths:
                 - MSP Device Upgrades
     /v1/msp/inventory/devices/ftds/upgrades/runs/{uid}:
         delete:
-            description: 'Delete a MSP Device Upgrade Run by UID in the SCC Firewall Manager Tenant. Warning: if you delete an upgrade run currently in progress, you may end up allowing multiple upgrades to be triggered on devices.'
+            description: 'Delete a MSP Device Upgrade Run, by UID, in the SCC Firewall Manager tenant. Caution: If you delete an upgrade run currently in progress, you may end up allowing multiple upgrades to be triggered on devices.'
             operationId: deleteMspDeviceUpgradeRun
             parameters:
                 - description: The unique identifier, represented as a UUID, of the FTD Device Upgrade Run in SCC Firewall Manager.
@@ -5355,7 +5355,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/MspUpgradeRunsAttributeValues'
-                    description: Distinct attribute values for MSP upgrade runs
+                    description: Distinct attribute values for MSP upgrade runs.
                 "500":
                     content:
                         application/json:
@@ -5393,7 +5393,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/CdoTransaction'
-                    description: Returns a Security Cloud Control returns a Transaction object that can be used to track the progress of the multi-tenant device upgrade operation.
+                    description: Returns a Transaction object that can be used to track the progress of the multi-tenant device upgrade operation.
                 "500":
                     content:
                         application/json:
@@ -5407,7 +5407,7 @@ paths:
                 - MSP Device Upgrades
     /v1/msp/inventory/devices/ftds/upgrades/versions:
         post:
-            description: This is an asynchronous operation to calculate a list of compatible upgrade versions for a list of CdFMC-managed FTD devices across multiple managed tenants.
+            description: An asynchronous operation to calculate a list of compatible upgrade versions for a list of CdFMC-managed FTD devices across multiple managed tenants.
             operationId: calculateMspFtdCompatibleUpgradeVersions
             requestBody:
                 content:
@@ -5421,7 +5421,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/CdoTransaction'
-                    description: Returns a Security Cloud Control returns a Transaction object that can be used to track the progress of the operation to get the set of compatibility versions.
+                    description: Returns a Transaction object to track the progress of the operation to get the set of compatibility versions.
                 "400":
                     $ref: '#/components/responses/http400BadRequest'
                 "401":
@@ -5448,7 +5448,7 @@ paths:
             description: Get a Device Upgrade Run by UID in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices being upgraded, or staged for upgrades, together.
             operationId: getMspFtdCompatibleUpgradeVersions
             parameters:
-                - description: The unique identifier, represented as a UUID, of the Device Upgrade Version object in SCC Firewall Manager.
+                - description: Unique identifier, represented as a UUID, of the Device Upgrade Version object in SCC Firewall Manager.
                   in: path
                   name: upgradeVersionUid
                   required: true
@@ -5486,7 +5486,7 @@ paths:
             description: Get device managers, across all tenants, managed by the MSP portal.
             operationId: getMspManagedDeviceManagers
             parameters:
-                - description: The number of results to retrieve.
+                - description: Number of results to retrieve.
                   in: query
                   name: limit
                   required: false
@@ -5494,7 +5494,7 @@ paths:
                     maximum: 200
                     minimum: 0
                     type: string
-                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
                   in: query
                   name: offset
                   required: false
@@ -5622,7 +5622,7 @@ paths:
             description: Get cloud services, across all tenants, managed by the MSP portal.
             operationId: getMspManagedCloudServices
             parameters:
-                - description: The number of results to retrieve.
+                - description: Number of results to retrieve.
                   in: query
                   name: limit
                   required: false
@@ -5630,7 +5630,7 @@ paths:
                     maximum: 200
                     minimum: 0
                     type: string
-                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
                   in: query
                   name: offset
                   required: false
@@ -5758,7 +5758,7 @@ paths:
             description: Get templates, across all tenants, managed by the MSP portal.
             operationId: getMspManagedTemplates
             parameters:
-                - description: The number of results to retrieve.
+                - description: Number of results to retrieve.
                   in: query
                   name: limit
                   required: false
@@ -5766,7 +5766,7 @@ paths:
                     maximum: 200
                     minimum: 0
                     type: string
-                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
                   in: query
                   name: offset
                   required: false
@@ -5894,7 +5894,7 @@ paths:
             description: Get a list of Security Cloud Control tenants managed by the MSP Portal.
             operationId: getMspManagedTenants
             parameters:
-                - description: The number of results to retrieve.
+                - description: Number of results to retrieve.
                   in: query
                   name: limit
                   required: false
@@ -5902,7 +5902,7 @@ paths:
                     maximum: 200
                     minimum: 0
                     type: string
-                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
                   in: query
                   name: offset
                   required: false
@@ -6157,7 +6157,7 @@ paths:
                   schema:
                     format: uuid
                     type: string
-                - description: The number of results to retrieve.
+                - description: Number of results to retrieve.
                   in: query
                   name: limit
                   required: false
@@ -6165,7 +6165,7 @@ paths:
                     maximum: 200
                     minimum: 0
                     type: string
-                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
                   in: query
                   name: offset
                   required: false
@@ -6287,7 +6287,7 @@ paths:
                   schema:
                     format: uuid
                     type: string
-                - description: The number of results to retrieve.
+                - description: Number of results to retrieve.
                   in: query
                   name: limit
                   required: false
@@ -6295,7 +6295,7 @@ paths:
                     maximum: 200
                     minimum: 0
                     type: string
-                - description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
                   in: query
                   name: offset
                   required: false
@@ -9731,7 +9731,7 @@ components:
                 cancellable:
                     type: boolean
                 cdoTransactionStatus:
-                    description: The status of the transaction
+                    description: Status of the transaction.
                     enum:
                         - PENDING
                         - IN_PROGRESS
@@ -9741,48 +9741,48 @@ components:
                     example: IN_PROGRESS
                     type: string
                 entityUid:
-                    description: The unique identifier of the entity that the transaction is triggered on. This can be empty, for a transaction that is not tied to an entity, such as transactions which refresh RA VPN sessions.
+                    description: Unique identifier of the entity that the transaction is triggered on. This can be empty, for a transaction that is not tied to an entity, such as transactions which refresh RA VPN sessions.
                     example: f5f660d4-4b81-4374-877d-fbc4bee894e2
                     format: uuid
                     type: string
                 entityUrl:
-                    description: A URL to access the entity that the transaction is triggered on. This can also be empty
+                    description: URL to access the entity that the transaction is triggered on. This can also be empty if not applicable.
                     example: https://edge.us.cdo.cisco.com/platform/public-api/v1/inventory/devices/f5f660d4-4b81-4374-877d-fbc4bee894e2
                     type: string
                 errorDetails:
                     additionalProperties:
                         type: string
-                    description: Transaction error details, if any
+                    description: Transaction error details, if any.
                     type: object
                 errorMessage:
-                    description: Transaction error message, if any
+                    description: Transaction error message, if any.
                     type: string
                 lastUpdatedTime:
-                    description: The time (UTC; represented using the RFC-3339 standard) at which the transaction status was last updated
+                    description: Time (UTC; represented using the RFC-3339 standard) at which the transaction status was last updated.
                     example: 2023-12-13T08:15:44Z
                     format: date-time
                     type: string
                 submissionTime:
-                    description: The time (UTC; represented using the RFC-3339 standard) at which the transaction was triggered
+                    description: Time (UTC; represented using the RFC-3339 standard) at which the transaction was triggered.
                     example: 2023-12-13T05:15:44Z
                     format: date-time
                     type: string
                 tenantUid:
-                    description: The unique identifier of the tenant that the transaction triggered on.
+                    description: Unique identifier of the tenant that the transaction was triggered on.
                     example: 5131daad-e813-4b8f-8f42-be1e241e2cdb
                     format: uuid
                     type: string
                 transactionDetails:
                     additionalProperties:
                         type: string
-                    description: Transaction details, if any
+                    description: Transaction details, if any.
                     type: object
                 transactionPollingUrl:
-                    description: The URL to poll to track the progress of the transaction.
+                    description: Polling URL to track the progress of the transaction.
                     example: https://edge.us.cdo.cisco.com/platform/v1/transactions/7131daad-e813-4b8f-8f42-be1e241e8cdb
                     type: string
                 transactionType:
-                    description: the type of the transaction
+                    description: Type of the transaction.
                     enum:
                         - ONBOARD_ASA
                         - ONBOARD_IOS
@@ -9839,7 +9839,7 @@ components:
                     example: ONBOARD_ASA
                     type: string
                 transactionUid:
-                    description: The unique identifier of the transaction triggered.
+                    description: Unique identifier of the transaction triggered.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
@@ -10218,14 +10218,14 @@ components:
             properties:
                 details:
                     additionalProperties:
-                        description: Additional details, if any, on the error
+                        description: Additional details, if any, about the error.
                         example: {}
                         type: object
-                    description: Additional details, if any, on the error
+                    description: Additional details, if any, about the error.
                     example: {}
                     type: object
                 errorCode:
-                    description: A unique code that describes the error.
+                    description: Unique code that describes the error.
                     enum:
                         - INVALID_INPUT
                         - UNAUTHORIZED
@@ -10241,7 +10241,7 @@ components:
                     example: INVALID_INPUT
                     type: string
                 errorMsg:
-                    description: A human-readable error description in English.
+                    description: Human-readable error description in English.
                     example: sample error
                     type: string
         CompatibleDeviceDto:
@@ -10992,58 +10992,14 @@ components:
         DeviceUpgradeStatusDto:
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device.
+                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                hardwareModel:
-                    description: The hardware model of the devices being upgraded.
-                    example: Firepower 2110
-                    type: string
-                managedTenantDisplayName:
-                    description: The display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: The name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: tenant-uuid-1
-                    format: uuid
-                    type: string
-                name:
-                    description: The name of the device being upgraded.
-                    example: my-firepower
-                    type: string
-                softwareVersionBeforeUpgrade:
-                    description: The software version of the device before the upgrade.
-                    example: 7.2.3
-                    type: string
-                transactionUid:
-                    description: The unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of the device being upgraded.
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: The current status of the upgrade run.
-                    enum:
-                        - IN_PROGRESS
-                        - REBUILDING_UPGRADE_CACHE
-                        - PERFORMING_UPGRADE
-                        - UPLOADING_IMAGE
-                        - PERFORMING_READINESS_CHECK
-                        - UPGRADE_STAGED
-                        - UPGRADE_STAGING_FAILED
-                        - UGPRADE_STAGING_FAILED
-                        - UPGRADE_COMPLETED
-                        - UPGRADE_FAILED
-                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -12573,7 +12529,7 @@ components:
                 - users
             type: object
         MspCalculateCompatibleUpgradeVersionsInput:
-            description: 'A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. Note: All of the devices specified have to be on tenants managed by the MSP portal.'
+            description: List of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. Note that all the specified devices must be in tenants managed by the MSP portal.
             properties:
                 deviceUids:
                     description: The list of devices to calculate compatible upgrade versions for. All of the devices must exist, be associated with the managed tenant, and be in the connectivity state 'ONLINE'.
@@ -13256,11 +13212,11 @@ components:
         MspUpgradeRunDto:
             properties:
                 errorMsg:
-                    description: The error message if the upgrade run failed.
+                    description: Error message if the upgrade run failed.
                     example: Timeout error
                     type: string
                 lastUpdatedTime:
-                    description: The time (UTC; represented using the RFC-3339 standard) at which the upgrade run was last updated.
+                    description: Time (UTC; represented using the RFC-3339 standard) at which the upgrade run was last updated.
                     example: 2023-12-13T08:15:44Z
                     format: date-time
                     type: string
@@ -13268,11 +13224,11 @@ components:
                     $ref: '#/components/schemas/UpgradeRunMetadataDto'
                     description: Information on the progress of each upgrade run, grouped by the tenant and the hardware model.
                 name:
-                    description: The name of the upgrade run. Upgrade runs names are unique in a tenant in SCC Firewall Manager.
+                    description: Name of the upgrade run. Upgrade runs names are unique in a tenant in SCC Firewall Manager.
                     example: my-example-device
                     type: string
                 softwareVersion:
-                    description: The target software version for the upgrade.
+                    description: Target software version for the upgrade.
                     example: 7.4.2
                     type: string
                 stageUpgradeOnly:
@@ -13280,12 +13236,12 @@ components:
                     example: false
                     type: boolean
                 submissionTime:
-                    description: The time (UTC; represented using the RFC-3339 standard) at which the upgrade run was triggered.
+                    description: Time (UTC; represented using the RFC-3339 standard) at which the upgrade run was triggered.
                     example: 2023-12-13T05:15:44Z
                     format: date-time
                     type: string
                 transactionUid:
-                    description: The unique identifier, represented as a UUID, of the CDO transaction that tracks this upgrade run.
+                    description: Unique identifier, represented as a UUID, of the CDO transaction that tracks this upgrade run.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
@@ -13295,7 +13251,7 @@ components:
                     format: uuid
                     type: string
                 upgradeRunStatus:
-                    description: The current status of the upgrade run.
+                    description: Current status of the upgrade run.
                     enum:
                         - IN_PROGRESS
                         - REBUILDING_UPGRADE_CACHE
@@ -13310,7 +13266,7 @@ components:
                     example: PERFORMING_UPGRADE
                     type: string
                 upgradeRunType:
-                    description: The type of upgrade run
+                    description: Type of upgrade run
                     enum:
                         - ASA_DEVICE_UPGRADE
                         - FTD_DEVICE_UPGRADE
@@ -13319,7 +13275,7 @@ components:
                     example: FTD_DEVICE_UPGRADE
                     type: string
                 username:
-                    description: The username of the user who initiated the upgrade run.
+                    description: Username of the user who initiated the upgrade run.
                     example: admin.user@my-msp.com
                     type: string
             type: object
@@ -13349,7 +13305,7 @@ components:
         MspUpgradeRunsAttributeValues:
             properties:
                 upgradeRunStatuses:
-                    description: The distinct status values for the MSP upgrade runs on this MSP portal.
+                    description: Distinct status values for the MSP upgrade runs on this MSP portal.
                     items:
                         enum:
                             - IN_PROGRESS
@@ -14924,7 +14880,7 @@ components:
         UpgradeRunMetadataDto:
             properties:
                 devices:
-                    description: The set of device UIDs that are part of this upgrade run.
+                    description: Set of device UIDs that are part of this upgrade run.
                     items:
                         $ref: '#/components/schemas/DeviceUpgradeStatusDto'
                     type: array
