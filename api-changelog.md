@@ -3,43 +3,40 @@
 ## Added
 
 ### Events
-- Endpoint to [get event search reports](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-event-search-reports/) containing the results of event log searches executed using the Report feature in the Event Logging page.
+- Endpoint to [get event search reports](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-event-search-reports/) containing the results of event log searches executed using the Report feature in the Event Logging page.
 
 ### Health Metrics
-- Endpoint to get [device health metric aggregations](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-health-metric-aggregations/) for all managed devices, supporting CPU, memory, and disk metrics.
-- Endpoint to get [device detailed list for aggregations](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-health-metric-aggregation-list/) to retrieve filtered device lists corresponding to aggregation metrics with threshold filtering (CRITICAL, WARNING, OK).
-- Endpoint to get [interface health metric aggregations](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-interface-health-metric-aggregations/) for all managed devices, supporting link status, overruns, underruns, dropped packets, L2 decode drops, and input/output errors.
-- Endpoint to get [device interface detailed list for aggregations](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-interface-health-metric-aggregation-list/) to retrieve filtered interface lists with metric-specific thresholds.
-- Endpoint to get [interface health metric error aggregations](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-interface-health-metric-error-aggregations/) providing summary of interface errors across all managed devices.
+- Endpoint to get [device health metric aggregations](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-health-metric-aggregations/) for all managed devices, supporting CPU, memory, and disk metrics.
+- Endpoint to get [detailed device health metrics](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-detailed-list-for-aggregations/ to retrieve filtered device lists corresponding to aggregation metrics with threshold filtering (CRITICAL, WARNING, OK).
+- Endpoint to get [interface health metric aggregations](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-interface-health-metric-aggregations/) for all managed devices, supporting link status, overruns, underruns, dropped packets, L2 decode drops, and input/output errors.
+- Endpoint to get [interface health metric error aggregations](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-interface-health-metric-error-aggregations/) providing summary of interface errors across all managed devices.
 
 ### Device Upgrades
-- Endpoint to [get device upgrade runs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-upgrade-runs/) to list all FTD device upgrade runs in the tenant.
-- Endpoint to [get a device upgrade run](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-upgrade-run/) by UID with detailed completion status for each device.
-- Endpoint to [modify a device upgrade run](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/modify-device-upgrade-run/) to update upgrade run properties.
-- Endpoint to [delete a device upgrade run](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/delete-device-upgrade-run/) by UID.
+- Endpoint to [get device upgrade runs](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-upgrade-runs/) to list all FTD device upgrade runs in the tenant.
+- Endpoint to [get a device upgrade run](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-upgrade-run/) by UID with detailed completion status for each device.
+- Endpoint to [modify a device upgrade run](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/modify-device-upgrade-run/) to update upgrade run properties.
+- Endpoint to [delete a device upgrade run](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/delete-device-upgrade-run/) by UID.
 
 ### MSP
-- Endpoint to [calculate compatible upgrade versions for multiple MSP-managed devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/msp-calculate-compatible-upgrade-versions/) across different tenants (up to 50 devices).
-- Endpoint to [upgrade multiple MSP-managed FTD devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/msp-upgrade-ftd-devices/) across different tenants simultaneously.
-- Endpoint to [get MSP upgrade runs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-upgrade-runs/) to monitor upgrade operations across managed tenants.
-- Endpoint to [get a specific MSP upgrade run](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-upgrade-run/) by UID.
-- Endpoint to [get MSP upgrade run attribute values](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-upgrade-run-attribute-values/) to retrieve distinct values for filtering upgrade runs.
+- Endpoint to [calculate compatible upgrade versions for multiple MSP-managed devices](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/calculate-compatible-ftd-upgrade-versions/) across different tenants (up to 50 devices).
+- Endpoint to [upgrade multiple MSP-managed FTD devices](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/upgrade-multiple-ftds-across-multiple-tenants/) across different tenants simultaneously.
+- Endpoint to [get MSP upgrade runs](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-device-upgrade-runs/) to monitor upgrade operations across managed tenants.
+- Endpoint to [get a specific MSP upgrade run](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-device-upgrade-run/) by UID.
+- Endpoint to [get MSP upgrade run attribute values](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-distinct-attribute-values-for-msp-upgrade-runs/) to retrieve distinct values for filtering upgrade runs.
 
 ## Improvements
 
 ### Device Upgrades
-- Device upgrade operations now support maintenance window configuration. You can specify `ignoreMaintenanceWindow` parameter when upgrading [single FTD devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/upgrade-ftd-device/), [multiple FTD devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/upgrade-multiple-ftd-devices/), and [ASA devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/upgrade-asa-device/).
-- The [Get Device Upgrade Run](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-upgrade-run/) endpoint now returns detailed completion status for each device, including percentage complete and current progress messages for each node in HA pairs and clusters.
-- Added `UPGRADE_STAGING_FAILED` status to upgrade run statuses for better tracking of staging failures.
+- Device upgrade operations now support maintenance window configuration. You can specify `ignoreMaintenanceWindow` parameter when upgrading [single FTD devices](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/upgrade-ftd-device/) and [multiple FTD devices](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/upgrade-multiple-ftd-devices/).
 
 ### MSP
-- The [Get MSP-managed Devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-devices/) endpoint now provides additional filterable fields including `hardwareModels` and `modelNumbers` for better device inventory management.
+- The [Get MSP-managed Devices](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-devices/) endpoint now provides additional filterable fields including `hardwareModels` and `modelNumbers` for better device inventory management.
 
 ### Object Management
-- The [Delete Object](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/delete-object/) endpoint now supports a `forcedDelete` parameter to delete objects that are in use by other objects but are not associated with a device.
+- The [Delete Object](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/delete-object/) endpoint now supports a `forcedDelete` parameter to delete objects that are in use by other objects but are not associated with a device.
 
 ### API Consistency
-- The [Get Users](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-users/) endpoint now has a maximum limit of 50 results (reduced from 200) for better performance.
+- The [Get Users](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-users/) endpoint now has a maximum limit of 50 results (reduced from 200) for better performance.
 
 ### Authentication & Tenants
 - The authentication token response now includes `tenantName` field providing the name of the enterprise (tenant) in Security Cloud Control.
