@@ -34,7 +34,6 @@
 
 ### MSP
 - The [Get MSP-managed Devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-devices/) endpoint now provides additional filterable fields including `hardwareModels` and `modelNumbers` for better device inventory management.
-- MSP Portal can now provision dedicated cdFMC instances for managed tenants using the `dedicatedCdFmcInstance` parameter in the [Enable cdFMC for Tenant](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/enable-cdfmc-for-tenant/) endpoint.
 
 ### Object Management
 - The [Delete Object](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/delete-object/) endpoint now supports a `forcedDelete` parameter to delete objects that are in use by other objects but are not associated with a device.
