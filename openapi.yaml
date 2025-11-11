@@ -13180,7 +13180,16 @@ components:
         MspUpgradeFtdDevicesInput:
             properties:
                 deviceUids:
-                    description: Set of device unique identifiers (UUIDs) to upgrade in Security Cloud Control. All of the devices have to be managed by the MSSP portal, be of type CDFMC_MANAGED_FTD, have the connectivity state ONLINE, and be compatible with the software version specified.
+                    description: |4
+                            <p>List of device identifiers to upgrade in Security Cloud Control.</p>
+                            <p>Each entry must meet all of the following:</p>
+                            <ul>
+                              <li>The identifier is a UUID (unique identifier).</li>
+                              <li>The device is managed by the MSSP portal.</li>
+                              <li>The device type is <code>CDFMC_MANAGED_FTD</code>.</li>
+                              <li>The connectivity state is <code>ONLINE</code>.</li>
+                              <li>The device is compatible with the specified software version.</li>
+                            </ul>
                     example:
                         - 256461f6-bd60-11ef-8beb-6cf1610cf55d
                     items:
@@ -13190,7 +13199,12 @@ components:
                     type: array
                     uniqueItems: true
                 ignoreMaintenanceWindow:
-                    description: A boolean value, indicating whether devices maintenance window should be ignored. If this is set to true, upgrade will be allowed even if there are devices outside their maintenance window.
+                    description: |4
+                            <p>A boolean flag that determines whether device maintenance windows should be ignored during a full upgrade.</p>
+                            <ul>
+                              <li>If <code>stageUpgradeOnly</code> is set to <code>false</code>, this field is ignored.</li>
+                              <li>If <code>stageUpgradeOnly</code> is <code>true</code> and this field is set to <code>false</code> (the default), the upgrade will fail if any selected device is outside its maintenance window.</li>
+                            </ul>
                     example: false
                     type: boolean
                 name:
