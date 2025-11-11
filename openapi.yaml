@@ -4175,7 +4175,7 @@ paths:
                 - Inventory
     /v1/inventory/devices/upgrades/runs:
         get:
-            description: Get a list of FTD device upgrade runs in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices being upgraded, or staged for upgrades, together.
+            description: Get a list of device upgrade runs in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices being upgraded, or staged for upgrades, together.
             operationId: getDeviceUpgradeRuns
             parameters:
                 - description: Number of results to retrieve.
@@ -9746,7 +9746,7 @@ components:
                     format: uuid
                     type: string
                 entityUrl:
-                    description: URL to access the entity that the transaction is triggered on. This can also be empty if not applicable.
+                    description: URL to access the entity that the transaction is triggered on. This can be empty, for a transaction that is not tied to an entity, such as transactions which refresh RA VPN sessions.
                     example: https://edge.us.cdo.cisco.com/platform/public-api/v1/inventory/devices/f5f660d4-4b81-4374-877d-fbc4bee894e2
                     type: string
                 errorDetails:
@@ -14845,7 +14845,7 @@ components:
                     format: uuid
                     type: string
                 uid:
-                    description: The unique identifier, represented as a UUID, of the FTD device upgrade run in SCC Firewall Manager.
+                    description: The unique identifier, represented as a UUID, of the device upgrade run in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
