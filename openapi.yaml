@@ -8557,7 +8557,6 @@ components:
             required:
                 - entityUid
                 - name
-                - sharedAccessGroupUid
                 - uid
             type: object
         AccessGroupCreateInput:
