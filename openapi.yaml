@@ -4984,6 +4984,46 @@ paths:
             summary: Modify Template Device
             tags:
                 - Inventory
+    /v1/licenses/devices:
+        get:
+            description: Get a paginated list of device licenses.
+            operationId: getDeviceLicenses
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeviceLicensePage'
+                    description: List of device licenses
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Device Licenses
+            tags:
+                - Licensing
     /v1/meta:
         get:
             description: Get Meta information about CDO, including the IP addresses of Security Cloud Control services.
@@ -10888,6 +10928,79 @@ components:
                 - deviceUid
                 - request
             type: object
+        DeviceLicenseDto:
+            properties:
+                complianceStatus:
+                    description: Indicates whether the license used on the device is currently compliant with Smart Licensing restrictions.
+                    enum:
+                        - IN_COMPLIANCE
+                        - OUT_OF_COMPLIANCE
+                    type: string
+                deviceType:
+                    $ref: '#/components/schemas/EntityType'
+                    description: The type of the device.
+                    example: CDFMC_MANAGED_FTD
+                isEvaluationLicenseExpired:
+                    description: Indicates if the evaluation license has expired. This field is only relevant if the license status is EVALUATION.
+                    type: boolean
+                isExportControlFeaturesAllowed:
+                    description: Indicates if the license enables the device to offer export-controlled functionality. If this is set to false, Cisco software features that are subject to national security, foreign policy, and anti-terrorism laws and regulations are disabled.
+                    type: boolean
+                licenseStatus:
+                    description: The license status of the device.
+                    enum:
+                        - LICENSED
+                        - UNLICENSED
+                        - EVALUATION
+                    type: string
+                licenses:
+                    description: The list of licenses enabled on the device.
+                    items:
+                        type: string
+                    type: array
+                modelNumber:
+                    description: The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device.
+                    type: string
+                name:
+                    description: The name of the device in CDO. Device names are unique in Security Cloud Control.
+                    example: my-example-device
+                    type: string
+                serial:
+                    description: The serial number of the device.
+                    example: JAD24500xxx
+                    type: string
+                smartAccount:
+                    $ref: '#/components/schemas/SmartAccount'
+                    description: The smart account used to license this device.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            type: object
+        DeviceLicensePage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/DeviceLicenseDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
         DeviceMaintenanceWindow:
             properties:
                 currentEnd:
@@ -14159,6 +14272,15 @@ components:
                         - SOURCE_DESTINATION_PORT
                         - PORT
                         - PROTOCOL_VALUE
+                    type: string
+            type: object
+        SmartAccount:
+            properties:
+                parent:
+                    description: The name of the smart account used to license the device.
+                    type: string
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
             type: object
         SourceDestinationPortsValue:
