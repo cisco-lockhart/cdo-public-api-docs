@@ -5024,6 +5024,42 @@ paths:
             summary: Get Device Licenses
             tags:
                 - Licensing
+    /v1/licenses/devices/{deviceUid}:
+        get:
+            description: Retrieves the device licensing information for a specific device identified by UID.
+            operationId: getDeviceLicensesByUid
+            parameters:
+                - description: The unique identifier (UID) of the device
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeviceLicenseDto'
+                    description: Device licensing information for specified device UID
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "404":
+                    content:
+                        application/json: {}
+                    description: Device licensing information not found for the specified device UID
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Device Licensing Information by Device UID
+            tags:
+                - Licensing
     /v1/meta:
         get:
             description: Get Meta information about CDO, including the IP addresses of Security Cloud Control services.
