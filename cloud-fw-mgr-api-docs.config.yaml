@@ -3,6 +3,8 @@ services:
     url: "https://staging.manage.security.cisco.com/api/platform/public-api/v3/api-docs.yaml"
   - name: "msp-api"
     url: "https://staging.manage.security.cisco.com/api/platform/msp-api/v3/api-docs.yaml"
+  - name: "licensing-info"
+    url: "https://staging.manage.security.cisco.com/api/platform/licensing-info/v3/api-docs.yaml"
   - name: "device-upgrade"
     url: "https://staging.manage.security.cisco.com/api/platform/device-upgrade/v3/api-docs.yaml"
   - name: "device-interfaces-api"
