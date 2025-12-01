@@ -5040,6 +5040,7 @@ paths:
             summary: Get Device Licenses
             tags:
                 - Licensing
+            x-in-dev: "true"
     /v1/licenses/devices/{deviceUid}:
         get:
             description: Retrieves the device licensing information for a specific device identified by UID.
@@ -5076,6 +5077,101 @@ paths:
             summary: Get Device Licensing Information by Device UID
             tags:
                 - Licensing
+            x-in-dev: "true"
+    /v1/licenses/smart-accounts:
+        get:
+            description: 'Get the Smart Accounts and the number of Virtual Accounts used in this tenant. Note: This endpoint does not display all the Smart Accounts, or number of Virtual Accounts within a Smart Account, to which the customer has access. Only Smart Accounts — and number of Virtual Accounts therein — that have licenses used by devices in this tenant are displayed. '
+            operationId: getSmartAccounts
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SmartAccountsPage'
+                    description: List of Smart Accounts
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Smart Accounts used in this tenant.
+            tags:
+                - Licensing
+            x-in-dev: "true"
+    /v1/licenses/smart-accounts/{smartAccountUid}:
+        get:
+            description: Get Smart Account identified by UID.
+            operationId: getSmartAccountByUid
+            parameters:
+                - description: The unique identifier (UID) of the smart account
+                  in: path
+                  name: smartAccountUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SmartAccountDto'
+                    description: Smart Account for specified UID
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "404":
+                    content:
+                        application/json: {}
+                    description: Smart Account not found for the specified UID
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Smart Account by UID
+            tags:
+                - Licensing
+            x-in-dev: "true"
     /v1/meta:
         get:
             description: Get Meta information about CDO, including the IP addresses of Security Cloud Control services.
@@ -14337,6 +14433,46 @@ components:
                 virtual:
                     description: The name of the virtual account, within the smart account, used to license the device
                     type: string
+            type: object
+        SmartAccountDto:
+            properties:
+                domain:
+                    description: Account domain for your Smart Account
+                    type: string
+                smartAccountId:
+                    description: Smart Account Identifier
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, for your Smart Account
+                    format: uuid
+                    type: string
+                virtualAccountCount:
+                    description: Number of Virtual Accounts in this Smart Account
+                    format: int32
+                    type: integer
+            type: object
+        SmartAccountsPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/SmartAccountDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
             type: object
         SourceDestinationPortsValue:
             properties:
