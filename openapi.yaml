@@ -3353,6 +3353,42 @@ paths:
             summary: Get Device End-Of-Life Reports
             tags:
                 - Inventory
+    /v1/inventory/devices/export:
+        post:
+            description: This is an asynchronous operation to export devices in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
+            operationId: exportDevices
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ExportInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the <code>entityUrl</code> field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Export Devices
+            tags:
+                - Inventory
     /v1/inventory/devices/ftds:
         post:
             description: 'This is an asynchronous operation to generate a registration key for a cdFMC managed FTD device in the CDO tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation. Onboarding a cdFMC managed FTD device is a two-step process: the first step, handled by this operation, creates an FTD device with a configure manager string that must be pasted into the FTD device''s Command-Line Interface. The FTD then uses this information to register itself with the Security Cloud Control tenant.'
@@ -11778,6 +11814,13 @@ components:
                 username:
                     description: The username of the user that triggered the Change Log event.
                     example: myuser@cisco.com
+                    type: string
+            type: object
+        ExportInput:
+            properties:
+                query:
+                    description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         FmcAccessPolicyReference:
