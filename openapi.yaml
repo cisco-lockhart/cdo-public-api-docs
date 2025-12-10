@@ -13639,6 +13639,9 @@ components:
             type: object
         MspManagedTenant:
             properties:
+                dedicatedCdFmcInstance:
+                    description: Indicates whether the tenant's provisioned cdFMC instance is dedicated rather than shared.
+                    type: boolean
                 displayName:
                     description: A human-readable display name for the tenant. This is the tenant name displayed in the Security Cloud Control Web UI.
                     example: mytenantname
