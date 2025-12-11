@@ -5422,6 +5422,56 @@ paths:
             tags:
                 - Licensing
             x-in-dev: "true"
+    /v1/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}/licenses/export:
+        post:
+            description: This endpoint exports all of the licenses used by devices across this tenant that are registered to Smart License using a token generated in this Virtual Account.
+            operationId: exportVirtualAccountLicenses
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the smart account
+                  in: path
+                  name: smartAccountUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the virtual account
+                  in: path
+                  name: virtualAccountUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ExportInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the <code>entityUrl</code> field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file.
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "404":
+                    content:
+                        application/json: {}
+                    description: Virtual Account with UID not found within the given Smart Account.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Export Licenses for a Virtual Account
+            tags:
+                - Licensing
+            x-in-dev: "true"
     /v1/meta:
         get:
             description: Get Meta information about CDO, including the IP addresses of Security Cloud Control services.
