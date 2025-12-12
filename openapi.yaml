@@ -11113,6 +11113,13 @@ components:
                     description: The serial number on the chassis of the device (ASA-only). This is typically used to type up to Cisco SmartNet, and is not the same as the serial number.
                     example: JMX2450Xxxx
                     type: string
+                complianceStatus:
+                    description: Indicates whether the license used on the device is currently compliant with Smart Licensing restrictions.
+                    enum:
+                        - IN_COMPLIANCE
+                        - OUT_OF_COMPLIANCE
+                    example: IN_COMPLIANCE
+                    type: string
                 configState:
                     $ref: '#/components/schemas/ConfigState'
                     description: The state of the device configuration in CDO. CDO stages configuration changes which have to be manually applied to the device; this field indicates whether the configuration on CDO does not match the configuration on the device, which indicates whether there are changes to be deployed from Security Cloud Control to the device.
@@ -11186,6 +11193,14 @@ components:
                 labels:
                     $ref: '#/components/schemas/Labels'
                     description: The labels associated with the device.
+                licenseStatus:
+                    description: The license status of the device.
+                    enum:
+                        - LICENSED
+                        - UNLICENSED
+                        - EVALUATION
+                    example: LICENSED
+                    type: string
                 merakiDeploymentMode:
                     $ref: '#/components/schemas/MerakiDeploymentMode'
                     description: (Meraki devices only) The deployment mode of the Meraki device.
