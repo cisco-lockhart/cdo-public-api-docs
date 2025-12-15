@@ -13510,6 +13510,9 @@ components:
                     $ref: '#/components/schemas/ConnectivityState'
                     description: The connectivity state of the device to CDO. A connectivity state that is not ONLINE can indicate either a problem with the device, or the communication pathways between the device and Security Cloud Control.
                     example: ONLINE
+                dedicatedCdFmcInstance:
+                    description: Indicates whether the tenant's provisioned cdFMC instance is dedicated rather than shared.
+                    type: boolean
                 deviceManagerType:
                     $ref: '#/components/schemas/EntityType'
                     description: The type of the device manager.
