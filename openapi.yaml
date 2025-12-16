@@ -11433,6 +11433,10 @@ components:
                 isExportControlFeaturesAllowed:
                     description: Indicates if the license enables the device to offer export-controlled functionality. If this is set to false, Cisco software features that are subject to national security, foreign policy, and anti-terrorism laws and regulations are disabled.
                     type: boolean
+                lastUpdatedTime:
+                    description: The time, in RFC 3339 format, that the license usage for this device was updated.
+                    format: date-time
+                    type: string
                 licenseStatus:
                     description: The license status of the device.
                     enum:
