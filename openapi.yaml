@@ -6386,6 +6386,60 @@ paths:
             summary: Export MSP-managed Templates
             tags:
                 - MSP Inventory
+    /v1/msp/licenses/devices:
+        get:
+            description: Get device licenses, across all tenants, managed by the MSP portal.
+            operationId: getMspDeviceLicenses
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspDeviceLicensePage'
+                    description: List of licenses for MSP-managed devices
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get licenses for MSP-managed devices
+            tags:
+                - MSP Licenses
     /v1/msp/tenants:
         get:
             description: Get a list of Security Cloud Control tenants managed by the MSP Portal.
@@ -10827,7 +10881,7 @@ components:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -10838,7 +10892,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: Percentage completion of the current task being performed.
+                    description: The percentage completion of the current task being performed
                     format: double
                     type: number
             type: object
@@ -11605,58 +11659,14 @@ components:
         DeviceUpgradeStatusDto:
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device.
+                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                hardwareModel:
-                    description: Hardware model of the devices being upgraded.
-                    example: Firepower 2110
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: Name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantUid:
-                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: tenant-uuid-1
-                    format: uuid
-                    type: string
-                name:
-                    description: Name of the device being upgraded.
-                    example: my-firepower
-                    type: string
-                softwareVersionBeforeUpgrade:
-                    description: Software version of the device before the upgrade.
-                    example: 7.2.3
-                    type: string
-                transactionUid:
-                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, of the device being upgraded.
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: Current status of the upgrade run.
-                    enum:
-                        - IN_PROGRESS
-                        - REBUILDING_UPGRADE_CACHE
-                        - PERFORMING_UPGRADE
-                        - UPLOADING_IMAGE
-                        - PERFORMING_READINESS_CHECK
-                        - UPGRADE_STAGED
-                        - UPGRADE_STAGING_FAILED
-                        - UGPRADE_STAGING_FAILED
-                        - UPGRADE_COMPLETED
-                        - UPGRADE_FAILED
-                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -13240,6 +13250,106 @@ components:
                     type: array
             required:
                 - usernames
+            type: object
+        MspDeviceLicenseDetail:
+            properties:
+                endDate:
+                    format: date-time
+                    type: string
+                licenseUid:
+                    format: uuid
+                    type: string
+                name:
+                    type: string
+                startDate:
+                    format: date-time
+                    type: string
+            type: object
+        MspDeviceLicenseDto:
+            properties:
+                complianceStatus:
+                    description: Indicates whether the license used on the device is currently compliant with Smart Licensing restrictions.
+                    enum:
+                        - IN_COMPLIANCE
+                        - OUT_OF_COMPLIANCE
+                    example: IN_COMPLIANCE
+                    type: string
+                deviceType:
+                    $ref: '#/components/schemas/EntityType'
+                    description: The type of the device.
+                    example: CDFMC_MANAGED_FTD
+                isEvaluationLicenseExpired:
+                    description: Indicates if the evaluation license has expired. This field is only relevant if the license status is EVALUATION.
+                    example: false
+                    type: boolean
+                isExportControlFeaturesAllowed:
+                    description: Indicates if export control features are allowed on the device.
+                    example: true
+                    type: boolean
+                lastUpdatedTime:
+                    description: The time, in RFC 3339 format, that the license usage for this device was updated.
+                    format: date-time
+                    type: string
+                licenseStatus:
+                    description: The license status of the device.
+                    enum:
+                        - LICENSED
+                        - UNLICENSED
+                        - EVALUATION
+                    example: LICENSED
+                    type: string
+                licenses:
+                    description: The list of licenses enabled on the device.
+                    items:
+                        $ref: '#/components/schemas/MspDeviceLicenseDetail'
+                    type: array
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant associated with the device.
+                    example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+                    format: uuid
+                    type: string
+                modelNumber:
+                    description: The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device.
+                    type: string
+                name:
+                    description: The name of the device in CDO. Device names are unique in Security Cloud Control.
+                    example: my-example-device
+                    type: string
+                serial:
+                    description: The serial number of the device.
+                    example: JAD24500xxx
+                    type: string
+                smartAccount:
+                    $ref: '#/components/schemas/SmartAccountDto'
+                    description: The smart account used to license this device.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            type: object
+        MspDeviceLicensePage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MspDeviceLicenseDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
             type: object
         MspExportInput:
             properties:
