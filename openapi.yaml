@@ -2456,6 +2456,43 @@ paths:
             summary: Upgrade ASA device
             tags:
                 - Device Upgrades
+    /v1/inventory/devices/asas/{deviceUid}/upgrades/trigger/state-machine:
+        post:
+            description: 'This asynchronous operation upgrades the ASA firmware and ASDM software versions on the device. Note: Newly detected or modified certificates will be automatically approved.'
+            operationId: upgradeAsaDevice_1
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpgradeAsaDeviceInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the operation.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Upgrade ASA device
+            tags:
+                - Device Upgrades
+            x-in-dev: "true"
     /v1/inventory/devices/asas/{deviceUid}/upgrades/versions:
         get:
             description: Get a list of compatible upgrade versions for a given ASA device.
@@ -3246,6 +3283,35 @@ paths:
             summary: Read configurations for multiple ASA devices
             tags:
                 - Inventory
+    /v1/inventory/devices/asas/upgrades/trigger:
+        post:
+            description: Upgrade up to 50 ASA devices to the requested software and ASDM versions in a single request.
+            operationId: upgradeAsaDevices
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpgradeAsaDevicesInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the operation.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Upgrade multiple ASA devices
+            tags:
+                - Device Upgrades
+            x-in-dev: "true"
     /v1/inventory/devices/bulk:
         patch:
             description: Modify a list of devices in the Security Cloud Control tenant
@@ -12133,7 +12199,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -15099,28 +15165,12 @@ components:
             type: object
         SmartAccountDto:
             properties:
-                domain:
-                    description: Account domain for your Smart Account
+                parent:
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                smartAccountId:
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             properties:
@@ -15739,10 +15789,46 @@ components:
                     description: A boolean value, indicating whether device maintenance window should be ignored. If this is set to true, upgrade will be allowed even if device is outside maintenance window.
                     example: false
                     type: boolean
+                name:
+                    description: An optional name for the upgrade operation to help identify and track the upgrade.
+                    example: Production ASA Upgrade - January 2025
+                    type: string
                 softwareVersion:
                     description: The target ASA firmware version to upgrade the device to.
                     example: 9.4(1)
                     type: string
+            type: object
+        UpgradeAsaDevicesInput:
+            properties:
+                asdmVersion:
+                    description: The target ASDM software version to upgrade the devices to.
+                    example: '''7.6(2)'' or ''7.6(2).openjre'''
+                    type: string
+                deviceUids:
+                    description: The set of unique identifiers, represented as UUIDs, of the ASA devices to upgrade in Security Cloud Control.
+                    example:
+                        - 256461f6-bd60-11ef-8beb-6cf1610cf55d
+                    items:
+                        format: uuid
+                        type: string
+                    maxItems: 50
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                ignoreMaintenanceWindow:
+                    description: A boolean value, indicating whether device maintenance window should be ignored. If this is set to true, upgrade will be allowed even if devices are outside maintenance window.
+                    example: false
+                    type: boolean
+                name:
+                    description: An optional name for the upgrade operation to help identify and track the upgrade.
+                    example: Production ASA Upgrade - January 2025
+                    type: string
+                softwareVersion:
+                    description: The target ASA firmware version to upgrade the devices to.
+                    example: 9.4(1)
+                    type: string
+            required:
+                - deviceUids
             type: object
         UpgradeCompatibilityInfoDto:
             description: Compatible upgrade versions for MSP managed devices across multiple tenants.
