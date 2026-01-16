@@ -13688,6 +13688,10 @@ components:
                     $ref: '#/components/schemas/ConnectivityState'
                     description: The connectivity state of the device to CDO. A connectivity state that is not ONLINE can indicate either a problem with the device, or the communication pathways between the device and Security Cloud Control.
                     example: ONLINE
+                connectorType:
+                    $ref: '#/components/schemas/ConnectorType'
+                    description: The type of the connector that will be used to communicate with the device.
+                    example: CDG
                 deviceMaintenanceWindow:
                     $ref: '#/components/schemas/DeviceMaintenanceWindow'
                     description: The maintenance window configuration for the device.
