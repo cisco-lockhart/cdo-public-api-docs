@@ -3312,6 +3312,41 @@ paths:
             tags:
                 - Device Upgrades
             x-in-dev: "true"
+    /v1/inventory/devices/asas/upgrades/versions:
+        get:
+            description: Get a list of compatible upgrade versions for the specified ASA devices.
+            operationId: getCompatibleAsaVersionsForMultipleAsas
+            parameters:
+                - description: A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control.
+                  in: query
+                  name: deviceUids
+                  required: true
+                  schema:
+                    items:
+                        format: uuid
+                        type: string
+                    maxItems: 50
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaCompatibilityVersion'
+                    description: List of compatible upgrade versions
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get upgrade versions compatible with multiple ASAs
+            tags:
+                - Device Upgrades
     /v1/inventory/devices/bulk:
         patch:
             description: Modify a list of devices in the Security Cloud Control tenant
@@ -5769,6 +5804,34 @@ paths:
             summary: Get distinct attribute values for MSP-managed devices
             tags:
                 - MSP Inventory
+    /v1/msp/inventory/devices/bulk:
+        patch:
+            description: Perform bulk updates on MSP-managed devices across multiple tenants.
+            operationId: bulkUpdateMspManagedDevices
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MspBulkDeviceUpdateInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track of the bulk device update operation
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Bulk update MSP-managed devices
+            tags:
+                - MSP Device Actions
     /v1/msp/inventory/devices/export:
         post:
             description: This is an asynchronous operation to export MSP-managed devices in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
@@ -6565,6 +6628,200 @@ paths:
             security:
                 - bearerAuth: []
             summary: Export licenses for MSP-managed devices
+            tags:
+                - MSP Licensing
+            x-in-dev: "true"
+    /v1/msp/licenses/smart-accounts:
+        get:
+            description: 'Get the Smart Accounts and the number of Virtual Accounts used by MSP-managed tenants. Note: This endpoint does not display all the Smart Accounts, or number of Virtual Accounts within a Smart Account, to which the customer has access. Only Smart Accounts — and number of Virtual Accounts therein — that have licenses used by devices in MSP-managed tenants are displayed.'
+            operationId: getMspSmartAccounts
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspSmartAccountsPage'
+                    description: List of Smart Accounts
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Smart Accounts used by MSP-managed tenants.
+            tags:
+                - MSP Licensing
+            x-in-dev: "true"
+    /v1/msp/licenses/smart-accounts/{smartAccountUid}:
+        get:
+            description: Get Smart Account identified by UID.
+            operationId: getMspSmartAccountByUid
+            parameters:
+                - description: The unique identifier (UID) of the smart account
+                  in: path
+                  name: smartAccountUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspSmartAccountDto'
+                    description: Smart Account for specified UID
+                "404":
+                    content:
+                        application/json: {}
+                    description: Smart Account not found for the specified UID
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Smart Account by UID
+            tags:
+                - MSP Licensing
+            x-in-dev: "true"
+    /v1/msp/licenses/smart-accounts/{smartAccountUid}/virtual-accounts:
+        get:
+            description: 'Get the Virtual Accounts for a specific Smart Account used by MSP-managed tenants. Note: This endpoint does not display all the Virtual Accounts within the Smart Account to which the customer has access. Only Virtual Accounts that have licenses used by devices in MSP-managed tenants are displayed.'
+            operationId: getMspVirtualAccounts
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+                - description: The unique identifier (UID) of the smart account
+                  in: path
+                  name: smartAccountUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspVirtualAccountsPage'
+                    description: List of Virtual Accounts
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get the Virtual Accounts for a specific Smart Account used by MSP-managed tenants.
+            tags:
+                - MSP Licensing
+            x-in-dev: "true"
+    /v1/msp/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}:
+        get:
+            description: Get Virtual Account identified by UID within a specific Smart Account.
+            operationId: getMspVirtualAccountByUid
+            parameters:
+                - description: The unique identifier (UID) of the smart account
+                  in: path
+                  name: smartAccountUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier (UID) of the virtual account
+                  in: path
+                  name: virtualAccountUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspVirtualAccountDto'
+                    description: Virtual Account for specified UID
+                "404":
+                    content:
+                        application/json: {}
+                    description: Virtual Account not found for the specified UID
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Virtual Account by UID
             tags:
                 - MSP Licensing
             x-in-dev: "true"
@@ -9847,6 +10104,20 @@ components:
                     example: FaKE-toKeN
                     type: string
             type: object
+        AsaCompatibilityVersion:
+            properties:
+                compatibleAsaVersions:
+                    items:
+                        $ref: '#/components/schemas/AsaCompatibleVersion'
+                    type: array
+                deviceUids:
+                    items:
+                        format: uuid
+                        type: string
+                    type: array
+                hardwareModel:
+                    type: string
+            type: object
         AsaCompatibleVersion:
             properties:
                 asdmImageUrl:
@@ -11057,7 +11328,7 @@ components:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -11068,7 +11339,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: Percentage completion of the current task being performed.
+                    description: The percentage completion of the current task being performed
                     format: double
                     type: number
             type: object
@@ -11835,58 +12106,14 @@ components:
         DeviceUpgradeStatusDto:
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device.
+                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                hardwareModel:
-                    description: Hardware model of the devices being upgraded.
-                    example: Firepower 2110
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: Name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantUid:
-                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: tenant-uuid-1
-                    format: uuid
-                    type: string
-                name:
-                    description: Name of the device being upgraded.
-                    example: my-firepower
-                    type: string
-                softwareVersionBeforeUpgrade:
-                    description: Software version of the device before the upgrade.
-                    example: 7.2.3
-                    type: string
-                transactionUid:
-                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, of the device being upgraded.
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: Current status of the upgrade run.
-                    enum:
-                        - IN_PROGRESS
-                        - REBUILDING_UPGRADE_CACHE
-                        - PERFORMING_UPGRADE
-                        - UPLOADING_IMAGE
-                        - PERFORMING_READINESS_CHECK
-                        - UPGRADE_STAGED
-                        - UPGRADE_STAGING_FAILED
-                        - UGPRADE_STAGING_FAILED
-                        - UPGRADE_COMPLETED
-                        - UPGRADE_FAILED
-                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -13226,6 +13453,20 @@ components:
                     example: 3
                     type: string
             type: object
+        ManagedTenantDto:
+            properties:
+                lastUpdatedTime:
+                    description: The time when this managed tenant usage was last updated.
+                    format: date-time
+                    type: string
+                tenantName:
+                    description: The name of the managed tenant.
+                    type: string
+                tenantUid:
+                    description: The unique identifier of the managed tenant.
+                    format: uuid
+                    type: string
+            type: object
         MemoryHealthMetrics:
             properties:
                 linaUsageAvg:
@@ -13423,6 +13664,34 @@ components:
                     type: array
             required:
                 - users
+            type: object
+        MspBulkDeviceUpdateInput:
+            properties:
+                deviceUids:
+                    description: A set of device UIDs to bulk update.
+                    example:
+                        - 256461f6-bd60-11ef-8beb-6cf1610cf55d
+                    items:
+                        format: uuid
+                        type: string
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                maintenanceWindowDurationMinutes:
+                    description: Duration of the maintenance window in minutes.
+                    example: 120
+                    format: int32
+                    type: integer
+                maintenanceWindowStartCron:
+                    description: 'CRON expression defining the scheduled start time of the maintenance window in format: Minute, Hour, Day of Month, Month, Day of Week.'
+                    example: 0
+                    type: string
+                optedInToAsaHealthMetrics:
+                    description: Specify whether to enable or disable health metrics collection (SDC-managed ASA devices only).
+                    example: true
+                    type: boolean
+            required:
+                - deviceUids
             type: object
         MspCalculateCompatibleUpgradeVersionsInput:
             description: List of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. Note that all the specified devices must be in tenants managed by the MSP portal.
@@ -14183,6 +14452,51 @@ components:
                     format: int32
                     type: integer
             type: object
+        MspSmartAccountDto:
+            properties:
+                domain:
+                    description: The domain of the smart account.
+                    type: string
+                lastUpdatedTime:
+                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
+                    format: date-time
+                    type: string
+                managedTenants:
+                    description: The list of managed tenants associated with this Smart Account.
+                    items:
+                        $ref: '#/components/schemas/ManagedTenantDto'
+                    type: array
+                smartAccountId:
+                    description: The identifier of the smart account, represented as a String, returned by the Smart Account API.
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the smart account in Security Cloud Control.
+                    format: uuid
+                    type: string
+            type: object
+        MspSmartAccountsPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MspSmartAccountDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
         MspUpgradeFtdDevicesInput:
             properties:
                 deviceUids:
@@ -14356,6 +14670,61 @@ components:
                         type: string
                     type: array
                     uniqueItems: true
+            type: object
+        MspVirtualAccountDto:
+            properties:
+                complianceStatus:
+                    description: The compliance status of the virtual account.
+                    enum:
+                        - IN_COMPLIANCE
+                        - OUT_OF_COMPLIANCE
+                    type: string
+                lastUpdatedTime:
+                    description: The time, in RFC 3339 format, when information on this Virtual Account was last updated
+                    format: date-time
+                    type: string
+                managedTenants:
+                    description: The list of managed tenants associated with this Virtual Account.
+                    items:
+                        $ref: '#/components/schemas/ManagedTenantDto'
+                    type: array
+                name:
+                    description: The name of the virtual account.
+                    example: My Virtual Account
+                    type: string
+                smartAccountUid:
+                    description: The unique identifier, represented as a UUID, of the smart account associated with this virtual account.
+                    example: 8242ebbd-f924-5c9f-9f53-cf2f352f9ddc
+                    format: uuid
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the virtual account in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            type: object
+        MspVirtualAccountsPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MspVirtualAccountDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
             type: object
         Network:
             properties:
@@ -15169,12 +15538,28 @@ components:
             type: object
         SmartAccountDto:
             properties:
-                parent:
-                    description: The name of the smart account used to license the device.
+                domain:
+                    description: Account domain for your Smart Account
                     type: string
-                virtual:
-                    description: The name of the virtual account, within the smart account, used to license the device
+                lastUpdatedTime:
+                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
+                    format: date-time
                     type: string
+                smartAccountId:
+                    description: Smart Account Identifier
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, for your Smart Account
+                    format: uuid
+                    type: string
+                virtualAccountsInComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with in compliance status
+                    format: int32
+                    type: integer
+                virtualAccountsOutOfComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
+                    format: int32
+                    type: integer
             type: object
         SmartAccountsPage:
             properties:
