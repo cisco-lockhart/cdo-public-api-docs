@@ -5806,8 +5806,8 @@ paths:
                 - MSP Inventory
     /v1/msp/inventory/devices/bulk:
         patch:
-            description: Perform bulk updates on MSP-managed devices across multiple tenants.
-            operationId: bulkUpdateMspManagedDevices
+            description: Modify a list of MSP-managed devices across multiple tenants, across multiple regions.
+            operationId: modifyMspManagedDevices
             requestBody:
                 content:
                     application/json:
@@ -5820,7 +5820,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/CdoTransaction'
-                    description: Security Cloud Control Transaction object that can be used to track of the bulk device update operation
+                    description: Security Cloud Control Transaction object that can be used to track the status of the operation.
                 "500":
                     content:
                         application/json:
@@ -5829,9 +5829,9 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Bulk update MSP-managed devices
+            summary: Modify MSP-managed devices
             tags:
-                - MSP Device Actions
+                - MSP Inventory
     /v1/msp/inventory/devices/export:
         post:
             description: This is an asynchronous operation to export MSP-managed devices in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
@@ -15538,28 +15538,12 @@ components:
             type: object
         SmartAccountDto:
             properties:
-                domain:
-                    description: Account domain for your Smart Account
+                parent:
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                smartAccountId:
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             properties:
