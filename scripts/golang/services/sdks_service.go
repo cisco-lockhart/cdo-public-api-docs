@@ -35,6 +35,12 @@ func GeneratePythonSdk(openapiFile string, version string, useLocalInstallation 
 	if err != nil {
 		return errors.New(fmt.Sprintf("Error: %s.\nSDK Output: %s", err.Error(), out))
 	}
+
+	out, err = ExecCommand("cp", openapiFile, "sdks/python/scc_firewall_manager_sdk/").CombinedOutput()
+	if err != nil {
+		return errors.New(fmt.Sprintf("Error: %s.\nCopy OpenAPI Spec Output: %s", err.Error(), out))
+	}
+	
 	return nil
 }
 
