@@ -46,8 +46,8 @@ var _ = Describe("SdksService", func() {
 				} else if execCount == 2 {
 					// validate args
 					Expect(name).To(Equal("npx"))
-					Expect(args).To(HaveLen(9))
-					Expect(args).To(Equal([]string{"./node_modules/@openapitools/openapi-generator-cli", "generate", "-i", openapiFile, "-g", "python", "-o", "sdks/python", "--additional-properties=packageName=scc_firewall_manager_sdk,packageVersion=" + version}))
+					Expect(args).To(HaveLen(11))
+					Expect(args).To(Equal([]string{"./node_modules/@openapitools/openapi-generator-cli", "generate", "-i", openapiFile, "-g", "python", "-t", "openapi-templates/python", "-o", "sdks/python", "--additional-properties=packageName=scc_firewall_manager_sdk,packageVersion=" + version}))
 
 					output := "test output"
 					return &MockCommandExecutor{output: &output}
@@ -76,8 +76,8 @@ var _ = Describe("SdksService", func() {
 				if execCount == 1 {
 					// validate args
 					Expect(name).To(Equal("npx"))
-					Expect(args).To(HaveLen(9))
-					Expect(args).To(Equal([]string{"@openapitools/openapi-generator-cli", "generate", "-i", openapiFile, "-g", "python", "-o", "sdks/python", "--additional-properties=packageName=scc_firewall_manager_sdk,packageVersion=" + version}))
+					Expect(args).To(HaveLen(11))
+					Expect(args).To(Equal([]string{"@openapitools/openapi-generator-cli", "generate", "-i", openapiFile, "-g", "python", "-t", "openapi-templates/python", "-o", "sdks/python", "--additional-properties=packageName=scc_firewall_manager_sdk,packageVersion=" + version}))
 
 					output := "test output"
 					return &MockCommandExecutor{output: &output}
@@ -106,8 +106,8 @@ var _ = Describe("SdksService", func() {
 			mockShellCommandFunc := func(name string, args ...string) services.CommandExecutor {
 				// validate args
 				Expect(name).To(Equal("npx"))
-				Expect(args).To(HaveLen(9))
-				Expect(args).To(Equal([]string{"@openapitools/openapi-generator-cli", "generate", "-i", openapiFile, "-g", "python", "-o", "sdks/python", "--additional-properties=packageName=scc_firewall_manager_sdk,packageVersion=" + version}))
+				Expect(args).To(HaveLen(11))
+				Expect(args).To(Equal([]string{"@openapitools/openapi-generator-cli", "generate", "-i", openapiFile, "-g", "python", "-t", "openapi-templates/python", "-o", "sdks/python", "--additional-properties=packageName=scc_firewall_manager_sdk,packageVersion=" + version}))
 
 				return &MockCommandExecutor{err: errors.New(errMsg), output: &expectedSdkOutput}
 			}
@@ -131,8 +131,8 @@ var _ = Describe("SdksService", func() {
 				if execCount == 1 {
 					// successful SDK generation
 					Expect(name).To(Equal("npx"))
-					Expect(args).To(HaveLen(9))
-					Expect(args).To(Equal([]string{"@openapitools/openapi-generator-cli", "generate", "-i", openapiFile, "-g", "python", "-o", "sdks/python", "--additional-properties=packageName=scc_firewall_manager_sdk,packageVersion=" + version}))
+					Expect(args).To(HaveLen(11))
+					Expect(args).To(Equal([]string{"@openapitools/openapi-generator-cli", "generate", "-i", openapiFile, "-g", "python", "-t", "openapi-templates/python", "-o", "sdks/python", "--additional-properties=packageName=scc_firewall_manager_sdk,packageVersion=" + version}))
 
 					return &MockCommandExecutor{output: &generationOutput}
 				} else {
