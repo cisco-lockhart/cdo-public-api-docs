@@ -30,7 +30,7 @@ func GeneratePythonSdk(openapiFile string, version string, useLocalInstallation 
 		"generate",
 		"-i", openapiFile,
 		"-g", "python",
-		"-t", "openapi-templates/python",
+		"-t", "openapi-templates",
 		"-o", "sdks/python",
 		"--additional-properties=packageName=scc_firewall_manager_sdk,packageVersion="+version).CombinedOutput()
 	if err != nil {
