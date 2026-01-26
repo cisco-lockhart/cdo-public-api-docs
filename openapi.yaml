@@ -12389,7 +12389,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
+                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -14653,6 +14653,14 @@ components:
                     description: The time, in RFC 3339 format, when information on this Virtual Account was last updated
                     format: date-time
                     type: string
+                licensesInComplianceCount:
+                    description: Number of licenses in this Virtual Account with in compliance status
+                    format: int32
+                    type: integer
+                licensesOutOfComplianceCount:
+                    description: Number of licenses in this Virtual Account with out of compliance status
+                    format: int32
+                    type: integer
                 managedTenants:
                     description: The list of managed tenants associated with this Virtual Account.
                     items:
