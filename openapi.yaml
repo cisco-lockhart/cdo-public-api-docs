@@ -6787,6 +6787,79 @@ paths:
             tags:
                 - MSP Licensing
             x-in-dev: "true"
+    /v1/msp/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}/licenses:
+        get:
+            description: This endpoint returns information on all of the licenses used by devices across all MSP-managed tenants that are registered to Smart License using a token generated in this Virtual Account.
+            operationId: getMspVirtualAccountLicenses
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+                - description: The unique identifier (UID) of the smart account
+                  in: path
+                  name: smartAccountUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier (UID) of the virtual account
+                  in: path
+                  name: virtualAccountUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspLicensesPage'
+                    description: List of licenses for the specified Virtual Account.
+                "404":
+                    content:
+                        application/json: {}
+                    description: Virtual Account with UID not found within the given Smart Account.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Licenses for a Virtual Account
+            tags:
+                - MSP Licensing
+            x-in-dev: "true"
     /v1/msp/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}/licenses/export:
         post:
             description: This endpoint exports all of the licenses used by devices across all tenants, managed by the MSP portal, that are registered to Smart License using a token generated in this Virtual Account, in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
@@ -12433,7 +12506,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -13852,6 +13925,91 @@ components:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
                     example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
+            type: object
+        MspLicenseDto:
+            properties:
+                complianceStatus:
+                    description: Indicates whether the license is currently compliant with Smart Licensing restrictions.
+                    enum:
+                        - IN_COMPLIANCE
+                        - OUT_OF_COMPLIANCE
+                    example: IN_COMPLIANCE
+                    type: string
+                expiryDate:
+                    description: (Only for TERM licenses) (Only for TERM licenses) The expiry date date, in RFC 3339 format, for this license.
+                    format: date-time
+                    type: string
+                lastUpdatedTime:
+                    description: The time, in RFC 3339 format, that the license usage for this Smart Account was updated.
+                    example: 2024-11-24T10:30:00Z
+                    format: date-time
+                    type: string
+                managedTenants:
+                    description: The list of managed tenants associated with this license.
+                    items:
+                        $ref: '#/components/schemas/ManagedTenantDto'
+                    type: array
+                name:
+                    description: The name of the license.
+                    example: ASAv5 Standard - 100M
+                    type: string
+                numAvailable:
+                    description: The number of licenses available for use.
+                    format: int32
+                    type: integer
+                numInUse:
+                    description: The number of licenses currently in use.
+                    format: int32
+                    type: integer
+                numPurchased:
+                    description: The total number of licenses purchased.
+                    format: int32
+                    type: integer
+                startDate:
+                    description: (Only for TERM licenses) The activation date, in RFC 3339 format, for this license.
+                    format: date-time
+                    type: string
+                type:
+                    description: The type of the license.
+                    enum:
+                        - TERM
+                        - PERPETUAL
+                        - UNLICENSED
+                    example: TERM
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the license in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                virtualAccountUid:
+                    description: The unique identifier, represented as a UUID, of the virtual account associated with this license.
+                    example: 8241daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            type: object
+        MspLicensesPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MspLicenseDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
             type: object
         MspManagedCloudService:
             properties:
@@ -15560,28 +15718,12 @@ components:
             type: object
         SmartAccountDto:
             properties:
-                domain:
-                    description: Account domain for your Smart Account
+                parent:
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                smartAccountId:
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             properties:
