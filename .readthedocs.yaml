@@ -5,6 +5,5 @@ build:
   tools:
     python: "3.11"
   commands:
-    - cd sdk-templates/python-docs
     - pip install mkdocs
-    - mkdocs build --site-dir $READTHEDOCS_OUTPUT/html
+    - cd sdk-templates/python-docs && mkdocs build --site-dir $READTHEDOCS_OUTPUT/html
