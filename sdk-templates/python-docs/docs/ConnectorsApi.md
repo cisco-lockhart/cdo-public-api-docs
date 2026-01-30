@@ -1,0 +1,441 @@
+# scc_firewall_manager_sdk.ConnectorsApi
+
+All URIs are relative to the base URL, which depends on the region your organization is deployed to.
+
+Region | Base URL
+------------- | -------------
+US  | https://api.us.security.cisco.com/firewall
+EU  | https://api.eu.security.cisco.com/firewall
+APJ | https://api.apj.security.cisco.com/firewall
+AU  | https://api.au.security.cisco.com/firewall
+IN  | https://api.in.security.cisco.com/firewall
+UAE | https://api.uae.security.cisco.com/firewall
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**create_sdc**](ConnectorsApi.md#create_sdc) | **POST** /v1/connectors/sdcs | Create SDC
+[**delete_sdc**](ConnectorsApi.md#delete_sdc) | **DELETE** /v1/connectors/sdcs/{sdcUid} | Delete SDC
+[**get_sdc**](ConnectorsApi.md#get_sdc) | **GET** /v1/connectors/sdcs/{sdcUid} | Get SDC
+[**get_sdcs**](ConnectorsApi.md#get_sdcs) | **GET** /v1/connectors/sdcs | Get SDCs
+[**modify_sdc**](ConnectorsApi.md#modify_sdc) | **PATCH** /v1/connectors/sdcs/{sdcUid} | Modify SDC
+
+
+# **create_sdc**
+> CdoTransaction create_sdc(sdc_create_input)
+
+Create SDC
+
+This is an asynchronous operation to create an SDC to a Security Cloud Control tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.models.sdc_create_input import SdcCreateInput
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.ConnectorsApi(api_client)
+    sdc_create_input = scc_firewall_manager_sdk.SdcCreateInput() # SdcCreateInput | 
+
+    try:
+        # Create SDC
+        api_response = api_instance.create_sdc(sdc_create_input)
+        print("The response of ConnectorsApi->create_sdc:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ConnectorsApi->create_sdc: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sdc_create_input** | [**SdcCreateInput**](SdcCreateInput.md)|  | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Security Cloud Control Transaction object that can be used to track the progress of the creation operation. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_sdc**
+> delete_sdc(sdc_uid)
+
+Delete SDC
+
+Delete an SDC in the Security Cloud Control tenant
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.ConnectorsApi(api_client)
+    sdc_uid = 'sdc_uid_example' # str | The unique identifier, represented as a UUID, of the SDC in Security Cloud Control.
+
+    try:
+        # Delete SDC
+        api_instance.delete_sdc(sdc_uid)
+    except Exception as e:
+        print("Exception when calling ConnectorsApi->delete_sdc: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sdc_uid** | **str**| The unique identifier, represented as a UUID, of the SDC in Security Cloud Control. | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | No Content |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_sdc**
+> Sdc get_sdc(sdc_uid)
+
+Get SDC
+
+Get a SDC by UID in the Security Cloud Control tenant.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.sdc import Sdc
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.ConnectorsApi(api_client)
+    sdc_uid = 'sdc_uid_example' # str | The unique identifier, represented as a UUID, of the SDC in Security Cloud Control.
+
+    try:
+        # Get SDC
+        api_response = api_instance.get_sdc(sdc_uid)
+        print("The response of ConnectorsApi->get_sdc:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ConnectorsApi->get_sdc: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sdc_uid** | **str**| The unique identifier, represented as a UUID, of the SDC in Security Cloud Control. | 
+
+### Return type
+
+[**Sdc**](Sdc.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | SDC object |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**404** | Entity not found. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_sdcs**
+> SdcPage get_sdcs(limit=limit, offset=offset, q=q, sort=sort)
+
+Get SDCs
+
+Get a list of on-prem SDCs in the Security Cloud Control tenant.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.sdc_page import SdcPage
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.ConnectorsApi(api_client)
+    limit = 'limit_example' # str | Number of results to retrieve. (optional)
+    offset = 'offset_example' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional)
+    q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
+    sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
+
+    try:
+        # Get SDCs
+        api_response = api_instance.get_sdcs(limit=limit, offset=offset, q=q, sort=sort)
+        print("The response of ConnectorsApi->get_sdcs:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ConnectorsApi->get_sdcs: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **str**| Number of results to retrieve. | [optional] 
+ **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] 
+ **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
+ **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
+
+### Return type
+
+[**SdcPage**](SdcPage.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of SDC objects |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **modify_sdc**
+> Sdc modify_sdc(sdc_uid, sdc_patch_input)
+
+Modify SDC
+
+Modify a SDC in the Security Cloud Control tenant
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.sdc import Sdc
+from scc_firewall_manager_sdk.models.sdc_patch_input import SdcPatchInput
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.ConnectorsApi(api_client)
+    sdc_uid = 'sdc_uid_example' # str | The unique identifier, represented as a UUID, of the SDC in Security Cloud Control.
+    sdc_patch_input = scc_firewall_manager_sdk.SdcPatchInput() # SdcPatchInput | 
+
+    try:
+        # Modify SDC
+        api_response = api_instance.modify_sdc(sdc_uid, sdc_patch_input)
+        print("The response of ConnectorsApi->modify_sdc:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ConnectorsApi->modify_sdc: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sdc_uid** | **str**| The unique identifier, represented as a UUID, of the SDC in Security Cloud Control. | 
+ **sdc_patch_input** | [**SdcPatchInput**](SdcPatchInput.md)|  | 
+
+### Return type
+
+[**Sdc**](Sdc.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | SDC object |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**404** | Entity not found. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

@@ -4,18 +4,19 @@ Copyright © 2025 Cisco Systems
 package cmd
 
 import (
-	"github.com/cisco-lockhart/cloud-fw-mgr-api-docs/services"
-	"github.com/pterm/pterm"
 	"os"
 	"os/exec"
 	"runtime"
+
+	"github.com/cisco-lockhart/cloud-fw-mgr-api-docs/services"
+	"github.com/pterm/pterm"
 
 	"github.com/spf13/cobra"
 )
 
 var nodePackagesToInstall = []string{"openapi-to-postmanv2", "@openapitools/openapi-generator-cli"}
 var homebrewPackages = []string{"pipx"}
-var pipxPackages = []string{"twine", "wheel"}
+var pipxPackages = []string{"twine", "wheel", "mkdocs"}
 
 // installPreReqsCmd represents the installPreReqs command
 var installPreReqsCmd = &cobra.Command{

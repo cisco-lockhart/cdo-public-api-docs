@@ -5,3 +5,4 @@ node_modules/
 scripts/golang/sdks/
 scripts/golang/openapitools.json
 **/cloud-fw-mgr-api-docs
+**/site

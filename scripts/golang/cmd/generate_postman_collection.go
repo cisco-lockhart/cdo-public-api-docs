@@ -45,6 +45,6 @@ func init() {
 
 	defaultInputFile := filepath.Join(currDir, "openapi.yaml")
 	defaultOutputFile := filepath.Join(currDir, "postman_collection.json")
-	generatePostmanCollectionCmd.Flags().StringP("openapi-file", "i", defaultInputFile, fmt.Sprintf("Specify the OpenAPI spec file to convert to a Postman collection", defaultInputFile))
-	generatePostmanCollectionCmd.Flags().StringP("postman-collection-file", "o", defaultOutputFile, fmt.Sprintf("Specify the path to write the Postman collection to", defaultOutputFile))
+	generatePostmanCollectionCmd.Flags().StringP("openapi-file", "i", defaultInputFile, fmt.Sprintf("Specify the OpenAPI spec file to convert to a Postman collection (default: %s)", defaultInputFile))
+	generatePostmanCollectionCmd.Flags().StringP("postman-collection-file", "o", defaultOutputFile, fmt.Sprintf("Specify the path to write the Postman collection to (default: %s)", defaultOutputFile))
 }
