@@ -15,14 +15,27 @@ import (
 
 // generateSdksCmd represents the generateSdks command
 var generateSdksCmd = &cobra.Command{
-	Use:   "generate-sdks <path-to-openapi-yaml>",
+	Use:   "generate-sdks <path-to-openapi-yaml> <path-to-sdk-templates> <path-to-docs-templates>",
 	Short: "Generate SDKs for the Cloud Firewall Manager API",
-	Long:  `Generates SDKs for the Cloud Firewall Manager API using the OpenAPI specification.`,
-	Args:  cobra.ExactArgs(1),
+	Long:  `Generates SDKs for the Cloud Firewall Manager API using the OpenAPI specification.
+
+The sdk-templates path should point to the directory containing the mustache templates for the SDK.
+The docs-templates path should point to the directory where generated API docs will be copied (for Read the Docs).`,
+	Args:  cobra.ExactArgs(3),
 	Run: func(cmd *cobra.Command, args []string) {
 		openAPISpecPath := args[0]
+		sdkTemplatesPath := args[1]
+		docsTemplatesPath := args[2]
 		if _, err := os.Stat(openAPISpecPath); os.IsNotExist(err) {
 			pterm.Error.Printf("The specified OpenAPI spec file does not exist: %s\n", openAPISpecPath)
+			os.Exit(1)
+		}
+		if _, err := os.Stat(sdkTemplatesPath); os.IsNotExist(err) {
+			pterm.Error.Printf("The specified SDK templates directory does not exist: %s\n", sdkTemplatesPath)
+			os.Exit(1)
+		}
+		if _, err := os.Stat(docsTemplatesPath); os.IsNotExist(err) {
+			pterm.Error.Printf("The specified docs templates directory does not exist: %s\n", docsTemplatesPath)
 			os.Exit(1)
 		}
 		data, err := os.ReadFile(openAPISpecPath)
@@ -41,7 +54,7 @@ var generateSdksCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		version, err := generatePythonSdk(openAPISpecPath, useLocalInstallation, &openApiSpec)
+		version, err := generatePythonSdk(openAPISpecPath, sdkTemplatesPath, docsTemplatesPath, useLocalInstallation, &openApiSpec)
 		if err != nil {
 			pterm.Error.Println("Failed to generate Python SDK", err)
 			os.Exit(1)
@@ -64,7 +77,7 @@ var generateSdksCmd = &cobra.Command{
 	},
 }
 
-func generatePythonSdk(openApiFile string, useLocalInstallation bool, openApiSpec *models.OpenAPI) (*string, error) {
+func generatePythonSdk(openApiFile string, sdkTemplatesPath string, docsTemplatesPath string, useLocalInstallation bool, openApiSpec *models.OpenAPI) (*string, error) {
 	// Generate Python SDK
 	version, err := services.GetCurrentVersion(openApiSpec.Info.Version)
 	if err != nil {
@@ -73,12 +86,21 @@ func generatePythonSdk(openApiFile string, useLocalInstallation bool, openApiSpe
 	}
 	pterm.Info.Printf("Generating Python SDK with version %s\n", *version)
 	spinner, _ := pterm.DefaultSpinner.Start("Generating Python SDK...")
-	err = services.GeneratePythonSdk(openApiFile, *version, useLocalInstallation)
+	err = services.GeneratePythonSdk(openApiFile, sdkTemplatesPath, *version, useLocalInstallation)
 	if err != nil {
 		spinner.Fail("Error generating Python SDK", err)
 		os.Exit(1)
 	}
 	spinner.Success("Python SDK generated successfully")
+
+	// Copy generated API docs to docs templates directory
+	spinner, _ = pterm.DefaultSpinner.Start("Copying generated API docs...")
+	err = services.BuildPythonSdkDocs(docsTemplatesPath)
+	if err != nil {
+		spinner.Fail("Error copying API docs", err)
+		os.Exit(1)
+	}
+	spinner.Success("API docs copied successfully")
 
 	return version, nil
 }
