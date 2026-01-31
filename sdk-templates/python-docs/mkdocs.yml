@@ -39,6 +39,7 @@ nav:
     - MSPApi: MSPApi.md
     - MSPDeviceUpgradesApi: MSPDeviceUpgradesApi.md
     - MSPInventoryApi: MSPInventoryApi.md
+    - MSPLicensingApi: MSPLicensingApi.md
     - MSPTenantManagementApi: MSPTenantManagementApi.md
     - MSPUserManagementApi: MSPUserManagementApi.md
     - MetaApi: MetaApi.md
@@ -76,6 +77,7 @@ nav:
     - ApplicationContextClassLoaderParentUnnamedModule: ApplicationContextClassLoaderParentUnnamedModule.md
     - ApplicationContextClassLoaderParentUnnamedModuleClassLoader: ApplicationContextClassLoaderParentUnnamedModuleClassLoader.md
     - ApplicationContextClassLoaderParentUnnamedModuleDescriptor: ApplicationContextClassLoaderParentUnnamedModuleDescriptor.md
+    - AsaCompatibilityVersion: AsaCompatibilityVersion.md
     - AsaCompatibleVersion: AsaCompatibleVersion.md
     - AsaCompatibleVersionsResponse: AsaCompatibleVersionsResponse.md
     - AsaConfig: AsaConfig.md
@@ -137,6 +139,7 @@ nav:
     - DeviceEndOfLifeRecommendation: DeviceEndOfLifeRecommendation.md
     - DeviceEndOfLifeReport: DeviceEndOfLifeReport.md
     - DeviceGatewayApiRequest: DeviceGatewayApiRequest.md
+    - DeviceLicenseDetail: DeviceLicenseDetail.md
     - DeviceLicenseDto: DeviceLicenseDto.md
     - DeviceLicensePage: DeviceLicensePage.md
     - DeviceMaintenanceWindow: DeviceMaintenanceWindow.md
@@ -159,6 +162,7 @@ nav:
     - EtherChannelInterfaceCreateInput: EtherChannelInterfaceCreateInput.md
     - EtherChannelInterfacePatchInput: EtherChannelInterfacePatchInput.md
     - Event: Event.md
+    - ExportInput: ExportInput.md
     - FilterRegistration: FilterRegistration.md
     - FmcAccessPolicyReference: FmcAccessPolicyReference.md
     - FmcDeviceRecord: FmcDeviceRecord.md
@@ -209,6 +213,7 @@ nav:
     - ListObjectResponse: ListObjectResponse.md
     - Location: Location.md
     - LogSettings: LogSettings.md
+    - ManagedTenantDto: ManagedTenantDto.md
     - MemoryHealthMetrics: MemoryHealthMetrics.md
     - MerakiDeploymentMode: MerakiDeploymentMode.md
     - Meta: Meta.md
@@ -223,11 +228,17 @@ nav:
     - MfaEventPage: MfaEventPage.md
     - MspAddTenantInput: MspAddTenantInput.md
     - MspAddUsersToTenantInput: MspAddUsersToTenantInput.md
+    - MspBulkDeviceUpdateInput: MspBulkDeviceUpdateInput.md
     - MspCalculateCompatibleUpgradeVersionsInput: MspCalculateCompatibleUpgradeVersionsInput.md
     - MspCreateTenantInput: MspCreateTenantInput.md
     - MspDeleteUserGroupsFromTenantInput: MspDeleteUserGroupsFromTenantInput.md
     - MspDeleteUsersFromTenantInput: MspDeleteUsersFromTenantInput.md
+    - MspDeviceLicenseDetail: MspDeviceLicenseDetail.md
+    - MspDeviceLicenseDto: MspDeviceLicenseDto.md
+    - MspDeviceLicensePage: MspDeviceLicensePage.md
     - MspExportInput: MspExportInput.md
+    - MspLicenseDto: MspLicenseDto.md
+    - MspLicensesPage: MspLicensesPage.md
     - MspManagedCloudService: MspManagedCloudService.md
     - MspManagedCloudServiceDistinctAttributeValues: MspManagedCloudServiceDistinctAttributeValues.md
     - MspManagedCloudServicePage: MspManagedCloudServicePage.md
@@ -242,10 +253,14 @@ nav:
     - MspManagedTemplatesPage: MspManagedTemplatesPage.md
     - MspManagedTenant: MspManagedTenant.md
     - MspManagedTenantPage: MspManagedTenantPage.md
+    - MspSmartAccountDto: MspSmartAccountDto.md
+    - MspSmartAccountsPage: MspSmartAccountsPage.md
     - MspUpgradeFtdDevicesInput: MspUpgradeFtdDevicesInput.md
     - MspUpgradeRunDto: MspUpgradeRunDto.md
     - MspUpgradeRunDtoPage: MspUpgradeRunDtoPage.md
     - MspUpgradeRunsAttributeValues: MspUpgradeRunsAttributeValues.md
+    - MspVirtualAccountDto: MspVirtualAccountDto.md
+    - MspVirtualAccountsPage: MspVirtualAccountsPage.md
     - Network: Network.md
     - NetworkObjectContent: NetworkObjectContent.md
     - OS: OS.md
@@ -282,6 +297,8 @@ nav:
     - SharedObjectValue: SharedObjectValue.md
     - SingleContent: SingleContent.md
     - SmartAccount: SmartAccount.md
+    - SmartAccountDto: SmartAccountDto.md
+    - SmartAccountsPage: SmartAccountsPage.md
     - SourceDestinationPortsValue: SourceDestinationPortsValue.md
     - SourceDynamicObjectContent: SourceDynamicObjectContent.md
     - SourceNetworkContent: SourceNetworkContent.md
@@ -307,6 +324,7 @@ nav:
     - UniversalZtnaSettings: UniversalZtnaSettings.md
     - UpdateRequest: UpdateRequest.md
     - UpgradeAsaDeviceInput: UpgradeAsaDeviceInput.md
+    - UpgradeAsaDevicesInput: UpgradeAsaDevicesInput.md
     - UpgradeCompatibilityInfoDto: UpgradeCompatibilityInfoDto.md
     - UpgradeFtdDeviceInput: UpgradeFtdDeviceInput.md
     - UpgradeFtdDevicesInput: UpgradeFtdDevicesInput.md
@@ -319,6 +337,8 @@ nav:
     - UserInput: UserInput.md
     - UserPage: UserPage.md
     - UserRole: UserRole.md
+    - VirtualAccountDto: VirtualAccountDto.md
+    - VirtualAccountsPage: VirtualAccountsPage.md
     - VlanIdRange: VlanIdRange.md
     - VlanInterfaceCreateInput: VlanInterfaceCreateInput.md
     - VlanInterfacePatchInput: VlanInterfacePatchInput.md

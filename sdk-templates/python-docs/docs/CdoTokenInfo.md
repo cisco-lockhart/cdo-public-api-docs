@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **product_instance_id** | **str** | The unique identifier, represented as a UUID, of the firewall product instance this token is associated with. A Security Cloud Control enterprise has subscriptions to multiple products; this is the unique identifier of the firewall product instance. | [optional] 
 **roles** | [**List[UserRole]**](UserRole.md) | The role of the user this token belongs to. The user can be API-only or a human. | [optional] 
 **tenant_name** | **str** | The name of the enterprise (tenant) in Security Cloud Control. | [optional] 
+**tenant_pay_type** | **str** | The pay type of the tenant this token is associated with. | [optional] 
 **tenant_uid** | **str** | The unique identifier, represented as a UUID, of the tenant this token is associated with. While a user can be associated with multiple tenants, a token is associated with a single tenant. | [optional] 
 **uid** | **str** | The unique identifier, represented as a UUID, of the user this token belongs to. The user can be API-only or a human. | [optional] 
 

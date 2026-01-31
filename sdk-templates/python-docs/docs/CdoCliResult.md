@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **device_uid** | **str** | The unique identifier, represented as a UUID, of the device. | 
 **error_msg** | **str** | The error message, if any. | [optional] 
+**execution_uid** | **str** | The identifier, represented as a UUID, of the CLI execution that produced the CLI execution result. Note: A single executionUid may be associated with one or more execution results. | [optional] 
 **result** | **str** | The result of the CLI execution. | [optional] 
 **script** | **str** | The script executed to generate the CLI result. | [optional] 
 **start_time** | **datetime** | The time (in UTC) at which the user run the CLI execution, represented using the RFC-3339 standard. | [optional] 

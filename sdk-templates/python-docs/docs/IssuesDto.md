@@ -6,6 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **duplicate_target_ids** | **List[str]** |  | [optional] 
+**duplicates_ignored** | **bool** |  | [optional] 
+**unused_ignored** | **bool** |  | [optional] 
 **unused_target_ids** | **List[str]** |  | [optional] 
 
 ## Example

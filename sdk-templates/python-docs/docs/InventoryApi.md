@@ -26,6 +26,7 @@ Method | HTTP request | Description
 [**deploy_changes_to_multiple_ftd_devices**](InventoryApi.md#deploy_changes_to_multiple_ftd_devices) | **POST** /v1/inventory/devices/ftds/deploy | (cdFMC-managed FTDs only) Deploy changes to multiple FTD devices
 [**deploy_ftd_device_changes**](InventoryApi.md#deploy_ftd_device_changes) | **POST** /v1/inventory/devices/ftds/{deviceUid}/deploy | (cdFMC-managed FTDs only) Deploy FTD device changes
 [**enable_multicloud_defense**](InventoryApi.md#enable_multicloud_defense) | **POST** /v1/inventory/managers/mcd | Enable Multicloud Defense
+[**export_devices**](InventoryApi.md#export_devices) | **POST** /v1/inventory/devices/export | Export Devices
 [**finish_onboarding_ftd_device**](InventoryApi.md#finish_onboarding_ftd_device) | **POST** /v1/inventory/devices/ftds/register | Register FTD device to FMC
 [**get_asa_configuration**](InventoryApi.md#get_asa_configuration) | **GET** /v1/inventory/devices/asas/{deviceUid}/configs | Get ASA configuration details
 [**get_cloud_service**](InventoryApi.md#get_cloud_service) | **GET** /v1/inventory/services/{cloudServiceUid} | Get Cloud Service
@@ -1111,6 +1112,90 @@ This endpoint does not need any parameter.
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
 **409** | Conflict. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **export_devices**
+> CdoTransaction export_devices(export_input)
+
+Export Devices
+
+This is an asynchronous operation to export devices in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.models.export_input import ExportInput
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.InventoryApi(api_client)
+    export_input = scc_firewall_manager_sdk.ExportInput() # ExportInput | 
+
+    try:
+        # Export Devices
+        api_response = api_instance.export_devices(export_input)
+        print("The response of InventoryApi->export_devices:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InventoryApi->export_devices: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **export_input** | [**ExportInput**](ExportInput.md)|  | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the &lt;code&gt;entityUrl&lt;/code&gt; field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**405** | Method not allowed. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

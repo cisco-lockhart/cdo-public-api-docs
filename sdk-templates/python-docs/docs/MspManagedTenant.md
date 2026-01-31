@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**dedicated_cd_fmc_instance** | **bool** | Indicates whether the tenant&#39;s provisioned cdFMC instance is dedicated rather than shared. | [optional] 
 **display_name** | **str** | A human-readable display name for the tenant. This is the tenant name displayed in the Security Cloud Control Web UI. | [optional] 
 **name** | **str** | The name of the device in CDO. Device names are unique in Security Cloud Control. | [optional] 
 **region** | **str** | The Security Cloud Control region the tenant exists in. | [optional] 

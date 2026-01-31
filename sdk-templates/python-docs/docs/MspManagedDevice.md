@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **config_state** | [**ConfigState**](ConfigState.md) |  | [optional] 
 **conflict_detection_state** | [**ConflictDetectionState**](ConflictDetectionState.md) |  | [optional] 
 **connectivity_state** | [**ConnectivityState**](ConnectivityState.md) |  | [optional] 
+**connector_type** | [**ConnectorType**](ConnectorType.md) |  | [optional] 
 **device_maintenance_window** | [**DeviceMaintenanceWindow**](DeviceMaintenanceWindow.md) |  | [optional] 
 **device_record_on_fmc** | [**FmcDeviceRecord**](FmcDeviceRecord.md) |  | [optional] 
 **device_type** | [**EntityType**](EntityType.md) |  | [optional] 

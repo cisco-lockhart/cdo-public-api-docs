@@ -6,6 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **description** | **str** | The description of the object | [optional] 
+**ignore_duplicates** | **bool** | Ignore duplicate issues on this object | [optional] 
+**ignore_unused_issues** | **bool** | Ignore unused issues on this object | [optional] 
 **labels** | **List[str]** | The labels for the object | [optional] 
 **name** | **str** | The name of the object to update | [optional] 
 **tags** | **Dict[str, List[str]]** | The tags for the object | [optional] 

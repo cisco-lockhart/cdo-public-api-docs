@@ -29,6 +29,7 @@ Method | HTTP request | Description
 [**get_msp_managed_template**](MSPInventoryApi.md#get_msp_managed_template) | **GET** /v1/msp/inventory/templates/{templateUid} | Get MSP-managed template by UID
 [**get_msp_managed_template_attribute_values**](MSPInventoryApi.md#get_msp_managed_template_attribute_values) | **GET** /v1/msp/inventory/templates/attribute-values | Get distinct attribute values for MSP-managed templates
 [**get_msp_managed_templates**](MSPInventoryApi.md#get_msp_managed_templates) | **GET** /v1/msp/inventory/templates | Get MSP-managed templates
+[**modify_msp_managed_devices**](MSPInventoryApi.md#modify_msp_managed_devices) | **PATCH** /v1/msp/inventory/devices/bulk | Modify MSP-managed devices
 
 
 # **export_msp_managed_cloud_services**
@@ -1307,6 +1308,86 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of MSP-managed templates |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **modify_msp_managed_devices**
+> CdoTransaction modify_msp_managed_devices(msp_bulk_device_update_input)
+
+Modify MSP-managed devices
+
+Modify a list of MSP-managed devices across multiple tenants, across multiple regions.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.models.msp_bulk_device_update_input import MspBulkDeviceUpdateInput
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.MSPInventoryApi(api_client)
+    msp_bulk_device_update_input = scc_firewall_manager_sdk.MspBulkDeviceUpdateInput() # MspBulkDeviceUpdateInput | 
+
+    try:
+        # Modify MSP-managed devices
+        api_response = api_instance.modify_msp_managed_devices(msp_bulk_device_update_input)
+        print("The response of MSPInventoryApi->modify_msp_managed_devices:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling MSPInventoryApi->modify_msp_managed_devices: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **msp_bulk_device_update_input** | [**MspBulkDeviceUpdateInput**](MspBulkDeviceUpdateInput.md)|  | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Security Cloud Control Transaction object that can be used to track the status of the operation. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

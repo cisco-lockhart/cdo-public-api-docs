@@ -15,6 +15,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_device_upgrade_run**](DeviceUpgradesApi.md#delete_device_upgrade_run) | **DELETE** /v1/inventory/devices/upgrades/runs/{uid} | Delete Device Upgrade Run
 [**get_asa_upgrade_versions**](DeviceUpgradesApi.md#get_asa_upgrade_versions) | **GET** /v1/inventory/devices/asas/{deviceUid}/upgrades/versions | Get compatible upgrade versions for an ASA
+[**get_compatible_asa_versions_for_multiple_asas**](DeviceUpgradesApi.md#get_compatible_asa_versions_for_multiple_asas) | **GET** /v1/inventory/devices/asas/upgrades/versions | Get upgrade versions compatible with multiple ASAs
 [**get_compatible_ftd_versions**](DeviceUpgradesApi.md#get_compatible_ftd_versions) | **GET** /v1/inventory/devices/ftds/{deviceUid}/upgrades/versions | Get compatible upgrade versions for an FTD
 [**get_compatible_ftd_versions_for_multiple_ftds**](DeviceUpgradesApi.md#get_compatible_ftd_versions_for_multiple_ftds) | **GET** /v1/inventory/devices/ftds/upgrades/versions | Get upgrade versions compatible with multiple FTDs
 [**get_device_upgrade_run**](DeviceUpgradesApi.md#get_device_upgrade_run) | **GET** /v1/inventory/devices/upgrades/runs/{upgradeRunUid} | Get Device Upgrade Run
@@ -22,6 +23,7 @@ Method | HTTP request | Description
 [**modify_device_upgrade_run**](DeviceUpgradesApi.md#modify_device_upgrade_run) | **PATCH** /v1/inventory/devices/upgrades/runs/{upgradeRunUid} | Modify Device Upgrade Run
 [**update_ftd_upgrade_packages_cache**](DeviceUpgradesApi.md#update_ftd_upgrade_packages_cache) | **PUT** /v1/inventory/devices/ftds/upgrades/packages/build-cache | Update cache of compatible upgrade packages for all FTDs
 [**upgrade_asa_device**](DeviceUpgradesApi.md#upgrade_asa_device) | **POST** /v1/inventory/devices/asas/{deviceUid}/upgrades/trigger | Upgrade ASA device
+[**upgrade_asa_devices**](DeviceUpgradesApi.md#upgrade_asa_devices) | **POST** /v1/inventory/devices/asas/upgrades/trigger | Upgrade multiple ASA devices
 [**upgrade_ftd_device**](DeviceUpgradesApi.md#upgrade_ftd_device) | **POST** /v1/inventory/devices/ftds/{deviceUid}/upgrades/trigger | Upgrade FTD device
 [**upgrade_ftd_devices**](DeviceUpgradesApi.md#upgrade_ftd_devices) | **POST** /v1/inventory/devices/ftds/upgrades/trigger | Upgrade multiple FTD devices
 
@@ -165,6 +167,85 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AsaCompatibleVersionsResponse**](AsaCompatibleVersionsResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of compatible upgrade versions |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_compatible_asa_versions_for_multiple_asas**
+> AsaCompatibilityVersion get_compatible_asa_versions_for_multiple_asas(device_uids)
+
+Get upgrade versions compatible with multiple ASAs
+
+Get a list of compatible upgrade versions for the specified ASA devices.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.asa_compatibility_version import AsaCompatibilityVersion
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.DeviceUpgradesApi(api_client)
+    device_uids = ['device_uids_example'] # List[str] | A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control.
+
+    try:
+        # Get upgrade versions compatible with multiple ASAs
+        api_response = api_instance.get_compatible_asa_versions_for_multiple_asas(device_uids)
+        print("The response of DeviceUpgradesApi->get_compatible_asa_versions_for_multiple_asas:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceUpgradesApi->get_compatible_asa_versions_for_multiple_asas: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **device_uids** | [**List[str]**](str.md)| A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. | 
+
+### Return type
+
+[**AsaCompatibilityVersion**](AsaCompatibilityVersion.md)
 
 ### Authorization
 
@@ -757,6 +838,86 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **device_uid** | **str**| The unique identifier, represented as a UUID, of the device in Security Cloud Control. | 
  **upgrade_asa_device_input** | [**UpgradeAsaDeviceInput**](UpgradeAsaDeviceInput.md)|  | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Security Cloud Control Transaction object that can be used to track the status of the operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **upgrade_asa_devices**
+> CdoTransaction upgrade_asa_devices(upgrade_asa_devices_input)
+
+Upgrade multiple ASA devices
+
+Upgrade up to 50 ASA devices to the requested software and ASDM versions in a single request.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.models.upgrade_asa_devices_input import UpgradeAsaDevicesInput
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.DeviceUpgradesApi(api_client)
+    upgrade_asa_devices_input = scc_firewall_manager_sdk.UpgradeAsaDevicesInput() # UpgradeAsaDevicesInput | 
+
+    try:
+        # Upgrade multiple ASA devices
+        api_response = api_instance.upgrade_asa_devices(upgrade_asa_devices_input)
+        print("The response of DeviceUpgradesApi->upgrade_asa_devices:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceUpgradesApi->upgrade_asa_devices: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **upgrade_asa_devices_input** | [**UpgradeAsaDevicesInput**](UpgradeAsaDevicesInput.md)|  | 
 
 ### Return type
 
