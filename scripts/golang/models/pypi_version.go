@@ -14,7 +14,7 @@ type info struct {
 		LastMonth int `json:"last_month"`
 		LastWeek  int `json:"last_week"`
 	} `json:"downloads"`
-	Dynamic           *string  `json:"dynamic"`
+	Dynamic           []string `json:"dynamic"`
 	HomePage          *string  `json:"home_page"`
 	Keywords          string   `json:"keywords"`
 	License           *string  `json:"license"`
@@ -26,15 +26,18 @@ type info struct {
 	PackageURL        string   `json:"package_url"`
 	Platform          *string  `json:"platform"`
 	ProjectURL        string   `json:"project_url"`
-	ProjectURLs       *string  `json:"project_urls"`
-	ProvidesExtra     *string  `json:"provides_extra"`
-	ReleaseURL        string   `json:"release_url"`
-	RequiresDist      []string `json:"requires_dist"`
-	RequiresPython    *string  `json:"requires_python"`
-	Summary           string   `json:"summary"`
-	Version           string   `json:"version"`
-	Yanked            bool     `json:"yanked"`
-	YankedReason      *string  `json:"yanked_reason"`
+	ProjectURLs       struct {
+		Documentation *string `json:"Documentation"`
+		Url           *string `json:"url"`
+	}
+	ProvidesExtra  *string  `json:"provides_extra"`
+	ReleaseURL     string   `json:"release_url"`
+	RequiresDist   []string `json:"requires_dist"`
+	RequiresPython *string  `json:"requires_python"`
+	Summary        string   `json:"summary"`
+	Version        string   `json:"version"`
+	Yanked         bool     `json:"yanked"`
+	YankedReason   *string  `json:"yanked_reason"`
 }
 
 type PypiVersionInfo struct {
