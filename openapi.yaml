@@ -6982,12 +6982,21 @@ paths:
                   required: false
                   schema:
                     type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
             responses:
                 "200":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/MspManagedTenantPage'
+                                $ref: '#/components/schemas/MspManagedTenantDtoPage'
                     description: List of Security Cloud Control tenant objects
                 "400":
                     $ref: '#/components/responses/http400BadRequest'
@@ -7039,6 +7048,44 @@ paths:
             summary: Add Tenant to MSP Portal (API token)
             tags:
                 - MSP Tenant Management
+    /v1/msp/tenants/{managedTenantUid}:
+        get:
+            description: Get a Security Cloud Control tenant managed by the MSP Portal.
+            operationId: getMspManagedTenant
+            parameters:
+                - description: 'The unique identifier of the tenant in Security Cloud Control Firewall Manager. Note: this is different from the organization ID in Security Cloud Control.'
+                  in: path
+                  name: managedTenantUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedTenantDto'
+                    description: Security Cloud Control tenant object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Security Cloud Control tenant managed by MSP Portal
+            tags:
+                - MSP Tenant Management
     /v1/msp/tenants/{tenantUid}:
         delete:
             description: 'Removes a tenant currently associated with the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal.'
@@ -7069,43 +7116,6 @@ paths:
             security:
                 - bearerAuth: []
             summary: Remove tenant from MSP Portal
-            tags:
-                - MSP Tenant Management
-        get:
-            description: Get a Security Cloud Control tenant managed by the MSP Portal.
-            operationId: getMspManagedTenant
-            parameters:
-                - description: The unique identifier of the tenant in Security Cloud Control.
-                  in: path
-                  name: tenantUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MspManagedTenant'
-                    description: Security Cloud Control tenant object
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "404":
-                    $ref: '#/components/responses/http404NotFound'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get Security Cloud Control tenant managed by MSP Portal
             tags:
                 - MSP Tenant Management
         post:
@@ -7183,6 +7193,7 @@ paths:
                 - MSP Tenant Management
     /v1/msp/tenants/{tenantUid}/mcd:
         post:
+            deprecated: true
             description: This is an asynchronous operation to enable Multicloud Defense for a tenant associated with the MSP Portal.
             operationId: enableMulticloudDefenseForTenantInMspPortal
             parameters:
@@ -7429,6 +7440,34 @@ paths:
             summary: Remove users from Security Cloud Control tenant in MSP Portal
             tags:
                 - MSP User Management
+    /v1/msp/tenants/attribute-values:
+        get:
+            description: Get distinct values for multiple fields in the MSP-managed tenants managed by the MSP portal.
+            operationId: getMspManagedTenantsAttributeValues
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedDeviceDistinctAttributeValues'
+                    description: Distinct attribute values for MSP-managed devices
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get distinct attribute values for MSP-managed tenants
+            tags:
+                - MSP Tenant Management
     /v1/msp/tenants/create:
         post:
             description: 'Create a new tenant in Security Cloud Control from an MSP Portal. This endpoint creates a tenant, adds the tenant to the MSP Portal. If the user creating the tenant is not an API-only user, the user is also added to the tenant. Note: This endpoint can only be executed by a super-admin in an MSP Portal. You can create no more than 1 tenant every 30 seconds. Additionally, you are limited to creating a total of 100 tenants: please speak to support to raise this limit.'
@@ -12587,7 +12626,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -14650,18 +14689,22 @@ components:
                     format: int32
                     type: integer
             type: object
-        MspManagedTenant:
+        MspManagedTenantDto:
             properties:
-                dedicatedCdFmcInstance:
+                cdFmcType:
                     description: Indicates whether the tenant's provisioned cdFMC instance is dedicated rather than shared.
-                    type: boolean
+                    enum:
+                        - DEDICATED
+                        - SHARED
+                        - UNPROVISIONED
+                    type: string
                 displayName:
                     description: A human-readable display name for the tenant. This is the tenant name displayed in the Security Cloud Control Web UI.
-                    example: mytenantname
+                    example: My Example Tenant
                     type: string
                 name:
-                    description: The name of the device in CDO. Device names are unique in Security Cloud Control.
-                    example: my-example-device
+                    description: The name of the tenant in CDO. Tenant names are unique in Security Cloud Control.
+                    example: my-example-tenant
                     type: string
                 region:
                     description: The Security Cloud Control region the tenant exists in.
@@ -14671,6 +14714,7 @@ components:
                         - APJ
                         - AUS
                         - IN
+                        - UAE
                         - CI
                         - SCALE
                         - STAGING
@@ -14681,13 +14725,35 @@ components:
                         - UNKNOWN
                     example: US
                     type: string
-                uid:
-                    description: The unique identifier of the tenant in Security Cloud Control.
+                sccOrganizationUid:
+                    description: The unique identifier of the organization in Security Cloud Control Firewall Platform. This is different to the unique identifier used in Security Cloud Control Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
+                tenantPayType:
+                    description: The pay type of the tenant.
+                    enum:
+                        - PAYING
+                        - NOT_PAYING
+                        - TRIAL
+                        - INTERNAL
+                        - PARTNER
+                        - DEMO
+                    example: PAYING
+                    type: string
+                uid:
+                    description: The unique identifier of the tenant in Security Cloud Control Firewall Manager.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            required:
+                - displayName
+                - name
+                - region
+                - sccOrganizationUid
+                - uid
             type: object
-        MspManagedTenantPage:
+        MspManagedTenantDtoPage:
             properties:
                 count:
                     description: The total number of results available.
@@ -14697,7 +14763,7 @@ components:
                 items:
                     description: The list of items retrieved.
                     items:
-                        $ref: '#/components/schemas/MspManagedTenant'
+                        $ref: '#/components/schemas/MspManagedTenantDto'
                     type: array
                 limit:
                     description: The number of results retrieved.
@@ -15812,28 +15878,12 @@ components:
             type: object
         SmartAccountDto:
             properties:
-                domain:
-                    description: Account domain for your Smart Account
+                parent:
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                smartAccountId:
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             properties:

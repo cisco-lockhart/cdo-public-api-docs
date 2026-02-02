@@ -18,8 +18,9 @@ Method | HTTP request | Description
 [**create_tenant**](MSPTenantManagementApi.md#create_tenant) | **POST** /v1/msp/tenants/create | Create Security Cloud Control Tenant
 [**enable_multicloud_defense_for_tenant_in_msp_portal**](MSPTenantManagementApi.md#enable_multicloud_defense_for_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/mcd | Enable Multicloud Defense for Security Cloud Control tenant in MSP Portal
 [**generate_api_token_for_user_in_tenant**](MSPTenantManagementApi.md#generate_api_token_for_user_in_tenant) | **POST** /v1/msp/tenants/{tenantUid}/users/{apiUserUid}/token | Generate token for API-only user on tenant managed by MSP portal
-[**get_msp_managed_tenant**](MSPTenantManagementApi.md#get_msp_managed_tenant) | **GET** /v1/msp/tenants/{tenantUid} | Get Security Cloud Control tenant managed by MSP Portal
+[**get_msp_managed_tenant**](MSPTenantManagementApi.md#get_msp_managed_tenant) | **GET** /v1/msp/tenants/{managedTenantUid} | Get Security Cloud Control tenant managed by MSP Portal
 [**get_msp_managed_tenants**](MSPTenantManagementApi.md#get_msp_managed_tenants) | **GET** /v1/msp/tenants | Get Security Cloud Control tenants managed by MSP Portal
+[**get_msp_managed_tenants_attribute_values**](MSPTenantManagementApi.md#get_msp_managed_tenants_attribute_values) | **GET** /v1/msp/tenants/attribute-values | Get distinct attribute values for MSP-managed tenants
 [**provision_cd_fmc_for_tenant_in_msp_portal**](MSPTenantManagementApi.md#provision_cd_fmc_for_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/cdfmc | Provision cdFMC for Security Cloud Control tenant in MSP Portal
 [**remove_tenant_from_msp_portal**](MSPTenantManagementApi.md#remove_tenant_from_msp_portal) | **DELETE** /v1/msp/tenants/{tenantUid} | Remove tenant from MSP Portal
 
@@ -438,7 +439,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_msp_managed_tenant**
-> MspManagedTenant get_msp_managed_tenant(tenant_uid)
+> MspManagedTenantDto get_msp_managed_tenant(managed_tenant_uid)
 
 Get Security Cloud Control tenant managed by MSP Portal
 
@@ -450,7 +451,7 @@ Get a Security Cloud Control tenant managed by the MSP Portal.
 
 ```python
 import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.msp_managed_tenant import MspManagedTenant
+from scc_firewall_manager_sdk.models.msp_managed_tenant_dto import MspManagedTenantDto
 from scc_firewall_manager_sdk.rest import ApiException
 from pprint import pprint
 
@@ -474,11 +475,11 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.MSPTenantManagementApi(api_client)
-    tenant_uid = 'tenant_uid_example' # str | The unique identifier of the tenant in Security Cloud Control.
+    managed_tenant_uid = 'managed_tenant_uid_example' # str | The unique identifier of the tenant in Security Cloud Control Firewall Manager. Note: this is different from the organization ID in Security Cloud Control.
 
     try:
         # Get Security Cloud Control tenant managed by MSP Portal
-        api_response = api_instance.get_msp_managed_tenant(tenant_uid)
+        api_response = api_instance.get_msp_managed_tenant(managed_tenant_uid)
         print("The response of MSPTenantManagementApi->get_msp_managed_tenant:\n")
         pprint(api_response)
     except Exception as e:
@@ -492,11 +493,11 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenant_uid** | **str**| The unique identifier of the tenant in Security Cloud Control. | 
+ **managed_tenant_uid** | **str**| The unique identifier of the tenant in Security Cloud Control Firewall Manager. Note: this is different from the organization ID in Security Cloud Control. | 
 
 ### Return type
 
-[**MspManagedTenant**](MspManagedTenant.md)
+[**MspManagedTenantDto**](MspManagedTenantDto.md)
 
 ### Authorization
 
@@ -521,7 +522,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_msp_managed_tenants**
-> MspManagedTenantPage get_msp_managed_tenants(limit=limit, offset=offset, q=q)
+> MspManagedTenantDtoPage get_msp_managed_tenants(limit=limit, offset=offset, q=q, sort=sort)
 
 Get Security Cloud Control tenants managed by MSP Portal
 
@@ -533,7 +534,7 @@ Get a list of Security Cloud Control tenants managed by the MSP Portal.
 
 ```python
 import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.msp_managed_tenant_page import MspManagedTenantPage
+from scc_firewall_manager_sdk.models.msp_managed_tenant_dto_page import MspManagedTenantDtoPage
 from scc_firewall_manager_sdk.rest import ApiException
 from pprint import pprint
 
@@ -560,10 +561,11 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     limit = 'limit_example' # str | Number of results to retrieve. (optional)
     offset = 'offset_example' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional)
     q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
+    sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
         # Get Security Cloud Control tenants managed by MSP Portal
-        api_response = api_instance.get_msp_managed_tenants(limit=limit, offset=offset, q=q)
+        api_response = api_instance.get_msp_managed_tenants(limit=limit, offset=offset, q=q, sort=sort)
         print("The response of MSPTenantManagementApi->get_msp_managed_tenants:\n")
         pprint(api_response)
     except Exception as e:
@@ -580,10 +582,11 @@ Name | Type | Description  | Notes
  **limit** | **str**| Number of results to retrieve. | [optional] 
  **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] 
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
+ **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
 ### Return type
 
-[**MspManagedTenantPage**](MspManagedTenantPage.md)
+[**MspManagedTenantDtoPage**](MspManagedTenantDtoPage.md)
 
 ### Authorization
 
@@ -599,6 +602,84 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of Security Cloud Control tenant objects |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_msp_managed_tenants_attribute_values**
+> MspManagedDeviceDistinctAttributeValues get_msp_managed_tenants_attribute_values()
+
+Get distinct attribute values for MSP-managed tenants
+
+Get distinct values for multiple fields in the MSP-managed tenants managed by the MSP portal.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.msp_managed_device_distinct_attribute_values import MspManagedDeviceDistinctAttributeValues
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.MSPTenantManagementApi(api_client)
+
+    try:
+        # Get distinct attribute values for MSP-managed tenants
+        api_response = api_instance.get_msp_managed_tenants_attribute_values()
+        print("The response of MSPTenantManagementApi->get_msp_managed_tenants_attribute_values:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling MSPTenantManagementApi->get_msp_managed_tenants_attribute_values: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**MspManagedDeviceDistinctAttributeValues**](MspManagedDeviceDistinctAttributeValues.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Distinct attribute values for MSP-managed devices |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
