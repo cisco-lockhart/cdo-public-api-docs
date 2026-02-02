@@ -36,6 +36,7 @@ nav:
     - InterfaceHealthAggregationsApi: InterfaceHealthAggregationsApi.md
     - InventoryApi: InventoryApi.md
     - LicensingApi: LicensingApi.md
+    - MSPASADeviceUpgradesApi: MSPASADeviceUpgradesApi.md
     - MSPApi: MSPApi.md
     - MSPDeviceUpgradesApi: MSPDeviceUpgradesApi.md
     - MSPInventoryApi: MSPInventoryApi.md
@@ -118,7 +119,9 @@ nav:
     - Command: Command.md
     - CommandResponse: CommandResponse.md
     - CommonApiError: CommonApiError.md
+    - CompatibleDevice: CompatibleDevice.md
     - CompatibleDeviceDto: CompatibleDeviceDto.md
+    - CompatibleVersionInfo: CompatibleVersionInfo.md
     - CompatibleVersionInfoDto: CompatibleVersionInfoDto.md
     - CompletionStatusDto: CompletionStatusDto.md
     - ConfigState: ConfigState.md
@@ -228,6 +231,7 @@ nav:
     - MfaEventPage: MfaEventPage.md
     - MspAddTenantInput: MspAddTenantInput.md
     - MspAddUsersToTenantInput: MspAddUsersToTenantInput.md
+    - MspAsaCompatibleVersionsDto: MspAsaCompatibleVersionsDto.md
     - MspBulkDeviceUpdateInput: MspBulkDeviceUpdateInput.md
     - MspCalculateCompatibleUpgradeVersionsInput: MspCalculateCompatibleUpgradeVersionsInput.md
     - MspCreateTenantInput: MspCreateTenantInput.md

@@ -5746,6 +5746,51 @@ paths:
             summary: Get MSP-managed device by UID
             tags:
                 - MSP Inventory
+    /v1/msp/inventory/devices/asas/upgrades/versions:
+        get:
+            description: Get a list of compatible upgrade versions for a list of ASA devices across multiple managed tenants.
+            operationId: getMspAsaCompatibleUpgradeVersions
+            parameters:
+                - description: 'A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. Note: All the specified devices must be in tenants managed by the MSP portal.'
+                  in: query
+                  name: deviceUids
+                  required: true
+                  schema:
+                    items:
+                        format: uuid
+                        type: string
+                    maxItems: 50
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspAsaCompatibleVersionsDto'
+                    description: Compatible upgrade versions for MSP managed ASA devices across multiple tenants.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "422":
+                    $ref: '#/components/responses/http422UnprocessableEntity'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get compatible ASA upgrade versions
+            tags:
+                - MSP ASA Device Upgrades
     /v1/msp/inventory/devices/attribute-values:
         get:
             description: Get distinct values for multiple fields in the MSP-managed devices across all tenants managed by the MSP portal.
@@ -11298,6 +11343,44 @@ components:
                     description: Human-readable error description in English.
                     example: sample error
                     type: string
+        CompatibleDevice:
+            description: Information about a device that is compatible with a specific ASA upgrade version.
+            properties:
+                currentSoftwareVersion:
+                    description: The software version currently running on the device
+                    type: string
+                hardwareModel:
+                    description: The hardware model of the device
+                    example: ASAv (V01)
+                    type: string
+                managedTenantDisplayName:
+                    description: The display name of the managed tenant in CDO.
+                    example: My Tenant
+                    type: string
+                managedTenantName:
+                    description: The name of the managed tenant in CDO.
+                    example: my-tenant
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: 9ab5b2d0-f032-46f7-8b47-4ef10e598bf8
+                    format: uuid
+                    type: string
+                name:
+                    description: The name of the device
+                    example: ASA-Device-1
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
+                    example: 8da12556-748a-4d67-8b6b-d3dcf5af9a30
+                    format: uuid
+                    type: string
+            required:
+                - hardwareModel
+                - managedTenantUid
+                - name
+                - uid
+            type: object
         CompatibleDeviceDto:
             description: Information about a device that is compatible with a specific upgrade version.
             properties:
@@ -11335,6 +11418,35 @@ components:
                 - managedTenantUid
                 - name
                 - uid
+            type: object
+        CompatibleVersionInfo:
+            description: Information about a compatible ASA upgrade version and the devices that support it.
+            properties:
+                asdmImageUrl:
+                    description: The ASDM image URL
+                    example: https://../asdm-openjre-7204.bin
+                    type: string
+                asdmVersion:
+                    description: The ASDM version
+                    example: 7.20(4).openjre
+                    type: string
+                compatibleDevices:
+                    description: List of devices that are compatible with this upgrade version
+                    items:
+                        $ref: '#/components/schemas/CompatibleDevice'
+                    type: array
+                softwareImageUrl:
+                    description: The ASA software image URL
+                    example: https://../asa9-20-3-20-smp-k8.bin
+                    type: string
+                softwareVersion:
+                    description: The software version
+                    example: 9.20(3.20)
+                    type: string
+            required:
+                - asdmVersion
+                - compatibleDevices
+                - softwareVersion
             type: object
         CompatibleVersionInfoDto:
             description: Information about a compatible upgrade version and the devices that support it.
@@ -11377,7 +11489,7 @@ components:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -11388,7 +11500,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: Percentage completion of the current task being performed.
+                    description: The percentage completion of the current task being performed
                     format: double
                     type: number
             type: object
@@ -12155,58 +12267,14 @@ components:
         DeviceUpgradeStatusDto:
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device.
+                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                hardwareModel:
-                    description: Hardware model of the devices being upgraded.
-                    example: Firepower 2110
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: Name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantUid:
-                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: tenant-uuid-1
-                    format: uuid
-                    type: string
-                name:
-                    description: Name of the device being upgraded.
-                    example: my-firepower
-                    type: string
-                softwareVersionBeforeUpgrade:
-                    description: Software version of the device before the upgrade.
-                    example: 7.2.3
-                    type: string
-                transactionUid:
-                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, of the device being upgraded.
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: Current status of the upgrade run.
-                    enum:
-                        - IN_PROGRESS
-                        - REBUILDING_UPGRADE_CACHE
-                        - PERFORMING_UPGRADE
-                        - UPLOADING_IMAGE
-                        - PERFORMING_READINESS_CHECK
-                        - UPGRADE_STAGED
-                        - UPGRADE_STAGING_FAILED
-                        - UGPRADE_STAGING_FAILED
-                        - UPGRADE_COMPLETED
-                        - UPGRADE_FAILED
-                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -13756,6 +13824,17 @@ components:
                     type: array
             required:
                 - users
+            type: object
+        MspAsaCompatibleVersionsDto:
+            description: Compatible ASA upgrade versions for MSP managed devices across multiple tenants.
+            properties:
+                compatibleVersions:
+                    description: List of compatible ASA upgrade versions available for the specified devices.
+                    items:
+                        $ref: '#/components/schemas/CompatibleVersionInfo'
+                    type: array
+            required:
+                - compatibleVersions
             type: object
         MspBulkDeviceUpdateInput:
             properties:
