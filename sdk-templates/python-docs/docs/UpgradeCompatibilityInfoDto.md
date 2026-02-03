@@ -7,6 +7,7 @@ Compatible upgrade versions for MSP managed devices across multiple tenants.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **compatible_versions** | [**List[CompatibleVersionInfoDto]**](CompatibleVersionInfoDto.md) | List of compatible upgrade versions available for the specified devices. | [optional] 
+**error_message** | **str** | Error message detailing the issues that occurred during compatibility information retrieval. This field is populated when the status is ERROR and contains more detailed error information. | [optional] 
 **status** | **str** | The current status of the retrieval of upgrade versions. | 
 **uid** | **str** | The unique identifier, represented as a UUID, of this list of compatible versions. | 
 
