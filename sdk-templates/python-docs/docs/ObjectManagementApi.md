@@ -36,6 +36,7 @@ Create an object in the Security Cloud Control tenant. To use the object APIs, c
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import scc_firewall_manager_sdk
@@ -50,6 +51,15 @@ configuration = scc_firewall_manager_sdk.Configuration(
     host = "https://api.us.security.cisco.com/firewall"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
@@ -81,7 +91,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -109,6 +119,7 @@ Create targets for an object in the Security Cloud Control tenant. To use the ob
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import scc_firewall_manager_sdk
@@ -122,6 +133,15 @@ configuration = scc_firewall_manager_sdk.Configuration(
     host = "https://api.us.security.cisco.com/firewall"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
@@ -155,7 +175,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -184,6 +204,7 @@ Delete an object in the Security Cloud Control tenant. To use the object APIs, c
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import scc_firewall_manager_sdk
@@ -196,6 +217,15 @@ configuration = scc_firewall_manager_sdk.Configuration(
     host = "https://api.us.security.cisco.com/firewall"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
@@ -229,7 +259,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -257,6 +287,7 @@ Delete targets from an object in the Security Cloud Control tenant. To use the o
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import scc_firewall_manager_sdk
@@ -269,6 +300,15 @@ configuration = scc_firewall_manager_sdk.Configuration(
     host = "https://api.us.security.cisco.com/firewall"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
@@ -302,7 +342,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -331,6 +371,7 @@ Get objects in the Security Cloud Control tenant that are duplicates of the give
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import scc_firewall_manager_sdk
@@ -344,6 +385,15 @@ configuration = scc_firewall_manager_sdk.Configuration(
     host = "https://api.us.security.cisco.com/firewall"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
@@ -377,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -405,6 +455,7 @@ Get issues count in the Security Cloud Control tenant. To use the object APIs, c
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import scc_firewall_manager_sdk
@@ -418,6 +469,15 @@ configuration = scc_firewall_manager_sdk.Configuration(
     host = "https://api.us.security.cisco.com/firewall"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
@@ -449,7 +509,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -477,6 +537,7 @@ Gets an object in the Security Cloud Control tenant. To use the object APIs, con
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import scc_firewall_manager_sdk
@@ -490,6 +551,15 @@ configuration = scc_firewall_manager_sdk.Configuration(
     host = "https://api.us.security.cisco.com/firewall"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
@@ -523,7 +593,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -551,6 +621,7 @@ Get usages of an object in the Security Cloud Control tenant. To use the object 
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import scc_firewall_manager_sdk
@@ -564,6 +635,15 @@ configuration = scc_firewall_manager_sdk.Configuration(
     host = "https://api.us.security.cisco.com/firewall"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
@@ -595,7 +675,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -623,6 +703,7 @@ Get objects in the Security Cloud Control tenant. To use the object APIs, contac
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import scc_firewall_manager_sdk
@@ -636,6 +717,15 @@ configuration = scc_firewall_manager_sdk.Configuration(
     host = "https://api.us.security.cisco.com/firewall"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
@@ -677,7 +767,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -705,6 +795,7 @@ Gets an object in the Security Cloud Control tenant with values for specific tar
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import scc_firewall_manager_sdk
@@ -718,6 +809,15 @@ configuration = scc_firewall_manager_sdk.Configuration(
     host = "https://api.us.security.cisco.com/firewall"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
@@ -751,7 +851,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -779,6 +879,7 @@ Get targets from an object in the Security Cloud Control tenant. To use the obje
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import scc_firewall_manager_sdk
@@ -792,6 +893,15 @@ configuration = scc_firewall_manager_sdk.Configuration(
     host = "https://api.us.security.cisco.com/firewall"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
@@ -829,7 +939,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -857,6 +967,7 @@ Modify an object in the Security Cloud Control tenant. To use the object APIs, c
 
 ### Example
 
+* Bearer (JWT) Authentication (bearerAuth):
 
 ```python
 import scc_firewall_manager_sdk
@@ -871,6 +982,15 @@ configuration = scc_firewall_manager_sdk.Configuration(
     host = "https://api.us.security.cisco.com/firewall"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
@@ -904,7 +1024,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

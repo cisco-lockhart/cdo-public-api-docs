@@ -7572,6 +7572,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/CommonApiError'
                     description: Internal server error.
+            security:
+                - bearerAuth: []
             summary: Get Objects
             tags:
                 - Object Management
@@ -7603,6 +7605,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/CommonApiError'
                     description: Internal server error.
+            security:
+                - bearerAuth: []
             summary: Create Object
             tags:
                 - Object Management
@@ -7646,6 +7650,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/CommonApiError'
                     description: Internal server error.
+            security:
+                - bearerAuth: []
             summary: Delete Object
             tags:
                 - Object Management
@@ -7687,6 +7693,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/CommonApiError'
                     description: Internal server error.
+            security:
+                - bearerAuth: []
             summary: Get Object
             tags:
                 - Object Management
@@ -7727,6 +7735,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/CommonApiError'
                     description: Internal server error.
+            security:
+                - bearerAuth: []
             summary: Modify Object
             tags:
                 - Object Management
@@ -7772,6 +7782,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/CommonApiError'
                     description: Internal server error.
+            security:
+                - bearerAuth: []
             summary: Get Duplicate Objects
             tags:
                 - Object Management
@@ -7822,6 +7834,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/CommonApiError'
                     description: Internal server error.
+            security:
+                - bearerAuth: []
             summary: Delete Targets
             tags:
                 - Object Management
@@ -7878,6 +7892,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/CommonApiError'
                     description: Internal server error.
+            security:
+                - bearerAuth: []
             summary: Get Targets
             tags:
                 - Object Management
@@ -7924,6 +7940,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/CommonApiError'
                     description: Internal server error.
+            security:
+                - bearerAuth: []
             summary: Create Targets
             tags:
                 - Object Management
@@ -7961,6 +7979,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/CommonApiError'
                     description: Internal server error.
+            security:
+                - bearerAuth: []
             summary: Get Object Usages
             tags:
                 - Object Management
@@ -7995,6 +8015,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/CommonApiError'
                     description: Internal server error.
+            security:
+                - bearerAuth: []
             summary: Get Issues Count
             tags:
                 - Object Management
@@ -8038,6 +8060,8 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/CommonApiError'
                     description: Internal server error.
+            security:
+                - bearerAuth: []
             summary: Get Override Object With Values For Specific Target
             tags:
                 - Object Management
@@ -15878,12 +15902,28 @@ components:
             type: object
         SmartAccountDto:
             properties:
-                parent:
-                    description: The name of the smart account used to license the device.
+                domain:
+                    description: Account domain for your Smart Account
                     type: string
-                virtual:
-                    description: The name of the virtual account, within the smart account, used to license the device
+                lastUpdatedTime:
+                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
+                    format: date-time
                     type: string
+                smartAccountId:
+                    description: Smart Account Identifier
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, for your Smart Account
+                    format: uuid
+                    type: string
+                virtualAccountsInComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with in compliance status
+                    format: int32
+                    type: integer
+                virtualAccountsOutOfComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
+                    format: int32
+                    type: integer
             type: object
         SmartAccountsPage:
             properties:
