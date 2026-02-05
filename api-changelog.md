@@ -1,6 +1,55 @@
+# Version 1.17.0 (2026-02-05)
+
+## Added
+
+### Device Upgrades
+- Endpoint to [upgrade multiple ASA devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/upgrade-multiple-asa-devices/) in a single request (`POST /v1/inventory/devices/asas/upgrades/trigger`).
+- Endpoint to [get compatible upgrade versions for multiple ASAs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-upgrade-versions-compatible-with-multiple-asas/) (`GET /v1/inventory/devices/asas/upgrades/versions`).
+
+### Inventory
+- Endpoint to [export devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/export-devices/) to CSV (`POST /v1/inventory/devices/export`).
+
+### MSP
+- Endpoint to [upgrade multiple ASA devices across managed tenants](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/upgrade-multiple-asas-across-multiple-tenants/) (`POST /v1/msp/inventory/devices/asas/upgrades/trigger`).
+- Endpoint to [get compatible ASA upgrade versions for MSP-managed devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-compatible-asa-upgrade-versions/) (`GET /v1/msp/inventory/devices/asas/upgrades/versions`).
+- Endpoint to [bulk modify MSP-managed devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/modify-msp-managed-devices/) (`PATCH /v1/msp/inventory/devices/bulk`).
+
+### cdFMC API
+- Added AI Defense policy and profile endpoints, and access-policy AI Defense settings.
+- Added DNS policy rule endpoints and identity policy category/rule endpoints.
+- Added external authentication configuration and operational endpoints (LDAP/RADIUS config objects, fetch/apply).
+- Added Secure Access integration endpoints (regions, tunnel configurations, transcripts).
+- Added platform endpoints for content updates and device upgrade info.
+- Added analysis and operational endpoints for filters, VPN tunnel status details, virtual access interfaces, and VPN tunnel status lookup.
+- Added new object endpoints for SIDNS lists/downloads, SIDNS feeds, sinkholes, skip servers, realm sequences, and EVE exception lists, plus access-policy advanced logging, EVE settings, and decryption standard mode configuration.
+- Active session queries now support additional filters (search, session duration, domain, user risk, device risk) and include expanded examples.
+- DNS policies, identity policies, SIDNS feeds, and sinkholes now support POST/PUT/DELETE where previously only GET was available.
+
+
+## Improvements
+
+### Device Upgrades
+- [Stage ASA device upgrades](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/upgrade-asa-device/) to get the latest version on the device without performing the actual upgrade.
+- Upgrade compatibility and upgrade run responses now include error details when retrieval or execution fails.
+
+### MSP
+- [MSP-managed tenant](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/mspmanagedtenant/) records now include cdFMC type, tenant pay type, and SCC organization UID.
+
+### Object Management
+- Object issue handling now supports ignore flags for duplicates and unused issues.
+
+## Deprecations
+
+- The JWKS endpoint is now marked deprecated (`GET /.well-known/jwks.json`).
+- The MSP FTD upgrade runs endpoint is now deprecated; use `GET /v1/msp/inventory/devices/upgrades/runs` instead of `GET /v1/msp/inventory/devices/ftds/upgrades/runs`.
+- The cdFMC AIOps configure endpoint was removed from the spec (`/v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/integration/aiops/configure`).
+
 # Version 1.16.0 (2025-11-14)
 
 ## Added
+
+### FedRAMP
+- The SCC Firewall Manager APIs are available on the FedRAMP environment at https://manage.secure.cisco.
 
 ### Events
 - Endpoint to [get event search reports](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-event-search-reports/) containing the results of event log searches executed using the Report feature in the Event Logging page.
@@ -23,6 +72,7 @@
 - Endpoint to [get MSP upgrade runs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-device-upgrade-runs/) to monitor upgrade operations across managed tenants.
 - Endpoint to [get a specific MSP upgrade run](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-device-upgrade-run/) by UID.
 - Endpoint to [get MSP upgrade run attribute values](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-distinct-attribute-values-for-msp-upgrade-runs/) to retrieve distinct values for filtering upgrade runs.
+
 
 ## Improvements
 

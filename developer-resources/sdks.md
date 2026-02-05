@@ -10,3 +10,7 @@ The SDK can be downloaded from [Pypi](https://pypi.org/project/scc-firewall-mana
 ```shell
 pip install scc-firewall-manager-sdk
 ```
+
+## SDK Documentation
+
+You can find the SDK [documentation here](https://scc-firewall-manager-sdk.readthedocs.io/en/latest/).
