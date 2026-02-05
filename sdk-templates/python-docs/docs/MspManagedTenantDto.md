@@ -5,11 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**api_token_valid** | **bool** | Indicates whether the tenant&#39;s API token is valid. | [optional] 
 **cd_fmc_type** | **str** | Indicates whether the tenant&#39;s provisioned cdFMC instance is dedicated rather than shared. | [optional] 
 **display_name** | **str** | A human-readable display name for the tenant. This is the tenant name displayed in the Security Cloud Control Web UI. | 
 **name** | **str** | The name of the tenant in CDO. Tenant names are unique in Security Cloud Control. | 
 **region** | **str** | The Security Cloud Control region the tenant exists in. | 
-**scc_organization_uid** | **str** | The unique identifier of the organization in Security Cloud Control Firewall Platform. This is different to the unique identifier used in Security Cloud Control Firewall Manager. | 
+**scc_organization_uid** | **str** | The unique identifier of the organization in Security Cloud Control Firewall Platform. This is different to the unique identifier used in Security Cloud Control Firewall Manager. | [optional] 
 **tenant_pay_type** | **str** | The pay type of the tenant. | [optional] 
 **uid** | **str** | The unique identifier of the tenant in Security Cloud Control Firewall Manager. | 
 

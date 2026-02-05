@@ -28,6 +28,95 @@ paths:
             summary: Fetch JSON Web Key Set
             tags:
                 - Meta
+    /aiops-status:
+        get:
+            operationId: getAiOpsStatus
+            responses:
+                "200":
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/ThousandEyesAiOpsStatusResponse'
+                    description: OK
+            tags:
+                - thousand-eyes-gateway-controller
+        put:
+            operationId: updateAiOpsStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ThousandEyesAiOpsStatusUpdateRequest'
+                required: true
+            responses:
+                "204":
+                    description: No Content
+            tags:
+                - thousand-eyes-gateway-controller
+    /applications:
+        get:
+            operationId: getApplications
+            responses:
+                "200":
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/ThousandEyesApplicationsResponse'
+                    description: OK
+            tags:
+                - thousand-eyes-gateway-controller
+        patch:
+            operationId: updateApplications_1
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ThousandEyesApplicationsUpdateRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/ThousandEyesApplicationsResponse'
+                    description: OK
+            tags:
+                - thousand-eyes-gateway-controller
+        put:
+            operationId: updateApplications
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ThousandEyesApplicationsUpdateRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/ThousandEyesApplicationsResponse'
+                    description: OK
+            tags:
+                - thousand-eyes-gateway-controller
+    /outages:
+        get:
+            operationId: getOutagesByDateRange
+            parameters:
+                - in: query
+                  name: request
+                  required: true
+                  schema:
+                    $ref: '#/components/schemas/ThousandEyesOutageQueryRequest'
+            responses:
+                "200":
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/ThousandEyesOutageQueryResponse'
+                    description: OK
+            tags:
+                - thousand-eyes-gateway-controller
     /v1/ai-assistant/conversations:
         get:
             description: 'Get a list of AI Assistant Conversations. Note: the total number of conversations is set to -1 as this information is currently unavailable.'
@@ -230,6 +319,65 @@ paths:
             summary: Get Messages
             tags:
                 - AI Assistant
+    /v1/application-insights/outages:
+        get:
+            description: Get a list of application outages that started in the specified time period
+            operationId: getApplicationOutages
+            parameters:
+                - description: Start time for outage (UTC; represented using the RFC-3339 standard, inclusive)
+                  example: 2025-01-01T00:00:00Z
+                  in: query
+                  name: start
+                  required: false
+                  schema:
+                    format: date-time
+                    type: string
+                - description: End time for outage (UTC; represented using the RFC-3339 standard, exclusive)
+                  example: 2025-01-31T23:59:59Z
+                  in: query
+                  name: end
+                  required: false
+                  schema:
+                    format: date-time
+                    type: string
+                - description: Relative time range (mutually exclusive with start/end).
+                  example: 24h
+                  in: query
+                  name: timeRange
+                  required: false
+                  schema:
+                    enum:
+                        - 24h
+                        - 7d
+                        - 30d
+                    type: string
+                - description: Filter by application name
+                  example: Webex
+                  in: query
+                  name: applicationName
+                  required: false
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PublicThousandEyesOutageDto'
+                    description: List of application outages that started in the specified time period
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+            security:
+                - bearerAuth: []
+            summary: Get Application Outages
+            tags:
+                - Application Insights
     /v1/auditlogs:
         get:
             description: Get a list of Audit Logs.
@@ -6391,6 +6539,49 @@ paths:
             summary: Get Security Cloud Control tenant managed by MSP Portal
             tags:
                 - MSP Tenant Management
+        patch:
+            description: 'Update the API token for an existing tenant managed by the MSP Portal. Use this endpoint to replace an expired or invalid API token. Note: This endpoint can only be executed by a super-admin in an MSP Portal.'
+            operationId: updateMspTenantApiToken
+            parameters:
+                - description: The unique identifier of the tenant in Security Cloud Control Firewall Manager.
+                  in: path
+                  name: managedTenantUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MspUpdateTenantApiTokenInput'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspManagedTenantDto'
+                    description: Updated tenant
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Update API Token for MSP Managed Tenant
+            tags:
+                - MSP Tenant Management
     /v1/msp/tenants/{tenantUid}:
         delete:
             description: 'Removes a tenant currently associated with the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal.'
@@ -8907,6 +9098,20 @@ paths:
             summary: Refresh RA VPN Sessions
             tags:
                 - Remote Access Monitoring
+    /webhook:
+        post:
+            operationId: handleWebhook
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: string
+                required: true
+            responses:
+                "200":
+                    description: OK
+            tags:
+                - thousand-eyes-gateway-controller
 servers:
     - url: https://api.us.security.cisco.com/firewall
       description: US
@@ -10862,7 +11067,7 @@ components:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -10873,7 +11078,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: The percentage completion of the current task being performed
+                    description: Percentage completion of the current task being performed.
                     format: double
                     type: number
             type: object
@@ -11549,14 +11754,58 @@ components:
         DeviceUpgradeStatusDto:
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+                    description: The completion status of the upgrade on the device.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                uid:
-                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+                hardwareModel:
+                    description: Hardware model of the devices being upgraded.
+                    example: Firepower 2110
+                    type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: Name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantUid:
+                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: tenant-uuid-1
+                    format: uuid
+                    type: string
+                name:
+                    description: Name of the device being upgraded.
+                    example: my-firepower
+                    type: string
+                softwareVersionBeforeUpgrade:
+                    description: Software version of the device before the upgrade.
+                    example: 7.2.3
+                    type: string
+                transactionUid:
+                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, of the device being upgraded.
+                    format: uuid
+                    type: string
+                upgradeRunStatus:
+                    description: Current status of the upgrade run.
+                    enum:
+                        - IN_PROGRESS
+                        - REBUILDING_UPGRADE_CACHE
+                        - PERFORMING_UPGRADE
+                        - UPLOADING_IMAGE
+                        - PERFORMING_READINESS_CHECK
+                        - UPGRADE_STAGED
+                        - UPGRADE_STAGING_FAILED
+                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_COMPLETED
+                        - UPGRADE_FAILED
+                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -13736,6 +13985,10 @@ components:
             type: object
         MspManagedTenantDto:
             properties:
+                apiTokenValid:
+                    description: Indicates whether the tenant's API token is valid.
+                    example: true
+                    type: boolean
                 cdFmcType:
                     description: Indicates whether the tenant's provisioned cdFMC instance is dedicated rather than shared.
                     enum:
@@ -13795,7 +14048,6 @@ components:
                 - displayName
                 - name
                 - region
-                - sccOrganizationUid
                 - uid
             type: object
         MspManagedTenantDtoPage:
@@ -13820,6 +14072,15 @@ components:
                     example: 0
                     format: int32
                     type: integer
+            type: object
+        MspUpdateTenantApiTokenInput:
+            properties:
+                apiToken:
+                    description: The new Tenant API Access Token.
+                    minLength: 1
+                    type: string
+            required:
+                - apiToken
             type: object
         MspUpgradeAsaDevicesInput:
             properties:
@@ -14345,6 +14606,39 @@ components:
                 keyId:
                     description: The identifier of the RSA public key. This identifier is used by the SDC to know which private key to use to decrypt a string.
                     example: example-key-id
+                    type: string
+            type: object
+        PublicThousandEyesOutageDto:
+            properties:
+                affectedDomains:
+                    items:
+                        type: string
+                    type: array
+                alertId:
+                    format: uuid
+                    type: string
+                applicationName:
+                    type: string
+                durationSeconds:
+                    format: int32
+                    type: integer
+                end:
+                    format: date-time
+                    type: string
+                errors:
+                    items:
+                        type: string
+                    type: array
+                outageType:
+                    type: string
+                regions:
+                    items:
+                        type: string
+                    type: array
+                severity:
+                    type: string
+                start:
+                    format: date-time
                     type: string
             type: object
         RaVpnDeviceInput:
@@ -15338,6 +15632,133 @@ components:
                     description: Indicates if web analytics are enabled for the tenant.
                     example: true
                     type: boolean
+            type: object
+        ThousandEyesAiOpsStatusResponse:
+            properties:
+                aiopsOnboarded:
+                    type: boolean
+                serviceEnabled:
+                    type: boolean
+            type: object
+        ThousandEyesAiOpsStatusUpdateRequest:
+            properties:
+                serviceEnabled:
+                    type: boolean
+            type: object
+        ThousandEyesApplicationResponse:
+            properties:
+                application:
+                    type: string
+                available:
+                    type: boolean
+                existInCdFmcPolicy:
+                    type: boolean
+                subscribedToNotifications:
+                    type: boolean
+            type: object
+        ThousandEyesApplicationUpdateRequest:
+            properties:
+                application:
+                    minLength: 1
+                    type: string
+                subscribedToNotifications:
+                    type: boolean
+            required:
+                - application
+            type: object
+        ThousandEyesApplicationsResponse:
+            properties:
+                applications:
+                    items:
+                        $ref: '#/components/schemas/ThousandEyesApplicationResponse'
+                    type: array
+            type: object
+        ThousandEyesApplicationsUpdateRequest:
+            properties:
+                applications:
+                    items:
+                        $ref: '#/components/schemas/ThousandEyesApplicationUpdateRequest'
+                    type: array
+            required:
+                - applications
+            type: object
+        ThousandEyesOutageQueryRequest:
+            properties:
+                applicationName:
+                    type: string
+                applicationSpecific:
+                    type: boolean
+                effectivePageSize:
+                    format: int32
+                    type: integer
+                endDate:
+                    format: date-time
+                    type: string
+                lastEvaluatedKey:
+                    type: string
+                pageSize:
+                    format: int32
+                    maximum: 2000
+                    minimum: 1
+                    type: integer
+                startDate:
+                    format: date-time
+                    type: string
+                validDateRange:
+                    type: boolean
+            required:
+                - endDate
+                - startDate
+            type: object
+        ThousandEyesOutageQueryResponse:
+            properties:
+                hasMoreResults:
+                    type: boolean
+                lastEvaluatedKey:
+                    type: string
+                outages:
+                    items:
+                        $ref: '#/components/schemas/ThousandEyesOutageResponse'
+                    type: array
+                pageSize:
+                    format: int32
+                    type: integer
+                totalCount:
+                    format: int32
+                    type: integer
+            type: object
+        ThousandEyesOutageResponse:
+            properties:
+                affectedDomains:
+                    items:
+                        type: string
+                    type: array
+                alertId:
+                    format: uuid
+                    type: string
+                applicationName:
+                    type: string
+                durationSeconds:
+                    format: int32
+                    type: integer
+                endDate:
+                    format: date-time
+                    type: string
+                errors:
+                    items:
+                        type: string
+                    type: array
+                outageType:
+                    type: string
+                regions:
+                    items:
+                        type: string
+                    type: array
+                severity:
+                    type: string
+                startDate:
+                    format: date-time
+                    type: string
             type: object
         UnifiedObjectListView:
             properties:

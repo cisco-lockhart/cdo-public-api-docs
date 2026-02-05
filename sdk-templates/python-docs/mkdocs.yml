@@ -22,6 +22,7 @@ nav:
     - ASAAccessRulesApi: ASAAccessRulesApi.md
     - ASAInterfacesApi: ASAInterfacesApi.md
     - AccessGroupsApi: AccessGroupsApi.md
+    - ApplicationInsightsApi: ApplicationInsightsApi.md
     - AuditLogsApi: AuditLogsApi.md
     - ChangeRequestsApi: ChangeRequestsApi.md
     - ChangelogsApi: ChangelogsApi.md
@@ -49,6 +50,7 @@ nav:
     - SearchApi: SearchApi.md
     - SwaggerRedirectControllerApi: SwaggerRedirectControllerApi.md
     - TenantManagementApi: TenantManagementApi.md
+    - ThousandEyesGatewayControllerApi: ThousandEyesGatewayControllerApi.md
     - TransactionsApi: TransactionsApi.md
     - UsersApi: UsersApi.md
   - Models:
@@ -261,6 +263,7 @@ nav:
     - MspManagedTenantPage: MspManagedTenantPage.md
     - MspSmartAccountDto: MspSmartAccountDto.md
     - MspSmartAccountsPage: MspSmartAccountsPage.md
+    - MspUpdateTenantApiTokenInput: MspUpdateTenantApiTokenInput.md
     - MspUpgradeAsaDevicesInput: MspUpgradeAsaDevicesInput.md
     - MspUpgradeFtdDevicesInput: MspUpgradeFtdDevicesInput.md
     - MspUpgradeRunDto: MspUpgradeRunDto.md
@@ -282,6 +285,7 @@ nav:
     - ProtocolContent: ProtocolContent.md
     - ProtocolValueContent: ProtocolValueContent.md
     - PublicKey: PublicKey.md
+    - PublicThousandEyesOutageDto: PublicThousandEyesOutageDto.md
     - RaVpnDeviceInput: RaVpnDeviceInput.md
     - RaVpnSession: RaVpnSession.md
     - RaVpnSessionHealthMetrics: RaVpnSessionHealthMetrics.md
@@ -327,6 +331,15 @@ nav:
     - Tenant: Tenant.md
     - TenantPage: TenantPage.md
     - TenantSettings: TenantSettings.md
+    - ThousandEyesAiOpsStatusResponse: ThousandEyesAiOpsStatusResponse.md
+    - ThousandEyesAiOpsStatusUpdateRequest: ThousandEyesAiOpsStatusUpdateRequest.md
+    - ThousandEyesApplicationResponse: ThousandEyesApplicationResponse.md
+    - ThousandEyesApplicationUpdateRequest: ThousandEyesApplicationUpdateRequest.md
+    - ThousandEyesApplicationsResponse: ThousandEyesApplicationsResponse.md
+    - ThousandEyesApplicationsUpdateRequest: ThousandEyesApplicationsUpdateRequest.md
+    - ThousandEyesOutageQueryRequest: ThousandEyesOutageQueryRequest.md
+    - ThousandEyesOutageQueryResponse: ThousandEyesOutageQueryResponse.md
+    - ThousandEyesOutageResponse: ThousandEyesOutageResponse.md
     - UnifiedObjectListView: UnifiedObjectListView.md
     - UniversalZtnaSettings: UniversalZtnaSettings.md
     - UpdateRequest: UpdateRequest.md

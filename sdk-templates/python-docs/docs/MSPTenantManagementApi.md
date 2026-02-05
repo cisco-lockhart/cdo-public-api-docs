@@ -23,6 +23,7 @@ Method | HTTP request | Description
 [**get_msp_managed_tenants_attribute_values**](MSPTenantManagementApi.md#get_msp_managed_tenants_attribute_values) | **GET** /v1/msp/tenants/attribute-values | Get distinct attribute values for MSP-managed tenants
 [**provision_cd_fmc_for_tenant_in_msp_portal**](MSPTenantManagementApi.md#provision_cd_fmc_for_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/cdfmc | Provision cdFMC for Security Cloud Control tenant in MSP Portal
 [**remove_tenant_from_msp_portal**](MSPTenantManagementApi.md#remove_tenant_from_msp_portal) | **DELETE** /v1/msp/tenants/{tenantUid} | Remove tenant from MSP Portal
+[**update_msp_tenant_api_token**](MSPTenantManagementApi.md#update_msp_tenant_api_token) | **PATCH** /v1/msp/tenants/{managedTenantUid} | Update API Token for MSP Managed Tenant
 
 
 # **add_msp_tenant**
@@ -844,6 +845,92 @@ void (empty response body)
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_msp_tenant_api_token**
+> MspManagedTenantDto update_msp_tenant_api_token(managed_tenant_uid, msp_update_tenant_api_token_input)
+
+Update API Token for MSP Managed Tenant
+
+Update the API token for an existing tenant managed by the MSP Portal. Use this endpoint to replace an expired or invalid API token. Note: This endpoint can only be executed by a super-admin in an MSP Portal.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.msp_managed_tenant_dto import MspManagedTenantDto
+from scc_firewall_manager_sdk.models.msp_update_tenant_api_token_input import MspUpdateTenantApiTokenInput
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.MSPTenantManagementApi(api_client)
+    managed_tenant_uid = 'managed_tenant_uid_example' # str | The unique identifier of the tenant in Security Cloud Control Firewall Manager.
+    msp_update_tenant_api_token_input = scc_firewall_manager_sdk.MspUpdateTenantApiTokenInput() # MspUpdateTenantApiTokenInput | 
+
+    try:
+        # Update API Token for MSP Managed Tenant
+        api_response = api_instance.update_msp_tenant_api_token(managed_tenant_uid, msp_update_tenant_api_token_input)
+        print("The response of MSPTenantManagementApi->update_msp_tenant_api_token:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling MSPTenantManagementApi->update_msp_tenant_api_token: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **managed_tenant_uid** | **str**| The unique identifier of the tenant in Security Cloud Control Firewall Manager. | 
+ **msp_update_tenant_api_token_input** | [**MspUpdateTenantApiTokenInput**](MspUpdateTenantApiTokenInput.md)|  | 
+
+### Return type
+
+[**MspManagedTenantDto**](MspManagedTenantDto.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Updated tenant |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**404** | Entity not found. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
