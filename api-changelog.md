@@ -15,13 +15,16 @@
 - Endpoint to [bulk modify MSP-managed devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/modify-msp-managed-devices/) (`PATCH /v1/msp/inventory/devices/bulk`).
 
 ### cdFMC API
-- Added AI Defense policy/profile endpoints and access-policy AI Defense settings.
+- Added AI Defense policy and profile endpoints, and access-policy AI Defense settings.
 - Added DNS policy rule endpoints and identity policy category/rule endpoints.
 - Added external authentication configuration and operational endpoints (LDAP/RADIUS config objects, fetch/apply).
 - Added Secure Access integration endpoints (regions, tunnel configurations, transcripts).
-- Added platform endpoints for content update operations and device upgrade info.
-- Added new analysis/operational endpoints (filters, active sessions, identified users, user activity, VPN tunnel status details, virtual access interfaces).
-- Added new object endpoints for SIDNS lists/downloads, SIDNS feeds, sinkholes, skip servers, realm sequences, and EVE exception lists, plus advanced logging and decryption standard mode configuration.
+- Added platform endpoints for content updates and device upgrade info.
+- Added analysis and operational endpoints for filters, VPN tunnel status details, virtual access interfaces, and VPN tunnel status lookup.
+- Added new object endpoints for SIDNS lists/downloads, SIDNS feeds, sinkholes, skip servers, realm sequences, and EVE exception lists, plus access-policy advanced logging, EVE settings, and decryption standard mode configuration.
+- Active session queries now support additional filters (search, session duration, domain, user risk, device risk) and include expanded examples.
+- DNS policies, identity policies, SIDNS feeds, and sinkholes now support POST/PUT/DELETE where previously only GET was available.
+
 
 ## Improvements
 
@@ -29,9 +32,8 @@
 - [Stage ASA device upgrades](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/upgrade-asa-device/) to get the latest version on the device without performing the actual upgrade.
 - Upgrade compatibility and upgrade run responses now include error details when retrieval or execution fails.
 
-### Inventory
-- Device records now include `connectorType` and cdFMC records include `dedicatedCdFmcInstance` to clarify management connectivity and provisioning.
-- MSP-managed tenant records now include cdFMC type, tenant pay type, SCC organization UID, and new region enum values.
+### MSP
+- [MSP-managed tenant](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/mspmanagedtenant/) records now include cdFMC type, tenant pay type, and SCC organization UID.
 
 ### Object Management
 - Object issue handling now supports ignore flags for duplicates and unused issues.
