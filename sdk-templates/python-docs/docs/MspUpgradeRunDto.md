@@ -5,7 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**asdm_version** | **str** | Target management version for the upgrade. | [optional] 
 **error_msg** | **str** | Error message if the upgrade run failed. | [optional] 
+**force_upgrade** | **bool** | Indicates if this upgrade run is forced on the devices. If set to true, the upgrade is forcefully applied no matter the current upgrades staged on the devices | [optional] 
 **last_updated_time** | **datetime** | Time (UTC; represented using the RFC-3339 standard) at which the upgrade run was last updated. | [optional] 
 **metadata** | [**UpgradeRunMetadataDto**](UpgradeRunMetadataDto.md) |  | [optional] 
 **name** | **str** | Name of the upgrade run. Upgrade runs names are unique in a tenant in SCC Firewall Manager. | [optional] 

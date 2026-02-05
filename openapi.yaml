@@ -5294,6 +5294,44 @@ paths:
             summary: Get MSP-managed device by UID
             tags:
                 - MSP Inventory
+    /v1/msp/inventory/devices/asas/upgrades/trigger:
+        post:
+            description: |-
+                <p>Asynchronous operation to upgrade multiple ASA devices across managed tenants.</p>
+                <p><strong>Notes:</strong></p>
+                <ul>
+                <li>Maximum of 50 ASA devices per request</li>
+                </ul>
+                <p><strong>Response:</strong></p>
+                <ul>
+                <li>Returns a transaction object to track upgrade operation progress</li>
+                <li>Use the transaction ID or the entity UID to monitor the status of the upgrade</li>
+                </ul>
+            operationId: upgradeMspManagedAsaDevices
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MspUpgradeAsaDevicesInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Returns a Transaction object that can be used to track the progress of the multi-tenant device upgrade operation.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Upgrade multiple ASAs across multiple tenants
+            tags:
+                - MSP Device Upgrades
     /v1/msp/inventory/devices/asas/upgrades/versions:
         get:
             description: Get a list of compatible upgrade versions for a list of ASA devices across multiple managed tenants.
@@ -5338,7 +5376,7 @@ paths:
                 - bearerAuth: []
             summary: Get compatible ASA upgrade versions
             tags:
-                - MSP ASA Device Upgrades
+                - MSP Device Upgrades
     /v1/msp/inventory/devices/attribute-values:
         get:
             description: Get distinct values for multiple fields in the MSP-managed devices across all tenants managed by the MSP portal.
@@ -5419,8 +5457,12 @@ paths:
                 - MSP Inventory
     /v1/msp/inventory/devices/ftds/upgrades/runs:
         get:
-            description: Get a list of MSP device upgrade runs in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices across multiple managed tenants being upgraded, or staged for upgrades, together.
-            operationId: getMspDeviceUpgradeRuns
+            deprecated: true
+            description: |
+                <strong>Deprecated</strong> - Use /v1/msp/inventory/devices/upgrades/runs instead.
+
+                Get a list of MSP device upgrade runs in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices across multiple managed tenants being upgraded, or staged for upgrades, together.
+            operationId: getMspFtdDeviceUpgradeRuns
             parameters:
                 - description: Number of results to retrieve.
                   in: query
@@ -5468,13 +5510,17 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Get MSP Device Upgrade Runs
+            summary: Get MSP FTD Device Upgrade Runs
             tags:
                 - MSP Device Upgrades
     /v1/msp/inventory/devices/ftds/upgrades/runs/{mspUpgradeRunUid}:
         get:
-            description: Get a MSP Device Upgrade Run by UID in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices across multiple managed tenants being upgraded, or staged for upgrades, together.
-            operationId: getMspDeviceUpgradeRun
+            deprecated: true
+            description: |
+                <strong>Deprecated</strong> - Use /v1/msp/inventory/devices/upgrades/runs/{mspUpgradeRunUid} instead.
+
+                Get a MSP Device Upgrade Run by UID in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices across multiple managed tenants being upgraded, or staged for upgrades, together.
+            operationId: getMspFtdDeviceUpgradeRun
             parameters:
                 - description: The unique identifier, represented as a UUID, of the FTD Device Upgrade Run in SCC Firewall Manager.
                   in: path
@@ -5500,13 +5546,17 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Get MSP Device Upgrade Run
+            summary: Get MSP FTD Device Upgrade Run
             tags:
                 - MSP Device Upgrades
     /v1/msp/inventory/devices/ftds/upgrades/runs/{uid}:
         delete:
-            description: 'Delete a MSP Device Upgrade Run, by UID, in the SCC Firewall Manager tenant. Caution: If you delete an upgrade run currently in progress, you may end up allowing multiple upgrades to be triggered on devices.'
-            operationId: deleteMspDeviceUpgradeRun
+            deprecated: true
+            description: |
+                <strong>Deprecated</strong> - Use /v1/msp/inventory/devices/upgrades/runs/{uid} instead.
+
+                Delete a MSP Device Upgrade Run, by UID, in the SCC Firewall Manager tenant. Caution: If you delete an upgrade run currently in progress, you may end up allowing multiple upgrades to be triggered on devices.
+            operationId: deleteMspFtdDeviceUpgradeRun
             parameters:
                 - description: The unique identifier, represented as a UUID, of the FTD Device Upgrade Run in SCC Firewall Manager.
                   in: path
@@ -5526,13 +5576,17 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Delete MSP Device Upgrade Run
+            summary: Delete MSP FTD Device Upgrade Run
             tags:
                 - MSP Device Upgrades
     /v1/msp/inventory/devices/ftds/upgrades/runs/attribute-values:
         get:
-            description: Get distinct attribute values for fields in the MSP upgrade runs.
-            operationId: getMspUpgradeRunsAttributeValues
+            deprecated: true
+            description: |
+                <strong>Deprecated</strong> - Use /v1/msp/inventory/devices/upgrades/runs/attribute-values instead.
+
+                Get distinct attribute values for fields in the MSP upgrade runs.
+            operationId: getMspFtdUpgradeRunsAttributeValues
             responses:
                 "200":
                     content:
@@ -5663,6 +5717,139 @@ paths:
             security:
                 - bearerAuth: []
             summary: Get compatible FTD upgrade versions
+            tags:
+                - MSP Device Upgrades
+    /v1/msp/inventory/devices/upgrades/runs:
+        get:
+            description: Get a list of MSP device upgrade runs in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices across multiple managed tenants being upgraded, or staged for upgrades, together.
+            operationId: getMspDeviceUpgradeRuns
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspUpgradeRunDtoPage'
+                    description: List of MSP Device Upgrade Run objects
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP Device Upgrade Runs
+            tags:
+                - MSP Device Upgrades
+    /v1/msp/inventory/devices/upgrades/runs/{uid}:
+        delete:
+            description: 'Delete a MSP Device Upgrade Run, by UID, in the SCC Firewall Manager tenant. Caution: If you delete an upgrade run currently in progress, you may end up allowing multiple upgrades to be triggered on devices.'
+            operationId: deleteMspDeviceUpgradeRun
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the Device Upgrade Run in SCC Firewall Manager.
+                  in: path
+                  name: uid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "204":
+                    description: No Content
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Delete MSP Device Upgrade Run
+            tags:
+                - MSP Device Upgrades
+        get:
+            description: Get a MSP Device Upgrade Run by UID in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices across multiple managed tenants being upgraded, or staged for upgrades, together.
+            operationId: getMspDeviceUpgradeRun
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the Device Upgrade Run in SCC Firewall Manager.
+                  in: path
+                  name: uid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspUpgradeRunDto'
+                    description: The MSP Device Upgrade Run object
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP Device Upgrade Run
+            tags:
+                - MSP Device Upgrades
+    /v1/msp/inventory/devices/upgrades/runs/attribute-values:
+        get:
+            description: Get distinct attribute values for fields in the MSP upgrade runs.
+            operationId: getMspDeviceUpgradeRunsAttributeValues
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspUpgradeRunsAttributeValues'
+                    description: Distinct attribute values for MSP upgrade runs.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get distinct attribute values for MSP upgrade runs
             tags:
                 - MSP Device Upgrades
     /v1/msp/inventory/managers:
@@ -10671,7 +10858,7 @@ components:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -10682,7 +10869,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: Percentage completion of the current task being performed.
+                    description: The percentage completion of the current task being performed
                     format: double
                     type: number
             type: object
@@ -11358,58 +11545,14 @@ components:
         DeviceUpgradeStatusDto:
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device.
+                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                hardwareModel:
-                    description: Hardware model of the devices being upgraded.
-                    example: Firepower 2110
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: Name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantUid:
-                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: tenant-uuid-1
-                    format: uuid
-                    type: string
-                name:
-                    description: Name of the device being upgraded.
-                    example: my-firepower
-                    type: string
-                softwareVersionBeforeUpgrade:
-                    description: Software version of the device before the upgrade.
-                    example: 7.2.3
-                    type: string
-                transactionUid:
-                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, of the device being upgraded.
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: Current status of the upgrade run.
-                    enum:
-                        - IN_PROGRESS
-                        - REBUILDING_UPGRADE_CACHE
-                        - PERFORMING_UPGRADE
-                        - UPLOADING_IMAGE
-                        - PERFORMING_READINESS_CHECK
-                        - UPGRADE_STAGED
-                        - UPGRADE_STAGING_FAILED
-                        - UGPRADE_STAGING_FAILED
-                        - UPGRADE_COMPLETED
-                        - UPGRADE_FAILED
-                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -13674,6 +13817,56 @@ components:
                     format: int32
                     type: integer
             type: object
+        MspUpgradeAsaDevicesInput:
+            properties:
+                asdmVersion:
+                    description: The target ASDM software version to upgrade the device to.
+                    example: '''7.6(2)'' or ''7.6(2).openjre'''
+                    type: string
+                deviceUids:
+                    description: |4
+                            <p>List of device identifiers to upgrade in Security Cloud Control.</p>
+                            <p>Each entry must meet all of the following:</p>
+                            <ul>
+                              <li>The identifier is a UUID (unique identifier).</li>
+                              <li>The device is managed by the MSSP portal.</li>
+                              <li>The device type is <code>ASA</code>.</li>
+                              <li>The connectivity state is <code>ONLINE</code>.</li>
+                              <li>The device is compatible with the specified software version.</li>
+                            </ul>
+                    example:
+                        - 256461f6-bd60-11ef-8beb-6cf1610cf55d
+                    items:
+                        format: uuid
+                        type: string
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                forceUpgrade:
+                    default: false
+                    description: A boolean value, indicating whether the upgrade should be forced. If this is set to true, the upgrade (staged or not) will be executed even if any staged upgrade exists on the device
+                    example: false
+                    type: boolean
+                ignoreMaintenanceWindow:
+                    description: A boolean flag that determines whether device maintenance windows should be ignored during a full upgrade
+                    example: false
+                    type: boolean
+                name:
+                    description: Specify a human-readable name for the upgrade run.
+                    example: Production ASA Upgrade - January 2026
+                    type: string
+                softwareVersion:
+                    description: Specify the software version to which all devices will be upgraded.
+                    example: 7.3.0
+                    type: string
+                stageUpgradeOnly:
+                    default: false
+                    description: A boolean value, indicating whether the upgrade should be staged. If set to true, the image will be downloaded onto the devices and readiness checks will be performed. However, the upgrade will not be applied to the devices.
+                    example: false
+                    type: boolean
+            required:
+                - deviceUids
+            type: object
         MspUpgradeFtdDevicesInput:
             properties:
                 deviceUids:
@@ -13722,10 +13915,18 @@ components:
             type: object
         MspUpgradeRunDto:
             properties:
+                asdmVersion:
+                    description: Target management version for the upgrade.
+                    example: 7.7.1
+                    type: string
                 errorMsg:
                     description: Error message if the upgrade run failed.
                     example: Timeout error
                     type: string
+                forceUpgrade:
+                    description: Indicates if this upgrade run is forced on the devices. If set to true, the upgrade is forcefully applied no matter the current upgrades staged on the devices
+                    example: false
+                    type: boolean
                 lastUpdatedTime:
                     description: Time (UTC; represented using the RFC-3339 standard) at which the upgrade run was last updated.
                     example: 2023-12-13T08:15:44Z

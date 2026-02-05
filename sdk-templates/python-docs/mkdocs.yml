@@ -261,6 +261,7 @@ nav:
     - MspManagedTenantPage: MspManagedTenantPage.md
     - MspSmartAccountDto: MspSmartAccountDto.md
     - MspSmartAccountsPage: MspSmartAccountsPage.md
+    - MspUpgradeAsaDevicesInput: MspUpgradeAsaDevicesInput.md
     - MspUpgradeFtdDevicesInput: MspUpgradeFtdDevicesInput.md
     - MspUpgradeRunDto: MspUpgradeRunDto.md
     - MspUpgradeRunDtoPage: MspUpgradeRunDtoPage.md
