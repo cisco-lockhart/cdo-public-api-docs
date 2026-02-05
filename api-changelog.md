@@ -48,6 +48,9 @@
 
 ## Added
 
+### FedRAMP
+- The SCC Firewall Manager APIs are available on the FedRAMP environment at https://manage.secure.cisco.
+
 ### Events
 - Endpoint to [get event search reports](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-event-search-reports/) containing the results of event log searches executed using the Report feature in the Event Logging page.
 
@@ -69,6 +72,7 @@
 - Endpoint to [get MSP upgrade runs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-device-upgrade-runs/) to monitor upgrade operations across managed tenants.
 - Endpoint to [get a specific MSP upgrade run](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-device-upgrade-run/) by UID.
 - Endpoint to [get MSP upgrade run attribute values](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-distinct-attribute-values-for-msp-upgrade-runs/) to retrieve distinct values for filtering upgrade runs.
+
 
 ## Improvements
 

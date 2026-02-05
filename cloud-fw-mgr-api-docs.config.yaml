@@ -18,6 +18,8 @@ services:
     prefixToAdd: "/v1/fmc/gateway"
   - name: "device-health"
     url: "https://staging.manage.security.cisco.com/api/platform/device-health/v3/api-docs.yaml"
+  - name: "thousand-eyes-gateway"
+    url: "https://staging.manage.security.cisco.com/api/platform/thousand-eyes-gateway/v3/api-docs.yaml"
 cdfmc:
   url: "https://demo-red.app.us.cdo.cisco.com/api/api-explorer/fmc_oas3.json"
 info:
@@ -52,8 +54,12 @@ servers:
    description: Scale
  - url: https://ci.manage.security.cisco.com/api/rest
    description: CI
+ - url: https://manage.dev.secure.cisco/api/rest
+   description: Devf9
  - url: https://manage.stg.secure.cisco/api/rest
    description: Stgf9
+ - url: https://manage.secure.cisco/api/rest
+   description: ProdF9
 securitySchemes:
   bearerAuth:
     type: http
