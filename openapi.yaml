@@ -28,95 +28,6 @@ paths:
             summary: Fetch JSON Web Key Set
             tags:
                 - Meta
-    /aiops-status:
-        get:
-            operationId: getAiOpsStatus
-            responses:
-                "200":
-                    content:
-                        '*/*':
-                            schema:
-                                $ref: '#/components/schemas/ThousandEyesAiOpsStatusResponse'
-                    description: OK
-            tags:
-                - thousand-eyes-gateway-controller
-        put:
-            operationId: updateAiOpsStatus
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/ThousandEyesAiOpsStatusUpdateRequest'
-                required: true
-            responses:
-                "204":
-                    description: No Content
-            tags:
-                - thousand-eyes-gateway-controller
-    /applications:
-        get:
-            operationId: getApplications
-            responses:
-                "200":
-                    content:
-                        '*/*':
-                            schema:
-                                $ref: '#/components/schemas/ThousandEyesApplicationsResponse'
-                    description: OK
-            tags:
-                - thousand-eyes-gateway-controller
-        patch:
-            operationId: updateApplications_1
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/ThousandEyesApplicationsUpdateRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        '*/*':
-                            schema:
-                                $ref: '#/components/schemas/ThousandEyesApplicationsResponse'
-                    description: OK
-            tags:
-                - thousand-eyes-gateway-controller
-        put:
-            operationId: updateApplications
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/ThousandEyesApplicationsUpdateRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        '*/*':
-                            schema:
-                                $ref: '#/components/schemas/ThousandEyesApplicationsResponse'
-                    description: OK
-            tags:
-                - thousand-eyes-gateway-controller
-    /outages:
-        get:
-            operationId: getOutagesByDateRange
-            parameters:
-                - in: query
-                  name: request
-                  required: true
-                  schema:
-                    $ref: '#/components/schemas/ThousandEyesOutageQueryRequest'
-            responses:
-                "200":
-                    content:
-                        '*/*':
-                            schema:
-                                $ref: '#/components/schemas/ThousandEyesOutageQueryResponse'
-                    description: OK
-            tags:
-                - thousand-eyes-gateway-controller
     /v1/ai-assistant/conversations:
         get:
             description: 'Get a list of AI Assistant Conversations. Note: the total number of conversations is set to -1 as this information is currently unavailable.'
@@ -9098,20 +9009,6 @@ paths:
             summary: Refresh RA VPN Sessions
             tags:
                 - Remote Access Monitoring
-    /webhook:
-        post:
-            operationId: handleWebhook
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            type: string
-                required: true
-            responses:
-                "200":
-                    description: OK
-            tags:
-                - thousand-eyes-gateway-controller
 servers:
     - url: https://api.us.security.cisco.com/firewall
       description: US
@@ -11068,7 +10965,7 @@ components:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -11079,7 +10976,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: Percentage completion of the current task being performed.
+                    description: The percentage completion of the current task being performed
                     format: double
                     type: number
             type: object
@@ -11755,58 +11652,14 @@ components:
         DeviceUpgradeStatusDto:
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device.
+                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                hardwareModel:
-                    description: Hardware model of the devices being upgraded.
-                    example: Firepower 2110
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: Name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantUid:
-                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: tenant-uuid-1
-                    format: uuid
-                    type: string
-                name:
-                    description: Name of the device being upgraded.
-                    example: my-firepower
-                    type: string
-                softwareVersionBeforeUpgrade:
-                    description: Software version of the device before the upgrade.
-                    example: 7.2.3
-                    type: string
-                transactionUid:
-                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, of the device being upgraded.
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: Current status of the upgrade run.
-                    enum:
-                        - IN_PROGRESS
-                        - REBUILDING_UPGRADE_CACHE
-                        - PERFORMING_UPGRADE
-                        - UPLOADING_IMAGE
-                        - PERFORMING_READINESS_CHECK
-                        - UPGRADE_STAGED
-                        - UPGRADE_STAGING_FAILED
-                        - UGPRADE_STAGING_FAILED
-                        - UPGRADE_COMPLETED
-                        - UPGRADE_FAILED
-                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -15633,133 +15486,6 @@ components:
                     description: Indicates if web analytics are enabled for the tenant.
                     example: true
                     type: boolean
-            type: object
-        ThousandEyesAiOpsStatusResponse:
-            properties:
-                aiopsOnboarded:
-                    type: boolean
-                serviceEnabled:
-                    type: boolean
-            type: object
-        ThousandEyesAiOpsStatusUpdateRequest:
-            properties:
-                serviceEnabled:
-                    type: boolean
-            type: object
-        ThousandEyesApplicationResponse:
-            properties:
-                application:
-                    type: string
-                available:
-                    type: boolean
-                existInCdFmcPolicy:
-                    type: boolean
-                subscribedToNotifications:
-                    type: boolean
-            type: object
-        ThousandEyesApplicationUpdateRequest:
-            properties:
-                application:
-                    minLength: 1
-                    type: string
-                subscribedToNotifications:
-                    type: boolean
-            required:
-                - application
-            type: object
-        ThousandEyesApplicationsResponse:
-            properties:
-                applications:
-                    items:
-                        $ref: '#/components/schemas/ThousandEyesApplicationResponse'
-                    type: array
-            type: object
-        ThousandEyesApplicationsUpdateRequest:
-            properties:
-                applications:
-                    items:
-                        $ref: '#/components/schemas/ThousandEyesApplicationUpdateRequest'
-                    type: array
-            required:
-                - applications
-            type: object
-        ThousandEyesOutageQueryRequest:
-            properties:
-                applicationName:
-                    type: string
-                applicationSpecific:
-                    type: boolean
-                effectivePageSize:
-                    format: int32
-                    type: integer
-                endDate:
-                    format: date-time
-                    type: string
-                lastEvaluatedKey:
-                    type: string
-                pageSize:
-                    format: int32
-                    maximum: 2000
-                    minimum: 1
-                    type: integer
-                startDate:
-                    format: date-time
-                    type: string
-                validDateRange:
-                    type: boolean
-            required:
-                - endDate
-                - startDate
-            type: object
-        ThousandEyesOutageQueryResponse:
-            properties:
-                hasMoreResults:
-                    type: boolean
-                lastEvaluatedKey:
-                    type: string
-                outages:
-                    items:
-                        $ref: '#/components/schemas/ThousandEyesOutageResponse'
-                    type: array
-                pageSize:
-                    format: int32
-                    type: integer
-                totalCount:
-                    format: int32
-                    type: integer
-            type: object
-        ThousandEyesOutageResponse:
-            properties:
-                affectedDomains:
-                    items:
-                        type: string
-                    type: array
-                alertId:
-                    format: uuid
-                    type: string
-                applicationName:
-                    type: string
-                durationSeconds:
-                    format: int32
-                    type: integer
-                endDate:
-                    format: date-time
-                    type: string
-                errors:
-                    items:
-                        type: string
-                    type: array
-                outageType:
-                    type: string
-                regions:
-                    items:
-                        type: string
-                    type: array
-                severity:
-                    type: string
-                startDate:
-                    format: date-time
-                    type: string
             type: object
         UnifiedObjectListView:
             properties:
