@@ -2,6 +2,9 @@
 
 ## Added
 
+## ThousandEyes Integration
+- Endpoint to [get application outages](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-application-outages/) for any applications configured on the FMC.
+
 ### Device Upgrades
 - Endpoint to [upgrade multiple ASA devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/upgrade-multiple-asa-devices/) in a single request (`POST /v1/inventory/devices/asas/upgrades/trigger`).
 - Endpoint to [get compatible upgrade versions for multiple ASAs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-upgrade-versions-compatible-with-multiple-asas/) (`GET /v1/inventory/devices/asas/upgrades/versions`).
