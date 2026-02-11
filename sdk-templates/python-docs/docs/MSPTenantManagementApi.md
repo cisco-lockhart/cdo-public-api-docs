@@ -15,6 +15,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_msp_tenant**](MSPTenantManagementApi.md#add_msp_tenant) | **POST** /v1/msp/tenants | Add Tenant to MSP Portal (API token)
 [**add_tenant_to_msp_portal**](MSPTenantManagementApi.md#add_tenant_to_msp_portal) | **POST** /v1/msp/tenants/{tenantUid} | Add tenant to MSP Portal
+[**bulk_update_msp_tenant_settings**](MSPTenantManagementApi.md#bulk_update_msp_tenant_settings) | **PATCH** /v1/msp/tenants/settings | Bulk update settings for Security Cloud Control tenants managed by MSP Portal
 [**create_tenant**](MSPTenantManagementApi.md#create_tenant) | **POST** /v1/msp/tenants/create | Create Security Cloud Control Tenant
 [**enable_multicloud_defense_for_tenant_in_msp_portal**](MSPTenantManagementApi.md#enable_multicloud_defense_for_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/mcd | Enable Multicloud Defense for Security Cloud Control tenant in MSP Portal
 [**generate_api_token_for_user_in_tenant**](MSPTenantManagementApi.md#generate_api_token_for_user_in_tenant) | **POST** /v1/msp/tenants/{tenantUid}/users/{apiUserUid}/token | Generate token for API-only user on tenant managed by MSP portal
@@ -188,6 +189,88 @@ Name | Type | Description  | Notes
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
 **409** | Conflict. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **bulk_update_msp_tenant_settings**
+> CdoTransaction bulk_update_msp_tenant_settings(msp_tenant_settings_input)
+
+Bulk update settings for Security Cloud Control tenants managed by MSP Portal
+
+This is an asynchronous operation to update the settings of multiple Security Cloud Control tenants managed by the MSP Portal. Note: This endpoint can only be executed by a super-admin in an MSP Portal.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.models.msp_tenant_settings_input import MspTenantSettingsInput
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.MSPTenantManagementApi(api_client)
+    msp_tenant_settings_input = scc_firewall_manager_sdk.MspTenantSettingsInput() # MspTenantSettingsInput | 
+
+    try:
+        # Bulk update settings for Security Cloud Control tenants managed by MSP Portal
+        api_response = api_instance.bulk_update_msp_tenant_settings(msp_tenant_settings_input)
+        print("The response of MSPTenantManagementApi->bulk_update_msp_tenant_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling MSPTenantManagementApi->bulk_update_msp_tenant_settings: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **msp_tenant_settings_input** | [**MspTenantSettingsInput**](MspTenantSettingsInput.md)|  | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Security Cloud Control Transaction object that can be used to track the status of the operation. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
