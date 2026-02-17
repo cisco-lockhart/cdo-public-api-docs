@@ -20,8 +20,6 @@ services:
     url: "https://staging.manage.security.cisco.com/api/platform/device-health/v3/api-docs.yaml"
   - name: "thousand-eyes-gateway"
     url: "https://staging.manage.security.cisco.com/api/platform/thousand-eyes-gateway/v3/api-docs.yaml"
-  - name: "agent-orchestrator"
-    url: "https://staging.manage.security.cisco.com/api/platform/agent-orchestrator/v3/api-docs.yaml"    
 cdfmc:
   url: "https://demo-red.app.us.cdo.cisco.com/api/api-explorer/fmc_oas3.json"
 info:
