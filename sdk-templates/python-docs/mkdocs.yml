@@ -258,6 +258,7 @@ nav:
     - MspManagedTemplateDistinctAttributeValues: MspManagedTemplateDistinctAttributeValues.md
     - MspManagedTemplatesPage: MspManagedTemplatesPage.md
     - MspManagedTenant: MspManagedTenant.md
+    - MspManagedTenantDistinctAttributeValues: MspManagedTenantDistinctAttributeValues.md
     - MspManagedTenantDto: MspManagedTenantDto.md
     - MspManagedTenantDtoPage: MspManagedTenantDtoPage.md
     - MspManagedTenantPage: MspManagedTenantPage.md

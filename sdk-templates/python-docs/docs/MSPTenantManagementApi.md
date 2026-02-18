@@ -694,7 +694,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_msp_managed_tenants_attribute_values**
-> MspManagedDeviceDistinctAttributeValues get_msp_managed_tenants_attribute_values()
+> MspManagedTenantDistinctAttributeValues get_msp_managed_tenants_attribute_values()
 
 Get distinct attribute values for MSP-managed tenants
 
@@ -706,7 +706,7 @@ Get distinct values for multiple fields in the MSP-managed tenants managed by th
 
 ```python
 import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.msp_managed_device_distinct_attribute_values import MspManagedDeviceDistinctAttributeValues
+from scc_firewall_manager_sdk.models.msp_managed_tenant_distinct_attribute_values import MspManagedTenantDistinctAttributeValues
 from scc_firewall_manager_sdk.rest import ApiException
 from pprint import pprint
 
@@ -748,7 +748,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**MspManagedDeviceDistinctAttributeValues**](MspManagedDeviceDistinctAttributeValues.md)
+[**MspManagedTenantDistinctAttributeValues**](MspManagedTenantDistinctAttributeValues.md)
 
 ### Authorization
 

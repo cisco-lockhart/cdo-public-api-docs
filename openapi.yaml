@@ -6856,7 +6856,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/MspManagedDeviceDistinctAttributeValues'
+                                $ref: '#/components/schemas/MspManagedTenantDistinctAttributeValues'
                     description: Distinct attribute values for MSP-managed devices
                 "400":
                     $ref: '#/components/responses/http400BadRequest'
@@ -13912,6 +13912,43 @@ components:
                     example: 0
                     format: int32
                     type: integer
+            type: object
+        MspManagedTenantDistinctAttributeValues:
+            properties:
+                regions:
+                    description: The regions of the tenants that are managed by the MSP Portal.
+                    items:
+                        enum:
+                            - US
+                            - EU
+                            - APJ
+                            - AUS
+                            - IN
+                            - UAE
+                            - CI
+                            - SCALE
+                            - STAGING
+                            - DEVFED
+                            - STGF9
+                            - DEVF9
+                            - PRODF9
+                            - UNKNOWN
+                        type: string
+                    type: array
+                    uniqueItems: true
+                tenantPayTypes:
+                    description: The pay types of the tenants that are managed by the MSP Portal.
+                    items:
+                        enum:
+                            - PAYING
+                            - NOT_PAYING
+                            - TRIAL
+                            - INTERNAL
+                            - PARTNER
+                            - DEMO
+                        type: string
+                    type: array
+                    uniqueItems: true
             type: object
         MspManagedTenantDto:
             properties:
