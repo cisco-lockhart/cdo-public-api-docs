@@ -13871,6 +13871,16 @@ components:
             type: object
         MspManagedTenantDistinctAttributeValues:
             properties:
+                complianceStatuses:
+                    description: The compliance statuses of the tenants that are managed by the MSP Portal.
+                    items:
+                        enum:
+                            - IN_COMPLIANCE
+                            - OUT_OF_COMPLIANCE
+                            - UNKNOWN
+                        type: string
+                    type: array
+                    uniqueItems: true
                 regions:
                     description: The regions of the tenants that are managed by the MSP Portal.
                     items:
@@ -13918,6 +13928,14 @@ components:
                         - DEDICATED
                         - SHARED
                         - UNPROVISIONED
+                    type: string
+                complianceStatus:
+                    description: The licensing compliance status of the tenant.
+                    enum:
+                        - IN_COMPLIANCE
+                        - OUT_OF_COMPLIANCE
+                        - UNKNOWN
+                    example: IN_COMPLIANCE
                     type: string
                 displayName:
                     description: A human-readable display name for the tenant. This is the tenant name displayed in the Security Cloud Control Web UI.

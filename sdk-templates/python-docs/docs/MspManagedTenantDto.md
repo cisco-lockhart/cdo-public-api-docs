@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **api_token_valid** | **bool** | Indicates whether the tenant&#39;s API token is valid. | [optional] 
 **cd_fmc_type** | **str** | Indicates whether the tenant&#39;s provisioned cdFMC instance is dedicated rather than shared. | [optional] 
+**compliance_status** | **str** | The licensing compliance status of the tenant. | [optional] 
 **display_name** | **str** | A human-readable display name for the tenant. This is the tenant name displayed in the Security Cloud Control Web UI. | 
 **name** | **str** | The name of the tenant in CDO. Tenant names are unique in Security Cloud Control. | 
 **region** | **str** | The Security Cloud Control region the tenant exists in. | 
