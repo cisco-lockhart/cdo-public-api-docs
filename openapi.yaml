@@ -14370,6 +14370,10 @@ components:
                     description: The name of the object
                     example: my-object
                     type: string
+                objectVersion:
+                    description: The version of the unified object
+                    format: int64
+                    type: integer
                 readOnly:
                     description: Indicates if the object is read-only
                     example: false
