@@ -1,3 +1,23 @@
+# Version 1.18.0 (2026-02-27)
+
+## Added
+
+### MSP
+- Endpoint to [bulk update settings for MSP-managed tenants](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/bulk-update-msp-tenant-settings/) (`PATCH /v1/msp/tenants/settings`), allowing MSP super-admins to enable or disable ASA health metrics collection across multiple tenants.
+- [MSP-managed tenant](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/mspmanagedtenant/) records now include `complianceStatus` field indicating the licensing compliance status of the tenant.
+- MSP-managed [devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-devices/), [device managers](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-device-managers/), [cloud services](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-cloud-services/), and [templates](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-templates/) now include the unique identifier of the managed tenant in Security Cloud Control (`managedSccOrganizationUid`).
+
+### Object Management
+- Unified objects now include an `objectVersion` field.
+
+## Improvements
+
+### Inventory
+- Device onboarding now supports IPv6 addresses in the format `[host]:port`.
+
+### Transactions
+- Added new transaction types: `MSP_UPDATE_TENANT_SETTINGS` and `SYNC_POLICIES`.
+
 # Version 1.17.0 (2026-02-05)
 
 ## Added
