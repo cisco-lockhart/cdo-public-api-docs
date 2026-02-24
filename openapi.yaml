@@ -10426,6 +10426,7 @@ components:
                         - ANALYZE_POLICIES
                         - TRIGGER_FMC_DATA_EXPORT
                         - STAGE_POLICIES
+                        - SYNC_POLICIES
                         - EXPORT_DEVICES
                         - EXPORT_CLOUD_SERVICES
                         - EXPORT_MANAGERS
