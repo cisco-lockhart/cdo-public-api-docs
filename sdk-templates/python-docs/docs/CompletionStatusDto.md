@@ -6,9 +6,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **message** | **str** | A message, indicating current progress, returned from the device. | [optional] 
-**name** | **str** | Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster. | [optional] 
+**name** | **str** | The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster. | [optional] 
 **node_type** | **str** | (HA Pairs and clusters only) The node type of the device. | [optional] 
-**percentage_complete** | **float** | Percentage completion of the current task being performed. | [optional] 
+**percentage_complete** | **float** | The percentage completion of the current task being performed | [optional] 
 
 ## Example
 
