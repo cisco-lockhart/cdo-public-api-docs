@@ -10998,7 +10998,7 @@ components:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -11009,7 +11009,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: Percentage completion of the current task being performed.
+                    description: The percentage completion of the current task being performed
                     format: double
                     type: number
             type: object
@@ -11685,58 +11685,14 @@ components:
         DeviceUpgradeStatusDto:
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device.
+                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                hardwareModel:
-                    description: Hardware model of the devices being upgraded.
-                    example: Firepower 2110
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: Name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantUid:
-                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: tenant-uuid-1
-                    format: uuid
-                    type: string
-                name:
-                    description: Name of the device being upgraded.
-                    example: my-firepower
-                    type: string
-                softwareVersionBeforeUpgrade:
-                    description: Software version of the device before the upgrade.
-                    example: 7.2.3
-                    type: string
-                transactionUid:
-                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, of the device being upgraded.
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: Current status of the upgrade run.
-                    enum:
-                        - IN_PROGRESS
-                        - REBUILDING_UPGRADE_CACHE
-                        - PERFORMING_UPGRADE
-                        - UPLOADING_IMAGE
-                        - PERFORMING_READINESS_CHECK
-                        - UPGRADE_STAGED
-                        - UPGRADE_STAGING_FAILED
-                        - UGPRADE_STAGING_FAILED
-                        - UPGRADE_COMPLETED
-                        - UPGRADE_FAILED
-                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -13389,6 +13345,11 @@ components:
                     $ref: '#/components/schemas/ConnectivityState'
                     description: The connectivity state of the cloud service to CDO. A connectivity state that is not ONLINE can indicate either a problem with the cloud service, or the communication pathways between the cloud service and Security Cloud Control.
                     example: ONLINE
+                managedSccOrganizationUid:
+                    description: The unique identifier, represented as a UUID, of the managed organization on Security Cloud Control that this cloud service belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
                 managedTenantDisplayName:
                     description: The display name of the managed tenant in CDO.
                     example: my-example-tenant
@@ -13402,7 +13363,7 @@ components:
                     example: us1
                     type: string
                 managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this cloud service belongs to.
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control Firewall Manager that this cloud service belongs to.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
@@ -13547,6 +13508,11 @@ components:
                 labels:
                     $ref: '#/components/schemas/Labels'
                     description: The labels associated with the device.
+                managedSccOrganizationUid:
+                    description: The unique identifier, represented as a UUID, of the managed organization on Security Cloud Control that this device belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
                 managedTenantDisplayName:
                     description: The display name of the managed tenant in CDO.
                     example: my-example-tenant
@@ -13560,7 +13526,7 @@ components:
                     example: us1
                     type: string
                 managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control Firewall Manager that this device belongs to.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
@@ -13693,6 +13659,11 @@ components:
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
+                managedSccOrganizationUid:
+                    description: The unique identifier, represented as a UUID, of the managed organization on Security Cloud Control that this device manager belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
                 managedTenantDisplayName:
                     description: The display name of the managed tenant in CDO.
                     example: my-example-tenant
@@ -13706,7 +13677,7 @@ components:
                     example: us1
                     type: string
                 managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device manager belongs to.
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control Firewall Manager that this device manager belongs to.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
@@ -13816,6 +13787,11 @@ components:
                     $ref: '#/components/schemas/ConfigState'
                     description: The connectivity state of the template to CDO. A connectivity state that is not ONLINE can indicate either a problem with the template, or the communication pathways between the template and Security Cloud Control.
                     example: ONLINE
+                managedSccOrganizationUid:
+                    description: The unique identifier, represented as a UUID, of the managed organization on Security Cloud Control that this template belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
                 managedTenantDisplayName:
                     description: The display name of the managed tenant in CDO.
                     example: my-example-tenant
@@ -13829,7 +13805,7 @@ components:
                     example: us1
                     type: string
                 managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this template belongs to.
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control Firewall Manager that this template belongs to.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string

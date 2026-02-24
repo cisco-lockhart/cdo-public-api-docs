@@ -22,10 +22,11 @@ Name | Type | Description | Notes
 **ftd_ha_info** | [**FtdHaInfo**](FtdHaInfo.md) |  | [optional] 
 **hardware_model** | **str** | (ASAs, FDM-managed FTDs, and FMC-managed FTDs only) The hardware model of the device | [optional] 
 **labels** | [**Labels**](Labels.md) |  | [optional] 
+**managed_scc_organization_uid** | **str** | The unique identifier, represented as a UUID, of the managed organization on Security Cloud Control that this device belongs to. | [optional] 
 **managed_tenant_display_name** | **str** | The display name of the managed tenant in CDO. | [optional] 
 **managed_tenant_name** | **str** | The name of the managed tenant in CDO. | [optional] 
 **managed_tenant_region** | **str** | The region of the managed tenant in CDO. This is the region where the device is located. | [optional] 
-**managed_tenant_uid** | **str** | The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to. | [optional] 
+**managed_tenant_uid** | **str** | The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control Firewall Manager that this device belongs to. | [optional] 
 **model_number** | **str** | The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device. | [optional] 
 **name** | **str** | The name of the device in CDO. Device names are unique in Security Cloud Control. | 
 **ra_vpn_certificate_expiry_date** | **datetime** | (Remote Access VPN headends — ASA, FDM-managed FTD, and cdFMC-managed FTD — only) Expiration date of the Secure Client certificate installed on the device. | [optional] 

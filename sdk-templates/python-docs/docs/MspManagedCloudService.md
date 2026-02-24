@@ -10,10 +10,11 @@ Name | Type | Description | Notes
 **config_state** | [**ConfigState**](ConfigState.md) |  | [optional] 
 **conflict_detection_state** | [**ConflictDetectionState**](ConflictDetectionState.md) |  | [optional] 
 **connectivity_state** | [**ConnectivityState**](ConnectivityState.md) |  | [optional] 
+**managed_scc_organization_uid** | **str** | The unique identifier, represented as a UUID, of the managed organization on Security Cloud Control that this cloud service belongs to. | [optional] 
 **managed_tenant_display_name** | **str** | The display name of the managed tenant in CDO. | [optional] 
 **managed_tenant_name** | **str** | The name of the managed tenant in CDO. | [optional] 
 **managed_tenant_region** | **str** | The region of the managed tenant in CDO. This is the region where the cloud service is located. | [optional] 
-**managed_tenant_uid** | **str** | The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this cloud service belongs to. | [optional] 
+**managed_tenant_uid** | **str** | The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control Firewall Manager that this cloud service belongs to. | [optional] 
 **name** | **str** | The name of the cloud service in CDO. Cloud service names are unique in Security Cloud Control. | 
 **tenant_uid** | **str** |  | [optional] 
 **uid** | **str** | The unique identifier, represented as a UUID, of the cloud service in Security Cloud Control. | [optional] 

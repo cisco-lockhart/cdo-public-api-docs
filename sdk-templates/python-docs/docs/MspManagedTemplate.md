@@ -6,10 +6,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **config_state** | [**ConfigState**](ConfigState.md) |  | [optional] 
+**managed_scc_organization_uid** | **str** | The unique identifier, represented as a UUID, of the managed organization on Security Cloud Control that this template belongs to. | [optional] 
 **managed_tenant_display_name** | **str** | The display name of the managed tenant in CDO. | [optional] 
 **managed_tenant_name** | **str** | The name of the managed tenant in CDO. | [optional] 
 **managed_tenant_region** | **str** | The region of the managed tenant in CDO. This is the region where the template is located. | [optional] 
-**managed_tenant_uid** | **str** | The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this template belongs to. | [optional] 
+**managed_tenant_uid** | **str** | The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control Firewall Manager that this template belongs to. | [optional] 
 **name** | **str** | The name of the template in CDO. Template names are unique in Security Cloud Control. | 
 **software_version** | **str** | The software version that the template is applicable to. | [optional] 
 **template_type** | [**EntityType**](EntityType.md) |  | [optional] 
