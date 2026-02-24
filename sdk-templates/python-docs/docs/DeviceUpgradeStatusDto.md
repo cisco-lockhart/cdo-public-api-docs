@@ -5,8 +5,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**completion_statuses** | [**List[CompletionStatusDto]**](CompletionStatusDto.md) | The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster. | [optional] 
-**uid** | **str** | The unique identifier, represented as a UUID, of the device in SCC Firewall Manager. | [optional] 
+**completion_statuses** | [**List[CompletionStatusDto]**](CompletionStatusDto.md) | The completion status of the upgrade on the device. | [optional] 
+**hardware_model** | **str** | Hardware model of the devices being upgraded. | [optional] 
+**managed_tenant_display_name** | **str** | Display name of the managed tenant in CDO. | [optional] 
+**managed_tenant_name** | **str** | Name of the managed tenant in CDO. | [optional] 
+**managed_tenant_uid** | **str** | Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to. | [optional] 
+**name** | **str** | Name of the device being upgraded. | [optional] 
+**software_version_before_upgrade** | **str** | Software version of the device before the upgrade. | [optional] 
+**transaction_uid** | **str** | Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run. | [optional] 
+**uid** | **str** | Unique identifier, represented as a UUID, of the device being upgraded. | [optional] 
+**upgrade_run_status** | **str** | Current status of the upgrade run. | [optional] 
 
 ## Example
 
