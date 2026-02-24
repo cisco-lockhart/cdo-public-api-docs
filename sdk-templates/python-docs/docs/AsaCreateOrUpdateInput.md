@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **connector_name** | **str** | The name of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG). | [optional] 
 **connector_type** | [**ConnectorType**](ConnectorType.md) |  | 
-**device_address** | **str** | The address of the device to onboard, specified in the format &#x60;host:port&#x60;. | [optional] 
+**device_address** | **str** | The address of the device to onboard, specified in the format &#x60;host:port&#x60; for IPv4 or &#x60;[host]:port&#x60; for IPv6. | [optional] 
 **ignore_certificate** | **bool** | Set this attribute to true if you do not want Security Cloud Control to validate the certificate of this device before onboarding. | [optional] [default to False]
 **labels** | [**Labels**](Labels.md) |  | [optional] 
 **name** | **str** | A human-readable name for the device. | 
