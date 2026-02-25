@@ -59,6 +59,10 @@
             "content": "developer-resources/sdks.md"
           },
           {
+            "title": "Terraform",
+            "content": "developer-resources/terraform.md"
+          },
+          {
             "title": "Learning Labs",
             "content": "https://developer.cisco.com/learning/modules/automating-cisco-defense-orchestrator/",
             "type": "url"
