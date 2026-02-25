@@ -5147,7 +5147,7 @@ paths:
                 - Inventory
     /v1/licenses/devices:
         get:
-            description: Get a paginated list of device licenses.
+            description: 'Get a paginated list of device licenses. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
             operationId: getDeviceLicenses
             parameters:
                 - description: Number of results to retrieve.
@@ -5201,10 +5201,10 @@ paths:
             summary: Get Device Licenses
             tags:
                 - Licensing
-            x-in-dev: "true"
+            x-beta: "true"
     /v1/licenses/devices/{deviceUid}:
         get:
-            description: Retrieves the device licensing information for a specific device identified by UID.
+            description: 'Retrieves the device licensing information for a specific device identified by UID. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
             operationId: getDeviceLicensesByUid
             parameters:
                 - description: The unique identifier (UID) of the device
@@ -5238,10 +5238,10 @@ paths:
             summary: Get Device Licensing Information by Device UID
             tags:
                 - Licensing
-            x-in-dev: "true"
+            x-beta: "true"
     /v1/licenses/devices/export:
         post:
-            description: This is an asynchronous operation to export per-device licenses in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
+            description: 'This is an asynchronous operation to export per-device licenses in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
             operationId: exportDeviceLicenses
             requestBody:
                 content:
@@ -5269,10 +5269,10 @@ paths:
             summary: Export Per-Device Licenses
             tags:
                 - Licensing
-            x-in-dev: "true"
+            x-beta: "true"
     /v1/licenses/smart-accounts:
         get:
-            description: 'Get the Smart Accounts and the number of Virtual Accounts used in this tenant. Note: This endpoint does not display all the Smart Accounts, or number of Virtual Accounts within a Smart Account, to which the customer has access. Only Smart Accounts — and number of Virtual Accounts therein — that have licenses used by devices in this tenant are displayed. '
+            description: 'Get the Smart Accounts and the number of Virtual Accounts used in this tenant. Note: This endpoint does not display all the Smart Accounts, or number of Virtual Accounts within a Smart Account, to which the customer has access. Only Smart Accounts — and number of Virtual Accounts therein — that have licenses used by devices in this tenant are displayed. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
             operationId: getSmartAccounts
             parameters:
                 - description: Number of results to retrieve.
@@ -5326,10 +5326,10 @@ paths:
             summary: Get Smart Accounts used in this tenant.
             tags:
                 - Licensing
-            x-in-dev: "true"
+            x-beta: "true"
     /v1/licenses/smart-accounts/{smartAccountUid}:
         get:
-            description: Get Smart Account identified by UID.
+            description: 'Get Smart Account identified by UID. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
             operationId: getSmartAccountByUid
             parameters:
                 - description: The unique identifier (UID) of the smart account
@@ -5363,10 +5363,10 @@ paths:
             summary: Get Smart Account by UID
             tags:
                 - Licensing
-            x-in-dev: "true"
+            x-beta: "true"
     /v1/licenses/smart-accounts/{smartAccountUid}/virtual-accounts:
         get:
-            description: 'Get the Virtual Accounts for a specific Smart Account used in this tenant. Note: This endpoint does not display all the Virtual Accounts within the Smart Account to which the customer has access. Only Virtual Accounts that have licenses used by devices in this tenant are displayed.'
+            description: 'Get the Virtual Accounts for a specific Smart Account used in this tenant. Note: This endpoint does not display all the Virtual Accounts within the Smart Account to which the customer has access. Only Virtual Accounts that have licenses used by devices in this tenant are displayed. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
             operationId: getVirtualAccounts
             parameters:
                 - description: Number of results to retrieve.
@@ -5427,10 +5427,10 @@ paths:
             summary: Get the Virtual Accounts for a specific Smart Account used in this tenant.
             tags:
                 - Licensing
-            x-in-dev: "true"
+            x-beta: "true"
     /v1/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}:
         get:
-            description: Get Virtual Account identified by UID within a specific Smart Account.
+            description: 'Get Virtual Account identified by UID within a specific Smart Account. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
             operationId: getVirtualAccountByUid
             parameters:
                 - description: The unique identifier (UID) of the smart account
@@ -5471,10 +5471,10 @@ paths:
             summary: Get Virtual Account by UID
             tags:
                 - Licensing
-            x-in-dev: "true"
+            x-beta: "true"
     /v1/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}/licenses:
         get:
-            description: This endpoint returns information on all of the licenses used by devices across this tenant that are registered to Smart License using a token generated in this Virtual Account.
+            description: 'This endpoint returns information on all of the licenses used by devices across this tenant that are registered to Smart License using a token generated in this Virtual Account. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
             operationId: getVirtualAccountLicenses
             parameters:
                 - description: Number of results to retrieve.
@@ -5546,10 +5546,10 @@ paths:
             summary: Get Licenses for a Virtual Account
             tags:
                 - Licensing
-            x-in-dev: "true"
+            x-beta: "true"
     /v1/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}/licenses/export:
         post:
-            description: This endpoint exports all of the licenses used by devices across this tenant that are registered to Smart License using a token generated in this Virtual Account.
+            description: 'This endpoint exports all of the licenses used by devices across this tenant that are registered to Smart License using a token generated in this Virtual Account. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
             operationId: exportVirtualAccountLicenses
             parameters:
                 - description: The unique identifier, represented as a UUID, of the smart account
@@ -5596,7 +5596,7 @@ paths:
             summary: Export Licenses for a Virtual Account
             tags:
                 - Licensing
-            x-in-dev: "true"
+            x-beta: "true"
     /v1/meta:
         get:
             description: Get Meta information about CDO, including the IP addresses of Security Cloud Control services.
@@ -12978,7 +12978,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         FmcAccessPolicyReference:

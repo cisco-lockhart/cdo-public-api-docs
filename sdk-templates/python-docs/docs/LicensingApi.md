@@ -29,7 +29,7 @@ Method | HTTP request | Description
 
 Export Per-Device Licenses
 
-This is an asynchronous operation to export per-device licenses in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
+This is an asynchronous operation to export per-device licenses in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
@@ -110,7 +110,7 @@ Name | Type | Description  | Notes
 
 Export Licenses for a Virtual Account
 
-This endpoint exports all of the licenses used by devices across this tenant that are registered to Smart License using a token generated in this Virtual Account.
+This endpoint exports all of the licenses used by devices across this tenant that are registered to Smart License using a token generated in this Virtual Account. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
@@ -196,7 +196,7 @@ Name | Type | Description  | Notes
 
 Get Device Licenses
 
-Get a paginated list of device licenses.
+Get a paginated list of device licenses. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
@@ -282,7 +282,7 @@ Name | Type | Description  | Notes
 
 Get Device Licensing Information by Device UID
 
-Retrieves the device licensing information for a specific device identified by UID.
+Retrieves the device licensing information for a specific device identified by UID. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
@@ -363,7 +363,7 @@ Name | Type | Description  | Notes
 
 Get Smart Account by UID
 
-Get Smart Account identified by UID.
+Get Smart Account identified by UID. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
@@ -444,7 +444,7 @@ Name | Type | Description  | Notes
 
 Get Smart Accounts used in this tenant.
 
-Get the Smart Accounts and the number of Virtual Accounts used in this tenant. Note: This endpoint does not display all the Smart Accounts, or number of Virtual Accounts within a Smart Account, to which the customer has access. Only Smart Accounts — and number of Virtual Accounts therein — that have licenses used by devices in this tenant are displayed. 
+Get the Smart Accounts and the number of Virtual Accounts used in this tenant. Note: This endpoint does not display all the Smart Accounts, or number of Virtual Accounts within a Smart Account, to which the customer has access. Only Smart Accounts — and number of Virtual Accounts therein — that have licenses used by devices in this tenant are displayed. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
@@ -530,7 +530,7 @@ Name | Type | Description  | Notes
 
 Get Virtual Account by UID
 
-Get Virtual Account identified by UID within a specific Smart Account.
+Get Virtual Account identified by UID within a specific Smart Account. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
@@ -613,7 +613,7 @@ Name | Type | Description  | Notes
 
 Get Licenses for a Virtual Account
 
-This endpoint returns information on all of the licenses used by devices across this tenant that are registered to Smart License using a token generated in this Virtual Account.
+This endpoint returns information on all of the licenses used by devices across this tenant that are registered to Smart License using a token generated in this Virtual Account. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
@@ -704,7 +704,7 @@ Name | Type | Description  | Notes
 
 Get the Virtual Accounts for a specific Smart Account used in this tenant.
 
-Get the Virtual Accounts for a specific Smart Account used in this tenant. Note: This endpoint does not display all the Virtual Accounts within the Smart Account to which the customer has access. Only Virtual Accounts that have licenses used by devices in this tenant are displayed.
+Get the Virtual Accounts for a specific Smart Account used in this tenant. Note: This endpoint does not display all the Virtual Accounts within the Smart Account to which the customer has access. Only Virtual Accounts that have licenses used by devices in this tenant are displayed. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
