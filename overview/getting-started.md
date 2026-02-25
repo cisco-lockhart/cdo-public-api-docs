@@ -58,6 +58,8 @@ them. The server URLs for each region is as follows:
 - APJ: https://api.apj.security.cisco.com/firewall
 - Australia: https://api.au.security.cisco.com/firewall
 - India: https://api.in.security.cisco.com/firewall
+- UAE : https://api.uae.security.cisco.com/firewall
+- FedRAMP: https://manage.secure.cisco/api/rest
 
 > **Note**:
 > If you are still using the old base URLs (`https://edge.<region>.cdo.cisco.com`), they will continue to
