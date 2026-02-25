@@ -15,6 +15,6 @@ Cisco Security Cloud Control Firewall Manager exposes a rich REST API. This docu
 - Execute commands across your entire fleet of devices
 - Build your own dashboard as a Managed Service Provider
 
-## Important note re FedRAMP
+## FedRAMP Availability
 
-All of the Security Cloud Control Firewall Manager APIs, except for the MSP APIs, are available on FedRAMP at https://manage.secure.cisco/api/rest.
+All Security Cloud Control Firewall Manager APIs are available on FedRAMP at https://manage.secure.cisco/api/rest, with the exception of the MSP APIs.
