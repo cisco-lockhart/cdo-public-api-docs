@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **dedicated_cd_fmc_instance** | **bool** | Indicates whether the tenant&#39;s provisioned cdFMC instance is dedicated rather than shared. | [optional] 
 **device_manager_type** | [**EntityType**](EntityType.md) |  | [optional] 
 **fmc_domain_uid** | **str** | (FMC-only) The Domain UID of the FMC. | [optional] 
+**geo_db_version** | **str** | (FMC-only) The version of the Cisco geolocation database (GeoDB). | [optional] 
 **managed_scc_organization_uid** | **str** | The unique identifier, represented as a UUID, of the managed organization on Security Cloud Control that this device manager belongs to. | [optional] 
 **managed_tenant_display_name** | **str** | The display name of the managed tenant in CDO. | [optional] 
 **managed_tenant_name** | **str** | The name of the managed tenant in CDO. | [optional] 
@@ -17,8 +18,10 @@ Name | Type | Description | Notes
 **managed_tenant_uid** | **str** | The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control Firewall Manager that this device manager belongs to. | [optional] 
 **name** | **str** | The name of the device manager in CDO. Device manager names are unique in Security Cloud Control. | 
 **software_version** | **str** | The version of the software running on the device. | [optional] 
+**sru_version** | **str** | (FMC-only) The version of the Intrusion Rules database on the FMC. | [optional] 
 **tenant_uid** | **str** |  | [optional] 
 **uid** | **str** | The unique identifier, represented as a UUID, of the device manager in Security Cloud Control. | [optional] 
+**vdb_version** | **str** | (FMC-only) The version of the Cisco vulnerability database (VDB) on the FMC. | [optional] 
 
 ## Example
 

@@ -11882,7 +11882,7 @@ components:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -11893,7 +11893,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: Percentage completion of the current task being performed.
+                    description: The percentage completion of the current task being performed
                     format: double
                     type: number
             type: object
@@ -12686,58 +12686,14 @@ components:
         DeviceUpgradeStatusDto:
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device.
+                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                hardwareModel:
-                    description: Hardware model of the devices being upgraded.
-                    example: Firepower 2110
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: Name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantUid:
-                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: tenant-uuid-1
-                    format: uuid
-                    type: string
-                name:
-                    description: Name of the device being upgraded.
-                    example: my-firepower
-                    type: string
-                softwareVersionBeforeUpgrade:
-                    description: Software version of the device before the upgrade.
-                    example: 7.2.3
-                    type: string
-                transactionUid:
-                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, of the device being upgraded.
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: Current status of the upgrade run.
-                    enum:
-                        - IN_PROGRESS
-                        - REBUILDING_UPGRADE_CACHE
-                        - PERFORMING_UPGRADE
-                        - UPLOADING_IMAGE
-                        - PERFORMING_READINESS_CHECK
-                        - UPGRADE_STAGED
-                        - UPGRADE_STAGING_FAILED
-                        - UGPRADE_STAGING_FAILED
-                        - UPGRADE_COMPLETED
-                        - UPGRADE_FAILED
-                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -14766,6 +14722,14 @@ components:
                     $ref: '#/components/schemas/ConnectorType'
                     description: The type of the connector that will be used to communicate with the device.
                     example: CDG
+                contextMode:
+                    description: (ASAs only) The context mode of the ASA device.
+                    enum:
+                        - MULTI_CONTEXT_ADMIN
+                        - MULTI_CONTEXT_NON_ADMIN
+                        - SINGLE_CONTEXT
+                    example: SINGLE_CONTEXT
+                    type: string
                 deviceMaintenanceWindow:
                     $ref: '#/components/schemas/DeviceMaintenanceWindow'
                     description: The maintenance window configuration for the device.
@@ -14776,6 +14740,10 @@ components:
                     $ref: '#/components/schemas/EntityType'
                     description: The type of the device.
                     example: CDFMC_MANAGED_FTD
+                firewallMode:
+                    description: (ASAs only) The firewall operating mode of the device.
+                    example: routed
+                    type: string
                 ftdClusterInfo:
                     $ref: '#/components/schemas/FtdClusterInfo'
                     description: '(Device Clusters managed by FMC only) Clustering information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
@@ -14810,6 +14778,11 @@ components:
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
+                merakiPhysicalDevices:
+                    description: (Meraki devices only) The physical devices associated with the Meraki appliance.
+                    items:
+                        $ref: '#/components/schemas/MerakiPhysicalDevice'
+                    type: array
                 modelNumber:
                     description: The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device.
                     type: string
@@ -14939,6 +14912,9 @@ components:
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
+                geoDbVersion:
+                    description: (FMC-only) The version of the Cisco geolocation database (GeoDB).
+                    type: string
                 managedSccOrganizationUid:
                     description: The unique identifier, represented as a UUID, of the managed organization on Security Cloud Control that this device manager belongs to.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
@@ -14969,6 +14945,9 @@ components:
                     description: The version of the software running on the device.
                     example: 7.4.1
                     type: string
+                sruVersion:
+                    description: (FMC-only) The version of the Intrusion Rules database on the FMC.
+                    type: string
                 tenantUid:
                     format: uuid
                     type: string
@@ -14976,6 +14955,9 @@ components:
                     description: The unique identifier, represented as a UUID, of the device manager in Security Cloud Control.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
+                    type: string
+                vdbVersion:
+                    description: (FMC-only) The version of the Cisco vulnerability database (VDB) on the FMC.
                     type: string
             required:
                 - name
