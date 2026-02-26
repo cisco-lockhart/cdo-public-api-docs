@@ -13206,7 +13206,7 @@ components:
         FtdCreateOrUpdateInput:
             properties:
                 deviceType:
-                    description: Specify the type of the FTD. The only supported type of FTD is CDFMC_MANAGED_FTD
+                    description: Specify the type of the FTD. The only supported type of FTD is CDFMC_MANAGED_FTD.
                     enum:
                         - CDFMC_MANAGED_FTD
                     type: string
@@ -13239,8 +13239,12 @@ components:
                     example: My FTD
                     minLength: 1
                     type: string
+                natId:
+                    description: Optional nat id for the device.
+                    example: 123
+                    type: string
                 performanceTier:
-                    description: Specify the performance tier of the FTDv (required only if isVirtual is set to true)
+                    description: Specify the performance tier of the FTDv (required only if isVirtual is set to true).
                     enum:
                         - FTDv5
                         - FTDv10
@@ -13249,6 +13253,10 @@ components:
                         - FTDv50
                         - FTDv100
                         - FTDv
+                    type: string
+                regKey:
+                    description: Optional registration key for the device.
+                    example: 123
                     type: string
                 virtual:
                     description: Indicate whether the FTD is a virtual or a physical device.
@@ -16523,28 +16531,12 @@ components:
             type: object
         SmartAccountDto:
             properties:
-                domain:
-                    description: Account domain for your Smart Account
+                parent:
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                smartAccountId:
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             properties:

@@ -5,12 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**device_type** | **str** | Specify the type of the FTD. The only supported type of FTD is CDFMC_MANAGED_FTD | 
+**device_type** | **str** | Specify the type of the FTD. The only supported type of FTD is CDFMC_MANAGED_FTD. | 
 **fmc_access_policy_uid** | **str** | Specify the unique identifier, represented as a UUID, of the FMC access policy to apply to this device. | 
 **labels** | [**Labels**](Labels.md) |  | [optional] 
 **licenses** | **List[str]** | Specify a set of licenses to apply to the device. | 
 **name** | **str** | Specify a human-readable name for the device. | 
-**performance_tier** | **str** | Specify the performance tier of the FTDv (required only if isVirtual is set to true) | [optional] 
+**nat_id** | **str** | Optional nat id for the device. | [optional] 
+**performance_tier** | **str** | Specify the performance tier of the FTDv (required only if isVirtual is set to true). | [optional] 
+**reg_key** | **str** | Optional registration key for the device. | [optional] 
 **virtual** | **bool** | Indicate whether the FTD is a virtual or a physical device. | [optional] 
 
 ## Example
