@@ -12196,6 +12196,14 @@ components:
                     example: 3af473a8-d70f-4090-bcdb-853981696478
                     format: uuid
                     type: string
+                contextMode:
+                    description: (ASAs only) The operating context mode of the device.
+                    enum:
+                        - MULTI_CONTEXT_ADMIN
+                        - MULTI_CONTEXT_NON_ADMIN
+                        - SINGLE_CONTEXT
+                    example: SINGLE_CONTEXT
+                    type: string
                 dedicatedCdFmcInstance:
                     description: Indicates whether the tenant's provisioned cdFMC instance is dedicated rather than shared.
                     type: boolean
@@ -12223,6 +12231,10 @@ components:
                     $ref: '#/components/schemas/EntityType'
                     description: The type of the device.
                     example: CDFMC_MANAGED_FTD
+                firewallMode:
+                    description: (ASAs only) The firewall operating mode of the device.
+                    example: routed
+                    type: string
                 fmcAccessPolicy:
                     $ref: '#/components/schemas/FmcAccessPolicyReference'
                     description: (FMC-managed FTDs only) The FMC Access Policy applied to the device.
@@ -12245,6 +12257,9 @@ components:
                 ftdPerformanceTier:
                     description: (FTDvs only) The FTDv supports performance-tiered licensing that provides different throughput levels and VPN connection limits based on deployment requirements. This field specifies the performance tier of the FTD.
                     type: string
+                geoDbVersion:
+                    description: (FMC device managers only) The version of the Cisco geolocation database (GeoDB).
+                    type: string
                 hardwareModel:
                     description: (ASAs, FDM-managed FTDs, and FMC-managed FTDs only) The hardware model of the device
                     type: string
@@ -12266,6 +12281,11 @@ components:
                 merakiNetwork:
                     $ref: '#/components/schemas/Network'
                     description: (Meraki devices only) The [Dashboard Network](https://documentation.meraki.com/General_Administration/Organizations_and_Networks/Creating_and_Deleting_Dashboard_Networks) the device is deployed in.
+                merakiPhysicalDevices:
+                    description: (Meraki devices only) The physical devices associated with the Meraki appliance.
+                    items:
+                        $ref: '#/components/schemas/MerakiPhysicalDevice'
+                    type: array
                 modelNumber:
                     description: The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device.
                     type: string
@@ -12307,6 +12327,9 @@ components:
                     description: The version of the software running on the device.
                     example: 7.4.1
                     type: string
+                sruVersion:
+                    description: (FMC device managers only) The version of the Intrusion Rules database on the FMC.
+                    type: string
                 sseDeviceData:
                     $ref: '#/components/schemas/SseDeviceData'
                     description: SSX related info for the registered device
@@ -12331,6 +12354,9 @@ components:
                 universalZtnaSettings:
                     $ref: '#/components/schemas/UniversalZtnaSettings'
                     description: (FMC-managed FTDs only) Universal Zero-Trust Network Access (ZTNA) configuration.
+                vdbVersion:
+                    description: (FMC device managers only) The version of the Cisco vulnerability database (VDB) on the FMC.
+                    type: string
                 ztpOnboardingJobId:
                     description: The unique identifier, represented as a UUID, for an internal job that orchestrates the onboarding of devices through Zero-Touch Provisioning. This applies to devices managed by both on-premises and Cloud-delivered FMC.
                     example: 7e9789b4-8389-4029-933f-ec7e385335ef
@@ -14081,6 +14107,41 @@ components:
                 - ROUTED
                 - PASSTHROUGH
             type: string
+        MerakiPhysicalDevice:
+            description: Physical device information for a Meraki MX appliance.
+            properties:
+                lanIp:
+                    description: The LAN IP address assigned to the Meraki Security Appliance.
+                    example: 192.168.128.1
+                    type: string
+                latitude:
+                    description: The latitude of the location of the Meraki Security Appliance.
+                    format: double
+                    type: number
+                longitude:
+                    description: The longitude of the location of the Meraki Security Appliance.
+                    format: double
+                    type: number
+                model:
+                    description: The model of the Meraki Security Appliance.
+                    example: MX68
+                    type: string
+                notes:
+                    description: Freeform text notes describing the Meraki Security Appliance.
+                    type: string
+                serial:
+                    description: The serial number of the Meraki Security Appliance.
+                    example: Q2WI-XXXX-YY12-ZZ23
+                    type: string
+                wan1Ip:
+                    description: The IP address assigned to the first WAN link of the Meraki Security Appliance.
+                    example: 1.2.3.4
+                    type: string
+                wan2Ip:
+                    description: (Only dual-WAN capable and configured devices) The IP address assigned to the second WAN link of the Meraki Security Appliance.
+                    example: 5.6.7.8
+                    type: string
+            type: object
         Meta:
             properties:
                 cloudConnectorIps:

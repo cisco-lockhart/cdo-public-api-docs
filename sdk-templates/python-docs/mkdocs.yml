@@ -221,6 +221,7 @@ nav:
     - ManagedTenantDto: ManagedTenantDto.md
     - MemoryHealthMetrics: MemoryHealthMetrics.md
     - MerakiDeploymentMode: MerakiDeploymentMode.md
+    - MerakiPhysicalDevice: MerakiPhysicalDevice.md
     - Meta: Meta.md
     - Metric: Metric.md
     - MetricAggregationItem: MetricAggregationItem.md
