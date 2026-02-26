@@ -5,8 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**parent** | **str** | The name of the smart account used to license the device. | [optional] 
-**virtual** | **str** | The name of the virtual account, within the smart account, used to license the device | [optional] 
+**domain** | **str** | Account domain for your Smart Account | [optional] 
+**last_updated_time** | **datetime** | The time, in RFC 3339 format, when information on this Smart Account was last updated | [optional] 
+**smart_account_id** | **str** | Smart Account Identifier | [optional] 
+**uid** | **str** | Unique identifier, represented as a UUID, for your Smart Account | [optional] 
+**virtual_accounts_in_compliance_count** | **int** | Number of Virtual Accounts in this Smart Account with in compliance status | [optional] 
+**virtual_accounts_out_of_compliance_count** | **int** | Number of Virtual Accounts in this Smart Account with out of compliance status | [optional] 
 
 ## Example
 
