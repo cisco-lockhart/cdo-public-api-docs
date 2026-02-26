@@ -9934,6 +9934,8 @@ servers:
       description: AUS
     - url: https://api.in.security.cisco.com/firewall
       description: IN
+    - url: https://api.uae.security.cisco.com/firewall
+      description: UAE
     - url: https://api.int.security.cisco.com/firewall
       description: Staging
     - url: https://scale.manage.security.cisco.com/api/rest
