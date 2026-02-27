@@ -5190,6 +5190,8 @@ paths:
                     description: List of device licenses
                 "401":
                     $ref: '#/components/responses/http401Unauthorised'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
                 "500":
                     content:
                         application/json:
@@ -5227,6 +5229,8 @@ paths:
                     content:
                         application/json: {}
                     description: Device licensing information not found for the specified device UID
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
                 "500":
                     content:
                         application/json:
@@ -5258,6 +5262,8 @@ paths:
                     description: Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the <code>entityUrl</code> field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file.
                 "401":
                     $ref: '#/components/responses/http401Unauthorised'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
                 "500":
                     content:
                         application/json:
@@ -5315,6 +5321,8 @@ paths:
                     description: List of Smart Accounts
                 "401":
                     $ref: '#/components/responses/http401Unauthorised'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
                 "500":
                     content:
                         application/json:
@@ -5352,6 +5360,8 @@ paths:
                     content:
                         application/json: {}
                     description: Smart Account not found for the specified UID
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
                 "500":
                     content:
                         application/json:
@@ -5416,6 +5426,8 @@ paths:
                     description: List of Virtual Accounts
                 "401":
                     $ref: '#/components/responses/http401Unauthorised'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
                 "500":
                     content:
                         application/json:
@@ -5460,6 +5472,8 @@ paths:
                     content:
                         application/json: {}
                     description: Virtual Account not found for the specified UID
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
                 "500":
                     content:
                         application/json:
@@ -5535,6 +5549,8 @@ paths:
                     content:
                         application/json: {}
                     description: Virtual Account with UID not found within the given Smart Account.
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
                 "500":
                     content:
                         application/json:
@@ -5585,6 +5601,8 @@ paths:
                     content:
                         application/json: {}
                     description: Virtual Account with UID not found within the given Smart Account.
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
                 "500":
                     content:
                         application/json:

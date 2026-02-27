@@ -101,6 +101,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **202** | Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the &lt;code&gt;entityUrl&lt;/code&gt; field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file. |  -  |
 **401** | Request not authorized. |  -  |
+**405** | Method not allowed. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -187,6 +188,7 @@ Name | Type | Description  | Notes
 **202** | Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the &lt;code&gt;entityUrl&lt;/code&gt; field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file. |  -  |
 **401** | Request not authorized. |  -  |
 **404** | Virtual Account with UID not found within the given Smart Account. |  -  |
+**405** | Method not allowed. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -273,6 +275,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | List of device licenses |  -  |
 **401** | Request not authorized. |  -  |
+**405** | Method not allowed. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -354,6 +357,7 @@ Name | Type | Description  | Notes
 **200** | Device licensing information for specified device UID |  -  |
 **401** | Request not authorized. |  -  |
 **404** | Device licensing information not found for the specified device UID |  -  |
+**405** | Method not allowed. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -435,6 +439,7 @@ Name | Type | Description  | Notes
 **200** | Smart Account for specified UID |  -  |
 **401** | Request not authorized. |  -  |
 **404** | Smart Account not found for the specified UID |  -  |
+**405** | Method not allowed. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -521,6 +526,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | List of Smart Accounts |  -  |
 **401** | Request not authorized. |  -  |
+**405** | Method not allowed. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -604,6 +610,7 @@ Name | Type | Description  | Notes
 **200** | Virtual Account for specified UID |  -  |
 **401** | Request not authorized. |  -  |
 **404** | Virtual Account not found for the specified UID |  -  |
+**405** | Method not allowed. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -695,6 +702,7 @@ Name | Type | Description  | Notes
 **200** | List of licenses for the specified Virtual Account. |  -  |
 **401** | Request not authorized. |  -  |
 **404** | Virtual Account with UID not found within the given Smart Account. |  -  |
+**405** | Method not allowed. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -783,6 +791,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | List of Virtual Accounts |  -  |
 **401** | Request not authorized. |  -  |
+**405** | Method not allowed. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
