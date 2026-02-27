@@ -24,6 +24,7 @@ Method | HTTP request | Description
 [**get_msp_managed_tenants_attribute_values**](MSPTenantManagementApi.md#get_msp_managed_tenants_attribute_values) | **GET** /v1/msp/tenants/attribute-values | Get distinct attribute values for MSP-managed tenants
 [**provision_cd_fmc_for_tenant_in_msp_portal**](MSPTenantManagementApi.md#provision_cd_fmc_for_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/cdfmc | Provision cdFMC for Security Cloud Control tenant in MSP Portal
 [**remove_tenant_from_msp_portal**](MSPTenantManagementApi.md#remove_tenant_from_msp_portal) | **DELETE** /v1/msp/tenants/{tenantUid} | Remove tenant from MSP Portal
+[**revoke_tenant_from_msp_portal**](MSPTenantManagementApi.md#revoke_tenant_from_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/revoke | Revoke manager -&gt; managed relationship between tenant and MSP Portal
 [**update_msp_tenant_api_token**](MSPTenantManagementApi.md#update_msp_tenant_api_token) | **PATCH** /v1/msp/tenants/{managedTenantUid} | Update API Token for MSP Managed Tenant
 
 
@@ -858,7 +859,7 @@ Name | Type | Description  | Notes
 
 Remove tenant from MSP Portal
 
-Removes a tenant currently associated with the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal.
+Removes a tenant currently associated with the MSP Portal. Note: this endpoint can only be executed by a super-admin in the MSP Portal. This endpoint is deprecated because it can take over 30 seconds to perform all of the revocation actions. Use the POST /tenants/{tenantUid}/revoke endpoint instead.
 
 ### Example
 
@@ -925,6 +926,88 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | No Content |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **revoke_tenant_from_msp_portal**
+> CdoTransaction revoke_tenant_from_msp_portal(tenant_uid)
+
+Revoke manager -> managed relationship between tenant and MSP Portal
+
+Revokes the manager-managed relationship between a tenant and the MSP Portal. This removes the tenant from the MSP Portal but does not delete the tenant itself. To delete the tenant, contact Cisco TAC. This endpoint can only be executed by a super-admin in the MSP Portal.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.MSPTenantManagementApi(api_client)
+    tenant_uid = 'tenant_uid_example' # str | The unique identifier, represented as a UUID, of the tenant in Security Cloud Control.
+
+    try:
+        # Revoke manager -> managed relationship between tenant and MSP Portal
+        api_response = api_instance.revoke_tenant_from_msp_portal(tenant_uid)
+        print("The response of MSPTenantManagementApi->revoke_tenant_from_msp_portal:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling MSPTenantManagementApi->revoke_tenant_from_msp_portal: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tenant_uid** | **str**| The unique identifier, represented as a UUID, of the tenant in Security Cloud Control. | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Security Cloud Control Transaction object that can be used to track the status of the operation. |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
