@@ -11314,6 +11314,7 @@ components:
                         - CREATE_SDC
                         - SEND_AI_ASSISTANT_MESSAGE
                         - MSP_CREATE_TENANT
+                        - MSP_REVOKE_TENANT_MSP_PORTAL_RELATIONSHIP
                         - MSP_ADD_USERS_TO_TENANT
                         - MSP_ADD_USER_GROUPS_TO_TENANT
                         - MSP_DELETE_USERS_FROM_TENANT
