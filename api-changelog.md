@@ -43,7 +43,7 @@ Please speak to your Cisco account team or Cisco TAC to enable this feature.
 - [Device](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-devices/) records now include `contextMode` and `firewallMode` fields for ASA devices.
 - [Device](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-devices/) records now include `merakiPhysicalDevices` for Meraki devices, providing physical appliance details such as model, serial number, LAN/WAN IPs, and geolocation.
 - [Device manager](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-managers/) records now include `geoDbVersion`, `sruVersion`, and `vdbVersion` fields for FMC device managers.
-- [FTD onboarding](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/onboard-ftd/) now supports optional `natId` and `regKey` fields. If these fields are specified, SCC Firewall Manager will not autogenerate them.
+- [FTD onboarding](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/onboard-ftd-device/) now supports optional `natId` and `regKey` fields. If these fields are specified, SCC Firewall Manager will not autogenerate them.
 
 ### Object Management
 - Unified objects now include an `objectVersion` field.
