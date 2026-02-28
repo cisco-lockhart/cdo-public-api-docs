@@ -1,9 +1,10 @@
-# Version 1.18.0 (2026-02-27)
+# Version 1.18.0 (2026-02-28)
 
 ## Added
 
 ### MSP
 - Endpoint to [bulk update settings for MSP-managed tenants](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/bulk-update-msp-tenant-settings/) (`PATCH /v1/msp/tenants/settings`), allowing MSP super-admins to enable or disable ASA health metrics collection across multiple tenants.
+- Endpoint to [revoke a tenant from the MSP Portal](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/revoke-tenant-from-msp-portal/) (`POST /v1/msp/tenants/{tenantUid}/revoke`). This removes the manager-managed relationship between the tenant and the MSP Portal without deleting the tenant.
 - [MSP-managed tenant](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/mspmanagedtenant/) records now include `complianceStatus` field indicating the licensing compliance status of the tenant.
 - MSP-managed [devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-devices/), [device managers](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-device-managers/), [cloud services](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-cloud-services/), and [templates](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-templates/) now include the unique identifier of the managed tenant in Security Cloud Control (`managedSccOrganizationUid`).
 
@@ -36,6 +37,12 @@ Please speak to your Cisco account team or Cisco TAC to enable this feature.
 - Endpoint to [export licenses for a Virtual Account](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/export-licenses-for-a-virtual-account/) to CSV (`POST /v1/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}/licenses/export`).
 
 
+### Inventory
+- [Device](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-devices/) records now include `contextMode` and `firewallMode` fields for ASA devices.
+- [Device](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-devices/) records now include `merakiPhysicalDevices` for Meraki devices, providing physical appliance details such as model, serial number, LAN/WAN IPs, and geolocation.
+- [Device manager](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-managers/) records now include `geoDbVersion`, `sruVersion`, and `vdbVersion` fields for FMC device managers.
+- [FTD onboarding](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/onboard-ftd/) now supports optional `natId` and `regKey` fields. If these fields are specified, SCC Firewall Manager will not autogenerate them.
+
 ### Object Management
 - Unified objects now include an `objectVersion` field.
 
@@ -44,8 +51,19 @@ Please speak to your Cisco account team or Cisco TAC to enable this feature.
 ### Inventory
 - Device onboarding now supports IPv6 addresses in the format `[host]:port`.
 
+### Device Upgrades
+- [Device upgrade status](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-upgrade-run/) responses now include additional fields: `hardwareModel`, `name`, `softwareVersionBeforeUpgrade`, `upgradeRunStatus`, `transactionUid`, and managed tenant information (`managedTenantUid`, `managedTenantName`, `managedTenantDisplayName`).
+
+### Licensing
+- Added `401 Unauthorized` and `405 Method Not Allowed` error responses across all Licensing and MSP Licensing endpoints for improved error handling consistency.
+
 ### Transactions
 - Added new transaction types: `MSP_UPDATE_TENANT_SETTINGS` and `SYNC_POLICIES`.
+
+## Deprecations
+
+### MSP
+- The `DELETE /v1/msp/tenants/{tenantUid}` endpoint is now deprecated. Use `POST /v1/msp/tenants/{tenantUid}/revoke` instead, which performs the revocation asynchronously and returns a transaction for tracking.
 
 # Version 1.17.0 (2026-02-05)
 
