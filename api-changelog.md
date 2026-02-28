@@ -3,9 +3,9 @@
 ## Added
 
 ### MSP
-- Endpoint to [bulk update settings for MSP-managed tenants](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/bulk-update-msp-tenant-settings/) (`PATCH /v1/msp/tenants/settings`), allowing MSP super-admins to enable or disable ASA health metrics collection across multiple tenants.
-- Endpoint to [revoke a tenant from the MSP Portal](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/revoke-tenant-from-msp-portal/) (`POST /v1/msp/tenants/{tenantUid}/revoke`). This removes the manager-managed relationship between the tenant and the MSP Portal without deleting the tenant.
-- [MSP-managed tenant](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/mspmanagedtenant/) records now include `complianceStatus` field indicating the licensing compliance status of the tenant.
+- Endpoint to [bulk update settings for MSP-managed tenants](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/bulk-update-settings-for-security-cloud-control-tenants-managed-by-msp-portal) (`PATCH /v1/msp/tenants/settings`), allowing MSP super-admins to enable or disable ASA health metrics collection across multiple tenants.
+- Endpoint to [revoke a tenant from the MSP Portal](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/revoke-manager-managed-relationship-between-tenant-and-msp-portal/) (`POST /v1/msp/tenants/{tenantUid}/revoke`). This removes the manager-managed relationship between the tenant and the MSP Portal without deleting the tenant.
+- [MSP-managed tenant](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/mspmanagedtenantdto/) records now include `complianceStatus` field indicating the licensing compliance status of the tenant.
 - MSP-managed [devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-devices/), [device managers](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-device-managers/), [cloud services](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-cloud-services/), and [templates](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-templates/) now include the unique identifier of the managed tenant in Security Cloud Control (`managedSccOrganizationUid`).
 
 #### MSP Licensing Endpoints (limited availability)
@@ -16,11 +16,12 @@ Please speak to your Cisco account team or Cisco TAC to enable this feature.
 - Endpoint to [get licenses for an MSP-managed device by UID](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-licenses-for-msp-managed-device/) (`GET /v1/msp/licenses/devices/{mspManagedDeviceUid}`).
 - Endpoint to [export licenses for MSP-managed devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/export-licenses-for-msp-managed-devices/) to CSV (`POST /v1/msp/licenses/devices/export`).
 - Endpoint to [get Smart Accounts used by MSP-managed tenants](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-smart-accounts-used-by-msp-managed-tenants/) (`GET /v1/msp/licenses/smart-accounts`).
-- Endpoint to [get an MSP Smart Account by UID](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-smart-account-by-uid/) (`GET /v1/msp/licenses/smart-accounts/{smartAccountUid}`).
-- Endpoint to [get Virtual Accounts for an MSP Smart Account](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-virtual-accounts/) (`GET /v1/msp/licenses/smart-accounts/{smartAccountUid}/virtual-accounts`).
-- Endpoint to [get an MSP Virtual Account by UID](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-virtual-account-by-uid/) (`GET /v1/msp/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}`).
-- Endpoint to [get licenses for an MSP Virtual Account](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-licenses-for-msp-virtual-account/) (`GET /v1/msp/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}/licenses`).
-- Endpoint to [export licenses for an MSP Virtual Account](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/export-licenses-for-msp-virtual-account/) to CSV (`POST /v1/msp/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}/licenses/export`)
+- Endpoint to [get an MSP Smart Account by UID](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/msp-licensing-get-smart-account-by-uid/) (`GET /v1/msp/licenses/smart-accounts/{smartAccountUid}`).
+- Endpoint to [get Virtual Accounts for an MSP Smart Account](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-the-virtual-accounts-for-a-specific-smart-account-used-by-msp-managed-tenants) (`GET /v1/msp/licenses/smart-accounts/{smartAccountUid}/virtual-accounts`).
+- Endpoint to [get an MSP Virtual Account by UID](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/msp-licensing-get-virtual-account-by-uid/) (`GET /v1/msp/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}`).
+- Endpoint to [get licenses for an MSP Virtual Account](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/msp-licensing-get-licenses-for-a-virtual-account/) (`GET /v1/msp/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}/licenses`).
+- Endpoint to [export licenses for an MSP Virtual Account](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/export-licenses-for-a-msp-managed-virtual-account) to CSV (`POST /v1/msp/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}/licenses/export`)
+- Endpoint to [export licenses for MSP-Managed Devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/export-licenses-for-msp-managed-devices/) to CSV (`POST /v1/msp/licenses/devices/export`)
   
 ### Licensing (Limited Availability)
 
@@ -29,12 +30,13 @@ Please speak to your Cisco account team or Cisco TAC to enable this feature.
 - Endpoint to [get device licenses](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-licenses/) (`GET /v1/licenses/devices`).
 - Endpoint to [get device licensing information by device UID](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-licensing-information-by-device-uid/) (`GET /v1/licenses/devices/{deviceUid}`).
 - Endpoint to [export per-device licenses](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/export-per-device-licenses/) to CSV (`POST /v1/licenses/devices/export`).
-- Endpoint to [get Smart Accounts](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-smart-accounts/) used in a tenant (`GET /v1/licenses/smart-accounts`).
+- Endpoint to [get Smart Accounts](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-smart-accounts-used-in-this-tenant/) used in a tenant (`GET /v1/licenses/smart-accounts`).
 - Endpoint to [get a Smart Account by UID](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-smart-account-by-uid/) (`GET /v1/licenses/smart-accounts/{smartAccountUid}`).
-- Endpoint to [get Virtual Accounts for a Smart Account](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-virtual-accounts/) (`GET /v1/licenses/smart-accounts/{smartAccountUid}/virtual-accounts`).
+- Endpoint to [get Virtual Accounts for a Smart Account](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-the-virtual-accounts-for-a-specific-smart-account-used-in-this-tenant/) (`GET /v1/licenses/smart-accounts/{smartAccountUid}/virtual-accounts`).
 - Endpoint to [get a Virtual Account by UID](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-virtual-account-by-uid/) (`GET /v1/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}`).
 - Endpoint to [get licenses for a Virtual Account](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-licenses-for-a-virtual-account/) (`GET /v1/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}/licenses`).
 - Endpoint to [export licenses for a Virtual Account](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/export-licenses-for-a-virtual-account/) to CSV (`POST /v1/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}/licenses/export`).
+- Endpoint to [export per-device licenses](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/export-per-device-licenses/) to CSV (`POST /v1/licenses/devices/export`)
 
 
 ### Inventory
