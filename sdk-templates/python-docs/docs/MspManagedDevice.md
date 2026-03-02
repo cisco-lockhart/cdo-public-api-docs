@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **asa_failover_mate** | [**AsaFailoverMate**](AsaFailoverMate.md) |  | [optional] 
 **asa_failover_mode** | [**AsaFailoverMode**](AsaFailoverMode.md) |  | [optional] 
 **asa_failover_state** | **str** | (High Availability ASAs only) Failover state of this device. | [optional] 
+**asdm_version** | **str** | (ASAs only) Version of the ASDM device manager running on the device. | [optional] 
 **certificate_expiry_date** | **datetime** | (ASAs and FDM-managed FTDs only) Expiration date of the certificate used on the management interface of the device. | [optional] 
 **chassis_serial** | **str** | The serial number on the chassis of the device (ASA-only). This is typically used to type up to Cisco SmartNet, and is not the same as the serial number. | [optional] 
 **config_state** | [**ConfigState**](ConfigState.md) |  | [optional] 
