@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **scc_organization_uid** | **str** | The unique identifier of the organization in Security Cloud Control Firewall Platform. This is different to the unique identifier used in Security Cloud Control Firewall Manager. | [optional] 
 **tenant_pay_type** | **str** | The pay type of the tenant. | [optional] 
 **uid** | **str** | The unique identifier of the tenant in Security Cloud Control Firewall Manager. | 
+**virtual_accounts** | [**List[MspManagedTenantVirtualAccountDto]**](MspManagedTenantVirtualAccountDto.md) | The list of virtual accounts associated with this managed tenant. | [optional] 
 
 ## Example
 
