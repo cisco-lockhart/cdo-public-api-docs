@@ -56,6 +56,8 @@ servers:
    description: Scale
  - url: https://ci.manage.security.cisco.com/api/rest
    description: CI
+ - url: https://devfed.cdo.cisco.com/api/rest
+   description: Devfed
  - url: https://manage.dev.secure.cisco/api/rest
    description: Devf9
  - url: https://manage.stg.secure.cisco/api/rest
