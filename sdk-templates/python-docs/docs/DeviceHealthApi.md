@@ -15,8 +15,11 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_asa_health_metrics**](DeviceHealthApi.md#get_asa_health_metrics) | **GET** /v1/inventory/devices/asas/health/metrics | Get time-series health metrics for one or more ASA devices
 [**get_asa_interface_health_metrics**](DeviceHealthApi.md#get_asa_interface_health_metrics) | **GET** /v1/inventory/devices/asas/health/{deviceUid}/interfaces | Get time-series interface metrics for an ASA device
+[**get_ftd_health_metrics**](DeviceHealthApi.md#get_ftd_health_metrics) | **GET** /v1/inventory/devices/ftds/health/metrics | Get time-series health metrics for one or more FTD devices
 [**opt_in_to_asa_health_metrics**](DeviceHealthApi.md#opt_in_to_asa_health_metrics) | **POST** /v1/inventory/devices/asas/health/metrics | Opt in to ASA Health Metrics
+[**opt_in_to_ftd_health_metrics**](DeviceHealthApi.md#opt_in_to_ftd_health_metrics) | **POST** /v1/inventory/devices/ftds/health/metrics | Opt in to FTD Health Metrics
 [**opt_out_of_asa_health_metrics**](DeviceHealthApi.md#opt_out_of_asa_health_metrics) | **DELETE** /v1/inventory/devices/asas/health/metrics | Opt out of ASA Health Metrics
+[**opt_out_of_ftd_health_metrics**](DeviceHealthApi.md#opt_out_of_ftd_health_metrics) | **DELETE** /v1/inventory/devices/ftds/health/metrics | Opt out of FTD Health Metrics
 
 
 # **get_asa_health_metrics**
@@ -213,6 +216,102 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_ftd_health_metrics**
+> MetricsResponse get_ftd_health_metrics(start=start, end=end, time_range=time_range, limit=limit, offset=offset, device_uids=device_uids, metrics=metrics)
+
+Get time-series health metrics for one or more FTD devices
+
+Returns time-series metrics such as CPU, memory, disk, connections, and environment data over a specified time range. Supports filtering by device and metric. Pagination applies only when device UIDs are not specified.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.metrics_response import MetricsResponse
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.DeviceHealthApi(api_client)
+    start = '2025-04-05T00:00:00Z' # str | Start of the time range (ISO 8601 format). (optional)
+    end = '2025-04-05T04:00:00Z' # str | End of the time range (ISO 8601 format). (optional)
+    time_range = '10m' # str | Relative time range (mutually exclusive with start/end). Data is collected every 10 minutes, so shorter time ranges may return fewer data points. (optional)
+    limit = 'limit_example' # str | Maximum number of device records to return (used only when no deviceUids are provided). (optional)
+    offset = 'offset_example' # str | Offset for pagination (used only when no deviceUids are provided). (optional)
+    device_uids = ['256461f6-bd60-11ef-8beb-6cf1610cf55d,41a1d57b-ffc2-49aa-933b-440cdd76b2fc'] # List[str] | Comma-separated list of device UIDs to query. Max 50. If omitted, results are paginated. (optional)
+    metrics = 'cpu,mem' # str | Comma-separated list of metrics to return (e.g. cpu, mem). Returns all if omitted. (optional)
+
+    try:
+        # Get time-series health metrics for one or more FTD devices
+        api_response = api_instance.get_ftd_health_metrics(start=start, end=end, time_range=time_range, limit=limit, offset=offset, device_uids=device_uids, metrics=metrics)
+        print("The response of DeviceHealthApi->get_ftd_health_metrics:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceHealthApi->get_ftd_health_metrics: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **start** | **str**| Start of the time range (ISO 8601 format). | [optional] 
+ **end** | **str**| End of the time range (ISO 8601 format). | [optional] 
+ **time_range** | **str**| Relative time range (mutually exclusive with start/end). Data is collected every 10 minutes, so shorter time ranges may return fewer data points. | [optional] 
+ **limit** | **str**| Maximum number of device records to return (used only when no deviceUids are provided). | [optional] 
+ **offset** | **str**| Offset for pagination (used only when no deviceUids are provided). | [optional] 
+ **device_uids** | [**List[str]**](str.md)| Comma-separated list of device UIDs to query. Max 50. If omitted, results are paginated. | [optional] 
+ **metrics** | **str**| Comma-separated list of metrics to return (e.g. cpu, mem). Returns all if omitted. | [optional] 
+
+### Return type
+
+[**MetricsResponse**](MetricsResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully retrieved time-series metrics for one or more FTD devices. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**404** | Entity not found. |  -  |
+**405** | Method not allowed. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **opt_in_to_asa_health_metrics**
 > CdoTransaction opt_in_to_asa_health_metrics()
 
@@ -293,6 +392,83 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **opt_in_to_ftd_health_metrics**
+> opt_in_to_ftd_health_metrics()
+
+Opt in to FTD Health Metrics
+
+Allow Security Cloud Control Firewall Manager to collect health metrics for FTDs in this tenant.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.DeviceHealthApi(api_client)
+
+    try:
+        # Opt in to FTD Health Metrics
+        api_instance.opt_in_to_ftd_health_metrics()
+    except Exception as e:
+        print("Exception when calling DeviceHealthApi->opt_in_to_ftd_health_metrics: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | No Content |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**404** | Entity not found. |  -  |
+**405** | Method not allowed. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **opt_out_of_asa_health_metrics**
 > CdoTransaction opt_out_of_asa_health_metrics()
 
@@ -369,6 +545,83 @@ This endpoint does not need any parameter.
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
 **404** | Entity not found. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **opt_out_of_ftd_health_metrics**
+> opt_out_of_ftd_health_metrics()
+
+Opt out of FTD Health Metrics
+
+Allows a tenant to opt out of receiving health metrics for their FTDs.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.DeviceHealthApi(api_client)
+
+    try:
+        # Opt out of FTD Health Metrics
+        api_instance.opt_out_of_ftd_health_metrics()
+    except Exception as e:
+        print("Exception when calling DeviceHealthApi->opt_out_of_ftd_health_metrics: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | No Content |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**404** | Entity not found. |  -  |
+**405** | Method not allowed. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

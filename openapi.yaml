@@ -3765,6 +3765,162 @@ paths:
             summary: (cdFMC-managed FTDs only) Deploy changes to multiple FTD devices
             tags:
                 - Inventory
+    /v1/inventory/devices/ftds/health/metrics:
+        delete:
+            description: Allows a tenant to opt out of receiving health metrics for their FTDs.
+            operationId: optOutOfFtdHealthMetrics
+            responses:
+                "204":
+                    description: No Content
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Opt out of FTD Health Metrics
+            tags:
+                - Device Health
+            x-in-dev: "true"
+        get:
+            description: Returns time-series metrics such as CPU, memory, disk, connections, and environment data over a specified time range. Supports filtering by device and metric. Pagination applies only when device UIDs are not specified.
+            operationId: getFtdHealthMetrics
+            parameters:
+                - description: Start of the time range (ISO 8601 format).
+                  example: 2025-04-05T00:00:00Z
+                  in: query
+                  name: start
+                  required: false
+                  schema:
+                    type: string
+                - description: End of the time range (ISO 8601 format).
+                  example: 2025-04-05T04:00:00Z
+                  in: query
+                  name: end
+                  required: false
+                  schema:
+                    type: string
+                - description: Relative time range (mutually exclusive with start/end). Data is collected every 10 minutes, so shorter time ranges may return fewer data points.
+                  example: 10m
+                  in: query
+                  name: timeRange
+                  required: false
+                  schema:
+                    enum:
+                        - 10m
+                        - 30m
+                        - 1h
+                        - 24h
+                        - 7d
+                    type: string
+                - description: Maximum number of device records to return (used only when no deviceUids are provided).
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 50
+                    minimum: 0
+                    type: string
+                - description: Offset for pagination (used only when no deviceUids are provided).
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: Comma-separated list of device UIDs to query. Max 50. If omitted, results are paginated.
+                  example: 256461f6-bd60-11ef-8beb-6cf1610cf55d,41a1d57b-ffc2-49aa-933b-440cdd76b2fc
+                  in: query
+                  name: deviceUids
+                  required: false
+                  schema:
+                    items:
+                        format: uuid
+                        type: string
+                    maxItems: 50
+                    minItems: 0
+                    type: array
+                    uniqueItems: true
+                - description: Comma-separated list of metrics to return (e.g. cpu, mem). Returns all if omitted.
+                  example: cpu,mem
+                  in: query
+                  name: metrics
+                  required: false
+                  schema:
+                    enum:
+                        - cpu
+                        - mem
+                        - disk
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MetricsResponse'
+                    description: Successfully retrieved time-series metrics for one or more FTD devices.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get time-series health metrics for one or more FTD devices
+            tags:
+                - Device Health
+            x-in-dev: "true"
+        post:
+            description: Allow Security Cloud Control Firewall Manager to collect health metrics for FTDs in this tenant.
+            operationId: optInToFtdHealthMetrics
+            responses:
+                "204":
+                    description: No Content
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Opt in to FTD Health Metrics
+            tags:
+                - Device Health
+            x-in-dev: "true"
     /v1/inventory/devices/ftds/register:
         post:
             description: Complete registration of an FTD device managed by an FMC to the Security Cloud Control tenant. Call this API endpoint after you have created an FTD and pasted the generated CLI output in the FTD. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
@@ -13148,7 +13304,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -16708,28 +16864,12 @@ components:
             type: object
         SmartAccountDto:
             properties:
-                domain:
-                    description: Account domain for your Smart Account
+                parent:
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                smartAccountId:
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             properties:
