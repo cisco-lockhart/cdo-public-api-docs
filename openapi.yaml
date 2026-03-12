@@ -12485,6 +12485,9 @@ components:
                     $ref: '#/components/schemas/EntityType'
                     description: The type of the device.
                     example: CDFMC_MANAGED_FTD
+                edgeFtdRegistrationInfo:
+                    $ref: '#/components/schemas/EdgeFtdRegistrationInfo'
+                    description: (FTDs with public IPs managed by cdFMC) Information on the FTD. This information will only be available if you are onboarding the FTD using the cdFMC-driven CLI flow (this is typically the case when you are spinning up an Azure FTDv).
                 firewallMode:
                     description: (ASAs only) The firewall operating mode of the device.
                     example: routed
@@ -13050,6 +13053,21 @@ components:
                     type: array
                     uniqueItems: true
             type: object
+        EdgeFtdRegistrationInfo:
+            properties:
+                hostname:
+                    description: The FQDN or public IP of the FTD being registered to the cdFMC. This hostname must be accessible from the public internet, as the cdFMC will use it to initiate the connection to the FTD. This is only present when the FTD is registered using the cdFMC-triggered CLI flow (as opposed to the default flow, where the FTD connects to the cdFMC).
+                    example: 18.2.25.7
+                    type: string
+                natId:
+                    description: The NAT ID used during cdFMC-triggered registration. This is only present when the FTD is registered using the cdFMC-triggered CLI flow, where the cdFMC initiates the connection to the FTD (as opposed to the default flow, where the FTD connects to the cdFMC).
+                    example: 5Do6FwUaXY4EFlyraC2yVnxodLxhuxxx
+                    type: string
+                regKey:
+                    description: The registration key used to authenticate the cdFMC-triggered registration. This is only present when the FTD is registered using the cdFMC-triggered CLI flow, where the cdFMC initiates the connection to the FTD (as opposed to the default flow, where the FTD connects to the cdFMC).
+                    example: E2jsyiZggyeCfFfCUaMK2kD1a1bxxx
+                    type: string
+            type: object
         EnableCdFmcForTenantRequest:
             properties:
                 dedicatedCdFmcInstance:
@@ -13260,7 +13278,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -13469,6 +13487,10 @@ components:
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
+                ftdHostname:
+                    description: The FQDN or public IP of the FTD being registered to the cdFMC. This hostname must be accessible from the public internet, as the cdFMC will use it to initiate the connection to the FTD. Required when useCdFmcTriggeredRegistration is true; must not be specified otherwise.
+                    example: 18.2.25.7
+                    type: string
                 labels:
                     $ref: '#/components/schemas/Labels'
                     description: Specify a set of labels to identify the device as part of a group. Refer to the CDO documentation for details on how labels are used in Security Cloud Control.
@@ -13494,8 +13516,8 @@ components:
                     minLength: 1
                     type: string
                 natId:
-                    description: Optional nat id for the device.
-                    example: 123
+                    description: The NAT ID used during cdFMC-triggered registration, where the cdFMC initiates the connection to the FTD (as opposed to the default flow, where the FTD connects to the cdFMC). Required when useCdFmcTriggeredRegistration is true; must not be specified otherwise.
+                    example: abc237
                     type: string
                 performanceTier:
                     description: Specify the performance tier of the FTDv (required only if isVirtual is set to true).
@@ -13509,9 +13531,12 @@ components:
                         - FTDv
                     type: string
                 regKey:
-                    description: Optional registration key for the device.
-                    example: 123
+                    description: The registration key used to authenticate the cdFMC-triggered registration, where the cdFMC initiates the connection to the FTD (as opposed to the default flow, where the FTD connects to the cdFMC). Required when useCdFmcTriggeredRegistration is true; must not be specified otherwise.
+                    example: xyz124
                     type: string
+                useCdFmcTriggeredRegistration:
+                    description: If your FTD is publicly accessible, then you can choose to use the cdFMC triggered registration flow. If this field is set to true, the ftdHostname, natId, and regKey fields must be specified.
+                    type: boolean
                 virtual:
                     description: Indicate whether the FTD is a virtual or a physical device.
                     example: true

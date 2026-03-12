@@ -160,6 +160,7 @@ nav:
     - DuoAdminPanelCreateOrUpdateInput: DuoAdminPanelCreateOrUpdateInput.md
     - DuplexType: DuplexType.md
     - DuplicateGroupDto: DuplicateGroupDto.md
+    - EdgeFtdRegistrationInfo: EdgeFtdRegistrationInfo.md
     - EnableCdFmcForTenantRequest: EnableCdFmcForTenantRequest.md
     - Entity: Entity.md
     - EntityType: EntityType.md

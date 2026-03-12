@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **device_role** | [**DeviceRole**](DeviceRole.md) |  | [optional] 
 **device_roles** | [**List[DeviceRole]**](DeviceRole.md) | The roles that this device performs on the network. | [optional] 
 **device_type** | [**EntityType**](EntityType.md) |  | 
+**edge_ftd_registration_info** | [**EdgeFtdRegistrationInfo**](EdgeFtdRegistrationInfo.md) |  | [optional] 
 **firewall_mode** | **str** | (ASAs only) The firewall operating mode of the device. | [optional] 
 **fmc_access_policy** | [**FmcAccessPolicyReference**](FmcAccessPolicyReference.md) |  | [optional] 
 **fmc_domain_uid** | **str** | (FMC device managers only) The unique identifier, represented as a UUID, of the [FMC domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html). | [optional] 
