@@ -72,6 +72,7 @@ nav:
     - AiConversation: AiConversation.md
     - AiMessage: AiMessage.md
     - AiQuestion: AiQuestion.md
+    - AmpWorkspaceDetailsResponse: AmpWorkspaceDetailsResponse.md
     - ApiTokenInfo: ApiTokenInfo.md
     - ApplicationContext: ApplicationContext.md
     - ApplicationContextClassLoader: ApplicationContextClassLoader.md
