@@ -16,7 +16,6 @@ Method | HTTP request | Description
 [**create_object**](ObjectManagementApi.md#create_object) | **POST** /v1/objects | Create Object
 [**create_targets**](ObjectManagementApi.md#create_targets) | **POST** /v1/objects/{uid}/targets | Create Targets
 [**delete_object**](ObjectManagementApi.md#delete_object) | **DELETE** /v1/objects/{uid} | Delete Object
-[**delete_targets**](ObjectManagementApi.md#delete_targets) | **DELETE** /v1/objects/{uid}/targets | Delete Targets
 [**get_duplicate_objects**](ObjectManagementApi.md#get_duplicate_objects) | **GET** /v1/objects/{uid}/duplicates | Get Duplicate Objects
 [**get_issues_count**](ObjectManagementApi.md#get_issues_count) | **GET** /v1/objects/issues-count | Get Issues Count
 [**get_object**](ObjectManagementApi.md#get_object) | **GET** /v1/objects/{uid} | Get Object
@@ -274,90 +273,6 @@ Name | Type | Description  | Notes
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
-**500** | Internal server error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_targets**
-> object delete_targets(uid, target_uuids)
-
-Delete Targets
-
-Delete targets from an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
-
-### Example
-
-* Bearer (JWT) Authentication (bearerAuth):
-
-```python
-import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
-# See configuration.py for a list of all supported configuration parameters.
-configuration = scc_firewall_manager_sdk.Configuration(
-    host = "https://api.us.security.cisco.com/firewall"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): bearerAuth
-configuration = scc_firewall_manager_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = scc_firewall_manager_sdk.ObjectManagementApi(api_client)
-    uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | the unique identifier of the object for which the targets are being removed from.
-    target_uuids = ['[7131daad-e813-4b8f-8f42-be1e241e8cdb, yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy]'] # List[str] | The list of UIDs of the targets being removed.
-
-    try:
-        # Delete Targets
-        api_response = api_instance.delete_targets(uid, target_uuids)
-        print("The response of ObjectManagementApi->delete_targets:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ObjectManagementApi->delete_targets: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **uid** | **str**| the unique identifier of the object for which the targets are being removed from. | 
- **target_uuids** | [**List[str]**](str.md)| The list of UIDs of the targets being removed. | 
-
-### Return type
-
-**object**
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: */*, application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**204** | No content |  -  |
-**400** | Invalid input provided. Check the response for details. |  -  |
-**401** | Request not authorized. |  -  |
-**403** | User does not have sufficient privileges to perform this operation. |  -  |
-**404** | Not found |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

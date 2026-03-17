@@ -8397,57 +8397,6 @@ paths:
             tags:
                 - Object Management
     /v1/objects/{uid}/targets:
-        delete:
-            description: 'Delete targets from an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
-            operationId: deleteTargets
-            parameters:
-                - description: the unique identifier of the object for which the targets are being removed from.
-                  example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                  in: path
-                  name: uid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-                - description: The list of UIDs of the targets being removed.
-                  example: '[7131daad-e813-4b8f-8f42-be1e241e8cdb, yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy]'
-                  in: query
-                  name: targetUuids
-                  required: true
-                  schema:
-                    items:
-                        type: string
-                    type: array
-            responses:
-                "204":
-                    content:
-                        '*/*':
-                            schema:
-                                type: object
-                    description: No content
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "404":
-                    content:
-                        '*/*':
-                            schema:
-                                type: object
-                    description: Not found
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Delete Targets
-            tags:
-                - Object Management
         get:
             description: 'Get targets from an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
             operationId: getTargets
@@ -13324,7 +13273,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -16891,12 +16840,28 @@ components:
             type: object
         SmartAccountDto:
             properties:
-                parent:
-                    description: The name of the smart account used to license the device.
+                domain:
+                    description: Account domain for your Smart Account
                     type: string
-                virtual:
-                    description: The name of the virtual account, within the smart account, used to license the device
+                lastUpdatedTime:
+                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
+                    format: date-time
                     type: string
+                smartAccountId:
+                    description: Smart Account Identifier
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, for your Smart Account
+                    format: uuid
+                    type: string
+                virtualAccountsInComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with in compliance status
+                    format: int32
+                    type: integer
+                virtualAccountsOutOfComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
+                    format: int32
+                    type: integer
             type: object
         SmartAccountsPage:
             properties:
