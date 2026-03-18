@@ -917,7 +917,7 @@ This endpoint does not need any parameter.
 
 Upgrade multiple ASAs across multiple tenants
 
-<p>Asynchronous operation to upgrade multiple ASA devices across managed tenants.</p> <p><strong>Notes:</strong></p> <ul> <li>Maximum of 50 ASA devices per request</li> </ul> <p><strong>Response:</strong></p> <ul> <li>Returns a transaction object to track upgrade operation progress</li> <li>Use the transaction ID or the entity UID to monitor the status of the upgrade</li> </ul>
+<p>Asynchronous operation to upgrade multiple ASA devices across managed tenants.</p> <p><strong>Notes:</strong></p> <ul> <li>Maximum of 50 ASA devices per hardware model per managed tenant per request</li> </ul> <p><strong>Response:</strong></p> <ul> <li>Returns a transaction object to track upgrade operation progress</li> <li>Use the transaction ID or the entity UID to monitor the status of the upgrade</li> </ul>
 
 ### Example
 

@@ -6022,7 +6022,7 @@ paths:
                 <p>Asynchronous operation to upgrade multiple ASA devices across managed tenants.</p>
                 <p><strong>Notes:</strong></p>
                 <ul>
-                <li>Maximum of 50 ASA devices per request</li>
+                <li>Maximum of 50 ASA devices per hardware model per managed tenant per request</li>
                 </ul>
                 <p><strong>Response:</strong></p>
                 <ul>
