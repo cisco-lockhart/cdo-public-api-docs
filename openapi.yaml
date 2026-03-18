@@ -11566,6 +11566,7 @@ components:
                         - EXPORT_TEMPLATES
                         - EXPORT_DEVICE_LICENSES
                         - EXPORT_TENANT_LICENSES
+                        - EXPORT_TENANTS
                         - PROVISION_SDWAN_SAL_RESOURCES
                         - DEPROVISION_SDWAN_SAL_RESOURCES
                         - PROVISION_FIREWALL_SAL_RESOURCES
