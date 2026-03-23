@@ -3000,7 +3000,16 @@ paths:
                 - Command Line Interface
     /v1/inventory/devices/asas/health/{deviceUid}/interfaces:
         get:
-            description: Returns time-series interface metrics - including link status, overruns, and other key performance indicators - over a specified time range. Supports filtering by interface and metric. Pagination applies only when interface UIDs are not specified.
+            description: |-
+                Returns time-series interface metrics - including link status, overruns, and other key performance indicators - over a specified time range. Supports filtering by interface and metric. Pagination applies only when interface UIDs are not specified.
+
+                **Prerequisites:**
+
+                1. Health metrics must be enabled for your tenant. See [Opt In to ASA Health Metrics](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/opt-in-to-asa-health-metrics/).
+                2. Health metrics collection is automatically enabled for all CDG-managed ASAs — no additional action is required for these devices.
+                3. Each SDC-managed ASA device must be individually enabled for health metrics (individually or in bulk) using the [Modify Devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/modify-devices/) endpoint.
+
+                If health metrics are not enabled, this endpoint returns a `422` error.
             operationId: getAsaInterfaceHealthMetrics
             parameters:
                 - description: The unique identifier, represented as a UUID, of the ASA device in Security Cloud Control.
@@ -3010,21 +3019,21 @@ paths:
                   schema:
                     format: uuid
                     type: string
-                - description: Start of the time range (ISO 8601 format).
+                - description: Start of the time range (ISO 8601 format). Required together with `end`. Mutually exclusive with `timeRange`.
                   example: 2025-04-05T00:00:00Z
                   in: query
                   name: start
                   required: false
                   schema:
                     type: string
-                - description: End of the time range (ISO 8601 format).
+                - description: End of the time range (ISO 8601 format). Required together with `start`. Mutually exclusive with `timeRange`.
                   example: 2025-04-05T04:00:00Z
                   in: query
                   name: end
                   required: false
                   schema:
                     type: string
-                - description: Relative time range (mutually exclusive with start/end). Data is collected every 10 minutes, so shorter time ranges may return fewer data points.
+                - description: Relative time range. Mutually exclusive with `start`/`end` — exactly one of `timeRange` or `start`/`end` must be provided. Data is collected every 10 minutes, so shorter time ranges may return fewer data points.
                   example: 10m
                   in: query
                   name: timeRange

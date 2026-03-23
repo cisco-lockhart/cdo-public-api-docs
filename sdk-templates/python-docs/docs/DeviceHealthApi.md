@@ -123,7 +123,7 @@ Name | Type | Description  | Notes
 
 Get time-series interface metrics for an ASA device
 
-Returns time-series interface metrics - including link status, overruns, and other key performance indicators - over a specified time range. Supports filtering by interface and metric. Pagination applies only when interface UIDs are not specified.
+Returns time-series interface metrics - including link status, overruns, and other key performance indicators - over a specified time range. Supports filtering by interface and metric. Pagination applies only when interface UIDs are not specified.  **Prerequisites:**  1. Health metrics must be enabled for your tenant. See [Opt In to ASA Health Metrics](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/opt-in-to-asa-health-metrics/). 2. Health metrics collection is automatically enabled for all CDG-managed ASAs — no additional action is required for these devices. 3. Each SDC-managed ASA device must be individually enabled for health metrics (individually or in bulk) using the [Modify Devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/modify-devices/) endpoint.  If health metrics are not enabled, this endpoint returns a `422` error.
 
 ### Example
 
@@ -156,9 +156,9 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.DeviceHealthApi(api_client)
     device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the ASA device in Security Cloud Control.
-    start = '2025-04-05T00:00:00Z' # str | Start of the time range (ISO 8601 format). (optional)
-    end = '2025-04-05T04:00:00Z' # str | End of the time range (ISO 8601 format). (optional)
-    time_range = '10m' # str | Relative time range (mutually exclusive with start/end). Data is collected every 10 minutes, so shorter time ranges may return fewer data points. (optional)
+    start = '2025-04-05T00:00:00Z' # str | Start of the time range (ISO 8601 format). Required together with `end`. Mutually exclusive with `timeRange`. (optional)
+    end = '2025-04-05T04:00:00Z' # str | End of the time range (ISO 8601 format). Required together with `start`. Mutually exclusive with `timeRange`. (optional)
+    time_range = '10m' # str | Relative time range. Mutually exclusive with `start`/`end` — exactly one of `timeRange` or `start`/`end` must be provided. Data is collected every 10 minutes, so shorter time ranges may return fewer data points. (optional)
     limit = 'limit_example' # str | Maximum number of device records to return (used only when no deviceUids are provided). (optional)
     offset = 'offset_example' # str | Offset for pagination (used only when no deviceUids are provided). (optional)
     interface_uids = 'def6c34a-a5d4-45c1-8d96-820fb00de723,4bc125a0-cf08-4dcc-bfac-45669ba898b0' # str | Comma-separated list of interface UIDs to query. Max 50. If omitted, results are paginated. (optional)
@@ -182,9 +182,9 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **device_uid** | **str**| The unique identifier, represented as a UUID, of the ASA device in Security Cloud Control. | 
- **start** | **str**| Start of the time range (ISO 8601 format). | [optional] 
- **end** | **str**| End of the time range (ISO 8601 format). | [optional] 
- **time_range** | **str**| Relative time range (mutually exclusive with start/end). Data is collected every 10 minutes, so shorter time ranges may return fewer data points. | [optional] 
+ **start** | **str**| Start of the time range (ISO 8601 format). Required together with &#x60;end&#x60;. Mutually exclusive with &#x60;timeRange&#x60;. | [optional] 
+ **end** | **str**| End of the time range (ISO 8601 format). Required together with &#x60;start&#x60;. Mutually exclusive with &#x60;timeRange&#x60;. | [optional] 
+ **time_range** | **str**| Relative time range. Mutually exclusive with &#x60;start&#x60;/&#x60;end&#x60; — exactly one of &#x60;timeRange&#x60; or &#x60;start&#x60;/&#x60;end&#x60; must be provided. Data is collected every 10 minutes, so shorter time ranges may return fewer data points. | [optional] 
  **limit** | **str**| Maximum number of device records to return (used only when no deviceUids are provided). | [optional] 
  **offset** | **str**| Offset for pagination (used only when no deviceUids are provided). | [optional] 
  **interface_uids** | **str**| Comma-separated list of interface UIDs to query. Max 50. If omitted, results are paginated. | [optional] 
