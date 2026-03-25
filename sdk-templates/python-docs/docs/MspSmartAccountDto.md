@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **domain** | **str** | The domain of the smart account. | [optional] 
 **last_updated_time** | **datetime** | The time, in RFC 3339 format, when information on this Smart Account was last updated | [optional] 
 **managed_tenants** | [**List[ManagedTenantDto]**](ManagedTenantDto.md) | The list of managed tenants associated with this Smart Account. | [optional] 
+**name** | **str** | The name of the smart account. | [optional] 
 **smart_account_id** | **str** | The identifier of the smart account, represented as a String, returned by the Smart Account API. | [optional] 
 **uid** | **str** | The unique identifier, represented as a UUID, of the smart account in Security Cloud Control. | [optional] 
 **virtual_accounts_in_compliance_count** | **int** | Number of Virtual Accounts in this Smart Account with IN_COMPLIANCE status | [optional] 
