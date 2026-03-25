@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **domain** | **str** | Account domain for your Smart Account | [optional] 
 **last_updated_time** | **datetime** | The time, in RFC 3339 format, when information on this Smart Account was last updated | [optional] 
+**name** | **str** | Name of the smart account | [optional] 
 **smart_account_id** | **str** | Smart Account Identifier | [optional] 
 **uid** | **str** | Unique identifier, represented as a UUID, for your Smart Account | [optional] 
 **virtual_accounts_in_compliance_count** | **int** | Number of Virtual Accounts in this Smart Account with in compliance status | [optional] 
