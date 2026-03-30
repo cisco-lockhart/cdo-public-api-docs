@@ -13606,6 +13606,7 @@ components:
                         - FTDv50
                         - FTDv100
                         - FTDv
+                        - FTDvU
                     type: string
                 regKey:
                     description: The registration key used to authenticate the cdFMC-triggered registration, where the cdFMC initiates the connection to the FTD (as opposed to the default flow, where the FTD connects to the cdFMC). Required when useCdFmcTriggeredRegistration is true; must not be specified otherwise.
