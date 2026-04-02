@@ -20,7 +20,9 @@ Method | HTTP request | Description
 [**enable_multicloud_defense_for_tenant_in_msp_portal**](MSPTenantManagementApi.md#enable_multicloud_defense_for_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/mcd | Enable Multicloud Defense for Security Cloud Control tenant in MSP Portal
 [**export_msp_managed_tenants**](MSPTenantManagementApi.md#export_msp_managed_tenants) | **POST** /v1/msp/tenants/export | Export MSP-managed Tenants
 [**generate_api_token_for_user_in_tenant**](MSPTenantManagementApi.md#generate_api_token_for_user_in_tenant) | **POST** /v1/msp/tenants/{tenantUid}/users/{apiUserUid}/token | Generate token for API-only user on tenant managed by MSP portal
+[**get_all_msp_managed_tenant_settings**](MSPTenantManagementApi.md#get_all_msp_managed_tenant_settings) | **GET** /v1/msp/tenants/settings | Get Tenant Settings for all Security Cloud Control tenants managed by MSP Portal
 [**get_msp_managed_tenant**](MSPTenantManagementApi.md#get_msp_managed_tenant) | **GET** /v1/msp/tenants/{managedTenantUid} | Get Security Cloud Control tenant managed by MSP Portal
+[**get_msp_managed_tenant_settings**](MSPTenantManagementApi.md#get_msp_managed_tenant_settings) | **GET** /v1/msp/tenants/{managedTenantUid}/settings | Get Tenant Settings for a Security Cloud Control tenant managed by MSP Portal
 [**get_msp_managed_tenants**](MSPTenantManagementApi.md#get_msp_managed_tenants) | **GET** /v1/msp/tenants | Get Security Cloud Control tenants managed by MSP Portal
 [**get_msp_managed_tenants_attribute_values**](MSPTenantManagementApi.md#get_msp_managed_tenants_attribute_values) | **GET** /v1/msp/tenants/attribute-values | Get distinct attribute values for MSP-managed tenants
 [**provision_cd_fmc_for_tenant_in_msp_portal**](MSPTenantManagementApi.md#provision_cd_fmc_for_tenant_in_msp_portal) | **POST** /v1/msp/tenants/{tenantUid}/cdfmc | Provision cdFMC for Security Cloud Control tenant in MSP Portal
@@ -607,6 +609,93 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_all_msp_managed_tenant_settings**
+> MspManagedTenantSettingsDtoPage get_all_msp_managed_tenant_settings(limit=limit, offset=offset, q=q, sort=sort)
+
+Get Tenant Settings for all Security Cloud Control tenants managed by MSP Portal
+
+Get the settings for all Security Cloud Control tenants managed by the MSP Portal.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.msp_managed_tenant_settings_dto_page import MspManagedTenantSettingsDtoPage
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.MSPTenantManagementApi(api_client)
+    limit = 'limit_example' # str | Number of results to retrieve. (optional)
+    offset = 'offset_example' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional)
+    q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
+    sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
+
+    try:
+        # Get Tenant Settings for all Security Cloud Control tenants managed by MSP Portal
+        api_response = api_instance.get_all_msp_managed_tenant_settings(limit=limit, offset=offset, q=q, sort=sort)
+        print("The response of MSPTenantManagementApi->get_all_msp_managed_tenant_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling MSPTenantManagementApi->get_all_msp_managed_tenant_settings: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **str**| Number of results to retrieve. | [optional] 
+ **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] 
+ **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
+ **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
+
+### Return type
+
+[**MspManagedTenantSettingsDtoPage**](MspManagedTenantSettingsDtoPage.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Page of tenant settings objects |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_msp_managed_tenant**
 > MspManagedTenantDto get_msp_managed_tenant(managed_tenant_uid)
 
@@ -683,6 +772,88 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Security Cloud Control tenant object |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**404** | Entity not found. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_msp_managed_tenant_settings**
+> MspManagedTenantSettingsDto get_msp_managed_tenant_settings(managed_tenant_uid)
+
+Get Tenant Settings for a Security Cloud Control tenant managed by MSP Portal
+
+Get the settings for a specific Security Cloud Control tenant managed by the MSP Portal.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.msp_managed_tenant_settings_dto import MspManagedTenantSettingsDto
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.MSPTenantManagementApi(api_client)
+    managed_tenant_uid = 'managed_tenant_uid_example' # str | The unique identifier of the tenant in Security Cloud Control Firewall Manager.
+
+    try:
+        # Get Tenant Settings for a Security Cloud Control tenant managed by MSP Portal
+        api_response = api_instance.get_msp_managed_tenant_settings(managed_tenant_uid)
+        print("The response of MSPTenantManagementApi->get_msp_managed_tenant_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling MSPTenantManagementApi->get_msp_managed_tenant_settings: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **managed_tenant_uid** | **str**| The unique identifier of the tenant in Security Cloud Control Firewall Manager. | 
+
+### Return type
+
+[**MspManagedTenantSettingsDto**](MspManagedTenantSettingsDto.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Tenant settings object |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
 **404** | Entity not found. |  -  |
