@@ -11753,6 +11753,7 @@ components:
                         - UPDATE_DEVICE_BULK
                         - AGENTIC_JOB
                         - IMPORT_FMC_OBJECTS
+                        - NAT_PAO_TRIGGER_PDF_GENERATION
                         - BIDIRECTIONAL_OBJECT_RECONCILIATION
                     example: ONBOARD_ASA
                     type: string
