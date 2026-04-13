@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
     title: Cisco Security Cloud Control Firewall Manager API
-    version: 1.18.0
+    version: 1.19.0
     description: Use the documentation to explore the endpoints Security Cloud Control Firewall Manager has to offer
     contact:
         name: Cisco Security Cloud Control TAC
@@ -2279,6 +2279,110 @@ paths:
             summary: Reconnect ASA device
             tags:
                 - Inventory
+    /v1/inventory/devices/asas/{deviceUid}/secure-client/packages:
+        get:
+            description: Returns Secure Client webdeploy packages installed on an ASA device, including  version, operating system, and CPU architecture.
+            operationId: getAsaSecureClientPackages
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the ASA device in Security Cloud Control.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SecureClientPackagesPage'
+                    description: Secure Client packages retrieved successfully
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: List Secure Client packages installed on an ASA device
+            tags:
+                - Secure Client Management
+            x-beta: "true"
+    /v1/inventory/devices/asas/{deviceUid}/secure-client/packages/{packageUid}:
+        get:
+            description: Returns a single Secure Client webdeploy package installed on an ASA device, including  version, operating system, and CPU architecture.
+            operationId: getAsaSecureClientPackageByUid
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the ASA device in Security Cloud Control.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the Secure Client package.
+                  in: path
+                  name: packageUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SecureClientPackageDto'
+                    description: Secure Client package retrieved successfully
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get a Secure Client package installed on an ASA device by UID
+            tags:
+                - Secure Client Management
+            x-beta: "true"
     /v1/inventory/devices/asas/{deviceUid}/subinterfaces:
         get:
             description: Get a list of the ASA subinterfaces. A subinterface is a logical interface created in a physical interface that allows the ASA to support multiple VLANs by assigning each subinterface to a different VLAN, enabling segmented network traffic over a single physical port.
@@ -12309,7 +12413,7 @@ components:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -12320,7 +12424,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: Percentage completion of the current task being performed.
+                    description: The percentage completion of the current task being performed
                     format: double
                     type: number
             type: object
@@ -13116,58 +13220,14 @@ components:
         DeviceUpgradeStatusDto:
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device.
+                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                hardwareModel:
-                    description: Hardware model of the devices being upgraded.
-                    example: Firepower 2110
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: Name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantUid:
-                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: tenant-uuid-1
-                    format: uuid
-                    type: string
-                name:
-                    description: Name of the device being upgraded.
-                    example: my-firepower
-                    type: string
-                softwareVersionBeforeUpgrade:
-                    description: Software version of the device before the upgrade.
-                    example: 7.2.3
-                    type: string
-                transactionUid:
-                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, of the device being upgraded.
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: Current status of the upgrade run.
-                    enum:
-                        - IN_PROGRESS
-                        - REBUILDING_UPGRADE_CACHE
-                        - PERFORMING_UPGRADE
-                        - UPLOADING_IMAGE
-                        - PERFORMING_READINESS_CHECK
-                        - UPGRADE_STAGED
-                        - UPGRADE_STAGING_FAILED
-                        - UGPRADE_STAGING_FAILED
-                        - UPGRADE_COMPLETED
-                        - UPGRADE_FAILED
-                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -13495,7 +13555,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -16885,6 +16945,59 @@ components:
                     type: integer
                 numRules:
                     description: The number of Cisco Secure Access rules associated with the device.
+                    format: int32
+                    type: integer
+            type: object
+        SecureClientPackageDto:
+            properties:
+                cpuArchitecture:
+                    description: 'The CPU architecture. One of: X86_64, ARM64, UNIVERSAL. null if the filename could not be parsed.'
+                    enum:
+                        - X86_64
+                        - ARM64
+                        - UNIVERSAL
+                    type: string
+                fileName:
+                    description: The filename of the package as stored on the device.
+                    type: string
+                os:
+                    description: 'The operating system. One of: LINUX, MACOS, WINDOWS. null if the filename could not be parsed.'
+                    enum:
+                        - LINUX
+                        - MACOS
+                        - WINDOWS
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the Secure Client package in Security Cloud Control.
+                    format: uuid
+                    type: string
+                version:
+                    description: The version string extracted from the filename. null if the filename could not be parsed.
+                    type: string
+            required:
+                - fileName
+                - uid
+            type: object
+        SecureClientPackagesPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/SecureClientPackageDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
                     format: int32
                     type: integer
             type: object
