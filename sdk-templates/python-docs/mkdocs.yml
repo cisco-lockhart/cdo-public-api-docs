@@ -48,6 +48,7 @@ nav:
     - ObjectManagementApi: ObjectManagementApi.md
     - RemoteAccessMonitoringApi: RemoteAccessMonitoringApi.md
     - SearchApi: SearchApi.md
+    - SecureClientManagementApi: SecureClientManagementApi.md
     - SwaggerRedirectControllerApi: SwaggerRedirectControllerApi.md
     - TenantManagementApi: TenantManagementApi.md
     - ThousandEyesGatewayControllerApi: ThousandEyesGatewayControllerApi.md
@@ -307,6 +308,8 @@ nav:
     - SdcPage: SdcPage.md
     - SdcPatchInput: SdcPatchInput.md
     - SecureAccessMetadata: SecureAccessMetadata.md
+    - SecureClientPackageDto: SecureClientPackageDto.md
+    - SecureClientPackagesPage: SecureClientPackagesPage.md
     - Series: Series.md
     - ServiceObjectContent: ServiceObjectContent.md
     - ServiceObjectValueContent: ServiceObjectValueContent.md
