@@ -1,3 +1,49 @@
+# Version 1.19.0 (2026-04-15)
+
+## Added
+
+### Secure Client Management
+- Endpoint to [list Secure Client packages installed on an ASA device](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/list-secure-client-packages-installed-on-an-asa-device) (`GET /v1/inventory/devices/asas/{deviceUid}/secure-client/packages`).
+- Endpoint to [get a Secure Client package installed on an ASA device by UID](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-a-secure-client-package-installed-on-an-asa-device-by-uid) (`GET /v1/inventory/devices/asas/{deviceUid}/secure-client/packages/{packageUid}`).
+
+## Improvements
+
+### MSP
+- Endpoint to [get tenant settings for a specific MSP-managed tenant](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-tenant-settings-for-a-security-cloud-control-tenant-managed-by-msp-portal) (`GET /v1/msp/tenants/{managedTenantUid}/settings`).
+- Endpoint to [get tenant settings for all MSP-managed tenants](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-tenant-settings-for-all-security-cloud-control-tenants-managed-by-msp-portal) (`GET /v1/msp/tenants/settings`).
+- Endpoint to [export MSP-managed tenants](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/export-msp-managed-tenants) to CSV (`POST /v1/msp/tenants/export`).
+- [MSP-managed tenant](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/mspmanagedtenantdto/) records now include `deviceCount` and `virtualAccounts` fields.
+- [MSP Smart Account](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/mspsmartaccountdto/) records now include `name` field.
+
+### Inventory
+- [Device](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-devices/) records now include `asdmVersion` field for ASA devices.
+- [Device](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-devices/) records now include `edgeFtdRegistrationInfo` for FTDs with public IPs managed by cdFMC, providing registration details for the cdFMC-triggered CLI flow.
+- [FTD onboarding](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/onboard-ftd-device/) now supports cdFMC-triggered registration via the `useCdFmcTriggeredRegistration` field. When set to true, the `ftdHostname`, `natId`, and `regKey` fields must be specified.
+- Added `FTDvU` as a new `performanceTier` option for FTDv onboarding.
+
+### Transactions
+- Added new transaction types: `EXPORT_TENANTS`, `IMPORT_FMC_OBJECTS`, `NAT_PAO_TRIGGER_PDF_GENERATION`, and `BIDIRECTIONAL_OBJECT_RECONCILIATION`.
+
+### Object Management
+- Service objects now support `ALL` as a protocol value.
+
+### Device Health (ASA)
+- Improved documentation for [ASA device health metrics](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-time-series-health-metrics-for-one-or-more-asa-devices/) and [ASA interface health metrics](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-time-series-interface-metrics-for-an-asa-device/) endpoints with prerequisite information and clarified time range parameter descriptions.
+
+### Device Upgrades
+- [Device upgrade status](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-upgrade-run/) records now describe completion statuses for HA pairs and clusters (one per node).
+
+### MSP
+- The [upgrade multiple ASAs across managed tenants](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/upgrade-multiple-asas-across-multiple-tenants/) endpoint now enforces a maximum of 50 ASA devices per hardware model per managed tenant per request.
+
+### API Consistency
+- Added `405 Method Not Allowed` error responses across all Object Management endpoints and [MSP-managed device](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-managed-devices/) list endpoints for improved error handling consistency.
+
+## Deprecations
+
+### Licensing
+- The `UNLICENSED` license type has been replaced with `UNKNOWN`.
+
 # Version 1.18.0 (2026-02-28)
 
 ## Added
@@ -72,7 +118,7 @@ Please speak to your Cisco account team or Cisco TAC to enable this feature.
 ## Added
 
 ## ThousandEyes Integration
-- Endpoint to [get application outages](https://devnetapps.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-application-outages/) for any applications configured on the FMC.
+- Endpoint to [get application outages](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-application-outages/) for any applications configured on the FMC.
 
 ### Device Upgrades
 - Endpoint to [upgrade multiple ASA devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/upgrade-multiple-asa-devices/) in a single request (`POST /v1/inventory/devices/asas/upgrades/trigger`).
