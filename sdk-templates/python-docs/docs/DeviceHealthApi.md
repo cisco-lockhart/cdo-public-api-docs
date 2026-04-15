@@ -15,12 +15,9 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_asa_health_metrics**](DeviceHealthApi.md#get_asa_health_metrics) | **GET** /v1/inventory/devices/asas/health/metrics | Get time-series health metrics for one or more ASA devices
 [**get_asa_interface_health_metrics**](DeviceHealthApi.md#get_asa_interface_health_metrics) | **GET** /v1/inventory/devices/asas/health/{deviceUid}/interfaces | Get time-series interface metrics for an ASA device
-[**get_ftd_amp_workspace**](DeviceHealthApi.md#get_ftd_amp_workspace) | **GET** /v1/inventory/devices/ftds/health/metrics/workspace | Get AMP workspace details for the authenticated tenant
 [**get_ftd_health_metrics**](DeviceHealthApi.md#get_ftd_health_metrics) | **GET** /v1/inventory/devices/ftds/health/metrics | Get time-series health metrics for one or more FTD devices
 [**opt_in_to_asa_health_metrics**](DeviceHealthApi.md#opt_in_to_asa_health_metrics) | **POST** /v1/inventory/devices/asas/health/metrics | Opt in to ASA Health Metrics
-[**opt_in_to_ftd_health_metrics**](DeviceHealthApi.md#opt_in_to_ftd_health_metrics) | **POST** /v1/inventory/devices/ftds/health/metrics | Opt in to FTD Health Metrics
 [**opt_out_of_asa_health_metrics**](DeviceHealthApi.md#opt_out_of_asa_health_metrics) | **DELETE** /v1/inventory/devices/asas/health/metrics | Opt out of ASA Health Metrics
-[**opt_out_of_ftd_health_metrics**](DeviceHealthApi.md#opt_out_of_ftd_health_metrics) | **DELETE** /v1/inventory/devices/ftds/health/metrics | Opt out of FTD Health Metrics
 
 
 # **get_asa_health_metrics**
@@ -217,86 +214,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_ftd_amp_workspace**
-> AmpWorkspaceDetailsResponse get_ftd_amp_workspace()
-
-Get AMP workspace details for the authenticated tenant
-
-Returns the AMP workspace identifier and URL used for FTD health metrics.
-
-### Example
-
-* Bearer (JWT) Authentication (bearerAuth):
-
-```python
-import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.amp_workspace_details_response import AmpWorkspaceDetailsResponse
-from scc_firewall_manager_sdk.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
-# See configuration.py for a list of all supported configuration parameters.
-configuration = scc_firewall_manager_sdk.Configuration(
-    host = "https://api.us.security.cisco.com/firewall"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): bearerAuth
-configuration = scc_firewall_manager_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = scc_firewall_manager_sdk.DeviceHealthApi(api_client)
-
-    try:
-        # Get AMP workspace details for the authenticated tenant
-        api_response = api_instance.get_ftd_amp_workspace()
-        print("The response of DeviceHealthApi->get_ftd_amp_workspace:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DeviceHealthApi->get_ftd_amp_workspace: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**AmpWorkspaceDetailsResponse**](AmpWorkspaceDetailsResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successfully resolved AMP workspace details for the tenant. |  -  |
-**400** | Invalid input provided. Check the response for details. |  -  |
-**401** | Request not authorized. |  -  |
-**403** | User does not have sufficient privileges to perform this operation. |  -  |
-**404** | Entity not found. |  -  |
-**405** | Method not allowed. |  -  |
-**500** | Internal server error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_ftd_health_metrics**
 > MetricsResponse get_ftd_health_metrics(start=start, end=end, time_range=time_range, limit=limit, offset=offset, device_uids=device_uids, metrics=metrics)
 
@@ -473,86 +390,6 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **opt_in_to_ftd_health_metrics**
-> AmpWorkspaceDetailsResponse opt_in_to_ftd_health_metrics()
-
-Opt in to FTD Health Metrics
-
-Allow Security Cloud Control Firewall Manager to collect health metrics for FTDs in this tenant.
-
-### Example
-
-* Bearer (JWT) Authentication (bearerAuth):
-
-```python
-import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.amp_workspace_details_response import AmpWorkspaceDetailsResponse
-from scc_firewall_manager_sdk.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
-# See configuration.py for a list of all supported configuration parameters.
-configuration = scc_firewall_manager_sdk.Configuration(
-    host = "https://api.us.security.cisco.com/firewall"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): bearerAuth
-configuration = scc_firewall_manager_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = scc_firewall_manager_sdk.DeviceHealthApi(api_client)
-
-    try:
-        # Opt in to FTD Health Metrics
-        api_response = api_instance.opt_in_to_ftd_health_metrics()
-        print("The response of DeviceHealthApi->opt_in_to_ftd_health_metrics:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DeviceHealthApi->opt_in_to_ftd_health_metrics: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**AmpWorkspaceDetailsResponse**](AmpWorkspaceDetailsResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successfully opted-in for FTD health metrics into AMP. Response returns workspace details |  -  |
-**400** | Invalid input provided. Check the response for details. |  -  |
-**401** | Request not authorized. |  -  |
-**403** | User does not have sufficient privileges to perform this operation. |  -  |
-**404** | Entity not found. |  -  |
-**405** | Method not allowed. |  -  |
-**500** | Internal server error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **opt_out_of_asa_health_metrics**
 > CdoTransaction opt_out_of_asa_health_metrics()
 
@@ -629,83 +466,6 @@ This endpoint does not need any parameter.
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
 **404** | Entity not found. |  -  |
-**500** | Internal server error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **opt_out_of_ftd_health_metrics**
-> opt_out_of_ftd_health_metrics()
-
-Opt out of FTD Health Metrics
-
-Allows a tenant to opt out of receiving health metrics for their FTDs.
-
-### Example
-
-* Bearer (JWT) Authentication (bearerAuth):
-
-```python
-import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
-# See configuration.py for a list of all supported configuration parameters.
-configuration = scc_firewall_manager_sdk.Configuration(
-    host = "https://api.us.security.cisco.com/firewall"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): bearerAuth
-configuration = scc_firewall_manager_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = scc_firewall_manager_sdk.DeviceHealthApi(api_client)
-
-    try:
-        # Opt out of FTD Health Metrics
-        api_instance.opt_out_of_ftd_health_metrics()
-    except Exception as e:
-        print("Exception when calling DeviceHealthApi->opt_out_of_ftd_health_metrics: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**204** | No Content |  -  |
-**400** | Invalid input provided. Check the response for details. |  -  |
-**401** | Request not authorized. |  -  |
-**403** | User does not have sufficient privileges to perform this operation. |  -  |
-**404** | Entity not found. |  -  |
-**405** | Method not allowed. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
