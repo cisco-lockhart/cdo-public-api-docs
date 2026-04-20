@@ -22,6 +22,8 @@ services:
     url: "https://staging.manage.security.cisco.com/api/platform/thousand-eyes-gateway/v3/api-docs.yaml"
   - name: "secure-client-mgmt"
     url: "https://staging.manage.security.cisco.com/api/platform/secure-client-mgmt/v3/api-docs.yaml"
+  - name: "device-deployment"
+    url: "https://staging.manage.security.cisco.com/api/platform/device-deployment/v3/api-docs.yaml"
 cdfmc:
   url: "https://demo-red.app.us.cdo.cisco.com/api/api-explorer/fmc_oas3.json"
 info:
