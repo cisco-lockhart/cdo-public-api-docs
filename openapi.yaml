@@ -3436,6 +3436,69 @@ paths:
             summary: Read configurations for multiple ASA devices
             tags:
                 - Inventory
+    /v1/inventory/devices/asas/secure-client/upgrades/versions:
+        get:
+            description: Get a list of compatible Secure Client upgrade versions for the specified ASA devices.
+            operationId: getAsaCompatibleSecureClientVersionDtos
+            parameters:
+                - description: The unique identifiers, represented as UUIDs, of the ASA devices in Security Cloud Control.
+                  in: query
+                  name: deviceUids
+                  required: true
+                  schema:
+                    items:
+                        format: uuid
+                        type: string
+                    maxItems: 50
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SecureClientUpgradeVersionsPage'
+                    description: A paginated list of compatible Secure Client versions
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+                "503":
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/PageCompatibleSecureClientVersionDto'
+                    description: Service temporarily unavailable
+            security:
+                - bearerAuth: []
+            summary: List Secure Client versions compatible with the specified ASA devices
+            tags:
+                - Secure Client Management
+            x-beta: "true"
     /v1/inventory/devices/asas/upgrades/trigger:
         post:
             description: Upgrade up to 50 ASA devices to the requested software and ASDM versions in a single request.
@@ -12241,6 +12304,20 @@ components:
                 - name
                 - uid
             type: object
+        CompatibleSecureClientVersionDto:
+            properties:
+                platforms:
+                    description: The OS and CPU architecture combinations available for this version.
+                    items:
+                        $ref: '#/components/schemas/SecureClientPlatformDto'
+                    type: array
+                version:
+                    description: The Secure Client version string (e.g. "5.1.15.287", "4.10.05095").
+                    type: string
+            required:
+                - platforms
+                - version
+            type: object
         CompatibleVersionInfo:
             description: Information about a compatible ASA upgrade version and the devices that support it.
             properties:
@@ -16389,6 +16466,29 @@ components:
                     format: int32
                     type: integer
             type: object
+        PageCompatibleSecureClientVersionDto:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/CompatibleSecureClientVersionDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
         PhysicalInterfacePatchInput:
             properties:
                 description:
@@ -16887,6 +16987,49 @@ components:
                     description: The list of items retrieved.
                     items:
                         $ref: '#/components/schemas/SecureClientPackageDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
+        SecureClientPlatformDto:
+            properties:
+                cpuArchitecture:
+                    description: 'The CPU architecture. One of: X86_64, ARM64, UNIVERSAL.'
+                    enum:
+                        - X86_64
+                        - ARM64
+                        - UNIVERSAL
+                    type: string
+                os:
+                    description: 'The operating system. One of: LINUX, MACOS, WINDOWS.'
+                    enum:
+                        - LINUX
+                        - MACOS
+                        - WINDOWS
+                    type: string
+            required:
+                - cpuArchitecture
+                - os
+            type: object
+        SecureClientUpgradeVersionsPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/CompatibleSecureClientVersionDto'
                     type: array
                 limit:
                     description: The number of results retrieved.

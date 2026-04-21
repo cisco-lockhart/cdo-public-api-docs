@@ -125,6 +125,7 @@ nav:
     - CommonApiError: CommonApiError.md
     - CompatibleDevice: CompatibleDevice.md
     - CompatibleDeviceDto: CompatibleDeviceDto.md
+    - CompatibleSecureClientVersionDto: CompatibleSecureClientVersionDto.md
     - CompatibleVersionInfo: CompatibleVersionInfo.md
     - CompatibleVersionInfoDto: CompatibleVersionInfoDto.md
     - CompletionStatusDto: CompletionStatusDto.md
@@ -288,6 +289,7 @@ nav:
     - OnPremFmcInfo: OnPremFmcInfo.md
     - Override: Override.md
     - Page: Page.md
+    - PageCompatibleSecureClientVersionDto: PageCompatibleSecureClientVersionDto.md
     - PhysicalInterfacePatchInput: PhysicalInterfacePatchInput.md
     - Policy: Policy.md
     - PortsValue: PortsValue.md
@@ -310,6 +312,8 @@ nav:
     - SecureAccessMetadata: SecureAccessMetadata.md
     - SecureClientPackageDto: SecureClientPackageDto.md
     - SecureClientPackagesPage: SecureClientPackagesPage.md
+    - SecureClientPlatformDto: SecureClientPlatformDto.md
+    - SecureClientUpgradeVersionsPage: SecureClientUpgradeVersionsPage.md
     - Series: Series.md
     - ServiceObjectContent: ServiceObjectContent.md
     - ServiceObjectValueContent: ServiceObjectValueContent.md
