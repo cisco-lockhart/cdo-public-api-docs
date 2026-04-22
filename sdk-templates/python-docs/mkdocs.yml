@@ -30,6 +30,7 @@ nav:
     - CommandLineInterfaceApi: CommandLineInterfaceApi.md
     - CommandsApi: CommandsApi.md
     - ConnectorsApi: ConnectorsApi.md
+    - DeviceDeploymentsApi: DeviceDeploymentsApi.md
     - DeviceHealthAggregationsApi: DeviceHealthAggregationsApi.md
     - DeviceHealthApi: DeviceHealthApi.md
     - DeviceUpgradesApi: DeviceUpgradesApi.md
@@ -137,10 +138,13 @@ nav:
     - CpuHealthMetrics: CpuHealthMetrics.md
     - CreateRequest: CreateRequest.md
     - Deployed: Deployed.md
+    - DeploymentRunDto: DeploymentRunDto.md
+    - DeploymentRunDtoPage: DeploymentRunDtoPage.md
     - DestinationDynamicObjectContent: DestinationDynamicObjectContent.md
     - DestinationNetworkContent: DestinationNetworkContent.md
     - DestinationPortContent: DestinationPortContent.md
     - Device: Device.md
+    - DeviceDeploymentStatusDto: DeviceDeploymentStatusDto.md
     - DeviceEndOfLife: DeviceEndOfLife.md
     - DeviceEndOfLifeDetails: DeviceEndOfLifeDetails.md
     - DeviceEndOfLifeDeviceInfo: DeviceEndOfLifeDeviceInfo.md
