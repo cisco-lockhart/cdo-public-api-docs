@@ -3436,6 +3436,69 @@ paths:
             summary: Read configurations for multiple ASA devices
             tags:
                 - Inventory
+    /v1/inventory/devices/asas/secure-client/upgrades/versions:
+        get:
+            description: Get a list of compatible Secure Client upgrade versions for the specified ASA devices.
+            operationId: getAsaCompatibleSecureClientVersionDtos
+            parameters:
+                - description: The unique identifiers, represented as UUIDs, of the ASA devices in Security Cloud Control.
+                  in: query
+                  name: deviceUids
+                  required: true
+                  schema:
+                    items:
+                        format: uuid
+                        type: string
+                    maxItems: 50
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SecureClientUpgradeVersionsPage'
+                    description: A paginated list of compatible Secure Client versions
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+                "503":
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/PageCompatibleSecureClientVersionDto'
+                    description: Service temporarily unavailable
+            security:
+                - bearerAuth: []
+            summary: List Secure Client versions compatible with the specified ASA devices
+            tags:
+                - Secure Client Management
+            x-beta: "true"
     /v1/inventory/devices/asas/upgrades/trigger:
         post:
             description: Upgrade up to 50 ASA devices to the requested software and ASDM versions in a single request.
@@ -3535,6 +3598,104 @@ paths:
             summary: Modify Devices
             tags:
                 - Inventory
+    /v1/inventory/devices/deployments/runs:
+        get:
+            description: Get a list of device deployment runs in the SCC Firewall Manager Tenant. Each deployment run represents a group of devices being deployed together.
+            operationId: getDeviceDeploymentRuns
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeploymentRunDtoPage'
+                    description: List of Device Deployment Run objects
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Device Deployment Runs
+            tags:
+                - Device Deployments
+    /v1/inventory/devices/deployments/runs/{deploymentRunUid}:
+        get:
+            description: Get a Device Deployment Run by UID in the SCC Firewall Manager Tenant. Each deployment run represents a group of devices being deployed together.
+            operationId: getDeviceDeploymentRun
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device deployment Run in SCC Firewall Manager.
+                  in: path
+                  name: deploymentRunUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeploymentRunDto'
+                    description: The Device Deployment Run object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Device Deployment Run
+            tags:
+                - Device Deployments
     /v1/inventory/devices/duoAdminPanels:
         post:
             description: Onboard a Duo Admin Panel to the CDO tenant. The credentials to onboard the Duo Admin Panel to Security Cloud Control must be generated by creating an Admin API application on https://www.duo.com. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
@@ -12241,6 +12402,20 @@ components:
                 - name
                 - uid
             type: object
+        CompatibleSecureClientVersionDto:
+            properties:
+                platforms:
+                    description: The OS and CPU architecture combinations available for this version.
+                    items:
+                        $ref: '#/components/schemas/SecureClientPlatformDto'
+                    type: array
+                version:
+                    description: The Secure Client version string (e.g. "5.1.15.287", "4.10.05095").
+                    type: string
+            required:
+                - platforms
+                - version
+            type: object
         CompatibleVersionInfo:
             description: Information about a compatible ASA upgrade version and the devices that support it.
             properties:
@@ -12311,7 +12486,7 @@ components:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -12322,7 +12497,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: The percentage completion of the current task being performed
+                    description: Percentage completion of the current task being performed.
                     format: double
                     type: number
             type: object
@@ -12429,6 +12604,100 @@ components:
                     items:
                         $ref: '#/components/schemas/DomainSettings'
                     type: array
+            type: object
+        DeploymentRunDto:
+            properties:
+                deploymentRunStatus:
+                    description: The status of the deployment
+                    enum:
+                        - PENDING
+                        - VALIDATING_DEVICES
+                        - TRIGGERING_DEPLOY
+                        - WAITING_FOR_DEPLOY
+                        - DEPLOY_COMPLETED
+                        - DEPLOY_FAILED
+                    example: WAITING_FOR_DEPLOY
+                    type: string
+                deploymentType:
+                    description: The type of the deployment
+                    enum:
+                        - FTD_DEVICE_DEPLOY
+                        - ASA_DEVICE_DEPLOY
+                    example: ASA_DEVICE_DEPLOY
+                    type: string
+                description:
+                    description: A human-readable description of this deployment.
+                    example: This is a test deployment.
+                    type: string
+                deviceDeploymentStatuses:
+                    description: The current status of each device that is being deployed to as part of this deployment.
+                    items:
+                        $ref: '#/components/schemas/DeviceDeploymentStatusDto'
+                    type: array
+                deviceUids:
+                    description: The set of device UIDs that are part of this deployment.
+                    example:
+                        - 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                        - 5141daad-e813-4b8f-8f42-be1e241e8cdb
+                    items:
+                        format: uuid
+                        type: string
+                    type: array
+                    uniqueItems: true
+                errorMsg:
+                    description: Error message if the deployment failed.
+                    example: Timeout error
+                    type: string
+                ignoreWarnings:
+                    description: Boolean indicating whether warnings identified by the deployment sub-system about this deployment were ignored.
+                    type: boolean
+                lastUpdatedTime:
+                    description: Time (UTC; represented using the RFC-3339 standard) at which the deployment run was last updated.
+                    example: 2023-12-13T08:15:44Z
+                    format: date-time
+                    type: string
+                name:
+                    description: The name of the deployment run. Deployment runs names are unique in a tenant in SCC Firewall Manager.
+                    example: my-example-device
+                    type: string
+                submissionTime:
+                    description: Time (UTC; represented using the RFC-3339 standard) at which the deployment run was triggered.
+                    example: 2023-12-13T05:15:44Z
+                    format: date-time
+                    type: string
+                transactionUid:
+                    description: The unique identifier of the CDO transaction that tracks this deployment.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the deployment run in SCC Firewall Manager.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            type: object
+        DeploymentRunDtoPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/DeploymentRunDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
             type: object
         DestinationDynamicObjectContent:
             description: The destination dynamic object.
@@ -12798,6 +13067,19 @@ components:
                 - deviceType
                 - name
             type: object
+        DeviceDeploymentStatusDto:
+            properties:
+                completionStatuses:
+                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+                    items:
+                        $ref: '#/components/schemas/CompletionStatusDto'
+                    type: array
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            type: object
         DeviceEndOfLife:
             properties:
                 endOfLifeDetails:
@@ -13118,14 +13400,58 @@ components:
         DeviceUpgradeStatusDto:
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+                    description: The completion status of the upgrade on the device.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                uid:
-                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+                hardwareModel:
+                    description: Hardware model of the devices being upgraded.
+                    example: Firepower 2110
+                    type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: Name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantUid:
+                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: tenant-uuid-1
+                    format: uuid
+                    type: string
+                name:
+                    description: Name of the device being upgraded.
+                    example: my-firepower
+                    type: string
+                softwareVersionBeforeUpgrade:
+                    description: Software version of the device before the upgrade.
+                    example: 7.2.3
+                    type: string
+                transactionUid:
+                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, of the device being upgraded.
+                    format: uuid
+                    type: string
+                upgradeRunStatus:
+                    description: Current status of the upgrade run.
+                    enum:
+                        - IN_PROGRESS
+                        - REBUILDING_UPGRADE_CACHE
+                        - PERFORMING_UPGRADE
+                        - UPLOADING_IMAGE
+                        - PERFORMING_READINESS_CHECK
+                        - UPGRADE_STAGED
+                        - UPGRADE_STAGING_FAILED
+                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_COMPLETED
+                        - UPGRADE_FAILED
+                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -13453,7 +13779,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -16389,6 +16715,29 @@ components:
                     format: int32
                     type: integer
             type: object
+        PageCompatibleSecureClientVersionDto:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/CompatibleSecureClientVersionDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
         PhysicalInterfacePatchInput:
             properties:
                 description:
@@ -16899,6 +17248,49 @@ components:
                     format: int32
                     type: integer
             type: object
+        SecureClientPlatformDto:
+            properties:
+                cpuArchitecture:
+                    description: 'The CPU architecture. One of: X86_64, ARM64, UNIVERSAL.'
+                    enum:
+                        - X86_64
+                        - ARM64
+                        - UNIVERSAL
+                    type: string
+                os:
+                    description: 'The operating system. One of: LINUX, MACOS, WINDOWS.'
+                    enum:
+                        - LINUX
+                        - MACOS
+                        - WINDOWS
+                    type: string
+            required:
+                - cpuArchitecture
+                - os
+            type: object
+        SecureClientUpgradeVersionsPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/CompatibleSecureClientVersionDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
         Series:
             properties:
                 timestamp:
@@ -17125,31 +17517,12 @@ components:
             type: object
         SmartAccountDto:
             properties:
-                domain:
-                    description: Account domain for your Smart Account
+                parent:
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                name:
-                    description: Name of the smart account
-                    type: string
-                smartAccountId:
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             properties:
