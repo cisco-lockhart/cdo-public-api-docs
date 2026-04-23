@@ -13,13 +13,13 @@ UAE | https://api.uae.security.cisco.com/firewall
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_asa_compatible_secure_client_version_dtos**](SecureClientManagementApi.md#get_asa_compatible_secure_client_version_dtos) | **GET** /v1/inventory/devices/asas/secure-client/upgrades/versions | List Secure Client versions compatible with the specified ASA devices
+[**get_asa_compatible_secure_client_versions**](SecureClientManagementApi.md#get_asa_compatible_secure_client_versions) | **GET** /v1/inventory/devices/asas/secure-client/upgrades/versions | List Secure Client versions compatible with the specified ASA devices
 [**get_asa_secure_client_package_by_uid**](SecureClientManagementApi.md#get_asa_secure_client_package_by_uid) | **GET** /v1/inventory/devices/asas/{deviceUid}/secure-client/packages/{packageUid} | Get a Secure Client package installed on an ASA device by UID
 [**get_asa_secure_client_packages**](SecureClientManagementApi.md#get_asa_secure_client_packages) | **GET** /v1/inventory/devices/asas/{deviceUid}/secure-client/packages | List Secure Client packages installed on an ASA device
 
 
-# **get_asa_compatible_secure_client_version_dtos**
-> SecureClientUpgradeVersionsPage get_asa_compatible_secure_client_version_dtos(device_uids, limit=limit, offset=offset)
+# **get_asa_compatible_secure_client_versions**
+> SecureClientUpgradeVersionsPage get_asa_compatible_secure_client_versions(device_uids, limit=limit, offset=offset)
 
 List Secure Client versions compatible with the specified ASA devices
 
@@ -61,11 +61,11 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
     try:
         # List Secure Client versions compatible with the specified ASA devices
-        api_response = api_instance.get_asa_compatible_secure_client_version_dtos(device_uids, limit=limit, offset=offset)
-        print("The response of SecureClientManagementApi->get_asa_compatible_secure_client_version_dtos:\n")
+        api_response = api_instance.get_asa_compatible_secure_client_versions(device_uids, limit=limit, offset=offset)
+        print("The response of SecureClientManagementApi->get_asa_compatible_secure_client_versions:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SecureClientManagementApi->get_asa_compatible_secure_client_version_dtos: %s\n" % e)
+        print("Exception when calling SecureClientManagementApi->get_asa_compatible_secure_client_versions: %s\n" % e)
 ```
 
 
