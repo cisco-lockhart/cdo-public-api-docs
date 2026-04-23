@@ -26,6 +26,7 @@ Method | HTTP request | Description
 [**deploy_changes_to_multiple_ftd_devices**](InventoryApi.md#deploy_changes_to_multiple_ftd_devices) | **POST** /v1/inventory/devices/ftds/deploy | (cdFMC-managed FTDs only) Deploy changes to multiple FTD devices
 [**deploy_ftd_device_changes**](InventoryApi.md#deploy_ftd_device_changes) | **POST** /v1/inventory/devices/ftds/{deviceUid}/deploy | (cdFMC-managed FTDs only) Deploy FTD device changes
 [**enable_multicloud_defense**](InventoryApi.md#enable_multicloud_defense) | **POST** /v1/inventory/managers/mcd | Enable Multicloud Defense
+[**export_cloud_services**](InventoryApi.md#export_cloud_services) | **POST** /v1/inventory/services/export | Export Cloud Services
 [**export_device_managers**](InventoryApi.md#export_device_managers) | **POST** /v1/inventory/managers/export | Export Device Managers
 [**export_devices**](InventoryApi.md#export_devices) | **POST** /v1/inventory/devices/export | Export Devices
 [**finish_onboarding_ftd_device**](InventoryApi.md#finish_onboarding_ftd_device) | **POST** /v1/inventory/devices/ftds/register | Register FTD device to FMC
@@ -1117,8 +1118,91 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **export_cloud_services**
+> CdoTransaction export_cloud_services(export_input=export_input)
+
+Export Cloud Services
+
+This is an asynchronous operation to export cloud services in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.models.export_input import ExportInput
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.InventoryApi(api_client)
+    export_input = scc_firewall_manager_sdk.ExportInput() # ExportInput |  (optional)
+
+    try:
+        # Export Cloud Services
+        api_response = api_instance.export_cloud_services(export_input=export_input)
+        print("The response of InventoryApi->export_cloud_services:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InventoryApi->export_cloud_services: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **export_input** | [**ExportInput**](ExportInput.md)|  | [optional] 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the &lt;code&gt;entityUrl&lt;/code&gt; field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **export_device_managers**
-> CdoTransaction export_device_managers(export_input)
+> CdoTransaction export_device_managers(export_input=export_input)
 
 Export Device Managers
 
@@ -1155,11 +1239,11 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.InventoryApi(api_client)
-    export_input = scc_firewall_manager_sdk.ExportInput() # ExportInput | 
+    export_input = scc_firewall_manager_sdk.ExportInput() # ExportInput |  (optional)
 
     try:
         # Export Device Managers
-        api_response = api_instance.export_device_managers(export_input)
+        api_response = api_instance.export_device_managers(export_input=export_input)
         print("The response of InventoryApi->export_device_managers:\n")
         pprint(api_response)
     except Exception as e:
@@ -1173,7 +1257,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **export_input** | [**ExportInput**](ExportInput.md)|  | 
+ **export_input** | [**ExportInput**](ExportInput.md)|  | [optional] 
 
 ### Return type
 
@@ -1201,7 +1285,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **export_devices**
-> CdoTransaction export_devices(export_input)
+> CdoTransaction export_devices(export_input=export_input)
 
 Export Devices
 
@@ -1238,11 +1322,11 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.InventoryApi(api_client)
-    export_input = scc_firewall_manager_sdk.ExportInput() # ExportInput | 
+    export_input = scc_firewall_manager_sdk.ExportInput() # ExportInput |  (optional)
 
     try:
         # Export Devices
-        api_response = api_instance.export_devices(export_input)
+        api_response = api_instance.export_devices(export_input=export_input)
         print("The response of InventoryApi->export_devices:\n")
         pprint(api_response)
     except Exception as e:
@@ -1256,7 +1340,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **export_input** | [**ExportInput**](ExportInput.md)|  | 
+ **export_input** | [**ExportInput**](ExportInput.md)|  | [optional] 
 
 ### Return type
 
