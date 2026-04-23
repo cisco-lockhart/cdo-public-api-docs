@@ -443,7 +443,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **export_msp_managed_tenants**
-> CdoTransaction export_msp_managed_tenants(msp_export_input)
+> CdoTransaction export_msp_managed_tenants(msp_export_input=msp_export_input)
 
 Export MSP-managed Tenants
 
@@ -480,11 +480,11 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.MSPTenantManagementApi(api_client)
-    msp_export_input = scc_firewall_manager_sdk.MspExportInput() # MspExportInput | 
+    msp_export_input = scc_firewall_manager_sdk.MspExportInput() # MspExportInput |  (optional)
 
     try:
         # Export MSP-managed Tenants
-        api_response = api_instance.export_msp_managed_tenants(msp_export_input)
+        api_response = api_instance.export_msp_managed_tenants(msp_export_input=msp_export_input)
         print("The response of MSPTenantManagementApi->export_msp_managed_tenants:\n")
         pprint(api_response)
     except Exception as e:
@@ -498,7 +498,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **msp_export_input** | [**MspExportInput**](MspExportInput.md)|  | 
+ **msp_export_input** | [**MspExportInput**](MspExportInput.md)|  | [optional] 
 
 ### Return type
 

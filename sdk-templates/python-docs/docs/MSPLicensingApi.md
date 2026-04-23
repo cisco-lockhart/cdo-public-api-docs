@@ -25,7 +25,7 @@ Method | HTTP request | Description
 
 
 # **export_msp_device_licenses**
-> CdoTransaction export_msp_device_licenses(msp_export_input)
+> CdoTransaction export_msp_device_licenses(msp_export_input=msp_export_input)
 
 Export licenses for MSP-managed devices
 
@@ -62,11 +62,11 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.MSPLicensingApi(api_client)
-    msp_export_input = scc_firewall_manager_sdk.MspExportInput() # MspExportInput | 
+    msp_export_input = scc_firewall_manager_sdk.MspExportInput() # MspExportInput |  (optional)
 
     try:
         # Export licenses for MSP-managed devices
-        api_response = api_instance.export_msp_device_licenses(msp_export_input)
+        api_response = api_instance.export_msp_device_licenses(msp_export_input=msp_export_input)
         print("The response of MSPLicensingApi->export_msp_device_licenses:\n")
         pprint(api_response)
     except Exception as e:
@@ -80,7 +80,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **msp_export_input** | [**MspExportInput**](MspExportInput.md)|  | 
+ **msp_export_input** | [**MspExportInput**](MspExportInput.md)|  | [optional] 
 
 ### Return type
 
@@ -107,7 +107,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **export_msp_virtual_account_licenses**
-> CdoTransaction export_msp_virtual_account_licenses(smart_account_uid, virtual_account_uid, msp_export_input)
+> CdoTransaction export_msp_virtual_account_licenses(smart_account_uid, virtual_account_uid, msp_export_input=msp_export_input)
 
 Export Licenses for a MSP-managed Virtual Account
 
@@ -146,11 +146,11 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     api_instance = scc_firewall_manager_sdk.MSPLicensingApi(api_client)
     smart_account_uid = 'smart_account_uid_example' # str | The unique identifier, represented as a UUID, of the smart account
     virtual_account_uid = 'virtual_account_uid_example' # str | The unique identifier, represented as a UUID, of the virtual account
-    msp_export_input = scc_firewall_manager_sdk.MspExportInput() # MspExportInput | 
+    msp_export_input = scc_firewall_manager_sdk.MspExportInput() # MspExportInput |  (optional)
 
     try:
         # Export Licenses for a MSP-managed Virtual Account
-        api_response = api_instance.export_msp_virtual_account_licenses(smart_account_uid, virtual_account_uid, msp_export_input)
+        api_response = api_instance.export_msp_virtual_account_licenses(smart_account_uid, virtual_account_uid, msp_export_input=msp_export_input)
         print("The response of MSPLicensingApi->export_msp_virtual_account_licenses:\n")
         pprint(api_response)
     except Exception as e:
@@ -166,7 +166,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **smart_account_uid** | **str**| The unique identifier, represented as a UUID, of the smart account | 
  **virtual_account_uid** | **str**| The unique identifier, represented as a UUID, of the virtual account | 
- **msp_export_input** | [**MspExportInput**](MspExportInput.md)|  | 
+ **msp_export_input** | [**MspExportInput**](MspExportInput.md)|  | [optional] 
 
 ### Return type
 
