@@ -5161,6 +5161,40 @@ paths:
             summary: Provision cdFMC
             tags:
                 - Inventory
+    /v1/inventory/managers/export:
+        post:
+            description: This is an asynchronous operation to export device managers in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
+            operationId: exportDeviceManagers
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ExportInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the <code>entityUrl</code> field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Export Device Managers
+            tags:
+                - Inventory
     /v1/inventory/managers/mcd:
         post:
             description: This is an asynchronous operation to Enable Multicloud Defense for the Security Cloud Control tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
@@ -13735,7 +13769,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
+                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
                     type: string
             type: object
         FmcAccessPolicyReference:
