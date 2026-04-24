@@ -25,7 +25,7 @@ Method | HTTP request | Description
 
 
 # **export_device_licenses**
-> CdoTransaction export_device_licenses(export_input)
+> CdoTransaction export_device_licenses(export_input=export_input)
 
 Export Per-Device Licenses
 
@@ -62,11 +62,11 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.LicensingApi(api_client)
-    export_input = scc_firewall_manager_sdk.ExportInput() # ExportInput | 
+    export_input = scc_firewall_manager_sdk.ExportInput() # ExportInput |  (optional)
 
     try:
         # Export Per-Device Licenses
-        api_response = api_instance.export_device_licenses(export_input)
+        api_response = api_instance.export_device_licenses(export_input=export_input)
         print("The response of LicensingApi->export_device_licenses:\n")
         pprint(api_response)
     except Exception as e:
@@ -80,7 +80,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **export_input** | [**ExportInput**](ExportInput.md)|  | 
+ **export_input** | [**ExportInput**](ExportInput.md)|  | [optional] 
 
 ### Return type
 
@@ -107,7 +107,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **export_virtual_account_licenses**
-> CdoTransaction export_virtual_account_licenses(smart_account_uid, virtual_account_uid, export_input)
+> CdoTransaction export_virtual_account_licenses(smart_account_uid, virtual_account_uid, export_input=export_input)
 
 Export Licenses for a Virtual Account
 
@@ -146,11 +146,11 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     api_instance = scc_firewall_manager_sdk.LicensingApi(api_client)
     smart_account_uid = 'smart_account_uid_example' # str | The unique identifier, represented as a UUID, of the smart account
     virtual_account_uid = 'virtual_account_uid_example' # str | The unique identifier, represented as a UUID, of the virtual account
-    export_input = scc_firewall_manager_sdk.ExportInput() # ExportInput | 
+    export_input = scc_firewall_manager_sdk.ExportInput() # ExportInput |  (optional)
 
     try:
         # Export Licenses for a Virtual Account
-        api_response = api_instance.export_virtual_account_licenses(smart_account_uid, virtual_account_uid, export_input)
+        api_response = api_instance.export_virtual_account_licenses(smart_account_uid, virtual_account_uid, export_input=export_input)
         print("The response of LicensingApi->export_virtual_account_licenses:\n")
         pprint(api_response)
     except Exception as e:
@@ -166,7 +166,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **smart_account_uid** | **str**| The unique identifier, represented as a UUID, of the smart account | 
  **virtual_account_uid** | **str**| The unique identifier, represented as a UUID, of the virtual account | 
- **export_input** | [**ExportInput**](ExportInput.md)|  | 
+ **export_input** | [**ExportInput**](ExportInput.md)|  | [optional] 
 
 ### Return type
 
