@@ -172,6 +172,7 @@ nav:
     - Entity: Entity.md
     - EntityType: EntityType.md
     - Environment: Environment.md
+    - ErrorDetails: ErrorDetails.md
     - EtherChannelInterfaceCreateInput: EtherChannelInterfaceCreateInput.md
     - EtherChannelInterfacePatchInput: EtherChannelInterfacePatchInput.md
     - Event: Event.md
