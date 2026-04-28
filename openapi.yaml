@@ -3457,6 +3457,8 @@ paths:
                     $ref: '#/components/responses/http400BadRequest'
                 "401":
                     $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
                 "405":
                     $ref: '#/components/responses/http405MethodNotAllowed'
                 "500":
@@ -3514,6 +3516,8 @@ paths:
                     $ref: '#/components/responses/http400BadRequest'
                 "401":
                     $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
                 "405":
                     $ref: '#/components/responses/http405MethodNotAllowed'
                 "500":
@@ -4767,6 +4771,110 @@ paths:
             summary: Onboard IOS Device
             tags:
                 - Inventory
+    /v1/inventory/devices/secure-client/upgrades/runs:
+        get:
+            description: Get a list of Secure Client upgrade runs in the Security Cloud Control tenant. Each upgrade run represents a group of devices having their Secure Client packages upgraded together.
+            operationId: getSecureClientUpgradeRuns
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SecureClientUpgradeRunPage'
+                    description: List of Secure Client Upgrade Run objects
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Secure Client Upgrade Runs
+            tags:
+                - Secure Client Management
+            x-beta: "true"
+    /v1/inventory/devices/secure-client/upgrades/runs/{upgradeRunUid}:
+        get:
+            description: Get a Secure Client Upgrade Run by UID in the Security Cloud Control tenant. Each upgrade run represents a group of devices having their Secure Client packages upgraded together.
+            operationId: getSecureClientUpgradeRun
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the Secure Client Upgrade Run in Security Cloud Control.
+                  in: path
+                  name: upgradeRunUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SecureClientUpgradeRunDto'
+                    description: The Secure Client Upgrade Run object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Secure Client Upgrade Run
+            tags:
+                - Secure Client Management
+            x-beta: "true"
     /v1/inventory/devices/upgrades/runs:
         get:
             description: Get a list of device upgrade runs in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices being upgraded, or staged for upgrades, together.
@@ -5633,6 +5741,39 @@ paths:
             security:
                 - bearerAuth: []
             summary: Modify Template Device
+            tags:
+                - Inventory
+    /v1/inventory/templates/export:
+        post:
+            description: This is an asynchronous operation to export templates in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
+            operationId: exportTemplates
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ExportInput'
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the <code>entityUrl</code> field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Export Templates
             tags:
                 - Inventory
     /v1/licenses/devices:
@@ -12574,11 +12715,16 @@ components:
             type: object
         CompletionStatusDto:
             properties:
+                completedAt:
+                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
+                    example: 2026-04-15T18:00:10.123Z
+                    format: date-time
+                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -12589,7 +12735,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: The percentage completion of the current task being performed
+                    description: Percentage completion of the current task being performed.
                     format: double
                     type: number
             type: object
@@ -13173,11 +13319,9 @@ components:
             type: object
         DeviceDeploymentStatusDto:
             properties:
-                completionStatuses:
-                    description: The completion status of the deployment on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
-                    items:
-                        $ref: '#/components/schemas/CompletionStatusDto'
-                    type: array
+                completionStatus:
+                    $ref: '#/components/schemas/CompletionStatusDto'
+                    description: The completion status of the deployment on the device.
                 errorDetails:
                     description: Detailed error information reported for this device during deployment.
                     items:
@@ -13189,6 +13333,14 @@ components:
                 name:
                     description: The name of the device in SCC Firewall Manager.
                     example: My FTD
+                    type: string
+                status:
+                    description: The overall status of the deployment on this device
+                    enum:
+                        - IN_PROGRESS
+                        - DONE
+                        - ERROR
+                        - SKIPPED
                     type: string
                 uid:
                     description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
@@ -17397,6 +17549,86 @@ components:
                 - cpuArchitecture
                 - os
             type: object
+        SecureClientUpgradeRunDto:
+            properties:
+                devices:
+                    description: The devices included in this upgrade run.
+                    items:
+                        $ref: '#/components/schemas/UpgradedDeviceDto'
+                    type: array
+                errorMsg:
+                    description: Error message if the upgrade run failed.
+                    example: Timeout error
+                    type: string
+                lastUpdatedTime:
+                    description: Time (UTC; represented using the RFC-3339 standard) at which the upgrade run was last updated.
+                    example: 2026-03-30T14:45:00Z
+                    format: date-time
+                    type: string
+                name:
+                    description: The name of the upgrade run.
+                    example: upgrade-run-01
+                    type: string
+                secureClientVersion:
+                    description: The Secure Client version being upgraded to.
+                    example: 5.1.15.287
+                    type: string
+                submissionTime:
+                    description: Time (UTC; represented using the RFC-3339 standard) at which the upgrade run was submitted.
+                    example: 2026-03-30T14:30:00Z
+                    format: date-time
+                    type: string
+                transactionUid:
+                    description: The unique identifier, represented as a UUID, of the CDO transaction that tracks this upgrade run.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the upgrade run.
+                    example: d4e5f6a7-8901-2345-bcde-f12345678901
+                    format: uuid
+                    type: string
+                upgradeRunStatus:
+                    description: 'The current status of the upgrade run. One of: UPLOADING_IMAGES, UPDATING_RA_VPN_CONFIG, DELETING_OLD_IMAGES, DONE, ERROR.'
+                    enum:
+                        - UPLOADING_IMAGES
+                        - UPDATING_RA_VPN_CONFIG
+                        - DELETING_OLD_IMAGES
+                        - DONE
+                        - ERROR
+                    example: DONE
+                    type: string
+                upgradeRunType:
+                    description: 'The type of the Secure Client upgrade. One of: ASA_SECURE_CLIENT_UPGRADE, FTD_SECURE_CLIENT_UPGRADE.'
+                    enum:
+                        - ASA_SECURE_CLIENT_UPGRADE
+                        - FTD_SECURE_CLIENT_UPGRADE
+                    example: ASA_SECURE_CLIENT_UPGRADE
+                    type: string
+            type: object
+        SecureClientUpgradeRunPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/SecureClientUpgradeRunDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
         SecureClientUpgradeVersionsPage:
             properties:
                 count:
@@ -18531,6 +18763,18 @@ components:
                     type: string
             required:
                 - name
+            type: object
+        UpgradedDeviceDto:
+            properties:
+                name:
+                    description: The name of the device.
+                    example: asa-fw-01
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device.
+                    example: f0a09517-bab1-43e4-adae-2037cf3184e3
+                    format: uuid
+                    type: string
             type: object
         UrlObjectContent:
             properties:
