@@ -12574,6 +12574,11 @@ components:
             type: object
         CompletionStatusDto:
             properties:
+                completedAt:
+                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
+                    example: 2026-04-15T18:00:10.123Z
+                    format: date-time
+                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
