@@ -360,6 +360,7 @@ nav:
     - ThousandEyesOutageQueryRequest: ThousandEyesOutageQueryRequest.md
     - ThousandEyesOutageQueryResponse: ThousandEyesOutageQueryResponse.md
     - ThousandEyesOutageResponse: ThousandEyesOutageResponse.md
+    - TriggerSecureClientUpgradeInput: TriggerSecureClientUpgradeInput.md
     - UnifiedObjectListView: UnifiedObjectListView.md
     - UniversalZtnaSettings: UniversalZtnaSettings.md
     - UpdateRequest: UpdateRequest.md

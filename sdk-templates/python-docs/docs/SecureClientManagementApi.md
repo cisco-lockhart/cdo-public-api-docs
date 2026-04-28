@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**get_asa_compatible_secure_client_versions**](SecureClientManagementApi.md#get_asa_compatible_secure_client_versions) | **GET** /v1/inventory/devices/asas/secure-client/upgrades/versions | List Secure Client versions compatible with the specified ASA devices
 [**get_asa_secure_client_package_by_uid**](SecureClientManagementApi.md#get_asa_secure_client_package_by_uid) | **GET** /v1/inventory/devices/asas/{deviceUid}/secure-client/packages/{packageUid} | Get a Secure Client package installed on an ASA device by UID
 [**get_asa_secure_client_packages**](SecureClientManagementApi.md#get_asa_secure_client_packages) | **GET** /v1/inventory/devices/asas/{deviceUid}/secure-client/packages | List Secure Client packages installed on an ASA device
+[**trigger_secure_client_upgrade**](SecureClientManagementApi.md#trigger_secure_client_upgrade) | **POST** /v1/inventory/devices/asas/secure-client/upgrades | Trigger Secure Client upgrade on ASA devices
 
 
 # **get_asa_compatible_secure_client_versions**
@@ -274,6 +275,89 @@ Name | Type | Description  | Notes
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
 **404** | Entity not found. |  -  |
+**405** | Method not allowed. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **trigger_secure_client_upgrade**
+> CdoTransaction trigger_secure_client_upgrade(trigger_secure_client_upgrade_input)
+
+Trigger Secure Client upgrade on ASA devices
+
+Initiate a Secure Client package upgrade on one or more ASA devices. The endpoint validates that all target devices are eligible, creates a CDO transaction and a SecureClientUpgradeRun tracking object, and returns 202 Accepted with the transaction.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.models.trigger_secure_client_upgrade_input import TriggerSecureClientUpgradeInput
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.SecureClientManagementApi(api_client)
+    trigger_secure_client_upgrade_input = scc_firewall_manager_sdk.TriggerSecureClientUpgradeInput() # TriggerSecureClientUpgradeInput | 
+
+    try:
+        # Trigger Secure Client upgrade on ASA devices
+        api_response = api_instance.trigger_secure_client_upgrade(trigger_secure_client_upgrade_input)
+        print("The response of SecureClientManagementApi->trigger_secure_client_upgrade:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SecureClientManagementApi->trigger_secure_client_upgrade: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **trigger_secure_client_upgrade_input** | [**TriggerSecureClientUpgradeInput**](TriggerSecureClientUpgradeInput.md)|  | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Security Cloud Control Transaction object that can be used to track the status of the operation. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
 **405** | Method not allowed. |  -  |
 **500** | Internal server error. |  -  |
 

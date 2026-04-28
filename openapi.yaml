@@ -3436,6 +3436,41 @@ paths:
             summary: Read configurations for multiple ASA devices
             tags:
                 - Inventory
+    /v1/inventory/devices/asas/secure-client/upgrades:
+        post:
+            description: Initiate a Secure Client package upgrade on one or more ASA devices. The endpoint validates that all target devices are eligible, creates a CDO transaction and a SecureClientUpgradeRun tracking object, and returns 202 Accepted with the transaction.
+            operationId: triggerSecureClientUpgrade
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/TriggerSecureClientUpgradeInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the operation.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Trigger Secure Client upgrade on ASA devices
+            tags:
+                - Secure Client Management
+            x-beta: "true"
     /v1/inventory/devices/asas/secure-client/upgrades/versions:
         get:
             description: Get a list of compatible Secure Client upgrade versions for the specified ASA devices.
@@ -11931,6 +11966,7 @@ components:
                         - UPGRADE_ASA
                         - UPGRADE_FTD
                         - UPGRADE_FTD_CACHE
+                        - UPGRADE_SECURE_CLIENT_PACKAGES
                         - MSP_UPGRADE_ASAS
                         - MSP_UPGRADE_FTDS
                         - MSP_GET_COMPATIBLE_FTD_UPGRADE_PACKAGES
@@ -12538,11 +12574,6 @@ components:
             type: object
         CompletionStatusDto:
             properties:
-                completedAt:
-                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
-                    example: 2026-04-15T18:00:10.123Z
-                    format: date-time
-                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
@@ -17571,31 +17602,12 @@ components:
             type: object
         SmartAccountDto:
             properties:
-                domain:
-                    description: Account domain for your Smart Account
+                parent:
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                name:
-                    description: Name of the smart account
-                    type: string
-                smartAccountId:
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             properties:
@@ -18104,6 +18116,35 @@ components:
                     description: Indicates if web analytics are enabled for the tenant.
                     example: true
                     type: boolean
+            type: object
+        TriggerSecureClientUpgradeInput:
+            properties:
+                deviceUids:
+                    description: The unique identifiers of the ASA devices to upgrade in Security Cloud Control.
+                    items:
+                        format: uuid
+                        type: string
+                    maxItems: 50
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                name:
+                    description: An optional name for the upgrade operation to help identify and track the upgrade.
+                    example: upgrade-run-01
+                    type: string
+                platforms:
+                    description: The OS and CPU architecture combinations to upgrade. If omitted, all platforms available for the specified version are uploaded to each device.
+                    items:
+                        $ref: '#/components/schemas/SecureClientPlatformDto'
+                    type: array
+                version:
+                    description: The Secure Client version to upgrade to. Must be a version present in the Secure Client package catalog.
+                    example: 5.1.15.287
+                    minLength: 1
+                    type: string
+            required:
+                - deviceUids
+                - version
             type: object
         UnifiedObjectListView:
             properties:
