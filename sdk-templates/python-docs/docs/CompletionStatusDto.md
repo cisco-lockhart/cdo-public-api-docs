@@ -5,7 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**completed_at** | **datetime** | Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress. | [optional] 
 **message** | **str** | A message, indicating current progress, returned from the device. | [optional] 
 **name** | **str** | The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster. | [optional] 
 **node_type** | **str** | (HA Pairs and clusters only) The node type of the device. | [optional] 
