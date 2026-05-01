@@ -84,7 +84,7 @@ Use this `curl` command to make a request to retrieve the list of devices from t
 `/v1/inventory/devices` endpoint.
 
 ```curl
-curl -X GET \                                                                                                             08:48:01
+curl -X GET \
 --url https://api.us.security.cisco.com/firewall/v1/inventory/devices \
 --header "Authorization: Bearer $API_TOKEN"
 ```
