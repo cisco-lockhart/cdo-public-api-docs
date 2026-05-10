@@ -185,6 +185,7 @@ nav:
     - FmcObjectReference: FmcObjectReference.md
     - FmcRequest: FmcRequest.md
     - FmcTemplateVariable: FmcTemplateVariable.md
+    - FtdChangeItemDto: FtdChangeItemDto.md
     - FtdClusterInfo: FtdClusterInfo.md
     - FtdCompatibilityVersion: FtdCompatibilityVersion.md
     - FtdCreateOrUpdateInput: FtdCreateOrUpdateInput.md
@@ -307,6 +308,7 @@ nav:
     - RaVpnSessionHealthMetrics: RaVpnSessionHealthMetrics.md
     - RaVpnSessionPage: RaVpnSessionPage.md
     - RedirectView: RedirectView.md
+    - Reference: Reference.md
     - ReferenceInfo: ReferenceInfo.md
     - RuleTimeRangeContent: RuleTimeRangeContent.md
     - S2sVpnTunnelHealthMetrics: S2sVpnTunnelHealthMetrics.md
@@ -366,6 +368,7 @@ nav:
     - UnifiedObjectListView: UnifiedObjectListView.md
     - UniversalZtnaSettings: UniversalZtnaSettings.md
     - UpdateRequest: UpdateRequest.md
+    - UpdatedValue: UpdatedValue.md
     - UpgradeAsaDeviceInput: UpgradeAsaDeviceInput.md
     - UpgradeAsaDevicesInput: UpgradeAsaDevicesInput.md
     - UpgradeCompatibilityInfoDto: UpgradeCompatibilityInfoDto.md
@@ -381,6 +384,7 @@ nav:
     - UserInput: UserInput.md
     - UserPage: UserPage.md
     - UserRole: UserRole.md
+    - Value: Value.md
     - VirtualAccountDto: VirtualAccountDto.md
     - VirtualAccountsPage: VirtualAccountsPage.md
     - VlanIdRange: VlanIdRange.md

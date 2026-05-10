@@ -3876,6 +3876,78 @@ paths:
             summary: Onboard FTD device
             tags:
                 - Inventory
+    /v1/inventory/devices/ftds/{deviceUid}/changes/pending:
+        get:
+            description: 'Get the pending changes on a cdFMC-managed FTD. Note 1: if there is no deployment baseline available to compare the current state of the device against, an empty list will be returned. Note 2: This is not a paginated endpoint.'
+            operationId: getFtdDevicePendingChanges
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/FtdChangeItemDto'
+                                type: array
+                    description: List of pending changes on a cdFMC-managed FTD
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get pending changes on a cdFMC-managed FTD
+            tags:
+                - Inventory
+        post:
+            description: 'This is an asynchronous operation to calculate the pending changes on a cdFMC-managed FTD. Note: if there is no deployment baseline available to compare the current state of the device against, an empty list will be returned.'
+            operationId: calculateFtdDevicePendingChanges
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the progress of the calculation operation.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Calculate pending changes on a cdFMC-managed FTD
+            tags:
+                - Inventory
     /v1/inventory/devices/ftds/{deviceUid}/deploy:
         post:
             description: |
@@ -14012,7 +14084,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -14160,6 +14232,83 @@ components:
             required:
                 - name
                 - value
+            type: object
+        FtdChangeItemDto:
+            properties:
+                addedReferences:
+                    description: The list of references added to this entity as part of the change.
+                    items:
+                        $ref: '#/components/schemas/Reference'
+                    type: array
+                addedValues:
+                    description: The list of values added to this entity as part of the change.
+                    items:
+                        $ref: '#/components/schemas/Value'
+                    type: array
+                changeItemType:
+                    description: Indicates if this item represents an actual entity change or a grouping header.
+                    enum:
+                        - ENTITY_CHANGE
+                        - GROUPING_HEADER
+                    type: string
+                changeType:
+                    description: The type of the change.
+                    enum:
+                        - ADD
+                        - DELETE
+                        - UPDATE
+                        - NOCHANGE
+                    type: string
+                children:
+                    description: The children of this change item. This represents changes that rest within the group represented by this change item.
+                    items:
+                        $ref: '#/components/schemas/FtdChangeItemDto'
+                    type: array
+                deletedReferences:
+                    description: The list of references deleted from this entity as part of the change.
+                    items:
+                        $ref: '#/components/schemas/Reference'
+                    type: array
+                deletedValues:
+                    description: The list of values removed from this entity as part of the change.
+                    items:
+                        $ref: '#/components/schemas/Value'
+                    type: array
+                deviceUid:
+                    description: The unique identifier, represented as a UUID, of the device the changed entity is associated with.
+                    format: uuid
+                    type: string
+                entityType:
+                    description: The type of the changed entity.
+                    type: string
+                entityUid:
+                    description: The unique identifier, represented as a UUID, of the changed entity.
+                    format: uuid
+                    type: string
+                errorMsg:
+                    description: An error message indicating why a diff could not be generated for the changed entity.
+                    type: string
+                lastUpdatedByUsers:
+                    description: The list of users who have made the changes to this entity.
+                    items:
+                        type: string
+                    type: array
+                name:
+                    description: The name of the changed entity.
+                    type: string
+                parentUid:
+                    description: The unique identifier, represented as a UUID, of the 'parent' of this change item. The parentUid, if set, can be used to identify the group that this change belongs to.
+                    format: uuid
+                    type: string
+                uid:
+                    description: 'The unique identifier, represented as a UUID, of this change item. Note: this is not the unique identifier of the changed entity.'
+                    format: uuid
+                    type: string
+                updatedValues:
+                    description: The list of values updated on this entity as part of the change.
+                    items:
+                        $ref: '#/components/schemas/UpdatedValue'
+                    type: array
             type: object
         FtdClusterInfo:
             properties:
@@ -17251,6 +17400,15 @@ components:
                     format: int32
                     type: integer
             type: object
+        Reference:
+            properties:
+                fieldName:
+                    type: string
+                name:
+                    type: string
+                type:
+                    type: string
+            type: object
         ReferenceInfo:
             properties:
                 name:
@@ -18494,6 +18652,15 @@ components:
                     $ref: '#/components/schemas/SharedObjectValue'
                     description: The value of the object
             type: object
+        UpdatedValue:
+            properties:
+                fieldName:
+                    type: string
+                newValue:
+                    type: string
+                oldValue:
+                    type: string
+            type: object
         UpgradeAsaDeviceInput:
             properties:
                 asdmVersion:
@@ -18887,6 +19054,13 @@ components:
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
             type: string
+        Value:
+            properties:
+                fieldName:
+                    type: string
+                value:
+                    type: string
+            type: object
         VirtualAccountDto:
             properties:
                 complianceStatus:
