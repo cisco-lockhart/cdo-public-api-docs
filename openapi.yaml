@@ -12788,11 +12788,6 @@ components:
             type: object
         CompletionStatusDto:
             properties:
-                completedAt:
-                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
-                    example: 2026-04-15T18:00:10.123Z
-                    format: date-time
-                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
@@ -17708,11 +17703,12 @@ components:
                     format: uuid
                     type: string
                 upgradeRunStatus:
-                    description: 'The current status of the upgrade run. One of: UPLOADING_IMAGES, UPDATING_RA_VPN_CONFIG, DELETING_OLD_IMAGES, DONE, ERROR.'
+                    description: 'The current status of the upgrade run. One of: UPLOADING_IMAGES, CHECKING_IMAGES_UPLOAD_RESULTS, UPDATING_RA_VPN_CONFIG, DELETING_OLD_IMAGES, DONE, ERROR.'
                     enum:
                         - VALIDATING_INPUTS
                         - FETCHING_CURRENTLY_INSTALLED_PACKAGES
                         - UPLOADING_IMAGES
+                        - CHECKING_IMAGES_UPLOAD_RESULTS
                         - UPDATING_RA_VPN_CONFIG
                         - DELETING_OLD_IMAGES
                         - DONE
