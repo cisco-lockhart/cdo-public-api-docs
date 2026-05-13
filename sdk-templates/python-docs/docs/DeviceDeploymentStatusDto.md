@@ -5,7 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**completion_statuses** | [**List[CompletionStatusDto]**](CompletionStatusDto.md) | The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster. | [optional] 
+**completion_status** | [**CompletionStatusDto**](CompletionStatusDto.md) |  | [optional] 
+**error_details** | [**List[ErrorDetails]**](ErrorDetails.md) | Detailed error information reported for this device during deployment. | [optional] 
+**error_msg** | **str** | A summary error message if the deployment failed for this device. | [optional] 
+**name** | **str** | The name of the device in SCC Firewall Manager. | [optional] 
+**status** | **str** | The overall status of the deployment on this device | [optional] 
 **uid** | **str** | The unique identifier, represented as a UUID, of the device in SCC Firewall Manager. | [optional] 
 
 ## Example

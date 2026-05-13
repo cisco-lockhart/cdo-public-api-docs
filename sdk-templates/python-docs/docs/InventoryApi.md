@@ -15,6 +15,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**bulk_accept_asa_certificates**](InventoryApi.md#bulk_accept_asa_certificates) | **POST** /v1/inventory/devices/asas/acceptCert | Accept certificates for multiple ASA devices
 [**bulk_read_asa_device_configurations**](InventoryApi.md#bulk_read_asa_device_configurations) | **POST** /v1/inventory/devices/asas/read | Read configurations for multiple ASA devices
+[**calculate_ftd_device_pending_changes**](InventoryApi.md#calculate_ftd_device_pending_changes) | **POST** /v1/inventory/devices/ftds/{deviceUid}/changes/pending | Calculate pending changes on a cdFMC-managed FTD
 [**create_duo_admin_panel**](InventoryApi.md#create_duo_admin_panel) | **POST** /v1/inventory/devices/duoAdminPanels | Onboard Duo Admin Panel
 [**create_ftd_device**](InventoryApi.md#create_ftd_device) | **POST** /v1/inventory/devices/ftds | Onboard FTD device
 [**delete_cd_fmc_managed_ftd_device**](InventoryApi.md#delete_cd_fmc_managed_ftd_device) | **POST** /v1/inventory/devices/ftds/cdfmcManaged/{deviceUid}/delete | Delete cdFMC managed FTD device
@@ -23,10 +24,12 @@ Method | HTTP request | Description
 [**delete_device_manager**](InventoryApi.md#delete_device_manager) | **DELETE** /v1/inventory/managers/{deviceManagerUid} | Delete Device Manager
 [**delete_template_device**](InventoryApi.md#delete_template_device) | **DELETE** /v1/inventory/templates/{templateDeviceUid} | Delete Template Device
 [**deploy_asa_device_changes**](InventoryApi.md#deploy_asa_device_changes) | **POST** /v1/inventory/devices/asas/{deviceUid}/deploy | Deploy ASA device changes
-[**deploy_changes_to_multiple_ftd_devices**](InventoryApi.md#deploy_changes_to_multiple_ftd_devices) | **POST** /v1/inventory/devices/ftds/deploy | (cdFMC-managed FTDs only) Deploy changes to multiple FTD devices
 [**deploy_ftd_device_changes**](InventoryApi.md#deploy_ftd_device_changes) | **POST** /v1/inventory/devices/ftds/{deviceUid}/deploy | (cdFMC-managed FTDs only) Deploy FTD device changes
 [**enable_multicloud_defense**](InventoryApi.md#enable_multicloud_defense) | **POST** /v1/inventory/managers/mcd | Enable Multicloud Defense
+[**export_cloud_services**](InventoryApi.md#export_cloud_services) | **POST** /v1/inventory/services/export | Export Cloud Services
+[**export_device_managers**](InventoryApi.md#export_device_managers) | **POST** /v1/inventory/managers/export | Export Device Managers
 [**export_devices**](InventoryApi.md#export_devices) | **POST** /v1/inventory/devices/export | Export Devices
+[**export_templates**](InventoryApi.md#export_templates) | **POST** /v1/inventory/templates/export | Export Templates
 [**finish_onboarding_ftd_device**](InventoryApi.md#finish_onboarding_ftd_device) | **POST** /v1/inventory/devices/ftds/register | Register FTD device to FMC
 [**get_asa_configuration**](InventoryApi.md#get_asa_configuration) | **GET** /v1/inventory/devices/asas/{deviceUid}/configs | Get ASA configuration details
 [**get_cloud_service**](InventoryApi.md#get_cloud_service) | **GET** /v1/inventory/services/{cloudServiceUid} | Get Cloud Service
@@ -38,6 +41,7 @@ Method | HTTP request | Description
 [**get_device_managers**](InventoryApi.md#get_device_managers) | **GET** /v1/inventory/managers | Get Device Managers
 [**get_devices**](InventoryApi.md#get_devices) | **GET** /v1/inventory/devices | Get Devices
 [**get_fmc_health**](InventoryApi.md#get_fmc_health) | **GET** /v1/inventory/managers/{fmcUid}/health/metrics | Get health metrics on devices managed by the FMC (cdFMC only)
+[**get_ftd_device_pending_changes**](InventoryApi.md#get_ftd_device_pending_changes) | **GET** /v1/inventory/devices/ftds/{deviceUid}/changes/pending | Get pending changes on a cdFMC-managed FTD
 [**get_template_device**](InventoryApi.md#get_template_device) | **GET** /v1/inventory/templates/{templateDeviceUid} | Get Template Device
 [**get_template_devices**](InventoryApi.md#get_template_devices) | **GET** /v1/inventory/templates | Get Template Devices
 [**modify_cloud_service**](InventoryApi.md#modify_cloud_service) | **PATCH** /v1/inventory/services/{cloudServiceUid} | Modify Cloud Service
@@ -215,6 +219,88 @@ Name | Type | Description  | Notes
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **calculate_ftd_device_pending_changes**
+> CdoTransaction calculate_ftd_device_pending_changes(device_uid)
+
+Calculate pending changes on a cdFMC-managed FTD
+
+This is an asynchronous operation to calculate the pending changes on a cdFMC-managed FTD. Note: if there is no deployment baseline available to compare the current state of the device against, an empty list will be returned.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.InventoryApi(api_client)
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control.
+
+    try:
+        # Calculate pending changes on a cdFMC-managed FTD
+        api_response = api_instance.calculate_ftd_device_pending_changes(device_uid)
+        print("The response of InventoryApi->calculate_ftd_device_pending_changes:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InventoryApi->calculate_ftd_device_pending_changes: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control. | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Security Cloud Control Transaction object that can be used to track the progress of the calculation operation. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**404** | Entity not found. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -869,95 +955,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **deploy_changes_to_multiple_ftd_devices**
-> CdoTransaction deploy_changes_to_multiple_ftd_devices(ftd_multi_device_deployment_input)
-
-(cdFMC-managed FTDs only) Deploy changes to multiple FTD devices
-
-This is an asynchronous operation to deploy changes made to the configurations of multiple cdFMC-managed FTD devices on Security Cloud Control. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.  Notes:  - This operation is only supported for cdFMC-managed FTD devices.  - This operation will only deploy changes to the device if there are pending changes to deploy.   
-
-### Example
-
-* Bearer (JWT) Authentication (bearerAuth):
-
-```python
-import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
-from scc_firewall_manager_sdk.models.ftd_multi_device_deployment_input import FtdMultiDeviceDeploymentInput
-from scc_firewall_manager_sdk.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
-# See configuration.py for a list of all supported configuration parameters.
-configuration = scc_firewall_manager_sdk.Configuration(
-    host = "https://api.us.security.cisco.com/firewall"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): bearerAuth
-configuration = scc_firewall_manager_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = scc_firewall_manager_sdk.InventoryApi(api_client)
-    ftd_multi_device_deployment_input = scc_firewall_manager_sdk.FtdMultiDeviceDeploymentInput() # FtdMultiDeviceDeploymentInput | 
-
-    try:
-        # (cdFMC-managed FTDs only) Deploy changes to multiple FTD devices
-        api_response = api_instance.deploy_changes_to_multiple_ftd_devices(ftd_multi_device_deployment_input)
-        print("The response of InventoryApi->deploy_changes_to_multiple_ftd_devices:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling InventoryApi->deploy_changes_to_multiple_ftd_devices: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ftd_multi_device_deployment_input** | [**FtdMultiDeviceDeploymentInput**](FtdMultiDeviceDeploymentInput.md)|  | 
-
-### Return type
-
-[**CdoTransaction**](CdoTransaction.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**202** | Security Cloud Control Transaction object that can be used to track the progress of the creation operation. |  -  |
-**400** | Invalid input provided. Check the response for details. |  -  |
-**401** | Request not authorized. |  -  |
-**403** | User does not have sufficient privileges to perform this operation. |  -  |
-**500** | Internal server error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **deploy_ftd_device_changes**
 > CdoTransaction deploy_ftd_device_changes(device_uid, ftd_deployment_input)
 
 (cdFMC-managed FTDs only) Deploy FTD device changes
 
-This is an asynchronous operation to deploy changes made to a cdFMC-managed FTD device's configuration on Security Cloud Control to the device. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.  Notes:  - This operation is only supported for cdFMC-managed FTD devices.  - This operation will only deploy changes to the device if there are pending changes to deploy.  - Once this operation is finished, it can take up to 10 minutes for the [device](https://developer.cisco.com/docs/cisco-security-cloud-control/device/) [configState](https://developer.cisco.com/docs/cisco-security-cloud-control/configstate/) to be updated from `SYNCED` to `NOT_SYNCED` on Security Cloud Control. 
+This is an asynchronous operation to deploy changes made to a cdFMC-managed FTD device's configuration on Security Cloud Control to the device. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.  Notes:  - This operation is deprecated and will be removed in a subsequent release.  - This operation is only supported for cdFMC-managed FTD devices.  - This operation will only deploy changes to the device if there are pending changes to deploy.  - Once this operation is finished, it can take up to 10 minutes for the [device](https://developer.cisco.com/docs/cisco-security-cloud-control/device/) [configState](https://developer.cisco.com/docs/cisco-security-cloud-control/configstate/) to be updated from `SYNCED` to `NOT_SYNCED` on Security Cloud Control. 
 
 ### Example
 
@@ -1116,8 +1119,174 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **export_cloud_services**
+> CdoTransaction export_cloud_services(export_input=export_input)
+
+Export Cloud Services
+
+This is an asynchronous operation to export cloud services in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.models.export_input import ExportInput
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.InventoryApi(api_client)
+    export_input = scc_firewall_manager_sdk.ExportInput() # ExportInput |  (optional)
+
+    try:
+        # Export Cloud Services
+        api_response = api_instance.export_cloud_services(export_input=export_input)
+        print("The response of InventoryApi->export_cloud_services:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InventoryApi->export_cloud_services: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **export_input** | [**ExportInput**](ExportInput.md)|  | [optional] 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the &lt;code&gt;entityUrl&lt;/code&gt; field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **export_device_managers**
+> CdoTransaction export_device_managers(export_input=export_input)
+
+Export Device Managers
+
+This is an asynchronous operation to export device managers in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.models.export_input import ExportInput
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.InventoryApi(api_client)
+    export_input = scc_firewall_manager_sdk.ExportInput() # ExportInput |  (optional)
+
+    try:
+        # Export Device Managers
+        api_response = api_instance.export_device_managers(export_input=export_input)
+        print("The response of InventoryApi->export_device_managers:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InventoryApi->export_device_managers: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **export_input** | [**ExportInput**](ExportInput.md)|  | [optional] 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the &lt;code&gt;entityUrl&lt;/code&gt; field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **export_devices**
-> CdoTransaction export_devices(export_input)
+> CdoTransaction export_devices(export_input=export_input)
 
 Export Devices
 
@@ -1154,11 +1323,11 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.InventoryApi(api_client)
-    export_input = scc_firewall_manager_sdk.ExportInput() # ExportInput | 
+    export_input = scc_firewall_manager_sdk.ExportInput() # ExportInput |  (optional)
 
     try:
         # Export Devices
-        api_response = api_instance.export_devices(export_input)
+        api_response = api_instance.export_devices(export_input=export_input)
         print("The response of InventoryApi->export_devices:\n")
         pprint(api_response)
     except Exception as e:
@@ -1172,7 +1341,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **export_input** | [**ExportInput**](ExportInput.md)|  | 
+ **export_input** | [**ExportInput**](ExportInput.md)|  | [optional] 
 
 ### Return type
 
@@ -1196,6 +1365,89 @@ Name | Type | Description  | Notes
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
 **405** | Method not allowed. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **export_templates**
+> CdoTransaction export_templates(export_input=export_input)
+
+Export Templates
+
+This is an asynchronous operation to export templates in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.models.export_input import ExportInput
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.InventoryApi(api_client)
+    export_input = scc_firewall_manager_sdk.ExportInput() # ExportInput |  (optional)
+
+    try:
+        # Export Templates
+        api_response = api_instance.export_templates(export_input=export_input)
+        print("The response of InventoryApi->export_templates:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InventoryApi->export_templates: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **export_input** | [**ExportInput**](ExportInput.md)|  | [optional] 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the &lt;code&gt;entityUrl&lt;/code&gt; field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2126,6 +2378,88 @@ Name | Type | Description  | Notes
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
 **405** | Method not allowed. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_ftd_device_pending_changes**
+> FtdChangeItemDto get_ftd_device_pending_changes(device_uid)
+
+Get pending changes on a cdFMC-managed FTD
+
+Get the pending changes on a cdFMC-managed FTD. Note 1: if there is no deployment baseline available to compare the current state of the device against, an empty list will be returned. Note 2: This is not a paginated endpoint.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.ftd_change_item_dto import FtdChangeItemDto
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.InventoryApi(api_client)
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control.
+
+    try:
+        # Get pending changes on a cdFMC-managed FTD
+        api_response = api_instance.get_ftd_device_pending_changes(device_uid)
+        print("The response of InventoryApi->get_ftd_device_pending_changes:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InventoryApi->get_ftd_device_pending_changes: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control. | 
+
+### Return type
+
+[**FtdChangeItemDto**](FtdChangeItemDto.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of pending changes on a cdFMC-managed FTD |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**404** | Entity not found. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

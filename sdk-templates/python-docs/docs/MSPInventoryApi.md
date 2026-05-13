@@ -33,7 +33,7 @@ Method | HTTP request | Description
 
 
 # **export_msp_managed_cloud_services**
-> CdoTransaction export_msp_managed_cloud_services(msp_export_input)
+> CdoTransaction export_msp_managed_cloud_services(msp_export_input=msp_export_input)
 
 Export MSP-managed Cloud Services
 
@@ -70,11 +70,11 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.MSPInventoryApi(api_client)
-    msp_export_input = scc_firewall_manager_sdk.MspExportInput() # MspExportInput | 
+    msp_export_input = scc_firewall_manager_sdk.MspExportInput() # MspExportInput |  (optional)
 
     try:
         # Export MSP-managed Cloud Services
-        api_response = api_instance.export_msp_managed_cloud_services(msp_export_input)
+        api_response = api_instance.export_msp_managed_cloud_services(msp_export_input=msp_export_input)
         print("The response of MSPInventoryApi->export_msp_managed_cloud_services:\n")
         pprint(api_response)
     except Exception as e:
@@ -88,7 +88,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **msp_export_input** | [**MspExportInput**](MspExportInput.md)|  | 
+ **msp_export_input** | [**MspExportInput**](MspExportInput.md)|  | [optional] 
 
 ### Return type
 
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **export_msp_managed_device_managers**
-> CdoTransaction export_msp_managed_device_managers(msp_export_input)
+> CdoTransaction export_msp_managed_device_managers(msp_export_input=msp_export_input)
 
 Export MSP-managed Device Managers
 
@@ -150,11 +150,11 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.MSPInventoryApi(api_client)
-    msp_export_input = scc_firewall_manager_sdk.MspExportInput() # MspExportInput | 
+    msp_export_input = scc_firewall_manager_sdk.MspExportInput() # MspExportInput |  (optional)
 
     try:
         # Export MSP-managed Device Managers
-        api_response = api_instance.export_msp_managed_device_managers(msp_export_input)
+        api_response = api_instance.export_msp_managed_device_managers(msp_export_input=msp_export_input)
         print("The response of MSPInventoryApi->export_msp_managed_device_managers:\n")
         pprint(api_response)
     except Exception as e:
@@ -168,7 +168,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **msp_export_input** | [**MspExportInput**](MspExportInput.md)|  | 
+ **msp_export_input** | [**MspExportInput**](MspExportInput.md)|  | [optional] 
 
 ### Return type
 
@@ -193,7 +193,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **export_msp_managed_devices**
-> CdoTransaction export_msp_managed_devices(msp_export_input)
+> CdoTransaction export_msp_managed_devices(msp_export_input=msp_export_input)
 
 Export MSP-managed Devices
 
@@ -230,11 +230,11 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.MSPInventoryApi(api_client)
-    msp_export_input = scc_firewall_manager_sdk.MspExportInput() # MspExportInput | 
+    msp_export_input = scc_firewall_manager_sdk.MspExportInput() # MspExportInput |  (optional)
 
     try:
         # Export MSP-managed Devices
-        api_response = api_instance.export_msp_managed_devices(msp_export_input)
+        api_response = api_instance.export_msp_managed_devices(msp_export_input=msp_export_input)
         print("The response of MSPInventoryApi->export_msp_managed_devices:\n")
         pprint(api_response)
     except Exception as e:
@@ -248,7 +248,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **msp_export_input** | [**MspExportInput**](MspExportInput.md)|  | 
+ **msp_export_input** | [**MspExportInput**](MspExportInput.md)|  | [optional] 
 
 ### Return type
 
@@ -273,7 +273,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **export_msp_managed_templates**
-> CdoTransaction export_msp_managed_templates(msp_export_input)
+> CdoTransaction export_msp_managed_templates(msp_export_input=msp_export_input)
 
 Export MSP-managed Templates
 
@@ -310,11 +310,11 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.MSPInventoryApi(api_client)
-    msp_export_input = scc_firewall_manager_sdk.MspExportInput() # MspExportInput | 
+    msp_export_input = scc_firewall_manager_sdk.MspExportInput() # MspExportInput |  (optional)
 
     try:
         # Export MSP-managed Templates
-        api_response = api_instance.export_msp_managed_templates(msp_export_input)
+        api_response = api_instance.export_msp_managed_templates(msp_export_input=msp_export_input)
         print("The response of MSPInventoryApi->export_msp_managed_templates:\n")
         pprint(api_response)
     except Exception as e:
@@ -328,7 +328,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **msp_export_input** | [**MspExportInput**](MspExportInput.md)|  | 
+ **msp_export_input** | [**MspExportInput**](MspExportInput.md)|  | [optional] 
 
 ### Return type
 

@@ -3436,10 +3436,47 @@ paths:
             summary: Read configurations for multiple ASA devices
             tags:
                 - Inventory
+    /v1/inventory/devices/asas/secure-client/upgrades:
+        post:
+            description: Initiate a Secure Client package upgrade on one or more ASA devices. The endpoint validates that all target devices are eligible, creates a CDO transaction and a SecureClientUpgradeRun tracking object, and returns 202 Accepted with the transaction.
+            operationId: triggerSecureClientUpgrade
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/TriggerSecureClientUpgradeInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the operation.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Trigger Secure Client upgrade on ASA devices
+            tags:
+                - Secure Client Management
+            x-beta: "true"
     /v1/inventory/devices/asas/secure-client/upgrades/versions:
         get:
             description: Get a list of compatible Secure Client upgrade versions for the specified ASA devices.
-            operationId: getAsaCompatibleSecureClientVersionDtos
+            operationId: getAsaCompatibleSecureClientVersions
             parameters:
                 - description: The unique identifiers, represented as UUIDs, of the ASA devices in Security Cloud Control.
                   in: query
@@ -3479,6 +3516,8 @@ paths:
                     $ref: '#/components/responses/http400BadRequest'
                 "401":
                     $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
                 "405":
                     $ref: '#/components/responses/http405MethodNotAllowed'
                 "500":
@@ -3696,6 +3735,52 @@ paths:
             summary: Get Device Deployment Run
             tags:
                 - Device Deployments
+    /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/changes:
+        get:
+            description: 'Get the changes that were deployed to a device as part of a deployment run. Note: if the deployment failed, the changes returned are the changes we attempted to deploy to the device.'
+            operationId: getChangesDeployedInDeploymentRun
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device deployment Run in SCC Firewall Manager.
+                  in: path
+                  name: deploymentRunUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/FtdChangeItemDto'
+                                type: array
+                    description: The Device Deployment Run object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Deployed Device Changes in Deployment Run
+            tags:
+                - Device Deployments
     /v1/inventory/devices/duoAdminPanels:
         post:
             description: Onboard a Duo Admin Panel to the CDO tenant. The credentials to onboard the Duo Admin Panel to Security Cloud Control must be generated by creating an Admin API application on https://www.duo.com. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
@@ -3777,7 +3862,6 @@ paths:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/ExportInput'
-                required: true
             responses:
                 "202":
                     content:
@@ -3838,12 +3922,87 @@ paths:
             summary: Onboard FTD device
             tags:
                 - Inventory
+    /v1/inventory/devices/ftds/{deviceUid}/changes/pending:
+        get:
+            description: 'Get the pending changes on a cdFMC-managed FTD. Note 1: if there is no deployment baseline available to compare the current state of the device against, an empty list will be returned. Note 2: This is not a paginated endpoint.'
+            operationId: getFtdDevicePendingChanges
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/FtdChangeItemDto'
+                                type: array
+                    description: List of pending changes on a cdFMC-managed FTD
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get pending changes on a cdFMC-managed FTD
+            tags:
+                - Inventory
+        post:
+            description: 'This is an asynchronous operation to calculate the pending changes on a cdFMC-managed FTD. Note: if there is no deployment baseline available to compare the current state of the device against, an empty list will be returned.'
+            operationId: calculateFtdDevicePendingChanges
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the progress of the calculation operation.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Calculate pending changes on a cdFMC-managed FTD
+            tags:
+                - Inventory
     /v1/inventory/devices/ftds/{deviceUid}/deploy:
         post:
+            deprecated: true
             description: |
                 This is an asynchronous operation to deploy changes made to a cdFMC-managed FTD device's configuration on Security Cloud Control to the device. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
 
                 Notes:
+
+                - This operation is deprecated and will be removed in a subsequent release.
 
                 - This operation is only supported for cdFMC-managed FTD devices.
 
@@ -4010,49 +4169,6 @@ paths:
             security:
                 - bearerAuth: []
             summary: Delete cdFMC managed FTD device
-            tags:
-                - Inventory
-    /v1/inventory/devices/ftds/deploy:
-        post:
-            description: |+
-                This is an asynchronous operation to deploy changes made to the configurations of multiple cdFMC-managed FTD devices on Security Cloud Control. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
-
-                Notes:
-
-                - This operation is only supported for cdFMC-managed FTD devices.
-
-                - This operation will only deploy changes to the device if there are pending changes to deploy.
-
-
-            operationId: deployChangesToMultipleFtdDevices
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/FtdMultiDeviceDeploymentInput'
-                required: true
-            responses:
-                "202":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CdoTransaction'
-                    description: Security Cloud Control Transaction object that can be used to track the progress of the creation operation.
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: (cdFMC-managed FTDs only) Deploy changes to multiple FTD devices
             tags:
                 - Inventory
     /v1/inventory/devices/ftds/health/metrics:
@@ -4733,6 +4849,110 @@ paths:
             summary: Onboard IOS Device
             tags:
                 - Inventory
+    /v1/inventory/devices/secure-client/upgrades/runs:
+        get:
+            description: Get a list of Secure Client upgrade runs in the Security Cloud Control tenant. Each upgrade run represents a group of devices having their Secure Client packages upgraded together.
+            operationId: getSecureClientUpgradeRuns
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SecureClientUpgradeRunPage'
+                    description: List of Secure Client Upgrade Run objects
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Secure Client Upgrade Runs
+            tags:
+                - Secure Client Management
+            x-beta: "true"
+    /v1/inventory/devices/secure-client/upgrades/runs/{upgradeRunUid}:
+        get:
+            description: Get a Secure Client Upgrade Run by UID in the Security Cloud Control tenant. Each upgrade run represents a group of devices having their Secure Client packages upgraded together.
+            operationId: getSecureClientUpgradeRun
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the Secure Client Upgrade Run in Security Cloud Control.
+                  in: path
+                  name: upgradeRunUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SecureClientUpgradeRunDto'
+                    description: The Secure Client Upgrade Run object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Secure Client Upgrade Run
+            tags:
+                - Secure Client Management
+            x-beta: "true"
     /v1/inventory/devices/upgrades/runs:
         get:
             description: Get a list of device upgrade runs in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices being upgraded, or staged for upgrades, together.
@@ -5161,6 +5381,39 @@ paths:
             summary: Provision cdFMC
             tags:
                 - Inventory
+    /v1/inventory/managers/export:
+        post:
+            description: This is an asynchronous operation to export device managers in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
+            operationId: exportDeviceManagers
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ExportInput'
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the <code>entityUrl</code> field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Export Device Managers
+            tags:
+                - Inventory
     /v1/inventory/managers/mcd:
         post:
             description: This is an asynchronous operation to Enable Multicloud Defense for the Security Cloud Control tenant. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
@@ -5363,6 +5616,39 @@ paths:
             summary: Modify Cloud Service
             tags:
                 - Inventory
+    /v1/inventory/services/export:
+        post:
+            description: This is an asynchronous operation to export cloud services in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
+            operationId: exportCloudServices
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ExportInput'
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the <code>entityUrl</code> field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Export Cloud Services
+            tags:
+                - Inventory
     /v1/inventory/templates:
         get:
             description: Get a list of template devices in the Security Cloud Control tenant.
@@ -5535,6 +5821,39 @@ paths:
             summary: Modify Template Device
             tags:
                 - Inventory
+    /v1/inventory/templates/export:
+        post:
+            description: This is an asynchronous operation to export templates in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
+            operationId: exportTemplates
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ExportInput'
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the <code>entityUrl</code> field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Export Templates
+            tags:
+                - Inventory
     /v1/licenses/devices:
         get:
             description: 'Get a paginated list of device licenses. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
@@ -5642,7 +5961,6 @@ paths:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/ExportInput'
-                required: true
             responses:
                 "202":
                     content:
@@ -5977,7 +6295,6 @@ paths:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/ExportInput'
-                required: true
             responses:
                 "202":
                     content:
@@ -6355,7 +6672,6 @@ paths:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/MspExportInput'
-                required: true
             responses:
                 "202":
                     content:
@@ -6888,7 +7204,6 @@ paths:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/MspExportInput'
-                required: true
             responses:
                 "202":
                     content:
@@ -7024,7 +7339,6 @@ paths:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/MspExportInput'
-                required: true
             responses:
                 "202":
                     content:
@@ -7160,7 +7474,6 @@ paths:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/MspExportInput'
-                required: true
             responses:
                 "202":
                     content:
@@ -7286,7 +7599,6 @@ paths:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/MspExportInput'
-                required: true
             responses:
                 "202":
                     content:
@@ -7621,7 +7933,6 @@ paths:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/MspExportInput'
-                required: true
             responses:
                 "202":
                     content:
@@ -8323,7 +8634,6 @@ paths:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/MspExportInput'
-                required: true
             responses:
                 "202":
                     content:
@@ -11875,6 +12185,7 @@ components:
                         - UPGRADE_ASA
                         - UPGRADE_FTD
                         - UPGRADE_FTD_CACHE
+                        - UPGRADE_SECURE_CLIENT_PACKAGES
                         - MSP_UPGRADE_ASAS
                         - MSP_UPGRADE_FTDS
                         - MSP_GET_COMPATIBLE_FTD_UPGRADE_PACKAGES
@@ -11918,6 +12229,7 @@ components:
                         - IMPORT_FMC_OBJECTS
                         - NAT_PAO_TRIGGER_PDF_GENERATION
                         - BIDIRECTIONAL_OBJECT_RECONCILIATION
+                        - CALCULATE_FTD_PENDING_CHANGES
                     example: ONBOARD_ASA
                     type: string
                 transactionUid:
@@ -12482,6 +12794,11 @@ components:
             type: object
         CompletionStatusDto:
             properties:
+                completedAt:
+                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
+                    example: 2026-04-15T18:00:10.123Z
+                    format: date-time
+                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
@@ -12607,13 +12924,16 @@ components:
             type: object
         DeploymentRunDto:
             properties:
+                deployerUsername:
+                    description: The name of the user performing the deploy.
+                    example: john.doe@example.com
+                    type: string
                 deploymentRunStatus:
                     description: The status of the deployment
                     enum:
                         - PENDING
                         - VALIDATING_DEVICES
-                        - TRIGGERING_DEPLOY
-                        - WAITING_FOR_DEPLOY
+                        - DEPLOYING
                         - DEPLOY_COMPLETED
                         - DEPLOY_FAILED
                     example: WAITING_FOR_DEPLOY
@@ -12647,6 +12967,15 @@ components:
                 errorMsg:
                     description: Error message if the deployment failed.
                     example: Timeout error
+                    type: string
+                failureReason:
+                    description: The reason the deployment failed, if applicable.
+                    enum:
+                        - VALIDATION_FAILED
+                        - WARNINGS_REJECTED
+                        - TRIGGER_ERROR
+                        - DEVICE_DEPLOY_FAILED
+                    example: WARNINGS_REJECTED
                     type: string
                 ignoreWarnings:
                     description: Boolean indicating whether warnings identified by the deployment sub-system about this deployment were ignored.
@@ -13069,11 +13398,29 @@ components:
             type: object
         DeviceDeploymentStatusDto:
             properties:
-                completionStatuses:
-                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+                completionStatus:
+                    $ref: '#/components/schemas/CompletionStatusDto'
+                    description: The completion status of the deployment on the device.
+                errorDetails:
+                    description: Detailed error information reported for this device during deployment.
                     items:
-                        $ref: '#/components/schemas/CompletionStatusDto'
+                        $ref: '#/components/schemas/ErrorDetails'
                     type: array
+                errorMsg:
+                    description: A summary error message if the deployment failed for this device.
+                    type: string
+                name:
+                    description: The name of the device in SCC Firewall Manager.
+                    example: My FTD
+                    type: string
+                status:
+                    description: The overall status of the deployment on this device
+                    enum:
+                        - IN_PROGRESS
+                        - DONE
+                        - ERROR
+                        - SKIPPED
+                    type: string
                 uid:
                     description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
@@ -13625,6 +13972,19 @@ components:
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
             type: string
+        ErrorDetails:
+            properties:
+                code:
+                    type: string
+                description:
+                    type: string
+                details:
+                    additionalProperties:
+                        type: string
+                    type: object
+                severity:
+                    type: string
+            type: object
         EtherChannelInterfaceCreateInput:
             properties:
                 description:
@@ -13928,6 +14288,83 @@ components:
                 - name
                 - value
             type: object
+        FtdChangeItemDto:
+            properties:
+                addedReferences:
+                    description: The list of references added to this entity as part of the change.
+                    items:
+                        $ref: '#/components/schemas/Reference'
+                    type: array
+                addedValues:
+                    description: The list of values added to this entity as part of the change.
+                    items:
+                        $ref: '#/components/schemas/Value'
+                    type: array
+                changeItemType:
+                    description: Indicates if this item represents an actual entity change or a grouping header.
+                    enum:
+                        - ENTITY_CHANGE
+                        - GROUPING_HEADER
+                    type: string
+                changeType:
+                    description: The type of the change.
+                    enum:
+                        - ADD
+                        - DELETE
+                        - UPDATE
+                        - NOCHANGE
+                    type: string
+                children:
+                    description: The children of this change item. This represents changes that rest within the group represented by this change item.
+                    items:
+                        $ref: '#/components/schemas/FtdChangeItemDto'
+                    type: array
+                deletedReferences:
+                    description: The list of references deleted from this entity as part of the change.
+                    items:
+                        $ref: '#/components/schemas/Reference'
+                    type: array
+                deletedValues:
+                    description: The list of values removed from this entity as part of the change.
+                    items:
+                        $ref: '#/components/schemas/Value'
+                    type: array
+                deviceUid:
+                    description: The unique identifier, represented as a UUID, of the device the changed entity is associated with.
+                    format: uuid
+                    type: string
+                entityType:
+                    description: The type of the changed entity.
+                    type: string
+                entityUid:
+                    description: The unique identifier, represented as a UUID, of the changed entity.
+                    format: uuid
+                    type: string
+                errorMsg:
+                    description: An error message indicating why a diff could not be generated for the changed entity.
+                    type: string
+                lastUpdatedByUsers:
+                    description: The list of users who have made the changes to this entity.
+                    items:
+                        type: string
+                    type: array
+                name:
+                    description: The name of the changed entity.
+                    type: string
+                parentUid:
+                    description: The unique identifier, represented as a UUID, of the 'parent' of this change item. The parentUid, if set, can be used to identify the group that this change belongs to.
+                    format: uuid
+                    type: string
+                uid:
+                    description: 'The unique identifier, represented as a UUID, of this change item. Note: this is not the unique identifier of the changed entity.'
+                    format: uuid
+                    type: string
+                updatedValues:
+                    description: The list of values updated on this entity as part of the change.
+                    items:
+                        $ref: '#/components/schemas/UpdatedValue'
+                    type: array
+            type: object
         FtdClusterInfo:
             properties:
                 clusterName:
@@ -14091,34 +14528,6 @@ components:
                 secondaryNode:
                     $ref: '#/components/schemas/HaNode'
                     description: 'Information on the secondary unit in the FTD HA Pair. Note: for an on-prem FMC managed FTD, this information is available only if the `cdfmc_and_onprem_fmc_enhanced_flow` feature flag is enabled on your tenant.'
-            type: object
-        FtdMultiDeviceDeploymentInput:
-            properties:
-                deploymentNotes:
-                    description: Specify notes, if any, for the deployment.
-                    example: 'This deployment addresses ticket #12345.'
-                    type: string
-                description:
-                    description: Specify a human-readable description for the deployment.
-                    example: This deployment is for the branch office in San Francisco.
-                    type: string
-                deviceUids:
-                    description: The set of unique identifiers, represented as UUIDs, of the devices to upgrade in Security Cloud Control. All of the devices in the list have to be compatible with the upgrade package.
-                    example:
-                        - 256461f6-bd60-11ef-8beb-6cf1610cf55d
-                    items:
-                        format: uuid
-                        type: string
-                    maxItems: 50
-                    minItems: 1
-                    type: array
-                    uniqueItems: true
-                ignoreWarnings:
-                    default: false
-                    description: 'Specify whether to ignore warnings generated during the pre-validation of the deployment job and proceed with the deployment regardless. **Warning**: Do not set this to `true` unless you know what you are doing.'
-                    type: boolean
-            required:
-                - deviceUids
             type: object
         FtdRegistrationInput:
             properties:
@@ -16230,6 +16639,10 @@ components:
                     description: Specify whether to enable or disable the collection of health metrics for ASAs.
                     example: true
                     type: boolean
+                collectFtdHealthMetrics:
+                    description: Specify whether to enable or disable AMP-based FTD health metrics collection.
+                    example: true
+                    type: boolean
                 tenantUids:
                     description: A set of unique identifiers, representing the tenants in Security Cloud Control.
                     example:
@@ -17018,6 +17431,15 @@ components:
                     format: int32
                     type: integer
             type: object
+        Reference:
+            properties:
+                fieldName:
+                    type: string
+                name:
+                    type: string
+                type:
+                    type: string
+            type: object
         ReferenceInfo:
             properties:
                 name:
@@ -17267,6 +17689,89 @@ components:
             required:
                 - cpuArchitecture
                 - os
+            type: object
+        SecureClientUpgradeRunDto:
+            properties:
+                devices:
+                    description: The devices included in this upgrade run.
+                    items:
+                        $ref: '#/components/schemas/UpgradedDeviceDto'
+                    type: array
+                errorMsg:
+                    description: Error message if the upgrade run failed.
+                    example: Timeout error
+                    type: string
+                lastUpdatedTime:
+                    description: Time (UTC; represented using the RFC-3339 standard) at which the upgrade run was last updated.
+                    example: 2026-03-30T14:45:00Z
+                    format: date-time
+                    type: string
+                name:
+                    description: The name of the upgrade run.
+                    example: upgrade-run-01
+                    type: string
+                secureClientVersion:
+                    description: The Secure Client version being upgraded to.
+                    example: 5.1.15.287
+                    type: string
+                submissionTime:
+                    description: Time (UTC; represented using the RFC-3339 standard) at which the upgrade run was submitted.
+                    example: 2026-03-30T14:30:00Z
+                    format: date-time
+                    type: string
+                transactionUid:
+                    description: The unique identifier, represented as a UUID, of the CDO transaction that tracks this upgrade run.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the upgrade run.
+                    example: d4e5f6a7-8901-2345-bcde-f12345678901
+                    format: uuid
+                    type: string
+                upgradeRunStatus:
+                    description: 'The current status of the upgrade run. One of: UPLOADING_IMAGES, CHECKING_IMAGES_UPLOAD_RESULTS, UPDATING_RA_VPN_CONFIG, DELETING_OLD_IMAGES, DONE, ERROR.'
+                    enum:
+                        - VALIDATING_INPUTS
+                        - FETCHING_CURRENTLY_INSTALLED_PACKAGES
+                        - UPLOADING_IMAGES
+                        - CHECKING_IMAGES_UPLOAD_RESULTS
+                        - UPDATING_RA_VPN_CONFIG
+                        - DELETING_OLD_IMAGES
+                        - DONE
+                        - ERROR
+                    example: DONE
+                    type: string
+                upgradeRunType:
+                    description: 'The type of the Secure Client upgrade. One of: ASA_SECURE_CLIENT_UPGRADE, FTD_SECURE_CLIENT_UPGRADE.'
+                    enum:
+                        - ASA_SECURE_CLIENT_UPGRADE
+                        - FTD_SECURE_CLIENT_UPGRADE
+                    example: ASA_SECURE_CLIENT_UPGRADE
+                    type: string
+            type: object
+        SecureClientUpgradeRunPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/SecureClientUpgradeRunDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
             type: object
         SecureClientUpgradeVersionsPage:
             properties:
@@ -18032,6 +18537,35 @@ components:
                     example: true
                     type: boolean
             type: object
+        TriggerSecureClientUpgradeInput:
+            properties:
+                deviceUids:
+                    description: The unique identifiers of the ASA devices to upgrade in Security Cloud Control.
+                    items:
+                        format: uuid
+                        type: string
+                    maxItems: 50
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                name:
+                    description: An optional name for the upgrade operation to help identify and track the upgrade.
+                    example: upgrade-run-01
+                    type: string
+                platforms:
+                    description: The OS and CPU architecture combinations to upgrade. If omitted, all platforms available for the specified version are uploaded to each device.
+                    items:
+                        $ref: '#/components/schemas/SecureClientPlatformDto'
+                    type: array
+                version:
+                    description: The Secure Client version to upgrade to. Must be a version present in the Secure Client package catalog.
+                    example: 5.1.15.287
+                    minLength: 1
+                    type: string
+            required:
+                - deviceUids
+                - version
+            type: object
         UnifiedObjectListView:
             properties:
                 description:
@@ -18130,6 +18664,15 @@ components:
                 value:
                     $ref: '#/components/schemas/SharedObjectValue'
                     description: The value of the object
+            type: object
+        UpdatedValue:
+            properties:
+                fieldName:
+                    type: string
+                newValue:
+                    type: string
+                oldValue:
+                    type: string
             type: object
         UpgradeAsaDeviceInput:
             properties:
@@ -18374,6 +18917,18 @@ components:
             required:
                 - name
             type: object
+        UpgradedDeviceDto:
+            properties:
+                name:
+                    description: The name of the device.
+                    example: asa-fw-01
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device.
+                    example: f0a09517-bab1-43e4-adae-2037cf3184e3
+                    format: uuid
+                    type: string
+            type: object
         UrlObjectContent:
             properties:
                 url:
@@ -18512,6 +19067,13 @@ components:
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
             type: string
+        Value:
+            properties:
+                fieldName:
+                    type: string
+                value:
+                    type: string
+            type: object
         VirtualAccountDto:
             properties:
                 complianceStatus:
