@@ -1,3 +1,45 @@
+# Version 1.20.0 (2026-05-13)
+
+## Added
+
+### Device Deployments
+- The Endpoint to [deploy changes to multiple FTDs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/cdfmc-managed-ftds-only-deploy-ftd-device-changes) has been significantly improved under the hood to improve reliability and performance. It now returns the unique identifier of a **Deployment Run** (see below for details) in the `entityUid` field, which can be used to track the progress of a deployment.
+- Endpoint to [get device deployment runs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-deployment-runs) (`GET /v1/inventory/devices/deployments/runs`). Each deployment run represents a group of devices being deployed together.
+- Endpoint to [get a device deployment run by UID](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-deployment-run) (`GET /v1/inventory/devices/deployments/runs/{deploymentRunUid}`).
+- Endpoint to [get deployed device changes in a deployment run](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-deployed-device-changes-in-deployment-run) (`GET /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/changes`). If the deployment failed, the changes returned are the changes that were attempted.
+
+### Secure Client Management (beta)
+- Endpoint to [list Secure Client versions compatible with the specified ASA devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/list-secure-client-versions-compatible-with-the-specified-asa-devices) (`GET /v1/inventory/devices/asas/secure-client/upgrades/versions`).
+
+### Inventory
+- Endpoint to [get pending changes on a cdFMC-managed FTD](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-pending-changes-on-a-cdfmc-managed-ftd) (`GET /v1/inventory/devices/ftds/{deviceUid}/changes/pending`).
+- Endpoint to [calculate pending changes on a cdFMC-managed FTD](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/calculate-pending-changes-on-a-cdfmc-managed-ftd) (`POST /v1/inventory/devices/ftds/{deviceUid}/changes/pending`). This is an asynchronous operation that returns a transaction for tracking.
+- Endpoint to [export device managers](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/export-device-managers) to CSV (`POST /v1/inventory/managers/export`).
+- Endpoint to [export cloud services](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/export-cloud-services) to CSV (`POST /v1/inventory/services/export`).
+- Endpoint to [export templates](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/export-templates) to CSV (`POST /v1/inventory/templates/export`).
+
+## Improvements
+
+### Device Upgrades
+- [Device upgrade status](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-upgrade-runs) records now include additional fields: `hardwareModel`, `name`, `softwareVersionBeforeUpgrade`, `upgradeRunStatus`, `transactionUid`, and managed tenant information (`managedTenantUid`, `managedTenantName`, `managedTenantDisplayName`).
+- [Completion status](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-upgrade-run) records now include `completedAt` field indicating when the upgrade reached a terminal state.
+
+### MSP
+- [Bulk update tenant settings](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/bulk-update-settings-for-security-cloud-control-tenants-managed-by-msp-portal) now supports `collectFtdHealthMetrics` field to enable or disable FTD health metrics collection across managed tenants.
+
+### Transactions
+- Added new transaction types: `UPGRADE_SECURE_CLIENT_PACKAGES` and `CALCULATE_FTD_PENDING_CHANGES`.
+
+## Deprecations
+
+### Inventory
+- The [deploy changes to an FTD device](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/cdfmc-managed-ftds-only-deploy-changes-to-ftd-device) endpoint (`POST /v1/inventory/devices/ftds/{deviceUid}/deploy`) is now deprecated and will be removed in a subsequent release. Please use the endpoint to [deploy changes to multiple FTDs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/cdfmc-managed-ftds-only-deploy-ftd-device-changes) instead.
+
+## Moved
+
+### Inventory
+- The deploy changes to multiple FTD devices endpoint was removed from the `Inventory` section to the `Device Deployments` section.
+
 # Version 1.19.0 (2026-04-15)
 
 ## Added
