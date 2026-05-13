@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **deployment_notes** | **str** | Specify notes, if any, for the deployment. | [optional] 
 **description** | **str** | Specify a human-readable description for the deployment. | [optional] 
-**device_uids** | **List[str]** | The set of unique identifiers, represented as UUIDs, of the devices to upgrade in Security Cloud Control. All of the devices in the list have to be compatible with the upgrade package. | 
+**device_uids** | **List[str]** | The set of unique identifiers, represented as UUIDs, of the devices to deploy in Security Cloud Control. All of the devices in the list have to be compatible with the upgrade package. | 
 **ignore_warnings** | **bool** | Specify whether to ignore warnings generated during the pre-validation of the deployment job and proceed with the deployment regardless. **Warning**: Do not set this to &#x60;true&#x60; unless you know what you are doing. | [optional] [default to False]
 
 ## Example
