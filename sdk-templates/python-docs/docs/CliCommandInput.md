@@ -6,6 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **device_uids** | **List[str]** | List of UIDs of the devices to execute the CLI script for. | 
+**polling_interval** | **str** | Optional polling interval for checking CLI command completion in ISO 8601 duration format. Minimum is 500 milliseconds. Maximum is 2 minutes. Defaults to 500 milliseconds if not provided. | [optional] 
+**polling_timeout** | **str** | Optional timeout for polling the CLI command completion in ISO 8601 duration format. Minimum is 60 seconds. Maximum is 60 minutes. Defaults to 60 seconds if not provided. | [optional] 
 **script** | **str** | The script executed to generate the CLI result. | 
 
 ## Example

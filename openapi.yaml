@@ -12451,6 +12451,14 @@ components:
                         type: string
                     minItems: 1
                     type: array
+                pollingInterval:
+                    description: Optional polling interval for checking CLI command completion in ISO 8601 duration format. Minimum is 500 milliseconds. Maximum is 2 minutes. Defaults to 500 milliseconds if not provided.
+                    example: PT30S
+                    type: string
+                pollingTimeout:
+                    description: Optional timeout for polling the CLI command completion in ISO 8601 duration format. Minimum is 60 seconds. Maximum is 60 minutes. Defaults to 60 seconds if not provided.
+                    example: PT5M
+                    type: string
                 script:
                     description: The script executed to generate the CLI result.
                     example: show xlate detail
@@ -12837,11 +12845,6 @@ components:
             type: object
         CompletionStatusDto:
             properties:
-                completedAt:
-                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
-                    example: 2026-04-15T18:00:10.123Z
-                    format: date-time
-                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
