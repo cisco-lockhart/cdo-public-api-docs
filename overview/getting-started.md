@@ -60,6 +60,7 @@ them. The server URLs for each region is as follows:
 - India: https://api.in.security.cisco.com/firewall
 - UAE : https://api.uae.security.cisco.com/firewall
 - FedRAMP: https://manage.secure.cisco/api/rest
+- IL5: https://manage.securitydod.cisco/api/rest
 
 > **Note**:
 > If you are still using the old base URLs (`https://edge.<region>.cdo.cisco.com`), they will continue to
