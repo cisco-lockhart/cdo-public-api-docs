@@ -68,6 +68,8 @@ servers:
    description: Stgf9
  - url: https://manage.secure.cisco/api/rest
    description: ProdF9
+ - url: https://manage.securitydod.cisco/api/rest
+   description: IL5
 securitySchemes:
   bearerAuth:
     type: http
