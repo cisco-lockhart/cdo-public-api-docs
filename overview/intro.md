@@ -17,6 +17,4 @@ Cisco Security Cloud Control Firewall Manager exposes a rich REST API. This docu
 
 ## FedRAMP Availability
 
-All Security Cloud Control Firewall Manager APIs are available on FedRAMP at https://manage.secure.cisco/api/rest, with the exception of the MSP APIs.
-
-All Security Cloud Control Firewall Manager APIs are available on IL5 at https://manage.securitydod.cisco/api/rest, with the exception of the MSP APIs.
+All Security Cloud Control Firewall Manager APIs are available on FedRAMP (https://manage.secure.cisco/api/rest) and IL5 (https://manage.securitydod.cisco/api/rest), with the exception of the MSP APIs.
