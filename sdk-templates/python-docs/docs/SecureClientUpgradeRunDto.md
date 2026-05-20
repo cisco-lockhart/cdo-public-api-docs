@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **submission_time** | **datetime** | Time (UTC; represented using the RFC-3339 standard) at which the upgrade run was submitted. | [optional] 
 **transaction_uid** | **str** | The unique identifier, represented as a UUID, of the CDO transaction that tracks this upgrade run. | [optional] 
 **uid** | **str** | The unique identifier, represented as a UUID, of the upgrade run. | [optional] 
-**upgrade_run_status** | **str** | The current status of the upgrade run. One of: CHECKING_ASA_DEVICES_DNS, CHECKING_ASA_DEVICES_DNS_RESULTS, UPLOADING_IMAGES, CHECKING_IMAGES_UPLOAD_RESULTS, UPDATING_RA_VPN_CONFIG, DELETING_OLD_IMAGES, DONE, ERROR. | [optional] 
+**upgrade_run_status** | **str** | The current status of the upgrade run. One of: CHECKING_ASA_DEVICES_DNS, CHECKING_ASA_DEVICES_DNS_RESULTS, UPLOADING_IMAGES, UPDATING_RA_VPN_CONFIG, DELETING_OLD_IMAGES, DONE, ERROR. | [optional] 
 **upgrade_run_type** | **str** | The type of the Secure Client upgrade. One of: ASA_SECURE_CLIENT_UPGRADE, FTD_SECURE_CLIENT_UPGRADE. | [optional] 
 
 ## Example
