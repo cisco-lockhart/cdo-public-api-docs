@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **uid** | **str** | The unique identifier, represented as a UUID, of the upgrade run. | [optional] 
 **upgrade_run_status** | **str** | The current status of the upgrade run. One of: CHECKING_ASA_DEVICES_DNS, CHECKING_ASA_DEVICES_DNS_RESULTS, UPLOADING_IMAGES, UPDATING_RA_VPN_CONFIG, DELETING_OLD_IMAGES, DONE, ERROR. | [optional] 
 **upgrade_run_type** | **str** | The type of the Secure Client upgrade. One of: ASA_SECURE_CLIENT_UPGRADE, FTD_SECURE_CLIENT_UPGRADE. | [optional] 
+**username** | **str** | Username of the user who initiated the upgrade run. | [optional] 
 
 ## Example
 
