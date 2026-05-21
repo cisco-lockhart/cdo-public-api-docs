@@ -320,6 +320,7 @@ nav:
     - SecureClientPackageDto: SecureClientPackageDto.md
     - SecureClientPackagesPage: SecureClientPackagesPage.md
     - SecureClientPlatformDto: SecureClientPlatformDto.md
+    - SecureClientUpgradeRunAttributeValues: SecureClientUpgradeRunAttributeValues.md
     - SecureClientUpgradeRunDto: SecureClientUpgradeRunDto.md
     - SecureClientUpgradeRunPage: SecureClientUpgradeRunPage.md
     - SecureClientUpgradeVersionsPage: SecureClientUpgradeVersionsPage.md
