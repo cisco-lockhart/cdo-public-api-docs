@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **submission_time** | **datetime** | Time (UTC; represented using the RFC-3339 standard) at which the upgrade run was submitted. | [optional] 
 **transaction_uid** | **str** | The unique identifier, represented as a UUID, of the CDO transaction that tracks this upgrade run. | [optional] 
 **uid** | **str** | The unique identifier, represented as a UUID, of the upgrade run. | [optional] 
-**upgrade_run_status** | **str** | The current status of the upgrade run. One of: CHECKING_ASA_DEVICES_DNS, CHECKING_ASA_DEVICES_DNS_RESULTS, UPLOADING_IMAGES, CHECKING_IMAGES_UPLOAD_RESULTS, ADDING_NEW_RA_VPN_IMAGES, CHECKING_ADD_NEW_RA_VPN_IMAGES_RESULTS, REMOVING_OLD_RA_VPN_IMAGES, CHECKING_REMOVE_OLD_RA_VPN_IMAGES_RESULTS, WRITING_CHANGES_TO_MEMORY, CHECKING_WRITE_CHANGES_TO_MEMORY_RESULTS, DELETING_OLD_IMAGES, DONE, ERROR. | [optional] 
+**upgrade_run_status** | **str** | The current status of the upgrade run. One of: CHECKING_ASA_DEVICES_DNS, CHECKING_ASA_DEVICES_DNS_RESULTS, UPLOADING_IMAGES, CHECKING_IMAGES_UPLOAD_RESULTS, REGISTERING_NEW_RA_VPN_IMAGES, CHECKING_REGISTER_NEW_RA_VPN_IMAGES_RESULTS, UNREGISTERING_OLD_RA_VPN_IMAGES, CHECKING_UNREGISTER_OLD_RA_VPN_IMAGES_RESULTS, WRITING_CHANGES_TO_MEMORY, CHECKING_WRITE_CHANGES_TO_MEMORY_RESULTS, DELETING_OLD_IMAGES, DONE, ERROR. | [optional] 
 **upgrade_run_type** | **str** | The type of the Secure Client upgrade. One of: ASA_SECURE_CLIENT_UPGRADE, FTD_SECURE_CLIENT_UPGRADE. | [optional] 
 **username** | **str** | Username of the user who initiated the upgrade run. | [optional] 
 

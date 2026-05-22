@@ -4214,6 +4214,121 @@ paths:
             summary: (cdFMC-managed FTDs only) Deploy changes to multiple FTD devices
             tags:
                 - Device Deployments
+    /v1/inventory/devices/ftds/health/{deviceUid}/interfaces:
+        get:
+            description: Returns time-series interface metrics - including link status, overruns, and other key performance indicators - over a specified time range. Supports filtering by interface and metric. Pagination applies only when interface UIDs are not specified.
+            operationId: getFtdInterfaceHealthMetrics
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the FTD device in Security Cloud Control.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: Start of the time range (ISO 8601 format). Required together with `end`. Mutually exclusive with `timeRange`.
+                  example: 2025-04-05T00:00:00Z
+                  in: query
+                  name: start
+                  required: false
+                  schema:
+                    type: string
+                - description: End of the time range (ISO 8601 format). Required together with `start`. Mutually exclusive with `timeRange`.
+                  example: 2025-04-05T04:00:00Z
+                  in: query
+                  name: end
+                  required: false
+                  schema:
+                    type: string
+                - description: Relative time range. Mutually exclusive with `start`/`end` — exactly one of `timeRange` or `start`/`end` must be provided. Data is collected every 10 minutes, so shorter time ranges may return fewer data points.
+                  example: 10m
+                  in: query
+                  name: timeRange
+                  required: false
+                  schema:
+                    enum:
+                        - 10m
+                        - 30m
+                        - 1h
+                        - 24h
+                        - 7d
+                    type: string
+                - description: Maximum number of interface records to return (used only when no interfaceUids are provided).
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    maximum: 50
+                    minimum: 0
+                    type: string
+                - description: Offset for pagination (used only when no interfaceUids are provided).
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    minimum: 0
+                    type: string
+                - description: Comma-separated list of interface UIDs to query. Max 50. If omitted, results are paginated.
+                  example: def6c34a-a5d4-45c1-8d96-820fb00de723,4bc125a0-cf08-4dcc-bfac-45669ba898b0
+                  in: query
+                  name: interfaceUids
+                  required: false
+                  schema:
+                    maxLength: 50
+                    maximum: 50
+                    minLength: 0
+                    type: string
+                - description: Comma-separated list of metrics to return (e.g. linkStatus, overruns). Returns all if omitted.
+                  example: linkStatus,overruns
+                  in: query
+                  name: metrics
+                  required: false
+                  schema:
+                    enum:
+                        - overruns
+                        - underruns
+                        - droppedPackets
+                        - l2DecodeDrops
+                        - inputErrors
+                        - outputErrors
+                        - inputPacketSize
+                        - outputPacketSize
+                        - linkStatus
+                    type: string
+                - description: Lucene-style query filter. Supports logical operators AND, OR, and NOT.Applicable only to the fields name and linkStatus.
+                  example: name:GigabitEthernet* OR linkStatus:1
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MetricsResponse'
+                    description: Successfully retrieved time-series metrics for one or more FTD interfaces.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get time-series interface metrics for an FTD device
+            tags:
+                - Device Health
+            x-in-dev: "true"
     /v1/inventory/devices/ftds/health/metrics:
         get:
             description: Returns time-series metrics such as CPU, memory, disk, connections, and environment data over a specified time range. Supports filtering by device and metric. Pagination applies only when device UIDs are not specified.
@@ -12878,6 +12993,11 @@ components:
             type: object
         CompletionStatusDto:
             properties:
+                completedAt:
+                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
+                    example: 2026-04-15T18:00:10.123Z
+                    format: date-time
+                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
@@ -14174,7 +14294,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -17765,10 +17885,10 @@ components:
                             - CHECKING_ASA_DEVICES_DNS_RESULTS
                             - UPLOADING_IMAGES
                             - CHECKING_IMAGES_UPLOAD_RESULTS
-                            - ADDING_NEW_RA_VPN_IMAGES
-                            - CHECKING_ADD_NEW_RA_VPN_IMAGES_RESULTS
-                            - REMOVING_OLD_RA_VPN_IMAGES
-                            - CHECKING_REMOVE_OLD_RA_VPN_IMAGES_RESULTS
+                            - REGISTERING_NEW_RA_VPN_IMAGES
+                            - CHECKING_REGISTER_NEW_RA_VPN_IMAGES_RESULTS
+                            - UNREGISTERING_OLD_RA_VPN_IMAGES
+                            - CHECKING_UNREGISTER_OLD_RA_VPN_IMAGES_RESULTS
                             - WRITING_CHANGES_TO_MEMORY
                             - CHECKING_WRITE_CHANGES_TO_MEMORY_RESULTS
                             - DELETING_OLD_IMAGES
@@ -17833,7 +17953,7 @@ components:
                     format: uuid
                     type: string
                 upgradeRunStatus:
-                    description: 'The current status of the upgrade run. One of: CHECKING_ASA_DEVICES_DNS, CHECKING_ASA_DEVICES_DNS_RESULTS, UPLOADING_IMAGES, CHECKING_IMAGES_UPLOAD_RESULTS, ADDING_NEW_RA_VPN_IMAGES, CHECKING_ADD_NEW_RA_VPN_IMAGES_RESULTS, REMOVING_OLD_RA_VPN_IMAGES, CHECKING_REMOVE_OLD_RA_VPN_IMAGES_RESULTS, WRITING_CHANGES_TO_MEMORY, CHECKING_WRITE_CHANGES_TO_MEMORY_RESULTS, DELETING_OLD_IMAGES, DONE, ERROR.'
+                    description: 'The current status of the upgrade run. One of: CHECKING_ASA_DEVICES_DNS, CHECKING_ASA_DEVICES_DNS_RESULTS, UPLOADING_IMAGES, CHECKING_IMAGES_UPLOAD_RESULTS, REGISTERING_NEW_RA_VPN_IMAGES, CHECKING_REGISTER_NEW_RA_VPN_IMAGES_RESULTS, UNREGISTERING_OLD_RA_VPN_IMAGES, CHECKING_UNREGISTER_OLD_RA_VPN_IMAGES_RESULTS, WRITING_CHANGES_TO_MEMORY, CHECKING_WRITE_CHANGES_TO_MEMORY_RESULTS, DELETING_OLD_IMAGES, DONE, ERROR.'
                     enum:
                         - VALIDATING_INPUTS
                         - FETCHING_CURRENTLY_INSTALLED_PACKAGES
@@ -17841,10 +17961,10 @@ components:
                         - CHECKING_ASA_DEVICES_DNS_RESULTS
                         - UPLOADING_IMAGES
                         - CHECKING_IMAGES_UPLOAD_RESULTS
-                        - ADDING_NEW_RA_VPN_IMAGES
-                        - CHECKING_ADD_NEW_RA_VPN_IMAGES_RESULTS
-                        - REMOVING_OLD_RA_VPN_IMAGES
-                        - CHECKING_REMOVE_OLD_RA_VPN_IMAGES_RESULTS
+                        - REGISTERING_NEW_RA_VPN_IMAGES
+                        - CHECKING_REGISTER_NEW_RA_VPN_IMAGES_RESULTS
+                        - UNREGISTERING_OLD_RA_VPN_IMAGES
+                        - CHECKING_UNREGISTER_OLD_RA_VPN_IMAGES_RESULTS
                         - WRITING_CHANGES_TO_MEMORY
                         - CHECKING_WRITE_CHANGES_TO_MEMORY_RESULTS
                         - DELETING_OLD_IMAGES
