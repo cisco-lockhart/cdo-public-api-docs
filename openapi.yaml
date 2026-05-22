@@ -12878,11 +12878,16 @@ components:
             type: object
         CompletionStatusDto:
             properties:
+                completedAt:
+                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
+                    example: 2026-04-15T18:00:10.123Z
+                    format: date-time
+                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -12893,7 +12898,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: The percentage completion of the current task being performed
+                    description: Percentage completion of the current task being performed.
                     format: double
                     type: number
             type: object
@@ -13826,14 +13831,58 @@ components:
         DeviceUpgradeStatusDto:
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+                    description: The completion status of the upgrade on the device.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                uid:
-                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+                hardwareModel:
+                    description: Hardware model of the devices being upgraded.
+                    example: Firepower 2110
+                    type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: Name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantUid:
+                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: tenant-uuid-1
+                    format: uuid
+                    type: string
+                name:
+                    description: Name of the device being upgraded.
+                    example: my-firepower
+                    type: string
+                softwareVersionBeforeUpgrade:
+                    description: Software version of the device before the upgrade.
+                    example: 7.2.3
+                    type: string
+                transactionUid:
+                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, of the device being upgraded.
+                    format: uuid
+                    type: string
+                upgradeRunStatus:
+                    description: Current status of the upgrade run.
+                    enum:
+                        - IN_PROGRESS
+                        - REBUILDING_UPGRADE_CACHE
+                        - PERFORMING_UPGRADE
+                        - UPLOADING_IMAGE
+                        - PERFORMING_READINESS_CHECK
+                        - UPGRADE_STAGED
+                        - UPGRADE_STAGING_FAILED
+                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_COMPLETED
+                        - UPGRADE_FAILED
+                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -17764,7 +17813,13 @@ components:
                             - CHECKING_ASA_DEVICES_DNS
                             - CHECKING_ASA_DEVICES_DNS_RESULTS
                             - UPLOADING_IMAGES
-                            - UPDATING_RA_VPN_CONFIG
+                            - CHECKING_IMAGES_UPLOAD_RESULTS
+                            - ADDING_NEW_RA_VPN_IMAGES
+                            - CHECKING_ADD_NEW_RA_VPN_IMAGES_RESULTS
+                            - REMOVING_OLD_RA_VPN_IMAGES
+                            - CHECKING_REMOVE_OLD_RA_VPN_IMAGES_RESULTS
+                            - WRITING_CHANGES_TO_MEMORY
+                            - CHECKING_WRITE_CHANGES_TO_MEMORY_RESULTS
                             - DELETING_OLD_IMAGES
                             - DONE
                             - ERROR
@@ -17827,14 +17882,20 @@ components:
                     format: uuid
                     type: string
                 upgradeRunStatus:
-                    description: 'The current status of the upgrade run. One of: CHECKING_ASA_DEVICES_DNS, CHECKING_ASA_DEVICES_DNS_RESULTS, UPLOADING_IMAGES, UPDATING_RA_VPN_CONFIG, DELETING_OLD_IMAGES, DONE, ERROR.'
+                    description: 'The current status of the upgrade run. One of: CHECKING_ASA_DEVICES_DNS, CHECKING_ASA_DEVICES_DNS_RESULTS, UPLOADING_IMAGES, CHECKING_IMAGES_UPLOAD_RESULTS, ADDING_NEW_RA_VPN_IMAGES, CHECKING_ADD_NEW_RA_VPN_IMAGES_RESULTS, REMOVING_OLD_RA_VPN_IMAGES, CHECKING_REMOVE_OLD_RA_VPN_IMAGES_RESULTS, WRITING_CHANGES_TO_MEMORY, CHECKING_WRITE_CHANGES_TO_MEMORY_RESULTS, DELETING_OLD_IMAGES, DONE, ERROR.'
                     enum:
                         - VALIDATING_INPUTS
                         - FETCHING_CURRENTLY_INSTALLED_PACKAGES
                         - CHECKING_ASA_DEVICES_DNS
                         - CHECKING_ASA_DEVICES_DNS_RESULTS
                         - UPLOADING_IMAGES
-                        - UPDATING_RA_VPN_CONFIG
+                        - CHECKING_IMAGES_UPLOAD_RESULTS
+                        - ADDING_NEW_RA_VPN_IMAGES
+                        - CHECKING_ADD_NEW_RA_VPN_IMAGES_RESULTS
+                        - REMOVING_OLD_RA_VPN_IMAGES
+                        - CHECKING_REMOVE_OLD_RA_VPN_IMAGES_RESULTS
+                        - WRITING_CHANGES_TO_MEMORY
+                        - CHECKING_WRITE_CHANGES_TO_MEMORY_RESULTS
                         - DELETING_OLD_IMAGES
                         - DONE
                         - ERROR
