@@ -5,7 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**error_msg** | **str** | Error message if the device encountered a failure during the upgrade. | [optional] 
 **name** | **str** | The name of the device. | [optional] 
+**status** | **str** | The overall status of the device in this upgrade run. One of: PENDING, IN_PROGRESS, SUCCESS, FAILED, CLEANUP_FAILED. | [optional] 
 **uid** | **str** | The unique identifier, represented as a UUID, of the device. | [optional] 
 
 ## Example
