@@ -17809,6 +17809,10 @@ components:
                         - X86_64
                         - UNIVERSAL
                     type: string
+                deviceUid:
+                    description: The unique identifier, represented as a UUID, of the ASA device the package is installed on.
+                    format: uuid
+                    type: string
                 fileName:
                     description: The filename of the package as stored on the device.
                     type: string
@@ -17827,6 +17831,7 @@ components:
                     description: The version string extracted from the filename. null if the filename could not be parsed.
                     type: string
             required:
+                - deviceUid
                 - fileName
                 - uid
             type: object

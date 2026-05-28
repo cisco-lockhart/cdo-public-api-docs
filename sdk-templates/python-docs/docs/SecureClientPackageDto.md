@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **cpu_architecture** | **str** | The CPU architecture. One of: X86_64, ARM64, UNIVERSAL. null if the filename could not be parsed. | [optional] 
+**device_uid** | **str** | The unique identifier, represented as a UUID, of the ASA device the package is installed on. | 
 **file_name** | **str** | The filename of the package as stored on the device. | 
 **os** | **str** | The operating system. One of: LINUX, MACOS, WINDOWS. null if the filename could not be parsed. | [optional] 
 **uid** | **str** | The unique identifier, represented as a UUID, of the Secure Client package in Security Cloud Control. | 
