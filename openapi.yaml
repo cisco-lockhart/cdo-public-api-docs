@@ -3102,6 +3102,49 @@ paths:
             summary: Execute CLI Macro Command
             tags:
                 - Command Line Interface
+    /v1/inventory/devices/asas/deploy:
+        post:
+            description: |+
+                This is an asynchronous operation to deploy changes made to the configurations of multiple ASA devices on Security Cloud Control. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+
+                Notes:
+
+                - This operation is for ASA devices only.
+
+                - This operation will only deploy changes to the device if there are pending changes to deploy.
+
+
+            operationId: deployChangesToMultipleAsaDevices
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AsaMultiDeviceDeploymentInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the progress of the deployment operation.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Deploy changes to multiple ASA devices
+            tags:
+                - Device Deployments
     /v1/inventory/devices/asas/health/{deviceUid}/interfaces:
         get:
             description: |-
@@ -11926,6 +11969,30 @@ components:
                     format: int32
                     type: integer
             type: object
+        AsaMultiDeviceDeploymentInput:
+            properties:
+                deploymentNotes:
+                    description: Specify notes, if any, for the deployment.
+                    example: 'This deployment addresses ticket #12345.'
+                    type: string
+                description:
+                    description: Specify a human-readable description for the deployment.
+                    example: This deployment is for the branch office in San Francisco.
+                    type: string
+                deviceUids:
+                    description: The set of unique identifiers, represented as UUIDs, of the ASA devices to deploy in Security Cloud Control.
+                    example:
+                        - 256461f6-bd60-11ef-8beb-6cf1610cf55d
+                    items:
+                        format: uuid
+                        type: string
+                    maxItems: 50
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+            required:
+                - deviceUids
+            type: object
         AuditLog:
             properties:
                 eventDescription:
@@ -12993,16 +13060,11 @@ components:
             type: object
         CompletionStatusDto:
             properties:
-                completedAt:
-                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
-                    example: 2026-04-15T18:00:10.123Z
-                    format: date-time
-                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -13013,7 +13075,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: Percentage completion of the current task being performed.
+                    description: The percentage completion of the current task being performed
                     format: double
                     type: number
             type: object
@@ -18316,12 +18378,31 @@ components:
             type: object
         SmartAccountDto:
             properties:
-                parent:
-                    description: The name of the smart account used to license the device.
+                domain:
+                    description: Account domain for your Smart Account
                     type: string
-                virtual:
-                    description: The name of the virtual account, within the smart account, used to license the device
+                lastUpdatedTime:
+                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
+                    format: date-time
                     type: string
+                name:
+                    description: Name of the smart account
+                    type: string
+                smartAccountId:
+                    description: Smart Account Identifier
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, for your Smart Account
+                    format: uuid
+                    type: string
+                virtualAccountsInComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with in compliance status
+                    format: int32
+                    type: integer
+                virtualAccountsOutOfComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
+                    format: int32
+                    type: integer
             type: object
         SmartAccountsPage:
             properties:

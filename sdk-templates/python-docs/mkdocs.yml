@@ -92,6 +92,7 @@ nav:
     - AsaFailoverMode: AsaFailoverMode.md
     - AsaInterface: AsaInterface.md
     - AsaInterfacePage: AsaInterfacePage.md
+    - AsaMultiDeviceDeploymentInput: AsaMultiDeviceDeploymentInput.md
     - AuditLog: AuditLog.md
     - AuditLogPage: AuditLogPage.md
     - AuthenticationError: AuthenticationError.md
