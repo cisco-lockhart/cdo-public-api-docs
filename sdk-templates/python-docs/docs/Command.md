@@ -1,5 +1,6 @@
 # Command
 
+A list of commands to be executed on the device.
 
 ## Properties
 
