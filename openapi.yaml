@@ -3349,6 +3349,507 @@ paths:
             summary: Modify Device Upgrade Run
             tags:
                 - Device Upgrades
+    /v1/licenses/devices:
+        get:
+            description: 'Get a paginated list of device licenses. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
+            operationId: getDeviceLicenses
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    default: null
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    default: null
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeviceLicensePage'
+                    description: List of device licenses
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Device Licenses
+            tags:
+                - Licensing
+            x-beta: "true"
+    /v1/licenses/devices/{deviceUid}:
+        get:
+            description: 'Retrieves the device licensing information for a specific device identified by UID. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
+            operationId: getDeviceLicensesByUid
+            parameters:
+                - description: The unique identifier (UID) of the device
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    default: null
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeviceLicenseDto'
+                    description: Device licensing information for specified device UID
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "404":
+                    content:
+                        application/json:
+                            schema:
+                                additionalProperties:
+                                    default: null
+                                default: null
+                                type: string
+                    description: Device licensing information not found for the specified device UID
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Device Licensing Information by Device UID
+            tags:
+                - Licensing
+            x-beta: "true"
+    /v1/licenses/devices/export:
+        post:
+            description: 'This is an asynchronous operation to export per-device licenses in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
+            operationId: exportDeviceLicenses
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ExportInput'
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the <code>entityUrl</code> field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file.
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Export Per-Device Licenses
+            tags:
+                - Licensing
+            x-beta: "true"
+    /v1/licenses/smart-accounts:
+        get:
+            description: 'Get the Smart Accounts and the number of Virtual Accounts used in this tenant. Note: This endpoint does not display all the Smart Accounts, or number of Virtual Accounts within a Smart Account, to which the customer has access. Only Smart Accounts — and number of Virtual Accounts therein — that have licenses used by devices in this tenant are displayed. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
+            operationId: getSmartAccounts
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    default: null
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    default: null
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SmartAccountsPage'
+                    description: List of Smart Accounts
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Smart Accounts used in this tenant.
+            tags:
+                - Licensing
+            x-beta: "true"
+    /v1/licenses/smart-accounts/{smartAccountUid}:
+        get:
+            description: 'Get Smart Account identified by UID. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
+            operationId: getSmartAccountByUid
+            parameters:
+                - description: The unique identifier (UID) of the smart account
+                  in: path
+                  name: smartAccountUid
+                  required: true
+                  schema:
+                    default: null
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SmartAccountDto'
+                    description: Smart Account for specified UID
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "404":
+                    content:
+                        application/json:
+                            schema:
+                                additionalProperties:
+                                    default: null
+                                default: null
+                                type: string
+                    description: Smart Account not found for the specified UID
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Smart Account by UID
+            tags:
+                - Licensing
+            x-beta: "true"
+    /v1/licenses/smart-accounts/{smartAccountUid}/virtual-accounts:
+        get:
+            description: 'Get the Virtual Accounts for a specific Smart Account used in this tenant. Note: This endpoint does not display all the Virtual Accounts within the Smart Account to which the customer has access. Only Virtual Accounts that have licenses used by devices in this tenant are displayed. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
+            operationId: getVirtualAccounts
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    default: null
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    default: null
+                    type: string
+                - description: The unique identifier (UID) of the smart account
+                  in: path
+                  name: smartAccountUid
+                  required: true
+                  schema:
+                    default: null
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/VirtualAccountsPage'
+                    description: List of Virtual Accounts
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get the Virtual Accounts for a specific Smart Account used in this tenant.
+            tags:
+                - Licensing
+            x-beta: "true"
+    /v1/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}:
+        get:
+            description: 'Get Virtual Account identified by UID within a specific Smart Account. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
+            operationId: getVirtualAccountByUid
+            parameters:
+                - description: The unique identifier (UID) of the smart account
+                  in: path
+                  name: smartAccountUid
+                  required: true
+                  schema:
+                    default: null
+                    type: string
+                - description: The unique identifier (UID) of the virtual account
+                  in: path
+                  name: virtualAccountUid
+                  required: true
+                  schema:
+                    default: null
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/VirtualAccountDto'
+                    description: Virtual Account for specified UID
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "404":
+                    content:
+                        application/json:
+                            schema:
+                                additionalProperties:
+                                    default: null
+                                default: null
+                                type: string
+                    description: Virtual Account not found for the specified UID
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Virtual Account by UID
+            tags:
+                - Licensing
+            x-beta: "true"
+    /v1/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}/licenses:
+        get:
+            description: 'This endpoint returns information on all of the licenses used by devices across this tenant that are registered to Smart License using a token generated in this Virtual Account. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
+            operationId: getVirtualAccountLicenses
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    default: null
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    default: null
+                    type: string
+                - description: The unique identifier (UID) of the smart account
+                  in: path
+                  name: smartAccountUid
+                  required: true
+                  schema:
+                    default: null
+                    type: string
+                - description: The unique identifier (UID) of the virtual account
+                  in: path
+                  name: virtualAccountUid
+                  required: true
+                  schema:
+                    default: null
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Page'
+                    description: List of licenses for the specified Virtual Account.
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "404":
+                    content:
+                        application/json:
+                            schema:
+                                additionalProperties:
+                                    default: null
+                                default: null
+                                type: string
+                    description: Virtual Account with UID not found within the given Smart Account.
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Licenses for a Virtual Account
+            tags:
+                - Licensing
+            x-beta: "true"
+    /v1/licenses/smart-accounts/{smartAccountUid}/virtual-accounts/{virtualAccountUid}/licenses/export:
+        post:
+            description: 'This endpoint exports all of the licenses used by devices across this tenant that are registered to Smart License using a token generated in this Virtual Account. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
+            operationId: exportVirtualAccountLicenses
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the smart account
+                  in: path
+                  name: smartAccountUid
+                  required: true
+                  schema:
+                    default: null
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the virtual account
+                  in: path
+                  name: virtualAccountUid
+                  required: true
+                  schema:
+                    default: null
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ExportInput'
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the <code>entityUrl</code> field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file.
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "404":
+                    content:
+                        application/json:
+                            schema:
+                                additionalProperties:
+                                    default: null
+                                default: null
+                                type: string
+                    description: Virtual Account with UID not found within the given Smart Account.
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Export Licenses for a Virtual Account
+            tags:
+                - Licensing
+            x-beta: "true"
     /v1/msp/inventory/devices:
         get:
             description: Get devices, across all tenants, managed by the MSP portal.
@@ -7088,14 +7589,8 @@ components:
             type: object
         CompletionStatusDto:
             default: null
-            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+            description: The completion status of the deployment on the device.
             properties:
-                completedAt:
-                    default: null
-                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
-                    example: 2026-04-15T18:00:10.123Z
-                    format: date-time
-                    type: string
                 message:
                     default: null
                     description: A message, indicating current progress, returned from the device.
@@ -7401,6 +7896,116 @@ components:
                 - deviceUid
                 - request
             type: object
+        DeviceLicenseDetail:
+            default: null
+            description: The list of licenses enabled on the device.
+            properties:
+                endDate:
+                    default: null
+                    format: date-time
+                    type: string
+                licenseUid:
+                    default: null
+                    format: uuid
+                    type: string
+                name:
+                    default: null
+                    type: string
+                startDate:
+                    default: null
+                    format: date-time
+                    type: string
+            type: object
+        DeviceLicenseDto:
+            default: null
+            properties:
+                complianceStatus:
+                    default: null
+                    description: Indicates whether the license used on the device is currently compliant with Smart Licensing restrictions.
+                    enum:
+                        - IN_COMPLIANCE
+                        - OUT_OF_COMPLIANCE
+                    type: string
+                deviceType:
+                    $ref: '#/components/schemas/EntityType'
+                isEvaluationLicenseExpired:
+                    default: false
+                    description: Indicates if the evaluation license has expired. This field is only relevant if the license status is EVALUATION.
+                    type: boolean
+                isExportControlFeaturesAllowed:
+                    default: false
+                    description: Indicates if the license enables the device to offer export-controlled functionality. If this is set to false, Cisco software features that are subject to national security, foreign policy, and anti-terrorism laws and regulations are disabled.
+                    type: boolean
+                lastUpdatedTime:
+                    default: null
+                    description: The time, in RFC 3339 format, that the license usage for this device was updated.
+                    format: date-time
+                    type: string
+                licenseStatus:
+                    default: null
+                    description: The license status of the device.
+                    enum:
+                        - LICENSED
+                        - UNLICENSED
+                        - EVALUATION
+                    type: string
+                licenses:
+                    default: null
+                    description: The list of licenses enabled on the device.
+                    items:
+                        $ref: '#/components/schemas/DeviceLicenseDetail'
+                    type: array
+                modelNumber:
+                    default: null
+                    description: The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device.
+                    type: string
+                name:
+                    default: null
+                    description: The name of the device in CDO. Device names are unique in Security Cloud Control.
+                    example: my-example-device
+                    type: string
+                serial:
+                    default: null
+                    description: The serial number of the device.
+                    example: JAD24500xxx
+                    type: string
+                smartAccount:
+                    $ref: '#/components/schemas/SmartAccount'
+                uid:
+                    default: null
+                    description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            type: object
+        DeviceLicensePage:
+            default: null
+            properties:
+                count:
+                    default: null
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    default: null
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/DeviceLicenseDto'
+                    type: array
+                limit:
+                    default: null
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    default: null
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
         DeviceMaintenanceWindow:
             default: null
             description: The maintenance window configuration for the device.
@@ -7444,19 +8049,70 @@ components:
             type: object
         DeviceUpgradeStatusDto:
             default: null
-            description: The current status of each device in the upgrade run.
+            description: Set of device UIDs that are part of this upgrade run.
             properties:
                 completionStatuses:
                     default: null
-                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+                    description: The completion status of the upgrade on the device.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                uid:
+                hardwareModel:
                     default: null
-                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+                    description: Hardware model of the devices being upgraded.
+                    example: Firepower 2110
+                    type: string
+                managedTenantDisplayName:
+                    default: null
+                    description: Display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    default: null
+                    description: Name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantUid:
+                    default: null
+                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    format: uuid
+                    type: string
+                name:
+                    default: null
+                    description: Name of the device being upgraded.
+                    example: my-firepower
+                    type: string
+                softwareVersionBeforeUpgrade:
+                    default: null
+                    description: Software version of the device before the upgrade.
+                    example: 7.2.3
+                    type: string
+                transactionUid:
+                    default: null
+                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
+                    type: string
+                uid:
+                    default: null
+                    description: Unique identifier, represented as a UUID, of the device being upgraded.
+                    format: uuid
+                    type: string
+                upgradeRunStatus:
+                    default: null
+                    description: Current status of the upgrade run.
+                    enum:
+                        - IN_PROGRESS
+                        - REBUILDING_UPGRADE_CACHE
+                        - PERFORMING_UPGRADE
+                        - UPLOADING_IMAGE
+                        - PERFORMING_READINESS_CHECK
+                        - UPGRADE_STAGED
+                        - UPGRADE_STAGING_FAILED
+                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_COMPLETED
+                        - UPGRADE_FAILED
+                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DuplexType:
@@ -7499,7 +8155,7 @@ components:
             type: object
         EntityType:
             default: null
-            description: The distinct device types for the devices managed by the MSP Portal.
+            description: The type of the device.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -7522,6 +8178,7 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
+            example: CDFMC_MANAGED_FTD
             type: string
         ErrorDetails:
             default: null
@@ -7678,6 +8335,15 @@ components:
                 standbyMacAddress:
                     default: null
                     description: The standby interface Media Access Control (MAC) address, for use in a high-availability (HA) pair.
+                    type: string
+            type: object
+        ExportInput:
+            default: null
+            properties:
+                query:
+                    default: null
+                    description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
+                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
                     type: string
             type: object
         FmcDeviceRecord:
@@ -10696,6 +11362,36 @@ components:
             required:
                 - content
             type: object
+        Page:
+            default: null
+            properties:
+                count:
+                    default: null
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    default: null
+                    description: The list of items retrieved.
+                    items:
+                        default: null
+                        description: The list of items retrieved.
+                        type: object
+                    type: array
+                limit:
+                    default: null
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    default: null
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
         PageCompatibleSecureClientVersionDto:
             default: null
             properties:
@@ -11391,7 +12087,7 @@ components:
                         - PROTOCOL_VALUE
                     type: string
             type: object
-        SmartAccountDto:
+        SmartAccount:
             default: null
             description: The smart account used to license this device.
             properties:
@@ -11403,6 +12099,70 @@ components:
                     default: null
                     description: The name of the virtual account, within the smart account, used to license the device
                     type: string
+            type: object
+        SmartAccountDto:
+            default: null
+            properties:
+                domain:
+                    default: null
+                    description: Account domain for your Smart Account
+                    type: string
+                lastUpdatedTime:
+                    default: null
+                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
+                    format: date-time
+                    type: string
+                name:
+                    default: null
+                    description: Name of the smart account
+                    type: string
+                smartAccountId:
+                    default: null
+                    description: Smart Account Identifier
+                    type: string
+                uid:
+                    default: null
+                    description: Unique identifier, represented as a UUID, for your Smart Account
+                    format: uuid
+                    type: string
+                virtualAccountsInComplianceCount:
+                    default: null
+                    description: Number of Virtual Accounts in this Smart Account with in compliance status
+                    format: int32
+                    type: integer
+                virtualAccountsOutOfComplianceCount:
+                    default: null
+                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
+                    format: int32
+                    type: integer
+            type: object
+        SmartAccountsPage:
+            default: null
+            properties:
+                count:
+                    default: null
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    default: null
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/SmartAccountDto'
+                    type: array
+                limit:
+                    default: null
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    default: null
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
             type: object
         SourceDestinationPortsValue:
             default: null
@@ -12273,6 +13033,69 @@ components:
                 value:
                     default: null
                     type: string
+            type: object
+        VirtualAccountDto:
+            default: null
+            properties:
+                complianceStatus:
+                    default: null
+                    description: Indicates whether any of the licenses used in this tenant from this Virtual Account are out of compliance.
+                    enum:
+                        - IN_COMPLIANCE
+                        - OUT_OF_COMPLIANCE
+                    type: string
+                lastUpdatedTime:
+                    default: null
+                    description: The time, in RFC 3339 format, when information on this Virtual Account was last updated
+                    format: date-time
+                    type: string
+                licensesInComplianceCount:
+                    default: null
+                    description: Number of licenses in this Virtual Account with in compliance status
+                    format: int32
+                    type: integer
+                licensesOutOfComplianceCount:
+                    default: null
+                    description: Number of licenses in this Virtual Account with out of compliance status
+                    format: int32
+                    type: integer
+                name:
+                    default: null
+                    description: Name of the Virtual Account.
+                    type: string
+                uid:
+                    default: null
+                    description: Unique identifier, represented as a UUID, for your Virtual Account
+                    format: uuid
+                    type: string
+            type: object
+        VirtualAccountsPage:
+            default: null
+            properties:
+                count:
+                    default: null
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    default: null
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/VirtualAccountDto'
+                    type: array
+                limit:
+                    default: null
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    default: null
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
             type: object
         VlanIdRange:
             default: null
