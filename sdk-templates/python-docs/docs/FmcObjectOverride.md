@@ -1,5 +1,6 @@
 # FmcObjectOverride
 
+Specify a list of objects to override. All objects that have been marked as overridable in the template must be defined here. Note: Any overrides defined here that are not present in the template configuration will be ignored.
 
 ## Properties
 

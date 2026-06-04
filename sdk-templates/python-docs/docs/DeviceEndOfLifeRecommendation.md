@@ -1,5 +1,6 @@
 # DeviceEndOfLifeRecommendation
 
+End-Of-Life appropriate upgrade recommendations for the hardware models.
 
 ## Properties
 

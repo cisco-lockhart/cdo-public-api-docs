@@ -1,5 +1,6 @@
 # InterfaceHealthMetrics
 
+The interface health metrics for the device.
 
 ## Properties
 

@@ -1,5 +1,6 @@
 # Location
 
+The location of the client device.
 
 ## Properties
 

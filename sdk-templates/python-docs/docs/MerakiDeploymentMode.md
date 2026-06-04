@@ -1,5 +1,6 @@
 # MerakiDeploymentMode
 
+(Meraki devices only) The deployment mode of the Meraki device.
 
 ## Properties
 

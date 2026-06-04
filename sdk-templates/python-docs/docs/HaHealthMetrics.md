@@ -1,5 +1,6 @@
 # HaHealthMetrics
 
+The HA health metrics for the device. This value will be available only if the device is part of an HA pair.
 
 ## Properties
 

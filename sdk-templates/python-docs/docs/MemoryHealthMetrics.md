@@ -1,5 +1,6 @@
 # MemoryHealthMetrics
 
+The memory health metrics for the device.
 
 ## Properties
 

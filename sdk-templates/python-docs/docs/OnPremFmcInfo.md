@@ -1,5 +1,6 @@
 # OnPremFmcInfo
 
+(Devices managed by on-prem FMC only) Information on the on-prem FMC managing this device.
 
 ## Properties
 

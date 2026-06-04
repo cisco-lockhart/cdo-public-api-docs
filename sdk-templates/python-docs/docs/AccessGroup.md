@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **applied_to** | **List[str]** | The set of device unique identifiers to which this Access Group was applied. Only valid for shared access group. | [optional] 
 **created_date** | **datetime** | The time (in UTC) at which Access Group was created, represented using the RFC-3339 standard. | [optional] 
 **entity_uid** | **str** | The unique identifier, represented as a UUID, of the device/manager associated with the Access Group. | 
-**is_shared** | **bool** | The flag that identifies if access group is shared. | [optional] 
+**is_shared** | **bool** | The flag that identifies if access group is shared. | [optional] [default to False]
 **name** | **str** | The name of Access Group. Access Group names are unique in Security Cloud Control. | 
 **resources** | **List[Dict[str, object]]** | The set of of interface and direction pairs or global resource. | [optional] 
 **shared_access_group_uid** | **str** | The unique identifier, represented as a UUID, of the shared access group manager associated with the Access Group. | [optional] 

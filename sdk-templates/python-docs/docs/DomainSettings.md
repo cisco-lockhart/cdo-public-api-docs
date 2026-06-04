@@ -1,5 +1,6 @@
 # DomainSettings
 
+Configuration that defines how Secure Client communicates with the device.
 
 ## Properties
 

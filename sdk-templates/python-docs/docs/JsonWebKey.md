@@ -1,5 +1,6 @@
 # JsonWebKey
 
+The JSON Web Key Set.
 
 ## Properties
 

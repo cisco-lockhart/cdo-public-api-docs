@@ -1,5 +1,6 @@
 # Event
 
+The events recorded in this Change Log.
 
 ## Properties
 

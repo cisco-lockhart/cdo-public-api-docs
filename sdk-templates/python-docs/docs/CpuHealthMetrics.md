@@ -1,5 +1,6 @@
 # CpuHealthMetrics
 
+The CPU health metrics for the device. This value will be available only if the health policy on the device has CPU monitoring enabled.
 
 ## Properties
 

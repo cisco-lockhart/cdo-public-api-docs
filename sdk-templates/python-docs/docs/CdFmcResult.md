@@ -1,5 +1,6 @@
 # CdFmcResult
 
+Results from the Cloud-delivered FMC devices, objects or policies that match the search term.
 
 ## Properties
 

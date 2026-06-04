@@ -1,5 +1,6 @@
 # AccessRuleDetailsContent
 
+The rule time range.
 
 ## Properties
 
