@@ -1,5 +1,6 @@
 # SecureClientPlatformDto
 
+The OS and CPU architecture combinations available for this version.
 
 ## Properties
 

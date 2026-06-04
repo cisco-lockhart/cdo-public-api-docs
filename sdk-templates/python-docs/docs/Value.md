@@ -1,5 +1,6 @@
 # Value
 
+The list of values removed from this entity as part of the change.
 
 ## Properties
 

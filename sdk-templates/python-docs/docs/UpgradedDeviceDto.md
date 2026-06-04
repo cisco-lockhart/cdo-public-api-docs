@@ -1,5 +1,6 @@
 # UpgradedDeviceDto
 
+The devices included in this upgrade run.
 
 ## Properties
 

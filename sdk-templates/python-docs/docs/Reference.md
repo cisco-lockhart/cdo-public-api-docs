@@ -1,5 +1,6 @@
 # Reference
 
+The list of references deleted from this entity as part of the change.
 
 ## Properties
 

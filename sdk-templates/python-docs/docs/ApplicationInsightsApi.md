@@ -53,10 +53,10 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.ApplicationInsightsApi(api_client)
-    start = '2025-01-01T00:00:00Z' # datetime | Start time for outage (UTC; represented using the RFC-3339 standard, inclusive) (optional)
-    end = '2025-01-31T23:59:59Z' # datetime | End time for outage (UTC; represented using the RFC-3339 standard, exclusive) (optional)
-    time_range = '24h' # str | Relative time range (mutually exclusive with start/end). (optional)
-    application_name = 'Webex' # str | Filter by application name (optional)
+    start = '' # str | Start time for outage (UTC; represented using the RFC-3339 standard, inclusive) (optional) (default to '')
+    end = '' # str | End time for outage (UTC; represented using the RFC-3339 standard, exclusive) (optional) (default to '')
+    time_range =  # str | Relative time range (mutually exclusive with start/end). (optional) (default to )
+    application_name = '' # str | Filter by application name (optional) (default to '')
 
     try:
         # Get Application Outages
@@ -74,10 +74,10 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **start** | **datetime**| Start time for outage (UTC; represented using the RFC-3339 standard, inclusive) | [optional] 
- **end** | **datetime**| End time for outage (UTC; represented using the RFC-3339 standard, exclusive) | [optional] 
- **time_range** | **str**| Relative time range (mutually exclusive with start/end). | [optional] 
- **application_name** | **str**| Filter by application name | [optional] 
+ **start** | **str**| Start time for outage (UTC; represented using the RFC-3339 standard, inclusive) | [optional] [default to &#39;&#39;]
+ **end** | **str**| End time for outage (UTC; represented using the RFC-3339 standard, exclusive) | [optional] [default to &#39;&#39;]
+ **time_range** | **str**| Relative time range (mutually exclusive with start/end). | [optional] [default to ]
+ **application_name** | **str**| Filter by application name | [optional] [default to &#39;&#39;]
 
 ### Return type
 
@@ -97,10 +97,10 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of application outages that started in the specified time period |  -  |
-**400** |  |  -  |
-**401** |  |  -  |
-**403** |  |  -  |
-**405** |  |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**405** | Method not allowed. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

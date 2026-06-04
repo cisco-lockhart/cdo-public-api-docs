@@ -1,5 +1,6 @@
 # LinkState
 
+The interface link state, such as UP or DOWN.
 
 ## Properties
 

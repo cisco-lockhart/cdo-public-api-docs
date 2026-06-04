@@ -1,5 +1,6 @@
 # DeviceDeploymentStatusDto
 
+The current status of each device that is being deployed to as part of this deployment.
 
 ## Properties
 

@@ -1,5 +1,6 @@
 # IpType
 
+IP address type, such as STATIC or DHCP.
 
 ## Properties
 

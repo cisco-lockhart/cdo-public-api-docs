@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **filename** | **str** | The name of the file | [optional] 
-**is_suggested_version** | **bool** | A boolean value, indicating whether this version is a suggested version to upgrade to. | [optional] 
+**is_suggested_version** | **bool** | A boolean value, indicating whether this version is a suggested version to upgrade to. | [optional] [default to False]
 **software_version** | **str** | The version to which this package will upgrade the FTD. | [optional] 
 **upgrade_package_uid** | **str** | The unique identifier, represented as a UUID, of the version in Security Cloud Control | [optional] 
 **upgrade_type** | **str** | The type of the upgrade | [optional] 
