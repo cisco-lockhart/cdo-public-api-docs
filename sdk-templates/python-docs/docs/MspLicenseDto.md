@@ -1,5 +1,6 @@
 # MspLicenseDto
 
+The list of items retrieved.
 
 ## Properties
 

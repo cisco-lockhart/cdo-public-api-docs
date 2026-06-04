@@ -1,5 +1,6 @@
 # SingleContent
 
+List of content literals
 
 ## Properties
 

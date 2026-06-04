@@ -1,5 +1,6 @@
 # ManagedTenantDto
 
+The list of managed tenants associated with this license.
 
 ## Properties
 

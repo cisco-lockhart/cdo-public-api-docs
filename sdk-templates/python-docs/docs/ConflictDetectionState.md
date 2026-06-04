@@ -1,5 +1,6 @@
 # ConflictDetectionState
 
+The distinct conflict detection states for the devices managed by the MSP Portal.
 
 ## Properties
 

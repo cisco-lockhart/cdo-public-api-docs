@@ -1,5 +1,6 @@
 # ClusterNode
 
+(cdFMC-managed FTDs only) Information on the data nodes, which are individual units within a cluster that process and forward network traffic based on policies and configurations managed by the control node.
 
 ## Properties
 
