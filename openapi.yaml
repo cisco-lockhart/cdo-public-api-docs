@@ -7589,15 +7589,21 @@ components:
             type: object
         CompletionStatusDto:
             default: null
-            description: The completion status of the deployment on the device.
+            description: The completion status of the upgrade on the device.
             properties:
+                completedAt:
+                    default: null
+                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
+                    example: 2026-04-15T18:00:10.123Z
+                    format: date-time
+                    type: string
                 message:
                     default: null
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
                     default: null
-                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     default: null
@@ -7610,7 +7616,7 @@ components:
                     type: string
                 percentageComplete:
                     default: null
-                    description: The percentage completion of the current task being performed
+                    description: Percentage completion of the current task being performed.
                     format: double
                     type: number
             type: object
