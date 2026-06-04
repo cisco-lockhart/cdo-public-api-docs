@@ -13723,8 +13723,14 @@ components:
             type: object
         CompletionStatusDto:
             default: null
-            description: The completion status of the deployment on the device.
+            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
             properties:
+                completedAt:
+                    default: null
+                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
+                    example: 2026-04-15T18:00:10.123Z
+                    format: date-time
+                    type: string
                 message:
                     default: null
                     description: A message, indicating current progress, returned from the device.
@@ -15044,7 +15050,7 @@ components:
             type: object
         EntityType:
             default: null
-            description: The type of the device.
+            description: The distinct device types for the devices managed by the MSP Portal.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -15067,7 +15073,6 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: CDFMC_MANAGED_FTD
             type: string
         ErrorDetails:
             default: null
@@ -20138,39 +20143,16 @@ components:
             type: object
         SmartAccountDto:
             default: null
+            description: The smart account used to license this device.
             properties:
-                domain:
+                parent:
                     default: null
-                    description: Account domain for your Smart Account
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
+                virtual:
                     default: null
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                name:
-                    default: null
-                    description: Name of the smart account
-                    type: string
-                smartAccountId:
-                    default: null
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    default: null
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    default: null
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    default: null
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             default: null
