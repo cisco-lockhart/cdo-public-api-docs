@@ -1,5 +1,6 @@
 # OS
 
+The operating system of the client device.
 
 ## Properties
 

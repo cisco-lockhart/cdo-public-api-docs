@@ -1,5 +1,6 @@
 # AuditLog
 
+The list of items retrieved.
 
 ## Properties
 

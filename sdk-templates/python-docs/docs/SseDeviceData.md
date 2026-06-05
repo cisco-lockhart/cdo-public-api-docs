@@ -1,5 +1,6 @@
 # SseDeviceData
 
+SSX related info for the registered device
 
 ## Properties
 

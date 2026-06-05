@@ -1,5 +1,6 @@
 # EntityType
 
+The distinct device types for the devices managed by the MSP Portal.
 
 ## Properties
 

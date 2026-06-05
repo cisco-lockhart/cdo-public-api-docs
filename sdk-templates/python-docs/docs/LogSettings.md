@@ -1,5 +1,6 @@
 # LogSettings
 
+The set of of interface and direction pairs or global resource.
 
 ## Properties
 

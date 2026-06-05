@@ -1,5 +1,6 @@
 # UniversalZtnaSettings
 
+(FMC-managed FTDs only) Universal Zero-Trust Network Access (ZTNA) configuration.
 
 ## Properties
 
@@ -7,9 +8,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **deployed** | [**Deployed**](Deployed.md) |  | [optional] 
 **staged** | [**Staged**](Staged.md) |  | [optional] 
-**universal_ztna_configured** | **bool** | Indicates whether a device is configured for Zero Trust Network Access (ZTNA). | [optional] 
-**universal_ztna_enabled** | **bool** | Indicates whether a device is enabled for Zero Trust Network Access (ZTNA). | [optional] 
-**universal_ztna_supported** | **bool** | Indicates whether a device supports Zero Trust Network Access (ZTNA). | [optional] 
+**universal_ztna_configured** | **bool** | Indicates whether a device is configured for Zero Trust Network Access (ZTNA). | [optional] [default to False]
+**universal_ztna_enabled** | **bool** | Indicates whether a device is enabled for Zero Trust Network Access (ZTNA). | [optional] [default to False]
+**universal_ztna_supported** | **bool** | Indicates whether a device supports Zero Trust Network Access (ZTNA). | [optional] [default to False]
 
 ## Example
 

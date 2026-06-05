@@ -1,5 +1,6 @@
 # CompatibleSecureClientVersionDto
 
+The list of items retrieved.
 
 ## Properties
 

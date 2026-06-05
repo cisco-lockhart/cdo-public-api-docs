@@ -1,5 +1,6 @@
 # UnifiedObjectListView
 
+The list of objects retrieved.
 
 ## Properties
 

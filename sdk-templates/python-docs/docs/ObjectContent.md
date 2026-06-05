@@ -1,5 +1,6 @@
 # ObjectContent
 
+The content value of the override. This overrides the object's default content.
 
 ## Properties
 

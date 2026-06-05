@@ -1,16 +1,17 @@
 # InterfaceIpv6Address
 
+IPv6 address details of the interface.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**auto_config** | **bool** | Indicates whether address is automatically configured. | [optional] 
+**auto_config** | **bool** | Indicates whether address is automatically configured. | [optional] [default to False]
 **dad_attempts** | **int** | Indicates the number of times a device performs Duplicate Address Detection (DAD) to verify the uniqueness of an address before assigning the IPv6 address. Valid range is from 0 to 600. | [optional] 
-**enabled** | **bool** | Indicates whether IPv6 is enabled in interface. | [optional] 
+**enabled** | **bool** | Indicates whether IPv6 is enabled in interface. | [optional] [default to False]
 **ip_addresses** | [**List[InterfaceIpAddress]**](InterfaceIpAddress.md) | List of IPv6 addresses assigned to interface. | [optional] 
 **link_local_address** | [**InterfaceIpAddress**](InterfaceIpAddress.md) |  | [optional] 
-**suppress_ra** | **bool** | Indicates whether router advertisements should be suppressed. | [optional] 
+**suppress_ra** | **bool** | Indicates whether router advertisements should be suppressed. | [optional] [default to False]
 
 ## Example
 

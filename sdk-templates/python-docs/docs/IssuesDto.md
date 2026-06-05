@@ -1,5 +1,6 @@
 # IssuesDto
 
+The issues for the object
 
 ## Properties
 

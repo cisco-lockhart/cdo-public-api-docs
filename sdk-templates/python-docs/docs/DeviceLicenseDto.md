@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **compliance_status** | **str** | Indicates whether the license used on the device is currently compliant with Smart Licensing restrictions. | [optional] 
 **device_type** | [**EntityType**](EntityType.md) |  | [optional] 
-**is_evaluation_license_expired** | **bool** | Indicates if the evaluation license has expired. This field is only relevant if the license status is EVALUATION. | [optional] 
-**is_export_control_features_allowed** | **bool** | Indicates if the license enables the device to offer export-controlled functionality. If this is set to false, Cisco software features that are subject to national security, foreign policy, and anti-terrorism laws and regulations are disabled. | [optional] 
+**is_evaluation_license_expired** | **bool** | Indicates if the evaluation license has expired. This field is only relevant if the license status is EVALUATION. | [optional] [default to False]
+**is_export_control_features_allowed** | **bool** | Indicates if the license enables the device to offer export-controlled functionality. If this is set to false, Cisco software features that are subject to national security, foreign policy, and anti-terrorism laws and regulations are disabled. | [optional] [default to False]
 **last_updated_time** | **datetime** | The time, in RFC 3339 format, that the license usage for this device was updated. | [optional] 
 **license_status** | **str** | The license status of the device. | [optional] 
 **licenses** | [**List[DeviceLicenseDetail]**](DeviceLicenseDetail.md) | The list of licenses enabled on the device. | [optional] 

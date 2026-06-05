@@ -1,5 +1,6 @@
 # FmcRequest
 
+The request that the user wants to execute on the device.
 
 ## Properties
 

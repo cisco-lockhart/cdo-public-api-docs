@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **destination_port** | [**AccessRuleDetailsContent**](AccessRuleDetailsContent.md) |  | [optional] 
 **entity_uid** | **str** | The unique identifier, represented as a UUID, of the device/manager associated with the Access Rule. Points to shared Access Group in case of shared Rule | 
 **index** | **int** | Access rule index position in Access Group ordered rule list. | 
-**is_active_rule** | **bool** | Indicates whether this rule is active. | [optional] 
+**is_active_rule** | **bool** | Indicates whether this rule is active. | [optional] [default to False]
 **issues** | [**List[AccessRuleIssue]**](AccessRuleIssue.md) | Indicates if rule has SHADOWED, SHARED or DUPLICATE (remark) issue. | [optional] 
 **log_settings** | [**LogSettings**](LogSettings.md) |  | [optional] 
 **protocol** | [**AccessRuleDetailsContent**](AccessRuleDetailsContent.md) |  | [optional] 

@@ -1,5 +1,6 @@
 # InterfaceMode
 
+Interface mode, which describes how an interface operates in the network.
 
 ## Properties
 

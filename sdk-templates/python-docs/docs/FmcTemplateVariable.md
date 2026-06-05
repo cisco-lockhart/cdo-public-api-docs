@@ -1,5 +1,6 @@
 # FmcTemplateVariable
 
+Specify the list of template variables configured on the template. All required template variables must be defined here, and should have values valid for the type of the variable. Any invalid input will result in the template not being applied to the device upon onboarding. Note: Any variables defined here that are not present in the template will be ignored.
 
 ## Properties
 

@@ -1,5 +1,6 @@
 # DeviceMaintenanceWindow
 
+The maintenance window configuration for the device.
 
 ## Properties
 
@@ -8,7 +9,7 @@ Name | Type | Description | Notes
 **current_end** | **str** | End time of the current maintenance window in ISO 8601 format. Note: This field is only populated when isMaintenanceWindowOpen is true. | [optional] 
 **current_start** | **str** | Start time of the current maintenance window in ISO 8601 format. Note: This field is only populated when isMaintenanceWindowOpen is true. | [optional] 
 **duration_minutes** | **int** | Duration of the maintenance window in minutes. | [optional] 
-**is_open** | **bool** | Indicates whether the maintenance window is currently open. | [optional] 
+**is_open** | **bool** | Indicates whether the maintenance window is currently open. | [optional] [default to False]
 **next_end** | **str** | End time of the next scheduled maintenance window in ISO 8601 format. | [optional] 
 **next_start** | **str** | Start time of the next scheduled maintenance window in ISO 8601 format. | [optional] 
 **start_cron** | **str** | CRON expression defining the scheduled start time of the maintenance window in format: Minute, Hour, Day of Month, Month, Day of Week. | [optional] 

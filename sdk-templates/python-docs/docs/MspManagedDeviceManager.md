@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **address** | **str** | The address of the device, in &lt;code&gt;host:port&lt;/code&gt; format. Security Cloud Control connects to the device at this address. | [optional] 
 **connectivity_state** | [**ConnectivityState**](ConnectivityState.md) |  | [optional] 
-**dedicated_cd_fmc_instance** | **bool** | Indicates whether the tenant&#39;s provisioned cdFMC instance is dedicated rather than shared. | [optional] 
+**dedicated_cd_fmc_instance** | **bool** | Indicates whether the tenant&#39;s provisioned cdFMC instance is dedicated rather than shared. | [optional] [default to False]
 **device_manager_type** | [**EntityType**](EntityType.md) |  | [optional] 
 **fmc_domain_uid** | **str** | (FMC-only) The Domain UID of the FMC. | [optional] 
 **geo_db_version** | **str** | (FMC-only) The version of the Cisco geolocation database (GeoDB). | [optional] 

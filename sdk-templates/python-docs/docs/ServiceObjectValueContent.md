@@ -1,5 +1,6 @@
 # ServiceObjectValueContent
 
+The value of the service object
 
 ## Properties
 

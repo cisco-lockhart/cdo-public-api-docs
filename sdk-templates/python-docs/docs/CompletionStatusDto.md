@@ -1,5 +1,6 @@
 # CompletionStatusDto
 
+The completion status of the deployment on the device.
 
 ## Properties
 

@@ -1,5 +1,6 @@
 # DeviceEndOfLifeDetails
 
+End-of-Life details, including key EOL dates and links to official vendor notices.
 
 ## Properties
 

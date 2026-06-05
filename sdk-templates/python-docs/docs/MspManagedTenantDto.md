@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**api_token_valid** | **bool** | Indicates whether the tenant&#39;s API token is valid. | [optional] 
+**api_token_valid** | **bool** | Indicates whether the tenant&#39;s API token is valid. | [optional] [default to False]
 **cd_fmc_type** | **str** | Indicates whether the tenant&#39;s provisioned cdFMC instance is dedicated rather than shared. | [optional] 
 **compliance_status** | **str** | The licensing compliance status of the tenant. | [optional] 
 **device_count** | **int** | The number of devices in this managed tenant. | [optional] 

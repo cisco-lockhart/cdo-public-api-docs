@@ -1,5 +1,6 @@
 # SecureAccessMetadata
 
+Structured [Cisco Secure Access](https://www.cisco.com/site/uk/en/products/security/secure-access/index.html) metadata (applicable to UZTNA-enabled FTDs only).
 
 ## Properties
 

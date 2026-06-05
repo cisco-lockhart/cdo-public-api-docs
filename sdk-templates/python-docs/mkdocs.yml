@@ -194,6 +194,7 @@ nav:
     - FtdHaInfo: FtdHaInfo.md
     - FtdMultiDeviceDeploymentInput: FtdMultiDeviceDeploymentInput.md
     - FtdRegistrationInput: FtdRegistrationInput.md
+    - FtdSingleDeviceDeploymentInput: FtdSingleDeviceDeploymentInput.md
     - FtdUpgradeRunDtoPage: FtdUpgradeRunDtoPage.md
     - FtdVersion: FtdVersion.md
     - FtdVersionsPage: FtdVersionsPage.md

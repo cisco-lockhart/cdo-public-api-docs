@@ -1,5 +1,6 @@
 # ZtpOnboardingTemplateConfiguration
 
+Specify the template to apply to this device. If this field is specified, the 'fmcAccessPolicyUid' field must remain unspecified. Note: If both 'fmcAccessPolicyUid' and 'template' fields are unspecified, the operation will fail.
 
 ## Properties
 

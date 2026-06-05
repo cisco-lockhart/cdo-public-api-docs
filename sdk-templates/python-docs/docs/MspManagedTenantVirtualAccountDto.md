@@ -1,5 +1,6 @@
 # MspManagedTenantVirtualAccountDto
 
+The list of virtual accounts associated with this managed tenant.
 
 ## Properties
 

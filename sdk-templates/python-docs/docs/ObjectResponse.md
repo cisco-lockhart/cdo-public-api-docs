@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **labels** | **List[str]** | The labels for the object | [optional] 
 **name** | **str** | The name of the object | [optional] 
 **object_version** | **int** | The version of the unified object | [optional] 
-**read_only** | **bool** | Indicates if the object is read-only | [optional] 
+**read_only** | **bool** | Indicates if the object is read-only | [optional] [default to False]
 **references_info_from_default_and_overrides** | [**List[ReferenceInfo]**](ReferenceInfo.md) | List of objects referenced in the default content or in any of the overrides. | [optional] 
 **tags** | **Dict[str, List[str]]** | The tags for the object | [optional] 
 **targets** | [**List[Target]**](Target.md) | Set of targets that contain the object. A target can be, for example, a device, service, or a shared policy (Ruleset). | [optional] 

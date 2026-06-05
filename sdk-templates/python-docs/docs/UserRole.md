@@ -1,5 +1,6 @@
 # UserRole
 
+Roles associated with this user in Security Cloud Control.
 
 ## Properties
 

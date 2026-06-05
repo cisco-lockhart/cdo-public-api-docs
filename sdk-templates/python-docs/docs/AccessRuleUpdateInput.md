@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **destination_network** | [**DestinationNetworkContent**](DestinationNetworkContent.md) |  | [optional] 
 **destination_port** | [**DestinationPortContent**](DestinationPortContent.md) |  | [optional] 
 **index** | **int** | Access rule index position in Access Group ordered rule list. | [optional] 
-**is_active_rule** | **bool** | Is active. True by default | [optional] 
+**is_active_rule** | **bool** | Is active. True by default | [optional] [default to False]
 **log_settings** | [**LogSettings**](LogSettings.md) |  | [optional] 
 **protocol** | [**ProtocolContent**](ProtocolContent.md) |  | [optional] 
 **remark** | **str** | A remark. | [optional] 

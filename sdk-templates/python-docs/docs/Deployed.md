@@ -1,11 +1,12 @@
 # Deployed
 
+Indicates that the settings have been successfully configured and deployed.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**auto_deploy_enabled** | **bool** | Specifies whether changes to ZTNA settings are automatically deployed to the device. Note: This applies only to ZTNA-specific changes and does not affect the deployment of other pending changes. | [optional] 
+**auto_deploy_enabled** | **bool** | Specifies whether changes to ZTNA settings are automatically deployed to the device. Note: This applies only to ZTNA-specific changes and does not affect the deployment of other pending changes. | [optional] [default to False]
 **domain_settings** | [**List[DomainSettings]**](DomainSettings.md) | Configuration that defines how Secure Client communicates with the device. | [optional] 
 
 ## Example
