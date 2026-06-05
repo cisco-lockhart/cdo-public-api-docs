@@ -13723,14 +13723,8 @@ components:
             type: object
         CompletionStatusDto:
             default: null
-            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+            description: The completion status of the deployment on the device.
             properties:
-                completedAt:
-                    default: null
-                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
-                    example: 2026-04-15T18:00:10.123Z
-                    format: date-time
-                    type: string
                 message:
                     default: null
                     description: A message, indicating current progress, returned from the device.
@@ -13756,12 +13750,13 @@ components:
             type: object
         ConfigState:
             default: null
-            description: The distinct config states for the devices managed by the MSP Portal.
+            description: The state of the device configuration in CDO. CDO stages configuration changes which have to be manually applied to the device; this field indicates whether the configuration on CDO does not match the configuration on the device, which indicates whether there are changes to be deployed from Security Cloud Control to the device.
             enum:
                 - NO_CONFIG
                 - SYNCED
                 - NOT_SYNCED
                 - UNKNOWN
+            example: SYNCED
             type: string
         ConflictDetectionInterval:
             default: null
@@ -13775,14 +13770,15 @@ components:
             type: string
         ConflictDetectionState:
             default: null
-            description: The distinct conflict detection states for the devices managed by the MSP Portal.
+            description: Indicates whether there have been changes made to the device's configuration outside of Security Cloud Control.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
+            example: NO_CONFLICTS
             type: string
         ConnectivityState:
             default: null
-            description: The distinct connectivity states for the devices managed by the MSP Portal.
+            description: The connectivity state of the device to CDO. A connectivity state that is not ONLINE can indicate either a problem with the device, or the communication pathways between the device and Security Cloud Control.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -13791,10 +13787,11 @@ components:
                 - PENDING_SETUP
                 - PENDING
                 - NEW_CERT_DETECTED
+            example: ONLINE
             type: string
         ConnectorType:
             default: null
-            description: The type of the connector that will be used to communicate with the device.
+            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
             enum:
                 - SDC
                 - CDG
@@ -16601,6 +16598,7 @@ components:
         Labels:
             default: null
             description: Labels used to identify/tag Security Cloud Control entities.
+            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -21470,7 +21468,7 @@ components:
             type: object
         UserRole:
             default: null
-            description: Roles associated with this user in Security Cloud Control.
+            description: The role of the user this token belongs to. The user can be API-only or a human.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -21481,7 +21479,6 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
-            example: '[ROLE_ADMIN]'
             type: string
         Value:
             default: null
