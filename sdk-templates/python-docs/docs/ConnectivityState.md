@@ -1,6 +1,5 @@
 # ConnectivityState
 
-The distinct connectivity states for the devices managed by the MSP Portal.
 
 ## Properties
 

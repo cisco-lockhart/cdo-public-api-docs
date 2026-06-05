@@ -1,6 +1,5 @@
 # Status
 
-The status of the SDC.
 
 ## Properties
 

@@ -1,12 +1,11 @@
 # MspManagedTenantSettingsDto
 
-The list of items retrieved.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**asa_health_metrics** | **bool** | Indicates whether ASA health metrics are enabled. | [default to False]
+**asa_health_metrics** | **bool** | Indicates whether ASA health metrics are enabled. | 
 **managed_tenant_uid** | **str** | The unique identifier, represented as a UUID, of the managed tenant these settings belong to. | 
 **uid** | **str** | The unique identifier, represented as a UUID, of the tenant settings record. | 
 

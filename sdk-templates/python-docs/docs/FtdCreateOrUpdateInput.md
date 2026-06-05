@@ -14,8 +14,8 @@ Name | Type | Description | Notes
 **nat_id** | **str** | The NAT ID used during cdFMC-triggered registration, where the cdFMC initiates the connection to the FTD (as opposed to the default flow, where the FTD connects to the cdFMC). Required when useCdFmcTriggeredRegistration is true; must not be specified otherwise. | [optional] 
 **performance_tier** | **str** | Specify the performance tier of the FTDv (required only if isVirtual is set to true). | [optional] 
 **reg_key** | **str** | The registration key used to authenticate the cdFMC-triggered registration, where the cdFMC initiates the connection to the FTD (as opposed to the default flow, where the FTD connects to the cdFMC). Required when useCdFmcTriggeredRegistration is true; must not be specified otherwise. | [optional] 
-**use_cd_fmc_triggered_registration** | **bool** | If your FTD is publicly accessible, then you can choose to use the cdFMC triggered registration flow. If this field is set to true, the ftdHostname, natId, and regKey fields must be specified. | [optional] [default to False]
-**virtual** | **bool** | Indicate whether the FTD is a virtual or a physical device. | [optional] [default to False]
+**use_cd_fmc_triggered_registration** | **bool** | If your FTD is publicly accessible, then you can choose to use the cdFMC triggered registration flow. If this field is set to true, the ftdHostname, natId, and regKey fields must be specified. | [optional] 
+**virtual** | **bool** | Indicate whether the FTD is a virtual or a physical device. | [optional] 
 
 ## Example
 

@@ -1,6 +1,5 @@
 # FmcObjectReference
 
-List of references to interface objects on the FMC, which defines the interfaces on the device that are used for ZTNA.
 
 ## Properties
 

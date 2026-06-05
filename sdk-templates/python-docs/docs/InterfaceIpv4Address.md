@@ -1,6 +1,5 @@
 # InterfaceIpv4Address
 
-IPv4 address details of the interface.
 
 ## Properties
 

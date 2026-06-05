@@ -1,6 +1,5 @@
 # FmcAccessPolicyReference
 
-(FMC-managed FTDs only) The FMC Access Policy applied to the device.
 
 ## Properties
 

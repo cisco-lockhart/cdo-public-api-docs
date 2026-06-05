@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **device_uids** | **List[str]** | A set of device UIDs to bulk update. | [optional] 
 **maintenance_window_duration_minutes** | **int** | Duration of the maintenance window in minutes. | [optional] 
 **maintenance_window_start_cron** | **str** | CRON expression defining the scheduled start time of the maintenance window in format: Minute, Hour, Day of Month, Month, Day of Week. | [optional] 
-**opted_in_to_asa_health_metrics** | **bool** | Specify whether to enable or disable health metrics collection (SDC-managed ASA devices only). | [optional] [default to False]
+**opted_in_to_asa_health_metrics** | **bool** | Specify whether to enable or disable health metrics collection (SDC-managed ASA devices only). | [optional] 
 
 ## Example
 

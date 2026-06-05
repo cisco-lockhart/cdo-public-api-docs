@@ -1,6 +1,5 @@
 # EdgeFtdRegistrationInfo
 
-(FTDs with public IPs managed by cdFMC) Information on the FTD. This information will only be available if you are onboarding the FTD using the cdFMC-driven CLI flow (this is typically the case when you are spinning up an Azure FTDv).
 
 ## Properties
 

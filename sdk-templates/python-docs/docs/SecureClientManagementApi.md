@@ -59,9 +59,9 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.SecureClientManagementApi(api_client)
-    device_uids = 'device_uids_example' # str | The unique identifiers, represented as UUIDs, of the ASA devices in Security Cloud Control.
-    limit = '50' # str | Number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    device_uids = ['device_uids_example'] # List[str] | The unique identifiers, represented as UUIDs, of the ASA devices in Security Cloud Control.
+    limit = 'limit_example' # str | Number of results to retrieve. (optional)
+    offset = 'offset_example' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional)
 
     try:
         # List Secure Client versions compatible with the specified ASA devices
@@ -79,9 +79,9 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_uids** | **str**| The unique identifiers, represented as UUIDs, of the ASA devices in Security Cloud Control. | 
- **limit** | **str**| Number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **device_uids** | [**List[str]**](str.md)| The unique identifiers, represented as UUIDs, of the ASA devices in Security Cloud Control. | 
+ **limit** | **str**| Number of results to retrieve. | [optional] 
+ **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] 
 
 ### Return type
 
@@ -234,8 +234,8 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.SecureClientManagementApi(api_client)
     device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the ASA device in Security Cloud Control.
-    limit = '50' # str | Number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    limit = 'limit_example' # str | Number of results to retrieve. (optional)
+    offset = 'offset_example' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional)
 
     try:
         # List Secure Client packages installed on an ASA device
@@ -254,8 +254,8 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **device_uid** | **str**| The unique identifier, represented as a UUID, of the ASA device in Security Cloud Control. | 
- **limit** | **str**| Number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **limit** | **str**| Number of results to retrieve. | [optional] 
+ **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] 
 
 ### Return type
 
@@ -405,10 +405,10 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.SecureClientManagementApi(api_client)
-    limit = '50' # str | Number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    limit = 'limit_example' # str | Number of results to retrieve. (optional)
+    offset = 'offset_example' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional)
     q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
-    sort = 'name:DESC' # str | The fields to sort results by. (optional)
+    sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
         # Get Secure Client Upgrade Runs
@@ -426,10 +426,10 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **str**| Number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **limit** | **str**| Number of results to retrieve. | [optional] 
+ **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] 
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
- **sort** | **str**| The fields to sort results by. | [optional] 
+ **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
 ### Return type
 

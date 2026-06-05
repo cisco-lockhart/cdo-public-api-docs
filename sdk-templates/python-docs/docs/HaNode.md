@@ -1,6 +1,5 @@
 # HaNode
 
-Information on the secondary unit in the FTD HA Pair. Note: for an on-prem FMC managed FTD, this information is available only if the `cdfmc_and_onprem_fmc_enhanced_flow` feature flag is enabled on your tenant.
 
 ## Properties
 

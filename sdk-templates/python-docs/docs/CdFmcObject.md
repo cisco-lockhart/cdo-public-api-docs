@@ -1,6 +1,5 @@
 # CdFmcObject
 
-Policies that match the search term.
 
 ## Properties
 

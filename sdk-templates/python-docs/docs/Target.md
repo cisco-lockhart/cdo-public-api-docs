@@ -1,6 +1,5 @@
 # Target
 
-Set of targets that contain the object. A target can be, for example, a device, service, or a shared policy (Ruleset).
 
 ## Properties
 

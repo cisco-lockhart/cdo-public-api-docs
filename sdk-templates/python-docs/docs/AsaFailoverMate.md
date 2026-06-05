@@ -1,6 +1,5 @@
 # AsaFailoverMate
 
-(High Availability ASAs only) Information on the failover mate of this device.
 
 ## Properties
 

@@ -29,7 +29,7 @@ Method | HTTP request | Description
 
 
 # **calculate_msp_ftd_compatible_upgrade_versions**
-> CdoTransaction calculate_msp_ftd_compatible_upgrade_versions(body)
+> CdoTransaction calculate_msp_ftd_compatible_upgrade_versions(msp_calculate_compatible_upgrade_versions_input)
 
 Calculate compatible FTD upgrade versions
 
@@ -42,6 +42,7 @@ An asynchronous operation to calculate a list of compatible upgrade versions for
 ```python
 import scc_firewall_manager_sdk
 from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.models.msp_calculate_compatible_upgrade_versions_input import MspCalculateCompatibleUpgradeVersionsInput
 from scc_firewall_manager_sdk.rest import ApiException
 from pprint import pprint
 
@@ -65,11 +66,11 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.MSPDeviceUpgradesApi(api_client)
-    body = 'body_example' # str | 
+    msp_calculate_compatible_upgrade_versions_input = scc_firewall_manager_sdk.MspCalculateCompatibleUpgradeVersionsInput() # MspCalculateCompatibleUpgradeVersionsInput | 
 
     try:
         # Calculate compatible FTD upgrade versions
-        api_response = api_instance.calculate_msp_ftd_compatible_upgrade_versions(body)
+        api_response = api_instance.calculate_msp_ftd_compatible_upgrade_versions(msp_calculate_compatible_upgrade_versions_input)
         print("The response of MSPDeviceUpgradesApi->calculate_msp_ftd_compatible_upgrade_versions:\n")
         pprint(api_response)
     except Exception as e:
@@ -83,7 +84,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **str**|  | 
+ **msp_calculate_compatible_upgrade_versions_input** | [**MspCalculateCompatibleUpgradeVersionsInput**](MspCalculateCompatibleUpgradeVersionsInput.md)|  | 
 
 ### Return type
 
@@ -301,7 +302,7 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.MSPDeviceUpgradesApi(api_client)
-    device_uids = 'device_uids_example' # str | A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. Note: All the specified devices must be in tenants managed by the MSP portal.
+    device_uids = ['device_uids_example'] # List[str] | A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. Note: All the specified devices must be in tenants managed by the MSP portal.
 
     try:
         # Get compatible ASA upgrade versions
@@ -319,7 +320,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_uids** | **str**| A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. Note: All the specified devices must be in tenants managed by the MSP portal. | 
+ **device_uids** | [**List[str]**](str.md)| A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. Note: All the specified devices must be in tenants managed by the MSP portal. | 
 
 ### Return type
 
@@ -465,10 +466,10 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.MSPDeviceUpgradesApi(api_client)
-    limit = '50' # str | Number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    limit = 'limit_example' # str | Number of results to retrieve. (optional)
+    offset = 'offset_example' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional)
     q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
-    sort = 'name:DESC' # str | The fields to sort results by. (optional)
+    sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
         # Get MSP Device Upgrade Runs
@@ -486,10 +487,10 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **str**| Number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **limit** | **str**| Number of results to retrieve. | [optional] 
+ **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] 
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
- **sort** | **str**| The fields to sort results by. | [optional] 
+ **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
 ### Return type
 
@@ -788,10 +789,10 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.MSPDeviceUpgradesApi(api_client)
-    limit = '50' # str | Number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    limit = 'limit_example' # str | Number of results to retrieve. (optional)
+    offset = 'offset_example' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional)
     q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
-    sort = 'name:DESC' # str | The fields to sort results by. (optional)
+    sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
         # Get MSP FTD Device Upgrade Runs
@@ -809,10 +810,10 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **str**| Number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **limit** | **str**| Number of results to retrieve. | [optional] 
+ **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] 
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
- **sort** | **str**| The fields to sort results by. | [optional] 
+ **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
 ### Return type
 

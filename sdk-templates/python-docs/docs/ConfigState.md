@@ -1,6 +1,5 @@
 # ConfigState
 
-The distinct config states for the devices managed by the MSP Portal.
 
 ## Properties
 

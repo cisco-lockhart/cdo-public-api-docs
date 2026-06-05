@@ -1,6 +1,5 @@
 # DeviceUpgradeStatusDto
 
-Set of device UIDs that are part of this upgrade run.
 
 ## Properties
 

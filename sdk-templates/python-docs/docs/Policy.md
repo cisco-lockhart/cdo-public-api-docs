@@ -1,6 +1,5 @@
 # Policy
 
-Results from the Security Cloud Control policies that match the search term.
 
 ## Properties
 

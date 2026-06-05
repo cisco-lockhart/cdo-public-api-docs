@@ -1,6 +1,5 @@
 # ReferenceInfo
 
-List of objects referenced in the default content or in any of the overrides.
 
 ## Properties
 

@@ -1,6 +1,5 @@
 # S2sVpnTunnelHealthMetrics
 
-The S2S VPN tunnel health metrics for the device. The maximum number of tunnels retrieved is 1000.
 
 ## Properties
 

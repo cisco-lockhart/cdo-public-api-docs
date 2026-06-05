@@ -1,6 +1,5 @@
 # DeviceRole
 
-The roles that this device performs on the network.
 
 ## Properties
 

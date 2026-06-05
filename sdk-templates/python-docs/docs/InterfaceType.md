@@ -1,6 +1,5 @@
 # InterfaceType
 
-Interface type.
 
 ## Properties
 

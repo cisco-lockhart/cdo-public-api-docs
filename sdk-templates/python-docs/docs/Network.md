@@ -1,6 +1,5 @@
 # Network
 
-(Meraki devices only) The [Dashboard Network](https://documentation.meraki.com/General_Administration/Organizations_and_Networks/Creating_and_Deleting_Dashboard_Networks) the device is deployed in.
 
 ## Properties
 

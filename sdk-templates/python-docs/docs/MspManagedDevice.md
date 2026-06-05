@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **conflict_detection_state** | [**ConflictDetectionState**](ConflictDetectionState.md) |  | [optional] 
 **connectivity_state** | [**ConnectivityState**](ConnectivityState.md) |  | [optional] 
 **connector_type** | [**ConnectorType**](ConnectorType.md) |  | [optional] 
-**context_mode** | **str** | The operating context mode of the ASA device. | [optional] 
+**context_mode** | **str** | (ASAs only) The context mode of the ASA device. | [optional] 
 **device_maintenance_window** | [**DeviceMaintenanceWindow**](DeviceMaintenanceWindow.md) |  | [optional] 
 **device_record_on_fmc** | [**FmcDeviceRecord**](FmcDeviceRecord.md) |  | [optional] 
 **device_type** | [**EntityType**](EntityType.md) |  | [optional] 

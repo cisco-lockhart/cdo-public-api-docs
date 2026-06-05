@@ -7,9 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **deployment_notes** | **str** | Specify notes, if any, for the deployment. | [optional] 
 **description** | **str** | Specify a human-readable description for the deployment. | [optional] 
-**device_uids** | **List[str]** | Deprecated. Use &#x60;devices&#x60; instead. The set of unique identifiers, represented as UUIDs, of the devices to deploy in Security Cloud Control. | [optional] 
-**devices** | [**List[FtdSingleDeviceDeploymentInput]**](FtdSingleDeviceDeploymentInput.md) | Per-device deployment configuration. Cannot be combined with the deprecated &#x60;deviceUids&#x60; field. Each entry identifies a device and optionally selects which policy types to deploy. Set &#x60;selectedPolicyTypes&#x60; to null or include FULL_DEPLOY to perform a full deployment for that device. Each entry must have a unique uid. | [optional] 
-**effective_device_uids** | **List[str]** |  | [optional] 
+**device_uids** | **List[str]** | The set of unique identifiers, represented as UUIDs, of the devices to deploy in Security Cloud Control. All of the devices in the list have to be compatible with the upgrade package. | 
 **ignore_warnings** | **bool** | Specify whether to ignore warnings generated during the pre-validation of the deployment job and proceed with the deployment regardless. **Warning**: Do not set this to &#x60;true&#x60; unless you know what you are doing. | [optional] [default to False]
 
 ## Example

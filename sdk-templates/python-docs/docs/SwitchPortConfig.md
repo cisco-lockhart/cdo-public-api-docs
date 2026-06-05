@@ -1,13 +1,12 @@
 # SwitchPortConfig
 
-Switchport configuration of the interface, which includes settings such as switchport mode, access VLAN, and trunk VLAN. This configuration is applicable for interfaces operating in switchport mode.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **access_mode_vlan** | **str** | Unique identifier (UUID) of the access VLAN with which the interface is associated. | [optional] 
-**protected_enabled** | **bool** | Indicates whether switchport interface is protected or not. Protection prevents Layer 2 communication (unicast, multicast, or broadcast) between other protected ports on the same VLAN. | [optional] [default to False]
+**protected_enabled** | **bool** | Indicates whether switchport interface is protected or not. Protection prevents Layer 2 communication (unicast, multicast, or broadcast) between other protected ports on the same VLAN. | [optional] 
 **trunk_mode_allowed_vlans** | **List[str]** | Unique identifiers (UUIDs) of the VLAN interfaces that are permitted to send and receive traffic over trunk port. | [optional] 
 **trunk_mode_native_vlan** | **str** | Unique identifier (UUID) of the trunk VLAN with which the interface is associated. | [optional] 
 

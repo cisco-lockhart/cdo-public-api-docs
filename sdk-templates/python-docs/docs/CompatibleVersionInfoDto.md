@@ -7,7 +7,7 @@ Information about a compatible upgrade version and the devices that support it.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **compatible_devices** | [**List[CompatibleDeviceDto]**](CompatibleDeviceDto.md) | List of devices that are compatible with this upgrade version | 
-**is_suggested_version** | **bool** | A boolean value, indicating whether this version is a suggested version to upgrade to. | [default to False]
+**is_suggested_version** | **bool** | A boolean value, indicating whether this version is a suggested version to upgrade to. | 
 **release_date** | **datetime** | The release date of this software version | [optional] 
 **software_version** | **str** | The software version | 
 **upgrade_type** | **str** | The type of the upgrade | 
