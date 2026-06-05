@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 
 # **get_application_outages**
-> PublicThousandEyesOutageDto get_application_outages(start=start, end=end, time_range=time_range, application_name=application_name)
+> PublicThousandEyesOutageDto[str, object] get_application_outages(start=start, end=end, time_range=time_range, application_name=application_name)
 
 Get Application Outages
 
@@ -29,7 +29,6 @@ Get a list of application outages that started in the specified time period
 
 ```python
 import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.public_thousand_eyes_outage_dto import PublicThousandEyesOutageDto
 from scc_firewall_manager_sdk.rest import ApiException
 from pprint import pprint
 
@@ -81,7 +80,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PublicThousandEyesOutageDto**](PublicThousandEyesOutageDto.md)
+**PublicThousandEyesOutageDto[str, object]**
 
 ### Authorization
 
