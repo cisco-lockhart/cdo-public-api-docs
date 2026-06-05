@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ip_address** | **str** | Unique network address assigned to a physical or logical port, which enables the port to communicate on a specific network segment and enforce security policies for traffic traversing that interface. | [optional] 
 **netmask** | **str** | A 32-bit number that defines the network portion of an IP address, differentiating it from the host portion. This number determines the size of the local network segment directly connected to the interface, allowing it to identify which traffic belongs to its local network and which needs to be routed. | [optional] 
-**setroute** | **bool** | Indicates whether a default route using the gateway information provided by the DHCP server is created automatically. The DHCP-assigned gateway is used as the next-hop for routing traffic. | [optional] [default to False]
+**setroute** | **bool** | Indicates whether a default route using the gateway information provided by the DHCP server is created automatically. The DHCP-assigned gateway is used as the next-hop for routing traffic. | [optional] 
 **standby_ip_address** | **str** | Secondary IP address configured in an interface, specifically for use in an HA pair. This address stays inactive in the standby unit until a failover occurs, at which point, the standby assumes ownership of both the primary and secondary IP addresses to ensure network connectivity for devices. | [optional] 
 
 ## Example

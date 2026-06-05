@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **device_uids** | **List[str]** | The set of device UIDs that are part of this deployment. | [optional] 
 **error_msg** | **str** | Error message if the deployment failed. | [optional] 
 **failure_reason** | **str** | The reason the deployment failed, if applicable. | [optional] 
-**ignore_warnings** | **bool** | Boolean indicating whether warnings identified by the deployment sub-system about this deployment were ignored. | [optional] [default to False]
+**ignore_warnings** | **bool** | Boolean indicating whether warnings identified by the deployment sub-system about this deployment were ignored. | [optional] 
 **last_updated_time** | **datetime** | Time (UTC; represented using the RFC-3339 standard) at which the deployment run was last updated. | [optional] 
 **name** | **str** | The name of the deployment run. Deployment runs names are unique in a tenant in SCC Firewall Manager. | [optional] 
 **submission_time** | **datetime** | Time (UTC; represented using the RFC-3339 standard) at which the deployment run was triggered. | [optional] 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **duplex_type** | **str** | Actual duplex mode of the physical interface. | [optional] 
 **ip_address** | **str** | Actual IP address of the interface. | [optional] 
-**link_enabled** | **bool** | Indicates whether interface link is enabled. | [optional] [default to False]
+**link_enabled** | **bool** | Indicates whether interface link is enabled. | [optional] 
 **link_state** | [**LinkState**](LinkState.md) |  | [optional] 
 **mac_address** | **str** | Actual MAC address of the interface. | [optional] 
 **mtu** | **int** | Actual MTU of the interface. | [optional] 

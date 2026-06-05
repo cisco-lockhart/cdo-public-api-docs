@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 
 # **get_feature_flags**
-> List[Dict[str, object]] get_feature_flags()
+> List[str] get_feature_flags()
 
 Get Feature Flags
 
@@ -74,7 +74,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**List[Dict[str, object]]**
+**List[str]**
 
 ### Authorization
 

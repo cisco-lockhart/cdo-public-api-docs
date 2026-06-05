@@ -58,7 +58,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     search_text = 'search_text_example' # str | The searchText parameter serves as a flexible search option that allows for text-based filtering across the username fields of the Audit Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter's criteria, ensuring that the returned entries satisfy both sets of conditions. (optional)
     time_range = 'time_range_example' # str | The time range for which to retrieve Audit Logs. This parameter cannot be used in conjunction with a query on the eventTime field. (optional)
     q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
-    sort = 'name:DESC' # str | The fields to sort results by. (optional)
+    sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
         # Get Audit Logs
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
  **search_text** | **str**| The searchText parameter serves as a flexible search option that allows for text-based filtering across the username fields of the Audit Log object. This parameter can be used independently to search for entries containing the specified text, or in combination with the q query parameter for more targeted results. When used with q, the search conditions of searchText are logically ANDed with the q parameter&#39;s criteria, ensuring that the returned entries satisfy both sets of conditions. | [optional] 
  **time_range** | **str**| The time range for which to retrieve Audit Logs. This parameter cannot be used in conjunction with a query on the eventTime field. | [optional] 
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
- **sort** | **str**| The fields to sort results by. | [optional] 
+ **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
 ### Return type
 

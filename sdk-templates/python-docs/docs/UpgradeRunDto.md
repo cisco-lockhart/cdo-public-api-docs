@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **device_upgrade_statuses** | [**List[DeviceUpgradeStatusDto]**](DeviceUpgradeStatusDto.md) | The current status of each device in the upgrade run. | [optional] 
 **error_msg** | **str** | Error message if the upgrade run failed. | [optional] 
 **name** | **str** | The name of the upgrade run. Upgrade runs names are unique in a tenant in SCC Firewall Manager. | [optional] 
-**stage_upgrade_only** | **bool** | Indicates if this upgrade run is to stage the upgrade on the device. If set to true, the upgrade is not applied on the device. | [optional] [default to False]
+**stage_upgrade_only** | **bool** | Indicates if this upgrade run is to stage the upgrade on the device. If set to true, the upgrade is not applied on the device. | [optional] 
 **transaction_uid** | **str** | The unique identifier of the CDO transaction that tracks this upgrade run. | [optional] 
 **uid** | **str** | The unique identifier, represented as a UUID, of the device upgrade run in SCC Firewall Manager. | [optional] 
 **upgrade_package_uid** | **str** | (cdFMC-managed FTD device upgrades only) The unique identifier of the upgrade package being used. | [optional] 

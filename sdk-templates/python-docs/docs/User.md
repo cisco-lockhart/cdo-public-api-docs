@@ -6,7 +6,7 @@ The list of items retrieved.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**api_only_user** | **bool** | Whether the user is API-only, an API-only user cannot access Security Cloud Control in the UI. | [optional] [default to False]
+**api_only_user** | **bool** | Whether the user is API-only, an API-only user cannot access Security Cloud Control in the UI. | [optional] 
 **email_address** | **str** | The e-mail address in Security Cloud Control. | [optional] 
 **first_name** | **str** | The first name of the user in Security Cloud Control. | [optional] 
 **last_name** | **str** | The last name of the user in Security Cloud Control. | [optional] 

@@ -223,7 +223,7 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.DeviceUpgradesApi(api_client)
-    device_uids = 'device_uids_example' # str | A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control.
+    device_uids = ['device_uids_example'] # List[str] | A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control.
 
     try:
         # Get upgrade versions compatible with multiple ASAs
@@ -241,7 +241,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_uids** | **str**| A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. | 
+ **device_uids** | [**List[str]**](str.md)| A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. | 
 
 ### Return type
 
@@ -386,7 +386,7 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.DeviceUpgradesApi(api_client)
-    device_uids = 'device_uids_example' # str | A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control.
+    device_uids = ['device_uids_example'] # List[str] | A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control.
     x_calling_service = 'x_calling_service_example' # str |  (optional)
     x_request_metadata = 'x_request_metadata_example' # str | Custom metadata to identify the request (optional)
 
@@ -406,7 +406,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_uids** | **str**| A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. | 
+ **device_uids** | [**List[str]**](str.md)| A list of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. | 
  **x_calling_service** | **str**|  | [optional] 
  **x_request_metadata** | **str**| Custom metadata to identify the request | [optional] 
 
@@ -561,7 +561,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     limit = '50' # str | Number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
     q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
-    sort = 'name:DESC' # str | The fields to sort results by. (optional)
+    sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
 
     try:
         # Get Device Upgrade Runs
@@ -582,7 +582,7 @@ Name | Type | Description  | Notes
  **limit** | **str**| Number of results to retrieve. | [optional] [default to &#39;50&#39;]
  **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
- **sort** | **str**| The fields to sort results by. | [optional] 
+ **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
 
 ### Return type
 

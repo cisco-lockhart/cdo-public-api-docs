@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **name** | **str** | The name of the CLI macro. | [optional] 
 **parameters** | **List[str]** | A set of parameters provided in the script | [optional] 
 **script** | **str** | The script executed to generate the CLI result. | [optional] 
-**system_defined** | **bool** | Indicating whether this CLI macro is system-defined. | [optional] [default to False]
+**system_defined** | **bool** | Indicating whether this CLI macro is system-defined. | [optional] 
 **uid** | **str** | The unique identifier, represented as a UUID, of the CLI macro. | 
 
 ## Example

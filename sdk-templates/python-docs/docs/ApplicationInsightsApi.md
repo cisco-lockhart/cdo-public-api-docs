@@ -55,7 +55,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     api_instance = scc_firewall_manager_sdk.ApplicationInsightsApi(api_client)
     start = '' # str | Start time for outage (UTC; represented using the RFC-3339 standard, inclusive) (optional) (default to '')
     end = '' # str | End time for outage (UTC; represented using the RFC-3339 standard, exclusive) (optional) (default to '')
-    time_range =  # str | Relative time range (mutually exclusive with start/end). (optional) (default to )
+    time_range = '' # str | Relative time range (mutually exclusive with start/end). (optional) (default to '')
     application_name = '' # str | Filter by application name (optional) (default to '')
 
     try:
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **start** | **str**| Start time for outage (UTC; represented using the RFC-3339 standard, inclusive) | [optional] [default to &#39;&#39;]
  **end** | **str**| End time for outage (UTC; represented using the RFC-3339 standard, exclusive) | [optional] [default to &#39;&#39;]
- **time_range** | **str**| Relative time range (mutually exclusive with start/end). | [optional] [default to ]
+ **time_range** | **str**| Relative time range (mutually exclusive with start/end). | [optional] [default to &#39;&#39;]
  **application_name** | **str**| Filter by application name | [optional] [default to &#39;&#39;]
 
 ### Return type

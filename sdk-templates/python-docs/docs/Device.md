@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **connector_type** | [**ConnectorType**](ConnectorType.md) |  | [optional] 
 **connector_uid** | **str** | The unique identifier, represented as a UUID, of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG)The name of the Secure Device Connector (SDC) that will be used to communicate with the device. This value is not required if the connector type selected is Cloud Connector (CDG). | [optional] 
 **context_mode** | **str** | The operating context mode of the ASA device. | [optional] 
-**dedicated_cd_fmc_instance** | **bool** | Indicates whether the tenant&#39;s provisioned cdFMC instance is dedicated rather than shared. | [optional] [default to False]
+**dedicated_cd_fmc_instance** | **bool** | Indicates whether the tenant&#39;s provisioned cdFMC instance is dedicated rather than shared. | [optional] 
 **device_maintenance_window** | [**DeviceMaintenanceWindow**](DeviceMaintenanceWindow.md) |  | [optional] 
 **device_metadata** | [**DeviceMetadata**](DeviceMetadata.md) |  | [optional] 
 **device_record_on_fmc** | [**FmcDeviceRecord**](FmcDeviceRecord.md) |  | [optional] 
@@ -47,7 +47,7 @@ Name | Type | Description | Notes
 **name** | **str** | The name of the device. Device names are unique in Security Cloud Control. | 
 **notes** | **str** | Free-form notes on the device. | [optional] 
 **on_prem_fmc_info** | [**OnPremFmcInfo**](OnPremFmcInfo.md) |  | [optional] 
-**opted_in_to_asa_health_metrics** | **bool** | Indicates whether the device has been opted in to collect ASA health metrics (SDC-managed ASAs only). | [optional] [default to False]
+**opted_in_to_asa_health_metrics** | **bool** | Indicates whether the device has been opted in to collect ASA health metrics (SDC-managed ASAs only). | [optional] 
 **ra_vpn_certificate_expiry_date** | **datetime** | (Remote Access VPN headends — ASA, FDM-managed FTD, and cdFMC-managed FTD — only) Expiration date of the Secure Client certificate installed on the device. | [optional] 
 **redundancy_mode** | **str** | The redundancy mode this firewall is running in. Note: for High Availability pairs and clusters, Security Cloud Control represents all of the devices as part of one record. | [optional] 
 **serial** | **str** | The serial number of the device. This is typically used for licensing, and is not the same as the chassis&#39; serial number. | [optional] 

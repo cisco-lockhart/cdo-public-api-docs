@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **context_mode** | **str** | The operating context mode of the ASA device. | [optional] 
 **device_maintenance_window** | [**DeviceMaintenanceWindow**](DeviceMaintenanceWindow.md) |  | [optional] 
 **device_record_on_fmc** | [**FmcDeviceRecord**](FmcDeviceRecord.md) |  | [optional] 
+**device_roles** | [**List[DeviceRole]**](DeviceRole.md) | The roles that this device performs on the network. | [optional] 
 **device_type** | [**EntityType**](EntityType.md) |  | [optional] 
 **firewall_mode** | **str** | (ASAs only) The firewall operating mode of the device. | [optional] 
 **ftd_cluster_info** | [**FtdClusterInfo**](FtdClusterInfo.md) |  | [optional] 

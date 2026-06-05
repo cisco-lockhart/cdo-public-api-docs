@@ -63,7 +63,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     time_range = '10m' # str | Relative time range. Mutually exclusive with `start`/`end` — exactly one of `timeRange` or `start`/`end` must be provided. Data is collected every 10 minutes, so shorter time ranges may return fewer data points. (optional)
     limit = '50' # str | Maximum number of device records to return (used only when no deviceUids are provided). (optional) (default to '50')
     offset = '0' # str | Offset for pagination (used only when no deviceUids are provided). (optional) (default to '0')
-    device_uids = '256461f6-bd60-11ef-8beb-6cf1610cf55d,41a1d57b-ffc2-49aa-933b-440cdd76b2fc' # str | Comma-separated list of device UIDs to query. Max 50. If omitted, results are paginated. (optional)
+    device_uids = ['256461f6-bd60-11ef-8beb-6cf1610cf55d,41a1d57b-ffc2-49aa-933b-440cdd76b2fc'] # List[str] | Comma-separated list of device UIDs to query. Max 50. If omitted, results are paginated. (optional)
     metrics = 'cpu,mem' # str | Comma-separated list of metrics to return (e.g. cpu, mem). Returns all if omitted. (optional)
 
     try:
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
  **time_range** | **str**| Relative time range. Mutually exclusive with &#x60;start&#x60;/&#x60;end&#x60; — exactly one of &#x60;timeRange&#x60; or &#x60;start&#x60;/&#x60;end&#x60; must be provided. Data is collected every 10 minutes, so shorter time ranges may return fewer data points. | [optional] 
  **limit** | **str**| Maximum number of device records to return (used only when no deviceUids are provided). | [optional] [default to &#39;50&#39;]
  **offset** | **str**| Offset for pagination (used only when no deviceUids are provided). | [optional] [default to &#39;0&#39;]
- **device_uids** | **str**| Comma-separated list of device UIDs to query. Max 50. If omitted, results are paginated. | [optional] 
+ **device_uids** | [**List[str]**](str.md)| Comma-separated list of device UIDs to query. Max 50. If omitted, results are paginated. | [optional] 
  **metrics** | **str**| Comma-separated list of metrics to return (e.g. cpu, mem). Returns all if omitted. | [optional] 
 
 ### Return type
@@ -257,7 +257,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     time_range = '10m' # str | Relative time range (mutually exclusive with start/end). Data is collected every 10 minutes, so shorter time ranges may return fewer data points. (optional)
     limit = '50' # str | Maximum number of device records to return (used only when no deviceUids are provided). (optional) (default to '50')
     offset = '0' # str | Offset for pagination (used only when no deviceUids are provided). (optional) (default to '0')
-    device_uids = '256461f6-bd60-11ef-8beb-6cf1610cf55d,41a1d57b-ffc2-49aa-933b-440cdd76b2fc' # str | Comma-separated list of device UIDs to query. Max 50. If omitted, results are paginated. (optional)
+    device_uids = ['256461f6-bd60-11ef-8beb-6cf1610cf55d,41a1d57b-ffc2-49aa-933b-440cdd76b2fc'] # List[str] | Comma-separated list of device UIDs to query. Max 50. If omitted, results are paginated. (optional)
     metrics = 'cpu,mem' # str | Comma-separated list of metrics to return (e.g. cpu, mem). Returns all if omitted. (optional)
 
     try:
@@ -281,7 +281,7 @@ Name | Type | Description  | Notes
  **time_range** | **str**| Relative time range (mutually exclusive with start/end). Data is collected every 10 minutes, so shorter time ranges may return fewer data points. | [optional] 
  **limit** | **str**| Maximum number of device records to return (used only when no deviceUids are provided). | [optional] [default to &#39;50&#39;]
  **offset** | **str**| Offset for pagination (used only when no deviceUids are provided). | [optional] [default to &#39;0&#39;]
- **device_uids** | **str**| Comma-separated list of device UIDs to query. Max 50. If omitted, results are paginated. | [optional] 
+ **device_uids** | [**List[str]**](str.md)| Comma-separated list of device UIDs to query. Max 50. If omitted, results are paginated. | [optional] 
  **metrics** | **str**| Comma-separated list of metrics to return (e.g. cpu, mem). Returns all if omitted. | [optional] 
 
 ### Return type
@@ -474,7 +474,7 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, */*
+ - **Accept**: application/json
 
 ### HTTP response details
 
@@ -554,7 +554,7 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, */*
+ - **Accept**: application/json
 
 ### HTTP response details
 

@@ -5,21 +5,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ai_assistant** | **bool** | Indicates if the tenant has the AI assistant enabled. | [optional] [default to False]
-**allow_cross_region_tenant_addition** | **bool** | Indicates whether adding tenants from different regions to this MSP Portal is allowed. | [optional] [default to False]
-**asa_health_metrics** | **bool** | Indicates if the tenant collects ASA health metrics. | [optional] [default to False]
-**auto_accept_device_changes** | **bool** | Indicates if changes made out-of-band on devices on the tenant are automatically accepted without manual approval. | [optional] [default to False]
-**auto_discover_on_prem_fmcs** | **bool** | Indicates if the system automatically discovers on-premise FMCs. | [optional] [default to False]
-**change_request_support** | **bool** | Indicates if the tenant supports change requests. | [optional] [default to False]
+**ai_assistant** | **bool** | Indicates if the tenant has the AI assistant enabled. | [optional] 
+**allow_cross_region_tenant_addition** | **bool** | Indicates whether adding tenants from different regions to this MSP Portal is allowed. | [optional] 
+**asa_health_metrics** | **bool** | Indicates if the tenant collects ASA health metrics. | [optional] 
+**auto_accept_device_changes** | **bool** | Indicates if changes made out-of-band on devices on the tenant are automatically accepted without manual approval. | [optional] 
+**auto_discover_on_prem_fmcs** | **bool** | Indicates if the system automatically discovers on-premise FMCs. | [optional] 
+**change_request_support** | **bool** | Indicates if the tenant supports change requests. | [optional] 
 **conflict_detection_interval** | [**ConflictDetectionInterval**](ConflictDetectionInterval.md) |  | [optional] 
-**deny_cisco_support_access_to_tenant** | **bool** | Indicates if Cisco support is denied access to the tenant. | [optional] [default to False]
+**deny_cisco_support_access_to_tenant** | **bool** | Indicates if Cisco support is denied access to the tenant. | [optional] 
 **msp_portal_uid** | **str** | The unique identifier, represented as a UUID, of the MSP portal associated with the tenant. | [optional] 
-**multicloud_defense** | **bool** | Indicates if the tenant has the multicloud defense enabled. | [optional] [default to False]
-**object_sharing_enabled** | **bool** | Indicates if the tenant has Object Sharing enabled. | [optional] [default to False]
-**policy_analyzer** | **bool** | Indicates if the tenant has the policy analyzer enabled. | [optional] [default to False]
-**scheduled_deployments** | **bool** | Indicates if the tenant has scheduled deployments enabled. | [optional] [default to False]
+**multicloud_defense** | **bool** | Indicates if the tenant has the multicloud defense enabled. | [optional] 
+**object_sharing_enabled** | **bool** | Indicates if the tenant has Object Sharing enabled. | [optional] 
+**policy_analyzer** | **bool** | Indicates if the tenant has the policy analyzer enabled. | [optional] 
+**scheduled_deployments** | **bool** | Indicates if the tenant has scheduled deployments enabled. | [optional] 
 **uid** | **str** | The unique identifier, represented as a UUID, of the tenant in Security Cloud Control. | [optional] 
-**web_analytics** | **bool** | Indicates if web analytics are enabled for the tenant. | [optional] [default to False]
+**web_analytics** | **bool** | Indicates if web analytics are enabled for the tenant. | [optional] 
 
 ## Example
 
