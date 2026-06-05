@@ -1,6 +1,5 @@
 # SharedObjectValue
 
-The value of the object
 
 ## Properties
 

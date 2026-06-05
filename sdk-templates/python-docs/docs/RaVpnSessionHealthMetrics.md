@@ -1,6 +1,5 @@
 # RaVpnSessionHealthMetrics
 
-The RA VPN session health metrics for the device.
 
 ## Properties
 

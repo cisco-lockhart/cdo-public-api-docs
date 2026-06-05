@@ -1,6 +1,5 @@
 # UpdatedValue
 
-The list of values updated on this entity as part of the change.
 
 ## Properties
 

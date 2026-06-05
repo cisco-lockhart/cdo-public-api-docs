@@ -233,7 +233,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.ObjectManagementApi(api_client)
     uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | The unique identifier of the object being deleted.
-    forced_delete = 'false' # str | Force mode is required to delete an object that hasn't targets but is in use by another object. (optional)
+    forced_delete = False # bool | Force mode is required to delete an object that hasn't targets but is in use by another object. (optional) (default to False)
 
     try:
         # Delete Object
@@ -252,7 +252,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **uid** | **str**| The unique identifier of the object being deleted. | 
- **forced_delete** | **str**| Force mode is required to delete an object that hasn&#39;t targets but is in use by another object. | [optional] 
+ **forced_delete** | **bool**| Force mode is required to delete an object that hasn&#39;t targets but is in use by another object. | [optional] [default to False]
 
 ### Return type
 
@@ -654,9 +654,9 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.ObjectManagementApi(api_client)
     q = 'content:*2.2.* AND name:Lab1' # str | The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content. (optional)
-    include_overrides = 'include_overrides_example' # str | If enabled, the search will also include results from override objects. (optional)
-    offset = '0' # str | The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
-    limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
+    include_overrides = False # bool | If enabled, the search will also include results from override objects. (optional) (default to False)
+    offset = 'offset_example' # str | The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional)
+    limit = 'limit_example' # str | The number of results to retrieve. (optional)
     sort_by = 'name:DESC' # str | The fields to sort results by. This parameter is deprecated. (optional)
     sort = 'name:DESC' # str | The fields to sort results by. (optional)
 
@@ -677,9 +677,9 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content. | [optional] 
- **include_overrides** | **str**| If enabled, the search will also include results from override objects. | [optional] 
- **offset** | **str**| The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
- **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
+ **include_overrides** | **bool**| If enabled, the search will also include results from override objects. | [optional] [default to False]
+ **offset** | **str**| The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] 
+ **limit** | **str**| The number of results to retrieve. | [optional] 
  **sort_by** | **str**| The fields to sort results by. This parameter is deprecated. | [optional] 
  **sort** | **str**| The fields to sort results by. | [optional] 
 
@@ -833,8 +833,8 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     api_instance = scc_firewall_manager_sdk.ObjectManagementApi(api_client)
     uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | The unique identifier of the object for which the targets are being retrieved.
     q = 'targetType:MCD' # str | The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are: targetType. (optional)
-    offset = '0' # str | The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
-    limit = '50' # str | The number of results to retrieve. (optional) (default to '50')
+    offset = 'offset_example' # str | The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional)
+    limit = 'limit_example' # str | The number of results to retrieve. (optional)
 
     try:
         # Get Targets
@@ -854,8 +854,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **uid** | **str**| The unique identifier of the object for which the targets are being retrieved. | 
  **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are: targetType. | [optional] 
- **offset** | **str**| The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
- **limit** | **str**| The number of results to retrieve. | [optional] [default to &#39;50&#39;]
+ **offset** | **str**| The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] 
+ **limit** | **str**| The number of results to retrieve. | [optional] 
 
 ### Return type
 

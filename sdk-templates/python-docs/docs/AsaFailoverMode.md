@@ -1,6 +1,5 @@
 # AsaFailoverMode
 
-(ASAs only) Failover mode of the device.
 
 ## Properties
 

@@ -1,6 +1,5 @@
 # SpeedType
 
-Physical interface speed, which can be auto detected or set to a specific value.
 
 ## Properties
 

@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 
 # **get_feature_flags**
-> List[Dict[str, object]] get_feature_flags()
+> List[str] get_feature_flags()
 
 Get Feature Flags
 
@@ -74,7 +74,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**List[Dict[str, object]]**
+**List[str]**
 
 ### Authorization
 
@@ -294,8 +294,8 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.TenantManagementApi(api_client)
-    limit = '50' # str | Number of results to retrieve. (optional) (default to '50')
-    offset = '0' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    limit = 'limit_example' # str | Number of results to retrieve. (optional)
+    offset = 'offset_example' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional)
 
     try:
         # Get Tenants
@@ -313,8 +313,8 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **str**| Number of results to retrieve. | [optional] [default to &#39;50&#39;]
- **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **limit** | **str**| Number of results to retrieve. | [optional] 
+ **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] 
 
 ### Return type
 

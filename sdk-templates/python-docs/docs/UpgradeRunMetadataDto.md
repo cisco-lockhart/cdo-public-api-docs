@@ -1,6 +1,5 @@
 # UpgradeRunMetadataDto
 
-Information on the progress of each upgrade run, grouped by the tenant and the hardware model.
 
 ## Properties
 

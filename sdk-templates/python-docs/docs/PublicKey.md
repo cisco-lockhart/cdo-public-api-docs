@@ -1,6 +1,5 @@
 # PublicKey
 
-Information on the public key used to encrypt credentials sent to the SDC.
 
 ## Properties
 

@@ -1,6 +1,5 @@
 # CdFmcInfo
 
-(FTDs managed by cdFMC only) Information on the cloud-delivered FMC managing this FTD. This information is not available for FTDs managed using FDM or on-prem FMCs.
 
 ## Properties
 

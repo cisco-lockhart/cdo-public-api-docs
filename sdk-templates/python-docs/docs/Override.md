@@ -1,6 +1,5 @@
 # Override
 
-The list of target overrides for the object. Each override the default content for its target.
 
 ## Properties
 

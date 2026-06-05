@@ -1,6 +1,5 @@
 # ErrorDetails
 
-Detailed error information reported for this device during deployment.
 
 ## Properties
 

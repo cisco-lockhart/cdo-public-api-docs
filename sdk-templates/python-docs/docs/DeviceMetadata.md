@@ -1,6 +1,5 @@
 # DeviceMetadata
 
-Metadata for the device. This field contains a combination of structured service-specific metadata persisted by other Cisco services and arbitrary metadata.
 
 ## Properties
 

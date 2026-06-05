@@ -1,6 +1,5 @@
 # DeviceEndOfLife
 
-The device End-Of-Life information, including key EOL dates and recommendations for appropriate hardware upgrades.
 
 ## Properties
 

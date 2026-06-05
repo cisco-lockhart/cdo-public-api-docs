@@ -1,6 +1,5 @@
 # CdoRegion
 
-The list of items.
 
 ## Properties
 

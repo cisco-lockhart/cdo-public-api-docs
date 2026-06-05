@@ -1,6 +1,5 @@
 # Entity
 
-Cloud Services that match the search term.
 
 ## Properties
 

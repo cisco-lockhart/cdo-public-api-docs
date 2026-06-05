@@ -1,6 +1,5 @@
 # DeviceLicenseDetail
 
-The list of licenses enabled on the device.
 
 ## Properties
 

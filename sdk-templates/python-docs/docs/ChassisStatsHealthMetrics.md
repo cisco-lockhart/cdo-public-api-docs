@@ -1,6 +1,5 @@
 # ChassisStatsHealthMetrics
 
-The chassis health metrics for the device.
 
 ## Properties
 

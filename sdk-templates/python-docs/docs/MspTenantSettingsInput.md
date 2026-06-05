@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**collect_asa_health_metrics** | **bool** | Specify whether to enable or disable the collection of health metrics for ASAs. | [optional] [default to False]
-**collect_ftd_health_metrics** | **bool** | Specify whether to enable or disable AMP-based FTD health metrics collection. | [optional] [default to False]
+**collect_asa_health_metrics** | **bool** | Specify whether to enable or disable the collection of health metrics for ASAs. | [optional] 
+**collect_ftd_health_metrics** | **bool** | Specify whether to enable or disable AMP-based FTD health metrics collection. | [optional] 
 **tenant_uids** | **List[str]** | A set of unique identifiers, representing the tenants in Security Cloud Control. | [optional] 
 
 ## Example

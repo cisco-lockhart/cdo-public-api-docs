@@ -1,6 +1,5 @@
 # Browser
 
-The web browser running on the client device.
 
 ## Properties
 

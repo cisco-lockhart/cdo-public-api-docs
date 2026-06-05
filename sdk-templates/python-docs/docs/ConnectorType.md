@@ -1,6 +1,5 @@
 # ConnectorType
 
-The type of the connector that will be used to communicate with the device.
 
 ## Properties
 

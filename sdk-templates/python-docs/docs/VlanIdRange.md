@@ -1,6 +1,5 @@
 # VlanIdRange
 
-Secondary identifiers of the VLAN associated with subinterface. Each range is defined by a start and end value, which allows multiple VLANs to be associated with a subinterface. All ranges are inclusive.
 
 ## Properties
 

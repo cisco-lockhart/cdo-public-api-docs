@@ -1,6 +1,5 @@
 # StateMachineDetails
 
-The device state machine details.
 
 ## Properties
 

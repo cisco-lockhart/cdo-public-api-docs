@@ -1,6 +1,5 @@
 # DiskHealthMetrics
 
-The disk health metrics for the device.
 
 ## Properties
 

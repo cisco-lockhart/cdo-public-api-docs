@@ -1,6 +1,5 @@
 # SmartAccount
 
-The smart account used to license this device.
 
 ## Properties
 

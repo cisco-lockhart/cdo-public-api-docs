@@ -1,6 +1,5 @@
 # FtdHaInfo
 
-(High Availability Devices managed by FMC only) High-Available information information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.
 
 ## Properties
 

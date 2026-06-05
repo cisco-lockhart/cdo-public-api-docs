@@ -1,6 +1,5 @@
 # DeviceEndOfLifeDeviceInfo
 
-An inventory of End-Of-Life affected devices.
 
 ## Properties
 

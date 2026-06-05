@@ -53,10 +53,10 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.ApplicationInsightsApi(api_client)
-    start = '' # str | Start time for outage (UTC; represented using the RFC-3339 standard, inclusive) (optional) (default to '')
-    end = '' # str | End time for outage (UTC; represented using the RFC-3339 standard, exclusive) (optional) (default to '')
-    time_range =  # str | Relative time range (mutually exclusive with start/end). (optional) (default to )
-    application_name = '' # str | Filter by application name (optional) (default to '')
+    start = '2025-01-01T00:00:00Z' # datetime | Start time for outage (UTC; represented using the RFC-3339 standard, inclusive) (optional)
+    end = '2025-01-31T23:59:59Z' # datetime | End time for outage (UTC; represented using the RFC-3339 standard, exclusive) (optional)
+    time_range = '24h' # str | Relative time range (mutually exclusive with start/end). (optional)
+    application_name = 'Webex' # str | Filter by application name (optional)
 
     try:
         # Get Application Outages
@@ -74,10 +74,10 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **start** | **str**| Start time for outage (UTC; represented using the RFC-3339 standard, inclusive) | [optional] [default to &#39;&#39;]
- **end** | **str**| End time for outage (UTC; represented using the RFC-3339 standard, exclusive) | [optional] [default to &#39;&#39;]
- **time_range** | **str**| Relative time range (mutually exclusive with start/end). | [optional] [default to ]
- **application_name** | **str**| Filter by application name | [optional] [default to &#39;&#39;]
+ **start** | **datetime**| Start time for outage (UTC; represented using the RFC-3339 standard, inclusive) | [optional] 
+ **end** | **datetime**| End time for outage (UTC; represented using the RFC-3339 standard, exclusive) | [optional] 
+ **time_range** | **str**| Relative time range (mutually exclusive with start/end). | [optional] 
+ **application_name** | **str**| Filter by application name | [optional] 
 
 ### Return type
 

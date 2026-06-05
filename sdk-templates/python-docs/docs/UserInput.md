@@ -1,12 +1,11 @@
 # UserInput
 
-The list of users to be added to the tenant. You can add a maximum of 50 users at a time.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**api_only_user** | **bool** | Whether the user is an API-only user | [optional] [default to False]
+**api_only_user** | **bool** | Whether the user is an API-only user | [optional] 
 **first_name** | **str** | The first name of the user in Security Cloud Control. If this is not set, the first name is set to the username. Note: This field must not be specified for API-only users. | [optional] 
 **last_name** | **str** | The last name of the user in Security Cloud Control. If this is not set, the last name is set to the username. Note: This field must not be specified for API-only users. | [optional] 
 **role** | [**UserRole**](UserRole.md) |  | 
