@@ -1,6 +1,6 @@
 # ConflictDetectionState
 
-Indicates whether there have been changes made to the device's configuration outside of Security Cloud Control.
+The distinct conflict detection states for the devices managed by the MSP Portal.
 
 ## Properties
 
