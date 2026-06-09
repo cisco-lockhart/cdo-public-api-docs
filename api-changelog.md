@@ -2,7 +2,7 @@
 
 ## Added
 
-### Secure Client Management (beta)
+### Upgrade Secure Client Packages on ASAs (beta)
 - Endpoint to [trigger a Secure Client upgrade on ASA devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/trigger-secure-client-upgrade-on-asa-devices) (`POST /v1/inventory/devices/asas/secure-client/upgrades`). This is an asynchronous operation that returns a transaction for tracking.
 - Endpoint to [get Secure Client upgrade runs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-secure-client-upgrade-runs) (`GET /v1/inventory/devices/secure-client/upgrades/runs`). Each upgrade run represents a group of ASA devices having their Secure Client packages upgraded together.
 - Endpoint to [get a Secure Client upgrade run by UID](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-secure-client-upgrade-run) (`GET /v1/inventory/devices/secure-client/upgrades/runs/{upgradeRunUid}`).
