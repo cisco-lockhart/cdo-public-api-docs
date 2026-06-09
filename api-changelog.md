@@ -1,3 +1,29 @@
+# Version 1.21.0 (2026-06-12)
+
+## Added
+
+### Secure Client Management (beta)
+- Endpoint to [trigger a Secure Client upgrade on ASA devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/trigger-secure-client-upgrade-on-asa-devices) (`POST /v1/inventory/devices/asas/secure-client/upgrades`). This is an asynchronous operation that returns a transaction for tracking.
+- Endpoint to [get Secure Client upgrade runs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-secure-client-upgrade-runs) (`GET /v1/inventory/devices/secure-client/upgrades/runs`). Each upgrade run represents a group of ASA devices having their Secure Client packages upgraded together.
+- Endpoint to [get a Secure Client upgrade run by UID](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-secure-client-upgrade-run) (`GET /v1/inventory/devices/secure-client/upgrades/runs/{upgradeRunUid}`).
+- Endpoint to [get distinct attribute values for Secure Client upgrade runs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-distinct-attribute-values-for-secure-client-upgrade-runs) (`GET /v1/inventory/devices/secure-client/upgrades/runs/attribute-values`). Returns filterable field values such as upgrade statuses, upgrade types, and usernames.
+
+## Improvements
+
+### Device Deployments
+- The [deploy changes to multiple cdFMC-managed FTD devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/cdfmc-managed-ftds-only-deploy-changes-to-multiple-ftd-devices) endpoint now supports per-device selective policy deployment via the `devices` field. Each entry identifies a device and optionally specifies which policy types to deploy using `selectedPolicyTypes`. The `deviceUids` field is now deprecated — use `devices` instead.
+
+### Command Line Interface
+- The [execute CLI command](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/execute-cli-command) request now supports optional `pollingInterval` and `pollingTimeout` fields to control how SCC Firewall Manager polls for command completion.
+
+### FedRAMP
+- Added IL5 base URL (`https://manage.securitydod.cisco/api/rest`) to the list of supported environments.
+
+## Deprecations
+
+### Device Deployments
+- The `deviceUids` field on the [deploy changes to multiple cdFMC-managed FTD devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/cdfmc-managed-ftds-only-deploy-changes-to-multiple-ftd-devices) request body is now deprecated. Use the `devices` field instead.
+
 # Version 1.20.0 (2026-05-13)
 
 ## Added
