@@ -40,6 +40,7 @@ Method | HTTP request | Description
 [**get_device_manager**](InventoryApi.md#get_device_manager) | **GET** /v1/inventory/managers/{deviceManagerUid} | Get Device Manager
 [**get_device_managers**](InventoryApi.md#get_device_managers) | **GET** /v1/inventory/managers | Get Device Managers
 [**get_devices**](InventoryApi.md#get_devices) | **GET** /v1/inventory/devices | Get Devices
+[**get_devices_attribute_values**](InventoryApi.md#get_devices_attribute_values) | **GET** /v1/inventory/devices/attribute-values | Get distinct attribute values for devices
 [**get_fmc_health**](InventoryApi.md#get_fmc_health) | **GET** /v1/inventory/managers/{fmcUid}/health/metrics | Get health metrics on devices managed by the FMC (cdFMC only)
 [**get_ftd_device_pending_changes**](InventoryApi.md#get_ftd_device_pending_changes) | **GET** /v1/inventory/devices/ftds/{deviceUid}/changes/pending | Get pending changes on a cdFMC-managed FTD
 [**get_template_device**](InventoryApi.md#get_template_device) | **GET** /v1/inventory/templates/{templateDeviceUid} | Get Template Device
@@ -2289,6 +2290,85 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | List of Device objects |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**405** | Method not allowed. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_devices_attribute_values**
+> DeviceDistinctAttributeValues get_devices_attribute_values()
+
+Get distinct attribute values for devices
+
+Get distinct values for filterable fields across the devices in the Security Cloud Control tenant.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.device_distinct_attribute_values import DeviceDistinctAttributeValues
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.InventoryApi(api_client)
+
+    try:
+        # Get distinct attribute values for devices
+        api_response = api_instance.get_devices_attribute_values()
+        print("The response of InventoryApi->get_devices_attribute_values:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InventoryApi->get_devices_attribute_values: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**DeviceDistinctAttributeValues**](DeviceDistinctAttributeValues.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Distinct attribute values for devices in the tenant |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |

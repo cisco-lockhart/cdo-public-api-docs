@@ -3682,6 +3682,36 @@ paths:
             summary: Get upgrade versions compatible with multiple ASAs
             tags:
                 - Device Upgrades
+    /v1/inventory/devices/attribute-values:
+        get:
+            description: Get distinct values for filterable fields across the devices in the Security Cloud Control tenant.
+            operationId: getDevicesAttributeValues
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeviceDistinctAttributeValues'
+                    description: Distinct attribute values for devices in the tenant
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get distinct attribute values for devices
+            tags:
+                - Inventory
     /v1/inventory/devices/bulk:
         patch:
             description: Modify a list of devices in the Security Cloud Control tenant
@@ -13210,7 +13240,7 @@ components:
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices managed by the MSP Portal.
+            description: The distinct config states for the devices in the Security Cloud Control tenant.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -13227,13 +13257,13 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices managed by the MSP Portal.
+            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
             type: string
         ConnectivityState:
-            description: The distinct connectivity states for the devices managed by the MSP Portal.
+            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -13244,7 +13274,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device.
+            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
             enum:
                 - SDC
                 - CDG
@@ -13809,6 +13839,74 @@ components:
                     format: uuid
                     type: string
             type: object
+        DeviceDistinctAttributeValues:
+            properties:
+                configStates:
+                    description: The distinct config states for the devices in the Security Cloud Control tenant.
+                    items:
+                        $ref: '#/components/schemas/ConfigState'
+                    type: array
+                    uniqueItems: true
+                conflictDetectionStates:
+                    description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
+                    items:
+                        $ref: '#/components/schemas/ConflictDetectionState'
+                    type: array
+                    uniqueItems: true
+                connectivityStates:
+                    description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
+                    items:
+                        $ref: '#/components/schemas/ConnectivityState'
+                    type: array
+                    uniqueItems: true
+                deviceRoles:
+                    description: The distinct device roles for the devices in the Security Cloud Control tenant.
+                    items:
+                        $ref: '#/components/schemas/DeviceRole'
+                    type: array
+                    uniqueItems: true
+                deviceTypes:
+                    description: The distinct device types for the devices in the Security Cloud Control tenant.
+                    items:
+                        $ref: '#/components/schemas/EntityType'
+                    type: array
+                    uniqueItems: true
+                hardwareModels:
+                    description: The distinct hardware models for the devices in the Security Cloud Control tenant.
+                    items:
+                        description: The distinct hardware models for the devices in the Security Cloud Control tenant.
+                        type: string
+                    type: array
+                    uniqueItems: true
+                modelNumbers:
+                    description: The distinct model numbers for the devices in the Security Cloud Control tenant.
+                    items:
+                        description: The distinct model numbers for the devices in the Security Cloud Control tenant.
+                        type: string
+                    type: array
+                    uniqueItems: true
+                redundancyModes:
+                    description: The distinct redundancy modes for the devices in the Security Cloud Control tenant.
+                    items:
+                        description: The distinct redundancy modes for the devices in the Security Cloud Control tenant.
+                        enum:
+                            - HA
+                            - CLUSTER
+                            - STANDALONE
+                        type: string
+                    type: array
+                    uniqueItems: true
+                softwareVersions:
+                    additionalProperties:
+                        description: The software versions of the devices in the Security Cloud Control tenant, grouped by device type.
+                        items:
+                            description: The software versions of the devices in the Security Cloud Control tenant, grouped by device type.
+                            type: string
+                        type: array
+                        uniqueItems: true
+                    description: The software versions of the devices in the Security Cloud Control tenant, grouped by device type.
+                    type: object
+            type: object
         DeviceEndOfLife:
             description: The device End-Of-Life information, including key EOL dates and recommendations for appropriate hardware upgrades.
             properties:
@@ -14117,7 +14215,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The roles that this device performs on the network.
+            description: The distinct device roles for the devices in the Security Cloud Control tenant.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -14125,7 +14223,6 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
-            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
             description: The current status of each device in the upgrade run.
@@ -15591,6 +15688,7 @@ components:
             type: object
         Labels:
             description: Labels used to identify/tag Security Cloud Control entities.
+            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -19683,7 +19781,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: Roles associated with this user in Security Cloud Control.
+            description: The role of the user this token belongs to. The user can be API-only or a human.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -19694,7 +19792,6 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
-            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.

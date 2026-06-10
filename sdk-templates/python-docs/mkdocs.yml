@@ -146,6 +146,7 @@ nav:
     - DestinationPortContent: DestinationPortContent.md
     - Device: Device.md
     - DeviceDeploymentStatusDto: DeviceDeploymentStatusDto.md
+    - DeviceDistinctAttributeValues: DeviceDistinctAttributeValues.md
     - DeviceEndOfLife: DeviceEndOfLife.md
     - DeviceEndOfLifeDetails: DeviceEndOfLifeDetails.md
     - DeviceEndOfLifeDeviceInfo: DeviceEndOfLifeDeviceInfo.md
