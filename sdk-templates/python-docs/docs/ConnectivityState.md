@@ -1,6 +1,6 @@
 # ConnectivityState
 
-The distinct connectivity states for the devices managed by the MSP Portal.
+The connectivity state of the device to CDO. A connectivity state that is not ONLINE can indicate either a problem with the device, or the communication pathways between the device and Security Cloud Control.
 
 ## Properties
 
