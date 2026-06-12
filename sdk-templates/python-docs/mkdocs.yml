@@ -35,6 +35,7 @@ nav:
     - DeviceHealthApi: DeviceHealthApi.md
     - DeviceUpgradesApi: DeviceUpgradesApi.md
     - EventsApi: EventsApi.md
+    - FmcTasksControllerApi: FmcTasksControllerApi.md
     - InterfaceHealthAggregationsApi: InterfaceHealthAggregationsApi.md
     - InventoryApi: InventoryApi.md
     - LicensingApi: LicensingApi.md
@@ -301,6 +302,7 @@ nav:
     - Override: Override.md
     - Page: Page.md
     - PageCompatibleSecureClientVersionDto: PageCompatibleSecureClientVersionDto.md
+    - PageTaskDto: PageTaskDto.md
     - PhysicalInterfacePatchInput: PhysicalInterfacePatchInput.md
     - Policy: Policy.md
     - PortsValue: PortsValue.md
@@ -358,6 +360,7 @@ nav:
     - TaglibDescriptor: TaglibDescriptor.md
     - Target: Target.md
     - TargetsRequest: TargetsRequest.md
+    - TaskDto: TaskDto.md
     - Tenant: Tenant.md
     - TenantPage: TenantPage.md
     - TenantSettings: TenantSettings.md

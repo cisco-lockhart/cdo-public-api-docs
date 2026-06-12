@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
     title: Cisco Security Cloud Control Firewall Manager API
-    version: 1.21.0
+    version: 1.22.0
     description: Use the documentation to explore the endpoints Security Cloud Control Firewall Manager has to offer
     contact:
         name: Cisco Security Cloud Control TAC
@@ -1372,6 +1372,58 @@ paths:
             summary: Get supported endpoint patterns
             tags:
                 - Commands
+    /v1/ftd-services/tasks:
+        get:
+            operationId: getTasks
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/PageTaskDto'
+                    description: OK
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            tags:
+                - fmc-tasks-controller
     /v1/inventory/devices:
         get:
             description: Get a list of devices in the Security Cloud Control tenant.
@@ -17921,6 +17973,29 @@ components:
                     format: int32
                     type: integer
             type: object
+        PageTaskDto:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/TaskDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
         PhysicalInterfacePatchInput:
             properties:
                 description:
@@ -19265,6 +19340,116 @@ components:
                         example: '["7131daad-e813-4b8f-8f42-be1e241e8cdb"]'
                         type: string
                     type: array
+            type: object
+        TaskDto:
+            description: The list of items retrieved.
+            properties:
+                description:
+                    description: The description of the task in Security Cloud Control
+                    example: Policy Export
+                    type: string
+                lastUpdatedTime:
+                    description: Time (UTC; represented using the RFC-3339 standard) at which the task was last updated.
+                    example: 2023-12-13T08:15:44Z
+                    format: date-time
+                    type: string
+                numSubTasks:
+                    description: The number of subtasks associated with this task.
+                    example: 10
+                    format: int32
+                    type: integer
+                status:
+                    description: The status of the task in Security Cloud Control
+                    enum:
+                        - DONE
+                        - PARTIALLY_DONE
+                        - IN_PROGRESS
+                        - ERROR
+                        - CANCELLED
+                        - UNKNOWN
+                    example: PENDING
+                    type: string
+                statusDetails:
+                    description: Human-readable details on the status of the task
+                    example: SSP primary bootstrap succeeded
+                    type: string
+                submissionTime:
+                    description: Time (UTC; represented using the RFC-3339 standard) at which the task was triggered.
+                    example: 2023-12-13T05:15:44Z
+                    format: date-time
+                    type: string
+                type:
+                    description: The type of the task in Security Cloud Control
+                    enum:
+                        - REGISTER_DEVICE
+                        - UNREGISTER_DEVICE
+                        - DEPLOY_DEVICE
+                        - ROLLBACK_DEVICE
+                        - BACKUP_DEVICE
+                        - EXPORT_DEVICE
+                        - IMPORT_DEVICE
+                        - DELETE_DEVICE
+                        - TROUBLESHOOT_DEVICE
+                        - CONFIGURE_DEVICE
+                        - VALIDATE_DEVICE_CONFIGURATION
+                        - MIGRATE_DEVICE_MODEL
+                        - MANAGE_DEVICE_CERTIFICATE
+                        - CREATE_DEVICE_TEMPLATE
+                        - APPLY_DEVICE_TEMPLATE
+                        - EXPORT_POLICY
+                        - CLONE_POLICY
+                        - GENERATE_POLICY_REPORT
+                        - GENERATE_REPORTS
+                        - APPLY_HEALTH_POLICY
+                        - APPLY_HEALTH
+                        - CONFIGURE_MANAGER
+                        - ADD_MANAGER_CONFIGURATION
+                        - DELETE_MANAGER_CONFIGURATION
+                        - COPY_CONFIGURATION
+                        - MANAGE_CHANGES
+                        - REGISTER_CHASSIS
+                        - REGISTER_SMART_LICENSE
+                        - INITIATE_MIGRATION
+                        - DISCARD_MIGRATION
+                        - MIGRATE_FLEXCONFIG
+                        - CREATE_FTD_CLUSTER
+                        - BREAK_FTD_CLUSTER
+                        - BOOTSTRAP_FTD_CLUSTER
+                        - UPDATE_FTD_CLUSTER_BOOTSTRAP
+                        - ADD_FTD_CLUSTER_NODES
+                        - REMOVE_FTD_CLUSTER_NODES
+                        - EXECUTE_FTD_CLUSTER_COMMAND
+                        - MANAGE_NGFW_HA
+                        - OIR_SSP_EPM
+                        - DEPLOY_SSP_EPM_BREAKOUT
+                        - DOWNLOAD_LDAP
+                        - DOWNLOAD_AZURE_AD
+                        - UPDATE_SRU
+                        - INSTALL_SRU
+                        - UPGRADE_THREAT
+                        - INSTALL_LOCAL
+                        - INSTALL_LIGHTWEIGHT_SECURITY_PACKAGE
+                        - UPLOAD_TROUBLESHOOT
+                        - RUN_SNORT_PROFILER
+                        - RUN_CPU_PROFILER
+                        - ONBOARD_LTP
+                        - SWITCH_TO_ANALYTICS
+                        - REFRESH_HIT_COUNT
+                        - PENDING_CHANGES_REQUEST
+                        - OOB_CHANGES_REQUEST
+                        - CHASSIS_CONVERSION_REQUEST
+                        - ACTION_TYPE_DOMAIN_CHANGES
+                        - UNKNOWN
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the task in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                username:
+                    description: The last user to interact with (or trigger) this task.
+                    example: bob@example.com
+                    type: string
             type: object
         Tenant:
             properties:
