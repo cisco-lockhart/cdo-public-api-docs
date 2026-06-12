@@ -6856,6 +6856,76 @@ paths:
             summary: Get MSP-managed device by UID
             tags:
                 - MSP Inventory
+    /v1/msp/inventory/devices/{deviceUid}/packages:
+        get:
+            description: Get the Secure Client webdeploy packages installed on a device managed by the MSP portal, including version, operating system, and CPU architecture.
+            operationId: getMspDeviceSecureClientPackages
+            parameters:
+                - description: The unique identifier of the MSP-managed device.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: name:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspSecureClientPackagesPage'
+                    description: Secure Client packages installed on the MSP-managed device
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Secure Client packages installed on an MSP-managed device
+            tags:
+                - MSP Inventory
+            x-beta: "true"
     /v1/msp/inventory/devices/asas/upgrades/trigger:
         post:
             description: |-
@@ -14439,7 +14509,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The type of the device.
+            description: The distinct device types for the devices managed by the MSP Portal.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -14462,7 +14532,6 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: CDFMC_MANAGED_FTD
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -14631,7 +14700,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -17183,6 +17252,67 @@ components:
                     format: uuid
                     type: string
             type: object
+        MspSecureClientPackageDto:
+            description: The list of items retrieved.
+            properties:
+                cpuArchitecture:
+                    description: The CPU architecture the package targets.
+                    enum:
+                        - ARM64
+                        - X86_64
+                        - UNIVERSAL
+                    example: X86_64
+                    type: string
+                deviceUid:
+                    description: The unique identifier, represented as a UUID, of the device in Security Cloud Control that the package is installed on.
+                    example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+                    format: uuid
+                    type: string
+                fileName:
+                    description: The file name of the Secure Client webdeploy package.
+                    example: cisco-secure-client-win-5.1.2.42-webdeploy-k9.pkg
+                    type: string
+                os:
+                    description: The operating system the package targets.
+                    enum:
+                        - LINUX
+                        - MACOS
+                        - WINDOWS
+                    example: WINDOWS
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the Secure Client package.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                version:
+                    description: The version of the Secure Client package.
+                    example: 5.1.2.42
+                    type: string
+            type: object
+        MspSecureClientPackagesPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MspSecureClientPackageDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
         MspSmartAccountDto:
             properties:
                 domain:
@@ -18729,32 +18859,14 @@ components:
                     type: string
             type: object
         SmartAccountDto:
+            description: The smart account used to license this device.
             properties:
-                domain:
-                    description: Account domain for your Smart Account
+                parent:
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                name:
-                    description: Name of the smart account
-                    type: string
-                smartAccountId:
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             properties:

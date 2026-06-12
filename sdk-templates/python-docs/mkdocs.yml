@@ -279,6 +279,8 @@ nav:
     - MspManagedTenantSettingsDto: MspManagedTenantSettingsDto.md
     - MspManagedTenantSettingsDtoPage: MspManagedTenantSettingsDtoPage.md
     - MspManagedTenantVirtualAccountDto: MspManagedTenantVirtualAccountDto.md
+    - MspSecureClientPackageDto: MspSecureClientPackageDto.md
+    - MspSecureClientPackagesPage: MspSecureClientPackagesPage.md
     - MspSmartAccountDto: MspSmartAccountDto.md
     - MspSmartAccountsPage: MspSmartAccountsPage.md
     - MspTenantSettingsInput: MspTenantSettingsInput.md

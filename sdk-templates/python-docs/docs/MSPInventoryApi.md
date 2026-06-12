@@ -17,6 +17,7 @@ Method | HTTP request | Description
 [**export_msp_managed_device_managers**](MSPInventoryApi.md#export_msp_managed_device_managers) | **POST** /v1/msp/inventory/managers/export | Export MSP-managed Device Managers
 [**export_msp_managed_devices**](MSPInventoryApi.md#export_msp_managed_devices) | **POST** /v1/msp/inventory/devices/export | Export MSP-managed Devices
 [**export_msp_managed_templates**](MSPInventoryApi.md#export_msp_managed_templates) | **POST** /v1/msp/inventory/templates/export | Export MSP-managed Templates
+[**get_msp_device_secure_client_packages**](MSPInventoryApi.md#get_msp_device_secure_client_packages) | **GET** /v1/msp/inventory/devices/{deviceUid}/packages | Get Secure Client packages installed on an MSP-managed device
 [**get_msp_managed_cloud_service**](MSPInventoryApi.md#get_msp_managed_cloud_service) | **GET** /v1/msp/inventory/services/{cloudServiceUid} | Get MSP-managed cloud service by UID
 [**get_msp_managed_cloud_services**](MSPInventoryApi.md#get_msp_managed_cloud_services) | **GET** /v1/msp/inventory/services | Get MSP-managed cloud services
 [**get_msp_managed_cloud_services_attribute_values**](MSPInventoryApi.md#get_msp_managed_cloud_services_attribute_values) | **GET** /v1/msp/inventory/services/attribute-values | Get distinct attribute values for MSP-managed cloud services
@@ -348,6 +349,96 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **202** | Security Cloud Control Transaction object that can be used to track the status of the export. Once complete, the &lt;code&gt;entityUrl&lt;/code&gt; field of the transaction will contain a presigned AWS S3 URL, valid for 1 hour, to download the exported file. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_msp_device_secure_client_packages**
+> MspSecureClientPackagesPage get_msp_device_secure_client_packages(device_uid, limit=limit, offset=offset, q=q, sort=sort)
+
+Get Secure Client packages installed on an MSP-managed device
+
+Get the Secure Client webdeploy packages installed on a device managed by the MSP portal, including version, operating system, and CPU architecture.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.msp_secure_client_packages_page import MspSecureClientPackagesPage
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.MSPInventoryApi(api_client)
+    device_uid = 'device_uid_example' # str | The unique identifier of the MSP-managed device.
+    limit = '50' # str | Number of results to retrieve. (optional) (default to '50')
+    offset = '0' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
+    sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
+
+    try:
+        # Get Secure Client packages installed on an MSP-managed device
+        api_response = api_instance.get_msp_device_secure_client_packages(device_uid, limit=limit, offset=offset, q=q, sort=sort)
+        print("The response of MSPInventoryApi->get_msp_device_secure_client_packages:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling MSPInventoryApi->get_msp_device_secure_client_packages: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **device_uid** | **str**| The unique identifier of the MSP-managed device. | 
+ **limit** | **str**| Number of results to retrieve. | [optional] [default to &#39;50&#39;]
+ **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
+ **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
+
+### Return type
+
+[**MspSecureClientPackagesPage**](MspSecureClientPackagesPage.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Secure Client packages installed on the MSP-managed device |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**405** | Method not allowed. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
