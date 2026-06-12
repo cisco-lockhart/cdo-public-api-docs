@@ -35,6 +35,7 @@ nav:
     - DeviceHealthApi: DeviceHealthApi.md
     - DeviceUpgradesApi: DeviceUpgradesApi.md
     - EventsApi: EventsApi.md
+    - FTDServicesApi: FTDServicesApi.md
     - FmcTasksControllerApi: FmcTasksControllerApi.md
     - InterfaceHealthAggregationsApi: InterfaceHealthAggregationsApi.md
     - InventoryApi: InventoryApi.md
@@ -360,7 +361,9 @@ nav:
     - TaglibDescriptor: TaglibDescriptor.md
     - Target: Target.md
     - TargetsRequest: TargetsRequest.md
+    - TaskDistinctAttributeValues: TaskDistinctAttributeValues.md
     - TaskDto: TaskDto.md
+    - TaskDtoPage: TaskDtoPage.md
     - Tenant: Tenant.md
     - TenantPage: TenantPage.md
     - TenantSettings: TenantSettings.md
