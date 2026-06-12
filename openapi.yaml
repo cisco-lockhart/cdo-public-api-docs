@@ -1428,6 +1428,55 @@ paths:
             summary: Get tasks
             tags:
                 - FTD Services
+    /v1/ftd-services/tasks/{taskUid}/subtasks:
+        get:
+            description: Get subtasks associated with a task executed on the Security Cloud Control tenant.
+            operationId: getSubTasks
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control.
+                  in: path
+                  name: taskUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SubTaskDtoPage'
+                    description: List of subtasks associated with a task
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            summary: Get subtasks associated with a task
+            tags:
+                - FTD Services
     /v1/ftd-services/tasks/attribute-values:
         get:
             description: Get distinct values for multiple fields in the FTD services tasks executed on the Security Cloud Control tenant.
@@ -1438,7 +1487,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/TaskDistinctAttributeValues'
-                    description: Distinct attribute values for MSP-managed devices
+                    description: Distinct attribute values for tasks
                 "401":
                     $ref: '#/components/responses/http401Unauthorised'
                 "500":
@@ -13388,7 +13437,7 @@ components:
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices managed by the MSP Portal.
+            description: The distinct config states for the devices in the Security Cloud Control tenant.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -13405,13 +13454,13 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices managed by the MSP Portal.
+            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
             type: string
         ConnectivityState:
-            description: The distinct connectivity states for the devices managed by the MSP Portal.
+            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -13422,7 +13471,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device.
+            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
             enum:
                 - SDC
                 - CDG
@@ -14363,7 +14412,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The roles that this device performs on the network.
+            description: The distinct device roles for the devices in the Security Cloud Control tenant.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -14371,7 +14420,6 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
-            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
             description: The current status of each device in the upgrade run.
@@ -14539,7 +14587,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The distinct device types for the devices managed by the MSP Portal.
+            description: The type of the device.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -14562,6 +14610,7 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
+            example: ASA
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -14730,7 +14779,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -15836,6 +15885,7 @@ components:
             type: object
         Labels:
             description: Labels used to identify/tag Security Cloud Control entities.
+            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -18889,14 +18939,32 @@ components:
                     type: string
             type: object
         SmartAccountDto:
-            description: The smart account used to license this device.
             properties:
-                parent:
-                    description: The name of the smart account used to license the device.
+                domain:
+                    description: Account domain for your Smart Account
                     type: string
-                virtual:
-                    description: The name of the virtual account, within the smart account, used to license the device
+                lastUpdatedTime:
+                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
+                    format: date-time
                     type: string
+                name:
+                    description: Name of the smart account
+                    type: string
+                smartAccountId:
+                    description: Smart Account Identifier
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, for your Smart Account
+                    format: uuid
+                    type: string
+                virtualAccountsInComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with in compliance status
+                    format: int32
+                    type: integer
+                virtualAccountsOutOfComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
+                    format: int32
+                    type: integer
             type: object
         SmartAccountsPage:
             properties:
@@ -19217,6 +19285,68 @@ components:
                 standbyMacAddress:
                     description: The standby interface Media Access Control (MAC) address, for use in a high-availability (HA) pair.
                     type: string
+            type: object
+        SubTaskDto:
+            description: The list of items retrieved.
+            properties:
+                description:
+                    description: The description of the subtask in Security Cloud Control
+                    example: 'Policy Export for Device A: 80% complete'
+                    type: string
+                status:
+                    description: The status of the task in Security Cloud Control
+                    enum:
+                        - DONE
+                        - PARTIALLY_DONE
+                        - IN_PROGRESS
+                        - ERROR
+                        - CANCELLED
+                        - UNKNOWN
+                    example: PENDING
+                    type: string
+                targetName:
+                    description: The name of the target the subtask is running against.
+                    example: Device A
+                    type: string
+                targetType:
+                    description: The type of the target the subtask is running against.
+                    enum:
+                        - DEVICE
+                    example: DEVICE
+                    type: string
+                targetUid:
+                    description: The unique identifier, represented as a UUID, of the target the subtask is running against.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the subtask in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            type: object
+        SubTaskDtoPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/SubTaskDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
             type: object
         Summary:
             properties:
@@ -20195,7 +20325,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: Roles associated with this user in Security Cloud Control.
+            description: The role of the user this token belongs to. The user can be API-only or a human.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -20206,7 +20336,6 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
-            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.

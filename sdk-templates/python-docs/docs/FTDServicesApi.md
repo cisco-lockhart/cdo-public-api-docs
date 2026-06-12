@@ -13,9 +13,85 @@ UAE | https://api.uae.security.cisco.com/firewall
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**get_sub_tasks**](FTDServicesApi.md#get_sub_tasks) | **GET** /v1/ftd-services/tasks/{taskUid}/subtasks | Get subtasks associated with a task
 [**get_tasks**](FTDServicesApi.md#get_tasks) | **GET** /v1/ftd-services/tasks | Get tasks
 [**get_tasks_attribute_values**](FTDServicesApi.md#get_tasks_attribute_values) | **GET** /v1/ftd-services/tasks/attribute-values | Get distinct attribute values for tasks
 
+
+# **get_sub_tasks**
+> SubTaskDtoPage get_sub_tasks(task_uid, limit=limit, offset=offset)
+
+Get subtasks associated with a task
+
+Get subtasks associated with a task executed on the Security Cloud Control tenant.
+
+### Example
+
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.sub_task_dto_page import SubTaskDtoPage
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.FTDServicesApi(api_client)
+    task_uid = 'task_uid_example' # str | The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control.
+    limit = '50' # str | Number of results to retrieve. (optional) (default to '50')
+    offset = '0' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+
+    try:
+        # Get subtasks associated with a task
+        api_response = api_instance.get_sub_tasks(task_uid, limit=limit, offset=offset)
+        print("The response of FTDServicesApi->get_sub_tasks:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FTDServicesApi->get_sub_tasks: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **task_uid** | **str**| The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control. | 
+ **limit** | **str**| Number of results to retrieve. | [optional] [default to &#39;50&#39;]
+ **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+
+### Return type
+
+[**SubTaskDtoPage**](SubTaskDtoPage.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of subtasks associated with a task |  -  |
+**401** | Request not authorized. |  -  |
+**404** | Entity not found. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_tasks**
 > TaskDtoPage get_tasks(limit=limit, offset=offset, q=q, sort=sort)
@@ -153,7 +229,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Distinct attribute values for MSP-managed devices |  -  |
+**200** | Distinct attribute values for tasks |  -  |
 **401** | Request not authorized. |  -  |
 **500** | Internal server error. |  -  |
 

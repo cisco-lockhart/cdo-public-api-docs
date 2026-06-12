@@ -356,6 +356,8 @@ nav:
     - StatusInfo: StatusInfo.md
     - SubInterfaceCreateInput: SubInterfaceCreateInput.md
     - SubInterfacePatchInput: SubInterfacePatchInput.md
+    - SubTaskDto: SubTaskDto.md
+    - SubTaskDtoPage: SubTaskDtoPage.md
     - Summary: Summary.md
     - SwitchPortConfig: SwitchPortConfig.md
     - TaglibDescriptor: TaglibDescriptor.md
