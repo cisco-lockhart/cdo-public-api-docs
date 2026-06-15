@@ -7053,6 +7053,49 @@ paths:
             tags:
                 - MSP Inventory
             x-beta: "true"
+    /v1/msp/inventory/devices/asas/secure-client/upgrades:
+        post:
+            description: |-
+                <p>Asynchronous operation to upgrade the Secure Client packages on ASA devices across managed tenants.</p>
+                <p><strong>Response:</strong></p>
+                <ul>
+                <li>Returns a transaction object to track the upgrade operation progress</li>
+                <li>Use the transaction ID or the entity UID to monitor the status of the upgrade</li>
+                </ul>
+            operationId: upgradeMspManagedAsaSecureClientPackages
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MspUpgradeSecureClientPackagesInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Returns a Transaction object that can be used to track the progress of the multi-tenant Secure Client upgrade operation.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Upgrade Secure Client packages on ASAs across multiple tenants
+            tags:
+                - MSP Device Upgrades
+            x-beta: "true"
     /v1/msp/inventory/devices/asas/upgrades/trigger:
         post:
             description: |-
@@ -12790,6 +12833,7 @@ components:
                         - UPGRADE_SECURE_CLIENT_PACKAGES
                         - MSP_UPGRADE_ASAS
                         - MSP_UPGRADE_FTDS
+                        - MSP_UPGRADE_SECURE_CLIENT_PACKAGES
                         - MSP_GET_COMPATIBLE_FTD_UPGRADE_PACKAGES
                         - CREATE_SDC
                         - SEND_AI_ASSISTANT_MESSAGE
@@ -13442,7 +13486,7 @@ components:
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices in the Security Cloud Control tenant.
+            description: The distinct config states for the devices managed by the MSP Portal.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -13459,13 +13503,13 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
+            description: The distinct conflict detection states for the devices managed by the MSP Portal.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
             type: string
         ConnectivityState:
-            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
+            description: The distinct connectivity states for the devices managed by the MSP Portal.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -13476,7 +13520,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
+            description: The type of the connector that will be used to communicate with the device.
             enum:
                 - SDC
                 - CDG
@@ -14417,7 +14461,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The distinct device roles for the devices in the Security Cloud Control tenant.
+            description: The roles that this device performs on the network.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -14425,6 +14469,7 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
+            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
             description: Set of device UIDs that are part of this upgrade run.
@@ -14635,7 +14680,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The type of the device.
+            description: The distinct device types for the devices managed by the MSP Portal.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -14658,7 +14703,6 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: ASA
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -14827,7 +14871,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
+                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -15933,7 +15977,6 @@ components:
             type: object
         Labels:
             description: Labels used to identify/tag Security Cloud Control entities.
-            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -17441,6 +17484,27 @@ components:
                     format: int32
                     type: integer
             type: object
+        MspSecureClientPlatform:
+            description: The OS and CPU architecture combinations to upgrade. If omitted, all platforms available for the specified version are uploaded to each device.
+            properties:
+                cpuArchitecture:
+                    description: 'The CPU architecture. One of: ARM64, X86_64, UNIVERSAL.'
+                    enum:
+                        - ARM64
+                        - X86_64
+                        - UNIVERSAL
+                    type: string
+                os:
+                    description: 'The operating system. One of: LINUX, MACOS, WINDOWS.'
+                    enum:
+                        - LINUX
+                        - MACOS
+                        - WINDOWS
+                    type: string
+            required:
+                - cpuArchitecture
+                - os
+            type: object
         MspSmartAccountDto:
             properties:
                 domain:
@@ -17781,6 +17845,66 @@ components:
                         type: string
                     type: array
                     uniqueItems: true
+            type: object
+        MspUpgradeSecureClientPackagesInput:
+            properties:
+                deviceUids:
+                    description: |-
+                        <p>List of device identifiers to upgrade in Security Cloud Control.</p>
+                        <p>Each entry must meet all of the following:</p>
+                        <ul>
+                          <li>The identifier is a UUID (unique identifier).</li>
+                          <li>The device is managed by the MSSP portal.</li>
+                          <li>The device type is <code>ASA</code>.</li>
+                          <li>The device has the <code>ASA_RA_VPN_HEADEND</code> role.</li>
+                          <li>The connectivity state is <code>ONLINE</code>.</li>
+                          <li>The configuration state is <code>SYNCED</code>.</li>
+                          <li>The device has a known software version.</li>
+                        </ul>
+                        <p>Device-level validation is performed asynchronously; any device that fails these
+                        checks causes the upgrade run to fail with the offending devices reported in the
+                        error message.</p>
+                    example:
+                        - 256461f6-bd60-11ef-8beb-6cf1610cf55d
+                    items:
+                        description: |-
+                            <p>List of device identifiers to upgrade in Security Cloud Control.</p>
+                            <p>Each entry must meet all of the following:</p>
+                            <ul>
+                              <li>The identifier is a UUID (unique identifier).</li>
+                              <li>The device is managed by the MSSP portal.</li>
+                              <li>The device type is <code>ASA</code>.</li>
+                              <li>The device has the <code>ASA_RA_VPN_HEADEND</code> role.</li>
+                              <li>The connectivity state is <code>ONLINE</code>.</li>
+                              <li>The configuration state is <code>SYNCED</code>.</li>
+                              <li>The device has a known software version.</li>
+                            </ul>
+                            <p>Device-level validation is performed asynchronously; any device that fails these
+                            checks causes the upgrade run to fail with the offending devices reported in the
+                            error message.</p>
+                        format: uuid
+                        type: string
+                    maxItems: 50
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                name:
+                    description: Specify a human-readable name for the upgrade run.
+                    example: Production Secure Client Upgrade - January 2026
+                    type: string
+                platforms:
+                    description: The OS and CPU architecture combinations to upgrade. If omitted, all platforms available for the specified version are uploaded to each device.
+                    items:
+                        $ref: '#/components/schemas/MspSecureClientPlatform'
+                    type: array
+                version:
+                    description: Specify the Secure Client package version to which all devices will be upgraded.
+                    example: 5.1.2.42
+                    minLength: 1
+                    type: string
+            required:
+                - deviceUids
+                - version
             type: object
         MspVirtualAccountDto:
             properties:
@@ -18987,32 +19111,14 @@ components:
                     type: string
             type: object
         SmartAccountDto:
+            description: The smart account used to license this device.
             properties:
-                domain:
-                    description: Account domain for your Smart Account
+                parent:
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                name:
-                    description: Name of the smart account
-                    type: string
-                smartAccountId:
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             properties:
@@ -19544,6 +19650,7 @@ components:
                             - INSTALL_LOCAL
                             - INSTALL_LIGHTWEIGHT_SECURITY_PACKAGE
                             - UPLOAD_TROUBLESHOOT
+                            - DOWNLOAD_FROM_CISCO_SUPPORT
                             - RUN_SNORT_PROFILER
                             - RUN_CPU_PROFILER
                             - ONBOARD_LTP
@@ -19654,6 +19761,7 @@ components:
                         - INSTALL_LOCAL
                         - INSTALL_LIGHTWEIGHT_SECURITY_PACKAGE
                         - UPLOAD_TROUBLESHOOT
+                        - DOWNLOAD_FROM_CISCO_SUPPORT
                         - RUN_SNORT_PROFILER
                         - RUN_CPU_PROFILER
                         - ONBOARD_LTP
@@ -20373,7 +20481,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: The role of the user this token belongs to. The user can be API-only or a human.
+            description: Roles associated with this user in Security Cloud Control.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -20384,6 +20492,7 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
+            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.

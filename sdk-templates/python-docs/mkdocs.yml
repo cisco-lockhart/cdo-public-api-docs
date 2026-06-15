@@ -283,6 +283,7 @@ nav:
     - MspManagedTenantVirtualAccountDto: MspManagedTenantVirtualAccountDto.md
     - MspSecureClientPackageDto: MspSecureClientPackageDto.md
     - MspSecureClientPackagesPage: MspSecureClientPackagesPage.md
+    - MspSecureClientPlatform: MspSecureClientPlatform.md
     - MspSmartAccountDto: MspSmartAccountDto.md
     - MspSmartAccountsPage: MspSmartAccountsPage.md
     - MspTenantSettingsInput: MspTenantSettingsInput.md
@@ -292,6 +293,7 @@ nav:
     - MspUpgradeRunDto: MspUpgradeRunDto.md
     - MspUpgradeRunDtoPage: MspUpgradeRunDtoPage.md
     - MspUpgradeRunsAttributeValues: MspUpgradeRunsAttributeValues.md
+    - MspUpgradeSecureClientPackagesInput: MspUpgradeSecureClientPackagesInput.md
     - MspVirtualAccountDto: MspVirtualAccountDto.md
     - MspVirtualAccountsPage: MspVirtualAccountsPage.md
     - Network: Network.md
