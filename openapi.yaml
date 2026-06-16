@@ -12833,7 +12833,6 @@ components:
                         - UPGRADE_SECURE_CLIENT_PACKAGES
                         - MSP_UPGRADE_ASAS
                         - MSP_UPGRADE_FTDS
-                        - MSP_UPGRADE_SECURE_CLIENT_PACKAGES
                         - MSP_GET_COMPATIBLE_FTD_UPGRADE_PACKAGES
                         - CREATE_SDC
                         - SEND_AI_ASSISTANT_MESSAGE
