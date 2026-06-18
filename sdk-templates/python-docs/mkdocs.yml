@@ -284,6 +284,9 @@ nav:
     - MspSecureClientPackageDto: MspSecureClientPackageDto.md
     - MspSecureClientPackagesPage: MspSecureClientPackagesPage.md
     - MspSecureClientPlatform: MspSecureClientPlatform.md
+    - MspSecureClientUpgradeRunDto: MspSecureClientUpgradeRunDto.md
+    - MspSecureClientUpgradeRunPage: MspSecureClientUpgradeRunPage.md
+    - MspSecureClientUpgradeRunsAttributeValues: MspSecureClientUpgradeRunsAttributeValues.md
     - MspSmartAccountDto: MspSmartAccountDto.md
     - MspSmartAccountsPage: MspSmartAccountsPage.md
     - MspTenantSettingsInput: MspTenantSettingsInput.md

@@ -24,6 +24,9 @@ Method | HTTP request | Description
 [**get_msp_ftd_device_upgrade_run**](MSPDeviceUpgradesApi.md#get_msp_ftd_device_upgrade_run) | **GET** /v1/msp/inventory/devices/ftds/upgrades/runs/{mspUpgradeRunUid} | Get MSP FTD Device Upgrade Run
 [**get_msp_ftd_device_upgrade_runs**](MSPDeviceUpgradesApi.md#get_msp_ftd_device_upgrade_runs) | **GET** /v1/msp/inventory/devices/ftds/upgrades/runs | Get MSP FTD Device Upgrade Runs
 [**get_msp_ftd_upgrade_runs_attribute_values**](MSPDeviceUpgradesApi.md#get_msp_ftd_upgrade_runs_attribute_values) | **GET** /v1/msp/inventory/devices/ftds/upgrades/runs/attribute-values | Get distinct attribute values for MSP upgrade runs
+[**get_msp_secure_client_upgrade_run**](MSPDeviceUpgradesApi.md#get_msp_secure_client_upgrade_run) | **GET** /v1/msp/inventory/devices/secure-client/upgrades/runs/{upgradeRunUid} | Get MSP Secure Client Upgrade Run
+[**get_msp_secure_client_upgrade_runs**](MSPDeviceUpgradesApi.md#get_msp_secure_client_upgrade_runs) | **GET** /v1/msp/inventory/devices/secure-client/upgrades/runs | Get MSP Secure Client Upgrade Runs
+[**get_msp_secure_client_upgrade_runs_attribute_values**](MSPDeviceUpgradesApi.md#get_msp_secure_client_upgrade_runs_attribute_values) | **GET** /v1/msp/inventory/devices/secure-client/upgrades/runs/attribute-values | Get distinct attribute values for MSP Secure Client upgrade runs
 [**upgrade_msp_managed_asa_devices**](MSPDeviceUpgradesApi.md#upgrade_msp_managed_asa_devices) | **POST** /v1/msp/inventory/devices/asas/upgrades/trigger | Upgrade multiple ASAs across multiple tenants
 [**upgrade_msp_managed_asa_secure_client_packages**](MSPDeviceUpgradesApi.md#upgrade_msp_managed_asa_secure_client_packages) | **POST** /v1/msp/inventory/devices/asas/secure-client/upgrades | Upgrade Secure Client packages on ASAs across multiple tenants
 [**upgrade_msp_managed_ftd_devices**](MSPDeviceUpgradesApi.md#upgrade_msp_managed_ftd_devices) | **POST** /v1/msp/inventory/devices/ftds/upgrades/trigger | Upgrade multiple FTDs across multiple tenants
@@ -909,6 +912,246 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Distinct attribute values for MSP upgrade runs. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_msp_secure_client_upgrade_run**
+> MspSecureClientUpgradeRunDto get_msp_secure_client_upgrade_run(upgrade_run_uid)
+
+Get MSP Secure Client Upgrade Run
+
+Get an MSP Secure Client Upgrade Run by UID in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices across managed tenants having their Secure Client packages upgraded together.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.msp_secure_client_upgrade_run_dto import MspSecureClientUpgradeRunDto
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.MSPDeviceUpgradesApi(api_client)
+    upgrade_run_uid = 'upgrade_run_uid_example' # str | The unique identifier, represented as a UUID, of the MSP Secure Client Upgrade Run in SCC Firewall Manager.
+
+    try:
+        # Get MSP Secure Client Upgrade Run
+        api_response = api_instance.get_msp_secure_client_upgrade_run(upgrade_run_uid)
+        print("The response of MSPDeviceUpgradesApi->get_msp_secure_client_upgrade_run:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling MSPDeviceUpgradesApi->get_msp_secure_client_upgrade_run: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **upgrade_run_uid** | **str**| The unique identifier, represented as a UUID, of the MSP Secure Client Upgrade Run in SCC Firewall Manager. | 
+
+### Return type
+
+[**MspSecureClientUpgradeRunDto**](MspSecureClientUpgradeRunDto.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The MSP Secure Client Upgrade Run object |  -  |
+**404** | Entity not found. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_msp_secure_client_upgrade_runs**
+> MspSecureClientUpgradeRunPage get_msp_secure_client_upgrade_runs(limit=limit, offset=offset, q=q, sort=sort)
+
+Get MSP Secure Client Upgrade Runs
+
+Get a list of MSP Secure Client upgrade runs in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices across managed tenants having their Secure Client packages upgraded together.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.msp_secure_client_upgrade_run_page import MspSecureClientUpgradeRunPage
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.MSPDeviceUpgradesApi(api_client)
+    limit = '50' # str | Number of results to retrieve. (optional) (default to '50')
+    offset = '0' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+    q = 'fieldName:fieldValue' # str | The query to execute. Use the Lucene Query Syntax to construct your query. (optional)
+    sort = ['name:DESC'] # List[str] | The fields to sort results by. (optional)
+
+    try:
+        # Get MSP Secure Client Upgrade Runs
+        api_response = api_instance.get_msp_secure_client_upgrade_runs(limit=limit, offset=offset, q=q, sort=sort)
+        print("The response of MSPDeviceUpgradesApi->get_msp_secure_client_upgrade_runs:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling MSPDeviceUpgradesApi->get_msp_secure_client_upgrade_runs: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **str**| Number of results to retrieve. | [optional] [default to &#39;50&#39;]
+ **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+ **q** | **str**| The query to execute. Use the Lucene Query Syntax to construct your query. | [optional] 
+ **sort** | [**List[str]**](str.md)| The fields to sort results by. | [optional] 
+
+### Return type
+
+[**MspSecureClientUpgradeRunPage**](MspSecureClientUpgradeRunPage.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | List of MSP Secure Client Upgrade Run objects |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_msp_secure_client_upgrade_runs_attribute_values**
+> MspSecureClientUpgradeRunsAttributeValues get_msp_secure_client_upgrade_runs_attribute_values()
+
+Get distinct attribute values for MSP Secure Client upgrade runs
+
+Get distinct attribute values for filterable fields on MSP Secure Client upgrade runs.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.msp_secure_client_upgrade_runs_attribute_values import MspSecureClientUpgradeRunsAttributeValues
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.MSPDeviceUpgradesApi(api_client)
+
+    try:
+        # Get distinct attribute values for MSP Secure Client upgrade runs
+        api_response = api_instance.get_msp_secure_client_upgrade_runs_attribute_values()
+        print("The response of MSPDeviceUpgradesApi->get_msp_secure_client_upgrade_runs_attribute_values:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling MSPDeviceUpgradesApi->get_msp_secure_client_upgrade_runs_attribute_values: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**MspSecureClientUpgradeRunsAttributeValues**](MspSecureClientUpgradeRunsAttributeValues.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Distinct attribute values for MSP Secure Client upgrade runs. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
