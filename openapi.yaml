@@ -13459,13 +13459,8 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+            description: The completion status of the deployment on the device.
             properties:
-                completedAt:
-                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
-                    example: 2026-04-15T18:00:10.123Z
-                    format: date-time
-                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
@@ -13958,7 +13953,7 @@ components:
                     description: (FMC device managers only) The version of the Cisco geolocation database (GeoDB).
                     type: string
                 hardwareModel:
-                    description: (ASAs, FDM-managed FTDs, and FMC-managed FTDs only) The hardware model of the device
+                    description: (ASAs, FDM-managed FTDs, and FMC-managed FTDs only) The hardware model of the device. Filtering on cdFMC-managed FTDs requires the human-readable form (e.g. "Cisco Firepower 2100 Threat Defense"). On-prem FMC-managed FTDs are not filterable on this field.
                     type: string
                 labels:
                     $ref: '#/components/schemas/Labels'

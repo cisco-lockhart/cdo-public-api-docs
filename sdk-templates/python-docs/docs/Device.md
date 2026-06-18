@@ -37,7 +37,7 @@ Name | Type | Description | Notes
 **ftd_licenses** | **List[str]** | (FTDs only) List of FTD License entitlements. | [optional] 
 **ftd_performance_tier** | **str** | (FTDvs only) The FTDv supports performance-tiered licensing that provides different throughput levels and VPN connection limits based on deployment requirements. This field specifies the performance tier of the FTD. | [optional] 
 **geo_db_version** | **str** | (FMC device managers only) The version of the Cisco geolocation database (GeoDB). | [optional] 
-**hardware_model** | **str** | (ASAs, FDM-managed FTDs, and FMC-managed FTDs only) The hardware model of the device | [optional] 
+**hardware_model** | **str** | (ASAs, FDM-managed FTDs, and FMC-managed FTDs only) The hardware model of the device. Filtering on cdFMC-managed FTDs requires the human-readable form (e.g. \&quot;Cisco Firepower 2100 Threat Defense\&quot;). On-prem FMC-managed FTDs are not filterable on this field. | [optional] 
 **labels** | [**Labels**](Labels.md) |  | [optional] 
 **license_status** | **str** | The license status of the device. | [optional] 
 **meraki_deployment_mode** | [**MerakiDeploymentMode**](MerakiDeploymentMode.md) |  | [optional] 
