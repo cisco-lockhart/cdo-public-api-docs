@@ -7522,119 +7522,6 @@ paths:
             summary: Get compatible FTD upgrade versions
             tags:
                 - MSP Device Upgrades
-    /v1/msp/inventory/devices/secure-client/upgrades/runs:
-        get:
-            description: Get a list of MSP Secure Client upgrade runs in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices across managed tenants having their Secure Client packages upgraded together.
-            operationId: getMspSecureClientUpgradeRuns
-            parameters:
-                - description: Number of results to retrieve.
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 200
-                    minimum: 0
-                    type: string
-                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
-                  example: fieldName:fieldValue
-                  in: query
-                  name: q
-                  required: false
-                  schema:
-                    type: string
-                - description: The fields to sort results by.
-                  example: name:DESC
-                  in: query
-                  name: sort
-                  required: false
-                  schema:
-                    items:
-                        type: string
-                    type: array
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MspSecureClientUpgradeRunPage'
-                    description: List of MSP Secure Client Upgrade Run objects
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get MSP Secure Client Upgrade Runs
-            tags:
-                - MSP Device Upgrades
-            x-beta: "true"
-    /v1/msp/inventory/devices/secure-client/upgrades/runs/{upgradeRunUid}:
-        get:
-            description: Get an MSP Secure Client Upgrade Run by UID in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices across managed tenants having their Secure Client packages upgraded together.
-            operationId: getMspSecureClientUpgradeRun
-            parameters:
-                - description: The unique identifier, represented as a UUID, of the MSP Secure Client Upgrade Run in SCC Firewall Manager.
-                  in: path
-                  name: upgradeRunUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MspSecureClientUpgradeRunDto'
-                    description: The MSP Secure Client Upgrade Run object
-                "404":
-                    $ref: '#/components/responses/http404NotFound'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get MSP Secure Client Upgrade Run
-            tags:
-                - MSP Device Upgrades
-            x-beta: "true"
-    /v1/msp/inventory/devices/secure-client/upgrades/runs/attribute-values:
-        get:
-            description: Get distinct attribute values for filterable fields on MSP Secure Client upgrade runs.
-            operationId: getMspSecureClientUpgradeRunsAttributeValues
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MspSecureClientUpgradeRunsAttributeValues'
-                    description: Distinct attribute values for MSP Secure Client upgrade runs.
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get distinct attribute values for MSP Secure Client upgrade runs
-            tags:
-                - MSP Device Upgrades
-            x-beta: "true"
     /v1/msp/inventory/devices/upgrades/runs:
         get:
             description: Get a list of MSP device upgrade runs in the SCC Firewall Manager Tenant. Each upgrade run represents a group of devices across multiple managed tenants being upgraded, or staged for upgrades, together.
@@ -13572,13 +13459,8 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+            description: The completion status of the deployment on the device.
             properties:
-                completedAt:
-                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
-                    example: 2026-04-15T18:00:10.123Z
-                    format: date-time
-                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
@@ -13599,7 +13481,7 @@ components:
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices managed by the MSP Portal.
+            description: The distinct config states for the devices in the Security Cloud Control tenant.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -13616,13 +13498,13 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices managed by the MSP Portal.
+            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
             type: string
         ConnectivityState:
-            description: The distinct connectivity states for the devices managed by the MSP Portal.
+            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -13633,7 +13515,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device.
+            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
             enum:
                 - SDC
                 - CDG
@@ -14574,7 +14456,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The roles that this device performs on the network.
+            description: The distinct device roles for the devices in the Security Cloud Control tenant.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -14582,20 +14464,62 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
-            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
-            description: The current status of each device in the upgrade run.
+            description: Set of device UIDs that are part of this upgrade run.
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+                    description: The completion status of the upgrade on the device.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                uid:
-                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+                hardwareModel:
+                    description: Hardware model of the devices being upgraded.
+                    example: Firepower 2110
+                    type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: Name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantUid:
+                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    format: uuid
+                    type: string
+                name:
+                    description: Name of the device being upgraded.
+                    example: my-firepower
+                    type: string
+                softwareVersionBeforeUpgrade:
+                    description: Software version of the device before the upgrade.
+                    example: 7.2.3
+                    type: string
+                transactionUid:
+                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, of the device being upgraded.
+                    format: uuid
+                    type: string
+                upgradeRunStatus:
+                    description: Current status of the upgrade run.
+                    enum:
+                        - IN_PROGRESS
+                        - REBUILDING_UPGRADE_CACHE
+                        - PERFORMING_UPGRADE
+                        - UPLOADING_IMAGE
+                        - PERFORMING_READINESS_CHECK
+                        - UPGRADE_STAGED
+                        - UPGRADE_STAGING_FAILED
+                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_COMPLETED
+                        - UPGRADE_FAILED
+                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -14750,7 +14674,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The distinct device types for the devices managed by the MSP Portal.
+            description: The type of the device.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -14773,6 +14697,7 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
+            example: ASA
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -14941,7 +14866,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -16047,6 +15972,7 @@ components:
             type: object
         Labels:
             description: Labels used to identify/tag Security Cloud Control entities.
+            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -17574,131 +17500,6 @@ components:
             required:
                 - cpuArchitecture
                 - os
-            type: object
-        MspSecureClientUpgradeRunDto:
-            properties:
-                devices:
-                    description: The devices included in this upgrade run.
-                    items:
-                        $ref: '#/components/schemas/UpgradedDeviceDto'
-                    type: array
-                errorMsg:
-                    description: Error message if the upgrade run failed.
-                    example: Timeout error
-                    type: string
-                lastUpdatedTime:
-                    description: Time (UTC; represented using the RFC-3339 standard) at which the upgrade run was last updated.
-                    example: 2026-03-30T14:45:00Z
-                    format: date-time
-                    type: string
-                name:
-                    description: The name of the upgrade run.
-                    example: msp-upgrade-run-01
-                    type: string
-                percentageComplete:
-                    description: Percentage completion of the current step (0.0 to 1.0). Null when there is no active progress tracking.
-                    example: 0.5
-                    format: double
-                    nullable: true
-                    type: number
-                secureClientVersion:
-                    description: The Secure Client version being upgraded to.
-                    example: 5.1.15.287
-                    type: string
-                submissionTime:
-                    description: Time (UTC; represented using the RFC-3339 standard) at which the upgrade run was submitted.
-                    example: 2026-03-30T14:30:00Z
-                    format: date-time
-                    type: string
-                transactionUid:
-                    description: The unique identifier, represented as a UUID, of the SCC Firewall Manager transaction that tracks this upgrade run.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of the upgrade run.
-                    example: d4e5f6a7-8901-2345-bcde-f12345678901
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: 'The current status of the upgrade run. One of: VALIDATING_INPUTS, UPLOADING_IMAGES, DONE, DONE_WITH_DEVICE_WARNINGS, DONE_WITH_DEVICE_ERRORS, ERROR.'
-                    enum:
-                        - VALIDATING_INPUTS
-                        - UPLOADING_IMAGES
-                        - DONE
-                        - DONE_WITH_DEVICE_WARNINGS
-                        - DONE_WITH_DEVICE_ERRORS
-                        - ERROR
-                    example: DONE
-                    type: string
-                upgradeRunType:
-                    description: 'The type of the Secure Client upgrade. One of: ASA_SECURE_CLIENT_UPGRADE, FTD_SECURE_CLIENT_UPGRADE.'
-                    enum:
-                        - ASA_SECURE_CLIENT_UPGRADE
-                        - FTD_SECURE_CLIENT_UPGRADE
-                    example: ASA_SECURE_CLIENT_UPGRADE
-                    type: string
-                username:
-                    description: Username of the user who initiated the upgrade run.
-                    example: admin.user@my-msp.com
-                    type: string
-            type: object
-        MspSecureClientUpgradeRunPage:
-            properties:
-                count:
-                    description: The total number of results available.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/MspSecureClientUpgradeRunDto'
-                    type: array
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
-            type: object
-        MspSecureClientUpgradeRunsAttributeValues:
-            properties:
-                upgradeRunStatuses:
-                    description: Distinct status values for the MSP Secure Client upgrade runs on this MSP portal.
-                    items:
-                        description: Distinct status values for the MSP Secure Client upgrade runs on this MSP portal.
-                        enum:
-                            - VALIDATING_INPUTS
-                            - UPLOADING_IMAGES
-                            - DONE
-                            - DONE_WITH_DEVICE_WARNINGS
-                            - DONE_WITH_DEVICE_ERRORS
-                            - ERROR
-                        type: string
-                    type: array
-                    uniqueItems: true
-                upgradeRunTypes:
-                    description: Distinct upgrade run type values for the MSP Secure Client upgrade runs.
-                    items:
-                        description: Distinct upgrade run type values for the MSP Secure Client upgrade runs.
-                        enum:
-                            - ASA_SECURE_CLIENT_UPGRADE
-                            - FTD_SECURE_CLIENT_UPGRADE
-                        type: string
-                    type: array
-                    uniqueItems: true
-                users:
-                    description: Distinct usernames of users who initiated upgrade runs.
-                    items:
-                        description: Distinct usernames of users who initiated upgrade runs.
-                        type: string
-                    type: array
-                    uniqueItems: true
             type: object
         MspSmartAccountDto:
             properties:
@@ -20676,7 +20477,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: Roles associated with this user in Security Cloud Control.
+            description: The role of the user this token belongs to. The user can be API-only or a human.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -20687,7 +20488,6 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
-            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.
