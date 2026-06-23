@@ -45,6 +45,7 @@ nav:
     - MSPDeviceUpgradesApi: MSPDeviceUpgradesApi.md
     - MSPInventoryApi: MSPInventoryApi.md
     - MSPLicensingApi: MSPLicensingApi.md
+    - MSPSecureClientManagementApi: MSPSecureClientManagementApi.md
     - MSPTenantManagementApi: MSPTenantManagementApi.md
     - MSPUserManagementApi: MSPUserManagementApi.md
     - MetaApi: MetaApi.md
