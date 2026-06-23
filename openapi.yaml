@@ -7096,45 +7096,6 @@ paths:
             tags:
                 - MSP Device Upgrades
             x-beta: "true"
-    /v1/msp/inventory/devices/asas/secure-client/upgrades/versions:
-        post:
-            description: 'An asynchronous operation to calculate the list of Secure Client versions compatible with the specified ASA devices across multiple managed tenants. The set returned is the intersection across tenants: a version is included only when every managed tenant offers it, and the platforms reported for that version are likewise the platforms offered by every managed tenant.'
-            operationId: calculateMspCompatibleSecureClientVersions
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/MspCalculateCompatibleUpgradeVersionsInput'
-                required: true
-            responses:
-                "202":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CdoTransaction'
-                    description: Returns a Transaction object to track the progress of the calculation. The Transaction's entity URL points at the GET endpoint that returns the aggregated result.
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "404":
-                    $ref: '#/components/responses/http404NotFound'
-                "422":
-                    $ref: '#/components/responses/http422UnprocessableEntity'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Calculate compatible Secure Client upgrade versions across managed tenants
-            tags:
-                - MSP Device Upgrades
-            x-beta: "true"
     /v1/msp/inventory/devices/asas/upgrades/trigger:
         post:
             description: |-
@@ -7671,45 +7632,6 @@ paths:
             security:
                 - bearerAuth: []
             summary: Get distinct attribute values for MSP Secure Client upgrade runs
-            tags:
-                - MSP Device Upgrades
-            x-beta: "true"
-    /v1/msp/inventory/devices/secure-client/upgrades/versions/{compatibilityInfoUid}:
-        get:
-            description: Get the aggregated compatible Secure Client versions for an MSP cross-tenant calculation, identified by the compatibility-info UID returned in the entity URL of the calculation's Transaction.
-            operationId: getMspCompatibleSecureClientVersions
-            parameters:
-                - description: Unique identifier, represented as a UUID, of the Secure Client compatibility-info object returned by the calculation endpoint.
-                  in: path
-                  name: compatibilityInfoUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MspSecureClientUpgradeCompatibilityInfoDto'
-                    description: Compatible Secure Client upgrade versions for the requested MSP-managed ASA devices, aggregated across managed tenants.
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "404":
-                    $ref: '#/components/responses/http404NotFound'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get the result of a Secure Client compatibility calculation
             tags:
                 - MSP Device Upgrades
             x-beta: "true"
@@ -13569,27 +13491,6 @@ components:
                 - name
                 - uid
             type: object
-        CompatibleSecureClientPlatformDto:
-            description: An OS and CPU architecture combination available for a Secure Client version.
-            properties:
-                cpuArchitecture:
-                    description: 'The CPU architecture. One of: ARM64, X86_64, UNIVERSAL.'
-                    enum:
-                        - ARM64
-                        - X86_64
-                        - UNIVERSAL
-                    type: string
-                os:
-                    description: 'The operating system. One of: LINUX, MACOS, WINDOWS.'
-                    enum:
-                        - LINUX
-                        - MACOS
-                        - WINDOWS
-                    type: string
-            required:
-                - cpuArchitecture
-                - os
-            type: object
         CompatibleSecureClientVersionDto:
             description: The list of items retrieved.
             properties:
@@ -13699,7 +13600,7 @@ components:
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices in the Security Cloud Control tenant.
+            description: The distinct config states for the devices managed by the MSP Portal.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -13716,13 +13617,13 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
+            description: The distinct conflict detection states for the devices managed by the MSP Portal.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
             type: string
         ConnectivityState:
-            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
+            description: The distinct connectivity states for the devices managed by the MSP Portal.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -13733,7 +13634,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
+            description: The type of the connector that will be used to communicate with the device.
             enum:
                 - SDC
                 - CDG
@@ -14674,7 +14575,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The distinct device roles for the devices in the Security Cloud Control tenant.
+            description: The roles that this device performs on the network.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -14682,6 +14583,7 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
+            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
             description: The current status of each device in the upgrade run.
@@ -14872,7 +14774,7 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: ASA
+            example: CDFMC_MANAGED_FTD
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -15041,7 +14943,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
+                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -16148,7 +16050,6 @@ components:
             type: object
         Labels:
             description: Labels used to identify/tag Security Cloud Control entities.
-            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -16259,57 +16160,6 @@ components:
                 uid:
                     description: The unique identifier of the managed tenant.
                     format: uuid
-                    type: string
-            type: object
-        ManagedTenantUpgradeDto:
-            description: Per-managed-tenant upgrade progress across this run.
-            properties:
-                errorMsg:
-                    description: Error message if the managed tenant's upgrade failed.
-                    example: One or more devices failed to upgrade
-                    nullable: true
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in Security Cloud Control.
-                    example: My Managed Tenant
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-                transactionStatus:
-                    description: 'The status of the managed tenant''s upgrade transaction. One of: PENDING, IN_PROGRESS, CANCELLED, DONE, ERROR.'
-                    enum:
-                        - PENDING
-                        - IN_PROGRESS
-                        - CANCELLED
-                        - DONE
-                        - ERROR
-                    example: DONE
-                    type: string
-                transactionUid:
-                    description: The unique identifier, represented as a UUID, of the upgrade transaction on the managed tenant. Null if the upgrade could not be triggered on that tenant.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    nullable: true
-                    type: string
-                upgradeRunStatus:
-                    description: The current status of the upgrade run on the managed tenant, as reported by the tenant. A granular pipeline step (e.g. UPLOADING_IMAGES, REGISTERING_NEW_RA_VPN_IMAGES, DONE); passed through verbatim from the managed tenant.
-                    example: REGISTERING_NEW_RA_VPN_IMAGES
-                    nullable: true
-                    type: string
-                upgradeRunStepPercentageComplete:
-                    description: Percentage completion (0.0 to 1.0) of the managed tenant upgrade run's current step. Null when the tenant reports no active progress for the current step.
-                    example: 0.5
-                    format: double
-                    nullable: true
-                    type: number
-                upgradeRunUid:
-                    description: The unique identifier, represented as a UUID, of the upgrade run on the managed tenant. Use it to deep-link into the tenant's own upgrade-run detail. Null if the upgrade could not be triggered on that tenant.
-                    example: d4e5f6a7-8901-2345-bcde-f12345678901
-                    format: uuid
-                    nullable: true
                     type: string
             type: object
         MemoryHealthMetrics:
@@ -16590,7 +16440,7 @@ components:
                     type: boolean
             type: object
         MspCalculateCompatibleUpgradeVersionsInput:
-            description: List of unique identifiers, represented as UUIDs, of the ASA devices in Security Cloud Control. All specified devices must be in tenants managed by the MSP portal, must be ASA devices in connectivity state ONLINE, and must be in configuration state SYNCED with the ASA_RA_VPN_HEADEND role and a known software version. Per-device validation is performed against each managed tenant; any device that fails validation in its tenant causes the calculation to fail with the offending devices reported in the error message.
+            description: List of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. Note that all the specified devices must be in tenants managed by the MSP portal.
             properties:
                 deviceUids:
                     description: The list of devices to calculate compatible upgrade versions for. All of the devices must exist, be associated with the managed tenant, and be in the connectivity state 'ONLINE'.
@@ -17728,40 +17578,6 @@ components:
                 - cpuArchitecture
                 - os
             type: object
-        MspSecureClientUpgradeCompatibilityInfoDto:
-            description: Compatible Secure Client upgrade versions for MSP managed ASA devices across multiple tenants.
-            properties:
-                compatibleVersions:
-                    description: List of Secure Client versions compatible with the specified ASA devices across managed tenants. A version is included only if it is compatible with all of the requested devices in every managed tenant they belong to. The platforms listed for each version are likewise the intersection of platforms available in every managed tenant.
-                    items:
-                        $ref: '#/components/schemas/CompatibleSecureClientVersionDto'
-                    nullable: true
-                    type: array
-                errorMessage:
-                    description: Error message detailing the issues that occurred during compatibility information retrieval. This field is populated when the status is ERROR.
-                    example: 'An error has occurred retrieving compatibility information. Contact Cisco TAC with the details below if you require additional support. The details of the error/s are: ...'
-                    nullable: true
-                    type: string
-                status:
-                    description: The current status of the retrieval of compatible Secure Client versions.
-                    enum:
-                        - DONE
-                        - IN_PROGRESS
-                        - ERROR
-                        - IN_PROGRESS
-                        - DONE
-                        - ERROR
-                    example: DONE
-                    type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of this list of compatible Secure Client versions.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-            required:
-                - status
-                - uid
-            type: object
         MspSecureClientUpgradeRunDto:
             properties:
                 devices:
@@ -17778,11 +17594,6 @@ components:
                     example: 2026-03-30T14:45:00Z
                     format: date-time
                     type: string
-                managedTenantUpgrades:
-                    description: Per-managed-tenant upgrade progress across this run.
-                    items:
-                        $ref: '#/components/schemas/ManagedTenantUpgradeDto'
-                    type: array
                 name:
                     description: The name of the upgrade run.
                     example: msp-upgrade-run-01
@@ -17813,11 +17624,10 @@ components:
                     format: uuid
                     type: string
                 upgradeRunStatus:
-                    description: 'The current status of the upgrade run. One of: VALIDATING_INPUTS, UPLOADING_IMAGES, PERFORMING_UPGRADE, DONE, DONE_WITH_DEVICE_WARNINGS, DONE_WITH_DEVICE_ERRORS, ERROR.'
+                    description: 'The current status of the upgrade run. One of: VALIDATING_INPUTS, UPLOADING_IMAGES, DONE, DONE_WITH_DEVICE_WARNINGS, DONE_WITH_DEVICE_ERRORS, ERROR.'
                     enum:
                         - VALIDATING_INPUTS
                         - UPLOADING_IMAGES
-                        - PERFORMING_UPGRADE
                         - DONE
                         - DONE_WITH_DEVICE_WARNINGS
                         - DONE_WITH_DEVICE_ERRORS
@@ -17868,7 +17678,6 @@ components:
                         enum:
                             - VALIDATING_INPUTS
                             - UPLOADING_IMAGES
-                            - PERFORMING_UPGRADE
                             - DONE
                             - DONE_WITH_DEVICE_WARNINGS
                             - DONE_WITH_DEVICE_ERRORS
@@ -20888,7 +20697,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: The role of the user this token belongs to. The user can be API-only or a human.
+            description: Roles associated with this user in Security Cloud Control.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -20899,6 +20708,7 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
+            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.

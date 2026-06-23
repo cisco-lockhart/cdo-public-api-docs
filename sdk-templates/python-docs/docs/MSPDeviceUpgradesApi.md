@@ -13,12 +13,10 @@ UAE | https://api.uae.security.cisco.com/firewall
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**calculate_msp_compatible_secure_client_versions**](MSPDeviceUpgradesApi.md#calculate_msp_compatible_secure_client_versions) | **POST** /v1/msp/inventory/devices/asas/secure-client/upgrades/versions | Calculate compatible Secure Client upgrade versions across managed tenants
 [**calculate_msp_ftd_compatible_upgrade_versions**](MSPDeviceUpgradesApi.md#calculate_msp_ftd_compatible_upgrade_versions) | **POST** /v1/msp/inventory/devices/ftds/upgrades/versions | Calculate compatible FTD upgrade versions
 [**delete_msp_device_upgrade_run**](MSPDeviceUpgradesApi.md#delete_msp_device_upgrade_run) | **DELETE** /v1/msp/inventory/devices/upgrades/runs/{uid} | Delete MSP Device Upgrade Run
 [**delete_msp_ftd_device_upgrade_run**](MSPDeviceUpgradesApi.md#delete_msp_ftd_device_upgrade_run) | **DELETE** /v1/msp/inventory/devices/ftds/upgrades/runs/{uid} | Delete MSP FTD Device Upgrade Run
 [**get_msp_asa_compatible_upgrade_versions**](MSPDeviceUpgradesApi.md#get_msp_asa_compatible_upgrade_versions) | **GET** /v1/msp/inventory/devices/asas/upgrades/versions | Get compatible ASA upgrade versions
-[**get_msp_compatible_secure_client_versions**](MSPDeviceUpgradesApi.md#get_msp_compatible_secure_client_versions) | **GET** /v1/msp/inventory/devices/secure-client/upgrades/versions/{compatibilityInfoUid} | Get the result of a Secure Client compatibility calculation
 [**get_msp_device_upgrade_run**](MSPDeviceUpgradesApi.md#get_msp_device_upgrade_run) | **GET** /v1/msp/inventory/devices/upgrades/runs/{uid} | Get MSP Device Upgrade Run
 [**get_msp_device_upgrade_runs**](MSPDeviceUpgradesApi.md#get_msp_device_upgrade_runs) | **GET** /v1/msp/inventory/devices/upgrades/runs | Get MSP Device Upgrade Runs
 [**get_msp_device_upgrade_runs_attribute_values**](MSPDeviceUpgradesApi.md#get_msp_device_upgrade_runs_attribute_values) | **GET** /v1/msp/inventory/devices/upgrades/runs/attribute-values | Get distinct attribute values for MSP upgrade runs
@@ -33,91 +31,6 @@ Method | HTTP request | Description
 [**upgrade_msp_managed_asa_secure_client_packages**](MSPDeviceUpgradesApi.md#upgrade_msp_managed_asa_secure_client_packages) | **POST** /v1/msp/inventory/devices/asas/secure-client/upgrades | Upgrade Secure Client packages on ASAs across multiple tenants
 [**upgrade_msp_managed_ftd_devices**](MSPDeviceUpgradesApi.md#upgrade_msp_managed_ftd_devices) | **POST** /v1/msp/inventory/devices/ftds/upgrades/trigger | Upgrade multiple FTDs across multiple tenants
 
-
-# **calculate_msp_compatible_secure_client_versions**
-> CdoTransaction calculate_msp_compatible_secure_client_versions(msp_calculate_compatible_upgrade_versions_input)
-
-Calculate compatible Secure Client upgrade versions across managed tenants
-
-An asynchronous operation to calculate the list of Secure Client versions compatible with the specified ASA devices across multiple managed tenants. The set returned is the intersection across tenants: a version is included only when every managed tenant offers it, and the platforms reported for that version are likewise the platforms offered by every managed tenant.
-
-### Example
-
-* Bearer (JWT) Authentication (bearerAuth):
-
-```python
-import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
-from scc_firewall_manager_sdk.models.msp_calculate_compatible_upgrade_versions_input import MspCalculateCompatibleUpgradeVersionsInput
-from scc_firewall_manager_sdk.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
-# See configuration.py for a list of all supported configuration parameters.
-configuration = scc_firewall_manager_sdk.Configuration(
-    host = "https://api.us.security.cisco.com/firewall"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): bearerAuth
-configuration = scc_firewall_manager_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = scc_firewall_manager_sdk.MSPDeviceUpgradesApi(api_client)
-    msp_calculate_compatible_upgrade_versions_input = scc_firewall_manager_sdk.MspCalculateCompatibleUpgradeVersionsInput() # MspCalculateCompatibleUpgradeVersionsInput | 
-
-    try:
-        # Calculate compatible Secure Client upgrade versions across managed tenants
-        api_response = api_instance.calculate_msp_compatible_secure_client_versions(msp_calculate_compatible_upgrade_versions_input)
-        print("The response of MSPDeviceUpgradesApi->calculate_msp_compatible_secure_client_versions:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling MSPDeviceUpgradesApi->calculate_msp_compatible_secure_client_versions: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **msp_calculate_compatible_upgrade_versions_input** | [**MspCalculateCompatibleUpgradeVersionsInput**](MspCalculateCompatibleUpgradeVersionsInput.md)|  | 
-
-### Return type
-
-[**CdoTransaction**](CdoTransaction.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**202** | Returns a Transaction object to track the progress of the calculation. The Transaction&#39;s entity URL points at the GET endpoint that returns the aggregated result. |  -  |
-**400** | Invalid input provided. Check the response for details. |  -  |
-**401** | Request not authorized. |  -  |
-**403** | User does not have sufficient privileges to perform this operation. |  -  |
-**404** | Entity not found. |  -  |
-**422** | Unprocessable entity. |  -  |
-**500** | Internal server error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **calculate_msp_ftd_compatible_upgrade_versions**
 > CdoTransaction calculate_msp_ftd_compatible_upgrade_versions(msp_calculate_compatible_upgrade_versions_input)
@@ -436,89 +349,6 @@ Name | Type | Description  | Notes
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
 **404** | Entity not found. |  -  |
 **422** | Unprocessable entity. |  -  |
-**500** | Internal server error. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_msp_compatible_secure_client_versions**
-> MspSecureClientUpgradeCompatibilityInfoDto get_msp_compatible_secure_client_versions(compatibility_info_uid)
-
-Get the result of a Secure Client compatibility calculation
-
-Get the aggregated compatible Secure Client versions for an MSP cross-tenant calculation, identified by the compatibility-info UID returned in the entity URL of the calculation's Transaction.
-
-### Example
-
-* Bearer (JWT) Authentication (bearerAuth):
-
-```python
-import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.msp_secure_client_upgrade_compatibility_info_dto import MspSecureClientUpgradeCompatibilityInfoDto
-from scc_firewall_manager_sdk.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
-# See configuration.py for a list of all supported configuration parameters.
-configuration = scc_firewall_manager_sdk.Configuration(
-    host = "https://api.us.security.cisco.com/firewall"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): bearerAuth
-configuration = scc_firewall_manager_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = scc_firewall_manager_sdk.MSPDeviceUpgradesApi(api_client)
-    compatibility_info_uid = 'compatibility_info_uid_example' # str | Unique identifier, represented as a UUID, of the Secure Client compatibility-info object returned by the calculation endpoint.
-
-    try:
-        # Get the result of a Secure Client compatibility calculation
-        api_response = api_instance.get_msp_compatible_secure_client_versions(compatibility_info_uid)
-        print("The response of MSPDeviceUpgradesApi->get_msp_compatible_secure_client_versions:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling MSPDeviceUpgradesApi->get_msp_compatible_secure_client_versions: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **compatibility_info_uid** | **str**| Unique identifier, represented as a UUID, of the Secure Client compatibility-info object returned by the calculation endpoint. | 
-
-### Return type
-
-[**MspSecureClientUpgradeCompatibilityInfoDto**](MspSecureClientUpgradeCompatibilityInfoDto.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Compatible Secure Client upgrade versions for the requested MSP-managed ASA devices, aggregated across managed tenants. |  -  |
-**400** | Invalid input provided. Check the response for details. |  -  |
-**401** | Request not authorized. |  -  |
-**403** | User does not have sufficient privileges to perform this operation. |  -  |
-**404** | Entity not found. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
