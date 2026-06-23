@@ -12948,6 +12948,7 @@ components:
                         - MSP_UPGRADE_FTDS
                         - MSP_UPGRADE_SECURE_CLIENT_PACKAGES
                         - MSP_GET_COMPATIBLE_FTD_UPGRADE_PACKAGES
+                        - MSP_GET_COMPATIBLE_SECURE_CLIENT_UPGRADE_PACKAGES
                         - CREATE_SDC
                         - SEND_AI_ASSISTANT_MESSAGE
                         - MSP_CREATE_TENANT
@@ -13572,18 +13573,13 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the upgrade on the device.
+            description: The completion status of the deployment on the device.
             properties:
-                completedAt:
-                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
-                    example: 2026-04-15T18:00:10.123Z
-                    format: date-time
-                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -13594,7 +13590,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: Percentage completion of the current task being performed.
+                    description: The percentage completion of the current task being performed
                     format: double
                     type: number
             type: object
