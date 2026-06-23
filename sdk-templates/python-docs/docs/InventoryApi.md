@@ -878,7 +878,7 @@ void (empty response body)
 
 Deploy ASA device changes
 
-This is an asynchronous operation to deploy changes made to an ASA device's configuration on Security Cloud Control to the device. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+This is an asynchronous operation to deploy changes made to an ASA device's configuration on Security Cloud Control to the device. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.  Notes:  - This operation is deprecated and will be removed in a subsequent release. Use `POST /v1/inventory/devices/asas/deploy` with a single-element `deviceUids` array to deploy changes to one ASA device.  - This operation will only deploy changes to the device if there are pending changes to deploy. 
 
 ### Example
 
