@@ -129,6 +129,7 @@ nav:
     - CommonApiError: CommonApiError.md
     - CompatibleDevice: CompatibleDevice.md
     - CompatibleDeviceDto: CompatibleDeviceDto.md
+    - CompatibleSecureClientPlatformDto: CompatibleSecureClientPlatformDto.md
     - CompatibleSecureClientVersionDto: CompatibleSecureClientVersionDto.md
     - CompatibleVersionInfo: CompatibleVersionInfo.md
     - CompatibleVersionInfoDto: CompatibleVersionInfoDto.md
@@ -234,6 +235,7 @@ nav:
     - Location: Location.md
     - LogSettings: LogSettings.md
     - ManagedTenantDto: ManagedTenantDto.md
+    - ManagedTenantUpgradeDto: ManagedTenantUpgradeDto.md
     - MemoryHealthMetrics: MemoryHealthMetrics.md
     - MerakiDeploymentMode: MerakiDeploymentMode.md
     - MerakiPhysicalDevice: MerakiPhysicalDevice.md
@@ -284,6 +286,7 @@ nav:
     - MspSecureClientPackageDto: MspSecureClientPackageDto.md
     - MspSecureClientPackagesPage: MspSecureClientPackagesPage.md
     - MspSecureClientPlatform: MspSecureClientPlatform.md
+    - MspSecureClientUpgradeCompatibilityInfoDto: MspSecureClientUpgradeCompatibilityInfoDto.md
     - MspSecureClientUpgradeRunDto: MspSecureClientUpgradeRunDto.md
     - MspSecureClientUpgradeRunPage: MspSecureClientUpgradeRunPage.md
     - MspSecureClientUpgradeRunsAttributeValues: MspSecureClientUpgradeRunsAttributeValues.md
