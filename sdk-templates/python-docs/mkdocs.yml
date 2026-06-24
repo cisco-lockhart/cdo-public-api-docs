@@ -254,6 +254,7 @@ nav:
     - MspAddUsersToTenantInput: MspAddUsersToTenantInput.md
     - MspAsaCompatibleVersionsDto: MspAsaCompatibleVersionsDto.md
     - MspBulkDeviceUpdateInput: MspBulkDeviceUpdateInput.md
+    - MspCalculateCompatibleSecureClientVersionsInput: MspCalculateCompatibleSecureClientVersionsInput.md
     - MspCalculateCompatibleUpgradeVersionsInput: MspCalculateCompatibleUpgradeVersionsInput.md
     - MspCreateTenantInput: MspCreateTenantInput.md
     - MspDeleteUserGroupsFromTenantInput: MspDeleteUserGroupsFromTenantInput.md

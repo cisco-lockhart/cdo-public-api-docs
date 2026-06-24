@@ -1,6 +1,6 @@
 # MspCalculateCompatibleUpgradeVersionsInput
 
-List of unique identifiers, represented as UUIDs, of the ASA devices in Security Cloud Control. All specified devices must be in tenants managed by the MSP portal, must be ASA devices in connectivity state ONLINE, and must be in configuration state SYNCED with the ASA_RA_VPN_HEADEND role and a known software version. Per-device validation is performed against each managed tenant; any device that fails validation in its tenant causes the calculation to fail with the offending devices reported in the error message.
+List of unique identifiers, represented as UUIDs, of the devices in Security Cloud Control. Note that all the specified devices must be in tenants managed by the MSP portal.
 
 ## Properties
 

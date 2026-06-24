@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 
 # **calculate_msp_compatible_secure_client_versions**
-> CdoTransaction calculate_msp_compatible_secure_client_versions(msp_calculate_compatible_upgrade_versions_input)
+> CdoTransaction calculate_msp_compatible_secure_client_versions(msp_calculate_compatible_secure_client_versions_input)
 
 Calculate compatible Secure Client upgrade versions across managed tenants
 
@@ -36,7 +36,7 @@ An asynchronous operation to calculate the list of Secure Client versions compat
 ```python
 import scc_firewall_manager_sdk
 from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
-from scc_firewall_manager_sdk.models.msp_calculate_compatible_upgrade_versions_input import MspCalculateCompatibleUpgradeVersionsInput
+from scc_firewall_manager_sdk.models.msp_calculate_compatible_secure_client_versions_input import MspCalculateCompatibleSecureClientVersionsInput
 from scc_firewall_manager_sdk.rest import ApiException
 from pprint import pprint
 
@@ -60,11 +60,11 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.MSPSecureClientManagementApi(api_client)
-    msp_calculate_compatible_upgrade_versions_input = scc_firewall_manager_sdk.MspCalculateCompatibleUpgradeVersionsInput() # MspCalculateCompatibleUpgradeVersionsInput | 
+    msp_calculate_compatible_secure_client_versions_input = scc_firewall_manager_sdk.MspCalculateCompatibleSecureClientVersionsInput() # MspCalculateCompatibleSecureClientVersionsInput | 
 
     try:
         # Calculate compatible Secure Client upgrade versions across managed tenants
-        api_response = api_instance.calculate_msp_compatible_secure_client_versions(msp_calculate_compatible_upgrade_versions_input)
+        api_response = api_instance.calculate_msp_compatible_secure_client_versions(msp_calculate_compatible_secure_client_versions_input)
         print("The response of MSPSecureClientManagementApi->calculate_msp_compatible_secure_client_versions:\n")
         pprint(api_response)
     except Exception as e:
@@ -78,7 +78,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **msp_calculate_compatible_upgrade_versions_input** | [**MspCalculateCompatibleUpgradeVersionsInput**](MspCalculateCompatibleUpgradeVersionsInput.md)|  | 
+ **msp_calculate_compatible_secure_client_versions_input** | [**MspCalculateCompatibleSecureClientVersionsInput**](MspCalculateCompatibleSecureClientVersionsInput.md)|  | 
 
 ### Return type
 
