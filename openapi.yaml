@@ -13680,8 +13680,13 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the deployment on the device.
+            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
             properties:
+                completedAt:
+                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
+                    example: 2026-04-15T18:00:10.123Z
+                    format: date-time
+                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
