@@ -13599,17 +13599,15 @@ components:
                 - os
             type: object
         CompatibleSecureClientVersionDto:
-            description: A Secure Client version available across all requested managed tenants, with the platforms available for that version.
-            nullable: true
+            description: The list of items retrieved.
             properties:
                 platforms:
-                    description: The OS and CPU architecture combinations available for this Secure Client version across every requested managed tenant.
+                    description: The OS and CPU architecture combinations available for this version.
                     items:
-                        $ref: '#/components/schemas/CompatibleSecureClientPlatformDto'
+                        $ref: '#/components/schemas/SecureClientPlatformDto'
                     type: array
                 version:
-                    description: The Secure Client version string.
-                    example: 5.1.15.287
+                    description: The Secure Client version string (e.g. "5.1.15.287", "4.10.05095").
                     type: string
             required:
                 - platforms
@@ -13682,8 +13680,13 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the deployment on the device.
+            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
             properties:
+                completedAt:
+                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
+                    example: 2026-04-15T18:00:10.123Z
+                    format: date-time
+                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
@@ -20760,15 +20763,6 @@ components:
                 errorMsg:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in Security Cloud Control.
-                    example: My Managed Tenant
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
                     type: string
                 name:
                     description: The name of the device.
