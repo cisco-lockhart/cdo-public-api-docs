@@ -13702,7 +13702,7 @@ components:
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices in the Security Cloud Control tenant.
+            description: The distinct config states for the devices managed by the MSP Portal.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -13719,13 +13719,13 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
+            description: The distinct conflict detection states for the devices managed by the MSP Portal.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
             type: string
         ConnectivityState:
-            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
+            description: The distinct connectivity states for the devices managed by the MSP Portal.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -13736,7 +13736,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
+            description: The type of the connector that will be used to communicate with the device.
             enum:
                 - SDC
                 - CDG
@@ -14677,7 +14677,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The distinct device roles for the devices in the Security Cloud Control tenant.
+            description: The roles that this device performs on the network.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -14685,6 +14685,7 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
+            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
             description: The current status of each device in the upgrade run.
@@ -16151,7 +16152,6 @@ components:
             type: object
         Labels:
             description: Labels used to identify/tag Security Cloud Control entities.
-            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -20907,7 +20907,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: The role of the user this token belongs to. The user can be API-only or a human.
+            description: Roles associated with this user in Security Cloud Control.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -20918,6 +20918,7 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
+            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.
