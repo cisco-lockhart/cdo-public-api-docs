@@ -49,6 +49,7 @@ Name | Type | Description | Notes
 **on_prem_fmc_info** | [**OnPremFmcInfo**](OnPremFmcInfo.md) |  | [optional] 
 **opted_in_to_asa_health_metrics** | **bool** | Indicates whether the device has been opted in to collect ASA health metrics (SDC-managed ASAs only). | [optional] 
 **ra_vpn_certificate_expiry_date** | **datetime** | (Remote Access VPN headends — ASA, FDM-managed FTD, and cdFMC-managed FTD — only) Expiration date of the Secure Client certificate installed on the device. | [optional] 
+**ra_vpn_policy** | [**RaVpnPolicyReference**](RaVpnPolicyReference.md) |  | [optional] 
 **redundancy_mode** | **str** | The redundancy mode this firewall is running in. Note: for High Availability pairs and clusters, Security Cloud Control represents all of the devices as part of one record. | [optional] 
 **serial** | **str** | The serial number of the device. This is typically used for licensing, and is not the same as the chassis&#39; serial number. | [optional] 
 **snort_version** | **str** | (FTDs only) List of FTD License entitlements. | [optional] 

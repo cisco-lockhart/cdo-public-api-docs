@@ -322,6 +322,7 @@ nav:
     - PublicKey: PublicKey.md
     - PublicThousandEyesOutageDto: PublicThousandEyesOutageDto.md
     - RaVpnDeviceInput: RaVpnDeviceInput.md
+    - RaVpnPolicyReference: RaVpnPolicyReference.md
     - RaVpnSession: RaVpnSession.md
     - RaVpnSessionHealthMetrics: RaVpnSessionHealthMetrics.md
     - RaVpnSessionPage: RaVpnSessionPage.md

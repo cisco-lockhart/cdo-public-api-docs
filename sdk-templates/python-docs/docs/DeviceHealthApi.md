@@ -26,7 +26,7 @@ Method | HTTP request | Description
 
 Get time-series health metrics for one or more ASA devices
 
-Returns time-series metrics such as CPU, memory, disk, connections, and environment data over a specified time range. Supports filtering by device and metric. Pagination applies only when device UIDs are not specified.  **Prerequisites:**  1. Health metrics must be enabled for your tenant. See [Opt In to ASA Health Metrics](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/opt-in-to-asa-health-metrics/). 2. Health metrics collection is automatically enabled for all CDG-managed ASAs — no additional action is required for these devices. 3. Each SDC-managed ASA device must be individually enabled for health metrics (individually or in bulk) using the [Modify Devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/modify-devices/) endpoint.  **Time range (required — specify exactly one):**  - `start` and `end`: both must be provided together as ISO 8601 timestamps, OR - `timeRange`: a predefined relative range (e.g. `1h`, `24h`).  Providing both `start`/`end` and `timeRange`, or neither, will result in a validation error.  **Environmental data (`env`):** A device may publish multiple environmental sensors (e.g. several CPU temperature probes, internal chassis temperatures). The response carries each physical sensor as a peer property of `series` and `summary` on the `env` metric object — e.g. `metrics.env.processorTemperatureProcessor1`, `metrics.env.chassisTemperatureInternal0`. Each peer property is itself a `Metric` (with its own `series` and `summary`). The top-level `metrics.env.series` and `metrics.env.summary` reflect one of the sensor series (back-compat shape). Other metrics (cpu, mem, disk, connections, natTranslations) never carry such peer properties.  If health metrics are not enabled, this endpoint returns a `422` error.
+Returns time-series metrics such as CPU, memory, disk, connections, and environment data over a specified time range. Supports filtering by device and metric. Pagination applies only when device UIDs are not specified.  **Prerequisites:**  1. Health metrics must be enabled for your tenant. See [Opt In to ASA Health Metrics](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/opt-in-to-asa-health-metrics/). 2. Health metrics collection is automatically enabled for all CDG-managed ASAs — no additional action is required for these devices. 3. Each SDC-managed ASA device must be individually enabled for health metrics (individually or in bulk) using the [Modify Devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/modify-devices/) endpoint.  **Time range (required — specify exactly one):**  - `start` and `end`: both must be provided together as ISO 8601 timestamps, OR - `timeRange`: a predefined relative range (e.g. `1h`, `24h`).  Providing both `start`/`end` and `timeRange`, or neither, will result in a validation error.  If health metrics are not enabled, this endpoint returns a `422` error.
 
 ### Example
 
@@ -64,7 +64,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     limit = '50' # str | Maximum number of device records to return (used only when no deviceUids are provided). (optional) (default to '50')
     offset = '0' # str | Offset for pagination (used only when no deviceUids are provided). (optional) (default to '0')
     device_uids = ['256461f6-bd60-11ef-8beb-6cf1610cf55d,41a1d57b-ffc2-49aa-933b-440cdd76b2fc'] # List[str] | Comma-separated list of device UIDs to query. Max 50. If omitted, results are paginated. (optional)
-    metrics = 'cpu,mem' # str | Comma-separated list of metrics to return (e.g. cpu, mem). Returns all if omitted. When `env` is requested (or returned by default), the response fans out per-sensor data as dynamic peer properties on the `env` metric object — see the endpoint description for the response shape. (optional)
+    metrics = 'cpu,mem' # str | Comma-separated list of metrics to return (e.g. cpu, mem). Returns all if omitted. (optional)
 
     try:
         # Get time-series health metrics for one or more ASA devices
@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
  **limit** | **str**| Maximum number of device records to return (used only when no deviceUids are provided). | [optional] [default to &#39;50&#39;]
  **offset** | **str**| Offset for pagination (used only when no deviceUids are provided). | [optional] [default to &#39;0&#39;]
  **device_uids** | [**List[str]**](str.md)| Comma-separated list of device UIDs to query. Max 50. If omitted, results are paginated. | [optional] 
- **metrics** | **str**| Comma-separated list of metrics to return (e.g. cpu, mem). Returns all if omitted. When &#x60;env&#x60; is requested (or returned by default), the response fans out per-sensor data as dynamic peer properties on the &#x60;env&#x60; metric object — see the endpoint description for the response shape. | [optional] 
+ **metrics** | **str**| Comma-separated list of metrics to return (e.g. cpu, mem). Returns all if omitted. | [optional] 
 
 ### Return type
 

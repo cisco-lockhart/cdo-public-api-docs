@@ -1,6 +1,5 @@
 # Metric
 
-Time series and summary for a single metric. For the `env` metric, additional dynamic peer properties may be present at the same JSON depth as `series` and `summary`, one per physical environmental sensor (e.g. `processorTemperatureProcessor1`, `chassisTemperatureInternal0`). Each such property is itself a `Metric`. Non-env metrics never carry these additional properties.
 
 ## Properties
 
