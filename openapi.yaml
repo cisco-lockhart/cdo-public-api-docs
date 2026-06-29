@@ -3486,6 +3486,8 @@ paths:
 
                 Providing both `start`/`end` and `timeRange`, or neither, will result in a validation error.
 
+                **Environmental data (`env`):** A device may publish multiple environmental sensors (e.g. several CPU temperature probes, internal chassis temperatures). The response carries each physical sensor as a peer property of `series` and `summary` on the `env` metric object — e.g. `metrics.env.processorTemperatureProcessor1`, `metrics.env.chassisTemperatureInternal0`. Each peer property is itself a `Metric` (with its own `series` and `summary`). The top-level `metrics.env.series` and `metrics.env.summary` reflect one of the sensor series (back-compat shape). Other metrics (cpu, mem, disk, connections, natTranslations) never carry such peer properties.
+
                 If health metrics are not enabled, this endpoint returns a `422` error.
             operationId: getAsaHealthMetrics
             parameters:
@@ -3545,7 +3547,7 @@ paths:
                     maxItems: 50
                     minItems: 0
                     type: array
-                - description: Comma-separated list of metrics to return (e.g. cpu, mem). Returns all if omitted.
+                - description: Comma-separated list of metrics to return (e.g. cpu, mem). Returns all if omitted. When `env` is requested (or returned by default), the response fans out per-sensor data as dynamic peer properties on the `env` metric object — see the endpoint description for the response shape.
                   example: cpu,mem
                   in: query
                   name: metrics
@@ -13599,15 +13601,17 @@ components:
                 - os
             type: object
         CompatibleSecureClientVersionDto:
-            description: The list of items retrieved.
+            description: A Secure Client version available across all requested managed tenants, with the platforms available for that version.
+            nullable: true
             properties:
                 platforms:
-                    description: The OS and CPU architecture combinations available for this version.
+                    description: The OS and CPU architecture combinations available for this Secure Client version across every requested managed tenant.
                     items:
-                        $ref: '#/components/schemas/SecureClientPlatformDto'
+                        $ref: '#/components/schemas/CompatibleSecureClientPlatformDto'
                     type: array
                 version:
-                    description: The Secure Client version string (e.g. "5.1.15.287", "4.10.05095").
+                    description: The Secure Client version string.
+                    example: 5.1.15.287
                     type: string
             required:
                 - platforms
@@ -16432,6 +16436,7 @@ components:
                     type: array
             type: object
         Metric:
+            description: Time series and summary for a single metric. For the `env` metric, additional dynamic peer properties may be present at the same JSON depth as `series` and `summary`, one per physical environmental sensor (e.g. `processorTemperatureProcessor1`, `chassisTemperatureInternal0`). Each such property is itself a `Metric`. Non-env metrics never carry these additional properties.
             properties:
                 series:
                     items:
@@ -20822,6 +20827,15 @@ components:
                 errorMsg:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
+                    type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in Security Cloud Control.
+                    example: My Managed Tenant
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
                     type: string
                 name:
                     description: The name of the device.
