@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
 
 Get time-series health metrics for one or more FTD devices
 
-Returns time-series metrics such as CPU, memory, disk, connections, and environment data over a specified time range. Supports filtering by device and metric. Pagination applies only when device UIDs are not specified.
+<strong>Deprecated</strong> - This operation is deprecated and will be removed in a subsequent release. It will be replaced by a new endpoint that mirrors the request and response shape of the [ASA health metrics endpoint](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-health-metrics-on-asa-devices/). Clients should migrate to the replacement endpoint once it becomes available.  Returns time-series metrics such as CPU, memory, disk, connections, and environment data over a specified time range. Supports filtering by device and metric. Pagination applies only when device UIDs are not specified.
 
 ### Example
 
