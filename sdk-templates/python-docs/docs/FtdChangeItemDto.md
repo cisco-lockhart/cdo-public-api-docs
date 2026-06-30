@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **children** | [**List[FtdChangeItemDto]**](FtdChangeItemDto.md) | The children of this change item. This represents changes that rest within the group represented by this change item. | [optional] 
 **deleted_references** | [**List[Reference]**](Reference.md) | The list of references deleted from this entity as part of the change. | [optional] 
 **deleted_values** | [**List[Value]**](Value.md) | The list of values removed from this entity as part of the change. | [optional] 
+**deployment_type** | **str** | Discriminator identifying this change item as FTD. | [optional] 
 **device_uid** | **str** | The unique identifier, represented as a UUID, of the device the changed entity is associated with. | [optional] 
 **entity_type** | **str** | The type of the changed entity. | [optional] 
 **entity_uid** | **str** | The unique identifier, represented as a UUID, of the changed entity. | [optional] 

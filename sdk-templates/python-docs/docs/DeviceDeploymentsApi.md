@@ -187,11 +187,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_changes_deployed_in_deployment_run**
-> FtdChangeItemDto get_changes_deployed_in_deployment_run(deployment_run_uid, device_uid)
+> ChangeItemDto get_changes_deployed_in_deployment_run(deployment_run_uid, device_uid)
 
 Get Deployed Device Changes in Deployment Run
 
-Get the changes that were deployed to a device as part of a deployment run. Note: if the deployment failed, the changes returned are the changes we attempted to deploy to the device.
+Get the changes that were deployed to a device as part of a deployment run. Changes are represented differently for FTDs and ASAs. For FTDs, this endpoint returns one item per changed entity describing what changed. For ASAs, this endpoint returns the initial configuration, and the configuration that was deployed to the device. The `deploymentType` field on each item identifies which shape it is. If the deployment failed, the changes returned are the changes that were attempted.
 
 ### Example
 
@@ -199,7 +199,7 @@ Get the changes that were deployed to a device as part of a deployment run. Note
 
 ```python
 import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.ftd_change_item_dto import FtdChangeItemDto
+from scc_firewall_manager_sdk.models.change_item_dto import ChangeItemDto
 from scc_firewall_manager_sdk.rest import ApiException
 from pprint import pprint
 
@@ -224,7 +224,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.DeviceDeploymentsApi(api_client)
     deployment_run_uid = 'deployment_run_uid_example' # str | The unique identifier, represented as a UUID, of the device deployment Run in SCC Firewall Manager.
-    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control.
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the device in Security Cloud Control.
 
     try:
         # Get Deployed Device Changes in Deployment Run
@@ -243,11 +243,11 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **deployment_run_uid** | **str**| The unique identifier, represented as a UUID, of the device deployment Run in SCC Firewall Manager. | 
- **device_uid** | **str**| The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control. | 
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the device in Security Cloud Control. | 
 
 ### Return type
 
-[**FtdChangeItemDto**](FtdChangeItemDto.md)
+[**ChangeItemDto**](ChangeItemDto.md)
 
 ### Authorization
 
@@ -262,7 +262,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The Device Deployment Run object |  -  |
+**200** | The change items captured for the device in this deployment run. |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |

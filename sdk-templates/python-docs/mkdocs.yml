@@ -113,6 +113,7 @@ nav:
     - CdoRegionList: CdoRegionList.md
     - CdoTokenInfo: CdoTokenInfo.md
     - CdoTransaction: CdoTransaction.md
+    - ChangeItemDto: ChangeItemDto.md
     - ChangeRequest: ChangeRequest.md
     - ChangeRequestCreateInput: ChangeRequestCreateInput.md
     - ChangeRequestPage: ChangeRequestPage.md
