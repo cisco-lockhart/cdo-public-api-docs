@@ -200,6 +200,7 @@ nav:
     - FtdHaInfo: FtdHaInfo.md
     - FtdMultiDeviceDeploymentInput: FtdMultiDeviceDeploymentInput.md
     - FtdRegistrationInput: FtdRegistrationInput.md
+    - FtdSecureClientPackagesPage: FtdSecureClientPackagesPage.md
     - FtdSingleDeviceDeploymentInput: FtdSingleDeviceDeploymentInput.md
     - FtdUpgradeRunDtoPage: FtdUpgradeRunDtoPage.md
     - FtdVersion: FtdVersion.md
@@ -314,6 +315,7 @@ nav:
     - Override: Override.md
     - Page: Page.md
     - PageCompatibleSecureClientVersionDto: PageCompatibleSecureClientVersionDto.md
+    - PageSecureClientPackageDto: PageSecureClientPackageDto.md
     - PageTaskDto: PageTaskDto.md
     - PhysicalInterfacePatchInput: PhysicalInterfacePatchInput.md
     - Policy: Policy.md

@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**get_asa_compatible_secure_client_versions**](SecureClientManagementApi.md#get_asa_compatible_secure_client_versions) | **GET** /v1/inventory/devices/asas/secure-client/upgrades/versions | List Secure Client versions compatible with the specified ASA devices
 [**get_asa_secure_client_package_by_uid**](SecureClientManagementApi.md#get_asa_secure_client_package_by_uid) | **GET** /v1/inventory/devices/asas/{deviceUid}/secure-client/packages/{packageUid} | Get a Secure Client package installed on an ASA device by UID
 [**get_asa_secure_client_packages**](SecureClientManagementApi.md#get_asa_secure_client_packages) | **GET** /v1/inventory/devices/asas/{deviceUid}/secure-client/packages | List Secure Client packages installed on an ASA device
+[**get_ftd_secure_client_packages**](SecureClientManagementApi.md#get_ftd_secure_client_packages) | **GET** /v1/inventory/devices/ftds/{deviceUid}/secure-client/packages | List Secure Client packages available on an FTD device
 [**get_secure_client_upgrade_run**](SecureClientManagementApi.md#get_secure_client_upgrade_run) | **GET** /v1/inventory/devices/secure-client/upgrades/runs/{upgradeRunUid} | Get Secure Client Upgrade Run
 [**get_secure_client_upgrade_runs**](SecureClientManagementApi.md#get_secure_client_upgrade_runs) | **GET** /v1/inventory/devices/secure-client/upgrades/runs | Get Secure Client Upgrade Runs
 [**get_secure_client_upgrade_runs_attribute_values**](SecureClientManagementApi.md#get_secure_client_upgrade_runs_attribute_values) | **GET** /v1/inventory/devices/secure-client/upgrades/runs/attribute-values | Get distinct attribute values for Secure Client upgrade runs
@@ -279,6 +280,94 @@ Name | Type | Description  | Notes
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
 **404** | Entity not found. |  -  |
+**405** | Method not allowed. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_ftd_secure_client_packages**
+> FtdSecureClientPackagesPage get_ftd_secure_client_packages(device_uid, limit=limit, offset=offset)
+
+List Secure Client packages available on an FTD device
+
+Returns the Secure Client packages configured on the FTD device's Remote Access VPN policy, including the version, operating system, and CPU architecture parsed from each package filename. When a filename does not match the expected Secure Client package naming pattern, the package is still returned but its version, operating system, and CPU architecture are null. Returns an empty page when the device has no Remote Access VPN policy or the policy has no configured packages.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.ftd_secure_client_packages_page import FtdSecureClientPackagesPage
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.SecureClientManagementApi(api_client)
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the FTD device in Security Cloud Control.
+    limit = '50' # str | Number of results to retrieve. (optional) (default to '50')
+    offset = '0' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+
+    try:
+        # List Secure Client packages available on an FTD device
+        api_response = api_instance.get_ftd_secure_client_packages(device_uid, limit=limit, offset=offset)
+        print("The response of SecureClientManagementApi->get_ftd_secure_client_packages:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SecureClientManagementApi->get_ftd_secure_client_packages: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the FTD device in Security Cloud Control. | 
+ **limit** | **str**| Number of results to retrieve. | [optional] [default to &#39;50&#39;]
+ **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+
+### Return type
+
+[**FtdSecureClientPackagesPage**](FtdSecureClientPackagesPage.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, */*
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Secure Client packages retrieved successfully. |  -  |
+**400** | Returned when the device identifier is not a valid UUID or the limit or offset query parameters are outside their allowed ranges. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**404** | Returned when the device does not exist or is not a Cloud-delivered FMC-managed FTD. |  -  |
 **405** | Method not allowed. |  -  |
 **500** | Internal server error. |  -  |
 
