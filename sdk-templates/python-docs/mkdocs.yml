@@ -86,6 +86,7 @@ nav:
     - ApplicationContextClassLoaderParentUnnamedModule: ApplicationContextClassLoaderParentUnnamedModule.md
     - ApplicationContextClassLoaderParentUnnamedModuleClassLoader: ApplicationContextClassLoaderParentUnnamedModuleClassLoader.md
     - ApplicationContextClassLoaderParentUnnamedModuleDescriptor: ApplicationContextClassLoaderParentUnnamedModuleDescriptor.md
+    - AsaChangeItemDto: AsaChangeItemDto.md
     - AsaCompatibilityVersion: AsaCompatibilityVersion.md
     - AsaCompatibleVersion: AsaCompatibleVersion.md
     - AsaCompatibleVersionsResponse: AsaCompatibleVersionsResponse.md
@@ -206,6 +207,7 @@ nav:
     - FtdVersion: FtdVersion.md
     - FtdVersionsPage: FtdVersionsPage.md
     - FtdVersionsResponse: FtdVersionsResponse.md
+    - GetChangesDeployedInDeploymentRun200ResponseInner: GetChangesDeployedInDeploymentRun200ResponseInner.md
     - GlobalSearchResult: GlobalSearchResult.md
     - GroupContent: GroupContent.md
     - HaHealthMetrics: HaHealthMetrics.md

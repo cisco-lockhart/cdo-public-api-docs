@@ -4009,7 +4009,12 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/ChangeItemDto'
+                                items:
+                                    oneOf:
+                                        - $ref: '#/components/schemas/FtdChangeItemDto'
+                                        - $ref: '#/components/schemas/AsaChangeItemDto'
+                                    type: string
+                                type: array
                     description: The change items captured for the device in this deployment run.
                 "400":
                     $ref: '#/components/responses/http400BadRequest'
@@ -12411,6 +12416,34 @@ components:
                     example: FaKE-toKeN
                     type: string
             type: object
+        AsaChangeItemDto:
+            properties:
+                deployedConfig:
+                    description: 'The configuration deployed to the device (or the configuration that was attempted to be deployed to the device, in the case of a failed deployment). Note: this field is set to null if the device already had this configuration, or when snapshot capture failed for this device.'
+                    type: string
+                deploymentRunUid:
+                    description: The unique identifier, represented as a UUID, of the deployment run the change item is associated with.
+                    format: uuid
+                    type: string
+                deploymentType:
+                    description: Discriminator identifying this change item as ASA.
+                    enum:
+                        - FTD_DEVICE_DEPLOY
+                        - ASA_DEVICE_DEPLOY
+                        - ASA_DEVICE_DEPLOY
+                    type: string
+                deviceUid:
+                    description: The unique identifier, represented as a UUID, of the device the change item is associated with.
+                    format: uuid
+                    type: string
+                initialConfig:
+                    description: 'The configuration on the device prior to deployment. Note: this field is set to null if snapshot capture failed for this device.'
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of this change item.
+                    format: uuid
+                    type: string
+            type: object
         AsaCompatibilityVersion:
             properties:
                 compatibleAsaVersions:
@@ -13213,15 +13246,6 @@ components:
                     format: uuid
                     type: string
             type: object
-        ChangeItemDto:
-            discriminator:
-                propertyName: deploymentType
-            properties:
-                deploymentType:
-                    type: string
-            required:
-                - deploymentType
-            type: object
         ChangeRequest:
             properties:
                 description:
@@ -13736,17 +13760,15 @@ components:
                 - os
             type: object
         CompatibleSecureClientVersionDto:
-            description: A Secure Client version available across all requested managed tenants, with the platforms available for that version.
-            nullable: true
+            description: The list of items retrieved.
             properties:
                 platforms:
-                    description: The OS and CPU architecture combinations available for this Secure Client version across every requested managed tenant.
+                    description: The OS and CPU architecture combinations available for this version.
                     items:
-                        $ref: '#/components/schemas/CompatibleSecureClientPlatformDto'
+                        $ref: '#/components/schemas/SecureClientPlatformDto'
                     type: array
                 version:
-                    description: The Secure Client version string.
-                    example: 5.1.15.287
+                    description: The Secure Client version string (e.g. "5.1.15.287", "4.10.05095").
                     type: string
             required:
                 - platforms
@@ -15344,92 +15366,89 @@ components:
                 - value
             type: object
         FtdChangeItemDto:
-            allOf:
-                - $ref: '#/components/schemas/ChangeItemDto'
-                - properties:
-                    addedReferences:
-                        description: The list of references added to this entity as part of the change.
-                        items:
-                            $ref: '#/components/schemas/Reference'
-                        type: array
-                    addedValues:
-                        description: The list of values added to this entity as part of the change.
-                        items:
-                            $ref: '#/components/schemas/Value'
-                        type: array
-                    changeItemType:
-                        description: Indicates if this item represents an actual entity change or a grouping header.
-                        enum:
-                            - ENTITY_CHANGE
-                            - GROUPING_HEADER
-                        type: string
-                    changeType:
-                        description: The type of the change.
-                        enum:
-                            - ADD
-                            - DELETE
-                            - UPDATE
-                            - NOCHANGE
-                        type: string
-                    children:
-                        description: The children of this change item. This represents changes that rest within the group represented by this change item.
-                        items:
-                            $ref: '#/components/schemas/FtdChangeItemDto'
-                        type: array
-                    deletedReferences:
-                        description: The list of references deleted from this entity as part of the change.
-                        items:
-                            $ref: '#/components/schemas/Reference'
-                        type: array
-                    deletedValues:
-                        description: The list of values removed from this entity as part of the change.
-                        items:
-                            $ref: '#/components/schemas/Value'
-                        type: array
-                    deploymentType:
-                        description: Discriminator identifying this change item as FTD.
-                        enum:
-                            - FTD_DEVICE_DEPLOY
-                            - ASA_DEVICE_DEPLOY
-                            - FTD_DEVICE_DEPLOY
-                        type: string
-                    deviceUid:
-                        description: The unique identifier, represented as a UUID, of the device the changed entity is associated with.
-                        format: uuid
-                        type: string
-                    entityType:
-                        description: The type of the changed entity.
-                        type: string
-                    entityUid:
-                        description: The unique identifier, represented as a UUID, of the changed entity.
-                        format: uuid
-                        type: string
-                    errorMsg:
-                        description: An error message indicating why a diff could not be generated for the changed entity.
-                        type: string
-                    lastUpdatedByUsers:
+            properties:
+                addedReferences:
+                    description: The list of references added to this entity as part of the change.
+                    items:
+                        $ref: '#/components/schemas/Reference'
+                    type: array
+                addedValues:
+                    description: The list of values added to this entity as part of the change.
+                    items:
+                        $ref: '#/components/schemas/Value'
+                    type: array
+                changeItemType:
+                    description: Indicates if this item represents an actual entity change or a grouping header.
+                    enum:
+                        - ENTITY_CHANGE
+                        - GROUPING_HEADER
+                    type: string
+                changeType:
+                    description: The type of the change.
+                    enum:
+                        - ADD
+                        - DELETE
+                        - UPDATE
+                        - NOCHANGE
+                    type: string
+                children:
+                    description: The children of this change item. This represents changes that rest within the group represented by this change item.
+                    items:
+                        $ref: '#/components/schemas/FtdChangeItemDto'
+                    type: array
+                deletedReferences:
+                    description: The list of references deleted from this entity as part of the change.
+                    items:
+                        $ref: '#/components/schemas/Reference'
+                    type: array
+                deletedValues:
+                    description: The list of values removed from this entity as part of the change.
+                    items:
+                        $ref: '#/components/schemas/Value'
+                    type: array
+                deploymentType:
+                    description: Discriminator identifying this change item as FTD.
+                    enum:
+                        - FTD_DEVICE_DEPLOY
+                        - ASA_DEVICE_DEPLOY
+                        - FTD_DEVICE_DEPLOY
+                    type: string
+                deviceUid:
+                    description: The unique identifier, represented as a UUID, of the device the changed entity is associated with.
+                    format: uuid
+                    type: string
+                entityType:
+                    description: The type of the changed entity.
+                    type: string
+                entityUid:
+                    description: The unique identifier, represented as a UUID, of the changed entity.
+                    format: uuid
+                    type: string
+                errorMsg:
+                    description: An error message indicating why a diff could not be generated for the changed entity.
+                    type: string
+                lastUpdatedByUsers:
+                    description: The list of users who have made the changes to this entity.
+                    items:
                         description: The list of users who have made the changes to this entity.
-                        items:
-                            description: The list of users who have made the changes to this entity.
-                            type: string
-                        type: array
-                    name:
-                        description: The name of the changed entity.
                         type: string
-                    parentUid:
-                        description: The unique identifier, represented as a UUID, of the 'parent' of this change item. The parentUid, if set, can be used to identify the group that this change belongs to.
-                        format: uuid
-                        type: string
-                    uid:
-                        description: 'The unique identifier, represented as a UUID, of this change item. Note: this is not the unique identifier of the changed entity.'
-                        format: uuid
-                        type: string
-                    updatedValues:
-                        description: The list of values updated on this entity as part of the change.
-                        items:
-                            $ref: '#/components/schemas/UpdatedValue'
-                        type: array
-                  type: object
+                    type: array
+                name:
+                    description: The name of the changed entity.
+                    type: string
+                parentUid:
+                    description: The unique identifier, represented as a UUID, of the 'parent' of this change item. The parentUid, if set, can be used to identify the group that this change belongs to.
+                    format: uuid
+                    type: string
+                uid:
+                    description: 'The unique identifier, represented as a UUID, of this change item. Note: this is not the unique identifier of the changed entity.'
+                    format: uuid
+                    type: string
+                updatedValues:
+                    description: The list of values updated on this entity as part of the change.
+                    items:
+                        $ref: '#/components/schemas/UpdatedValue'
+                    type: array
             type: object
         FtdClusterInfo:
             description: '(Device Clusters managed by FMC only) Clustering information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
@@ -20977,15 +20996,6 @@ components:
                 errorMsg:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in Security Cloud Control.
-                    example: My Managed Tenant
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
                     type: string
                 name:
                     description: The name of the device.

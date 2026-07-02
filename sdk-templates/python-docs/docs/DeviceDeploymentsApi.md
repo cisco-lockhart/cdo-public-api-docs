@@ -187,7 +187,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_changes_deployed_in_deployment_run**
-> ChangeItemDto get_changes_deployed_in_deployment_run(deployment_run_uid, device_uid)
+> List[GetChangesDeployedInDeploymentRun200ResponseInner] get_changes_deployed_in_deployment_run(deployment_run_uid, device_uid)
 
 Get Deployed Device Changes in Deployment Run
 
@@ -199,7 +199,7 @@ Get the changes that were deployed to a device as part of a deployment run. Chan
 
 ```python
 import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.change_item_dto import ChangeItemDto
+from scc_firewall_manager_sdk.models.get_changes_deployed_in_deployment_run200_response_inner import GetChangesDeployedInDeploymentRun200ResponseInner
 from scc_firewall_manager_sdk.rest import ApiException
 from pprint import pprint
 
@@ -247,7 +247,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChangeItemDto**](ChangeItemDto.md)
+[**List[GetChangesDeployedInDeploymentRun200ResponseInner]**](GetChangesDeployedInDeploymentRun200ResponseInner.md)
 
 ### Authorization
 
