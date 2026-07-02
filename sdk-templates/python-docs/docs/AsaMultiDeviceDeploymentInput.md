@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **deployment_notes** | **str** | Specify notes, if any, for the deployment. | [optional] 
 **description** | **str** | Specify a human-readable description for the deployment. | [optional] 
 **device_uids** | **List[str]** | The set of unique identifiers, represented as UUIDs, of the ASA devices to deploy in Security Cloud Control. | 
+**force_deploy_unsupported_commands** | **bool** | Force-deploy changes that cannot be applied incrementally. When false (the default), these changes are skipped and the rest of the deployment proceeds. When true, SCC Firewall Manager applies the full configuration to the device to deploy them. Warning: applying the full configuration drops all active connections to the device. Enable this only when you intend to accept that disruption. | [optional] 
 
 ## Example
 

@@ -12718,6 +12718,9 @@ components:
                     minItems: 1
                     type: array
                     uniqueItems: true
+                forceDeployUnsupportedCommands:
+                    description: 'Force-deploy changes that cannot be applied incrementally. When false (the default), these changes are skipped and the rest of the deployment proceeds. When true, SCC Firewall Manager applies the full configuration to the device to deploy them. Warning: applying the full configuration drops all active connections to the device. Enable this only when you intend to accept that disruption.'
+                    type: boolean
             required:
                 - deviceUids
             type: object
