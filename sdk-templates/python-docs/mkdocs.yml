@@ -91,6 +91,7 @@ nav:
     - AsaCompatibleVersion: AsaCompatibleVersion.md
     - AsaCompatibleVersionsResponse: AsaCompatibleVersionsResponse.md
     - AsaConfig: AsaConfig.md
+    - AsaConfigCommandsDto: AsaConfigCommandsDto.md
     - AsaCreateOrUpdateInput: AsaCreateOrUpdateInput.md
     - AsaFailoverMate: AsaFailoverMate.md
     - AsaFailoverMode: AsaFailoverMode.md

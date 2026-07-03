@@ -15,6 +15,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**bulk_accept_asa_certificates**](InventoryApi.md#bulk_accept_asa_certificates) | **POST** /v1/inventory/devices/asas/acceptCert | Accept certificates for multiple ASA devices
 [**bulk_read_asa_device_configurations**](InventoryApi.md#bulk_read_asa_device_configurations) | **POST** /v1/inventory/devices/asas/read | Read configurations for multiple ASA devices
+[**calculate_asa_commands_to_apply_pending_changes**](InventoryApi.md#calculate_asa_commands_to_apply_pending_changes) | **POST** /v1/inventory/devices/asas/{deviceUid}/changes/pending/commands | Calculate the commands that will be executed on the ASA to apply the pending changes on the device
 [**calculate_ftd_device_pending_changes**](InventoryApi.md#calculate_ftd_device_pending_changes) | **POST** /v1/inventory/devices/ftds/{deviceUid}/changes/pending | Calculate pending changes on a cdFMC-managed FTD
 [**create_duo_admin_panel**](InventoryApi.md#create_duo_admin_panel) | **POST** /v1/inventory/devices/duoAdminPanels | Onboard Duo Admin Panel
 [**create_ftd_device**](InventoryApi.md#create_ftd_device) | **POST** /v1/inventory/devices/ftds | Onboard FTD device
@@ -31,6 +32,7 @@ Method | HTTP request | Description
 [**export_devices**](InventoryApi.md#export_devices) | **POST** /v1/inventory/devices/export | Export Devices
 [**export_templates**](InventoryApi.md#export_templates) | **POST** /v1/inventory/templates/export | Export Templates
 [**finish_onboarding_ftd_device**](InventoryApi.md#finish_onboarding_ftd_device) | **POST** /v1/inventory/devices/ftds/register | Register FTD device to FMC
+[**get_asa_commands_to_apply_pending_changes**](InventoryApi.md#get_asa_commands_to_apply_pending_changes) | **GET** /v1/inventory/devices/asas/{deviceUid}/changes/pending/commands | Get the commands that will be executed on the ASA to apply the pending changes on the device
 [**get_asa_configuration**](InventoryApi.md#get_asa_configuration) | **GET** /v1/inventory/devices/asas/{deviceUid}/configs | Get ASA configuration details
 [**get_cloud_service**](InventoryApi.md#get_cloud_service) | **GET** /v1/inventory/services/{cloudServiceUid} | Get Cloud Service
 [**get_cloud_services**](InventoryApi.md#get_cloud_services) | **GET** /v1/inventory/services | Get Cloud Services
@@ -220,6 +222,88 @@ Name | Type | Description  | Notes
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **calculate_asa_commands_to_apply_pending_changes**
+> CdoTransaction calculate_asa_commands_to_apply_pending_changes(device_uid)
+
+Calculate the commands that will be executed on the ASA to apply the pending changes on the device
+
+This is an asynchronous operation to calculate the ASA commands that will be executed to apply the pending changes on the device.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.InventoryApi(api_client)
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the ASA device in Security Cloud Control.
+
+    try:
+        # Calculate the commands that will be executed on the ASA to apply the pending changes on the device
+        api_response = api_instance.calculate_asa_commands_to_apply_pending_changes(device_uid)
+        print("The response of InventoryApi->calculate_asa_commands_to_apply_pending_changes:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InventoryApi->calculate_asa_commands_to_apply_pending_changes: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the ASA device in Security Cloud Control. | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Security Cloud Control Transaction object that can be used to track the progress of the calculation operation. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**404** | Entity not found. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1532,6 +1616,88 @@ Name | Type | Description  | Notes
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_asa_commands_to_apply_pending_changes**
+> AsaConfigCommandsDto get_asa_commands_to_apply_pending_changes(device_uid)
+
+Get the commands that will be executed on the ASA to apply the pending changes on the device
+
+Returns the ASA commands that will be executed to apply the pending changes on the device, as previously calculated by the asynchronous calculation operation. The calculated commands are cached for a short period, so this endpoint should be called shortly after the calculation transaction completes; if the commands are not available a 404 is returned.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.asa_config_commands_dto import AsaConfigCommandsDto
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.InventoryApi(api_client)
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the ASA device in Security Cloud Control.
+
+    try:
+        # Get the commands that will be executed on the ASA to apply the pending changes on the device
+        api_response = api_instance.get_asa_commands_to_apply_pending_changes(device_uid)
+        print("The response of InventoryApi->get_asa_commands_to_apply_pending_changes:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InventoryApi->get_asa_commands_to_apply_pending_changes: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the ASA device in Security Cloud Control. | 
+
+### Return type
+
+[**AsaConfigCommandsDto**](AsaConfigCommandsDto.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The ASA configuration commands that will be executed to apply the pending changes on the device. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**404** | Entity not found. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

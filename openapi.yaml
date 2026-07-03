@@ -1755,6 +1755,77 @@ paths:
             summary: Onboard ASA device
             tags:
                 - Inventory
+    /v1/inventory/devices/asas/{deviceUid}/changes/pending/commands:
+        get:
+            description: Returns the ASA commands that will be executed to apply the pending changes on the device, as previously calculated by the asynchronous calculation operation. The calculated commands are cached for a short period, so this endpoint should be called shortly after the calculation transaction completes; if the commands are not available a 404 is returned.
+            operationId: getAsaCommandsToApplyPendingChanges
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the ASA device in Security Cloud Control.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AsaConfigCommandsDto'
+                    description: The ASA configuration commands that will be executed to apply the pending changes on the device.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get the commands that will be executed on the ASA to apply the pending changes on the device
+            tags:
+                - Inventory
+        post:
+            description: This is an asynchronous operation to calculate the ASA commands that will be executed to apply the pending changes on the device.
+            operationId: calculateAsaCommandsToApplyPendingChanges
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the ASA device in Security Cloud Control.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the progress of the calculation operation.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Calculate the commands that will be executed on the ASA to apply the pending changes on the device
+            tags:
+                - Inventory
     /v1/inventory/devices/asas/{deviceUid}/configs:
         get:
             description: Fetches the ASA configuration for a specified device by its unique identifier, represented as a UUID. This endpoint returns both the current configuration from the device ('configOnDevice') and the configuration stored in Security Cloud Control ('configOnCloud').
@@ -4846,6 +4917,73 @@ paths:
             summary: Register FTD device to FMC
             tags:
                 - Inventory
+    /v1/inventory/devices/ftds/secure-client/upgrades/versions:
+        get:
+            description: Get a list of compatible Secure Client upgrade versions for the specified FTD devices.
+            operationId: getFtdCompatibleSecureClientVersions
+            parameters:
+                - description: The unique identifiers, represented as UUIDs, of the FTD devices in Security Cloud Control.
+                  in: query
+                  name: deviceUids
+                  required: true
+                  schema:
+                    items:
+                        format: uuid
+                        type: string
+                    maxItems: 50
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SecureClientUpgradeVersionsPage'
+                    description: A paginated list of compatible Secure Client versions
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+                "503":
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/PageCompatibleSecureClientVersionDto'
+                    description: Service temporarily unavailable
+            security:
+                - bearerAuth: []
+            summary: List Secure Client versions compatible with the specified FTD devices
+            tags:
+                - Secure Client Management
+            x-beta: "true"
     /v1/inventory/devices/ftds/upgrades/packages/build-cache:
         put:
             description: Update cache of compatible upgrade packages for a all FTD devices.
@@ -12491,6 +12629,26 @@ components:
                     description: 'The running configuration on the ASA device. Note: this may not include changes made out-of-band directly on the device since the last Out-of-Band check ran on Security Cloud Control.'
                     type: string
             type: object
+        AsaConfigCommandsDto:
+            properties:
+                configCommands:
+                    description: The list of ASA configuration commands that will be applied to the device upon deployment.
+                    items:
+                        description: The list of ASA configuration commands that will be applied to the device upon deployment.
+                        type: string
+                    type: array
+                deviceUid:
+                    description: The unique identifier, represented as a UUID, of the ASA device the config commands will be applied to upon deployment.
+                    format: uuid
+                    type: string
+                status:
+                    description: The status of the configuration command generation process.
+                    enum:
+                        - SUCCESS
+                        - UNSUPPORTED_COMMANDS
+                        - ERROR
+                    type: string
+            type: object
         AsaCreateOrUpdateInput:
             properties:
                 connectorName:
@@ -13241,6 +13399,7 @@ components:
                         - NAT_PAO_TRIGGER_PDF_GENERATION
                         - BIDIRECTIONAL_OBJECT_RECONCILIATION
                         - CALCULATE_FTD_PENDING_CHANGES
+                        - CALCULATE_ASA_CONFIG_COMMANDS
                     example: ONBOARD_ASA
                     type: string
                 transactionUid:
@@ -13846,10 +14005,10 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the upgrade on the device.
+            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
             properties:
                 completedAt:
-                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
+                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
                     example: 2026-04-15T18:00:10.123Z
                     format: date-time
                     type: string
@@ -13857,7 +14016,7 @@ components:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -13868,12 +14027,12 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: Percentage completion of the current task being performed.
+                    description: The percentage completion of the current task being performed
                     format: double
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices managed by the MSP Portal.
+            description: The distinct config states for the devices in the Security Cloud Control tenant.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -13890,13 +14049,13 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices managed by the MSP Portal.
+            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
             type: string
         ConnectivityState:
-            description: The distinct connectivity states for the devices managed by the MSP Portal.
+            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -13907,7 +14066,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device.
+            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
             enum:
                 - SDC
                 - CDG
@@ -14852,7 +15011,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The roles that this device performs on the network.
+            description: The distinct device roles for the devices in the Security Cloud Control tenant.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -14860,63 +15019,19 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
-            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
-            description: Set of device UIDs that are part of this upgrade run.
+            description: The current status of each device in the upgrade run.
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device.
+                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                hardwareModel:
-                    description: Hardware model of the devices being upgraded.
-                    example: Firepower 2110
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: Name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantUid:
-                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    format: uuid
-                    type: string
-                name:
-                    description: Name of the device being upgraded.
-                    example: my-firepower
-                    type: string
-                softwareVersionBeforeUpgrade:
-                    description: Software version of the device before the upgrade.
-                    example: 7.2.3
-                    type: string
-                transactionUid:
-                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, of the device being upgraded.
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: Current status of the upgrade run.
-                    enum:
-                        - IN_PROGRESS
-                        - REBUILDING_UPGRADE_CACHE
-                        - PERFORMING_UPGRADE
-                        - UPLOADING_IMAGE
-                        - PERFORMING_READINESS_CHECK
-                        - UPGRADE_STAGED
-                        - UPGRADE_STAGING_FAILED
-                        - UGPRADE_STAGING_FAILED
-                        - UPGRADE_COMPLETED
-                        - UPGRADE_FAILED
-                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -16400,6 +16515,7 @@ components:
             type: object
         Labels:
             description: Labels used to identify/tag Security Cloud Control entities.
+            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -21202,7 +21318,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: Roles associated with this user in Security Cloud Control.
+            description: The role of the user this token belongs to. The user can be API-only or a human.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -21213,7 +21329,6 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
-            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.
