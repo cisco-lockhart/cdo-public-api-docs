@@ -22,6 +22,7 @@ Method | HTTP request | Description
 [**get_secure_client_upgrade_run**](SecureClientManagementApi.md#get_secure_client_upgrade_run) | **GET** /v1/inventory/devices/secure-client/upgrades/runs/{upgradeRunUid} | Get Secure Client Upgrade Run
 [**get_secure_client_upgrade_runs**](SecureClientManagementApi.md#get_secure_client_upgrade_runs) | **GET** /v1/inventory/devices/secure-client/upgrades/runs | Get Secure Client Upgrade Runs
 [**get_secure_client_upgrade_runs_attribute_values**](SecureClientManagementApi.md#get_secure_client_upgrade_runs_attribute_values) | **GET** /v1/inventory/devices/secure-client/upgrades/runs/attribute-values | Get distinct attribute values for Secure Client upgrade runs
+[**trigger_ftd_secure_client_upgrade**](SecureClientManagementApi.md#trigger_ftd_secure_client_upgrade) | **POST** /v1/inventory/devices/ftds/secure-client/upgrades | Trigger Secure Client upgrade on FTD devices
 [**trigger_secure_client_upgrade**](SecureClientManagementApi.md#trigger_secure_client_upgrade) | **POST** /v1/inventory/devices/asas/secure-client/upgrades | Trigger Secure Client upgrade on ASA devices
 
 
@@ -793,6 +794,90 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Distinct attribute values for Secure Client upgrade runs. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**405** | Method not allowed. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **trigger_ftd_secure_client_upgrade**
+> CdoTransaction trigger_ftd_secure_client_upgrade(trigger_secure_client_upgrade_input)
+
+Trigger Secure Client upgrade on FTD devices
+
+Initiate a Secure Client package upgrade on one or more FTD devices. The endpoint validates that all target devices are eligible, creates a CDO transaction and a SecureClientUpgradeRun tracking object, and returns 202 Accepted with the transaction.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.models.trigger_secure_client_upgrade_input import TriggerSecureClientUpgradeInput
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.SecureClientManagementApi(api_client)
+    trigger_secure_client_upgrade_input = scc_firewall_manager_sdk.TriggerSecureClientUpgradeInput() # TriggerSecureClientUpgradeInput | 
+
+    try:
+        # Trigger Secure Client upgrade on FTD devices
+        api_response = api_instance.trigger_ftd_secure_client_upgrade(trigger_secure_client_upgrade_input)
+        print("The response of SecureClientManagementApi->trigger_ftd_secure_client_upgrade:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SecureClientManagementApi->trigger_ftd_secure_client_upgrade: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **trigger_secure_client_upgrade_input** | [**TriggerSecureClientUpgradeInput**](TriggerSecureClientUpgradeInput.md)|  | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Security Cloud Control Transaction object that can be used to track the status of the operation. |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
