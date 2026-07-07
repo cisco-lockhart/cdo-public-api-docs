@@ -4705,229 +4705,6 @@ paths:
             summary: (cdFMC-managed FTDs only) Deploy changes to multiple FTD devices
             tags:
                 - Device Deployments
-    /v1/inventory/devices/ftds/health/{deviceUid}/interfaces:
-        get:
-            description: Returns time-series interface metrics - including link status, overruns, and other key performance indicators - over a specified time range. Supports filtering by interface and metric. Pagination applies only when interface UIDs are not specified.
-            operationId: getFtdInterfaceHealthMetrics
-            parameters:
-                - description: The unique identifier, represented as a UUID, of the FTD device in Security Cloud Control.
-                  in: path
-                  name: deviceUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-                - description: Start of the time range (ISO 8601 format). Required together with `end`. Mutually exclusive with `timeRange`.
-                  example: 2025-04-05T00:00:00Z
-                  in: query
-                  name: start
-                  required: false
-                  schema:
-                    type: string
-                - description: End of the time range (ISO 8601 format). Required together with `start`. Mutually exclusive with `timeRange`.
-                  example: 2025-04-05T04:00:00Z
-                  in: query
-                  name: end
-                  required: false
-                  schema:
-                    type: string
-                - description: Relative time range. Mutually exclusive with `start`/`end` — exactly one of `timeRange` or `start`/`end` must be provided. Data is collected every 10 minutes, so shorter time ranges may return fewer data points.
-                  example: 10m
-                  in: query
-                  name: timeRange
-                  required: false
-                  schema:
-                    enum:
-                        - 10m
-                        - 30m
-                        - 1h
-                        - 24h
-                        - 7d
-                    type: string
-                - description: Maximum number of interface records to return (used only when no interfaceUids are provided).
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 50
-                    minimum: 0
-                    type: string
-                - description: Offset for pagination (used only when no interfaceUids are provided).
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-                - description: Comma-separated list of interface UIDs to query. Max 50. If omitted, results are paginated.
-                  example: def6c34a-a5d4-45c1-8d96-820fb00de723,4bc125a0-cf08-4dcc-bfac-45669ba898b0
-                  in: query
-                  name: interfaceUids
-                  required: false
-                  schema:
-                    maxLength: 50
-                    maximum: 50
-                    minLength: 0
-                    type: string
-                - description: Comma-separated list of metrics to return (e.g. linkStatus, overruns). Returns all if omitted.
-                  example: linkStatus,overruns
-                  in: query
-                  name: metrics
-                  required: false
-                  schema:
-                    enum:
-                        - overruns
-                        - underruns
-                        - droppedPackets
-                        - l2DecodeDrops
-                        - inputErrors
-                        - outputErrors
-                        - inputPacketSize
-                        - outputPacketSize
-                        - linkStatus
-                    type: string
-                - description: Lucene-style query filter. Supports logical operators AND, OR, and NOT.Applicable only to the fields name and linkStatus.
-                  example: name:GigabitEthernet* OR linkStatus:1
-                  in: query
-                  name: q
-                  required: false
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MetricsResponse'
-                    description: Successfully retrieved time-series metrics for one or more FTD interfaces.
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "404":
-                    $ref: '#/components/responses/http404NotFound'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get time-series interface metrics for an FTD device
-            tags:
-                - Device Health
-            x-in-dev: "true"
-    /v1/inventory/devices/ftds/health/metrics:
-        get:
-            deprecated: true
-            description: |-
-                <strong>Deprecated</strong> - This operation is deprecated and will be removed in a subsequent release. It will be replaced by a new endpoint that mirrors the request and response shape of the [ASA health metrics endpoint](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-health-metrics-on-asa-devices/). Clients should migrate to the replacement endpoint once it becomes available.
-
-                Returns time-series metrics such as CPU, memory, disk, connections, and environment data over a specified time range. Supports filtering by device and metric. Pagination applies only when device UIDs are not specified.
-            operationId: getFtdHealthMetrics
-            parameters:
-                - description: Start of the time range (ISO 8601 format).
-                  example: 2025-04-05T00:00:00Z
-                  in: query
-                  name: start
-                  required: false
-                  schema:
-                    type: string
-                - description: End of the time range (ISO 8601 format).
-                  example: 2025-04-05T04:00:00Z
-                  in: query
-                  name: end
-                  required: false
-                  schema:
-                    type: string
-                - description: Relative time range (mutually exclusive with start/end). Data is collected every 10 minutes, so shorter time ranges may return fewer data points.
-                  example: 10m
-                  in: query
-                  name: timeRange
-                  required: false
-                  schema:
-                    enum:
-                        - 10m
-                        - 30m
-                        - 1h
-                        - 24h
-                        - 7d
-                    type: string
-                - description: Maximum number of device records to return (used only when no deviceUids are provided).
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 50
-                    minimum: 0
-                    type: string
-                - description: Offset for pagination (used only when no deviceUids are provided).
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-                - description: Comma-separated list of device UIDs to query. Max 50. If omitted, results are paginated.
-                  example: 256461f6-bd60-11ef-8beb-6cf1610cf55d,41a1d57b-ffc2-49aa-933b-440cdd76b2fc
-                  in: query
-                  name: deviceUids
-                  required: false
-                  schema:
-                    items:
-                        format: uuid
-                        type: string
-                    maxItems: 50
-                    minItems: 0
-                    type: array
-                    uniqueItems: true
-                - description: Comma-separated list of metrics to return (e.g. cpu, mem). Returns all if omitted.
-                  example: cpu,mem
-                  in: query
-                  name: metrics
-                  required: false
-                  schema:
-                    enum:
-                        - cpu
-                        - mem
-                        - disk
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MetricsResponse'
-                    description: Successfully retrieved time-series metrics for one or more FTD devices.
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "404":
-                    $ref: '#/components/responses/http404NotFound'
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get time-series health metrics for one or more FTD devices
-            tags:
-                - Device Health
-            x-in-dev: "true"
     /v1/inventory/devices/ftds/register:
         post:
             description: Complete registration of an FTD device managed by an FMC to the Security Cloud Control tenant. Call this API endpoint after you have created an FTD and pasted the generated CLI output in the FTD. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
@@ -6100,7 +5877,11 @@ paths:
                 - Inventory
     /v1/inventory/managers/{fmcUid}/health/metrics:
         get:
-            description: 'Get metrics that indicate the current health of all devices managed by the cdFMC. Note: For specific health metrics to be available for a given device under management of the cdFMC, the health policy for that device should be configured to collect those metrics. For example, CPU metrics will be unavailable for a device if the health policy applied to that device has CPU metric collection turned off. Note: This endpoint can only be queried twice every minute.'
+            deprecated: true
+            description: |-
+                <strong>Deprecated</strong> - This operation is deprecated and will be removed in a subsequent release. It will be replaced by a new endpoint that mirrors the request and response shape of the [ASA health metrics endpoint](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-health-metrics-on-asa-devices/).Clients should migrate to the replacement endpoint once it becomes available.
+
+                Get metrics that indicate the current health of all devices managed by the cdFMC. Note: For specific health metrics to be available for a given device under management of the cdFMC, the health policy for that device should be configured to collect those metrics. For example, CPU metrics will be unavailable for a device if the health policy applied to that device has CPU metric collection turned off. Note: This endpoint can only be queried twice every minute.
             operationId: getFmcHealth
             parameters:
                 - description: The unique identifier, represented as a UUID, of the FMC in Security Cloud Control.
@@ -14107,7 +13888,7 @@ components:
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices managed by the MSP Portal.
+            description: The distinct config states for the devices in the Security Cloud Control tenant.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -14124,13 +13905,13 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices managed by the MSP Portal.
+            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
             type: string
         ConnectivityState:
-            description: The distinct connectivity states for the devices managed by the MSP Portal.
+            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -14141,7 +13922,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device.
+            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
             enum:
                 - SDC
                 - CDG
@@ -15107,7 +14888,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The roles that this device performs on the network.
+            description: The distinct device roles for the devices in the Security Cloud Control tenant.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -15115,7 +14896,6 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
-            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
             description: The current status of each device in the upgrade run.
@@ -16612,6 +16392,7 @@ components:
             type: object
         Labels:
             description: Labels used to identify/tag Security Cloud Control entities.
+            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -21405,7 +21186,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: Roles associated with this user in Security Cloud Control.
+            description: The role of the user this token belongs to. The user can be API-only or a human.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -21416,7 +21197,6 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
-            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.

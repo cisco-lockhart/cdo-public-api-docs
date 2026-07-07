@@ -2548,7 +2548,7 @@ This endpoint does not need any parameter.
 
 Get health metrics on devices managed by the FMC (cdFMC only)
 
-Get metrics that indicate the current health of all devices managed by the cdFMC. Note: For specific health metrics to be available for a given device under management of the cdFMC, the health policy for that device should be configured to collect those metrics. For example, CPU metrics will be unavailable for a device if the health policy applied to that device has CPU metric collection turned off. Note: This endpoint can only be queried twice every minute.
+<strong>Deprecated</strong> - This operation is deprecated and will be removed in a subsequent release. It will be replaced by a new endpoint that mirrors the request and response shape of the [ASA health metrics endpoint](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-health-metrics-on-asa-devices/).Clients should migrate to the replacement endpoint once it becomes available.  Get metrics that indicate the current health of all devices managed by the cdFMC. Note: For specific health metrics to be available for a given device under management of the cdFMC, the health policy for that device should be configured to collect those metrics. For example, CPU metrics will be unavailable for a device if the health policy applied to that device has CPU metric collection turned off. Note: This endpoint can only be queried twice every minute.
 
 ### Example
 
