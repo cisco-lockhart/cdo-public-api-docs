@@ -19296,7 +19296,10 @@ components:
         SdcPatchInput:
             properties:
                 name:
+                    minLength: 1
                     type: string
+            required:
+                - name
             type: object
         SecureAccessMetadata:
             description: Structured [Cisco Secure Access](https://www.cisco.com/site/uk/en/products/security/secure-access/index.html) metadata (applicable to UZTNA-enabled FTDs only).
