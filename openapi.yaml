@@ -18639,6 +18639,14 @@ components:
         NetworkObjectContent:
             description: The content of a network object
             properties:
+                dnsResolution:
+                    description: For FQDN network objects sourced from FTD/cdFMC, the DNS resolution family that governs which DNS record types FTD resolves at policy-enforcement time. Populated only for FQDN objects; absent otherwise.
+                    enum:
+                        - IPV4_ONLY
+                        - IPV6_ONLY
+                        - IPV4_AND_IPV6
+                    example: IPV4_AND_IPV6
+                    type: string
                 literal:
                     description: The literal content of the network object
                     example: a:b:c::1

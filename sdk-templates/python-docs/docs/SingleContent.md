@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **protocol** | **str** | The service object protocol | [optional] 
 **service_value** | [**ServiceObjectValueContent**](ServiceObjectValueContent.md) |  | [optional] 
 **url** | **str** | The URL literal | 
+**dns_resolution** | **str** | For FQDN network objects sourced from FTD/cdFMC, the DNS resolution family that governs which DNS record types FTD resolves at policy-enforcement time. Populated only for FQDN objects; absent otherwise. | [optional] 
 **literal** | **str** | The literal content of the network object | 
 
 ## Example

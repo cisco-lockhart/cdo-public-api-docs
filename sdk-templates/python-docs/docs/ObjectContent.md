@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **url** | **str** | The URL literal | 
 **literals** | [**List[SingleContent]**](SingleContent.md) | List of content literals | [optional] 
 **referenced_object_uids** | **List[str]** | Set of UIDs of the group&#39;s referenced objects | [optional] 
+**dns_resolution** | **str** | For FQDN network objects sourced from FTD/cdFMC, the DNS resolution family that governs which DNS record types FTD resolves at policy-enforcement time. Populated only for FQDN objects; absent otherwise. | [optional] 
 **literal** | **str** | The literal content of the network object | 
 
 ## Example
