@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **description** | **str** | A human-readable description of this deployment. | [optional] 
 **device_deployment_statuses** | [**List[DeviceDeploymentStatusDto]**](DeviceDeploymentStatusDto.md) | The current status of each device that is being deployed to as part of this deployment. | [optional] 
 **device_uids** | **List[str]** | The set of device UIDs that are part of this deployment. | [optional] 
+**error_details** | [**List[ErrorDetails]**](ErrorDetails.md) | Detailed messages reported for the deployment that could not be associated with a specific device. | [optional] 
 **error_msg** | **str** | Error message if the deployment failed. | [optional] 
 **failure_reason** | **str** | The reason the deployment failed, if applicable. | [optional] 
 **ignore_warnings** | **bool** | Boolean indicating whether warnings identified by the deployment sub-system about this deployment were ignored. | [optional] 
