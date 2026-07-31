@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **description** | **str** | The description of the task in Security Cloud Control | [optional] 
 **last_updated_time** | **datetime** | Time (UTC; represented using the RFC-3339 standard) at which the task was last updated. | [optional] 
 **num_sub_tasks** | **int** | The number of subtasks associated with this task. | [optional] 
+**result** | [**TaskResultDetails**](TaskResultDetails.md) |  | [optional] 
 **status** | **str** | The status of the task in Security Cloud Control | [optional] 
 **status_details** | **str** | Human-readable details on the status of the task | [optional] 
 **submission_time** | **datetime** | Time (UTC; represented using the RFC-3339 standard) at which the task was triggered. | [optional] 

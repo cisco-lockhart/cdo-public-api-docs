@@ -385,6 +385,7 @@ nav:
     - TaskDistinctAttributeValues: TaskDistinctAttributeValues.md
     - TaskDto: TaskDto.md
     - TaskDtoPage: TaskDtoPage.md
+    - TaskResultDetails: TaskResultDetails.md
     - Tenant: Tenant.md
     - TenantPage: TenantPage.md
     - TenantSettings: TenantSettings.md
@@ -398,6 +399,7 @@ nav:
     - ThousandEyesOutageQueryResponse: ThousandEyesOutageQueryResponse.md
     - ThousandEyesOutageResponse: ThousandEyesOutageResponse.md
     - TriggerSecureClientUpgradeInput: TriggerSecureClientUpgradeInput.md
+    - TroubleshootingResult: TroubleshootingResult.md
     - UnifiedObjectListView: UnifiedObjectListView.md
     - UniversalZtnaSettings: UniversalZtnaSettings.md
     - UpdateRequest: UpdateRequest.md
