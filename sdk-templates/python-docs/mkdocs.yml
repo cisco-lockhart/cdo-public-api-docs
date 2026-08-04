@@ -173,8 +173,11 @@ nav:
     - DeviceRole: DeviceRole.md
     - DeviceUpgradeStatusDto: DeviceUpgradeStatusDto.md
     - DevicesPatchInput: DevicesPatchInput.md
+    - DirectoryDownloadEntry: DirectoryDownloadEntry.md
+    - DirectoryDownloadResult: DirectoryDownloadResult.md
     - DiskHealthMetrics: DiskHealthMetrics.md
     - DomainSettings: DomainSettings.md
+    - DownloadedObjects: DownloadedObjects.md
     - DuoAdminPanelCreateOrUpdateInput: DuoAdminPanelCreateOrUpdateInput.md
     - DuplexType: DuplexType.md
     - DuplicateGroupDto: DuplicateGroupDto.md

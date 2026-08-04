@@ -7,6 +7,8 @@ Type-specific result produced by a task
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** |  | 
+**downloads** | [**List[DirectoryDownloadEntry]**](DirectoryDownloadEntry.md) |  | [optional] 
+**download_urls** | **List[str]** |  | [optional] 
 
 ## Example
 
