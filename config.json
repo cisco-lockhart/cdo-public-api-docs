@@ -20,6 +20,10 @@
               "content": "overview/searching.md"
             },
             {
+              "title": "Versioning & Deprecation",
+              "content": "overview/versioning.md"
+            },
+            {
               "title": "API Changelog",
               "content": "api-changelog.md"
             }
