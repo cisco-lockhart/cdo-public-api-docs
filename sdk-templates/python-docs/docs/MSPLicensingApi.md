@@ -29,7 +29,7 @@ Method | HTTP request | Description
 
 Export licenses for MSP-managed devices
 
-This is an asynchronous operation to export device licenses, across all tenants, managed by the MSP portal, in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
+This is an asynchronous operation to export device licenses, across all tenants, managed by the MSP portal, in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour. Note: This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
@@ -111,7 +111,7 @@ Name | Type | Description  | Notes
 
 Export Licenses for a MSP-managed Virtual Account
 
-This endpoint exports all of the licenses used by devices across all tenants, managed by the MSP portal, that are registered to Smart License using a token generated in this Virtual Account, in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
+This endpoint exports all of the licenses used by devices across all tenants, managed by the MSP portal, that are registered to Smart License using a token generated in this Virtual Account, in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour. Note: This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
@@ -198,7 +198,7 @@ Name | Type | Description  | Notes
 
 Get licenses for MSP-managed devices
 
-Get device licenses, across all tenants, managed by the MSP portal. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
+Get device licenses, across all tenants, managed by the MSP portal. Note: This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
@@ -285,7 +285,7 @@ Name | Type | Description  | Notes
 
 Get licenses for MSP-managed device
 
-Get device licenses for device managed by the MSP portal using its UID. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
+Get device licenses for device managed by the MSP portal using its UID. Note: This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
@@ -367,7 +367,7 @@ Name | Type | Description  | Notes
 
 Get Smart Account by UID
 
-Get Smart Account identified by UID. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
+Get Smart Account identified by UID. Note: This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
@@ -449,7 +449,7 @@ Name | Type | Description  | Notes
 
 Get Smart Accounts used by MSP-managed tenants.
 
-Get the Smart Accounts and the number of Virtual Accounts used by MSP-managed tenants. Note: This endpoint does not display all the Smart Accounts, or number of Virtual Accounts within a Smart Account, to which the customer has access. Only Smart Accounts — and number of Virtual Accounts therein — that have licenses used by devices in MSP-managed tenants are displayed. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
+Get the Smart Accounts and the number of Virtual Accounts used by MSP-managed tenants. Note: This endpoint does not display all the Smart Accounts, or number of Virtual Accounts within a Smart Account, to which the customer has access. Only Smart Accounts — and number of Virtual Accounts therein — that have licenses used by devices in MSP-managed tenants are displayed. Note: This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
@@ -536,7 +536,7 @@ Name | Type | Description  | Notes
 
 Get Virtual Account by UID
 
-Get Virtual Account identified by UID within a specific Smart Account. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
+Get Virtual Account identified by UID within a specific Smart Account. Note: This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
@@ -620,7 +620,7 @@ Name | Type | Description  | Notes
 
 Get Licenses for a Virtual Account
 
-This endpoint returns information on all of the licenses used by devices across all MSP-managed tenants that are registered to Smart License using a token generated in this Virtual Account. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
+This endpoint returns information on all of the licenses used by devices across all MSP-managed tenants that are registered to Smart License using a token generated in this Virtual Account. Note: This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
@@ -712,7 +712,7 @@ Name | Type | Description  | Notes
 
 Get the Virtual Accounts for a specific Smart Account used by MSP-managed tenants.
 
-Get the Virtual Accounts for a specific Smart Account used by MSP-managed tenants. Note: This endpoint does not display all the Virtual Accounts within the Smart Account to which the customer has access. Only Virtual Accounts that have licenses used by devices in MSP-managed tenants are displayed. Note: ⚠️ This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
+Get the Virtual Accounts for a specific Smart Account used by MSP-managed tenants. Note: This endpoint does not display all the Virtual Accounts within the Smart Account to which the customer has access. Only Virtual Accounts that have licenses used by devices in MSP-managed tenants are displayed. Note: This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.
 
 ### Example
 
