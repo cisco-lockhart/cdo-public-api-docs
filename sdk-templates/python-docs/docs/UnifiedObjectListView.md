@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **issues** | [**IssuesDto**](IssuesDto.md) |  | [optional] 
 **labels** | **List[str]** |  | [optional] 
 **name** | **str** |  | [optional] 
+**object_version** | **int** |  | [optional] 
 **override_ids** | **List[str]** |  | [optional] 
 **read_only** | **bool** |  | [optional] 
 **tags** | **Dict[str, List[str]]** |  | [optional] 
