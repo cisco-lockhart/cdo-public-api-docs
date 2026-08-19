@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **deployer_username** | **str** | The name of the user performing the deploy. | [optional] 
 **deployment_run_status** | **str** | The status of the deployment | [optional] 
-**deployment_type** | **str** | The type of the deployment | [optional] 
+**deployment_type** | **str** | The type of the deployment. Searchable with values ASA_DEVICE_DEPLOY and FTD_DEVICE_DEPLOY. | [optional] 
 **description** | **str** | A human-readable description of this deployment. | [optional] 
 **device_deployment_statuses** | [**List[DeviceDeploymentStatusDto]**](DeviceDeploymentStatusDto.md) | The current status of each device that is being deployed to as part of this deployment. | [optional] 
 **device_uids** | **List[str]** | The set of device UIDs that are part of this deployment. | [optional] 
