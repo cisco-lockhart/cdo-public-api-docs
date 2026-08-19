@@ -6569,6 +6569,55 @@ paths:
             tags:
                 - Licensing
             x-beta: "true"
+    /v1/licenses/msla/usage:
+        get:
+            description: Get the MSLA entitlements assigned to this tenant and the number of devices consuming each entitlement. All assigned entitlements are returned, including those with no consuming devices. The consumption counts are derived from the most recent cdFMC poll, whose timestamp is returned in lastPolledAt.
+            operationId: getMslaUsage
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MslaUsagePage'
+                    description: MSLA license usage for the tenant
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    content:
+                        application/json: {}
+                    description: MSLA licensing is not enabled for this tenant
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSLA License Usage
+            tags:
+                - Licensing
+            x-beta: "true"
     /v1/licenses/smart-accounts:
         get:
             description: 'Get the Smart Accounts and the number of Virtual Accounts used in this tenant. Note: This endpoint does not display all the Smart Accounts, or number of Virtual Accounts within a Smart Account, to which the customer has access. Only Smart Accounts — and number of Virtual Accounts therein — that have licenses used by devices in this tenant are displayed. Note: This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
@@ -16839,6 +16888,47 @@ components:
                     items:
                         $ref: '#/components/schemas/MfaEvent'
                     type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
+        MslaUsageItemDto:
+            description: The list of items retrieved.
+            properties:
+                deviceCount:
+                    description: Number of devices in the tenant that have this entitlement assigned in cdFMC. Zero if no devices have consumed this entitlement.
+                    example: 12
+                    format: int32
+                    type: integer
+                entitlement:
+                    description: The MSLA entitlement identifier.
+                    example: MSLA-CSF-ESS
+                    type: string
+            type: object
+        MslaUsagePage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MslaUsageItemDto'
+                    type: array
+                lastPolledAt:
+                    description: Timestamp, in RFC 3339 format, of the most recent cdFMC poll that populated the consumption data. Null if no poll has completed yet.
+                    example: 2026-07-03T12:00:00Z
+                    format: date-time
+                    type: string
                 limit:
                     description: The number of results retrieved.
                     example: 50
