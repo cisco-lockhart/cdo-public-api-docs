@@ -206,6 +206,7 @@ nav:
     - FtdDeploymentInput: FtdDeploymentInput.md
     - FtdHaInfo: FtdHaInfo.md
     - FtdMultiDeviceDeploymentInput: FtdMultiDeviceDeploymentInput.md
+    - FtdOnboardingTemplateConfiguration: FtdOnboardingTemplateConfiguration.md
     - FtdRegistrationInput: FtdRegistrationInput.md
     - FtdSecureClientPackagesPage: FtdSecureClientPackagesPage.md
     - FtdSingleDeviceDeploymentInput: FtdSingleDeviceDeploymentInput.md

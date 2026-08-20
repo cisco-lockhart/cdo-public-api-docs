@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **licenses** | **List[str]** | Specify a set of licenses to apply to the device. | 
 **name** | **str** | Specify a human-readable name for the device. | 
 **serial_number** | **str** | Specify the serial number of the FTD device to be onboarded. When a device with this serial number is plugged in and connected to the Internet, it will automatically be registered to this Security Cloud Control tenant. | 
-**template** | [**ZtpOnboardingTemplateConfiguration**](ZtpOnboardingTemplateConfiguration.md) |  | [optional] 
+**template** | [**FtdOnboardingTemplateConfiguration**](FtdOnboardingTemplateConfiguration.md) |  | [optional] 
 
 ## Example
 

@@ -7072,6 +7072,52 @@ paths:
                     description: Error
             tags:
                 - Deployment
+    /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/deployment/jobhistories/{containerUUID}/transcripts/{objectId}:
+        get:
+            deprecated: false
+            description: '**Retrieves the masked deployment transcript for a device associated with a deployment job. This API returns a short-lived, pre-signed URL (transcriptUrl) and the transcripts availability status. Supported only on cdFMC.**'
+            operationId: getDeploymentJobTranscript
+            parameters:
+                - description: UUID of the device whose transcript is requested. For an HA pair use the active device UUID; for a cluster use the control node UUID.
+                  in: path
+                  name: objectId
+                  required: true
+                  schema:
+                    type: string
+                - description: The container id under which this specific resource is contained.
+                  in: path
+                  name: containerUUID
+                  required: true
+                  schema:
+                    type: string
+                - $ref: '#/components/parameters/domainUUID'
+                  name: domainUUID
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            examples:
+                                ? 'Example 1 : GET /api/fmc_config/v1/domain/domainUUID/deployment/jobhistories/containerUUID/transcripts/objectId ( Retrieves the masked deployment transcript for a device associated with a deployment job. This API returns a short-lived, pre-signed URL (transcriptUrl) and the transcript''s availability status. Supported only on cdFMC. )'
+                                :   value:
+                                        id: dbf3e4a4-41b4-11e6-a798-a0a74bcbc09b
+                                        links:
+                                            self: https://<base-url>/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/deployment/jobhistories/0050568a-9521-0ed3-0000-012884902671/transcripts/dbf3e4a4-41b4-11e6-a798-a0a74bcbc09b
+                                        status: COMPLETED
+                                        transcriptUrl: https://fmcservices-deployment-s3-bucket.s3.amazonaws.com/tenantUuid/var/opt/CSCOpx/MDC/temp/transcripts/jobId_deviceUuid_masked_transcript.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=600&X-Amz-Signature=EXAMPLE
+                                        type: DeploymentJobTranscript
+                            schema:
+                                $ref: '#/components/schemas/DeploymentJobTranscript'
+                                type: object
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                                type: object
+                    description: Error
+            tags:
+                - Deployment
     /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/deployment/jobhistories/{objectId}:
         get:
             deprecated: false
@@ -14741,7 +14787,7 @@ paths:
             description: '**Get the show command output from the device. Only one request can be handled concurrently per device, with a maximum of ten devices. The devices must be running version 6.6.0 or higher.**'
             operationId: getCommands
             parameters:
-                - description: 'The command filter query parameter should have value of show commands. The maximum word size of this field is 2. For eg: show failover, show snmp-server, show logging etc.<br/><b>Note:- This API endpoint retrieves outputs from devices by executing specific CLIs which return small configurations. This endpoint should not be used to retrieve large configurations as this may not work as desired or impact performance. Specific CLI commands which should not be used include "show running-config all", "show running-config access-list", and similar commands which will provide large outputs.</b><br/><code>Supported CLIs:- </code><i>show version, show version <?-option>, show failover, show failover <?-option>, show dhcpd state, show ip, show ip <?-option>, show aaa-server, show aaa-server <?-option>, show logging, show logging <?-some_option_only>, show snmp-server <?-option>, show ssl, show ssl <?-option>, show firewall, show logging, show logging <?-some_option_only>, show route, show route <?-option>, show vpn-sessiondb, show vpn-sessiondb <?-option>, show crypto <?-option>, show rule <?-option>, show access-list <?-option>, show network, show ntp, show banner, show snort3 status</i>'
+                - description: 'The command filter query parameter should have value of show commands. The maximum word size of this field is 2. For eg: show failover, show snmp-server, show logging etc.<br/><b>Note:- This API endpoint retrieves outputs from devices by executing specific CLIs which return small configurations. This endpoint should not be used to retrieve large configurations as this may not work as desired or impact performance. Specific CLI commands which should not be used include "show running-config all", "show running-config access-list", and similar commands which will provide large outputs.</b><br/><code>Supported CLIs:- </code><i>show version, show version <?-option>, show failover, show failover <?-option>, show dhcpd state, show ip, show ip <?-option>, show aaa-server, show aaa-server <?-option>, show arp, show arp <?-option>, show logging, show logging <?-some_option_only>, show snmp-server <?-option>, show ssl, show ssl <?-option>, show firewall, show logging, show logging <?-some_option_only>, show route, show route <?-option>, show vpn-sessiondb, show vpn-sessiondb <?-option>, show crypto <?-option>, show rule <?-option>, show access-list <?-option>, show network, show ntp, show banner, show snort3 status</i>'
                   in: query
                   name: command
                   required: true
@@ -36107,7 +36153,7 @@ paths:
     /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/devices/devicerecords/operational/bulkcommands:
         post:
             deprecated: false
-            description: '**Get the show command output from the devices. Only one request can be handled concurrently per device, with a maximum of 25 devices. The devices must be running version 6.6.0 or higher. For example: show failover, show snmp-server, show logging etc.<br/><b>Note:- This API endpoint retrieves outputs from devices by executing specific CLIs which return small configurations. This endpoint should not be used to retrieve large configurations as this may not work as desired or impact performance. Specific CLI commands which should not be used include "show running-config all", "show running-config access-list", and similar commands which will provide large outputs.</b><br/><code>Supported CLIs:- </code><i>show version, show version <?-option>, show failover, show failover <?-option>, show dhcpd state, show ip, show ip <?-option>, show aaa-server, show aaa-server <?-option>, show logging, show logging <?-some_option_only>, show snmp-server <?-option>, show ssl, show ssl <?-option>, show firewall, show logging, show logging <?-some_option_only>, show route, show route <?-option>, show vpn-sessiondb, show vpn-sessiondb <?-option>, show crypto <?-option>, show rule <?-option>, show access-list <?-option>, show network, show ntp, show banner, show snort3 status</i> _Check the response section for applicable examples (if any)._**'
+            description: '**Get the show command output from the devices. Only one request can be handled concurrently per device, with a maximum of 25 devices. The devices must be running version 6.6.0 or higher. For example: show failover, show snmp-server, show logging etc.<br/><b>Note:- This API endpoint retrieves outputs from devices by executing specific CLIs which return small configurations. This endpoint should not be used to retrieve large configurations as this may not work as desired or impact performance. Specific CLI commands which should not be used include "show running-config all", "show running-config access-list", and similar commands which will provide large outputs.</b><br/><code>Supported CLIs:- </code><i>show version, show version <?-option>, show failover, show failover <?-option>, show dhcpd state, show ip, show ip <?-option>, show aaa-server, show aaa-server <?-option>, show arp, show arp <?-option>, show logging, show logging <?-some_option_only>, show snmp-server <?-option>, show ssl, show ssl <?-option>, show firewall, show logging, show logging <?-some_option_only>, show route, show route <?-option>, show vpn-sessiondb, show vpn-sessiondb <?-option>, show crypto <?-option>, show rule <?-option>, show access-list <?-option>, show network, show ntp, show banner, show snort3 status</i> _Check the response section for applicable examples (if any)._**'
             operationId: createBulkCommand
             parameters:
                 - $ref: '#/components/parameters/domainUUID'
@@ -98772,6 +98818,10 @@ paths:
                                                   name: Internal
                                                   type: SecurityZone
                                         enabled: true
+                                        extWap:
+                                            id: 0050568A-04A5-0ed3-0000-000900000001
+                                            name: default
+                                            type: extWap
                                         id: accessruleUUID
                                         ipsPolicy:
                                             id: ipsPolicyUUID
@@ -101031,6 +101081,12 @@ paths:
                   required: true
                   schema:
                     type: string
+                - description: If set to <code>true</code>, refreshes hit count information from the selected device before returning hit count values.
+                  in: query
+                  name: forceRefresh
+                  required: false
+                  schema:
+                    type: boolean
                 - description: UUID of the ticket for tracking the configuration changes.
                   in: header
                   name: ticket-id
@@ -134674,6 +134730,12 @@ paths:
                   required: true
                   schema:
                     type: string
+                - description: If set to <code>true</code>, refreshes hit count information from the selected device before returning hit count values.
+                  in: query
+                  name: forceRefresh
+                  required: false
+                  schema:
+                    type: boolean
                 - description: UUID of the ticket for tracking the configuration changes.
                   in: header
                   name: ticket-id
@@ -163040,6 +163102,10 @@ components:
                         $ref: '#/components/schemas/IEndPointDeviceType'
                         type: object
                     type: array
+                extWap:
+                    $ref: '#/components/schemas/IReference'
+                    description: Reference object for the External WAP selection associated with the access rule. The reference UUID is converted and persisted as ExtWap without object validation.
+                    type: object
                 filePolicy:
                     $ref: '#/components/schemas/IFilePolicy'
                     description: Object representing the file policy settings for the rule action.
@@ -169250,6 +169316,33 @@ components:
                     $ref: '#/components/schemas/PagingContainer'
                     type: object
             type: object
+        DeploymentJobTranscript:
+            properties:
+                description:
+                    type: string
+                id:
+                    type: string
+                links:
+                    $ref: '#/components/schemas/ILinks'
+                    type: object
+                metadata:
+                    $ref: '#/components/schemas/Metadata'
+                    type: object
+                name:
+                    type: string
+                status:
+                    enum:
+                        - IN_PROGRESS
+                        - COMPLETED
+                        - FAILED
+                    type: string
+                transcriptUrl:
+                    type: string
+                type:
+                    type: string
+                version:
+                    type: string
+            type: object
         DeploymentRequest:
             description: Represents the deployment request object which will be used for policy deployment of a device.
             properties:
@@ -169408,6 +169501,9 @@ components:
                 isAzureDevice:
                     type: boolean
                 isBootstrapCompleted:
+                    type: boolean
+                isCdFmcInboundRegistration:
+                    description: Boolean indicating whether the device registration originated as a cdFMC inbound registration.
                     type: boolean
                 isConnected:
                     description: Device connection status
@@ -170520,6 +170616,10 @@ components:
                 options:
                     $ref: '#/components/schemas/IDeviceImportExportRequestOptions'
                     type: object
+                skipPolicyExportTypes:
+                    items:
+                        type: string
+                    type: array
                 url:
                     type: string
             type: object
@@ -180813,6 +180913,8 @@ components:
                     type: boolean
                 isBootstrapCompleted:
                     type: boolean
+                isCdFmcInboundRegistration:
+                    type: boolean
                 isConnected:
                     type: boolean
                 isMCDManaged:
@@ -180934,6 +181036,8 @@ components:
                     type: string
                 isBootstrapCompleted:
                     type: boolean
+                isCdFmcInboundRegistration:
+                    type: boolean
                 isConnected:
                     type: boolean
                 isMCDManaged:
@@ -181052,6 +181156,8 @@ components:
                 id:
                     type: string
                 isBootstrapCompleted:
+                    type: boolean
+                isCdFmcInboundRegistration:
                     type: boolean
                 isConnected:
                     type: boolean
@@ -181250,6 +181356,10 @@ components:
                 options:
                     $ref: '#/components/schemas/IDeviceImportExportRequestOptions'
                     type: object
+                skipPolicyExportTypes:
+                    items:
+                        type: string
+                    type: array
                 url:
                     type: string
             type: object
@@ -187042,6 +187152,8 @@ components:
                     type: boolean
                 isBootstrapCompleted:
                     type: boolean
+                isCdFmcInboundRegistration:
+                    type: boolean
                 isConnected:
                     type: boolean
                 isMCDManaged:
@@ -187166,6 +187278,8 @@ components:
                 isAzureDevice:
                     type: boolean
                 isBootstrapCompleted:
+                    type: boolean
+                isCdFmcInboundRegistration:
                     type: boolean
                 isConnected:
                     type: boolean
