@@ -101,6 +101,7 @@ nav:
     - AuditLog: AuditLog.md
     - AuditLogPage: AuditLogPage.md
     - AuthenticationError: AuthenticationError.md
+    - BillingAddress: BillingAddress.md
     - Browser: Browser.md
     - BulkOperationAsaDeviceRequest: BulkOperationAsaDeviceRequest.md
     - Cause: Cause.md

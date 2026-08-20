@@ -5,6 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**add_ons** | **List[str]** | The MSLA subscription add-ons to enable on the tenant. If omitted, the tenant is created with no add-ons. | [optional] 
+**billing_address** | [**BillingAddress**](BillingAddress.md) |  | [optional] 
 **display_name** | **str** | A human-readable display name of the tenant to create. Use this field only if you want the display name to be different from the name of the tenant. | [optional] 
 **sales_order_number** | **str** | The sales order number. If this value is not provided, the tenant will be created as a trial tenant. | [optional] 
 **tenant_name** | **str** | The name of the tenant to create. The tenant name can only contain alphabets, numbers, -, and _, and is limited to 50 characters. | 
