@@ -13166,6 +13166,9 @@ components:
                         $ref: '#/components/schemas/UserRole'
                     type: array
                     uniqueItems: true
+                tenantLicensingType:
+                    description: The licensing type of the tenant this token is associated with.
+                    type: string
                 tenantName:
                     description: The name of the enterprise (tenant) in Security Cloud Control.
                     example: my-tenant-name
@@ -13843,17 +13846,15 @@ components:
                 - os
             type: object
         CompatibleSecureClientVersionDto:
-            description: A Secure Client version available across all requested managed tenants, with the platforms available for that version.
-            nullable: true
+            description: The list of items retrieved.
             properties:
                 platforms:
-                    description: The OS and CPU architecture combinations available for this Secure Client version across every requested managed tenant.
+                    description: The OS and CPU architecture combinations available for this version.
                     items:
-                        $ref: '#/components/schemas/CompatibleSecureClientPlatformDto'
+                        $ref: '#/components/schemas/SecureClientPlatformDto'
                     type: array
                 version:
-                    description: The Secure Client version string.
-                    example: 5.1.15.287
+                    description: The Secure Client version string (e.g. "5.1.15.287", "4.10.05095").
                     type: string
             required:
                 - platforms
@@ -15735,7 +15736,7 @@ components:
                         - CDFMC_MANAGED_FTD
                     type: string
                 fmcAccessPolicyUid:
-                    description: Specify the unique identifier, represented as a UUID, of the FMC access policy to apply to this device.
+                    description: Specify the unique identifier, represented as a UUID, of the FMC access policy to apply to this device. If this field is specified, the 'template' field must remain unspecified. Exactly one of 'fmcAccessPolicyUid' or 'template' must be supplied.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
@@ -15746,12 +15747,12 @@ components:
                 labels:
                     $ref: '#/components/schemas/Labels'
                 licenses:
-                    description: Specify a set of licenses to apply to the device.
+                    description: Specify a set of licenses to apply to the device. This field is required for access-policy onboarding. It may be omitted or empty for template onboarding, but it must not contain any licenses when a template is supplied.
                     example:
                         - BASE
                         - CARRIER
                     items:
-                        description: Specify a set of licenses to apply to the device.
+                        description: Specify a set of licenses to apply to the device. This field is required for access-policy onboarding. It may be omitted or empty for template onboarding, but it must not contain any licenses when a template is supplied.
                         enum:
                             - BASE
                             - CARRIER
@@ -15787,6 +15788,8 @@ components:
                     description: The registration key used to authenticate the cdFMC-triggered registration, where the cdFMC initiates the connection to the FTD (as opposed to the default flow, where the FTD connects to the cdFMC). Required when useCdFmcTriggeredRegistration is true; must not be specified otherwise.
                     example: xyz124
                     type: string
+                template:
+                    $ref: '#/components/schemas/FtdOnboardingTemplateConfiguration'
                 useCdFmcTriggeredRegistration:
                     description: If your FTD is publicly accessible, then you can choose to use the cdFMC triggered registration flow. If this field is set to true, the ftdHostname, natId, and regKey fields must be specified.
                     type: boolean
@@ -15796,8 +15799,6 @@ components:
                     type: boolean
             required:
                 - deviceType
-                - fmcAccessPolicyUid
-                - licenses
                 - name
             type: object
         FtdDeploymentInput:
@@ -15883,6 +15884,27 @@ components:
                     default: false
                     description: 'Specify whether to ignore warnings generated during the pre-validation of the deployment job and proceed with the deployment regardless. **Warning**: Do not set this to `true` unless you know what you are doing.'
                     type: boolean
+            type: object
+        FtdOnboardingTemplateConfiguration:
+            description: Specify the template to apply to this device. If this field is specified, the 'fmcAccessPolicyUid' field must remain unspecified. Exactly one of 'fmcAccessPolicyUid' or 'template' must be supplied.
+            properties:
+                objectOverrides:
+                    description: 'Specify a list of objects to override. All objects that have been marked as overridable in the template must be defined here. Note: Any overrides defined here that are not present in the template configuration will be ignored.'
+                    items:
+                        $ref: '#/components/schemas/FmcObjectOverride'
+                    type: array
+                templateVariables:
+                    description: 'Specify the list of template variables configured on the template. All required template variables must be defined here, and should have values valid for the type of the variable. Any invalid input will result in the template not being applied to the device upon onboarding. Note: Any variables defined here that are not present in the template will be ignored.'
+                    items:
+                        $ref: '#/components/schemas/FmcTemplateVariable'
+                    type: array
+                uid:
+                    description: Specify the unique identifier, represented as a UUID, of the template to apply to the onboarded device.
+                    example: 2cadad15-dc8b-4bc4-899f-b9badcfc56a3
+                    format: uuid
+                    type: string
+            required:
+                - uid
             type: object
         FtdRegistrationInput:
             properties:
@@ -21301,15 +21323,6 @@ components:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
                     type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in Security Cloud Control.
-                    example: My Managed Tenant
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
                 name:
                     description: The name of the device.
                     example: asa-fw-01
@@ -21675,32 +21688,11 @@ components:
                     minLength: 1
                     type: string
                 template:
-                    $ref: '#/components/schemas/ZtpOnboardingTemplateConfiguration'
+                    $ref: '#/components/schemas/FtdOnboardingTemplateConfiguration'
             required:
                 - licenses
                 - name
                 - serialNumber
-            type: object
-        ZtpOnboardingTemplateConfiguration:
-            description: 'Specify the template to apply to this device. If this field is specified, the ''fmcAccessPolicyUid'' field must remain unspecified. Note: If both ''fmcAccessPolicyUid'' and ''template'' fields are unspecified, the operation will fail.'
-            properties:
-                objectOverrides:
-                    description: 'Specify a list of objects to override. All objects that have been marked as overridable in the template must be defined here. Note: Any overrides defined here that are not present in the template configuration will be ignored.'
-                    items:
-                        $ref: '#/components/schemas/FmcObjectOverride'
-                    type: array
-                templateVariables:
-                    description: 'Specify the list of template variables configured on the template. All required template variables must be defined here, and should have values valid for the type of the variable. Any invalid input will result in the template not being applied to the device upon onboarding. Note: Any variables defined here that are not present in the template will be ignored.'
-                    items:
-                        $ref: '#/components/schemas/FmcTemplateVariable'
-                    type: array
-                uid:
-                    description: Specify the unique identifier, represented as a UUID, of the template to apply to the onboarded device.
-                    example: 2cadad15-dc8b-4bc4-899f-b9badcfc56a3
-                    format: uuid
-                    type: string
-            required:
-                - uid
             type: object
     responses:
         http400BadRequest:
