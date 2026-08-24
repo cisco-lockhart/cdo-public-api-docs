@@ -26,7 +26,7 @@ Method | HTTP request | Description
 
 Get Current Tenant
 
-Get the tenant associated with the API token used to authenticate the request. The response includes tenant metadata and enabled feature flags.
+Get the tenant associated with the API token used to authenticate the request.
 
 ### Example
 

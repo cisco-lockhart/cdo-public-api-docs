@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **display_name** | **str** | The human-readable tenant name displayed in the Security Cloud Control Web UI. | [optional] 
 **feature_flags** | **List[str]** | The feature flags enabled for the tenant. | [optional] 
 **name** | **str** | The name of the tenant in Security Cloud Control. | [optional] 
+**sal_status** | **str** | The Security Analytics and Logging (SAL) enablement status for the tenant. ENABLED if the tenant has a cdo-event-access subscription in Security Services Exchange, DISABLED if it does not, UNKNOWN if the status could not be determined. | [optional] 
 **security_cloud_control_enterprise_id** | **str** | The unique identifier of the Security Cloud Control enterprise associated with the tenant. | [optional] 
 **ssx_tenant_uid** | **str** | The unique identifier of the tenant in Security Services Exchange. | [optional] 
 **uid** | **str** | The unique identifier, represented as a UUID, of the tenant in Security Cloud Control. | [optional] 

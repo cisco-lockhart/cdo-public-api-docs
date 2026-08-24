@@ -10852,7 +10852,7 @@ paths:
                 - Tenant Management
     /v1/tenants/me:
         get:
-            description: Get the tenant associated with the API token used to authenticate the request. The response includes tenant metadata and enabled feature flags.
+            description: Get the tenant associated with the API token used to authenticate the request.
             operationId: getCurrentTenant
             responses:
                 "200":
@@ -13846,17 +13846,15 @@ components:
                 - os
             type: object
         CompatibleSecureClientVersionDto:
-            description: A Secure Client version available across all requested managed tenants, with the platforms available for that version.
-            nullable: true
+            description: The list of items retrieved.
             properties:
                 platforms:
-                    description: The OS and CPU architecture combinations available for this Secure Client version across every requested managed tenant.
+                    description: The OS and CPU architecture combinations available for this version.
                     items:
-                        $ref: '#/components/schemas/CompatibleSecureClientPlatformDto'
+                        $ref: '#/components/schemas/SecureClientPlatformDto'
                     type: array
                 version:
-                    description: The Secure Client version string.
-                    example: 5.1.15.287
+                    description: The Secure Client version string (e.g. "5.1.15.287", "4.10.05095").
                     type: string
             required:
                 - platforms
@@ -14080,6 +14078,14 @@ components:
                 name:
                     description: The name of the tenant in Security Cloud Control.
                     example: CDO_cisco-dothraki-team__t31oim
+                    type: string
+                salStatus:
+                    description: The Security Analytics and Logging (SAL) enablement status for the tenant. ENABLED if the tenant has a cdo-event-access subscription in Security Services Exchange, DISABLED if it does not, UNKNOWN if the status could not be determined.
+                    enum:
+                        - ENABLED
+                        - DISABLED
+                        - UNKNOWN
+                    example: ENABLED
                     type: string
                 securityCloudControlEnterpriseId:
                     description: The unique identifier of the Security Cloud Control enterprise associated with the tenant.
@@ -21295,15 +21301,6 @@ components:
                 errorMsg:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in Security Cloud Control.
-                    example: My Managed Tenant
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
                     type: string
                 name:
                     description: The name of the device.
