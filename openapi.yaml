@@ -4778,19 +4778,19 @@ paths:
             x-beta: "true"
     /v1/inventory/devices/ftds/secure-client/upgrades/versions:
         get:
-            description: Get a list of compatible Secure Client upgrade versions for the specified FTD devices.
+            description: Get a list of compatible Secure Client upgrade versions for the specified FTD devices, each with the packages available for it and their direct download URLs. When no device identifiers are supplied, returns every version in the Secure Client catalog that FTD devices support, without validating any devices.
             operationId: getFtdCompatibleSecureClientVersions
             parameters:
-                - description: The unique identifiers, represented as UUIDs, of the FTD devices in Security Cloud Control.
+                - description: The unique identifiers, represented as UUIDs, of the FTD devices in Security Cloud Control. When omitted, every version in the Secure Client catalog that FTD devices support is returned.
                   in: query
                   name: deviceUids
-                  required: true
+                  required: false
                   schema:
                     items:
                         format: uuid
                         type: string
                     maxItems: 50
-                    minItems: 1
+                    minItems: 0
                     type: array
                     uniqueItems: true
                 - description: Number of results to retrieve.
@@ -13824,11 +13824,24 @@ components:
                 - name
                 - uid
             type: object
+        CompatibleSecureClientPackageDto:
+            description: The Secure Client package available for this platform.
+            properties:
+                downloadUrl:
+                    description: Direct download URL for the package. Requires no authentication and does not expire.
+                    type: string
+                fileName:
+                    description: The Secure Client package filename.
+                    type: string
+            required:
+                - downloadUrl
+                - fileName
+            type: object
         CompatibleSecureClientPlatformDto:
-            description: An OS and CPU architecture combination available for a Secure Client version.
+            description: The OS and CPU architecture combinations available for this version, each with the package that serves it.
             properties:
                 cpuArchitecture:
-                    description: 'The CPU architecture. One of: ARM64, X86_64, UNIVERSAL.'
+                    description: 'The CPU architecture. One of: X86_64, ARM64, UNIVERSAL.'
                     enum:
                         - ARM64
                         - X86_64
@@ -13841,17 +13854,20 @@ components:
                         - MACOS
                         - WINDOWS
                     type: string
+                package:
+                    $ref: '#/components/schemas/CompatibleSecureClientPackageDto'
             required:
                 - cpuArchitecture
                 - os
+                - package
             type: object
         CompatibleSecureClientVersionDto:
             description: The list of items retrieved.
             properties:
                 platforms:
-                    description: The OS and CPU architecture combinations available for this version.
+                    description: The OS and CPU architecture combinations available for this version, each with the package that serves it.
                     items:
-                        $ref: '#/components/schemas/SecureClientPlatformDto'
+                        $ref: '#/components/schemas/CompatibleSecureClientPlatformDto'
                     type: array
                 version:
                     description: The Secure Client version string (e.g. "5.1.15.287", "4.10.05095").
@@ -13927,13 +13943,18 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the deployment on the device.
+            description: The completion status of the upgrade on the device.
             properties:
+                completedAt:
+                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
+                    example: 2026-04-15T18:00:10.123Z
+                    format: date-time
+                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -13944,7 +13965,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: The percentage completion of the current task being performed
+                    description: Percentage completion of the current task being performed.
                     format: double
                     type: number
             type: object
@@ -15258,7 +15279,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The type of the device.
+            description: The distinct device types for the devices managed by the MSP Portal.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -15281,7 +15302,6 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: CDFMC_MANAGED_FTD
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -19662,7 +19682,7 @@ components:
                     type: integer
             type: object
         SecureClientPlatformDto:
-            description: The OS and CPU architecture combinations available for this version.
+            description: The OS and CPU architecture combinations to upgrade. If omitted, all platforms available for the specified version are uploaded to each device.
             properties:
                 cpuArchitecture:
                     description: 'The CPU architecture. One of: X86_64, ARM64, UNIVERSAL.'
@@ -20078,32 +20098,14 @@ components:
                     type: string
             type: object
         SmartAccountDto:
+            description: The smart account used to license this device.
             properties:
-                domain:
-                    description: Account domain for your Smart Account
+                parent:
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                name:
-                    description: Name of the smart account
-                    type: string
-                smartAccountId:
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             properties:

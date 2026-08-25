@@ -6,7 +6,7 @@ The list of items retrieved.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**platforms** | [**List[SecureClientPlatformDto]**](SecureClientPlatformDto.md) | The OS and CPU architecture combinations available for this version. | 
+**platforms** | [**List[CompatibleSecureClientPlatformDto]**](CompatibleSecureClientPlatformDto.md) | The OS and CPU architecture combinations available for this version, each with the package that serves it. | 
 **version** | **str** | The Secure Client version string (e.g. \&quot;5.1.15.287\&quot;, \&quot;4.10.05095\&quot;). | 
 
 ## Example

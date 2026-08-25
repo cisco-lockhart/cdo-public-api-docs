@@ -1,6 +1,6 @@
 # SecureClientPlatformDto
 
-The OS and CPU architecture combinations available for this version.
+The OS and CPU architecture combinations to upgrade. If omitted, all platforms available for the specified version are uploaded to each device.
 
 ## Properties
 

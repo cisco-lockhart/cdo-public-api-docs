@@ -134,6 +134,7 @@ nav:
     - CommonApiError: CommonApiError.md
     - CompatibleDevice: CompatibleDevice.md
     - CompatibleDeviceDto: CompatibleDeviceDto.md
+    - CompatibleSecureClientPackageDto: CompatibleSecureClientPackageDto.md
     - CompatibleSecureClientPlatformDto: CompatibleSecureClientPlatformDto.md
     - CompatibleSecureClientVersionDto: CompatibleSecureClientVersionDto.md
     - CompatibleVersionInfo: CompatibleVersionInfo.md

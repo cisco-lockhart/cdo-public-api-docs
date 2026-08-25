@@ -289,11 +289,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_ftd_compatible_secure_client_versions**
-> SecureClientUpgradeVersionsPage get_ftd_compatible_secure_client_versions(device_uids, limit=limit, offset=offset)
+> SecureClientUpgradeVersionsPage get_ftd_compatible_secure_client_versions(device_uids=device_uids, limit=limit, offset=offset)
 
 List Secure Client versions compatible with the specified FTD devices
 
-Get a list of compatible Secure Client upgrade versions for the specified FTD devices.
+Get a list of compatible Secure Client upgrade versions for the specified FTD devices, each with the packages available for it and their direct download URLs. When no device identifiers are supplied, returns every version in the Secure Client catalog that FTD devices support, without validating any devices.
 
 ### Example
 
@@ -325,13 +325,13 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.SecureClientManagementApi(api_client)
-    device_uids = ['device_uids_example'] # List[str] | The unique identifiers, represented as UUIDs, of the FTD devices in Security Cloud Control.
+    device_uids = ['device_uids_example'] # List[str] | The unique identifiers, represented as UUIDs, of the FTD devices in Security Cloud Control. When omitted, every version in the Secure Client catalog that FTD devices support is returned. (optional)
     limit = '50' # str | Number of results to retrieve. (optional) (default to '50')
     offset = '0' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
 
     try:
         # List Secure Client versions compatible with the specified FTD devices
-        api_response = api_instance.get_ftd_compatible_secure_client_versions(device_uids, limit=limit, offset=offset)
+        api_response = api_instance.get_ftd_compatible_secure_client_versions(device_uids=device_uids, limit=limit, offset=offset)
         print("The response of SecureClientManagementApi->get_ftd_compatible_secure_client_versions:\n")
         pprint(api_response)
     except Exception as e:
@@ -345,7 +345,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_uids** | [**List[str]**](str.md)| The unique identifiers, represented as UUIDs, of the FTD devices in Security Cloud Control. | 
+ **device_uids** | [**List[str]**](str.md)| The unique identifiers, represented as UUIDs, of the FTD devices in Security Cloud Control. When omitted, every version in the Secure Client catalog that FTD devices support is returned. | [optional] 
  **limit** | **str**| Number of results to retrieve. | [optional] [default to &#39;50&#39;]
  **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
 
