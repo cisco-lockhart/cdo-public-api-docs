@@ -6,7 +6,7 @@ Compatible Secure Client upgrade versions for MSP managed ASA devices across mul
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**compatible_versions** | [**List[MspCompatibleSecureClientVersionDto]**](MspCompatibleSecureClientVersionDto.md) | List of Secure Client versions compatible with the specified ASA devices across managed tenants. A version is included only if it is compatible with all of the requested devices in every managed tenant they belong to. The platforms listed for each version are likewise the intersection of platforms available in every managed tenant. | [optional] 
+**compatible_versions** | [**List[CompatibleSecureClientVersionDto]**](CompatibleSecureClientVersionDto.md) | List of Secure Client versions compatible with the specified ASA devices across managed tenants. A version is included only if it is compatible with all of the requested devices in every managed tenant they belong to. The platforms listed for each version are likewise the intersection of platforms available in every managed tenant. | [optional] 
 **error_message** | **str** | Error message detailing the issues that occurred during compatibility information retrieval. This field is populated when the status is ERROR. | [optional] 
 **status** | **str** | The current status of the retrieval of compatible Secure Client versions. | 
 **uid** | **str** | The unique identifier, represented as a UUID, of this list of compatible Secure Client versions. | 
