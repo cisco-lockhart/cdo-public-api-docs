@@ -15470,7 +15470,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
+                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -17139,6 +17139,44 @@ components:
                     type: array
                     uniqueItems: true
             type: object
+        MspCompatibleSecureClientPlatformDto:
+            description: An OS and CPU architecture combination available for a Secure Client version.
+            properties:
+                cpuArchitecture:
+                    description: 'The CPU architecture. One of: ARM64, X86_64, UNIVERSAL.'
+                    enum:
+                        - ARM64
+                        - X86_64
+                        - UNIVERSAL
+                    type: string
+                os:
+                    description: 'The operating system. One of: LINUX, MACOS, WINDOWS.'
+                    enum:
+                        - LINUX
+                        - MACOS
+                        - WINDOWS
+                    type: string
+            required:
+                - cpuArchitecture
+                - os
+            type: object
+        MspCompatibleSecureClientVersionDto:
+            description: A Secure Client version available across all requested managed tenants, with the platforms available for that version.
+            nullable: true
+            properties:
+                platforms:
+                    description: The OS and CPU architecture combinations available for this Secure Client version across every requested managed tenant.
+                    items:
+                        $ref: '#/components/schemas/MspCompatibleSecureClientPlatformDto'
+                    type: array
+                version:
+                    description: The Secure Client version string.
+                    example: 5.1.15.287
+                    type: string
+            required:
+                - platforms
+                - version
+            type: object
         MspCreateTenantInput:
             properties:
                 addOns:
@@ -18283,7 +18321,7 @@ components:
                 compatibleVersions:
                     description: List of Secure Client versions compatible with the specified ASA devices across managed tenants. A version is included only if it is compatible with all of the requested devices in every managed tenant they belong to. The platforms listed for each version are likewise the intersection of platforms available in every managed tenant.
                     items:
-                        $ref: '#/components/schemas/CompatibleSecureClientVersionDto'
+                        $ref: '#/components/schemas/MspCompatibleSecureClientVersionDto'
                     nullable: true
                     type: array
                 errorMessage:
@@ -21347,6 +21385,15 @@ components:
                 errorMsg:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
+                    type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in Security Cloud Control.
+                    example: My Managed Tenant
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
                     type: string
                 name:
                     description: The name of the device.
