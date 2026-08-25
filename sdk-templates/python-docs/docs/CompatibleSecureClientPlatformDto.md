@@ -1,13 +1,14 @@
 # CompatibleSecureClientPlatformDto
 
-An OS and CPU architecture combination available for a Secure Client version.
+The OS and CPU architecture combinations available for this version, each with the package that serves it.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cpu_architecture** | **str** | The CPU architecture. One of: ARM64, X86_64, UNIVERSAL. | 
+**cpu_architecture** | **str** | The CPU architecture. One of: X86_64, ARM64, UNIVERSAL. | 
 **os** | **str** | The operating system. One of: LINUX, MACOS, WINDOWS. | 
+**package** | [**CompatibleSecureClientPackageDto**](CompatibleSecureClientPackageDto.md) |  | 
 
 ## Example
 
