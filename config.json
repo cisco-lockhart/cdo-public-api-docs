@@ -63,6 +63,10 @@
             "content": "developer-resources/sdks.md"
           },
           {
+            "title": "SCCFM DevKit",
+            "content": "developer-resources/sccfm-devkit.md"
+          },
+          {
             "title": "Terraform",
             "content": "developer-resources/terraform.md"
           },
