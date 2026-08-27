@@ -22,7 +22,7 @@ Method | HTTP request | Description
 
 
 # **get_current_tenant**
-> CurrentTenantResponse get_current_tenant()
+> CurrentTenant get_current_tenant()
 
 Get Current Tenant
 
@@ -34,7 +34,7 @@ Get the tenant associated with the API token used to authenticate the request.
 
 ```python
 import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.current_tenant_response import CurrentTenantResponse
+from scc_firewall_manager_sdk.models.current_tenant import CurrentTenant
 from scc_firewall_manager_sdk.rest import ApiException
 from pprint import pprint
 
@@ -76,7 +76,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**CurrentTenantResponse**](CurrentTenantResponse.md)
+[**CurrentTenant**](CurrentTenant.md)
 
 ### Authorization
 

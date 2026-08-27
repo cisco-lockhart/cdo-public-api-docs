@@ -147,6 +147,7 @@ nav:
     - ConnectorType: ConnectorType.md
     - CpuHealthMetrics: CpuHealthMetrics.md
     - CreateRequest: CreateRequest.md
+    - CurrentTenant: CurrentTenant.md
     - CurrentTenantResponse: CurrentTenantResponse.md
     - Deployed: Deployed.md
     - DeploymentRunDto: DeploymentRunDto.md
