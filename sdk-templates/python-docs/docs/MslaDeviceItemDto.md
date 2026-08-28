@@ -1,6 +1,5 @@
 # MslaDeviceItemDto
 
-The list of items retrieved.
 
 ## Properties
 
