@@ -264,6 +264,8 @@ nav:
     - MetricsResponse: MetricsResponse.md
     - MfaEvent: MfaEvent.md
     - MfaEventPage: MfaEventPage.md
+    - MslaDeviceItemDto: MslaDeviceItemDto.md
+    - MslaDevicePage: MslaDevicePage.md
     - MslaUsageItemDto: MslaUsageItemDto.md
     - MslaUsagePage: MslaUsagePage.md
     - MspAddTenantInput: MspAddTenantInput.md
@@ -303,6 +305,11 @@ nav:
     - MspManagedTenantSettingsDto: MspManagedTenantSettingsDto.md
     - MspManagedTenantSettingsDtoPage: MspManagedTenantSettingsDtoPage.md
     - MspManagedTenantVirtualAccountDto: MspManagedTenantVirtualAccountDto.md
+    - MspMslaDeviceEntitlementDto: MspMslaDeviceEntitlementDto.md
+    - MspMslaDevicePage: MspMslaDevicePage.md
+    - MspMslaUsageItemDto: MspMslaUsageItemDto.md
+    - MspMslaUsagePage: MspMslaUsagePage.md
+    - MspMslaUsageTenantDto: MspMslaUsageTenantDto.md
     - MspSecureClientPackageDto: MspSecureClientPackageDto.md
     - MspSecureClientPackagesPage: MspSecureClientPackagesPage.md
     - MspSecureClientPlatform: MspSecureClientPlatform.md

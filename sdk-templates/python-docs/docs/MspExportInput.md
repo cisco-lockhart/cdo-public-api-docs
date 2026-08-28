@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**query** | **str** | The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export. | [optional] 
+**query** | **str** | The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export. Filter on the searchable fields of the exported resource; filtering on non-searchable fields is not supported. | [optional] 
 
 ## Example
 
