@@ -1,4 +1,4 @@
-<seotitle>Cloud Firewall Manager, Firewall Cloud Manager, Security Policy, Network Management, Deploy, Upgrade, Security Cloud Control, Cisco Security Cloud Control, Cisco Security Cloud Control API</seotitle>
+<seotitle>Cloud Firewall Manager, Firewall Cloud Manager, Security Policy, Network Management, Deploy, Upgrade, Security Cloud Control, Cisco Security Cloud Control, Cisco Security Cloud Control API, Cisco Secure Firewall, SCC Firewall Manager, Security Cloud Control Firewall Manager SDK, Security Cloud Control Firewall Manager CLI, Security Cloud Control Firewall Manager Terraform Provider, Security Cloud Control Firewall Manager Ansible Collection</seotitle>
 
 # Cisco Security Cloud Control Firewall Manager API Documentation
 
@@ -14,6 +14,10 @@ Cisco Security Cloud Control Firewall Manager exposes a rich REST API. This docu
 - Monitor your changelog
 - Execute commands across your entire fleet of devices
 - Build your own dashboard as a Managed Service Provider
+
+## Automating Security Cloud Control Firewall Manager
+
+You do not have to call the API directly. We build and support a Python SDK, a CLI, an Ansible collection, a Terraform provider, and an agent plugin for Claude Code and Codex on top of these endpoints. They are all listed on [Automation Tools and AI Agents](/docs/cisco-security-cloud-control-firewall-manager/automation-tools-and-ai-agents/).
 
 ## FedRAMP Availability
 

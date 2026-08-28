@@ -55,20 +55,12 @@
         },
         "items": [
           {
+            "title": "Automation Tools and AI Agents",
+            "content": "developer-resources/automation-tools.md"
+          },
+          {
             "title": "Postman Collections",
             "content": "developer-resources/postman-collection.md"
-          },
-          {
-            "title": "SDKs",
-            "content": "developer-resources/sdks.md"
-          },
-          {
-            "title": "SCCFM DevKit",
-            "content": "developer-resources/sccfm-devkit.md"
-          },
-          {
-            "title": "Terraform",
-            "content": "developer-resources/terraform.md"
           },
           {
             "title": "Learning Labs",

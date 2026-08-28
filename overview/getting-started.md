@@ -1,6 +1,9 @@
 # Getting Started
 
-The following sections introduce you to the resources available in the Security Cloud Control Firewall Manager API and provide instructions for your first API request. Sample requests are shown using [curl](https://curl.se/), a CLI tool. 
+The following sections introduce you to the resources available in the Security Cloud Control Firewall Manager API and provide instructions for your first API request. Sample requests are shown using [curl](https://curl.se/).
+
+> **Note**:
+> If you would rather not call the API directly, we also provide a Python SDK, a CLI, an Ansible collection, a Terraform provider, and an agent plugin for Claude Code and Codex. See [Automation Tools and AI Agents](/docs/cisco-security-cloud-control-firewall-manager/automation-tools-and-ai-agents/).
 
 ## Supported RESTful Operations
 
@@ -574,7 +577,12 @@ depending on the request you make.
 }
 ```
 
-## Try it out with Postman
+## Next steps
 
 Prefer to use Postman rather than code or the command line? Check out
 our [Postman Collection](/docs/cisco-security-cloud-control-firewall-manager/postman-collections/).
+
+Ready to automate? Rather than writing your own HTTP client, use one of the tools we build on top of
+this API — a Python SDK, a CLI, an Ansible collection, a Terraform provider, and an agent plugin for
+Claude Code and Codex. They are all listed on
+[Automation Tools and AI Agents](/docs/cisco-security-cloud-control-firewall-manager/automation-tools-and-ai-agents/).

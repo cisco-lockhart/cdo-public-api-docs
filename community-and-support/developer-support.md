@@ -14,9 +14,18 @@ If you identify issues with the Security Cloud Control API, you can contact the 
 - Worldwide Support Contacts: https://www.cisco.com/c/en/us/support/web/tsd-cisco-worldwide-contacts.html
 - Webex: tac.connect@webex.bot
 
+### Automation Tools
+
+Issues with our [automation tools](/docs/cisco-security-cloud-control-firewall-manager/automation-tools-and-ai-agents/) are tracked on GitHub. Please report bugs and feature requests there rather than through TAC, so that they reach the maintainers directly:
+
+- [CLI, Ansible collection, and agent plugin](https://github.com/CiscoDevNet/sccfm-devkit/issues)
+- [Terraform Provider](https://github.com/CiscoDevNet/terraform-provider-sccfm/issues)
+
 ## Enhancement Requests
 
 Please file enhancement requests in the [Network Security forum](https://community.cisco.com/t5/network-security/bd-p/disc-network-security) using the `Cisco Security Cloud Control` label.
+
+For our automation tools, open an enhancement request on the relevant GitHub repository listed above.
 
 ## One-on-one Consulting
 
