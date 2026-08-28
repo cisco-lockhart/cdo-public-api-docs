@@ -1,4 +1,4 @@
-# SCCFM DevKit (CLI & Ansible Collection)
+# SCCFM DevKit
 
 The SCCFM DevKit provides a command-line interface and an Ansible collection for interacting with
 Security Cloud Control Firewall Manager.
@@ -17,6 +17,25 @@ Install the `cisco.sccfm` collection from [Ansible Galaxy](https://galaxy.ansibl
 
 ```shell
 ansible-galaxy collection install cisco.sccfm
+```
+
+## Claude Code and Codex Plugin
+
+An `sccfm` agent plugin bundles guided installation, authentication setup, and operational
+skills for the CLI and Ansible collection into Claude Code and Codex.
+
+Claude Code:
+
+```shell
+/plugin marketplace add CiscoDevNet/sccfm-devkit
+/plugin install sccfm@sccfm-devkit
+```
+
+Codex:
+
+```shell
+codex plugin marketplace add CiscoDevNet/sccfm-devkit
+codex plugin add sccfm@sccfm-devkit
 ```
 
 ## Documentation
