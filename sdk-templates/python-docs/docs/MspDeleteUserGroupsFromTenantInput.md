@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_sdk_python.models.msp_delete_user_groups_from_tenant_input import MspDeleteUserGroupsFromTenantInput
+from scc_firewall_manager_sdk.models.msp_delete_user_groups_from_tenant_input import MspDeleteUserGroupsFromTenantInput
 
 # TODO update the JSON string below
 json = "{}"
