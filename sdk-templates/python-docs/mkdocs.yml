@@ -264,6 +264,8 @@ nav:
     - MetricsResponse: MetricsResponse.md
     - MfaEvent: MfaEvent.md
     - MfaEventPage: MfaEventPage.md
+    - MslaDeviceItemDto: MslaDeviceItemDto.md
+    - MslaDevicePage: MslaDevicePage.md
     - MslaUsageItemDto: MslaUsageItemDto.md
     - MslaUsagePage: MslaUsagePage.md
     - MspAddTenantInput: MspAddTenantInput.md
