@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from cdo_sdk_python.models.ftd_versions_page import FtdVersionsPage
+from scc_firewall_manager_sdk.models.ftd_versions_page import FtdVersionsPage
 
 # TODO update the JSON string below
 json = "{}"
