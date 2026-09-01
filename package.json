@@ -9,5 +9,9 @@
     "openapi-to-postmanv2": "^4.20.0",
     "openapi-transformer": "^0.11.0",
     "yaml": "^2.7.0"
+  },
+  "devDependencies": {
+    "@semantic-release/commit-analyzer": "13.0.1",
+    "semantic-release": "25.0.9"
   }
 }
