@@ -5,7 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**downloads** | [**List[DirectoryDownloadEntry]**](DirectoryDownloadEntry.md) |  | [optional] 
+**num_groups** | **int** |  | [optional] 
+**num_users** | **int** |  | [optional] 
 
 ## Example
 
