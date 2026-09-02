@@ -1372,133 +1372,6 @@ paths:
             summary: Get supported endpoint patterns
             tags:
                 - Commands
-    /v1/ftd-services/tasks:
-        get:
-            description: Get FTD Services tasks executed on this Security Cloud Control tenant.
-            operationId: getTasks
-            parameters:
-                - description: Number of results to retrieve.
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 200
-                    minimum: 0
-                    type: string
-                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
-                  example: fieldName:fieldValue
-                  in: query
-                  name: q
-                  required: false
-                  schema:
-                    type: string
-                - description: The fields to sort results by.
-                  example: name:DESC
-                  in: query
-                  name: sort
-                  required: false
-                  schema:
-                    items:
-                        type: string
-                    type: array
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/TaskDtoPage'
-                    description: List of tasks
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            summary: Get tasks
-            tags:
-                - FTD Services
-    /v1/ftd-services/tasks/{taskUid}/subtasks:
-        get:
-            description: Get subtasks associated with a task executed on the Security Cloud Control tenant.
-            operationId: getSubTasks
-            parameters:
-                - description: Number of results to retrieve.
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 200
-                    minimum: 0
-                    type: string
-                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-                - description: The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control.
-                  in: path
-                  name: taskUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/SubTaskDtoPage'
-                    description: List of subtasks associated with a task
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "404":
-                    $ref: '#/components/responses/http404NotFound'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            summary: Get subtasks associated with a task
-            tags:
-                - FTD Services
-    /v1/ftd-services/tasks/attribute-values:
-        get:
-            description: Get distinct values for multiple fields in the FTD services tasks executed on the Security Cloud Control tenant.
-            operationId: getTasksAttributeValues
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/TaskDistinctAttributeValues'
-                    description: Distinct attribute values for tasks
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            summary: Get distinct attribute values for tasks
-            tags:
-                - FTD Services
     /v1/inventory/devices:
         get:
             description: Get a list of devices in the Security Cloud Control tenant.
@@ -4416,128 +4289,6 @@ paths:
             summary: (cdFMC-managed FTDs only) Deploy FTD device changes
             tags:
                 - Inventory
-    /v1/inventory/devices/ftds/{deviceUid}/secure-client/packages:
-        get:
-            description: Returns the Secure Client packages configured on the FTD device's Remote Access VPN policy, including the version, operating system, and CPU architecture parsed from each package filename. When a filename does not match the expected Secure Client package naming pattern, the package is still returned but its version, operating system, and CPU architecture are null. Returns an empty page when the device has no Remote Access VPN policy or the policy has no configured packages.
-            operationId: getFtdSecureClientPackages
-            parameters:
-                - description: The unique identifier, represented as a UUID, of the FTD device in Security Cloud Control.
-                  in: path
-                  name: deviceUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-                - description: Number of results to retrieve.
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 200
-                    minimum: 0
-                    type: string
-                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/FtdSecureClientPackagesPage'
-                    description: Secure Client packages retrieved successfully.
-                "400":
-                    content:
-                        '*/*':
-                            schema:
-                                $ref: '#/components/schemas/PageSecureClientPackageDto'
-                    description: Returned when the device identifier is not a valid UUID or the limit or offset query parameters are outside their allowed ranges.
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "404":
-                    content:
-                        '*/*':
-                            schema:
-                                $ref: '#/components/schemas/PageSecureClientPackageDto'
-                    description: Returned when the device does not exist or is not a Cloud-delivered FMC-managed FTD.
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: List Secure Client packages available on an FTD device
-            tags:
-                - Secure Client Management
-            x-beta: "true"
-    /v1/inventory/devices/ftds/{deviceUid}/secure-client/packages/{packageUid}:
-        get:
-            description: Returns the single Secure Client package configured on the FTD device's Remote Access VPN policy whose UID matches the requested package UID, including the version, operating system, and CPU architecture parsed from the package filename. When the filename does not match the expected Secure Client package naming pattern, the package is still returned but its version, operating system, and CPU architecture are null.
-            operationId: getFtdSecureClientPackageByUid
-            parameters:
-                - description: The unique identifier, represented as a UUID, of the FTD device in Security Cloud Control.
-                  in: path
-                  name: deviceUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-                - description: The unique identifier, represented as a UUID, of the Secure Client package.
-                  in: path
-                  name: packageUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/SecureClientPackageDto'
-                    description: Secure Client package retrieved successfully.
-                "400":
-                    content:
-                        '*/*':
-                            schema:
-                                $ref: '#/components/schemas/SecureClientPackageDto'
-                    description: Returned when the device or package identifier is not a valid UUID.
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "404":
-                    content:
-                        '*/*':
-                            schema:
-                                $ref: '#/components/schemas/SecureClientPackageDto'
-                    description: Returned when the device does not exist or is not a Cloud-delivered FMC-managed FTD, or the package is not configured on the device's Remote Access VPN policy.
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get a Secure Client package available on an FTD device by UID
-            tags:
-                - Secure Client Management
-            x-beta: "true"
     /v1/inventory/devices/ftds/{deviceUid}/upgrades/trigger:
         post:
             description: Upgrade FTD device using a specified upgrade package.
@@ -4739,110 +4490,6 @@ paths:
             summary: Register FTD device to FMC
             tags:
                 - Inventory
-    /v1/inventory/devices/ftds/secure-client/upgrades:
-        post:
-            description: Initiate a Secure Client package upgrade on one or more FTD devices. The endpoint validates that all target devices are eligible, creates a CDO transaction and a SecureClientUpgradeRun tracking object, and returns 202 Accepted with the transaction.
-            operationId: triggerFtdSecureClientUpgrade
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/TriggerSecureClientUpgradeInput'
-                required: true
-            responses:
-                "202":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CdoTransaction'
-                    description: Security Cloud Control Transaction object that can be used to track the status of the operation.
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Trigger Secure Client upgrade on FTD devices
-            tags:
-                - Secure Client Management
-            x-beta: "true"
-    /v1/inventory/devices/ftds/secure-client/upgrades/versions:
-        get:
-            description: Get a list of compatible Secure Client upgrade versions for the specified FTD devices, each with the packages available for it and their direct download URLs. When no device identifiers are supplied, returns every version in the Secure Client catalog that FTD devices support, without validating any devices.
-            operationId: getFtdCompatibleSecureClientVersions
-            parameters:
-                - description: The unique identifiers, represented as UUIDs, of the FTD devices in Security Cloud Control. When omitted, every version in the Secure Client catalog that FTD devices support is returned.
-                  in: query
-                  name: deviceUids
-                  required: false
-                  schema:
-                    items:
-                        format: uuid
-                        type: string
-                    maxItems: 50
-                    minItems: 0
-                    type: array
-                    uniqueItems: true
-                - description: Number of results to retrieve.
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 200
-                    minimum: 0
-                    type: string
-                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/SecureClientUpgradeVersionsPage'
-                    description: A paginated list of compatible Secure Client versions
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-                "503":
-                    content:
-                        '*/*':
-                            schema:
-                                $ref: '#/components/schemas/PageCompatibleSecureClientVersionDto'
-                    description: Service temporarily unavailable
-            security:
-                - bearerAuth: []
-            summary: List Secure Client versions compatible with the specified FTD devices
-            tags:
-                - Secure Client Management
-            x-beta: "true"
     /v1/inventory/devices/ftds/upgrades/packages/build-cache:
         put:
             description: Update cache of compatible upgrade packages for a all FTD devices.
@@ -15322,18 +14969,6 @@ components:
                     example: true
                     type: boolean
             type: object
-        DirectoryDownloadResult:
-            allOf:
-                - $ref: '#/components/schemas/TaskResultDetails'
-                - properties:
-                    numGroups:
-                        format: int64
-                        type: integer
-                    numUsers:
-                        format: int64
-                        type: integer
-                  type: object
-            type: object
         DiskHealthMetrics:
             description: The disk health metrics for the device.
             properties:
@@ -15457,7 +15092,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The type of the device.
+            description: The distinct device types for the devices managed by the MSP Portal.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -15480,7 +15115,6 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: CDFMC_MANAGED_FTD
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -16123,29 +15757,6 @@ components:
                     type: boolean
             required:
                 - ftdUid
-            type: object
-        FtdSecureClientPackagesPage:
-            properties:
-                count:
-                    description: The total number of results available.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/SecureClientPackageDto'
-                    type: array
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
             type: object
         FtdSingleDeviceDeploymentInput:
             description: Per-device deployment configuration. Cannot be combined with the deprecated `deviceUids` field. Each entry identifies a device and optionally selects which policy types to deploy. Set `selectedPolicyTypes` to null or include FULL_DEPLOY to perform a full deployment for that device. Each entry must have a unique uid.
@@ -19529,29 +19140,6 @@ components:
                     format: int32
                     type: integer
             type: object
-        PageSecureClientPackageDto:
-            properties:
-                count:
-                    description: The total number of results available.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/SecureClientPackageDto'
-                    type: array
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
-            type: object
         PhysicalInterfacePatchInput:
             properties:
                 description:
@@ -20507,32 +20095,14 @@ components:
                     type: string
             type: object
         SmartAccountDto:
+            description: The smart account used to license this device.
             properties:
-                domain:
-                    description: Account domain for your Smart Account
+                parent:
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                name:
-                    description: Name of the smart account
-                    type: string
-                smartAccountId:
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             properties:
@@ -20854,68 +20424,6 @@ components:
                     description: The standby interface Media Access Control (MAC) address, for use in a high-availability (HA) pair.
                     type: string
             type: object
-        SubTaskDto:
-            description: The list of items retrieved.
-            properties:
-                description:
-                    description: The description of the subtask in Security Cloud Control
-                    example: 'Policy Export for Device A: 80% complete'
-                    type: string
-                status:
-                    description: The status of the task in Security Cloud Control
-                    enum:
-                        - DONE
-                        - PARTIALLY_DONE
-                        - IN_PROGRESS
-                        - ERROR
-                        - CANCELLED
-                        - UNKNOWN
-                    example: PENDING
-                    type: string
-                targetName:
-                    description: The name of the target the subtask is running against.
-                    example: Device A
-                    type: string
-                targetType:
-                    description: The type of the target the subtask is running against.
-                    enum:
-                        - DEVICE
-                    example: DEVICE
-                    type: string
-                targetUid:
-                    description: The unique identifier, represented as a UUID, of the target the subtask is running against.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of the subtask in Security Cloud Control.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-            type: object
-        SubTaskDtoPage:
-            properties:
-                count:
-                    description: The total number of results available.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/SubTaskDto'
-                    type: array
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
-            type: object
         Summary:
             properties:
                 average:
@@ -20993,247 +20501,6 @@ components:
                         example: '["7131daad-e813-4b8f-8f42-be1e241e8cdb"]'
                         type: string
                     type: array
-            type: object
-        TaskDistinctAttributeValues:
-            properties:
-                statuses:
-                    description: The unique status values for the tasks in the Security Cloud Control tenant
-                    items:
-                        description: The unique status values for the tasks in the Security Cloud Control tenant
-                        enum:
-                            - DONE
-                            - PARTIALLY_DONE
-                            - IN_PROGRESS
-                            - ERROR
-                            - CANCELLED
-                            - UNKNOWN
-                        type: string
-                    type: array
-                    uniqueItems: true
-                types:
-                    description: The unique task type values for the tasks in the Security Cloud Control tenant
-                    items:
-                        description: The unique task type values for the tasks in the Security Cloud Control tenant
-                        enum:
-                            - REGISTER_DEVICE
-                            - UNREGISTER_DEVICE
-                            - DEPLOY_DEVICE
-                            - ROLLBACK_DEVICE
-                            - BACKUP_DEVICE
-                            - EXPORT_DEVICE
-                            - IMPORT_DEVICE
-                            - DELETE_DEVICE
-                            - TROUBLESHOOT_DEVICE
-                            - CONFIGURE_DEVICE
-                            - VALIDATE_DEVICE_CONFIGURATION
-                            - MIGRATE_DEVICE_MODEL
-                            - MANAGE_DEVICE_CERTIFICATE
-                            - CREATE_DEVICE_TEMPLATE
-                            - APPLY_DEVICE_TEMPLATE
-                            - EXPORT_POLICY
-                            - CLONE_POLICY
-                            - GENERATE_POLICY_REPORT
-                            - GENERATE_REPORTS
-                            - APPLY_HEALTH_POLICY
-                            - APPLY_HEALTH
-                            - CONFIGURE_MANAGER
-                            - ADD_MANAGER_CONFIGURATION
-                            - DELETE_MANAGER_CONFIGURATION
-                            - COPY_CONFIGURATION
-                            - MANAGE_CHANGES
-                            - REGISTER_CHASSIS
-                            - REGISTER_SMART_LICENSE
-                            - INITIATE_MIGRATION
-                            - DISCARD_MIGRATION
-                            - MIGRATE_FLEXCONFIG
-                            - CREATE_FTD_CLUSTER
-                            - BREAK_FTD_CLUSTER
-                            - BOOTSTRAP_FTD_CLUSTER
-                            - UPDATE_FTD_CLUSTER_BOOTSTRAP
-                            - ADD_FTD_CLUSTER_NODES
-                            - REMOVE_FTD_CLUSTER_NODES
-                            - EXECUTE_FTD_CLUSTER_COMMAND
-                            - MANAGE_NGFW_HA
-                            - OIR_SSP_EPM
-                            - DEPLOY_SSP_EPM_BREAKOUT
-                            - DOWNLOAD_LDAP
-                            - DOWNLOAD_AZURE_AD
-                            - UPDATE_SRU
-                            - INSTALL_SRU
-                            - UPGRADE_THREAT
-                            - INSTALL_LOCAL
-                            - INSTALL_LIGHTWEIGHT_SECURITY_PACKAGE
-                            - UPLOAD_TROUBLESHOOT
-                            - DOWNLOAD_FROM_CISCO_SUPPORT
-                            - RUN_SNORT_PROFILER
-                            - RUN_CPU_PROFILER
-                            - ONBOARD_LTP
-                            - SWITCH_TO_ANALYTICS
-                            - REFRESH_HIT_COUNT
-                            - PENDING_CHANGES_REQUEST
-                            - OOB_CHANGES_REQUEST
-                            - CHASSIS_CONVERSION_REQUEST
-                            - ACTION_TYPE_DOMAIN_CHANGES
-                            - UNKNOWN
-                        type: string
-                    type: array
-                    uniqueItems: true
-                usernames:
-                    description: The unique username values for who triggered tasks in the Security Cloud Control tenant
-                    items:
-                        description: The unique username values for who triggered tasks in the Security Cloud Control tenant
-                        type: string
-                    type: array
-                    uniqueItems: true
-            type: object
-        TaskDto:
-            description: The list of items retrieved.
-            properties:
-                description:
-                    description: The description of the task in Security Cloud Control
-                    example: Policy Export
-                    type: string
-                lastUpdatedTime:
-                    description: Time (UTC; represented using the RFC-3339 standard) at which the task was last updated.
-                    example: 2023-12-13T08:15:44Z
-                    format: date-time
-                    type: string
-                numSubTasks:
-                    description: The number of subtasks associated with this task.
-                    example: 10
-                    format: int32
-                    type: integer
-                result:
-                    $ref: '#/components/schemas/TaskResultDetails'
-                status:
-                    description: The status of the task in Security Cloud Control
-                    enum:
-                        - DONE
-                        - PARTIALLY_DONE
-                        - IN_PROGRESS
-                        - ERROR
-                        - CANCELLED
-                        - UNKNOWN
-                    example: PENDING
-                    type: string
-                statusDetails:
-                    description: Human-readable details on the status of the task
-                    example: SSP primary bootstrap succeeded
-                    type: string
-                submissionTime:
-                    description: Time (UTC; represented using the RFC-3339 standard) at which the task was triggered.
-                    example: 2023-12-13T05:15:44Z
-                    format: date-time
-                    type: string
-                type:
-                    description: The type of the task in Security Cloud Control
-                    enum:
-                        - REGISTER_DEVICE
-                        - UNREGISTER_DEVICE
-                        - DEPLOY_DEVICE
-                        - ROLLBACK_DEVICE
-                        - BACKUP_DEVICE
-                        - EXPORT_DEVICE
-                        - IMPORT_DEVICE
-                        - DELETE_DEVICE
-                        - TROUBLESHOOT_DEVICE
-                        - CONFIGURE_DEVICE
-                        - VALIDATE_DEVICE_CONFIGURATION
-                        - MIGRATE_DEVICE_MODEL
-                        - MANAGE_DEVICE_CERTIFICATE
-                        - CREATE_DEVICE_TEMPLATE
-                        - APPLY_DEVICE_TEMPLATE
-                        - EXPORT_POLICY
-                        - CLONE_POLICY
-                        - GENERATE_POLICY_REPORT
-                        - GENERATE_REPORTS
-                        - APPLY_HEALTH_POLICY
-                        - APPLY_HEALTH
-                        - CONFIGURE_MANAGER
-                        - ADD_MANAGER_CONFIGURATION
-                        - DELETE_MANAGER_CONFIGURATION
-                        - COPY_CONFIGURATION
-                        - MANAGE_CHANGES
-                        - REGISTER_CHASSIS
-                        - REGISTER_SMART_LICENSE
-                        - INITIATE_MIGRATION
-                        - DISCARD_MIGRATION
-                        - MIGRATE_FLEXCONFIG
-                        - CREATE_FTD_CLUSTER
-                        - BREAK_FTD_CLUSTER
-                        - BOOTSTRAP_FTD_CLUSTER
-                        - UPDATE_FTD_CLUSTER_BOOTSTRAP
-                        - ADD_FTD_CLUSTER_NODES
-                        - REMOVE_FTD_CLUSTER_NODES
-                        - EXECUTE_FTD_CLUSTER_COMMAND
-                        - MANAGE_NGFW_HA
-                        - OIR_SSP_EPM
-                        - DEPLOY_SSP_EPM_BREAKOUT
-                        - DOWNLOAD_LDAP
-                        - DOWNLOAD_AZURE_AD
-                        - UPDATE_SRU
-                        - INSTALL_SRU
-                        - UPGRADE_THREAT
-                        - INSTALL_LOCAL
-                        - INSTALL_LIGHTWEIGHT_SECURITY_PACKAGE
-                        - UPLOAD_TROUBLESHOOT
-                        - DOWNLOAD_FROM_CISCO_SUPPORT
-                        - RUN_SNORT_PROFILER
-                        - RUN_CPU_PROFILER
-                        - ONBOARD_LTP
-                        - SWITCH_TO_ANALYTICS
-                        - REFRESH_HIT_COUNT
-                        - PENDING_CHANGES_REQUEST
-                        - OOB_CHANGES_REQUEST
-                        - CHASSIS_CONVERSION_REQUEST
-                        - ACTION_TYPE_DOMAIN_CHANGES
-                        - UNKNOWN
-                    type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of the task in Security Cloud Control.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-                username:
-                    description: The last user to interact with (or trigger) this task.
-                    example: bob@example.com
-                    type: string
-            type: object
-        TaskDtoPage:
-            properties:
-                count:
-                    description: The total number of results available.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/TaskDto'
-                    type: array
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
-            type: object
-        TaskResultDetails:
-            description: Type-specific result produced by a task
-            discriminator:
-                propertyName: type
-            oneOf:
-                - $ref: '#/components/schemas/DirectoryDownloadResult'
-                - $ref: '#/components/schemas/TroubleshootingResult'
-            properties:
-                type:
-                    type: string
-            required:
-                - type
             type: object
         Tenant:
             properties:
@@ -21384,16 +20651,6 @@ components:
             required:
                 - deviceUids
                 - version
-            type: object
-        TroubleshootingResult:
-            allOf:
-                - $ref: '#/components/schemas/TaskResultDetails'
-                - properties:
-                    downloadUrls:
-                        items:
-                            type: string
-                        type: array
-                  type: object
             type: object
         UnifiedObjectListView:
             description: The list of objects retrieved.
@@ -21774,6 +21031,15 @@ components:
                 errorMsg:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
+                    type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in Security Cloud Control.
+                    example: My Managed Tenant
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
                     type: string
                 name:
                     description: The name of the device.
