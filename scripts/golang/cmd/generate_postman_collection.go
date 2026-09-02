@@ -24,12 +24,12 @@ var generatePostmanCollectionCmd = &cobra.Command{
 		}
 		postmanCollectionFile, err := cmd.Flags().GetString("postman-collection-file")
 		if err != nil {
-			spinner.Fail("Failed to get Postman collection file", err)
+			spinner.Fail("Failed to get Postman collection file: ", err)
 			os.Exit(1)
 		}
 		err = services.GeneratePostmanCollection(openapiFile, postmanCollectionFile)
 		if err != nil {
-			spinner.Fail("Failed to generate Postman collection", err)
+			spinner.Fail("Failed to generate Postman collection: ", err)
 			os.Exit(1)
 		}
 		spinner.Success(fmt.Sprintf("Postman collection generated successfully at %s", postmanCollectionFile))

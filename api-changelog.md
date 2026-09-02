@@ -8,18 +8,32 @@ There is also a new [Claude Code and Codex plugin](https://developer.cisco.com/d
 
 ## Added
 
+
+### Policy Analysis and Optimization
+
+These new endpoints analyze the NAT policies on your security infrastructure, and report rules that are shadowed or redundant.
+
+- Endpoint to [sync FMC NAT policies](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/sync-fmc-nat-policies) (`POST /v1/agenticops/policies/nat/sync`). 
+- Endpoint to [start a NAT policy analysis](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/start-nat-policy-analysis) (`POST /v1/agenticops/policies/nat/analyses`).
+- Endpoint to [get the latest NAT policy analyses across data sources](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-latest-nat-policy-analyses) (`GET /v1/agenticops/policies/nat/analyses/latest`). Results can be filtered, sorted, and paginated.
+- Endpoint to [get an aggregated summary of the latest NAT policy analyses for a data source](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-latest-nat-policy-analysis-summary) (`GET /v1/agenticops/policies/nat/analyses/latest/summary`).
+- Endpoint to [get the summary of a single NAT policy analysis](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-nat-policy-analysis-summary) (`GET /v1/agenticops/policies/nat/analysis/insights/summary/{insightsUid}`).
+- Endpoint to [get the rule conflicts found by a NAT policy analysis](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-nat-policy-analysis-rule-conflicts) (`GET /v1/agenticops/policies/nat/analysis/insights/{insightsUid}/details`).
+- Endpoint to [generate a PDF report for a NAT policy analysis](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/generate-nat-policy-analysis-report) (`POST /v1/agenticops/policies/nat/report-gen/analysis`).
+- Endpoint to [get the report URL for a NAT policy analysis](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-nat-policy-analysis-report-url) (`GET /v1/agenticops/policies/nat/report-gen/analysis/{insightsUid}`).
+
 ### MSP Secure Client Management
-- Endpoint to [upgrade Secure Client packages on ASAs across managed tenants](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/upgrade-secure-client-packages-on-asas-across-multiple-tenants) (`POST /v1/msp/inventory/devices/asas/secure-client/upgrades`). This is an asynchronous operation that returns a transaction for tracking.
-- Endpoint to [calculate compatible Secure Client upgrade versions across managed tenants](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/calculate-compatible-secure-client-upgrade-versions-across-managed-tenants) (`POST /v1/msp/inventory/devices/asas/secure-client/upgrades/versions`). This is an asynchronous operation. The versions returned are the intersection across tenants: a version is included only when every managed tenant offers it, and the platforms reported for that version are the platforms offered by every managed tenant.
-- Endpoint to [get the result of a Secure Client compatibility calculation](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-the-result-of-a-secure-client-compatibility-calculation) (`GET /v1/msp/inventory/devices/secure-client/upgrades/versions/{compatibilityInfoUid}`). Use the compatibility-info UID returned in the entity URL of the calculation transaction.
-- Endpoint to [get MSP Secure Client upgrade runs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-secure-client-upgrade-runs) (`GET /v1/msp/inventory/devices/secure-client/upgrades/runs`). Each upgrade run represents a group of devices across managed tenants having their Secure Client packages upgraded together.
+- Endpoint to [upgrade Secure Client packages on ASAs across managed tenants](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/upgrade-secure-client-packages-on-asas-across-multiple-tenants) (`POST /v1/msp/inventory/devices/asas/secure-client/upgrades`).
+- Endpoint to [calculate compatible Secure Client upgrade versions across managed tenants](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/calculate-compatible-secure-client-upgrade-versions-across-managed-tenants) (`POST /v1/msp/inventory/devices/asas/secure-client/upgrades/versions`).
+- Endpoint to [get the result of a Secure Client compatibility calculation](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-the-result-of-a-secure-client-compatibility-calculation) (`GET /v1/msp/inventory/devices/secure-client/upgrades/versions/{compatibilityInfoUid}`).
+- Endpoint to [get MSP Secure Client upgrade runs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-secure-client-upgrade-runs) (`GET /v1/msp/inventory/devices/secure-client/upgrades/runs`).
 - Endpoint to [get an MSP Secure Client upgrade run by UID](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-secure-client-upgrade-run) (`GET /v1/msp/inventory/devices/secure-client/upgrades/runs/{upgradeRunUid}`).
 - Endpoint to [get distinct attribute values for MSP Secure Client upgrade runs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-distinct-attribute-values-for-msp-secure-client-upgrade-runs) (`GET /v1/msp/inventory/devices/secure-client/upgrades/runs/attribute-values`).
 - Endpoint to [get the Secure Client packages installed on an MSP-managed device](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-secure-client-packages-installed-on-an-msp-managed-device) (`GET /v1/msp/inventory/devices/{deviceUid}/packages`).
 
 ### Inventory
 - Endpoint to [calculate the commands that will be executed on an ASA to apply its pending changes](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/calculate-the-commands-that-will-be-executed-on-the-asa-to-apply-the-pending-changes-on-the-device) (`POST /v1/inventory/devices/asas/{deviceUid}/changes/pending/commands`). This is an asynchronous operation that returns a transaction for tracking.
-- Endpoint to [get the commands that will be executed on an ASA to apply its pending changes](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-the-commands-that-will-be-executed-on-the-asa-to-apply-the-pending-changes-on-the-device) (`GET /v1/inventory/devices/asas/{deviceUid}/changes/pending/commands`). The calculated commands are cached for a short period, so call this endpoint shortly after the calculation transaction completes. If the commands are no longer available, a `404` is returned.
+- Endpoint to [get the commands that will be executed on an ASA to apply its pending changes](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-the-commands-that-will-be-executed-on-the-asa-to-apply-the-pending-changes-on-the-device) (`GET /v1/inventory/devices/asas/{deviceUid}/changes/pending/commands`). The calculated commands are cached for a short period, so call this endpoint shortly after the calculation transaction completes.
 - Endpoint to [get distinct attribute values for devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-distinct-attribute-values-for-devices) (`GET /v1/inventory/devices/attribute-values`).
 
 ### Device Deployments
@@ -31,41 +45,28 @@ There is also a new [Claude Code and Codex plugin](https://developer.cisco.com/d
 ## Improvements
 
 ### Device Deployments
-- [Deployed device changes](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-deployed-device-changes-in-deployment-run) are now returned for ASAs as well as cdFMC-managed FTDs. The endpoint now returns an array of change items, and the `deploymentType` field on each item identifies its shape. For FTDs, there is one item per changed entity. For ASAs, the items contain the initial configuration and the configuration that was deployed to the device.
-- [Deploy changes to multiple ASA devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/deploy-changes-to-multiple-asa-devices) now supports the `forceDeployUnsupportedCommands` field for changes that cannot be applied incrementally. When `false` (the default), these changes are skipped and the rest of the deployment proceeds. When `true`, SCC Firewall Manager applies the full configuration to the device. Applying the full configuration drops all active connections to the device, so enable this only when you intend to accept that disruption.
-- [Device deployment run](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-deployment-runs) records now include an `errorDetails` array, which contains detailed messages that could not be associated with a specific device, and a new `DEPLOY_VALIDATION_FAILED` status.
+- [Deployed device changes](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-deployed-device-changes-in-deployment-run) are now returned for ASAs as well as cdFMC-managed FTDs.
+- [Deploy changes to multiple ASA devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/deploy-changes-to-multiple-asa-devices) now supports the `forceDeployUnsupportedCommands` field for changes that cannot be applied incrementally.
+- [Device deployment run](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-deployment-runs) records now include an `errorDetails` array, which contains detailed messages, and a new `DEPLOY_VALIDATION_FAILED` status for when deployment could not be started as a result of policy validation failures.
 - Device deployment status records now include a `WARNING` state, and a new `DEVICE_DEPLOY_COMPLETED_WITH_WARNINGS` status.
-- The `deploymentType` field on [device deployment runs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-deployment-runs) is now searchable, with the values `ASA_DEVICE_DEPLOY` and `FTD_DEVICE_DEPLOY`.
 
 ### Device Health
-- [ASA health metrics](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-time-series-health-metrics-for-one-or-more-asa-devices) responses now return each environmental sensor separately. A device may publish multiple environmental sensors, such as several CPU temperature probes or internal chassis temperatures. Each physical sensor is returned as a peer property of `series` and `summary` on the `env` metric object — for example, `metrics.env.processorTemperatureProcessor1` and `metrics.env.chassisTemperatureInternal0`. Each of these properties is itself a metric with its own `series` and `summary`. The top-level `metrics.env.series` and `metrics.env.summary` continue to reflect one of the sensor series for backward compatibility. Other metrics never carry these properties.
+- [ASA health metrics](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-time-series-health-metrics-for-one-or-more-asa-devices) responses now return each environmental sensor separately.
 
 ### Inventory
 - [Device](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-devices) records now include a `raVpnPolicy` field.
-- [FTD onboarding](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/onboard-ftd-device) now supports onboarding with a device template using the `template` field. Exactly one of `fmcAccessPolicyUid` or `template` must be supplied. The `licenses` field is required for access-policy onboarding, and must not contain any licenses when a template is supplied.
-- Filtering [devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-devices) on `hardwareModel` now documents that cdFMC-managed FTDs require the human-readable form of the model, for example `Cisco Firepower 2100 Threat Defense`. FTDs managed by an on-premises FMC cannot be filtered on this field.
-- Added `BRIDGEGROUPMEMBER` as a new interface mode.
+- [FTD onboarding](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/onboard-ftd-device) now supports onboarding with a device template using the `template` field.
 
 ### Object Management
-- FQDN network objects sourced from FTD or cdFMC now include a `dnsResolution` field, with the values `IPV4_ONLY`, `IPV6_ONLY`, or `IPV4_AND_IPV6`. This is the DNS resolution family that governs which DNS record types FTD resolves when it enforces policy. It is populated only for FQDN objects.
+- FQDN network objects sourced from FTD or cdFMC now include a `dnsResolution` field, with the values `IPV4_ONLY`, `IPV6_ONLY`, or `IPV4_AND_IPV6`. This is the DNS resolution family that governs which DNS record types FTD resolves when it enforces policy.
 - [Object](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-objects) records now include an `objectVersion` field.
 
 ### Secure Client Management
-- Compatible Secure Client versions returned for [ASA devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/list-secure-client-versions-compatible-with-the-specified-asa-devices) and [FTD devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/list-secure-client-versions-compatible-with-the-specified-ftd-devices) now include the package that serves each platform, in the `package` field of each entry in `platforms`.
+- Compatible Secure Client versions returned for [ASA devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/list-secure-client-versions-compatible-with-the-specified-asa-devices) and [FTD devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/list-secure-client-versions-compatible-with-the-specified-ftd-devices) now include a link to the package that serves each platform, in the `package` field of each entry in `platforms`.
 - The `platforms` field is optional when you trigger a Secure Client upgrade on [ASA devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/trigger-secure-client-upgrade-on-asa-devices) or [FTD devices](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/trigger-secure-client-upgrade-on-ftd-devices). If it is omitted, all platforms available for the specified version are uploaded to each device.
-
-### MSP
-- [Create tenant](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/create-security-cloud-control-tenant) now supports the `addOns` field, which enables MSLA subscription add-ons on the new tenant (currently `SAL` only), and a `billingAddress` field.
-- [Export MSP-managed tenants](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/export-msp-managed-tenants) now documents that the export query must filter on the searchable fields of the exported resource. Filtering on non-searchable fields is not supported.
-
-### Users
-- [Token info](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-token-info) responses now include a `tenantLicensingType` field.
 
 ### Connectors
 - [Modify SDC](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/modify-sdc) now requires a non-empty `name`.
-
-### Transactions
-- Added new transaction types: `MSP_UPGRADE_SECURE_CLIENT_PACKAGES`, `MSP_GET_COMPATIBLE_SECURE_CLIENT_UPGRADE_PACKAGES`, `CALCULATE_ASA_CONFIG_COMMANDS`, and `NAT_PAO_APPLY_REMEDIATION`.
 
 ## Deprecations
 
@@ -77,9 +78,6 @@ There is also a new [Claude Code and Codex plugin](https://developer.cisco.com/d
 
 ### MSP Tenant Management
 - The deprecated endpoint to add an existing tenant to the MSP Portal was removed from the spec (`POST /v1/msp/tenants/{tenantUid}`).
-
-### Device Upgrades
-- The `completedAt` field was removed from completion status records, which appear on [device upgrade runs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-upgrade-runs) and [device deployment runs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-deployment-runs).
 
 # Version 1.21.0 (2026-06-12)
 
