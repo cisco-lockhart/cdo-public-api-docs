@@ -6216,154 +6216,6 @@ paths:
             tags:
                 - Licensing
             x-beta: "true"
-    /v1/licenses/msla/devices:
-        get:
-            description: Get a paginated list of MSLA entitlement assignments for devices in the tenant. Each item represents one entitlement assigned to one device.
-            operationId: getMslaDevices
-            parameters:
-                - description: Number of results to retrieve.
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 200
-                    minimum: 0
-                    type: string
-                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
-                  example: fieldName:fieldValue
-                  in: query
-                  name: q
-                  required: false
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MslaDevicePage'
-                    description: MSLA device entitlement assignments for the tenant
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    content:
-                        application/json: {}
-                    description: MSLA licensing is not enabled for this tenant
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get MSLA Device Entitlements
-            tags:
-                - Licensing
-            x-beta: "true"
-    /v1/licenses/msla/devices/{uid}:
-        get:
-            description: Get a single MSLA entitlement assignment by its UID.
-            operationId: getMslaDeviceByUid
-            parameters:
-                - description: The unique identifier (UID) of the MSLA device entitlement
-                  in: path
-                  name: uid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MslaDeviceItemDto'
-                    description: MSLA device entitlement assignment for the specified UID
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    content:
-                        application/json: {}
-                    description: MSLA licensing is not enabled for this tenant
-                "404":
-                    content:
-                        application/json: {}
-                    description: MSLA device entitlement not found for the specified UID
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get MSLA Device Entitlement by UID
-            tags:
-                - Licensing
-            x-beta: "true"
-    /v1/licenses/msla/usage:
-        get:
-            description: Get the MSLA entitlements assigned to this tenant and the number of devices consuming each entitlement. All assigned entitlements are returned, including those with no consuming devices. The consumption counts are derived from the most recent cdFMC poll, whose timestamp is returned in lastPolledAt.
-            operationId: getMslaUsage
-            parameters:
-                - description: Number of results to retrieve.
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 200
-                    minimum: 0
-                    type: string
-                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MslaUsagePage'
-                    description: MSLA license usage for the tenant
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    content:
-                        application/json: {}
-                    description: MSLA licensing is not enabled for this tenant
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get MSLA License Usage
-            tags:
-                - Licensing
-            x-beta: "true"
     /v1/licenses/smart-accounts:
         get:
             description: 'Get the Smart Accounts and the number of Virtual Accounts used in this tenant. Note: This endpoint does not display all the Smart Accounts, or number of Virtual Accounts within a Smart Account, to which the customer has access. Only Smart Accounts — and number of Virtual Accounts therein — that have licenses used by devices in this tenant are displayed. Note: This endpoint is currently in limited availability. Please contact your Cisco account team or Cisco TAC to request access.'
@@ -8325,155 +8177,6 @@ paths:
             security:
                 - bearerAuth: []
             summary: Export licenses for MSP-managed devices
-            tags:
-                - MSP Licensing
-            x-beta: "true"
-    /v1/msp/licenses/msla/devices:
-        get:
-            description: Get a paginated list of MSLA device entitlement assignments across all managed tenants in the MSP portal.
-            operationId: getMspMslaDeviceEntitlements
-            parameters:
-                - description: Number of results to retrieve.
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 200
-                    minimum: 0
-                    type: string
-                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
-                  example: fieldName:fieldValue
-                  in: query
-                  name: q
-                  required: false
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MspMslaDevicePage'
-                    description: List of MSP MSLA device entitlement assignments
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get MSP MSLA device entitlements
-            tags:
-                - MSP Licensing
-            x-beta: "true"
-    /v1/msp/licenses/msla/devices/{uid}:
-        get:
-            description: Get a single MSP MSLA device entitlement assignment by its UID.
-            operationId: getMspMslaDeviceEntitlementByUid
-            parameters:
-                - description: The unique identifier (UID) of the MSLA entitlement assignment
-                  in: path
-                  name: uid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MspMslaDeviceEntitlementDto'
-                    description: MSP MSLA device entitlement assignment for the specified UID
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "404":
-                    content:
-                        application/json: {}
-                    description: MSP MSLA device entitlement not found for the specified UID
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get MSP MSLA device entitlement by UID
-            tags:
-                - MSP Licensing
-            x-beta: "true"
-    /v1/msp/licenses/msla/usage:
-        get:
-            description: Get a paginated list of MSLA entitlement consumption across all managed tenants in the MSP portal.
-            operationId: getMspMslaLicenseUsage
-            parameters:
-                - description: Number of results to retrieve.
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 200
-                    minimum: 0
-                    type: string
-                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
-                  example: fieldName:fieldValue
-                  in: query
-                  name: q
-                  required: false
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MspMslaUsagePage'
-                    description: MSP MSLA entitlement consumption across managed tenants
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get MSP MSLA license usage
             tags:
                 - MSP Licensing
             x-beta: "true"
@@ -13838,13 +13541,8 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+            description: The completion status of the deployment on the device.
             properties:
-                completedAt:
-                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
-                    example: 2026-04-15T18:00:10.123Z
-                    format: date-time
-                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
@@ -14927,17 +14625,60 @@ components:
             example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
-            description: The current status of each device in the upgrade run.
+            description: Set of device UIDs that are part of this upgrade run.
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+                    description: The completion status of the upgrade on the device.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                uid:
-                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+                hardwareModel:
+                    description: Hardware model of the devices being upgraded.
+                    example: Firepower 2110
+                    type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: Name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantUid:
+                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    format: uuid
+                    type: string
+                name:
+                    description: Name of the device being upgraded.
+                    example: my-firepower
+                    type: string
+                softwareVersionBeforeUpgrade:
+                    description: Software version of the device before the upgrade.
+                    example: 7.2.3
+                    type: string
+                transactionUid:
+                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, of the device being upgraded.
+                    format: uuid
+                    type: string
+                upgradeRunStatus:
+                    description: Current status of the upgrade run.
+                    enum:
+                        - IN_PROGRESS
+                        - REBUILDING_UPGRADE_CACHE
+                        - PERFORMING_UPGRADE
+                        - UPLOADING_IMAGE
+                        - PERFORMING_READINESS_CHECK
+                        - UPGRADE_STAGED
+                        - UPGRADE_STAGING_FAILED
+                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_COMPLETED
+                        - UPGRADE_FAILED
+                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -15092,7 +14833,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The distinct device types for the devices managed by the MSP Portal.
+            description: The type of the device.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -15115,6 +14856,7 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
+            example: CDFMC_MANAGED_FTD
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -16796,103 +16538,6 @@ components:
                     format: int32
                     type: integer
             type: object
-        MslaDeviceItemDto:
-            properties:
-                deviceName:
-                    description: The name of the device.
-                    example: ftd-device-1
-                    type: string
-                deviceUid:
-                    description: The UID of the device in Security Cloud Control.
-                    example: 5d8f7db1-5e9b-4f7d-9c64-4fef0e5f9c9e
-                    type: string
-                entitlement:
-                    description: The MSLA entitlement identifier.
-                    example: MSLA-CSF-ESS
-                    type: string
-                modelNumber:
-                    description: The hardware model number.
-                    example: FPR-1120
-                    type: string
-                serial:
-                    description: The serial number of the device.
-                    example: JAD24500ABC
-                    type: string
-                uid:
-                    description: The UID of the entitlement assignment row.
-                    example: a1b2c3d4-0000-0000-0000-000000000001
-                    format: uuid
-                    type: string
-            type: object
-        MslaDevicePage:
-            properties:
-                count:
-                    description: The total number of results available.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/MslaDeviceItemDto'
-                    type: array
-                lastPolledAt:
-                    description: Timestamp, in RFC 3339 format, of the most recent data refresh. Null if no data has been collected yet.
-                    example: 2026-07-03T12:00:00Z
-                    format: date-time
-                    type: string
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
-            type: object
-        MslaUsageItemDto:
-            description: The list of items retrieved.
-            properties:
-                deviceCount:
-                    description: Number of devices in the tenant that have this entitlement assigned in cdFMC. Zero if no devices have consumed this entitlement.
-                    example: 12
-                    format: int32
-                    type: integer
-                entitlement:
-                    description: The MSLA entitlement identifier.
-                    example: MSLA-CSF-ESS
-                    type: string
-            type: object
-        MslaUsagePage:
-            properties:
-                count:
-                    description: The total number of results available.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/MslaUsageItemDto'
-                    type: array
-                lastPolledAt:
-                    description: Timestamp, in RFC 3339 format, of the most recent cdFMC poll that populated the consumption data. Null if no poll has completed yet.
-                    example: 2026-07-03T12:00:00Z
-                    format: date-time
-                    type: string
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
-            type: object
         MspAddTenantInput:
             properties:
                 apiToken:
@@ -18084,134 +17729,6 @@ components:
                 uid:
                     description: The unique identifier, represented as a UUID, of the virtual account in Security Cloud Control.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-            type: object
-        MspMslaDeviceEntitlementDto:
-            description: A single MSLA entitlement assignment for one device across an MSP-managed tenant.
-            properties:
-                deviceName:
-                    description: The name of the device.
-                    example: ftd-device-1
-                    type: string
-                deviceUid:
-                    description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
-                    example: 5d8f7db1-5e9b-4f7d-9c64-4fef0e5f9c9e
-                    format: uuid
-                    type: string
-                entitlement:
-                    description: MSLA entitlement identifier.
-                    enum:
-                        - MSLA-CSF-ESS
-                        - MSLA-CSF-ADV
-                        - MSLA-CSF-AMP
-                        - MSLA-CSF-URL
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant that owns this device.
-                    example: 5d8f7db1-5e9b-4f7d-9c64-4fef0e5f9c9c
-                    format: uuid
-                    type: string
-                modelNumber:
-                    description: The hardware model number of the device.
-                    example: FPR-1120
-                    type: string
-                serial:
-                    description: The serial number of the device.
-                    example: JAD24500ABC
-                    type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of the MSLA entitlement assignment.
-                    example: a1b2c3d4-0000-0000-0000-000000000001
-                    format: uuid
-                    type: string
-            type: object
-        MspMslaDevicePage:
-            properties:
-                count:
-                    description: The total number of results available.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/MspMslaDeviceEntitlementDto'
-                    type: array
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
-            type: object
-        MspMslaUsageItemDto:
-            description: MSLA entitlement consumption across all managed tenants of an MSP portal.
-            properties:
-                deviceCount:
-                    description: The total number of devices across all managed tenants consuming this entitlement.
-                    example: 19
-                    format: int32
-                    type: integer
-                entitlement:
-                    description: MSLA entitlement identifier.
-                    enum:
-                        - MSLA-CSF-ESS
-                        - MSLA-CSF-ADV
-                        - MSLA-CSF-AMP
-                        - MSLA-CSF-URL
-                    type: string
-                managedTenants:
-                    description: The managed tenants with at least one device consuming this entitlement.
-                    items:
-                        $ref: '#/components/schemas/MspMslaUsageTenantDto'
-                    type: array
-            type: object
-        MspMslaUsagePage:
-            properties:
-                count:
-                    description: The total number of results available.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/MspMslaUsageItemDto'
-                    type: array
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
-            type: object
-        MspMslaUsageTenantDto:
-            description: A managed tenant with at least one device consuming an MSLA entitlement.
-            properties:
-                displayName:
-                    description: The human-readable display name of the managed tenant.
-                    example: Tenant One
-                    type: string
-                name:
-                    description: The name of the managed tenant (unique in CDO).
-                    example: tenant-one
-                    type: string
-                region:
-                    description: The CDO region of the managed tenant.
-                    example: scale
-                    type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control.
-                    example: 5d8f7db1-5e9b-4f7d-9c64-4fef0e5f9c9c
                     format: uuid
                     type: string
             type: object
@@ -20095,14 +19612,32 @@ components:
                     type: string
             type: object
         SmartAccountDto:
-            description: The smart account used to license this device.
             properties:
-                parent:
-                    description: The name of the smart account used to license the device.
+                domain:
+                    description: Account domain for your Smart Account
                     type: string
-                virtual:
-                    description: The name of the virtual account, within the smart account, used to license the device
+                lastUpdatedTime:
+                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
+                    format: date-time
                     type: string
+                name:
+                    description: Name of the smart account
+                    type: string
+                smartAccountId:
+                    description: Smart Account Identifier
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, for your Smart Account
+                    format: uuid
+                    type: string
+                virtualAccountsInComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with in compliance status
+                    format: int32
+                    type: integer
+                virtualAccountsOutOfComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
+                    format: int32
+                    type: integer
             type: object
         SmartAccountsPage:
             properties:
@@ -21031,15 +20566,6 @@ components:
                 errorMsg:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in Security Cloud Control.
-                    example: My Managed Tenant
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
                     type: string
                 name:
                     description: The name of the device.
