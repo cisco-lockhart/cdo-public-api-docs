@@ -36,6 +36,14 @@ from scripts. Install it from [PyPI](https://pypi.org/project/cisco-sccfm-devkit
 pipx install cisco-sccfm-devkit
 ```
 
+Alternatively, install it with Homebrew:
+
+```shell
+brew tap CiscoDevNet/tap
+brew trust --formula CiscoDevNet/tap/sccfm-cli  # required once on Homebrew 6.0+
+brew install CiscoDevNet/tap/sccfm-cli
+```
+
 ## Ansible Collection
 
 The `cisco.sccfm` collection lets you manage Security Cloud Control Firewall Manager from Ansible
@@ -63,8 +71,8 @@ skills for the CLI and Ansible collection into Claude Code and Codex.
 Claude Code:
 
 ```shell
-/plugin marketplace add CiscoDevNet/sccfm-devkit
-/plugin install sccfm@sccfm-devkit
+claude plugin marketplace add CiscoDevNet/sccfm-devkit
+claude plugin install sccfm@sccfm-devkit
 ```
 
 Codex:
