@@ -28,6 +28,374 @@ paths:
             summary: Fetch JSON Web Key Set
             tags:
                 - Meta
+    /v1/agenticops/policies/nat/analyses:
+        post:
+            description: Starts an asynchronous analysis of one or more NAT policies for a single data source. A data source is the device manager that owns the NAT policies on this tenant, so each <code>dataSourceUid</code> is the unique identifier, represented as a UUID, of an FMC device manager onboarded to it. Use the <a href="https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-managers/">Device Managers</a> endpoint to list them and pick the data source(s) to analyze. The operation returns a Security Cloud Control Transaction object that can be used to track progress.
+            operationId: triggerNatPolicyAnalysis
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/NatPolicyAnalysisRequest'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track policy analysis progress
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "409":
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: No requested policy requires analysis or all are unavailable
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Start NAT policy analysis
+            tags:
+                - Policy Analysis and Optimization
+    /v1/agenticops/policies/nat/analyses/latest:
+        get:
+            description: Gets the latest NAT policy analyses across data sources. Results can be filtered, sorted, and paginated.
+            operationId: getLatestPolicyAnalysisData
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: analysisDetails.analysisStartTime:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PolicyNodeDataPage'
+                    description: Paginated list of the latest NAT policy analyses
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get latest NAT policy analyses
+            tags:
+                - Policy Analysis and Optimization
+    /v1/agenticops/policies/nat/analyses/latest/summary:
+        get:
+            description: Gets an aggregated summary of the latest NAT policy analyses for the specified data source.
+            operationId: getNatPolicyAnalysisSummaryByDataSourceUid
+            parameters:
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PolicyAnalysisInsightsSummary'
+                    description: Aggregated summary of the latest NAT policy analyses for the data source
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get latest NAT policy analysis summary
+            tags:
+                - Policy Analysis and Optimization
+    /v1/agenticops/policies/nat/analysis/insights/{insightsUid}/details:
+        get:
+            description: Gets rule-level conflict data for the specified NAT policy analysis. Each item includes the `hasShadowedRules` and `hasRedundantRules` fields, which indicate whether the conflicting rules are shadowed or redundant, respectively. If there are no conflicts, an empty page is returned.
+            operationId: getNatPolicyRuleConflicts
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: The unique identifier of the NAT policy analysis.
+                  example: a276b855-feb7-4774-863f-569f2826f3f5
+                  in: path
+                  name: insightsUid
+                  required: true
+                  schema:
+                    type: string
+                - description: Filter results to conflicts containing shadowed rules.
+                  in: query
+                  name: shadowedOnly
+                  required: false
+                  schema:
+                    default: false
+                    type: boolean
+                - description: Filter results to conflicts containing redundant rules.
+                  in: query
+                  name: redundantOnly
+                  required: false
+                  schema:
+                    default: false
+                    type: boolean
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RuleConflictsDataPage'
+                    description: Paginated list of NAT policy analysis rule conflicts
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get NAT policy analysis rule conflicts
+            tags:
+                - Policy Analysis and Optimization
+    /v1/agenticops/policies/nat/analysis/insights/summary/{insightsUid}:
+        get:
+            description: Gets the summary for the specified NAT policy analysis.
+            operationId: getNatPolicyAnalysisSummary
+            parameters:
+                - description: The unique identifier of the NAT policy analysis.
+                  example: a276b855-feb7-4774-863f-569f2826f3f5
+                  in: path
+                  name: insightsUid
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PolicyAnalysisInsightsSummary'
+                    description: NAT policy analysis summary
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get NAT policy analysis summary
+            tags:
+                - Policy Analysis and Optimization
+    /v1/agenticops/policies/nat/report-gen/analysis:
+        post:
+            description: Generates or reuses a PDF report for the requested NAT policy analysis. The operation returns a Security Cloud Control Transaction object that can be used to track report generation progress. When the transaction completes, `transactionDetails` contains `reportUrl`. The request requires the analysis and data source identifiers; an S3 key is not required.
+            operationId: generatePolicyAnalysisInsightsReport
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/InsightsReportGenerationRequest'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track report generation progress
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Generate NAT policy analysis report
+            tags:
+                - Policy Analysis and Optimization
+    /v1/agenticops/policies/nat/report-gen/analysis/{insightsUid}:
+        get:
+            description: Gets a `reportUrl` field containing a presigned download URL that is valid for 30 minutes. A current PDF report must already exist for the requested analysis.
+            operationId: getPolicyAnalysisInsightsReportUrl
+            parameters:
+                - description: The unique identifier of the NAT policy analysis whose report URL is requested.
+                  example: a276b855-feb7-4774-863f-569f2826f3f5
+                  in: path
+                  name: insightsUid
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                    description: Object containing a presigned download URL for the NAT policy analysis report
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get NAT policy analysis report URL
+            tags:
+                - Policy Analysis and Optimization
+    /v1/agenticops/policies/nat/sync:
+        post:
+            description: Creates one NAT policy sync transaction for each requested data source. If the <code>dataSourceUids</code> field is omitted or empty, all eligible FMC data sources are synced. A data source is the device manager that owns the NAT policies on this tenant, so the data source UIDs are the unique identifiers of the FMC device managers onboarded to it. Use the <a href="https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-managers/">Device Managers</a> endpoint to list them and pick the UIDs to sync.
+            operationId: syncNatPolicies
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/NatPolicySyncRequest'
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransactionListResponse'
+                    description: Security Cloud Control Transaction objects that can be used to track NAT policy sync progress
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "409":
+                    $ref: '#/components/responses/http409Conflict'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Sync FMC NAT policies
+            tags:
+                - Policy Analysis and Optimization
     /v1/ai-assistant/conversations:
         get:
             description: 'Get a list of AI Assistant Conversations. Note: the total number of conversations is set to -1 as this information is currently unavailable.'
@@ -1372,133 +1740,6 @@ paths:
             summary: Get supported endpoint patterns
             tags:
                 - Commands
-    /v1/ftd-services/tasks:
-        get:
-            description: Get FTD Services tasks executed on this Security Cloud Control tenant.
-            operationId: getTasks
-            parameters:
-                - description: Number of results to retrieve.
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 200
-                    minimum: 0
-                    type: string
-                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
-                  example: fieldName:fieldValue
-                  in: query
-                  name: q
-                  required: false
-                  schema:
-                    type: string
-                - description: The fields to sort results by.
-                  example: name:DESC
-                  in: query
-                  name: sort
-                  required: false
-                  schema:
-                    items:
-                        type: string
-                    type: array
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/TaskDtoPage'
-                    description: List of tasks
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            summary: Get tasks
-            tags:
-                - FTD Services
-    /v1/ftd-services/tasks/{taskUid}/subtasks:
-        get:
-            description: Get subtasks associated with a task executed on the Security Cloud Control tenant.
-            operationId: getSubTasks
-            parameters:
-                - description: Number of results to retrieve.
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 200
-                    minimum: 0
-                    type: string
-                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-                - description: The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control.
-                  in: path
-                  name: taskUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/SubTaskDtoPage'
-                    description: List of subtasks associated with a task
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "404":
-                    $ref: '#/components/responses/http404NotFound'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            summary: Get subtasks associated with a task
-            tags:
-                - FTD Services
-    /v1/ftd-services/tasks/attribute-values:
-        get:
-            description: Get distinct values for multiple fields in the FTD services tasks executed on the Security Cloud Control tenant.
-            operationId: getTasksAttributeValues
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/TaskDistinctAttributeValues'
-                    description: Distinct attribute values for tasks
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            summary: Get distinct attribute values for tasks
-            tags:
-                - FTD Services
     /v1/inventory/devices:
         get:
             description: Get a list of devices in the Security Cloud Control tenant.
@@ -12174,6 +12415,24 @@ components:
                     example: What's the difference between an Admin and a Super Admin?
                     type: string
             type: object
+        AnalysisDetails:
+            properties:
+                analysisStartTime:
+                    format: date-time
+                    type: string
+                status:
+                    enum:
+                        - ERROR
+                        - ANALYSIS_PENDING
+                        - IN_PROGRESS
+                        - REMEDIATION_IN_PROGRESS
+                        - ANALYSIS_OUT_OF_DATE
+                        - HEALTHY
+                        - OPTIMIZABLE
+                    type: string
+                summary:
+                    $ref: '#/components/schemas/Summary'
+            type: object
         ApiTokenInfo:
             properties:
                 apiToken:
@@ -13057,6 +13316,14 @@ components:
                     format: uuid
                     type: string
             type: object
+        CdoTransactionListResponse:
+            properties:
+                items:
+                    description: Transactions created for the requested data sources
+                    items:
+                        $ref: '#/components/schemas/CdoTransaction'
+                    type: array
+            type: object
         ChangeRequest:
             properties:
                 description:
@@ -13668,10 +13935,10 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the upgrade on the device.
+            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
             properties:
                 completedAt:
-                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
+                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
                     example: 2026-04-15T18:00:10.123Z
                     format: date-time
                     type: string
@@ -13679,7 +13946,7 @@ components:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -13690,7 +13957,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: Percentage completion of the current task being performed.
+                    description: The percentage completion of the current task being performed
                     format: double
                     type: number
             type: object
@@ -13717,6 +13984,18 @@ components:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
             type: string
+        ConflictingRules:
+            description: The Data of the conflicting rules.
+            properties:
+                redundantRules:
+                    items:
+                        $ref: '#/components/schemas/ExtendedNatRuleData'
+                    type: array
+                shadowedRules:
+                    items:
+                        $ref: '#/components/schemas/ExtendedNatRuleData'
+                    type: array
+            type: object
         ConnectivityState:
             description: The distinct connectivity states for the devices managed by the MSP Portal.
             enum:
@@ -13846,6 +14125,19 @@ components:
                 uid:
                     description: The unique identifier, represented as a UUID, of the tenant in Security Cloud Control.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            type: object
+        DataSource:
+            properties:
+                name:
+                    type: string
+                type:
+                    enum:
+                        - FMC
+                        - SCC
+                    type: string
+                uid:
                     format: uuid
                     type: string
             type: object
@@ -14757,60 +15049,17 @@ components:
             example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
-            description: Set of device UIDs that are part of this upgrade run.
+            description: The current status of each device in the upgrade run.
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device.
+                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                hardwareModel:
-                    description: Hardware model of the devices being upgraded.
-                    example: Firepower 2110
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: Name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantUid:
-                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    format: uuid
-                    type: string
-                name:
-                    description: Name of the device being upgraded.
-                    example: my-firepower
-                    type: string
-                softwareVersionBeforeUpgrade:
-                    description: Software version of the device before the upgrade.
-                    example: 7.2.3
-                    type: string
-                transactionUid:
-                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, of the device being upgraded.
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: Current status of the upgrade run.
-                    enum:
-                        - IN_PROGRESS
-                        - REBUILDING_UPGRADE_CACHE
-                        - PERFORMING_UPGRADE
-                        - UPLOADING_IMAGE
-                        - PERFORMING_READINESS_CHECK
-                        - UPGRADE_STAGED
-                        - UPGRADE_STAGING_FAILED
-                        - UGPRADE_STAGING_FAILED
-                        - UPGRADE_COMPLETED
-                        - UPGRADE_FAILED
-                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -14841,18 +15090,6 @@ components:
                     description: Specify whether to enable or disable health metrics collection (SDC-managed ASA devices only).
                     example: true
                     type: boolean
-            type: object
-        DirectoryDownloadResult:
-            allOf:
-                - $ref: '#/components/schemas/TaskResultDetails'
-                - properties:
-                    numGroups:
-                        format: int64
-                        type: integer
-                    numUsers:
-                        format: int64
-                        type: integer
-                  type: object
             type: object
         DiskHealthMetrics:
             description: The disk health metrics for the device.
@@ -14977,7 +15214,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The distinct device types for the devices managed by the MSP Portal.
+            description: The type of the device.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -15000,6 +15237,7 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
+            example: CDFMC_MANAGED_FTD
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -15168,7 +15406,63 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
+                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    type: string
+            type: object
+        ExtendedNatRuleData:
+            properties:
+                destinationInterface:
+                    $ref: '#/components/schemas/ObjectData'
+                direction:
+                    enum:
+                        - UNIDIRECTIONAL
+                        - BIDIRECTIONAL
+                    type: string
+                enabled:
+                    type: boolean
+                name:
+                    type: string
+                originalDestination:
+                    $ref: '#/components/schemas/ObjectData'
+                originalDestinationPort:
+                    $ref: '#/components/schemas/ObjectData'
+                originalSource:
+                    $ref: '#/components/schemas/ObjectData'
+                originalSourcePort:
+                    $ref: '#/components/schemas/ObjectData'
+                ruleIndex:
+                    format: int32
+                    type: integer
+                ruleName:
+                    type: string
+                ruleSection:
+                    enum:
+                        - NAT_RULES_BEFORE
+                        - NAT_RULES_AFTER
+                        - AUTO_NAT
+                    type: string
+                ruleType:
+                    enum:
+                        - STATIC
+                        - DYNAMIC
+                    type: string
+                sourceInterface:
+                    $ref: '#/components/schemas/ObjectData'
+                translatedDestination:
+                    $ref: '#/components/schemas/ObjectData'
+                translatedDestinationPort:
+                    $ref: '#/components/schemas/ObjectData'
+                translatedSource:
+                    $ref: '#/components/schemas/ObjectData'
+                translatedSourcePort:
+                    $ref: '#/components/schemas/ObjectData'
+                type:
+                    description: Type of the rule.
+                    example: ManualNat64Rule
+                    type: string
+                uid:
+                    description: UID of the rule.
+                    example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -15989,6 +16283,23 @@ components:
                     example: DESTINATION_UNREACHABLE
                     type: string
             type: object
+        ImpactedSources:
+            properties:
+                devicesCount:
+                    format: int32
+                    type: integer
+                templatesCount:
+                    format: int32
+                    type: integer
+            type: object
+        InsightsReportGenerationRequest:
+            properties:
+                insightsUid:
+                    format: uuid
+                    type: string
+                source:
+                    $ref: '#/components/schemas/DataSource'
+            type: object
         InterfaceErrorSummary:
             properties:
                 error:
@@ -16270,6 +16581,25 @@ components:
                         type: string
                     type: array
                     uniqueItems: true
+            type: object
+        Item:
+            description: Policy analysis requests grouped by data source
+            properties:
+                dataSourceUid:
+                    description: The unique identifier, represented as a UUID, of the data source whose policies are analyzed. A data source is the device manager that owns the NAT policies on this tenant, so this is the unique identifier of an FMC device manager onboarded to it, as returned by the <a href="https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-managers/">Device Managers</a> endpoint.
+                    format: uuid
+                    type: string
+                policyUids:
+                    description: The unique identifiers, represented as UUIDs, of the NAT policies to analyze. Use the <a href="https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-all-ftd-nat-policy/">Get cdFMC NAT Policies</a> endpoint, or the equivalent NAT policy retrieval APIs for on-prem FMCs, to get these identifiers.
+                    items:
+                        description: The unique identifiers, represented as UUIDs, of the NAT policies to analyze. Use the <a href="https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-all-ftd-nat-policy/">Get cdFMC NAT Policies</a> endpoint, or the equivalent NAT policy retrieval APIs for on-prem FMCs, to get these identifiers.
+                        type: string
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+            required:
+                - dataSourceUid
+                - policyUids
             type: object
         JsonWebKey:
             description: The JSON Web Key Set.
@@ -18589,6 +18919,27 @@ components:
                     format: int32
                     type: integer
             type: object
+        NatPolicyAnalysisRequest:
+            properties:
+                items:
+                    description: Policy analysis requests grouped by data source
+                    items:
+                        $ref: '#/components/schemas/Item'
+                    minItems: 1
+                    type: array
+            required:
+                - items
+            type: object
+        NatPolicySyncRequest:
+            properties:
+                dataSourceUids:
+                    description: the unique identifiers, represented as UUIDs, of the Data sources to sync. A data source is the device manager that owns the NAT policies on this tenant, so these are the unique identifiers of the FMC device managers onboarded to it, as returned by the <a href="https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-managers/">Device Managers</a> endpoint. If omitted or empty, all eligible NAT PAO FMC data sources are synced.
+                    items:
+                        description: the unique identifiers, represented as UUIDs, of the Data sources to sync. A data source is the device manager that owns the NAT policies on this tenant, so these are the unique identifiers of the FMC device managers onboarded to it, as returned by the <a href="https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-managers/">Device Managers</a> endpoint. If omitted or empty, all eligible NAT PAO FMC data sources are synced.
+                        format: uuid
+                        type: string
+                    type: array
+            type: object
         Network:
             description: (Meraki devices only) The [Dashboard Network](https://documentation.meraki.com/General_Administration/Organizations_and_Networks/Creating_and_Deleting_Dashboard_Networks) the device is deployed in.
             properties:
@@ -18645,6 +18996,21 @@ components:
                 - $ref: '#/components/schemas/UrlObjectContent'
                 - $ref: '#/components/schemas/GroupContent'
                 - $ref: '#/components/schemas/NetworkObjectContent'
+            type: object
+        ObjectData:
+            properties:
+                name:
+                    type: string
+                type:
+                    description: Type of the rule.
+                    example: ManualNat64Rule
+                    type: string
+                uid:
+                    description: UID of the rule.
+                    example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                    type: string
+                value:
+                    type: string
             type: object
         ObjectResponse:
             properties:
@@ -18800,6 +19166,52 @@ components:
                     format: int32
                     type: integer
             type: object
+        PagePolicyAnalysisData:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/PolicyAnalysisData'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
+        PageRuleConflictsData:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/RuleConflictsData'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
         PhysicalInterfacePatchInput:
             properties:
                 description:
@@ -18855,6 +19267,85 @@ components:
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
+            type: object
+        PolicyAnalysisData:
+            description: Latest NAT policy analysis data.
+            properties:
+                analysisDetails:
+                    $ref: '#/components/schemas/AnalysisDetails'
+                dataSource:
+                    $ref: '#/components/schemas/DataSource'
+                impactedSources:
+                    $ref: '#/components/schemas/ImpactedSources'
+                link:
+                    type: string
+                policy:
+                    $ref: '#/components/schemas/Policy'
+                remediationStatus:
+                    type: string
+                uid:
+                    format: uuid
+                    type: string
+            type: object
+        PolicyAnalysisInsightsSummary:
+            properties:
+                anomalousRules:
+                    description: The total number of anomalous rules
+                    format: int32
+                    type: integer
+                dataSourceUid:
+                    description: The data source UID for the summarized NAT policies
+                    type: string
+                disabledRules:
+                    description: The total number of disabled rules
+                    format: int32
+                    type: integer
+                policies:
+                    description: The number of policies included in the summary
+                    format: int32
+                    type: integer
+                policyType:
+                    description: The policy type for the summarized NAT policies
+                    type: string
+                redundantRules:
+                    description: The total number of redundant rules using v1 semantics
+                    format: int32
+                    type: integer
+                shadowedRules:
+                    description: The total number of shadowed rules using v1 semantics
+                    format: int32
+                    type: integer
+                totalRules:
+                    description: The total number of rules
+                    format: int32
+                    type: integer
+                unhealthyRules:
+                    description: The number of unique unhealthy rules across shadowed and redundant sets
+                    format: int32
+                    type: integer
+            type: object
+        PolicyNodeDataPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/PolicyAnalysisData'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
             type: object
         PortsValue:
             properties:
@@ -19122,6 +19613,46 @@ components:
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
+            type: object
+        RuleConflictsData:
+            description: Rule Conflicts Data holding original rule and conflicting rules.
+            properties:
+                conflictingRules:
+                    $ref: '#/components/schemas/ConflictingRules'
+                isRedundant:
+                    description: Are the conflicting rules redundant rules.
+                    type: boolean
+                isShadowed:
+                    description: Are the conflicting rules shadowed rules.
+                    type: boolean
+                observationId:
+                    description: Rule conflict observation identifier.
+                    type: string
+                originalRule:
+                    $ref: '#/components/schemas/originalRule'
+            type: object
+        RuleConflictsDataPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/RuleConflictsData'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
             type: object
         RuleTimeRangeContent:
             description: The optional time range for which the access rule is active.
@@ -19755,14 +20286,32 @@ components:
                     type: string
             type: object
         SmartAccountDto:
-            description: The smart account used to license this device.
             properties:
-                parent:
-                    description: The name of the smart account used to license the device.
+                domain:
+                    description: Account domain for your Smart Account
                     type: string
-                virtual:
-                    description: The name of the virtual account, within the smart account, used to license the device
+                lastUpdatedTime:
+                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
+                    format: date-time
                     type: string
+                name:
+                    description: Name of the smart account
+                    type: string
+                smartAccountId:
+                    description: Smart Account Identifier
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, for your Smart Account
+                    format: uuid
+                    type: string
+                virtualAccountsInComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with in compliance status
+                    format: int32
+                    type: integer
+                virtualAccountsOutOfComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
+                    format: int32
+                    type: integer
             type: object
         SmartAccountsPage:
             properties:
@@ -20084,79 +20633,23 @@ components:
                     description: The standby interface Media Access Control (MAC) address, for use in a high-availability (HA) pair.
                     type: string
             type: object
-        SubTaskDto:
-            description: The list of items retrieved.
-            properties:
-                description:
-                    description: The description of the subtask in Security Cloud Control
-                    example: 'Policy Export for Device A: 80% complete'
-                    type: string
-                status:
-                    description: The status of the task in Security Cloud Control
-                    enum:
-                        - DONE
-                        - PARTIALLY_DONE
-                        - IN_PROGRESS
-                        - ERROR
-                        - CANCELLED
-                        - UNKNOWN
-                    example: PENDING
-                    type: string
-                targetName:
-                    description: The name of the target the subtask is running against.
-                    example: Device A
-                    type: string
-                targetType:
-                    description: The type of the target the subtask is running against.
-                    enum:
-                        - DEVICE
-                    example: DEVICE
-                    type: string
-                targetUid:
-                    description: The unique identifier, represented as a UUID, of the target the subtask is running against.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of the subtask in Security Cloud Control.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-            type: object
-        SubTaskDtoPage:
-            properties:
-                count:
-                    description: The total number of results available.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/SubTaskDto'
-                    type: array
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
-            type: object
         Summary:
             properties:
-                average:
+                optimizablePercentage:
                     format: double
                     type: number
-                latest:
-                    format: double
-                    type: number
-                max:
-                    format: double
-                    type: number
+                redundantRules:
+                    format: int32
+                    type: integer
+                shadowedRules:
+                    format: int32
+                    type: integer
+                totalRules:
+                    format: int32
+                    type: integer
+                unhealthyRulesCount:
+                    format: int32
+                    type: integer
             type: object
         SwitchPortConfig:
             description: Switchport configuration of the interface, which includes settings such as switchport mode, access VLAN, and trunk VLAN. This configuration is applicable for interfaces operating in switchport mode.
@@ -20223,247 +20716,6 @@ components:
                         example: '["7131daad-e813-4b8f-8f42-be1e241e8cdb"]'
                         type: string
                     type: array
-            type: object
-        TaskDistinctAttributeValues:
-            properties:
-                statuses:
-                    description: The unique status values for the tasks in the Security Cloud Control tenant
-                    items:
-                        description: The unique status values for the tasks in the Security Cloud Control tenant
-                        enum:
-                            - DONE
-                            - PARTIALLY_DONE
-                            - IN_PROGRESS
-                            - ERROR
-                            - CANCELLED
-                            - UNKNOWN
-                        type: string
-                    type: array
-                    uniqueItems: true
-                types:
-                    description: The unique task type values for the tasks in the Security Cloud Control tenant
-                    items:
-                        description: The unique task type values for the tasks in the Security Cloud Control tenant
-                        enum:
-                            - REGISTER_DEVICE
-                            - UNREGISTER_DEVICE
-                            - DEPLOY_DEVICE
-                            - ROLLBACK_DEVICE
-                            - BACKUP_DEVICE
-                            - EXPORT_DEVICE
-                            - IMPORT_DEVICE
-                            - DELETE_DEVICE
-                            - TROUBLESHOOT_DEVICE
-                            - CONFIGURE_DEVICE
-                            - VALIDATE_DEVICE_CONFIGURATION
-                            - MIGRATE_DEVICE_MODEL
-                            - MANAGE_DEVICE_CERTIFICATE
-                            - CREATE_DEVICE_TEMPLATE
-                            - APPLY_DEVICE_TEMPLATE
-                            - EXPORT_POLICY
-                            - CLONE_POLICY
-                            - GENERATE_POLICY_REPORT
-                            - GENERATE_REPORTS
-                            - APPLY_HEALTH_POLICY
-                            - APPLY_HEALTH
-                            - CONFIGURE_MANAGER
-                            - ADD_MANAGER_CONFIGURATION
-                            - DELETE_MANAGER_CONFIGURATION
-                            - COPY_CONFIGURATION
-                            - MANAGE_CHANGES
-                            - REGISTER_CHASSIS
-                            - REGISTER_SMART_LICENSE
-                            - INITIATE_MIGRATION
-                            - DISCARD_MIGRATION
-                            - MIGRATE_FLEXCONFIG
-                            - CREATE_FTD_CLUSTER
-                            - BREAK_FTD_CLUSTER
-                            - BOOTSTRAP_FTD_CLUSTER
-                            - UPDATE_FTD_CLUSTER_BOOTSTRAP
-                            - ADD_FTD_CLUSTER_NODES
-                            - REMOVE_FTD_CLUSTER_NODES
-                            - EXECUTE_FTD_CLUSTER_COMMAND
-                            - MANAGE_NGFW_HA
-                            - OIR_SSP_EPM
-                            - DEPLOY_SSP_EPM_BREAKOUT
-                            - DOWNLOAD_LDAP
-                            - DOWNLOAD_AZURE_AD
-                            - UPDATE_SRU
-                            - INSTALL_SRU
-                            - UPGRADE_THREAT
-                            - INSTALL_LOCAL
-                            - INSTALL_LIGHTWEIGHT_SECURITY_PACKAGE
-                            - UPLOAD_TROUBLESHOOT
-                            - DOWNLOAD_FROM_CISCO_SUPPORT
-                            - RUN_SNORT_PROFILER
-                            - RUN_CPU_PROFILER
-                            - ONBOARD_LTP
-                            - SWITCH_TO_ANALYTICS
-                            - REFRESH_HIT_COUNT
-                            - PENDING_CHANGES_REQUEST
-                            - OOB_CHANGES_REQUEST
-                            - CHASSIS_CONVERSION_REQUEST
-                            - ACTION_TYPE_DOMAIN_CHANGES
-                            - UNKNOWN
-                        type: string
-                    type: array
-                    uniqueItems: true
-                usernames:
-                    description: The unique username values for who triggered tasks in the Security Cloud Control tenant
-                    items:
-                        description: The unique username values for who triggered tasks in the Security Cloud Control tenant
-                        type: string
-                    type: array
-                    uniqueItems: true
-            type: object
-        TaskDto:
-            description: The list of items retrieved.
-            properties:
-                description:
-                    description: The description of the task in Security Cloud Control
-                    example: Policy Export
-                    type: string
-                lastUpdatedTime:
-                    description: Time (UTC; represented using the RFC-3339 standard) at which the task was last updated.
-                    example: 2023-12-13T08:15:44Z
-                    format: date-time
-                    type: string
-                numSubTasks:
-                    description: The number of subtasks associated with this task.
-                    example: 10
-                    format: int32
-                    type: integer
-                result:
-                    $ref: '#/components/schemas/TaskResultDetails'
-                status:
-                    description: The status of the task in Security Cloud Control
-                    enum:
-                        - DONE
-                        - PARTIALLY_DONE
-                        - IN_PROGRESS
-                        - ERROR
-                        - CANCELLED
-                        - UNKNOWN
-                    example: PENDING
-                    type: string
-                statusDetails:
-                    description: Human-readable details on the status of the task
-                    example: SSP primary bootstrap succeeded
-                    type: string
-                submissionTime:
-                    description: Time (UTC; represented using the RFC-3339 standard) at which the task was triggered.
-                    example: 2023-12-13T05:15:44Z
-                    format: date-time
-                    type: string
-                type:
-                    description: The type of the task in Security Cloud Control
-                    enum:
-                        - REGISTER_DEVICE
-                        - UNREGISTER_DEVICE
-                        - DEPLOY_DEVICE
-                        - ROLLBACK_DEVICE
-                        - BACKUP_DEVICE
-                        - EXPORT_DEVICE
-                        - IMPORT_DEVICE
-                        - DELETE_DEVICE
-                        - TROUBLESHOOT_DEVICE
-                        - CONFIGURE_DEVICE
-                        - VALIDATE_DEVICE_CONFIGURATION
-                        - MIGRATE_DEVICE_MODEL
-                        - MANAGE_DEVICE_CERTIFICATE
-                        - CREATE_DEVICE_TEMPLATE
-                        - APPLY_DEVICE_TEMPLATE
-                        - EXPORT_POLICY
-                        - CLONE_POLICY
-                        - GENERATE_POLICY_REPORT
-                        - GENERATE_REPORTS
-                        - APPLY_HEALTH_POLICY
-                        - APPLY_HEALTH
-                        - CONFIGURE_MANAGER
-                        - ADD_MANAGER_CONFIGURATION
-                        - DELETE_MANAGER_CONFIGURATION
-                        - COPY_CONFIGURATION
-                        - MANAGE_CHANGES
-                        - REGISTER_CHASSIS
-                        - REGISTER_SMART_LICENSE
-                        - INITIATE_MIGRATION
-                        - DISCARD_MIGRATION
-                        - MIGRATE_FLEXCONFIG
-                        - CREATE_FTD_CLUSTER
-                        - BREAK_FTD_CLUSTER
-                        - BOOTSTRAP_FTD_CLUSTER
-                        - UPDATE_FTD_CLUSTER_BOOTSTRAP
-                        - ADD_FTD_CLUSTER_NODES
-                        - REMOVE_FTD_CLUSTER_NODES
-                        - EXECUTE_FTD_CLUSTER_COMMAND
-                        - MANAGE_NGFW_HA
-                        - OIR_SSP_EPM
-                        - DEPLOY_SSP_EPM_BREAKOUT
-                        - DOWNLOAD_LDAP
-                        - DOWNLOAD_AZURE_AD
-                        - UPDATE_SRU
-                        - INSTALL_SRU
-                        - UPGRADE_THREAT
-                        - INSTALL_LOCAL
-                        - INSTALL_LIGHTWEIGHT_SECURITY_PACKAGE
-                        - UPLOAD_TROUBLESHOOT
-                        - DOWNLOAD_FROM_CISCO_SUPPORT
-                        - RUN_SNORT_PROFILER
-                        - RUN_CPU_PROFILER
-                        - ONBOARD_LTP
-                        - SWITCH_TO_ANALYTICS
-                        - REFRESH_HIT_COUNT
-                        - PENDING_CHANGES_REQUEST
-                        - OOB_CHANGES_REQUEST
-                        - CHASSIS_CONVERSION_REQUEST
-                        - ACTION_TYPE_DOMAIN_CHANGES
-                        - UNKNOWN
-                    type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of the task in Security Cloud Control.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-                username:
-                    description: The last user to interact with (or trigger) this task.
-                    example: bob@example.com
-                    type: string
-            type: object
-        TaskDtoPage:
-            properties:
-                count:
-                    description: The total number of results available.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/TaskDto'
-                    type: array
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
-            type: object
-        TaskResultDetails:
-            description: Type-specific result produced by a task
-            discriminator:
-                propertyName: type
-            oneOf:
-                - $ref: '#/components/schemas/DirectoryDownloadResult'
-                - $ref: '#/components/schemas/TroubleshootingResult'
-            properties:
-                type:
-                    type: string
-            required:
-                - type
             type: object
         Tenant:
             properties:
@@ -20614,16 +20866,6 @@ components:
             required:
                 - deviceUids
                 - version
-            type: object
-        TroubleshootingResult:
-            allOf:
-                - $ref: '#/components/schemas/TaskResultDetails'
-                - properties:
-                    downloadUrls:
-                        items:
-                            type: string
-                        type: array
-                  type: object
             type: object
         UnifiedObjectListView:
             description: The list of objects retrieved.
@@ -21384,6 +21626,63 @@ components:
                 - licenses
                 - name
                 - serialNumber
+            type: object
+        originalRule:
+            description: The Data of the Original rule.
+            properties:
+                destinationInterface:
+                    $ref: '#/components/schemas/ObjectData'
+                direction:
+                    enum:
+                        - UNIDIRECTIONAL
+                        - BIDIRECTIONAL
+                    type: string
+                enabled:
+                    type: boolean
+                name:
+                    type: string
+                originalDestination:
+                    $ref: '#/components/schemas/ObjectData'
+                originalDestinationPort:
+                    $ref: '#/components/schemas/ObjectData'
+                originalSource:
+                    $ref: '#/components/schemas/ObjectData'
+                originalSourcePort:
+                    $ref: '#/components/schemas/ObjectData'
+                ruleIndex:
+                    format: int32
+                    type: integer
+                ruleName:
+                    type: string
+                ruleSection:
+                    enum:
+                        - NAT_RULES_BEFORE
+                        - NAT_RULES_AFTER
+                        - AUTO_NAT
+                    type: string
+                ruleType:
+                    enum:
+                        - STATIC
+                        - DYNAMIC
+                    type: string
+                sourceInterface:
+                    $ref: '#/components/schemas/ObjectData'
+                translatedDestination:
+                    $ref: '#/components/schemas/ObjectData'
+                translatedDestinationPort:
+                    $ref: '#/components/schemas/ObjectData'
+                translatedSource:
+                    $ref: '#/components/schemas/ObjectData'
+                translatedSourcePort:
+                    $ref: '#/components/schemas/ObjectData'
+                type:
+                    description: Type of the rule.
+                    example: ManualNat64Rule
+                    type: string
+                uid:
+                    description: UID of the rule.
+                    example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                    type: string
             type: object
     responses:
         http400BadRequest:
