@@ -50,6 +50,7 @@ nav:
     - MSPUserManagementApi: MSPUserManagementApi.md
     - MetaApi: MetaApi.md
     - ObjectManagementApi: ObjectManagementApi.md
+    - PolicyAnalysisAndOptimizationApi: PolicyAnalysisAndOptimizationApi.md
     - RemoteAccessMonitoringApi: RemoteAccessMonitoringApi.md
     - SearchApi: SearchApi.md
     - SecureClientManagementApi: SecureClientManagementApi.md
@@ -78,6 +79,7 @@ nav:
     - AiMessage: AiMessage.md
     - AiQuestion: AiQuestion.md
     - AmpWorkspaceDetailsResponse: AmpWorkspaceDetailsResponse.md
+    - AnalysisDetails: AnalysisDetails.md
     - ApiTokenInfo: ApiTokenInfo.md
     - ApplicationContext: ApplicationContext.md
     - ApplicationContextClassLoader: ApplicationContextClassLoader.md
@@ -116,6 +118,7 @@ nav:
     - CdoRegionList: CdoRegionList.md
     - CdoTokenInfo: CdoTokenInfo.md
     - CdoTransaction: CdoTransaction.md
+    - CdoTransactionListResponse: CdoTransactionListResponse.md
     - ChangeItemDto: ChangeItemDto.md
     - ChangeRequest: ChangeRequest.md
     - ChangeRequestCreateInput: ChangeRequestCreateInput.md
@@ -143,12 +146,14 @@ nav:
     - ConfigState: ConfigState.md
     - ConflictDetectionInterval: ConflictDetectionInterval.md
     - ConflictDetectionState: ConflictDetectionState.md
+    - ConflictingRules: ConflictingRules.md
     - ConnectivityState: ConnectivityState.md
     - ConnectorType: ConnectorType.md
     - CpuHealthMetrics: CpuHealthMetrics.md
     - CreateRequest: CreateRequest.md
     - CurrentTenant: CurrentTenant.md
     - CurrentTenantResponse: CurrentTenantResponse.md
+    - DataSource: DataSource.md
     - Deployed: Deployed.md
     - DeploymentRunDto: DeploymentRunDto.md
     - DeploymentRunDtoPage: DeploymentRunDtoPage.md
@@ -194,6 +199,7 @@ nav:
     - EtherChannelInterfacePatchInput: EtherChannelInterfacePatchInput.md
     - Event: Event.md
     - ExportInput: ExportInput.md
+    - ExtendedNatRuleData: ExtendedNatRuleData.md
     - FilterRegistration: FilterRegistration.md
     - FmcAccessPolicyReference: FmcAccessPolicyReference.md
     - FmcDeviceRecord: FmcDeviceRecord.md
@@ -225,6 +231,8 @@ nav:
     - HttpStatusCode: HttpStatusCode.md
     - Icmp4Value: Icmp4Value.md
     - Icmp6Value: Icmp6Value.md
+    - ImpactedSources: ImpactedSources.md
+    - InsightsReportGenerationRequest: InsightsReportGenerationRequest.md
     - InterfaceErrorSummary: InterfaceErrorSummary.md
     - InterfaceHealthMetrics: InterfaceHealthMetrics.md
     - InterfaceIpAddress: InterfaceIpAddress.md
@@ -240,6 +248,7 @@ nav:
     - IpType: IpType.md
     - IssuesCount: IssuesCount.md
     - IssuesDto: IssuesDto.md
+    - Item: Item.md
     - JsonWebKey: JsonWebKey.md
     - JspConfigDescriptor: JspConfigDescriptor.md
     - JspPropertyGroupDescriptor: JspPropertyGroupDescriptor.md
@@ -329,19 +338,28 @@ nav:
     - MspUpgradeSecureClientPackagesInput: MspUpgradeSecureClientPackagesInput.md
     - MspVirtualAccountDto: MspVirtualAccountDto.md
     - MspVirtualAccountsPage: MspVirtualAccountsPage.md
+    - NatPolicyAnalysisRequest: NatPolicyAnalysisRequest.md
+    - NatPolicySyncRequest: NatPolicySyncRequest.md
     - Network: Network.md
     - NetworkObjectContent: NetworkObjectContent.md
     - OS: OS.md
     - ObjectContent: ObjectContent.md
+    - ObjectData: ObjectData.md
     - ObjectResponse: ObjectResponse.md
     - OnPremFmcInfo: OnPremFmcInfo.md
+    - OriginalRule: OriginalRule.md
     - Override: Override.md
     - Page: Page.md
     - PageCompatibleSecureClientVersionDto: PageCompatibleSecureClientVersionDto.md
+    - PagePolicyAnalysisData: PagePolicyAnalysisData.md
+    - PageRuleConflictsData: PageRuleConflictsData.md
     - PageSecureClientPackageDto: PageSecureClientPackageDto.md
     - PageTaskDto: PageTaskDto.md
     - PhysicalInterfacePatchInput: PhysicalInterfacePatchInput.md
     - Policy: Policy.md
+    - PolicyAnalysisData: PolicyAnalysisData.md
+    - PolicyAnalysisInsightsSummary: PolicyAnalysisInsightsSummary.md
+    - PolicyNodeDataPage: PolicyNodeDataPage.md
     - PortsValue: PortsValue.md
     - ProtocolContent: ProtocolContent.md
     - ProtocolValueContent: ProtocolValueContent.md
@@ -355,6 +373,8 @@ nav:
     - RedirectView: RedirectView.md
     - Reference: Reference.md
     - ReferenceInfo: ReferenceInfo.md
+    - RuleConflictsData: RuleConflictsData.md
+    - RuleConflictsDataPage: RuleConflictsDataPage.md
     - RuleTimeRangeContent: RuleTimeRangeContent.md
     - S2sVpnTunnelHealthMetrics: S2sVpnTunnelHealthMetrics.md
     - Sdc: Sdc.md
