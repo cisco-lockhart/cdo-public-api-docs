@@ -28,6 +28,374 @@ paths:
             summary: Fetch JSON Web Key Set
             tags:
                 - Meta
+    /v1/agenticops/policies/nat/analyses:
+        post:
+            description: Starts an asynchronous analysis of one or more NAT policies for a single data source. The operation returns a Security Cloud Control Transaction object that can be used to track progress.
+            operationId: triggerNatPolicyAnalysis
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/NatPolicyAnalysisRequest'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track policy analysis progress
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "409":
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: No requested policy requires analysis or all are unavailable
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Start NAT policy analysis
+            tags:
+                - Policy Analysis and Optimization
+    /v1/agenticops/policies/nat/analyses/latest:
+        get:
+            description: Gets the latest NAT policy analyses across data sources. Results can be filtered, sorted, and paginated.
+            operationId: getLatestPolicyAnalysisData
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: The fields to sort results by.
+                  example: analysisDetails.analysisStartTime:DESC
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PolicyNodeDataPage'
+                    description: Paginated list of the latest NAT policy analyses
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get latest NAT policy analyses
+            tags:
+                - Policy Analysis and Optimization
+    /v1/agenticops/policies/nat/analyses/latest/summary:
+        get:
+            description: Gets an aggregated summary of the latest NAT policy analyses for the specified data source.
+            operationId: getNatPolicyAnalysisSummaryByDataSourceUid
+            parameters:
+                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
+                  example: fieldName:fieldValue
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PolicyAnalysisInsightsSummary'
+                    description: Aggregated summary of the latest NAT policy analyses for the data source
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get latest NAT policy analysis summary
+            tags:
+                - Policy Analysis and Optimization
+    /v1/agenticops/policies/nat/analysis/insights/{insightsUid}/details:
+        get:
+            description: Gets rule-level conflict data for the specified NAT policy analysis. Each item includes the `hasShadowedRules` and `hasRedundantRules` fields, which indicate whether the conflicting rules are shadowed or redundant, respectively. If there are no conflicts, an empty page is returned.
+            operationId: getNatPolicyRuleConflicts
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: The unique identifier of the NAT policy analysis.
+                  example: a276b855-feb7-4774-863f-569f2826f3f5
+                  in: path
+                  name: insightsUid
+                  required: true
+                  schema:
+                    type: string
+                - description: Filter results to conflicts containing shadowed rules.
+                  in: query
+                  name: shadowedOnly
+                  required: false
+                  schema:
+                    default: false
+                    type: boolean
+                - description: Filter results to conflicts containing redundant rules.
+                  in: query
+                  name: redundantOnly
+                  required: false
+                  schema:
+                    default: false
+                    type: boolean
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RuleConflictsDataPage'
+                    description: Paginated list of NAT policy analysis rule conflicts
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get NAT policy analysis rule conflicts
+            tags:
+                - Policy Analysis and Optimization
+    /v1/agenticops/policies/nat/analysis/insights/summary/{insightsUid}:
+        get:
+            description: Gets the summary for the specified NAT policy analysis.
+            operationId: getNatPolicyAnalysisSummary
+            parameters:
+                - description: The unique identifier of the NAT policy analysis.
+                  example: a276b855-feb7-4774-863f-569f2826f3f5
+                  in: path
+                  name: insightsUid
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PolicyAnalysisInsightsSummary'
+                    description: NAT policy analysis summary
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get NAT policy analysis summary
+            tags:
+                - Policy Analysis and Optimization
+    /v1/agenticops/policies/nat/report-gen/analysis:
+        post:
+            description: Generates or reuses a PDF report for the requested NAT policy analysis. The operation returns a Security Cloud Control Transaction object that can be used to track report generation progress. When the transaction completes, `transactionDetails` contains `reportUrl`. The request requires the analysis and data source identifiers; an S3 key is not required.
+            operationId: generatePolicyAnalysisInsightsReport
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/InsightsReportGenerationRequest'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track report generation progress
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Generate NAT policy analysis report
+            tags:
+                - Policy Analysis and Optimization
+    /v1/agenticops/policies/nat/report-gen/analysis/{insightsUid}:
+        get:
+            description: Gets a `reportUrl` field containing a presigned download URL that is valid for 30 minutes. A current PDF report must already exist for the requested analysis.
+            operationId: getPolicyAnalysisInsightsReportUrl
+            parameters:
+                - description: The unique identifier of the NAT policy analysis whose report URL is requested.
+                  example: a276b855-feb7-4774-863f-569f2826f3f5
+                  in: path
+                  name: insightsUid
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                    description: Object containing a presigned download URL for the NAT policy analysis report
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get NAT policy analysis report URL
+            tags:
+                - Policy Analysis and Optimization
+    /v1/agenticops/policies/nat/sync:
+        post:
+            description: Creates one NAT policy sync transaction for each requested data source. If the `dataSourceUids` field is omitted or empty, all eligible FMC data sources are synced.
+            operationId: syncNatPolicies
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/NatPolicySyncRequest'
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransactionListResponse'
+                    description: Security Cloud Control Transaction objects that can be used to track NAT policy sync progress
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "409":
+                    $ref: '#/components/responses/http409Conflict'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Sync FMC NAT policies
+            tags:
+                - Policy Analysis and Optimization
     /v1/ai-assistant/conversations:
         get:
             description: 'Get a list of AI Assistant Conversations. Note: the total number of conversations is set to -1 as this information is currently unavailable.'
@@ -4416,128 +4784,6 @@ paths:
             summary: (cdFMC-managed FTDs only) Deploy FTD device changes
             tags:
                 - Inventory
-    /v1/inventory/devices/ftds/{deviceUid}/secure-client/packages:
-        get:
-            description: Returns the Secure Client packages configured on the FTD device's Remote Access VPN policy, including the version, operating system, and CPU architecture parsed from each package filename. When a filename does not match the expected Secure Client package naming pattern, the package is still returned but its version, operating system, and CPU architecture are null. Returns an empty page when the device has no Remote Access VPN policy or the policy has no configured packages.
-            operationId: getFtdSecureClientPackages
-            parameters:
-                - description: The unique identifier, represented as a UUID, of the FTD device in Security Cloud Control.
-                  in: path
-                  name: deviceUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-                - description: Number of results to retrieve.
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 200
-                    minimum: 0
-                    type: string
-                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/FtdSecureClientPackagesPage'
-                    description: Secure Client packages retrieved successfully.
-                "400":
-                    content:
-                        '*/*':
-                            schema:
-                                $ref: '#/components/schemas/PageSecureClientPackageDto'
-                    description: Returned when the device identifier is not a valid UUID or the limit or offset query parameters are outside their allowed ranges.
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "404":
-                    content:
-                        '*/*':
-                            schema:
-                                $ref: '#/components/schemas/PageSecureClientPackageDto'
-                    description: Returned when the device does not exist or is not a Cloud-delivered FMC-managed FTD.
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: List Secure Client packages available on an FTD device
-            tags:
-                - Secure Client Management
-            x-beta: "true"
-    /v1/inventory/devices/ftds/{deviceUid}/secure-client/packages/{packageUid}:
-        get:
-            description: Returns the single Secure Client package configured on the FTD device's Remote Access VPN policy whose UID matches the requested package UID, including the version, operating system, and CPU architecture parsed from the package filename. When the filename does not match the expected Secure Client package naming pattern, the package is still returned but its version, operating system, and CPU architecture are null.
-            operationId: getFtdSecureClientPackageByUid
-            parameters:
-                - description: The unique identifier, represented as a UUID, of the FTD device in Security Cloud Control.
-                  in: path
-                  name: deviceUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-                - description: The unique identifier, represented as a UUID, of the Secure Client package.
-                  in: path
-                  name: packageUid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/SecureClientPackageDto'
-                    description: Secure Client package retrieved successfully.
-                "400":
-                    content:
-                        '*/*':
-                            schema:
-                                $ref: '#/components/schemas/SecureClientPackageDto'
-                    description: Returned when the device or package identifier is not a valid UUID.
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "404":
-                    content:
-                        '*/*':
-                            schema:
-                                $ref: '#/components/schemas/SecureClientPackageDto'
-                    description: Returned when the device does not exist or is not a Cloud-delivered FMC-managed FTD, or the package is not configured on the device's Remote Access VPN policy.
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get a Secure Client package available on an FTD device by UID
-            tags:
-                - Secure Client Management
-            x-beta: "true"
     /v1/inventory/devices/ftds/{deviceUid}/upgrades/trigger:
         post:
             description: Upgrade FTD device using a specified upgrade package.
@@ -4739,110 +4985,6 @@ paths:
             summary: Register FTD device to FMC
             tags:
                 - Inventory
-    /v1/inventory/devices/ftds/secure-client/upgrades:
-        post:
-            description: Initiate a Secure Client package upgrade on one or more FTD devices. The endpoint validates that all target devices are eligible, creates a CDO transaction and a SecureClientUpgradeRun tracking object, and returns 202 Accepted with the transaction.
-            operationId: triggerFtdSecureClientUpgrade
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/TriggerSecureClientUpgradeInput'
-                required: true
-            responses:
-                "202":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CdoTransaction'
-                    description: Security Cloud Control Transaction object that can be used to track the status of the operation.
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Trigger Secure Client upgrade on FTD devices
-            tags:
-                - Secure Client Management
-            x-beta: "true"
-    /v1/inventory/devices/ftds/secure-client/upgrades/versions:
-        get:
-            description: Get a list of compatible Secure Client upgrade versions for the specified FTD devices, each with the packages available for it and their direct download URLs. When no device identifiers are supplied, returns every version in the Secure Client catalog that FTD devices support, without validating any devices.
-            operationId: getFtdCompatibleSecureClientVersions
-            parameters:
-                - description: The unique identifiers, represented as UUIDs, of the FTD devices in Security Cloud Control. When omitted, every version in the Secure Client catalog that FTD devices support is returned.
-                  in: query
-                  name: deviceUids
-                  required: false
-                  schema:
-                    items:
-                        format: uuid
-                        type: string
-                    maxItems: 50
-                    minItems: 0
-                    type: array
-                    uniqueItems: true
-                - description: Number of results to retrieve.
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 200
-                    minimum: 0
-                    type: string
-                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/SecureClientUpgradeVersionsPage'
-                    description: A paginated list of compatible Secure Client versions
-                "400":
-                    $ref: '#/components/responses/http400BadRequest'
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-                "503":
-                    content:
-                        '*/*':
-                            schema:
-                                $ref: '#/components/schemas/PageCompatibleSecureClientVersionDto'
-                    description: Service temporarily unavailable
-            security:
-                - bearerAuth: []
-            summary: List Secure Client versions compatible with the specified FTD devices
-            tags:
-                - Secure Client Management
-            x-beta: "true"
     /v1/inventory/devices/ftds/upgrades/packages/build-cache:
         put:
             description: Update cache of compatible upgrade packages for a all FTD devices.
@@ -6566,111 +6708,6 @@ paths:
             security:
                 - bearerAuth: []
             summary: Export Per-Device Licenses
-            tags:
-                - Licensing
-            x-beta: "true"
-    /v1/licenses/msla/devices:
-        get:
-            description: Get a paginated list of MSLA entitlement assignments for devices in the tenant. Each item represents one entitlement assigned to one device.
-            operationId: getMslaDevices
-            parameters:
-                - description: Number of results to retrieve.
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 200
-                    minimum: 0
-                    type: string
-                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
-                  example: fieldName:fieldValue
-                  in: query
-                  name: q
-                  required: false
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MslaDevicePage'
-                    description: MSLA device entitlement assignments for the tenant
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    content:
-                        application/json: {}
-                    description: MSLA licensing is not enabled for this tenant
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get MSLA Device Entitlements
-            tags:
-                - Licensing
-            x-beta: "true"
-    /v1/licenses/msla/usage:
-        get:
-            description: Get the MSLA entitlements assigned to this tenant and the number of devices consuming each entitlement. All assigned entitlements are returned, including those with no consuming devices. The consumption counts are derived from the most recent cdFMC poll, whose timestamp is returned in lastPolledAt.
-            operationId: getMslaUsage
-            parameters:
-                - description: Number of results to retrieve.
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 200
-                    minimum: 0
-                    type: string
-                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MslaUsagePage'
-                    description: MSLA license usage for the tenant
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    content:
-                        application/json: {}
-                    description: MSLA licensing is not enabled for this tenant
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get MSLA License Usage
             tags:
                 - Licensing
             x-beta: "true"
@@ -8635,155 +8672,6 @@ paths:
             security:
                 - bearerAuth: []
             summary: Export licenses for MSP-managed devices
-            tags:
-                - MSP Licensing
-            x-beta: "true"
-    /v1/msp/licenses/msla/devices:
-        get:
-            description: Get a paginated list of MSLA device entitlement assignments across all managed tenants in the MSP portal.
-            operationId: getMspMslaDeviceEntitlements
-            parameters:
-                - description: Number of results to retrieve.
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 200
-                    minimum: 0
-                    type: string
-                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
-                  example: fieldName:fieldValue
-                  in: query
-                  name: q
-                  required: false
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MspMslaDevicePage'
-                    description: List of MSP MSLA device entitlement assignments
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get MSP MSLA device entitlements
-            tags:
-                - MSP Licensing
-            x-beta: "true"
-    /v1/msp/licenses/msla/devices/{uid}:
-        get:
-            description: Get a single MSP MSLA device entitlement assignment by its UID.
-            operationId: getMspMslaDeviceEntitlementByUid
-            parameters:
-                - description: The unique identifier (UID) of the MSLA entitlement assignment
-                  in: path
-                  name: uid
-                  required: true
-                  schema:
-                    format: uuid
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MspMslaDeviceEntitlementDto'
-                    description: MSP MSLA device entitlement assignment for the specified UID
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "404":
-                    content:
-                        application/json: {}
-                    description: MSP MSLA device entitlement not found for the specified UID
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get MSP MSLA device entitlement by UID
-            tags:
-                - MSP Licensing
-            x-beta: "true"
-    /v1/msp/licenses/msla/usage:
-        get:
-            description: Get a paginated list of MSLA entitlement consumption across all managed tenants in the MSP portal.
-            operationId: getMspMslaLicenseUsage
-            parameters:
-                - description: Number of results to retrieve.
-                  in: query
-                  name: limit
-                  required: false
-                  schema:
-                    default: "50"
-                    maximum: 200
-                    minimum: 0
-                    type: string
-                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                  in: query
-                  name: offset
-                  required: false
-                  schema:
-                    default: "0"
-                    minimum: 0
-                    type: string
-                - description: The query to execute. Use the Lucene Query Syntax to construct your query.
-                  example: fieldName:fieldValue
-                  in: query
-                  name: q
-                  required: false
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/MspMslaUsagePage'
-                    description: MSP MSLA entitlement consumption across managed tenants
-                "401":
-                    $ref: '#/components/responses/http401Unauthorised'
-                "403":
-                    $ref: '#/components/responses/http403Forbidden'
-                "405":
-                    $ref: '#/components/responses/http405MethodNotAllowed'
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-            security:
-                - bearerAuth: []
-            summary: Get MSP MSLA license usage
             tags:
                 - MSP Licensing
             x-beta: "true"
@@ -12654,6 +12542,24 @@ components:
                     example: What's the difference between an Admin and a Super Admin?
                     type: string
             type: object
+        AnalysisDetails:
+            properties:
+                analysisStartTime:
+                    format: date-time
+                    type: string
+                status:
+                    enum:
+                        - ERROR
+                        - ANALYSIS_PENDING
+                        - IN_PROGRESS
+                        - REMEDIATION_IN_PROGRESS
+                        - ANALYSIS_OUT_OF_DATE
+                        - HEALTHY
+                        - OPTIMIZABLE
+                    type: string
+                summary:
+                    $ref: '#/components/schemas/Summary'
+            type: object
         ApiTokenInfo:
             properties:
                 apiToken:
@@ -13537,6 +13443,14 @@ components:
                     format: uuid
                     type: string
             type: object
+        CdoTransactionListResponse:
+            properties:
+                items:
+                    description: Transactions created for the requested data sources
+                    items:
+                        $ref: '#/components/schemas/CdoTransaction'
+                    type: array
+            type: object
         ChangeRequest:
             properties:
                 description:
@@ -14170,7 +14084,7 @@ components:
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices managed by the MSP Portal.
+            description: The distinct config states for the devices in the Security Cloud Control tenant.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -14187,13 +14101,25 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices managed by the MSP Portal.
+            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
             type: string
+        ConflictingRules:
+            description: The Data of the conflicting rules.
+            properties:
+                redundantRules:
+                    items:
+                        $ref: '#/components/schemas/ExtendedNatRuleData'
+                    type: array
+                shadowedRules:
+                    items:
+                        $ref: '#/components/schemas/ExtendedNatRuleData'
+                    type: array
+            type: object
         ConnectivityState:
-            description: The distinct connectivity states for the devices managed by the MSP Portal.
+            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -14204,7 +14130,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device.
+            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
             enum:
                 - SDC
                 - CDG
@@ -14283,7 +14209,7 @@ components:
             properties:
                 displayName:
                     description: The human-readable tenant name displayed in the Security Cloud Control Web UI.
-                    example: cisco-dothraki-team
+                    example: mytenantname
                     type: string
                 featureFlags:
                     description: The feature flags enabled for the tenant.
@@ -14298,7 +14224,7 @@ components:
                     uniqueItems: true
                 name:
                     description: The name of the tenant in Security Cloud Control.
-                    example: CDO_cisco-dothraki-team__t31oim
+                    example: CDO_mytenantname__ab12cd
                     type: string
                 salStatus:
                     description: The Security Analytics and Logging (SAL) enablement status for the tenant. ENABLED if the tenant has a cdo-event-access subscription in Security Services Exchange, DISABLED if it does not, UNKNOWN if the status could not be determined.
@@ -14310,17 +14236,30 @@ components:
                     type: string
                 securityCloudControlEnterpriseId:
                     description: The unique identifier of the Security Cloud Control enterprise associated with the tenant.
-                    example: df5dc1ab-f994-4189-a1c1-b82817d1b989
+                    example: dda3ce52-312c-477a-aa86-1fd1866ddab7
                     format: uuid
                     type: string
                 ssxTenantUid:
                     description: The unique identifier of the tenant in Security Services Exchange.
-                    example: 9db2e8e7-05f7-4619-a813-ffceba617cc4
+                    example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
                 uid:
                     description: The unique identifier, represented as a UUID, of the tenant in Security Cloud Control.
-                    example: 9db2e8e7-05f7-4619-a813-ffceba617cc4
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            type: object
+        DataSource:
+            properties:
+                name:
+                    type: string
+                type:
+                    enum:
+                        - FMC
+                        - SCC
+                    type: string
+                uid:
                     format: uuid
                     type: string
             type: object
@@ -15221,7 +15160,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The roles that this device performs on the network.
+            description: The distinct device roles for the devices in the Security Cloud Control tenant.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -15229,7 +15168,6 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
-            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
             description: The current status of each device in the upgrade run.
@@ -15274,34 +15212,16 @@ components:
                     example: true
                     type: boolean
             type: object
-        DirectoryDownloadEntry:
-            properties:
-                completedAt:
-                    format: date-time
-                    type: string
-                downloadedObjects:
-                    $ref: '#/components/schemas/DownloadedObjects'
-                startedAt:
-                    format: date-time
-                    type: string
-                status:
-                    enum:
-                        - DONE
-                        - PARTIALLY_DONE
-                        - IN_PROGRESS
-                        - ERROR
-                        - CANCELLED
-                        - UNKNOWN
-                    type: string
-            type: object
         DirectoryDownloadResult:
             allOf:
                 - $ref: '#/components/schemas/TaskResultDetails'
                 - properties:
-                    downloads:
-                        items:
-                            $ref: '#/components/schemas/DirectoryDownloadEntry'
-                        type: array
+                    numGroups:
+                        format: int64
+                        type: integer
+                    numUsers:
+                        format: int64
+                        type: integer
                   type: object
             type: object
         DiskHealthMetrics:
@@ -15325,15 +15245,6 @@ components:
                     items:
                         $ref: '#/components/schemas/FmcObjectReference'
                     type: array
-            type: object
-        DownloadedObjects:
-            properties:
-                groups:
-                    format: int64
-                    type: integer
-                users:
-                    format: int64
-                    type: integer
             type: object
         DuoAdminPanelCreateOrUpdateInput:
             properties:
@@ -15436,7 +15347,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The distinct device types for the devices managed by the MSP Portal.
+            description: The type of the device.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -15459,6 +15370,7 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
+            example: ASA
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -15628,6 +15540,62 @@ components:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
                     example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
+                    type: string
+            type: object
+        ExtendedNatRuleData:
+            properties:
+                destinationInterface:
+                    $ref: '#/components/schemas/ObjectData'
+                direction:
+                    enum:
+                        - UNIDIRECTIONAL
+                        - BIDIRECTIONAL
+                    type: string
+                enabled:
+                    type: boolean
+                name:
+                    type: string
+                originalDestination:
+                    $ref: '#/components/schemas/ObjectData'
+                originalDestinationPort:
+                    $ref: '#/components/schemas/ObjectData'
+                originalSource:
+                    $ref: '#/components/schemas/ObjectData'
+                originalSourcePort:
+                    $ref: '#/components/schemas/ObjectData'
+                ruleIndex:
+                    format: int32
+                    type: integer
+                ruleName:
+                    type: string
+                ruleSection:
+                    enum:
+                        - NAT_RULES_BEFORE
+                        - NAT_RULES_AFTER
+                        - AUTO_NAT
+                    type: string
+                ruleType:
+                    enum:
+                        - STATIC
+                        - DYNAMIC
+                    type: string
+                sourceInterface:
+                    $ref: '#/components/schemas/ObjectData'
+                translatedDestination:
+                    $ref: '#/components/schemas/ObjectData'
+                translatedDestinationPort:
+                    $ref: '#/components/schemas/ObjectData'
+                translatedSource:
+                    $ref: '#/components/schemas/ObjectData'
+                translatedSourcePort:
+                    $ref: '#/components/schemas/ObjectData'
+                type:
+                    description: Type of the rule.
+                    example: ManualNat64Rule
+                    type: string
+                uid:
+                    description: UID of the rule.
+                    example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
                     type: string
             type: object
         FmcAccessPolicyReference:
@@ -16102,29 +16070,6 @@ components:
             required:
                 - ftdUid
             type: object
-        FtdSecureClientPackagesPage:
-            properties:
-                count:
-                    description: The total number of results available.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/SecureClientPackageDto'
-                    type: array
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
-            type: object
         FtdSingleDeviceDeploymentInput:
             description: Per-device deployment configuration. Cannot be combined with the deprecated `deviceUids` field. Each entry identifies a device and optionally selects which policy types to deploy. Set `selectedPolicyTypes` to null or include FULL_DEPLOY to perform a full deployment for that device. Each entry must have a unique uid.
             properties:
@@ -16471,6 +16416,23 @@ components:
                     example: DESTINATION_UNREACHABLE
                     type: string
             type: object
+        ImpactedSources:
+            properties:
+                devicesCount:
+                    format: int32
+                    type: integer
+                templatesCount:
+                    format: int32
+                    type: integer
+            type: object
+        InsightsReportGenerationRequest:
+            properties:
+                insightsUid:
+                    format: uuid
+                    type: string
+                source:
+                    $ref: '#/components/schemas/DataSource'
+            type: object
         InterfaceErrorSummary:
             properties:
                 error:
@@ -16753,6 +16715,25 @@ components:
                     type: array
                     uniqueItems: true
             type: object
+        Item:
+            description: Policy analysis requests grouped by data source
+            properties:
+                dataSourceUid:
+                    description: Data source UUID
+                    format: uuid
+                    type: string
+                policyUids:
+                    description: NAT policy UUIDs to analyze for the data source
+                    items:
+                        description: NAT policy UUIDs to analyze for the data source
+                        type: string
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+            required:
+                - dataSourceUid
+                - policyUids
+            type: object
         JsonWebKey:
             description: The JSON Web Key Set.
             properties:
@@ -16785,6 +16766,7 @@ components:
             type: object
         Labels:
             description: Labels used to identify/tag Security Cloud Control entities.
+            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -17152,104 +17134,6 @@ components:
                     items:
                         $ref: '#/components/schemas/MfaEvent'
                     type: array
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
-            type: object
-        MslaDeviceItemDto:
-            description: The list of items retrieved.
-            properties:
-                deviceName:
-                    description: The name of the device.
-                    example: ftd-device-1
-                    type: string
-                deviceUid:
-                    description: The UID of the device in Security Cloud Control.
-                    example: 5d8f7db1-5e9b-4f7d-9c64-4fef0e5f9c9e
-                    type: string
-                entitlement:
-                    description: The MSLA entitlement identifier.
-                    example: MSLA-CSF-ESS
-                    type: string
-                modelNumber:
-                    description: The hardware model number.
-                    example: FPR-1120
-                    type: string
-                serial:
-                    description: The serial number of the device.
-                    example: JAD24500ABC
-                    type: string
-                uid:
-                    description: The UID of the entitlement assignment row.
-                    example: a1b2c3d4-0000-0000-0000-000000000001
-                    format: uuid
-                    type: string
-            type: object
-        MslaDevicePage:
-            properties:
-                count:
-                    description: The total number of results available.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/MslaDeviceItemDto'
-                    type: array
-                lastPolledAt:
-                    description: Timestamp, in RFC 3339 format, of the most recent data refresh. Null if no data has been collected yet.
-                    example: 2026-07-03T12:00:00Z
-                    format: date-time
-                    type: string
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
-            type: object
-        MslaUsageItemDto:
-            description: The list of items retrieved.
-            properties:
-                deviceCount:
-                    description: Number of devices in the tenant that have this entitlement assigned in cdFMC. Zero if no devices have consumed this entitlement.
-                    example: 12
-                    format: int32
-                    type: integer
-                entitlement:
-                    description: The MSLA entitlement identifier.
-                    example: MSLA-CSF-ESS
-                    type: string
-            type: object
-        MslaUsagePage:
-            properties:
-                count:
-                    description: The total number of results available.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/MslaUsageItemDto'
-                    type: array
-                lastPolledAt:
-                    description: Timestamp, in RFC 3339 format, of the most recent cdFMC poll that populated the consumption data. Null if no poll has completed yet.
-                    example: 2026-07-03T12:00:00Z
-                    format: date-time
-                    type: string
                 limit:
                     description: The number of results retrieved.
                     example: 50
@@ -18322,6 +18206,14 @@ components:
                         - UNKNOWN
                     example: US
                     type: string
+                salStatus:
+                    description: Indicates whether Cisco Security Analytics and Logging is enabled for the tenant. UNKNOWN means the status has not been determined for this tenant yet.
+                    enum:
+                        - ENABLED
+                        - DISABLED
+                        - UNKNOWN
+                    example: ENABLED
+                    type: string
                 sccOrganizationUid:
                     description: The unique identifier of the organization in Security Cloud Control Firewall Platform. This is different to the unique identifier used in Security Cloud Control Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
@@ -18444,134 +18336,6 @@ components:
                 uid:
                     description: The unique identifier, represented as a UUID, of the virtual account in Security Cloud Control.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-            type: object
-        MspMslaDeviceEntitlementDto:
-            description: A single MSLA entitlement assignment for one device across an MSP-managed tenant.
-            properties:
-                deviceName:
-                    description: The name of the device.
-                    example: ftd-device-1
-                    type: string
-                deviceUid:
-                    description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
-                    example: 5d8f7db1-5e9b-4f7d-9c64-4fef0e5f9c9e
-                    format: uuid
-                    type: string
-                entitlement:
-                    description: MSLA entitlement identifier.
-                    enum:
-                        - MSLA-CSF-ESS
-                        - MSLA-CSF-ADV
-                        - MSLA-CSF-AMP
-                        - MSLA-CSF-URL
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant that owns this device.
-                    example: 5d8f7db1-5e9b-4f7d-9c64-4fef0e5f9c9c
-                    format: uuid
-                    type: string
-                modelNumber:
-                    description: The hardware model number of the device.
-                    example: FPR-1120
-                    type: string
-                serial:
-                    description: The serial number of the device.
-                    example: JAD24500ABC
-                    type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of the MSLA entitlement assignment.
-                    example: a1b2c3d4-0000-0000-0000-000000000001
-                    format: uuid
-                    type: string
-            type: object
-        MspMslaDevicePage:
-            properties:
-                count:
-                    description: The total number of results available.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/MspMslaDeviceEntitlementDto'
-                    type: array
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
-            type: object
-        MspMslaUsageItemDto:
-            description: MSLA entitlement consumption across all managed tenants of an MSP portal.
-            properties:
-                deviceCount:
-                    description: The total number of devices across all managed tenants consuming this entitlement.
-                    example: 19
-                    format: int32
-                    type: integer
-                entitlement:
-                    description: MSLA entitlement identifier.
-                    enum:
-                        - MSLA-CSF-ESS
-                        - MSLA-CSF-ADV
-                        - MSLA-CSF-AMP
-                        - MSLA-CSF-URL
-                    type: string
-                managedTenants:
-                    description: The managed tenants with at least one device consuming this entitlement.
-                    items:
-                        $ref: '#/components/schemas/MspMslaUsageTenantDto'
-                    type: array
-            type: object
-        MspMslaUsagePage:
-            properties:
-                count:
-                    description: The total number of results available.
-                    example: 100
-                    format: int32
-                    type: integer
-                items:
-                    description: The list of items retrieved.
-                    items:
-                        $ref: '#/components/schemas/MspMslaUsageItemDto'
-                    type: array
-                limit:
-                    description: The number of results retrieved.
-                    example: 50
-                    format: int32
-                    type: integer
-                offset:
-                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
-                    example: 0
-                    format: int32
-                    type: integer
-            type: object
-        MspMslaUsageTenantDto:
-            description: A managed tenant with at least one device consuming an MSLA entitlement.
-            properties:
-                displayName:
-                    description: The human-readable display name of the managed tenant.
-                    example: Tenant One
-                    type: string
-                name:
-                    description: The name of the managed tenant (unique in CDO).
-                    example: tenant-one
-                    type: string
-                region:
-                    description: The CDO region of the managed tenant.
-                    example: scale
-                    type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control.
-                    example: 5d8f7db1-5e9b-4f7d-9c64-4fef0e5f9c9c
                     format: uuid
                     type: string
             type: object
@@ -19289,6 +19053,27 @@ components:
                     format: int32
                     type: integer
             type: object
+        NatPolicyAnalysisRequest:
+            properties:
+                items:
+                    description: Policy analysis requests grouped by data source
+                    items:
+                        $ref: '#/components/schemas/Item'
+                    minItems: 1
+                    type: array
+            required:
+                - items
+            type: object
+        NatPolicySyncRequest:
+            properties:
+                dataSourceUids:
+                    description: Data source UUIDs to sync. If omitted or empty, all eligible NAT PAO FMC data sources are synced.
+                    items:
+                        description: Data source UUIDs to sync. If omitted or empty, all eligible NAT PAO FMC data sources are synced.
+                        format: uuid
+                        type: string
+                    type: array
+            type: object
         Network:
             description: (Meraki devices only) The [Dashboard Network](https://documentation.meraki.com/General_Administration/Organizations_and_Networks/Creating_and_Deleting_Dashboard_Networks) the device is deployed in.
             properties:
@@ -19345,6 +19130,21 @@ components:
                 - $ref: '#/components/schemas/UrlObjectContent'
                 - $ref: '#/components/schemas/GroupContent'
                 - $ref: '#/components/schemas/NetworkObjectContent'
+            type: object
+        ObjectData:
+            properties:
+                name:
+                    type: string
+                type:
+                    description: Type of the rule.
+                    example: ManualNat64Rule
+                    type: string
+                uid:
+                    description: UID of the rule.
+                    example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                    type: string
+                value:
+                    type: string
             type: object
         ObjectResponse:
             properties:
@@ -19500,7 +19300,7 @@ components:
                     format: int32
                     type: integer
             type: object
-        PageSecureClientPackageDto:
+        PagePolicyAnalysisData:
             properties:
                 count:
                     description: The total number of results available.
@@ -19510,7 +19310,30 @@ components:
                 items:
                     description: The list of items retrieved.
                     items:
-                        $ref: '#/components/schemas/SecureClientPackageDto'
+                        $ref: '#/components/schemas/PolicyAnalysisData'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
+        PageRuleConflictsData:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/RuleConflictsData'
                     type: array
                 limit:
                     description: The number of results retrieved.
@@ -19567,17 +19390,100 @@ components:
                     type: string
             type: object
         Policy:
-            description: Results from the Security Cloud Control policies that match the search term.
             properties:
-                name:
-                    description: The name of the policy in Security Cloud Control.
-                    example: my-example-policy
+                domainName:
                     type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of the policy in Security Cloud Control.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                domainUid:
                     format: uuid
                     type: string
+                lastModifiedTime:
+                    format: date-time
+                    type: string
+                name:
+                    type: string
+                type:
+                    type: string
+                uid:
+                    type: string
+            type: object
+        PolicyAnalysisData:
+            description: Latest NAT policy analysis data.
+            properties:
+                analysisDetails:
+                    $ref: '#/components/schemas/AnalysisDetails'
+                dataSource:
+                    $ref: '#/components/schemas/DataSource'
+                impactedSources:
+                    $ref: '#/components/schemas/ImpactedSources'
+                link:
+                    type: string
+                policy:
+                    $ref: '#/components/schemas/Policy'
+                remediationStatus:
+                    type: string
+                uid:
+                    format: uuid
+                    type: string
+            type: object
+        PolicyAnalysisInsightsSummary:
+            properties:
+                anomalousRules:
+                    description: The total number of anomalous rules
+                    format: int32
+                    type: integer
+                dataSourceUid:
+                    description: The data source UID for the summarized NAT policies
+                    type: string
+                disabledRules:
+                    description: The total number of disabled rules
+                    format: int32
+                    type: integer
+                policies:
+                    description: The number of policies included in the summary
+                    format: int32
+                    type: integer
+                policyType:
+                    description: The policy type for the summarized NAT policies
+                    type: string
+                redundantRules:
+                    description: The total number of redundant rules using v1 semantics
+                    format: int32
+                    type: integer
+                shadowedRules:
+                    description: The total number of shadowed rules using v1 semantics
+                    format: int32
+                    type: integer
+                totalRules:
+                    description: The total number of rules
+                    format: int32
+                    type: integer
+                unhealthyRules:
+                    description: The number of unique unhealthy rules across shadowed and redundant sets
+                    format: int32
+                    type: integer
+            type: object
+        PolicyNodeDataPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/PolicyAnalysisData'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
             type: object
         PortsValue:
             properties:
@@ -19845,6 +19751,46 @@ components:
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
+            type: object
+        RuleConflictsData:
+            description: Rule Conflicts Data holding original rule and conflicting rules.
+            properties:
+                conflictingRules:
+                    $ref: '#/components/schemas/ConflictingRules'
+                isRedundant:
+                    description: Are the conflicting rules redundant rules.
+                    type: boolean
+                isShadowed:
+                    description: Are the conflicting rules shadowed rules.
+                    type: boolean
+                observationId:
+                    description: Rule conflict observation identifier.
+                    type: string
+                originalRule:
+                    $ref: '#/components/schemas/originalRule'
+            type: object
+        RuleConflictsDataPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/RuleConflictsData'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
             type: object
         RuleTimeRangeContent:
             description: The optional time range for which the access rule is active.
@@ -20478,14 +20424,32 @@ components:
                     type: string
             type: object
         SmartAccountDto:
-            description: The smart account used to license this device.
             properties:
-                parent:
-                    description: The name of the smart account used to license the device.
+                domain:
+                    description: Account domain for your Smart Account
                     type: string
-                virtual:
-                    description: The name of the virtual account, within the smart account, used to license the device
+                lastUpdatedTime:
+                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
+                    format: date-time
                     type: string
+                name:
+                    description: Name of the smart account
+                    type: string
+                smartAccountId:
+                    description: Smart Account Identifier
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, for your Smart Account
+                    format: uuid
+                    type: string
+                virtualAccountsInComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with in compliance status
+                    format: int32
+                    type: integer
+                virtualAccountsOutOfComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
+                    format: int32
+                    type: integer
             type: object
         SmartAccountsPage:
             properties:
@@ -20871,15 +20835,21 @@ components:
             type: object
         Summary:
             properties:
-                average:
+                optimizablePercentage:
                     format: double
                     type: number
-                latest:
-                    format: double
-                    type: number
-                max:
-                    format: double
-                    type: number
+                redundantRules:
+                    format: int32
+                    type: integer
+                shadowedRules:
+                    format: int32
+                    type: integer
+                totalRules:
+                    format: int32
+                    type: integer
+                unhealthyRulesCount:
+                    format: int32
+                    type: integer
             type: object
         SwitchPortConfig:
             description: Switchport configuration of the interface, which includes settings such as switchport mode, access VLAN, and trunk VLAN. This configuration is applicable for interfaces operating in switchport mode.
@@ -21876,7 +21846,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: Roles associated with this user in Security Cloud Control.
+            description: The role of the user this token belongs to. The user can be API-only or a human.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -21887,7 +21857,6 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
-            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.
@@ -22098,6 +22067,63 @@ components:
                 - licenses
                 - name
                 - serialNumber
+            type: object
+        originalRule:
+            description: The Data of the Original rule.
+            properties:
+                destinationInterface:
+                    $ref: '#/components/schemas/ObjectData'
+                direction:
+                    enum:
+                        - UNIDIRECTIONAL
+                        - BIDIRECTIONAL
+                    type: string
+                enabled:
+                    type: boolean
+                name:
+                    type: string
+                originalDestination:
+                    $ref: '#/components/schemas/ObjectData'
+                originalDestinationPort:
+                    $ref: '#/components/schemas/ObjectData'
+                originalSource:
+                    $ref: '#/components/schemas/ObjectData'
+                originalSourcePort:
+                    $ref: '#/components/schemas/ObjectData'
+                ruleIndex:
+                    format: int32
+                    type: integer
+                ruleName:
+                    type: string
+                ruleSection:
+                    enum:
+                        - NAT_RULES_BEFORE
+                        - NAT_RULES_AFTER
+                        - AUTO_NAT
+                    type: string
+                ruleType:
+                    enum:
+                        - STATIC
+                        - DYNAMIC
+                    type: string
+                sourceInterface:
+                    $ref: '#/components/schemas/ObjectData'
+                translatedDestination:
+                    $ref: '#/components/schemas/ObjectData'
+                translatedDestinationPort:
+                    $ref: '#/components/schemas/ObjectData'
+                translatedSource:
+                    $ref: '#/components/schemas/ObjectData'
+                translatedSourcePort:
+                    $ref: '#/components/schemas/ObjectData'
+                type:
+                    description: Type of the rule.
+                    example: ManualNat64Rule
+                    type: string
+                uid:
+                    description: UID of the rule.
+                    example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                    type: string
             type: object
     responses:
         http400BadRequest:
