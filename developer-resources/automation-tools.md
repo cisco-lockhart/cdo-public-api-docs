@@ -71,8 +71,8 @@ skills for the CLI and Ansible collection into Claude Code and Codex.
 Claude Code:
 
 ```shell
-/plugin marketplace add CiscoDevNet/sccfm-devkit
-/plugin install sccfm@sccfm-devkit
+claude plugin marketplace add CiscoDevNet/sccfm-devkit
+claude plugin install sccfm@sccfm-devkit
 ```
 
 Codex:
