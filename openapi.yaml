@@ -13935,13 +13935,18 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the deployment on the device.
+            description: The completion status of the upgrade on the device.
             properties:
+                completedAt:
+                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
+                    example: 2026-04-15T18:00:10.123Z
+                    format: date-time
+                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -13952,7 +13957,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: The percentage completion of the current task being performed
+                    description: Percentage completion of the current task being performed.
                     format: double
                     type: number
             type: object
@@ -15252,7 +15257,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The distinct device types for the devices managed by the MSP Portal.
+            description: The type of the device.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -15275,6 +15280,7 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
+            example: CDFMC_MANAGED_FTD
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -15876,8 +15882,16 @@ components:
                 currentRole:
                     description: '(on-prem FMC-managed FTDs only) Information on the current role of the node in the HA Pair. Note: Each node in an on-prem-FMC-managed FTD HA Pair is represented as a separate device entry in the API response.'
                     enum:
+                        - SINGLE
                         - ACTIVE
                         - STANDBY
+                        - SUSPENDED
+                        - FAILED
+                        - CONFIGURATION_SYNC
+                        - NEGOTIATING
+                        - DISABLED
+                        - UNKNOWN
+                        - UNDETERMINED
                     type: string
                 haNodeType:
                     description: '(on-prem FMC-managed FTDs only) Information on the type of this node in the HA Pair. Note: Each node in an on-prem-FMC-managed FTD HA Pair is represented as a separate device entry in the API response.'
@@ -16150,8 +16164,16 @@ components:
                 role:
                     description: (cdFMC-managed FTDs only) Information on the current role of the node in the HA Pair.
                     enum:
+                        - SINGLE
                         - ACTIVE
                         - STANDBY
+                        - SUSPENDED
+                        - FAILED
+                        - CONFIGURATION_SYNC
+                        - NEGOTIATING
+                        - DISABLED
+                        - UNKNOWN
+                        - UNDETERMINED
                     type: string
                 serial:
                     description: The serial number of the node on the device. This is typically used for licensing, and is not the same as the chassis' serial number.
@@ -19293,20 +19315,16 @@ components:
                     type: string
             type: object
         Policy:
+            description: Results from the Security Cloud Control policies that match the search term.
             properties:
-                domainName:
-                    type: string
-                domainUid:
-                    format: uuid
-                    type: string
-                lastModifiedTime:
-                    format: date-time
-                    type: string
                 name:
-                    type: string
-                type:
+                    description: The name of the policy in Security Cloud Control.
+                    example: my-example-policy
                     type: string
                 uid:
+                    description: The unique identifier, represented as a UUID, of the policy in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
                     type: string
             type: object
         PolicyAnalysisData:
@@ -20327,14 +20345,32 @@ components:
                     type: string
             type: object
         SmartAccountDto:
-            description: The smart account used to license this device.
             properties:
-                parent:
-                    description: The name of the smart account used to license the device.
+                domain:
+                    description: Account domain for your Smart Account
                     type: string
-                virtual:
-                    description: The name of the virtual account, within the smart account, used to license the device
+                lastUpdatedTime:
+                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
+                    format: date-time
                     type: string
+                name:
+                    description: Name of the smart account
+                    type: string
+                smartAccountId:
+                    description: Smart Account Identifier
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, for your Smart Account
+                    format: uuid
+                    type: string
+                virtualAccountsInComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with in compliance status
+                    format: int32
+                    type: integer
+                virtualAccountsOutOfComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
+                    format: int32
+                    type: integer
             type: object
         SmartAccountsPage:
             properties:
@@ -20658,21 +20694,15 @@ components:
             type: object
         Summary:
             properties:
-                optimizablePercentage:
+                average:
                     format: double
                     type: number
-                redundantRules:
-                    format: int32
-                    type: integer
-                shadowedRules:
-                    format: int32
-                    type: integer
-                totalRules:
-                    format: int32
-                    type: integer
-                unhealthyRulesCount:
-                    format: int32
-                    type: integer
+                latest:
+                    format: double
+                    type: number
+                max:
+                    format: double
+                    type: number
             type: object
         SwitchPortConfig:
             description: Switchport configuration of the interface, which includes settings such as switchport mode, access VLAN, and trunk VLAN. This configuration is applicable for interfaces operating in switchport mode.
@@ -21269,15 +21299,6 @@ components:
                 errorMsg:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in Security Cloud Control.
-                    example: My Managed Tenant
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
                     type: string
                 name:
                     description: The name of the device.
