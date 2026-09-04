@@ -13,89 +13,10 @@ UAE | https://api.uae.security.cisco.com/firewall
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_allow_list**](MetaApi.md#get_allow_list) | **GET** /v1/meta/allow-list | Get the CDO allow-list
 [**get_jwks**](MetaApi.md#get_jwks) | **GET** /.well-known/jwks.json | Fetch JSON Web Key Set
 [**get_meta**](MetaApi.md#get_meta) | **GET** /v1/meta | Get Meta information
 [**get_regions**](MetaApi.md#get_regions) | **GET** /v1/regions | Get Security Cloud Control Regions
 
-
-# **get_allow_list**
-> AllowListResponse get_allow_list()
-
-Get the CDO allow-list
-
-Returns the IPs, CIDRs and FQDNs a customer must allowlist to communicate with CDO services for the authenticated tenant and environment.
-
-### Example
-
-* Bearer (JWT) Authentication (bearerAuth):
-
-```python
-import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.allow_list_response import AllowListResponse
-from scc_firewall_manager_sdk.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
-# See configuration.py for a list of all supported configuration parameters.
-configuration = scc_firewall_manager_sdk.Configuration(
-    host = "https://api.us.security.cisco.com/firewall"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization (JWT): bearerAuth
-configuration = scc_firewall_manager_sdk.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = scc_firewall_manager_sdk.MetaApi(api_client)
-
-    try:
-        # Get the CDO allow-list
-        api_response = api_instance.get_allow_list()
-        print("The response of MetaApi->get_allow_list:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling MetaApi->get_allow_list: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**AllowListResponse**](AllowListResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The allow-list for the authenticated tenant. |  -  |
-**304** | Not modified. |  -  |
-**401** | Missing or invalid credentials. |  -  |
-**500** | Internal server error. |  -  |
-**503** | A required source has never been loaded and cannot be retrieved. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_jwks**
 > JwkSet get_jwks()

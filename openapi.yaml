@@ -6912,35 +6912,6 @@ paths:
             summary: Get Meta information
             tags:
                 - Meta
-    /v1/meta/allow-list:
-        get:
-            description: Returns the IPs, CIDRs and FQDNs a customer must allowlist to communicate with CDO services for the authenticated tenant and environment.
-            operationId: getAllowList
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/AllowListResponse'
-                    description: The allow-list for the authenticated tenant.
-                "304":
-                    description: Not modified.
-                "401":
-                    description: Missing or invalid credentials.
-                "500":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CommonApiError'
-                    description: Internal server error.
-                "503":
-                    description: A required source has never been loaded and cannot be retrieved.
-            security:
-                - bearerAuth: []
-            summary: Get the CDO allow-list
-            tags:
-                - Meta
-            x-in-dev: "true"
     /v1/mfaevents:
         get:
             description: Get a list of MFA events.
@@ -12408,73 +12379,6 @@ components:
                     example: What's the difference between an Admin and a Super Admin?
                     type: string
             type: object
-        AllowListResponse:
-            properties:
-                providerRanges:
-                    $ref: '#/components/schemas/ProviderRanges'
-                sources:
-                    description: The five named CDO sources.
-                    items:
-                        $ref: '#/components/schemas/AllowListSource'
-                    type: array
-            type: object
-        AllowListSource:
-            description: The five named CDO sources.
-            properties:
-                available:
-                    description: Whether the source was successfully resolved for this request.
-                    example: true
-                    type: boolean
-                fqdns:
-                    description: Authoritative hostnames for the source, if any.
-                    items:
-                        example: edge.us.security.cisco.com
-                        type: string
-                    type: array
-                ipv4Addresses:
-                    description: Resolved IPv4 addresses.
-                    items:
-                        example: 52.25.40.5
-                        type: string
-                    type: array
-                ipv4Cidrs:
-                    description: IPv4 CIDRs (always empty for CDO sources).
-                    items:
-                        description: IPv4 CIDRs (always empty for CDO sources).
-                        type: string
-                    type: array
-                ipv6Addresses:
-                    description: Resolved IPv6 addresses.
-                    items:
-                        example: 2600:1f14:abcd::1
-                        type: string
-                    type: array
-                ipv6Cidrs:
-                    description: IPv6 CIDRs (always empty for CDO sources).
-                    items:
-                        description: IPv6 CIDRs (always empty for CDO sources).
-                        type: string
-                    type: array
-                name:
-                    description: The named CDO source.
-                    enum:
-                        - cdo-public-api
-                        - cdo-platform-edge
-                        - ssx
-                        - cdfmc
-                        - cdo-egress
-                    example: cdo-platform-edge
-                    type: string
-                scope:
-                    description: Scope at which the source's addresses apply.
-                    enum:
-                        - ENVIRONMENT
-                        - TENANT
-                        - REGIONAL
-                        - GLOBAL
-                    example: ENVIRONMENT
-                    type: string
-            type: object
         AnalysisDetails:
             properties:
                 analysisStartTime:
@@ -13995,8 +13899,13 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the deployment on the device.
+            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
             properties:
+                completedAt:
+                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
+                    example: 2026-04-15T18:00:10.123Z
+                    format: date-time
+                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
@@ -19470,43 +19379,6 @@ components:
                 protocolValue:
                     description: The literal for a custom protocol value
                     example: www
-                    type: string
-            type: object
-        ProviderRange:
-            description: Ranges grouped by service and region.
-            properties:
-                ipv4Cidrs:
-                    description: IPv4 CIDRs for this service/region.
-                    items:
-                        example: 13.32.0.0/15
-                        type: string
-                    type: array
-                ipv6Cidrs:
-                    description: IPv6 CIDRs for this service/region.
-                    items:
-                        example: 2600:9000::/28
-                        type: string
-                    type: array
-                region:
-                    description: AWS region, or GLOBAL.
-                    example: us-west-2
-                    type: string
-                service:
-                    description: AWS service the ranges belong to.
-                    example: CLOUDFRONT
-                    type: string
-            type: object
-        ProviderRanges:
-            description: AWS-managed shared CIDR ranges.
-            properties:
-                ranges:
-                    description: Ranges grouped by service and region.
-                    items:
-                        $ref: '#/components/schemas/ProviderRange'
-                    type: array
-                syncToken:
-                    description: Version identifier of the underlying AWS ip-ranges document.
-                    example: "1787901425"
                     type: string
             type: object
         PublicKey:
