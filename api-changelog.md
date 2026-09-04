@@ -19,7 +19,6 @@ These new endpoints analyze the NAT policies on your security infrastructure, an
 - Endpoint to [get an aggregated summary of the latest NAT policy analyses for a data source](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-latest-nat-policy-analysis-summary) (`GET /v1/agenticops/policies/nat/analyses/latest/summary`).
 - Endpoint to [get the summary of a single NAT policy analysis](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-nat-policy-analysis-summary) (`GET /v1/agenticops/policies/nat/analysis/insights/summary/{insightsUid}`).
 - Endpoint to [get the rule conflicts found by a NAT policy analysis](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-nat-policy-analysis-rule-conflicts) (`GET /v1/agenticops/policies/nat/analysis/insights/{insightsUid}/details`).
-- Endpoint to [generate a PDF report for a NAT policy analysis](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/generate-nat-policy-analysis-report) (`POST /v1/agenticops/policies/nat/report-gen/analysis`).
 - Endpoint to [get the report URL for a NAT policy analysis](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-nat-policy-analysis-report-url) (`GET /v1/agenticops/policies/nat/report-gen/analysis/{insightsUid}`).
 
 ### MSP Secure Client Management
@@ -41,6 +40,9 @@ These new endpoints analyze the NAT policies on your security infrastructure, an
 
 ### Tenant Management
 - Endpoint to [get the current tenant](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-current-tenant) (`GET /v1/tenants/me`). This returns the tenant associated with the API token used to authenticate the request, including its `featureFlags`, `salStatus`, `securityCloudControlEnterpriseId`, and `ssxTenantUid`.
+
+### cdFMC API
+- Added an endpoint to get the masked deployment transcript for a device in a deployment job (`GET /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/deployment/jobhistories/{containerUUID}/transcripts/{objectId}`). The response returns the availability `status` of the transcript and a short-lived, pre-signed `transcriptUrl`. For an HA pair, use the UUID of the active device; for a cluster, use the UUID of the control node. This endpoint is supported only on cdFMC.
 
 ## Improvements
 
@@ -67,6 +69,13 @@ These new endpoints analyze the NAT policies on your security infrastructure, an
 
 ### Connectors
 - [Modify SDC](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/modify-sdc) now requires a non-empty `name`.
+
+### cdFMC API
+- Access rule hit count and prefilter rule hit count queries now support an optional `forceRefresh` query parameter. If it is set to `true`, hit count information is refreshed from the selected device before the values are returned.
+- Access rules now include an `extWap` field. This is a reference to the External WAP selection for the rule.
+- Device records now include an `isCdFmcInboundRegistration` field, which indicates whether the device registration originated as a cdFMC inbound registration.
+- Device export requests now support a `skipPolicyExportTypes` field, which lists the policy types to exclude from the export.
+- The show command endpoints for a single device and for multiple devices now support `show arp`
 
 ## Deprecations
 
