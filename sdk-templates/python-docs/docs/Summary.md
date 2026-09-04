@@ -5,9 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**average** | **float** |  | [optional] 
-**latest** | **float** |  | [optional] 
-**max** | **float** |  | [optional] 
+**optimizable_percentage** | **float** |  | [optional] 
+**redundant_rules** | **int** |  | [optional] 
+**shadowed_rules** | **int** |  | [optional] 
+**total_rules** | **int** |  | [optional] 
+**unhealthy_rules_count** | **int** |  | [optional] 
 
 ## Example
 
