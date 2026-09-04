@@ -115,7 +115,7 @@ Name | Type | Description  | Notes
 
 Create Targets
 
-Create targets for an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Add known targets for an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
 
 ### Example
 

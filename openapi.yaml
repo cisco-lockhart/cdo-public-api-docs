@@ -6912,6 +6912,35 @@ paths:
             summary: Get Meta information
             tags:
                 - Meta
+    /v1/meta/allow-list:
+        get:
+            description: Returns the IPs, CIDRs and FQDNs a customer must allowlist to communicate with CDO services for the authenticated tenant and environment.
+            operationId: getAllowList
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AllowListResponse'
+                    description: The allow-list for the authenticated tenant.
+                "304":
+                    description: Not modified.
+                "401":
+                    description: Missing or invalid credentials.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+                "503":
+                    description: A required source has never been loaded and cannot be retrieved.
+            security:
+                - bearerAuth: []
+            summary: Get the CDO allow-list
+            tags:
+                - Meta
+            x-in-dev: "true"
     /v1/mfaevents:
         get:
             description: Get a list of MFA events.
@@ -9974,7 +10003,7 @@ paths:
             tags:
                 - Object Management
         post:
-            description: 'Create targets for an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
+            description: 'Add known targets for an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
             operationId: createTargets
             parameters:
                 - description: the unique identifier of the object for which the targets are being added to.
@@ -12377,6 +12406,73 @@ components:
                 content:
                     description: The content of the message.
                     example: What's the difference between an Admin and a Super Admin?
+                    type: string
+            type: object
+        AllowListResponse:
+            properties:
+                providerRanges:
+                    $ref: '#/components/schemas/ProviderRanges'
+                sources:
+                    description: The five named CDO sources.
+                    items:
+                        $ref: '#/components/schemas/AllowListSource'
+                    type: array
+            type: object
+        AllowListSource:
+            description: The five named CDO sources.
+            properties:
+                available:
+                    description: Whether the source was successfully resolved for this request.
+                    example: true
+                    type: boolean
+                fqdns:
+                    description: Authoritative hostnames for the source, if any.
+                    items:
+                        example: edge.us.security.cisco.com
+                        type: string
+                    type: array
+                ipv4Addresses:
+                    description: Resolved IPv4 addresses.
+                    items:
+                        example: 52.25.40.5
+                        type: string
+                    type: array
+                ipv4Cidrs:
+                    description: IPv4 CIDRs (always empty for CDO sources).
+                    items:
+                        description: IPv4 CIDRs (always empty for CDO sources).
+                        type: string
+                    type: array
+                ipv6Addresses:
+                    description: Resolved IPv6 addresses.
+                    items:
+                        example: 2600:1f14:abcd::1
+                        type: string
+                    type: array
+                ipv6Cidrs:
+                    description: IPv6 CIDRs (always empty for CDO sources).
+                    items:
+                        description: IPv6 CIDRs (always empty for CDO sources).
+                        type: string
+                    type: array
+                name:
+                    description: The named CDO source.
+                    enum:
+                        - cdo-public-api
+                        - cdo-platform-edge
+                        - ssx
+                        - cdfmc
+                        - cdo-egress
+                    example: cdo-platform-edge
+                    type: string
+                scope:
+                    description: Scope at which the source's addresses apply.
+                    enum:
+                        - ENVIRONMENT
+                        - TENANT
+                        - REGIONAL
+                        - GLOBAL
+                    example: ENVIRONMENT
                     type: string
             type: object
         AnalysisDetails:
@@ -15221,7 +15317,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The distinct device types for the devices managed by the MSP Portal.
+            description: The type of the device.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -15244,6 +15340,7 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
+            example: CDFMC_MANAGED_FTD
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -19270,16 +19367,20 @@ components:
                     type: string
             type: object
         Policy:
-            description: Results from the Security Cloud Control policies that match the search term.
             properties:
+                domainName:
+                    type: string
+                domainUid:
+                    format: uuid
+                    type: string
+                lastModifiedTime:
+                    format: date-time
+                    type: string
                 name:
-                    description: The name of the policy in Security Cloud Control.
-                    example: my-example-policy
+                    type: string
+                type:
                     type: string
                 uid:
-                    description: The unique identifier, represented as a UUID, of the policy in Security Cloud Control.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
                     type: string
             type: object
         PolicyAnalysisData:
@@ -19417,6 +19518,43 @@ components:
                 protocolValue:
                     description: The literal for a custom protocol value
                     example: www
+                    type: string
+            type: object
+        ProviderRange:
+            description: Ranges grouped by service and region.
+            properties:
+                ipv4Cidrs:
+                    description: IPv4 CIDRs for this service/region.
+                    items:
+                        example: 13.32.0.0/15
+                        type: string
+                    type: array
+                ipv6Cidrs:
+                    description: IPv6 CIDRs for this service/region.
+                    items:
+                        example: 2600:9000::/28
+                        type: string
+                    type: array
+                region:
+                    description: AWS region, or GLOBAL.
+                    example: us-west-2
+                    type: string
+                service:
+                    description: AWS service the ranges belong to.
+                    example: CLOUDFRONT
+                    type: string
+            type: object
+        ProviderRanges:
+            description: AWS-managed shared CIDR ranges.
+            properties:
+                ranges:
+                    description: Ranges grouped by service and region.
+                    items:
+                        $ref: '#/components/schemas/ProviderRange'
+                    type: array
+                syncToken:
+                    description: Version identifier of the underlying AWS ip-ranges document.
+                    example: "1787901425"
                     type: string
             type: object
         PublicKey:
@@ -20300,14 +20438,32 @@ components:
                     type: string
             type: object
         SmartAccountDto:
-            description: The smart account used to license this device.
             properties:
-                parent:
-                    description: The name of the smart account used to license the device.
+                domain:
+                    description: Account domain for your Smart Account
                     type: string
-                virtual:
-                    description: The name of the virtual account, within the smart account, used to license the device
+                lastUpdatedTime:
+                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
+                    format: date-time
                     type: string
+                name:
+                    description: Name of the smart account
+                    type: string
+                smartAccountId:
+                    description: Smart Account Identifier
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, for your Smart Account
+                    format: uuid
+                    type: string
+                virtualAccountsInComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with in compliance status
+                    format: int32
+                    type: integer
+                virtualAccountsOutOfComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
+                    format: int32
+                    type: integer
             type: object
         SmartAccountsPage:
             properties:
@@ -21236,15 +21392,6 @@ components:
                 errorMsg:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in Security Cloud Control.
-                    example: My Managed Tenant
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
                     type: string
                 name:
                     description: The name of the device.

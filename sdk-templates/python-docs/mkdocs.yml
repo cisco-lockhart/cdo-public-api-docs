@@ -78,6 +78,8 @@ nav:
     - AiConversation: AiConversation.md
     - AiMessage: AiMessage.md
     - AiQuestion: AiQuestion.md
+    - AllowListResponse: AllowListResponse.md
+    - AllowListSource: AllowListSource.md
     - AmpWorkspaceDetailsResponse: AmpWorkspaceDetailsResponse.md
     - AnalysisDetails: AnalysisDetails.md
     - ApiTokenInfo: ApiTokenInfo.md
@@ -363,6 +365,8 @@ nav:
     - PortsValue: PortsValue.md
     - ProtocolContent: ProtocolContent.md
     - ProtocolValueContent: ProtocolValueContent.md
+    - ProviderRange: ProviderRange.md
+    - ProviderRanges: ProviderRanges.md
     - PublicKey: PublicKey.md
     - PublicThousandEyesOutageDto: PublicThousandEyesOutageDto.md
     - RaVpnDeviceInput: RaVpnDeviceInput.md
