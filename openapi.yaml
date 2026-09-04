@@ -19324,16 +19324,20 @@ components:
                     type: string
             type: object
         Policy:
-            description: Results from the Security Cloud Control policies that match the search term.
             properties:
+                domainName:
+                    type: string
+                domainUid:
+                    format: uuid
+                    type: string
+                lastModifiedTime:
+                    format: date-time
+                    type: string
                 name:
-                    description: The name of the policy in Security Cloud Control.
-                    example: my-example-policy
+                    type: string
+                type:
                     type: string
                 uid:
-                    description: The unique identifier, represented as a UUID, of the policy in Security Cloud Control.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
                     type: string
             type: object
         PolicyAnalysisData:
@@ -20740,15 +20744,21 @@ components:
             type: object
         Summary:
             properties:
-                average:
+                optimizablePercentage:
                     format: double
                     type: number
-                latest:
-                    format: double
-                    type: number
-                max:
-                    format: double
-                    type: number
+                redundantRules:
+                    format: int32
+                    type: integer
+                shadowedRules:
+                    format: int32
+                    type: integer
+                totalRules:
+                    format: int32
+                    type: integer
+                unhealthyRulesCount:
+                    format: int32
+                    type: integer
             type: object
         SwitchPortConfig:
             description: Switchport configuration of the interface, which includes settings such as switchport mode, access VLAN, and trunk VLAN. This configuration is applicable for interfaces operating in switchport mode.
