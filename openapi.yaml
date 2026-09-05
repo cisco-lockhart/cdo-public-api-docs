@@ -6912,6 +6912,35 @@ paths:
             summary: Get Meta information
             tags:
                 - Meta
+    /v1/meta/allow-list:
+        get:
+            description: Returns the IPs, CIDRs and FQDNs a customer must allowlist to communicate with CDO services for the authenticated tenant and environment.
+            operationId: getAllowList
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AllowListResponse'
+                    description: The allow-list for the authenticated tenant.
+                "304":
+                    description: Not modified.
+                "401":
+                    description: Missing or invalid credentials.
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+                "503":
+                    description: A required source has never been loaded and cannot be retrieved.
+            security:
+                - bearerAuth: []
+            summary: Get the CDO allow-list
+            tags:
+                - Meta
+            x-in-dev: "true"
     /v1/mfaevents:
         get:
             description: Get a list of MFA events.
@@ -12379,6 +12408,73 @@ components:
                     example: What's the difference between an Admin and a Super Admin?
                     type: string
             type: object
+        AllowListResponse:
+            properties:
+                providerRanges:
+                    $ref: '#/components/schemas/ProviderRanges'
+                sources:
+                    description: The five named CDO sources.
+                    items:
+                        $ref: '#/components/schemas/AllowListSource'
+                    type: array
+            type: object
+        AllowListSource:
+            description: The five named CDO sources.
+            properties:
+                available:
+                    description: Whether the source was successfully resolved for this request.
+                    example: true
+                    type: boolean
+                fqdns:
+                    description: Authoritative hostnames for the source, if any.
+                    items:
+                        example: edge.us.security.cisco.com
+                        type: string
+                    type: array
+                ipv4Addresses:
+                    description: Resolved IPv4 addresses.
+                    items:
+                        example: 52.25.40.5
+                        type: string
+                    type: array
+                ipv4Cidrs:
+                    description: IPv4 CIDRs (always empty for CDO sources).
+                    items:
+                        description: IPv4 CIDRs (always empty for CDO sources).
+                        type: string
+                    type: array
+                ipv6Addresses:
+                    description: Resolved IPv6 addresses.
+                    items:
+                        example: 2600:1f14:abcd::1
+                        type: string
+                    type: array
+                ipv6Cidrs:
+                    description: IPv6 CIDRs (always empty for CDO sources).
+                    items:
+                        description: IPv6 CIDRs (always empty for CDO sources).
+                        type: string
+                    type: array
+                name:
+                    description: The named CDO source.
+                    enum:
+                        - cdo-public-api
+                        - cdo-platform-edge
+                        - ssx
+                        - cdfmc
+                        - cdo-egress
+                    example: cdo-platform-edge
+                    type: string
+                scope:
+                    description: Scope at which the source's addresses apply.
+                    enum:
+                        - ENVIRONMENT
+                        - TENANT
+                        - REGIONAL
+                        - GLOBAL
+                    example: ENVIRONMENT
+                    type: string
+            type: object
         AnalysisDetails:
             properties:
                 analysisStartTime:
@@ -13899,18 +13995,13 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the upgrade on the device.
+            description: The completion status of the deployment on the device.
             properties:
-                completedAt:
-                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
-                    example: 2026-04-15T18:00:10.123Z
-                    format: date-time
-                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -13921,12 +14012,12 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: Percentage completion of the current task being performed.
+                    description: The percentage completion of the current task being performed
                     format: double
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices managed by the MSP Portal.
+            description: The distinct config states for the devices in the Security Cloud Control tenant.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -13943,7 +14034,7 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices managed by the MSP Portal.
+            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
@@ -13961,7 +14052,7 @@ components:
                     type: array
             type: object
         ConnectivityState:
-            description: The distinct connectivity states for the devices managed by the MSP Portal.
+            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -13972,7 +14063,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device.
+            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
             enum:
                 - SDC
                 - CDG
@@ -15002,7 +15093,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The roles that this device performs on the network.
+            description: The distinct device roles for the devices in the Security Cloud Control tenant.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -15010,63 +15101,19 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
-            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
-            description: Set of device UIDs that are part of this upgrade run.
+            description: The current status of each device in the upgrade run.
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device.
+                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                hardwareModel:
-                    description: Hardware model of the devices being upgraded.
-                    example: Firepower 2110
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: Name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantUid:
-                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    format: uuid
-                    type: string
-                name:
-                    description: Name of the device being upgraded.
-                    example: my-firepower
-                    type: string
-                softwareVersionBeforeUpgrade:
-                    description: Software version of the device before the upgrade.
-                    example: 7.2.3
-                    type: string
-                transactionUid:
-                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, of the device being upgraded.
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: Current status of the upgrade run.
-                    enum:
-                        - IN_PROGRESS
-                        - REBUILDING_UPGRADE_CACHE
-                        - PERFORMING_UPGRADE
-                        - UPLOADING_IMAGE
-                        - PERFORMING_READINESS_CHECK
-                        - UPGRADE_STAGED
-                        - UPGRADE_STAGING_FAILED
-                        - UGPRADE_STAGING_FAILED
-                        - UPGRADE_COMPLETED
-                        - UPGRADE_FAILED
-                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -16648,6 +16695,7 @@ components:
             type: object
         Labels:
             description: Labels used to identify/tag Security Cloud Control entities.
+            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -19424,6 +19472,43 @@ components:
                     example: www
                     type: string
             type: object
+        ProviderRange:
+            description: Ranges grouped by service and region.
+            properties:
+                ipv4Cidrs:
+                    description: IPv4 CIDRs for this service/region.
+                    items:
+                        example: 13.32.0.0/15
+                        type: string
+                    type: array
+                ipv6Cidrs:
+                    description: IPv6 CIDRs for this service/region.
+                    items:
+                        example: 2600:9000::/28
+                        type: string
+                    type: array
+                region:
+                    description: AWS region, or GLOBAL.
+                    example: us-west-2
+                    type: string
+                service:
+                    description: AWS service the ranges belong to.
+                    example: CLOUDFRONT
+                    type: string
+            type: object
+        ProviderRanges:
+            description: AWS-managed shared CIDR ranges.
+            properties:
+                ranges:
+                    description: Ranges grouped by service and region.
+                    items:
+                        $ref: '#/components/schemas/ProviderRange'
+                    type: array
+                syncToken:
+                    description: Version identifier of the underlying AWS ip-ranges document.
+                    example: "1787901425"
+                    type: string
+            type: object
         PublicKey:
             description: Information on the public key used to encrypt credentials sent to the SDC.
             properties:
@@ -20654,15 +20739,21 @@ components:
             type: object
         Summary:
             properties:
-                average:
+                optimizablePercentage:
                     format: double
                     type: number
-                latest:
-                    format: double
-                    type: number
-                max:
-                    format: double
-                    type: number
+                redundantRules:
+                    format: int32
+                    type: integer
+                shadowedRules:
+                    format: int32
+                    type: integer
+                totalRules:
+                    format: int32
+                    type: integer
+                unhealthyRulesCount:
+                    format: int32
+                    type: integer
             type: object
         SwitchPortConfig:
             description: Switchport configuration of the interface, which includes settings such as switchport mode, access VLAN, and trunk VLAN. This configuration is applicable for interfaces operating in switchport mode.
@@ -21408,7 +21499,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: Roles associated with this user in Security Cloud Control.
+            description: The role of the user this token belongs to. The user can be API-only or a human.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -21419,7 +21510,6 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
-            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.
