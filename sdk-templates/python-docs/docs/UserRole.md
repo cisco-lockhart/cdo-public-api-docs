@@ -1,6 +1,6 @@
 # UserRole
 
-The role of the user this token belongs to. The user can be API-only or a human.
+Roles associated with this user in Security Cloud Control.
 
 ## Properties
 
