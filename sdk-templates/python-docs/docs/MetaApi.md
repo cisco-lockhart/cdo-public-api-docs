@@ -90,7 +90,6 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The allow-list for the authenticated tenant. |  -  |
-**304** | Not modified. |  -  |
 **401** | Missing or invalid credentials. |  -  |
 **500** | Internal server error. |  -  |
 **503** | A required source has never been loaded and cannot be retrieved. |  -  |
