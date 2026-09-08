@@ -1,6 +1,6 @@
 # DeviceRole
 
-The distinct device roles for the devices in the Security Cloud Control tenant.
+The roles that this device performs on the network.
 
 ## Properties
 
