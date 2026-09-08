@@ -4621,6 +4621,128 @@ paths:
             summary: (cdFMC-managed FTDs only) Deploy FTD device changes
             tags:
                 - Inventory
+    /v1/inventory/devices/ftds/{deviceUid}/secure-client/packages:
+        get:
+            description: Returns the Secure Client packages configured on the FTD device's Remote Access VPN policy, including the version, operating system, and CPU architecture parsed from each package filename. When a filename does not match the expected Secure Client package naming pattern, the package is still returned but its version, operating system, and CPU architecture are null. Returns an empty page when the device has no Remote Access VPN policy or the policy has no configured packages.
+            operationId: getFtdSecureClientPackages
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the FTD device in Security Cloud Control.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/FtdSecureClientPackagesPage'
+                    description: Secure Client packages retrieved successfully.
+                "400":
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/PageSecureClientPackageDto'
+                    description: Returned when the device identifier is not a valid UUID or the limit or offset query parameters are outside their allowed ranges.
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/PageSecureClientPackageDto'
+                    description: Returned when the device does not exist or is not a Cloud-delivered FMC-managed FTD.
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: List Secure Client packages available on an FTD device
+            tags:
+                - Secure Client Management
+            x-beta: "true"
+    /v1/inventory/devices/ftds/{deviceUid}/secure-client/packages/{packageUid}:
+        get:
+            description: Returns the single Secure Client package configured on the FTD device's Remote Access VPN policy whose UID matches the requested package UID, including the version, operating system, and CPU architecture parsed from the package filename. When the filename does not match the expected Secure Client package naming pattern, the package is still returned but its version, operating system, and CPU architecture are null.
+            operationId: getFtdSecureClientPackageByUid
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the FTD device in Security Cloud Control.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the Secure Client package.
+                  in: path
+                  name: packageUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SecureClientPackageDto'
+                    description: Secure Client package retrieved successfully.
+                "400":
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/SecureClientPackageDto'
+                    description: Returned when the device or package identifier is not a valid UUID.
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/SecureClientPackageDto'
+                    description: Returned when the device does not exist or is not a Cloud-delivered FMC-managed FTD, or the package is not configured on the device's Remote Access VPN policy.
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get a Secure Client package available on an FTD device by UID
+            tags:
+                - Secure Client Management
+            x-beta: "true"
     /v1/inventory/devices/ftds/{deviceUid}/upgrades/trigger:
         post:
             description: Upgrade FTD device using a specified upgrade package.
@@ -4822,6 +4944,110 @@ paths:
             summary: Register FTD device to FMC
             tags:
                 - Inventory
+    /v1/inventory/devices/ftds/secure-client/upgrades:
+        post:
+            description: Initiate a Secure Client package upgrade on one or more FTD devices. The endpoint validates that all target devices are eligible, creates a CDO transaction and a SecureClientUpgradeRun tracking object, and returns 202 Accepted with the transaction.
+            operationId: triggerFtdSecureClientUpgrade
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/TriggerSecureClientUpgradeInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the status of the operation.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Trigger Secure Client upgrade on FTD devices
+            tags:
+                - Secure Client Management
+            x-beta: "true"
+    /v1/inventory/devices/ftds/secure-client/upgrades/versions:
+        get:
+            description: Get a list of compatible Secure Client upgrade versions for the specified FTD devices, each with the packages available for it and their direct download URLs. When no device identifiers are supplied, returns every version in the Secure Client catalog that FTD devices support, without validating any devices.
+            operationId: getFtdCompatibleSecureClientVersions
+            parameters:
+                - description: The unique identifiers, represented as UUIDs, of the FTD devices in Security Cloud Control. When omitted, every version in the Secure Client catalog that FTD devices support is returned.
+                  in: query
+                  name: deviceUids
+                  required: false
+                  schema:
+                    items:
+                        format: uuid
+                        type: string
+                    maxItems: 50
+                    minItems: 0
+                    type: array
+                    uniqueItems: true
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SecureClientUpgradeVersionsPage'
+                    description: A paginated list of compatible Secure Client versions
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+                "503":
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/PageCompatibleSecureClientVersionDto'
+                    description: Service temporarily unavailable
+            security:
+                - bearerAuth: []
+            summary: List Secure Client versions compatible with the specified FTD devices
+            tags:
+                - Secure Client Management
+            x-beta: "true"
     /v1/inventory/devices/ftds/upgrades/packages/build-cache:
         put:
             description: Update cache of compatible upgrade packages for a all FTD devices.
@@ -13993,18 +14219,13 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the upgrade on the device.
+            description: The completion status of the deployment on the device.
             properties:
-                completedAt:
-                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
-                    example: 2026-04-15T18:00:10.123Z
-                    format: date-time
-                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -14015,12 +14236,12 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: Percentage completion of the current task being performed.
+                    description: The percentage completion of the current task being performed
                     format: double
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices managed by the MSP Portal.
+            description: The distinct config states for the devices in the Security Cloud Control tenant.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -14037,7 +14258,7 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices managed by the MSP Portal.
+            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
@@ -14055,7 +14276,7 @@ components:
                     type: array
             type: object
         ConnectivityState:
-            description: The distinct connectivity states for the devices managed by the MSP Portal.
+            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -14066,7 +14287,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device.
+            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
             enum:
                 - SDC
                 - CDG
@@ -15096,7 +15317,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The roles that this device performs on the network.
+            description: The distinct device roles for the devices in the Security Cloud Control tenant.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -15104,63 +15325,19 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
-            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
-            description: Set of device UIDs that are part of this upgrade run.
+            description: The current status of each device in the upgrade run.
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device.
+                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                hardwareModel:
-                    description: Hardware model of the devices being upgraded.
-                    example: Firepower 2110
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: Name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantUid:
-                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    format: uuid
-                    type: string
-                name:
-                    description: Name of the device being upgraded.
-                    example: my-firepower
-                    type: string
-                softwareVersionBeforeUpgrade:
-                    description: Software version of the device before the upgrade.
-                    example: 7.2.3
-                    type: string
-                transactionUid:
-                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, of the device being upgraded.
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: Current status of the upgrade run.
-                    enum:
-                        - IN_PROGRESS
-                        - REBUILDING_UPGRADE_CACHE
-                        - PERFORMING_UPGRADE
-                        - UPLOADING_IMAGE
-                        - PERFORMING_READINESS_CHECK
-                        - UPGRADE_STAGED
-                        - UPGRADE_STAGING_FAILED
-                        - UGPRADE_STAGING_FAILED
-                        - UPGRADE_COMPLETED
-                        - UPGRADE_FAILED
-                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -15338,7 +15515,7 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: CDFMC_MANAGED_FTD
+            example: ASA
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -15507,7 +15684,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         ExtendedNatRuleData:
@@ -16045,6 +16222,29 @@ components:
                     type: boolean
             required:
                 - ftdUid
+            type: object
+        FtdSecureClientPackagesPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/SecureClientPackageDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
             type: object
         FtdSingleDeviceDeploymentInput:
             description: Per-device deployment configuration. Cannot be combined with the deprecated `deviceUids` field. Each entry identifies a device and optionally selects which policy types to deploy. Set `selectedPolicyTypes` to null or include FULL_DEPLOY to perform a full deployment for that device. Each entry must have a unique uid.
@@ -16742,6 +16942,7 @@ components:
             type: object
         Labels:
             description: Labels used to identify/tag Security Cloud Control entities.
+            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -19321,6 +19522,29 @@ components:
                     format: int32
                     type: integer
             type: object
+        PageSecureClientPackageDto:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/SecureClientPackageDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
         PhysicalInterfacePatchInput:
             properties:
                 description:
@@ -21397,15 +21621,6 @@ components:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
                     type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in Security Cloud Control.
-                    example: My Managed Tenant
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
                 name:
                     description: The name of the device.
                     example: asa-fw-01
@@ -21554,7 +21769,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: Roles associated with this user in Security Cloud Control.
+            description: The role of the user this token belongs to. The user can be API-only or a human.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -21565,7 +21780,6 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
-            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.
