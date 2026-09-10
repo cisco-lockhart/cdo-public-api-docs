@@ -105,6 +105,7 @@ nav:
     - AuditLog: AuditLog.md
     - AuditLogPage: AuditLogPage.md
     - AuthenticationError: AuthenticationError.md
+    - BackupResult: BackupResult.md
     - BillingAddress: BillingAddress.md
     - Browser: Browser.md
     - BulkOperationAsaDeviceRequest: BulkOperationAsaDeviceRequest.md
@@ -361,6 +362,7 @@ nav:
     - Policy: Policy.md
     - PolicyAnalysisData: PolicyAnalysisData.md
     - PolicyAnalysisInsightsSummary: PolicyAnalysisInsightsSummary.md
+    - PolicyApplyTaskResultDetails: PolicyApplyTaskResultDetails.md
     - PolicyNodeDataPage: PolicyNodeDataPage.md
     - PortsValue: PortsValue.md
     - ProtocolContent: ProtocolContent.md

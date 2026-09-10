@@ -9,6 +9,12 @@ Name | Type | Description | Notes
 **type** | **str** |  | 
 **num_groups** | **int** |  | [optional] 
 **num_users** | **int** |  | [optional] 
+**num_devices** | **int** |  | [optional] 
+**num_failed** | **int** |  | [optional] 
+**num_running** | **int** |  | [optional] 
+**num_successful** | **int** |  | [optional] 
+**devices_with_failing_validation_checks** | **List[str]** |  | [optional] 
+**devices_with_passing_validation_checks** | **List[str]** |  | [optional] 
 **download_urls** | **List[str]** |  | [optional] 
 
 ## Example
