@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**error_msg** | **str** |  | [optional] 
 **num_groups** | **int** |  | [optional] 
 **num_users** | **int** |  | [optional] 
 

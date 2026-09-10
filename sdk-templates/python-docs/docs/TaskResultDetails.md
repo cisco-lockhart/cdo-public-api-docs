@@ -7,6 +7,7 @@ Type-specific result produced by a task
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** |  | 
+**error_msg** | **str** |  | [optional] 
 **num_groups** | **int** |  | [optional] 
 **num_users** | **int** |  | [optional] 
 **num_devices** | **int** |  | [optional] 
