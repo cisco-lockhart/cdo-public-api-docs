@@ -217,6 +217,7 @@ nav:
     - FtdCreateOrUpdateInput: FtdCreateOrUpdateInput.md
     - FtdDeploymentInput: FtdDeploymentInput.md
     - FtdHaInfo: FtdHaInfo.md
+    - FtdLicenseType: FtdLicenseType.md
     - FtdMultiDeviceDeploymentInput: FtdMultiDeviceDeploymentInput.md
     - FtdOnboardingTemplateConfiguration: FtdOnboardingTemplateConfiguration.md
     - FtdRegistrationInput: FtdRegistrationInput.md
