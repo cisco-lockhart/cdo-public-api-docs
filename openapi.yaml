@@ -16155,7 +16155,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
+                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
                     type: string
             type: object
         ExtendedNatRuleData:
@@ -16518,15 +16518,7 @@ components:
                         - BASE
                         - CARRIER
                     items:
-                        description: Specify a set of licenses to apply to the device. This field is required for access-policy onboarding. It may be omitted or empty for template onboarding, but it must not contain any licenses when a template is supplied.
-                        enum:
-                            - BASE
-                            - CARRIER
-                            - THREAT
-                            - MALWARE
-                            - URLFilter
-                        example: '["BASE","CARRIER"]'
-                        type: string
+                        $ref: '#/components/schemas/FtdLicenseType'
                     type: array
                     uniqueItems: true
                 name:
@@ -16617,6 +16609,20 @@ components:
                 secondaryNode:
                     $ref: '#/components/schemas/HaNode'
             type: object
+        FtdLicenseType:
+            description: A license that can be applied to an FTD. Tenants that are not MSLA-enabled must use the Smart Licensing licenses ('BASE', 'CARRIER', 'THREAT', 'MALWARE', 'URLFilter'). MSLA-enabled tenants must use the MSLA licenses ('MSLA-CSF-ESS', 'MSLA-CSF-ADV', 'MSLA-CSF-AMP', 'MSLA-CSF-URL'), and may only specify entitlements their tenant actually holds. A single request must not mix the two families.
+            enum:
+                - BASE
+                - CARRIER
+                - THREAT
+                - MALWARE
+                - URLFilter
+                - MSLA-CSF-ADV
+                - MSLA-CSF-ESS
+                - MSLA-CSF-AMP
+                - MSLA-CSF-URL
+            example: '["BASE","CARRIER"]'
+            type: string
         FtdMultiDeviceDeploymentInput:
             properties:
                 deploymentNotes:
@@ -23008,16 +23014,7 @@ components:
                         - BASE
                         - CARRIER
                     items:
-                        description: Specify a set of licenses to apply to the device.
-                        enum:
-                            - BASE
-                            - CARRIER
-                            - THREAT
-                            - MALWARE
-                            - URLFilter
-                        example: '["BASE","CARRIER"]'
-                        type: string
-                    minItems: 1
+                        $ref: '#/components/schemas/FtdLicenseType'
                     type: array
                     uniqueItems: true
                 name:
@@ -23032,7 +23029,6 @@ components:
                 template:
                     $ref: '#/components/schemas/FtdOnboardingTemplateConfiguration'
             required:
-                - licenses
                 - name
                 - serialNumber
             type: object
