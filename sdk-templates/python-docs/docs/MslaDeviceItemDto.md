@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**device_name** | **str** | The name of the device. | [optional] 
-**device_uid** | **str** | The UID of the device in Security Cloud Control. | [optional] 
-**entitlement** | **str** | The MSLA entitlement identifier. | [optional] 
-**model_number** | **str** | The hardware model number. | [optional] 
-**serial** | **str** | The serial number of the device. | [optional] 
-**uid** | **str** | The UID of the entitlement assignment row. | [optional] 
+**device_name** | **str** | The name of the device. Device names are unique in Security Cloud Control. | [optional] 
+**device_uid** | **str** | The unique identifier, represented as a UUID, of the device in Security Cloud Control. | [optional] 
+**entitlement** | **str** | The unique identifier of the MSLA entitlement assigned to the device. | [optional] 
+**model_number** | **str** | The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device. | [optional] 
+**serial** | **str** | The serial number of the device. This is typically used for licensing, and is not the same as the chassis&#39; serial number. | [optional] 
+**uid** | **str** | The unique identifier, represented as a UUID, of the entitlement assignment row. | [optional] 
 
 ## Example
 

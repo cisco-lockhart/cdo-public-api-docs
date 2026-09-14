@@ -7000,6 +7000,55 @@ paths:
             tags:
                 - Licensing
             x-beta: "true"
+    /v1/licenses/msla/entitlements:
+        get:
+            description: Get a paginated list of MSLA entitlements assigned to this tenant.
+            operationId: getMslaEntitlements
+            parameters:
+                - description: Number of results to retrieve.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 0
+                    type: string
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MslaEntitlementsPage'
+                    description: MSLA entitlement assignments for the tenant
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    content:
+                        application/json: {}
+                    description: MSLA licensing is not enabled for this tenant
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Tenant MSLA Entitlements
+            tags:
+                - Licensing
+            x-beta: "true"
     /v1/licenses/msla/usage:
         get:
             description: Get the MSLA entitlements assigned to this tenant and the number of devices consuming each entitlement. All assigned entitlements are returned, including those with no consuming devices. The consumption counts are derived from the most recent cdFMC poll, whose timestamp is returned in lastPolledAt.
@@ -14664,13 +14713,8 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+            description: The completion status of the deployment on the device.
             properties:
-                completedAt:
-                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
-                    example: 2026-04-15T18:00:10.123Z
-                    format: date-time
-                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
@@ -17829,27 +17873,27 @@ components:
         MslaDeviceItemDto:
             properties:
                 deviceName:
-                    description: The name of the device.
+                    description: The name of the device. Device names are unique in Security Cloud Control.
                     example: ftd-device-1
                     type: string
                 deviceUid:
-                    description: The UID of the device in Security Cloud Control.
+                    description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
                     example: 5d8f7db1-5e9b-4f7d-9c64-4fef0e5f9c9e
                     type: string
                 entitlement:
-                    description: The MSLA entitlement identifier.
+                    description: The unique identifier of the MSLA entitlement assigned to the device.
                     example: MSLA-CSF-ESS
                     type: string
                 modelNumber:
-                    description: The hardware model number.
+                    description: The hardware, or virtualized hardware platform, that the device is running on (ASA-only). This field can be missing in the case of a partially onboarded device.
                     example: FPR-1120
                     type: string
                 serial:
-                    description: The serial number of the device.
+                    description: The serial number of the device. This is typically used for licensing, and is not the same as the chassis' serial number.
                     example: JAD24500ABC
                     type: string
                 uid:
-                    description: The UID of the entitlement assignment row.
+                    description: The unique identifier, represented as a UUID, of the entitlement assignment row.
                     example: a1b2c3d4-0000-0000-0000-000000000001
                     format: uuid
                     type: string
@@ -17871,6 +17915,42 @@ components:
                     example: 2026-07-03T12:00:00Z
                     format: date-time
                     type: string
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
+        MslaEntitlementDto:
+            description: The list of items retrieved.
+            properties:
+                entitlement:
+                    description: The unique identifier of the MSLA entitlement available on the tenant.
+                    example: MSLA-CSF-ESS
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the entitlement assignment row.
+                    example: a1b2c3d4-0000-0000-0000-000000000001
+                    format: uuid
+                    type: string
+            type: object
+        MslaEntitlementsPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MslaEntitlementDto'
+                    type: array
                 limit:
                     description: The number of results retrieved.
                     example: 50

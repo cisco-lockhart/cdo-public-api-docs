@@ -281,6 +281,8 @@ nav:
     - MfaEventPage: MfaEventPage.md
     - MslaDeviceItemDto: MslaDeviceItemDto.md
     - MslaDevicePage: MslaDevicePage.md
+    - MslaEntitlementDto: MslaEntitlementDto.md
+    - MslaEntitlementsPage: MslaEntitlementsPage.md
     - MslaUsageItemDto: MslaUsageItemDto.md
     - MslaUsagePage: MslaUsagePage.md
     - MspAddTenantInput: MspAddTenantInput.md

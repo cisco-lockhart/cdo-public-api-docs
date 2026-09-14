@@ -19,6 +19,7 @@ Method | HTTP request | Description
 [**get_device_licenses_by_uid**](LicensingApi.md#get_device_licenses_by_uid) | **GET** /v1/licenses/devices/{deviceUid} | Get Device Licensing Information by Device UID
 [**get_msla_device_by_uid**](LicensingApi.md#get_msla_device_by_uid) | **GET** /v1/licenses/msla/devices/{uid} | Get MSLA Device Entitlement by UID
 [**get_msla_devices**](LicensingApi.md#get_msla_devices) | **GET** /v1/licenses/msla/devices | Get MSLA Device Entitlements
+[**get_msla_entitlements**](LicensingApi.md#get_msla_entitlements) | **GET** /v1/licenses/msla/entitlements | Get Tenant MSLA Entitlements
 [**get_msla_usage**](LicensingApi.md#get_msla_usage) | **GET** /v1/licenses/msla/usage | Get MSLA License Usage
 [**get_smart_account_by_uid**](LicensingApi.md#get_smart_account_by_uid) | **GET** /v1/licenses/smart-accounts/{smartAccountUid} | Get Smart Account by UID
 [**get_smart_accounts**](LicensingApi.md#get_smart_accounts) | **GET** /v1/licenses/smart-accounts | Get Smart Accounts used in this tenant.
@@ -527,6 +528,90 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | MSLA device entitlement assignments for the tenant |  -  |
+**401** | Request not authorized. |  -  |
+**403** | MSLA licensing is not enabled for this tenant |  -  |
+**405** | Method not allowed. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_msla_entitlements**
+> MslaEntitlementsPage get_msla_entitlements(limit=limit, offset=offset)
+
+Get Tenant MSLA Entitlements
+
+Get a paginated list of MSLA entitlements assigned to this tenant.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.msla_entitlements_page import MslaEntitlementsPage
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.LicensingApi(api_client)
+    limit = '50' # str | Number of results to retrieve. (optional) (default to '50')
+    offset = '0' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
+
+    try:
+        # Get Tenant MSLA Entitlements
+        api_response = api_instance.get_msla_entitlements(limit=limit, offset=offset)
+        print("The response of LicensingApi->get_msla_entitlements:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling LicensingApi->get_msla_entitlements: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **str**| Number of results to retrieve. | [optional] [default to &#39;50&#39;]
+ **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
+
+### Return type
+
+[**MslaEntitlementsPage**](MslaEntitlementsPage.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | MSLA entitlement assignments for the tenant |  -  |
 **401** | Request not authorized. |  -  |
 **403** | MSLA licensing is not enabled for this tenant |  -  |
 **405** | Method not allowed. |  -  |
