@@ -260,6 +260,7 @@ nav:
     - Labels: Labels.md
     - LinkState: LinkState.md
     - ListObjectResponse: ListObjectResponse.md
+    - LocalReadinessResult: LocalReadinessResult.md
     - Location: Location.md
     - LogSettings: LogSettings.md
     - ManagedTenantDto: ManagedTenantDto.md
@@ -380,6 +381,7 @@ nav:
     - RedirectView: RedirectView.md
     - Reference: Reference.md
     - ReferenceInfo: ReferenceInfo.md
+    - RemoteReadinessResult: RemoteReadinessResult.md
     - RuleConflictsData: RuleConflictsData.md
     - RuleConflictsDataPage: RuleConflictsDataPage.md
     - RuleTimeRangeContent: RuleTimeRangeContent.md
