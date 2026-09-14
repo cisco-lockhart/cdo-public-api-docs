@@ -6,6 +6,7 @@ A managed tenant with at least one device consuming an MSLA entitlement.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**device_count** | **int** | The number of devices in this managed tenant consuming this entitlement. | [optional] 
 **display_name** | **str** | The human-readable display name of the managed tenant. | [optional] 
 **name** | **str** | The name of the managed tenant (unique in CDO). | [optional] 
 **region** | **str** | The CDO region of the managed tenant. | [optional] 
