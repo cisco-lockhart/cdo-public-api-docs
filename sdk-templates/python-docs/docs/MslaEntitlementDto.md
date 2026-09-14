@@ -7,7 +7,6 @@ The list of items retrieved.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **entitlement** | **str** | The unique identifier of the MSLA entitlement available on the tenant. | [optional] 
-**uid** | **str** | The unique identifier, represented as a UUID, of the entitlement assignment row. | [optional] 
 
 ## Example
 
