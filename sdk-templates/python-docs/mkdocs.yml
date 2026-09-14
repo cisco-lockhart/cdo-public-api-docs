@@ -152,6 +152,7 @@ nav:
     - ConflictingRules: ConflictingRules.md
     - ConnectivityState: ConnectivityState.md
     - ConnectorType: ConnectorType.md
+    - CopyFilesResult: CopyFilesResult.md
     - CpuHealthMetrics: CpuHealthMetrics.md
     - CreateRequest: CreateRequest.md
     - CurrentTenant: CurrentTenant.md
