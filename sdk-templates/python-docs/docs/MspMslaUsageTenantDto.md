@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **display_name** | **str** | The human-readable display name of the managed tenant. | [optional] 
 **name** | **str** | The name of the managed tenant (unique in CDO). | [optional] 
 **region** | **str** | The CDO region of the managed tenant. | [optional] 
+**scc_organization_uid** | **str** | The unique identifier of the organization in Security Cloud Control Firewall Platform. This is different to the unique identifier used in Security Cloud Control Firewall Manager. | [optional] 
 **uid** | **str** | The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control. | [optional] 
 
 ## Example
