@@ -15262,6 +15262,7 @@ components:
                     description: Indicates whether the license used on the device is currently compliant with Smart Licensing restrictions.
                     enum:
                         - IN_COMPLIANCE
+                        - UNKNOWN
                         - OUT_OF_COMPLIANCE
                     example: IN_COMPLIANCE
                     type: string
@@ -15343,6 +15344,7 @@ components:
                     enum:
                         - LICENSED
                         - UNLICENSED
+                        - UNKNOWN
                         - EVALUATION
                     example: LICENSED
                     type: string
@@ -15672,6 +15674,7 @@ components:
                     description: Indicates whether the license used on the device is currently compliant with Smart Licensing restrictions.
                     enum:
                         - IN_COMPLIANCE
+                        - UNKNOWN
                         - OUT_OF_COMPLIANCE
                     type: string
                 deviceType:
@@ -15691,6 +15694,7 @@ components:
                     enum:
                         - LICENSED
                         - UNLICENSED
+                        - UNKNOWN
                         - EVALUATION
                     type: string
                 licenses:
@@ -16582,15 +16586,7 @@ components:
                         - BASE
                         - CARRIER
                     items:
-                        description: Specify a set of licenses to apply to the device. This field is required for access-policy onboarding. It may be omitted or empty for template onboarding, but it must not contain any licenses when a template is supplied.
-                        enum:
-                            - BASE
-                            - CARRIER
-                            - THREAT
-                            - MALWARE
-                            - URLFilter
-                        example: '["BASE","CARRIER"]'
-                        type: string
+                        $ref: '#/components/schemas/FtdLicenseType'
                     type: array
                     uniqueItems: true
                 name:
@@ -16681,6 +16677,20 @@ components:
                 secondaryNode:
                     $ref: '#/components/schemas/HaNode'
             type: object
+        FtdLicenseType:
+            description: A license that can be applied to an FTD. Tenants that are not MSLA-enabled must use the Smart Licensing licenses ('BASE', 'CARRIER', 'THREAT', 'MALWARE', 'URLFilter'). MSLA-enabled tenants must use the MSLA licenses ('MSLA-CSF-ESS', 'MSLA-CSF-ADV', 'MSLA-CSF-AMP', 'MSLA-CSF-URL'), and may only specify entitlements their tenant actually holds. A single request must not mix the two families.
+            enum:
+                - BASE
+                - CARRIER
+                - THREAT
+                - MALWARE
+                - URLFilter
+                - MSLA-CSF-ADV
+                - MSLA-CSF-ESS
+                - MSLA-CSF-AMP
+                - MSLA-CSF-URL
+            example: '["BASE","CARRIER"]'
+            type: string
         FtdMultiDeviceDeploymentInput:
             properties:
                 deploymentNotes:
@@ -22826,6 +22836,15 @@ components:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
                     type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in Security Cloud Control.
+                    example: My Managed Tenant
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
                 name:
                     description: The name of the device.
                     example: asa-fw-01
@@ -23001,6 +23020,7 @@ components:
                     description: Indicates whether any of the licenses used in this tenant from this Virtual Account are out of compliance.
                     enum:
                         - IN_COMPLIANCE
+                        - UNKNOWN
                         - OUT_OF_COMPLIANCE
                     type: string
                 lastUpdatedTime:
@@ -23169,16 +23189,7 @@ components:
                         - BASE
                         - CARRIER
                     items:
-                        description: Specify a set of licenses to apply to the device.
-                        enum:
-                            - BASE
-                            - CARRIER
-                            - THREAT
-                            - MALWARE
-                            - URLFilter
-                        example: '["BASE","CARRIER"]'
-                        type: string
-                    minItems: 1
+                        $ref: '#/components/schemas/FtdLicenseType'
                     type: array
                     uniqueItems: true
                 name:
@@ -23193,7 +23204,6 @@ components:
                 template:
                     $ref: '#/components/schemas/FtdOnboardingTemplateConfiguration'
             required:
-                - licenses
                 - name
                 - serialNumber
             type: object
