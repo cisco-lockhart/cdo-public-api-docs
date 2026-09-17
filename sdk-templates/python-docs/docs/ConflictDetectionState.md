@@ -1,6 +1,6 @@
 # ConflictDetectionState
 
-The distinct conflict detection states for the devices managed by the MSP Portal.
+The distinct conflict detection states for the devices in the Security Cloud Control tenant.
 
 ## Properties
 
