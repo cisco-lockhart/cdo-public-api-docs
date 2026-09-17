@@ -435,6 +435,7 @@ nav:
     - TaskDistinctAttributeValues: TaskDistinctAttributeValues.md
     - TaskDto: TaskDto.md
     - TaskDtoPage: TaskDtoPage.md
+    - TaskDtoResult: TaskDtoResult.md
     - TaskResultDetails: TaskResultDetails.md
     - Tenant: Tenant.md
     - TenantPage: TenantPage.md
