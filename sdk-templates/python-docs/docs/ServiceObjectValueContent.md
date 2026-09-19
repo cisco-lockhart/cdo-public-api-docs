@@ -1,20 +1,19 @@
 # ServiceObjectValueContent
 
-The value of the service object
+The value of a service object. Which properties are populated depends on the service object's protocol: port-based protocols carry a literal or a source and destination, ICMP4 and ICMP6 carry their respective type and code, and a custom protocol carries a protocolValue.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** |  | [optional] 
+**destination** | [**PortsValue**](PortsValue.md) |  | [optional] 
 **icmp4_code** | **str** |  | [optional] 
 **icmp4_type** | **str** |  | [optional] 
 **icmp6_code** | **str** |  | [optional] 
 **icmp6_type** | **str** |  | [optional] 
-**destination** | [**PortsValue**](PortsValue.md) |  | [optional] 
-**source** | [**PortsValue**](PortsValue.md) |  | [optional] 
 **literal** | **str** | The literal port or range of port values | [optional] 
 **protocol_value** | **str** | The literal for a custom protocol value | [optional] 
+**source** | [**PortsValue**](PortsValue.md) |  | [optional] 
 
 ## Example
 

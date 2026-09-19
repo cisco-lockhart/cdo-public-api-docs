@@ -1,5 +1,6 @@
 # PortsValue
 
+The destination ports of the service object
 
 ## Properties
 

@@ -621,7 +621,7 @@ Name | Type | Description  | Notes
 
 Get Objects
 
-Get objects in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Get objects in the Security Cloud Control tenant. To use the object APIs, your tenant needs to be using the centralized object service.
 
 ### Example
 

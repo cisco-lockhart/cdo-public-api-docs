@@ -10341,7 +10341,7 @@ paths:
                 - MSP Tenant Management
     /v1/objects:
         get:
-            description: 'Get objects in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
+            description: Get objects in the Security Cloud Control tenant. To use the object APIs, your tenant needs to be using the centralized object service.
             operationId: getObjects
             parameters:
                 - description: The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.
@@ -14713,13 +14713,8 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+            description: The completion status of the deployment on the device.
             properties:
-                completedAt:
-                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
-                    example: 2026-04-15T18:00:10.123Z
-                    format: date-time
-                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
@@ -16912,25 +16907,6 @@ components:
                         $ref: '#/components/schemas/Policy'
                     type: array
             type: object
-        GroupContent:
-            description: The contents of an object group
-            properties:
-                literals:
-                    description: List of content literals
-                    items:
-                        $ref: '#/components/schemas/SingleContent'
-                    type: array
-                referencedObjectUids:
-                    description: Set of UIDs of the group's referenced objects
-                    example:
-                        - 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    items:
-                        description: Set of UIDs of the group's referenced objects
-                        format: uuid
-                        type: string
-                    type: array
-                    uniqueItems: true
-            type: object
         HaHealthMetrics:
             description: The HA health metrics for the device. This value will be available only if the device is part of an HA pair.
             properties:
@@ -16999,149 +16975,6 @@ components:
                     description: The unique identifier, represented as a UUID, of the device on the FMC.
                     example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-            type: object
-        Icmp4Value:
-            properties:
-                icmp4Code:
-                    enum:
-                        - NET_UNREACHABLE
-                        - HOST_UNREACHABLE
-                        - PROTOCOL_UNREACHABLE
-                        - PORT_UNREACHABLE
-                        - FRAGMENTATION_NEEDED
-                        - SOURCE_ROUTE_FAILED
-                        - DEST_NETWORK_UNKNOWN
-                        - DEST_HOST_UNKNOWN
-                        - SRC_HOST_ISOLATED
-                        - COMMUNICATION_DEST_NET_PROHIBITED
-                        - COMMUNICATION_DEST_HOST_PROHIBITED
-                        - DEST_NET_UNREACHABLE_FOR_TOS
-                        - DEST_HOST_UNREACHABLE_FOR_TOS
-                        - COMM_ADMINISTRATIVELY_PROHIBITED
-                        - HOST_PRECEDENCE_VIOLATION
-                        - PRECEDENCE_CUTOFF
-                        - REDIRECT_DATAGRAM_NETWORK
-                        - REDIRECT_DATAGRAM_HOST
-                        - REDIRECT_DATAGRAM_SERVICE_NETWORK
-                        - REDIRECT_DATAGRAM_SERVICE_HOST
-                        - ALTERNATE_HOST_ADDR
-                        - DO_NOT_ROUTE_COMMON_TRAFFIC
-                        - NORMAL_ROUTER_ADV
-                        - TTL_EXPIRED_TRANSIT
-                        - FRAG_ASSEMBLY
-                        - PTR_ERROR
-                        - MISSING_REQD_OPTION
-                        - BAD_LENGTH
-                        - BAD_SPI
-                        - AUTH_FAILED
-                        - DECOMPRESSION_FAILED
-                        - DECRYPTION_FAILED
-                        - NEED_AUTHENTICATION
-                        - NEED_AUTHORIZATION
-                    example: NET_UNREACHABLE
-                    type: string
-                icmp4Type:
-                    enum:
-                        - ANY
-                        - ECHO_REPLY
-                        - DESTINATION_UNREACHABLE
-                        - SOURCE_QUENCH
-                        - REDIRECT_MESSAGE
-                        - ALTERNATE_HOST_ADDRESS
-                        - ECHO_REQUEST
-                        - ROUTER_ADVERTISEMENT
-                        - ROUTER_SOLICITATION
-                        - TIME_EXCEEDED
-                        - PARAMETER_PROBLEM
-                        - TIMESTAMP
-                        - TIMESTAMP_REPLY
-                        - INFO_REQUEST
-                        - INFO_REPLY
-                        - ADDR_MASK_REQUEST
-                        - ADDR_MASK_REPLY
-                        - TRACEROUTE
-                        - DATAGRAM_CONVERSION_ERROR
-                        - MOBILE_HOST_REDIRECT
-                        - WHERE_ARE_YOU
-                        - HERE_I_AM
-                        - MOBILE_REG_REQUEST
-                        - MOBILE_REG_REPLY
-                        - DOMAIN_NAME_REQUEST
-                        - DOMAIN_NAME_REPLY
-                        - SKIP_ALGORITHM_DISCOVERY_PROTOCOL
-                        - PHOTURIS
-                        - EXPERIMENTAL_MOB_PROTOCOLS
-                    example: DESTINATION_UNREACHABLE
-                    type: string
-            type: object
-        Icmp6Value:
-            properties:
-                icmp6Code:
-                    enum:
-                        - NO_ROUTE_DEST
-                        - COMMUNICATION_PROHIBITED
-                        - BEYOND_SCOPE_SRC_ADDR
-                        - ADDRESS_UNREACHABLE
-                        - PORT_UNREACHABLE
-                        - SOURCE_ADDRESS_FAILED
-                        - REJECT_ROUTE
-                        - ERROR_SRC_ROUTING_HEADER
-                        - HOP_LIMIT_EXCEEDED
-                        - FRAGMENT_REASSEMBLY_TIME_EXCEEDED
-                        - ERRONEOUS_HEADER_ENCOUNTERED
-                        - UNRECOGNIZED_NEXT_HEADER_TYPE_ENCOUNTERED
-                        - UNRECOGNIZED_IPV6_OPTION_ENCOUNTERED
-                        - IPV6_FIRST_FRAG_HAS_INCOMPLETE_HEADER_CHAIN
-                        - SR_UPPER_LAYER_HEADER_ERROR
-                        - ROUTER_RENUMBERING_COMMAND
-                        - ROUTER_RENUMBERING_RESULT
-                        - DATA_CONTAINS_IPV6
-                        - DATA_CONTAINS_NAME
-                        - DATA_CONTAINS_IPV4
-                        - SUCCESSFUL_REPLY
-                        - RESPONDER_REFUSES_ANSWER
-                        - QTYPE_UNKNOWN
-                    example: ADDRESS_UNREACHABLE
-                    type: string
-                icmp6Type:
-                    enum:
-                        - ANY
-                        - DESTINATION_UNREACHABLE
-                        - PACKET_TOO_BIG
-                        - TIME_EXCEEDED
-                        - PARAMETER_PROBLEM
-                        - ECHO_REQUEST
-                        - ECHO_REPLY
-                        - MULTICAST_LISTENER_QUERY
-                        - MULTICAST_LISTENER_REPORT
-                        - MULTICAST_LISTENER_DONE
-                        - ROUTER_SOLICITATION
-                        - ROUTER_ADVERTISEMENT
-                        - NEIGHBOUR_SOLICITATION
-                        - NEIGHBOUR_ADVERTISEMENT
-                        - REDIRECT_MESSAGE
-                        - ROUTER_RENUMBERING
-                        - ICMP_NODE_INFO_QUERY
-                        - ICMP_NODE_INFO_RESPONSE
-                        - INVERSE_NEIGHBOR_DISCOVERY_SOLICITATION
-                        - INVERSE_NEIGHBOR_DISCOVERY_ADVERTISEMENT
-                        - VER2_MULTICAST_LISTENER_REPORT
-                        - HOME_AGENT_ADDR_DISCOVERY_REQUEST
-                        - HOME_AGENT_ADDR_DISCOVERY_REPLY
-                        - MOBILE_PREFIX_SOLICITATION
-                        - MOBILE_PREFIX_ADVERTISEMENT
-                        - CERT_PATH_SOLICITATION
-                        - CERT_PATH_ADVERTISEMENT
-                        - ICMP_EXP_MOBILITY_PROTOCOLS
-                        - MULTICAST_ROUTER_ADVERTISEMENT
-                        - MULTICAST_ROUTER_SOLICITATION
-                        - MULTICAST_ROUTER_TERMINATION
-                        - FMIPV6_MESSAGE
-                        - RPL_CONTROL_MESSAGE
-                        - PRIVATE_EXPERIMENTATION
-                        - PRIVATE_EXPERIMENTATION_EXTENDED
-                    example: DESTINATION_UNREACHABLE
                     type: string
             type: object
         ImpactedSources:
@@ -20096,25 +19929,6 @@ components:
                     example: UTC +0
                     type: string
             type: object
-        NetworkObjectContent:
-            description: The content of a network object
-            properties:
-                dnsResolution:
-                    description: For FQDN network objects sourced from FTD/cdFMC, the DNS resolution family that governs which DNS record types FTD resolves at policy-enforcement time. Populated only for FQDN objects; absent otherwise.
-                    enum:
-                        - IPV4_ONLY
-                        - IPV6_ONLY
-                        - IPV4_AND_IPV6
-                    example: IPV4_AND_IPV6
-                    type: string
-                literal:
-                    description: The literal content of the network object
-                    example: a:b:c::1
-                    minLength: 1
-                    type: string
-            required:
-                - literal
-            type: object
         OS:
             description: The operating system of the client device.
             properties:
@@ -20128,14 +19942,176 @@ components:
                     type: string
             type: object
         ObjectContent:
-            description: The content value of the override. This overrides the object's default content.
+            description: 'The content of an object. Which properties are populated is determined by the objectType of the enclosing object: network objects carry a literal, URL objects a url, service objects a protocol and serviceValue, and groups their literals and referencedObjectUids.'
             example:
                 literal: a:b:c::1
-            oneOf:
-                - $ref: '#/components/schemas/ServiceObjectContent'
-                - $ref: '#/components/schemas/UrlObjectContent'
-                - $ref: '#/components/schemas/GroupContent'
-                - $ref: '#/components/schemas/NetworkObjectContent'
+            properties:
+                dnsResolution:
+                    description: For FQDN network objects sourced from FTD/cdFMC, the DNS resolution family that governs which DNS record types FTD resolves at policy-enforcement time. Populated only for FQDN objects; absent otherwise.
+                    enum:
+                        - IPV4_ONLY
+                        - IPV6_ONLY
+                        - IPV4_AND_IPV6
+                    example: IPV4_AND_IPV6
+                    type: string
+                literal:
+                    description: The literal content of the network object
+                    example: a:b:c::1
+                    type: string
+                literals:
+                    description: List of content literals
+                    items:
+                        $ref: '#/components/schemas/SingleContent'
+                    type: array
+                protocol:
+                    description: The service object protocol
+                    enum:
+                        - ALL
+                        - TCP
+                        - UDP
+                        - ICMP
+                        - ICMP4
+                        - ICMP6
+                        - TCP_UDP
+                        - IGMP
+                        - GGP
+                        - ST2
+                        - CBT
+                        - EGP
+                        - IGP
+                        - BBNRCCMON
+                        - NVP2
+                        - PUP
+                        - ARGUS
+                        - EMCON
+                        - XNET
+                        - CHAOS
+                        - MUX
+                        - DCNMEAS
+                        - HMP
+                        - PRM
+                        - XNSIDP
+                        - TRUNK1
+                        - TRUNK2
+                        - LEAF1
+                        - LEAF2
+                        - RDP
+                        - IRTP
+                        - ISOTP4
+                        - NETBLT
+                        - MFENSP
+                        - MERITINP
+                        - SEP
+                        - THREEPC
+                        - IDPR
+                        - XTP
+                        - DDP
+                        - IDPRCMTP
+                        - TPPLUSPLUS
+                        - IL
+                        - SDRP
+                        - IDRP
+                        - RSVP
+                        - GRE
+                        - MHRP
+                        - BNA
+                        - ESP
+                        - AH
+                        - INLSP
+                        - SWIPE
+                        - NARP
+                        - MOBILE
+                        - TLSP
+                        - SKIP
+                        - IPv6NONXT
+                        - CFTP
+                        - SATEXPAK
+                        - KRYPTOLAN
+                        - RVD
+                        - IPPC
+                        - SATMON
+                        - VISA
+                        - IPCV
+                        - CPNX
+                        - CPHB
+                        - WSN
+                        - PVP
+                        - BRSATMON
+                        - SUNND
+                        - WBMON
+                        - WBEXPAK
+                        - ISOIP
+                        - VMTP
+                        - SECUREVMTP
+                        - VINES
+                        - TTP
+                        - NSFNETIGP
+                        - DGP
+                        - TCF
+                        - EIGRP
+                        - OSPFIGP
+                        - SPRITERPC
+                        - LARP
+                        - MTP
+                        - AX25
+                        - IPIP
+                        - MICP
+                        - SCCSP
+                        - ETHERIP
+                        - ENCAP
+                        - GMTP
+                        - IFMP
+                        - PNNI
+                        - PIM
+                        - ARIS
+                        - SCPS
+                        - QNX
+                        - AN
+                        - IPCOMP
+                        - SNP
+                        - COMPAQPEER
+                        - IPXINIP
+                        - VRRP
+                        - PGM
+                        - L2TP
+                        - DDX
+                        - IATP
+                        - ST
+                        - SRP
+                        - UTI
+                        - SMP
+                        - SM
+                        - PTP
+                        - ISIS
+                        - FIRE
+                        - CRTP
+                        - CRUDP
+                        - SSCOPMCE
+                        - IPLT
+                        - SPS
+                        - PIPE
+                        - SCTP
+                        - FC
+                        - DIVERT
+                        - CUSTOM
+                    example: TCP
+                    type: string
+                referencedObjectUids:
+                    description: Set of UIDs of the group's referenced objects
+                    example:
+                        - 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    items:
+                        description: Set of UIDs of the group's referenced objects
+                        format: uuid
+                        type: string
+                    type: array
+                    uniqueItems: true
+                serviceValue:
+                    $ref: '#/components/schemas/ServiceObjectValueContent'
+                url:
+                    description: The URL literal
+                    example: https://www.cisco.com/
+                    type: string
             type: object
         ObjectData:
             properties:
@@ -20525,6 +20501,7 @@ components:
                     type: integer
             type: object
         PortsValue:
+            description: The destination ports of the service object
             properties:
                 literal:
                     description: The literal port or range of port values
@@ -20577,13 +20554,6 @@ components:
                     type: string
             required:
                 - name
-            type: object
-        ProtocolValueContent:
-            properties:
-                protocolValue:
-                    description: The literal for a custom protocol value
-                    example: www
-                    type: string
             type: object
         ProviderRange:
             description: Ranges grouped by service and region.
@@ -21308,10 +21278,205 @@ components:
                     format: double
                     type: number
             type: object
-        ServiceObjectContent:
+        ServiceObjectValueContent:
+            description: 'The value of a service object. Which properties are populated depends on the service object''s protocol: port-based protocols carry a literal or a source and destination, ICMP4 and ICMP6 carry their respective type and code, and a custom protocol carries a protocolValue.'
+            example:
+                literal: 8000-9000
             properties:
+                destination:
+                    $ref: '#/components/schemas/PortsValue'
+                icmp4Code:
+                    enum:
+                        - NET_UNREACHABLE
+                        - HOST_UNREACHABLE
+                        - PROTOCOL_UNREACHABLE
+                        - PORT_UNREACHABLE
+                        - FRAGMENTATION_NEEDED
+                        - SOURCE_ROUTE_FAILED
+                        - DEST_NETWORK_UNKNOWN
+                        - DEST_HOST_UNKNOWN
+                        - SRC_HOST_ISOLATED
+                        - COMMUNICATION_DEST_NET_PROHIBITED
+                        - COMMUNICATION_DEST_HOST_PROHIBITED
+                        - DEST_NET_UNREACHABLE_FOR_TOS
+                        - DEST_HOST_UNREACHABLE_FOR_TOS
+                        - COMM_ADMINISTRATIVELY_PROHIBITED
+                        - HOST_PRECEDENCE_VIOLATION
+                        - PRECEDENCE_CUTOFF
+                        - REDIRECT_DATAGRAM_NETWORK
+                        - REDIRECT_DATAGRAM_HOST
+                        - REDIRECT_DATAGRAM_SERVICE_NETWORK
+                        - REDIRECT_DATAGRAM_SERVICE_HOST
+                        - ALTERNATE_HOST_ADDR
+                        - DO_NOT_ROUTE_COMMON_TRAFFIC
+                        - NORMAL_ROUTER_ADV
+                        - TTL_EXPIRED_TRANSIT
+                        - FRAG_ASSEMBLY
+                        - PTR_ERROR
+                        - MISSING_REQD_OPTION
+                        - BAD_LENGTH
+                        - BAD_SPI
+                        - AUTH_FAILED
+                        - DECOMPRESSION_FAILED
+                        - DECRYPTION_FAILED
+                        - NEED_AUTHENTICATION
+                        - NEED_AUTHORIZATION
+                    example: NET_UNREACHABLE
+                    type: string
+                icmp4Type:
+                    enum:
+                        - ANY
+                        - ECHO_REPLY
+                        - DESTINATION_UNREACHABLE
+                        - SOURCE_QUENCH
+                        - REDIRECT_MESSAGE
+                        - ALTERNATE_HOST_ADDRESS
+                        - ECHO_REQUEST
+                        - ROUTER_ADVERTISEMENT
+                        - ROUTER_SOLICITATION
+                        - TIME_EXCEEDED
+                        - PARAMETER_PROBLEM
+                        - TIMESTAMP
+                        - TIMESTAMP_REPLY
+                        - INFO_REQUEST
+                        - INFO_REPLY
+                        - ADDR_MASK_REQUEST
+                        - ADDR_MASK_REPLY
+                        - TRACEROUTE
+                        - DATAGRAM_CONVERSION_ERROR
+                        - MOBILE_HOST_REDIRECT
+                        - WHERE_ARE_YOU
+                        - HERE_I_AM
+                        - MOBILE_REG_REQUEST
+                        - MOBILE_REG_REPLY
+                        - DOMAIN_NAME_REQUEST
+                        - DOMAIN_NAME_REPLY
+                        - SKIP_ALGORITHM_DISCOVERY_PROTOCOL
+                        - PHOTURIS
+                        - EXPERIMENTAL_MOB_PROTOCOLS
+                    example: DESTINATION_UNREACHABLE
+                    type: string
+                icmp6Code:
+                    enum:
+                        - NO_ROUTE_DEST
+                        - COMMUNICATION_PROHIBITED
+                        - BEYOND_SCOPE_SRC_ADDR
+                        - ADDRESS_UNREACHABLE
+                        - PORT_UNREACHABLE
+                        - SOURCE_ADDRESS_FAILED
+                        - REJECT_ROUTE
+                        - ERROR_SRC_ROUTING_HEADER
+                        - HOP_LIMIT_EXCEEDED
+                        - FRAGMENT_REASSEMBLY_TIME_EXCEEDED
+                        - ERRONEOUS_HEADER_ENCOUNTERED
+                        - UNRECOGNIZED_NEXT_HEADER_TYPE_ENCOUNTERED
+                        - UNRECOGNIZED_IPV6_OPTION_ENCOUNTERED
+                        - IPV6_FIRST_FRAG_HAS_INCOMPLETE_HEADER_CHAIN
+                        - SR_UPPER_LAYER_HEADER_ERROR
+                        - ROUTER_RENUMBERING_COMMAND
+                        - ROUTER_RENUMBERING_RESULT
+                        - DATA_CONTAINS_IPV6
+                        - DATA_CONTAINS_NAME
+                        - DATA_CONTAINS_IPV4
+                        - SUCCESSFUL_REPLY
+                        - RESPONDER_REFUSES_ANSWER
+                        - QTYPE_UNKNOWN
+                    example: ADDRESS_UNREACHABLE
+                    type: string
+                icmp6Type:
+                    enum:
+                        - ANY
+                        - DESTINATION_UNREACHABLE
+                        - PACKET_TOO_BIG
+                        - TIME_EXCEEDED
+                        - PARAMETER_PROBLEM
+                        - ECHO_REQUEST
+                        - ECHO_REPLY
+                        - MULTICAST_LISTENER_QUERY
+                        - MULTICAST_LISTENER_REPORT
+                        - MULTICAST_LISTENER_DONE
+                        - ROUTER_SOLICITATION
+                        - ROUTER_ADVERTISEMENT
+                        - NEIGHBOUR_SOLICITATION
+                        - NEIGHBOUR_ADVERTISEMENT
+                        - REDIRECT_MESSAGE
+                        - ROUTER_RENUMBERING
+                        - ICMP_NODE_INFO_QUERY
+                        - ICMP_NODE_INFO_RESPONSE
+                        - INVERSE_NEIGHBOR_DISCOVERY_SOLICITATION
+                        - INVERSE_NEIGHBOR_DISCOVERY_ADVERTISEMENT
+                        - VER2_MULTICAST_LISTENER_REPORT
+                        - HOME_AGENT_ADDR_DISCOVERY_REQUEST
+                        - HOME_AGENT_ADDR_DISCOVERY_REPLY
+                        - MOBILE_PREFIX_SOLICITATION
+                        - MOBILE_PREFIX_ADVERTISEMENT
+                        - CERT_PATH_SOLICITATION
+                        - CERT_PATH_ADVERTISEMENT
+                        - ICMP_EXP_MOBILITY_PROTOCOLS
+                        - MULTICAST_ROUTER_ADVERTISEMENT
+                        - MULTICAST_ROUTER_SOLICITATION
+                        - MULTICAST_ROUTER_TERMINATION
+                        - FMIPV6_MESSAGE
+                        - RPL_CONTROL_MESSAGE
+                        - PRIVATE_EXPERIMENTATION
+                        - PRIVATE_EXPERIMENTATION_EXTENDED
+                    example: DESTINATION_UNREACHABLE
+                    type: string
+                literal:
+                    description: The literal port or range of port values
+                    example: 8000-8080
+                    type: string
+                protocolValue:
+                    description: The literal for a custom protocol value
+                    example: www
+                    type: string
+                source:
+                    $ref: '#/components/schemas/PortsValue'
+            type: object
+        SharedObjectValue:
+            description: The value of the object
+            properties:
+                defaultContent:
+                    $ref: '#/components/schemas/ObjectContent'
+                objectType:
+                    description: The type of object
+                    enum:
+                        - NETWORK_OBJECT
+                        - URL_OBJECT
+                        - SERVICE_OBJECT
+                        - NETWORK_GROUP
+                        - URL_GROUP
+                        - SERVICE_GROUP
+                    example: NETWORK_OBJECT
+                    type: string
+                overrides:
+                    description: The list of target overrides for the object. Each override the default content for its target.
+                    items:
+                        $ref: '#/components/schemas/Override'
+                    type: array
+            required:
+                - defaultContent
+                - objectType
+            type: object
+        SingleContent:
+            description: A single, non-group content literal. Network literals carry a literal, URL literals a url, and service literals a protocol and serviceValue.
+            example:
+                literal: a:b:c::1
+            properties:
+                dnsResolution:
+                    description: For FQDN network objects sourced from FTD/cdFMC, the DNS resolution family that governs which DNS record types FTD resolves at policy-enforcement time. Populated only for FQDN objects; absent otherwise.
+                    enum:
+                        - IPV4_ONLY
+                        - IPV6_ONLY
+                        - IPV4_AND_IPV6
+                    example: IPV4_AND_IPV6
+                    type: string
+                literal:
+                    description: The literal content of the network object
+                    example: a:b:c::1
+                    type: string
                 protocol:
-                    description: The service object protocol
+                    description: The service object protocol. Populated only for service objects; absent otherwise.
                     enum:
                         - ALL
                         - TCP
@@ -21445,71 +21610,9 @@ components:
                     type: string
                 serviceValue:
                     $ref: '#/components/schemas/ServiceObjectValueContent'
-            type: object
-        ServiceObjectValueContent:
-            description: The value of the service object
-            example: '{ "8000-9000"] }'
-            oneOf:
-                - $ref: '#/components/schemas/Icmp4Value'
-                - $ref: '#/components/schemas/Icmp6Value'
-                - $ref: '#/components/schemas/SourceDestinationPortsValue'
-                - $ref: '#/components/schemas/PortsValue'
-                - $ref: '#/components/schemas/ProtocolValueContent'
-            properties:
-                type:
-                    enum:
-                        - NETWORK_OBJECT
-                        - URL_OBJECT
-                        - SERVICE_OBJECT
-                        - ICMP_4
-                        - ICMP_6
-                        - SOURCE_DESTINATION_PORT
-                        - PORT
-                        - PROTOCOL_VALUE
-                    type: string
-            type: object
-        SharedObjectValue:
-            description: The value of the object
-            properties:
-                defaultContent:
-                    $ref: '#/components/schemas/ObjectContent'
-                objectType:
-                    description: The type of object
-                    enum:
-                        - NETWORK_OBJECT
-                        - URL_OBJECT
-                        - SERVICE_OBJECT
-                        - NETWORK_GROUP
-                        - URL_GROUP
-                        - SERVICE_GROUP
-                    example: NETWORK_OBJECT
-                    type: string
-                overrides:
-                    description: The list of target overrides for the object. Each override the default content for its target.
-                    items:
-                        $ref: '#/components/schemas/Override'
-                    type: array
-            required:
-                - defaultContent
-                - objectType
-            type: object
-        SingleContent:
-            description: List of content literals
-            oneOf:
-                - $ref: '#/components/schemas/ServiceObjectContent'
-                - $ref: '#/components/schemas/UrlObjectContent'
-                - $ref: '#/components/schemas/NetworkObjectContent'
-            properties:
-                type:
-                    enum:
-                        - NETWORK_OBJECT
-                        - URL_OBJECT
-                        - SERVICE_OBJECT
-                        - ICMP_4
-                        - ICMP_6
-                        - SOURCE_DESTINATION_PORT
-                        - PORT
-                        - PROTOCOL_VALUE
+                url:
+                    description: The URL literal
+                    example: https://www.cisco.com/
                     type: string
             type: object
         SmartAccount:
@@ -21523,14 +21626,32 @@ components:
                     type: string
             type: object
         SmartAccountDto:
-            description: The smart account used to license this device.
             properties:
-                parent:
-                    description: The name of the smart account used to license the device.
+                domain:
+                    description: Account domain for your Smart Account
                     type: string
-                virtual:
-                    description: The name of the virtual account, within the smart account, used to license the device
+                lastUpdatedTime:
+                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
+                    format: date-time
                     type: string
+                name:
+                    description: Name of the smart account
+                    type: string
+                smartAccountId:
+                    description: Smart Account Identifier
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, for your Smart Account
+                    format: uuid
+                    type: string
+                virtualAccountsInComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with in compliance status
+                    format: int32
+                    type: integer
+                virtualAccountsOutOfComplianceCount:
+                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
+                    format: int32
+                    type: integer
             type: object
         SmartAccountsPage:
             properties:
@@ -21554,13 +21675,6 @@ components:
                     example: 0
                     format: int32
                     type: integer
-            type: object
-        SourceDestinationPortsValue:
-            properties:
-                destination:
-                    $ref: '#/components/schemas/PortsValue'
-                source:
-                    $ref: '#/components/schemas/PortsValue'
             type: object
         SourceDynamicObjectContent:
             description: The source dynamic object.
@@ -22821,15 +22935,6 @@ components:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
                     type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in Security Cloud Control.
-                    example: My Managed Tenant
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
                 name:
                     description: The name of the device.
                     example: asa-fw-01
@@ -22849,16 +22954,6 @@ components:
                     example: f0a09517-bab1-43e4-adae-2037cf3184e3
                     format: uuid
                     type: string
-            type: object
-        UrlObjectContent:
-            properties:
-                url:
-                    description: The URL literal
-                    example: https://www.cisco.com/
-                    minLength: 1
-                    type: string
-            required:
-                - url
             type: object
         User:
             description: The list of items retrieved.
