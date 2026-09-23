@@ -7,6 +7,8 @@ The devices included in this upgrade run.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **error_msg** | **str** | Error message if the device encountered a failure during the upgrade. | [optional] 
+**managed_tenant_display_name** | **str** | Display name of the managed tenant in Security Cloud Control. | [optional] 
+**managed_tenant_uid** | **str** | The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to. | [optional] 
 **name** | **str** | The name of the device. | [optional] 
 **status** | **str** | The overall status of the device in this upgrade run. One of: PENDING, IN_PROGRESS, SUCCESS, FAILED, CLEANUP_FAILED. | [optional] 
 **uid** | **str** | The unique identifier, represented as a UUID, of the device. | [optional] 
