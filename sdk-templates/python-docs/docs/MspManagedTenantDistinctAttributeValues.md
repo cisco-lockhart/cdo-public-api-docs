@@ -6,7 +6,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **compliance_statuses** | **List[str]** | The compliance statuses of the tenants that are managed by the MSP Portal. | [optional] 
-**licensing_types** | **List[str]** | The licensing types of the tenants that are managed by the MSP Portal. | [optional] 
 **regions** | **List[str]** | The regions of the tenants that are managed by the MSP Portal. | [optional] 
 **tenant_pay_types** | **List[str]** | The pay types of the tenants that are managed by the MSP Portal. | [optional] 
 
