@@ -1,0 +1,45 @@
+# MspManagedDeviceManagerDto
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**address** | **str** | The address of the device, in &lt;code&gt;host:port&lt;/code&gt; format. Security Cloud Control connects to the device at this address. | [optional] 
+**connectivity_state** | [**ConnectivityState**](ConnectivityState.md) |  | [optional] 
+**dedicated_cd_fmc_instance** | **bool** | Indicates whether the tenant&#39;s provisioned cdFMC instance is dedicated rather than shared. | [optional] 
+**device_manager_type** | [**EntityType**](EntityType.md) |  | [optional] 
+**fmc_domain_uid** | **str** | (FMC-only) The Domain UID of the FMC. | [optional] 
+**geo_db_version** | **str** | (FMC-only) The version of the Cisco geolocation database (GeoDB). | [optional] 
+**managed_scc_organization_uid** | **str** | The unique identifier, represented as a UUID, of the managed organization on Security Cloud Control that this device manager belongs to. | [optional] 
+**managed_tenant_display_name** | **str** | The display name of the managed tenant in CDO. | [optional] 
+**managed_tenant_name** | **str** | The name of the managed tenant in CDO. | [optional] 
+**managed_tenant_region** | **str** | The region of the managed tenant in CDO. This is the region where the device manager is located. | [optional] 
+**managed_tenant_uid** | **str** | The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control Firewall Manager that this device manager belongs to. | [optional] 
+**name** | **str** | The name of the device manager in CDO. Device manager names are unique in Security Cloud Control. | 
+**software_version** | **str** | The version of the software running on the device. | [optional] 
+**sru_version** | **str** | (FMC-only) The version of the Intrusion Rules database on the FMC. | [optional] 
+**tenant_uid** | **str** | The unique identifier, represented as a UUID, of the MSP portal that manages this device manager. | [optional] 
+**uid** | **str** | The unique identifier, represented as a UUID, of the device manager in Security Cloud Control. | [optional] 
+**vdb_version** | **str** | (FMC-only) The version of the Cisco vulnerability database (VDB) on the FMC. | [optional] 
+
+## Example
+
+```python
+from scc_firewall_manager_sdk.models.msp_managed_device_manager_dto import MspManagedDeviceManagerDto
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of MspManagedDeviceManagerDto from a JSON string
+msp_managed_device_manager_dto_instance = MspManagedDeviceManagerDto.from_json(json)
+# print the JSON string representation of the object
+print(MspManagedDeviceManagerDto.to_json())
+
+# convert the object into a dict
+msp_managed_device_manager_dto_dict = msp_managed_device_manager_dto_instance.to_dict()
+# create an instance of MspManagedDeviceManagerDto from a dict
+msp_managed_device_manager_dto_form_dict = msp_managed_device_manager_dto.from_dict(msp_managed_device_manager_dto_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

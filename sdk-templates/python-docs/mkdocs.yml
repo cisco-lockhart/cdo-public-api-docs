@@ -304,15 +304,19 @@ nav:
     - MspLicensesPage: MspLicensesPage.md
     - MspManagedCloudService: MspManagedCloudService.md
     - MspManagedCloudServiceDistinctAttributeValues: MspManagedCloudServiceDistinctAttributeValues.md
+    - MspManagedCloudServiceDto: MspManagedCloudServiceDto.md
     - MspManagedCloudServicePage: MspManagedCloudServicePage.md
     - MspManagedDevice: MspManagedDevice.md
     - MspManagedDeviceDistinctAttributeValues: MspManagedDeviceDistinctAttributeValues.md
+    - MspManagedDeviceDto: MspManagedDeviceDto.md
     - MspManagedDeviceManager: MspManagedDeviceManager.md
     - MspManagedDeviceManagerDistinctAttributeValues: MspManagedDeviceManagerDistinctAttributeValues.md
+    - MspManagedDeviceManagerDto: MspManagedDeviceManagerDto.md
     - MspManagedDeviceManagersPage: MspManagedDeviceManagersPage.md
     - MspManagedDevicePage: MspManagedDevicePage.md
     - MspManagedTemplate: MspManagedTemplate.md
     - MspManagedTemplateDistinctAttributeValues: MspManagedTemplateDistinctAttributeValues.md
+    - MspManagedTemplateDto: MspManagedTemplateDto.md
     - MspManagedTemplatesPage: MspManagedTemplatesPage.md
     - MspManagedTenant: MspManagedTenant.md
     - MspManagedTenantDistinctAttributeValues: MspManagedTenantDistinctAttributeValues.md
