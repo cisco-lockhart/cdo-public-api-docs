@@ -7666,7 +7666,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/MspManagedDeviceDto'
+                                $ref: '#/components/schemas/MspManagedDevice'
                     description: MSP-managed device
                 "404":
                     $ref: '#/components/responses/http404NotFound'
@@ -8619,7 +8619,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/MspManagedDeviceManagerDto'
+                                $ref: '#/components/schemas/MspManagedDeviceManager'
                     description: MSP-managed device manager
                 "404":
                     $ref: '#/components/responses/http404NotFound'
@@ -8756,7 +8756,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/MspManagedCloudServiceDto'
+                                $ref: '#/components/schemas/MspManagedCloudService'
                     description: MSP-managed cloud service
                 "404":
                     $ref: '#/components/responses/http404NotFound'
@@ -8893,7 +8893,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/MspManagedTemplateDto'
+                                $ref: '#/components/schemas/MspManagedTemplate'
                     description: MSP-managed template
                 "404":
                     $ref: '#/components/responses/http404NotFound'
@@ -14713,18 +14713,13 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the upgrade on the device.
+            description: The completion status of the deployment on the device.
             properties:
-                completedAt:
-                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
-                    example: 2026-04-15T18:00:10.123Z
-                    format: date-time
-                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -14735,12 +14730,12 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: Percentage completion of the current task being performed.
+                    description: The percentage completion of the current task being performed
                     format: double
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices managed by the MSP Portal.
+            description: The distinct config states for the devices in the Security Cloud Control tenant.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -14757,7 +14752,7 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices managed by the MSP Portal.
+            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
@@ -14775,7 +14770,7 @@ components:
                     type: array
             type: object
         ConnectivityState:
-            description: The distinct connectivity states for the devices managed by the MSP Portal.
+            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -14786,7 +14781,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device.
+            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
             enum:
                 - SDC
                 - CDG
@@ -15844,7 +15839,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The roles that this device performs on the network.
+            description: The distinct device roles for the devices in the Security Cloud Control tenant.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -15852,63 +15847,19 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
-            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
-            description: Set of device UIDs that are part of this upgrade run.
+            description: The current status of each device in the upgrade run.
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device.
+                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                hardwareModel:
-                    description: Hardware model of the devices being upgraded.
-                    example: Firepower 2110
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: Name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantUid:
-                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    format: uuid
-                    type: string
-                name:
-                    description: Name of the device being upgraded.
-                    example: my-firepower
-                    type: string
-                softwareVersionBeforeUpgrade:
-                    description: Software version of the device before the upgrade.
-                    example: 7.2.3
-                    type: string
-                transactionUid:
-                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
+                uid:
+                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, of the device being upgraded.
-                    format: uuid
-                    type: string
-                upgradeRunStatus:
-                    description: Current status of the upgrade run.
-                    enum:
-                        - IN_PROGRESS
-                        - REBUILDING_UPGRADE_CACHE
-                        - PERFORMING_UPGRADE
-                        - UPLOADING_IMAGE
-                        - PERFORMING_READINESS_CHECK
-                        - UPGRADE_STAGED
-                        - UPGRADE_STAGING_FAILED
-                        - UGPRADE_STAGING_FAILED
-                        - UPGRADE_COMPLETED
-                        - UPGRADE_FAILED
-                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -16096,7 +16047,7 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: CDFMC_MANAGED_FTD
+            example: ASA
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -16265,7 +16216,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         ExtendedNatRuleData:
@@ -17367,6 +17318,7 @@ components:
             type: object
         Labels:
             description: Labels used to identify/tag Security Cloud Control entities.
+            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -18265,6 +18217,57 @@ components:
                     format: int32
                     type: integer
             type: object
+        MspManagedCloudService:
+            properties:
+                address:
+                    description: The address of the cloud service (if applicable), in <code>host:port</code> format. Security Cloud Control connects to the cloud service at this address.
+                    example: my-example-duo.example.com:443
+                    type: string
+                cloudServiceType:
+                    $ref: '#/components/schemas/EntityType'
+                configState:
+                    $ref: '#/components/schemas/ConfigState'
+                conflictDetectionState:
+                    $ref: '#/components/schemas/ConflictDetectionState'
+                connectivityState:
+                    $ref: '#/components/schemas/ConnectivityState'
+                managedSccOrganizationUid:
+                    description: The unique identifier, represented as a UUID, of the managed organization on Security Cloud Control that this cloud service belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                managedTenantDisplayName:
+                    description: The display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: The name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantRegion:
+                    description: The region of the managed tenant in CDO. This is the region where the cloud service is located.
+                    example: us1
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control Firewall Manager that this cloud service belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                name:
+                    description: The name of the cloud service in CDO. Cloud service names are unique in Security Cloud Control.
+                    example: my-example-duo-admin-panel
+                    type: string
+                tenantUid:
+                    format: uuid
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the cloud service in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            required:
+                - name
+            type: object
         MspManagedCloudServiceDistinctAttributeValues:
             properties:
                 cloudServiceTypes:
@@ -18306,59 +18309,6 @@ components:
                     type: array
                     uniqueItems: true
             type: object
-        MspManagedCloudServiceDto:
-            properties:
-                address:
-                    description: The address of the cloud service (if applicable), in <code>host:port</code> format. Security Cloud Control connects to the cloud service at this address.
-                    example: my-example-duo.example.com:443
-                    type: string
-                cloudServiceType:
-                    $ref: '#/components/schemas/EntityType'
-                configState:
-                    $ref: '#/components/schemas/ConfigState'
-                conflictDetectionState:
-                    $ref: '#/components/schemas/ConflictDetectionState'
-                connectivityState:
-                    $ref: '#/components/schemas/ConnectivityState'
-                managedSccOrganizationUid:
-                    description: The unique identifier, represented as a UUID, of the managed organization on Security Cloud Control that this cloud service belongs to.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-                managedTenantDisplayName:
-                    description: The display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: The name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantRegion:
-                    description: The region of the managed tenant in CDO. This is the region where the cloud service is located.
-                    example: us1
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control Firewall Manager that this cloud service belongs to.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-                name:
-                    description: The name of the cloud service in CDO. Cloud service names are unique in Security Cloud Control.
-                    example: my-example-duo-admin-panel
-                    type: string
-                tenantUid:
-                    description: The unique identifier, represented as a UUID, of the MSP portal that manages this cloud service.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of the cloud service in Security Cloud Control.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-            required:
-                - name
-            type: object
         MspManagedCloudServicePage:
             properties:
                 count:
@@ -18369,7 +18319,7 @@ components:
                 items:
                     description: The list of items retrieved.
                     items:
-                        $ref: '#/components/schemas/MspManagedCloudServiceDto'
+                        $ref: '#/components/schemas/MspManagedCloudService'
                     type: array
                 limit:
                     description: The number of results retrieved.
@@ -18382,83 +18332,7 @@ components:
                     format: int32
                     type: integer
             type: object
-        MspManagedDeviceDistinctAttributeValues:
-            properties:
-                configStates:
-                    description: The distinct config states for the devices managed by the MSP Portal.
-                    items:
-                        $ref: '#/components/schemas/ConfigState'
-                    type: array
-                    uniqueItems: true
-                conflictDetectionStates:
-                    description: The distinct conflict detection states for the devices managed by the MSP Portal.
-                    items:
-                        $ref: '#/components/schemas/ConflictDetectionState'
-                    type: array
-                    uniqueItems: true
-                connectivityStates:
-                    description: The distinct connectivity states for the devices managed by the MSP Portal.
-                    items:
-                        $ref: '#/components/schemas/ConnectivityState'
-                    type: array
-                    uniqueItems: true
-                deviceTypes:
-                    description: The distinct device types for the devices managed by the MSP Portal.
-                    items:
-                        $ref: '#/components/schemas/EntityType'
-                    type: array
-                    uniqueItems: true
-                hardwareModels:
-                    description: The distinct hardware models for the devices managed by the MSP Portal.
-                    items:
-                        description: The distinct hardware models for the devices managed by the MSP Portal.
-                        type: string
-                    type: array
-                    uniqueItems: true
-                managedTenantDisplayNames:
-                    description: The display names of the tenants that have devices onboarded and are managed by the MSP Portal.
-                    items:
-                        description: The display names of the tenants that have devices onboarded and are managed by the MSP Portal.
-                        type: string
-                    type: array
-                    uniqueItems: true
-                managedTenantNames:
-                    description: The names of the tenants that have devices onboarded and are managed by the MSP Portal.
-                    items:
-                        description: The names of the tenants that have devices onboarded and are managed by the MSP Portal.
-                        type: string
-                    type: array
-                    uniqueItems: true
-                modelNumbers:
-                    description: The distinct model numbers for the devices managed by the MSP Portal.
-                    items:
-                        description: The distinct model numbers for the devices managed by the MSP Portal.
-                        type: string
-                    type: array
-                    uniqueItems: true
-                redundancyModes:
-                    description: The distinct redundancy modes for the devices managed by the MSP Portal.
-                    items:
-                        description: The distinct redundancy modes for the devices managed by the MSP Portal.
-                        enum:
-                            - HA
-                            - CLUSTER
-                            - STANDALONE
-                        type: string
-                    type: array
-                    uniqueItems: true
-                softwareVersions:
-                    additionalProperties:
-                        description: The software versions of the devices managed by the MSP Portal.
-                        items:
-                            description: The software versions of the devices managed by the MSP Portal.
-                            type: string
-                        type: array
-                        uniqueItems: true
-                    description: The software versions of the devices managed by the MSP Portal.
-                    type: object
-            type: object
-        MspManagedDeviceDto:
+        MspManagedDevice:
             properties:
                 address:
                     description: The address of the device, in <code>host:port</code> format. Security Cloud Control connects to the device at this address.
@@ -18581,8 +18455,6 @@ components:
                     example: 7.4.1
                     type: string
                 tenantUid:
-                    description: The unique identifier, represented as a UUID, of the MSP portal that manages this device.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
                 uid:
@@ -18593,46 +18465,83 @@ components:
             required:
                 - name
             type: object
-        MspManagedDeviceManagerDistinctAttributeValues:
+        MspManagedDeviceDistinctAttributeValues:
             properties:
+                configStates:
+                    description: The distinct config states for the devices managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/ConfigState'
+                    type: array
+                    uniqueItems: true
+                conflictDetectionStates:
+                    description: The distinct conflict detection states for the devices managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/ConflictDetectionState'
+                    type: array
+                    uniqueItems: true
                 connectivityStates:
-                    description: The distinct connectivity states for the device managers managed by the MSP Portal.
+                    description: The distinct connectivity states for the devices managed by the MSP Portal.
                     items:
                         $ref: '#/components/schemas/ConnectivityState'
                     type: array
                     uniqueItems: true
-                deviceManagerTypes:
-                    description: The distinct device manager types for the device managers managed by the MSP Portal.
+                deviceTypes:
+                    description: The distinct device types for the devices managed by the MSP Portal.
                     items:
                         $ref: '#/components/schemas/EntityType'
                     type: array
                     uniqueItems: true
-                managedTenantDisplayNames:
-                    description: The display names of the tenants that have device managers onboarded and are managed by the MSP Portal.
+                hardwareModels:
+                    description: The distinct hardware models for the devices managed by the MSP Portal.
                     items:
-                        description: The display names of the tenants that have device managers onboarded and are managed by the MSP Portal.
+                        description: The distinct hardware models for the devices managed by the MSP Portal.
+                        type: string
+                    type: array
+                    uniqueItems: true
+                managedTenantDisplayNames:
+                    description: The display names of the tenants that have devices onboarded and are managed by the MSP Portal.
+                    items:
+                        description: The display names of the tenants that have devices onboarded and are managed by the MSP Portal.
                         type: string
                     type: array
                     uniqueItems: true
                 managedTenantNames:
-                    description: The names of the tenants that have device managers onboarded and are managed by the MSP Portal.
+                    description: The names of the tenants that have devices onboarded and are managed by the MSP Portal.
                     items:
-                        description: The names of the tenants that have device managers onboarded and are managed by the MSP Portal.
+                        description: The names of the tenants that have devices onboarded and are managed by the MSP Portal.
+                        type: string
+                    type: array
+                    uniqueItems: true
+                modelNumbers:
+                    description: The distinct model numbers for the devices managed by the MSP Portal.
+                    items:
+                        description: The distinct model numbers for the devices managed by the MSP Portal.
+                        type: string
+                    type: array
+                    uniqueItems: true
+                redundancyModes:
+                    description: The distinct redundancy modes for the devices managed by the MSP Portal.
+                    items:
+                        description: The distinct redundancy modes for the devices managed by the MSP Portal.
+                        enum:
+                            - HA
+                            - CLUSTER
+                            - STANDALONE
                         type: string
                     type: array
                     uniqueItems: true
                 softwareVersions:
                     additionalProperties:
-                        description: The software versions of the device managers managed by the MSP Portal.
+                        description: The software versions of the devices managed by the MSP Portal.
                         items:
-                            description: The software versions of the device managers managed by the MSP Portal.
+                            description: The software versions of the devices managed by the MSP Portal.
                             type: string
                         type: array
                         uniqueItems: true
-                    description: The software versions of the device managers managed by the MSP Portal.
+                    description: The software versions of the devices managed by the MSP Portal.
                     type: object
             type: object
-        MspManagedDeviceManagerDto:
+        MspManagedDeviceManager:
             properties:
                 address:
                     description: The address of the device, in <code>host:port</code> format. Security Cloud Control connects to the device at this address.
@@ -18687,8 +18596,6 @@ components:
                     description: (FMC-only) The version of the Intrusion Rules database on the FMC.
                     type: string
                 tenantUid:
-                    description: The unique identifier, represented as a UUID, of the MSP portal that manages this device manager.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
                 uid:
@@ -18702,6 +18609,45 @@ components:
             required:
                 - name
             type: object
+        MspManagedDeviceManagerDistinctAttributeValues:
+            properties:
+                connectivityStates:
+                    description: The distinct connectivity states for the device managers managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/ConnectivityState'
+                    type: array
+                    uniqueItems: true
+                deviceManagerTypes:
+                    description: The distinct device manager types for the device managers managed by the MSP Portal.
+                    items:
+                        $ref: '#/components/schemas/EntityType'
+                    type: array
+                    uniqueItems: true
+                managedTenantDisplayNames:
+                    description: The display names of the tenants that have device managers onboarded and are managed by the MSP Portal.
+                    items:
+                        description: The display names of the tenants that have device managers onboarded and are managed by the MSP Portal.
+                        type: string
+                    type: array
+                    uniqueItems: true
+                managedTenantNames:
+                    description: The names of the tenants that have device managers onboarded and are managed by the MSP Portal.
+                    items:
+                        description: The names of the tenants that have device managers onboarded and are managed by the MSP Portal.
+                        type: string
+                    type: array
+                    uniqueItems: true
+                softwareVersions:
+                    additionalProperties:
+                        description: The software versions of the device managers managed by the MSP Portal.
+                        items:
+                            description: The software versions of the device managers managed by the MSP Portal.
+                            type: string
+                        type: array
+                        uniqueItems: true
+                    description: The software versions of the device managers managed by the MSP Portal.
+                    type: object
+            type: object
         MspManagedDeviceManagersPage:
             properties:
                 count:
@@ -18712,7 +18658,7 @@ components:
                 items:
                     description: The list of items retrieved.
                     items:
-                        $ref: '#/components/schemas/MspManagedDeviceManagerDto'
+                        $ref: '#/components/schemas/MspManagedDeviceManager'
                     type: array
                 limit:
                     description: The number of results retrieved.
@@ -18735,7 +18681,7 @@ components:
                 items:
                     description: The list of items retrieved.
                     items:
-                        $ref: '#/components/schemas/MspManagedDeviceDto'
+                        $ref: '#/components/schemas/MspManagedDevice'
                     type: array
                 limit:
                     description: The number of results retrieved.
@@ -18747,6 +18693,53 @@ components:
                     example: 0
                     format: int32
                     type: integer
+            type: object
+        MspManagedTemplate:
+            properties:
+                configState:
+                    $ref: '#/components/schemas/ConfigState'
+                managedSccOrganizationUid:
+                    description: The unique identifier, represented as a UUID, of the managed organization on Security Cloud Control that this template belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                managedTenantDisplayName:
+                    description: The display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: The name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantRegion:
+                    description: The region of the managed tenant in CDO. This is the region where the template is located.
+                    example: us1
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control Firewall Manager that this template belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                name:
+                    description: The name of the template in CDO. Template names are unique in Security Cloud Control.
+                    example: my-example-device
+                    type: string
+                softwareVersion:
+                    description: The software version that the template is applicable to.
+                    example: 7.4.1
+                    type: string
+                templateType:
+                    $ref: '#/components/schemas/EntityType'
+                tenantUid:
+                    format: uuid
+                    type: string
+                uid:
+                    description: The unique identifier, represented as a UUID, of the template in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+            required:
+                - name
             type: object
         MspManagedTemplateDistinctAttributeValues:
             properties:
@@ -18787,55 +18780,6 @@ components:
                     type: array
                     uniqueItems: true
             type: object
-        MspManagedTemplateDto:
-            properties:
-                configState:
-                    $ref: '#/components/schemas/ConfigState'
-                managedSccOrganizationUid:
-                    description: The unique identifier, represented as a UUID, of the managed organization on Security Cloud Control that this template belongs to.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-                managedTenantDisplayName:
-                    description: The display name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantName:
-                    description: The name of the managed tenant in CDO.
-                    example: my-example-tenant
-                    type: string
-                managedTenantRegion:
-                    description: The region of the managed tenant in CDO. This is the region where the template is located.
-                    example: us1
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control Firewall Manager that this template belongs to.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-                name:
-                    description: The name of the template in CDO. Template names are unique in Security Cloud Control.
-                    example: my-example-device
-                    type: string
-                softwareVersion:
-                    description: The software version that the template is applicable to.
-                    example: 7.4.1
-                    type: string
-                templateType:
-                    $ref: '#/components/schemas/EntityType'
-                tenantUid:
-                    description: The unique identifier, represented as a UUID, of the MSP portal that manages this template.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of the template in Security Cloud Control.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
-                    type: string
-            required:
-                - name
-            type: object
         MspManagedTemplatesPage:
             properties:
                 count:
@@ -18846,7 +18790,7 @@ components:
                 items:
                     description: The list of items retrieved.
                     items:
-                        $ref: '#/components/schemas/MspManagedTemplateDto'
+                        $ref: '#/components/schemas/MspManagedTemplate'
                     type: array
                 limit:
                     description: The number of results retrieved.
@@ -23137,7 +23081,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: Roles associated with this user in Security Cloud Control.
+            description: The role of the user this token belongs to. The user can be API-only or a human.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -23148,7 +23092,6 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
-            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.

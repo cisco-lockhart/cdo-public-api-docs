@@ -353,7 +353,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_msp_managed_cloud_service**
-> MspManagedCloudServiceDto get_msp_managed_cloud_service(cloud_service_uid)
+> MspManagedCloudService get_msp_managed_cloud_service(cloud_service_uid)
 
 Get MSP-managed cloud service by UID
 
@@ -365,7 +365,7 @@ Get the cloud service managed by the MSP portal using its UID.
 
 ```python
 import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.msp_managed_cloud_service_dto import MspManagedCloudServiceDto
+from scc_firewall_manager_sdk.models.msp_managed_cloud_service import MspManagedCloudService
 from scc_firewall_manager_sdk.rest import ApiException
 from pprint import pprint
 
@@ -411,7 +411,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MspManagedCloudServiceDto**](MspManagedCloudServiceDto.md)
+[**MspManagedCloudService**](MspManagedCloudService.md)
 
 ### Authorization
 
@@ -593,7 +593,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_msp_managed_device**
-> MspManagedDeviceDto get_msp_managed_device(device_uid)
+> MspManagedDevice get_msp_managed_device(device_uid)
 
 Get MSP-managed device by UID
 
@@ -605,7 +605,7 @@ Get the device managed by the MSP portal using its UID.
 
 ```python
 import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.msp_managed_device_dto import MspManagedDeviceDto
+from scc_firewall_manager_sdk.models.msp_managed_device import MspManagedDevice
 from scc_firewall_manager_sdk.rest import ApiException
 from pprint import pprint
 
@@ -651,7 +651,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MspManagedDeviceDto**](MspManagedDeviceDto.md)
+[**MspManagedDevice**](MspManagedDevice.md)
 
 ### Authorization
 
@@ -673,7 +673,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_msp_managed_device_manager**
-> MspManagedDeviceManagerDto get_msp_managed_device_manager(device_manager_uid)
+> MspManagedDeviceManager get_msp_managed_device_manager(device_manager_uid)
 
 Get MSP-managed device manager by UID
 
@@ -685,7 +685,7 @@ Get the device manager managed by the MSP portal using its UID.
 
 ```python
 import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.msp_managed_device_manager_dto import MspManagedDeviceManagerDto
+from scc_firewall_manager_sdk.models.msp_managed_device_manager import MspManagedDeviceManager
 from scc_firewall_manager_sdk.rest import ApiException
 from pprint import pprint
 
@@ -731,7 +731,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MspManagedDeviceManagerDto**](MspManagedDeviceManagerDto.md)
+[**MspManagedDeviceManager**](MspManagedDeviceManager.md)
 
 ### Authorization
 
@@ -1073,7 +1073,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_msp_managed_template**
-> MspManagedTemplateDto get_msp_managed_template(template_uid)
+> MspManagedTemplate get_msp_managed_template(template_uid)
 
 Get MSP-managed template by UID
 
@@ -1085,7 +1085,7 @@ Get the template managed by the MSP portal using its UID.
 
 ```python
 import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.msp_managed_template_dto import MspManagedTemplateDto
+from scc_firewall_manager_sdk.models.msp_managed_template import MspManagedTemplate
 from scc_firewall_manager_sdk.rest import ApiException
 from pprint import pprint
 
@@ -1131,7 +1131,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MspManagedTemplateDto**](MspManagedTemplateDto.md)
+[**MspManagedTemplate**](MspManagedTemplate.md)
 
 ### Authorization
 

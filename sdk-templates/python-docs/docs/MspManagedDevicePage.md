@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **count** | **int** | The total number of results available. | [optional] 
-**items** | [**List[MspManagedDeviceDto]**](MspManagedDeviceDto.md) | The list of items retrieved. | [optional] 
+**items** | [**List[MspManagedDevice]**](MspManagedDevice.md) | The list of items retrieved. | [optional] 
 **limit** | **int** | The number of results retrieved. | [optional] 
 **offset** | **int** | The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] 
 
