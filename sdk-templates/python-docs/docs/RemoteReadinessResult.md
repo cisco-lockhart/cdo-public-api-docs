@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**check_identifier** | **str** |  | [optional] 
 **device_address** | **str** |  | [optional] 
 **error_msg** | **str** |  | [optional] 
 **progress** | **int** |  | [optional] 

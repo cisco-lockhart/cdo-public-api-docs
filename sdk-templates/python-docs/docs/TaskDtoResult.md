@@ -13,13 +13,13 @@ Name | Type | Description | Notes
 **num_groups** | **int** |  | [optional] 
 **num_users** | **int** |  | [optional] 
 **device_address** | **str** |  | [optional] 
+**log_path** | **str** |  | [optional] 
 **progress** | **int** |  | [optional] 
 **stage** | **str** |  | [optional] 
 **version** | **str** |  | [optional] 
 **devices_with_failing_validation_checks** | **List[str]** |  | [optional] 
 **devices_with_passing_validation_checks** | **List[str]** |  | [optional] 
-**device_name** | **str** |  | [optional] 
-**device_uid_on_fmc** | **str** |  | [optional] 
+**check_identifier** | **str** |  | [optional] 
 **download_urls** | **List[str]** |  | [optional] 
 
 ## Example
