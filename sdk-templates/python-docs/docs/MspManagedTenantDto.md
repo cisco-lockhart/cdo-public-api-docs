@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **compliance_status** | **str** | The licensing compliance status of the tenant. | [optional] 
 **device_count** | **int** | The number of devices in this managed tenant. | [optional] 
 **display_name** | **str** | A human-readable display name for the tenant. This is the tenant name displayed in the Security Cloud Control Web UI. | 
+**licensing_type** | **str** | The licensing type of the tenant. | [optional] 
 **name** | **str** | The name of the tenant in CDO. Tenant names are unique in Security Cloud Control. | 
 **region** | **str** | The Security Cloud Control region the tenant exists in. | 
 **sal_status** | **str** | Indicates whether Cisco Security Analytics and Logging is enabled for the tenant. UNKNOWN means the status has not been determined for this tenant yet. | [optional] 

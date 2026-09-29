@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **device_address** | **str** |  | [optional] 
 **error_msg** | **str** |  | [optional] 
-**log_path** | **str** |  | [optional] 
 **progress** | **int** |  | [optional] 
 **stage** | **str** |  | [optional] 
 **version** | **str** |  | [optional] 

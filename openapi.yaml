@@ -17443,8 +17443,6 @@ components:
                         type: string
                     errorMsg:
                         type: string
-                    logPath:
-                        type: string
                     progress:
                         format: int32
                         type: integer
@@ -18871,6 +18869,16 @@ components:
                         type: string
                     type: array
                     uniqueItems: true
+                licensingTypes:
+                    description: The licensing types of the tenants that are managed by the MSP Portal.
+                    items:
+                        description: The licensing types of the tenants that are managed by the MSP Portal.
+                        enum:
+                            - MSLA
+                            - SMART_LICENSING
+                        type: string
+                    type: array
+                    uniqueItems: true
                 regions:
                     description: The regions of the tenants that are managed by the MSP Portal.
                     items:
@@ -18937,6 +18945,13 @@ components:
                 displayName:
                     description: A human-readable display name for the tenant. This is the tenant name displayed in the Security Cloud Control Web UI.
                     example: My Example Tenant
+                    type: string
+                licensingType:
+                    description: The licensing type of the tenant.
+                    enum:
+                        - MSLA
+                        - SMART_LICENSING
+                    example: MSLA
                     type: string
                 name:
                     description: The name of the tenant in CDO. Tenant names are unique in Security Cloud Control.
@@ -20863,8 +20878,6 @@ components:
             allOf:
                 - $ref: '#/components/schemas/TaskResultDetails'
                 - properties:
-                    checkIdentifier:
-                        type: string
                     deviceAddress:
                         type: string
                     errorMsg:
@@ -22589,6 +22602,11 @@ components:
             allOf:
                 - $ref: '#/components/schemas/TaskResultDetails'
                 - properties:
+                    deviceName:
+                        type: string
+                    deviceUidOnFmc:
+                        format: uuid
+                        type: string
                     downloadUrls:
                         items:
                             type: string
@@ -22974,15 +22992,6 @@ components:
                 errorMsg:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
-                    type: string
-                managedTenantDisplayName:
-                    description: Display name of the managed tenant in Security Cloud Control.
-                    example: My Managed Tenant
-                    type: string
-                managedTenantUid:
-                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
                     type: string
                 name:
                     description: The name of the device.
