@@ -5,6 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**device_name** | **str** |  | [optional] 
+**device_uid_on_fmc** | **str** |  | [optional] 
 **download_urls** | **List[str]** |  | [optional] 
 
 ## Example
