@@ -1,3 +1,17 @@
+# Version 1.23.0 (2026-10-01)
+
+## Added
+
+### Allow List
+- Endpoint to [get the Security Cloud Control allow-list](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-the-cdo-allow-list) (`GET /v1/meta/allow-list`). Returns the IPs, CIDRs, and FQDNs a customer must allow to communicate with Security Cloud Control services for the authenticated tenant and environment. The response lists the named Security Cloud Control sources (`cdo-public-api`, `cdo-platform-edge`, `ssx`, `cdfmc`, and `cdo-egress`) with their resolved FQDNs and IPv4/IPv6 addresses, along with the AWS provider-managed CIDR ranges grouped by service and region.
+
+## Improvements
+
+### MSP
+- [MSP-managed tenant](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-security-cloud-control-tenants-managed-by-msp-portal) records now include additional fields: `licensingType` (one of `MSLA` or `SMART_LICENSING`) and `salStatus`.
+- The [MSP-managed tenants](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-security-cloud-control-tenants-managed-by-msp-portal) list can now be filtered by `licensingTypes`.
+- The [create MSP-managed tenant](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/create-a-security-cloud-control-tenant-managed-by-msp-portal) request now supports the optional `addOns` and `billingAddress` fields.
+
 # Version 1.22.0 (2026-09-04)
 
 ## Automation Tools and AI Agents
