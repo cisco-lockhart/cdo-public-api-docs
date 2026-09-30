@@ -2057,7 +2057,7 @@ paths:
                 - description: Boolean value indicating whether bulk backup delete is enabled.
                   in: query
                   name: bulk
-                  required: false
+                  required: true
                   schema:
                     type: boolean
                 - $ref: '#/components/parameters/domainUUID'
@@ -6650,27 +6650,29 @@ paths:
                                 ? 'Example 1 : GET <fmc_ip>/api/fmc_config/v1/domain/DomainUUID/deployment/pendingchanges/entityUUID123 ( GET example of PendingChanges showing changes to an entity )'
                                 :   value:
                                         action: update
-                                        entityName: Corporate Access Policy
-                                        entityType: AccessPolicy
+                                        entityName: Corporate HTTPS Port
+                                        entityType: PortObject
                                         entityUUID: entityUUID123
                                         lastUpdatedByUsers:
                                             - admin
                                             - securityanalyst
                                         links:
                                             self: <fmc_ip>/api/fmc_config/v1/domain/DomainUUID/deployment//pendingchanges/entityUUID123
-                                        message: Policy modified with security rule additions
+                                        message: Object modified with reference updates
                                         parentUUID: parentUUID456
                                         referencesAdded:
                                             - entityName: Allow HTTPS Traffic
                                               entityType: SecurityRule
                                               fieldName: rules
-                                            - entityName: Internal Network
-                                              entityType: NetworkObject
+                                            - entityName: Internal Host
+                                              entityType: Network
                                               fieldName: source
+                                              type: Host
                                         referencesDeleted:
                                             - entityName: Old Permissive Rule
                                               entityType: SecurityRule
                                               fieldName: rules
+                                        type: ProtocolPortObject
                                         valueAdded:
                                             - fieldName: description
                                               newValue: Updated corporate access policy with enhanced security rules
@@ -6686,6 +6688,214 @@ paths:
                                               oldValue: "false"
                             schema:
                                 $ref: '#/components/schemas/PendingChangesListContainer'
+                                type: object
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                                type: object
+                    description: Error
+            tags:
+                - Deployment
+    /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/deployment/deploymentreadinesscheck:
+        get:
+            deprecated: false
+            description: '**Get deployment readiness check status for all dirty devices. Use query parameter type=basic for basic readiness or type=advanced for both basic and Policy Impact Analysis results.**'
+            operationId: getAllDeploymentReadinessCheck
+            parameters:
+                - description: 'Readiness check mode: basic for basic readiness only, advanced for both basic and PIA results.'
+                  in: query
+                  name: type
+                  required: false
+                  schema:
+                    type: string
+                - $ref: '#/components/parameters/domainUUID'
+                  name: domainUUID
+                - $ref: '#/components/parameters/offset'
+                  name: offset
+                - $ref: '#/components/parameters/limit'
+                  name: limit
+                - $ref: '#/components/parameters/expanded'
+                  name: expanded
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            examples:
+                                ? 'Example 1 : GETALL /api/fmc_config/v1/domain/{domainUUID}/deployment/deploymentreadinesscheck?type=advanced ( Get deployment readiness status for dirty devices including advanced readiness details. )'
+                                :   value:
+                                        items:
+                                            - devices:
+                                                - advancedReadiness:
+                                                    analysisFreshness: OUTDATED
+                                                    analysisOutdatedReason: NEWER_POLICY_CHANGES
+                                                    analysisOutdatedSince: "2026-07-27T09:45:00Z"
+                                                    analysisResult: CRITICAL
+                                                    analysisResultReason: One or more changes may expose the network to threats or disrupt services. Review the affected rules before deployment.
+                                                    currentAnalysisStatus: COMPLETED
+                                                    isSalDisabled: false
+                                                    lastAnalysedTime: 1.7845962e+12
+                                                    orchestratorId: 17ab5efe-91f8-4c7b-bd57-84e84d4de88d
+                                                  basicReadiness:
+                                                    status: READY
+                                                    validationMessages: []
+                                                  deviceId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                                                  deviceName: FTD-Chicago-01
+                                              summary:
+                                                cancelled: 0
+                                                completed: 1
+                                                failed: 0
+                                                inProgress: 0
+                                                notAnalysed: 0
+                                                notApplicable: 0
+                                                partialSuccess: 0
+                                                total: 1
+                                        links:
+                                            self: https://vpn-test-blr.app.staging.cdo.cisco.com/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/deployment/deploymentreadinesscheck?offset=0&limit=25&type=advanced
+                                        paging:
+                                            count: 1
+                                            limit: 25
+                                            offset: 0
+                                            pages: 1
+                                ? 'Example 2 : GETALL /api/fmc_config/v1/domain/{domainUUID}/deployment/deploymentreadinesscheck?type=advanced ( Get deployment readiness status for dirty devices including advanced readiness details. )'
+                                :   value:
+                                        items:
+                                            - devices:
+                                                - advancedReadiness:
+                                                    analysisFreshness: OUTDATED
+                                                    analysisOutdatedReason: NEWER_POLICY_CHANGES
+                                                    analysisOutdatedSince: "2026-07-27T09:45:00Z"
+                                                    analysisResult: CRITICAL
+                                                    analysisResultReason: One or more changes may expose the network to threats or disrupt services. Review the affected rules before deployment.
+                                                    currentAnalysisStatus: COMPLETED
+                                                    isSalDisabled: false
+                                                    lastAnalysedTime: 1.7845962e+12
+                                                    orchestratorId: 17ab5efe-91f8-4c7b-bd57-84e84d4de88d
+                                                  basicReadiness:
+                                                    status: READY
+                                                    validationMessages: []
+                                                  deviceId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                                                  deviceName: FTD-Chicago-01
+                                              summary:
+                                                cancelled: 0
+                                                completed: 1
+                                                failed: 0
+                                                inProgress: 0
+                                                notAnalysed: 0
+                                                notApplicable: 0
+                                                partialSuccess: 0
+                                                total: 1
+                                        links:
+                                            self: https://vpn-test-blr.app.staging.cdo.cisco.com/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/deployment/deploymentreadinesscheck?offset=0&limit=25&type=advanced
+                                        paging:
+                                            count: 1
+                                            limit: 25
+                                            offset: 0
+                                            pages: 1
+                            schema:
+                                $ref: '#/components/schemas/DeploymentReadinessCheckListContainer'
+                                type: object
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                                type: object
+                    description: Error
+            tags:
+                - Deployment
+    /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/deployment/deploymentreadinesscheck/{objectId}:
+        get:
+            deprecated: false
+            description: '**Get deployment readiness check status for a specific device.**'
+            operationId: getDeploymentReadinessCheck
+            parameters:
+                - description: UUID of the device for which to fetch deployment readiness status.
+                  in: path
+                  name: objectId
+                  required: true
+                  schema:
+                    type: string
+                - description: 'Readiness check mode: basic for basic readiness only, advanced for both basic and PIA results.'
+                  in: query
+                  name: type
+                  required: false
+                  schema:
+                    type: string
+                - $ref: '#/components/parameters/domainUUID'
+                  name: domainUUID
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            examples:
+                                ? 'Example 1 : GETALL /api/fmc_config/v1/domain/{domainUUID}/deployment/deploymentreadinesscheck?type=advanced ( Get deployment readiness status for dirty devices including advanced readiness details. )'
+                                :   value:
+                                        items:
+                                            - devices:
+                                                - advancedReadiness:
+                                                    analysisFreshness: OUTDATED
+                                                    analysisOutdatedReason: NEWER_POLICY_CHANGES
+                                                    analysisOutdatedSince: "2026-07-27T09:45:00Z"
+                                                    analysisResult: CRITICAL
+                                                    analysisResultReason: One or more changes may expose the network to threats or disrupt services. Review the affected rules before deployment.
+                                                    currentAnalysisStatus: COMPLETED
+                                                    isSalDisabled: false
+                                                    lastAnalysedTime: 1.7845962e+12
+                                                    orchestratorId: 17ab5efe-91f8-4c7b-bd57-84e84d4de88d
+                                                  basicReadiness:
+                                                    status: READY
+                                                    validationMessages: []
+                                                  deviceId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                                                  deviceName: FTD-Chicago-01
+                                              summary:
+                                                cancelled: 0
+                                                completed: 1
+                                                failed: 0
+                                                inProgress: 0
+                                                notAnalysed: 0
+                                                notApplicable: 0
+                                                partialSuccess: 0
+                                                total: 1
+                                        links:
+                                            self: https://vpn-test-blr.app.staging.cdo.cisco.com/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/deployment/deploymentreadinesscheck?offset=0&limit=25&type=advanced
+                                        paging:
+                                            count: 1
+                                            limit: 25
+                                            offset: 0
+                                            pages: 1
+                                ? 'Example 2 : GET /api/fmc_config/v1/domain/{domainUUID}/deployment/deploymentreadinesscheck/{objectId}?type=advanced ( Get deployment readiness status for a specific device including advanced readiness details. )'
+                                :   value:
+                                        devices:
+                                            - advancedReadiness:
+                                                analysisFreshness: OUTDATED
+                                                analysisOutdatedReason: NEWER_POLICY_CHANGES
+                                                analysisOutdatedSince: "2026-07-27T09:45:00Z"
+                                                analysisResult: CRITICAL
+                                                analysisResultReason: One or more changes may expose the network to threats or disrupt services. Review the affected rules before deployment.
+                                                currentAnalysisStatus: COMPLETED
+                                                isSalDisabled: false
+                                                lastAnalysedTime: 1.7845962e+12
+                                                orchestratorId: 17ab5efe-91f8-4c7b-bd57-84e84d4de88d
+                                              basicReadiness:
+                                                status: READY
+                                                validationMessages: []
+                                              deviceId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                                              deviceName: FTD-Chicago-01
+                                        summary:
+                                            cancelled: 0
+                                            completed: 1
+                                            failed: 0
+                                            inProgress: 0
+                                            notAnalysed: 0
+                                            notApplicable: 0
+                                            partialSuccess: 0
+                                            total: 1
+                            schema:
+                                $ref: '#/components/schemas/DeploymentReadinessCheck'
                                 type: object
                     description: OK
                 default:
@@ -6816,6 +7026,56 @@ paths:
                                         version: "1589689510428"
                             schema:
                                 $ref: '#/components/schemas/DeploymentRequest'
+                                type: object
+                    description: Accepted
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                                type: object
+                    description: Error
+            tags:
+                - Deployment
+    /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/deployment/deployreadinessrequest:
+        post:
+            deprecated: false
+            description: '**[DEV ERROR: Missing description] _Check the response section for applicable examples (if any)._**'
+            operationId: createDeployReadinessRequest
+            parameters:
+                - $ref: '#/components/parameters/domainUUID'
+                  name: domainUUID
+            requestBody:
+                content:
+                    application/json:
+                        examples:
+                            ? 'Example 1 : POST /api/fmc_config/v1/domain/{domainUUID}/deployment/deployreadinessrequests ( Trigger Deployment Readiness check for specified devices. Returns a task with orchestratorId to poll for analysis results. )'
+                            :   value:
+                                    devices:
+                                        - id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        schema:
+                            $ref: '#/components/schemas/DeployReadinessRequest'
+                            type: object
+                description: '[DEV ERROR: Missing description]'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            examples:
+                                ? 'Example 1 : POST /api/fmc_config/v1/domain/{domainUUID}/deployment/deployreadinessrequests ( Trigger Deployment Readiness check for specified devices. Returns a task with orchestratorId to poll for analysis results. )'
+                                :   value:
+                                        description: Deployment Readiness check is in progress.
+                                        id: "1234567890123"
+                                        links:
+                                            self: https://fmc.example.com/api/fmc_config/v1/domain/{domainUUID}/job/taskstatuses/1234567890123
+                                        pia:
+                                            orchestratorId: d6079d30-7060-4f01-b9fa-f70e2f1036bf
+                                            overallStatus: IN_PROGRESS
+                                        status: "200"
+                                        taskType: DEPLOYMENT_READINESS
+                            schema:
+                                $ref: '#/components/schemas/DeployReadinessRequest'
                                 type: object
                     description: Accepted
                 default:
@@ -25684,6 +25944,82 @@ paths:
             tags:
                 - Devices
     /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/devices/devicerecords/{containerUUID}/routing/virtualrouters:
+        delete:
+            deprecated: false
+            description: '**Delete multiple virtual routers. Use filtering to specify which virtual routers will be deleted. _Check the response section for applicable examples (if any)._**'
+            operationId: deleteMultipleVirtualRouterModel
+            parameters:
+                - description: Boolean indicating whether this is a bulk operation.
+                  in: query
+                  name: bulk
+                  required: true
+                  schema:
+                    type: boolean
+                - description: 'To be used in conjunction with <code>"ids:id1,id2,..."</code>.<br/><code>ids</code> is a comma-separated list of virtual router UUIDs to be deleted. Note: Global Virtual Router cannot be deleted. Maximum 200 VRFs can be deleted per request.'
+                  in: query
+                  name: filter
+                  required: true
+                  schema:
+                    type: string
+                - description: UUID of the ticket for tracking the configuration changes.
+                  in: header
+                  name: ticket-id
+                  required: false
+                  schema:
+                    type: string
+                - description: The container id under which this specific resource is contained.
+                  in: path
+                  name: containerUUID
+                  required: true
+                  schema:
+                    type: string
+                - $ref: '#/components/parameters/domainUUID'
+                  name: domainUUID
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            examples:
+                                ? 'Example 1 : DELETE /api/fmc_config/v1/domain/domainUUID/devices/devicerecords/containerUUID/routing/virtualrouters/objectId3 ( Example payload for DELETE on Virtual Router )'
+                                :   value:
+                                        description: Production environment virtual router
+                                        id: objectId3
+                                        interfaces:
+                                            - id: interfaceUUID3
+                                              name: Ethernet0/3
+                                              type: PhysicalInterface
+                                            - id: subInterfaceUUID3
+                                              name: Ethernet0/3.300
+                                              type: SubInterface
+                                        links:
+                                            parent: https://fmc.example.com/api/fmc_config/v1/domain/domainUUID/devices/devicerecords/containerUUID/routing/virtualrouters
+                                            self: https://fmc.example.com/api/fmc_config/v1/domain/domainUUID/devices/devicerecords/containerUUID/routing/virtualrouters/objectId3
+                                        metadata:
+                                            domain:
+                                                id: domainUUID
+                                                name: Global
+                                                type: Domain
+                                            timestamp: 1.656144e+12
+                                        name: Production-VRF
+                                        type: VirtualRouter
+                                ? 'Example 2 : DELETE /api/fmc_config/v1/domain/domainUUID/devices/devicerecords/containerUUID/routing/virtualrouters?bulk=true&filter=ids:objectId1,objectId2 ( Bulk delete multiple Virtual Routers. Use filter parameter with ids to specify which Virtual Routers to delete. Note: Global Virtual Router cannot be deleted. )'
+                                :   value:
+                                        items: []
+                                        links:
+                                            self: https://fmc.example.com/api/fmc_config/v1/domain/domainUUID/devices/devicerecords/containerUUID/routing/virtualrouters?bulk=true&filter=ids:objectId1,objectId2
+                            schema:
+                                $ref: '#/components/schemas/VirtualRouterModel'
+                                type: object
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                                type: object
+                    description: Error
+            tags:
+                - Devices
         get:
             deprecated: false
             description: '**Get the list of all virtual routers created in the specified device.**'
@@ -25870,8 +26206,14 @@ paths:
         post:
             deprecated: false
             description: '**Create a virtual router on the specified device. _Check the response section for applicable examples (if any)._**'
-            operationId: createVirtualRouterModel
+            operationId: createMultipleVirtualRouterModel
             parameters:
+                - description: Boolean value indicating whether this is performed as a bulk operation.
+                  in: query
+                  name: bulk
+                  required: false
+                  schema:
+                    type: boolean
                 - description: UUID of the ticket for tracking the configuration changes.
                   in: header
                   name: ticket-id
@@ -25902,6 +26244,20 @@ paths:
                                           type: SubInterface
                                     name: Production-VRF
                                     type: VirtualRouter
+                            ? 'Example 2 : POST /api/fmc_config/v1/domain/domainUUID/devices/devicerecords/containerUUID/routing/virtualrouters?bulk=true ( Bulk create multiple Virtual Routers in a single request )'
+                            :   value:
+                                    - description: First Virtual Router
+                                      interfaces:
+                                        - id: interfaceUUID1
+                                          name: Ethernet0/1
+                                          type: PhysicalInterface
+                                      name: VRF1
+                                    - description: Second Virtual Router
+                                      interfaces:
+                                        - id: interfaceUUID2
+                                          name: Ethernet0/2
+                                          type: PhysicalInterface
+                                      name: VRF2
                         schema:
                             $ref: '#/components/schemas/VirtualRouterModel'
                             type: object
@@ -25934,6 +26290,45 @@ paths:
                                             timestamp: 1.656144e+12
                                         name: Production-VRF
                                         type: VirtualRouter
+                                ? 'Example 2 : POST /api/fmc_config/v1/domain/domainUUID/devices/devicerecords/containerUUID/routing/virtualrouters?bulk=true ( Bulk create multiple Virtual Routers in a single request )'
+                                :   value:
+                                        items:
+                                            - description: First Virtual Router
+                                              id: objectId1
+                                              interfaces:
+                                                - id: interfaceUUID1
+                                                  name: Ethernet0/1
+                                                  type: PhysicalInterface
+                                              links:
+                                                parent: https://fmc.example.com/api/fmc_config/v1/domain/domainUUID/devices/devicerecords/containerUUID/routing/virtualrouters
+                                                self: https://fmc.example.com/api/fmc_config/v1/domain/domainUUID/devices/devicerecords/containerUUID/routing/virtualrouters/objectId1
+                                              metadata:
+                                                domain:
+                                                    id: domainUUID
+                                                    name: Global
+                                                    type: Domain
+                                                timestamp: 1.656144e+12
+                                              name: VRF1
+                                              type: VirtualRouter
+                                            - description: Second Virtual Router
+                                              id: objectId2
+                                              interfaces:
+                                                - id: interfaceUUID2
+                                                  name: Ethernet0/2
+                                                  type: PhysicalInterface
+                                              links:
+                                                parent: https://fmc.example.com/api/fmc_config/v1/domain/domainUUID/devices/devicerecords/containerUUID/routing/virtualrouters
+                                                self: https://fmc.example.com/api/fmc_config/v1/domain/domainUUID/devices/devicerecords/containerUUID/routing/virtualrouters/objectId2
+                                              metadata:
+                                                domain:
+                                                    id: domainUUID
+                                                    name: Global
+                                                    type: Domain
+                                                timestamp: 1.656144e+12
+                                              name: VRF2
+                                              type: VirtualRouter
+                                        links:
+                                            self: https://fmc.example.com/api/fmc_config/v1/domain/domainUUID/devices/devicerecords/containerUUID/routing/virtualrouters?bulk=true
                             schema:
                                 $ref: '#/components/schemas/VirtualRouterModel'
                                 type: object
@@ -26000,6 +26395,11 @@ paths:
                                             timestamp: 1.656144e+12
                                         name: Production-VRF
                                         type: VirtualRouter
+                                ? 'Example 2 : DELETE /api/fmc_config/v1/domain/domainUUID/devices/devicerecords/containerUUID/routing/virtualrouters?bulk=true&filter=ids:objectId1,objectId2 ( Bulk delete multiple Virtual Routers. Use filter parameter with ids to specify which Virtual Routers to delete. Note: Global Virtual Router cannot be deleted. )'
+                                :   value:
+                                        items: []
+                                        links:
+                                            self: https://fmc.example.com/api/fmc_config/v1/domain/domainUUID/devices/devicerecords/containerUUID/routing/virtualrouters?bulk=true&filter=ids:objectId1,objectId2
                             schema:
                                 $ref: '#/components/schemas/VirtualRouterModel'
                                 type: object
@@ -32806,7 +33206,9 @@ paths:
                                                 type: PhysicalInterface
                                               tunnelType: STATIC
                                               type: VTIInterface
-                                            - enabled: true
+                                            - enableSGTInlineForce: true
+                                              enableSGTPropagate: false
+                                              enabled: true
                                               id: 00000000-0000-0ed3-0000-206158430258
                                               ifname: tunnel-5
                                               ipsecMode: ipv4
@@ -32887,6 +33289,8 @@ paths:
                         examples:
                             ? 'Example 1 : POST /fmc_config/v1/domain/domainUUID/devices/devicerecords/containerUUID/virtualtunnelinterfaces ( Success: Test POST method for FTD virtual tunnel interface )'
                             :   value:
+                                    enableSGTInlineForce: true
+                                    enableSGTPropagate: false
                                     enabled: true
                                     id: 00000000-0000-0ed3-0000-206158430258
                                     ifname: tunnel-5
@@ -32961,6 +33365,8 @@ paths:
                             examples:
                                 ? 'Example 1 : POST /fmc_config/v1/domain/domainUUID/devices/devicerecords/containerUUID/virtualtunnelinterfaces ( Success: Test POST method for FTD virtual tunnel interface )'
                                 :   value:
+                                        enableSGTInlineForce: true
+                                        enableSGTPropagate: false
                                         enabled: true
                                         id: 00000000-0000-0ed3-0000-206158430258
                                         ifname: tunnel-5
@@ -33205,6 +33611,8 @@ paths:
                             examples:
                                 ? 'Example 1 : GET /fmc_config/v1/domain/domainUUID/devices/devicerecords/containerUUID/virtualtunnelinterfaces/virtualtunnelinterfaceUUID ( Success: Test GET method for virtual tunnel interface )'
                                 :   value:
+                                        enableSGTInlineForce: true
+                                        enableSGTPropagate: false
                                         enabled: true
                                         id: 00000000-0000-0ed3-0000-206158430258
                                         ifname: tunnel-4
@@ -33294,6 +33702,8 @@ paths:
                                         id: loopback interface UUID
                                         name: Loopback5
                                         type: LoopbackInterface
+                                      enableSGTInlineForce: true
+                                      enableSGTPropagate: false
                                       enabled: true
                                       id: 00000000-0000-0ed3-0000-206158430258
                                       ifname: tunnel-5
@@ -33348,6 +33758,8 @@ paths:
                                             id: 00505686-854B-0ed3-0000-008589934808
                                             name: Loopback5
                                             type: LoopbackInterface
+                                          enableSGTInlineForce: true
+                                          enableSGTPropagate: false
                                           enabled: true
                                           id: 00000000-0000-0ed3-0000-206158430258
                                           ifname: tunnel-5
@@ -36004,6 +36416,66 @@ paths:
                                         snortEngine: SNORT3
                                         sw_version: 10.0.0
                                         type: Device
+                                'Example 3 : GET /fmc_config/v1/domain/domainUUID/devices/devicerecords ( Test GET of chassis-backed device for a uuid )':
+                                    value:
+                                        accessPolicy:
+                                            id: 00000000-0000-0ed3-0000-008589934663
+                                            name: OriginalAcPolicy
+                                            type: AccessPolicy
+                                        advanced:
+                                            enableOGS: true
+                                        deploymentStatus: DEPLOYED
+                                        deploymentTime: "2026-04-02T04:15:09Z"
+                                        ftdMode: ROUTED
+                                        healthMessage: FXOS health check passed.
+                                        healthStatus: green
+                                        hostName: 172.16.0.111
+                                        id: 099ed932-2cc8-11f1-a725-a23ca28f6f06
+                                        isConnected: true
+                                        keepLocalEvents: false
+                                        license_caps:
+                                            - ESSENTIALS
+                                            - CARRIER
+                                            - MALWARE_DEFENSE
+                                            - IPS
+                                            - URL
+                                        links:
+                                            self: https://example.cisco.com/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/devices/devicerecords/099ed932-2cc8-11f1-a725-a23ca28f6f06
+                                        managementState: MANAGED
+                                        metadata:
+                                            chassisDetails:
+                                                chassisId: d8a07c81-f28a-4e3c-aab0-ff489a84afa7
+                                                chassisSerialNo: FJC25401EBC
+                                                chassisUrl: https://firepower-3130.cisco.com:443//
+                                                securityModuleNo: 1
+                                                securityModuleSN: FJC25401EBC
+                                            clusterBootstrapSupported: true
+                                            coreProfile: Default
+                                            deviceSerialNumber: FJC25401EBC64R
+                                            domain:
+                                                id: e276abec-e0f2-11e3-8169-6d9ed49b625f
+                                                name: Global
+                                                type: Domain
+                                            inventoryData:
+                                                cpuCores: 1 CPU (6 cores)
+                                                cpuType: CPU Ryzen Zen 2 2300 MHz
+                                                memoryInMB: 13788 MB RAM
+                                                storageInGB: 40 GB
+                                            isMultiInstance: true
+                                            lspVersion: lsp-rel-20260325-1912
+                                            readOnly:
+                                                state: false
+                                            snortVersion: 3.9.3.1-61
+                                            vdbVersion: Build 426 - 2026-03-24 09:29:08.0
+                                        model: Cisco Secure Firewall 3130 Threat Defense
+                                        modelId: C
+                                        modelNumber: "80"
+                                        modelType: Sensor
+                                        name: 172.16.0.111
+                                        prohibitPacketTransfer: false
+                                        snortEngine: SNORT3
+                                        sw_version: 10.0.0
+                                        type: Device
                             schema:
                                 $ref: '#/components/schemas/Device'
                                 type: object
@@ -38260,9 +38732,17 @@ paths:
                 content:
                     application/json:
                         examples:
-                            'Example 1 : POST /fmc_config/v1/domain/DomainUUID/health/metrics/export ( Export the Metrics Data to given upload url )':
-                                value:
-                                    uploadUrl: http://link-to-s3-bucket
+                            ? 'Example 1 : POST /fmc_config/v1/domain/DomainUUID/health/metricexport ( Export metrics to one presigned URL. uploadType defaults to SINGLE when omitted. )'
+                            :   value:
+                                    uploadType: SINGLE
+                                    uploadUrl: https://s3.example/metrics.zip
+                            ? 'Example 2 : POST /fmc_config/v1/domain/DomainUUID/health/metricexport ( Export metrics using presigned multipart and block-details upload URLs. )'
+                            :   value:
+                                    blockDetailsUploadUrl: https://s3.example/block-details.json
+                                    partUploadUrls:
+                                        - https://s3.example/metrics.zip?uploadId=upload-id&partNumber=1
+                                        - https://s3.example/metrics.zip?uploadId=upload-id&partNumber=2
+                                    uploadType: MULTIPART
                         schema:
                             $ref: '#/components/schemas/MetricsExport'
                             type: object
@@ -38273,12 +38753,23 @@ paths:
                     content:
                         application/json:
                             examples:
-                                'Example 1 : POST /fmc_config/v1/domain/DomainUUID/health/metrics/export ( Export the Metrics Data to given upload url )':
-                                    value:
+                                ? 'Example 1 : POST /fmc_config/v1/domain/DomainUUID/health/metricexport ( Export metrics to one presigned URL. uploadType defaults to SINGLE when omitted. )'
+                                :   value:
                                         fmcUuid: fmcUUID
                                         status: IN_PROGRESS
                                         taskId: TaskUUID
-                                        uploadUrl: http://link-to-s3-bucket
+                                        uploadType: SINGLE
+                                        uploadUrl: https://s3.example/metrics.zip
+                                ? 'Example 2 : POST /fmc_config/v1/domain/DomainUUID/health/metricexport ( Export metrics using presigned multipart and block-details upload URLs. )'
+                                :   value:
+                                        blockDetailsUploadUrl: https://s3.example/block-details.json
+                                        fmcUuid: fmcUUID
+                                        partUploadUrls:
+                                            - https://s3.example/metrics.zip?uploadId=upload-id&partNumber=1
+                                            - https://s3.example/metrics.zip?uploadId=upload-id&partNumber=2
+                                        status: IN_PROGRESS
+                                        taskId: TaskUUID
+                                        uploadType: MULTIPART
                             schema:
                                 $ref: '#/components/schemas/MetricsExport'
                                 type: object
@@ -38311,14 +38802,37 @@ paths:
                     content:
                         application/json:
                             examples:
-                                'Example 1 : GET /fmc_config/v1/domain/DomainUUID/health/metrics/export/status/{taskId} ( Get the status of the Metrics Export )':
-                                    value:
+                                ? 'Example 1 : GET /fmc_config/v1/domain/DomainUUID/health/metricexport/{taskId} ( Get the status of a single-upload metrics export. )'
+                                :   value:
                                         blockDetails:
                                             - blockName: 01J4RTAYM8PXNVVCQ388MCTVFP
                                               checksum: a4255b42a6ce279c1a8d1ff211b04d32e775bc5c35a639aba9af424ca436791c
+                                        errorMessage: ""
                                         fmcUuid: fmcUUID
                                         status: SUCCESS
                                         taskId: TaskUUID
+                                        uploadType: SINGLE
+                                        uploadUrl: https://s3.example/metrics.zip
+                                'Example 2 : GET /fmc_config/v1/domain/DomainUUID/health/metricexport/{taskId} ( Get the status of a multipart metrics export. )':
+                                    value:
+                                        blockDetailsUploadUrl: https://s3.example/block-details.json
+                                        errorMessage: ""
+                                        fmcUuid: fmcUUID
+                                        partUploadStatus:
+                                            - eTag: 35ccfbd1fa9c746ed7279b398d1f344b
+                                              partNumber: 1
+                                              uploadResponseCode: 200
+                                              uploadSizeInBytes: 4.294967296e+09
+                                            - eTag: 493e01c45c7a6f26f7b120f25ca1bda2
+                                              partNumber: 2
+                                              uploadResponseCode: 200
+                                              uploadSizeInBytes: 725884
+                                        partUploadUrls:
+                                            - https://s3.example/metrics.zip?uploadId=upload-id&partNumber=1
+                                            - https://s3.example/metrics.zip?uploadId=upload-id&partNumber=2
+                                        status: SUCCESS
+                                        taskId: TaskUUID
+                                        uploadType: MULTIPART
                             schema:
                                 $ref: '#/components/schemas/MetricsExport'
                                 type: object
@@ -39165,6 +39679,49 @@ paths:
                     description: Error
             tags:
                 - Health
+    /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/integration/agentworkforce/policyimpactanalyser:
+        get:
+            deprecated: false
+            description: '**Get the Policy Impact Analyser (PIA) enablement status.**'
+            operationId: getPolicyImpactAnalyser
+            parameters:
+                - $ref: '#/components/parameters/domainUUID'
+                  name: domainUUID
+                - $ref: '#/components/parameters/offset'
+                  name: offset
+                - $ref: '#/components/parameters/limit'
+                  name: limit
+                - $ref: '#/components/parameters/expanded'
+                  name: expanded
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            examples:
+                                ? 'Example 1 : GET /api/fmc_config/v1/domain/{domainUUID}/integration/agentworkforce/policyimpactanalyser ( GET ALL operation on Policy Impact Analyser enablement status )'
+                                :   value:
+                                        items:
+                                            - enabled: true
+                                        links:
+                                            self: fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/integration/agentworkforce/policyimpactanalyser?offset=0&limit=25
+                                        paging:
+                                            count: 1
+                                            limit: 25
+                                            offset: 0
+                                            pages: 1
+                            schema:
+                                $ref: '#/components/schemas/PolicyImpactAnalyserListContainer'
+                                type: object
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                                type: object
+                    description: Error
+            tags:
+                - Integration
     /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/integration/aiops/metricconfiguration:
         get:
             deprecated: false
@@ -39382,7 +39939,6 @@ paths:
                                               id: CloudEventsConfigsUUID
                                               links:
                                                 self: /fmc_config/v1/domain/DomainUUID/integration/cloudeventsconfigs/CloudEventsConfigsUUID
-                                              sendAIDefenseEvents: true
                                               sendAllConnectionEvents: false
                                               sendConnectionEvents: true
                                               sendFileEvents: true
@@ -39435,7 +39991,6 @@ paths:
                                         id: CloudEventsConfigsUUID
                                         links:
                                             self: /fmc_config/v1/domain/DomainUUID/integration/cloudeventsconfigs/CloudEventsConfigsUUID
-                                        sendAIDefenseEvents: true
                                         sendAllConnectionEvents: false
                                         sendConnectionEvents: true
                                         sendFileEvents: true
@@ -39477,7 +40032,6 @@ paths:
                             :   value:
                                     devicesExcludedFromSendingEvents: []
                                     id: CloudEventsConfigsUUID
-                                    sendAIDefenseEvents: false
                                     sendAllConnectionEvents: true
                                     sendConnectionEvents: false
                                     sendFileEvents: true
@@ -39501,7 +40055,6 @@ paths:
                                         id: CloudEventsConfigsUUID
                                         links:
                                             self: /fmc_config/v1/domain/domainUUID/integration/cloudeventsconfigs/CloudEventsConfigsUUID
-                                        sendAIDefenseEvents: false
                                         sendAllConnectionEvents: true
                                         sendConnectionEvents: false
                                         sendFileEvents: true
@@ -40645,6 +41198,68 @@ paths:
                     description: Error
             tags:
                 - Integration
+    /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/integration/operational/resynchronizeidentity:
+        post:
+            deprecated: false
+            description: '**Create a request to generate a resynchronize identity task. _Check the response section for applicable examples (if any)._**'
+            operationId: createResynchronizeIdentity
+            parameters:
+                - $ref: '#/components/parameters/domainUUID'
+                  name: domainUUID
+            requestBody:
+                content:
+                    application/json:
+                        examples:
+                            ? 'Example 1 : POST /fmc_config/v1/domain/domainUUID/integration/operational/resynchronizeidentity ( Resynchronize identity request. )'
+                            :   value:
+                                    devices:
+                                        - id: 1251b782-7922-11e8-85d1-9ce8632d3182
+                                          name: vFTD-1
+                                          type: Device
+                                        - id: 88f052b8-7922-11e8-a602-840c6cea8ca5
+                                          name: vFTD-2
+                                          type: Device
+                        schema:
+                            $ref: '#/components/schemas/ResynchronizeIdentity'
+                            type: object
+                description: JSON data for creating a resynchronize identity request.
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            examples:
+                                ? 'Example 1 : POST /fmc_config/v1/domain/domainUUID/integration/operational/resynchronizeidentity ( Resynchronize identity request. )'
+                                :   value:
+                                        devices:
+                                            - id: 1251b782-7922-11e8-85d1-9ce8632d3182
+                                              name: vFTD-1
+                                              type: Device
+                                            - id: 88f052b8-7922-11e8-a602-840c6cea8ca5
+                                              name: vFTD-2
+                                              type: Device
+                                        metadata:
+                                            task:
+                                                description: Resynchronize identity objects from FMC
+                                                id: 3fd3db26-1cae-11f1-91e4-1cd140e70bb6
+                                                message: Resynchronize identity objects
+                                                status: RUNNING
+                                                taskType: RESYNCHRONIZE_IDENTITY
+                                                type: TaskStatus
+                                        type: ResynchronizeIdentity
+                            schema:
+                                $ref: '#/components/schemas/ResynchronizeIdentity'
+                                type: object
+                    description: Accepted
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                                type: object
+                    description: Error
+            tags:
+                - Integration
     /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/integration/operational/testumbrellaconnections:
         post:
             deprecated: false
@@ -40723,6 +41338,215 @@ paths:
                                 $ref: '#/components/schemas/PortOperationModel'
                                 type: object
                     description: Created
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                                type: object
+                    description: Error
+            tags:
+                - Integration
+    /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/integration/remotehealth/config:
+        get:
+            deprecated: false
+            description: '**Get all remote write configurations.**'
+            operationId: getHealthMetricsRemoteWriteConfig
+            parameters:
+                - $ref: '#/components/parameters/domainUUID'
+                  name: domainUUID
+                - $ref: '#/components/parameters/offset'
+                  name: offset
+                - $ref: '#/components/parameters/limit'
+                  name: limit
+                - $ref: '#/components/parameters/expanded'
+                  name: expanded
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            examples:
+                                ? 'Example 1 : GET /api/fmc_config/v1/domain/{domainUUID}/integration/remotehealths/config ( Retrieve the Prometheus Remote Write configuration )'
+                                :   value:
+                                        authType: MTLS
+                                        caCertName: ca-cert.pem
+                                        clientCertName: client-cert.pem
+                                        clientKeyName: client-key.pem
+                                        isInternal: false
+                                        url: https://example.prometheus.com
+                                        uuid: 6267d2ba-4055-4f67-b6e5-815e568d4f25
+                            schema:
+                                $ref: '#/components/schemas/HealthMetricsRemoteWriteConfigListContainer'
+                                type: object
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                                type: object
+                    description: Error
+            tags:
+                - Integration
+        post:
+            deprecated: false
+            description: '**Create a new remote write configuration. _Check the response section for applicable examples (if any)._**'
+            operationId: createHealthMetricsRemoteWriteConfig
+            parameters:
+                - $ref: '#/components/parameters/domainUUID'
+                  name: domainUUID
+            requestBody:
+                content:
+                    application/json:
+                        examples:
+                            ? 'Example 1 : POST /api/fmc_config/v1/domain/{domainUUID}/integration/remotehealths/config ( Create the Prometheus Remote Write configuration )'
+                            :   value:
+                                    auth_type: MTLS
+                                    caCertName: ca-cert.pem
+                                    caCertPayload: |-
+                                        -----BEGIN CERTIFICATE-----
+                                        MIIBIjANBgkqh...
+                                        -----END CERTIFICATE-----
+                                    clientCertName: client-cert.pem
+                                    clientCertPayload: |-
+                                        -----BEGIN CERTIFICATE-----
+                                        MIIBIjANBgkqh...
+                                        -----END CERTIFICATE-----
+                                    clientKeyName: client-key.pem
+                                    clientKeyPayload: |-
+                                        -----BEGIN PRIVATE KEY-----
+                                        MIIEvQIBADANBg...
+                                        -----END PRIVATE KEY-----
+                                    isInternal: false
+                                    url: https://example.prometheus.com
+                        schema:
+                            $ref: '#/components/schemas/HealthMetricsRemoteWriteConfig'
+                            type: object
+                description: Input for remote write configuration.
+                required: true
+            responses:
+                "201":
+                    content:
+                        application/json:
+                            examples:
+                                ? 'Example 1 : POST /api/fmc_config/v1/domain/{domainUUID}/integration/remotehealths/config ( Create the Prometheus Remote Write configuration )'
+                                :   value:
+                                        auth_type: MTLS
+                                        caCertName: ca-cert.pem
+                                        caCertPayload: |-
+                                            -----BEGIN CERTIFICATE-----
+                                            MIIBIjANBgkqh...
+                                            -----END CERTIFICATE-----
+                                        clientCertName: client-cert.pem
+                                        clientCertPayload: |-
+                                            -----BEGIN CERTIFICATE-----
+                                            MIIBIjANBgkqh...
+                                            -----END CERTIFICATE-----
+                                        clientKeyName: client-key.pem
+                                        clientKeyPayload: |-
+                                            -----BEGIN PRIVATE KEY-----
+                                            MIIEvQIBADANBg...
+                                            -----END PRIVATE KEY-----
+                                        id: 123e4567-e89b-12d3-a456-426614174000
+                                        isInternal: false
+                                        type: RemoteHealth
+                                        url: https://example.prometheus.com
+                            schema:
+                                $ref: '#/components/schemas/HealthMetricsRemoteWriteConfig'
+                                type: object
+                    description: Created
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                                type: object
+                    description: Error
+            tags:
+                - Integration
+    /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/integration/remotehealth/config/{id}:
+        delete:
+            deprecated: false
+            description: '**Delete the remote write configuration associated with the specified UUID. _Check the response section for applicable examples (if any)._**'
+            operationId: deleteHealthMetricsRemoteWriteConfig
+            parameters:
+                - description: Unique identifier of a remote write configuration.
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+                - $ref: '#/components/parameters/domainUUID'
+                  name: domainUUID
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            examples:
+                                ? 'Example 1 : DELETE /fmc_config/v1/domain/{domainUUID}/remotehealths/config/{id} ( Delete the Prometheus Remote Write configuration )'
+                                :   value:
+                                        auth_type: MTLS
+                                        caCertName: ca-cert.pem
+                                        caCertPayload: |-
+                                            -----BEGIN CERTIFICATE-----
+                                            MIIBIjANBgkqh...
+                                            -----END CERTIFICATE-----
+                                        clientCertName: client-cert.pem
+                                        clientCertPayload: |-
+                                            -----BEGIN CERTIFICATE-----
+                                            MIIBIjANBgkqh...
+                                            -----END CERTIFICATE-----
+                                        clientKeyName: client-key.pem
+                                        clientKeyPayload: |-
+                                            -----BEGIN PRIVATE KEY-----
+                                            MIIEvQIBADANBg...
+                                            -----END PRIVATE KEY-----
+                                        id: 123e4567-e89b-12d3-a456-426614174000
+                                        isInternal: false
+                                        type: RemoteHealth
+                                        url: https://example.prometheus.com
+                            schema:
+                                $ref: '#/components/schemas/HealthMetricsRemoteWriteConfig'
+                                type: object
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                                type: object
+                    description: Error
+            tags:
+                - Integration
+        put:
+            deprecated: false
+            description: '**Modify the remote write configuration associated with the specified UUID. _Check the response section for applicable examples (if any)._**'
+            operationId: updateHealthMetricsRemoteWriteConfig
+            parameters:
+                - description: Unique identifier of a remote write configuration.
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+                - $ref: '#/components/parameters/domainUUID'
+                  name: domainUUID
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/HealthMetricsRemoteWriteConfig'
+                            type: object
+                description: Input for remote write configuration.
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/HealthMetricsRemoteWriteConfig'
+                                type: object
+                    description: OK
                 default:
                     content:
                         application/json:
@@ -55151,13 +55975,29 @@ paths:
                                 ? 'Example 1 : GET /fmc_config/v1/domain/domainUUID/object/filetypes?limit=2&expanded=true ( Success: Test GET ALL success of all the file types with expanded=true )'
                                 :   value:
                                         items:
-                                            - description: exampleFileTypeDescription
+                                            - capabilities:
+                                                supportedRuleDirections:
+                                                    - ANY
+                                                    - UPLOAD
+                                                    - DOWNLOAD
+                                                supportsDynamicAnalysis: false
+                                                supportsLocalMalwareAnalysis: false
+                                                supportsMalwareRuleAction: true
+                                                supportsSperoAnalysis: false
+                                              description: exampleFileTypeDescription
                                               id: exampleFileTypeId
                                               links:
                                                 self: https://example.com:443/api/fmc_config/v1/domain/exampledomainuuid/object/filetypes/exampleFileTypeId
                                               name: exampleFileTypeName
                                               type: FileType
-                                            - description: exampleFileTypeDescription2
+                                            - capabilities:
+                                                supportedRuleDirections:
+                                                    - UPLOAD
+                                                supportsDynamicAnalysis: true
+                                                supportsLocalMalwareAnalysis: true
+                                                supportsMalwareRuleAction: true
+                                                supportsSperoAnalysis: false
+                                              description: exampleFileTypeDescription2
                                               id: exampleFileTypeId2
                                               links:
                                                 self: https://example.com:443/api/fmc_config/v1/domain/exampledomainuuid/object/filetypes/exampleFileTypeId2
@@ -55224,6 +56064,15 @@ paths:
                             examples:
                                 'Example 1 : GET /fmc_config/v1/domain/domainUUID/object/filetypes/fileType-id ( Success: Test GET success of a file type )':
                                     value:
+                                        capabilities:
+                                            supportedRuleDirections:
+                                                - ANY
+                                                - UPLOAD
+                                                - DOWNLOAD
+                                            supportsDynamicAnalysis: false
+                                            supportsLocalMalwareAnalysis: false
+                                            supportsMalwareRuleAction: true
+                                            supportsSperoAnalysis: false
                                         description: exampleFileTypeDescription
                                         id: exampleFileTypeId
                                         links:
@@ -86254,122 +87103,7 @@ paths:
                     description: Error
             tags:
                 - Object
-        post:
-            deprecated: false
-            description: '**Create a security intelligence URL list. _Check the response section for applicable examples (if any)._**'
-            operationId: createSIURLList
-            parameters:
-                - $ref: '#/components/parameters/domainUUID'
-                  name: domainUUID
-            requestBody:
-                content:
-                    application/json:
-                        examples:
-                            'Example 1 : POST /fmc_config/v1/domain/DomainUUID/object/siurllists ( Create a URL List object )':
-                                value:
-                                    fileName: urls.txt
-                                    listType: 4
-                                    name: List_1
-                                    type: SIURLList
-                        schema:
-                            $ref: '#/components/schemas/SIURLList'
-                            type: object
-                description: Request input of Security Intelligence URL List object.
-                required: true
-            responses:
-                "201":
-                    content:
-                        application/json:
-                            examples:
-                                'Example 1 : POST /fmc_config/v1/domain/DomainUUID/object/siurllists ( Create a URL List object )':
-                                    value:
-                                        fileName: urls.txt
-                                        id: SIURLListUUID
-                                        links:
-                                            self: /fmc_config/v1/domain/domainUUID/object/siurllists/SIURLListUUID
-                                        metadata:
-                                            domain:
-                                                id: domainUUID
-                                                name: Global
-                                                type: Domain
-                                            entryCount: 6
-                                            lastUser:
-                                                id: userUUID
-                                                name: admin
-                                                type: user
-                                            listUpdateTime: number
-                                            readOnly:
-                                                state: false
-                                            timestamp: number
-                                        name: List_1
-                                        type: SIURLList
-                            schema:
-                                $ref: '#/components/schemas/SIURLList'
-                                type: object
-                    description: Created
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ErrorResponse'
-                                type: object
-                    description: Error
-            tags:
-                - Object
     /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/object/siurllists/{objectId}:
-        delete:
-            deprecated: false
-            description: '**Delete the security intelligence URL list associated with the specified ID. _Check the response section for applicable examples (if any)._**'
-            operationId: deleteSIURLList
-            parameters:
-                - description: Unique identifier of the security intelligence URL list.
-                  in: path
-                  name: objectId
-                  required: true
-                  schema:
-                    type: string
-                - $ref: '#/components/parameters/domainUUID'
-                  name: domainUUID
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            examples:
-                                'Example 1 : DELETE /fmc_config/v1/domain/DomainUUID/object/siurllists/SIURLListUUID ( Delete a URL List object )':
-                                    value:
-                                        fileName: urls.txt
-                                        id: SIURLListUUID
-                                        links:
-                                            self: /fmc_config/v1/domain/domainUUID/object/siurllists/SIURLListUUID
-                                        metadata:
-                                            domain:
-                                                id: domainUUID
-                                                name: Global
-                                                type: Domain
-                                            entryCount: 6
-                                            lastUser:
-                                                id: userUUID
-                                                name: admin
-                                                type: user
-                                            listUpdateTime: number
-                                            readOnly:
-                                                state: false
-                                            timestamp: number
-                                        name: List_1_Edited
-                                        type: SIURLList
-                            schema:
-                                $ref: '#/components/schemas/SIURLList'
-                                type: object
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ErrorResponse'
-                                type: object
-                    description: Error
-            tags:
-                - Object
         get:
             deprecated: false
             description: '**Get the security intelligence URL list associated with the specified ID.**'
@@ -86409,75 +87143,6 @@ paths:
                                                 state: false
                                             timestamp: 1.605518859e+09
                                         name: URL
-                                        type: SIURLList
-                            schema:
-                                $ref: '#/components/schemas/SIURLList'
-                                type: object
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ErrorResponse'
-                                type: object
-                    description: Error
-            tags:
-                - Object
-        put:
-            deprecated: false
-            description: '**Modify the security intelligence URL list associated with the specified ID. _Check the response section for applicable examples (if any)._**'
-            operationId: updateSIURLList
-            parameters:
-                - description: Unique identifier of the security intelligence URL list.
-                  in: path
-                  name: objectId
-                  required: true
-                  schema:
-                    type: string
-                - $ref: '#/components/parameters/domainUUID'
-                  name: domainUUID
-            requestBody:
-                content:
-                    application/json:
-                        examples:
-                            'Example 1 : PUT /fmc_config/v1/domain/DomainUUID/object/siurllists/SIURLListUUID ( Modify a URL List object )':
-                                value:
-                                    fileName: urls.txt
-                                    id: SIURLListUUID
-                                    listType: 4
-                                    name: List_1_Edited
-                                    type: SIURLList
-                        schema:
-                            $ref: '#/components/schemas/SIURLList'
-                            type: object
-                description: Request input of Security Intelligence URL List object.
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            examples:
-                                'Example 1 : PUT /fmc_config/v1/domain/DomainUUID/object/siurllists/SIURLListUUID ( Modify a URL List object )':
-                                    value:
-                                        fileName: urls.txt
-                                        id: SIURLListUUID
-                                        links:
-                                            self: /fmc_config/v1/domain/domainUUID/object/siurllists/SIURLListUUID
-                                        metadata:
-                                            domain:
-                                                id: domainUUID
-                                                name: Global
-                                                type: Domain
-                                            entryCount: 6
-                                            lastUser:
-                                                id: userUUID
-                                                name: admin
-                                                type: user
-                                            listUpdateTime: number
-                                            readOnly:
-                                                state: false
-                                            timestamp: number
-                                        name: List_1_Edited
                                         type: SIURLList
                             schema:
                                 $ref: '#/components/schemas/SIURLList'
@@ -94789,7 +95454,7 @@ paths:
             description: '**Get the list of all access rules associated with the specified policy ID.**'
             operationId: getAllAccessRule
             parameters:
-                - description: For GetAll Filter criteria can be specified using the format <code>"name:filterName;timeRange:true;action:filterAction;sourceNetworks:filterValue1,filterValue2...."</code>.<br/>Supported filter criteria are "name","timeRange","action","sourceNetworks","originalClientIP","destinationNetworks","sourcePorts","destinationPorts","sourceZones","destinationZones","applications","sourceDynamicObjects","destinationDynamicObjects","vlanTags","comments","users","urls","intrusionPolicy","sourceSecurityGroupTags","fts".
+                - description: For GetAll Filter criteria can be specified using the format <code>"name:filterName;timeRange:true;action:filterAction;sourceNetworks:filterValue1,filterValue2...."</code>.<br/>Supported filter criteria are "name","timeRange","action","sourceNetworks","originalClientIP","destinationNetworks","sourcePorts","destinationPorts","sourceZones","destinationZones","applications","vlanTags","comments","users","urls","intrusionPolicy","sourceSecurityGroupTags","destinationSecurityGroupTags","fts","notSet","includeNotSetFor".<br/><code>notSet</code> returns rules whose specified fields are not configured. Supported values are <code>sourceZones</code>, <code>destinationZones</code>, <code>sourceNetworks</code>, <code>destinationNetworks</code>, <code>originalClientIP</code>, <code>sourcePorts</code>, <code>destinationPorts</code>, <code>applications</code>, <code>users</code>, <code>urls</code>, <code>vlanTags</code>, <code>sourceSecurityGroupTags</code>, <code>destinationSecurityGroupTags</code>, <code>sourceDynamicObjects</code>, <code>destinationDynamicObjects</code>, <code>networkAccessDeviceIPs</code>, and <code>endPointDeviceTypes</code>. Specify multiple values as a comma-separated list; rules match when at least one specified field is not configured. The value <code>all</code> must be specified by itself and returns only rules where every supported field is not configured.<br/><code>includeNotSetFor</code> adds rules where the specified field is not configured to that fields regular search results. Supported values are <code>sourceZones</code>, <code>destinationZones</code>, <code>sourceNetworks</code>, <code>destinationNetworks</code>, <code>originalClientIP</code>, <code>sourcePorts</code>, <code>destinationPorts</code>, <code>applications</code>, <code>users</code>, <code>urls</code>, <code>vlanTags</code>, <code>sourceSecurityGroupTags</code>, and <code>destinationSecurityGroupTags</code>. Each value must name a corresponding regular filter in the same request. For example, <code>sourceNetworks:NetworkA,NetworkB;includeNotSetFor:sourceNetworks</code> matches NetworkA, NetworkB, or an unconfigured Source Networks field.
                   in: query
                   name: filter
                   required: false
@@ -100388,6 +101053,397 @@ paths:
                     description: Error
             tags:
                 - Policy
+    /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/policy/accesspolicies/{containerUUID}/elephantflowsettings:
+        get:
+            deprecated: false
+            description: '**Get the list of all elephant flow settings associated with the specified access control policy ID.**'
+            operationId: getAllAccessPolicyElephantFlowSettingsModel
+            parameters:
+                - description: UUID of the ticket for tracking the configuration changes.
+                  in: header
+                  name: ticket-id
+                  required: false
+                  schema:
+                    type: string
+                - description: The container id under which this specific resource is contained.
+                  in: path
+                  name: containerUUID
+                  required: true
+                  schema:
+                    type: string
+                - $ref: '#/components/parameters/domainUUID'
+                  name: domainUUID
+                - $ref: '#/components/parameters/offset'
+                  name: offset
+                - $ref: '#/components/parameters/limit'
+                  name: limit
+                - $ref: '#/components/parameters/expanded'
+                  name: expanded
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            examples:
+                                ? 'Example 1 : GET /fmc_config/v1/domain/{domainUUID}/policy/accesspolicies/{containerUUID}/elephantflowsettings?expanded=false ( GET ALL ElephantFlow settings for an Access Policy with expanded=false )'
+                                :   value:
+                                        items:
+                                            - id: 00000000-0000-0ed3-0000-004294968190
+                                              links:
+                                                self: /fmc_config/v1/domain/{domainUUID}/policy/accesspolicies/{containerUUID}/elephantflowsettings/00000000-0000-0ed3-0000-004294968190
+                                              type: ElephantFlowSettings
+                                        links:
+                                            self: /fmc_config/v1/domain/{domainUUID}/policy/accesspolicies/{containerUUID}/elephantflowsettings?offset=0&limit=25&expanded=false
+                                        paging:
+                                            count: 1
+                                            limit: 25
+                                            offset: 0
+                                            pages: 1
+                                ? 'Example 2 : GET /fmc_config/v1/domain/{domainUUID}/policy/accesspolicies/{containerUUID}/elephantflowsettings?expanded=true ( GET ALL ElephantFlow settings with expanded details including metadata and policy settings fields )'
+                                :   value:
+                                        items:
+                                            - applications:
+                                                applicationFilters:
+                                                    - id: 7265c978-0fca-11f1-8306-7da1a2c1a5f1
+                                                      name: efc_full_filter_1771749742
+                                                      type: ApplicationFilter
+                                                applications:
+                                                    - id: "4165"
+                                                      name: 1fichier
+                                                      type: Application
+                                                    - id: "3702"
+                                                      name: Ad4mat
+                                                      type: Application
+                                                    - id: "567"
+                                                      name: Best Buy
+                                                      type: Application
+                                                inlineApplicationFilters:
+                                                    - risks:
+                                                        - id: LOW
+                                                          name: Low
+                                                          type: ApplicationRisk
+                                                    - categories:
+                                                        - id: "20"
+                                                          name: gaming
+                                                          type: ApplicationCategory
+                                                        - id: "181"
+                                                          name: generative ai
+                                                          type: ApplicationCategory
+                                                      risks:
+                                                        - id: LOW
+                                                          name: Low
+                                                          type: ApplicationRisk
+                                              cpuFlowDurationLimit: 50
+                                              cpuHoggingEnabled: true
+                                              cpuUtilizationLimit: 80
+                                              efcEnabled: true
+                                              flowBypassEnabled: true
+                                              flowBytesLimit: 15000
+                                              flowDurationLimit: 120
+                                              flowThrottleEnabled: false
+                                              id: 00000000-0000-0ed3-0000-004294968190
+                                              includeConditionsEnabled: true
+                                              links:
+                                                self: /fmc_config/v1/domain/{domainUUID}/policy/accesspolicies/{containerUUID}/elephantflowsettings/00000000-0000-0ed3-0000-004294968190
+                                              metadata:
+                                                domain:
+                                                    id: e276abec-e0f2-11e3-8169-6d9ed49b625f
+                                                    name: Global
+                                                    type: Domain
+                                                timestamp: 1.772176623848e+12
+                                              queueDropPercentage: 15
+                                              remediationExemptionRules:
+                                                - destinationNetworks:
+                                                    objects:
+                                                        - id: 0050568A-B4B0-0ed3-0000-085899346369
+                                                          name: TestRange
+                                                          type: Range
+                                                  sourceNetworks:
+                                                    objects:
+                                                        - id: dde11d62-288b-4b4c-92e0-1dad0496f14b
+                                                          name: any-ipv6
+                                                          type: Host
+                                                        - id: 1047b91f-db3a-45b8-9c10-f48ed3f0c3d6
+                                                          name: IPv6-IPv4-Mapped
+                                                          type: Network
+                                              type: ElephantFlowSettings
+                                        links:
+                                            self: /fmc_config/v1/domain/{domainUUID}/policy/accesspolicies/{containerUUID}/elephantflowsettings?offset=0&limit=25&expanded=true
+                                        paging:
+                                            count: 1
+                                            limit: 25
+                                            offset: 0
+                                            pages: 1
+                            schema:
+                                $ref: '#/components/schemas/AccessPolicyElephantFlowSettingsModelListContainer'
+                                type: object
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                                type: object
+                    description: Error
+            tags:
+                - Policy
+    /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/policy/accesspolicies/{containerUUID}/elephantflowsettings/{objectId}:
+        get:
+            deprecated: false
+            description: '**Get the elephant flow setting associated with the specified access control policy and ID.**'
+            operationId: getAccessPolicyElephantFlowSettingsModel
+            parameters:
+                - description: Unique identifier of an elephant flow setting.
+                  in: path
+                  name: objectId
+                  required: true
+                  schema:
+                    type: string
+                - description: UUID of the ticket for tracking the configuration changes.
+                  in: header
+                  name: ticket-id
+                  required: false
+                  schema:
+                    type: string
+                - description: The container id under which this specific resource is contained.
+                  in: path
+                  name: containerUUID
+                  required: true
+                  schema:
+                    type: string
+                - $ref: '#/components/parameters/domainUUID'
+                  name: domainUUID
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            examples:
+                                ? 'Example 1 : GET /fmc_config/v1/domain/{domainUUID}/policy/accesspolicies/{containerUUID}/elephantflowsettings/{objectUUID} ( GET ElephantFlow settings by ID with full details including applications and remediation exemption rules )'
+                                :   value:
+                                        applications:
+                                            applicationFilters:
+                                                - id: 7265c978-0fca-11f1-8306-7da1a2c1a5f1
+                                                  name: efc_full_filter_1771749742
+                                                  type: ApplicationFilter
+                                            applications:
+                                                - id: "4165"
+                                                  name: 1fichier
+                                                  type: Application
+                                                - id: "3702"
+                                                  name: Ad4mat
+                                                  type: Application
+                                                - id: "567"
+                                                  name: Best Buy
+                                                  type: Application
+                                            inlineApplicationFilters:
+                                                - risks:
+                                                    - id: LOW
+                                                      name: Low
+                                                      type: ApplicationRisk
+                                                - categories:
+                                                    - id: "20"
+                                                      name: gaming
+                                                      type: ApplicationCategory
+                                                    - id: "181"
+                                                      name: generative ai
+                                                      type: ApplicationCategory
+                                                  risks:
+                                                    - id: LOW
+                                                      name: Low
+                                                      type: ApplicationRisk
+                                        cpuFlowDurationLimit: 50
+                                        cpuHoggingEnabled: true
+                                        cpuUtilizationLimit: 80
+                                        efcEnabled: true
+                                        flowBypassEnabled: true
+                                        flowBytesLimit: 15000
+                                        flowDurationLimit: 120
+                                        flowThrottleEnabled: false
+                                        id: 0050568A-B4B0-0ed3-0000-021474836548
+                                        includeConditionsEnabled: true
+                                        links:
+                                            self: /fmc_config/v1/domain/{domainUUID}/policy/accesspolicies/{containerUUID}/elephantflowsettings/{objectUUID}
+                                        metadata:
+                                            domain:
+                                                id: e276abec-e0f2-11e3-8169-6d9ed49b625f
+                                                name: Global
+                                                type: Domain
+                                            timestamp: 1.772176623848e+12
+                                        queueDropPercentage: 15
+                                        remediationExemptionRules:
+                                            - destinationNetworks:
+                                                objects:
+                                                    - id: 0050568A-B4B0-0ed3-0000-085899346369
+                                                      name: TestRange
+                                                      type: Range
+                                              sourceNetworks:
+                                                objects:
+                                                    - id: dde11d62-288b-4b4c-92e0-1dad0496f14b
+                                                      name: any-ipv6
+                                                      type: Host
+                                                    - id: 1047b91f-db3a-45b8-9c10-f48ed3f0c3d6
+                                                      name: IPv6-IPv4-Mapped
+                                                      type: Network
+                                        type: ElephantFlowSettings
+                            schema:
+                                $ref: '#/components/schemas/AccessPolicyElephantFlowSettingsModel'
+                                type: object
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                                type: object
+                    description: Error
+            tags:
+                - Policy
+        put:
+            deprecated: false
+            description: '**Modify the elephant flow setting associated with the specified access control policy ID. _Check the response section for applicable examples (if any)._**'
+            operationId: updateAccessPolicyElephantFlowSettingsModel
+            parameters:
+                - description: Unique identifier of an elephant flow setting.
+                  in: path
+                  name: objectId
+                  required: true
+                  schema:
+                    type: string
+                - description: UUID of the ticket for tracking the configuration changes.
+                  in: header
+                  name: ticket-id
+                  required: false
+                  schema:
+                    type: string
+                - description: The container id under which this specific resource is contained.
+                  in: path
+                  name: containerUUID
+                  required: true
+                  schema:
+                    type: string
+                - $ref: '#/components/parameters/domainUUID'
+                  name: domainUUID
+            requestBody:
+                content:
+                    application/json:
+                        examples:
+                            ? 'Example 1 : PUT /fmc_config/v1/domain/{domainUUID}/policy/accesspolicies/{containerUUID}/elephantflowsettings/{objectUUID} ( Modify the Elephant Flow settings including applications, inline filters, and remediation exemption rules )'
+                            :   value:
+                                    cpuFlowDurationLimit: 50
+                                    cpuHoggingEnabled: true
+                                    cpuUtilizationLimit: 80
+                                    efcEnabled: true
+                                    flowBypassEnabled: true
+                                    flowBytesLimit: 15000
+                                    flowDurationLimit: 120
+                                    flowThrottleEnabled: false
+                                    id: 0050568A-B4B0-0ed3-0000-021474836548
+                                    includeConditionsEnabled: true
+                                    queueDropPercentage: 15
+                                    type: ElephantFlowSettings
+                        schema:
+                            $ref: '#/components/schemas/AccessPolicyElephantFlowSettingsModel'
+                            type: object
+                description: The input representation of elephant flow setting for specific access control policy to be updated.
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            examples:
+                                ? 'Example 1 : PUT /fmc_config/v1/domain/{domainUUID}/policy/accesspolicies/{containerUUID}/elephantflowsettings/{objectUUID} ( Modify the Elephant Flow settings including applications, inline filters, and remediation exemption rules )'
+                                :   value:
+                                        applications:
+                                            applicationFilters:
+                                                - id: 7265c978-0fca-11f1-8306-7da1a2c1a5f1
+                                                  name: efc_full_filter_1771749742
+                                                  type: ApplicationFilter
+                                            applications:
+                                                - id: "4165"
+                                                  name: 1fichier
+                                                  type: Application
+                                                - id: "567"
+                                                  name: Best Buy
+                                                  type: Application
+                                            inlineApplicationFilters:
+                                                - risks:
+                                                    - id: LOW
+                                                      name: Low
+                                                      type: ApplicationRisk
+                                                - categories:
+                                                    - id: "20"
+                                                      name: gaming
+                                                      type: ApplicationCategory
+                                                    - id: "181"
+                                                      name: generative ai
+                                                      type: ApplicationCategory
+                                                  risks:
+                                                    - id: LOW
+                                                      name: Low
+                                                      type: ApplicationRisk
+                                        cpuFlowDurationLimit: 50
+                                        cpuHoggingEnabled: true
+                                        cpuUtilizationLimit: 80
+                                        efcEnabled: true
+                                        flowBypassEnabled: true
+                                        flowBytesLimit: 15000
+                                        flowDurationLimit: 120
+                                        flowThrottleEnabled: false
+                                        id: 0050568A-B4B0-0ed3-0000-021474836548
+                                        includeConditionsEnabled: true
+                                        links:
+                                            self: /fmc_config/v1/domain/{domainUUID}/policy/accesspolicies/{containerUUID}/elephantflowsettings/{objectUUID}
+                                        metadata:
+                                            domain:
+                                                id: e276abec-e0f2-11e3-8169-6d9ed49b625f
+                                                name: Global
+                                                type: Domain
+                                            timestamp: 1.772176623848e+12
+                                        queueDropPercentage: 15
+                                        remediationExemptionRules:
+                                            - destinationNetworks:
+                                                objects:
+                                                    - id: 0050568A-B4B0-0ed3-0000-085899346369
+                                                      name: TestRange
+                                                      type: Range
+                                              destinationPorts:
+                                                literals:
+                                                    - port: "8443"
+                                                      protocol: "6"
+                                                      type: PortLiteral
+                                                objects:
+                                                    - id: 1834e5f1-38bb-11e2-86aa-62f0c593a59b
+                                                      name: HTTPS
+                                                      type: ProtocolPortObject
+                                              sourceNetworks:
+                                                literals:
+                                                    - type: Host
+                                                      value: 10.1.1.1
+                                                objects:
+                                                    - id: dde11d62-288b-4b4c-92e0-1dad0496f14b
+                                                      name: any-ipv6
+                                                      type: Host
+                                                    - id: 1047b91f-db3a-45b8-9c10-f48ed3f0c3d6
+                                                      name: IPv6-IPv4-Mapped
+                                                      type: Network
+                                              sourcePorts:
+                                                objects:
+                                                    - id: 1834e5f0-38bb-11e2-86aa-62f0c593a59a
+                                                      name: HTTP
+                                                      type: ProtocolPortObject
+                                        type: ElephantFlowSettings
+                            schema:
+                                $ref: '#/components/schemas/AccessPolicyElephantFlowSettingsModel'
+                                type: object
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                                type: object
+                    description: Error
+            tags:
+                - Policy
     /v1/cdfmc/api/fmc_config/v1/domain/{domainUUID}/policy/accesspolicies/{containerUUID}/evesettings:
         get:
             deprecated: false
@@ -100636,17 +101692,38 @@ paths:
                                 ? 'Example 1 : GET /fmc_config/v1/domain/DomainUUID/policy/accesspolicies/ac_pol_uuid/inheritancesettings?expanded=true ( Test GET ALL Success of AccessPolicy inheritance setting )'
                                 :   value:
                                         items:
-                                            - basePolicy:
+                                            - advancedLoggingSetting: UNRESTRICTED
+                                              aiDefenseSettings: UNRESTRICTED
+                                              basePolicy:
                                                 id: id_of_base_policy
                                                 links:
                                                     self: /fmc_config/v1/domain/DomainUUID/policy/accesspolicies/basePolicyUUID/
                                                 name: Base Policy Name
                                                 type: AccessPolicy
+                                              decryptionPolicySetting: UNRESTRICTED
+                                              detectionEnhancementSetting: UNRESTRICTED
+                                              elephantFlowSetting: UNRESTRICTED
+                                              eveSetting: UNRESTRICTED
+                                              filesAndMalwarePolicySetting: UNRESTRICTED
+                                              generalSetting: UNRESTRICTED
+                                              httpResponse: UNRESTRICTED
                                               id: inheritanceSettingUUID
+                                              identityPolicySetting: UNRESTRICTED
+                                              intelligentAppBypassSetting: UNRESTRICTED
+                                              latencyBasedPerformanceSetting: UNRESTRICTED
                                               links:
                                                 self: /fmc_config/v1/domain/DomainUUID/policy/accesspolicies/accesspolicyUUID/inheritancesettings/inheritanceSettingUUID
+                                              loggingPolicySetting: UNRESTRICTED
                                               metadata:
                                                 timestamp: 1.2345678e+07
+                                              networkAnalysisAndIntrusionPolicySetting: UNRESTRICTED
+                                              performanceSetting: UNRESTRICTED
+                                              prefilterPolicySetting: UNRESTRICTED
+                                              securityIntelligence: UNRESTRICTED
+                                              shadowTrafficSetting: UNRESTRICTED
+                                              threatDefenseServicePolicy: UNRESTRICTED
+                                              threatDetectionSetting: UNRESTRICTED
+                                              transportNetworkLayerPreProcessorSetting: UNRESTRICTED
                                               type: AccessPolicyInheritanceSetting
                                         links:
                                             self: /fmc_config/v1/domain/DomainUUID/policy/accesspolicies/accesspolicyUUID/inheritancesettings?offset=0&limit=1
@@ -100701,17 +101778,38 @@ paths:
                             examples:
                                 ? 'Example 2 : GET /fmc_config/v1/domain/DomainUUID/policy/accesspolicies/accesspolicyUUID/inheritancesettings/inheritanceSettingUUID ( Test GET of AccessPolicyInheritanceSetting to get a record )'
                                 :   value:
+                                        advancedLoggingSetting: UNRESTRICTED
+                                        aiDefenseSettings: UNRESTRICTED
                                         basePolicy:
                                             id: id_of_base_policy
                                             links:
                                                 self: /fmc_config/v1/domain/DomainUUID/policy/accesspolicies/basePolicyUUID/
                                             name: Base Policy Name
                                             type: AccessPolicy
+                                        decryptionPolicySetting: UNRESTRICTED
+                                        detectionEnhancementSetting: UNRESTRICTED
+                                        elephantFlowSetting: UNRESTRICTED
+                                        eveSetting: UNRESTRICTED
+                                        filesAndMalwarePolicySetting: UNRESTRICTED
+                                        generalSetting: UNRESTRICTED
+                                        httpResponse: UNRESTRICTED
                                         id: inheritanceSettingUUID
+                                        identityPolicySetting: UNRESTRICTED
+                                        intelligentAppBypassSetting: UNRESTRICTED
+                                        latencyBasedPerformanceSetting: UNRESTRICTED
                                         links:
                                             self: /fmc_config/v1/domain/DomainUUID/policy/accesspolicies/accesspolicyUUID/inheritancesettings/inheritanceSettingUUID
+                                        loggingPolicySetting: UNRESTRICTED
                                         metadata:
                                             timestamp: 1.2345678e+07
+                                        networkAnalysisAndIntrusionPolicySetting: UNRESTRICTED
+                                        performanceSetting: UNRESTRICTED
+                                        prefilterPolicySetting: UNRESTRICTED
+                                        securityIntelligence: UNRESTRICTED
+                                        shadowTrafficSetting: UNRESTRICTED
+                                        threatDefenseServicePolicy: UNRESTRICTED
+                                        threatDetectionSetting: UNRESTRICTED
+                                        transportNetworkLayerPreProcessorSetting: UNRESTRICTED
                                         type: AccessPolicyInheritanceSetting
                             schema:
                                 $ref: '#/components/schemas/AccessPolicyInheritanceSetting'
@@ -100737,6 +101835,12 @@ paths:
                   required: true
                   schema:
                     type: string
+                - description: Boolean indicating whether to change only the specified inheritance setting attributes or reset unspecified supported inheritance setting attributes to their default effective state. If the value is true, omitted per-policy-type inheritance fields retain their current backend value. If the value is false, omitted editable fields reset to UNRESTRICTED and locked fields remain LOCKED_BY_PARENT. The default value is TRUE.
+                  in: query
+                  name: partialUpdate
+                  required: false
+                  schema:
+                    type: boolean
                 - description: UUID of the ticket for tracking the configuration changes.
                   in: header
                   name: ticket-id
@@ -100755,11 +101859,20 @@ paths:
                 content:
                     application/json:
                         examples:
-                            ? 'Example 1 : PUT /fmc_config/v1/domain/DomainUUID/policy/accesspolicies/accesspolicyUUID/inheritancesettings/inheritanceSettingUUID ( Test PUT of AccessPolicyInheritanceSetting to update the record )'
+                            ? 'Example 1 : PUT /fmc_config/v1/domain/DomainUUID/policy/accesspolicies/accesspolicyUUID/inheritancesettings/inheritanceSettingUUID ( Test PUT of AccessPolicyInheritanceSetting to update specified inheritance settings while unspecified settings retain their current values because partialUpdate defaults to true. )'
                             :   value:
                                     basePolicy:
                                         id: id_of_base_policy
                                         type: AccessPolicy
+                                    generalSetting: MANDATORY_ON_CHILD
+                                    id: id_of_inheritance_settings
+                                    type: AccessPolicyInheritanceSetting
+                            ? 'Example 2 : PUT /fmc_config/v1/domain/DomainUUID/policy/accesspolicies/accesspolicyUUID/inheritancesettings/inheritanceSettingUUID?partialUpdate=false ( Test PUT of AccessPolicyInheritanceSetting with partialUpdate=false so unspecified editable inheritance settings reset to UNRESTRICTED. )'
+                            :   value:
+                                    basePolicy:
+                                        id: id_of_base_policy
+                                        type: AccessPolicy
+                                    generalSetting: MANDATORY_ON_CHILD
                                     id: id_of_inheritance_settings
                                     type: AccessPolicyInheritanceSetting
                         schema:
@@ -100772,18 +101885,73 @@ paths:
                     content:
                         application/json:
                             examples:
-                                ? 'Example 1 : PUT /fmc_config/v1/domain/DomainUUID/policy/accesspolicies/accesspolicyUUID/inheritancesettings/inheritanceSettingUUID ( Test PUT of AccessPolicyInheritanceSetting to update the record )'
+                                ? 'Example 1 : PUT /fmc_config/v1/domain/DomainUUID/policy/accesspolicies/accesspolicyUUID/inheritancesettings/inheritanceSettingUUID ( Test PUT of AccessPolicyInheritanceSetting to update specified inheritance settings while unspecified settings retain their current values because partialUpdate defaults to true. )'
                                 :   value:
+                                        advancedLoggingSetting: UNRESTRICTED
+                                        aiDefenseSettings: UNRESTRICTED
                                         basePolicy:
                                             id: baseAccessPolicyUUID
                                             links:
                                                 self: /fmc_config/v1/domain/domainUUID/policy/accesspolicies/accessPolicyUUID
                                             type: AccessPolicy
+                                        decryptionPolicySetting: UNRESTRICTED
+                                        detectionEnhancementSetting: UNRESTRICTED
+                                        elephantFlowSetting: UNRESTRICTED
+                                        eveSetting: UNRESTRICTED
+                                        filesAndMalwarePolicySetting: UNRESTRICTED
+                                        generalSetting: MANDATORY_ON_CHILD
+                                        httpResponse: UNRESTRICTED
                                         id: inheritanceSettingUUID
+                                        identityPolicySetting: UNRESTRICTED
+                                        intelligentAppBypassSetting: UNRESTRICTED
+                                        latencyBasedPerformanceSetting: UNRESTRICTED
                                         links:
                                             self: /fmc_config/v1/domain/domainUUID/policy/accesspolicies/accessPolicyUUID/inheritancesettings/inheritanceSettingUUID
+                                        loggingPolicySetting: UNRESTRICTED
                                         metadata:
                                             timestamp: 1.750161212104e+12
+                                        networkAnalysisAndIntrusionPolicySetting: UNRESTRICTED
+                                        performanceSetting: UNRESTRICTED
+                                        prefilterPolicySetting: UNRESTRICTED
+                                        securityIntelligence: UNRESTRICTED
+                                        shadowTrafficSetting: UNRESTRICTED
+                                        threatDefenseServicePolicy: UNRESTRICTED
+                                        threatDetectionSetting: UNRESTRICTED
+                                        transportNetworkLayerPreProcessorSetting: UNRESTRICTED
+                                        type: AccessPolicyInheritanceSetting
+                                ? 'Example 2 : PUT /fmc_config/v1/domain/DomainUUID/policy/accesspolicies/accesspolicyUUID/inheritancesettings/inheritanceSettingUUID?partialUpdate=false ( Test PUT of AccessPolicyInheritanceSetting with partialUpdate=false so unspecified editable inheritance settings reset to UNRESTRICTED. )'
+                                :   value:
+                                        advancedLoggingSetting: UNRESTRICTED
+                                        aiDefenseSettings: UNRESTRICTED
+                                        basePolicy:
+                                            id: baseAccessPolicyUUID
+                                            links:
+                                                self: /fmc_config/v1/domain/domainUUID/policy/accesspolicies/accessPolicyUUID
+                                            type: AccessPolicy
+                                        decryptionPolicySetting: UNRESTRICTED
+                                        detectionEnhancementSetting: UNRESTRICTED
+                                        elephantFlowSetting: UNRESTRICTED
+                                        eveSetting: UNRESTRICTED
+                                        filesAndMalwarePolicySetting: UNRESTRICTED
+                                        generalSetting: MANDATORY_ON_CHILD
+                                        httpResponse: UNRESTRICTED
+                                        id: inheritanceSettingUUID
+                                        identityPolicySetting: UNRESTRICTED
+                                        intelligentAppBypassSetting: UNRESTRICTED
+                                        latencyBasedPerformanceSetting: UNRESTRICTED
+                                        links:
+                                            self: /fmc_config/v1/domain/domainUUID/policy/accesspolicies/accessPolicyUUID/inheritancesettings/inheritanceSettingUUID
+                                        loggingPolicySetting: UNRESTRICTED
+                                        metadata:
+                                            timestamp: 1.750161212104e+12
+                                        networkAnalysisAndIntrusionPolicySetting: UNRESTRICTED
+                                        performanceSetting: UNRESTRICTED
+                                        prefilterPolicySetting: UNRESTRICTED
+                                        securityIntelligence: UNRESTRICTED
+                                        shadowTrafficSetting: UNRESTRICTED
+                                        threatDefenseServicePolicy: UNRESTRICTED
+                                        threatDetectionSetting: UNRESTRICTED
+                                        transportNetworkLayerPreProcessorSetting: UNRESTRICTED
                                         type: AccessPolicyInheritanceSetting
                             schema:
                                 $ref: '#/components/schemas/AccessPolicyInheritanceSetting'
@@ -112939,7 +114107,7 @@ paths:
                                     firstTimeFileAnalysis: true
                                     inspectArchives: false
                                     name: Test-File-policy
-                                    threatScore: High
+                                    threatScore: HIGH
                                     type: FilePolicy
                         schema:
                             $ref: '#/components/schemas/FilePolicy'
@@ -112977,7 +114145,7 @@ paths:
                                                 state: false
                                             timestamp: 1.460056664e+09
                                         name: Test-File-policy
-                                        threatScore: High
+                                        threatScore: HIGH
                                         type: FilePolicy
                             schema:
                                 $ref: '#/components/schemas/FilePolicy'
@@ -122670,7 +123838,44 @@ paths:
                     content:
                         application/json:
                             examples:
-                                ? 'Example 1 : GET /fmc_config/v1/domain/DomainUUID/policy/ftdplatformsettingspolicies/<containerUUID>/syslog/basicloggingsetups?offset=0&limit=25&expanded=true ( GET All Basic Logging Setup Settings with expanded=true )'
+                                ? 'Example 1 : GET /fmc_config/v1/domain/DomainUUID/policy/ftdplatformsettingspolicies/containerUUID/syslog/basicloggingsetups?offset=0&limit=25 ( Example payload for GET ALL on FTD Basic Logging Setup Settings )'
+                                :   value:
+                                        items:
+                                            - enableDebugMesgAsSyslog: false
+                                              enableEMBLEMFormat: true
+                                              enableFlash: true
+                                              enableLogging: true
+                                              enableLoggingFailover: true
+                                              enablePbrLogging: true
+                                              ftpServerInfo:
+                                                interfaceGroups:
+                                                    - id: f51bc1de-2317-11ef-bd5b-c6ca67ef1199
+                                                      name: interface
+                                                      type: InterfaceGroup
+                                                ipAddress:
+                                                    id: 00505681-5CDB-0ed3-0000-214748364852
+                                                    name: host1
+                                                    type: Network
+                                                password: '***********'
+                                                path: /test/itc
+                                                userName: user
+                                              id: 00505681-5CDB-0ed3-0000-231928234223
+                                              internalBuffMemSizeInBytes: 4097
+                                              links:
+                                                self: https://u35c01p01-vrouter.cisco.com:13606/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/policy/ftdplatformsettingspolicies/00505681-5CDB-0ed3-0000-249108103248/syslog/basicloggingsetups/00505681-5CDB-0ed3-0000-249108103248
+                                              loggingToFMCLogLevel: ERR
+                                              loggingToFMCType: VPN
+                                              maxFlashForLoggingInKB: 3086
+                                              minFreePreservedSpaceInKB: 1024
+                                              type: BasicLoggingSetup
+                                        links:
+                                            self: /fmc_config/v1/domain/DomainUUID/policy/ftdplatformsettingspolicies/containerUUID/syslog/basicloggingsetups?offset=0&limit=25
+                                        paging:
+                                            count: 1
+                                            limit: 25
+                                            offset: 0
+                                            pages: 1
+                                ? 'Example 2 : GET /fmc_config/v1/domain/DomainUUID/policy/ftdplatformsettingspolicies/<containerUUID>/syslog/basicloggingsetups?offset=0&limit=25&expanded=true ( GET All Basic Logging Setup Settings with expanded=true )'
                                 :   value:
                                         items:
                                             - enableDebugMesgAsSyslog: false
@@ -122678,6 +123883,7 @@ paths:
                                               enableFlash: true
                                               enableLogging: true
                                               enableLoggingFailover: true
+                                              enablePbrLogging: true
                                               ftpServerInfo:
                                                 interfaceGroups:
                                                     - id: f51bc1de-2317-11ef-bd5b-c6ca67ef1199
@@ -122749,43 +123955,6 @@ paths:
                 "200":
                     content:
                         application/json:
-                            examples:
-                                ? 'Example 1 : GET /fmc_config/v1/domain/DomainUUID/policy/ftdplatformsettingspolicies/containerUUID/syslog/basicloggingsetups?offset=0&limit=25 ( Example payload for GET by Id on FTD Basic Logging Setup Settings )'
-                                :   value:
-                                        items:
-                                            - enableDebugMesgAsSyslog: false
-                                              enableEMBLEMFormat: true
-                                              enableFlash: true
-                                              enableLogging: true
-                                              enableLoggingFailover: true
-                                              ftpServerInfo:
-                                                interfaceGroups:
-                                                    - id: f51bc1de-2317-11ef-bd5b-c6ca67ef1199
-                                                      name: interface
-                                                      type: InterfaceGroup
-                                                ipAddress:
-                                                    id: 00505681-5CDB-0ed3-0000-214748364852
-                                                    name: host1
-                                                    type: Network
-                                                password: '***********'
-                                                path: /test/itc
-                                                userName: user
-                                              id: 00505681-5CDB-0ed3-0000-231928234223
-                                              internalBuffMemSizeInBytes: 4097
-                                              links:
-                                                self: https://u35c01p01-vrouter.cisco.com:13606/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/policy/ftdplatformsettingspolicies/00505681-5CDB-0ed3-0000-249108103248/syslog/basicloggingsetups/00505681-5CDB-0ed3-0000-249108103248
-                                              loggingToFMCLogLevel: ERR
-                                              loggingToFMCType: VPN
-                                              maxFlashForLoggingInKB: 3086
-                                              minFreePreservedSpaceInKB: 1024
-                                              type: BasicLoggingSetup
-                                        links:
-                                            self: /fmc_config/v1/domain/DomainUUID/policy/ftdplatformsettingspolicies/containerUUID/syslog/basicloggingsetups?offset=0&limit=25
-                                        paging:
-                                            count: 1
-                                            limit: 25
-                                            offset: 0
-                                            pages: 1
                             schema:
                                 $ref: '#/components/schemas/SyslogBasicLoggingSetup'
                                 type: object
@@ -122841,6 +124010,7 @@ paths:
                                     enableFlash: true
                                     enableLogging: true
                                     enableLoggingFailover: true
+                                    enablePbrLogging: true
                                     ftpServerInfo:
                                         interfaceGroups:
                                             - id: f51bc1de-2317-11ef-bd5b-c6ca67ef1199
@@ -122866,6 +124036,7 @@ paths:
                                     enableEMBLEMFormat: true
                                     enableLogging: true
                                     enableLoggingFailover: true
+                                    enablePbrLogging: true
                                     id: 00505681-5CDB-0ed3-0000-231928234223
                                     internalBuffMemSizeInBytes: 4097
                                     loggingToFMCLogLevel: ERR
@@ -122889,6 +124060,7 @@ paths:
                                         enableFlash: true
                                         enableLogging: true
                                         enableLoggingFailover: true
+                                        enablePbrLogging: true
                                         ftpServerInfo:
                                             interfaceGroups:
                                                 - id: f51bc1de-2317-11ef-bd5b-c6ca67ef1199
@@ -122917,6 +124089,7 @@ paths:
                                         enableFlash: true
                                         enableLogging: true
                                         enableLoggingFailover: true
+                                        enablePbrLogging: true
                                         ftpServerInfo:
                                             interfaceGroups:
                                                 - id: f51bc1de-2317-11ef-bd5b-c6ca67ef1199
@@ -156219,7 +157392,9 @@ paths:
                                 'Example 1 : GET /fmc_platform/v1/info/serverversion ( Success: Test GET ALL success for Server Version )':
                                     value:
                                         items:
-                                            - hostname: firepower
+                                            - biosVersion: "6.00"
+                                              hostname: firepower
+                                              latestHotfix: Hotfix_Test
                                               lspVersion: lsp-rel-20250612-1532
                                               model: Cisco Secure Firewall Management Center for VMware
                                               platform: "66"
@@ -156290,15 +157465,9 @@ paths:
     /v1/cdfmc/api/fmc_platform/v1/license/devicelicensedetails:
         get:
             deprecated: false
-            description: '**[DEV ERROR: Missing description]**'
+            description: '**Get all device licenses with detailed license information including license type and human-readable name.**'
             operationId: getAllDeviceLicenseDetails
             parameters:
-                - description: '[DEV ERROR: Missing description]'
-                  in: query
-                  name: filter
-                  required: false
-                  schema:
-                    type: string
                 - $ref: '#/components/parameters/offset'
                   name: offset
                 - $ref: '#/components/parameters/limit'
@@ -156351,10 +157520,10 @@ paths:
     /v1/cdfmc/api/fmc_platform/v1/license/devicelicensedetails/{objectId}:
         get:
             deprecated: false
-            description: '**[DEV ERROR: Missing description]**'
+            description: '**Get the device license details associated with the specified device ID.**'
             operationId: getDeviceLicenseDetails
             parameters:
-                - description: '[DEV ERROR: Missing description]'
+                - description: Unique identifier (UUID) of the device.
                   in: path
                   name: objectId
                   required: true
@@ -156401,12 +157570,6 @@ paths:
             description: '**Get all device licenses.**'
             operationId: getAllDeviceLicense
             parameters:
-                - description: '[DEV ERROR: Missing description]'
-                  in: query
-                  name: filter
-                  required: false
-                  schema:
-                    type: string
                 - $ref: '#/components/parameters/offset'
                   name: offset
                 - $ref: '#/components/parameters/limit'
@@ -156454,7 +157617,7 @@ paths:
             description: '**Modify the device licenses. _Check the response section for applicable examples (if any)._**'
             operationId: updateMultipleDeviceLicense
             parameters:
-                - description: Boolean value indicating whether this is performed as a bulk operation.
+                - description: Required parameter, should be always set to <code>true</code>
                   in: query
                   name: bulk
                   required: true
@@ -156683,7 +157846,8 @@ paths:
                                 'Example 1 : GET /api/fmc_platform/v1/license/smartlicenses ( API for the smart license registration status )':
                                     value:
                                         items:
-                                            - metadata:
+                                            - confirmationCode: e065..
+                                              metadata:
                                                 authStatus: AUTHORIZED|AUTHORIZED_RESERVED|OUT_OF_COMPLIANCE|AUTHORIZATION_EXPIRED|NOT_AUTHORIZED
                                                 evalExpiresInDays: 0
                                                 evalUsed: true
@@ -156692,6 +157856,8 @@ paths:
                                                 lastSynchronizedTime: 2021-10-25T15:10:38UTC
                                                 smartAccount: FTD Int Test
                                                 virtualAccount: FMC_ENG_BLR
+                                              productInstance: 33f212a2-ef8...
+                                              regMode: CSSM|SLR|PLR|ON_PREM_SSM
                                               regStatus: REGISTERED|UNREGISTERED|RESERVATION_IN_PROGRESS|EVALUATION
                                               type: SmartLicense
                                         links:
@@ -161973,7 +163139,8 @@ paths:
                                 'Example 1 : GET /api/fmc_troubleshoot/v1/domain/{domainUUID}/radkit/services ( GET ALL RADKit Service data )':
                                     value:
                                         items:
-                                            - id: "1"
+                                            - enrollmentStatus: Waiting
+                                              id: "1"
                                               isCloudConnected: true
                                               isEnrolled: true
                                               serviceId: cuno-sm6v-11rb
@@ -162031,6 +163198,7 @@ paths:
                             examples:
                                 'Example 1 : POST /api/fmc_troubleshoot/v1/domain/{domainUUID}/radkit/services/ ( POST request to start the RADKit Service )':
                                     value:
+                                        enrollmentStatus: Waiting
                                         id: "1"
                                         isCloudConnected: false
                                         isEnrolled: false
@@ -162076,6 +163244,7 @@ paths:
                             examples:
                                 'Example 1 : GET /api/fmc_troubleshoot/v1/domain/{domainUUID}/radkit/services/{id} ( GET RADKit Service by container ID )':
                                     value:
+                                        enrollmentStatus: Waiting
                                         id: "1"
                                         isCloudConnected: true
                                         isEnrolled: true
@@ -162611,6 +163780,9 @@ components:
                 description:
                     description: Description of Access Policy
                     type: string
+                elephantFlowSettings:
+                    $ref: '#/components/schemas/IReference'
+                    type: object
                 eveSetting:
                     $ref: '#/components/schemas/IEVESettingModel'
                     type: object
@@ -162839,6 +164011,74 @@ components:
                     format: int32
                     type: integer
             type: object
+        AccessPolicyElephantFlowSettingsModel:
+            properties:
+                applications:
+                    $ref: '#/components/schemas/IApplicationsContainer'
+                    type: object
+                cpuFlowDurationLimit:
+                    format: int32
+                    type: integer
+                cpuHoggingEnabled:
+                    type: boolean
+                cpuUtilizationLimit:
+                    format: int32
+                    type: integer
+                description:
+                    type: string
+                efcEnabled:
+                    type: boolean
+                firstValidationError:
+                    type: string
+                flowBypassEnabled:
+                    type: boolean
+                flowBytesLimit:
+                    format: int32
+                    type: integer
+                flowDurationLimit:
+                    format: int32
+                    type: integer
+                flowThrottleEnabled:
+                    type: boolean
+                id:
+                    type: string
+                includeConditionsEnabled:
+                    type: boolean
+                links:
+                    $ref: '#/components/schemas/ILinks'
+                    type: object
+                metadata:
+                    $ref: '#/components/schemas/Metadata'
+                    type: object
+                name:
+                    type: string
+                queueDropPercentage:
+                    format: int32
+                    type: integer
+                remediationExemptionRules:
+                    items:
+                        $ref: '#/components/schemas/IElephantFlowRemediationExemptionRule'
+                        type: object
+                    type: array
+                type:
+                    type: string
+                version:
+                    type: string
+            required:
+                - efcEnabled
+            type: object
+        AccessPolicyElephantFlowSettingsModelListContainer:
+            properties:
+                items:
+                    $ref: '#/components/schemas/AccessPolicyElephantFlowSettingsModel'
+                    type: array
+                links:
+                    $ref: '#/components/schemas/ILinks'
+                    type: object
+                paging:
+                    $ref: '#/components/schemas/PagingContainer'
+                    type: object
+            type: object
         AccessPolicyInheritanceSetting:
             description: Description of Access Policy Inheritence Setting.
             properties:
@@ -162852,6 +164092,9 @@ components:
                 id:
                     description: Unique identifier (UUID) representing the access policy inheritance setting.
                     type: string
+                inheritanceStates:
+                    $ref: '#/components/schemas/LLInheritanceStates'
+                    type: object
                 links:
                     $ref: '#/components/schemas/ILinks'
                     description: Object containing links to this resource.
@@ -163387,11 +164630,19 @@ components:
                 cpuHealthMetrics:
                     $ref: '#/components/schemas/CPUHealthMetrics'
                     type: object
+                deployedConfigurationMetrics:
+                    $ref: '#/components/schemas/DeployedConfigurationMetrics'
+                    type: object
                 description:
                     type: string
                 diskHealthMetrics:
                     $ref: '#/components/schemas/DiskHealthMetrics'
                     type: object
+                dnsFqdnStatsMetricsList:
+                    items:
+                        $ref: '#/components/schemas/DnsFqdnStatsMetrics'
+                        type: object
+                    type: array
                 endTime:
                     description: End time of the metrics.
                     type: string
@@ -164458,6 +165709,9 @@ components:
                     items:
                         type: string
                     type: array
+                lastUpdatedTime:
+                    format: int32
+                    type: integer
                 links:
                     $ref: '#/components/schemas/ILinks'
                     type: object
@@ -164480,6 +165734,8 @@ components:
                         type: object
                     type: array
                 sourceEntityUUID:
+                    type: string
+                type:
                     type: string
                 valueAdded:
                     description: 'Values that were added compared to its other state. '
@@ -167602,11 +168858,9 @@ components:
                     description: Name of the Continent.
                     type: string
                 overridable:
-                    description: Boolean indicating whether object values can be overridden.
                     type: boolean
                 overrides:
                     $ref: '#/components/schemas/IOverride'
-                    description: An object override allows you to define an alternate value for an object on a device or domain.
                     type: object
                 type:
                     description: Type of the response object. This value is always Continent.
@@ -167654,11 +168908,9 @@ components:
                     description: Name of the Country.
                     type: string
                 overridable:
-                    description: Boolean indicating whether object values can be overridden.
                     type: boolean
                 overrides:
                     $ref: '#/components/schemas/IOverride'
-                    description: An object override allows you to define an alternate value for an object on a device or domain.
                     type: object
                 type:
                     description: Type of the response object. This value is always Country.
@@ -169146,6 +170398,97 @@ components:
                     $ref: '#/components/schemas/PagingContainer'
                     type: object
             type: object
+        DeployReadinessRequest:
+            properties:
+                description:
+                    type: string
+                devices:
+                    items:
+                        $ref: '#/components/schemas/LLDevices'
+                        type: object
+                    type: array
+                id:
+                    type: string
+                links:
+                    $ref: '#/components/schemas/Links'
+                    type: object
+                metadata:
+                    $ref: '#/components/schemas/Metadata'
+                    type: object
+                name:
+                    type: string
+                pia:
+                    $ref: '#/components/schemas/PiaInfo'
+                    type: object
+                status:
+                    type: string
+                taskType:
+                    enum:
+                        - DEVICE_REGISTRATION
+                        - SMART_LICENSE
+                        - DEVICE_DEPLOYMENT
+                        - DEVICE_ROLLBACK
+                        - NGFWHA_OPERATIONS
+                        - COPY_CONFIG_REQUEST
+                        - HIT_COUNT_REFRESH
+                        - ACTION_TYPE_DOMAIN_CHANGES
+                        - FTD_CLUSTER_BOOTSTRAP
+                        - FTD_CLUSTER_CREATE
+                        - FTD_CLUSTER_BREAK
+                        - FTD_CLUSTER_ADD_NODES
+                        - FTD_CLUSTER_REMOVE_NODES
+                        - DEVICE_BACKUP
+                        - FTD_CLUSTER_UPDATE_BOOTSTRAP
+                        - FTD_CLUSTER_COMMAND
+                        - SSP_EPM_OIR
+                        - SSP_EPM_BREAKOUT_DEPLOY
+                        - DEVICE_EXPORT
+                        - DEVICE_IMPORT
+                        - POLICY_IMPORT
+                        - POLICY_EXPORT
+                        - CHASSIS_REGISTRATION
+                        - CHANGE_MANAGER
+                        - CONFIGURE_DEVICE_VALIDATE
+                        - CONFIGURE_DEVICE
+                        - CONFIGURE_MANAGER
+                        - CONFIGURE_MANAGER_ADD
+                        - CONFIGURE_MANAGER_DELETE
+                        - INITIATE_MIGRATION
+                        - DISCARD_MIGRATION
+                        - SWITCH_TO_ANALYTICS
+                        - DELETE_DEVICE
+                        - GENERATE_REPORTS
+                        - FLEXCONFIG_MIGRATION
+                        - DEVICE_UNREGISTRATION
+                        - PENDING_CHANGES_REQUEST
+                        - DEVICE_TROUBLESHOOT
+                        - DEVICE_MODEL_MIGRATION
+                        - DEVICE_TEMPLATE_CREATION
+                        - CHASSIS_CONVERSION_REQUEST
+                        - SNORT_PROFILER
+                        - CPU_PROFILER
+                        - POLICY_REPORT_GENERATION
+                        - DEVICE_TEMPLATE_APPLY
+                        - LTP_ONBOARDING
+                        - POLICY_CLONE_OPERATION
+                        - DEVICE_CERTIFICATE_MANAGEMENT
+                        - OOB_CHANGES_REQUEST
+                        - UPLOAD_TROUBLESHOOT
+                        - FMC_MODEL_MIGRATION
+                        - EXTERNAL_AUTHENTICATION
+                        - EXECUTE_BULK_COMMANDS
+                        - FA_TELEMETRY_DATA_GENERATION
+                        - JOB_REPORT_GENERATION
+                        - OBJECT_IMPORT
+                        - PORT_OPERATION
+                        - DEPLOYMENT_READINESS
+                        - RESYNCHRONIZE_IDENTITY
+                    type: string
+                type:
+                    type: string
+                version:
+                    type: string
+            type: object
         DeploySettings:
             properties:
                 automaticRollback:
@@ -169241,6 +170584,74 @@ components:
                 paging:
                     $ref: '#/components/schemas/PagingContainer'
                     type: object
+            type: object
+        DeployedConfigurationMetrics:
+            properties:
+                allocatedStrideBlockSizes:
+                    items:
+                        format: int32
+                        type: integer
+                    type: array
+                aspDestinationEntries:
+                    format: int32
+                    type: integer
+                aspSourceDynamic:
+                    format: int32
+                    type: integer
+                aspSourceEntries:
+                    format: int32
+                    type: integer
+                aspSourceTotal:
+                    format: int32
+                    type: integer
+                freeHeapcachePoolMemory:
+                    format: int32
+                    type: integer
+                freeMemory:
+                    format: int32
+                    type: integer
+                freeStrideTreePoolMemory:
+                    format: int32
+                    type: integer
+                gspHeapReserve:
+                    format: int32
+                    type: integer
+                ipv4Count:
+                    format: int32
+                    type: integer
+                ipv6Count:
+                    format: int32
+                    type: integer
+                largestStrideTreePoolBlock:
+                    format: int32
+                    type: integer
+                linaCores:
+                    format: int32
+                    type: integer
+                mpCountersFree:
+                    format: int32
+                    type: integer
+                mpCountersHighWaterMark:
+                    format: int32
+                    type: integer
+                numberOfACEs:
+                    format: int32
+                    type: integer
+                numberOfACLs:
+                    format: int32
+                    type: integer
+                totalAllocatedStrideTreePoolMemory:
+                    format: int32
+                    type: integer
+                totalMemory:
+                    format: int32
+                    type: integer
+                usedInAcl:
+                    format: int32
+                    type: integer
+                usedMemory:
+                    format: int32
+                    type: integer
             type: object
         DeploymentDetail:
             description: An object representing the deployment details on a device
@@ -169342,6 +170753,45 @@ components:
                     type: string
                 version:
                     type: string
+            type: object
+        DeploymentReadinessCheck:
+            properties:
+                description:
+                    type: string
+                devices:
+                    items:
+                        $ref: '#/components/schemas/IDeviceReadinessModel'
+                        type: object
+                    type: array
+                id:
+                    type: string
+                links:
+                    $ref: '#/components/schemas/ILinks'
+                    type: object
+                metadata:
+                    $ref: '#/components/schemas/Metadata'
+                    type: object
+                name:
+                    type: string
+                summary:
+                    $ref: '#/components/schemas/IReadinessSummary'
+                    type: object
+                type:
+                    type: string
+                version:
+                    type: string
+            type: object
+        DeploymentReadinessCheckListContainer:
+            properties:
+                items:
+                    $ref: '#/components/schemas/DeploymentReadinessCheck'
+                    type: array
+                links:
+                    $ref: '#/components/schemas/ILinks'
+                    type: object
+                paging:
+                    $ref: '#/components/schemas/PagingContainer'
+                    type: object
             type: object
         DeploymentRequest:
             description: Represents the deployment request object which will be used for policy deployment of a device.
@@ -169713,6 +171163,8 @@ components:
             type: object
         DeviceChassisData:
             properties:
+                chassisId:
+                    type: string
                 chassisSerialNo:
                     type: string
                 chassisUrl:
@@ -170280,6 +171732,8 @@ components:
                     type: boolean
                 supportIsGeneric:
                     type: boolean
+                svtiInMulticastRoutingSupported:
+                    type: boolean
                 swBuildVersion:
                     type: string
                 sysObjId:
@@ -170455,6 +171909,8 @@ components:
                 obtainDefaultRouteSupport:
                     type: boolean
                 pathMonitoringSupported:
+                    type: boolean
+                sgtinlineForceSupportedInTunnelInterface:
                     type: boolean
                 sgtpropagateEnableInTunnelInterface:
                     type: boolean
@@ -171550,6 +173006,14 @@ components:
                 paging:
                     $ref: '#/components/schemas/PagingContainer'
                     type: object
+            type: object
+        DnsFqdnStatsMetrics:
+            properties:
+                name:
+                    type: string
+                value:
+                    format: int32
+                    type: integer
             type: object
         Domain:
             description: The details about the domain.
@@ -177033,6 +178497,8 @@ components:
                     type: boolean
                 enableDNSLookup:
                     type: boolean
+                enableSGTInlineForce:
+                    type: boolean
                 enableSGTPropagate:
                     type: boolean
                 enabled:
@@ -177481,9 +178947,27 @@ components:
                     $ref: '#/components/schemas/PagingContainer'
                     type: object
             type: object
+        FileTypeCapabilities:
+            properties:
+                supportedRuleDirections:
+                    items:
+                        type: string
+                    type: array
+                supportsDynamicAnalysis:
+                    type: boolean
+                supportsLocalMalwareAnalysis:
+                    type: boolean
+                supportsMalwareRuleAction:
+                    type: boolean
+                supportsSperoAnalysis:
+                    type: boolean
+            type: object
         FileTypeModel:
             description: Object representing a FileType object within a FileCategory.
             properties:
+                capabilities:
+                    $ref: '#/components/schemas/FileTypeCapabilities'
+                    type: object
                 description:
                     description: Description of the file type.
                     type: string
@@ -177683,11 +179167,9 @@ components:
                     description: User-specified name of the geolocation.
                     type: string
                 overridable:
-                    description: Boolean indicating whether object values can be overridden.
                     type: boolean
                 overrides:
                     $ref: '#/components/schemas/IOverride'
-                    description: An object override allows you to define an alternate value for an object on a device or domain.
                     type: object
                 type:
                     description: Type of the response object. This value is always GeoLocationObject.
@@ -178105,8 +179587,9 @@ components:
                         - HM_TALOSAGENT
                         - IDENTITY_PROCESS_STATUS
                         - FXOS_HEALTH
-                        - BACKUP_FAILURES
                         - EXT_CONN_STATUS
+                        - ARSENAL_DEVICE_IDENTITY_LIMITS_MONITOR
+                        - FQDN_STATS_FTD
                     type: string
                 moduleUUID:
                     description: UUID of the module on which the alert is raised
@@ -178252,8 +179735,9 @@ components:
                         - HM_TALOSAGENT
                         - IDENTITY_PROCESS_STATUS
                         - FXOS_HEALTH
-                        - BACKUP_FAILURES
                         - EXT_CONN_STATUS
+                        - ARSENAL_DEVICE_IDENTITY_LIMITS_MONITOR
+                        - FQDN_STATS_FTD
                     type: string
                 name:
                     type: string
@@ -178325,6 +179809,46 @@ components:
             properties:
                 items:
                     $ref: '#/components/schemas/HealthMetric'
+                    type: array
+                links:
+                    $ref: '#/components/schemas/ILinks'
+                    type: object
+                paging:
+                    $ref: '#/components/schemas/PagingContainer'
+                    type: object
+            type: object
+        HealthMetricsRemoteWriteConfig:
+            properties:
+                auth_type:
+                    enum:
+                        - TLS
+                        - MTLS
+                    type: string
+                caCertName:
+                    type: string
+                caCertPayload:
+                    type: string
+                clientCertName:
+                    type: string
+                clientCertPayload:
+                    type: string
+                clientKeyName:
+                    type: string
+                clientKeyPayload:
+                    type: string
+                id:
+                    type: string
+                isInternal:
+                    type: boolean
+                type:
+                    type: string
+                url:
+                    type: string
+            type: object
+        HealthMetricsRemoteWriteConfigListContainer:
+            properties:
+                items:
+                    $ref: '#/components/schemas/HealthMetricsRemoteWriteConfig'
                     type: array
                 links:
                     $ref: '#/components/schemas/ILinks'
@@ -179029,6 +180553,9 @@ components:
                     type: object
                 description:
                     type: string
+                elephantFlowSettings:
+                    $ref: '#/components/schemas/IReference'
+                    type: object
                 eveSetting:
                     $ref: '#/components/schemas/IEVESettingModel'
                     type: object
@@ -179164,6 +180691,28 @@ components:
                     type: string
             required:
                 - protocol
+            type: object
+        IAdvancedReadiness:
+            properties:
+                analysisFreshness:
+                    type: string
+                analysisOutdatedReason:
+                    type: string
+                analysisOutdatedSince:
+                    type: string
+                analysisResult:
+                    type: string
+                analysisResultReason:
+                    type: string
+                currentAnalysisStatus:
+                    type: string
+                isSalDisabled:
+                    type: boolean
+                lastAnalysedTime:
+                    format: int32
+                    type: integer
+                orchestratorId:
+                    type: string
             type: object
         IAdvertisement:
             properties:
@@ -179878,6 +181427,15 @@ components:
                     type: string
                 type:
                     type: string
+            type: object
+        IBasicReadiness:
+            properties:
+                status:
+                    type: string
+                validationMessages:
+                    items:
+                        type: string
+                    type: array
             type: object
         IBgpNetworks:
             properties:
@@ -181251,6 +182809,8 @@ components:
             type: object
         IDeviceChassisData:
             properties:
+                chassisId:
+                    type: string
                 chassisSerialNo:
                     type: string
                 chassisUrl:
@@ -181500,6 +183060,19 @@ components:
                 sourceDevice:
                     type: string
                 targetDevice:
+                    type: string
+            type: object
+        IDeviceReadinessModel:
+            properties:
+                advancedReadiness:
+                    $ref: '#/components/schemas/IAdvancedReadiness'
+                    type: object
+                basicReadiness:
+                    $ref: '#/components/schemas/IBasicReadiness'
+                    type: object
+                deviceId:
+                    type: string
+                deviceName:
                     type: string
             type: object
         IDeviceTemplateInterfaceMapping:
@@ -181924,6 +183497,21 @@ components:
                 receiveOnly:
                     description: Enable the router to only recieve the packets.Can be TRUE or FALSE.
                     type: boolean
+            type: object
+        IElephantFlowRemediationExemptionRule:
+            properties:
+                destinationNetworks:
+                    $ref: '#/components/schemas/INetworkObjectsContainer'
+                    type: object
+                destinationPorts:
+                    $ref: '#/components/schemas/IPortObjectsContainer'
+                    type: object
+                sourceNetworks:
+                    $ref: '#/components/schemas/INetworkObjectsContainer'
+                    type: object
+                sourcePorts:
+                    $ref: '#/components/schemas/IPortObjectsContainer'
+                    type: object
             type: object
         IEndPointDeviceType:
             properties:
@@ -182794,7 +184382,7 @@ components:
                     $ref: '#/components/schemas/SseProxyData'
                     type: object
                 threatScore:
-                    description: If AMP Cloud disposition is Unknown, override disposition based upon threat score (DISABLED, MEDIUM, HIGH, VERY_HIGH.
+                    description: If AMP Cloud disposition is Unknown, override disposition based upon threat score. Possible values are DISABLED, MEDIUM, HIGH, VERY_HIGH.
                     type: string
                 type:
                     description: Type must be FilePolicy.
@@ -185710,6 +187298,8 @@ components:
                     type: boolean
                 sslServer:
                     type: boolean
+                uztnaClient:
+                    type: boolean
             type: object
         IPPPoEContianer:
             properties:
@@ -186022,8 +187612,6 @@ components:
                 peerEndpointId:
                     type: string
                 peerType:
-                    type: string
-                topologyId:
                     type: string
             type: object
         IPendingDeviceRegInfo:
@@ -186888,6 +188476,33 @@ components:
                 - host
                 - secretKey
             type: object
+        IReadinessSummary:
+            properties:
+                cancelled:
+                    format: int32
+                    type: integer
+                completed:
+                    format: int32
+                    type: integer
+                failed:
+                    format: int32
+                    type: integer
+                inProgress:
+                    format: int32
+                    type: integer
+                notAnalysed:
+                    format: int32
+                    type: integer
+                notApplicable:
+                    format: int32
+                    type: integer
+                partialSuccess:
+                    format: int32
+                    type: integer
+                total:
+                    format: int32
+                    type: integer
+            type: object
         IReadonly:
             properties:
                 reason:
@@ -187362,7 +188977,23 @@ components:
                     type: string
                 entityType:
                     type: string
+                entityUUID:
+                    type: string
                 fieldName:
+                    type: string
+                type:
+                    type: string
+            type: object
+        IResynchronizeIdentityDevice:
+            properties:
+                id:
+                    type: string
+                links:
+                    $ref: '#/components/schemas/ILinks'
+                    type: object
+                name:
+                    type: string
+                type:
                     type: string
             type: object
         IRollbackDeviceListEntry:
@@ -187751,6 +189382,7 @@ components:
                         - BLOCK
                         - ALERT
                         - DISABLE
+                        - DISABLED
                         - DEFAULT
                         - PASS
                         - REJECT
@@ -187764,6 +189396,7 @@ components:
                         - BLOCK
                         - ALERT
                         - DISABLE
+                        - DISABLED
                         - DEFAULT
                         - PASS
                         - REJECT
@@ -187780,6 +189413,7 @@ components:
                         - BLOCK
                         - ALERT
                         - DISABLE
+                        - DISABLED
                         - DEFAULT
                         - PASS
                         - REJECT
@@ -188864,6 +190498,7 @@ components:
                         - SSP_EPM_BREAKOUT_DEPLOY
                         - DEVICE_EXPORT
                         - DEVICE_IMPORT
+                        - POLICY_IMPORT
                         - POLICY_EXPORT
                         - CHASSIS_REGISTRATION
                         - CHANGE_MANAGER
@@ -188900,6 +190535,8 @@ components:
                         - JOB_REPORT_GENERATION
                         - OBJECT_IMPORT
                         - PORT_OPERATION
+                        - DEPLOYMENT_READINESS
+                        - RESYNCHRONIZE_IDENTITY
                     type: string
                 type:
                     type: string
@@ -190582,6 +192219,8 @@ components:
                     type: integer
                 enableParentInterfaces:
                     type: boolean
+                enableSGTInlineForce:
+                    type: boolean
                 enableSGTPropagate:
                     type: boolean
                 enabled:
@@ -190691,6 +192330,8 @@ components:
             type: object
         InterfaceCapabilityInfo:
             properties:
+                autoSpeedDuplexSupported:
+                    type: boolean
                 breakfixSupportedOnPlatform:
                     type: boolean
                 bridgeGroupInterfaces:
@@ -191871,6 +193512,10 @@ components:
             additionalProperties:
                 type: string
             type: object
+        LLDevices:
+            additionalProperties:
+                type: string
+            type: object
         LLDevicesLastFetchTime:
             additionalProperties:
                 type: string
@@ -192225,6 +193870,14 @@ components:
                     type: integer
                 version:
                     type: string
+            type: object
+        LLInheritanceStates:
+            additionalProperties:
+                enum:
+                    - LOCKED_BY_PARENT
+                    - MANDATORY_ON_CHILD
+                    - UNRESTRICTED
+                type: string
             type: object
         LLInspectorConfig:
             additionalProperties:
@@ -192799,12 +194452,21 @@ components:
         MemoryHealthMetrics:
             description: Represents device memory metrics in percentage values.
             properties:
+                availableBytes:
+                    format: int32
+                    type: integer
                 linaUsageAvg:
                     type: number
                 snortUsageAvg:
                     type: number
                 systemUsageAvg:
                     type: number
+                totalBytes:
+                    format: int32
+                    type: integer
+                usedBytes:
+                    format: int32
+                    type: integer
             type: object
         Metadata:
             description: Defines read only details about the object - whether it is system defined, last user who modified the object etc.
@@ -192856,7 +194518,16 @@ components:
                         $ref: '#/components/schemas/BlockDetails'
                         type: object
                     type: array
+                blockDetailsUploadUrl:
+                    type: string
                 description:
+                    type: string
+                errorCode:
+                    enum:
+                        - SNAPSHOT_FAILED
+                        - ARCHIVE_FAILED
+                        - BLOCK_DETAILS_UPLOAD_FAILED
+                        - PART_UPLOAD_FAILED
                     type: string
                 errorMessage:
                     type: string
@@ -192872,6 +194543,15 @@ components:
                     type: object
                 name:
                     type: string
+                partUploadStatus:
+                    items:
+                        $ref: '#/components/schemas/PartUploadStatus'
+                        type: object
+                    type: array
+                partUploadUrls:
+                    items:
+                        type: string
+                    type: array
                 status:
                     enum:
                         - SUCCESS
@@ -192881,6 +194561,11 @@ components:
                 taskId:
                     type: string
                 type:
+                    type: string
+                uploadType:
+                    enum:
+                        - SINGLE
+                        - MULTIPART
                     type: string
                 uploadUrl:
                     type: string
@@ -195316,6 +197001,9 @@ components:
                         - OBJECT_IMPORT_IN_PROGRESS
                         - OBJECT_IMPORT_SUCCESS
                         - OBJECT_IMPORT_FAILED
+                        - DEPLOY_READINESS_IN_PROGRESS
+                        - DEPLOY_READINESS_COMPLETED
+                        - DEPLOY_READINESS_FAILED
                     type: string
                 readOnly:
                     $ref: '#/components/schemas/ReadOnly'
@@ -195766,6 +197454,22 @@ components:
                     format: int32
                     type: integer
             type: object
+        PartUploadStatus:
+            properties:
+                eTag:
+                    type: string
+                error:
+                    type: string
+                partNumber:
+                    format: int32
+                    type: integer
+                uploadResponseCode:
+                    format: int32
+                    type: integer
+                uploadSizeInBytes:
+                    format: int32
+                    type: integer
+            type: object
         PathMonitoredInterface:
             properties:
                 description:
@@ -195824,19 +197528,10 @@ components:
             type: object
         PeerSpecificCustomConfigEntry:
             properties:
-                activityId:
-                    format: int32
-                    type: integer
-                approvingActivityId:
-                    format: int32
-                    type: integer
                 customConfig:
                     type: string
                 customConfigType:
                     type: string
-                deviceId:
-                    format: int32
-                    type: integer
                 encoded:
                     type: boolean
                 id:
@@ -195851,9 +197546,6 @@ components:
                     type: integer
                 peerType:
                     type: string
-                topologyId:
-                    format: int32
-                    type: integer
                 type:
                     type: string
                 uuid:
@@ -195886,6 +197578,10 @@ components:
                     items:
                         type: string
                     type: array
+                lastUpdatedTime:
+                    description: Time when the entity was last updated.
+                    format: int32
+                    type: integer
                 links:
                     $ref: '#/components/schemas/ILinks'
                     type: object
@@ -195908,6 +197604,9 @@ components:
                         type: object
                     type: array
                 sourceEntityUUID:
+                    type: string
+                type:
+                    description: Concrete REST API object type that qualifies entityType when available.
                     type: string
                 valueAdded:
                     description: 'Values that were added compared to its other state. '
@@ -196063,6 +197762,13 @@ components:
                     $ref: '#/components/schemas/PagingContainer'
                     type: object
             type: object
+        PiaInfo:
+            properties:
+                orchestratorId:
+                    type: string
+                overallStatus:
+                    type: string
+            type: object
         PolicyAssignment:
             properties:
                 description:
@@ -196122,6 +197828,39 @@ components:
                 uptoDateDeviceCount:
                     format: int32
                     type: integer
+            type: object
+        PolicyImpactAnalyser:
+            properties:
+                description:
+                    type: string
+                enabled:
+                    type: boolean
+                id:
+                    type: string
+                links:
+                    $ref: '#/components/schemas/ILinks'
+                    type: object
+                metadata:
+                    $ref: '#/components/schemas/Metadata'
+                    type: object
+                name:
+                    type: string
+                type:
+                    type: string
+                version:
+                    type: string
+            type: object
+        PolicyImpactAnalyserListContainer:
+            properties:
+                items:
+                    $ref: '#/components/schemas/PolicyImpactAnalyser'
+                    type: array
+                links:
+                    $ref: '#/components/schemas/ILinks'
+                    type: object
+                paging:
+                    $ref: '#/components/schemas/PagingContainer'
+                    type: object
             type: object
         PolicyList:
             description: A policy list for use in a route map for Border Gateway Protocol (BGP).
@@ -197471,6 +199210,8 @@ components:
             description: Cisco Remote Automation Development Kit Service
             properties:
                 description:
+                    type: string
+                enrollmentStatus:
                     type: string
                 id:
                     description: RADKit Service ID.
@@ -199252,6 +200993,7 @@ components:
                         - SSP_EPM_BREAKOUT_DEPLOY
                         - DEVICE_EXPORT
                         - DEVICE_IMPORT
+                        - POLICY_IMPORT
                         - POLICY_EXPORT
                         - CHASSIS_REGISTRATION
                         - CHANGE_MANAGER
@@ -199288,9 +201030,63 @@ components:
                         - JOB_REPORT_GENERATION
                         - OBJECT_IMPORT
                         - PORT_OPERATION
+                        - DEPLOYMENT_READINESS
+                        - RESYNCHRONIZE_IDENTITY
                     type: string
                 type:
                     type: string
+            type: object
+        ResynchronizeIdentity:
+            description: Represents the resynchronize identity request that is used to resynchronize identities on the device
+            properties:
+                description:
+                    type: string
+                devices:
+                    description: List of devices for which the resynchronize identity request is to be triggered.
+                    items:
+                        $ref: '#/components/schemas/IResynchronizeIdentityDevice'
+                        type: object
+                    type: array
+                id:
+                    type: string
+                links:
+                    $ref: '#/components/schemas/ILinks'
+                    type: object
+                metadata:
+                    $ref: '#/components/schemas/ResynchronizeIdentityMetadata'
+                    description: Metadata section that contains the task status details with which user can track the progress
+                    type: object
+                name:
+                    type: string
+                type:
+                    description: Type of the model. This is always 'ResynchronizeIdentity'.
+                    type: string
+                version:
+                    type: string
+            type: object
+        ResynchronizeIdentityMetadata:
+            properties:
+                domain:
+                    $ref: '#/components/schemas/Domain'
+                    type: object
+                isLocked:
+                    type: boolean
+                lastUser:
+                    $ref: '#/components/schemas/MetadataUser'
+                    type: object
+                matches:
+                    items:
+                        type: string
+                    type: array
+                readOnly:
+                    $ref: '#/components/schemas/ReadOnly'
+                    type: object
+                task:
+                    $ref: '#/components/schemas/ITaskStatus'
+                    type: object
+                timestamp:
+                    format: int32
+                    type: integer
             type: object
         RetryUpgrade:
             description: This operation retries a failed upgrade.
@@ -199979,14 +201775,7 @@ components:
                     type: object
             type: object
         SIURLList:
-            description: Object representing a user-specified third-party list.
             properties:
-                description:
-                    description: Description of the Security Intelligence list.
-                    type: string
-                fileName:
-                    description: Name of the custom Security Intelligence URL list file as specified by user.
-                    type: string
                 id:
                     description: Unique identifier representing the Security Intelligence URL list.
                     type: string
@@ -199994,26 +201783,14 @@ components:
                     $ref: '#/components/schemas/ILinks'
                     description: Object containing links to this resource.
                     type: object
-                listType:
-                    format: int32
-                    type: integer
                 metadata:
                     $ref: '#/components/schemas/SIListMetadata'
-                    description: Object representing metadata attributes for the SIURLList object.
                     type: object
                 name:
                     description: Name of the Security Intelligence URL List object.
                     type: string
-                overridable:
-                    type: boolean
-                overrides:
-                    $ref: '#/components/schemas/IOverride'
-                    type: object
                 type:
                     description: Type must be SIURLList.
-                    type: string
-                version:
-                    description: Version number of the response object.
                     type: string
             type: object
         SIURLListListContainer:
@@ -200701,6 +202478,8 @@ components:
             type: object
         ServerVersion:
             properties:
+                biosVersion:
+                    type: string
                 description:
                     type: string
                 geoVersion:
@@ -200708,6 +202487,8 @@ components:
                 hostname:
                     type: string
                 id:
+                    type: string
+                latestHotfix:
                     type: string
                 links:
                     $ref: '#/components/schemas/ILinks'
@@ -200964,6 +202745,9 @@ components:
         SmartLicense:
             description: API's to trigger Smart License related operations like evaluation, registration, de-registration and Smart License operations on devices.
             properties:
+                confirmationCode:
+                    description: Confirmation code for license reservation. Only available when regMode is SLR or PLR.
+                    type: string
                 description:
                     description: More information about the Smart License.
                     type: string
@@ -200982,6 +202766,12 @@ components:
                     type: object
                 name:
                     description: Name of the Smart License.
+                    type: string
+                productInstance:
+                    description: Product instance identifier (UUID). Only available when regMode is SLR or PLR.
+                    type: string
+                regMode:
+                    description: 'Registration mode indicating how the license is registered. Possible values: SLR, PLR, CSSM, ON_PREM_SATELLITE.'
                     type: string
                 regStatus:
                     description: 'Current registration status of the Smart License. Possible values: REGISTERED, UNREGISTERED, RESERVATION_IN_PROGRESS, EVALUATION.'
@@ -201183,6 +202973,7 @@ components:
                         - BLOCK
                         - ALERT
                         - DISABLE
+                        - DISABLED
                         - DEFAULT
                         - PASS
                         - REJECT
@@ -201228,6 +203019,7 @@ components:
                         - BLOCK
                         - ALERT
                         - DISABLE
+                        - DISABLED
                         - DEFAULT
                         - PASS
                         - REJECT
@@ -201240,6 +203032,7 @@ components:
                         - BLOCK
                         - ALERT
                         - DISABLE
+                        - DISABLED
                         - DEFAULT
                         - PASS
                         - REJECT
@@ -201332,6 +203125,7 @@ components:
                         - BLOCK
                         - ALERT
                         - DISABLE
+                        - DISABLED
                         - DEFAULT
                         - PASS
                         - REJECT
@@ -201372,6 +203166,7 @@ components:
                         - BLOCK
                         - ALERT
                         - DISABLE
+                        - DISABLED
                         - DEFAULT
                         - PASS
                         - REJECT
@@ -201384,6 +203179,7 @@ components:
                         - BLOCK
                         - ALERT
                         - DISABLE
+                        - DISABLED
                         - DEFAULT
                         - PASS
                         - REJECT
@@ -202411,6 +204207,8 @@ components:
                     type: boolean
                 enableLoggingFailover:
                     type: boolean
+                enablePbrLogging:
+                    type: boolean
                 ftpServerInfo:
                     $ref: '#/components/schemas/FTPServerInformation'
                     type: object
@@ -202874,6 +204672,7 @@ components:
                         - SSP_EPM_BREAKOUT_DEPLOY
                         - DEVICE_EXPORT
                         - DEVICE_IMPORT
+                        - POLICY_IMPORT
                         - POLICY_EXPORT
                         - CHASSIS_REGISTRATION
                         - CHANGE_MANAGER
@@ -202910,6 +204709,8 @@ components:
                         - JOB_REPORT_GENERATION
                         - OBJECT_IMPORT
                         - PORT_OPERATION
+                        - DEPLOYMENT_READINESS
+                        - RESYNCHRONIZE_IDENTITY
                     type: string
                 type:
                     type: string
@@ -203203,6 +205004,9 @@ components:
                     items:
                         type: string
                     type: array
+                lastUpdatedTime:
+                    format: int32
+                    type: integer
                 links:
                     $ref: '#/components/schemas/ILinks'
                     type: object
@@ -203221,6 +205025,8 @@ components:
                         type: object
                     type: array
                 sourceEntityUUID:
+                    type: string
+                type:
                     type: string
                 valueAdded:
                     items:
@@ -205033,6 +206839,8 @@ components:
                 enableAntiSpoofing:
                     type: boolean
                 enableDNSLookup:
+                    type: boolean
+                enableSGTInlineForce:
                     type: boolean
                 enableSGTPropagate:
                     type: boolean
