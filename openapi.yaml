@@ -13369,6 +13369,7 @@ components:
                         - BIDIRECTIONAL_OBJECT_RECONCILIATION
                         - CALCULATE_FTD_PENDING_CHANGES
                         - CALCULATE_ASA_CONFIG_COMMANDS
+                        - REFRESH_FTD_DEPLOYABILITY
                     example: ONBOARD_ASA
                     type: string
                 transactionUid:
@@ -15306,7 +15307,7 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: CDFMC_MANAGED_FTD
+            example: ASA
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -15475,7 +15476,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         ExtendedNatRuleData:
@@ -20902,21 +20903,15 @@ components:
             type: object
         Summary:
             properties:
-                optimizablePercentage:
+                average:
                     format: double
                     type: number
-                redundantRules:
-                    format: int32
-                    type: integer
-                shadowedRules:
-                    format: int32
-                    type: integer
-                totalRules:
-                    format: int32
-                    type: integer
-                unhealthyRulesCount:
-                    format: int32
-                    type: integer
+                latest:
+                    format: double
+                    type: number
+                max:
+                    format: double
+                    type: number
             type: object
         SwitchPortConfig:
             description: Switchport configuration of the interface, which includes settings such as switchport mode, access VLAN, and trunk VLAN. This configuration is applicable for interfaces operating in switchport mode.
@@ -21512,6 +21507,15 @@ components:
                 errorMsg:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
+                    type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in Security Cloud Control.
+                    example: My Managed Tenant
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
                     type: string
                 name:
                     description: The name of the device.
