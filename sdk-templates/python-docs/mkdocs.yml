@@ -204,6 +204,7 @@ nav:
     - Event: Event.md
     - ExportInput: ExportInput.md
     - ExtendedNatRuleData: ExtendedNatRuleData.md
+    - FeatureFlag: FeatureFlag.md
     - FilterRegistration: FilterRegistration.md
     - FmcAccessPolicyReference: FmcAccessPolicyReference.md
     - FmcDeviceRecord: FmcDeviceRecord.md
