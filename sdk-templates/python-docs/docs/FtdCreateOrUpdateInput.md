@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**device_group_uuid** | **str** | Specify the unique identifier, represented as a UUID, of the device group to assign to this device. | [optional] 
 **device_type** | **str** | Specify the type of the FTD. The only supported type of FTD is CDFMC_MANAGED_FTD. | 
 **fmc_access_policy_uid** | **str** | Specify the unique identifier, represented as a UUID, of the FMC access policy to apply to this device. If this field is specified, the &#39;template&#39; field must remain unspecified. Exactly one of &#39;fmcAccessPolicyUid&#39; or &#39;template&#39; must be supplied. | [optional] 
 **ftd_hostname** | **str** | The FQDN or public IP of the FTD being registered to the cdFMC. This hostname must be accessible from the public internet, as the cdFMC will use it to initiate the connection to the FTD. Required when useCdFmcTriggeredRegistration is true; must not be specified otherwise. | [optional] 
