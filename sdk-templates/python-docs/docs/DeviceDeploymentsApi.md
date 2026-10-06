@@ -19,6 +19,7 @@ Method | HTTP request | Description
 [**get_deployment_run_transcript**](DeviceDeploymentsApi.md#get_deployment_run_transcript) | **GET** /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/transcript | (cdFMC-managed FTDs only) Get Deployment Run Transcript
 [**get_device_deployment_run**](DeviceDeploymentsApi.md#get_device_deployment_run) | **GET** /v1/inventory/devices/deployments/runs/{deploymentRunUid} | Get Device Deployment Run
 [**get_device_deployment_runs**](DeviceDeploymentsApi.md#get_device_deployment_runs) | **GET** /v1/inventory/devices/deployments/runs | Get Device Deployment Runs
+[**update_device_deployment_run**](DeviceDeploymentsApi.md#update_device_deployment_run) | **PATCH** /v1/inventory/devices/deployments/runs/{deploymentRunUid} | Update Device Deployment Run
 
 
 # **deploy_changes_to_multiple_asa_devices**
@@ -524,6 +525,92 @@ Name | Type | Description  | Notes
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_device_deployment_run**
+> DeploymentRunDto update_device_deployment_run(deployment_run_uid, deployment_run_patch_input)
+
+Update Device Deployment Run
+
+Update the notes and labels of a Device Deployment Run in the SCC Firewall Manager Tenant. Only `deploymentNotes` and `labels` can be updated; a request containing any other field is rejected with a 400 and the run is left unchanged. Fields omitted from the request are left unchanged, and fields set to `null` (or, for `deploymentNotes`, an empty string, and for `labels`, an object with no labels) are cleared. `labels` replaces the existing labels in full. A deployment run can be updated whatever its status, including while the deployment is in progress.
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.deployment_run_dto import DeploymentRunDto
+from scc_firewall_manager_sdk.models.deployment_run_patch_input import DeploymentRunPatchInput
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.DeviceDeploymentsApi(api_client)
+    deployment_run_uid = 'deployment_run_uid_example' # str | The unique identifier, represented as a UUID, of the device deployment Run in SCC Firewall Manager.
+    deployment_run_patch_input = scc_firewall_manager_sdk.DeploymentRunPatchInput() # DeploymentRunPatchInput | 
+
+    try:
+        # Update Device Deployment Run
+        api_response = api_instance.update_device_deployment_run(deployment_run_uid, deployment_run_patch_input)
+        print("The response of DeviceDeploymentsApi->update_device_deployment_run:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceDeploymentsApi->update_device_deployment_run: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_run_uid** | **str**| The unique identifier, represented as a UUID, of the device deployment Run in SCC Firewall Manager. | 
+ **deployment_run_patch_input** | [**DeploymentRunPatchInput**](DeploymentRunPatchInput.md)|  | 
+
+### Return type
+
+[**DeploymentRunDto**](DeploymentRunDto.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The updated Device Deployment Run object |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**404** | Entity not found. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

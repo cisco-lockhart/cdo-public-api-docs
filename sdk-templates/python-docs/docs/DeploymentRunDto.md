@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **deployer_username** | **str** | The name of the user performing the deploy. | [optional] 
+**deployment_notes** | **str** | Notes about the deployment run, provided when it was triggered or updated later. Omitted if the deployment run has no notes. | [optional] 
 **deployment_run_status** | **str** | The status of the deployment | [optional] 
 **deployment_type** | **str** | The type of the deployment. Searchable with values ASA_DEVICE_DEPLOY and FTD_DEVICE_DEPLOY. | [optional] 
 **description** | **str** | A human-readable description of this deployment. | [optional] 
@@ -15,6 +16,7 @@ Name | Type | Description | Notes
 **error_msg** | **str** | Error message if the deployment failed. | [optional] 
 **failure_reason** | **str** | The reason the deployment failed, if applicable. | [optional] 
 **ignore_warnings** | **bool** | Boolean indicating whether warnings identified by the deployment sub-system about this deployment were ignored. | [optional] 
+**labels** | [**Labels**](Labels.md) |  | [optional] 
 **last_updated_time** | **datetime** | Time (UTC; represented using the RFC-3339 standard) at which the deployment run was last updated. | [optional] 
 **name** | **str** | The name of the deployment run. Deployment runs names are unique in a tenant in SCC Firewall Manager. | [optional] 
 **submission_time** | **datetime** | Time (UTC; represented using the RFC-3339 standard) at which the deployment run was triggered. | [optional] 

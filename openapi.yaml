@@ -4330,6 +4330,49 @@ paths:
             summary: Get Device Deployment Run
             tags:
                 - Device Deployments
+        patch:
+            description: Update the notes and labels of a Device Deployment Run in the SCC Firewall Manager Tenant. Only `deploymentNotes` and `labels` can be updated; a request containing any other field is rejected with a 400 and the run is left unchanged. Fields omitted from the request are left unchanged, and fields set to `null` (or, for `deploymentNotes`, an empty string, and for `labels`, an object with no labels) are cleared. `labels` replaces the existing labels in full. A deployment run can be updated whatever its status, including while the deployment is in progress.
+            operationId: updateDeviceDeploymentRun
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device deployment Run in SCC Firewall Manager.
+                  in: path
+                  name: deploymentRunUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeploymentRunPatchInput'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeploymentRunDto'
+                    description: The updated Device Deployment Run object
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Update Device Deployment Run
+            tags:
+                - Device Deployments
     /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/changes:
         get:
             description: Get the changes that were deployed to a device as part of a deployment run. Changes are represented differently for FTDs and ASAs. For FTDs, this endpoint returns one item per changed entity describing what changed. For ASAs, this endpoint returns the initial configuration, and the configuration that was deployed to the device. The `deploymentType` field on each item identifies which shape it is. If the deployment failed, the changes returned are the changes that were attempted.
@@ -12894,6 +12937,8 @@ components:
                 forceDeployUnsupportedCommands:
                     description: 'Force-deploy changes that cannot be applied incrementally. When false (the default), these changes are skipped and the rest of the deployment proceeds. When true, SCC Firewall Manager applies the full configuration to the device to deploy them. Warning: applying the full configuration drops all active connections to the device. Enable this only when you intend to accept that disruption.'
                     type: boolean
+                labels:
+                    $ref: '#/components/schemas/Labels'
             required:
                 - deviceUids
             type: object
@@ -14066,10 +14111,10 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+            description: The completion status of the upgrade on the device.
             properties:
                 completedAt:
-                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
+                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
                     example: 2026-04-15T18:00:10.123Z
                     format: date-time
                     type: string
@@ -14077,7 +14122,7 @@ components:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -14088,12 +14133,12 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: The percentage completion of the current task being performed
+                    description: Percentage completion of the current task being performed.
                     format: double
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices in the Security Cloud Control tenant.
+            description: The distinct config states for the devices managed by the MSP Portal.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -14110,7 +14155,7 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
+            description: The distinct conflict detection states for the devices managed by the MSP Portal.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
@@ -14128,7 +14173,7 @@ components:
                     type: array
             type: object
         ConnectivityState:
-            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
+            description: The distinct connectivity states for the devices managed by the MSP Portal.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -14139,7 +14184,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
+            description: The type of the connector that will be used to communicate with the device.
             enum:
                 - SDC
                 - CDG
@@ -14291,6 +14336,10 @@ components:
                     description: The name of the user performing the deploy.
                     example: john.doe@example.com
                     type: string
+                deploymentNotes:
+                    description: Notes about the deployment run, provided when it was triggered or updated later. Omitted if the deployment run has no notes.
+                    example: 'Quarterly policy refresh approved under change ticket #12345.'
+                    type: string
                 deploymentRunStatus:
                     description: The status of the deployment
                     enum:
@@ -14351,6 +14400,8 @@ components:
                 ignoreWarnings:
                     description: Boolean indicating whether warnings identified by the deployment sub-system about this deployment were ignored.
                     type: boolean
+                labels:
+                    $ref: '#/components/schemas/Labels'
                 lastUpdatedTime:
                     description: Time (UTC; represented using the RFC-3339 standard) at which the deployment run was last updated.
                     example: 2023-12-13T08:15:44Z
@@ -14398,6 +14449,17 @@ components:
                     example: 0
                     format: int32
                     type: integer
+            type: object
+        DeploymentRunPatchInput:
+            description: Fields to update on a deployment run. Only `deploymentNotes` and `labels` can be updated; a request containing any other field is rejected. Fields omitted from the request are left unchanged. Set a field to `null` (or, for `deploymentNotes`, an empty string, and for `labels`, an object with no labels) to clear it.
+            properties:
+                deploymentNotes:
+                    description: The notes for the deployment run. Omit to leave unchanged; set to `null` or an empty string to clear.
+                    example: 'Rolled back on 2026-10-02 under ticket #12345.'
+                    nullable: true
+                    type: string
+                labels:
+                    $ref: '#/components/schemas/Labels'
             type: object
         DeploymentRunTranscriptDto:
             properties:
@@ -15182,7 +15244,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The distinct device roles for the devices in the Security Cloud Control tenant.
+            description: The roles that this device performs on the network.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -15190,19 +15252,63 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
+            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
-            description: The current status of each device in the upgrade run.
+            description: Set of device UIDs that are part of this upgrade run.
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+                    description: The completion status of the upgrade on the device.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                uid:
-                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+                hardwareModel:
+                    description: Hardware model of the devices being upgraded.
+                    example: Firepower 2110
+                    type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: Name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantUid:
+                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    format: uuid
+                    type: string
+                name:
+                    description: Name of the device being upgraded.
+                    example: my-firepower
+                    type: string
+                softwareVersionBeforeUpgrade:
+                    description: Software version of the device before the upgrade.
+                    example: 7.2.3
+                    type: string
+                transactionUid:
+                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, of the device being upgraded.
+                    format: uuid
+                    type: string
+                upgradeRunStatus:
+                    description: Current status of the upgrade run.
+                    enum:
+                        - IN_PROGRESS
+                        - REBUILDING_UPGRADE_CACHE
+                        - PERFORMING_UPGRADE
+                        - UPLOADING_IMAGE
+                        - PERFORMING_READINESS_CHECK
+                        - UPGRADE_STAGED
+                        - UPGRADE_STAGING_FAILED
+                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_COMPLETED
+                        - UPGRADE_FAILED
+                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -16066,6 +16172,8 @@ components:
                     default: false
                     description: 'Specify whether to ignore warnings generated during the pre-validation of the deployment job and proceed with the deployment regardless. **Warning**: Do not set this to `true` unless you know what you are doing.'
                     type: boolean
+                labels:
+                    $ref: '#/components/schemas/Labels'
             type: object
         FtdOnboardingTemplateConfiguration:
             description: Specify the template to apply to this device. If this field is specified, the 'fmcAccessPolicyUid' field must remain unspecified. Exactly one of 'fmcAccessPolicyUid' or 'template' must be supplied.
@@ -16636,7 +16744,6 @@ components:
             type: object
         Labels:
             description: Labels used to identify/tag Security Cloud Control entities.
-            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -20980,15 +21087,21 @@ components:
             type: object
         Summary:
             properties:
-                average:
+                optimizablePercentage:
                     format: double
                     type: number
-                latest:
-                    format: double
-                    type: number
-                max:
-                    format: double
-                    type: number
+                redundantRules:
+                    format: int32
+                    type: integer
+                shadowedRules:
+                    format: int32
+                    type: integer
+                totalRules:
+                    format: int32
+                    type: integer
+                unhealthyRulesCount:
+                    format: int32
+                    type: integer
             type: object
         SwitchPortConfig:
             description: Switchport configuration of the interface, which includes settings such as switchport mode, access VLAN, and trunk VLAN. This configuration is applicable for interfaces operating in switchport mode.
@@ -21732,7 +21845,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: The role of the user this token belongs to. The user can be API-only or a human.
+            description: Roles associated with this user in Security Cloud Control.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -21743,6 +21856,7 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
+            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.

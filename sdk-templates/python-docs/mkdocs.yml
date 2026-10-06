@@ -161,6 +161,7 @@ nav:
     - Deployed: Deployed.md
     - DeploymentRunDto: DeploymentRunDto.md
     - DeploymentRunDtoPage: DeploymentRunDtoPage.md
+    - DeploymentRunPatchInput: DeploymentRunPatchInput.md
     - DeploymentRunTranscriptDto: DeploymentRunTranscriptDto.md
     - DestinationDynamicObjectContent: DestinationDynamicObjectContent.md
     - DestinationNetworkContent: DestinationNetworkContent.md

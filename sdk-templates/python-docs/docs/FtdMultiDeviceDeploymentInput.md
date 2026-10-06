@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **devices** | [**List[FtdSingleDeviceDeploymentInput]**](FtdSingleDeviceDeploymentInput.md) | Per-device deployment configuration. Cannot be combined with the deprecated &#x60;deviceUids&#x60; field. Each entry identifies a device and optionally selects which policy types to deploy. Set &#x60;selectedPolicyTypes&#x60; to null or include FULL_DEPLOY to perform a full deployment for that device. Each entry must have a unique uid. | [optional] 
 **effective_device_uids** | **List[str]** |  | [optional] 
 **ignore_warnings** | **bool** | Specify whether to ignore warnings generated during the pre-validation of the deployment job and proceed with the deployment regardless. **Warning**: Do not set this to &#x60;true&#x60; unless you know what you are doing. | [optional] [default to False]
+**labels** | [**Labels**](Labels.md) |  | [optional] 
 
 ## Example
 
