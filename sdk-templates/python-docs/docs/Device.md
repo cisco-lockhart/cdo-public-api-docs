@@ -38,6 +38,7 @@ Name | Type | Description | Notes
 **ftd_performance_tier** | **str** | (FTDvs only) The FTDv supports performance-tiered licensing that provides different throughput levels and VPN connection limits based on deployment requirements. This field specifies the performance tier of the FTD. | [optional] 
 **geo_db_version** | **str** | (FMC device managers only) The version of the Cisco geolocation database (GeoDB). | [optional] 
 **hardware_model** | **str** | (ASAs, FDM-managed FTDs, and FMC-managed FTDs only) The hardware model of the device. Filtering on cdFMC-managed FTDs requires the human-readable form (e.g. \&quot;Cisco Firepower 2100 Threat Defense\&quot;). On-prem FMC-managed FTDs are not filterable on this field. | [optional] 
+**is_deployable** | **bool** | (cdFMC-managed FTDs only) Indicates whether the cloud-delivered FMC reports pending changes that can be deployed to the device. **Note**: this indicator is not necessarily up to date. It reflects the cdFMC deployability state as of the last time Security Cloud Control refreshed it, not the live state on the cdFMC. In particular, deployments triggered directly using the cdFMC APIs do not update it. Devices for which no deployability state has been recorded yet match neither &#x60;isDeployable:true&#x60; nor &#x60;isDeployable:false&#x60;. | [optional] 
 **labels** | [**Labels**](Labels.md) |  | [optional] 
 **license_status** | **str** | The license status of the device. | [optional] 
 **meraki_deployment_mode** | [**MerakiDeploymentMode**](MerakiDeploymentMode.md) |  | [optional] 
