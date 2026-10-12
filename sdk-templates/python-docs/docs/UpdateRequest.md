@@ -5,7 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cd_fmc_labels** | [**List[LabelDefinitionReference]**](LabelDefinitionReference.md) | cdFMC label references; null leaves existing labels unchanged | [optional] 
 **description** | **str** | The description of the object | [optional] 
 **ignore_duplicates** | **bool** | Ignore duplicate issues on this object | [optional] 
 **ignore_unused_issues** | **bool** | Ignore unused issues on this object | [optional] 

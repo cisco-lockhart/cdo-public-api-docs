@@ -6,7 +6,6 @@ The list of objects retrieved.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**assigned_labels** | [**List[LabelDefinitionReference]**](LabelDefinitionReference.md) |  | [optional] 
 **description** | **str** |  | [optional] 
 **issues** | [**IssuesDto**](IssuesDto.md) |  | [optional] 
 **labels** | **List[str]** |  | [optional] 

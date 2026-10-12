@@ -5,7 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cd_fmc_labels** | [**List[LabelDefinitionReference]**](LabelDefinitionReference.md) | cdFMC label references; UUIDs are stored on the object as labels | [optional] 
 **description** | **str** | The human-readable description of the object | [optional] 
 **labels** | **List[str]** | The labels for the object | [optional] 
 **name** | **str** | The name of the object | 
