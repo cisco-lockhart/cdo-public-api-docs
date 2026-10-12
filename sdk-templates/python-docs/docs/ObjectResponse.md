@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**assigned_labels** | [**List[LabelDefinitionReference]**](LabelDefinitionReference.md) | Source-owned label assignments for display | [optional] [readonly] 
 **description** | **str** | The human-readable description of the object | [optional] 
 **elements** | **List[str]** | A flattened list of the content value of the object | [optional] 
 **issues** | [**IssuesDto**](IssuesDto.md) |  | [optional] 

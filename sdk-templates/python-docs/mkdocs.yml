@@ -260,6 +260,7 @@ nav:
     - JspConfigDescriptor: JspConfigDescriptor.md
     - JspPropertyGroupDescriptor: JspPropertyGroupDescriptor.md
     - JwkSet: JwkSet.md
+    - LabelDefinitionReference: LabelDefinitionReference.md
     - Labels: Labels.md
     - LinkState: LinkState.md
     - ListObjectResponse: ListObjectResponse.md
