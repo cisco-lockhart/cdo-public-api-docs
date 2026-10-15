@@ -174,6 +174,275 @@ paths:
             summary: Get latest NAT policy analysis summary
             tags:
                 - Policy Analysis and Optimization
+    /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-plan-executions:
+        post:
+            description: This is an asynchronous operation to apply the saved NAT remediation plan for one analysis insight. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+            operationId: applyNatRemediationActions
+            parameters:
+                - in: path
+                  name: insightUid
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Transaction details to poll for remediation completion
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "409":
+                    $ref: '#/components/responses/http409Conflict'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Create NAT Remediation Plan Execution
+            tags:
+                - NAT Remediation APIs
+            x-in-dev: "true"
+    /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-plans:
+        get:
+            description: Returns the saved NAT remediation plan for one analysis insight.
+            operationId: getNatRemediationActions
+            parameters:
+                - in: path
+                  name: insightUid
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RemediationActionsDto'
+                    description: Successfully retrieved remediation plan
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get NAT Remediation Plan
+            tags:
+                - NAT Remediation APIs
+            x-in-dev: "true"
+        put:
+            description: Creates or replaces a NAT remediation plan for one analysis insight. Computed count fields in the request are ignored and returned from the saved rule-level actions.
+            operationId: modifyNatRemediationActions
+            parameters:
+                - in: path
+                  name: insightUid
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/RemediationActionsDto'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RemediationActionsDto'
+                    description: Successfully saved remediation plan
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "409":
+                    $ref: '#/components/responses/http409Conflict'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Modify NAT Remediation Plan
+            tags:
+                - NAT Remediation APIs
+            x-in-dev: "true"
+    /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-reports:
+        get:
+            description: Returns terminal, versioned NAT remediation reports for the insight, ordered by version from newest to oldest.
+            operationId: getRemediationReports
+            parameters:
+                - in: path
+                  name: insightUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: Maximum number of remediation reports to return.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: 10
+                    maximum: 200
+                    minimum: 0
+                    type: integer
+                - description: Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RemediationReportPage'
+                    description: Successfully retrieved NAT remediation reports
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get NAT Remediation Reports
+            tags:
+                - NAT Remediation Report APIs
+            x-in-dev: "true"
+    /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-reports/{version}:
+        get:
+            description: Returns one terminal NAT remediation report for the insight and positive report version.
+            operationId: getRemediationReportByVersion
+            parameters:
+                - in: path
+                  name: insightUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: Positive remediation report version.
+                  in: path
+                  name: version
+                  required: true
+                  schema:
+                    format: int64
+                    minimum: 1
+                    type: integer
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RemediationReportDto'
+                    description: Successfully retrieved the NAT remediation report
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get NAT Remediation Report by Version
+            tags:
+                - NAT Remediation Report APIs
+            x-in-dev: "true"
+    /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-reports/latest:
+        get:
+            description: Returns the latest terminal, versioned NAT remediation report for the insight.
+            operationId: getLatestRemediationReport
+            parameters:
+                - in: path
+                  name: insightUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RemediationReportDto'
+                    description: Successfully retrieved the latest NAT remediation report
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get Latest NAT Remediation Report
+            tags:
+                - NAT Remediation Report APIs
+            x-in-dev: "true"
     /v1/agenticops/policies/nat/analysis/insights/{insightsUid}/details:
         get:
             description: Gets rule-level conflict data for the specified NAT policy analysis. Each item includes the `hasShadowedRules` and `hasRedundantRules` fields, which indicate whether the conflicting rules are shadowed or redundant, respectively. If there are no conflicts, an empty page is returned.
@@ -14113,13 +14382,8 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+            description: The completion status of the deployment on the device.
             properties:
-                completedAt:
-                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
-                    example: 2026-04-15T18:00:10.123Z
-                    format: date-time
-                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
@@ -14140,7 +14404,7 @@ components:
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices managed by the MSP Portal.
+            description: The distinct config states for the devices in the Security Cloud Control tenant.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -14157,7 +14421,7 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices managed by the MSP Portal.
+            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
@@ -14175,7 +14439,7 @@ components:
                     type: array
             type: object
         ConnectivityState:
-            description: The distinct connectivity states for the devices managed by the MSP Portal.
+            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -14186,7 +14450,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device.
+            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
             enum:
                 - SDC
                 - CDG
@@ -15250,7 +15514,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The roles that this device performs on the network.
+            description: The distinct device roles for the devices in the Security Cloud Control tenant.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -15258,20 +15522,62 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
-            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
-            description: The current status of each device in the upgrade run.
+            description: Set of device UIDs that are part of this upgrade run.
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+                    description: The completion status of the upgrade on the device.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                uid:
-                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+                hardwareModel:
+                    description: Hardware model of the devices being upgraded.
+                    example: Firepower 2110
+                    type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: Name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantUid:
+                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    format: uuid
+                    type: string
+                name:
+                    description: Name of the device being upgraded.
+                    example: my-firepower
+                    type: string
+                softwareVersionBeforeUpgrade:
+                    description: Software version of the device before the upgrade.
+                    example: 7.2.3
+                    type: string
+                transactionUid:
+                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, of the device being upgraded.
+                    format: uuid
+                    type: string
+                upgradeRunStatus:
+                    description: Current status of the upgrade run.
+                    enum:
+                        - IN_PROGRESS
+                        - REBUILDING_UPGRADE_CACHE
+                        - PERFORMING_UPGRADE
+                        - UPLOADING_IMAGE
+                        - PERFORMING_READINESS_CHECK
+                        - UPGRADE_STAGED
+                        - UPGRADE_STAGING_FAILED
+                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_COMPLETED
+                        - UPGRADE_FAILED
+                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -16707,6 +17013,7 @@ components:
             type: object
         Labels:
             description: Labels used to identify/tag Security Cloud Control entities.
+            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -19330,6 +19637,29 @@ components:
                 value:
                     $ref: '#/components/schemas/SharedObjectValue'
             type: object
+        ObservationRemediationActionDto:
+            description: Action selection for one rule-conflict observation.
+            properties:
+                action:
+                    description: Remediation action type to be applied for observation level remediation.
+                    enum:
+                        - DELETE
+                        - DISABLE
+                    example: DELETE
+                    type: string
+                observationId:
+                    description: Rule conflict observation identifier.
+                    example: observation-1
+                    minLength: 1
+                    type: string
+                ruleActions:
+                    description: Optional rule-level remediation actions. When non-empty, these actions are authoritative.
+                    items:
+                        $ref: '#/components/schemas/RuleRemediationActionDto'
+                    type: array
+            required:
+                - observationId
+            type: object
         OnPremFmcInfo:
             description: (Devices managed by on-prem FMC only) Information on the on-prem FMC managing this device.
             properties:
@@ -19420,6 +19750,29 @@ components:
                     description: The list of items retrieved.
                     items:
                         $ref: '#/components/schemas/PolicyAnalysisData'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
+        PageRemediationReportDto:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/RemediationReportDto'
                     type: array
                 limit:
                     description: The number of results retrieved.
@@ -19895,6 +20248,109 @@ components:
                     format: uuid
                     type: string
             type: object
+        RemediationActionsDto:
+            description: NAT policy remediation actions selected for an insight.
+            properties:
+                insightUid:
+                    description: Insight UID that owns the remediation action selection.
+                    example: ed189db6-3c46-463f-9615-72230044be2a
+                    type: string
+                redundantRulesActionList:
+                    description: Actions selected for redundant NAT rule conflicts.
+                    items:
+                        $ref: '#/components/schemas/ObservationRemediationActionDto'
+                    type: array
+                shadowedRulesActionList:
+                    description: Actions selected for shadowed NAT rule conflicts.
+                    items:
+                        $ref: '#/components/schemas/ObservationRemediationActionDto'
+                    type: array
+                totalDeletedCount:
+                    description: Total number of rules selected for deletion.
+                    example: 2
+                    format: int32
+                    readOnly: true
+                    type: integer
+                totalDisabledCount:
+                    description: Total number of rules selected for disablement.
+                    example: 1
+                    format: int32
+                    readOnly: true
+                    type: integer
+            type: object
+        RemediationReportDto:
+            description: Details of one terminal NAT remediation report.
+            properties:
+                completedAt:
+                    description: Time the remediation reached its final status, in UTC (RFC 3339).
+                    example: 2026-10-08T10:02:00Z
+                    format: date-time
+                    type: string
+                remediationJobUid:
+                    description: Identifier of the remediation job, useful for support and troubleshooting.
+                    example: ed189db6-3c46-463f-9615-72230044be2a
+                    format: uuid
+                    type: string
+                reportUrl:
+                    description: Download URL for the remediation PDF. Expires 30 minutes after generation; retrieve the report again to obtain a fresh URL. Null when no PDF is recorded for this attempt.
+                    example: https://example.com/remediation-report.pdf?signature=example
+                    format: uri
+                    nullable: true
+                    type: string
+                startedAt:
+                    description: Time the remediation started, in UTC (RFC 3339). Omitted if unavailable.
+                    example: 2026-10-08T10:00:00Z
+                    format: date-time
+                    type: string
+                status:
+                    description: Final status of the remediation attempt.
+                    enum:
+                        - QUEUED
+                        - RUNNING
+                        - COMPLETED
+                        - PARTIAL_SUCCESS
+                        - FAILED
+                        - FAILED_IN_ACQUIRING_LOCK
+                        - COMPLETED
+                        - PARTIAL_SUCCESS
+                        - FAILED
+                        - FAILED_IN_ACQUIRING_LOCK
+                    example: COMPLETED
+                    type: string
+                triggeredBy:
+                    description: Username of the user who initiated the remediation.
+                    example: user@example.com
+                    type: string
+                version:
+                    description: Positive remediation-attempt version within the insight.
+                    example: 3
+                    format: int64
+                    minimum: 1
+                    type: integer
+            type: object
+        RemediationReportPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/RemediationReportDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
         RuleConflictsData:
             description: Rule Conflicts Data holding original rule and conflicting rules.
             properties:
@@ -19934,6 +20390,25 @@ components:
                     example: 0
                     format: int32
                     type: integer
+            type: object
+        RuleRemediationActionDto:
+            description: Action selection for one NAT rule.
+            properties:
+                action:
+                    description: Authoritative remediation action for this NAT rule.
+                    enum:
+                        - DELETE
+                        - DISABLE
+                    example: DISABLE
+                    type: string
+                ruleId:
+                    description: NAT rule identifier.
+                    example: ed189db6-3c46-463f-9615-72230044be2a
+                    minLength: 1
+                    type: string
+            required:
+                - action
+                - ruleId
             type: object
         RuleTimeRangeContent:
             description: The optional time range for which the access rule is active.
@@ -21055,15 +21530,21 @@ components:
             type: object
         Summary:
             properties:
-                average:
+                optimizablePercentage:
                     format: double
                     type: number
-                latest:
-                    format: double
-                    type: number
-                max:
-                    format: double
-                    type: number
+                redundantRules:
+                    format: int32
+                    type: integer
+                shadowedRules:
+                    format: int32
+                    type: integer
+                totalRules:
+                    format: int32
+                    type: integer
+                unhealthyRulesCount:
+                    format: int32
+                    type: integer
             type: object
         SwitchPortConfig:
             description: Switchport configuration of the interface, which includes settings such as switchport mode, access VLAN, and trunk VLAN. This configuration is applicable for interfaces operating in switchport mode.
@@ -21660,6 +22141,15 @@ components:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
                     type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in Security Cloud Control.
+                    example: My Managed Tenant
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
                 name:
                     description: The name of the device.
                     example: asa-fw-01
@@ -21798,7 +22288,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: Roles associated with this user in Security Cloud Control.
+            description: The role of the user this token belongs to. The user can be API-only or a human.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -21809,7 +22299,6 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
-            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.

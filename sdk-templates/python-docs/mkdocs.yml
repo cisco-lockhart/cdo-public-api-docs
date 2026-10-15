@@ -49,6 +49,8 @@ nav:
     - MSPTenantManagementApi: MSPTenantManagementApi.md
     - MSPUserManagementApi: MSPUserManagementApi.md
     - MetaApi: MetaApi.md
+    - NATRemediationAPIsApi: NATRemediationAPIsApi.md
+    - NATRemediationReportAPIsApi: NATRemediationReportAPIsApi.md
     - ObjectManagementApi: ObjectManagementApi.md
     - PolicyAnalysisAndOptimizationApi: PolicyAnalysisAndOptimizationApi.md
     - RemoteAccessMonitoringApi: RemoteAccessMonitoringApi.md
@@ -361,12 +363,14 @@ nav:
     - ObjectContent: ObjectContent.md
     - ObjectData: ObjectData.md
     - ObjectResponse: ObjectResponse.md
+    - ObservationRemediationActionDto: ObservationRemediationActionDto.md
     - OnPremFmcInfo: OnPremFmcInfo.md
     - OriginalRule: OriginalRule.md
     - Override: Override.md
     - Page: Page.md
     - PageCompatibleSecureClientVersionDto: PageCompatibleSecureClientVersionDto.md
     - PagePolicyAnalysisData: PagePolicyAnalysisData.md
+    - PageRemediationReportDto: PageRemediationReportDto.md
     - PageRuleConflictsData: PageRuleConflictsData.md
     - PageSecureClientPackageDto: PageSecureClientPackageDto.md
     - PageTaskDto: PageTaskDto.md
@@ -391,9 +395,13 @@ nav:
     - RedirectView: RedirectView.md
     - Reference: Reference.md
     - ReferenceInfo: ReferenceInfo.md
+    - RemediationActionsDto: RemediationActionsDto.md
+    - RemediationReportDto: RemediationReportDto.md
+    - RemediationReportPage: RemediationReportPage.md
     - RemoteReadinessResult: RemoteReadinessResult.md
     - RuleConflictsData: RuleConflictsData.md
     - RuleConflictsDataPage: RuleConflictsDataPage.md
+    - RuleRemediationActionDto: RuleRemediationActionDto.md
     - RuleTimeRangeContent: RuleTimeRangeContent.md
     - S2sVpnTunnelHealthMetrics: S2sVpnTunnelHealthMetrics.md
     - Sdc: Sdc.md
