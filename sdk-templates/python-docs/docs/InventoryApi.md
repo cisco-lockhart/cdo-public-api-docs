@@ -16,7 +16,7 @@ Method | HTTP request | Description
 [**bulk_accept_asa_certificates**](InventoryApi.md#bulk_accept_asa_certificates) | **POST** /v1/inventory/devices/asas/acceptCert | Accept certificates for multiple ASA devices
 [**bulk_read_asa_device_configurations**](InventoryApi.md#bulk_read_asa_device_configurations) | **POST** /v1/inventory/devices/asas/read | Read configurations for multiple ASA devices
 [**calculate_asa_commands_to_apply_pending_changes**](InventoryApi.md#calculate_asa_commands_to_apply_pending_changes) | **POST** /v1/inventory/devices/asas/{deviceUid}/changes/pending/commands | Calculate the commands that will be executed on the ASA to apply the pending changes on the device
-[**calculate_ftd_device_pending_changes**](InventoryApi.md#calculate_ftd_device_pending_changes) | **POST** /v1/inventory/devices/ftds/{deviceUid}/changes/pending | Calculate pending changes on a cdFMC-managed FTD
+[**calculate_ftd_device_pending_changes**](InventoryApi.md#calculate_ftd_device_pending_changes) | **POST** /v1/inventory/devices/ftds/{deviceUid}/changes/pending | Calculate pending changes on a cdFMC-managed FTD or chassis
 [**create_duo_admin_panel**](InventoryApi.md#create_duo_admin_panel) | **POST** /v1/inventory/devices/duoAdminPanels | Onboard Duo Admin Panel
 [**create_ftd_device**](InventoryApi.md#create_ftd_device) | **POST** /v1/inventory/devices/ftds | Onboard FTD device
 [**delete_cd_fmc_managed_ftd_device**](InventoryApi.md#delete_cd_fmc_managed_ftd_device) | **POST** /v1/inventory/devices/ftds/cdfmcManaged/{deviceUid}/delete | Delete cdFMC managed FTD device
@@ -44,7 +44,7 @@ Method | HTTP request | Description
 [**get_devices**](InventoryApi.md#get_devices) | **GET** /v1/inventory/devices | Get Devices
 [**get_devices_attribute_values**](InventoryApi.md#get_devices_attribute_values) | **GET** /v1/inventory/devices/attribute-values | Get distinct attribute values for devices
 [**get_fmc_health**](InventoryApi.md#get_fmc_health) | **GET** /v1/inventory/managers/{fmcUid}/health/metrics | Get health metrics on devices managed by the FMC (cdFMC only)
-[**get_ftd_device_pending_changes**](InventoryApi.md#get_ftd_device_pending_changes) | **GET** /v1/inventory/devices/ftds/{deviceUid}/changes/pending | Get pending changes on a cdFMC-managed FTD
+[**get_ftd_device_pending_changes**](InventoryApi.md#get_ftd_device_pending_changes) | **GET** /v1/inventory/devices/ftds/{deviceUid}/changes/pending | Get pending changes on a cdFMC-managed FTD or chassis
 [**get_template_device**](InventoryApi.md#get_template_device) | **GET** /v1/inventory/templates/{templateDeviceUid} | Get Template Device
 [**get_template_devices**](InventoryApi.md#get_template_devices) | **GET** /v1/inventory/templates | Get Template Devices
 [**modify_cloud_service**](InventoryApi.md#modify_cloud_service) | **PATCH** /v1/inventory/services/{cloudServiceUid} | Modify Cloud Service
@@ -311,9 +311,9 @@ Name | Type | Description  | Notes
 # **calculate_ftd_device_pending_changes**
 > CdoTransaction calculate_ftd_device_pending_changes(device_uid)
 
-Calculate pending changes on a cdFMC-managed FTD
+Calculate pending changes on a cdFMC-managed FTD or chassis
 
-This is an asynchronous operation to calculate the pending changes on a cdFMC-managed FTD. Note: if there is no deployment baseline available to compare the current state of the device against, an empty list will be returned.
+This is an asynchronous operation to calculate the pending changes on a cdFMC-managed FTD or chassis. Note: if there is no deployment baseline available to compare the current state of the device against, an empty list will be returned.
 
 ### Example
 
@@ -345,10 +345,10 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.InventoryApi(api_client)
-    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control.
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the cdFMC-managed FTD or chassis in Security Cloud Control.
 
     try:
-        # Calculate pending changes on a cdFMC-managed FTD
+        # Calculate pending changes on a cdFMC-managed FTD or chassis
         api_response = api_instance.calculate_ftd_device_pending_changes(device_uid)
         print("The response of InventoryApi->calculate_ftd_device_pending_changes:\n")
         pprint(api_response)
@@ -363,7 +363,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_uid** | **str**| The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control. | 
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the cdFMC-managed FTD or chassis in Security Cloud Control. | 
 
 ### Return type
 
@@ -2631,9 +2631,9 @@ Name | Type | Description  | Notes
 # **get_ftd_device_pending_changes**
 > FtdChangeItemDto get_ftd_device_pending_changes(device_uid)
 
-Get pending changes on a cdFMC-managed FTD
+Get pending changes on a cdFMC-managed FTD or chassis
 
-Get the pending changes on a cdFMC-managed FTD. Note 1: if there is no deployment baseline available to compare the current state of the device against, an empty list will be returned. Note 2: This is not a paginated endpoint.
+Get the pending changes on a cdFMC-managed FTD or chassis. Note 1: if there is no deployment baseline available to compare the current state of the device against, an empty list will be returned. Note 2: This is not a paginated endpoint.
 
 ### Example
 
@@ -2665,10 +2665,10 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.InventoryApi(api_client)
-    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control.
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the cdFMC-managed FTD or chassis in Security Cloud Control.
 
     try:
-        # Get pending changes on a cdFMC-managed FTD
+        # Get pending changes on a cdFMC-managed FTD or chassis
         api_response = api_instance.get_ftd_device_pending_changes(device_uid)
         print("The response of InventoryApi->get_ftd_device_pending_changes:\n")
         pprint(api_response)
@@ -2683,7 +2683,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_uid** | **str**| The unique identifier, represented as a UUID, of the cdFMC managed FTD device in Security Cloud Control. | 
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the cdFMC-managed FTD or chassis in Security Cloud Control. | 
 
 ### Return type
 
@@ -2702,7 +2702,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | List of pending changes on a cdFMC-managed FTD |  -  |
+**200** | List of pending changes on a cdFMC-managed FTD or chassis |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **404** | Entity not found. |  -  |

@@ -14,9 +14,9 @@ UAE | https://api.uae.security.cisco.com/firewall
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**deploy_changes_to_multiple_asa_devices**](DeviceDeploymentsApi.md#deploy_changes_to_multiple_asa_devices) | **POST** /v1/inventory/devices/asas/deploy | Deploy changes to multiple ASA devices
-[**deploy_changes_to_multiple_ftd_devices**](DeviceDeploymentsApi.md#deploy_changes_to_multiple_ftd_devices) | **POST** /v1/inventory/devices/ftds/deploy | (cdFMC-managed FTDs only) Deploy changes to multiple FTD devices
+[**deploy_changes_to_multiple_ftd_devices**](DeviceDeploymentsApi.md#deploy_changes_to_multiple_ftd_devices) | **POST** /v1/inventory/devices/ftds/deploy | (cdFMC-managed FTDs and chassis only) Deploy changes to multiple FTD devices
 [**get_changes_deployed_in_deployment_run**](DeviceDeploymentsApi.md#get_changes_deployed_in_deployment_run) | **GET** /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/changes | Get Deployed Device Changes in Deployment Run
-[**get_deployment_run_transcript**](DeviceDeploymentsApi.md#get_deployment_run_transcript) | **GET** /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/transcript | (cdFMC-managed FTDs only) Get Deployment Run Transcript
+[**get_deployment_run_transcript**](DeviceDeploymentsApi.md#get_deployment_run_transcript) | **GET** /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/transcript | (cdFMC-managed FTDs and chassis only) Get Deployment Run Transcript
 [**get_device_deployment_run**](DeviceDeploymentsApi.md#get_device_deployment_run) | **GET** /v1/inventory/devices/deployments/runs/{deploymentRunUid} | Get Device Deployment Run
 [**get_device_deployment_runs**](DeviceDeploymentsApi.md#get_device_deployment_runs) | **GET** /v1/inventory/devices/deployments/runs | Get Device Deployment Runs
 [**update_device_deployment_run**](DeviceDeploymentsApi.md#update_device_deployment_run) | **PATCH** /v1/inventory/devices/deployments/runs/{deploymentRunUid} | Update Device Deployment Run
@@ -108,9 +108,9 @@ Name | Type | Description  | Notes
 # **deploy_changes_to_multiple_ftd_devices**
 > CdoTransaction deploy_changes_to_multiple_ftd_devices(ftd_multi_device_deployment_input)
 
-(cdFMC-managed FTDs only) Deploy changes to multiple FTD devices
+(cdFMC-managed FTDs and chassis only) Deploy changes to multiple FTD devices
 
-This is an asynchronous operation to deploy changes made to the configurations of multiple cdFMC-managed FTD devices on Security Cloud Control. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.  Notes:  - This operation is only supported for cdFMC-managed FTD devices.  - This operation will only deploy changes to the device if there are pending changes to deploy.   
+This is an asynchronous operation to deploy changes made to the configurations of multiple cdFMC-managed FTDs and chassis on Security Cloud Control. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.  Notes:  - This operation is only supported for cdFMC-managed FTDs and chassis.  - This operation will only deploy changes to the device if there are pending changes to deploy.   
 
 ### Example
 
@@ -146,7 +146,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     ftd_multi_device_deployment_input = scc_firewall_manager_sdk.FtdMultiDeviceDeploymentInput() # FtdMultiDeviceDeploymentInput | 
 
     try:
-        # (cdFMC-managed FTDs only) Deploy changes to multiple FTD devices
+        # (cdFMC-managed FTDs and chassis only) Deploy changes to multiple FTD devices
         api_response = api_instance.deploy_changes_to_multiple_ftd_devices(ftd_multi_device_deployment_input)
         print("The response of DeviceDeploymentsApi->deploy_changes_to_multiple_ftd_devices:\n")
         pprint(api_response)
@@ -276,9 +276,9 @@ Name | Type | Description  | Notes
 # **get_deployment_run_transcript**
 > DeploymentRunTranscriptDto get_deployment_run_transcript(deployment_run_uid, device_uid)
 
-(cdFMC-managed FTDs only) Get Deployment Run Transcript
+(cdFMC-managed FTDs and chassis only) Get Deployment Run Transcript
 
-Get the deployment run transcript for a device that was deployed to as part of a deployment run. Transcripts are only available for cdFMC-managed FTDs.
+Get the deployment run transcript for a device that was deployed to as part of a deployment run. Transcripts are only available for cdFMC-managed FTDs and chassis.
 
 ### Example
 
@@ -311,10 +311,10 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.DeviceDeploymentsApi(api_client)
     deployment_run_uid = 'deployment_run_uid_example' # str | The unique identifier, represented as a UUID, of the device deployment Run in SCC Firewall Manager.
-    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the cdFMC-managed FTD device in Security Cloud Control.
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the cdFMC-managed FTD or chassis in Security Cloud Control.
 
     try:
-        # (cdFMC-managed FTDs only) Get Deployment Run Transcript
+        # (cdFMC-managed FTDs and chassis only) Get Deployment Run Transcript
         api_response = api_instance.get_deployment_run_transcript(deployment_run_uid, device_uid)
         print("The response of DeviceDeploymentsApi->get_deployment_run_transcript:\n")
         pprint(api_response)
@@ -330,7 +330,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **deployment_run_uid** | **str**| The unique identifier, represented as a UUID, of the device deployment Run in SCC Firewall Manager. | 
- **device_uid** | **str**| The unique identifier, represented as a UUID, of the cdFMC-managed FTD device in Security Cloud Control. | 
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the cdFMC-managed FTD or chassis in Security Cloud Control. | 
 
 ### Return type
 
