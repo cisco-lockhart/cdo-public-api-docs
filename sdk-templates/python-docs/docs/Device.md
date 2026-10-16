@@ -32,6 +32,7 @@ Name | Type | Description | Notes
 **firewall_mode** | **str** | (ASAs only) The firewall operating mode of the device. | [optional] 
 **fmc_access_policy** | [**FmcAccessPolicyReference**](FmcAccessPolicyReference.md) |  | [optional] 
 **fmc_domain_uid** | **str** | (FMC device managers only) The unique identifier, represented as a UUID, of the [FMC domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html). | [optional] 
+**ftd_chassis_info** | [**FtdChassisInfo**](FtdChassisInfo.md) |  | [optional] 
 **ftd_cluster_info** | [**FtdClusterInfo**](FtdClusterInfo.md) |  | [optional] 
 **ftd_ha_info** | [**FtdHaInfo**](FtdHaInfo.md) |  | [optional] 
 **ftd_licenses** | **List[str]** | (FTDs only) List of FTD License entitlements. | [optional] 

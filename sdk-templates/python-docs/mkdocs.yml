@@ -217,6 +217,7 @@ nav:
     - FmcRequest: FmcRequest.md
     - FmcTemplateVariable: FmcTemplateVariable.md
     - FtdChangeItemDto: FtdChangeItemDto.md
+    - FtdChassisInfo: FtdChassisInfo.md
     - FtdClusterInfo: FtdClusterInfo.md
     - FtdCompatibilityVersion: FtdCompatibilityVersion.md
     - FtdCreateOrUpdateInput: FtdCreateOrUpdateInput.md
@@ -269,6 +270,7 @@ nav:
     - LocalReadinessResult: LocalReadinessResult.md
     - Location: Location.md
     - LogSettings: LogSettings.md
+    - LogicalDevice: LogicalDevice.md
     - ManagedTenantDto: ManagedTenantDto.md
     - ManagedTenantUpgradeDto: ManagedTenantUpgradeDto.md
     - MemoryHealthMetrics: MemoryHealthMetrics.md

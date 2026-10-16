@@ -14409,7 +14409,7 @@ components:
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices in the Security Cloud Control tenant.
+            description: The distinct config states for the devices managed by the MSP Portal.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -14426,7 +14426,7 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
+            description: The distinct conflict detection states for the devices managed by the MSP Portal.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
@@ -14444,7 +14444,7 @@ components:
                     type: array
             type: object
         ConnectivityState:
-            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
+            description: The distinct connectivity states for the devices managed by the MSP Portal.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -14455,7 +14455,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
+            description: The type of the connector that will be used to communicate with the device.
             enum:
                 - SDC
                 - CDG
@@ -14989,6 +14989,8 @@ components:
                     description: (FMC device managers only) The unique identifier, represented as a UUID, of the [FMC domain](https://www.cisco.com/c/en/us/td/docs/security/secure-firewall/management-center/admin/740/management-center-admin-74/system-domains.html).
                     format: uuid
                     type: string
+                ftdChassisInfo:
+                    $ref: '#/components/schemas/FtdChassisInfo'
                 ftdClusterInfo:
                     $ref: '#/components/schemas/FtdClusterInfo'
                 ftdHaInfo:
@@ -15519,7 +15521,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The distinct device roles for the devices in the Security Cloud Control tenant.
+            description: The roles that this device performs on the network.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -15527,6 +15529,7 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
+            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
             description: The current status of each device in the upgrade run.
@@ -15694,7 +15697,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The type of the device.
+            description: The distinct device types for the devices managed by the MSP Portal.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -15715,7 +15718,6 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: CDFMC_MANAGED_FTD
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -16181,6 +16183,20 @@ components:
                     items:
                         $ref: '#/components/schemas/UpdatedValue'
                     type: array
+            type: object
+        FtdChassisInfo:
+            description: (Chassis devices managed by FMC only) Information on logical devices deployed on this chassis.
+            properties:
+                logicalDevices:
+                    description: The logical devices on this chassis that are managed on the same Security Cloud Control tenant as the chassis. A chassis can host logical devices managed on other tenants; those are not listed.
+                    items:
+                        $ref: '#/components/schemas/LogicalDevice'
+                    type: array
+                numLogicalDevices:
+                    description: The number of logical devices on this chassis that are managed on the same Security Cloud Control tenant as the chassis. Always equal to the length of `logicalDevices`. Logical devices on the chassis that are managed on other tenants are not counted.
+                    example: 2
+                    format: int32
+                    type: integer
             type: object
         FtdClusterInfo:
             description: '(Device Clusters managed by FMC only) Clustering information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
@@ -16977,7 +16993,6 @@ components:
             type: object
         Labels:
             description: Labels used to identify/tag Security Cloud Control entities.
-            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -17074,6 +17089,21 @@ components:
                 level:
                     description: The level
                     example: "3"
+                    type: string
+            type: object
+        LogicalDevice:
+            description: The logical devices on this chassis that are managed on the same Security Cloud Control tenant as the chassis. A chassis can host logical devices managed on other tenants; those are not listed.
+            properties:
+                uid:
+                    description: The unique identifier, represented as a UUID, of the logical device in Security Cloud Control. Use it to retrieve the logical device from the inventory.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
+                uidOnFmc:
+                    deprecated: true
+                    description: 'The unique identifier, represented as a UUID, of the logical device''s device record on the cdFMC. This field is deprecated: retrieve the logical device by `uid` and use its `deviceRecordOnFmc` instead.'
+                    example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
                     type: string
             type: object
         ManagedTenantDto:
@@ -21143,32 +21173,14 @@ components:
                     type: string
             type: object
         SmartAccountDto:
+            description: The smart account used to license this device.
             properties:
-                domain:
-                    description: Account domain for your Smart Account
+                parent:
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                name:
-                    description: Name of the smart account
-                    type: string
-                smartAccountId:
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             properties:
@@ -22105,6 +22117,15 @@ components:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
                     type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in Security Cloud Control.
+                    example: My Managed Tenant
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
                 name:
                     description: The name of the device.
                     example: asa-fw-01
@@ -22243,7 +22264,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: The role of the user this token belongs to. The user can be API-only or a human.
+            description: Roles associated with this user in Security Cloud Control.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -22254,6 +22275,7 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
+            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.
