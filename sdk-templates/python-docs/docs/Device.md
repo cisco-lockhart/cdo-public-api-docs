@@ -61,7 +61,7 @@ Name | Type | Description | Notes
 **state** | **str** | The device state. | [optional] 
 **state_machine_details** | [**StateMachineDetails**](StateMachineDetails.md) |  | [optional] 
 **uid** | **str** | The unique identifier, represented as a UUID, of the device in Security Cloud Control. | [optional] 
-**uid_on_fmc** | **str** | (FMC-managed FTDs only) The unique identifier, represented as a UUID, of the device on a cdFMC. This field is deprecated. Please see &#x60;deviceRecordOnFmc&#x60;. | [optional] 
+**uid_on_fmc** | **str** | (FMC-managed FTDs and cdFMC-managed chassis devices only) The unique identifier, represented as a UUID, of the device on a cdFMC. This field is deprecated. Please see &#x60;deviceRecordOnFmc&#x60;. | [optional] 
 **universal_ztna_settings** | [**UniversalZtnaSettings**](UniversalZtnaSettings.md) |  | [optional] 
 **vdb_version** | **str** | (FMC device managers only) The version of the Cisco vulnerability database (VDB) on the FMC. | [optional] 
 **ztp_onboarding_job_id** | **str** | The unique identifier, represented as a UUID, for an internal job that orchestrates the onboarding of devices through Zero-Touch Provisioning. This applies to devices managed by both on-premises and Cloud-delivered FMC. | [optional] 

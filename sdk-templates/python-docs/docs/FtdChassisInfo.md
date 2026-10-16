@@ -1,6 +1,6 @@
 # FtdChassisInfo
 
-(Chassis devices managed by FMC only) Information on logical devices deployed on this chassis.
+(Chassis devices managed by cdFMC only) Information on logical devices deployed on this chassis.
 
 ## Properties
 
