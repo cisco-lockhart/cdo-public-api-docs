@@ -13,17 +13,17 @@ UAE | https://api.uae.security.cisco.com/firewall
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_latest_remediation_report**](NATRemediationReportAPIsApi.md#get_latest_remediation_report) | **GET** /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-reports/latest | Get Latest NAT Remediation Report
-[**get_remediation_report_by_version**](NATRemediationReportAPIsApi.md#get_remediation_report_by_version) | **GET** /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-reports/{version} | Get NAT Remediation Report by Version
-[**get_remediation_reports**](NATRemediationReportAPIsApi.md#get_remediation_reports) | **GET** /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-reports | Get NAT Remediation Reports
+[**get_latest_remediation_report**](NATRemediationReportAPIsApi.md#get_latest_remediation_report) | **GET** /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-reports/latest | Get latest NAT policy remediation report
+[**get_remediation_report_by_version**](NATRemediationReportAPIsApi.md#get_remediation_report_by_version) | **GET** /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-reports/{version} | Get NAT policy remediation report by version
+[**get_remediation_reports**](NATRemediationReportAPIsApi.md#get_remediation_reports) | **GET** /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-reports | Get NAT policy remediation reports
 
 
 # **get_latest_remediation_report**
 > RemediationReportDto get_latest_remediation_report(insight_uid)
 
-Get Latest NAT Remediation Report
+Get latest NAT policy remediation report
 
-Returns the latest terminal, versioned NAT remediation report for the insight.
+Gets the latest NAT policy remediation report for the specified NAT policy analysis. Only finished remediations are included, whether they succeeded or failed.
 
 ### Example
 
@@ -55,10 +55,10 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.NATRemediationReportAPIsApi(api_client)
-    insight_uid = 'insight_uid_example' # str | 
+    insight_uid = 'a276b855-feb7-4774-863f-569f2826f3f5' # str | The unique identifier of the NAT policy analysis.
 
     try:
-        # Get Latest NAT Remediation Report
+        # Get latest NAT policy remediation report
         api_response = api_instance.get_latest_remediation_report(insight_uid)
         print("The response of NATRemediationReportAPIsApi->get_latest_remediation_report:\n")
         pprint(api_response)
@@ -73,7 +73,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **insight_uid** | **str**|  | 
+ **insight_uid** | **str**| The unique identifier of the NAT policy analysis. | 
 
 ### Return type
 
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully retrieved the latest NAT remediation report |  -  |
+**200** | Latest NAT policy remediation report |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -105,9 +105,9 @@ Name | Type | Description  | Notes
 # **get_remediation_report_by_version**
 > RemediationReportDto get_remediation_report_by_version(insight_uid, version)
 
-Get NAT Remediation Report by Version
+Get NAT policy remediation report by version
 
-Returns one terminal NAT remediation report for the insight and positive report version.
+Gets the specified version of a NAT policy remediation report for the NAT policy analysis. The remediation must have finished, whether it succeeded or failed.
 
 ### Example
 
@@ -139,11 +139,11 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.NATRemediationReportAPIsApi(api_client)
-    insight_uid = 'insight_uid_example' # str | 
-    version = 56 # int | Positive remediation report version.
+    insight_uid = 'a276b855-feb7-4774-863f-569f2826f3f5' # str | The unique identifier of the NAT policy analysis.
+    version = 56 # int | The version of the NAT policy remediation report to retrieve.
 
     try:
-        # Get NAT Remediation Report by Version
+        # Get NAT policy remediation report by version
         api_response = api_instance.get_remediation_report_by_version(insight_uid, version)
         print("The response of NATRemediationReportAPIsApi->get_remediation_report_by_version:\n")
         pprint(api_response)
@@ -158,8 +158,8 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **insight_uid** | **str**|  | 
- **version** | **int**| Positive remediation report version. | 
+ **insight_uid** | **str**| The unique identifier of the NAT policy analysis. | 
+ **version** | **int**| The version of the NAT policy remediation report to retrieve. | 
 
 ### Return type
 
@@ -178,7 +178,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully retrieved the NAT remediation report |  -  |
+**200** | NAT policy remediation report |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -191,9 +191,9 @@ Name | Type | Description  | Notes
 # **get_remediation_reports**
 > RemediationReportPage get_remediation_reports(insight_uid, limit=limit, offset=offset)
 
-Get NAT Remediation Reports
+Get NAT policy remediation reports
 
-Returns terminal, versioned NAT remediation reports for the insight, ordered by version from newest to oldest.
+Gets NAT policy remediation reports for the specified NAT policy analysis. Only finished remediations are included, whether they succeeded or failed. Results are ordered by version from newest to oldest and can be paginated.
 
 ### Example
 
@@ -225,12 +225,12 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.NATRemediationReportAPIsApi(api_client)
-    insight_uid = 'insight_uid_example' # str | 
-    limit = 10 # int | Maximum number of remediation reports to return. (optional) (default to 10)
+    insight_uid = 'a276b855-feb7-4774-863f-569f2826f3f5' # str | The unique identifier of the NAT policy analysis.
+    limit = 10 # int | The maximum number of NAT policy remediation reports to retrieve. (optional) (default to 10)
     offset = '0' # str | Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified. (optional) (default to '0')
 
     try:
-        # Get NAT Remediation Reports
+        # Get NAT policy remediation reports
         api_response = api_instance.get_remediation_reports(insight_uid, limit=limit, offset=offset)
         print("The response of NATRemediationReportAPIsApi->get_remediation_reports:\n")
         pprint(api_response)
@@ -245,8 +245,8 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **insight_uid** | **str**|  | 
- **limit** | **int**| Maximum number of remediation reports to return. | [optional] [default to 10]
+ **insight_uid** | **str**| The unique identifier of the NAT policy analysis. | 
+ **limit** | **int**| The maximum number of NAT policy remediation reports to retrieve. | [optional] [default to 10]
  **offset** | **str**| Offset of the results retrieved. The Security Cloud Control APIs use the offset field to determine the index of the first result retrieved, and will retrieve &#x60;limit&#x60; results from the offset specified. | [optional] [default to &#39;0&#39;]
 
 ### Return type
@@ -266,7 +266,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully retrieved NAT remediation reports |  -  |
+**200** | Paginated list of NAT policy remediation reports |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |

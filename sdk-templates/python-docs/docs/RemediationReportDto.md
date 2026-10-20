@@ -1,18 +1,18 @@
 # RemediationReportDto
 
-Details of one terminal NAT remediation report.
+NAT policy remediation report data.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**completed_at** | **datetime** | Time the remediation reached its final status, in UTC (RFC 3339). | [optional] 
-**remediation_job_uid** | **str** | Identifier of the remediation job, useful for support and troubleshooting. | [optional] 
-**report_url** | **str** | Download URL for the remediation PDF. Expires 30 minutes after generation; retrieve the report again to obtain a fresh URL. Null when no PDF is recorded for this attempt. | [optional] 
-**started_at** | **datetime** | Time the remediation started, in UTC (RFC 3339). Omitted if unavailable. | [optional] 
-**status** | **str** | Final status of the remediation attempt. | [optional] 
-**triggered_by** | **str** | Username of the user who initiated the remediation. | [optional] 
-**version** | **int** | Positive remediation-attempt version within the insight. | [optional] 
+**completed_at** | **datetime** | The time the remediation finished, in UTC (RFC 3339). | [optional] 
+**remediation_job_uid** | **str** | The unique identifier of the NAT policy remediation job. | [optional] 
+**report_url** | **str** | Presigned download URL for the NAT policy remediation report, valid for 30 minutes after generation. Get the report again to obtain a new URL. Null if no PDF report is available. | [optional] 
+**started_at** | **datetime** | The time the remediation started, in UTC (RFC 3339). Omitted if unavailable. | [optional] 
+**status** | **str** | The final status of the NAT policy remediation. | [optional] 
+**triggered_by** | **str** | The username of the user who started the NAT policy remediation. | [optional] 
+**version** | **int** | The version of the remediation report for the NAT policy analysis. | [optional] 
 
 ## Example
 

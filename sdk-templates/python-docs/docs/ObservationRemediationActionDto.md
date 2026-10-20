@@ -1,14 +1,14 @@
 # ObservationRemediationActionDto
 
-Action selection for one rule-conflict observation.
+The remediation actions selected for a rule conflict observation.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action** | **str** | Remediation action type to be applied for observation level remediation. | [optional] 
-**observation_id** | **str** | Rule conflict observation identifier. | 
-**rule_actions** | [**List[RuleRemediationActionDto]**](RuleRemediationActionDto.md) | Optional rule-level remediation actions. When non-empty, these actions are authoritative. | [optional] 
+**action** | **str** | The remediation action to apply to all shadowed or redundant rules in this observation if &#x60;ruleActions&#x60; is omitted, null, or empty. | [optional] 
+**observation_id** | **str** | The unique identifier of the rule conflict observation. | 
+**rule_actions** | [**List[RuleRemediationActionDto]**](RuleRemediationActionDto.md) | The remediation actions selected for individual NAT rules. If this list is not empty, these actions are used instead of the observation action. | [optional] 
 
 ## Example
 

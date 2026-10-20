@@ -13,17 +13,17 @@ UAE | https://api.uae.security.cisco.com/firewall
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**apply_nat_remediation_actions**](NATRemediationAPIsApi.md#apply_nat_remediation_actions) | **POST** /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-plan-executions | Create NAT Remediation Plan Execution
-[**get_nat_remediation_actions**](NATRemediationAPIsApi.md#get_nat_remediation_actions) | **GET** /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-plans | Get NAT Remediation Plan
-[**modify_nat_remediation_actions**](NATRemediationAPIsApi.md#modify_nat_remediation_actions) | **PUT** /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-plans | Modify NAT Remediation Plan
+[**apply_nat_remediation_actions**](NATRemediationAPIsApi.md#apply_nat_remediation_actions) | **POST** /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-plan-executions | Apply NAT policy remediation plan
+[**get_nat_remediation_actions**](NATRemediationAPIsApi.md#get_nat_remediation_actions) | **GET** /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-plans | Get NAT policy remediation plan
+[**modify_nat_remediation_actions**](NATRemediationAPIsApi.md#modify_nat_remediation_actions) | **PUT** /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-plans | Save NAT policy remediation plan
 
 
 # **apply_nat_remediation_actions**
 > CdoTransaction apply_nat_remediation_actions(insight_uid)
 
-Create NAT Remediation Plan Execution
+Apply NAT policy remediation plan
 
-This is an asynchronous operation to apply the saved NAT remediation plan for one analysis insight. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+Starts an asynchronous operation to apply the saved remediation plan for the specified NAT policy analysis. The operation returns a Security Cloud Control Transaction object that can be used to track remediation progress.
 
 ### Example
 
@@ -55,10 +55,10 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.NATRemediationAPIsApi(api_client)
-    insight_uid = 'insight_uid_example' # str | 
+    insight_uid = 'a276b855-feb7-4774-863f-569f2826f3f5' # str | The unique identifier of the NAT policy analysis.
 
     try:
-        # Create NAT Remediation Plan Execution
+        # Apply NAT policy remediation plan
         api_response = api_instance.apply_nat_remediation_actions(insight_uid)
         print("The response of NATRemediationAPIsApi->apply_nat_remediation_actions:\n")
         pprint(api_response)
@@ -73,7 +73,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **insight_uid** | **str**|  | 
+ **insight_uid** | **str**| The unique identifier of the NAT policy analysis. | 
 
 ### Return type
 
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Transaction details to poll for remediation completion |  -  |
+**202** | Security Cloud Control Transaction object that can be used to track remediation progress |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -106,9 +106,9 @@ Name | Type | Description  | Notes
 # **get_nat_remediation_actions**
 > RemediationActionsDto get_nat_remediation_actions(insight_uid)
 
-Get NAT Remediation Plan
+Get NAT policy remediation plan
 
-Returns the saved NAT remediation plan for one analysis insight.
+Gets the saved remediation plan for the specified NAT policy analysis. The plan includes the selected actions for shadowed and redundant rules and the total number of rules selected for deletion or disablement. If no plan has been saved, an empty plan is returned.
 
 ### Example
 
@@ -140,10 +140,10 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.NATRemediationAPIsApi(api_client)
-    insight_uid = 'insight_uid_example' # str | 
+    insight_uid = 'a276b855-feb7-4774-863f-569f2826f3f5' # str | The unique identifier of the NAT policy analysis.
 
     try:
-        # Get NAT Remediation Plan
+        # Get NAT policy remediation plan
         api_response = api_instance.get_nat_remediation_actions(insight_uid)
         print("The response of NATRemediationAPIsApi->get_nat_remediation_actions:\n")
         pprint(api_response)
@@ -158,7 +158,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **insight_uid** | **str**|  | 
+ **insight_uid** | **str**| The unique identifier of the NAT policy analysis. | 
 
 ### Return type
 
@@ -177,7 +177,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully retrieved remediation plan |  -  |
+**200** | NAT policy remediation plan |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
@@ -190,9 +190,9 @@ Name | Type | Description  | Notes
 # **modify_nat_remediation_actions**
 > RemediationActionsDto modify_nat_remediation_actions(insight_uid, remediation_actions_dto)
 
-Modify NAT Remediation Plan
+Save NAT policy remediation plan
 
-Creates or replaces a NAT remediation plan for one analysis insight. Computed count fields in the request are ignored and returned from the saved rule-level actions.
+Saves the remediation plan for the specified NAT policy analysis. The request replaces the saved selections for shadowed and redundant rules. Omitted selections are removed. The `totalDeletedCount` and `totalDisabledCount` fields are calculated from the selected rules and are ignored in the request.
 
 ### Example
 
@@ -224,11 +224,11 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.NATRemediationAPIsApi(api_client)
-    insight_uid = 'insight_uid_example' # str | 
+    insight_uid = 'a276b855-feb7-4774-863f-569f2826f3f5' # str | The unique identifier of the NAT policy analysis.
     remediation_actions_dto = scc_firewall_manager_sdk.RemediationActionsDto() # RemediationActionsDto | 
 
     try:
-        # Modify NAT Remediation Plan
+        # Save NAT policy remediation plan
         api_response = api_instance.modify_nat_remediation_actions(insight_uid, remediation_actions_dto)
         print("The response of NATRemediationAPIsApi->modify_nat_remediation_actions:\n")
         pprint(api_response)
@@ -243,7 +243,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **insight_uid** | **str**|  | 
+ **insight_uid** | **str**| The unique identifier of the NAT policy analysis. | 
  **remediation_actions_dto** | [**RemediationActionsDto**](RemediationActionsDto.md)|  | 
 
 ### Return type
@@ -263,7 +263,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successfully saved remediation plan |  -  |
+**200** | Saved NAT policy remediation plan |  -  |
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |

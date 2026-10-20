@@ -1,16 +1,16 @@
 # RemediationActionsDto
 
-NAT policy remediation actions selected for an insight.
+The remediation plan for a NAT policy analysis.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**insight_uid** | **str** | Insight UID that owns the remediation action selection. | [optional] 
-**redundant_rules_action_list** | [**List[ObservationRemediationActionDto]**](ObservationRemediationActionDto.md) | Actions selected for redundant NAT rule conflicts. | [optional] 
-**shadowed_rules_action_list** | [**List[ObservationRemediationActionDto]**](ObservationRemediationActionDto.md) | Actions selected for shadowed NAT rule conflicts. | [optional] 
-**total_deleted_count** | **int** | Total number of rules selected for deletion. | [optional] [readonly] 
-**total_disabled_count** | **int** | Total number of rules selected for disablement. | [optional] [readonly] 
+**insight_uid** | **str** | The unique identifier of the NAT policy analysis. | [optional] 
+**redundant_rules_action_list** | [**List[ObservationRemediationActionDto]**](ObservationRemediationActionDto.md) | The remediation actions selected for redundant NAT rules. | [optional] 
+**shadowed_rules_action_list** | [**List[ObservationRemediationActionDto]**](ObservationRemediationActionDto.md) | The remediation actions selected for shadowed NAT rules. | [optional] 
+**total_deleted_count** | **int** | The total number of unique NAT rules selected for deletion. | [optional] [readonly] 
+**total_disabled_count** | **int** | The total number of unique NAT rules selected to be disabled. | [optional] [readonly] 
 
 ## Example
 

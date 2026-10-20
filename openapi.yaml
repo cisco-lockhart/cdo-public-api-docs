@@ -176,10 +176,12 @@ paths:
                 - Policy Analysis and Optimization
     /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-plan-executions:
         post:
-            description: This is an asynchronous operation to apply the saved NAT remediation plan for one analysis insight. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+            description: Starts an asynchronous operation to apply the saved remediation plan for the specified NAT policy analysis. The operation returns a Security Cloud Control Transaction object that can be used to track remediation progress.
             operationId: applyNatRemediationActions
             parameters:
-                - in: path
+                - description: The unique identifier of the NAT policy analysis.
+                  example: a276b855-feb7-4774-863f-569f2826f3f5
+                  in: path
                   name: insightUid
                   required: true
                   schema:
@@ -190,7 +192,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/CdoTransaction'
-                    description: Transaction details to poll for remediation completion
+                    description: Security Cloud Control Transaction object that can be used to track remediation progress
                 "400":
                     $ref: '#/components/responses/http400BadRequest'
                 "401":
@@ -211,16 +213,18 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Create NAT Remediation Plan Execution
+            summary: Apply NAT policy remediation plan
             tags:
                 - NAT Remediation APIs
             x-in-dev: "true"
     /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-plans:
         get:
-            description: Returns the saved NAT remediation plan for one analysis insight.
+            description: Gets the saved remediation plan for the specified NAT policy analysis. The plan includes the selected actions for shadowed and redundant rules and the total number of rules selected for deletion or disablement. If no plan has been saved, an empty plan is returned.
             operationId: getNatRemediationActions
             parameters:
-                - in: path
+                - description: The unique identifier of the NAT policy analysis.
+                  example: a276b855-feb7-4774-863f-569f2826f3f5
+                  in: path
                   name: insightUid
                   required: true
                   schema:
@@ -231,7 +235,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/RemediationActionsDto'
-                    description: Successfully retrieved remediation plan
+                    description: NAT policy remediation plan
                 "400":
                     $ref: '#/components/responses/http400BadRequest'
                 "401":
@@ -250,15 +254,17 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Get NAT Remediation Plan
+            summary: Get NAT policy remediation plan
             tags:
                 - NAT Remediation APIs
             x-in-dev: "true"
         put:
-            description: Creates or replaces a NAT remediation plan for one analysis insight. Computed count fields in the request are ignored and returned from the saved rule-level actions.
+            description: Saves the remediation plan for the specified NAT policy analysis. The request replaces the saved selections for shadowed and redundant rules. Omitted selections are removed. The `totalDeletedCount` and `totalDisabledCount` fields are calculated from the selected rules and are ignored in the request.
             operationId: modifyNatRemediationActions
             parameters:
-                - in: path
+                - description: The unique identifier of the NAT policy analysis.
+                  example: a276b855-feb7-4774-863f-569f2826f3f5
+                  in: path
                   name: insightUid
                   required: true
                   schema:
@@ -275,7 +281,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/RemediationActionsDto'
-                    description: Successfully saved remediation plan
+                    description: Saved NAT policy remediation plan
                 "400":
                     $ref: '#/components/responses/http400BadRequest'
                 "401":
@@ -296,22 +302,24 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Modify NAT Remediation Plan
+            summary: Save NAT policy remediation plan
             tags:
                 - NAT Remediation APIs
             x-in-dev: "true"
     /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-reports:
         get:
-            description: Returns terminal, versioned NAT remediation reports for the insight, ordered by version from newest to oldest.
+            description: Gets NAT policy remediation reports for the specified NAT policy analysis. Only finished remediations are included, whether they succeeded or failed. Results are ordered by version from newest to oldest and can be paginated.
             operationId: getRemediationReports
             parameters:
-                - in: path
+                - description: The unique identifier of the NAT policy analysis.
+                  example: a276b855-feb7-4774-863f-569f2826f3f5
+                  in: path
                   name: insightUid
                   required: true
                   schema:
                     format: uuid
                     type: string
-                - description: Maximum number of remediation reports to return.
+                - description: The maximum number of NAT policy remediation reports to retrieve.
                   in: query
                   name: limit
                   required: false
@@ -334,7 +342,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/RemediationReportPage'
-                    description: Successfully retrieved NAT remediation reports
+                    description: Paginated list of NAT policy remediation reports
                 "400":
                     $ref: '#/components/responses/http400BadRequest'
                 "401":
@@ -351,22 +359,24 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Get NAT Remediation Reports
+            summary: Get NAT policy remediation reports
             tags:
                 - NAT Remediation Report APIs
             x-in-dev: "true"
     /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-reports/{version}:
         get:
-            description: Returns one terminal NAT remediation report for the insight and positive report version.
+            description: Gets the specified version of a NAT policy remediation report for the NAT policy analysis. The remediation must have finished, whether it succeeded or failed.
             operationId: getRemediationReportByVersion
             parameters:
-                - in: path
+                - description: The unique identifier of the NAT policy analysis.
+                  example: a276b855-feb7-4774-863f-569f2826f3f5
+                  in: path
                   name: insightUid
                   required: true
                   schema:
                     format: uuid
                     type: string
-                - description: Positive remediation report version.
+                - description: The version of the NAT policy remediation report to retrieve.
                   in: path
                   name: version
                   required: true
@@ -380,7 +390,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/RemediationReportDto'
-                    description: Successfully retrieved the NAT remediation report
+                    description: NAT policy remediation report
                 "400":
                     $ref: '#/components/responses/http400BadRequest'
                 "401":
@@ -399,16 +409,18 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Get NAT Remediation Report by Version
+            summary: Get NAT policy remediation report by version
             tags:
                 - NAT Remediation Report APIs
             x-in-dev: "true"
     /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-reports/latest:
         get:
-            description: Returns the latest terminal, versioned NAT remediation report for the insight.
+            description: Gets the latest NAT policy remediation report for the specified NAT policy analysis. Only finished remediations are included, whether they succeeded or failed.
             operationId: getLatestRemediationReport
             parameters:
-                - in: path
+                - description: The unique identifier of the NAT policy analysis.
+                  example: a276b855-feb7-4774-863f-569f2826f3f5
+                  in: path
                   name: insightUid
                   required: true
                   schema:
@@ -420,7 +432,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/RemediationReportDto'
-                    description: Successfully retrieved the latest NAT remediation report
+                    description: Latest NAT policy remediation report
                 "400":
                     $ref: '#/components/responses/http400BadRequest'
                 "401":
@@ -439,7 +451,7 @@ paths:
                     description: Internal server error.
             security:
                 - bearerAuth: []
-            summary: Get Latest NAT Remediation Report
+            summary: Get latest NAT policy remediation report
             tags:
                 - NAT Remediation Report APIs
             x-in-dev: "true"
@@ -14382,13 +14394,18 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the deployment on the device.
+            description: The completion status of the upgrade on the device.
             properties:
+                completedAt:
+                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
+                    example: 2026-04-15T18:00:10.123Z
+                    format: date-time
+                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -14399,7 +14416,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: The percentage completion of the current task being performed
+                    description: Percentage completion of the current task being performed.
                     format: double
                     type: number
             type: object
@@ -15527,17 +15544,60 @@ components:
             example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
-            description: The current status of each device in the upgrade run.
+            description: Set of device UIDs that are part of this upgrade run.
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+                    description: The completion status of the upgrade on the device.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                uid:
-                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+                hardwareModel:
+                    description: Hardware model of the devices being upgraded.
+                    example: Firepower 2110
+                    type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: Name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantUid:
+                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    format: uuid
+                    type: string
+                name:
+                    description: Name of the device being upgraded.
+                    example: my-firepower
+                    type: string
+                softwareVersionBeforeUpgrade:
+                    description: Software version of the device before the upgrade.
+                    example: 7.2.3
+                    type: string
+                transactionUid:
+                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, of the device being upgraded.
+                    format: uuid
+                    type: string
+                upgradeRunStatus:
+                    description: Current status of the upgrade run.
+                    enum:
+                        - IN_PROGRESS
+                        - REBUILDING_UPGRADE_CACHE
+                        - PERFORMING_UPGRADE
+                        - UPLOADING_IMAGE
+                        - PERFORMING_READINESS_CHECK
+                        - UPGRADE_STAGED
+                        - UPGRADE_STAGING_FAILED
+                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_COMPLETED
+                        - UPGRADE_FAILED
+                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -15692,7 +15752,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The type of the device.
+            description: The distinct device types for the devices managed by the MSP Portal.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -15713,7 +15773,6 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: CDFMC_MANAGED_FTD
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -19628,22 +19687,22 @@ components:
                     $ref: '#/components/schemas/SharedObjectValue'
             type: object
         ObservationRemediationActionDto:
-            description: Action selection for one rule-conflict observation.
+            description: The remediation actions selected for a rule conflict observation.
             properties:
                 action:
-                    description: Remediation action type to be applied for observation level remediation.
+                    description: The remediation action to apply to all shadowed or redundant rules in this observation if `ruleActions` is omitted, null, or empty.
                     enum:
                         - DELETE
                         - DISABLE
                     example: DELETE
                     type: string
                 observationId:
-                    description: Rule conflict observation identifier.
+                    description: The unique identifier of the rule conflict observation.
                     example: observation-1
                     minLength: 1
                     type: string
                 ruleActions:
-                    description: Optional rule-level remediation actions. When non-empty, these actions are authoritative.
+                    description: The remediation actions selected for individual NAT rules. If this list is not empty, these actions are used instead of the observation action.
                     items:
                         $ref: '#/components/schemas/RuleRemediationActionDto'
                     type: array
@@ -20239,61 +20298,61 @@ components:
                     type: string
             type: object
         RemediationActionsDto:
-            description: NAT policy remediation actions selected for an insight.
+            description: The remediation plan for a NAT policy analysis.
             properties:
                 insightUid:
-                    description: Insight UID that owns the remediation action selection.
+                    description: The unique identifier of the NAT policy analysis.
                     example: ed189db6-3c46-463f-9615-72230044be2a
                     type: string
                 redundantRulesActionList:
-                    description: Actions selected for redundant NAT rule conflicts.
+                    description: The remediation actions selected for redundant NAT rules.
                     items:
                         $ref: '#/components/schemas/ObservationRemediationActionDto'
                     type: array
                 shadowedRulesActionList:
-                    description: Actions selected for shadowed NAT rule conflicts.
+                    description: The remediation actions selected for shadowed NAT rules.
                     items:
                         $ref: '#/components/schemas/ObservationRemediationActionDto'
                     type: array
                 totalDeletedCount:
-                    description: Total number of rules selected for deletion.
+                    description: The total number of unique NAT rules selected for deletion.
                     example: 2
                     format: int32
                     readOnly: true
                     type: integer
                 totalDisabledCount:
-                    description: Total number of rules selected for disablement.
+                    description: The total number of unique NAT rules selected to be disabled.
                     example: 1
                     format: int32
                     readOnly: true
                     type: integer
             type: object
         RemediationReportDto:
-            description: Details of one terminal NAT remediation report.
+            description: NAT policy remediation report data.
             properties:
                 completedAt:
-                    description: Time the remediation reached its final status, in UTC (RFC 3339).
+                    description: The time the remediation finished, in UTC (RFC 3339).
                     example: 2026-10-08T10:02:00Z
                     format: date-time
                     type: string
                 remediationJobUid:
-                    description: Identifier of the remediation job, useful for support and troubleshooting.
+                    description: The unique identifier of the NAT policy remediation job.
                     example: ed189db6-3c46-463f-9615-72230044be2a
                     format: uuid
                     type: string
                 reportUrl:
-                    description: Download URL for the remediation PDF. Expires 30 minutes after generation; retrieve the report again to obtain a fresh URL. Null when no PDF is recorded for this attempt.
+                    description: Presigned download URL for the NAT policy remediation report, valid for 30 minutes after generation. Get the report again to obtain a new URL. Null if no PDF report is available.
                     example: https://example.com/remediation-report.pdf?signature=example
                     format: uri
                     nullable: true
                     type: string
                 startedAt:
-                    description: Time the remediation started, in UTC (RFC 3339). Omitted if unavailable.
+                    description: The time the remediation started, in UTC (RFC 3339). Omitted if unavailable.
                     example: 2026-10-08T10:00:00Z
                     format: date-time
                     type: string
                 status:
-                    description: Final status of the remediation attempt.
+                    description: The final status of the NAT policy remediation.
                     enum:
                         - QUEUED
                         - RUNNING
@@ -20308,11 +20367,11 @@ components:
                     example: COMPLETED
                     type: string
                 triggeredBy:
-                    description: Username of the user who initiated the remediation.
+                    description: The username of the user who started the NAT policy remediation.
                     example: user@example.com
                     type: string
                 version:
-                    description: Positive remediation-attempt version within the insight.
+                    description: The version of the remediation report for the NAT policy analysis.
                     example: 3
                     format: int64
                     minimum: 1
@@ -20382,17 +20441,17 @@ components:
                     type: integer
             type: object
         RuleRemediationActionDto:
-            description: Action selection for one NAT rule.
+            description: The remediation action selected for a NAT rule.
             properties:
                 action:
-                    description: Authoritative remediation action for this NAT rule.
+                    description: The remediation action to apply to the NAT rule.
                     enum:
                         - DELETE
                         - DISABLE
                     example: DISABLE
                     type: string
                 ruleId:
-                    description: NAT rule identifier.
+                    description: The unique identifier of the NAT rule.
                     example: ed189db6-3c46-463f-9615-72230044be2a
                     minLength: 1
                     type: string
@@ -21169,32 +21228,14 @@ components:
                     type: string
             type: object
         SmartAccountDto:
+            description: The smart account used to license this device.
             properties:
-                domain:
-                    description: Account domain for your Smart Account
+                parent:
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                name:
-                    description: Name of the smart account
-                    type: string
-                smartAccountId:
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             properties:

@@ -1,13 +1,13 @@
 # RuleRemediationActionDto
 
-Action selection for one NAT rule.
+The remediation action selected for a NAT rule.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action** | **str** | Authoritative remediation action for this NAT rule. | 
-**rule_id** | **str** | NAT rule identifier. | 
+**action** | **str** | The remediation action to apply to the NAT rule. | 
+**rule_id** | **str** | The unique identifier of the NAT rule. | 
 
 ## Example
 
