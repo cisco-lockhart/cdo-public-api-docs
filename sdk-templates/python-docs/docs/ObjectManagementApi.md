@@ -31,7 +31,7 @@ Method | HTTP request | Description
 
 Create Object
 
-Create an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Create an object in the Security Cloud Control tenant. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.
 
 ### Example
 
@@ -64,7 +64,7 @@ configuration = scc_firewall_manager_sdk.Configuration(
 with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.ObjectManagementApi(api_client)
-    create_request = scc_firewall_manager_sdk.CreateRequest() # CreateRequest | 
+    create_request = {"description":"All web servers","name":"web-servers","value":{"defaultContent":{"literals":[{"literal":"10.10.10.0/24"},{"literal":"10.10.20.1-10.10.20.9"},{"literal":"web.example.com"}],"referencedObjectUids":["7131daad-e813-4b8f-8f42-be1e241e8cdb"]},"objectType":"NETWORK_GROUP"}} # CreateRequest | 
 
     try:
         # Create Object
@@ -115,7 +115,7 @@ Name | Type | Description  | Notes
 
 Create Targets
 
-Add known targets for an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Add known targets for an object in the Security Cloud Control tenant. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.
 
 ### Example
 
@@ -201,7 +201,7 @@ Name | Type | Description  | Notes
 
 Delete Object
 
-Delete an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Delete an object in the Security Cloud Control tenant. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.
 
 ### Example
 
@@ -285,7 +285,7 @@ Name | Type | Description  | Notes
 
 Get Duplicate Objects
 
-Get objects in the Security Cloud Control tenant that are duplicates of the given object. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Get objects in the Security Cloud Control tenant that are duplicates of the given object. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.
 
 ### Example
 
@@ -370,7 +370,7 @@ Name | Type | Description  | Notes
 
 Get Issues Count
 
-Get issues count in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Get issues count in the Security Cloud Control tenant. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.
 
 ### Example
 
@@ -453,7 +453,7 @@ Name | Type | Description  | Notes
 
 Get Object
 
-Gets an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Gets an object in the Security Cloud Control tenant. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.
 
 ### Example
 
@@ -538,7 +538,7 @@ Name | Type | Description  | Notes
 
 Get Object Usages
 
-Get usages of an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Get usages of an object in the Security Cloud Control tenant. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.
 
 ### Example
 
@@ -714,7 +714,7 @@ Name | Type | Description  | Notes
 
 Get Override Object With Values For Specific Target
 
-Gets an object in the Security Cloud Control tenant with values for specific target uid. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Gets an object in the Security Cloud Control tenant with values for specific target uid. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.
 
 ### Example
 
@@ -799,7 +799,7 @@ Name | Type | Description  | Notes
 
 Get Targets
 
-Get targets from an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Get targets from an object in the Security Cloud Control tenant. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.
 
 ### Example
 
@@ -888,7 +888,7 @@ Name | Type | Description  | Notes
 
 Modify Object
 
-Modify an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.
+Modify an object in the Security Cloud Control tenant. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.
 
 ### Example
 
@@ -922,7 +922,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.ObjectManagementApi(api_client)
     uid = '7131daad-e813-4b8f-8f42-be1e241e8cdb' # str | The unique identifier of the object being updated.
-    update_request = scc_firewall_manager_sdk.UpdateRequest() # UpdateRequest | 
+    update_request = {"value":{"defaultContent":{"literals":[{"literal":"10.10.30.0/24"}],"referencedObjectUids":["7131daad-e813-4b8f-8f42-be1e241e8cdb"]},"objectType":"NETWORK_GROUP"}} # UpdateRequest | A partial update: send only the fields to change, and any field left out keeps its current value. The value is replaced as a whole, so when changing it send the complete new value, including any overrides to keep.
 
     try:
         # Modify Object
@@ -941,7 +941,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **uid** | **str**| The unique identifier of the object being updated. | 
- **update_request** | [**UpdateRequest**](UpdateRequest.md)|  | 
+ **update_request** | [**UpdateRequest**](UpdateRequest.md)| A partial update: send only the fields to change, and any field left out keeps its current value. The value is replaced as a whole, so when changing it send the complete new value, including any overrides to keep. | 
 
 ### Return type
 

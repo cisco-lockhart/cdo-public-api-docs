@@ -7,7 +7,7 @@ The value of the object
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **default_content** | [**ObjectContent**](ObjectContent.md) |  | 
-**object_type** | **str** | The type of object | 
+**object_type** | **str** | The type of object. It determines the shape of defaultContent and of each override&#39;s content: NETWORK_OBJECT, URL_OBJECT and SERVICE_OBJECT carry a single value, while NETWORK_GROUP, URL_GROUP and SERVICE_GROUP carry literals and referencedObjectUids. | 
 **overrides** | [**List[Override]**](Override.md) | The list of target overrides for the object. Each override the default content for its target. | [optional] 
 
 ## Example

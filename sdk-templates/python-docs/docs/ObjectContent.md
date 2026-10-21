@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **dns_resolution** | **str** | For FQDN network objects sourced from FTD/cdFMC, the DNS resolution family that governs which DNS record types FTD resolves at policy-enforcement time. Populated only for FQDN objects; absent otherwise. | [optional] 
 **literal** | **str** | The literal content of the network object | [optional] 
-**literals** | [**List[SingleContent]**](SingleContent.md) | List of content literals | [optional] 
+**literals** | [**List[SingleContent]**](SingleContent.md) | (groups only) The group&#39;s inline members. Each member has the same shape as the content of the matching single object: { \&quot;literal\&quot;: \&quot;10.10.10.0/24\&quot; } in a NETWORK_GROUP, { \&quot;url\&quot;: \&quot;https://www.cisco.com/\&quot; } in a URL_GROUP, and { \&quot;protocol\&quot;: \&quot;TCP\&quot;, \&quot;serviceValue\&quot;: { \&quot;literal\&quot;: \&quot;443\&quot; } } in a SERVICE_GROUP. | [optional] 
 **protocol** | **str** | The service object protocol | [optional] 
-**referenced_object_uids** | **List[str]** | Set of UIDs of the group&#39;s referenced objects | [optional] 
+**referenced_object_uids** | **List[str]** | (groups only) The UIDs of existing objects, or groups of the same kind, that are members of the group | [optional] 
 **service_value** | [**ServiceObjectValueContent**](ServiceObjectValueContent.md) |  | [optional] 
 **url** | **str** | The URL literal | [optional] 
 

@@ -10110,11 +10110,72 @@ paths:
             tags:
                 - Object Management
         post:
-            description: 'Create an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
+            description: 'Create an object in the Security Cloud Control tenant. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.'
             operationId: createObject
             requestBody:
                 content:
                     application/json:
+                        examples:
+                            Network group:
+                                description: Network group
+                                value:
+                                    description: All web servers
+                                    name: web-servers
+                                    value:
+                                        defaultContent:
+                                            literals:
+                                                - literal: 10.10.10.0/24
+                                                - literal: 10.10.20.1-10.10.20.9
+                                                - literal: web.example.com
+                                            referencedObjectUids:
+                                                - 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                                        objectType: NETWORK_GROUP
+                            Network object:
+                                description: Network object
+                                value:
+                                    description: The web server
+                                    name: web-server
+                                    value:
+                                        defaultContent:
+                                            literal: 10.10.10.1
+                                        objectType: NETWORK_OBJECT
+                            Service group:
+                                description: Service group
+                                value:
+                                    description: HTTP and HTTPS traffic
+                                    name: web-traffic
+                                    value:
+                                        defaultContent:
+                                            literals:
+                                                - protocol: TCP
+                                                  serviceValue:
+                                                    literal: "80"
+                                                - protocol: TCP
+                                                  serviceValue:
+                                                    literal: "443"
+                                            referencedObjectUids:
+                                                - 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                                        objectType: SERVICE_GROUP
+                            Service object:
+                                description: Service object
+                                value:
+                                    description: HTTPS traffic
+                                    name: https
+                                    value:
+                                        defaultContent:
+                                            protocol: TCP
+                                            serviceValue:
+                                                literal: "443"
+                                        objectType: SERVICE_OBJECT
+                            URL object:
+                                description: URL object
+                                value:
+                                    description: The Cisco website
+                                    name: cisco-website
+                                    value:
+                                        defaultContent:
+                                            url: https://www.cisco.com/
+                                        objectType: URL_OBJECT
                         schema:
                             $ref: '#/components/schemas/CreateRequest'
                 required: true
@@ -10146,7 +10207,7 @@ paths:
                 - Object Management
     /v1/objects/{uid}:
         delete:
-            description: 'Delete an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
+            description: 'Delete an object in the Security Cloud Control tenant. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.'
             operationId: deleteObject
             parameters:
                 - description: The unique identifier of the object being deleted.
@@ -10192,7 +10253,7 @@ paths:
             tags:
                 - Object Management
         get:
-            description: 'Gets an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
+            description: 'Gets an object in the Security Cloud Control tenant. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.'
             operationId: getObject
             parameters:
                 - description: The unique identifier of the object being retrieved.
@@ -10237,7 +10298,7 @@ paths:
             tags:
                 - Object Management
         patch:
-            description: 'Modify an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
+            description: 'Modify an object in the Security Cloud Control tenant. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.'
             operationId: modifyObject
             parameters:
                 - description: The unique identifier of the object being updated.
@@ -10251,8 +10312,34 @@ paths:
             requestBody:
                 content:
                     application/json:
+                        examples:
+                            Network group members:
+                                description: Network group members
+                                summary: Replace the members of a network group
+                                value:
+                                    value:
+                                        defaultContent:
+                                            literals:
+                                                - literal: 10.10.30.0/24
+                                            referencedObjectUids:
+                                                - 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                                        objectType: NETWORK_GROUP
+                            Network object value:
+                                description: Network object value
+                                summary: Change only the address of a network object
+                                value:
+                                    value:
+                                        defaultContent:
+                                            literal: 10.10.10.2
+                                        objectType: NETWORK_OBJECT
+                            Rename:
+                                description: Rename
+                                summary: Change only the name
+                                value:
+                                    name: web-server-primary
                         schema:
                             $ref: '#/components/schemas/UpdateRequest'
+                description: 'A partial update: send only the fields to change, and any field left out keeps its current value. The value is replaced as a whole, so when changing it send the complete new value, including any overrides to keep.'
                 required: true
             responses:
                 "200":
@@ -10282,7 +10369,7 @@ paths:
                 - Object Management
     /v1/objects/{uid}/duplicates:
         get:
-            description: 'Get objects in the Security Cloud Control tenant that are duplicates of the given object. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
+            description: 'Get objects in the Security Cloud Control tenant that are duplicates of the given object. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.'
             operationId: getDuplicateObjects
             parameters:
                 - description: The unique identifier of the object to retrieve duplicates for.
@@ -10331,7 +10418,7 @@ paths:
                 - Object Management
     /v1/objects/{uid}/targets:
         get:
-            description: 'Get targets from an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
+            description: 'Get targets from an object in the Security Cloud Control tenant. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.'
             operationId: getTargets
             parameters:
                 - description: The unique identifier of the object for which the targets are being retrieved.
@@ -10393,7 +10480,7 @@ paths:
             tags:
                 - Object Management
         post:
-            description: 'Add known targets for an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
+            description: 'Add known targets for an object in the Security Cloud Control tenant. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.'
             operationId: createTargets
             parameters:
                 - description: the unique identifier of the object for which the targets are being added to.
@@ -10444,7 +10531,7 @@ paths:
                 - Object Management
     /v1/objects/{uid}/usage:
         get:
-            description: 'Get usages of an object in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
+            description: 'Get usages of an object in the Security Cloud Control tenant. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.'
             operationId: getObjectUsages
             parameters:
                 - description: The unique identifier of the object to retrieve usages for.
@@ -10485,7 +10572,7 @@ paths:
                 - Object Management
     /v1/objects/issues-count:
         get:
-            description: 'Get issues count in the Security Cloud Control tenant. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
+            description: 'Get issues count in the Security Cloud Control tenant. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.'
             operationId: getIssuesCount
             parameters:
                 - description: The query to execute. Use the Lucene Query Syntax to construct your query. Possible fields to search by are name, content.
@@ -10523,7 +10610,7 @@ paths:
                 - Object Management
     /v1/objects/overrides/{uid}:
         get:
-            description: 'Gets an object in the Security Cloud Control tenant with values for specific target uid. To use the object APIs, contact customer support or provision Multicloud Defense and turn on object sharing. Note: the object APIs only support operations on network objects and groups.'
+            description: 'Gets an object in the Security Cloud Control tenant with values for specific target uid. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.'
             operationId: getOverrideObject
             parameters:
                 - description: The unique identifier of the object being retrieved.
@@ -15709,7 +15796,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The type of the device.
+            description: The distinct device types for the devices managed by the MSP Portal.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -15730,7 +15817,6 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: CDFMC_MANAGED_FTD
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -15899,7 +15985,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         ExtendedNatRuleData:
@@ -19400,7 +19486,7 @@ components:
                     example: a:b:c::1
                     type: string
                 literals:
-                    description: List of content literals
+                    description: '(groups only) The group''s inline members. Each member has the same shape as the content of the matching single object: { "literal": "10.10.10.0/24" } in a NETWORK_GROUP, { "url": "https://www.cisco.com/" } in a URL_GROUP, and { "protocol": "TCP", "serviceValue": { "literal": "443" } } in a SERVICE_GROUP.'
                     items:
                         $ref: '#/components/schemas/SingleContent'
                     type: array
@@ -19538,11 +19624,11 @@ components:
                     example: TCP
                     type: string
                 referencedObjectUids:
-                    description: Set of UIDs of the group's referenced objects
+                    description: (groups only) The UIDs of existing objects, or groups of the same kind, that are members of the group
                     example:
                         - 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     items:
-                        description: Set of UIDs of the group's referenced objects
+                        description: (groups only) The UIDs of existing objects, or groups of the same kind, that are members of the group
                         format: uuid
                         type: string
                     type: array
@@ -20999,7 +21085,7 @@ components:
                 defaultContent:
                     $ref: '#/components/schemas/ObjectContent'
                 objectType:
-                    description: The type of object
+                    description: 'The type of object. It determines the shape of defaultContent and of each override''s content: NETWORK_OBJECT, URL_OBJECT and SERVICE_OBJECT carry a single value, while NETWORK_GROUP, URL_GROUP and SERVICE_GROUP carry literals and referencedObjectUids.'
                     enum:
                         - NETWORK_OBJECT
                         - URL_OBJECT
@@ -21186,32 +21272,14 @@ components:
                     type: string
             type: object
         SmartAccountDto:
+            description: The smart account used to license this device.
             properties:
-                domain:
-                    description: Account domain for your Smart Account
+                parent:
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                name:
-                    description: Name of the smart account
-                    type: string
-                smartAccountId:
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             properties:
@@ -21537,15 +21605,21 @@ components:
             type: object
         Summary:
             properties:
-                average:
+                optimizablePercentage:
                     format: double
                     type: number
-                latest:
-                    format: double
-                    type: number
-                max:
-                    format: double
-                    type: number
+                redundantRules:
+                    format: int32
+                    type: integer
+                shadowedRules:
+                    format: int32
+                    type: integer
+                totalRules:
+                    format: int32
+                    type: integer
+                unhealthyRulesCount:
+                    format: int32
+                    type: integer
             type: object
         SwitchPortConfig:
             description: Switchport configuration of the interface, which includes settings such as switchport mode, access VLAN, and trunk VLAN. This configuration is applicable for interfaces operating in switchport mode.
