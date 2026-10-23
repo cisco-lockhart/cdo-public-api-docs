@@ -7,8 +7,8 @@ The remediation plan for a NAT policy analysis.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **insight_uid** | **str** | The unique identifier of the NAT policy analysis. | [optional] 
-**redundant_rules_action_list** | [**List[ObservationRemediationActionDto]**](ObservationRemediationActionDto.md) | The remediation actions selected for redundant NAT rules. | [optional] 
-**shadowed_rules_action_list** | [**List[ObservationRemediationActionDto]**](ObservationRemediationActionDto.md) | The remediation actions selected for shadowed NAT rules. | [optional] 
+**redundant_rules_actions** | [**List[ObservationRemediationActionDto]**](ObservationRemediationActionDto.md) | The remediation actions selected for redundant NAT rules. | [optional] 
+**shadowed_rules_actions** | [**List[ObservationRemediationActionDto]**](ObservationRemediationActionDto.md) | The remediation actions selected for shadowed NAT rules. | [optional] 
 **total_deleted_count** | **int** | The total number of unique NAT rules selected for deletion. | [optional] [readonly] 
 **total_disabled_count** | **int** | The total number of unique NAT rules selected to be disabled. | [optional] [readonly] 
 
