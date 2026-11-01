@@ -1,16 +1,13 @@
 # Policy
 
+Results from the Security Cloud Control policies that match the search term.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**domain_name** | **str** |  | [optional] 
-**domain_uid** | **str** |  | [optional] 
-**last_modified_time** | **datetime** |  | [optional] 
-**name** | **str** |  | [optional] 
-**type** | **str** |  | [optional] 
-**uid** | **str** |  | [optional] 
+**name** | **str** | The name of the policy in Security Cloud Control. | [optional] 
+**uid** | **str** | The unique identifier, represented as a UUID, of the policy in Security Cloud Control. | [optional] 
 
 ## Example
 
