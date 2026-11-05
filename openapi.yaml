@@ -4749,6 +4749,207 @@ paths:
             summary: (cdFMC-managed FTDs and chassis only) Get Deployment Run Transcript
             tags:
                 - Device Deployments
+    /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore:
+        post:
+            description: |+
+                This is an asynchronous operation to restore the configuration of the selected devices to the configuration deployed in the given FTD deployment run. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.
+
+                Notes:
+
+                - This operation is only supported for deployment runs of cdFMC-managed FTDs and chassis.
+
+                - Restoring changes only the devices. The changes that were rolled back remain in Security Cloud Control and will be deployed again by the next deployment.
+
+                - Use `GET /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore/devices` to find which devices can be restored.
+
+            operationId: restoreFtdDevicesToDeploymentRun
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device deployment run in SCC Firewall Manager.
+                  in: path
+                  name: deploymentRunUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/FtdDeviceRestoreInput'
+                required: true
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the progress of the restore.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: (cdFMC-managed FTDs and chassis only) Restore FTD Devices to a Deployment Run
+            tags:
+                - Device Deployments
+    /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore/devices:
+        get:
+            description: |+
+                Get the devices in an FTD deployment run, and whether each device can be restored to the configuration deployed in that run.
+
+                Notes:
+
+                - This operation is only supported for deployment runs of cdFMC-managed FTDs and chassis devices.
+
+                - Only deployment runs created after this feature was released can be restored.
+
+            operationId: getRestorableDevicesForDeploymentRun
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device deployment run in SCC Firewall Manager.
+                  in: path
+                  name: deploymentRunUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RestorableDeviceListDto'
+                    description: Every device in the deployment run, restorable or not.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: (cdFMC-managed FTDs and chassis only) Get Restorable Devices for FTD Deployment Run
+            tags:
+                - Device Deployments
+    /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore/devices/{deviceUid}/changes:
+        get:
+            description: |+
+                Get the changes calculated by `POST /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore/devices/{deviceUid}/changes`.
+
+                Note: This is not a paginated endpoint.
+
+            operationId: getRestoreChangesForDevice
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device deployment run in SCC Firewall Manager.
+                  in: path
+                  name: deploymentRunUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/FtdChangeItemDto'
+                    description: The changes restoring the device to the deployment run would make.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: (cdFMC-managed FTDs and chassis only) Get Device Restore Changes for FTD Deployment Run
+            tags:
+                - Device Deployments
+        post:
+            description: |+
+                This is an asynchronous operation to calculate the changes that restoring a device to the configuration deployed in the given FTD deployment run would make, compared with the configuration from the device's latest completed deployment run. This operation returns a link to a transaction object that can be used to monitor the progress of the calculation.
+
+                Notes:
+
+                - This operation is only supported for deployment runs of cdFMC-managed FTDs and chassis.
+
+                - Use `GET /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore/devices/{deviceUid}/changes` to get the result.
+
+            operationId: calculateRestoreChangesForDevice
+            parameters:
+                - description: The unique identifier, represented as a UUID, of the device deployment run in SCC Firewall Manager.
+                  in: path
+                  name: deploymentRunUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+                - description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+                  in: path
+                  name: deviceUid
+                  required: true
+                  schema:
+                    format: uuid
+                    type: string
+            responses:
+                "202":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the progress of the calculation.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "403":
+                    $ref: '#/components/responses/http403Forbidden'
+                "404":
+                    $ref: '#/components/responses/http404NotFound'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: (cdFMC-managed FTDs and chassis only) Calculate Device Restore Changes for FTD Deployment Run
+            tags:
+                - Device Deployments
     /v1/inventory/devices/deployments/runs/export:
         post:
             description: This is an asynchronous operation to export device deployment runs in CSV format. Once complete, the file can be downloaded using a presigned AWS S3 URL specified in the entityUrl field of the transaction that expires in 1 hour.
@@ -13012,6 +13213,7 @@ components:
                     enum:
                         - FTD_DEVICE_DEPLOY
                         - ASA_DEVICE_DEPLOY
+                        - FTD_DEVICE_RESTORE
                         - ASA_DEVICE_DEPLOY
                     type: string
                 deviceUid:
@@ -14730,16 +14932,20 @@ components:
                         - PENDING
                         - VALIDATING_DEVICES
                         - DEPLOYING
+                        - RESTORING
                         - DEPLOY_COMPLETED
+                        - RESTORE_COMPLETED
                         - DEPLOY_VALIDATION_FAILED
                         - DEPLOY_FAILED
+                        - RESTORE_FAILED
                     example: WAITING_FOR_DEPLOY
                     type: string
                 deploymentType:
-                    description: The type of the deployment. Searchable with values ASA_DEVICE_DEPLOY and FTD_DEVICE_DEPLOY.
+                    description: The type of the deployment. Searchable with values ASA_DEVICE_DEPLOY, FTD_DEVICE_DEPLOY and FTD_DEVICE_RESTORE.
                     enum:
                         - FTD_DEVICE_DEPLOY
                         - ASA_DEVICE_DEPLOY
+                        - FTD_DEVICE_RESTORE
                     example: ASA_DEVICE_DEPLOY
                     type: string
                 description:
@@ -14784,6 +14990,11 @@ components:
                 ignoreWarnings:
                     description: Boolean indicating whether warnings identified by the deployment sub-system about this deployment were ignored.
                     type: boolean
+                jobHistoryUid:
+                    description: (cdFMC-managed FTDs and chassis only) The unique identifier of the cdFMC deployment job for this deployment run. Only FTD deployment runs with a job history UID can be restored. Omitted for deployment runs created before restores were supported, and for deployment runs that failed before reaching cdFMC.
+                    example: 063abfdc-4a2d-0ed3-0000-554050785924
+                    format: uuid
+                    type: string
                 labels:
                     $ref: '#/components/schemas/Labels'
                 lastUpdatedTime:
@@ -14794,6 +15005,11 @@ components:
                 name:
                     description: The name of the deployment run. Deployment runs names are unique in a tenant in SCC Firewall Manager.
                     example: my-example-device
+                    type: string
+                restoredDeploymentUid:
+                    description: (Restore deployment runs only) The unique identifier of the deployment run whose configuration was restored to the devices.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
                     type: string
                 submissionTime:
                     description: Time (UTC; represented using the RFC-3339 standard) at which the deployment run was triggered.
@@ -16266,6 +16482,7 @@ components:
                     enum:
                         - FTD_DEVICE_DEPLOY
                         - ASA_DEVICE_DEPLOY
+                        - FTD_DEVICE_RESTORE
                         - FTD_DEVICE_DEPLOY
                     type: string
                 deviceUid:
@@ -16451,6 +16668,20 @@ components:
                     default: false
                     description: 'Specify whether to ignore warnings generated during the pre-validation of the deployment job and proceed with the deployment regardless. **Warning**: Do not set this to `true` unless you know what you are doing.'
                     type: boolean
+            type: object
+        FtdDeviceRestoreInput:
+            properties:
+                deviceUids:
+                    description: The unique identifiers, represented as UUIDs, of the devices in the deployment run to restore. Every device must be part of the deployment run and restorable.
+                    example:
+                        - 256461f6-bd60-11ef-8beb-6cf1610cf55d
+                    items:
+                        format: uuid
+                        type: string
+                    minItems: 1
+                    type: array
+            required:
+                - deviceUids
             type: object
         FtdHaInfo:
             description: '(High Availability Devices managed by FMC only) High-Available information information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
@@ -20465,6 +20696,40 @@ components:
                     example: 0
                     format: int32
                     type: integer
+            type: object
+        RestorableDeviceDto:
+            description: Every device in the deployment run, with indicators as to whether the device can be restored to the configuration deployed in this deployment run.
+            properties:
+                deviceName:
+                    description: The name of the device.
+                    example: branch-ftd-1
+                    type: string
+                deviceUid:
+                    description: The unique identifier, represented as a UUID, of the device in Security Cloud Control.
+                    example: 256461f6-bd60-11ef-8beb-6cf1610cf55d
+                    format: uuid
+                    type: string
+                notRestorableReason:
+                    description: 'Why the device cannot be restored. Absent when the device is restorable. DEVICE_NOT_FOUND: the device no longer exists. NOT_ROLLBACK_ELIGIBLE: cdFMC cannot roll the device back to this deployment run. DEVICE_UNREACHABLE: the device is not online. DEPLOYMENT_IN_PROGRESS: the device is being deployed to.'
+                    enum:
+                        - DEVICE_NOT_FOUND
+                        - NOT_ROLLBACK_ELIGIBLE
+                        - DEVICE_UNREACHABLE
+                        - DEPLOYMENT_IN_PROGRESS
+                    type: string
+                restorable:
+                    description: Whether the device can be restored to the configuration deployed in this deployment run.
+                    type: boolean
+            type: object
+        RestorableDeviceListDto:
+            properties:
+                items:
+                    description: Every device in the deployment run, with indicators as to whether the device can be restored to the configuration deployed in this deployment run.
+                    items:
+                        $ref: '#/components/schemas/RestorableDeviceDto'
+                    type: array
+            required:
+                - items
             type: object
         RuleConflictsData:
             description: Rule Conflicts Data holding original rule and conflicting rules.

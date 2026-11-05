@@ -223,6 +223,7 @@ nav:
     - FtdCompatibilityVersion: FtdCompatibilityVersion.md
     - FtdCreateOrUpdateInput: FtdCreateOrUpdateInput.md
     - FtdDeploymentInput: FtdDeploymentInput.md
+    - FtdDeviceRestoreInput: FtdDeviceRestoreInput.md
     - FtdHaInfo: FtdHaInfo.md
     - FtdLicenseType: FtdLicenseType.md
     - FtdMultiDeviceDeploymentInput: FtdMultiDeviceDeploymentInput.md
@@ -402,6 +403,8 @@ nav:
     - RemediationReportDto: RemediationReportDto.md
     - RemediationReportPage: RemediationReportPage.md
     - RemoteReadinessResult: RemoteReadinessResult.md
+    - RestorableDeviceDto: RestorableDeviceDto.md
+    - RestorableDeviceListDto: RestorableDeviceListDto.md
     - RuleConflictsData: RuleConflictsData.md
     - RuleConflictsDataPage: RuleConflictsDataPage.md
     - RuleRemediationActionDto: RuleRemediationActionDto.md

@@ -13,6 +13,7 @@ UAE | https://api.uae.security.cisco.com/firewall
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**calculate_restore_changes_for_device**](DeviceDeploymentsApi.md#calculate_restore_changes_for_device) | **POST** /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore/devices/{deviceUid}/changes | (cdFMC-managed FTDs and chassis only) Calculate Device Restore Changes for FTD Deployment Run
 [**deploy_changes_to_multiple_asa_devices**](DeviceDeploymentsApi.md#deploy_changes_to_multiple_asa_devices) | **POST** /v1/inventory/devices/asas/deploy | Deploy changes to multiple ASA devices
 [**deploy_changes_to_multiple_ftd_devices**](DeviceDeploymentsApi.md#deploy_changes_to_multiple_ftd_devices) | **POST** /v1/inventory/devices/ftds/deploy | (cdFMC-managed FTDs and chassis only) Deploy changes to multiple FTD devices
 [**export_device_deployment_runs**](DeviceDeploymentsApi.md#export_device_deployment_runs) | **POST** /v1/inventory/devices/deployments/runs/export | Export Device Deployment Runs
@@ -20,8 +21,96 @@ Method | HTTP request | Description
 [**get_deployment_run_transcript**](DeviceDeploymentsApi.md#get_deployment_run_transcript) | **GET** /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/transcript | (cdFMC-managed FTDs and chassis only) Get Deployment Run Transcript
 [**get_device_deployment_run**](DeviceDeploymentsApi.md#get_device_deployment_run) | **GET** /v1/inventory/devices/deployments/runs/{deploymentRunUid} | Get Device Deployment Run
 [**get_device_deployment_runs**](DeviceDeploymentsApi.md#get_device_deployment_runs) | **GET** /v1/inventory/devices/deployments/runs | Get Device Deployment Runs
+[**get_restorable_devices_for_deployment_run**](DeviceDeploymentsApi.md#get_restorable_devices_for_deployment_run) | **GET** /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore/devices | (cdFMC-managed FTDs and chassis only) Get Restorable Devices for FTD Deployment Run
+[**get_restore_changes_for_device**](DeviceDeploymentsApi.md#get_restore_changes_for_device) | **GET** /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore/devices/{deviceUid}/changes | (cdFMC-managed FTDs and chassis only) Get Device Restore Changes for FTD Deployment Run
+[**restore_ftd_devices_to_deployment_run**](DeviceDeploymentsApi.md#restore_ftd_devices_to_deployment_run) | **POST** /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore | (cdFMC-managed FTDs and chassis only) Restore FTD Devices to a Deployment Run
 [**update_device_deployment_run**](DeviceDeploymentsApi.md#update_device_deployment_run) | **PATCH** /v1/inventory/devices/deployments/runs/{deploymentRunUid} | Update Device Deployment Run
 
+
+# **calculate_restore_changes_for_device**
+> CdoTransaction calculate_restore_changes_for_device(deployment_run_uid, device_uid)
+
+(cdFMC-managed FTDs and chassis only) Calculate Device Restore Changes for FTD Deployment Run
+
+This is an asynchronous operation to calculate the changes that restoring a device to the configuration deployed in the given FTD deployment run would make, compared with the configuration from the device's latest completed deployment run. This operation returns a link to a transaction object that can be used to monitor the progress of the calculation.  Notes:  - This operation is only supported for deployment runs of cdFMC-managed FTDs and chassis.  - Use `GET /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore/devices/{deviceUid}/changes` to get the result.  
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.DeviceDeploymentsApi(api_client)
+    deployment_run_uid = 'deployment_run_uid_example' # str | The unique identifier, represented as a UUID, of the device deployment run in SCC Firewall Manager.
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+
+    try:
+        # (cdFMC-managed FTDs and chassis only) Calculate Device Restore Changes for FTD Deployment Run
+        api_response = api_instance.calculate_restore_changes_for_device(deployment_run_uid, device_uid)
+        print("The response of DeviceDeploymentsApi->calculate_restore_changes_for_device:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceDeploymentsApi->calculate_restore_changes_for_device: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_run_uid** | **str**| The unique identifier, represented as a UUID, of the device deployment run in SCC Firewall Manager. | 
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the device in SCC Firewall Manager. | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Security Cloud Control Transaction object that can be used to track the progress of the calculation. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**404** | Entity not found. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deploy_changes_to_multiple_asa_devices**
 > CdoTransaction deploy_changes_to_multiple_asa_devices(asa_multi_device_deployment_input)
@@ -609,6 +698,260 @@ Name | Type | Description  | Notes
 **400** | Invalid input provided. Check the response for details. |  -  |
 **401** | Request not authorized. |  -  |
 **403** | User does not have sufficient privileges to perform this operation. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_restorable_devices_for_deployment_run**
+> RestorableDeviceListDto get_restorable_devices_for_deployment_run(deployment_run_uid)
+
+(cdFMC-managed FTDs and chassis only) Get Restorable Devices for FTD Deployment Run
+
+Get the devices in an FTD deployment run, and whether each device can be restored to the configuration deployed in that run.  Notes:  - This operation is only supported for deployment runs of cdFMC-managed FTDs and chassis devices.  - Only deployment runs created after this feature was released can be restored.  
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.restorable_device_list_dto import RestorableDeviceListDto
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.DeviceDeploymentsApi(api_client)
+    deployment_run_uid = 'deployment_run_uid_example' # str | The unique identifier, represented as a UUID, of the device deployment run in SCC Firewall Manager.
+
+    try:
+        # (cdFMC-managed FTDs and chassis only) Get Restorable Devices for FTD Deployment Run
+        api_response = api_instance.get_restorable_devices_for_deployment_run(deployment_run_uid)
+        print("The response of DeviceDeploymentsApi->get_restorable_devices_for_deployment_run:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceDeploymentsApi->get_restorable_devices_for_deployment_run: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_run_uid** | **str**| The unique identifier, represented as a UUID, of the device deployment run in SCC Firewall Manager. | 
+
+### Return type
+
+[**RestorableDeviceListDto**](RestorableDeviceListDto.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Every device in the deployment run, restorable or not. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**404** | Entity not found. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_restore_changes_for_device**
+> FtdChangeItemDto get_restore_changes_for_device(deployment_run_uid, device_uid)
+
+(cdFMC-managed FTDs and chassis only) Get Device Restore Changes for FTD Deployment Run
+
+Get the changes calculated by `POST /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore/devices/{deviceUid}/changes`.  Note: This is not a paginated endpoint.  
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.ftd_change_item_dto import FtdChangeItemDto
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.DeviceDeploymentsApi(api_client)
+    deployment_run_uid = 'deployment_run_uid_example' # str | The unique identifier, represented as a UUID, of the device deployment run in SCC Firewall Manager.
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+
+    try:
+        # (cdFMC-managed FTDs and chassis only) Get Device Restore Changes for FTD Deployment Run
+        api_response = api_instance.get_restore_changes_for_device(deployment_run_uid, device_uid)
+        print("The response of DeviceDeploymentsApi->get_restore_changes_for_device:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceDeploymentsApi->get_restore_changes_for_device: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_run_uid** | **str**| The unique identifier, represented as a UUID, of the device deployment run in SCC Firewall Manager. | 
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the device in SCC Firewall Manager. | 
+
+### Return type
+
+[**FtdChangeItemDto**](FtdChangeItemDto.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The changes restoring the device to the deployment run would make. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**404** | Entity not found. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **restore_ftd_devices_to_deployment_run**
+> CdoTransaction restore_ftd_devices_to_deployment_run(deployment_run_uid, ftd_device_restore_input)
+
+(cdFMC-managed FTDs and chassis only) Restore FTD Devices to a Deployment Run
+
+This is an asynchronous operation to restore the configuration of the selected devices to the configuration deployed in the given FTD deployment run. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.  Notes:  - This operation is only supported for deployment runs of cdFMC-managed FTDs and chassis.  - Restoring changes only the devices. The changes that were rolled back remain in Security Cloud Control and will be deployed again by the next deployment.  - Use `GET /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore/devices` to find which devices can be restored.  
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.models.ftd_device_restore_input import FtdDeviceRestoreInput
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.DeviceDeploymentsApi(api_client)
+    deployment_run_uid = 'deployment_run_uid_example' # str | The unique identifier, represented as a UUID, of the device deployment run in SCC Firewall Manager.
+    ftd_device_restore_input = scc_firewall_manager_sdk.FtdDeviceRestoreInput() # FtdDeviceRestoreInput | 
+
+    try:
+        # (cdFMC-managed FTDs and chassis only) Restore FTD Devices to a Deployment Run
+        api_response = api_instance.restore_ftd_devices_to_deployment_run(deployment_run_uid, ftd_device_restore_input)
+        print("The response of DeviceDeploymentsApi->restore_ftd_devices_to_deployment_run:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceDeploymentsApi->restore_ftd_devices_to_deployment_run: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_run_uid** | **str**| The unique identifier, represented as a UUID, of the device deployment run in SCC Firewall Manager. | 
+ **ftd_device_restore_input** | [**FtdDeviceRestoreInput**](FtdDeviceRestoreInput.md)|  | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Security Cloud Control Transaction object that can be used to track the progress of the restore. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**404** | Entity not found. |  -  |
 **500** | Internal server error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
