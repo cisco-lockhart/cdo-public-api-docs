@@ -240,6 +240,7 @@ nav:
     - GroupContent: GroupContent.md
     - HaHealthMetrics: HaHealthMetrics.md
     - HaNode: HaNode.md
+    - HealthMetricSummary: HealthMetricSummary.md
     - HttpStatusCode: HttpStatusCode.md
     - Icmp4Value: Icmp4Value.md
     - Icmp6Value: Icmp6Value.md

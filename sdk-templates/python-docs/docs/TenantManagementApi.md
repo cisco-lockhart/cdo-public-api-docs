@@ -582,7 +582,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_beta_feature_flags**
-> List[FeatureFlag] update_beta_feature_flags(request_body)
+> CdoTransaction update_beta_feature_flags(request_body)
 
 Update Beta feature flags
 
@@ -594,7 +594,7 @@ Update the list of beta feature flags enabled
 
 ```python
 import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.feature_flag import FeatureFlag
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
 from scc_firewall_manager_sdk.rest import ApiException
 from pprint import pprint
 
@@ -640,7 +640,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[FeatureFlag]**](FeatureFlag.md)
+[**CdoTransaction**](CdoTransaction.md)
 
 ### Authorization
 
@@ -655,7 +655,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Set of beta feature flags that are enabled for the user&#39;s tenant. |  -  |
+**202** | Security Cloud Control Transaction object that can be used to track the progress of the feature flag update operation. |  -  |
 **401** | Request not authorized. |  -  |
 **500** | Internal server error. |  -  |
 

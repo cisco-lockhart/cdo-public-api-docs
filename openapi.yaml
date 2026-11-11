@@ -1917,17 +1917,12 @@ paths:
                             type: object
                 required: true
             responses:
-                "200":
+                "202":
                     content:
                         application/json:
-                            example:
-                                - feature-1: true
-                                - feature-2: false
                             schema:
-                                items:
-                                    $ref: '#/components/schemas/FeatureFlag'
-                                type: array
-                    description: Set of beta feature flags that are enabled for the user's tenant.
+                                $ref: '#/components/schemas/CdoTransaction'
+                    description: Security Cloud Control Transaction object that can be used to track the progress of the feature flag update operation.
                 "401":
                     $ref: '#/components/responses/http401Unauthorised'
                 "500":
@@ -4679,10 +4674,7 @@ paths:
                         application/json:
                             schema:
                                 items:
-                                    oneOf:
-                                        - $ref: '#/components/schemas/FtdChangeItemDto'
-                                        - $ref: '#/components/schemas/AsaChangeItemDto'
-                                    type: string
+                                    $ref: '#/components/schemas/ChangeItemDto'
                                 type: array
                     description: The change items captured for the device in this deployment run.
                 "400":
@@ -13200,33 +13192,36 @@ components:
                     type: string
             type: object
         AsaChangeItemDto:
-            properties:
-                deployedConfig:
-                    description: 'The configuration deployed to the device (or the configuration that was attempted to be deployed to the device, in the case of a failed deployment). Note: this field is set to null if the device already had this configuration, or when snapshot capture failed for this device.'
-                    type: string
-                deploymentRunUid:
-                    description: The unique identifier, represented as a UUID, of the deployment run the change item is associated with.
-                    format: uuid
-                    type: string
-                deploymentType:
-                    description: Discriminator identifying this change item as ASA.
-                    enum:
-                        - FTD_DEVICE_DEPLOY
-                        - ASA_DEVICE_DEPLOY
-                        - FTD_DEVICE_RESTORE
-                        - ASA_DEVICE_DEPLOY
-                    type: string
-                deviceUid:
-                    description: The unique identifier, represented as a UUID, of the device the change item is associated with.
-                    format: uuid
-                    type: string
-                initialConfig:
-                    description: 'The configuration on the device prior to deployment. Note: this field is set to null if snapshot capture failed for this device.'
-                    type: string
-                uid:
-                    description: The unique identifier, represented as a UUID, of this change item.
-                    format: uuid
-                    type: string
+            allOf:
+                - $ref: '#/components/schemas/ChangeItemDto'
+                - properties:
+                    deployedConfig:
+                        description: 'The configuration deployed to the device (or the configuration that was attempted to be deployed to the device, in the case of a failed deployment). Note: this field is set to null if the device already had this configuration, or when snapshot capture failed for this device.'
+                        type: string
+                    deploymentRunUid:
+                        description: The unique identifier, represented as a UUID, of the deployment run the change item is associated with.
+                        format: uuid
+                        type: string
+                    deploymentType:
+                        description: Discriminator identifying this change item as ASA.
+                        enum:
+                            - FTD_DEVICE_DEPLOY
+                            - ASA_DEVICE_DEPLOY
+                            - FTD_DEVICE_RESTORE
+                            - ASA_DEVICE_DEPLOY
+                        type: string
+                    deviceUid:
+                        description: The unique identifier, represented as a UUID, of the device the change item is associated with.
+                        format: uuid
+                        type: string
+                    initialConfig:
+                        description: 'The configuration on the device prior to deployment. Note: this field is set to null if snapshot capture failed for this device.'
+                        type: string
+                    uid:
+                        description: The unique identifier, represented as a UUID, of this change item.
+                        format: uuid
+                        type: string
+                  type: object
             type: object
         AsaCompatibilityVersion:
             properties:
@@ -14091,6 +14086,21 @@ components:
                         $ref: '#/components/schemas/CdoTransaction'
                     type: array
             type: object
+        ChangeItemDto:
+            discriminator:
+                mapping:
+                    ASA_DEVICE_DEPLOY: '#/components/schemas/AsaChangeItemDto'
+                    FTD_DEVICE_DEPLOY: '#/components/schemas/FtdChangeItemDto'
+                propertyName: deploymentType
+            oneOf:
+                - $ref: '#/components/schemas/FtdChangeItemDto'
+                - $ref: '#/components/schemas/AsaChangeItemDto'
+            properties:
+                deploymentType:
+                    type: string
+            required:
+                - deploymentType
+            type: object
         ChangeRequest:
             properties:
                 description:
@@ -14702,10 +14712,10 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+            description: The completion status of the upgrade on the device.
             properties:
                 completedAt:
-                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
+                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
                     example: 2026-04-15T18:00:10.123Z
                     format: date-time
                     type: string
@@ -14713,7 +14723,7 @@ components:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -14724,12 +14734,12 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: The percentage completion of the current task being performed
+                    description: Percentage completion of the current task being performed.
                     format: double
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices in the Security Cloud Control tenant.
+            description: The distinct config states for the devices managed by the MSP Portal.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -14746,7 +14756,7 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
+            description: The distinct conflict detection states for the devices managed by the MSP Portal.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
@@ -14764,7 +14774,7 @@ components:
                     type: array
             type: object
         ConnectivityState:
-            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
+            description: The distinct connectivity states for the devices managed by the MSP Portal.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -14775,7 +14785,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
+            description: The type of the connector that will be used to communicate with the device.
             enum:
                 - SDC
                 - CDG
@@ -15862,7 +15872,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The distinct device roles for the devices in the Security Cloud Control tenant.
+            description: The roles that this device performs on the network.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -15870,19 +15880,63 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
+            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
-            description: The current status of each device in the upgrade run.
+            description: Set of device UIDs that are part of this upgrade run.
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+                    description: The completion status of the upgrade on the device.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                uid:
-                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+                hardwareModel:
+                    description: Hardware model of the devices being upgraded.
+                    example: Firepower 2110
+                    type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: Name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantUid:
+                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    format: uuid
+                    type: string
+                name:
+                    description: Name of the device being upgraded.
+                    example: my-firepower
+                    type: string
+                softwareVersionBeforeUpgrade:
+                    description: Software version of the device before the upgrade.
+                    example: 7.2.3
+                    type: string
+                transactionUid:
+                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, of the device being upgraded.
+                    format: uuid
+                    type: string
+                upgradeRunStatus:
+                    description: Current status of the upgrade run.
+                    enum:
+                        - IN_PROGRESS
+                        - REBUILDING_UPGRADE_CACHE
+                        - PERFORMING_UPGRADE
+                        - UPLOADING_IMAGE
+                        - PERFORMING_READINESS_CHECK
+                        - UPGRADE_STAGED
+                        - UPGRADE_STAGING_FAILED
+                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_COMPLETED
+                        - UPGRADE_FAILED
+                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -16037,7 +16091,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The type of the device.
+            description: The distinct device types for the devices managed by the MSP Portal.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -16058,7 +16112,6 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: ASA
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -16308,7 +16361,7 @@ components:
                     type: string
             type: object
         FmcDeviceRecord:
-            description: (FMC-managed FTDs and cdFMC-managed chassis devices only) The device record in FMC. A FMC-managed device on SCC can also be accessed directly using the FMC APIs; this field provides details.
+            description: (FMC-managed FTDs only) The device record in FMC. A FMC-managed device on SCC can also be accessed directly using the FMC APIs; this field provides details.
             properties:
                 link:
                     description: The endpoint to access this resource from on the FMC.
@@ -16441,90 +16494,93 @@ components:
                 - value
             type: object
         FtdChangeItemDto:
-            properties:
-                addedReferences:
-                    description: The list of references added to this entity as part of the change.
-                    items:
-                        $ref: '#/components/schemas/Reference'
-                    type: array
-                addedValues:
-                    description: The list of values added to this entity as part of the change.
-                    items:
-                        $ref: '#/components/schemas/Value'
-                    type: array
-                changeItemType:
-                    description: Indicates if this item represents an actual entity change or a grouping header.
-                    enum:
-                        - ENTITY_CHANGE
-                        - GROUPING_HEADER
-                    type: string
-                changeType:
-                    description: The type of the change.
-                    enum:
-                        - ADD
-                        - DELETE
-                        - UPDATE
-                        - NOCHANGE
-                    type: string
-                children:
-                    description: The children of this change item. This represents changes that rest within the group represented by this change item.
-                    items:
-                        $ref: '#/components/schemas/FtdChangeItemDto'
-                    type: array
-                deletedReferences:
-                    description: The list of references deleted from this entity as part of the change.
-                    items:
-                        $ref: '#/components/schemas/Reference'
-                    type: array
-                deletedValues:
-                    description: The list of values removed from this entity as part of the change.
-                    items:
-                        $ref: '#/components/schemas/Value'
-                    type: array
-                deploymentType:
-                    description: Discriminator identifying this change item as FTD.
-                    enum:
-                        - FTD_DEVICE_DEPLOY
-                        - ASA_DEVICE_DEPLOY
-                        - FTD_DEVICE_RESTORE
-                        - FTD_DEVICE_DEPLOY
-                    type: string
-                deviceUid:
-                    description: The unique identifier, represented as a UUID, of the device the changed entity is associated with.
-                    format: uuid
-                    type: string
-                entityType:
-                    description: The type of the changed entity.
-                    type: string
-                entityUid:
-                    description: The unique identifier, represented as a UUID, of the changed entity.
-                    format: uuid
-                    type: string
-                errorMsg:
-                    description: An error message indicating why a diff could not be generated for the changed entity.
-                    type: string
-                lastUpdatedByUsers:
-                    description: The list of users who have made the changes to this entity.
-                    items:
-                        description: The list of users who have made the changes to this entity.
+            allOf:
+                - $ref: '#/components/schemas/ChangeItemDto'
+                - properties:
+                    addedReferences:
+                        description: The list of references added to this entity as part of the change.
+                        items:
+                            $ref: '#/components/schemas/Reference'
+                        type: array
+                    addedValues:
+                        description: The list of values added to this entity as part of the change.
+                        items:
+                            $ref: '#/components/schemas/Value'
+                        type: array
+                    changeItemType:
+                        description: Indicates if this item represents an actual entity change or a grouping header.
+                        enum:
+                            - ENTITY_CHANGE
+                            - GROUPING_HEADER
                         type: string
-                    type: array
-                name:
-                    description: The name of the changed entity.
-                    type: string
-                parentUid:
-                    description: The unique identifier, represented as a UUID, of the 'parent' of this change item. The parentUid, if set, can be used to identify the group that this change belongs to.
-                    format: uuid
-                    type: string
-                uid:
-                    description: 'The unique identifier, represented as a UUID, of this change item. Note: this is not the unique identifier of the changed entity.'
-                    format: uuid
-                    type: string
-                updatedValues:
-                    description: The list of values updated on this entity as part of the change.
-                    items:
-                        $ref: '#/components/schemas/UpdatedValue'
-                    type: array
+                    changeType:
+                        description: The type of the change.
+                        enum:
+                            - ADD
+                            - DELETE
+                            - UPDATE
+                            - NOCHANGE
+                        type: string
+                    children:
+                        description: The children of this change item. This represents changes that rest within the group represented by this change item.
+                        items:
+                            $ref: '#/components/schemas/FtdChangeItemDto'
+                        type: array
+                    deletedReferences:
+                        description: The list of references deleted from this entity as part of the change.
+                        items:
+                            $ref: '#/components/schemas/Reference'
+                        type: array
+                    deletedValues:
+                        description: The list of values removed from this entity as part of the change.
+                        items:
+                            $ref: '#/components/schemas/Value'
+                        type: array
+                    deploymentType:
+                        description: Discriminator identifying this change item as FTD.
+                        enum:
+                            - FTD_DEVICE_DEPLOY
+                            - ASA_DEVICE_DEPLOY
+                            - FTD_DEVICE_RESTORE
+                            - FTD_DEVICE_DEPLOY
+                        type: string
+                    deviceUid:
+                        description: The unique identifier, represented as a UUID, of the device the changed entity is associated with.
+                        format: uuid
+                        type: string
+                    entityType:
+                        description: The type of the changed entity.
+                        type: string
+                    entityUid:
+                        description: The unique identifier, represented as a UUID, of the changed entity.
+                        format: uuid
+                        type: string
+                    errorMsg:
+                        description: An error message indicating why a diff could not be generated for the changed entity.
+                        type: string
+                    lastUpdatedByUsers:
+                        description: The list of users who have made the changes to this entity.
+                        items:
+                            description: The list of users who have made the changes to this entity.
+                            type: string
+                        type: array
+                    name:
+                        description: The name of the changed entity.
+                        type: string
+                    parentUid:
+                        description: The unique identifier, represented as a UUID, of the 'parent' of this change item. The parentUid, if set, can be used to identify the group that this change belongs to.
+                        format: uuid
+                        type: string
+                    uid:
+                        description: 'The unique identifier, represented as a UUID, of this change item. Note: this is not the unique identifier of the changed entity.'
+                        format: uuid
+                        type: string
+                    updatedValues:
+                        description: The list of values updated on this entity as part of the change.
+                        items:
+                            $ref: '#/components/schemas/UpdatedValue'
+                        type: array
+                  type: object
             type: object
         FtdChassisInfo:
             description: (Chassis devices managed by cdFMC only) Information on logical devices deployed on this chassis.
@@ -16688,7 +16744,7 @@ components:
                 - deviceUids
             type: object
         FtdHaInfo:
-            description: '(High Availability Devices managed by FMC only) High-Availability Pair information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
+            description: '(High Availability Devices managed by FMC only) High-Available information information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
             properties:
                 currentRole:
                     description: '(on-prem FMC-managed FTDs only) Information on the current role of the node in the HA Pair. Note: Each node in an on-prem-FMC-managed FTD HA Pair is represented as a separate device entry in the API response.'
@@ -17006,6 +17062,18 @@ components:
                     example: 6131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
+            type: object
+        HealthMetricSummary:
+            properties:
+                average:
+                    format: double
+                    type: number
+                latest:
+                    format: double
+                    type: number
+                max:
+                    format: double
+                    type: number
             type: object
         ImpactedSources:
             properties:
@@ -17601,7 +17669,7 @@ components:
                         $ref: '#/components/schemas/Series'
                     type: array
                 summary:
-                    $ref: '#/components/schemas/Summary'
+                    $ref: '#/components/schemas/HealthMetricSummary'
             type: object
         MetricAggregationItem:
             properties:
@@ -20202,20 +20270,16 @@ components:
                     type: string
             type: object
         Policy:
+            description: Results from the Security Cloud Control policies that match the search term.
             properties:
-                domainName:
-                    type: string
-                domainUid:
-                    format: uuid
-                    type: string
-                lastModifiedTime:
-                    format: date-time
-                    type: string
                 name:
-                    type: string
-                type:
+                    description: The name of the policy in Security Cloud Control.
+                    example: my-example-policy
                     type: string
                 uid:
+                    description: The unique identifier, represented as a UUID, of the policy in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
                     type: string
             type: object
         PolicyAnalysisData:
@@ -22645,7 +22709,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: The role of the user this token belongs to. The user can be API-only or a human.
+            description: Roles associated with this user in Security Cloud Control.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -22656,6 +22720,7 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
+            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.

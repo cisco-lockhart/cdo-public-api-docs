@@ -7,7 +7,7 @@ Time series and summary for a single metric. For the `env` metric, additional dy
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **series** | [**List[Series]**](Series.md) |  | [optional] 
-**summary** | [**Summary**](Summary.md) |  | [optional] 
+**summary** | [**HealthMetricSummary**](HealthMetricSummary.md) |  | [optional] 
 
 ## Example
 
