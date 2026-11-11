@@ -35,7 +35,7 @@ func GeneratePythonSdk(openapiFile string, sdkTemplatesPath string, version stri
 		"-g", "python",
 		"-o", "sdks/python",
 		"-t", sdkTemplatesPath,
-		"--additional-properties=packageName=scc_firewall_manager_sdk,packageVersion="+version).CombinedOutput()
+		"--additional-properties=packageName=scc_firewall_manager_sdk,packageVersion="+version+",useOneOfDiscriminatorLookup=true").CombinedOutput()
 	if err != nil {
 		return errors.New(fmt.Sprintf("Error: %s.\nSDK Output: %s", err.Error(), out))
 	}
