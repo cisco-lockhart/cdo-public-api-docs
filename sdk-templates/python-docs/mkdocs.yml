@@ -170,6 +170,7 @@ nav:
     - DestinationNetworkContent: DestinationNetworkContent.md
     - DestinationPortContent: DestinationPortContent.md
     - Device: Device.md
+    - DeviceChangeItem: DeviceChangeItem.md
     - DeviceDeploymentStatusDto: DeviceDeploymentStatusDto.md
     - DeviceDistinctAttributeValues: DeviceDistinctAttributeValues.md
     - DeviceEndOfLife: DeviceEndOfLife.md
