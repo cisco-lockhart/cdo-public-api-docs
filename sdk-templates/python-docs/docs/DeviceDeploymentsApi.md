@@ -537,7 +537,7 @@ Name | Type | Description  | Notes
 
 (cdFMC-managed FTDs and chassis only) Get Deployment Run Transcript
 
-Get the deployment run transcript for a device that was deployed to as part of a deployment run. Transcripts are only available for cdFMC-managed FTDs and chassis.
+Get the deployment run transcript for a device that was deployed to as part of a deployment run. Transcripts are only available for cdFMC-managed FTDs and chassis.  Notes: - Security Cloud Control can take several minutes to build a transcript after a deployment finishes. Until then, this endpoint returns a 404 whose `details.errorCode` is `TRANSCRIPT_NOT_READY`; try again later. - If the deployment run has not finished yet, this endpoint returns a 400 whose `details.errorCode` is `DEPLOYMENT_RUN_NOT_FINISHED`. 
 
 ### Example
 
