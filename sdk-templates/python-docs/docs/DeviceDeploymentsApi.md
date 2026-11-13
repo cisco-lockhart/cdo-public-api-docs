@@ -13,6 +13,7 @@ UAE | https://api.uae.security.cisco.com/firewall
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**calculate_changes_deployed_in_deployment_run**](DeviceDeploymentsApi.md#calculate_changes_deployed_in_deployment_run) | **POST** /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/changes | (cdFMC-managed FTDs and chassis only) Calculate Deployed Device Changes in Deployment Run
 [**calculate_restore_changes_for_device**](DeviceDeploymentsApi.md#calculate_restore_changes_for_device) | **POST** /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore/devices/{deviceUid}/changes | (cdFMC-managed FTDs and chassis only) Calculate Device Restore Changes for FTD Deployment Run
 [**deploy_changes_to_multiple_asa_devices**](DeviceDeploymentsApi.md#deploy_changes_to_multiple_asa_devices) | **POST** /v1/inventory/devices/asas/deploy | Deploy changes to multiple ASA devices
 [**deploy_changes_to_multiple_ftd_devices**](DeviceDeploymentsApi.md#deploy_changes_to_multiple_ftd_devices) | **POST** /v1/inventory/devices/ftds/deploy | (cdFMC-managed FTDs and chassis only) Deploy changes to multiple FTD devices
@@ -26,6 +27,91 @@ Method | HTTP request | Description
 [**restore_ftd_devices_to_deployment_run**](DeviceDeploymentsApi.md#restore_ftd_devices_to_deployment_run) | **POST** /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore | (cdFMC-managed FTDs and chassis only) Restore FTD Devices to a Deployment Run
 [**update_device_deployment_run**](DeviceDeploymentsApi.md#update_device_deployment_run) | **PATCH** /v1/inventory/devices/deployments/runs/{deploymentRunUid} | Update Device Deployment Run
 
+
+# **calculate_changes_deployed_in_deployment_run**
+> CdoTransaction calculate_changes_deployed_in_deployment_run(deployment_run_uid, device_uid)
+
+(cdFMC-managed FTDs and chassis only) Calculate Deployed Device Changes in Deployment Run
+
+This is an asynchronous operation to calculate the changes that an FTD deployment run deployed to a device, by comparing the device's configuration before and after the run. This operation returns a link to a transaction object that can be used to monitor the progress of the calculation.  Notes:  - This operation is only supported for finished FTD deployment runs, and for devices the run deployed to successfully.  - The changes are calculated once per device. Use `GET /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/changes` to get the result.  
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+
+```python
+import scc_firewall_manager_sdk
+from scc_firewall_manager_sdk.models.cdo_transaction import CdoTransaction
+from scc_firewall_manager_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.us.security.cisco.com/firewall
+# See configuration.py for a list of all supported configuration parameters.
+configuration = scc_firewall_manager_sdk.Configuration(
+    host = "https://api.us.security.cisco.com/firewall"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = scc_firewall_manager_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = scc_firewall_manager_sdk.DeviceDeploymentsApi(api_client)
+    deployment_run_uid = 'deployment_run_uid_example' # str | The unique identifier, represented as a UUID, of the device deployment Run in SCC Firewall Manager.
+    device_uid = 'device_uid_example' # str | The unique identifier, represented as a UUID, of the device in Security Cloud Control.
+
+    try:
+        # (cdFMC-managed FTDs and chassis only) Calculate Deployed Device Changes in Deployment Run
+        api_response = api_instance.calculate_changes_deployed_in_deployment_run(deployment_run_uid, device_uid)
+        print("The response of DeviceDeploymentsApi->calculate_changes_deployed_in_deployment_run:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceDeploymentsApi->calculate_changes_deployed_in_deployment_run: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_run_uid** | **str**| The unique identifier, represented as a UUID, of the device deployment Run in SCC Firewall Manager. | 
+ **device_uid** | **str**| The unique identifier, represented as a UUID, of the device in Security Cloud Control. | 
+
+### Return type
+
+[**CdoTransaction**](CdoTransaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Security Cloud Control Transaction object that can be used to track the progress of the calculation. |  -  |
+**400** | Invalid input provided. Check the response for details. |  -  |
+**401** | Request not authorized. |  -  |
+**403** | User does not have sufficient privileges to perform this operation. |  -  |
+**404** | Entity not found. |  -  |
+**500** | Internal server error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **calculate_restore_changes_for_device**
 > CdoTransaction calculate_restore_changes_for_device(deployment_run_uid, device_uid)
@@ -366,7 +452,7 @@ Name | Type | Description  | Notes
 
 Get Deployed Device Changes in Deployment Run
 
-Get the changes that were deployed to a device as part of a deployment run. Changes are represented differently for FTDs and ASAs. For FTDs, this endpoint returns one item per changed entity describing what changed. For ASAs, this endpoint returns the initial configuration, and the configuration that was deployed to the device. The `deploymentType` field on each item identifies which shape it is. If the deployment failed, the changes returned are the changes that were attempted.
+Get the changes that were deployed to a device as part of a deployment run. Changes are represented differently for FTDs and ASAs. For FTDs, this endpoint returns one item per changed entity describing what changed. For ASAs, this endpoint returns the initial configuration, and the configuration that was deployed to the device. The `deploymentType` field on each item identifies which shape it is. If the deployment failed, the changes returned are the changes that were attempted.  Notes:  - For FTD deployment runs, the changes deployed to each device are calculated on demand. Call `POST /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/changes` first, and call this endpoint once the transaction it returns is done. Until then, this endpoint returns a 400 whose `details.errorCode` is `CHANGES_NOT_CALCULATED`, `CHANGES_BEING_CALCULATED` or `CHANGES_CALCULATION_FAILED`. If the device configurations a run deployed over could not be recorded, it returns a 400 whose `details.errorCode` is `CHANGES_UNAVAILABLE`, and the changes cannot be calculated.  - An empty list means nothing changed on the device, for example because it was deployed to for the first time. 
 
 ### Example
 
