@@ -1,3 +1,55 @@
+# Version 1.24.0 (Unpublished)
+
+## Added
+
+### Security Analytics and Logging
+- Endpoint to [get SAL event usage](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-sal-event-usage) (`GET /v1/events/usage`). Returns the amount of firewall and SD-WAN event data ingested for the tenant in UTC calendar-month buckets, together with totals and monthly averages for the requested time range (`1M`, `3M`, `6M`, or `1Y`). Security Analytics and Logging (SAL) must be enabled for the tenant.
+
+### MSP
+- Endpoint to [get MSP SAL event usage](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-sal-event-usage) (`GET /v1/msp/events/usage`). Returns the amount of firewall and SD-WAN event data ingested by each managed tenant in the MSP portal that has Security Analytics and Logging (SAL) enabled, with totals, monthly averages, and a usage entry for each UTC calendar month in the requested time range. Results can be filtered by `managedTenantName`, `managedTenantDisplayName`, or `payType`, sorted by `total.firewallBytes` or `total.sdwanBytes`, and paginated.
+
+### Device Deployments
+- Endpoint to [update a device deployment run](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/update-device-deployment-run) (`PATCH /v1/inventory/devices/deployments/runs/{deploymentRunUid}`). Only the `deploymentNotes` and `labels` fields can be updated. [Device deployment run](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-deployment-runs) records now include these fields, and `labels` can also be set when you deploy changes to multiple ASA or FTD devices.
+- Endpoint to [export device deployment runs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/export-device-deployment-runs) (`POST /v1/inventory/devices/deployments/runs/export`). This asynchronous operation produces a CSV file, which can be downloaded using a pre-signed URL that expires after one hour.
+- Endpoint to [calculate the changes that a deployment run deployed to a device](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/cdfmc-managed-ftds-and-chassis-only-calculate-deployed-device-changes-in-deployment-run) (`POST /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/changes`). The changes are calculated by comparing the device configuration before and after the run.
+- Endpoints to restore cdFMC-managed FTDs and chassis to the configuration deployed in an earlier deployment run:
+  - [Get the devices in a deployment run that can be restored](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/cdfmc-managed-ftds-and-chassis-only-get-restorable-devices-for-ftd-deployment-run) (`GET /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore/devices`).
+  - [Calculate the changes that restoring a device would make](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/cdfmc-managed-ftds-and-chassis-only-calculate-device-restore-changes-for-ftd-deployment-run) (`POST /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore/devices/{deviceUid}/changes`), and [get the calculated changes](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/cdfmc-managed-ftds-and-chassis-only-get-device-restore-changes-for-ftd-deployment-run) (`GET /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore/devices/{deviceUid}/changes`).
+  - [Restore devices to a deployment run](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/cdfmc-managed-ftds-and-chassis-only-restore-ftd-devices-to-a-deployment-run) (`POST /v1/inventory/devices/deployments/runs/{deploymentRunUid}/restore`).
+
+  Only deployment runs created after this feature was released can be restored. Deployment run records now include a `jobHistoryUid` field, and restore runs include a `restoredDeploymentUid` field that identifies the deployment run that was restored.
+
+### Policy Analysis and Optimization
+- Endpoints to [get](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-nat-policy-remediation-plan) (`GET`) and [save](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/save-nat-policy-remediation-plan) (`PUT`) the remediation plan for a NAT policy analysis (`/v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-plans`). The plan contains the actions selected for shadowed and redundant rules.
+- Endpoint to [apply a NAT policy remediation plan](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/apply-nat-policy-remediation-plan) (`POST /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-plan-executions`). This is an asynchronous operation.
+- Endpoints to [get NAT policy remediation reports](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-nat-policy-remediation-reports) (`GET /v1/agenticops/policies/nat/analysis/insights/{insightUid}/remediation-reports`), [get the latest NAT policy remediation report](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-latest-nat-policy-remediation-report) (`GET .../remediation-reports/latest`), and [get a NAT policy remediation report by version](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-nat-policy-remediation-report-by-version) (`GET .../remediation-reports/{version}`). Only finished remediations are included, whether they succeeded or failed.
+
+### Tenant Management
+- Endpoints to [get](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-beta-feature-flags) (`GET /v1/features/beta`) and [update](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/update-beta-feature-flags) (`PATCH /v1/features/beta`) the beta features that are available for, or have been enabled in, the tenant. Beta features whose prerequisites the tenant does not meet are not returned; for example, a feature that needs a cdFMC is only listed once the tenant has a cdFMC online.
+
+## Improvements
+
+### Device Deployments
+- Deploying changes, getting and calculating pending changes, and getting deployment run transcripts are now supported for cdFMC-managed chassis as well as cdFMC-managed FTDs.
+- Deployments made directly on the cdFMC, outside Security Cloud Control, are now recorded as [device deployment runs](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-device-deployment-runs), with names that start with `out-of-band-`.
+- FTD deployment runs are now named after their cdFMC deployment jobs, and ASA deployment runs are given sequential names.
+
+### Inventory
+- [Device](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-devices) records now include an `isDeployable` field for cdFMC-managed FTDs, which indicates whether the cdFMC reports pending changes that can be deployed to the device.
+- [Device](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-devices) records for chassis now include an `ftdChassisInfo` field, with the number and identifiers of the logical devices on the chassis.
+- [FTD onboarding](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/onboard-ftd-device) now supports the optional `deviceGroupUuid` field, which assigns the device to a device group.
+
+## Fixes
+
+### Device Deployments
+- The [deployed device changes](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-deployed-device-changes-in-deployment-run) response schema now identifies whether ASA or FTD changes were returned, so that generated clients can decode the response.
+
+### Device Health
+- Health metric summaries now use the correct schema, with the `average`, `latest`, and `max` fields. Previously, the published schema contained NAT policy analysis fields.
+
+### Device Upgrades
+- Upgrade completion status records once again include the `completedAt` field, which was missing from the 1.23.0 specification.
+
 # Version 1.23.0 (2026-10-01)
 
 ## Added
