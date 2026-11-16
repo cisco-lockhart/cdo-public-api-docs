@@ -1,3 +1,13 @@
+# Version 1.24.0 (Unpublished)
+
+## Added
+
+### Security Analytics and Logging
+- Endpoint to [get SAL event usage](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-sal-event-usage) (`GET /v1/events/usage`). Returns the amount of firewall and SD-WAN event data ingested for the tenant in UTC calendar-month buckets, together with totals and monthly averages for the requested time range (`1M`, `3M`, `6M`, or `1Y`). Security Analytics and Logging (SAL) must be enabled for the tenant.
+
+### MSP
+- Endpoint to [get MSP SAL event usage](https://developer.cisco.com/docs/cisco-security-cloud-control-firewall-manager/get-msp-sal-event-usage) (`GET /v1/msp/events/usage`). Returns the amount of firewall and SD-WAN event data ingested by each managed tenant in the MSP portal that has Security Analytics and Logging (SAL) enabled, with totals, monthly averages, and a usage entry for each UTC calendar month in the requested time range. Results can be filtered by `managedTenantName`, `managedTenantDisplayName`, or `payType`, sorted by `total.firewallBytes` or `total.sdwanBytes`, and paginated.
+
 # Version 1.23.0 (2026-10-01)
 
 ## Added
