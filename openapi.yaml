@@ -1844,6 +1844,47 @@ paths:
             summary: Get event search reports
             tags:
                 - Events
+    /v1/events/usage:
+        get:
+            description: Returns the amount of firewall and SD-WAN event data ingested for the tenant. SAL reports usage in monthly buckets, so each usage entry represents one UTC calendar month with an inclusive start date and exclusive end date. The response includes totals and monthly averages for the requested time range. Security Analytics and Logging (SAL) must be enabled for the tenant. Usage for the current month includes data ingested from the start of the current calendar month up to the time of the request.
+            operationId: getSalEventUsage
+            parameters:
+                - description: The calendar-month range to return. The current month is included. Use 1M for the current month, 3M for the current and previous two months, 6M for the current and previous five months, or 1Y for the current and previous eleven months.
+                  example: 3M
+                  in: query
+                  name: timeRange
+                  required: true
+                  schema:
+                    enum:
+                        - 1M
+                        - 3M
+                        - 6M
+                        - 1Y
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/EventUsageResponse'
+                    description: EventUsageResponse object.
+                "400":
+                    $ref: '#/components/responses/http400BadRequest'
+                "401":
+                    $ref: '#/components/responses/http401Unauthorised'
+                "405":
+                    $ref: '#/components/responses/http405MethodNotAllowed'
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get SAL Event Usage
+            tags:
+                - Events
     /v1/features:
         get:
             description: Get the feature flags enabled in the Security Cloud Control tenant.
@@ -7727,6 +7768,73 @@ paths:
             summary: Get MFA Event
             tags:
                 - Remote Access Monitoring
+    /v1/msp/events/usage:
+        get:
+            description: Returns the amount of firewall and SD-WAN event data ingested by each managed tenant in the MSP portal that has Security Analytics and Logging (SAL) enabled. Each managed tenant includes totals and monthly averages for the requested time range, and a usage entry for each UTC calendar month in that range. Results can be filtered, sorted, and paginated.
+            operationId: getMspSalEventUsage
+            parameters:
+                - description: UTC calendar-month range to include.
+                  in: query
+                  name: timeRange
+                  required: true
+                  schema:
+                    enum:
+                        - 1M
+                        - 3M
+                        - 6M
+                        - 1Y
+                    type: string
+                - description: Number of managed tenants to return.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 1
+                    type: string
+                - description: Index of the first managed tenant to return. Must be 0 or a multiple of limit.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: Filter by managedTenantName, managedTenantDisplayName, or payType using Lucene syntax. Name fields use case-insensitive matching; use '*' for wildcard matching. payType uses an exact match. Only '*' is supported as a wildcard.
+                  example: managedTenantName:*soln23* AND managedTenantDisplayName:*auto* AND payType:INTERNAL
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: Sort by total.firewallBytes or total.sdwanBytes summed over the selected timeRange. Append :asc or :desc (uppercase directions are also accepted); a bare field sorts ascending. Repeat sort parameters to apply clauses in the supplied order. If sort is omitted, tenants are returned by UID in ascending order.
+                  example: total.sdwanBytes:asc
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspSalUsagePage'
+                    description: SAL event usage for enabled managed tenants
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP SAL Event Usage
+            tags:
+                - MSP Events
     /v1/msp/inventory/devices:
         get:
             description: Get devices, across all tenants, managed by the MSP portal.
@@ -14763,13 +14871,8 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+            description: The completion status of the deployment on the device.
             properties:
-                completedAt:
-                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
-                    example: 2026-04-15T18:00:10.123Z
-                    format: date-time
-                    type: string
                 message:
                     description: A message, indicating current progress, returned from the device.
                     type: string
@@ -16129,7 +16232,7 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: CDFMC_MANAGED_FTD
+            example: ASA
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -16294,11 +16397,21 @@ components:
                     example: myuser@cisco.com
                     type: string
             type: object
+        EventUsageResponse:
+            properties:
+                summary:
+                    $ref: '#/components/schemas/UsageSummary'
+                usage:
+                    description: UTC calendar-month usage buckets, ordered from oldest to newest. Each bucket has an inclusive start date and an exclusive end date.
+                    items:
+                        $ref: '#/components/schemas/UsagePeriod'
+                    type: array
+            type: object
         ExportInput:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         ExtendedNatRuleData:
@@ -19045,6 +19158,108 @@ components:
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
                     type: string
+            type: object
+        MspSalUsageBytes:
+            description: Average event data ingested per calendar month in the requested time range. The current month uses its month-to-date value.
+            properties:
+                firewallBytes:
+                    description: Firewall event data ingested, in bytes.
+                    format: int64
+                    type: integer
+                sdwanBytes:
+                    description: SD-WAN event data ingested, in bytes.
+                    format: int64
+                    type: integer
+            type: object
+        MspSalUsageItemDto:
+            description: SAL event usage for one managed tenant.
+            properties:
+                managedTenantDisplayName:
+                    description: The human-readable display name of the managed tenant.
+                    example: QE Auto Stage 2
+                    type: string
+                managedTenantName:
+                    description: The name of the managed tenant.
+                    example: cisco-qe-auto-stage-2
+                    type: string
+                monthlyUsage:
+                    description: Event usage for each UTC calendar month in the requested time range, ordered from oldest to newest.
+                    items:
+                        $ref: '#/components/schemas/MspSalUsagePeriod'
+                    type: array
+                payType:
+                    description: The billing classification of the managed tenant. This value is null when no pay type is stored.
+                    enum:
+                        - PAYING
+                        - NOT_PAYING
+                        - TRIAL
+                        - INTERNAL
+                        - PARTNER
+                        - DEMO
+                    nullable: true
+                    type: string
+                summary:
+                    $ref: '#/components/schemas/MspSalUsageSummary'
+                uid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control.
+                    example: 9db2e8e7-05f7-4619-a813-ffceba617cc4
+                    format: uuid
+                    type: string
+            required:
+                - payType
+            type: object
+        MspSalUsagePage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MspSalUsageItemDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
+        MspSalUsagePeriod:
+            description: Event usage for one UTC calendar month. Dates are used because SAL aggregates usage by calendar month rather than by time of day.
+            properties:
+                endDate:
+                    description: The first day of the following calendar month in UTC. This date is not included in the period.
+                    example: 2026-08-01T00:00:00Z
+                    format: date
+                    type: string
+                firewallBytes:
+                    description: Firewall event data ingested during this month, in bytes.
+                    format: int64
+                    type: integer
+                sdwanBytes:
+                    description: SD-WAN event data ingested during this month, in bytes.
+                    format: int64
+                    type: integer
+                startDate:
+                    description: The first day of the calendar month in UTC. This date is included in the period.
+                    example: 2026-07-01T00:00:00Z
+                    format: date
+                    type: string
+            type: object
+        MspSalUsageSummary:
+            description: Aggregated event usage for the requested time range.
+            properties:
+                average:
+                    $ref: '#/components/schemas/MspSalUsageBytes'
+                total:
+                    $ref: '#/components/schemas/MspSalUsageBytes'
             type: object
         MspSecureClientPackageDto:
             description: The list of items retrieved.
@@ -22624,6 +22839,48 @@ components:
                     example: f0a09517-bab1-43e4-adae-2037cf3184e3
                     format: uuid
                     type: string
+            type: object
+        UsageBytes:
+            description: Average event data ingested per returned calendar month. The current month uses its month-to-date value.
+            properties:
+                firewallBytes:
+                    description: Firewall event data ingested, in bytes.
+                    format: int64
+                    type: integer
+                sdwanBytes:
+                    description: SD-WAN event data ingested, in bytes.
+                    format: int64
+                    type: integer
+            type: object
+        UsagePeriod:
+            description: Event usage for one UTC calendar month. Dates are used because SAL aggregates usage by calendar month rather than by time of day.
+            properties:
+                end:
+                    description: The first day of the following calendar month in UTC. This date is not included in the period.
+                    example: 2026-08-01T00:00:00Z
+                    format: date
+                    type: string
+                firewallBytes:
+                    description: Firewall event data ingested during this month, in bytes.
+                    format: int64
+                    type: integer
+                sdwanBytes:
+                    description: SD-WAN event data ingested during this month, in bytes.
+                    format: int64
+                    type: integer
+                start:
+                    description: The first day of the calendar month in UTC. This date is included in the period.
+                    example: 2026-07-01T00:00:00Z
+                    format: date
+                    type: string
+            type: object
+        UsageSummary:
+            description: Totals and monthly averages for the requested time range.
+            properties:
+                average:
+                    $ref: '#/components/schemas/UsageBytes'
+                total:
+                    $ref: '#/components/schemas/UsageBytes'
             type: object
         User:
             description: The list of items retrieved.

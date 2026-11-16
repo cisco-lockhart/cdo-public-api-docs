@@ -43,6 +43,7 @@ nav:
     - MSPASADeviceUpgradesApi: MSPASADeviceUpgradesApi.md
     - MSPApi: MSPApi.md
     - MSPDeviceUpgradesApi: MSPDeviceUpgradesApi.md
+    - MSPEventsApi: MSPEventsApi.md
     - MSPInventoryApi: MSPInventoryApi.md
     - MSPLicensingApi: MSPLicensingApi.md
     - MSPSecureClientManagementApi: MSPSecureClientManagementApi.md
@@ -207,6 +208,7 @@ nav:
     - EtherChannelInterfaceCreateInput: EtherChannelInterfaceCreateInput.md
     - EtherChannelInterfacePatchInput: EtherChannelInterfacePatchInput.md
     - Event: Event.md
+    - EventUsageResponse: EventUsageResponse.md
     - ExportInput: ExportInput.md
     - ExtendedNatRuleData: ExtendedNatRuleData.md
     - FeatureFlag: FeatureFlag.md
@@ -342,6 +344,11 @@ nav:
     - MspMslaUsageItemDto: MspMslaUsageItemDto.md
     - MspMslaUsagePage: MspMslaUsagePage.md
     - MspMslaUsageTenantDto: MspMslaUsageTenantDto.md
+    - MspSalUsageBytes: MspSalUsageBytes.md
+    - MspSalUsageItemDto: MspSalUsageItemDto.md
+    - MspSalUsagePage: MspSalUsagePage.md
+    - MspSalUsagePeriod: MspSalUsagePeriod.md
+    - MspSalUsageSummary: MspSalUsageSummary.md
     - MspSecureClientPackageDto: MspSecureClientPackageDto.md
     - MspSecureClientPackagesPage: MspSecureClientPackagesPage.md
     - MspSecureClientPlatform: MspSecureClientPlatform.md
@@ -488,6 +495,9 @@ nav:
     - UpgradeRunModifyInput: UpgradeRunModifyInput.md
     - UpgradedDeviceDto: UpgradedDeviceDto.md
     - UrlObjectContent: UrlObjectContent.md
+    - UsageBytes: UsageBytes.md
+    - UsagePeriod: UsagePeriod.md
+    - UsageSummary: UsageSummary.md
     - User: User.md
     - UserCreateOrUpdateInput: UserCreateOrUpdateInput.md
     - UserInput: UserInput.md
