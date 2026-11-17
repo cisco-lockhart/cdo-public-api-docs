@@ -14898,7 +14898,7 @@ components:
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices in the Security Cloud Control tenant.
+            description: The distinct config states for the devices managed by the MSP Portal.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -14915,7 +14915,7 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
+            description: The distinct conflict detection states for the devices managed by the MSP Portal.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
@@ -14933,7 +14933,7 @@ components:
                     type: array
             type: object
         ConnectivityState:
-            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
+            description: The distinct connectivity states for the devices managed by the MSP Portal.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -14944,7 +14944,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
+            description: The type of the connector that will be used to communicate with the device.
             enum:
                 - SDC
                 - CDG
@@ -16041,7 +16041,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The distinct device roles for the devices in the Security Cloud Control tenant.
+            description: The roles that this device performs on the network.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -16049,6 +16049,7 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
+            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
             description: The current status of each device in the upgrade run.
@@ -16497,7 +16498,7 @@ components:
                     type: string
             type: object
         FmcDeviceRecord:
-            description: (FMC-managed FTDs and cdFMC-managed chassis devices only) The device record in FMC. A FMC-managed device on SCC can also be accessed directly using the FMC APIs; this field provides details.
+            description: (FMC-managed FTDs only) The device record in FMC. A FMC-managed device on SCC can also be accessed directly using the FMC APIs; this field provides details.
             properties:
                 link:
                     description: The endpoint to access this resource from on the FMC.
@@ -16877,7 +16878,7 @@ components:
                 - deviceUids
             type: object
         FtdHaInfo:
-            description: '(High Availability Devices managed by FMC only) High-Availability Pair information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
+            description: '(High Availability Devices managed by FMC only) High-Available information information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
             properties:
                 currentRole:
                     description: '(on-prem FMC-managed FTDs only) Information on the current role of the node in the HA Pair. Note: Each node in an on-prem-FMC-managed FTD HA Pair is represented as a separate device entry in the API response.'
@@ -17550,7 +17551,6 @@ components:
             type: object
         Labels:
             description: Labels used to identify/tag Security Cloud Control entities.
-            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -17796,6 +17796,8 @@ components:
                     type: array
             type: object
         Metric:
+            additionalProperties:
+                $ref: '#/components/schemas/Metric'
             description: Time series and summary for a single metric. For the `env` metric, additional dynamic peer properties may be present at the same JSON depth as `series` and `summary`, one per physical environmental sensor (e.g. `processorTemperatureProcessor1`, `chassisTemperatureInternal0`). Each such property is itself a `Metric`. Non-env metrics never carry these additional properties.
             properties:
                 series:
@@ -23005,7 +23007,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: The role of the user this token belongs to. The user can be API-only or a human.
+            description: Roles associated with this user in Security Cloud Control.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -23016,6 +23018,7 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
+            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.
