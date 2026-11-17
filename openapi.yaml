@@ -4701,7 +4701,9 @@ paths:
 
                 - For FTD deployment runs, the changes deployed to each device are calculated on demand. Call `POST /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/changes` first, and call this endpoint once the transaction it returns is done. Until then, this endpoint returns a 400 whose `details.errorCode` is `CHANGES_NOT_CALCULATED`, `CHANGES_BEING_CALCULATED` or `CHANGES_CALCULATION_FAILED`. If the device configurations a run deployed over could not be recorded, it returns a 400 whose `details.errorCode` is `CHANGES_UNAVAILABLE`, and the changes cannot be calculated.
 
-                - An empty list means nothing changed on the device, for example because it was deployed to for the first time.
+                - If no earlier deployment run deployed to the device, there is nothing to compare its configuration against, and this endpoint returns a 400 whose `details.errorCode` is `NO_PREVIOUS_DEPLOYMENT`.
+
+                - An empty list means nothing changed on the device.
             operationId: getChangesDeployedInDeploymentRun
             parameters:
                 - description: The unique identifier, represented as a UUID, of the device deployment Run in SCC Firewall Manager.
@@ -4752,7 +4754,9 @@ paths:
 
                 Notes:
 
-                - This operation is only supported for finished FTD deployment runs, and for devices the run deployed to successfully.
+                - This operation is only supported for finished FTD deployment runs, and for devices the run tried to deploy to. For a device the run failed to deploy to, it calculates the changes that were attempted.
+
+                - It returns a 400 whose `details.errorCode` is `NO_PREVIOUS_DEPLOYMENT` if no earlier deployment run deployed to the device, as there is nothing to compare its configuration against.
 
                 - The changes are calculated once per device. Use `GET /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/changes` to get the result.
 
@@ -5481,6 +5485,8 @@ paths:
                 - This operation is only supported for cdFMC-managed FTDs and chassis.
 
                 - This operation will only deploy changes to the device if there are pending changes to deploy.
+
+                - You can deploy to at most 100 devices in a single request.
 
 
             operationId: deployChangesToMultipleFtdDevices
@@ -16938,23 +16944,23 @@ components:
                     type: string
                 deviceUids:
                     deprecated: true
-                    description: Deprecated. Use `devices` instead. The set of unique identifiers, represented as UUIDs, of the devices to deploy in Security Cloud Control.
+                    description: Deprecated. Use `devices` instead. The set of unique identifiers, represented as UUIDs, of the devices to deploy in Security Cloud Control. At most 100 devices are allowed.
                     example:
                         - 256461f6-bd60-11ef-8beb-6cf1610cf55d
                     items:
                         deprecated: true
-                        description: Deprecated. Use `devices` instead. The set of unique identifiers, represented as UUIDs, of the devices to deploy in Security Cloud Control.
+                        description: Deprecated. Use `devices` instead. The set of unique identifiers, represented as UUIDs, of the devices to deploy in Security Cloud Control. At most 100 devices are allowed.
                         format: uuid
                         type: string
-                    maxItems: 50
+                    maxItems: 100
                     minItems: 1
                     type: array
                     uniqueItems: true
                 devices:
-                    description: Per-device deployment configuration. Cannot be combined with the deprecated `deviceUids` field. Each entry identifies a device and optionally selects which policy types to deploy. Set `selectedPolicyTypes` to null or include FULL_DEPLOY to perform a full deployment for that device. Each entry must have a unique uid.
+                    description: Per-device deployment configuration. Cannot be combined with the deprecated `deviceUids` field. Each entry identifies a device and optionally selects which policy types to deploy. Set `selectedPolicyTypes` to null or include FULL_DEPLOY to perform a full deployment for that device. Each entry must have a unique uid. At most 100 devices are allowed.
                     items:
                         $ref: '#/components/schemas/FtdSingleDeviceDeploymentInput'
-                    maxItems: 50
+                    maxItems: 100
                     minItems: 1
                     type: array
                 effectiveDeviceUids:
@@ -17006,7 +17012,7 @@ components:
                 - ftdUid
             type: object
         FtdSingleDeviceDeploymentInput:
-            description: Per-device deployment configuration. Cannot be combined with the deprecated `deviceUids` field. Each entry identifies a device and optionally selects which policy types to deploy. Set `selectedPolicyTypes` to null or include FULL_DEPLOY to perform a full deployment for that device. Each entry must have a unique uid.
+            description: Per-device deployment configuration. Cannot be combined with the deprecated `deviceUids` field. Each entry identifies a device and optionally selects which policy types to deploy. Set `selectedPolicyTypes` to null or include FULL_DEPLOY to perform a full deployment for that device. Each entry must have a unique uid. At most 100 devices are allowed.
             properties:
                 selectedPolicyTypes:
                     description: (Optional) The policy types to deploy to this device. Use this to only deploy selected policies to the device, while skipping deployment of other parts of the device's configuration on SCC Firewall Management. Use individual policy types or group shortcuts (ACCESS_GROUP, UZTNA_GROUP). Set to null, or include FULL_DEPLOY, to perform a full deployment for this device.
@@ -20508,16 +20514,20 @@ components:
                     type: string
             type: object
         Policy:
-            description: Results from the Security Cloud Control policies that match the search term.
             properties:
+                domainName:
+                    type: string
+                domainUid:
+                    format: uuid
+                    type: string
+                lastModifiedTime:
+                    format: date-time
+                    type: string
                 name:
-                    description: The name of the policy in Security Cloud Control.
-                    example: my-example-policy
+                    type: string
+                type:
                     type: string
                 uid:
-                    description: The unique identifier, represented as a UUID, of the policy in Security Cloud Control.
-                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
-                    format: uuid
                     type: string
             type: object
         PolicyAnalysisData:
@@ -22826,6 +22836,15 @@ components:
                 errorMsg:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
+                    type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in Security Cloud Control.
+                    example: My Managed Tenant
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
                     type: string
                 name:
                     description: The name of the device.

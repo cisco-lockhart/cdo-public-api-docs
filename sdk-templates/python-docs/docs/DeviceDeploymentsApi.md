@@ -33,7 +33,7 @@ Method | HTTP request | Description
 
 (cdFMC-managed FTDs and chassis only) Calculate Deployed Device Changes in Deployment Run
 
-This is an asynchronous operation to calculate the changes that an FTD deployment run deployed to a device, by comparing the device's configuration before and after the run. This operation returns a link to a transaction object that can be used to monitor the progress of the calculation.  Notes:  - This operation is only supported for finished FTD deployment runs, and for devices the run deployed to successfully.  - The changes are calculated once per device. Use `GET /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/changes` to get the result.  
+This is an asynchronous operation to calculate the changes that an FTD deployment run deployed to a device, by comparing the device's configuration before and after the run. This operation returns a link to a transaction object that can be used to monitor the progress of the calculation.  Notes:  - This operation is only supported for finished FTD deployment runs, and for devices the run tried to deploy to. For a device the run failed to deploy to, it calculates the changes that were attempted.  - It returns a 400 whose `details.errorCode` is `NO_PREVIOUS_DEPLOYMENT` if no earlier deployment run deployed to the device, as there is nothing to compare its configuration against.  - The changes are calculated once per device. Use `GET /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/changes` to get the result.  
 
 ### Example
 
@@ -286,7 +286,7 @@ Name | Type | Description  | Notes
 
 (cdFMC-managed FTDs and chassis only) Deploy changes to multiple FTD devices
 
-This is an asynchronous operation to deploy changes made to the configurations of multiple cdFMC-managed FTDs and chassis on Security Cloud Control. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.  Notes:  - This operation is only supported for cdFMC-managed FTDs and chassis.  - This operation will only deploy changes to the device if there are pending changes to deploy.   
+This is an asynchronous operation to deploy changes made to the configurations of multiple cdFMC-managed FTDs and chassis on Security Cloud Control. This operation returns a link to a transaction object that can be used to monitor the progress of the operation.  Notes:  - This operation is only supported for cdFMC-managed FTDs and chassis.  - This operation will only deploy changes to the device if there are pending changes to deploy.  - You can deploy to at most 100 devices in a single request.   
 
 ### Example
 
@@ -452,7 +452,7 @@ Name | Type | Description  | Notes
 
 Get Deployed Device Changes in Deployment Run
 
-Get the changes that were deployed to a device as part of a deployment run. Changes are represented differently for FTDs and ASAs. For FTDs, this endpoint returns one item per changed entity describing what changed. For ASAs, this endpoint returns the initial configuration, and the configuration that was deployed to the device. The `deploymentType` field on each item identifies which shape it is. If the deployment failed, the changes returned are the changes that were attempted.  Notes:  - For FTD deployment runs, the changes deployed to each device are calculated on demand. Call `POST /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/changes` first, and call this endpoint once the transaction it returns is done. Until then, this endpoint returns a 400 whose `details.errorCode` is `CHANGES_NOT_CALCULATED`, `CHANGES_BEING_CALCULATED` or `CHANGES_CALCULATION_FAILED`. If the device configurations a run deployed over could not be recorded, it returns a 400 whose `details.errorCode` is `CHANGES_UNAVAILABLE`, and the changes cannot be calculated.  - An empty list means nothing changed on the device, for example because it was deployed to for the first time. 
+Get the changes that were deployed to a device as part of a deployment run. Changes are represented differently for FTDs and ASAs. For FTDs, this endpoint returns one item per changed entity describing what changed. For ASAs, this endpoint returns the initial configuration, and the configuration that was deployed to the device. The `deploymentType` field on each item identifies which shape it is. If the deployment failed, the changes returned are the changes that were attempted.  Notes:  - For FTD deployment runs, the changes deployed to each device are calculated on demand. Call `POST /v1/inventory/devices/deployments/runs/{deploymentRunUid}/devices/{deviceUid}/changes` first, and call this endpoint once the transaction it returns is done. Until then, this endpoint returns a 400 whose `details.errorCode` is `CHANGES_NOT_CALCULATED`, `CHANGES_BEING_CALCULATED` or `CHANGES_CALCULATION_FAILED`. If the device configurations a run deployed over could not be recorded, it returns a 400 whose `details.errorCode` is `CHANGES_UNAVAILABLE`, and the changes cannot be calculated.  - If no earlier deployment run deployed to the device, there is nothing to compare its configuration against, and this endpoint returns a 400 whose `details.errorCode` is `NO_PREVIOUS_DEPLOYMENT`.  - An empty list means nothing changed on the device. 
 
 ### Example
 
