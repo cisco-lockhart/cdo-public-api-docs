@@ -497,6 +497,7 @@ nav:
     - UrlObjectContent: UrlObjectContent.md
     - UsageBytes: UsageBytes.md
     - UsagePeriod: UsagePeriod.md
+    - UsageReference: UsageReference.md
     - UsageSummary: UsageSummary.md
     - User: User.md
     - UserCreateOrUpdateInput: UserCreateOrUpdateInput.md

@@ -534,11 +534,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_object_usages**
-> List[ReferenceInfo] get_object_usages(uid)
+> List[UsageReference] get_object_usages(uid)
 
 Get Object Usages
 
-Get usages of an object in the Security Cloud Control tenant. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.
+Get usages of an object in the Security Cloud Control tenant, including RA VPN group policies stored in Aegis. If these APIs return errors for your tenant, contact support to have them enabled. Note: the object APIs support network, URL and service objects and groups.
 
 ### Example
 
@@ -546,7 +546,7 @@ Get usages of an object in the Security Cloud Control tenant. If these APIs retu
 
 ```python
 import scc_firewall_manager_sdk
-from scc_firewall_manager_sdk.models.reference_info import ReferenceInfo
+from scc_firewall_manager_sdk.models.usage_reference import UsageReference
 from scc_firewall_manager_sdk.rest import ApiException
 from pprint import pprint
 
@@ -592,7 +592,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[ReferenceInfo]**](ReferenceInfo.md)
+[**List[UsageReference]**](UsageReference.md)
 
 ### Authorization
 
