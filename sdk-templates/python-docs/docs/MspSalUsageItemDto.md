@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **managed_tenant_name** | **str** | The name of the managed tenant. | [optional] 
 **monthly_usage** | [**List[MspSalUsagePeriod]**](MspSalUsagePeriod.md) | Event usage for each UTC calendar month in the requested time range, ordered from oldest to newest. | [optional] 
 **pay_type** | **str** | The billing classification of the managed tenant. This value is null when no pay type is stored. | 
+**sal_usage_ingest_date** | **datetime** | When SAL usage was last successfully ingested for this managed tenant. This value is null when SAL usage has not yet been ingested. | 
 **summary** | [**MspSalUsageSummary**](MspSalUsageSummary.md) |  | [optional] 
 **uid** | **str** | The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control. | [optional] 
 
