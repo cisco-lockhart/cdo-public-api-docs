@@ -1,4 +1,4 @@
-# Version 1.24.0 (Unpublished)
+# Version 1.24.0 (2026-11-19)
 
 ## Added
 
