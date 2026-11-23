@@ -1,6 +1,6 @@
 # UsageBytes
 
-Average event data ingested per returned calendar month. The current month uses its month-to-date value.
+Average event data ingested per returned calendar month or day. The current month uses its month-to-date value.
 
 ## Properties
 

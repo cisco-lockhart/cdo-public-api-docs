@@ -18,11 +18,11 @@ Method | HTTP request | Description
 
 
 # **get_sal_event_usage**
-> EventUsageResponse get_sal_event_usage(time_range)
+> EventUsageResponse get_sal_event_usage(time_range, granularity=granularity)
 
 Get SAL Event Usage
 
-Returns the amount of firewall and SD-WAN event data ingested for the tenant. SAL reports usage in monthly buckets, so each usage entry represents one UTC calendar month with an inclusive start date and exclusive end date. The response includes totals and monthly averages for the requested time range. Security Analytics and Logging (SAL) must be enabled for the tenant. Usage for the current month includes data ingested from the start of the current calendar month up to the time of the request.
+Returns the amount of firewall and SD-WAN event data ingested for the tenant, per UTC calendar month (the default) or per UTC day. Each usage entry has an inclusive start date and exclusive end date, and months or days without data count as 0. The response includes totals and averages per entry for the requested time range. Security Analytics and Logging (SAL) must be enabled for the tenant. Usage for the current month includes data ingested from the start of the current calendar month up to the time of the request. Daily usage covers the days up to and including yesterday (UTC).
 
 ### Example
 
@@ -55,10 +55,11 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = scc_firewall_manager_sdk.EventsApi(api_client)
     time_range = '3M' # str | The calendar-month range to return. The current month is included. Use 1M for the current month, 3M for the current and previous two months, 6M for the current and previous five months, or 1Y for the current and previous eleven months.
+    granularity = 'MONTH' # str | The size of each usage entry. One of: MONTH (one entry per calendar month), DAY (one entry per day). Defaults to MONTH. (optional)
 
     try:
         # Get SAL Event Usage
-        api_response = api_instance.get_sal_event_usage(time_range)
+        api_response = api_instance.get_sal_event_usage(time_range, granularity=granularity)
         print("The response of EventsApi->get_sal_event_usage:\n")
         pprint(api_response)
     except Exception as e:
@@ -73,6 +74,7 @@ with scc_firewall_manager_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **time_range** | **str**| The calendar-month range to return. The current month is included. Use 1M for the current month, 3M for the current and previous two months, 6M for the current and previous five months, or 1Y for the current and previous eleven months. | 
+ **granularity** | **str**| The size of each usage entry. One of: MONTH (one entry per calendar month), DAY (one entry per day). Defaults to MONTH. | [optional] 
 
 ### Return type
 

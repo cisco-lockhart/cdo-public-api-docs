@@ -1,15 +1,15 @@
 # UsagePeriod
 
-Event usage for one UTC calendar month. Dates are used because SAL aggregates usage by calendar month rather than by time of day.
+Event usage for one UTC calendar month or day. Dates are used because SAL aggregates usage by day rather than by time of day.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**end** | **date** | The first day of the following calendar month in UTC. This date is not included in the period. | [optional] 
-**firewall_bytes** | **int** | Firewall event data ingested during this month, in bytes. | [optional] 
-**sdwan_bytes** | **int** | SD-WAN event data ingested during this month, in bytes. | [optional] 
-**start** | **date** | The first day of the calendar month in UTC. This date is included in the period. | [optional] 
+**end** | **date** | The first day after the period in UTC. This date is not included in the period. | [optional] 
+**firewall_bytes** | **int** | Firewall event data ingested during this period, in bytes. | [optional] 
+**sdwan_bytes** | **int** | SD-WAN event data ingested during this period, in bytes. | [optional] 
+**start** | **date** | The first day of the period in UTC. This date is included in the period. | [optional] 
 
 ## Example
 

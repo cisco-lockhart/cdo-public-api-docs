@@ -1846,7 +1846,7 @@ paths:
                 - Events
     /v1/events/usage:
         get:
-            description: Returns the amount of firewall and SD-WAN event data ingested for the tenant. SAL reports usage in monthly buckets, so each usage entry represents one UTC calendar month with an inclusive start date and exclusive end date. The response includes totals and monthly averages for the requested time range. Security Analytics and Logging (SAL) must be enabled for the tenant. Usage for the current month includes data ingested from the start of the current calendar month up to the time of the request.
+            description: Returns the amount of firewall and SD-WAN event data ingested for the tenant, per UTC calendar month (the default) or per UTC day. Each usage entry has an inclusive start date and exclusive end date, and months or days without data count as 0. The response includes totals and averages per entry for the requested time range. Security Analytics and Logging (SAL) must be enabled for the tenant. Usage for the current month includes data ingested from the start of the current calendar month up to the time of the request. Daily usage covers the days up to and including yesterday (UTC).
             operationId: getSalEventUsage
             parameters:
                 - description: The calendar-month range to return. The current month is included. Use 1M for the current month, 3M for the current and previous two months, 6M for the current and previous five months, or 1Y for the current and previous eleven months.
@@ -1860,6 +1860,16 @@ paths:
                         - 3M
                         - 6M
                         - 1Y
+                    type: string
+                - description: 'The size of each usage entry. One of: MONTH (one entry per calendar month), DAY (one entry per day). Defaults to MONTH.'
+                  example: MONTH
+                  in: query
+                  name: granularity
+                  required: false
+                  schema:
+                    enum:
+                        - MONTH
+                        - DAY
                     type: string
             responses:
                 "200":
@@ -14877,10 +14887,10 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+            description: The completion status of the upgrade on the device.
             properties:
                 completedAt:
-                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
+                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
                     example: 2026-04-15T18:00:10.123Z
                     format: date-time
                     type: string
@@ -14888,7 +14898,7 @@ components:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -14899,12 +14909,12 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: The percentage completion of the current task being performed
+                    description: Percentage completion of the current task being performed.
                     format: double
                     type: number
             type: object
         ConfigState:
-            description: The distinct config states for the devices in the Security Cloud Control tenant.
+            description: The distinct config states for the devices managed by the MSP Portal.
             enum:
                 - NO_CONFIG
                 - SYNCED
@@ -14921,7 +14931,7 @@ components:
             example: EVERY_6_HOURS
             type: string
         ConflictDetectionState:
-            description: The distinct conflict detection states for the devices in the Security Cloud Control tenant.
+            description: The distinct conflict detection states for the devices managed by the MSP Portal.
             enum:
                 - CONFLICT_DETECTED
                 - NO_CONFLICTS
@@ -14939,7 +14949,7 @@ components:
                     type: array
             type: object
         ConnectivityState:
-            description: The distinct connectivity states for the devices in the Security Cloud Control tenant.
+            description: The distinct connectivity states for the devices managed by the MSP Portal.
             enum:
                 - ONLINE
                 - UNREACHABLE
@@ -14950,7 +14960,7 @@ components:
                 - NEW_CERT_DETECTED
             type: string
         ConnectorType:
-            description: The type of the connector that will be used to communicate with the device. Security Cloud Control can communicate with your device using either a Cloud Connector (CDG) or a Secure Device Connector (SDC).
+            description: The type of the connector that will be used to communicate with the device.
             enum:
                 - SDC
                 - CDG
@@ -16047,7 +16057,7 @@ components:
                     type: string
             type: object
         DeviceRole:
-            description: The distinct device roles for the devices in the Security Cloud Control tenant.
+            description: The roles that this device performs on the network.
             enum:
                 - FTD_RA_VPN_HEADEND
                 - ASA_RA_VPN_HEADEND
@@ -16055,19 +16065,63 @@ components:
                 - ZTNA_PROVIDER
                 - ANYCONNECT_VPN_HEAD_END
                 - UNIVERSAL_ZTNA_HEADEND
+            example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
-            description: The current status of each device in the upgrade run.
+            description: Set of device UIDs that are part of this upgrade run.
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+                    description: The completion status of the upgrade on the device.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                uid:
-                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+                hardwareModel:
+                    description: Hardware model of the devices being upgraded.
+                    example: Firepower 2110
+                    type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: Name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantUid:
+                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    format: uuid
+                    type: string
+                name:
+                    description: Name of the device being upgraded.
+                    example: my-firepower
+                    type: string
+                softwareVersionBeforeUpgrade:
+                    description: Software version of the device before the upgrade.
+                    example: 7.2.3
+                    type: string
+                transactionUid:
+                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, of the device being upgraded.
+                    format: uuid
+                    type: string
+                upgradeRunStatus:
+                    description: Current status of the upgrade run.
+                    enum:
+                        - IN_PROGRESS
+                        - REBUILDING_UPGRADE_CACHE
+                        - PERFORMING_UPGRADE
+                        - UPLOADING_IMAGE
+                        - PERFORMING_READINESS_CHECK
+                        - UPGRADE_STAGED
+                        - UPGRADE_STAGING_FAILED
+                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_COMPLETED
+                        - UPGRADE_FAILED
+                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -16222,7 +16276,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The type of the device.
+            description: The distinct device types for the devices managed by the MSP Portal.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -16243,7 +16297,6 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: ASA
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -16413,7 +16466,7 @@ components:
                 summary:
                     $ref: '#/components/schemas/UsageSummary'
                 usage:
-                    description: UTC calendar-month usage buckets, ordered from oldest to newest. Each bucket has an inclusive start date and an exclusive end date.
+                    description: UTC calendar-month or daily usage buckets, ordered from oldest to newest. Each bucket has an inclusive start date and an exclusive end date.
                     items:
                         $ref: '#/components/schemas/UsagePeriod'
                     type: array
@@ -16422,7 +16475,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
+                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
                     type: string
             type: object
         ExtendedNatRuleData:
@@ -16503,7 +16556,7 @@ components:
                     type: string
             type: object
         FmcDeviceRecord:
-            description: (FMC-managed FTDs and cdFMC-managed chassis devices only) The device record in FMC. A FMC-managed device on SCC can also be accessed directly using the FMC APIs; this field provides details.
+            description: (FMC-managed FTDs only) The device record in FMC. A FMC-managed device on SCC can also be accessed directly using the FMC APIs; this field provides details.
             properties:
                 link:
                     description: The endpoint to access this resource from on the FMC.
@@ -16883,7 +16936,7 @@ components:
                 - deviceUids
             type: object
         FtdHaInfo:
-            description: '(High Availability Devices managed by FMC only) High-Availability Pair information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
+            description: '(High Availability Devices managed by FMC only) High-Available information information. Note: Security Cloud Control represents all of the nodes on an FTD cluster in a single device record with the UID of the cluster control node.'
             properties:
                 currentRole:
                     description: '(on-prem FMC-managed FTDs only) Information on the current role of the node in the HA Pair. Note: Each node in an on-prem-FMC-managed FTD HA Pair is represented as a separate device entry in the API response.'
@@ -17556,7 +17609,6 @@ components:
             type: object
         Labels:
             description: Labels used to identify/tag Security Cloud Control entities.
-            nullable: true
             properties:
                 groupedLabels:
                     additionalProperties:
@@ -21878,32 +21930,14 @@ components:
                     type: string
             type: object
         SmartAccountDto:
+            description: The smart account used to license this device.
             properties:
-                domain:
-                    description: Account domain for your Smart Account
+                parent:
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                name:
-                    description: Name of the smart account
-                    type: string
-                smartAccountId:
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             properties:
@@ -22840,6 +22874,15 @@ components:
                     description: Error message if the device encountered a failure during the upgrade.
                     example: No CLI result received for device
                     type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in Security Cloud Control.
+                    example: My Managed Tenant
+                    type: string
+                managedTenantUid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
+                    type: string
                 name:
                     description: The name of the device.
                     example: asa-fw-01
@@ -22861,7 +22904,7 @@ components:
                     type: string
             type: object
         UsageBytes:
-            description: Average event data ingested per returned calendar month. The current month uses its month-to-date value.
+            description: Average event data ingested per returned calendar month or day. The current month uses its month-to-date value.
             properties:
                 firewallBytes:
                     description: Firewall event data ingested, in bytes.
@@ -22873,23 +22916,23 @@ components:
                     type: integer
             type: object
         UsagePeriod:
-            description: Event usage for one UTC calendar month. Dates are used because SAL aggregates usage by calendar month rather than by time of day.
+            description: Event usage for one UTC calendar month or day. Dates are used because SAL aggregates usage by day rather than by time of day.
             properties:
                 end:
-                    description: The first day of the following calendar month in UTC. This date is not included in the period.
+                    description: The first day after the period in UTC. This date is not included in the period.
                     example: 2026-08-01T00:00:00Z
                     format: date
                     type: string
                 firewallBytes:
-                    description: Firewall event data ingested during this month, in bytes.
+                    description: Firewall event data ingested during this period, in bytes.
                     format: int64
                     type: integer
                 sdwanBytes:
-                    description: SD-WAN event data ingested during this month, in bytes.
+                    description: SD-WAN event data ingested during this period, in bytes.
                     format: int64
                     type: integer
                 start:
-                    description: The first day of the calendar month in UTC. This date is included in the period.
+                    description: The first day of the period in UTC. This date is included in the period.
                     example: 2026-07-01T00:00:00Z
                     format: date
                     type: string
@@ -22919,7 +22962,7 @@ components:
                     type: string
             type: object
         UsageSummary:
-            description: Totals and monthly averages for the requested time range.
+            description: Totals and per-period averages for the requested time range.
             properties:
                 average:
                     $ref: '#/components/schemas/UsageBytes'
@@ -23044,7 +23087,7 @@ components:
                     type: integer
             type: object
         UserRole:
-            description: The role of the user this token belongs to. The user can be API-only or a human.
+            description: Roles associated with this user in Security Cloud Control.
             enum:
                 - ROLE_ADMIN
                 - ROLE_SUPER_ADMIN
@@ -23055,6 +23098,7 @@ components:
                 - ROLE_FWAAS
                 - ROLE_PASSIVE_IDENTITY_AGENT
                 - ROLE_OPERATIONAL_ADMIN
+            example: '[ROLE_ADMIN]'
             type: string
         Value:
             description: The list of values removed from this entity as part of the change.

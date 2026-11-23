@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **summary** | [**UsageSummary**](UsageSummary.md) |  | [optional] 
-**usage** | [**List[UsagePeriod]**](UsagePeriod.md) | UTC calendar-month usage buckets, ordered from oldest to newest. Each bucket has an inclusive start date and an exclusive end date. | [optional] 
+**usage** | [**List[UsagePeriod]**](UsagePeriod.md) | UTC calendar-month or daily usage buckets, ordered from oldest to newest. Each bucket has an inclusive start date and an exclusive end date. | [optional] 
 
 ## Example
 

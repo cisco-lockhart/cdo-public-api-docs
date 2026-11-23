@@ -1,6 +1,6 @@
 # UsageSummary
 
-Totals and monthly averages for the requested time range.
+Totals and per-period averages for the requested time range.
 
 ## Properties
 
