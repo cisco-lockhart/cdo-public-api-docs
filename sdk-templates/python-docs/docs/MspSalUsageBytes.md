@@ -1,6 +1,6 @@
 # MspSalUsageBytes
 
-Average event data ingested per calendar month in the requested time range. The current month uses its month-to-date value.
+Average event data ingested per returned period: per calendar month for monthly usage, where the current month uses its month-to-date value, or per completed UTC day for daily usage.
 
 ## Properties
 
