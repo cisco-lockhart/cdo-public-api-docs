@@ -344,10 +344,18 @@ nav:
     - MspMslaUsageItemDto: MspMslaUsageItemDto.md
     - MspMslaUsagePage: MspMslaUsagePage.md
     - MspMslaUsageTenantDto: MspMslaUsageTenantDto.md
+    - MspSalRateDailyItemDto: MspSalRateDailyItemDto.md
+    - MspSalRateDailyPage: MspSalRateDailyPage.md
+    - MspSalRateMonthlyItemDto: MspSalRateMonthlyItemDto.md
+    - MspSalRateMonthlyPage: MspSalRateMonthlyPage.md
+    - MspSalRatePeriodDaily: MspSalRatePeriodDaily.md
+    - MspSalRatePeriodMonthly: MspSalRatePeriodMonthly.md
+    - MspSalRateSummary: MspSalRateSummary.md
     - MspSalUsageBytes: MspSalUsageBytes.md
     - MspSalUsageItemDto: MspSalUsageItemDto.md
     - MspSalUsagePage: MspSalUsagePage.md
     - MspSalUsagePeriod: MspSalUsagePeriod.md
+    - MspSalUsagePeriodMonthly: MspSalUsagePeriodMonthly.md
     - MspSalUsageSummary: MspSalUsageSummary.md
     - MspSecureClientPackageDto: MspSecureClientPackageDto.md
     - MspSecureClientPackagesPage: MspSecureClientPackagesPage.md

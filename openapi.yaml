@@ -7784,6 +7784,138 @@ paths:
             summary: Get MFA Event
             tags:
                 - Remote Access Monitoring
+    /v1/msp/events/rates/daily:
+        get:
+            description: Returns the average number of firewall and SD-WAN events per second sent by each managed tenant in the MSP portal that has Security Analytics and Logging (SAL) enabled. Each managed tenant includes the average and peak daily rate for the requested time range, and a rate entry for each stored, completed UTC day in that range. Days without data and the current day are not listed. Managed tenants without collected rates are returned with no entries. Results can be filtered, sorted, and paginated.
+            operationId: getMspSalEventRateDaily
+            parameters:
+                - description: UTC calendar-month range to include.
+                  in: query
+                  name: timeRange
+                  required: true
+                  schema:
+                    enum:
+                        - 1M
+                        - 3M
+                        - 6M
+                    type: string
+                - description: Number of managed tenants to return.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 1
+                    type: string
+                - description: Index of the first managed tenant to return. Must be 0 or a multiple of limit.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: Filter by managedTenantName, managedTenantDisplayName, or payType using Lucene syntax. Name fields use case-insensitive matching; use '*' for wildcard matching. payType uses an exact match. Only '*' is supported as a wildcard.
+                  example: managedTenantName:*soln23* AND managedTenantDisplayName:*auto* AND payType:INTERNAL
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: Sort by averageEventsPerSecond or peakEventsPerSecond over the selected timeRange. Append :asc or :desc (uppercase directions are also accepted); a bare field sorts ascending. Repeat sort parameters to apply clauses in the supplied order. If sort is omitted, tenants are returned by UID in ascending order.
+                  example: peakEventsPerSecond:desc
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspSalRateDailyPage'
+                    description: SAL daily event rates for enabled managed tenants
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP SAL Daily Event Rate
+            tags:
+                - MSP Events
+    /v1/msp/events/rates/monthly:
+        get:
+            description: Returns the average number of firewall and SD-WAN events per second sent by each managed tenant in the MSP portal that has Security Analytics and Logging (SAL) enabled. Each managed tenant includes the average and peak monthly rate for the requested time range, and a rate entry for each stored UTC calendar month in that range. The current month's rate is null until its first UTC day is over. Managed tenants without collected rates are returned with no entries. Results can be filtered, sorted, and paginated.
+            operationId: getMspSalEventRateMonthly
+            parameters:
+                - description: UTC calendar-month range to include.
+                  in: query
+                  name: timeRange
+                  required: true
+                  schema:
+                    enum:
+                        - 1M
+                        - 3M
+                        - 6M
+                    type: string
+                - description: Number of managed tenants to return.
+                  in: query
+                  name: limit
+                  required: false
+                  schema:
+                    default: "50"
+                    maximum: 200
+                    minimum: 1
+                    type: string
+                - description: Index of the first managed tenant to return. Must be 0 or a multiple of limit.
+                  in: query
+                  name: offset
+                  required: false
+                  schema:
+                    default: "0"
+                    minimum: 0
+                    type: string
+                - description: Filter by managedTenantName, managedTenantDisplayName, or payType using Lucene syntax. Name fields use case-insensitive matching; use '*' for wildcard matching. payType uses an exact match. Only '*' is supported as a wildcard.
+                  example: managedTenantName:*soln23* AND managedTenantDisplayName:*auto* AND payType:INTERNAL
+                  in: query
+                  name: q
+                  required: false
+                  schema:
+                    type: string
+                - description: Sort by averageEventsPerSecond or peakEventsPerSecond over the selected timeRange. Append :asc or :desc (uppercase directions are also accepted); a bare field sorts ascending. Repeat sort parameters to apply clauses in the supplied order. If sort is omitted, tenants are returned by UID in ascending order.
+                  example: peakEventsPerSecond:desc
+                  in: query
+                  name: sort
+                  required: false
+                  schema:
+                    items:
+                        type: string
+                    type: array
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MspSalRateMonthlyPage'
+                    description: SAL monthly event rates for enabled managed tenants
+                "500":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CommonApiError'
+                    description: Internal server error.
+            security:
+                - bearerAuth: []
+            summary: Get MSP SAL Monthly Event Rate
+            tags:
+                - MSP Events
     /v1/msp/events/usage:
         get:
             description: Returns the amount of firewall and SD-WAN event data ingested by each managed tenant in the MSP portal that has Security Analytics and Logging (SAL) enabled. Each managed tenant includes totals and monthly averages for the requested time range, and a usage entry for each UTC calendar month in that range. Results can be filtered, sorted, and paginated.
@@ -14887,10 +15019,10 @@ components:
                 - upgradeType
             type: object
         CompletionStatusDto:
-            description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+            description: The completion status of the upgrade on the device.
             properties:
                 completedAt:
-                    description: Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Null if still in progress.
+                    description: 'Time (UTC; represented using the RFC-3339 standard) when this completion status became terminal. Note: this field is only populated when the upgrade run status is in a terminal state.'
                     example: 2026-04-15T18:00:10.123Z
                     format: date-time
                     type: string
@@ -14898,7 +15030,7 @@ components:
                     description: A message, indicating current progress, returned from the device.
                     type: string
                 name:
-                    description: 'The name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
+                    description: 'Name of the device. Note: this will be the name of the node on the cdFMC if the device is part of an HA pair or cluster.'
                     type: string
                 nodeType:
                     description: (HA Pairs and clusters only) The node type of the device.
@@ -14909,7 +15041,7 @@ components:
                         - CLUSTER_DATA
                     type: string
                 percentageComplete:
-                    description: The percentage completion of the current task being performed
+                    description: Percentage completion of the current task being performed.
                     format: double
                     type: number
             type: object
@@ -16068,17 +16200,60 @@ components:
             example: ASA_RA_VPN_HEADEND
             type: string
         DeviceUpgradeStatusDto:
-            description: The current status of each device in the upgrade run.
+            description: Set of device UIDs that are part of this upgrade run.
             properties:
                 completionStatuses:
-                    description: The completion status of the upgrade on the device. For HA pairs or clusters, there will be multiple completion statuses; one per node of the pair or cluster.
+                    description: The completion status of the upgrade on the device.
                     items:
                         $ref: '#/components/schemas/CompletionStatusDto'
                     type: array
-                uid:
-                    description: The unique identifier, represented as a UUID, of the device in SCC Firewall Manager.
+                hardwareModel:
+                    description: Hardware model of the devices being upgraded.
+                    example: Firepower 2110
+                    type: string
+                managedTenantDisplayName:
+                    description: Display name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantName:
+                    description: Name of the managed tenant in CDO.
+                    example: my-example-tenant
+                    type: string
+                managedTenantUid:
+                    description: Unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control that this device belongs to.
+                    format: uuid
+                    type: string
+                name:
+                    description: Name of the device being upgraded.
+                    example: my-firepower
+                    type: string
+                softwareVersionBeforeUpgrade:
+                    description: Software version of the device before the upgrade.
+                    example: 7.2.3
+                    type: string
+                transactionUid:
+                    description: Unique identifier, represented as a UUID, of the CDO transaction on the managed tenant that tracks this upgrade run.
                     example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
                     format: uuid
+                    type: string
+                uid:
+                    description: Unique identifier, represented as a UUID, of the device being upgraded.
+                    format: uuid
+                    type: string
+                upgradeRunStatus:
+                    description: Current status of the upgrade run.
+                    enum:
+                        - IN_PROGRESS
+                        - REBUILDING_UPGRADE_CACHE
+                        - PERFORMING_UPGRADE
+                        - UPLOADING_IMAGE
+                        - PERFORMING_READINESS_CHECK
+                        - UPGRADE_STAGED
+                        - UPGRADE_STAGING_FAILED
+                        - UGPRADE_STAGING_FAILED
+                        - UPGRADE_COMPLETED
+                        - UPGRADE_FAILED
+                    example: PERFORMING_UPGRADE
                     type: string
             type: object
         DevicesPatchInput:
@@ -16233,7 +16408,7 @@ components:
                     type: string
             type: object
         EntityType:
-            description: The type of the device.
+            description: The distinct device types for the devices managed by the MSP Portal.
             enum:
                 - ASA
                 - CDFMC_MANAGED_FTD
@@ -16254,7 +16429,6 @@ components:
                 - AZURE_VNET
                 - DUO_ADMIN_PANEL
                 - UMBRELLA_ORGANIZATION
-            example: CDFMC_MANAGED_FTD
             type: string
         ErrorDetails:
             description: Detailed error information reported for this device during deployment.
@@ -16433,7 +16607,7 @@ components:
             properties:
                 query:
                     description: The query to execute in order to generate the export. Use the Lucene Query Syntax to construct your query. You can use this to filter the entities included in your export.
-                    example: licenseType:TERM AND complianceStatus:IN_COMPLIANCE
+                    example: deviceType:CDFMC_MANAGED_FTD AND connectivityState:ONLINE
                     type: string
             type: object
         ExtendedNatRuleData:
@@ -19182,6 +19356,195 @@ components:
                     format: uuid
                     type: string
             type: object
+        MspSalRateDailyItemDto:
+            description: SAL event rate for one managed tenant.
+            properties:
+                dailyRates:
+                    description: Event rate for each stored, completed UTC day in the requested time range, ordered from oldest to newest. Days without data and the current day are not listed.
+                    items:
+                        $ref: '#/components/schemas/MspSalRatePeriodDaily'
+                    type: array
+                managedTenantDisplayName:
+                    description: The human-readable display name of the managed tenant.
+                    example: QE Auto Stage 2
+                    type: string
+                managedTenantName:
+                    description: The name of the managed tenant.
+                    example: cisco-qe-auto-stage-2
+                    type: string
+                payType:
+                    description: The billing classification of the managed tenant. This value is null when no pay type is stored.
+                    enum:
+                        - PAYING
+                        - NOT_PAYING
+                        - TRIAL
+                        - INTERNAL
+                        - PARTNER
+                        - DEMO
+                    nullable: true
+                    type: string
+                salRateIngestDate:
+                    description: When the SAL event rate was last successfully ingested for this managed tenant. This value is null when the rate has not yet been ingested.
+                    example: 2026-09-25T10:15:30Z
+                    format: date-time
+                    nullable: true
+                    type: string
+                summary:
+                    $ref: '#/components/schemas/MspSalRateSummary'
+                uid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control.
+                    example: 9db2e8e7-05f7-4619-a813-ffceba617cc4
+                    format: uuid
+                    type: string
+            required:
+                - payType
+                - salRateIngestDate
+            type: object
+        MspSalRateDailyPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MspSalRateDailyItemDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
+        MspSalRateMonthlyItemDto:
+            description: SAL event rate for one managed tenant.
+            properties:
+                managedTenantDisplayName:
+                    description: The human-readable display name of the managed tenant.
+                    example: QE Auto Stage 2
+                    type: string
+                managedTenantName:
+                    description: The name of the managed tenant.
+                    example: cisco-qe-auto-stage-2
+                    type: string
+                monthlyRates:
+                    description: Event rate for each stored UTC calendar month in the requested time range, ordered from oldest to newest.
+                    items:
+                        $ref: '#/components/schemas/MspSalRatePeriodMonthly'
+                    type: array
+                payType:
+                    description: The billing classification of the managed tenant. This value is null when no pay type is stored.
+                    enum:
+                        - PAYING
+                        - NOT_PAYING
+                        - TRIAL
+                        - INTERNAL
+                        - PARTNER
+                        - DEMO
+                    nullable: true
+                    type: string
+                salRateIngestDate:
+                    description: When the SAL event rate was last successfully ingested for this managed tenant. This value is null when the rate has not yet been ingested.
+                    example: 2026-09-25T10:15:30Z
+                    format: date-time
+                    nullable: true
+                    type: string
+                summary:
+                    $ref: '#/components/schemas/MspSalRateSummary'
+                uid:
+                    description: The unique identifier, represented as a UUID, of the managed tenant in Security Cloud Control.
+                    example: 9db2e8e7-05f7-4619-a813-ffceba617cc4
+                    format: uuid
+                    type: string
+            required:
+                - payType
+                - salRateIngestDate
+            type: object
+        MspSalRateMonthlyPage:
+            properties:
+                count:
+                    description: The total number of results available.
+                    example: 100
+                    format: int32
+                    type: integer
+                items:
+                    description: The list of items retrieved.
+                    items:
+                        $ref: '#/components/schemas/MspSalRateMonthlyItemDto'
+                    type: array
+                limit:
+                    description: The number of results retrieved.
+                    example: 50
+                    format: int32
+                    type: integer
+                offset:
+                    description: The offset of the results retrieved. The Security Cloud Control API uses the offset field to determine the index of the first result retrieved, and will retrieve `limit` results from the offset specified.
+                    example: 0
+                    format: int32
+                    type: integer
+            type: object
+        MspSalRatePeriodDaily:
+            description: SAL event rate for one UTC day.
+            properties:
+                averageEventsPerSecond:
+                    description: The average number of events per second sent by the managed tenant during this day.
+                    example: 123.45
+                    format: double
+                    type: number
+                endDate:
+                    description: The following UTC day. This date is not included in the period.
+                    example: 2026-07-02T00:00:00Z
+                    format: date
+                    type: string
+                startDate:
+                    description: The UTC day. This date is included in the period.
+                    example: 2026-07-01T00:00:00Z
+                    format: date
+                    type: string
+            type: object
+        MspSalRatePeriodMonthly:
+            description: SAL event rate for one UTC calendar month.
+            properties:
+                averageEventsPerSecond:
+                    description: The average number of events per second sent by the managed tenant during this month. This value is null for the current month until its first UTC day is over.
+                    example: 123.45
+                    format: double
+                    nullable: true
+                    type: number
+                endDate:
+                    description: The first day of the following calendar month in UTC. This date is not included in the period.
+                    example: 2026-08-01T00:00:00Z
+                    format: date
+                    type: string
+                startDate:
+                    description: The first day of the calendar month in UTC. This date is included in the period.
+                    example: 2026-07-01T00:00:00Z
+                    format: date
+                    type: string
+            required:
+                - averageEventsPerSecond
+            type: object
+        MspSalRateSummary:
+            description: Average and peak event rate for the requested time range.
+            properties:
+                averageEventsPerSecond:
+                    description: The mean of the stored average events per second in the requested time range. A null monthly rate is not counted; this value is 0 when there are no stored rates.
+                    example: 123.45
+                    format: double
+                    type: number
+                peakEventsPerSecond:
+                    description: The highest stored average events per second in the requested time range. This value is 0 when there are no stored rates.
+                    example: 234.56
+                    format: double
+                    type: number
+            type: object
         MspSalUsageBytes:
             description: Average event data ingested per calendar month in the requested time range. The current month uses its month-to-date value.
             properties:
@@ -19208,7 +19571,7 @@ components:
                 monthlyUsage:
                     description: Event usage for each UTC calendar month in the requested time range, ordered from oldest to newest.
                     items:
-                        $ref: '#/components/schemas/MspSalUsagePeriod'
+                        $ref: '#/components/schemas/MspSalUsagePeriodMonthly'
                     type: array
                 payType:
                     description: The billing classification of the managed tenant. This value is null when no pay type is stored.
@@ -19261,7 +19624,7 @@ components:
                     format: int32
                     type: integer
             type: object
-        MspSalUsagePeriod:
+        MspSalUsagePeriodMonthly:
             description: Event usage for one UTC calendar month. Dates are used because SAL aggregates usage by calendar month rather than by time of day.
             properties:
                 endDate:
@@ -20527,20 +20890,16 @@ components:
                     type: string
             type: object
         Policy:
+            description: Results from the Security Cloud Control policies that match the search term.
             properties:
-                domainName:
-                    type: string
-                domainUid:
-                    format: uuid
-                    type: string
-                lastModifiedTime:
-                    format: date-time
-                    type: string
                 name:
-                    type: string
-                type:
+                    description: The name of the policy in Security Cloud Control.
+                    example: my-example-policy
                     type: string
                 uid:
+                    description: The unique identifier, represented as a UUID, of the policy in Security Cloud Control.
+                    example: 7131daad-e813-4b8f-8f42-be1e241e8cdb
+                    format: uuid
                     type: string
             type: object
         PolicyAnalysisData:
@@ -21888,32 +22247,14 @@ components:
                     type: string
             type: object
         SmartAccountDto:
+            description: The smart account used to license this device.
             properties:
-                domain:
-                    description: Account domain for your Smart Account
+                parent:
+                    description: The name of the smart account used to license the device.
                     type: string
-                lastUpdatedTime:
-                    description: The time, in RFC 3339 format, when information on this Smart Account was last updated
-                    format: date-time
+                virtual:
+                    description: The name of the virtual account, within the smart account, used to license the device
                     type: string
-                name:
-                    description: Name of the smart account
-                    type: string
-                smartAccountId:
-                    description: Smart Account Identifier
-                    type: string
-                uid:
-                    description: Unique identifier, represented as a UUID, for your Smart Account
-                    format: uuid
-                    type: string
-                virtualAccountsInComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with in compliance status
-                    format: int32
-                    type: integer
-                virtualAccountsOutOfComplianceCount:
-                    description: Number of Virtual Accounts in this Smart Account with out of compliance status
-                    format: int32
-                    type: integer
             type: object
         SmartAccountsPage:
             properties:
