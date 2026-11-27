@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entity_name** | **str** | The name of the device, manager or service to which the Change Log refers. | [optional] 
+**entity_name** | **str** | The name of the device, manager or service to which the Change Log refers. Note: search on this field is case sensitive. | [optional] 
 **entity_uid** | **str** | The unique identifier, represented as a UUID, of the device, manager or service to which the Change Log refers. | [optional] 
 **events** | [**List[Event]**](Event.md) | The events recorded in this Change Log. | [optional] 
 **last_event_date** | **datetime** | The time (UTC; represented using the RFC-3339 standard) at which the last event in the changelog occurred. You can perform range queries on this endpoint using the syntax &#x60;[lastEventDate:YYYY-MM-ddTHH:mm:ssZ TO lastEventDate:YYYY-MM-ddTHH:mm:ssZ]&#x60;: please note that this will need to be URL-encoded. Please note that the timeRange request parameter is mapped to the lastEventDate field. For further details on the timeRange parameter, refer to the Changelogs API documentation. | [optional] 
