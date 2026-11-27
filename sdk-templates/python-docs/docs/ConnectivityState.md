@@ -1,6 +1,6 @@
 # ConnectivityState
 
-The distinct connectivity states for the devices in the Security Cloud Control tenant.
+The distinct connectivity states for the devices managed by the MSP Portal.
 
 ## Properties
 
